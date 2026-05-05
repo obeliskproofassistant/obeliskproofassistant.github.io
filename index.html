@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    Obelisk
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .left {
+            width: 50%;
+            height: 100%;
+        }
+
+        .right {
+            width: 50%;
+            height: 100%;
+            color:white;
+            background-color:black;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+
+</head>
+<body>
+
+<!--
+    <script>
+window.addEventListener('message', function(event) {
+    // Optional: Verify origin for security
+    // if (event.origin !== "https://trusted-site.com") return;
+    
+    if (event.data.type === 'CHANGE_TITLE') {
+        document.title = event.data.title;
+    }
+});
+    </script>
+-->
+    <iframe src="https://georgydunaev.github.io"></iframe>
+
+    <SCRIPT TYPE="text/javascript">
+        window.parent.postMessage({
+            type: 'CHANGE_TITLE',
+            title: "Obelisk Proof Assistant"
+        }, '*');
+    </script>
+<!--
+    <div class="left">
+        <iframe src="about.html"></iframe>
+    </div>
+    <div class="right">
+        <iframe src="embedding.html"></iframe>
+    </div>
+-->
+    <!--"https://example.com"-->
+</body>
+</html>
