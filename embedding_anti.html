@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            color:white;
+            background-color:black;
+        }
+    </style>
+            <!-- overflow: scroll; -->
+</head>
+<body>
+
+<div id="myhtmloutput"></div>
+<SCRIPT TYPE="text/javascript">
+let myaddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main";
+
+let htmladdr = myaddr.concat("/","output_html/index",".","html");
+
+async function getText() {
+    let text = sessionStorage.getItem("textanti");
+
+    if (!text) {
+        const res = await fetch(htmladdr);
+        text = await res.text();
+        sessionStorage.setItem("textanti", text);
+        console.log("The text has been downloaded. (async)")
+    }
+
+    return text;
+}
+
+// synchronous function (it is not used)
+function myOldDownload() {
+
+fetch(htmladdr)
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById("myhtmloutput").innerHTML = html
+  });
+
+console.log("The text has been downloaded. (sync)")
+
+}
+
+async function myNewDownloadOLD() {
+  document.getElementById("myhtmloutput").innerHTML = await getText();
+  window.scrollTo(0,1680);
+}
+
+async function myNewDownload() {
+  document.getElementById("myhtmloutput").innerHTML = await getText();
+  window.scrollTo(0,0);
+}
+
+
+myNewDownload();
+
+</script>
+<!--
+<body style="color:white; background-color:black" onload="window.scrollTo(0,1550);">
+-->
+</body>
+</html>
