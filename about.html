@@ -22,6 +22,12 @@ position: absolute; top: 0; left:0;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--max-width: 800px; -->
     <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        html, body {
+            overflow-x: hidden;
+        }
 header {
   background-image: url("images/tiling1.webp");
   background-repeat: repeat;
@@ -39,7 +45,19 @@ header {
   background-image: url("images/papyrus.jpeg");
   background-repeat: repeat;
   background-size: 100px;
-
+            overflow-wrap: break-word;
+        }
+        .container {
+            padding: 25px;
+        }
+        img {
+            max-width: 100%;
+        }
+        iframe {
+            max-width: 100%;
+        }
+        table {
+            max-width: 100%;
         }
         .myA {
   color: white;
@@ -76,7 +94,7 @@ header {
             font-size: 0.9em;
             color: #777;
             background-color: #fafafa;
-            padding: 0 0px;
+            padding: 10px 25px;
         }
         vr
 {
@@ -86,6 +104,35 @@ header {
     height: 1em;
     width: 2px;
 }
+        @media (max-width: 600px) {
+            .container {
+                padding: 12px;
+            }
+            header h2 {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            header h2 text {
+                font-size: 1.15em;
+                max-width: 100%;
+            }
+            .section {
+                border-radius: 15px;
+            }
+            ul {
+                padding-left: 20px;
+            }
+            iframe {
+                width: calc(100% - 24px);
+                height: auto;
+                aspect-ratio: 4 / 3;
+            }
+            .footer {
+                padding: 10px 12px;
+            }
+        }
     </style>
     <!--
     <vr></vr>
@@ -99,7 +146,7 @@ header {
 <div style=divbody width=90%> 
   border-right: 0px
 -->
-<div style="padding: 25px;">
+<div class="container">
 <header>
   <!-- <img src="https://cdn6.hexlet.io/1P6tmafZTIy5.png" alt="Логотип"> < ! -- Логотип сайта -->
   <h2 style="border-right: 0px; padding: 0; margin: 0;">
