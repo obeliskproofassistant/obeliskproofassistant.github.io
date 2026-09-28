@@ -130,13 +130,10 @@ header {
     </style>
 
 <style>
-  table {
-    border-collapse: collapse;
-  }
+
   td, th {
     border: 1px solid #ccc;
     padding: 10px;
-    vertical-align: bottom;
   }
   
   .top {
@@ -150,8 +147,25 @@ header {
   .baseline {
     vertical-align: baseline;
   }
-</style>
 
+  table {
+    border-collapse: collapse;
+  }
+
+
+.tableList { width: 100%; }
+.tableList th { 
+min-width: 50px;
+max-width: 50px;
+vertical-align: top;
+horizontal-align: right;
+ width=50px;
+}
+.tableList td { width: 1px; } /* min width, actually: this causes the width to fit the content */
+.tableList td:last-child { width: 100%; } /* well, it's less than 100% in the end, but this still works for me */
+  
+</style>
+<!--
 <table>
   <tr>
     <td class="top">Top aligned</td>
@@ -159,6 +173,7 @@ header {
     <td class="baseline">Baseline</td>
   </tr>
 </table>
+-->
 
     <!--
     <vr></vr>
@@ -311,38 +326,38 @@ Georgy Dunaev | Programmer &amp; Mathematician
             </li>
             <li>
                 Proof assistant "<strong>Obelisk</strong>":<!--(higher-order logic version)--><br>
-<table>
+<table class="tableList">
     <tr>
-        <td align="right" width="75px">
+        <th align="right" width="75px">
                 <a href="embedding.html" target="_top">
                 [HTML]
                 </a>
-        </td>
+        </th>
         <td>
          (full-screen demonstration)
         </td>
     </tr>
     <tr>
-        <td align="right" width="75px">
+        <th align="right" width="75px">
                 <!-- "https://github.com/georgydunaev/variousreleases/blob/main/output.pdf" -->
                 <a href=
                 "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.pdf"
                 target="_top">
                 [PDF]
                 </a>
-        </td>
+        </th>
         <td>
                 (dark background)
         </td>
     </tr>
     <tr>
-        <td align="right" width="75px">
+        <th align="right" width="75px">
                 <a href=
                 "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output_white.pdf"
                 target="_top">
                 [PDF]
                 </a>
-        </td>
+        </th>
         <td>
                 (ink-saving light background<!--[unfortunately, a bit wrong color palette yet]-->)
         </td>
