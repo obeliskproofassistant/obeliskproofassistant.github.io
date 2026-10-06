@@ -1,0 +1,80 @@
+<h1>HTML5 Canvas - fillRect()</h1>
+
+<style>
+canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+
+:root {
+  --primary-color: rgb(255, 165, 0); /* orange */
+  --primary-color: #FFD700; /* gold */
+  --primary-color-dark: color-mix(in srgb, var(--primary-color), black 80%);
+  --primary-color-light: color-mix(in srgb, var(--primary-color), white 80%);
+}
+
+.button {
+  background: var(--primary-color);
+}
+
+.button:hover {
+  background: var(--primary-color-dark);
+}
+
+.myrect {
+  
+}
+</style>
+
+<canvas id="myCanvas" width="16" height="16" style="border:1px solid black; width: 256px; height: 256px;">
+Sorry, your browser does not support canvas.
+</canvas>
+
+<script>
+const canvas = document.getElementById("myCanvas");
+const ctx = canvas.getContext("2d");
+
+/*
+const SCALE = 16;
+const VIRTUAL_WIDTH = 16;
+const VIRTUAL_HEIGHT = 16;
+
+function resize() {
+  canvas.width = VIRTUAL_WIDTH * SCALE;
+  canvas.height = VIRTUAL_HEIGHT * SCALE;
+  ctx.imageSmoothingEnabled = false;
+  ctx.scale(SCALE, SCALE);
+}
+resize();
+*/
+/* good
+ctx.fillStyle = "pink";
+ctx.fillRect(0,0, 16,16);
+ctx.fillStyle = "black";
+ctx.fillRect(0,0, 1,1);
+ctx.fillStyle = "blue";
+ctx.fillRect(0,0, 0,0);
+ctx.stroke();
+*/
+
+// Get the computed value of the CSS variable
+/*
+const para = document.querySelector(":root");
+const rootStyles = getComputedStyle(para); //document.documentElement
+const myColor = rootStyles.getPropertyValue('--primary-color').trim();
+*/
+
+const rootElement = document.documentElement;
+const rootStyles = getComputedStyle(rootElement);
+const myColor = rootStyles.getPropertyValue('--primary-color-dark').trim();
+// Use it in canvas
+//const ctx = canvas.getContext('2d');
+ctx.fillStyle = myColor;
+ctx.fillRect(0,0, 16,16);
+// ctx.fillStyle = "blue";
+// ctx.fillRect(0,0, 16,16);
+ctx.stroke();
+
+</script>
+
