@@ -493,6 +493,46 @@
       </div>
     </section>
 
+    <!-- NBG PROPOSITIONS-AS-TYPES COMPILER SECTION -->
+    <section id="compiler" style="margin-bottom: 4rem;">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Compiler Architecture · Standard ML &amp; CakeML</div>
+        <h2 class="section-title">NBG Propositions-as-Types: Compiling to Check, Not Execute</h2>
+      </div>
+
+      <div style="background: var(--card-bg); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 2rem;">
+        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          In Obelisk, we establish a strict <strong>1-to-1 Curry–Howard correspondence</strong> between mathematical theorems of von Neumann–Bernays–Gödel (NBG) class theory and compiler types.
+          The compiler operates under a foundational principle: <em>it compiles not to generate runtime executable bytecode, but strictly to verify whether the proof expression type-checks</em>.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.5rem;">Standard ML Native Kernel</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Eliminates dynamically typed languages like Python from the trusted kernel. Fully written in Standard ML 97 targeting the CakeML verified compiler for machine-code assurance down to silicon.
+            </p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #10b981; font-size: 0.95rem; margin-bottom: 0.5rem;">Theorems as Types (1-to-1)</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Every mathematical theorem (Modus Ponens, Conjunction Symmetry, Russell Paradox Refutation) corresponds to a unique type. Proof terms are formal witnesses checked by the SML type checker.
+            </p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #c084fc; font-size: 0.95rem; margin-bottom: 0.5rem;">Dunaev Tagged Ordered Pairs</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Replaces Kuratowski pairs (which inflate rank by +2) with tagged tuples <code>&lt;tag, x, y&gt;</code> that preserve set-theoretic rank, well-foundedness, and algebraic projections without universe elevation.
+            </p>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="repl.html" class="btn btn-primary">⚡ Test NBG Compiler in Web REPL</a>
+        </div>
+      </div>
+    </section>
+
     <!-- SYSTEM COMPARISON -->
     <section id="comparison">
       <div class="section-title-wrap">

@@ -166,6 +166,13 @@
       <button class="preset-btn" onclick="sendCmd('auto')">tactic: auto solve</button>
       <button class="preset-btn" onclick="sendCmd('qed')">seal: qed</button>
 
+      <div class="sidebar-title" style="margin-top: 1.2rem;">NBG Propositions-as-Types (SML)</div>
+      <button class="preset-btn" onclick="sendCmd('typecheck identity')">⚡ Typecheck: A → A</button>
+      <button class="preset-btn" onclick="sendCmd('typecheck modus_ponens')">⚡ Typecheck: (A → B) → A → B</button>
+      <button class="preset-btn" onclick="sendCmd('typecheck and_comm')">⚡ Typecheck: (A ∧ B) → (B ∧ A)</button>
+      <button class="preset-btn" onclick="sendCmd('typecheck currying')">⚡ Typecheck: ((A ∧ B) → C) ↔ (A → B → C)</button>
+      <button class="preset-btn" onclick="sendCmd('typecheck russell')">⚡ Typecheck: ~ Set({x | x ∉ x})</button>
+
       <div class="sidebar-title" style="margin-top: 1.2rem;">Classical Axioms</div>
       <button class="preset-btn" onclick="loadPreset('empty')">1. Empty Set Unique</button>
       <button class="preset-btn" onclick="loadPreset('russell')">2. Russell's Paradox</button>
@@ -199,10 +206,11 @@ Type 'help' or click presets on the left to begin.
 
       <div class="sidebar-title">Kernel Trust Info</div>
       <div class="panel-box">
-        <strong>Kernel:</strong> SML (~20k LOC)<br>
-        <strong>Axioms:</strong> Morse-Kelley (3.01–3.66)<br>
+        <strong>Kernel:</strong> Standard ML 97 / CakeML (~20k LOC)<br>
+        <strong>Compiler:</strong> Propositions-as-Types for NBG<br>
+        <strong>Principle:</strong> Compile to check, not execute<br>
         <strong>Implicit Computation:</strong> 0.00%<br>
-        <strong>Audit Status:</strong> <span style="color:#38bdf8;">Passed Lean 4</span>
+        <strong>Audit Status:</strong> <span style="color:#38bdf8;">Passed Lean 4 &amp; Poly/ML</span>
       </div>
     </div>
   </div>
