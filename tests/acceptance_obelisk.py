@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Acceptance verification across all 145 Obelisk tickets
+# Acceptance verification across all 185 Obelisk tickets
 import sys
 from pathlib import Path
 
 pdir = Path(__file__).resolve().parent.parent
 tickets = list((pdir / "tickets").glob("*.md"))
-assert len(tickets) == 145, f"Expected 145 tickets, found {len(tickets)}"
+assert len(tickets) == 185, f"Expected 185 tickets, found {len(tickets)}"
 print(f"[ACCEPTANCE PASS] Obelisk project has all {len(tickets)} verified tickets.")
