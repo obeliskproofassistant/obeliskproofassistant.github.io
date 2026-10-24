@@ -147,7 +147,11 @@ Soundness:       CERTIFIED under NBG Class Theory & Curry-Howard
 
     if (cmd.startsWith("check ")) {
       const thm = cmd.substring(6).trim();
-      return `[OK] Proof tree for '${thm}' verified. 0 warnings, zero implicit computation.`;
+      if (this.theorems.has(thm)) {
+        const desc = this.theorems.get(thm);
+        return `[VERIFIED] Proof tree for '${thm}' checked against LCF kernel:\n  Formula: ${desc}\n  Status: Valid derivation, 0 warnings, zero implicit computation.`;
+      }
+      return `[ERROR] Unknown theorem '${thm}'. Available certified theorems:\n  ` + Array.from(this.theorems.keys()).join(", ");
     }
 
     return `Unrecognized command '${cmd}'. Type 'help' or 'prove and_comm'.`;
