@@ -15,8 +15,13 @@ class ObeliskREPL {
     this.theorems.set("and_comm", "Theorem and_comm: (A ∧ B) → (B ∧ A)");
     this.theorems.set("or_comm", "Theorem or_comm: (A ∨ B) → (B ∨ A)");
     this.theorems.set("identity", "Theorem identity: (P → Q) → (P → Q)");
-    this.theorems.set("russell", "Theorem russell_paradox: ~ (R ∈ R ↔ ~(R ∈ R))");
-    this.theorems.set("empty_unique", "Theorem empty_set_unique: ∀X. subset(0, X)");
+    this.theorems.set("russell", "Theorem russell_paradox: ~ isSet(R) where R = {x | x ∉ x}");
+    this.theorems.set("empty_unique", "Theorem empty_set_unique: ∀X. ∅ ⊆ X ∧ (isSet(0) ∧ ∀x. x ∉ ∅)");
+    this.theorems.set("tagged_pair_proj", "Theorem tagged_pair_proj: pr₁(⟨A, B⟩_tag) = A ∧ pr₂(⟨A, B⟩_tag) = B");
+    this.theorems.set("ordinal_induction", "Theorem ordinal_induction: (∀α ∈ On. (∀β < α. P(β)) → P(α)) → ∀α ∈ On. P(α)");
+    this.theorems.set("hereditary_subsets", "Theorem hereditary_subsets: ∀x y. isSet(x) ∧ y ⊆ x → isSet(y)");
+    this.theorems.set("extensionality", "Theorem extensionality: (∀x. x ∈ A ↔ x ∈ B) → A = B");
+    this.theorems.set("burali_forti", "Theorem burali_forti_paradox: ~ isSet(On)");
   }
 
   updateGoalBox() {
@@ -114,6 +119,21 @@ class ObeliskREPL {
           expr: "ELam (\"setR\", TSet(FVar \"R\"), EAbort(EApp(EVar \"ax_russell\", EVar \"setR\"), TBottom))",
           type: "~ Set({x | x not in x})",
           desc: "Russell Class Non-Sethood Refutation"
+        },
+        "tagged_pairing": {
+          expr: "ELam (\"A\", TClass, ELam (\"B\", TClass, ETaggedPair (EVar \"A\", EVar \"B\")))",
+          type: "Class -> Class -> DunaevPair",
+          desc: "Dunaev Tagged Pair Class Injection"
+        },
+        "ordinal_induction": {
+          expr: "ELam (\"P\", TArrow(TOrdinal, TProp), ELam (\"step\", TWellFoundedStep, EFixInd (EVar \"P\", EVar \"step\")))",
+          type: "(On -> Prop) -> (∀α. (∀β < α. P β) -> P α) -> ∀α. P α",
+          desc: "Transfinite Well-Founded Ordinal Induction"
+        },
+        "hereditary_subsets": {
+          expr: "ELam (\"hSub\", TSubset(FVar \"y\", FVar \"x\"), ELam (\"hSet\", TSet(FVar \"x\"), EApp(EApp(EVar \"ax_heredity\", EVar \"hSub\"), EVar \"hSet\")))",
+          type: "y ⊆ x -> isSet(x) -> isSet(y)",
+          desc: "Hereditary Subclass Sethood Preservation"
         }
       };
 
@@ -130,7 +150,7 @@ Code Generation: SKIPPED (Compiler compiles to check, not execute)
 Soundness:       CERTIFIED under NBG Class Theory & Curry-Howard
 ======================================================================`;
       }
-      return `Unknown theorem for typecheck. Try: identity, modus_ponens, and_comm, currying, russell`;
+      return `Unknown theorem for typecheck. Try: identity, modus_ponens, and_comm, currying, russell, tagged_pairing, ordinal_induction, hereditary_subsets`;
     }
 
     // Tactic commands during active proof
