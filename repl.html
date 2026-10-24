@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant — Interactive REPL Playground</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="myfavicon.ico">
+  <style>
+    :root {
+      --bg: #090d16;
+      --panel-bg: #0f172a;
+      --border: rgba(255, 255, 255, 0.1);
+      --primary: #38bdf8;
+      --accent: #2563eb;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --code-bg: #030712;
+      --green: #10b981;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    header {
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand { font-size: 1.1rem; font-weight: 800; color: #fff; text-decoration: none; }
+    .brand span { color: var(--primary); }
+    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.88rem; margin-left: 1.2rem; }
+    .nav-links a:hover { color: var(--primary); }
+
+    .main-layout {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 280px 1fr 340px;
+      overflow: hidden;
+    }
+
+    /* Left Sidebar: Presets */
+    .sidebar-left {
+      background: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border);
+      padding: 1.25rem;
+      overflow-y: auto;
+    }
+    .sidebar-title { font-size: 0.8rem; font-weight: 700; color: var(--primary); text-transform: uppercase; margin-bottom: 0.8rem; }
+    .preset-btn {
+      width: 100%;
+      text-align: left;
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 0.8rem;
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
+    }
+    .preset-btn:hover { background: var(--accent); border-color: var(--primary); color: #fff; }
+
+    /* Center: REPL Terminal */
+    .repl-center {
+      display: flex;
+      flex-direction: column;
+      background: var(--code-bg);
+    }
+    .terminal-output {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+    }
+    .terminal-input-bar {
+      display: flex;
+      border-top: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 0.6rem 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .prompt-label { font-family: 'JetBrains Mono', monospace; color: var(--green); font-weight: 700; }
+    .terminal-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .run-btn {
+      padding: 0.4rem 0.9rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Right Sidebar: Goal & AST */
+    .sidebar-right {
+      background: rgba(15, 23, 42, 0.6);
+      border-left: 1px solid var(--border);
+      padding: 1.25rem;
+      overflow-y: auto;
+    }
+    .panel-box {
+      background: rgba(3, 7, 18, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 900px) {
+      .main-layout { grid-template-columns: 1fr; }
+      .sidebar-left, .sidebar-right { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand">Obelisk <span>REPL Playground</span></a>
+    <div class="nav-links">
+      <a href="manual.html">Reference Manual</a>
+      <a href="Obelisk_Report.pdf" target="_blank">Lean 4 Audit</a>
+      <a href="https://georgydunaev.github.io" target="_blank">Author Portfolio</a>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <!-- Presets -->
+    <div class="sidebar-left">
+      <div class="sidebar-title">Proof Presets</div>
+      <button class="preset-btn" onclick="loadPreset('empty')">1. Empty Set Unique</button>
+      <button class="preset-btn" onclick="loadPreset('russell')">2. Russell's Paradox Resolution</button>
+      <button class="preset-btn" onclick="loadPreset('tagged')">3. Tagged Proper Class Pair</button>
+      <button class="preset-btn" onclick="loadPreset('ordinals')">4. Transfinite Ordinal Induction</button>
+      <button class="preset-btn" onclick="loadPreset('heredity')">5. Subclass Sethood (Heredity)</button>
+      
+      <div class="sidebar-title" style="margin-top: 1.5rem;">Quick Commands</div>
+      <button class="preset-btn" onclick="sendCmd('axioms')">list axioms</button>
+      <button class="preset-btn" onclick="sendCmd('theorems')">list theorems</button>
+      <button class="preset-btn" onclick="sendCmd('check russell')">verify proof tree</button>
+      <button class="preset-btn" onclick="sendCmd('clear')">clear terminal</button>
+    </div>
+
+    <!-- Interactive Terminal -->
+    <div class="repl-center">
+      <div class="terminal-output" id="output">Obelisk Interactive Theorem Prover (Standard ML LCF Core)
+Architecture: Zero Implicit Computation · Morse-Kelley Class Theory
+Machine-Checked Audit: Lean 4 (0 errors, 0 sorry)
+Type 'help' or click presets on the left to begin.
+</div>
+      <div class="terminal-input-bar">
+        <span class="prompt-label">obelisk&gt;</span>
+        <input type="text" id="cmdInput" class="terminal-input" placeholder="Type command e.g. check russell, axioms, theorems..." autofocus>
+        <button class="run-btn" onclick="handleInput()">Run</button>
+      </div>
+    </div>
+
+    <!-- Inspector -->
+    <div class="sidebar-right">
+      <div class="sidebar-title">Syntactic Goal State</div>
+      <div class="panel-box" id="goalBox">
+        <span style="color:#10b981;">Goals: 0 remaining</span><br>
+        Current Theorem: Verified<br>
+        Derivation Steps: Explicit Tree
+      </div>
+
+      <div class="sidebar-title">Kernel Trust Info</div>
+      <div class="panel-box">
+        <strong>Kernel:</strong> SML (~20k LOC)<br>
+        <strong>Axioms:</strong> Morse-Kelley (3.01–3.66)<br>
+        <strong>Implicit Computation:</strong> 0.00%<br>
+        <strong>Audit Status:</strong> <span style="color:#38bdf8;">Passed Lean 4</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/obelisk_repl.js"></script>
+  <script>
+    const repl = new ObeliskREPL(document.getElementById('output'));
+    const inputEl = document.getElementById('cmdInput');
+    const outEl = document.getElementById('output');
+
+    inputEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleInput();
+    });
+
+    function handleInput() {
+      const val = inputEl.value;
+      inputEl.value = '';
+      sendCmd(val);
+    }
+
+    function sendCmd(cmd) {
+      if (!cmd) return;
+      if (cmd === 'clear') {
+        outEl.innerText = 'Obelisk REPL reset.\n';
+        return;
+      }
+      outEl.innerText += '\nobelisk> ' + cmd + '\n';
+      const res = repl.evalCommand(cmd);
+      outEl.innerText += res + '\n';
+      outEl.scrollTop = outEl.scrollHeight;
+    }
+
+    function loadPreset(name) {
+      if (name === 'empty') sendCmd('check empty_unique');
+      if (name === 'russell') sendCmd('check russell');
+      if (name === 'tagged') sendCmd('check tagged_pair_proj');
+      if (name === 'ordinals') sendCmd('check ordinal_induction');
+      if (name === 'heredity') sendCmd('check hereditary_subsets');
+    }
+  </script>
+
+</body>
+</html>
