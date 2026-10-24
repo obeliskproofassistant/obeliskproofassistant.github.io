@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Some Proofs in Category Theory: The Yoneda Lemma (yoneda_ai) | Georgy Dunaev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://obeliskproofassistant.github.io/styles.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/myfavicon.ico"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="projectaboutbody">
+
+<div class="container">
+<header>
+  <h2 style="border-right: 0px; padding: 0; margin: 0;">
+  <span class="title-text" style="display:inline-block; background-color: #fafafa; text-align: center; border-radius: 25px; padding: 10px;">
+    <span style="color: red;">Y</span>oneda <span style="color: red;">A</span>I — Some Proofs in Category Theory: The Yoneda Lemma
+  </span>
+  </h2>  
+</header>
+
+<div class="section">
+    <h2>Overview</h2>
+    <p>
+      <strong>yoneda_ai</strong> is an AI-assisted formal monograph and mathematical study dedicated to category theory, natural transformations, and constructive proofs of the celebrated <strong>Yoneda Lemma</strong> and its consequences.
+    </p>
+    <p>
+      The monograph investigates both covariant and contravariant formulations of representable functors, proving that an object in a locally small category is completely determined up to isomorphism by the network of its morphisms with other objects.
+    </p>
+</div>
+
+<div class="section">
+    <h2>Resources &amp; Downloads</h2>
+<table class="tableList">
+    <tr>
+        <th>
+            <a href="https://github.com/georgydunaev/yoneda_ai" target="_top">[GitHub]</a>
+        </th>
+        <td>
+            <strong>Source Repository</strong> — formal LaTeX sources, diagram definitions, and development notes.
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <a href="https://github.com/georgydunaev/yoneda_ai/releases/tag/v0.1" target="_top">[link]</a>
+        </th>
+        <td>
+            <strong>Release v0.1</strong> — official GitHub release tagged artifact.
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <a href="https://github.com/georgydunaev/yoneda_ai/releases/download/v0.1/yoneda_agy.pdf" target="_blank">[PDF]</a>
+        </th>
+        <td>
+            <strong>The Monograph (PDF)</strong> — complete monograph text, diagrams, and proofs.
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <a href="interactive_diagrams.html" target="_top">[Diagrams]</a>
+        </th>
+        <td>
+            <strong>Interactive Commutative Diagrams</strong> — SVG category theory commutative diagrams and Yoneda functor visualization.
+        </td>
+    </tr>
+    <tr>
+        <th>
+            <a href="about.html" target="_top">[Home]</a>
+        </th>
+        <td>
+            Return to Obelisk About Page.
+        </td>
+    </tr>
+</table>
+</div>
+
+<div class="section">
+    <h2>Mathematical Formulation</h2>
+    <h3>1. Presheaves and Representable Functors</h3>
+    <p>
+      Let \(\mathcal{C}\) be a locally small category. For any object \(A \in \mathrm{Ob}(\mathcal{C})\), the contravariant hom-functor (presheaf):
+      \[
+        h_A = \mathrm{Hom}_{\mathcal{C}}(-, A) : \mathcal{C}^{\mathrm{op}} \to \mathbf{Set}
+      \]
+      maps an object \(X\) to the set of morphisms \(\mathrm{Hom}_{\mathcal{C}}(X, A)\), and a morphism \(f : X \to Y\) to pre-composition \(-\circ f : \mathrm{Hom}_{\mathcal{C}}(Y, A) \to \mathrm{Hom}_{\mathcal{C}}(X, A)\).
+    </p>
+
+    <h3>2. Statement of the Yoneda Lemma</h3>
+    <p>
+      For every object \(A \in \mathcal{C}\) and every presheaf \(F : \mathcal{C}^{\mathrm{op}} \to \mathbf{Set}\), there exists a natural bijection:
+      \[
+        \Phi_{A, F} : \mathrm{Nat}\big(\mathrm{Hom}_{\mathcal{C}}(-, A), F\big) \overset{\sim}{\longrightarrow} F(A)
+      \]
+      given by evaluating a natural transformation \(\alpha\) at the identity morphism:
+      \[
+        \Phi_{A, F}(\alpha) = \alpha_A(\mathrm{id}_A) \in F(A).
+      \]
+      The inverse mapping constructs for every element \(u \in F(A)\) a natural transformation \(\alpha^{(u)}\) whose components \(\alpha^{(u)}_X : \mathrm{Hom}_{\mathcal{C}}(X, A) \to F(X)\) are defined by:
+      \[
+        \alpha^{(u)}_X(f) = (F(f))(u).
+      \]
+    </p>
+
+    <h3>3. The Yoneda Embedding</h3>
+    <p>
+      As a direct corollary, setting \(F = h_B = \mathrm{Hom}_{\mathcal{C}}(-, B)\) yields:
+      \[
+        \mathrm{Nat}\big(h_A, h_B\big) \cong \mathrm{Hom}_{\mathcal{C}}(A, B).
+      \]
+      Hence the Yoneda functor:
+      \[
+        y : \mathcal{C} \to \mathbf{Set}^{\mathcal{C}^{\mathrm{op}}}, \quad A \mapsto h_A
+      \]
+      is <strong>fully faithful</strong>. In particular, \(h_A \cong h_B\) as presheaves if and only if \(A \cong B\) in \(\mathcal{C}\).
+    </p>
+</div>
+
+<div class="section">
+    <h2>Foundational Context in Morse-Kelley Class Theory</h2>
+    <p>
+      In traditional set theories (ZFC), the collection of all sets or the category of sets \(\mathbf{Set}\) cannot be formed as a set. In the <strong>Morse-Kelley (MK)</strong> class theory underlying the <a href="https://obeliskproofassistant.github.io/">Obelisk Proof Assistant</a>, a rigorous distinction is maintained:
+    </p>
+    <ul>
+      <li><strong>Small Categories:</strong> Categories whose collections of objects and morphisms are sets. The category \(\mathbf{Set}\) of small sets is a large category.</li>
+      <li><strong>Large Categories:</strong> Categories whose objects and morphisms form proper classes. In Morse-Kelley theory, full impredicative class comprehension guarantees the existence of functor classes and natural transformation classes without introducing inconsistency.</li>
+    </ul>
+</div>
+
+<div class="footer">
+    © 2026 Georgy Dunaev · <a href="aboutme.html">Personal Page</a> · <a href="https://obeliskproofassistant.github.io/">Obelisk Proof Assistant</a>
+</div>
+
+</div>
+</body>
+</html>
