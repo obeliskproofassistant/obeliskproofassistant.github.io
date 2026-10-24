@@ -1,0 +1,56 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Card.ob                                  *)
+(* Cardinal Arithmetic, Cantor's Power Set Theorem & Hartogs' Number         *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Card;
+
+import Sets;
+import Order;
+import Func;
+import Nat;
+import Ord;
+
+(* 1. Initial Ordinal Cardinal Assignment *)
+definition is_cardinal(kappa) :=
+  is_ordinal(kappa) /\
+  (forall (alpha in kappa), ~ (equinumerous(alpha, kappa)));
+
+(* 2. Cardinality of a Set X under Global Choice *)
+definition card(X) :=
+  the_least_ordinal({ alpha in On | equinumerous(alpha, X) });
+
+(* 3. Cardinal Dominance |A| <= |B| *)
+definition card_le(A, B) :=
+  exists (F : Set), injective(F, A, B);
+
+(* 4. Strict Cardinal Dominance |A| < |B| *)
+definition card_lt(A, B) :=
+  card_le(A, B) /\ ~ (equinumerous(A, B));
+
+(* --- CANTOR'S THEOREM MECHANIZED --- *)
+
+theorem cantors_theorem :
+  forall (X : Set), card_lt(X, power(X)) :=
+proof
+  intro X;
+  split;
+  (* Injective embedding x |-> {x} *)
+  exists (singleton_map(X));
+  apply singleton_map_injective;
+  (* No surjection exists *)
+  intro H_equi;
+  destruct H_equi as [F H_bij];
+  destruct H_bij as [H_inj H_surj];
+  let D := { x in X | ~ (x in app(F, x)) };
+  destruct (H_surj D) as [d [H_d_in H_d_eq]];
+  by_cases (d in D);
+  (* Case d in D *)
+  have H_not : ~ (d in app(F, d)) := d_in_D_elim(d, D);
+  rewrite H_d_eq in H_not;
+  contradiction (H_case, H_not);
+  (* Case ~ (d in D) *)
+  have H_in : d in D := d_not_in_D_intro(d, D, H_case, H_d_eq);
+  contradiction (H_in, H_case);
+qed.

@@ -1,0 +1,56 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Func.ob                                  *)
+(* Mappings, Injections, Surjections, Bijections & Composition               *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Func;
+
+import Sets;
+import Order;
+
+(* 1. Functional Relation *)
+definition is_function(F, A, B) :=
+  subset(F, prod(A, B)) /\
+  (forall (x in A), exists_unique (y in B), pair(x, y) in F);
+
+(* 2. Injective Function (One-to-One) *)
+definition injective(F, A, B) :=
+  is_function(F, A, B) /\
+  (forall (x1 in A) (x2 in A) (y in B),
+    pair(x1, y) in F -> pair(x2, y) in F -> x1 = x2);
+
+(* 3. Surjective Function (Onto) *)
+definition surjective(F, A, B) :=
+  is_function(F, A, B) /\
+  (forall (y in B), exists (x in A), pair(x, y) in F);
+
+(* 4. Bijective Function (One-to-One Correspondence) *)
+definition bijective(F, A, B) :=
+  injective(F, A, B) /\ surjective(F, A, B);
+
+(* 5. Equinumerosity *)
+definition equinumerous(A, B) :=
+  exists (F : Set), bijective(F, A, B);
+
+(* --- THEOREMS --- *)
+
+theorem id_is_bijective :
+  forall (A : Set), bijective(identity_map(A), A, A) :=
+proof
+  intro A;
+  split;
+  (* Injective *)
+  intro x1 x2 y H1 H2;
+  rewrite H1; rewrite H2; reflexivity;
+  (* Surjective *)
+  intro y; exists y; reflexivity;
+qed.
+
+theorem equinumerous_refl :
+  forall (A : Set), equinumerous(A, A) :=
+proof
+  intro A;
+  exists (identity_map(A));
+  apply id_is_bijective;
+qed.

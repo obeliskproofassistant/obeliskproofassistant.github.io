@@ -1,0 +1,80 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Sets.ob                                  *)
+(* Elementary Set Theory & Morse-Kelley Class Algebra                        *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Sets;
+
+(* 1. Subset Inclusion *)
+definition subset(X, Y) :=
+  forall (z : Set), z in X -> z in Y;
+
+(* 2. Strict Proper Subset *)
+definition proper_subset(X, Y) :=
+  subset(X, Y) /\ ~ (X = Y);
+
+(* 3. Set Intersection *)
+definition inter(X, Y) :=
+  { z in X | z in Y };
+
+(* 4. Set Union *)
+definition union2(X, Y) :=
+  { z in V | z in X \/ z in Y };
+
+(* 5. Set Difference (Relative Complement) *)
+definition diff(X, Y) :=
+  { z in X | ~ (z in Y) };
+
+(* 6. Disjointness *)
+definition disjoint(X, Y) :=
+  inter(X, Y) = 0;
+
+(* --- THEOREMS --- *)
+
+theorem subset_refl :
+  forall (X : Set), subset(X, X) :=
+proof
+  intro X;
+  intro z;
+  intro H;
+  exact H;
+qed.
+
+theorem subset_trans :
+  forall (X Y Z : Set),
+    subset(X, Y) -> subset(Y, Z) -> subset(X, Z) :=
+proof
+  intro X; intro Y; intro Z;
+  intro H_xy;
+  intro H_yz;
+  intro w;
+  intro H_w;
+  apply H_yz;
+  apply H_xy;
+  exact H_w;
+qed.
+
+theorem inter_comm :
+  forall (X Y : Set), inter(X, Y) = inter(Y, X) :=
+proof
+  intro X; intro Y;
+  apply axiom_extensionality;
+  intro z;
+  split;
+  intro H1;
+  destruct H1 as [H1_in H1_y];
+  split; exact H1_y; exact H1_in;
+  intro H2;
+  destruct H2 as [H2_in H2_x];
+  split; exact H2_x; exact H2_in;
+qed.
+
+theorem empty_set_least :
+  forall (X : Set), subset(0, X) :=
+proof
+  intro X;
+  intro z;
+  intro H_empty;
+  contradiction (axiom_empty_set, H_empty);
+qed.

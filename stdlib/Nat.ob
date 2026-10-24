@@ -1,0 +1,73 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Nat.ob                                   *)
+(* Von Neumann Natural Numbers, Peano Axioms & Induction                     *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Nat;
+
+import Sets;
+import Order;
+import Func;
+
+(* 1. Successor Operation: S(x) = x U {x} *)
+definition succ(x) :=
+  union2(x, singleton(x));
+
+(* 2. Inductive Set *)
+definition is_inductive(X) :=
+  0 in X /\ (forall (n in X), succ(n) in X);
+
+(* 3. The Natural Numbers Omega as Least Inductive Set *)
+definition omega :=
+  inter_family({ X in power(V) | is_inductive(X) });
+
+(* 4. Natural Number Predicate *)
+definition is_nat(n) :=
+  n in omega;
+
+(* --- PEANO AXIOMS MECHANIZED --- *)
+
+theorem peano_zero_is_nat :
+  is_nat(0) :=
+proof
+  unfold is_nat;
+  unfold omega;
+  intro X H_ind;
+  destruct H_ind as [H_zero H_succ];
+  exact H_zero;
+qed.
+
+theorem peano_succ_is_nat :
+  forall (n : Set), is_nat(n) -> is_nat(succ(n)) :=
+proof
+  intro n H_n;
+  unfold is_nat;
+  unfold omega;
+  intro X H_ind;
+  destruct H_ind as [H_zero H_succ];
+  apply H_succ;
+  apply H_n;
+  exact H_ind;
+qed.
+
+theorem peano_succ_nonzero :
+  forall (n : Set), is_nat(n) -> ~ (succ(n) = 0) :=
+proof
+  intro n H_n H_eq;
+  have H_in : n in succ(n) := succ_has_element(n);
+  rewrite H_eq in H_in;
+  contradiction (axiom_empty_set, H_in);
+qed.
+
+theorem mathematical_induction :
+  forall (P : Set -> Prop),
+    P(0) ->
+    (forall (n : Set), is_nat(n) -> P(n) -> P(succ(n))) ->
+    forall (n : Set), is_nat(n) -> P(n) :=
+proof
+  intro P H_base H_step n H_nat;
+  let S := { k in omega | P(k) };
+  have H_ind : is_inductive(S) := inductive_subset(P, H_base, H_step);
+  exact (omega_minimal(S, H_ind, n, H_nat));
+qed.

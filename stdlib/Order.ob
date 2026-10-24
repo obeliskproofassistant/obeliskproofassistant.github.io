@@ -1,0 +1,59 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Order.ob                                 *)
+(* Binary Relations, Partial Orders, Total Orders & Well-Orders              *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Order;
+
+import Sets;
+
+(* 1. Binary Relation on a Set A *)
+definition is_relation(R, A) :=
+  subset(R, prod(A, A));
+
+(* 2. Reflexivity *)
+definition reflexive(R, A) :=
+  forall (x in A), pair(x, x) in R;
+
+(* 3. Antisymmetry *)
+definition antisymmetric(R, A) :=
+  forall (x in A) (y in A),
+    pair(x, y) in R -> pair(y, x) in R -> x = y;
+
+(* 4. Transitivity *)
+definition transitive(R, A) :=
+  forall (x in A) (y in A) (z in A),
+    pair(x, y) in R -> pair(y, z) in R -> pair(x, z) in R;
+
+(* 5. Partial Order *)
+definition is_partial_order(R, A) :=
+  reflexive(R, A) /\ antisymmetric(R, A) /\ transitive(R, A);
+
+(* 6. Total (Linear) Order *)
+definition is_total_order(R, A) :=
+  is_partial_order(R, A) /\
+  forall (x in A) (y in A), pair(x, y) in R \/ pair(y, x) in R;
+
+(* 7. Well-Founded Relation *)
+definition well_founded(R, A) :=
+  forall (S : Set),
+    subset(S, A) -> ~ (S = 0) ->
+    exists (m in S), forall (y in S), ~ (pair(y, m) in R);
+
+(* 8. Well-Ordering *)
+definition is_well_order(R, A) :=
+  is_total_order(R, A) /\ well_founded(R, A);
+
+(* --- THEOREMS --- *)
+
+theorem subset_is_partial_order :
+  forall (U : Set), is_partial_order(inclusion_relation(power(U)), power(U)) :=
+proof
+  intro U;
+  split;
+  intro x; apply subset_refl;
+  split;
+  intro x y H1 H2; apply axiom_extensionality; split; exact H1; exact H2;
+  intro x y z H1 H2; apply subset_trans with (Y := y); exact H1; exact H2;
+qed.

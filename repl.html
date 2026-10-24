@@ -154,18 +154,24 @@
   <div class="main-layout">
     <!-- Presets -->
     <div class="sidebar-left">
-      <div class="sidebar-title">Proof Presets</div>
-      <button class="preset-btn" onclick="loadPreset('empty')">1. Empty Set Unique</button>
-      <button class="preset-btn" onclick="loadPreset('russell')">2. Russell's Paradox Resolution</button>
-      <button class="preset-btn" onclick="loadPreset('tagged')">3. Tagged Proper Class Pair</button>
-      <button class="preset-btn" onclick="loadPreset('ordinals')">4. Transfinite Ordinal Induction</button>
-      <button class="preset-btn" onclick="loadPreset('heredity')">5. Subclass Sethood (Heredity)</button>
+      <div class="sidebar-title">Interactive Deductions</div>
+      <button class="preset-btn" onclick="sendCmd('prove and_comm')">⚡ Prove (A ∧ B) → (B ∧ A)</button>
+      <button class="preset-btn" onclick="sendCmd('prove or_comm')">⚡ Prove (A ∨ B) → (B ∨ A)</button>
+      <button class="preset-btn" onclick="sendCmd('prove identity')">⚡ Prove (P → Q) → (P → Q)</button>
       
-      <div class="sidebar-title" style="margin-top: 1.5rem;">Quick Commands</div>
-      <button class="preset-btn" onclick="sendCmd('axioms')">list axioms</button>
-      <button class="preset-btn" onclick="sendCmd('theorems')">list theorems</button>
-      <button class="preset-btn" onclick="sendCmd('check russell')">verify proof tree</button>
-      <button class="preset-btn" onclick="sendCmd('clear')">clear terminal</button>
+      <div class="sidebar-title" style="margin-top: 1.2rem;">Proof Step Tactics</div>
+      <button class="preset-btn" onclick="sendCmd('intro')">tactic: intro</button>
+      <button class="preset-btn" onclick="sendCmd('split')">tactic: split</button>
+      <button class="preset-btn" onclick="sendCmd('destruct H')">tactic: destruct H</button>
+      <button class="preset-btn" onclick="sendCmd('auto')">tactic: auto solve</button>
+      <button class="preset-btn" onclick="sendCmd('qed')">seal: qed</button>
+
+      <div class="sidebar-title" style="margin-top: 1.2rem;">Classical Axioms</div>
+      <button class="preset-btn" onclick="loadPreset('empty')">1. Empty Set Unique</button>
+      <button class="preset-btn" onclick="loadPreset('russell')">2. Russell's Paradox</button>
+      <button class="preset-btn" onclick="loadPreset('tagged')">3. Tagged Pairs</button>
+      <button class="preset-btn" onclick="loadPreset('ordinals')">4. Ordinal Induction</button>
+      <button class="preset-btn" onclick="sendCmd('clear')">Clear Terminal</button>
     </div>
 
     <!-- Interactive Terminal -->
@@ -201,11 +207,13 @@ Type 'help' or click presets on the left to begin.
     </div>
   </div>
 
+  <script src="js/obelisk_engine.js"></script>
   <script src="js/obelisk_repl.js"></script>
   <script>
-    const repl = new ObeliskREPL(document.getElementById('output'));
-    const inputEl = document.getElementById('cmdInput');
     const outEl = document.getElementById('output');
+    const goalBoxEl = document.getElementById('goalBox');
+    const repl = new ObeliskREPL(outEl, goalBoxEl);
+    const inputEl = document.getElementById('cmdInput');
 
     inputEl.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') handleInput();
@@ -221,6 +229,7 @@ Type 'help' or click presets on the left to begin.
       if (!cmd) return;
       if (cmd === 'clear') {
         outEl.innerText = 'Obelisk REPL reset.\n';
+        if (repl) { repl.activeProof = null; repl.updateGoalBox(); }
         return;
       }
       outEl.innerText += '\nobelisk> ' + cmd + '\n';

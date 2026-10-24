@@ -1,0 +1,68 @@
+(* ========================================================================= *)
+(* Obelisk Standard Library: Module Ord.ob                                   *)
+(* Transfinite Ordinals, Von Neumann Construction & Transfinite Induction    *)
+(* Architect: Georgy Dunaev                                                  *)
+(* ========================================================================= *)
+
+theory Ord;
+
+import Sets;
+import Order;
+import Nat;
+
+(* 1. Hereditary Transitivity *)
+definition transitive_set(X) :=
+  forall (y in X), subset(y, X);
+
+(* 2. Von Neumann Ordinal Predicate *)
+definition is_ordinal(alpha) :=
+  transitive_set(alpha) /\
+  (forall (y in alpha), transitive_set(y)) /\
+  is_well_order(membership_relation(alpha), alpha);
+
+(* 3. Limit Ordinal Predicate *)
+definition is_limit_ordinal(lambda) :=
+  is_ordinal(lambda) /\
+  ~ (lambda = 0) /\
+  (forall (alpha in lambda), succ(alpha) in lambda);
+
+(* --- THEOREMS --- *)
+
+theorem zero_is_ordinal :
+  is_ordinal(0) :=
+proof
+  unfold is_ordinal;
+  split;
+  (* Transitive *)
+  intro y H_empty; contradiction (axiom_empty_set, H_empty);
+  split;
+  intro y H_empty; contradiction (axiom_empty_set, H_empty);
+  apply empty_set_well_ordered;
+qed.
+
+theorem omega_is_limit_ordinal :
+  is_limit_ordinal(omega) :=
+proof
+  unfold is_limit_ordinal;
+  split;
+  apply omega_is_ordinal;
+  split;
+  apply omega_nonzero;
+  intro alpha H_alpha;
+  apply peano_succ_is_nat;
+  exact H_alpha;
+qed.
+
+theorem transfinite_induction :
+  forall (P : Set -> Prop),
+    (forall (alpha : Set),
+      is_ordinal(alpha) ->
+      (forall (beta in alpha), P(beta)) ->
+      P(alpha)) ->
+    forall (alpha : Set), is_ordinal(alpha) -> P(alpha) :=
+proof
+  intro P H_step alpha H_ord;
+  apply well_founded_induction with (R := membership_relation(alpha));
+  apply H_ord;
+  exact H_step;
+qed.
