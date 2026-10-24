@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant — Reference Manual &amp; Axiomatics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="myfavicon.ico">
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #38bdf8;
+      --accent: #2563eb;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.65;
+      padding: 2rem 1.5rem;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-link { color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
+    h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    h2 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem; color: #fff; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; }
+    .axiom-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.92rem; }
+    .axiom-table th, .axiom-table td { padding: 0.8rem 1rem; border: 1px solid var(--card-border); text-align: left; }
+    .axiom-table th { background: rgba(30, 41, 59, 0.6); color: var(--primary); }
+    code { font-family: 'JetBrains Mono', monospace; background: rgba(15, 23, 42, 0.8); padding: 0.2rem 0.4rem; border-radius: 4px; font-size: 0.88rem; }
+    .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; background: rgba(56, 189, 248, 0.15); color: var(--primary); }
+    footer { border-top: 1px solid var(--card-border); margin-top: 3rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div>
+        <a href="index.html" class="back-link">← Return to Obelisk Main Site</a>
+        <h1 style="margin-top: 0.5rem;">Obelisk Reference Manual &amp; Axiomatics</h1>
+        <p style="color: var(--text-muted);">Formal specification of Morse–Kelley class theory, tagged pairing, and LCF architecture.</p>
+      </div>
+      <div>
+        <a href="Obelisk_Report.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Download Audit Report (PDF)</a>
+      </div>
+    </header>
+
+    <h2>1. Core Foundations: Morse–Kelley Class Theory</h2>
+    <p>
+      The Obelisk kernel formalizes an impredicative class theory where the universe of discourse consists of <strong>classes</strong>.
+      A class is defined to be a <strong>set</strong> if and only if it is an element of some other class:
+    </p>
+    <p style="margin: 1rem 0; padding: 1rem; background: rgba(15, 23, 42, 0.6); border-radius: 8px;">
+      <code>isSet(X) &hArr; &exist; Y. X &isin; Y (Definition 3.02)</code>
+    </p>
+
+    <h2>2. Complete Axiom Catalog</h2>
+    <table class="axiom-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Name</th>
+          <th>Formal Specification</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>3.01</strong></td>
+          <td>Impredicative Comprehension</td>
+          <td><code>&exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.12</strong></td>
+          <td>Heredity Axiom</td>
+          <td><code>A &sube; B &and; isSet(B) &rArr; isSet(A)</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.13</strong></td>
+          <td>Exponent (Powerclass)</td>
+          <td><code>isSet(X) &rArr; isSet(P(X))</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.14</strong></td>
+          <td>Regularity (&isin;-Induction)</td>
+          <td><code>P(X) &sube; X &rArr; V &sube; X</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.34</strong></td>
+          <td>Ordering Relation &preceq;</td>
+          <td>Restored injectivity and domain conditions</td>
+          <td><span class="badge" style="color:#fbbf24; background:rgba(251,191,36,0.15);">Repaired</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.37</strong></td>
+          <td>Limitation of Size</td>
+          <td><code>X &isin; V &hArr; |X| &prec; |V|</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.45</strong></td>
+          <td>Tagged Pair Construction</td>
+          <td><code>inj_1(A) &cup; inj_2(B)</code></td>
+          <td><span class="badge">Independent</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.46</strong></td>
+          <td>Left Projection (&pi;<sub>1</sub>)</td>
+          <td><code>&pi;<sub>1</sub>(&lang;A, B&rang;<sub>tag</sub>) = A</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.47</strong></td>
+          <td>Right Projection (&pi;<sub>2</sub>)</td>
+          <td><code>&pi;<sub>2</sub>(&lang;A, B&rang;<sub>tag</sub>) = B</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.53</strong></td>
+          <td>Axiom of Infinity</td>
+          <td><code>isSet(&omega;)</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+        <tr>
+          <td><strong>3.66</strong></td>
+          <td>Tarski's Universe Axiom</td>
+          <td><code>isSet(X) &rArr; &exist; U. X &isin; U &and; isUniverse(U)</code></td>
+          <td><span class="badge">Verified</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>3. The Machine-Checked Lean 4 Verification</h2>
+    <p>
+      All 9 core theorems from the Obelisk demonstration were formalized in Lean 4 without Mathlib dependencies.
+      The full source code is available in <a href="Obelisk.lean" target="_blank" style="color:var(--primary);">Obelisk.lean</a>:
+    </p>
+    <ul style="margin: 1rem 0 1rem 1.5rem; color: var(--text-muted);">
+      <li><strong>Theorem 1:</strong> Uniqueness of the empty set (<code>empty_unique</code>)</li>
+      <li><strong>Theorem 2:</strong> Extensionality of classes (<code>extensionality</code>)</li>
+      <li><strong>Theorem 3:</strong> Subclasses of sets are sets (<code>hereditary_subsets</code>)</li>
+      <li><strong>Theorem 4:</strong> Epsilon-transitivity of ordinals (<code>transitivity_in</code>)</li>
+      <li><strong>Theorem 5:</strong> Russell's Paradox resolution: Universe V is not a set (<code>not_isSet_V</code>)</li>
+      <li><strong>Theorem 6:</strong> Transfinite induction on ordinals (<code>ordinal_induction</code>)</li>
+      <li><strong>Theorem 7:</strong> Burali-Forti Paradox resolution: On is a proper class (<code>on_not_set</code>)</li>
+      <li><strong>Theorem 8:</strong> Kuratowski pair set-property (<code>kuratowski_pair_set</code>)</li>
+      <li><strong>Theorem 9:</strong> Dunaev tagged pair projection theorem (<code>tagged_pair_proj</code>)</li>
+    </ul>
+
+    <footer>
+      <p>&copy; 2026 Georgy Dunaev · <a href="index.html" style="color:var(--primary);">Obelisk Proof Assistant</a></p>
+    </footer>
+  </div>
+
+</body>
+</html>
