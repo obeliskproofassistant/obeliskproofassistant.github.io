@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCXK5XYFYQ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TCXK5XYFYQ');
+    </script>
+    <!--(no title)-->
+    <title>
+    OPA
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+<!--
+    <style>
+
+    </style>
+-->
+            <!-- overflow: scroll; -->
+    <!-- not "assets/vendor/silktide-consent-manager/..." because submodules not working -->
+    <link rel="stylesheet" href="assets/silktide-consent-manager.css">
+    <script src="assets/silktide-consent-manager.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="/images/myfavicon.ico"/>
+</head>
+<body class="indexbody">
+    <div id="portal-switch-banner" style="position: fixed; top: 12px; right: 20px; z-index: 99999; background: rgba(15, 23, 42, 0.90); backdrop-filter: blur(8px); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 20px; padding: 6px 14px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 13px; box-shadow: 0 4px 14px rgba(0,0,0,0.35); display: flex; align-items: center; gap: 8px;">
+        <span style="color: #94a3b8; font-weight: 500;">Portal:</span>
+        <span style="color: #f8fafc; font-weight: 600;">🏛 Classic (Author)</span>
+        <span style="color: #475569;">|</span>
+        <a href="obelisk_ai.html" target="_top" style="color: #38bdf8; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px;">
+            ✨ Switch to Modern AI Portal &rarr;
+        </a>
+    </div>
+    <script>
+    // Initialize the consent manager
+    window.silktideConsentManager.init({
+      consentTypes: [
+        {
+          id: 'essential',
+          label: 'Essential',
+          description: 'These are necessary for the website to function and cannot be switched off.',
+          required: true,
+        },
+        {
+          id: 'analytics',
+          label: 'Analytics',
+          description: 'These help us understand how visitors interact with the website.',
+          defaultValue: true,
+          gtag: 'analytics_storage', // Automatic Google Tag Manager / Silktide Analytics integration
+        },
+        {
+          id: 'marketing',
+          label: 'Marketing',
+          description: 'These are used to deliver personalized advertisements.',
+          defaultValue: false,
+          gtag: ['ad_storage', 'ad_user_data', 'ad_personalization'],
+          onAccept: function() {
+            console.log('Marketing accepted');
+          },
+          onReject: function() {
+            console.log('Marketing rejected');
+          },
+        },
+      ],
+    });
+    </script>
+
+
+    <script>
+window.addEventListener('message', function(event) {
+    // Optional: Verify origin for security
+    // if (event.origin !== "https://trusted-site.com") return;
+    
+    if (event.data.type === 'CHANGE_TITLE') {
+        document.title = event.data.title;
+    }
+});
+    </script>
+
+    <div class="left">
+        <iframe class="completeiframe" src="about.html"></iframe>
+    </div>
+    <div class="right">
+        <iframe class="completeiframe" src="embedding.html"></iframe>
+    </div>
+
+</body>
+</html>
