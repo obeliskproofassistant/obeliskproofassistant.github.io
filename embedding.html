@@ -2,61 +2,164 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obelisk Interactive Demonstration</title>
     <style>
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             display: flex;
-            height: 100vh;
-            color:white;
-            background-color:black;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #f8fafc;
+            background-color: #030712;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+        }
+
+        #nav-toolbar {
+            position: sticky;
+            top: 0;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 100;
+            font-size: 12px;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-title {
+            font-weight: 700;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toolbar-nav {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .toolbar-btn {
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: #e2e8f0;
+            padding: 3px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 11px;
+            transition: all 0.2s ease;
+        }
+
+        .toolbar-btn:hover {
+            background: rgba(56, 189, 248, 0.25);
+            border-color: #38bdf8;
+            color: #fff;
+        }
+
+        #content-container {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+        }
+
+        #myhtmloutput {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Adjust pre formatting inside output */
+        #myhtmloutput pre {
+            font-size: 13.5px !important;
+            line-height: 1.5 !important;
+            font-family: 'JetBrains Mono', monospace !important;
         }
     </style>
-            <!-- overflow: scroll; -->
 </head>
 <body>
 
-<div id="myhtmloutput"></div>
-<SCRIPT TYPE="text/javascript">
-let myaddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main";
+<div id="nav-toolbar">
+    <div class="toolbar-title">
+        <span>⚡ Obelisk Kernel Output</span>
+        <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
+    </div>
+    <div class="toolbar-nav">
+        <button class="toolbar-btn" onclick="scrollToText('Propositional logic')">1. Propositional Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('First-order logic')">2. First-Order Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('Class theory')">3. Class Axioms</button>
+        <a class="toolbar-btn" href="output.pdf" target="_blank">📄 View PDF</a>
+        <a class="toolbar-btn" href="output_white.pdf" target="_blank">📄 Light PDF</a>
+    </div>
+</div>
 
-let htmladdr = myaddr.concat("/","output",".","html");
+<div id="content-container">
+    <div id="myhtmloutput">
+        <div style="padding: 30px; text-align: center; color: #94a3b8;">
+            Loading verified mathematical output...
+        </div>
+    </div>
+</div>
+
+<script>
+const localAddr = "output.html";
+const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
 
 async function getText() {
-    let text = sessionStorage.getItem("text");
-
+    let text = sessionStorage.getItem("obelisk_demo_output");
     if (!text) {
-        const res = await fetch(htmladdr);
-        text = await res.text();
-        sessionStorage.setItem("text", text);
-        console.log("The text has been downloaded. (async)")
+        try {
+            const res = await fetch(localAddr);
+            if (res.ok) {
+                text = await res.text();
+            } else {
+                throw new Error("Local fetch failed: " + res.status);
+            }
+        } catch (err) {
+            console.warn("Falling back to remote URL due to:", err);
+            const remoteRes = await fetch(remoteAddr);
+            text = await remoteRes.text();
+        }
+        if (text) {
+            sessionStorage.setItem("obelisk_demo_output", text);
+        }
     }
-
     return text;
 }
 
-// synchronous function (it is not used)
-function myOldDownload() {
-
-fetch(htmladdr)
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("myhtmloutput").innerHTML = html
-  });
-
-console.log("The text has been downloaded. (sync)")
-
+function scrollToText(searchText) {
+    const el = document.getElementById("myhtmloutput");
+    if (!el) return;
+    const spans = el.querySelectorAll("span, p, pre");
+    for (let s of spans) {
+        if (s.textContent && s.textContent.includes(searchText)) {
+            s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            s.style.outline = '2px solid #38bdf8';
+            setTimeout(() => { s.style.outline = 'none'; }, 2000);
+            break;
+        }
+    }
 }
 
-async function myNewDownload() {
-  document.getElementById("myhtmloutput").innerHTML = await getText();
-  window.scrollTo(0,1680);
+async function renderOutput() {
+    try {
+        const rawHtml = await getText();
+        const target = document.getElementById("myhtmloutput");
+        target.innerHTML = rawHtml;
+    } catch (e) {
+        document.getElementById("myhtmloutput").innerHTML = 
+            "<div style='color:#ef4444; padding:20px;'>Failed to load output: " + e.message + "</div>";
+    }
 }
 
-myNewDownload();
-
+renderOutput();
 </script>
-<!--
-<body style="color:white; background-color:black" onload="window.scrollTo(0,1550);">
--->
+
 </body>
 </html>

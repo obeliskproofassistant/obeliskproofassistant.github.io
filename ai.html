@@ -9,7 +9,7 @@
   <!-- Fonts & Math -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
   
   <link rel="icon" type="image/x-icon" href="myfavicon.ico">
   <link rel="icon" type="image/png" sizes="96x96" href="myfavicon-96x96.png">
@@ -24,6 +24,7 @@
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
       --primary: #38bdf8;
+      --primary-hover: #0284c7;
       --accent: #2563eb;
       --text: #f1f5f9;
       --text-muted: #94a3b8;
@@ -31,6 +32,9 @@
       --tag-border: rgba(56, 189, 248, 0.3);
       --code-bg: #030712;
       --success: #10b981;
+      --warning: #f59e0b;
+      --side-bg: rgba(16, 185, 129, 0.08);
+      --side-border: rgba(16, 185, 129, 0.3);
     }
 
     * {
@@ -61,10 +65,10 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(9, 13, 22, 0.85);
+      background: rgba(9, 13, 22, 0.88);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
-      padding: 0.9rem 0;
+      padding: 0.85rem 0;
     }
 
     .header-inner {
@@ -99,7 +103,7 @@
 
     nav.main-nav {
       display: flex;
-      gap: 1.25rem;
+      gap: 1.1rem;
       align-items: center;
     }
 
@@ -154,7 +158,7 @@
 
     /* Hero */
     .hero {
-      padding: 4.5rem 0 3.5rem;
+      padding: 4rem 0 3rem;
       text-align: center;
     }
 
@@ -187,9 +191,9 @@
     }
 
     .hero-desc {
-      font-size: 1.2rem;
+      font-size: 1.18rem;
       color: var(--text-muted);
-      max-width: 780px;
+      max-width: 820px;
       margin: 0 auto 2rem;
       line-height: 1.6;
     }
@@ -199,6 +203,217 @@
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
+    }
+
+    /* 60-Second Executive Clarity Section */
+    .exec-overview {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 16px;
+      padding: 2.25rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .exec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .exec-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .exec-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .exec-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exec-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .exec-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Interactive Theorem & Rule Inspector */
+    .inspector-section {
+      margin-bottom: 4rem;
+    }
+
+    .inspector-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .inspector-nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .thm-btn {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .thm-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+    }
+
+    .thm-btn.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(56, 189, 248, 0.2) 100%);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .inspector-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .syntax-toggle-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .syntax-toggle-btn:hover {
+      background: var(--primary);
+      color: #030712;
+    }
+
+    .copy-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fff;
+    }
+
+    .syntax-display-frame {
+      background: #030712;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .syntax-display-frame pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .side-conditions-box {
+      background: var(--side-bg);
+      border: 1px solid var(--side-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .side-conditions-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .side-conditions-list {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.6;
     }
 
     /* Triad Grid */
@@ -366,7 +581,7 @@
 
     .demo-frame-container {
       width: 100%;
-      height: 600px;
+      height: 620px;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--card-border);
@@ -408,6 +623,9 @@
       nav.main-nav {
         display: none;
       }
+      .exec-header {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -422,6 +640,8 @@
       </a>
       <nav class="main-nav">
         <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">🏛 Classic Author Portal</a>
+        <a href="#overview">Overview</a>
+        <a href="#inspector">Theorem Inspector</a>
         <a href="#triad">Architecture</a>
         <a href="#comparison">Comparison</a>
         <a href="#audit">Lean 4 Audit</a>
@@ -453,6 +673,98 @@
         <a href="repl.html" class="btn btn-primary">⚡ Launch Web REPL</a>
         <a href="#demo" class="btn btn-secondary">Explore Demonstration</a>
         <a href="https://georgydunaev.github.io" class="btn btn-secondary" target="_blank">👤 Author Portfolio</a>
+      </div>
+    </section>
+
+    <!-- 60-SECOND EXECUTIVE OVERVIEW -->
+    <section id="overview" class="exec-overview">
+      <div class="exec-header">
+        <div>
+          <div class="exec-tag">Foundational Clarity in 60 Seconds</div>
+          <h2 class="exec-title" style="margin-top: 0.4rem;">What is Obelisk &amp; Why It Solves Modern Proof Gridlock</h2>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--primary);">
+          Curry–Howard for Impredicative Classes
+        </div>
+      </div>
+
+      <div class="exec-grid">
+        <div class="exec-card">
+          <h4 style="color: #38bdf8;"><span>🌌</span> First-Class Proper Classes</h4>
+          <p>
+            In standard ZFC and dependent type systems (Lean 4, Coq), collections like the universal class \(V\) or the category of all sets \(\mathbf{Set}\) cannot be manipulated as ordinary elements without triggering Russell's paradox or ascending into infinite universe hierarchies (<code>Type u</code>). 
+            Obelisk adopts <strong>Morse–Kelley (MK) class theory</strong>: proper classes are native first-class objects with full impredicative comprehension over classes.
+          </p>
+        </div>
+
+        <div class="exec-card">
+          <h4 style="color: #c084fc;"><span>🏷️</span> Dunaev Tagged Ordered Pairs</h4>
+          <p>
+            Standard Kuratowski pairs \(\langle A, B \rangle = \{\{A\}, \{A, B\}\}\) fail for proper classes because proper classes cannot be elements of sets. 
+            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \(\langle \text{tag}, A, B \rangle_{\text{tag}}\), allowing proper classes and infinite families to form pairs and lists with zero set-theoretic rank inflation and full algebraic projection invertibility.
+          </p>
+        </div>
+
+        <div class="exec-card">
+          <h4 style="color: #10b981;"><span>⚖️</span> Zero Implicit Computation</h4>
+          <p>
+            Type-theoretic proof assistants suffer from fragile computational reduction (\(\beta\delta\iota\)): definition updates break proof scripts invisibly. 
+            Obelisk separates syntax from semantics through the explicit valuation bracket \(\llbracket \cdot \rrbracket\). Every deduction is a checkable syntactic tree; inference rules have explicit side conditions with no hidden normalization noise.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE THEOREM & RULE INSPECTOR -->
+    <section id="inspector" class="inspector-section">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Mathematical Precision &amp; Concrete Code</div>
+        <h2 class="section-title">Interactive Theorem &amp; Rule Inspector</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+          Toggle between formal mathematical notation (Unicode / LaTeX) and concrete executable SML/Obelisk syntax. Side conditions are made fully visible and explicit.
+        </p>
+      </div>
+
+      <div class="inspector-card">
+        <!-- Theorem Selector Tabs -->
+        <div class="inspector-nav" id="thm-tabs">
+          <button class="thm-btn active" onclick="selectTheorem('russell')">1. Russell Proper Class</button>
+          <button class="thm-btn" onclick="selectTheorem('tagged_pair')">2. Tagged Pair Inversion</button>
+          <button class="thm-btn" onclick="selectTheorem('mk_comprehension')">3. MK Class Comprehension</button>
+          <button class="thm-btn" onclick="selectTheorem('conditional_term')">4. Syntactic Conditional (CIf)</button>
+          <button class="thm-btn" onclick="selectTheorem('modus_ponens')">5. Modus Ponens &amp; Shift</button>
+          <button class="thm-btn" onclick="selectTheorem('ordinal_ind')">6. Ordinal Foundation</button>
+        </div>
+
+        <!-- Toolbar: Switcher & Copy -->
+        <div class="inspector-toolbar">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button class="syntax-toggle-btn" id="syntax-toggle-btn" onclick="toggleSyntaxMode()">
+              <span>🔀</span> <span id="syntax-toggle-label">Switch to Concrete ASCII Syntax</span>
+            </button>
+            <span class="badge-highlight" id="active-format-badge">Active: Mathematical Unicode</span>
+          </div>
+          <div>
+            <button class="copy-btn" id="copy-syntax-btn" onclick="copyActiveSyntax()">
+              <span>📋</span> <span id="copy-btn-text">Copy Statement</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Syntax Display Frame -->
+        <div class="syntax-display-frame">
+          <pre id="theorem-code-display"></pre>
+        </div>
+
+        <!-- Prominent Side Conditions Box -->
+        <div class="side-conditions-box">
+          <div class="side-conditions-header">
+            <span>🛡️</span> Explicit Side Conditions &amp; Meta-Constraints
+          </div>
+          <ul class="side-conditions-list" id="side-conditions-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -633,7 +945,7 @@
         <div class="section-subtitle">Interactive Environment</div>
         <h2 class="section-title">System Demonstration</h2>
         <p style="color:var(--text-muted); margin-top:0.5rem; font-size:0.95rem;">
-          Live demonstration of Obelisk proofs, axiomatics, and mathematical derivations.
+          Live demonstration of Obelisk proofs, axiomatics, and mathematical derivations directly from the kernel.
         </p>
       </div>
 
@@ -662,6 +974,160 @@
   </footer>
 
   <script>
+    // Theorem Registry for Inspector
+    const THEOREMS = {
+      russell: {
+        title: "Russell's Proper Class Theorem",
+        math: `⟦ ¬ (∃ x ∈ V. x = { y ∈ V | y ∉ y }) ⟧ ⟹ Proper({ y ∈ V | y ∉ y })`,
+        ascii: `val thm_russell : Term =
+  Impl (Neg (Exists "x" TClass (And (IsSet (Var "x")) 
+                                    (Eq (Var "x") (Compr "y" (Neg (In (Var "y") (Var "y"))))))))
+       (IsProper (Compr "y" (Neg (In (Var "y") (Var "y")))))`,
+        sideConditions: [
+          "Universal class V ≝ { x | x = x } is explicitly defined; Set(x) ⟺ x ∈ V.",
+          "Variable 'y' is fresh with respect to outer context Γ and free variable set.",
+          "Derived without Kuratowski rank elevation; directly refutes naive comprehension."
+        ]
+      },
+      tagged_pair: {
+        title: "Dunaev Tagged Ordered Pair Inversion",
+        math: `∀ tag ∈ ℕ_tag. ∀ A, B, C, D : Class. 
+  ⟨tag, A, B⟩_tag = ⟨tag, C, D⟩_tag  ⟹  (A = C ∧ B = D)`,
+        ascii: `val thm_tagged_pair_inversion : Term =
+  Forall "tag" TTag (
+    Forall "A" TClass (Forall "B" TClass (
+      Forall "C" TClass (Forall "D" TClass (
+        Impl (Eq (OPairTag (Var "tag") (Var "A") (Var "B"))
+                 (OPairTag (Var "tag") (Var "C") (Var "D")))
+             (And (Eq (Var "A") (Var "C"))
+                  (Eq (Var "B") (Var "D")))
+      ))
+    ))
+  )`,
+        sideConditions: [
+          "Side condition: tag is drawn from disjoint tag signature ℕ_tag.",
+          "Zero rank inflation: rank(⟨tag, A, B⟩) = max(rank A, rank B) + 0.",
+          "Proper classes A, B, C, D are permitted; bypasses set-membership prohibition."
+        ]
+      },
+      mk_comprehension: {
+        title: "Morse–Kelley Class Comprehension",
+        math: `∃ X : Class. ∀ x : Class. (x ∈ X  ⟺  x ∈ V ∧ ⟦ φ(x) ⟧)`,
+        ascii: `val ax_mk_comprehension : Term =
+  Exists "X" TClass (
+    Forall "x" TClass (
+      Iff (In (Var "x") (Var "X"))
+          (And (IsSet (Var "x"))
+               (App (Const "Sem") (App (Const "phi") (Var "x"))))
+    )
+  )`,
+        sideConditions: [
+          "Syntactic side condition: variable 'X' does not occur free in formula φ.",
+          "Impredicativity condition: formula φ may quantify over proper classes.",
+          "x is restricted to set realm (x ∈ V); proper classes cannot be elements."
+        ]
+      },
+      conditional_term: {
+        title: "Syntactic Conditional Term Constructor (CIf)",
+        math: `⟦ CIf(P, A, B) ⟧ = { x ∈ V | (⟦ P ⟧ ∧ x ∈ A) ∨ (⟦ ¬ P ⟧ ∧ x ∈ B) }`,
+        ascii: `val def_cif_semantics : Term =
+  Eq (App (Const "Sem") (App3 (Const "CIf") (Var "P") (Var "A") (Var "B")))
+     (Compr "x" (Or (And (App (Const "Sem") (Var "P")) (In (Var "x") (Var "A")))
+                    (And (Neg (App (Const "Sem") (Var "P"))) (In (Var "x") (Var "B")))))`,
+        sideConditions: [
+          "Syntax/Semantics separation: CIf is a pure syntactic constructor (not an opaque Value).",
+          "Denotation is mediated strictly by semantic valuation operator ⟦ · ⟧.",
+          "When P holds, ⟦ CIf(P, A, B) ⟧ = A; when ¬P holds, ⟦ CIf(P, A, B) ⟧ = B."
+        ]
+      },
+      modus_ponens: {
+        title: "LCF Modus Ponens & Shift-to-Term",
+        math: `⟦ Γ ⊢ φ → ψ ⟧   and   ⟦ Γ ⊢ φ ⟧   ⟹   ⟦ Γ ⊢ ψ ⟧`,
+        ascii: `val thm_modus_ponens_shift : Term =
+  Impl (AStmt Tau (Var "Gamma") (FImpl (Var "phi") (Var "psi")))
+       (Impl (AStmt Tau (Var "Gamma") (Var "phi"))
+             (AStmt Tau (Var "Gamma") (Var "psi")))`,
+        sideConditions: [
+          "Context unification: Theory Tau and context Gamma match syntactically in LCF kernel.",
+          "Zero implicit computation: No hidden βδι reductions; proof object is an explicit tree node.",
+          "Checked in < 250 LOC Standard ML kernel targeting CakeML."
+        ]
+      },
+      ordinal_ind: {
+        title: "Von Neumann Ordinal Foundation (∈-Induction)",
+        math: `Ord(A) ⟺ Trans(A) ∧ ∀ B ∈ A. Trans(B)
+  where Trans(X) ⟺ ∀ y ∈ X. y ⊆ X`,
+        ascii: `val def_ordinal : Term =
+  Iff (Ord (Var "A"))
+      (And (Trans (Var "A"))
+           (Forall "B" TClass (Impl (In (Var "B") (Var "A"))
+                                    (Trans (Var "B")))))`,
+        sideConditions: [
+          "Foundation / Regularity side condition: Powerclass induction (Power(X) ⊆ X ⟹ V ⊆ X).",
+          "Every element of an ordinal is also transitively closed.",
+          "Ordinals can be proper classes (e.g., On is the class of all ordinals)."
+        ]
+      }
+    };
+
+    let activeThmKey = "russell";
+    let isMathMode = true;
+
+    function renderActiveTheorem() {
+      const thm = THEOREMS[activeThmKey];
+      if (!thm) return;
+
+      const codeBox = document.getElementById("theorem-code-display");
+      const list = document.getElementById("side-conditions-list");
+      const badge = document.getElementById("active-format-badge");
+      const toggleLabel = document.getElementById("syntax-toggle-label");
+
+      if (isMathMode) {
+        codeBox.textContent = thm.math;
+        badge.textContent = "Active: Mathematical Unicode / LaTeX";
+        toggleLabel.textContent = "Switch to Concrete ASCII Syntax";
+      } else {
+        codeBox.textContent = thm.ascii;
+        badge.textContent = "Active: Concrete SML / Obelisk Syntax";
+        toggleLabel.textContent = "Switch to Mathematical Unicode";
+      }
+
+      list.innerHTML = "";
+      thm.sideConditions.forEach(sc => {
+        const li = document.createElement("li");
+        li.textContent = sc;
+        list.appendChild(li);
+      });
+    }
+
+    function selectTheorem(key) {
+      activeThmKey = key;
+      const tabs = document.querySelectorAll(".thm-btn");
+      tabs.forEach(t => t.classList.remove("active"));
+      event.target.classList.add("active");
+      renderActiveTheorem();
+    }
+
+    function toggleSyntaxMode() {
+      isMathMode = !isMathMode;
+      renderActiveTheorem();
+    }
+
+    function copyActiveSyntax() {
+      const thm = THEOREMS[activeThmKey];
+      const textToCopy = isMathMode ? thm.math : thm.ascii;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const btnText = document.getElementById("copy-btn-text");
+        btnText.textContent = "✓ Copied to Clipboard!";
+        setTimeout(() => {
+          btnText.textContent = "Copy Statement";
+        }, 2200);
+      });
+    }
+
+    // Initial render
+    renderActiveTheorem();
+
     // Initialize Silktide Cookie Consent Manager
     if (window.silktideConsentManager) {
       window.silktideConsentManager.init({
