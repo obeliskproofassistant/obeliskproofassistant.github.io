@@ -43,6 +43,10 @@ class TestReplEngineIntegrity(unittest.TestCase):
             "and_comm",
             "currying",
             "russell",
+            "cantor_diagonal",
+            "quantifier_swap",
+            "sub_succ",
+            "stage3_quat",
             "tagged_pairing",
             "ordinal_induction",
             "hereditary_subsets"

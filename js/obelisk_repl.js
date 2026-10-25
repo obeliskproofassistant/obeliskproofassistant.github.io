@@ -116,14 +116,34 @@ class ObeliskREPL {
           desc: "Currying Isomorphism"
         },
         "russell": {
-          expr: "ELam (\"setR\", TSet(FVar \"R\"), EAbort(EApp(EVar \"ax_russell\", EVar \"setR\"), TBottom))",
-          type: "~ Set({x | x not in x})",
-          desc: "Russell Class Non-Sethood Refutation"
+          expr: "ELam (\"hSetR\", TSet(russellClass), EApp(proofNoFixedPointNegIff rInR, EPair(ELam(\"hIn\", rInR, ESnd(EApp(EFst(EAxCompr(\"x\", russellFormula, russellClass)), EVar \"hIn\"))), ELam(\"hNotIn\", notRInR, EApp(ESnd(EAxCompr(\"x\", russellFormula, russellClass)), EPair(EVar \"hSetR\", EVar \"hNotIn\"))))))",
+          type: "Set({ x | (x in x -> _|_) }) -> _|_",
+          desc: "Russell Class Non-Sethood Theorem (Pure NBG Comprehension, Zero Diagonal Axiom)"
+        },
+        "cantor_diagonal": {
+          expr: "ETLam (\"R\", ClassSort, ETLam (\"c\", SetSort, ELam (\"hSetC\", TSet(FVar \"c\"), ELam (\"hEqv\", equivTy, EApp(prfNotCCInR, EApp(EFst(EVar \"hEqv\"), EApp(ESnd(EAxCompr(\"x\", diagPhi, FVar \"c\")), EPair(EVar \"hSetC\", prfNotCCInR))))))))",
+          type: "forall R:Class. forall c:Set. Set(c) -> ((c in {x | [x,x]_D in R -> _|_} <-> [c,c]_D in R) -> _|_)",
+          desc: "Cantor's Diagonal Theorem in Pure NBG with Dunaev Tagged Pairs"
+        },
+        "quantifier_swap": {
+          expr: "ELam (\"hEx\", TSigma(\"y\", SetSort, TPi(\"x\", SetSort, TIn(FVar \"x\", FVar \"y\"))), ETLam (\"x\", SetSort, EUnpack(EVar \"hEx\", \"y0\", \"hAllX\", EPack(FVar \"y0\", ETApp(EVar \"hAllX\", FVar \"x\"), TSigma(\"y\", SetSort, TIn(FVar \"x\", FVar \"y\"))))))",
+          type: "(exists y:Set. forall x:Set. x in y) -> (forall x:Set. exists y:Set. x in y)",
+          desc: "First-Order Existential-Universal Quantifier Swap"
+        },
+        "sub_succ": {
+          expr: "ETLam (\"x\", ClassSort, ETLam (\"z\", ClassSort, ELam (\"hInX\", TIn(FVar \"z\", FVar \"x\"), EApp(ESnd(EAxCompr(\"u\", TSum(TIn(FVar \"u\", FVar \"x\"), TEq(FVar \"u\", FVar \"x\")), FVar \"z\")), EPair(EApp(EAxHeredity(FVar \"z\", FVar \"x\"), EVar \"hInX\"), EInl(EVar \"hInX\", TEq(FVar \"z\", FVar \"x\")))))))",
+          type: "forall x:Class. forall z:Class. z in x -> z in { u | u in x \\/ u = x }",
+          desc: "Ordinal Successor Subclass Inclusion via NBG Heredity + Comprehension"
+        },
+        "stage3_quat": {
+          expr: "NBGQuatStage3.instantiateSeparationRussellProof Fau (FVar \"x\")",
+          type: "(Set({ x_1 | (x_1 in x /\\ (x_1 in x_1 -> _|_)) }) /\\ { x_1 | (x_1 in x /\\ (x_1 in x_1 -> _|_)) } in x) -> _|_",
+          desc: "Stage III Staged Quotation ‹...› & Antiquotation ⟦...⟧ with Tarski Stratification (Tau < Fau)"
         },
         "tagged_pairing": {
-          expr: "ELam (\"A\", TClass, ELam (\"B\", TClass, ETaggedPair (EVar \"A\", EVar \"B\")))",
-          type: "Class -> Class -> DunaevPair",
-          desc: "Dunaev Tagged Pair Class Injection"
+          expr: "ETLam (\"A\", ClassSort, ETLam (\"B\", ClassSort, EAxDunaevPairProj (FVar \"A\", FVar \"B\")))",
+          type: "forall A:Class. forall B:Class. pr1([A, B]_D) = A /\\ pr2([A, B]_D) = B",
+          desc: "Dunaev Tagged Pair Projections for Arbitrary Classes (Sets & Proper Classes)"
         },
         "ordinal_induction": {
           expr: "ELam (\"P\", TArrow(TOrdinal, TProp), ELam (\"step\", TWellFoundedStep, EFixInd (EVar \"P\", EVar \"step\")))",
