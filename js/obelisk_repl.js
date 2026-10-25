@@ -154,6 +154,21 @@ class ObeliskREPL {
           expr: "ELam (\"hSub\", TSubset(FVar \"y\", FVar \"x\"), ELam (\"hSet\", TSet(FVar \"x\"), EApp(EApp(EVar \"ax_heredity\", EVar \"hSub\"), EVar \"hSet\")))",
           type: "y ⊆ x -> isSet(x) -> isSet(y)",
           desc: "Hereditary Subclass Sethood Preservation"
+        },
+        "nbg_no_self_membership": {
+          expr: "NBGRegularity.proofNoSelfMembership",
+          type: "forall a:Class. Set(a) -> (a in a -> _|_)",
+          desc: "Irreflexivity of Membership from Foundation (No Self-Membership)"
+        },
+        "nbg_no_two_cycle": {
+          expr: "NBGRegularity.proofNoTwoCycle",
+          type: "forall a:Class. forall b:Class. (Set(a) /\\ Set(b)) -> ((a in b /\\ b in a) -> _|_)",
+          desc: "No Membership 2-Cycle from Foundation Axiom on {a, b}"
+        },
+        "nbg_singleton_choice": {
+          expr: "NBGChoiceTheorems.proofSingletonChoiceEq",
+          type: "forall a:Class. (eps x. x = a) = a",
+          desc: "Hilbert Global Choice Definite Description on Singletons"
         }
       };
 

@@ -49,7 +49,10 @@ class TestReplEngineIntegrity(unittest.TestCase):
             "stage3_quat",
             "tagged_pairing",
             "ordinal_induction",
-            "hereditary_subsets"
+            "hereditary_subsets",
+            "nbg_no_self_membership",
+            "nbg_no_two_cycle",
+            "nbg_singleton_choice"
         ]
         for tc in expected_typechecks:
             self.assertIn(f'"{tc}"', self.repl_js_content,

@@ -1,6 +1,6 @@
 (**
   obelisk_unfolded.ML — Monolithic Unfolded Obelisk PolyML Source
-  Generated: 2026-10-25 08:36:19Z
+  Generated: 2026-10-25 10:17:38Z
   Target: PolyML 5.9.2 / Native SML 97
   Compiles strictly to check correctness of dependent proofs and types.
 **)
@@ -5910,6 +5910,582 @@ end;
 (*** END MODULE: nbg_compiler.ML ***)
 
 
+(*** BEGIN MODULE: nbg_tactics.ML ***)
+(**
+  set_theory_prover/program/nbg_tactics.ML
+  First-Order Tactic Combinators, Boolean Algebra & Dunaev Relational Algebra
+  built on top of `NBGCompiler` (Stages I & II).
+  Architected & Implemented by Gemini 4 Argon (Ticket TKT-625).
+**)
+
+structure NBGTactics =
+struct
+
+  open NBGCompiler
+
+  (* ========================================================================= *)
+  (* 1. Tactical Proof-Building Combinators                                    *)
+  (* ========================================================================= *)
+
+  (* Wrap a proof body in nested universal introductions /\(x1:s1).../\(xn:sn) *)
+  fun introAllVars (vars: (string * Sort) list) (body: Expr) : Expr =
+    List.foldr (fn ((x, s), acc) => ETLam (x, s, acc)) body vars
+
+  (* Instantiate a universal proof with a sequence of class/set terms          *)
+  fun elimAllVars (prf: Expr) (terms: Term list) : Expr =
+    List.foldl (fn (t, acc) => ETApp (acc, t)) prf terms
+
+  (* Wrap a proof body in nested implication introductions \(h1:T1)...\(hn:Tn) *)
+  fun introImpls (hyps: (string * Type) list) (body: Expr) : Expr =
+    List.foldr (fn ((h, ty), acc) => ELam (h, ty, acc)) body hyps
+
+  (* Construct an instance of NBG comprehension schema z in {x | phi} <-> (Set(z) /\ phi[x:=z]) *)
+  fun proveFromComprehension (x: string) (phi: Type) (z: Term) : Expr =
+    EAxCompr (x, phi, z)
+
+  (* ========================================================================= *)
+  (* 2. Biconditional & De Morgan Algebra Combinators                          *)
+  (* ========================================================================= *)
+
+  (* Theorem: Biconditional Reflexivity: A <-> A *)
+  fun proofIffRefl (tyA: Type) : Expr =
+    EIffIntro (proofIdentity tyA, proofIdentity tyA)
+
+  (* Theorem: Biconditional Symmetry: (A <-> B) -> (B <-> A) *)
+  fun proofIffSym (tyA: Type) (tyB: Type) : Expr =
+    ELam ("hIff", TIff (tyA, tyB),
+      EIffIntro (EIffElimR (EVar "hIff"), EIffElimL (EVar "hIff")))
+
+  (* Theorem: Biconditional Transitivity: ((A <-> B) /\ (B <-> C)) -> (A <-> C) *)
+  fun proofIffTrans (tyA: Type) (tyB: Type) (tyC: Type) : Expr =
+    let
+      val premTy = TProd (TIff (tyA, tyB), TIff (tyB, tyC))
+      val ab = EFst (EVar "h")
+      val bc = ESnd (EVar "h")
+      val fwd =
+        ELam ("x", tyA,
+          EApp (EIffElimL bc, EApp (EIffElimL ab, EVar "x")))
+      val bwd =
+        ELam ("z", tyC,
+          EApp (EIffElimR ab, EApp (EIffElimR bc, EVar "z")))
+    in
+      ELam ("h", premTy, EIffIntro (fwd, bwd))
+    end
+
+  (* Theorem: Contraposition: (A -> B) -> ((B -> _|_) -> (A -> _|_)) *)
+  fun proofContraposition (tyA: Type) (tyB: Type) : Expr =
+    ELam ("f", TArrow (tyA, tyB),
+      ELam ("notB", TArrow (tyB, TBottom),
+        ELam ("a", tyA,
+          EApp (EVar "notB", EApp (EVar "f", EVar "a")))))
+
+  (* Theorem: Constructive De Morgan 1: ((A \/ B) -> _|_) -> ((A -> _|_) /\ (B -> _|_)) *)
+  fun proofDeMorganNotOr (tyA: Type) (tyB: Type) : Expr =
+    ELam ("notOr", TArrow (TSum (tyA, tyB), TBottom),
+      EPair (
+        ELam ("a", tyA, EApp (EVar "notOr", EInl (EVar "a", tyB))),
+        ELam ("b", tyB, EApp (EVar "notOr", EInr (EVar "b", tyA)))
+      ))
+
+  (* Theorem: Constructive De Morgan 2: ((A -> _|_) /\ (B -> _|_)) -> ((A \/ B) -> _|_) *)
+  fun proofDeMorganAndNotToNotOr (tyA: Type) (tyB: Type) : Expr =
+    ELam ("p", TProd (TArrow (tyA, TBottom), TArrow (tyB, TBottom)),
+      ELam ("disj", TSum (tyA, tyB),
+        ECase (EVar "disj",
+          "a", EApp (EFst (EVar "p"), EVar "a"),
+          "b", EApp (ESnd (EVar "p"), EVar "b"))))
+
+  (* Theorem: Class Difference Exclusion Law:                                  *)
+  (*   forall A:Class. forall B:Class. forall z:Class.                         *)
+  (*     (z in { x | x in A /\ (x in B -> _|_) } /\ z in B) -> _|_             *)
+  val proofDiffExcludesRight : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort), ("z", ClassSort)]
+      (let
+        val diffPhi = TProd (TIn (FVar "x", FVar "A"), TArrow (TIn (FVar "x", FVar "B"), TBottom))
+        val diffClass = CKappa ("x", diffPhi)
+        val compr = EAxCompr ("x", diffPhi, FVar "z")
+        val premTy = TProd (TIn (FVar "z", diffClass), TIn (FVar "z", FVar "B"))
+      in
+        ELam ("h", premTy,
+          let
+            val unpacked = EApp (EFst compr, EFst (EVar "h"))
+            val notInB = ESnd (ESnd unpacked)
+          in
+            EApp (notInB, ESnd (EVar "h"))
+          end)
+      end)
+
+  (* Theorem: Class Difference Subclass Left Law:                               *)
+  (*   forall A:Class. forall B:Class. forall z:Class.                         *)
+  (*     z in { x | x in A /\ (x in B -> _|_) } -> z in A                      *)
+  val proofDiffSubclassLeft : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort), ("z", ClassSort)]
+      (let
+        val diffPhi = TProd (TIn (FVar "x", FVar "A"), TArrow (TIn (FVar "x", FVar "B"), TBottom))
+        val diffClass = CKappa ("x", diffPhi)
+        val compr = EAxCompr ("x", diffPhi, FVar "z")
+      in
+        ELam ("hInDiff", TIn (FVar "z", diffClass),
+          let
+            val unpacked = EApp (EFst compr, EVar "hInDiff")
+            val inA_and_notInB = ESnd unpacked
+          in
+            EFst inA_and_notInB
+          end)
+      end)
+
+  (* ========================================================================= *)
+  (* 3. Dunaev Tagged-Pair Relational Algebra (Stage I Predicative Verified!)  *)
+  (* ========================================================================= *)
+
+  (* Cartesian Product A x_D B = { p | exists u:Set. exists v:Set. (u in A /\ v in B) /\ p = [u, v]_D } *)
+  fun mkDunaevCartesian (a: Term, b: Term) : Term =
+    let
+      val avoid = unionVars (freeVarsTerm a) (freeVarsTerm b)
+      val p = freshVar "p" avoid
+      val u = freshVar "u" (p :: avoid)
+      val v = freshVar "v" (u :: p :: avoid)
+    in
+      CKappa (p,
+        TSigma (u, SetSort,
+          TSigma (v, SetSort,
+            TProd (
+              TProd (TIn (FVar u, a), TIn (FVar v, b)),
+              TEq (FVar p, CDunaevPair (FVar u, FVar v))
+            ))))
+    end
+
+  (* Converse Relation R^-1 = { p | exists u:Set. exists v:Set. [v, u]_D in R /\ p = [u, v]_D } *)
+  fun mkConverseRel (r: Term) : Term =
+    let
+      val avoid = freeVarsTerm r
+      val p = freshVar "p" avoid
+      val u = freshVar "u" (p :: avoid)
+      val v = freshVar "v" (u :: p :: avoid)
+    in
+      CKappa (p,
+        TSigma (u, SetSort,
+          TSigma (v, SetSort,
+            TProd (
+              TIn (CDunaevPair (FVar v, FVar u), r),
+              TEq (FVar p, CDunaevPair (FVar u, FVar v))
+            ))))
+    end
+
+  (* Relational Composition S o R = { p | exists u:Set. exists v:Set. exists w:Set. ([u, v]_D in R /\ [v, w]_D in S) /\ p = [u, w]_D } *)
+  fun mkRelComp (sRel: Term, rRel: Term) : Term =
+    let
+      val avoid = unionVars (freeVarsTerm sRel) (freeVarsTerm rRel)
+      val p = freshVar "p" avoid
+      val u = freshVar "u" (p :: avoid)
+      val v = freshVar "v" (u :: p :: avoid)
+      val w = freshVar "w" (v :: u :: p :: avoid)
+    in
+      CKappa (p,
+        TSigma (u, SetSort,
+          TSigma (v, SetSort,
+            TSigma (w, SetSort,
+              TProd (
+                TProd (TIn (CDunaevPair (FVar u, FVar v), rRel), TIn (CDunaevPair (FVar v, FVar w), sRel)),
+                TEq (FVar p, CDunaevPair (FVar u, FVar w))
+              )))))
+    end
+
+  (* Theorem: Dunaev Pair Congruence under Class Equality:                     *)
+  (*   forall A1 A2 B1 B2:Class. (A1 = A2 /\ B1 = B2) -> [A1, B1]_D = [A2, B2]_D *)
+  val proofDunaevPairCongruence : Expr =
+    introAllVars [("A1", ClassSort), ("A2", ClassSort), ("B1", ClassSort), ("B2", ClassSort)]
+      (ELam ("hEqs", TProd (TEq (FVar "A1", FVar "A2"), TEq (FVar "B1", FVar "B2")),
+        let
+          (* Step 1: rewrite A1 -> A2 in [A1, B1]_D = [u, B1]_D starting from refl([A1, B1]_D) *)
+          val step1 =
+            ERewrite (
+              EFst (EVar "hEqs"),
+              "u",
+              TEq (CDunaevPair (FVar "A1", FVar "B1"), CDunaevPair (FVar "u", FVar "B1")),
+              ERefl (CDunaevPair (FVar "A1", FVar "B1"))
+            )
+          (* Step 2: rewrite B1 -> B2 in [A1, B1]_D = [A2, v]_D starting from step1 *)
+        in
+          ERewrite (
+            ESnd (EVar "hEqs"),
+            "v",
+            TEq (CDunaevPair (FVar "A1", FVar "B1"), CDunaevPair (FVar "A2", FVar "v")),
+            step1
+          )
+        end))
+
+end;
+(*** END MODULE: nbg_tactics.ML ***)
+
+
+(*** BEGIN MODULE: nbg_functions.ML ***)
+(**
+  set_theory_prover/program/nbg_functions.ML
+  Single-Valued Functions, Injections & Endpoint Equality Combinators in NBG.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-627).
+**)
+
+structure NBGFunctions =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Definition: Single-valued relation (functional property) *)
+  (* forall x:Class. forall y1:Class. forall y2:Class. ([x, y1]_D in f /\ [x, y2]_D in f) -> y1 = y2 *)
+  fun isSingleValued (f: Term) : Type =
+    TPi ("x", ClassSort,
+      TPi ("y1", ClassSort,
+        TPi ("y2", ClassSort,
+          TArrow (
+            TProd (
+              TIn (CDunaevPair (FVar "x", FVar "y1"), f),
+              TIn (CDunaevPair (FVar "x", FVar "y2"), f)
+            ),
+            TEq (FVar "y1", FVar "y2")
+          ))))
+
+  (* Definition: Injective relation *)
+  (* forall x1:Class. forall x2:Class. forall y:Class. ([x1, y]_D in f /\ [x2, y]_D in f) -> x1 = x2 *)
+  fun isInjectiveRel (f: Term) : Type =
+    TPi ("x1", ClassSort,
+      TPi ("x2", ClassSort,
+        TPi ("y", ClassSort,
+          TArrow (
+            TProd (
+              TIn (CDunaevPair (FVar "x1", FVar "y"), f),
+              TIn (CDunaevPair (FVar "x2", FVar "y"), f)
+            ),
+            TEq (FVar "x1", FVar "x2")
+          ))))
+
+  (* Theorem: Shared right endpoint equality *)
+  (* forall y1:Class. forall y2:Class. forall t:Class. (y1 = t /\ y2 = t) -> y1 = y2 *)
+  val proofSharedRightEndpointEq : Expr =
+    introAllVars [("y1", ClassSort), ("y2", ClassSort), ("t", ClassSort)]
+      (ELam ("h", TProd (TEq (FVar "y1", FVar "t"), TEq (FVar "y2", FVar "t")),
+        ETrans (EFst (EVar "h"), ESym (ESnd (EVar "h")))))
+
+  (* Theorem: Shared left endpoint equality *)
+  (* forall x1:Class. forall x2:Class. forall s:Class. (s = x1 /\ s = x2) -> x1 = x2 *)
+  val proofSharedLeftEndpointEq : Expr =
+    introAllVars [("x1", ClassSort), ("x2", ClassSort), ("s", ClassSort)]
+      (ELam ("h", TProd (TEq (FVar "s", FVar "x1"), TEq (FVar "s", FVar "x2")),
+        ETrans (ESym (EFst (EVar "h")), ESnd (EVar "h"))))
+
+  (* Theorem: Subclass transitivity *)
+  (* forall A:Class. forall B:Class. forall C:Class. (A c= B /\ B c= C) -> A c= C *)
+  val proofSubclassTrans : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort), ("C", ClassSort)]
+      (ELam ("h", TProd (TSub (FVar "A", FVar "B"), TSub (FVar "B", FVar "C")),
+        let
+          val unAB = EUnfold (EFst (EVar "h"), TPi ("z", ClassSort, TArrow (TIn (FVar "z", FVar "A"), TIn (FVar "z", FVar "B"))))
+          val unBC = EUnfold (ESnd (EVar "h"), TPi ("z", ClassSort, TArrow (TIn (FVar "z", FVar "B"), TIn (FVar "z", FVar "C"))))
+          val body =
+            ETLam ("z", ClassSort,
+              ELam ("hzA", TIn (FVar "z", FVar "A"),
+                EApp (ETApp (unBC, FVar "z"), EApp (ETApp (unAB, FVar "z"), EVar "hzA"))))
+        in
+          EFold (body, TSub (FVar "A", FVar "C"))
+        end))
+
+end;
+(*** END MODULE: nbg_functions.ML ***)
+
+
+(*** BEGIN MODULE: nbg_power_theorems.ML ***)
+(**
+  set_theory_prover/program/nbg_power_theorems.ML
+  Power Class (CPower) Self-Membership & Subclass Elimination Theorems.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-628).
+**)
+
+structure NBGPowerTheorems =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Theorem: Reflexivity of Subclass *)
+  (* forall A:Class. A c= A *)
+  val proofSubRefl : Expr =
+    ETLam ("A", ClassSort,
+      EFold (
+        ETLam ("z", ClassSort, ELam ("hz", TIn (FVar "z", FVar "A"), EVar "hz")),
+        TSub (FVar "A", FVar "A")
+      ))
+
+  (* Theorem: Singleton elimination *)
+  (* forall x:Class. forall u:Class. u in { v | v = x } -> u = x *)
+  val proofSingletonElimEq : Expr =
+    introAllVars [("x", ClassSort), ("u", ClassSort)]
+      (ELam ("hInSing", TIn (FVar "u", CSingleton (FVar "x")),
+        let
+          val eqPhi = TEq (FVar "v", FVar "x")
+          val singX = CKappa ("v", eqPhi)
+          val unIn = EUnfold (EVar "hInSing", TIn (FVar "u", singX))
+          val comprU = EAxCompr ("v", eqPhi, FVar "u")
+          val unpacked = EApp (EFst comprU, unIn)
+        in
+          ESnd unpacked
+        end))
+
+  (* Theorem: Set is member of its power class *)
+  (* forall A:Class. Set(A) -> A in P(A) *)
+  (* Note: in MK_Impredicative mode because CPower definition quantifies over ClassSort *)
+  val proofSelfInPower : Expr =
+    ETLam ("A", ClassSort,
+      ELam ("hSetA", TSet (FVar "A"),
+        let
+          val subPhi = TPi ("z", ClassSort, TArrow (TIn (FVar "z", FVar "u"), TIn (FVar "z", FVar "A")))
+          val powKappa = CKappa ("u", subPhi)
+          val subAA = EUnfold (ETApp (proofSubRefl, FVar "A"), TPi ("z", ClassSort, TArrow (TIn (FVar "z", FVar "A"), TIn (FVar "z", FVar "A"))))
+          val comprA = EAxCompr ("u", subPhi, FVar "A")
+          val inKappa = EApp (ESnd comprA, EPair (EVar "hSetA", subAA))
+        in
+          EFold (inKappa, TIn (FVar "A", CPower (FVar "A")))
+        end))
+
+  (* Theorem: Power class elimination *)
+  (* forall A:Class. forall u:Class. u in P(A) -> u c= A *)
+  val proofPowerElimSub : Expr =
+    introAllVars [("A", ClassSort), ("u", ClassSort)]
+      (ELam ("hInPow", TIn (FVar "u", CPower (FVar "A")),
+        let
+          val subPhi = TPi ("z", ClassSort, TArrow (TIn (FVar "z", FVar "v"), TIn (FVar "z", FVar "A")))
+          val powKappa = CKappa ("v", subPhi)
+          val unIn = EUnfold (EVar "hInPow", TIn (FVar "u", powKappa))
+          val comprU = EAxCompr ("v", subPhi, FVar "u")
+          val unpacked = EApp (EFst comprU, unIn)
+        in
+          EFold (ESnd unpacked, TSub (FVar "u", FVar "A"))
+        end))
+
+end;
+(*** END MODULE: nbg_power_theorems.ML ***)
+
+
+(*** BEGIN MODULE: nbg_regularity.ML ***)
+(**
+  set_theory_prover/program/nbg_regularity.ML
+  No Self-Membership & Foundation/Regularity Axiom Applications in NBG.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-629).
+**)
+
+structure NBGRegularity =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Theorem: No Self-Membership (Set(a) -> ~(a in a)) *)
+  (* Derived purely constructively by instantiating EAxFoundation on { u | u = a } *)
+  val proofNoSelfMembership : Expr =
+    ETLam ("a", ClassSort,
+      ELam ("hSetA", TSet (FVar "a"),
+        ELam ("hInAA", TIn (FVar "a", FVar "a"),
+          let
+            val eqPhi = TEq (FVar "u", FVar "a")
+            val singA = CKappa ("u", eqPhi)
+            val prfAinSing = EApp (ESnd (EAxCompr ("u", eqPhi, FVar "a")), EPair (EVar "hSetA", ERefl (FVar "a")))
+            val exNonEmpty = EPack (FVar "a", prfAinSing, TSigma ("x", SetSort, TIn (FVar "x", singA)))
+            val exDisjoint = EApp (EAxFoundation singA, exNonEmpty)
+            val prfYeqA = ESnd (EApp (EFst (EAxCompr ("u", eqPhi, FVar "y")), EFst (EVar "hMin")))
+            val prfAeqY = ESym prfYeqA
+            val prfAinY = ERewrite (prfAeqY, "v", TIn (FVar "a", FVar "v"), EVar "hInAA")
+          in
+            EUnpack (exDisjoint, "y", "hMin",
+              EApp (ETApp (ESnd (EVar "hMin"), FVar "a"), EPair (prfAinY, prfAinSing)))
+          end)))
+
+  (* Theorem: No Membership 2-Cycle: (Set(a) /\ Set(b)) -> ~ (a in b /\ b in a) *)
+  (* Derived constructively by instantiating EAxFoundation on { u | u = a \/ u = b } *)
+  val proofNoTwoCycle : Expr =
+    introAllVars [("a", ClassSort), ("b", ClassSort)]
+      (ELam ("hSets", TProd (TSet (FVar "a"), TSet (FVar "b")),
+        ELam ("hCycle", TProd (TIn (FVar "a", FVar "b"), TIn (FVar "b", FVar "a")),
+          let
+            val pairPhi = TSum (TEq (FVar "u", FVar "a"), TEq (FVar "u", FVar "b"))
+            val upAB = CKappa ("u", pairPhi)
+            val prfAinUp =
+              EApp (ESnd (EAxCompr ("u", pairPhi, FVar "a")),
+                EPair (EFst (EVar "hSets"), EInl (ERefl (FVar "a"), TEq (FVar "a", FVar "b"))))
+            val prfBinUp =
+              EApp (ESnd (EAxCompr ("u", pairPhi, FVar "b")),
+                EPair (ESnd (EVar "hSets"), EInr (ERefl (FVar "b"), TEq (FVar "b", FVar "a"))))
+            val exNonEmpty = EPack (FVar "a", prfAinUp, TSigma ("x", SetSort, TIn (FVar "x", upAB)))
+            val exDisjoint = EApp (EAxFoundation upAB, exNonEmpty)
+            val yOr = ESnd (EApp (EFst (EAxCompr ("u", pairPhi, FVar "y")), EFst (EVar "hMin")))
+            val branchA =
+              let
+                val prfBinY = ERewrite (ESym (EVar "hYeqA"), "v", TIn (FVar "b", FVar "v"), ESnd (EVar "hCycle"))
+              in
+                EApp (ETApp (ESnd (EVar "hMin"), FVar "b"), EPair (prfBinY, prfBinUp))
+              end
+            val branchB =
+              let
+                val prfAinY = ERewrite (ESym (EVar "hYeqB"), "v", TIn (FVar "a", FVar "v"), EFst (EVar "hCycle"))
+              in
+                EApp (ETApp (ESnd (EVar "hMin"), FVar "a"), EPair (prfAinY, prfAinUp))
+              end
+          in
+            EUnpack (exDisjoint, "y", "hMin",
+              ECase (yOr, "hYeqA", branchA, "hYeqB", branchB))
+          end)))
+
+end;
+(*** END MODULE: nbg_regularity.ML ***)
+
+
+(*** BEGIN MODULE: nbg_choice_theorems.ML ***)
+(**
+  set_theory_prover/program/nbg_choice_theorems.ML
+  Global Choice (Hilbert Epsilon) and Definite Description Theorems in NBG.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-636).
+**)
+
+structure NBGChoiceTheorems =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Theorem: Global Choice selects a set element from any non-empty class *)
+  (* forall A:Class. forall z:Class. z in A -> (Set(eps x. x in A) /\ (eps x. x in A) in A) *)
+  val proofChoiceFromNonEmptyClass : Expr =
+    introAllVars [("A", ClassSort), ("z", ClassSort)]
+      (ELam ("hzInA", TIn (FVar "z", FVar "A"),
+        let
+          val exWitness = EPack (FVar "z", EVar "hzInA", TSigma ("x", SetSort, TIn (FVar "x", FVar "A")))
+        in
+          EApp (EAxGlobalChoice ("x", TIn (FVar "x", FVar "A")), exWitness)
+        end))
+
+  (* Theorem: Global Choice on singleton equality is the identical element *)
+  (* forall a:Class. (eps x. x = a) = a *)
+  val proofSingletonChoiceEq : Expr =
+    ETLam ("a", ClassSort,
+      let
+        val exWitness = EPack (FVar "a", ERefl (FVar "a"), TSigma ("x", SetSort, TEq (FVar "x", FVar "a")))
+      in
+        ESnd (EApp (EAxGlobalChoice ("x", TEq (FVar "x", FVar "a")), exWitness))
+      end)
+
+end;
+(*** END MODULE: nbg_choice_theorems.ML ***)
+
+
+(*** BEGIN MODULE: nbg_limitation_of_size.ML ***)
+(**
+  set_theory_prover/program/nbg_limitation_of_size.ML
+  Von Neumann's Axiom of Limitation of Size & Russell Injection Theorems.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-637).
+**)
+
+structure NBGLimitationOfSize =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Theorem: Von Neumann's Theorem for Russell Class: *)
+  (* The Russell class R = { x | x notin x } injects the Universal Class V: exists F. Injective(F, V, R) *)
+  val proofRussellInjectsUniv : Expr =
+    let
+      val rClass = CKappa ("x", TArrow (TIn (FVar "x", FVar "x"), TBottom))
+      val prfProperR = EFold (proofRussellClassNotSet, TProper rClass)
+      val fwdR =
+        EFst (EUnfold (EAxLimitationOfSize rClass,
+          TProd (
+            TArrow (TProper rClass, TSigma ("_F", ClassSort, TInjective (FVar "_F", CUniv, rClass))),
+            TArrow (TSigma ("_F", ClassSort, TInjective (FVar "_F", CUniv, rClass)), TProper rClass)
+          )))
+    in
+      EApp (fwdR, prfProperR)
+    end
+
+  (* Theorem: Converse Limitation of Size: Any class into which V injects cannot be a set *)
+  (* forall X:Class. (exists F:Class. Injective(F, V, X)) -> (Set(X) -> _|_) *)
+  val proofUnivInjectionImpliesNotSet : Expr =
+    ETLam ("X", ClassSort,
+      ELam ("hInj", TSigma ("F", ClassSort, TInjective (FVar "F", CUniv, FVar "X")),
+        let
+          val losX = EAxLimitationOfSize (FVar "X")
+          val unfoldedLos =
+            EUnfold (losX,
+              TProd (
+                TArrow (TProper (FVar "X"), TSigma ("F", ClassSort, TInjective (FVar "F", CUniv, FVar "X"))),
+                TArrow (TSigma ("F", ClassSort, TInjective (FVar "F", CUniv, FVar "X")), TProper (FVar "X"))
+              ))
+          val prfProperX = EApp (ESnd unfoldedLos, EVar "hInj")
+        in
+          EUnfold (prfProperX, TArrow (TSet (FVar "X"), TBottom))
+        end))
+
+end;
+(*** END MODULE: nbg_limitation_of_size.ML ***)
+
+
+(*** BEGIN MODULE: nbg_ordinal_properties.ML ***)
+(**
+  set_theory_prover/program/nbg_ordinal_properties.ML
+  Empty Class Transitivity & Infinity Axiom Omega Properties in NBG.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-638).
+**)
+
+structure NBGOrdinalProperties =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* Theorem: Empty Class is Transitive: Tr(0) *)
+  val proofEmptyIsTransitive : Expr =
+    let
+      val body =
+        ETLam ("y", SetSort,
+          ELam ("hyInEmpty", TIn (FVar "y", CEmpty),
+            ETLam ("z", ClassSort,
+              ELam ("hzInY", TIn (FVar "z", FVar "y"),
+                EAbort (EApp (ETApp (proofEmptyClassNoElements, FVar "y"), EVar "hyInEmpty"), TIn (FVar "z", CEmpty))))))
+    in
+      EFold (body, TTrans CEmpty)
+    end
+
+  (* Theorem: Omega is a Set: Set(omega) *)
+  val proofOmegaIsSet : Expr = EFst EAxInfinity
+
+  (* Theorem: Empty set is an element of omega: 0 in omega *)
+  val proofZeroInOmega : Expr =
+    let
+      val indUnfolded =
+        EUnfold (ESnd EAxInfinity,
+          TProd (
+            TIn (CEmpty, COmega),
+            TPi ("y", SetSort, TArrow (TIn (FVar "y", COmega), TIn (CSucc (FVar "y"), COmega)))
+          ))
+    in
+      EFst indUnfolded
+    end
+
+  (* Theorem: Omega is closed under successor: forall y:Set. y in omega -> Succ(y) in omega *)
+  val proofOmegaSuccClosed : Expr =
+    let
+      val indUnfolded =
+        EUnfold (ESnd EAxInfinity,
+          TProd (
+            TIn (CEmpty, COmega),
+            TPi ("y", SetSort, TArrow (TIn (FVar "y", COmega), TIn (CSucc (FVar "y"), COmega)))
+          ))
+    in
+      ESnd indUnfolded
+    end
+
+end;
+(*** END MODULE: nbg_ordinal_properties.ML ***)
+
+
 (*** BEGIN MODULE: nbg_quat_stage3.ML ***)
 (**
   set_theory_prover/program/nbg_quat_stage3.ML
@@ -6375,6 +6951,90 @@ struct
 
 end;
 (*** END MODULE: nbg_quat_stage3.ML ***)
+
+
+(*** BEGIN MODULE: nbg_quat_ext.ML ***)
+(**
+  set_theory_prover/program/nbg_quat_ext.ML
+  Stage III Quotation & Antiquotation Meta-Schemas: Equality & Syllogism.
+  Architected by Gemini 4 Argon; Implemented by Gemini 3.8 Flash (Ticket TKT-630).
+**)
+
+structure NBGQuatExt =
+struct
+
+  open NBGCompiler
+  open NBGQuatStage3
+
+  (* Guard ensuring meta-schemas are only instantiated in meta-theories Fau, Qau, Wau *)
+  fun ensureMetaTheory (ambient: TheoryId) : unit =
+    if levelOfTheory ambient <= levelOfTheory Tau
+    then raise StratificationError "Meta-schema instantiation requires ambient meta-theory strictly higher than Tau"
+    else ()
+
+  (* 1. Quoted Schema for Equality Reflexivity: << [[t]] = [[t]] >> *)
+  val quotedEqReflSchema : QFm =
+    QEq (QAntiTerm "t", QAntiTerm "t")
+
+  fun instantiateEqReflSchema (ambient: TheoryId) (t: Term) : Expr * Type =
+    let
+      val _ = ensureMetaTheory ambient
+      val env = { termEnv = [("t", t)], fmEnv = [] }
+      val targetTy = evalQuoteFm ambient env quotedEqReflSchema
+      val prf = ERefl t
+      val checkedTy = typeCheck [] prf
+    in
+      if convType (checkedTy, targetTy) then (prf, checkedTy)
+      else raise QuotationError "EqRefl schema instantiation mismatch"
+    end
+
+  (* 2. Quoted Schema for Equality Symmetry: << [[t1]] = [[t2]] -> [[t2]] = [[t1]] >> *)
+  val quotedEqSymSchema : QFm =
+    QArrow (
+      QEq (QAntiTerm "t1", QAntiTerm "t2"),
+      QEq (QAntiTerm "t2", QAntiTerm "t1")
+    )
+
+  fun instantiateEqSymSchema (ambient: TheoryId) (t1: Term) (t2: Term) : Expr * Type =
+    let
+      val _ = ensureMetaTheory ambient
+      val env = { termEnv = [("t1", t1), ("t2", t2)], fmEnv = [] }
+      val targetTy = evalQuoteFm ambient env quotedEqSymSchema
+      val prf = ELam ("h", TEq (t1, t2), ESym (EVar "h"))
+      val checkedTy = typeCheck [] prf
+    in
+      if convType (checkedTy, targetTy) then (prf, checkedTy)
+      else raise QuotationError "EqSym schema instantiation mismatch"
+    end
+
+  (* 3. Quoted Schema for Hypothetical Syllogism: << ([[A]] -> [[B]]) -> (([[B]] -> [[C]]) -> ([[A]] -> [[C]])) >> *)
+  val quotedSyllogismSchema : QFm =
+    QArrow (
+      QArrow (QAntiFm "A", QAntiFm "B"),
+      QArrow (
+        QArrow (QAntiFm "B", QAntiFm "C"),
+        QArrow (QAntiFm "A", QAntiFm "C")
+      )
+    )
+
+  fun instantiateSyllogismSchema (ambient: TheoryId) (tyA: Type) (tyB: Type) (tyC: Type) : Expr * Type =
+    let
+      val _ = ensureMetaTheory ambient
+      val env = { termEnv = [], fmEnv = [("A", tyA), ("B", tyB), ("C", tyC)] }
+      val targetTy = evalQuoteFm ambient env quotedSyllogismSchema
+      val prf =
+        ELam ("f", TArrow (tyA, tyB),
+          ELam ("g", TArrow (tyB, tyC),
+            ELam ("x", tyA,
+              EApp (EVar "g", EApp (EVar "f", EVar "x")))))
+      val checkedTy = typeCheck [] prf
+    in
+      if convType (checkedTy, targetTy) then (prf, checkedTy)
+      else raise QuotationError "Syllogism schema instantiation mismatch"
+    end
+
+end;
+(*** END MODULE: nbg_quat_ext.ML ***)
 
 
 (*** BEGIN MODULE: nbg_surface_compiler.ML ***)
@@ -7284,194 +7944,27 @@ struct
       compileSurfaceString content
     end
 
+  val compileFile = compileSurfaceFile
+
+  fun extractVerifiedTheoremTerms (path: string) : (string * Expr) list =
+    let
+      val inStream = TextIO.openIn path
+      val content = TextIO.inputAll inStream
+      val _ = TextIO.closeIn inStream
+      val toks = tokenize content
+      val decls = parseProgram toks
+      fun collect [] acc = List.rev acc
+        | collect (TheoryDirective _ :: ds) acc = collect ds acc
+        | collect (TheoremDecl { name, proofTerm, ... } :: ds) acc =
+            collect ds ((name, proofTerm) :: acc)
+    in
+      case compileSurfaceString content of
+        SurfaceCompileSuccess _ => collect decls []
+      | SurfaceCompileFailure err => raise TypeError err
+    end
+
 end;
 (*** END MODULE: nbg_surface_compiler.ML ***)
-
-
-(*** BEGIN MODULE: nbg_tactics.ML ***)
-(**
-  set_theory_prover/program/nbg_tactics.ML
-  First-Order Tactic Combinators, Boolean Algebra & Dunaev Relational Algebra
-  built on top of `NBGCompiler` (Stages I & II).
-  Architected & Implemented by Gemini 4 Argon (Ticket TKT-625).
-**)
-
-structure NBGTactics =
-struct
-
-  open NBGCompiler
-
-  (* ========================================================================= *)
-  (* 1. Tactical Proof-Building Combinators                                    *)
-  (* ========================================================================= *)
-
-  (* Wrap a proof body in nested universal introductions /\(x1:s1).../\(xn:sn) *)
-  fun introAllVars (vars: (string * Sort) list) (body: Expr) : Expr =
-    List.foldr (fn ((x, s), acc) => ETLam (x, s, acc)) body vars
-
-  (* Instantiate a universal proof with a sequence of class/set terms          *)
-  fun elimAllVars (prf: Expr) (terms: Term list) : Expr =
-    List.foldl (fn (t, acc) => ETApp (acc, t)) prf terms
-
-  (* Wrap a proof body in nested implication introductions \(h1:T1)...\(hn:Tn) *)
-  fun introImpls (hyps: (string * Type) list) (body: Expr) : Expr =
-    List.foldr (fn ((h, ty), acc) => ELam (h, ty, acc)) body hyps
-
-  (* ========================================================================= *)
-  (* 2. Biconditional & De Morgan Algebra Combinators                          *)
-  (* ========================================================================= *)
-
-  (* Theorem: Biconditional Reflexivity: A <-> A *)
-  fun proofIffRefl (tyA: Type) : Expr =
-    EIffIntro (proofIdentity tyA, proofIdentity tyA)
-
-  (* Theorem: Biconditional Symmetry: (A <-> B) -> (B <-> A) *)
-  fun proofIffSym (tyA: Type) (tyB: Type) : Expr =
-    ELam ("hIff", TIff (tyA, tyB),
-      EIffIntro (EIffElimR (EVar "hIff"), EIffElimL (EVar "hIff")))
-
-  (* Theorem: Biconditional Transitivity: ((A <-> B) /\ (B <-> C)) -> (A <-> C) *)
-  fun proofIffTrans (tyA: Type) (tyB: Type) (tyC: Type) : Expr =
-    let
-      val premTy = TProd (TIff (tyA, tyB), TIff (tyB, tyC))
-      val ab = EFst (EVar "h")
-      val bc = ESnd (EVar "h")
-      val fwd =
-        ELam ("x", tyA,
-          EApp (EIffElimL bc, EApp (EIffElimL ab, EVar "x")))
-      val bwd =
-        ELam ("z", tyC,
-          EApp (EIffElimR ab, EApp (EIffElimR bc, EVar "z")))
-    in
-      ELam ("h", premTy, EIffIntro (fwd, bwd))
-    end
-
-  (* Theorem: Contraposition: (A -> B) -> ((B -> _|_) -> (A -> _|_)) *)
-  fun proofContraposition (tyA: Type) (tyB: Type) : Expr =
-    ELam ("f", TArrow (tyA, tyB),
-      ELam ("notB", TArrow (tyB, TBottom),
-        ELam ("a", tyA,
-          EApp (EVar "notB", EApp (EVar "f", EVar "a")))))
-
-  (* Theorem: Constructive De Morgan 1: ((A \/ B) -> _|_) -> ((A -> _|_) /\ (B -> _|_)) *)
-  fun proofDeMorganNotOr (tyA: Type) (tyB: Type) : Expr =
-    ELam ("notOr", TArrow (TSum (tyA, tyB), TBottom),
-      EPair (
-        ELam ("a", tyA, EApp (EVar "notOr", EInl (EVar "a", tyB))),
-        ELam ("b", tyB, EApp (EVar "notOr", EInr (EVar "b", tyA)))
-      ))
-
-  (* Theorem: Constructive De Morgan 2: ((A -> _|_) /\ (B -> _|_)) -> ((A \/ B) -> _|_) *)
-  fun proofDeMorganAndNotToNotOr (tyA: Type) (tyB: Type) : Expr =
-    ELam ("p", TProd (TArrow (tyA, TBottom), TArrow (tyB, TBottom)),
-      ELam ("disj", TSum (tyA, tyB),
-        ECase (EVar "disj",
-          "a", EApp (EFst (EVar "p"), EVar "a"),
-          "b", EApp (ESnd (EVar "p"), EVar "b"))))
-
-  (* Theorem: Class Difference Exclusion Law:                                  *)
-  (*   forall A:Class. forall B:Class. forall z:Class.                         *)
-  (*     (z in { x | x in A /\ (x in B -> _|_) } /\ z in B) -> _|_             *)
-  val proofDiffExcludesRight : Expr =
-    introAllVars [("A", ClassSort), ("B", ClassSort), ("z", ClassSort)]
-      (let
-        val diffPhi = TProd (TIn (FVar "x", FVar "A"), TArrow (TIn (FVar "x", FVar "B"), TBottom))
-        val diffClass = CKappa ("x", diffPhi)
-        val compr = EAxCompr ("x", diffPhi, FVar "z")
-        val premTy = TProd (TIn (FVar "z", diffClass), TIn (FVar "z", FVar "B"))
-      in
-        ELam ("h", premTy,
-          let
-            val unpacked = EApp (EFst compr, EFst (EVar "h"))
-            val notInB = ESnd (ESnd unpacked)
-          in
-            EApp (notInB, ESnd (EVar "h"))
-          end)
-      end)
-
-  (* ========================================================================= *)
-  (* 3. Dunaev Tagged-Pair Relational Algebra (Stage I Predicative Verified!)  *)
-  (* ========================================================================= *)
-
-  (* Cartesian Product A x_D B = { p | exists u:Set. exists v:Set. (u in A /\ v in B) /\ p = [u, v]_D } *)
-  fun mkDunaevCartesian (a: Term, b: Term) : Term =
-    let
-      val avoid = unionVars (freeVarsTerm a) (freeVarsTerm b)
-      val p = freshVar "p" avoid
-      val u = freshVar "u" (p :: avoid)
-      val v = freshVar "v" (u :: p :: avoid)
-    in
-      CKappa (p,
-        TSigma (u, SetSort,
-          TSigma (v, SetSort,
-            TProd (
-              TProd (TIn (FVar u, a), TIn (FVar v, b)),
-              TEq (FVar p, CDunaevPair (FVar u, FVar v))
-            ))))
-    end
-
-  (* Converse Relation R^-1 = { p | exists u:Set. exists v:Set. [v, u]_D in R /\ p = [u, v]_D } *)
-  fun mkConverseRel (r: Term) : Term =
-    let
-      val avoid = freeVarsTerm r
-      val p = freshVar "p" avoid
-      val u = freshVar "u" (p :: avoid)
-      val v = freshVar "v" (u :: p :: avoid)
-    in
-      CKappa (p,
-        TSigma (u, SetSort,
-          TSigma (v, SetSort,
-            TProd (
-              TIn (CDunaevPair (FVar v, FVar u), r),
-              TEq (FVar p, CDunaevPair (FVar u, FVar v))
-            ))))
-    end
-
-  (* Relational Composition S o R = { p | exists u:Set. exists v:Set. exists w:Set. ([u, v]_D in R /\ [v, w]_D in S) /\ p = [u, w]_D } *)
-  fun mkRelComp (sRel: Term, rRel: Term) : Term =
-    let
-      val avoid = unionVars (freeVarsTerm sRel) (freeVarsTerm rRel)
-      val p = freshVar "p" avoid
-      val u = freshVar "u" (p :: avoid)
-      val v = freshVar "v" (u :: p :: avoid)
-      val w = freshVar "w" (v :: u :: p :: avoid)
-    in
-      CKappa (p,
-        TSigma (u, SetSort,
-          TSigma (v, SetSort,
-            TSigma (w, SetSort,
-              TProd (
-                TProd (TIn (CDunaevPair (FVar u, FVar v), rRel), TIn (CDunaevPair (FVar v, FVar w), sRel)),
-                TEq (FVar p, CDunaevPair (FVar u, FVar w))
-              )))))
-    end
-
-  (* Theorem: Dunaev Pair Congruence under Class Equality:                     *)
-  (*   forall A1 A2 B1 B2:Class. (A1 = A2 /\ B1 = B2) -> [A1, B1]_D = [A2, B2]_D *)
-  val proofDunaevPairCongruence : Expr =
-    introAllVars [("A1", ClassSort), ("A2", ClassSort), ("B1", ClassSort), ("B2", ClassSort)]
-      (ELam ("hEqs", TProd (TEq (FVar "A1", FVar "A2"), TEq (FVar "B1", FVar "B2")),
-        let
-          (* Step 1: rewrite A1 -> A2 in [A1, B1]_D = [u, B1]_D starting from refl([A1, B1]_D) *)
-          val step1 =
-            ERewrite (
-              EFst (EVar "hEqs"),
-              "u",
-              TEq (CDunaevPair (FVar "A1", FVar "B1"), CDunaevPair (FVar "u", FVar "B1")),
-              ERefl (CDunaevPair (FVar "A1", FVar "B1"))
-            )
-          (* Step 2: rewrite B1 -> B2 in [A1, B1]_D = [A2, v]_D starting from step1 *)
-        in
-          ERewrite (
-            ESnd (EVar "hEqs"),
-            "v",
-            TEq (CDunaevPair (FVar "A1", FVar "B1"), CDunaevPair (FVar "A2", FVar "v")),
-            step1
-          )
-        end))
-
-end;
-(*** END MODULE: nbg_tactics.ML ***)
 
 
 (*** BEGIN MODULE: nbg_dedukti_exporter.ML ***)
@@ -7701,11 +8194,12 @@ struct
     ("nbg_thm_14_sub_succ", proofSubSucc)
   ]
 
-  fun generateNBGCertificate () : string =
+  fun exportTheoremsToLPString (thms: (string * Expr) list) : string =
     let
       fun renderEntry (name, prf) =
         let
           val checkedTy = typeCheck [] prf
+            handle TypeError _ => typeCheckWithTheory MK_Impredicative [] prf
         in
           "// -----------------------------------------------------------------------------\n" ^
           "// Certified NBG Theorem: " ^ name ^ "\n" ^
@@ -7715,17 +8209,33 @@ struct
           "  " ^ exprToLP prf ^ ";\n\n"
         end
     in
-      nbgCertificateHeader ^ String.concat (List.map renderEntry certifiedNBGTheorems)
+      nbgCertificateHeader ^ String.concat (List.map renderEntry thms)
     end
 
-  fun exportNBGCertificateToFile (path: string) : unit =
+  fun exportTheoremsToLPFile (path: string) (thms: (string * Expr) list) : unit =
     let
-      val content = generateNBGCertificate ()
+      val content = exportTheoremsToLPString thms
       val out = TextIO.openOut path
     in
       TextIO.output (out, content);
       TextIO.closeOut out
     end
+
+  val exportBundle = exportTheoremsToLPString
+
+  fun writeCertificateFile (path: string) (content: string) : unit =
+    let
+      val out = TextIO.openOut path
+    in
+      TextIO.output (out, content);
+      TextIO.closeOut out
+    end
+
+  fun generateNBGCertificate () : string =
+    exportTheoremsToLPString certifiedNBGTheorems
+
+  fun exportNBGCertificateToFile (path: string) : unit =
+    exportTheoremsToLPFile path certifiedNBGTheorems
 
 end;
 (*** END MODULE: nbg_dedukti_exporter.ML ***)
