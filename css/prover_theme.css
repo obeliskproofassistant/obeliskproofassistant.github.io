@@ -1,0 +1,219 @@
+/* -------------------------------------------------------
+   obeliskproofassistant.github.io — Math Prover Theme
+   Ticket 007: Dark / Light Math Prover Theme
+   IDE-grade theme optimized for proof viewing
+   Monokai / Catppuccin color palette
+   ------------------------------------------------------- */
+
+/* --- Color Palette (Catppuccin Mocha + Monokai accents) --- */
+:root {
+  /* Catppuccin Mocha base */
+  --prover-bg: #1e1e2e;
+  --prover-bg-subtle: #313244;
+  --prover-fg: #cdd6f4;
+  --prover-muted: #585b70;
+
+  /* Monokai accents */
+  --prover-comment: #797a9e;
+  --prover-constant: #f9e2af;
+  --prover-variable: #a5d6e7;
+  --prover-function: #e4cde9;
+  --prover-operator: #c8d6f1;
+  --prover-keyword: #f38f8f;
+  --prover-delimiter: #a5d6e7;
+
+  /* Syntax highlighting colors */
+  --prover-bg-code: #2a2d3f;
+  --prover-line-highlight: #414559;
+
+  /* Math-specific colors */
+  --prover-math-alpha: #f38f8f;   /* red - quantifiers, proof steps */
+  --prover-math-beta: #a5d6e7;    /* blue - variables, terms */
+  --prover-math-gamma: #f9e2af;   /* yellow - constants, definitions */
+  --prover-math-delta: #c8d6f1;   /* purple - implications, connectives */
+  --prover-math-epsilon: #797a9e; /* muted - comments, assumptions */
+
+  /* UI elements */
+  --prover-accent: #c8d6f1;
+  --prover-border: #414559;
+  --prover-error: #f38f8f;
+}
+
+/* --- Base Page Body --- */
+body.prover-theme {
+  font-family: "Noto Color Emoji", "DejaVu Sans", sans-serif;
+  background-color: var(--prover-bg);
+  color: var(--prover-fg);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* --- Code Blocks --- */
+pre.prover-code {
+  background-color: var(--prover-bg-code);
+  color: var(--prover-fg);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border: 1px solid var(--prover-border);
+  margin: 1rem 0;
+}
+
+pre.prover-code::selection {
+  background-color: var(--prover-line-highlight);
+  color: var(--prover-fg);
+}
+
+pre.prover-code ::selection {
+  background-color: var(--prover-line-highlight);
+  color: var(--prover-fg);
+}
+
+/* --- Syntax Highlighting --- */
+span.prover-comment {
+  color: var(--prover-comment);
+  font-style: italic;
+}
+
+span.prover-constant {
+  color: var(--prover-constant);
+}
+
+span.prover-variable {
+  color: var(--prover-variable);
+}
+
+span.prover-function {
+  color: var(--prover-function);
+  font-weight: bold;
+}
+
+span.prover-operator {
+  color: var(--prover-operator);
+}
+
+span.prover-keyword {
+  color: var(--prover-keyword);
+  font-weight: bold;
+}
+
+span.prover-delimiter {
+  color: var(--prover-delimiter);
+}
+
+/* --- Math Proof Elements --- */
+.prover-quantifier {
+  color: var(--prover-math-alpha);
+  font-weight: bold;
+}
+
+.prover-definition {
+  color: var(--prover-math-gamma);
+  font-weight: bold;
+}
+
+.prover-variable-term {
+  color: var(--prover-math-beta);
+}
+
+.prover-implication {
+  color: var(--prover-math-delta);
+}
+
+.prover-assumption {
+  color: var(--prover-math-epsilon);
+  background-color: var(--prover-bg-subtle);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* --- Theorem/Proof Blocks --- */
+.prover-theorem {
+  background-color: var(--prover-bg-subtle);
+  border-left: 4px solid var(--prover-accent);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.prover-proof {
+  background-color: var(--prover-bg-subtle);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+
+.prover-proof-step {
+  color: var(--prover-fg);
+  margin: 0.5rem 0;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--prover-bg);
+  border-radius: 4px;
+}
+
+/* --- Math Expressions (LaTeX) --- */
+.prover-math-display {
+  display: block;
+  text-align: center;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: var(--prover-bg-subtle);
+  border-radius: 8px;
+  border: 1px solid var(--prover-border);
+}
+
+.prover-math-inline {
+  color: var(--prover-fg);
+}
+
+/* --- Quotations/Citations --- */
+.prover-quote {
+  border-left: 3px solid var(--prover-accent);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  font-style: italic;
+  color: var(--prover-muted);
+}
+
+/* --- Navigation/Navigation --- */
+.prover-nav {
+  background-color: var(--prover-bg-subtle);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border: 1px solid var(--prover-border);
+}
+
+.prover-nav a {
+  color: var(--prover-accent);
+  text-decoration: none;
+  margin-right: 1rem;
+}
+
+.prover-nav a:hover {
+  text-decoration: underline;
+}
+
+/* --- Errors and Feedback --- */
+.prover-error {
+  color: var(--prover-error);
+  background-color: rgba(243, 143, 143, 0.1);
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--prover-error);
+}
+
+/* --- Focus States for Accessibility --- */
+.prover-theme :focus-visible {
+  outline: 2px solid var(--prover-accent);
+  outline-offset: 2px;
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
