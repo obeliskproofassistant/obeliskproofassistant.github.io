@@ -977,16 +977,15 @@
     // Theorem Registry for Inspector
     const THEOREMS = {
       russell: {
-        title: "Russell's Proper Class Theorem",
-        math: `⟦ ¬ (∃ x ∈ V. x = { y ∈ V | y ∉ y }) ⟧ ⟹ Proper({ y ∈ V | y ∉ y })`,
-        ascii: `val thm_russell : Term =
-  Impl (Neg (Exists "x" TClass (And (IsSet (Var "x")) 
-                                    (Eq (Var "x") (Compr "y" (Neg (In (Var "y") (Var "y"))))))))
-       (IsProper (Compr "y" (Neg (In (Var "y") (Var "y")))))`,
+        title: "Russell's Proper Class Theorem (Condensed Form)",
+        math: `⊢ Proper({ y ∈ V | y ∉ y })`,
+        ascii: `val thm_russell_proper : Term =
+  IsProper (Compr "y" (Neg (In (Var "y") (Var "y"))))`,
         sideConditions: [
-          "Universal class V ≝ { x | x = x } is explicitly defined; Set(x) ⟺ x ∈ V.",
-          "Variable 'y' is fresh with respect to outer context Γ and free variable set.",
-          "Derived without Kuratowski rank elevation; directly refutes naive comprehension."
+          "Condensed form (0 assumptions): Unconditionally proves the Russell collection is a proper class.",
+          "Detaches intermediate lemma: ⊢ ¬(∃ x ∈ V. x = R) via Modus Ponens with Proper(K) ⟺ ¬Set(K).",
+          "Universal class V ≝ { x | x = x }; Set(x) ⟺ x ∈ V.",
+          "Derived without Kuratowski rank elevation; directly resolves Russell's paradox in MK class theory."
         ]
       },
       tagged_pair: {
