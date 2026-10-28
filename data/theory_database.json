@@ -404,6 +404,16 @@
           "title": "simple_if (polymorphic non-dependent conditional over arbitrary Type)",
           "semantic": "simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)",
           "semantic_latex": "\\mathrm{simple\\_if} : \\Pi (\\alpha : \\mathsf{Type}).\\; \\mathsf{Bool} \\to \\alpha \\to \\alpha \\to \\alpha \\quad (\\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\; \\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{false}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_2 \\rrbracket)",
+          "semantic_chunks": [
+            {
+              "text": "simple_if : ∏(α : Type). Bool → α → α → α",
+              "latex": "\\mathrm{simple\\_if} : \\Pi (\\alpha : \\mathsf{Type}).\\; \\mathsf{Bool} \\to \\alpha \\to \\alpha \\to \\alpha"
+            },
+            {
+              "text": "⟦simple_if α true t1 t2⟧ = ⟦t1⟧,   ⟦simple_if α false t1 t2⟧ = ⟦t2⟧",
+              "latex": "\\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\quad \\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{false}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_2 \\rrbracket"
+            }
+          ],
           "syntax": "α : Type, t1, t2 : α",
           "syntax_latex": "\\alpha : \\mathsf{Type}, \\quad t_1, t_2 : \\alpha",
           "syntax_link": "metatheory.html#simple-if-typing",
@@ -418,6 +428,20 @@
           "title": "dependent_if (polymorphic dependent conditional with type computation)",
           "semantic": "dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)",
           "semantic_latex": "\\mathrm{dependent\\_if} : \\Pi (T : \\mathsf{Bool} \\to \\mathsf{Type}) (b : \\mathsf{Bool}).\\; T(\\mathrm{true}) \\to T(\\mathrm{false}) \\to T(b) \\quad (\\mathrm{typeof}(\\llbracket \\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket) := \\llbracket \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2) \\rrbracket, \\; \\llbracket \\mathrm{if}\\; \\mathrm{true}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\; \\llbracket \\mathrm{if}\\; \\mathrm{false}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_2 \\rrbracket)",
+          "semantic_chunks": [
+            {
+              "text": "dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)",
+              "latex": "\\mathrm{dependent\\_if} : \\Pi (T : \\mathsf{Bool} \\to \\mathsf{Type}) (b : \\mathsf{Bool}).\\; T(\\mathrm{true}) \\to T(\\mathrm{false}) \\to T(b)"
+            },
+            {
+              "text": "typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧",
+              "latex": "\\mathrm{typeof}(\\llbracket \\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket) := \\llbracket \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2) \\rrbracket"
+            },
+            {
+              "text": "⟦if true then t1 else t2⟧ = ⟦t1⟧,   ⟦if false then t1 else t2⟧ = ⟦t2⟧",
+              "latex": "\\llbracket \\mathrm{if}\\; \\mathrm{true}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\quad \\llbracket \\mathrm{if}\\; \\mathrm{false}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_2 \\rrbracket"
+            }
+          ],
           "syntax": "T : Bool → Type, t1 : T(true), t2 : T(false)",
           "syntax_latex": "T : \\mathsf{Bool} \\to \\mathsf{Type}, \\quad t_1 : T(\\mathrm{true}), \\; t_2 : T(\\mathrm{false})",
           "syntax_link": "metatheory.html#dependent-if-typing",
@@ -432,6 +456,16 @@
           "title": "Ordinal Induction (∈-Ind)",
           "semantic": "(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))",
           "semantic_latex": "((\\forall (\\alpha : \\mathsf{Class})\\; (\\alpha \\in \\mathrm{On} \\to ((\\forall (\\beta : \\mathsf{Class})\\; (\\beta \\in \\alpha \\to \\phi(\\beta))) \\to \\phi(\\alpha)))) \\to \\forall (\\alpha : \\mathsf{Class})\\; (\\alpha \\in \\mathrm{On} \\to \\phi(\\alpha)))",
+          "semantic_chunks": [
+            {
+              "text": "(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α))))",
+              "latex": "(\\forall (\\alpha : \\mathsf{Class})\\; (\\alpha \\in \\mathrm{On} \\to ((\\forall (\\beta : \\mathsf{Class})\\; (\\beta \\in \\alpha \\to \\phi(\\beta))) \\to \\phi(\\alpha))))"
+            },
+            {
+              "text": "→ ∀(α : Class) (α ∈ On → φ(α))",
+              "latex": "\\to \\forall (\\alpha : \\mathsf{Class})\\; (\\alpha \\in \\mathrm{On} \\to \\phi(\\alpha))"
+            }
+          ],
           "syntax": "On : Class, WF(∈, On) : Bool",
           "syntax_latex": "\\mathrm{On} : \\mathsf{Class}, \\quad \\mathrm{WF}(\\in, \\mathrm{On}) : \\mathsf{Bool}",
           "syntax_link": "metatheory.html#ord-induction",
