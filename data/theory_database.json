@@ -388,13 +388,13 @@
           "type": "Def.",
           "classification": "Definition",
           "title": "IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)",
-          "semantic": "W, Γ ⊢ (IF ψ THEN A ELSE B FI) = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }",
-          "semantic_latex": "\\mathcal{W}, \\Gamma \\vdash (\\mathrm{IF}\\; \\psi\\; \\mathrm{THEN}\\; A\\; \\mathrm{ELSE}\\; B\\; \\mathrm{FI}) = \\{ v \\mid (\\psi \\land v \\in A) \\lor (\\neg\\psi \\land v \\in B) \\}",
+          "semantic": "W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }",
+          "semantic_latex": "\\mathcal{W}, \\Gamma \\vdash \\llbracket \\mathrm{IF}\\; \\psi\\; \\mathrm{THEN}\\; A\\; \\mathrm{ELSE}\\; B\\; \\mathrm{FI} \\rrbracket = \\{ v \\mid (\\psi \\land v \\in A) \\lor (\\neg\\psi \\land v \\in B) \\}",
           "syntax": "NFV(v_v, ψ) : Bool ∧ NFV(v_v, Γ) : Bool",
           "syntax_latex": "\\mathrm{NFV}(v_v, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(v_v, \\Gamma) : \\mathsf{Bool}",
           "syntax_link": "metatheory.html#nfv-vv-psi",
           "status": "Verified",
-          "notes": "Class-level conditional defined via class comprehension. Soundness requires variable identifier v_v not free in formula ψ or context Γ."
+          "notes": "Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ."
         },
         {
           "id": "item-3-23-simple-if",
@@ -402,13 +402,13 @@
           "type": "Def.",
           "classification": "Definition",
           "title": "simple_if (polymorphic non-dependent conditional over arbitrary Type)",
-          "semantic": "simple_if : ∏(α : Type). Bool → α → α → α   (simple_if α true t1 t2 = t1, simple_if α false t1 t2 = t2)",
-          "semantic_latex": "\\mathrm{simple\\_if} : \\Pi (\\alpha : \\mathsf{Type}).\\; \\mathsf{Bool} \\to \\alpha \\to \\alpha \\to \\alpha \\quad (\\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 = t_1, \\; \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{false}\\;t_1\\;t_2 = t_2)",
+          "semantic": "simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)",
+          "semantic_latex": "\\mathrm{simple\\_if} : \\Pi (\\alpha : \\mathsf{Type}).\\; \\mathsf{Bool} \\to \\alpha \\to \\alpha \\to \\alpha \\quad (\\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\; \\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{false}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_2 \\rrbracket)",
           "syntax": "α : Type, t1, t2 : α",
           "syntax_latex": "\\alpha : \\mathsf{Type}, \\quad t_1, t_2 : \\alpha",
           "syntax_link": "metatheory.html#simple-if-typing",
           "status": "Verified",
-          "notes": "Non-dependent type-theoretic conditional working parametrically over any metatype, not restricted to Class."
+          "notes": "Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧."
         },
         {
           "id": "item-3-24-dependent-if",
@@ -416,13 +416,13 @@
           "type": "Def.",
           "classification": "Definition",
           "title": "dependent_if (polymorphic dependent conditional with type computation)",
-          "semantic": "dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(if b then t1 else t2) := simple_if Type b (typeof t1) (typeof t2))",
-          "semantic_latex": "\\mathrm{dependent\\_if} : \\Pi (T : \\mathsf{Bool} \\to \\mathsf{Type}) (b : \\mathsf{Bool}).\\; T(\\mathrm{true}) \\to T(\\mathrm{false}) \\to T(b) \\quad (\\mathrm{typeof}(\\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2) := \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2))",
+          "semantic": "dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)",
+          "semantic_latex": "\\mathrm{dependent\\_if} : \\Pi (T : \\mathsf{Bool} \\to \\mathsf{Type}) (b : \\mathsf{Bool}).\\; T(\\mathrm{true}) \\to T(\\mathrm{false}) \\to T(b) \\quad (\\mathrm{typeof}(\\llbracket \\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket) := \\llbracket \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2) \\rrbracket, \\; \\llbracket \\mathrm{if}\\; \\mathrm{true}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_1 \\rrbracket, \\; \\llbracket \\mathrm{if}\\; \\mathrm{false}\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket = \\llbracket t_2 \\rrbracket)",
           "syntax": "T : Bool → Type, t1 : T(true), t2 : T(false)",
           "syntax_latex": "T : \\mathsf{Bool} \\to \\mathsf{Type}, \\quad t_1 : T(\\mathrm{true}), \\; t_2 : T(\\mathrm{false})",
           "syntax_link": "metatheory.html#dependent-if-typing",
           "status": "Verified",
-          "notes": "Dependent type-theoretic conditional computing branch types dynamically using simple_if at the universe of Types."
+          "notes": "Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧."
         },
         {
           "id": "thm-ord-ind",
@@ -828,12 +828,12 @@
     {
       "id": "simple-if-typing",
       "condition": "simple_if_typing(α, t1, t2)",
-      "semantic_statement": "(α : Type) ∧ (t1 : α) ∧ (t2 : α) ⊢ (simple_if α true t1 t2 = t1) : Bool",
-      "semantic_latex": "(\\alpha : \\mathsf{Type}) \\land (t_1 : \\alpha) \\land (t_2 : \\alpha) \\vdash (\\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 = t_1) : \\mathsf{Bool}",
+      "semantic_statement": "(α : Type) ∧ (t1 : α) ∧ (t2 : α) ⊢ (⟦simple_if α true t1 t2⟧ = ⟦t1⟧) : Bool",
+      "semantic_latex": "(\\alpha : \\mathsf{Type}) \\land (t_1 : \\alpha) \\land (t_2 : \\alpha) \\vdash (\\llbracket \\mathrm{simple\\_if}\\;\\alpha\\;\\mathrm{true}\\;t_1\\;t_2 \\rrbracket = \\llbracket t_1 \\rrbracket) : \\mathsf{Bool}",
       "kind": "Typing Judgment (Checkable)",
       "origin": "simple_if Definition (3.23)",
       "origin_link": "manual.html#item-3-23-simple-if",
-      "metatheoretic_meaning": "Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α.",
+      "metatheoretic_meaning": "Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.",
       "side_side_condition": "α : Universe(i)",
       "side_side_latex": "\\alpha : \\mathcal{U}_i",
       "computable": true
@@ -841,12 +841,12 @@
     {
       "id": "dependent-if-typing",
       "condition": "dependent_if_typing(T, b, t1, t2)",
-      "semantic_statement": "typeof(if b then t1 else t2) = simple_if Type b (typeof t1) (typeof t2)",
-      "semantic_latex": "\\mathrm{typeof}(\\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2) = \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2)",
+      "semantic_statement": "typeof(⟦if b then t1 else t2⟧) = ⟦simple_if Type b (typeof t1) (typeof t2)⟧",
+      "semantic_latex": "\\mathrm{typeof}(\\llbracket \\mathrm{if}\\; b\\; \\mathrm{then}\\; t_1\\; \\mathrm{else}\\; t_2 \\rrbracket) = \\llbracket \\mathrm{simple\\_if}\\;\\mathsf{Type}\\;b\\;(\\mathrm{typeof}\\;t_1)\\;(\\mathrm{typeof}\\;t_2) \\rrbracket",
       "kind": "Typing Rule (Computable)",
       "origin": "dependent_if Definition (3.24)",
       "origin_link": "manual.html#item-3-24-dependent-if",
-      "metatheoretic_meaning": "Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel.",
+      "metatheoretic_meaning": "Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.",
       "side_side_condition": "T : Bool → Type ∧ b : Bool",
       "side_side_latex": "T : \\mathsf{Bool} \\to \\mathsf{Type} \\land b : \\mathsf{Bool}",
       "computable": true

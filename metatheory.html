@@ -283,8 +283,8 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 = t_1) : \mathsf{Bool}\\)</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α.</div>
+            <div class="semantic-box">\\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket) : \mathsf{Bool}\\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-23-simple-if" style="color: var(--accent-blue); text-decoration: none;">simple_if Definition (3.23) &rarr;</a>
             </div>
@@ -303,8 +303,8 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(\mathrm{typeof}(\mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2) = \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2)\\)</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel.</div>
+            <div class="semantic-box">\\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-24-dependent-if" style="color: var(--accent-blue); text-decoration: none;">dependent_if Definition (3.24) &rarr;</a>
             </div>

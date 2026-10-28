@@ -195,13 +195,13 @@
       </p>
       <ul style="margin: 0.5rem 0 0.5rem 1.2rem; padding: 0;">
         <li>
-          <strong>Semantic Column (Morse–Kelley Object Theory):</strong> Formulates statements about mathematical objects. The discourse domain consists solely of the atomic type \(\mathsf{Class}\\). Mathematical sets are classes satisfying \(\mathrm{isSet}(x) \equiv \exists(y : \mathsf{Class})(x \in y)\\). Any condition regarding <em>meaning</em> belongs entirely within the formula itself.
+          <strong>Semantic Column (Morse–Kelley Object Theory):</strong> Formulates statements about mathematical objects. The discourse domain consists solely of the atomic type \\(\mathsf{Class}\\). Mathematical sets are classes satisfying \\(\mathrm{isSet}(x) \equiv \exists(y : \mathsf{Class})(x \in y)\\). Any condition regarding <em>meaning</em> belongs entirely within the formula itself.
         </li>
         <li>
-          <strong>Syntax Column (Ambient Type Theory):</strong> Formulates statements about the language expressions themselves (variable freeness, substitution safety, context hygiene). Side conditions are <strong>not arbitrary informal comments</strong>—they are checkable formulas in an ambient type theory (such as \(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\) or \(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\)).
+          <strong>Syntax Column (Ambient Type Theory):</strong> Formulates statements about the language expressions themselves (variable freeness, substitution safety, context hygiene). Side conditions are <strong>not arbitrary informal comments</strong>—they are checkable formulas in an ambient type theory (such as \\(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\\) or \\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\\).
         </li>
         <li>
-          <strong>Syntactic Constants:</strong> When a variable \(x\) is referenced inside a side condition, it reifies as a constant identifier \(v_x : \mathsf{Variable}\) in the metatheory. The metatheory is the <em>same Morse–Kelley theory</em> functioning as a meta-language. Click any side condition to navigate to its reflected form in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
+          <strong>Syntactic Constants:</strong> When a variable \\(x\\) is referenced inside a side condition, it reifies as a constant identifier \\(v_x : \mathsf{Variable}\\) in the metatheory. The metatheory is the <em>same Morse–Kelley theory</em> functioning as a meta-language. Click any side condition to navigate to its reflected form in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
         </li>
         <li>
           <strong>Theorem Schemata vs. Statement Schemata:</strong> A statement schema is a collection of propositions. A <strong>Theorem Schema</strong> (such as <em>Ordinal Induction</em>, 3.32) guarantees the existence of a machine-checked proof program term inhabiting the schema type.
@@ -613,10 +613,10 @@
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</strong>
-              <div class="entry-notes">Class-level conditional defined via class comprehension. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div>
+              <div class="entry-notes">Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="W, Γ ⊢ (IF ψ THEN A ELSE B FI) = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }">\\(\mathcal{W}, \Gamma \vdash (\mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI}) = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\\)</td>
+            <td class="formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }">\\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\\)</td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-vv-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_v, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_v, \Gamma) : \mathsf{Bool}\\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
@@ -627,10 +627,10 @@
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</strong>
-              <div class="entry-notes">Non-dependent type-theoretic conditional working parametrically over any metatype, not restricted to Class.</div>
+              <div class="entry-notes">Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (simple_if α true t1 t2 = t1, simple_if α false t1 t2 = t2)">\\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 = t_1, \; \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 = t_2)\\)</td>
+            <td class="formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)">\\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\\)</td>
             <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
@@ -641,10 +641,10 @@
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">dependent_if (polymorphic dependent conditional with type computation)</strong>
-              <div class="entry-notes">Dependent type-theoretic conditional computing branch types dynamically using simple_if at the universe of Types.</div>
+              <div class="entry-notes">Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(if b then t1 else t2) := simple_if Type b (typeof t1) (typeof t2))">\\(\mathrm{dependent\_if} : \Pi (T : \mathsf{Bool} \to \mathsf{Type}) (b : \mathsf{Bool}).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2) := \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2))\\)</td>
+            <td class="formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)">\\(\mathrm{dependent\_if} : \Pi (T : \mathsf{Bool} \to \mathsf{Type}) (b : \mathsf{Bool}).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\\)</td>
             <td class="syntax-cell"><a href="metatheory.html#dependent-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>

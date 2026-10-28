@@ -127,15 +127,15 @@ License: All rights reserved.©
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.22)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</span>:
 
-           W, Γ ⊢ (IF ψ THEN A ELSE B FI) = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }
+           W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.23)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</span>:
 
-           simple_if : ∏(α : Type). Bool → α → α → α   (simple_if α true t1 t2 = t1, simple_if α false t1 t2 = t2)
+           simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.24)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">dependent_if (polymorphic dependent conditional with type computation)</span>:
 
-           dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(if b then t1 else t2) := simple_if Type b (typeof t1) (typeof t2))
+           dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.32)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Ordinal Induction (∈-Ind) Theorem Schema</span>:
 
