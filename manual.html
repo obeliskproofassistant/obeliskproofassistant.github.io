@@ -5,7 +5,18 @@
   <title>Obelisk Proof Assistant — Reference Manual &amp; Formal Theory</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     :root {
@@ -204,21 +215,23 @@
           <strong>Syntactic Constants:</strong> When a variable \\(x\\) is referenced inside a side condition, it reifies as a constant identifier \\(v_x : \mathsf{Variable}\\) in the metatheory. The metatheory is the <em>same Morse–Kelley theory</em> functioning as a meta-language. Click any side condition to navigate to its reflected form in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
         </li>
         <li>
-          <strong>Theorem Schemata vs. Statement Schemata:</strong> A statement schema is a collection of propositions. A <strong>Theorem Schema</strong> (such as <em>Ordinal Induction</em>, 3.32) guarantees the existence of a machine-checked proof program term inhabiting the schema type.
+          <strong>Formula Taxonomy &amp; Schemata:</strong> A closed formula without metavariables is <em>non-schematic</em>. Standard formulas with variables/metavariables are simply <em>formulas</em> (Theorems, Axioms, Definitions). The term <em>schema</em> is strictly reserved for infinite families of statements generated at the metalevel by syntactic formula substitution where object-level quantification is absent. In Morse–Kelley class theory, because classes are first-class mathematical entities, principles such as <em>Ordinal Induction</em> (3.32) and <em>Replacement</em> (3.37) are single finitely-quantified theorems and axioms.
         </li>
       </ul>
     </div>
 
     <!-- FILTER BAR -->
-    <div class="filter-bar">
+    <div class="filter-bar" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
       <span style="font-weight: 600; font-size: 0.85rem; color: #94a3b8; margin-right: 6px;">Filter By:</span>
       <button class="filter-btn active" onclick="filterCatalog('all', this)">All (49)</button>
       <button class="filter-btn" onclick="filterCatalog('axiom', this)">Axioms</button>
-      <button class="filter-btn" onclick="filterCatalog('axiom-schema', this)">Axiom Schemata</button>
       <button class="filter-btn" onclick="filterCatalog('theorem', this)">Theorems</button>
-      <button class="filter-btn" onclick="filterCatalog('theorem-schema', this)">Theorem Schemata</button>
       <button class="filter-btn" onclick="filterCatalog('definition', this)">Definitions</button>
-      <button class="filter-btn" onclick="filterCatalog('inference-rule', this)">Inference Rules</button>
+      <button class="filter-btn" onclick="filterCatalog('rule', this)">Inference Rules</button>
+      <div style="margin-left: auto; display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 0.82rem; color: #94a3b8;">Notation:</span>
+        <button class="filter-btn" id="toggle-notation-btn" onclick="toggleNotation()">Show Clean Unicode</button>
+      </div>
     </div>
 
     <!-- CATALOG TABLE -->
@@ -250,8 +263,8 @@
               <div class="entry-notes">Positive implicative axiom.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (β → α))">\\((\alpha \to (\beta \to \alpha))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(α → (β → α))">\((\alpha \to (\beta \to \alpha))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -264,8 +277,8 @@
               <div class="entry-notes">Self-distribution of implication.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → (β → γ)) → ((α → β) → (α → γ)))">\\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta, \gamma : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((α → (β → γ)) → ((α → β) → (α → γ)))">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -278,8 +291,8 @@
               <div class="entry-notes">Left projection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α ∧ β) → α)">\\(((\alpha \land \beta) \to \alpha)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((α ∧ β) → α)">\(((\alpha \land \beta) \to \alpha)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -292,8 +305,8 @@
               <div class="entry-notes">Right projection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α ∧ β) → β)">\\(((\alpha \land \beta) \to \beta)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((α ∧ β) → β)">\(((\alpha \land \beta) \to \beta)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -306,8 +319,8 @@
               <div class="entry-notes">Pairing of propositional truths.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (β → (α ∧ β)))">\\((\alpha \to (\beta \to (\alpha \land \beta)))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(α → (β → (α ∧ β)))">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -320,8 +333,8 @@
               <div class="entry-notes">Left injection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (α ∨ β))">\\((\alpha \to (\alpha \lor \beta))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(α → (α ∨ β))">\((\alpha \to (\alpha \lor \beta))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -334,8 +347,8 @@
               <div class="entry-notes">Right injection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(β → (α ∨ β))">\\((\beta \to (\alpha \lor \beta))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(β → (α ∨ β))">\((\beta \to (\alpha \lor \beta))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -348,8 +361,8 @@
               <div class="entry-notes">Proof by cases.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → γ) → ((β → γ) → ((α ∨ β) → γ)))">\\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta, \gamma : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((α → γ) → ((β → γ) → ((α ∨ β) → γ)))">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -362,8 +375,8 @@
               <div class="entry-notes">Contradiction to bottom.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((¬α) → (α → ⊥))">\\(((\neg \alpha) \to (\alpha \to \bot))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((¬α) → (α → ⊥))">\(((\neg \alpha) \to (\alpha \to \bot))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -376,8 +389,8 @@
               <div class="entry-notes">Proof of negation.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → β) → ((α → ¬β) → ¬α))">\\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="((α → β) → ((α → ¬β) → ¬α))">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -390,8 +403,8 @@
               <div class="entry-notes">Principle of explosion.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(⊥ → α)">\\((\bot \to \alpha)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(⊥ → α)">\((\bot \to \alpha)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -404,8 +417,8 @@
               <div class="entry-notes">Classical tertium non datur.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α ∨ ¬α)">\\((\alpha \lor \neg \alpha)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="(α ∨ ¬α)">\((\alpha \lor \neg \alpha)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -418,8 +431,8 @@
               <div class="entry-notes">Fundamental detachment rule.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="α, (α → β) ⊢ β">\\(\frac{\alpha \quad \alpha \to \beta}{\beta}\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\alpha, \beta : \mathsf{Bool}\\)</span></td>
+            <td class="formula-cell" data-unicode="α, (α → β) ⊢ β">\(\frac{\alpha \quad \alpha \to \beta}{\beta}\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -440,8 +453,8 @@
               <div class="entry-notes">Ensures the universe of discourse contains at least one class.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(K : Class) ⊤">\\(\exists (K : \mathsf{Class})\; \top\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(K : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∃(K : Class) ⊤">\(\exists (K : \mathsf{Class})\; \top\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(K : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -454,8 +467,8 @@
               <div class="entry-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]">\\(((\forall (x : \mathsf{Class})\; \phi) \to \phi[t/x])\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]">\(((\forall (x : \mathsf{Class})\; \phi) \to \phi[t/x])\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -468,8 +481,8 @@
               <div class="entry-notes">Witness substitution into existential quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ">\\((\phi[t/x] \to \exists (x : \mathsf{Class})\; \phi)\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ">\((\phi[t/x] \to \exists (x : \mathsf{Class})\; \phi)\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -482,8 +495,8 @@
               <div class="entry-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)">\\(\frac{\psi \to \phi}{\psi \to \forall (x : \mathsf{Class})\; \phi}\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)">\(\frac{\psi \to \phi}{\psi \to \forall (x : \mathsf{Class})\; \phi}\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -496,8 +509,8 @@
               <div class="entry-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)">\\(\frac{\phi \to \psi}{\exists (x : \mathsf{Class})\; \phi \to \psi}\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)">\(\frac{\phi \to \psi}{\exists (x : \mathsf{Class})\; \phi \to \psi}\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -510,8 +523,8 @@
               <div class="entry-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ">\\(\frac{\phi}{\forall (x : \mathsf{Class})\; \phi}\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ">\(\frac{\phi}{\forall (x : \mathsf{Class})\; \phi}\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -524,16 +537,16 @@
           </tr>
         
 
-          <tr id="item-3-01" data-classification="axiom-schema" data-section="sec-3">
+          <tr id="item-3-01" data-classification="axiom" data-section="sec-3">
             <td style="font-weight: 700; color: var(--accent-cyan);">3.01</td>
             <td>
-              <span class="classification-badge badge-axiom">Axiom Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom Schema</strong>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom</strong>
               <div class="entry-notes">Predicative/impredicative comprehension for all first-order and higher-order formulas.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))">\\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-c-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))">\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-c-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -546,8 +559,8 @@
               <div class="entry-notes">Two classes having identical elements are identical.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)">\\(\forall (A, B : \mathsf{Class})\; ((\forall (x : \mathsf{Class})\; (x \in A \longleftrightarrow x \in B)) \to A = B)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(A, B, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)">\(\forall (A, B : \mathsf{Class})\; ((\forall (x : \mathsf{Class})\; (x \in A \longleftrightarrow x \in B)) \to A = B)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, B, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -560,8 +573,8 @@
               <div class="entry-notes">Any subclass of a set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))">\\(\forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(A, B : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))">\(\forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, B : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -574,8 +587,8 @@
               <div class="entry-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))">\\(\forall (A : \mathsf{Class})\; (A \ne \emptyset \to \exists (x : \mathsf{Class})\; (x \in A \land x \cap A = \emptyset))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(A, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))">\(\forall (A : \mathsf{Class})\; (A \ne \emptyset \to \exists (x : \mathsf{Class})\; (x \in A \land x \cap A = \emptyset))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -588,8 +601,8 @@
               <div class="entry-notes">Unordered pair of two sets is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))">\\(\forall (a, b : \mathsf{Class})\; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(a, b : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))">\(\forall (a, b : \mathsf{Class})\; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(a, b : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -602,8 +615,8 @@
               <div class="entry-notes">The unary union of any set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))">\\(\forall (A : \mathsf{Class})\; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(A : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))">\(\forall (A : \mathsf{Class})\; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -616,8 +629,8 @@
               <div class="entry-notes">Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }">\\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vv-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v_v, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_v, \Gamma) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }">\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vv-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_v, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_v, \Gamma) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -630,8 +643,8 @@
               <div class="entry-notes">Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)">\\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\\)</a></td>
+            <td class="formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -644,22 +657,22 @@
               <div class="entry-notes">Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)">\\(\mathrm{dependent\_if} : \Pi (T : \mathsf{Bool} \to \mathsf{Type}) (b : \mathsf{Bool}).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#dependent-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\\)</a></td>
+            <td class="formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)">\(\mathrm{dependent\_if} : \Pi (T : \mathsf{Bool} \to \mathsf{Type}) (b : \mathsf{Bool}).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#dependent-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="thm-ord-ind" data-classification="theorem-schema" data-section="sec-3">
+          <tr id="thm-ord-ind" data-classification="theorem" data-section="sec-3">
             <td style="font-weight: 700; color: var(--accent-cyan);">3.32</td>
             <td>
-              <span class="classification-badge badge-theorem">Theorem Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Ordinal Induction (∈-Ind) Theorem Schema</strong>
-              <div class="entry-notes">On is a Class object, not a syntactic type. This is a Theorem Schema inhabited by a constructive proof program.</div>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Ordinal Induction (∈-Ind)</strong>
+              <div class="entry-notes">On is a Class object (On : Class). Ordinal induction is formulated as a formula in Morse–Kelley class theory, accompanied by a constructive proof program.</div>
               <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>let rec ord_ind (p : Prog) (a : Class) : Prf = ...</code></div>
             </td>
-            <td class="formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))">\\(((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha)))\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On}) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))">\(((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha)))\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On}) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -672,22 +685,22 @@
               <div class="entry-notes">Power class of any set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))">\\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(a : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(a : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="item-3-37" data-classification="axiom-schema" data-section="sec-3">
+          <tr id="item-3-37" data-classification="axiom" data-section="sec-3">
             <td style="font-weight: 700; color: var(--accent-cyan);">3.37</td>
             <td>
-              <span class="classification-badge badge-axiom">Axiom Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Replacement / Limitation of Size Axiom Schema</strong>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Replacement / Limitation of Size Axiom</strong>
               <div class="entry-notes">Image of a set under a class function is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))">\\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(F, A : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(F, A : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -700,8 +713,8 @@
               <div class="entry-notes">Guarantees existence of the set of natural numbers ω.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))">\\(\exists (x : \mathsf{Class})\; (\mathrm{isSet}(x) \land \emptyset \in x \land \forall (y : \mathsf{Class})\; (y \in x \to y \cup \{y\} \in x))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(x, y : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))">\(\exists (x : \mathsf{Class})\; (\mathrm{isSet}(x) \land \emptyset \in x \land \forall (y : \mathsf{Class})\; (y \in x \to y \cup \{y\} \in x))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -714,8 +727,8 @@
               <div class="entry-notes">Global choice function over all non-empty sets.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))">\\(\exists (c : \mathsf{Class})\; (\mathrm{isClassFunction}(c) \land \forall (x : \mathsf{Class})\; ((\mathrm{isSet}(x) \land x \ne \emptyset) \to c(x) \in x))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(c, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))">\(\exists (c : \mathsf{Class})\; (\mathrm{isClassFunction}(c) \land \forall (x : \mathsf{Class})\; ((\mathrm{isSet}(x) \land x \ne \emptyset) \to c(x) \in x))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(c, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -728,8 +741,8 @@
               <div class="entry-notes">Universe of all sets. V is a proper class (not a set).</div>
               
             </td>
-            <td class="formula-cell" data-unicode="V = {x | x = x}">\\(V = \{x \mid x = x\}\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(V : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="V = {x | x = x}">\(V = \{x \mid x = x\}\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(V : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -742,8 +755,8 @@
               <div class="entry-notes">A class is transitive if every element of it is also a subclass.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)">\\(\mathrm{Tr}(A) \longleftrightarrow \forall (x : \mathsf{Class})\; (x \in A \to x \subseteq A)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(A, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)">\(\mathrm{Tr}(A) \longleftrightarrow \forall (x : \mathsf{Class})\; (x \in A \to x \subseteq A)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -756,8 +769,8 @@
               <div class="entry-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))">\\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land x \in u \land \mathrm{isSet}(u)))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(x, u : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land x \in u \land \mathrm{isSet}(u)))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, u : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -770,30 +783,30 @@
           </tr>
         
 
-          <tr id="item-4-01" data-classification="axiom-schema" data-section="sec-4">
+          <tr id="item-4-01" data-classification="axiom" data-section="sec-4">
             <td style="font-weight: 700; color: var(--accent-cyan);">4.01</td>
             <td>
-              <span class="classification-badge badge-axiom">Axiom Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Instantiation Schema</strong>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Instantiation Axiom</strong>
               <div class="entry-notes">Metatheoretic instantiation across arbitrary typed expressions.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))">\\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(t : \mathrm{eval}(A), \quad v : \mathsf{Variable}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(t : \mathrm{eval}(A), \quad v : \mathsf{Variable}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="item-4-02" data-classification="axiom-schema" data-section="sec-4">
+          <tr id="item-4-02" data-classification="axiom" data-section="sec-4">
             <td style="font-weight: 700; color: var(--accent-cyan);">4.02</td>
             <td>
-              <span class="classification-badge badge-axiom">Axiom Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Generalisation Schema</strong>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Generalisation Axiom</strong>
               <div class="entry-notes">Universal generalization in metatheory guarded by non-free context occurrence.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))">\\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{NFV}(v, \Gamma) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v, \Gamma) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -806,8 +819,8 @@
               <div class="entry-notes">Reflection elimination for provability.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)">\\(\frac{\mathcal{F}, [] \vdash \langle \mathcal{F}, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\mathcal{F} : \mathsf{Theory}, \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\\)</span></td>
+            <td class="formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)">\(\frac{\mathcal{F}, [] \vdash \langle \mathcal{F}, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{F} : \mathsf{Theory}, \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -820,8 +833,8 @@
               <div class="entry-notes">At-most-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))">\\(\forall (\phi : \mathsf{Fm})\; ((! (z : \mathsf{Class})\; \phi) \longleftrightarrow \forall (x, y : \mathsf{Class})\; ((\phi[x/z] \land \phi[y/z]) \to x = y))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(z, x, y : \mathsf{Variable}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))">\(\forall (\phi : \mathsf{Fm})\; ((! (z : \mathsf{Class})\; \phi) \longleftrightarrow \forall (x, y : \mathsf{Class})\; ((\phi[x/z] \land \phi[y/z]) \to x = y))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(z, x, y : \mathsf{Variable}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -834,22 +847,22 @@
               <div class="entry-notes">Exactly-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))">\\(\forall (\phi : \mathsf{Fm})\; (\mathcal{T}, [] \vdash (\exists! (x : \mathsf{Class})\; \phi) \longleftrightarrow ((\exists (x : \mathsf{Class})\; \phi) \land ! (x : \mathsf{Class})\; \phi))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(x : \mathsf{Variable}, \quad \phi : \mathsf{Fm}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{T}, [] \vdash (\exists! (x : \mathsf{Class})\; \phi) \longleftrightarrow ((\exists (x : \mathsf{Class})\; \phi) \land ! (x : \mathsf{Class})\; \phi))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x : \mathsf{Variable}, \quad \phi : \mathsf{Fm}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="item-4-06" data-classification="axiom-schema" data-section="sec-4">
+          <tr id="item-4-06" data-classification="axiom" data-section="sec-4">
             <td style="font-weight: 700; color: var(--accent-cyan);">4.06</td>
             <td>
-              <span class="classification-badge badge-axiom">Axiom Schema</span>
-              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom Schema (Metatheory)</strong>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom (Metatheory)</strong>
               <div class="entry-notes">Reflected class comprehension in base theory T.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))">\\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\\)</td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\\(\mathrm{FFI}(k, x, \phi) : \mathsf{Bool}\\)</a></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(k, x, \phi) : \mathsf{Bool}\)</a></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -870,8 +883,8 @@
               <div class="entry-notes">Basic elementhood implies sethood.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))">\\((\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)) \land (\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(B, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))">\((\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)) \land (\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -884,8 +897,8 @@
               <div class="entry-notes">Unfolding definition to intro form.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))">\\(\frac{\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)}{\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B)}\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(B, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))">\(\frac{\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)}{\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B)}\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -898,8 +911,8 @@
               <div class="entry-notes">Deduction theorem discharging premise into implication.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))">\\((\mathcal{F}, [] \vdash (B \in x) \to \mathrm{isSet}(B))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(B, x : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))">\((\mathcal{F}, [] \vdash (B \in x) \to \mathrm{isSet}(B))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -912,8 +925,8 @@
               <div class="entry-notes">6-step verified derivation in LCF kernel.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)">\\(\mathcal{F}, [] \vdash (\exists (y : \mathsf{Class})\; \forall (x : \mathsf{Class})\; (x \in y)) \to \forall (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (x \in y)\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(x, y : \mathsf{Class}\\)</span></td>
+            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)">\(\mathcal{F}, [] \vdash (\exists (y : \mathsf{Class})\; \forall (x : \mathsf{Class})\; (x \in y)) \to \forall (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (x \in y)\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \mathsf{Class}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -934,36 +947,36 @@
               <div class="entry-notes">W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)">\\(\mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F}\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\mathcal{W}, \mathcal{Q}, \mathcal{T}, \mathcal{F} : \mathsf{Theory}\\)</span></td>
+            <td class="formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)">\(\mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F}\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{W}, \mathcal{Q}, \mathcal{T}, \mathcal{F} : \mathsf{Theory}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="item-6-02" data-classification="theorem-schema" data-section="sec-6">
+          <tr id="item-6-02" data-classification="theorem" data-section="sec-6">
             <td style="font-weight: 700; color: var(--accent-cyan);">6.02</td>
             <td>
-              <span class="classification-badge badge-theorem">Theorem Schema</span>
+              <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Löb&#x27;s Theorem</strong>
               <div class="entry-notes">Formalized Henkin modal provability principle.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))">\\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\phi : \mathsf{Fm}\\)</span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\phi : \mathsf{Fm}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
 
-          <tr id="item-6-03" data-classification="theorem-schema" data-section="sec-6">
+          <tr id="item-6-03" data-classification="theorem" data-section="sec-6">
             <td style="font-weight: 700; color: var(--accent-cyan);">6.03</td>
             <td>
-              <span class="classification-badge badge-theorem">Theorem Schema</span>
+              <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Gödel&#x27;s Second Incompleteness Theorem</strong>
               <div class="entry-notes">Consistency cannot be proved within the system itself.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))">\\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\\)</td>
-            <td class="syntax-cell"><span class="syntax-badge">\\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\\)</span></td>
+            <td class="formula-cell" data-unicode="Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\)</span></td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
           </tr>
             
@@ -977,7 +990,9 @@
 
   <script>
     function filterCatalog(type, btn) {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        if (b.id !== 'toggle-notation-btn') b.classList.remove('active');
+      });
       btn.classList.add('active');
       const rows = document.querySelectorAll('table.data-table tbody tr');
       rows.forEach(r => {
@@ -986,13 +1001,36 @@
           return;
         }
         const cls = r.getAttribute('data-classification');
-        if (type === 'all' || cls === type) {
+        if (type === 'all' || cls === type || (type === 'axiom' && cls.includes('axiom')) || (type === 'theorem' && cls.includes('theorem')) || (type === 'rule' && cls.includes('rule'))) {
           r.style.display = '';
         } else {
           r.style.display = 'none';
         }
       });
     }
+
+    let showingUnicode = false;
+    function toggleNotation() {
+      showingUnicode = !showingUnicode;
+      document.querySelectorAll('.formula-cell').forEach(cell => {
+        if (showingUnicode) {
+          if (!cell.getAttribute('data-latex-saved')) {
+            cell.setAttribute('data-latex-saved', cell.innerHTML);
+          }
+          cell.textContent = cell.getAttribute('data-unicode');
+        } else {
+          const saved = cell.getAttribute('data-latex-saved');
+          if (saved) {
+            cell.innerHTML = saved;
+            if (window.MathJax && window.MathJax.typesetPromise) {
+              window.MathJax.typesetPromise([cell]);
+            }
+          }
+        }
+      });
+      document.getElementById('toggle-notation-btn').textContent = showingUnicode ? 'Show LaTeX (MathJax)' : 'Show Clean Unicode';
+    }
+  </script>
   </script>
 </body>
 </html>

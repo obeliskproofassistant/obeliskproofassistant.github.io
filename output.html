@@ -101,7 +101,7 @@ License: All rights reserved.©
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">3) Set/class-theoretic foundations of mathematics</span>:
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom Schema</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom</span>:
 
            ∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))
 
@@ -137,7 +137,7 @@ License: All rights reserved.©
 
            dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.32)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Ordinal Induction (∈-Ind) Theorem Schema</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.32)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Ordinal Induction (∈-Ind)</span>:
 
            (∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))
 
@@ -145,7 +145,7 @@ License: All rights reserved.©
 
            ∀(a : Class) (isSet(a) → isSet(𝒫(a)))
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.37)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Replacement / Limitation of Size Axiom Schema</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.37)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Replacement / Limitation of Size Axiom</span>:
 
            ∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))
 
@@ -171,11 +171,11 @@ License: All rights reserved.©
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">4) Metalogical laws</span>:
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Instantiation Schema</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Instantiation Axiom</span>:
 
            ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Generalisation Schema</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Generalisation Axiom</span>:
 
            ∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))
 
@@ -191,7 +191,7 @@ License: All rights reserved.©
 
            ∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))
 
-<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.06)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom Schema (Metatheory)</span>:
+<span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.06)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom (Metatheory)</span>:
 
            ∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))
 

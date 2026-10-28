@@ -5,7 +5,18 @@
   <title>Obelisk Proof Assistant — Metatheory &amp; Reflected Syntactic Conditions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     :root {
@@ -163,14 +174,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(v_C \notin \mathrm{FV}(\phi) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(v_C \notin \mathrm{FV}(\phi) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-01" style="color: var(--accent-blue); text-decoration: none;">Class Comprehension Axiom Schema (3.01) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(v_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\\)</div>
+            <div class="syntax-box">\(v_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -183,14 +194,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(v_Y \ne v_X : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(v_Y \ne v_X : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-02" style="color: var(--accent-blue); text-decoration: none;">Extensionality / Pairing Binders &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(v_Y, v_X : \mathsf{Variable}\\)</div>
+            <div class="syntax-box">\(v_Y, v_X : \mathsf{Variable}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -203,14 +214,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(\mathrm{isFreeFor}(t, v_x, \phi) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(\mathrm{isFreeFor}(t, v_x, \phi) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-fi" style="color: var(--accent-blue); text-decoration: none;">Forall Instantiation (FI, 2.02) &amp; Exists Instantiation (EI, 2.03) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(t : \mathsf{Term} \land v_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\\)</div>
+            <div class="syntax-box">\(t : \mathsf{Term} \land v_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -223,14 +234,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(v_x \notin \mathrm{FV}(\psi) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(v_x \notin \mathrm{FV}(\psi) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-fa" style="color: var(--accent-blue); text-decoration: none;">Forall Abstraction (FA, 2.04) &amp; Exists Abstraction (EA, 2.05) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(v_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\\)</div>
+            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -243,14 +254,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(v_x \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(v_x \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-gen" style="color: var(--accent-blue); text-decoration: none;">Generalisation Rule (Gen, 2.06) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(v_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\\)</div>
+            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -263,14 +274,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(v_v \notin \mathrm{FV}(\psi) : \mathsf{Bool} \land v_v \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(v_v \notin \mathrm{FV}(\psi) : \mathsf{Bool} \land v_v \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-22-class-if" style="color: var(--accent-blue); text-decoration: none;">Class Conditional Definition (IF-THEN-ELSE-FI, 3.22) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(v_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\\)</div>
+            <div class="syntax-box">\(v_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -283,14 +294,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-23-simple-if" style="color: var(--accent-blue); text-decoration: none;">simple_if Definition (3.23) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(\alpha : \mathcal{U}_i\\)</div>
+            <div class="syntax-box">\(\alpha : \mathcal{U}_i\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -303,14 +314,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\\)</div>
+            <div class="semantic-box">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-24-dependent-if" style="color: var(--accent-blue); text-decoration: none;">dependent_if Definition (3.24) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\\)</div>
+            <div class="syntax-box">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
@@ -323,14 +334,14 @@
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #8b5cf6;">Provable Metatheorem</span></div>
           </td>
           <td>
-            <div class="semantic-box">\\(\mathrm{WellFounded}(\in, \mathrm{On}) : \mathsf{Bool}\\)</div>
+            <div class="semantic-box">\(\mathrm{WellFounded}(\in, \mathrm{On}) : \mathsf{Bool}\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an axiom; justified by MK Regularity.</div>
             <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
-              <strong>Origin in Manual:</strong> <a href="manual.html#thm-ord-ind" style="color: var(--accent-blue); text-decoration: none;">Ordinal Induction Theorem Schema (3.32) &rarr;</a>
+              <strong>Origin in Manual:</strong> <a href="manual.html#thm-ord-ind" style="color: var(--accent-blue); text-decoration: none;">Ordinal Induction (3.32) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\\)</div>
+            <div class="syntax-box">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
           </td>
           <td style="text-align: center;"><span class="badge">Checkable</span></td>
