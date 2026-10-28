@@ -2,638 +2,342 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Obelisk Proof Assistant — Metatheory &amp; Reflected Syntactic Conditions</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Metatheory — Reflection Engine &amp; Syntactic Semantics</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/x-icon" href="myfavicon.ico">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     :root {
-      --bg: #090d16;
+      --bg-dark: #07090e;
       --card-bg: rgba(15, 23, 42, 0.75);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --primary: #38bdf8;
-      --accent: #2563eb;
-      --text: #f1f5f9;
+      --card-border: rgba(56, 189, 248, 0.18);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
       --text-muted: #94a3b8;
-      --side-cond: #fbbf24;
-      --concrete-color: #a78bfa;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, sans-serif;
-      line-height: 1.65;
-      padding: 2rem 1.5rem;
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0; padding: 0;
     }
-    .container { max-width: 1100px; margin: 0 auto; }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
     header {
+      background: rgba(15, 23, 42, 0.9);
       border-bottom: 1px solid var(--card-border);
-      padding-bottom: 1.5rem;
-      margin-bottom: 2.5rem;
+      padding: 1.2rem 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
     }
-    .back-link { color: var(--primary); text-decoration: none; font-size: 0.9rem; font-weight: 600; }
-    h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.5rem; font-weight: 700; margin: 2.5rem 0 1rem; color: #fff; border-bottom: 1px solid var(--card-border); padding-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-    
-    /* Syntax Switcher Controls */
-    .syntax-control-bar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(15, 23, 42, 0.9);
+    .logo { font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1.2rem; font-size: 0.95rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .theory-box {
+      background: rgba(15, 23, 42, 0.7);
       border: 1px solid var(--card-border);
-      padding: 6px 12px;
-      border-radius: 8px;
+      border-radius: 10px;
+      padding: 1.5rem;
       margin: 1.5rem 0;
-      flex-wrap: wrap;
+      line-height: 1.6;
     }
-    .syntax-toggle-btn {
-      background: transparent;
+    table.data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 1.5rem 0 3rem;
+      background: rgba(15, 23, 42, 0.5);
       border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 6px;
-      cursor: pointer;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
       font-size: 0.85rem;
-      font-weight: 600;
-      transition: all 0.2s ease;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
     }
-    .syntax-toggle-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--primary);
-    }
-    .syntax-toggle-btn:hover:not(.active) {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-    }
-
-    /* Tables */
-    .meta-table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.92rem; }
-    .meta-table th, .meta-table td { padding: 0.85rem 1rem; border: 1px solid var(--card-border); text-align: left; vertical-align: middle; }
-    .meta-table th { background: rgba(30, 41, 59, 0.6); color: var(--primary); font-weight: 600; }
-    code { font-family: 'JetBrains Mono', monospace; background: rgba(15, 23, 42, 0.85); padding: 0.2rem 0.45rem; border-radius: 4px; font-size: 0.88rem; }
-    
-    /* Meta Side-Side Condition Box */
-    .side-side-box {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: #93c5fd;
-      background: rgba(37, 99, 235, 0.12);
-      border-left: 3px solid #2563eb;
-      padding: 4px 8px;
-      border-radius: 0 4px 4px 0;
-      line-height: 1.4;
-    }
-    .side-condition-none {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-style: italic;
-    }
-    .meta-semantic-formula {
-      font-family: 'JetBrains Mono', monospace;
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
       font-size: 0.92rem;
-      color: #38bdf8;
-      font-weight: 600;
     }
-    .anchor-highlight {
-      scroll-margin-top: 80px;
-    }
-    tr:target {
-      background: rgba(56, 189, 248, 0.12) !important;
-      outline: 2px solid var(--primary);
-    }
-
-    /* Copy Button */
-    .copy-btn {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
+    .semantic-box {
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--accent-blue);
+      padding: 8px 12px;
       border-radius: 4px;
-      padding: 3px 8px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      font-weight: 500;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-    }
-    .copy-btn:hover {
-      background: rgba(56, 189, 248, 0.2);
-      color: var(--primary);
-      border-color: var(--primary);
-    }
-    .copy-btn.copied {
-      background: rgba(16, 185, 129, 0.25) !important;
-      color: #34d399 !important;
-      border-color: #10b981 !important;
-    }
-
-    .badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.78rem; font-weight: 600; background: rgba(56, 189, 248, 0.15); color: var(--primary); }
-    
-    /* Toast Alert */
-    #copy-toast {
-      position: fixed;
-      bottom: 24px;
-      right: 24px;
-      background: #10b981;
+      font-size: 1.05rem;
       color: #fff;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      pointer-events: none;
-      z-index: 9999;
     }
-    #copy-toast.show { opacity: 1; }
-
-    footer { border-top: 1px solid var(--card-border); margin-top: 3.5rem; padding-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    .syntax-box {
+      background: rgba(192, 132, 252, 0.08);
+      border-left: 3px solid var(--accent-purple);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+    }
+    .anchor-highlight:target {
+      background: rgba(56, 189, 248, 0.18) !important;
+      outline: 2px solid var(--accent-blue);
+    }
+    .badge {
+      background: #0284c7;
+      color: #fff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Metatheory</span></div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="manual.html">Manual &amp; Theory</a>
+      <a href="metatheory.html" class="active">Metatheory</a>
+      <a href="output.html">Demo Output</a>
+      <a href="output.pdf" target="_blank">PDF Manual</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-  <div class="container">
-    <header>
-      <div>
-        <a href="manual.html" class="back-link">← Return to Obelisk Reference Manual</a>
-        <h1 style="margin-top: 0.5rem;">Obelisk Metatheory: The Reflection Engine</h1>
-        <p style="color: var(--text-muted);">Where syntactic side conditions become semantic formulas in the reflected Morse–Kelley metatheory.</p>
-      </div>
-      <div>
-        <a href="manual.html" style="padding: 0.5rem 1rem; background: rgba(255, 255, 255, 0.08); border: 1px solid var(--card-border); color: white; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-right: 8px;">📖 Reference Manual</a>
-        <a href="Obelisk_Report.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Download Audit Report (PDF)</a>
-      </div>
-    </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Reflected Metatheory Specification</h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
+      When moving from object-theory to metatheory, syntactic side conditions become first-class semantic statements, accompanied by meta-metatheoretic conditions.
+    </p>
 
-    <!-- Global Syntax Toggle Bar -->
-    <div class="syntax-control-bar">
-      <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 600; margin-right: 6px;">Syntax Display Mode:</span>
-      <button type="button" class="syntax-toggle-btn active" id="btn-mode-unicode" onclick="setGlobalSyntaxMode('unicode')">✨ Mathematical Unicode / Notation</button>
-      <button type="button" class="syntax-toggle-btn" id="btn-mode-concrete" onclick="setGlobalSyntaxMode('concrete')">💻 Concrete Syntax (Obelisk / SML / Lean 4)</button>
-      <span style="margin-left: auto; font-size: 0.78rem; color: var(--text-muted);">Click 📋 Copy on any formula or definition</span>
-    </div>
-
-    <!-- Core Metatheoretic Foundations Exposition -->
-    <h2>1. The Metatheoretic Perspective: Self-Reflection in Morse–Kelley</h2>
-    <div style="margin: 1.5rem 0; padding: 1.3rem 1.5rem; background: rgba(30, 58, 138, 0.22); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 4px solid var(--primary); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-        <span style="font-size: 1.25rem;">🔍</span>
-        <strong style="color: #38bdf8; font-size: 1.05rem;">The Secret: The Metatheory is the Same Theory MK</strong>
-      </div>
-      <p style="font-size: 0.9rem; color: #e2e8f0; line-height: 1.65;">
-        In the Obelisk architecture (cf. <code>program/types/typetheory.ML</code>, <code>program/types/foundations.ML</code>, and Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4), the metatheory is not an external, alien formalism: <strong>the metatheory is the very same theory Morse–Kelley (MK)</strong>.
-        There is a class-theoretic (set-theoretic) model of the language of formulas, terms, and variables:
+    <!-- METATHEORY PRINCIPLES -->
+    <div class="theory-box">
+      <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan); margin-top: 0;">The Metatheory Invariant</h2>
+      <p>
+        The key epistemic insight of the Obelisk Proof Assistant is that <strong>the metatheory is the same Morse–Kelley (MK) theory</strong>:
       </p>
-      <ul style="font-size: 0.88rem; color: #cbd5e1; margin: 10px 0 10px 1.5rem; line-height: 1.7;">
+      <ul>
         <li>
-          <strong style="color: #38bdf8;">Variable Reification (\(x\) vs. \(v_x\)):</strong>
-          What was an individual variable \(x\) in the object language becomes an unspecified constant \(v_x \in \mathsf{Variable}\) in the metatheory.
-          We know that distinct variable names yield distinct constants (e.g. \(v_x \ne v_y\)), without needing to fix any arbitrary Gödel numbering or low-level encoding.
+          <strong>Reflected Side Conditions:</strong> What appears as a "syntactic side condition" on the manual page is reflected in the <strong>Semantic column</strong> here. It is not an axiom or theorem, but an ordinary formula whose truth value is checkable or provable.
         </li>
         <li>
-          <strong style="color: #fbbf24;">Side Conditions are Formulas:</strong>
-          A side condition is not informal prose. When viewed from the metatheory, <strong>what was a "side condition" in the object theory now sits in the "Semantic" column</strong>!
-          It is an actual formula \(\mathsf{NFV}(v_x, \phi) \in \mathsf{Bool}\) or \(\mathsf{FFI}(t, v_x, \phi) \in \mathsf{Bool}\) being evaluated on the model of formulas and terms.
+          <strong>Constant Identifiers:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \(v_x : \mathsf{Variable}\) in the metatheory. We assume a standard set-theoretic encoding of the syntax language.
         </li>
         <li>
-          <strong style="color: #f43f5e;">Formulas vs. Axioms / Theorems:</strong>
-          In the metatheory, a side condition is <em>neither an axiom nor a theorem</em>: it is simply a <strong>formula</strong> that may be <code>true</code> or <code>false</code> depending on the syntactic instances plugged into it. An inference rule fires if and only if this metatheoretic formula evaluates to <code>true</code>.
-        </li>
-        <li>
-          <strong style="color: #a78bfa;">Statement Schemata vs. Theorem Schemata:</strong>
-          Do not mix statement schemata and theorem schemata! A <strong>statement schema</strong> is merely a family of formula types indexed by metavariables. A <strong>theorem schema</strong> implies that <strong>there exists an explicit program (proof term) inhabiting that type</strong> for every valid instance.
-        </li>
-        <li>
-          <strong style="color: #34d399;">Only One Atomic Type (<code>Class</code>) &amp; Ordinal Induction:</strong>
-          The class of ordinal numbers \(\mathrm{On}\) is <strong>not a type</strong> (it is not syntactic); it is a <strong>Class</strong> object (\(\mathrm{On} \in \mathsf{Class}\)).
-          In Obelisk, there is only one atomic base object type, called <code>Class</code>, on top of which a dependent type theory is given.
-          Therefore, <strong>Ordinal Induction (∈-Ind)</strong> is a <strong>Theorem Schema</strong> over <code>Class</code> with an explicit proof program; the restriction \(\alpha \in \mathrm{On}\) is an internal antecedent in the semantic formula, not a syntactic type.
+          <strong>Side-Side Conditions:</strong> The "Syntax" column at this level represents meta-metatheoretic requirements (typing, context finiteness, structural induction termination).
         </li>
       </ul>
     </div>
 
-    <!-- Metatheoretic Table -->
-    <h2>2. Metatheoretic Catalog: Side Conditions Promoted to Semantic Formulas</h2>
-    <p style="color: var(--text-muted); margin-bottom: 1rem;">
-      In this metatheoretic table, the side conditions from <a href="manual.html" style="color:var(--primary);">manual.html</a> appear in the <strong>Semantic (Metatheoretic Formula)</strong> column. The <strong>Syntax</strong> column shows the meta-metatheoretic "side-side conditions" (structural well-foundedness and variable typing).
-    </p>
+    <!-- METATHEORY TABLE -->
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th style="width: 220px;">Condition Identifier</th>
+          <th>Semantic (Metatheoretic Formula)</th>
+          <th style="width: 320px;">Syntax (Meta-Metatheoretic Condition)</th>
+          <th style="width: 100px; text-align: center;">Nature</th>
+        </tr>
+      </thead>
+      <tbody>
 
-    <div style="overflow-x: auto;">
-      <table class="meta-table">
-        <thead>
-          <tr>
-            <th style="width: 140px;">Anchor / Predicate</th>
-            <th style="width: 180px;">Origin in Object Theory</th>
-            <th>Semantic (Metatheoretic Formula)</th>
-            <th style="width: 180px;">Metatheoretic Nature</th>
-            <th style="width: 240px;">Syntax ("Side-Side Condition")</th>
-            <th style="width: 75px; text-align: center;">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- NFV(v_C, phi) -->
-          <tr id="nfv-c-phi" class="anchor-highlight">
-            <td>
-              <code>NFV(v_C, &phi;)</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Not-Free-Variable</span>
-            </td>
-            <td>
-              <a href="manual.html#item-3-01" style="color:var(--primary);text-decoration:none;"><strong>Item 3.01</strong><br/>Comprehension Schema</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">v<sub>C</sub> &notin; FV(&phi;) &nbsp;&hArr;&nbsp; isFree(v<sub>C</sub>, &phi;) = false</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">def nfv_check (vC : Variable) (phi : Fm) : Bool := not (Truth_Expression_isFree vC phi)</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Evaluates whether variable constant $v_C$ has zero free occurrences in formula tree $\phi$.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(May be true or false; not an axiom)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>None (Closed in MK)</strong><br/>
-                Typing: v<sub>C</sub> &isin; Variable, &phi; &isin; Fm. (No free meta-variables).
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'vC &notin; FV(&phi;) &hArr; isFree(vC, &phi;) = false', 'def nfv_check (vC : Variable) (phi : Fm) : Bool := not (Truth_Expression_isFree vC phi)')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="nfv-c-phi" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_C, φ)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(v_C \notin \mathrm{FV}(\phi) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#item-3-01" style="color: var(--accent-blue); text-decoration: none;">Class Comprehension Axiom Schema (3.01) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(v_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- Fresh(v_Y, v_X) -->
-          <tr id="fresh-vy-vx" class="anchor-highlight">
-            <td>
-              <code>Fresh(v_Y, v_X)</code><br/>
-              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;font-size:0.7rem;">Variable Freshness</span>
-            </td>
-            <td>
-              <a href="manual.html#item-3-02" style="color:var(--primary);text-decoration:none;"><strong>Item 3.02</strong><br/>Sethood Criterion</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">v<sub>Y</sub> &ne; v<sub>X</sub> &nbsp;&hArr;&nbsp; var_eq(v<sub>Y</sub>, v<sub>X</sub>) = false</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">def fresh_var (vY vX : Variable) : Bool := (vY != vX)</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Inequality assertion between distinct variable constants in the syntactic model.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Simple syntactic inequality)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>None</strong><br/>
-                v<sub>Y</sub>, v<sub>X</sub> &isin; Variable.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'vY &ne; vX &hArr; var_eq(vY, vX) = false', 'def fresh_var (vY vX : Variable) : Bool := (vY != vX)')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="fresh-vy-vx" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">Fresh(v_Y, v_X)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(v_Y \ne v_X : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#item-3-02" style="color: var(--accent-blue); text-decoration: none;">Extensionality / Pairing Binders &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(v_Y, v_X : \mathsf{Variable}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- FFI(t, v_x, phi) -->
-          <tr id="ffi-t-vx-phi" class="anchor-highlight">
-            <td>
-              <code>FFI(t, v_x, &phi;)</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Free-For-Inst (sidconFFI)</span>
-            </td>
-            <td>
-              <a href="manual.html#rule-fi" style="color:var(--primary);text-decoration:none;"><strong>Rule FI / EI</strong><br/>&forall;E / &exist;I Rules</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">isFreeForSubst(t, v<sub>x</sub>, &phi;) &nbsp;&hArr;&nbsp; &forall; y &isin; FV(t). y &notin; BndOcc(&phi;, v<sub>x</sub>)</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">val sidconFFI = FFI (vt, vX, vx, vphi) : Truth_Expression_subst t vx phi != NONE</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Defined recursively over the inductive AST of $\phi$: no variable in $t$ is captured by a quantifier.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Verified by substitution checker)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>Structural Induction</strong><br/>
-                Well-founded tree structure of &phi; &isin; Fm, t &isin; Term, v<sub>x</sub> &isin; Variable.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'isFreeForSubst(t, vx, &phi;) &hArr; &forall; y &isin; FV(t). y &notin; BndOcc(&phi;, vx)', 'val sidconFFI = FFI (vt, vX, vx, vphi) : Truth_Expression_subst t vx phi != NONE')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="ffi-t-vx-phi" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">FFI(t, v_x, φ)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(\mathrm{isFreeFor}(t, v_x, \phi) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#rule-fi" style="color: var(--accent-blue); text-decoration: none;">Forall Instantiation (FI, 2.02) &amp; Exists Instantiation (EI, 2.03) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(t : \mathsf{Term} \land v_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- NFV(v_x, psi) -->
-          <tr id="nfv-vx-psi" class="anchor-highlight">
-            <td>
-              <code>NFV(v_x, &psi;)</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Eigenvariable (sidconNFV)</span>
-            </td>
-            <td>
-              <a href="manual.html#rule-fa" style="color:var(--primary);text-decoration:none;"><strong>Rule FA / EA</strong><br/>Bernays Rules</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">v<sub>x</sub> &notin; FV(&psi;) &nbsp;&hArr;&nbsp; isFree(v<sub>x</sub>, &psi;) = false</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">val sidconNFV = NFV (vX, vx, vbeta) : not (Truth_Expression_isFree vx beta)</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Ensures eigenvariable $v_x$ is fresh with respect to antecedent/consequent formula $\psi$.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Fails if variable occurs free)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>None</strong><br/>
-                v<sub>x</sub> &isin; Variable, &psi; &isin; Fm.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'vx &notin; FV(&psi;) &hArr; isFree(vx, &psi;) = false', 'val sidconNFV = NFV (vX, vx, vbeta) : not (Truth_Expression_isFree vx beta)')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="nfv-vx-psi" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, ψ)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(v_x \notin \mathrm{FV}(\psi) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#rule-fa" style="color: var(--accent-blue); text-decoration: none;">Forall Abstraction (FA, 2.04) &amp; Exists Abstraction (EA, 2.05) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- NFV(v_x, Gamma) -->
-          <tr id="nfv-vx-gamma" class="anchor-highlight">
-            <td>
-              <code>NFV(v_x, &Gamma;)</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Context Freshness</span>
-            </td>
-            <td>
-              <a href="manual.html#rule-gen" style="color:var(--primary);text-decoration:none;"><strong>Rule Gen / ForaR</strong><br/>Generalisation Rule</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">&forall; &gamma; &isin; &Gamma;. v<sub>x</sub> &notin; FV(&gamma;)</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">def nfv_context (vx : Variable) (Gamma : List Fm) : Bool := not (disj_list (map (isFree vx) Gamma))</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Ensures eigenvariable $v_x$ has zero free occurrences in any active undischarged assumption in $\Gamma$.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Context freeness check)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>Context Finiteness</strong><br/>
-                &Gamma; is a finite list of formulas in context (&Gamma; &isin; Ctx).
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, '&forall; &gamma; &isin; &Gamma;. vx &notin; FV(&gamma;)', 'def nfv_context (vx : Variable) (Gamma : List Fm) : Bool := not (disj_list (map (isFree vx) Gamma))')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="nfv-vx-gamma" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, Γ)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(v_x \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#rule-gen" style="color: var(--accent-blue); text-decoration: none;">Generalisation Rule (Gen, 2.06) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- FFI Leibniz Conjunction -->
-          <tr id="ffi-leibniz" class="anchor-highlight">
-            <td>
-              <code>FFI(s, v_x, &phi;) &and; FFI(t, v_x, &phi;)</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Leibniz Substitutability</span>
-            </td>
-            <td>
-              <a href="manual.html#rule-subst" style="color:var(--primary);text-decoration:none;"><strong>Leibniz Rule</strong><br/>Equality Substitution</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">isFreeForSubst(s, v<sub>x</sub>, &phi;) &and; isFreeForSubst(t, v<sub>x</sub>, &phi;)</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">def subst_safe (s t : Term) (vx : Variable) (phi : Fm) : Bool := FFI s vx phi &and;&and; FFI t vx phi</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Conjunction of two substitutability checks in the metatheory.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Conjunction of predicates)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>None</strong><br/>
-                s, t &isin; Term, v<sub>x</sub> &isin; Variable, &phi; &isin; Fm.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'isFreeForSubst(s, vx, &phi;) &and; isFreeForSubst(t, vx, &phi;)', 'def subst_safe (s t : Term) (vx : Variable) (phi : Fm) : Bool := FFI s vx phi &and;&and; FFI t vx phi')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="nfv-vv-psi" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_v, ψ)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(v_v \notin \mathrm{FV}(\psi) : \mathsf{Bool} \land v_v \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#item-3-22-class-if" style="color: var(--accent-blue); text-decoration: none;">Class Conditional Definition (IF-THEN-ELSE-FI, 3.22) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(v_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- CCR Side Condition -->
-          <tr id="ccr-sidecond" class="anchor-highlight">
-            <td>
-              <code>FFI(v_y, v_x, &phi;) &and; NFV(v_y, {v_x | &phi;})</code><br/>
-              <span class="badge" style="background:rgba(251,191,36,0.15);color:#fbbf24;font-size:0.7rem;">Comprehension Binder</span>
-            </td>
-            <td>
-              <a href="manual.html#rule-ccr" style="color:var(--primary);text-decoration:none;"><strong>Rule CCR</strong><br/>ComprAx Constructor</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">isFreeForSubst(v<sub>y</sub>, v<sub>x</sub>, &phi;) &and; v<sub>y</sub> &notin; FV({v<sub>x</sub> | &phi;})</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">val ComprAx_sidecond = FFI (vy, vx, phi) andalso not (isFree vy (CKappa (LBind (vx, phi))))</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                Ensures witness variable $v_y$ is free to substitute into $\phi$ and does not clash with the set abstraction binder.
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(244,63,94,0.15);color:#f43f5e;">Metatheoretic Formula</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Evaluated prior to rule firing)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>Binder Soundness</strong><br/>
-                Bound variable v<sub>x</sub> is bound in comprehension term.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, 'isFreeForSubst(vy, vx, &phi;) &and; vy &notin; FV({vx | &phi;})', 'val ComprAx_sidecond = FFI (vy, vx, phi) andalso not (isFree vy (CKappa (LBind (vx, phi))))')">📋 Copy</button>
-            </td>
-          </tr>
+        <tr id="simple-if-typing" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">simple_if_typing(α, t1, t2)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 = t_1) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#item-3-23-simple-if" style="color: var(--accent-blue); text-decoration: none;">simple_if Definition (3.23) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(\alpha : \mathcal{U}_i\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-          <!-- Ordinal Induction Theorem Schema -->
-          <tr id="ord-induction" class="anchor-highlight">
-            <td>
-              <code>Ord_Induction</code><br/>
-              <span class="badge" style="background:rgba(167,139,250,0.15);color:#a78bfa;font-size:0.7rem;">Theorem Schema</span>
-            </td>
-            <td>
-              <a href="manual.html#thm-ord-ind" style="color:var(--primary);text-decoration:none;"><strong>Theorems</strong><br/>Transfinite &isin;-Induction</a>
-            </td>
-            <td>
-              <div class="stmt-unicode">
-                <span class="meta-semantic-formula">&forall; P. (&forall; &alpha;. &alpha; &isin; On &rArr; (&forall; &beta;. &beta; &isin; On &and; &beta; &isin; &alpha; &rArr; P(&beta;)) &rArr; P(&alpha;)) &rArr; (&forall; &alpha;. &alpha; &isin; On &rArr; P(&alpha;))</span>
-              </div>
-              <div class="stmt-concrete" style="display: none;">
-                <code style="color:var(--concrete-color);">theorem ordinal_induction (P : Class -&gt; Prop) : (&forall; a, a &isin; On -&gt; (&forall; b, b &isin; On &and; b &isin; a -&gt; P b) -&gt; P a) -&gt; (&forall; a, a &isin; On -&gt; P a)</code>
-              </div>
-              <div style="font-size:0.78rem;color:var(--text-muted);margin-top:4px;">
-                <strong>Crucial Distinction:</strong> On is a <strong>Class object</strong> (<code>On : Class</code>), NOT a syntactic type!
-              </div>
-            </td>
-            <td>
-              <span class="badge" style="background:rgba(96,165,250,0.15);color:#60a5fa;">Theorem Schema (With Program)</span><br/>
-              <span style="font-size:0.75rem;color:var(--text-muted);">(Inhabited by constructive proof term)</span>
-            </td>
-            <td>
-              <div class="side-side-box">
-                <strong>None (Closed in MK)</strong><br/>
-                All preconditions (&alpha; &isin; On) are internal to the semantic formula.
-              </div>
-            </td>
-            <td style="text-align:center;">
-              <button class="copy-btn" onclick="copySnippet(this, '&forall; P. (&forall; &alpha;. &alpha; &isin; On &rArr; (&forall; &beta;. &beta; &isin; On &and; &beta; &isin; &alpha; &rArr; P(&beta;)) &rArr; P(&alpha;)) &rArr; (&forall; &alpha;. &alpha; &isin; On &rArr; P(&alpha;))', 'theorem ordinal_induction (P : Class -&gt; Prop) : (&forall; a, a &isin; On -&gt; (&forall; b, b &isin; On &and; b &isin; a -&gt; P b) -&gt; P a) -&gt; (&forall; a, a &isin; On -&gt; P a)')">📋 Copy</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+        <tr id="dependent-if-typing" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">dependent_if_typing(T, b, t1, t2)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(\mathrm{typeof}(\mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2) = \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2)\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#item-3-24-dependent-if" style="color: var(--accent-blue); text-decoration: none;">dependent_if Definition (3.24) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
 
-    <!-- Comparative Schema Deep Dive -->
-    <h2>3. Distinguishing Statement Schemata, Theorem Schemata &amp; Metatheoretic Formulas</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 1.5rem 0;">
-      
-      <!-- Card 1: Statement Schema -->
-      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); border-radius: 8px; padding: 16px;">
-        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-          <span style="font-size: 1.1rem;">📄</span>
-          <strong style="color: #fbbf24; font-size: 1rem;">Statement Schema (Formula Schema)</strong>
-        </div>
-        <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
-          A parameterized family of formulas indexed by metavariables (such as formulas \(\phi\) or terms \(t\)).
-          <strong>It does not imply the existence of a proof program.</strong>
-          It merely specifies a well-formed type in the grammar of the object language.
-        </p>
-        <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.8rem; font-family:'JetBrains Mono', monospace; color: #fde68a;">
-          Example: Impredicative Comprehension schema type &exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))
-        </div>
-      </div>
-
-      <!-- Card 2: Theorem Schema -->
-      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); border-radius: 8px; padding: 16px;">
-        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-          <span style="font-size: 1.1rem;">⚡</span>
-          <strong style="color: #a78bfa; font-size: 1rem;">Theorem Schema (With Constructive Program)</strong>
-        </div>
-        <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
-          Under the Propositions-as-Types correspondence (Curry–Howard), a theorem schema guarantees that <strong>there exists an explicit program (proof term)</strong> inhabiting that type for every valid instance.
-        </p>
-        <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.8rem; font-family:'JetBrains Mono', monospace; color: #c4b5fd;">
-          Example: Ordinal Induction: inhabited by transfinite recursion proof program in Obelisk kernel.
-        </div>
-      </div>
-
-      <!-- Card 3: Metatheoretic Formula -->
-      <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); border-radius: 8px; padding: 16px;">
-        <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
-          <span style="font-size: 1.1rem;">🔬</span>
-          <strong style="color: #38bdf8; font-size: 1rem;">Metatheoretic Formula (Side Condition)</strong>
-        </div>
-        <p style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.6;">
-          An ordinary formula within the Morse–Kelley metatheory.
-          <strong>It is neither an axiom nor a theorem:</strong> it is a computable or checkable predicate that can evaluate to <code>true</code> or <code>false</code>.
-        </p>
-        <div style="margin-top: 10px; padding: 8px; background: rgba(0,0,0,0.3); border-radius: 6px; font-size: 0.8rem; font-family:'JetBrains Mono', monospace; color: #7dd3fc;">
-          Example: FFI(t, vx, &phi;) evaluates to true iff term t can be substituted for vx without capturing variables.
-        </div>
-      </div>
-
-    </div>
-
-    <footer>
-      <p>&copy; 2026 Georgy Dunaev · <a href="manual.html" style="color:var(--primary);">Obelisk Reference Manual</a> · <a href="index.html" style="color:var(--primary);">Obelisk Main Site</a></p>
-    </footer>
+        <tr id="ord-induction" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">WF(∈, On)</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #8b5cf6;">Provable Metatheorem</span></div>
+          </td>
+          <td>
+            <div class="semantic-box">\(\mathrm{WellFounded}(\in, \mathrm{On}) : \mathsf{Bool}\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an axiom; justified by MK Regularity.</div>
+            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#thm-ord-ind" style="color: var(--accent-blue); text-decoration: none;">Ordinal Induction Theorem Schema (3.32) &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <div class="syntax-box">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+          </td>
+          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+        </tr>
+        
+      </tbody>
+    </table>
   </div>
-
-  <div id="copy-toast">✓ Copied to clipboard!</div>
-
-  <script>
-    let currentSyntaxMode = 'unicode';
-
-    function setGlobalSyntaxMode(mode) {
-      currentSyntaxMode = mode;
-      
-      const btnUnicode = document.getElementById('btn-mode-unicode');
-      const btnConcrete = document.getElementById('btn-mode-concrete');
-
-      if (mode === 'unicode') {
-        btnUnicode.classList.add('active');
-        btnConcrete.classList.remove('active');
-        document.querySelectorAll('.stmt-unicode').forEach(el => el.style.display = 'block');
-        document.querySelectorAll('.stmt-concrete').forEach(el => el.style.display = 'none');
-      } else {
-        btnConcrete.classList.add('active');
-        btnUnicode.classList.remove('active');
-        document.querySelectorAll('.stmt-unicode').forEach(el => el.style.display = 'none');
-        document.querySelectorAll('.stmt-concrete').forEach(el => el.style.display = 'block');
-      }
-    }
-
-    function copySnippet(btn, unicodeText, concreteText) {
-      const textToCopy = (currentSyntaxMode === 'unicode') ? unicodeText : concreteText;
-      
-      // Clean HTML entities for clipboard text
-      const tempEl = document.createElement('textarea');
-      tempEl.innerHTML = textToCopy;
-      const cleanText = tempEl.value;
-
-      navigator.clipboard.writeText(cleanText).then(() => {
-        showCopyToast();
-        btn.classList.add('copied');
-        const origText = btn.innerHTML;
-        btn.innerHTML = '✓ Copied!';
-        setTimeout(() => {
-          btn.innerHTML = origText;
-          btn.classList.remove('copied');
-        }, 1800);
-      }).catch(err => {
-        console.error('Clipboard copy failed:', err);
-      });
-    }
-
-    function showCopyToast() {
-      const toast = document.getElementById('copy-toast');
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 1600);
-    }
-  </script>
-
 </body>
 </html>
