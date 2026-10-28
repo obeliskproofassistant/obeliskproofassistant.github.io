@@ -10,7 +10,18 @@
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true
+        processEscapes: true,
+        macros: {
+          llbracket: ["\\unicode{x27E6}"],
+          rrbracket: ["\\unicode{x27E7}"],
+          rrbracket: ["\\unicode{x27E7}"],
+          llbracket: ["\\unicode{x27E6}"],
+          rrbracket: ["\\unicode{x27E7}"],
+          llbracket: ["\\unicode{x27E6}"],
+          rrbracket: ["\\unicode{x27E7}"],
+          lsemantic: ["\\unicode{x27E6}"],
+          rsemantic: ["\\unicode{x27E7}"]
+        }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
@@ -19,6 +30,9 @@
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
+    /* Semantic denotation bracket styling and font fallback */
+    mjx-c.mjx-c27E6::before, mjx-c[c="27E6"]::before { content: "⟦"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
+    mjx-c.mjx-c27E7::before, mjx-c[c="27E7"]::before { content: "⟧"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
     :root {
       --bg-dark: #07090e;
       --card-bg: rgba(15, 23, 42, 0.75);
