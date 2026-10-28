@@ -23,213 +23,262 @@ License: All rights reserved.©
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A01 (Affirmation of Consequent)</span>:
 
-           (α → (β → α))
+           (α <span style="color:#38bdf8;font-weight:bold;">→</span> (β <span style="color:#38bdf8;font-weight:bold;">→</span> α))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A02 (Distribution of Implication)</span>:
 
-           ((α → (β → γ)) → ((α → β) → (α → γ)))
+           ((α <span style="color:#38bdf8;font-weight:bold;">→</span> (β <span style="color:#38bdf8;font-weight:bold;">→</span> γ)) <span style="color:#38bdf8;font-weight:bold;">→</span> ((α <span style="color:#38bdf8;font-weight:bold;">→</span> β) <span style="color:#38bdf8;font-weight:bold;">→</span> (α <span style="color:#38bdf8;font-weight:bold;">→</span> γ)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β, γ : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.03)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A03 (Conjunction Elimination Left)</span>:
 
-           ((α ∧ β) → α)
+           ((α <span style="color:#38bdf8;font-weight:bold;">∧</span> β) <span style="color:#38bdf8;font-weight:bold;">→</span> α)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.04)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A04 (Conjunction Elimination Right)</span>:
 
-           ((α ∧ β) → β)
+           ((α <span style="color:#38bdf8;font-weight:bold;">∧</span> β) <span style="color:#38bdf8;font-weight:bold;">→</span> β)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.05)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A05 (Conjunction Introduction)</span>:
 
-           (α → (β → (α ∧ β)))
+           (α <span style="color:#38bdf8;font-weight:bold;">→</span> (β <span style="color:#38bdf8;font-weight:bold;">→</span> (α <span style="color:#38bdf8;font-weight:bold;">∧</span> β)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.06)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A06 (Disjunction Introduction Left)</span>:
 
-           (α → (α ∨ β))
+           (α <span style="color:#38bdf8;font-weight:bold;">→</span> (α <span style="color:#38bdf8;font-weight:bold;">∨</span> β))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.07)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A07 (Disjunction Introduction Right)</span>:
 
-           (β → (α ∨ β))
+           (β <span style="color:#38bdf8;font-weight:bold;">→</span> (α <span style="color:#38bdf8;font-weight:bold;">∨</span> β))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.08)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A08 (Disjunction Elimination / Cases)</span>:
 
-           ((α → γ) → ((β → γ) → ((α ∨ β) → γ)))
+           ((α <span style="color:#38bdf8;font-weight:bold;">→</span> γ) <span style="color:#38bdf8;font-weight:bold;">→</span> ((β <span style="color:#38bdf8;font-weight:bold;">→</span> γ) <span style="color:#38bdf8;font-weight:bold;">→</span> ((α <span style="color:#38bdf8;font-weight:bold;">∨</span> β) <span style="color:#38bdf8;font-weight:bold;">→</span> γ)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β, γ : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.09)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A09 (Negation Introduction / Contradiction)</span>:
 
-           ((¬α) → (α → ⊥))
+           ((<span style="color:#38bdf8;font-weight:bold;">¬</span>α) <span style="color:#38bdf8;font-weight:bold;">→</span> (α <span style="color:#38bdf8;font-weight:bold;">→</span> ⊥))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.10)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A10 (Reductio Ad Absurdum)</span>:
 
-           ((α → β) → ((α → ¬β) → ¬α))
+           ((α <span style="color:#38bdf8;font-weight:bold;">→</span> β) <span style="color:#38bdf8;font-weight:bold;">→</span> ((α <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>β) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>α))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.11)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A11 (Ex Falso Quodlibet)</span>:
 
-           (⊥ → α)
+           (⊥ <span style="color:#38bdf8;font-weight:bold;">→</span> α)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.12)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">A12 (Law of Excluded Middle)</span>:
 
-           (α ∨ ¬α)
+           (α <span style="color:#38bdf8;font-weight:bold;">∨</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>α)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">1.13)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Modus Ponens (MP)</span>:
 
-           α, (α → β) ⊢ β
+           α, (α <span style="color:#38bdf8;font-weight:bold;">→</span> β) <span style="color:#38bdf8;font-weight:bold;">⊢</span> β
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α, β : <span style="color:#22d3ee;font-weight:bold;">Bool</span>
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">2) Predicate logic</span>:
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Discourse domain is non-empty</span>:
 
-           ∃(K : Class) ⊤
+           <span style="color:#fde047;font-weight:bold;">∃</span>(K : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ⊤
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> K : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Forall Instantiation (FI)</span>:
 
-           (∀(x : Class) φ) → φ[t/x]
+           (<span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ) <span style="color:#38bdf8;font-weight:bold;">→</span> φ[t/x]
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> FFI(t, <span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, φ)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.03)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Exists Instantiation (EI)</span>:
 
-           φ[t/x] → ∃(x : Class) φ
+           φ[t/x] <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> FFI(t, <span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, φ)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.04)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Forall Abstraction (FA / Bernays)</span>:
 
-           (ψ → φ) ⊢ (ψ → ∀(x : Class) φ)
+           (ψ <span style="color:#38bdf8;font-weight:bold;">→</span> φ) <span style="color:#38bdf8;font-weight:bold;">⊢</span> (ψ <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, ψ) <span style="color:#38bdf8;font-weight:bold;">∧</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.05)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Exists Abstraction (EA / Bernays)</span>:
 
-           (φ → ψ) ⊢ (∃(x : Class) φ → ψ)
+           (φ <span style="color:#38bdf8;font-weight:bold;">→</span> ψ) <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ <span style="color:#38bdf8;font-weight:bold;">→</span> ψ)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, ψ) <span style="color:#38bdf8;font-weight:bold;">∧</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">2.06)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Generalisation (Gen)</span>:
 
-           φ ⊢ ∀(x : Class) φ
+           φ <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_x</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span>)
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">3) Set/class-theoretic foundations of mathematics</span>:
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom</span>:
 
-           ∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(X : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (X <span style="color:#34d399;font-weight:bold;">∈</span> {x | φ(x)} <span style="color:#38bdf8;font-weight:bold;">⟷</span> (<span style="color:#fb923c;font-weight:bold;">isSet</span>(X) <span style="color:#38bdf8;font-weight:bold;">∧</span> φ(X)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_C</span>, φ)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Extensionality Axiom</span>:
 
-           ∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A, B : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((<span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (x <span style="color:#34d399;font-weight:bold;">∈</span> A <span style="color:#38bdf8;font-weight:bold;">⟷</span> x <span style="color:#34d399;font-weight:bold;">∈</span> B)) <span style="color:#38bdf8;font-weight:bold;">→</span> A <span style="color:#34d399;font-weight:bold;">=</span> B)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> A, B, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.08)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Heredity Axiom (Subclasses of Sets are Sets)</span>:
 
-           ∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A, B : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((<span style="color:#fb923c;font-weight:bold;">isSet</span>(B) <span style="color:#38bdf8;font-weight:bold;">∧</span> A <span style="color:#34d399;font-weight:bold;">⊆</span> B) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(A))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> A, B : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.12)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Regularity (Foundation) Axiom</span>:
 
-           ∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (A ≠ ∅ <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (x <span style="color:#34d399;font-weight:bold;">∈</span> A <span style="color:#38bdf8;font-weight:bold;">∧</span> x <span style="color:#34d399;font-weight:bold;">∩</span> A <span style="color:#34d399;font-weight:bold;">=</span> ∅))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> A, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.13)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Pairing Axiom</span>:
 
-           ∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(a, b : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((<span style="color:#fb923c;font-weight:bold;">isSet</span>(a) <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(b)) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>({a, b}))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> a, b : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.14)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Union Axiom</span>:
 
-           ∀(A : Class) (isSet(A) → isSet(⋃ A))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (<span style="color:#fb923c;font-weight:bold;">isSet</span>(A) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(⋃ A))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> A : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.22)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</span>:
 
-           W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }
+           <span style="color:#f472b6;font-weight:bold;">W</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#c084fc;font-weight:bold;">⟦</span><span style="color:#fb923c;font-weight:bold;">IF</span> ψ <span style="color:#fb923c;font-weight:bold;">THEN</span> A <span style="color:#fb923c;font-weight:bold;">ELSE</span> B <span style="color:#fb923c;font-weight:bold;">FI</span><span style="color:#c084fc;font-weight:bold;">⟧</span> <span style="color:#34d399;font-weight:bold;">=</span> { v | (ψ <span style="color:#38bdf8;font-weight:bold;">∧</span> v <span style="color:#34d399;font-weight:bold;">∈</span> A) <span style="color:#38bdf8;font-weight:bold;">∨</span> (<span style="color:#38bdf8;font-weight:bold;">¬</span>ψ <span style="color:#38bdf8;font-weight:bold;">∧</span> v <span style="color:#34d399;font-weight:bold;">∈</span> B) }
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_v</span>, ψ) <span style="color:#38bdf8;font-weight:bold;">∧</span> NFV(<span class="meta-const" style="color:#f472b6;font-weight:bold;font-style:normal;font-family:monospace;">v_v</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.23)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</span>:
 
-           simple_if : ∏(α : Type). Bool → α → α → α
-           ⟦simple_if α true t1 t2⟧ = ⟦t1⟧,   ⟦simple_if α false t1 t2⟧ = ⟦t2⟧
+           <span style="color:#fb923c;font-weight:bold;">simple_if</span> : <span style="color:#fde047;font-weight:bold;">∏</span>(α : <span style="color:#22d3ee;font-weight:bold;">Type</span>). <span style="color:#22d3ee;font-weight:bold;">Bool</span> <span style="color:#38bdf8;font-weight:bold;">→</span> α <span style="color:#38bdf8;font-weight:bold;">→</span> α <span style="color:#38bdf8;font-weight:bold;">→</span> α
+           <span style="color:#c084fc;font-weight:bold;">⟦</span><span style="color:#fb923c;font-weight:bold;">simple_if</span> α <span style="color:#fb923c;font-weight:bold;">true</span> t1 t2<span style="color:#c084fc;font-weight:bold;">⟧</span> <span style="color:#34d399;font-weight:bold;">=</span> <span style="color:#c084fc;font-weight:bold;">⟦</span>t1<span style="color:#c084fc;font-weight:bold;">⟧</span>,   <span style="color:#c084fc;font-weight:bold;">⟦</span><span style="color:#fb923c;font-weight:bold;">simple_if</span> α <span style="color:#fb923c;font-weight:bold;">false</span> t1 t2<span style="color:#c084fc;font-weight:bold;">⟧</span> <span style="color:#34d399;font-weight:bold;">=</span> <span style="color:#c084fc;font-weight:bold;">⟦</span>t2<span style="color:#c084fc;font-weight:bold;">⟧</span>
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> α : <span style="color:#22d3ee;font-weight:bold;">Type</span>, t1, t2 : α
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.24)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">dependent_if (polymorphic dependent conditional with type computation)</span>:
 
-           dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)
-           typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧
-           ⟦if true then t1 else t2⟧ = ⟦t1⟧,   ⟦if false then t1 else t2⟧ = ⟦t2⟧
+           <span style="color:#fb923c;font-weight:bold;">dependent_if</span> : <span style="color:#fde047;font-weight:bold;">∏</span>(<span style="color:#f472b6;font-weight:bold;">T</span> : <span style="color:#22d3ee;font-weight:bold;">Bool</span> <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#22d3ee;font-weight:bold;">Type</span>) (b : <span style="color:#22d3ee;font-weight:bold;">Bool</span>). <span style="color:#f472b6;font-weight:bold;">T</span>(<span style="color:#fb923c;font-weight:bold;">true</span>) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#f472b6;font-weight:bold;">T</span>(<span style="color:#fb923c;font-weight:bold;">false</span>) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#f472b6;font-weight:bold;">T</span>(b)
+           <span style="color:#fb923c;font-weight:bold;">typeof</span>(<span style="color:#c084fc;font-weight:bold;">⟦</span>if b then t1 else t2<span style="color:#c084fc;font-weight:bold;">⟧</span>) <span style="color:#34d399;font-weight:bold;">:=</span> <span style="color:#c084fc;font-weight:bold;">⟦</span><span style="color:#fb923c;font-weight:bold;">simple_if</span> <span style="color:#22d3ee;font-weight:bold;">Type</span> b (<span style="color:#fb923c;font-weight:bold;">typeof</span> t1) (<span style="color:#fb923c;font-weight:bold;">typeof</span> t2)<span style="color:#c084fc;font-weight:bold;">⟧</span>
+           <span style="color:#c084fc;font-weight:bold;">⟦</span>if <span style="color:#fb923c;font-weight:bold;">true</span> then t1 else t2<span style="color:#c084fc;font-weight:bold;">⟧</span> <span style="color:#34d399;font-weight:bold;">=</span> <span style="color:#c084fc;font-weight:bold;">⟦</span>t1<span style="color:#c084fc;font-weight:bold;">⟧</span>,   <span style="color:#c084fc;font-weight:bold;">⟦</span>if <span style="color:#fb923c;font-weight:bold;">false</span> then t1 else t2<span style="color:#c084fc;font-weight:bold;">⟧</span> <span style="color:#34d399;font-weight:bold;">=</span> <span style="color:#c084fc;font-weight:bold;">⟦</span>t2<span style="color:#c084fc;font-weight:bold;">⟧</span>
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#f472b6;font-weight:bold;">T</span> : <span style="color:#22d3ee;font-weight:bold;">Bool</span> <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#22d3ee;font-weight:bold;">Type</span>, t1 <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#f472b6;font-weight:bold;">T</span>(<span style="color:#fb923c;font-weight:bold;">true</span>), t2 <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#f472b6;font-weight:bold;">T</span>(<span style="color:#fb923c;font-weight:bold;">false</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.32)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Ordinal Induction (∈-Ind)</span>:
 
-           (∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α))))
-           → ∀(α : Class) (α ∈ On → φ(α))
+           (<span style="color:#fde047;font-weight:bold;">∀</span>(α : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (α <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#fb923c;font-weight:bold;">On</span> <span style="color:#38bdf8;font-weight:bold;">→</span> (<span style="color:#fde047;font-weight:bold;">∀</span>(β : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (β <span style="color:#34d399;font-weight:bold;">∈</span> α <span style="color:#38bdf8;font-weight:bold;">→</span> φ(β)) <span style="color:#38bdf8;font-weight:bold;">→</span> φ(α))))
+           <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∀</span>(α : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (α <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#fb923c;font-weight:bold;">On</span> <span style="color:#38bdf8;font-weight:bold;">→</span> φ(α))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#fb923c;font-weight:bold;">On</span> : <span style="color:#22d3ee;font-weight:bold;">Class</span>, WF(<span style="color:#34d399;font-weight:bold;">∈</span>, <span style="color:#fb923c;font-weight:bold;">On</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.34)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Power Class Axiom</span>:
 
-           ∀(a : Class) (isSet(a) → isSet(𝒫(a)))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(a : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (<span style="color:#fb923c;font-weight:bold;">isSet</span>(a) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(𝒫(a)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> a : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.37)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Replacement / Limitation of Size Axiom</span>:
 
-           ∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(<span style="color:#f472b6;font-weight:bold;">F</span>, A : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((isClassFunction(<span style="color:#f472b6;font-weight:bold;">F</span>) <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(A)) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(<span style="color:#f472b6;font-weight:bold;">F</span>[A]))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#f472b6;font-weight:bold;">F</span>, A : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.45)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Infinity Axiom</span>:
 
-           ∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))
+           <span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (<span style="color:#fb923c;font-weight:bold;">isSet</span>(x) <span style="color:#38bdf8;font-weight:bold;">∧</span> ∅ <span style="color:#34d399;font-weight:bold;">∈</span> x <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fde047;font-weight:bold;">∀</span>(y : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (y <span style="color:#34d399;font-weight:bold;">∈</span> x <span style="color:#38bdf8;font-weight:bold;">→</span> y <span style="color:#34d399;font-weight:bold;">∪</span> {y} <span style="color:#34d399;font-weight:bold;">∈</span> x))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> x, y : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.46)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Global Choice Axiom</span>:
 
-           ∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))
+           <span style="color:#fde047;font-weight:bold;">∃</span>(c : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (isClassFunction(c) <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((<span style="color:#fb923c;font-weight:bold;">isSet</span>(x) <span style="color:#38bdf8;font-weight:bold;">∧</span> x ≠ ∅) <span style="color:#38bdf8;font-weight:bold;">→</span> c(x) <span style="color:#34d399;font-weight:bold;">∈</span> x))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> c, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.47)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Universal Class (V)</span>:
 
-           V = {x | x = x}
+           V <span style="color:#34d399;font-weight:bold;">=</span> {x | x <span style="color:#34d399;font-weight:bold;">=</span> x}
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> V : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.53)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Transitive Class Predicate</span>:
 
-           Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)
+           Tr(A) <span style="color:#38bdf8;font-weight:bold;">⟷</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (x <span style="color:#34d399;font-weight:bold;">∈</span> A <span style="color:#38bdf8;font-weight:bold;">→</span> x <span style="color:#34d399;font-weight:bold;">⊆</span> A)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> A, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">3.66)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Tarski&#x27;s Axiom of Universes</span>:
 
-           ∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (<span style="color:#fb923c;font-weight:bold;">isSet</span>(x) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∃</span>(u : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (isUniverse(u) <span style="color:#38bdf8;font-weight:bold;">∧</span> x <span style="color:#34d399;font-weight:bold;">∈</span> u <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(u)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> x, u : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">4) Metalogical laws</span>:
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Instantiation Axiom</span>:
 
-           ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A : <span style="color:#22d3ee;font-weight:bold;">Type</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(G : <span style="color:#22d3ee;font-weight:bold;">Ctx</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(t : eval(A)) <span style="color:#fde047;font-weight:bold;">∀</span>(v : <span style="color:#22d3ee;font-weight:bold;">Variable</span>) (<span style="color:#f472b6;font-weight:bold;">W</span>, G <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#fde047;font-weight:bold;">∀</span>(x : A) φ) <span style="color:#38bdf8;font-weight:bold;">→</span> (let v <span style="color:#34d399;font-weight:bold;">=</span> t in φ))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> t : eval(A), v : <span style="color:#22d3ee;font-weight:bold;">Variable</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Generalisation Axiom</span>:
 
-           ∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(A : <span style="color:#22d3ee;font-weight:bold;">Type</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(<span style="color:#f472b6;font-weight:bold;">Γ</span> : <span style="color:#22d3ee;font-weight:bold;">Ctx</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(v : <span style="color:#22d3ee;font-weight:bold;">Variable</span>) (<span style="color:#38bdf8;font-weight:bold;">¬</span>(Enc(v) <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#22d3ee;font-weight:bold;">Ctx</span>.FV(<span style="color:#f472b6;font-weight:bold;">Γ</span>)) <span style="color:#38bdf8;font-weight:bold;">→</span> ((<span style="color:#f472b6;font-weight:bold;">W</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#38bdf8;font-weight:bold;">⊢</span> φ) <span style="color:#38bdf8;font-weight:bold;">→</span> (<span style="color:#f472b6;font-weight:bold;">W</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fde047;font-weight:bold;">∀</span>(v : A) φ)))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> NFV(v, <span style="color:#f472b6;font-weight:bold;">Γ</span>)
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.03)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">CoNecessitation</span>:
 
-           (F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)
+           (<span style="color:#f472b6;font-weight:bold;">F</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> ‹<span style="color:#f472b6;font-weight:bold;">F</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#38bdf8;font-weight:bold;">⊢</span> φ›) <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#f472b6;font-weight:bold;">F</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#38bdf8;font-weight:bold;">⊢</span> φ)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#f472b6;font-weight:bold;">F</span> <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#22d3ee;font-weight:bold;">Theory</span>, <span style="color:#f472b6;font-weight:bold;">Γ</span> <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#22d3ee;font-weight:bold;">Ctx</span>, φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.04)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Quantifier Unique (!)</span>:
 
-           ∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) ((<span style="color:#fde047;font-weight:bold;">!</span>(z : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ) <span style="color:#38bdf8;font-weight:bold;">⟷</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x, y : <span style="color:#22d3ee;font-weight:bold;">Class</span>) ((φ[x/z] <span style="color:#38bdf8;font-weight:bold;">∧</span> φ[y/z]) <span style="color:#38bdf8;font-weight:bold;">→</span> x <span style="color:#34d399;font-weight:bold;">=</span> y))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> z, x, y : <span style="color:#22d3ee;font-weight:bold;">Variable</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.05)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:yellow;background-color:#3333FF;">Def.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Quantifier Exists and Unique (∃!)</span>:
 
-           ∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) (<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#fde047;font-weight:bold;">∃</span><span style="color:#fde047;font-weight:bold;">!</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ) <span style="color:#38bdf8;font-weight:bold;">⟷</span> ((<span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ) <span style="color:#38bdf8;font-weight:bold;">∧</span> <span style="color:#fde047;font-weight:bold;">!</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) φ))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> x <span style="color:#34d399;font-weight:bold;">∈</span> <span style="color:#22d3ee;font-weight:bold;">Variable</span>, φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">4.06)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Class Comprehension Axiom (Metatheory)</span>:
 
-           ∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Name</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(k : <span style="color:#22d3ee;font-weight:bold;">Class</span>.Expr) (FFI(k, x, φ) <span style="color:#38bdf8;font-weight:bold;">→</span> (<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (k <span style="color:#34d399;font-weight:bold;">∈</span> {x | φ}) <span style="color:#38bdf8;font-weight:bold;">⟷</span> (<span style="color:#fb923c;font-weight:bold;">isSet</span>(k) <span style="color:#38bdf8;font-weight:bold;">∧</span> φ[k/x])))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> FFI(k, x, φ)
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">5) Tactics and inference rules</span>:
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">5.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Elementary Theorems</span>:
 
-           (F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))
+           (<span style="color:#f472b6;font-weight:bold;">F</span>, [B <span style="color:#34d399;font-weight:bold;">∈</span> x] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (B <span style="color:#34d399;font-weight:bold;">∈</span> x)) <span style="color:#38bdf8;font-weight:bold;">∧</span> (<span style="color:#f472b6;font-weight:bold;">F</span>, [B <span style="color:#34d399;font-weight:bold;">∈</span> x] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(B))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> B, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">5.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Definition to Introduction Rule</span>:
 
-           (F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))
+           (<span style="color:#f472b6;font-weight:bold;">F</span>, [B <span style="color:#34d399;font-weight:bold;">∈</span> x] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fde047;font-weight:bold;">∃</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (B <span style="color:#34d399;font-weight:bold;">∈</span> x)) <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#f472b6;font-weight:bold;">F</span>, [B <span style="color:#34d399;font-weight:bold;">∈</span> x] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(B))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> B, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">5.03)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Rule</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Deduction Rule Application</span>:
 
-           (F, [] ⊢ (B ∈ x) → isSet(B))
+           (<span style="color:#f472b6;font-weight:bold;">F</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (B <span style="color:#34d399;font-weight:bold;">∈</span> x) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fb923c;font-weight:bold;">isSet</span>(B))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> B, x : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">5.04)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Tactics Proof Example</span>:
 
-           F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)
+           <span style="color:#f472b6;font-weight:bold;">F</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#fde047;font-weight:bold;">∃</span>(y : <span style="color:#22d3ee;font-weight:bold;">Class</span>) <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (x <span style="color:#34d399;font-weight:bold;">∈</span> y)) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#fde047;font-weight:bold;">∀</span>(x : <span style="color:#22d3ee;font-weight:bold;">Class</span>) <span style="color:#fde047;font-weight:bold;">∃</span>(y : <span style="color:#22d3ee;font-weight:bold;">Class</span>) (x <span style="color:#34d399;font-weight:bold;">∈</span> y)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> x, y : <span style="color:#22d3ee;font-weight:bold;">Class</span>
 
 <span style="text-decoration:underline;font-weight:bold;color:#3333FF;background-color:white;">6) Incompleteness-related statements</span>:
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">6.01)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:fuchsia;background-color:#3333FF;">Axm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Theories (Metalevel Stratification)</span>:
 
-           W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)
+           <span style="color:#f472b6;font-weight:bold;">W</span> <span style="color:#34d399;font-weight:bold;">⊆</span> <span style="color:#f472b6;font-weight:bold;">Q</span> <span style="color:#34d399;font-weight:bold;">⊆</span> <span style="color:#f472b6;font-weight:bold;">T</span> <span style="color:#34d399;font-weight:bold;">⊆</span> <span style="color:#f472b6;font-weight:bold;">F</span> (Tarski hierarchy of theories with Henkin constants)
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#f472b6;font-weight:bold;">W</span>, <span style="color:#f472b6;font-weight:bold;">Q</span>, <span style="color:#f472b6;font-weight:bold;">T</span>, <span style="color:#f472b6;font-weight:bold;">F</span> : <span style="color:#22d3ee;font-weight:bold;">Theory</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">6.02)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Löb&#x27;s Theorem</span>:
 
-           ∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))
+           <span style="color:#fde047;font-weight:bold;">∀</span>(φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>) (<span style="color:#f472b6;font-weight:bold;">Q</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> (<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> φ) <span style="color:#38bdf8;font-weight:bold;">→</span> φ) <span style="color:#38bdf8;font-weight:bold;">→</span> (<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> φ))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> φ : <span style="color:#22d3ee;font-weight:bold;">Fm</span>
 
 <span style="text-decoration:underline;font-weight:bold;font-style:italic;filter: contrast(70%) brightness(190%);color:aqua;">6.03)</span> <span style="text-decoration:underline;font-weight:bold;font-style:italic;color:lime;background-color:#3333FF;">Thm.</span> <span style="font-weight:bold;font-style:italic;color:white;background-color:#3333FF;">Gödel&#x27;s Second Incompleteness Theorem</span>:
 
-           Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))
+           <span style="color:#f472b6;font-weight:bold;">Q</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>(<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> ⊥) <span style="color:#38bdf8;font-weight:bold;">→</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>(<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> <span style="color:#38bdf8;font-weight:bold;">¬</span>(<span style="color:#f472b6;font-weight:bold;">T</span>, [] <span style="color:#38bdf8;font-weight:bold;">⊢</span> ⊥))
+           <span style="color:#94a3b8;font-style:italic;">Side condition:</span> <span style="color:#f472b6;font-weight:bold;">T</span>, <span style="color:#f472b6;font-weight:bold;">Q</span> : <span style="color:#22d3ee;font-weight:bold;">Theory</span>
 
 </pre>
 </body>

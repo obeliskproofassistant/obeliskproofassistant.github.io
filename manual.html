@@ -8,19 +8,14 @@
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']],
         processEscapes: true,
         macros: {
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          lsemantic: ["\\unicode{x27E6}"],
-          rsemantic: ["\\unicode{x27E7}"]
+          llbracket: ["\unicode{x27E6}"],
+          rrbracket: ["\unicode{x27E7}"],
+          lsemantic: ["\unicode{x27E6}"],
+          rsemantic: ["\unicode{x27E7}"]
         }
       },
       options: {
@@ -33,6 +28,23 @@
     /* Semantic denotation bracket styling and font fallback */
     mjx-c.mjx-c27E6::before, mjx-c[c="27E6"]::before { content: "⟦"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
     mjx-c.mjx-c27E7::before, mjx-c[c="27E7"]::before { content: "⟧"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
+    
+    /* Metatheoretic constants vs object variables visual distinction */
+    .meta-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f472b6 !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    }
+    .obj-var {
+      font-style: italic !important;
+      color: #38bdf8 !important;
+    }
+    /* MathJax bold upright metatheoretic constant distinction */
+    .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
+      color: #f472b6 !important;
+    }
+
     :root {
       --bg-dark: #07090e;
       --card-bg: rgba(15, 23, 42, 0.75);
@@ -42,6 +54,7 @@
       --accent-purple: #c084fc;
       --accent-gold: #fbbf24;
       --accent-green: #34d399;
+      --accent-pink: #f472b6;
       --text-muted: #94a3b8;
     }
     body {
@@ -166,16 +179,6 @@
       border-color: rgba(34, 211, 238, 0.4);
       text-shadow: 0 0 8px rgba(34, 211, 238, 0.6);
     }
-    .entry-num-link::after {
-      content: " #";
-      font-size: 0.72rem;
-      opacity: 0.4;
-      transition: opacity 0.2s;
-    }
-    .entry-num-link:hover::after {
-      opacity: 1;
-      color: var(--accent-blue);
-    }
     .formula-cell {
       word-break: break-word;
       overflow-wrap: anywhere;
@@ -225,7 +228,6 @@
       z-index: 9999;
       box-shadow: 0 4px 20px rgba(0,0,0,0.6);
     }
-    table.data-table tr:hover td { background: rgba(56, 189, 248, 0.04); }
     .classification-badge {
       display: inline-block;
       font-size: 0.72rem;
@@ -238,6 +240,67 @@
     .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
     .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
     .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .badge-verified-strong {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+    .badge-verified-strong:hover {
+      background: rgba(16, 185, 129, 0.35);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+    }
+    .badge-axiom-status {
+      background: rgba(192, 132, 252, 0.2);
+      color: #d8b4fe;
+      border: 1px solid rgba(192, 132, 252, 0.4);
+    }
+    .badge-axiom-status:hover {
+      background: rgba(192, 132, 252, 0.35);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(192, 132, 252, 0.5);
+    }
+    .badge-rule-status {
+      background: rgba(251, 191, 36, 0.2);
+      color: #fde047;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+    .badge-rule-status:hover {
+      background: rgba(251, 191, 36, 0.35);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+    }
+    .badge-def-status {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+    .badge-def-status:hover {
+      background: rgba(56, 189, 248, 0.35);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+    .badge-verified-weak {
+      background: rgba(244, 114, 182, 0.2);
+      color: #f472b6;
+      border: 1px solid rgba(244, 114, 182, 0.4);
+    }
+    .badge-verified-weak:hover {
+      background: rgba(244, 114, 182, 0.35);
+      color: #fff;
+      box-shadow: 0 0 10px rgba(244, 114, 182, 0.5);
+    }
     .side-condition-link {
       color: var(--accent-cyan);
       text-decoration: none;
@@ -259,14 +322,6 @@
       margin-top: 4px;
       line-height: 1.4;
     }
-    .badge {
-      background: #0284c7;
-      color: #fff;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
     footer {
       border-top: 1px solid var(--card-border);
       padding: 2rem 24px;
@@ -286,6 +341,7 @@
       <a href="metatheory.html">Metatheory</a>
       <a href="output.html">Demo Output</a>
       <a href="output.pdf" target="_blank">PDF Manual</a>
+      <a href="repl.html">Web REPL</a>
       <a href="about.html">About</a>
     </nav>
   </header>
@@ -293,7 +349,7 @@
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
     <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Axiomatic Foundations &amp; Catalog</h1>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
-      Formal machine-checked specification of classical logic, Morse–Kelley class theory, LCF architecture, and type-theoretic syntactic side conditions.
+      Formal machine-checked specification of classical logic, Morse–Kelley class theory, LCF architecture, and type-theoretic syntactic side conditions. Click any verification status to inspect its proof certificate.
     </p>
 
     <!-- ARCHITECTURAL CLARIFICATION -->
@@ -307,13 +363,13 @@
       </p>
       <ul style="margin: 0.5rem 0 0.5rem 1.2rem; padding: 0;">
         <li>
-          <strong>Semantic Column (Morse–Kelley Object Theory):</strong> Formulates statements about mathematical objects. The discourse domain consists solely of the atomic type \\(\mathsf{Class}\\). Mathematical sets are classes satisfying \\(\mathrm{isSet}(x) \equiv \exists(y : \mathsf{Class})(x \in y)\\). Any condition regarding <em>meaning</em> belongs entirely within the formula itself.
+          <strong>Semantic Foundations (Morse–Kelley Class Theory):</strong> Every entity has rigorous set/class-theoretic semantics. There is <strong>no uninterpreted typing colon (":")</strong>; all typing judgments are genuine class membership statements (\( lpha \in \mathsf{Bool} \), \( x \in \mathsf{Class} \), \( \mathcal{W} \in \mathsf{Theory} \)). Mathematical sets are classes satisfying \( \mathrm{isSet}(x) \equiv \exists(y \in \mathsf{Class})(x \in y) \).
         </li>
         <li>
-          <strong>Syntax Column (Ambient Type Theory):</strong> Formulates statements about the language expressions themselves (variable freeness, substitution safety, context hygiene). Side conditions are <strong>not arbitrary informal comments</strong>—they are checkable formulas in an ambient type theory (such as \\(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\\) or \\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\\).
+          <strong>Side Conditions as Genuine Metatheoretic Formulas:</strong> A side condition is not an informal remark or separate type assertion—it is an ordinary decidable formula in the metatheory (e.g. \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) or \( \mathrm{FFI}(t, \mathbf{v}_x, \phi) = \mathrm{True} \)).
         </li>
         <li>
-          <strong>Syntactic Constants:</strong> When a variable \\(x\\) is referenced inside a side condition, it reifies as a constant identifier \\(v_x : \mathsf{Variable}\\) in the metatheory. The metatheory is the <em>same Morse–Kelley theory</em> functioning as a meta-language. Click any side condition to navigate to its reflected form in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
+          <strong>Visual Separation of Constants vs Object Variables:</strong> When an object variable \(x\) is reasoned about in a side condition, it is represented by a constant identifier \( \mathbf{v}_x \in \mathsf{Variable} \). Metatheoretic constants (<span class="meta-const">v_x</span>, <span class="meta-const">v_y</span>, <span class="meta-const">v_C</span>, \( \mathbf{v}_x \)) are rendered in <strong>bold upright pink</strong>, visually decoupled from italic object variables (<span class="obj-var">x</span>, <span class="obj-var">y</span>, <span class="obj-var">C</span>) in <strong>italic cyan</strong>. Click any side condition to navigate to its reflected certificate in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
         </li>
         <li>
           <strong>Formula Taxonomy &amp; Schemata:</strong> A closed formula without metavariables is <em>non-schematic</em>. Standard formulas with variables/metavariables are simply <em>formulas</em> (Theorems, Axioms, Definitions). The term <em>schema</em> is strictly reserved for infinite families of statements generated at the metalevel by syntactic formula substitution where object-level quantification is absent. In Morse–Kelley class theory, because classes are first-class mathematical entities, principles such as <em>Ordinal Induction</em> (3.32) and <em>Replacement</em> (3.37) are single finitely-quantified theorems and axioms.
@@ -339,11 +395,11 @@
     <table class="data-table">
       <thead>
         <tr>
-          <th style="width: 80px; text-align: center;">#</th>
+          <th style="width: 80px; text-align: center;">No.</th>
           <th style="width: 270px;">Name &amp; Classification</th>
           <th>Semantic Formula (Morse–Kelley Object Theory)</th>
           <th style="width: 250px;">Syntactic Side Condition (Ambient Type Theory)</th>
-          <th style="width: 80px; text-align: center;">Status</th>
+          <th style="width: 140px; text-align: center;">Verification</th>
         </tr>
       </thead>
       <tbody>
@@ -357,184 +413,184 @@
         
 
           <tr id="item-1-01" data-num="1.01" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.01" href="#1.01" class="entry-num-link" onclick="copyPermalink('1.01', 'item-1-01', event)" title="Click to share or copy permalink #1.01">#1.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.01" href="#1.01" class="entry-num-link" onclick="copyPermalink('1.01', 'item-1-01', event)" title="Click to navigate or copy link for 1.01">1.01</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A01 (Affirmation of Consequent)</strong>
               <div class="entry-notes">Positive implicative axiom.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (β → α))"><div class="formula-chunk">\((\alpha \to (\beta \to \alpha))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(α → (β → α))"><div class="formula-chunk">\((\\alpha \\to (\\beta \\to \\alpha))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-02" data-num="1.02" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.02" href="#1.02" class="entry-num-link" onclick="copyPermalink('1.02', 'item-1-02', event)" title="Click to share or copy permalink #1.02">#1.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.02" href="#1.02" class="entry-num-link" onclick="copyPermalink('1.02', 'item-1-02', event)" title="Click to navigate or copy link for 1.02">1.02</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A02 (Distribution of Implication)</strong>
               <div class="entry-notes">Self-distribution of implication.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → (β → γ)) → ((α → β) → (α → γ)))"><div class="formula-chunk">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((α → (β → γ)) → ((α → β) → (α → γ)))"><div class="formula-chunk">\(((\\alpha \\to (\\beta \\to \\gamma)) \\to ((\\alpha \\to \\beta) \\to (\\alpha \\to \\gamma)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta, \\gamma : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-02.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-03" data-num="1.03" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.03" href="#1.03" class="entry-num-link" onclick="copyPermalink('1.03', 'item-1-03', event)" title="Click to share or copy permalink #1.03">#1.03</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.03" href="#1.03" class="entry-num-link" onclick="copyPermalink('1.03', 'item-1-03', event)" title="Click to navigate or copy link for 1.03">1.03</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A03 (Conjunction Elimination Left)</strong>
               <div class="entry-notes">Left projection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α ∧ β) → α)"><div class="formula-chunk">\(((\alpha \land \beta) \to \alpha)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((α ∧ β) → α)"><div class="formula-chunk">\(((\\alpha \\land \\beta) \\to \\alpha)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-03.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-04" data-num="1.04" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.04" href="#1.04" class="entry-num-link" onclick="copyPermalink('1.04', 'item-1-04', event)" title="Click to share or copy permalink #1.04">#1.04</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.04" href="#1.04" class="entry-num-link" onclick="copyPermalink('1.04', 'item-1-04', event)" title="Click to navigate or copy link for 1.04">1.04</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A04 (Conjunction Elimination Right)</strong>
               <div class="entry-notes">Right projection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α ∧ β) → β)"><div class="formula-chunk">\(((\alpha \land \beta) \to \beta)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((α ∧ β) → β)"><div class="formula-chunk">\(((\\alpha \\land \\beta) \\to \\beta)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-04.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-05" data-num="1.05" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.05" href="#1.05" class="entry-num-link" onclick="copyPermalink('1.05', 'item-1-05', event)" title="Click to share or copy permalink #1.05">#1.05</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.05" href="#1.05" class="entry-num-link" onclick="copyPermalink('1.05', 'item-1-05', event)" title="Click to navigate or copy link for 1.05">1.05</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A05 (Conjunction Introduction)</strong>
               <div class="entry-notes">Pairing of propositional truths.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (β → (α ∧ β)))"><div class="formula-chunk">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(α → (β → (α ∧ β)))"><div class="formula-chunk">\((\\alpha \\to (\\beta \\to (\\alpha \\land \\beta)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-05.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-06" data-num="1.06" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.06" href="#1.06" class="entry-num-link" onclick="copyPermalink('1.06', 'item-1-06', event)" title="Click to share or copy permalink #1.06">#1.06</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.06" href="#1.06" class="entry-num-link" onclick="copyPermalink('1.06', 'item-1-06', event)" title="Click to navigate or copy link for 1.06">1.06</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A06 (Disjunction Introduction Left)</strong>
               <div class="entry-notes">Left injection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α → (α ∨ β))"><div class="formula-chunk">\((\alpha \to (\alpha \lor \beta))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(α → (α ∨ β))"><div class="formula-chunk">\((\\alpha \\to (\\alpha \\lor \\beta))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-06.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-07" data-num="1.07" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.07" href="#1.07" class="entry-num-link" onclick="copyPermalink('1.07', 'item-1-07', event)" title="Click to share or copy permalink #1.07">#1.07</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.07" href="#1.07" class="entry-num-link" onclick="copyPermalink('1.07', 'item-1-07', event)" title="Click to navigate or copy link for 1.07">1.07</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A07 (Disjunction Introduction Right)</strong>
               <div class="entry-notes">Right injection.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(β → (α ∨ β))"><div class="formula-chunk">\((\beta \to (\alpha \lor \beta))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(β → (α ∨ β))"><div class="formula-chunk">\((\\beta \\to (\\alpha \\lor \\beta))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-07.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-08" data-num="1.08" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.08" href="#1.08" class="entry-num-link" onclick="copyPermalink('1.08', 'item-1-08', event)" title="Click to share or copy permalink #1.08">#1.08</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.08" href="#1.08" class="entry-num-link" onclick="copyPermalink('1.08', 'item-1-08', event)" title="Click to navigate or copy link for 1.08">1.08</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A08 (Disjunction Elimination / Cases)</strong>
               <div class="entry-notes">Proof by cases.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → γ) → ((β → γ) → ((α ∨ β) → γ)))"><div class="formula-chunk">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((α → γ) → ((β → γ) → ((α ∨ β) → γ)))"><div class="formula-chunk">\(((\\alpha \\to \\gamma) \\to ((\\beta \\to \\gamma) \\to ((\\alpha \\lor \\beta) \\to \\gamma)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta, \\gamma : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-08.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-09" data-num="1.09" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.09" href="#1.09" class="entry-num-link" onclick="copyPermalink('1.09', 'item-1-09', event)" title="Click to share or copy permalink #1.09">#1.09</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.09" href="#1.09" class="entry-num-link" onclick="copyPermalink('1.09', 'item-1-09', event)" title="Click to navigate or copy link for 1.09">1.09</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A09 (Negation Introduction / Contradiction)</strong>
               <div class="entry-notes">Contradiction to bottom.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((¬α) → (α → ⊥))"><div class="formula-chunk">\(((\neg \alpha) \to (\alpha \to \bot))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((¬α) → (α → ⊥))"><div class="formula-chunk">\(((\\neg \\alpha) \\to (\\alpha \\to \\bot))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-09.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-10" data-num="1.10" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.10" href="#1.10" class="entry-num-link" onclick="copyPermalink('1.10', 'item-1-10', event)" title="Click to share or copy permalink #1.10">#1.10</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.10" href="#1.10" class="entry-num-link" onclick="copyPermalink('1.10', 'item-1-10', event)" title="Click to navigate or copy link for 1.10">1.10</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A10 (Reductio Ad Absurdum)</strong>
               <div class="entry-notes">Proof of negation.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="((α → β) → ((α → ¬β) → ¬α))"><div class="formula-chunk">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="((α → β) → ((α → ¬β) → ¬α))"><div class="formula-chunk">\(((\\alpha \\to \\beta) \\to ((\\alpha \\to \\neg \\beta) \\to \\neg \\alpha))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-10.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-11" data-num="1.11" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.11" href="#1.11" class="entry-num-link" onclick="copyPermalink('1.11', 'item-1-11', event)" title="Click to share or copy permalink #1.11">#1.11</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.11" href="#1.11" class="entry-num-link" onclick="copyPermalink('1.11', 'item-1-11', event)" title="Click to navigate or copy link for 1.11">1.11</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A11 (Ex Falso Quodlibet)</strong>
               <div class="entry-notes">Principle of explosion.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(⊥ → α)"><div class="formula-chunk">\((\bot \to \alpha)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(⊥ → α)"><div class="formula-chunk">\((\\bot \\to \\alpha)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-11.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-1-12" data-num="1.12" data-classification="axiom" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.12" href="#1.12" class="entry-num-link" onclick="copyPermalink('1.12', 'item-1-12', event)" title="Click to share or copy permalink #1.12">#1.12</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.12" href="#1.12" class="entry-num-link" onclick="copyPermalink('1.12', 'item-1-12', event)" title="Click to navigate or copy link for 1.12">1.12</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">A12 (Law of Excluded Middle)</strong>
               <div class="entry-notes">Classical tertium non datur.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(α ∨ ¬α)"><div class="formula-chunk">\((\alpha \lor \neg \alpha)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(α ∨ ¬α)"><div class="formula-chunk">\((\\alpha \\lor \\neg \\alpha)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-1-12.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="rule-mp" data-num="1.13" data-classification="inference-rule" data-section="sec-1">
-            <td class="num-cell" style="text-align: center;"><a id="1.13" href="#1.13" class="entry-num-link" onclick="copyPermalink('1.13', 'rule-mp', event)" title="Click to share or copy permalink #1.13">#1.13</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="1.13" href="#1.13" class="entry-num-link" onclick="copyPermalink('1.13', 'rule-mp', event)" title="Click to navigate or copy link for 1.13">1.13</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Modus Ponens (MP)</strong>
               <div class="entry-notes">Fundamental detachment rule.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="α, (α → β) ⊢ β"><div class="formula-chunk">\(\frac{\alpha \quad \alpha \to \beta}{\beta}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\alpha, \beta : \mathsf{Bool}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="α, (α → β) ⊢ β"><div class="formula-chunk">\(\\frac{\\alpha \\quad \\alpha \\to \\beta}{\\beta}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\alpha, \\beta : \\mathsf{Bool}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/rule-mp.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
@@ -547,86 +603,86 @@
         
 
           <tr id="item-2-01" data-num="2.01" data-classification="axiom" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.01" href="#2.01" class="entry-num-link" onclick="copyPermalink('2.01', 'item-2-01', event)" title="Click to share or copy permalink #2.01">#2.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.01" href="#2.01" class="entry-num-link" onclick="copyPermalink('2.01', 'item-2-01', event)" title="Click to navigate or copy link for 2.01">2.01</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Discourse domain is non-empty</strong>
               <div class="entry-notes">Ensures the universe of discourse contains at least one class.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(K : Class) ⊤"><div class="formula-chunk">\(\exists (K : \mathsf{Class})\; \top\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(K : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∃(K : Class) ⊤"><div class="formula-chunk">\(\\exists (K : \\mathsf{Class})\\; \\top\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(K : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-2-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="rule-fi" data-num="2.02" data-classification="inference-rule" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.02" href="#2.02" class="entry-num-link" onclick="copyPermalink('2.02', 'rule-fi', event)" title="Click to share or copy permalink #2.02">#2.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.02" href="#2.02" class="entry-num-link" onclick="copyPermalink('2.02', 'rule-fi', event)" title="Click to navigate or copy link for 2.02">2.02</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Forall Instantiation (FI)</strong>
               <div class="entry-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]"><div class="formula-chunk">\(((\forall (x : \mathsf{Class})\; \phi) \to \phi[t/x])\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]"><div class="formula-chunk">\(((\\forall (x : \\mathsf{Class})\\; \\phi) \\to \\phi[t/x])\)</div></td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</a></td>
+            <td style="text-align: center;"><a href="proofs/rule-fi.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="rule-ei" data-num="2.03" data-classification="inference-rule" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.03" href="#2.03" class="entry-num-link" onclick="copyPermalink('2.03', 'rule-ei', event)" title="Click to share or copy permalink #2.03">#2.03</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.03" href="#2.03" class="entry-num-link" onclick="copyPermalink('2.03', 'rule-ei', event)" title="Click to navigate or copy link for 2.03">2.03</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Exists Instantiation (EI)</strong>
               <div class="entry-notes">Witness substitution into existential quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ"><div class="formula-chunk">\((\phi[t/x] \to \exists (x : \mathsf{Class})\; \phi)\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(t, v_x, \phi) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ"><div class="formula-chunk">\((\\phi[t/x] \\to \\exists (x : \\mathsf{Class})\\; \\phi)\)</div></td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</a></td>
+            <td style="text-align: center;"><a href="proofs/rule-ei.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="rule-fa" data-num="2.04" data-classification="inference-rule" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.04" href="#2.04" class="entry-num-link" onclick="copyPermalink('2.04', 'rule-fa', event)" title="Click to share or copy permalink #2.04">#2.04</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.04" href="#2.04" class="entry-num-link" onclick="copyPermalink('2.04', 'rule-fa', event)" title="Click to navigate or copy link for 2.04">2.04</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Forall Abstraction (FA / Bernays)</strong>
               <div class="entry-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)"><div class="formula-chunk">\(\frac{\psi \to \phi}{\psi \to \forall (x : \mathsf{Class})\; \phi}\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)"><div class="formula-chunk">\(\\frac{\\psi \\to \\phi}{\\psi \\to \\forall (x : \\mathsf{Class})\\; \\phi}\)</div></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</a></td>
+            <td style="text-align: center;"><a href="proofs/rule-fa.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="rule-ea" data-num="2.05" data-classification="inference-rule" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.05" href="#2.05" class="entry-num-link" onclick="copyPermalink('2.05', 'rule-ea', event)" title="Click to share or copy permalink #2.05">#2.05</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.05" href="#2.05" class="entry-num-link" onclick="copyPermalink('2.05', 'rule-ea', event)" title="Click to navigate or copy link for 2.05">2.05</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Exists Abstraction (EA / Bernays)</strong>
               <div class="entry-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)"><div class="formula-chunk">\(\frac{\phi \to \psi}{\exists (x : \mathsf{Class})\; \phi \to \psi}\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)"><div class="formula-chunk">\(\\frac{\\phi \\to \\psi}{\\exists (x : \\mathsf{Class})\\; \\phi \\to \\psi}\)</div></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</a></td>
+            <td style="text-align: center;"><a href="proofs/rule-ea.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="rule-gen" data-num="2.06" data-classification="inference-rule" data-section="sec-2">
-            <td class="num-cell" style="text-align: center;"><a id="2.06" href="#2.06" class="entry-num-link" onclick="copyPermalink('2.06', 'rule-gen', event)" title="Click to share or copy permalink #2.06">#2.06</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="2.06" href="#2.06" class="entry-num-link" onclick="copyPermalink('2.06', 'rule-gen', event)" title="Click to navigate or copy link for 2.06">2.06</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Generalisation (Gen)</strong>
               <div class="entry-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ"><div class="formula-chunk">\(\frac{\phi}{\forall (x : \mathsf{Class})\; \phi}\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_x, \Gamma) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ"><div class="formula-chunk">\(\\frac{\\phi}{\\forall (x : \\mathsf{Class})\\; \\phi}\)</div></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</a></td>
+            <td style="text-align: center;"><a href="proofs/rule-gen.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
@@ -639,7 +695,7 @@
         
 
           <tr id="item-3-01" data-num="3.01" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.01" href="#3.01" class="entry-num-link" onclick="copyPermalink('3.01', 'item-3-01', event)" title="Click to share or copy permalink #3.01">#3.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.01" href="#3.01" class="entry-num-link" onclick="copyPermalink('3.01', 'item-3-01', event)" title="Click to navigate or copy link for 3.01">3.01</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom</strong>
@@ -647,83 +703,83 @@
               
             </td>
             <td class="formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))"><div class="formula-chunk">\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-c-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_C, \phi) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-c-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(\mathbf{v}_C, \phi)\)</a></td>
+            <td style="text-align: center;"><a href="proofs/item-3-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-02" data-num="3.02" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.02" href="#3.02" class="entry-num-link" onclick="copyPermalink('3.02', 'item-3-02', event)" title="Click to share or copy permalink #3.02">#3.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.02" href="#3.02" class="entry-num-link" onclick="copyPermalink('3.02', 'item-3-02', event)" title="Click to navigate or copy link for 3.02">3.02</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Extensionality Axiom</strong>
               <div class="entry-notes">Two classes having identical elements are identical.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)"><div class="formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\forall (x : \mathsf{Class})\; (x \in A \longleftrightarrow x \in B)) \to A = B)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(A, B, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)"><div class="formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\forall (x : \\mathsf{Class})\\; (x \\in A \\longleftrightarrow x \\in B)) \\to A = B)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, B, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-02.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-08" data-num="3.08" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.08" href="#3.08" class="entry-num-link" onclick="copyPermalink('3.08', 'item-3-08', event)" title="Click to share or copy permalink #3.08">#3.08</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.08" href="#3.08" class="entry-num-link" onclick="copyPermalink('3.08', 'item-3-08', event)" title="Click to navigate or copy link for 3.08">3.08</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Heredity Axiom (Subclasses of Sets are Sets)</strong>
               <div class="entry-notes">Any subclass of a set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))"><div class="formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(A, B : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))"><div class="formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\mathrm{isSet}(B) \\land A \\subseteq B) \\to \\mathrm{isSet}(A))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, B : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-08.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-12" data-num="3.12" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.12" href="#3.12" class="entry-num-link" onclick="copyPermalink('3.12', 'item-3-12', event)" title="Click to share or copy permalink #3.12">#3.12</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.12" href="#3.12" class="entry-num-link" onclick="copyPermalink('3.12', 'item-3-12', event)" title="Click to navigate or copy link for 3.12">3.12</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Regularity (Foundation) Axiom</strong>
               <div class="entry-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))"><div class="formula-chunk">\(\forall (A : \mathsf{Class})\; (A \ne \emptyset \to \exists (x : \mathsf{Class})\; (x \in A \land x \cap A = \emptyset))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))"><div class="formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (A \\ne \\emptyset \\to \\exists (x : \\mathsf{Class})\\; (x \\in A \\land x \\cap A = \\emptyset))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-12.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-13" data-num="3.13" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.13" href="#3.13" class="entry-num-link" onclick="copyPermalink('3.13', 'item-3-13', event)" title="Click to share or copy permalink #3.13">#3.13</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.13" href="#3.13" class="entry-num-link" onclick="copyPermalink('3.13', 'item-3-13', event)" title="Click to navigate or copy link for 3.13">3.13</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Pairing Axiom</strong>
               <div class="entry-notes">Unordered pair of two sets is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))"><div class="formula-chunk">\(\forall (a, b : \mathsf{Class})\; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(a, b : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))"><div class="formula-chunk">\(\\forall (a, b : \\mathsf{Class})\\; ((\\mathrm{isSet}(a) \\land \\mathrm{isSet}(b)) \\to \\mathrm{isSet}(\\{a, b\\}))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(a, b : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-13.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-14" data-num="3.14" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.14" href="#3.14" class="entry-num-link" onclick="copyPermalink('3.14', 'item-3-14', event)" title="Click to share or copy permalink #3.14">#3.14</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.14" href="#3.14" class="entry-num-link" onclick="copyPermalink('3.14', 'item-3-14', event)" title="Click to navigate or copy link for 3.14">3.14</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Union Axiom</strong>
               <div class="entry-notes">The unary union of any set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))"><div class="formula-chunk">\(\forall (A : \mathsf{Class})\; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(A : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))"><div class="formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (\\mathrm{isSet}(A) \\to \\mathrm{isSet}(\\bigcup A))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-14.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-22-class-if" data-num="3.22" data-classification="definition" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.22" href="#3.22" class="entry-num-link" onclick="copyPermalink('3.22', 'item-3-22-class-if', event)" title="Click to share or copy permalink #3.22">#3.22</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.22" href="#3.22" class="entry-num-link" onclick="copyPermalink('3.22', 'item-3-22-class-if', event)" title="Click to navigate or copy link for 3.22">3.22</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</strong>
@@ -731,13 +787,13 @@
               
             </td>
             <td class="formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }"><div class="formula-chunk">\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vv-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v_v, \psi) : \mathsf{Bool} \land \mathrm{NFV}(v_v, \Gamma) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vv-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(\mathbf{v}_v, \psi) \land \mathrm{NFV}(\mathbf{v}_v, \Gamma)\)</a></td>
+            <td style="text-align: center;"><a href="proofs/item-3-22-class-if.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-3-23-simple-if" data-num="3.23" data-classification="definition" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.23" href="#3.23" class="entry-num-link" onclick="copyPermalink('3.23', 'item-3-23-simple-if', event)" title="Click to share or copy permalink #3.23">#3.23</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.23" href="#3.23" class="entry-num-link" onclick="copyPermalink('3.23', 'item-3-23-simple-if', event)" title="Click to navigate or copy link for 3.23">3.23</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</strong>
@@ -748,12 +804,12 @@
 ⟦simple_if α true t1 t2⟧ = ⟦t1⟧,   ⟦simple_if α false t1 t2⟧ = ⟦t2⟧"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha\)</div>
 <div class="formula-chunk">\(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \quad \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-23-simple-if.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-3-24-dependent-if" data-num="3.24" data-classification="definition" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.24" href="#3.24" class="entry-num-link" onclick="copyPermalink('3.24', 'item-3-24-dependent-if', event)" title="Click to share or copy permalink #3.24">#3.24</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.24" href="#3.24" class="entry-num-link" onclick="copyPermalink('3.24', 'item-3-24-dependent-if', event)" title="Click to navigate or copy link for 3.24">3.24</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">dependent_if (polymorphic dependent conditional with type computation)</strong>
@@ -762,16 +818,16 @@
             </td>
             <td class="formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)
 typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧
-⟦if true then t1 else t2⟧ = ⟦t1⟧,   ⟦if false then t1 else t2⟧ = ⟦t2⟧"><div class="formula-chunk">\(\mathrm{dependent\_if} : \Pi (T : \mathsf{Bool} \to \mathsf{Type}) (b : \mathsf{Bool}).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b)\)</div>
+⟦if true then t1 else t2⟧ = ⟦t1⟧,   ⟦if false then t1 else t2⟧ = ⟦t2⟧"><div class="formula-chunk">\(\mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b)\)</div>
 <div class="formula-chunk">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
 <div class="formula-chunk">\(\llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \quad \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#dependent-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#dependent-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(T \to \mathsf{Type}, \quad t_1 \in T(\mathrm{true}), \; t_2 \in T(\mathrm{false})\)</a></td>
+            <td style="text-align: center;"><a href="proofs/item-3-24-dependent-if.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="thm-ord-ind" data-num="3.32" data-classification="theorem" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.32" href="#3.32" class="entry-num-link" onclick="copyPermalink('3.32', 'thm-ord-ind', event)" title="Click to share or copy permalink #3.32">#3.32</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.32" href="#3.32" class="entry-num-link" onclick="copyPermalink('3.32', 'thm-ord-ind', event)" title="Click to navigate or copy link for 3.32">3.32</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Ordinal Induction (∈-Ind)</strong>
@@ -781,13 +837,13 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             <td class="formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α))))
 → ∀(α : Class) (α ∈ On → φ(α))"><div class="formula-chunk">\((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha))))\)</div>
 <div class="formula-chunk">\(\to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha))\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On}) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On})\)</a></td>
+            <td style="text-align: center;"><a href="proofs/thm-ord-ind.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
 
           <tr id="item-3-34" data-num="3.34" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.34" href="#3.34" class="entry-num-link" onclick="copyPermalink('3.34', 'item-3-34', event)" title="Click to share or copy permalink #3.34">#3.34</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.34" href="#3.34" class="entry-num-link" onclick="copyPermalink('3.34', 'item-3-34', event)" title="Click to navigate or copy link for 3.34">3.34</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Power Class Axiom</strong>
@@ -796,12 +852,12 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             </td>
             <td class="formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))"><div class="formula-chunk">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div></td>
             <td class="syntax-cell"><span class="syntax-badge">\(a : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-34.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-37" data-num="3.37" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.37" href="#3.37" class="entry-num-link" onclick="copyPermalink('3.37', 'item-3-37', event)" title="Click to share or copy permalink #3.37">#3.37</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.37" href="#3.37" class="entry-num-link" onclick="copyPermalink('3.37', 'item-3-37', event)" title="Click to navigate or copy link for 3.37">3.37</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Replacement / Limitation of Size Axiom</strong>
@@ -809,78 +865,78 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))"><div class="formula-chunk">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(F, A : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(F, A : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-37.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-45" data-num="3.45" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.45" href="#3.45" class="entry-num-link" onclick="copyPermalink('3.45', 'item-3-45', event)" title="Click to share or copy permalink #3.45">#3.45</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.45" href="#3.45" class="entry-num-link" onclick="copyPermalink('3.45', 'item-3-45', event)" title="Click to navigate or copy link for 3.45">3.45</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Infinity Axiom</strong>
               <div class="entry-notes">Guarantees existence of the set of natural numbers ω.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))"><div class="formula-chunk">\(\exists (x : \mathsf{Class})\; (\mathrm{isSet}(x) \land \emptyset \in x \land \forall (y : \mathsf{Class})\; (y \in x \to y \cup \{y\} \in x))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))"><div class="formula-chunk">\(\\exists (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\land \\emptyset \\in x \\land \\forall (y : \\mathsf{Class})\\; (y \\in x \\to y \\cup \\{y\\} \\in x))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-45.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-46" data-num="3.46" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.46" href="#3.46" class="entry-num-link" onclick="copyPermalink('3.46', 'item-3-46', event)" title="Click to share or copy permalink #3.46">#3.46</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.46" href="#3.46" class="entry-num-link" onclick="copyPermalink('3.46', 'item-3-46', event)" title="Click to navigate or copy link for 3.46">3.46</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Global Choice Axiom</strong>
               <div class="entry-notes">Global choice function over all non-empty sets.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))"><div class="formula-chunk">\(\exists (c : \mathsf{Class})\; (\mathrm{isClassFunction}(c) \land \forall (x : \mathsf{Class})\; ((\mathrm{isSet}(x) \land x \ne \emptyset) \to c(x) \in x))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(c, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))"><div class="formula-chunk">\(\\exists (c : \\mathsf{Class})\\; (\\mathrm{isClassFunction}(c) \\land \\forall (x : \\mathsf{Class})\\; ((\\mathrm{isSet}(x) \\land x \\ne \\emptyset) \\to c(x) \\in x))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(c, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-46.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-3-47" data-num="3.47" data-classification="definition" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.47" href="#3.47" class="entry-num-link" onclick="copyPermalink('3.47', 'item-3-47', event)" title="Click to share or copy permalink #3.47">#3.47</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.47" href="#3.47" class="entry-num-link" onclick="copyPermalink('3.47', 'item-3-47', event)" title="Click to navigate or copy link for 3.47">3.47</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">Universal Class (V)</strong>
               <div class="entry-notes">Universe of all sets. V is a proper class (not a set).</div>
               
             </td>
-            <td class="formula-cell" data-unicode="V = {x | x = x}"><div class="formula-chunk">\(V = \{x \mid x = x\}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(V : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="V = {x | x = x}"><div class="formula-chunk">\(V = \\{x \\mid x = x\\}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(V : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-47.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-3-53" data-num="3.53" data-classification="definition" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.53" href="#3.53" class="entry-num-link" onclick="copyPermalink('3.53', 'item-3-53', event)" title="Click to share or copy permalink #3.53">#3.53</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.53" href="#3.53" class="entry-num-link" onclick="copyPermalink('3.53', 'item-3-53', event)" title="Click to navigate or copy link for 3.53">3.53</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">Transitive Class Predicate</strong>
               <div class="entry-notes">A class is transitive if every element of it is also a subclass.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)"><div class="formula-chunk">\(\mathrm{Tr}(A) \longleftrightarrow \forall (x : \mathsf{Class})\; (x \in A \to x \subseteq A)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)"><div class="formula-chunk">\(\\mathrm{Tr}(A) \\longleftrightarrow \\forall (x : \\mathsf{Class})\\; (x \\in A \\to x \\subseteq A)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(A, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-53.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-3-66" data-num="3.66" data-classification="axiom" data-section="sec-3">
-            <td class="num-cell" style="text-align: center;"><a id="3.66" href="#3.66" class="entry-num-link" onclick="copyPermalink('3.66', 'item-3-66', event)" title="Click to share or copy permalink #3.66">#3.66</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="3.66" href="#3.66" class="entry-num-link" onclick="copyPermalink('3.66', 'item-3-66', event)" title="Click to navigate or copy link for 3.66">3.66</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Tarski&#x27;s Axiom of Universes</strong>
               <div class="entry-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))"><div class="formula-chunk">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land x \in u \land \mathrm{isSet}(u)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(x, u : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))"><div class="formula-chunk">\(\\forall (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\to \\exists (u : \\mathsf{Class})\\; (\\mathrm{isUniverse}(u) \\land x \\in u \\land \\mathrm{isSet}(u)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, u : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-66.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
@@ -893,7 +949,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
         
 
           <tr id="item-4-01" data-num="4.01" data-classification="axiom" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.01" href="#4.01" class="entry-num-link" onclick="copyPermalink('4.01', 'item-4-01', event)" title="Click to share or copy permalink #4.01">#4.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.01" href="#4.01" class="entry-num-link" onclick="copyPermalink('4.01', 'item-4-01', event)" title="Click to navigate or copy link for 4.01">4.01</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Instantiation Axiom</strong>
@@ -902,12 +958,12 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             </td>
             <td class="formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))"><div class="formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div></td>
             <td class="syntax-cell"><span class="syntax-badge">\(t : \mathrm{eval}(A), \quad v : \mathsf{Variable}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><a href="proofs/item-4-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-4-02" data-num="4.02" data-classification="axiom" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.02" href="#4.02" class="entry-num-link" onclick="copyPermalink('4.02', 'item-4-02', event)" title="Click to share or copy permalink #4.02">#4.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.02" href="#4.02" class="entry-num-link" onclick="copyPermalink('4.02', 'item-4-02', event)" title="Click to navigate or copy link for 4.02">4.02</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Generalisation Axiom</strong>
@@ -915,55 +971,55 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))"><div class="formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v, \Gamma) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{NFV}(v, \Gamma)\)</a></td>
+            <td style="text-align: center;"><a href="proofs/item-4-02.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-4-03" data-num="4.03" data-classification="inference-rule" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.03" href="#4.03" class="entry-num-link" onclick="copyPermalink('4.03', 'item-4-03', event)" title="Click to share or copy permalink #4.03">#4.03</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.03" href="#4.03" class="entry-num-link" onclick="copyPermalink('4.03', 'item-4-03', event)" title="Click to navigate or copy link for 4.03">4.03</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">CoNecessitation</strong>
               <div class="entry-notes">Reflection elimination for provability.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)"><div class="formula-chunk">\(\frac{\mathcal{F}, [] \vdash \langle \mathcal{F}, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{F} : \mathsf{Theory}, \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)"><div class="formula-chunk">\(\\frac{\\mathcal{F}, [] \\vdash \\langle \\mathcal{F}, \\Gamma \\vdash \\phi \\rangle}{\\mathcal{F}, \\Gamma \\vdash \\phi}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\mathcal{F} : \\mathsf{Theory}, \\quad \\Gamma : \\mathsf{Ctx}, \\quad \\phi : \\mathsf{Fm}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-4-03.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="item-4-04" data-num="4.04" data-classification="definition" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.04" href="#4.04" class="entry-num-link" onclick="copyPermalink('4.04', 'item-4-04', event)" title="Click to share or copy permalink #4.04">#4.04</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.04" href="#4.04" class="entry-num-link" onclick="copyPermalink('4.04', 'item-4-04', event)" title="Click to navigate or copy link for 4.04">4.04</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">Quantifier Unique (!)</strong>
               <div class="entry-notes">At-most-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))"><div class="formula-chunk">\(\forall (\phi : \mathsf{Fm})\; ((! (z : \mathsf{Class})\; \phi) \longleftrightarrow \forall (x, y : \mathsf{Class})\; ((\phi[x/z] \land \phi[y/z]) \to x = y))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(z, x, y : \mathsf{Variable}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))"><div class="formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; ((! (z : \\mathsf{Class})\\; \\phi) \\longleftrightarrow \\forall (x, y : \\mathsf{Class})\\; ((\\phi[x/z] \\land \\phi[y/z]) \\to x = y))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(z, x, y : \\mathsf{Variable}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-4-04.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-4-05" data-num="4.05" data-classification="definition" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.05" href="#4.05" class="entry-num-link" onclick="copyPermalink('4.05', 'item-4-05', event)" title="Click to share or copy permalink #4.05">#4.05</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.05" href="#4.05" class="entry-num-link" onclick="copyPermalink('4.05', 'item-4-05', event)" title="Click to navigate or copy link for 4.05">4.05</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
               <strong style="color: #fff; margin-left: 6px;">Quantifier Exists and Unique (∃!)</strong>
               <div class="entry-notes">Exactly-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))"><div class="formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{T}, [] \vdash (\exists! (x : \mathsf{Class})\; \phi) \longleftrightarrow ((\exists (x : \mathsf{Class})\; \phi) \land ! (x : \mathsf{Class})\; \phi))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(x : \mathsf{Variable}, \quad \phi : \mathsf{Fm}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))"><div class="formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; (\\mathcal{T}, [] \\vdash (\\exists! (x : \\mathsf{Class})\\; \\phi) \\longleftrightarrow ((\\exists (x : \\mathsf{Class})\\; \\phi) \\land ! (x : \\mathsf{Class})\\; \\phi))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x : \\mathsf{Variable}, \\quad \\phi : \\mathsf{Fm}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-4-05.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
 
           <tr id="item-4-06" data-num="4.06" data-classification="axiom" data-section="sec-4">
-            <td class="num-cell" style="text-align: center;"><a id="4.06" href="#4.06" class="entry-num-link" onclick="copyPermalink('4.06', 'item-4-06', event)" title="Click to share or copy permalink #4.06">#4.06</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="4.06" href="#4.06" class="entry-num-link" onclick="copyPermalink('4.06', 'item-4-06', event)" title="Click to navigate or copy link for 4.06">4.06</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom (Metatheory)</strong>
@@ -971,8 +1027,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))"><div class="formula-chunk">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div></td>
-            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(k, x, \phi) : \mathsf{Bool}\)</a></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory">\(\mathrm{FFI}(k, x, \phi)\)</a></td>
+            <td style="text-align: center;"><a href="proofs/item-4-06.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
@@ -985,58 +1041,58 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
         
 
           <tr id="item-5-01" data-num="5.01" data-classification="theorem" data-section="sec-5">
-            <td class="num-cell" style="text-align: center;"><a id="5.01" href="#5.01" class="entry-num-link" onclick="copyPermalink('5.01', 'item-5-01', event)" title="Click to share or copy permalink #5.01">#5.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="5.01" href="#5.01" class="entry-num-link" onclick="copyPermalink('5.01', 'item-5-01', event)" title="Click to navigate or copy link for 5.01">5.01</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Elementary Theorems</strong>
               <div class="entry-notes">Basic elementhood implies sethood.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))"><div class="formula-chunk">\((\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)) \land (\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))"><div class="formula-chunk">\((\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)) \\land (\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-5-01.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
 
           <tr id="item-5-02" data-num="5.02" data-classification="inference-rule" data-section="sec-5">
-            <td class="num-cell" style="text-align: center;"><a id="5.02" href="#5.02" class="entry-num-link" onclick="copyPermalink('5.02', 'item-5-02', event)" title="Click to share or copy permalink #5.02">#5.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="5.02" href="#5.02" class="entry-num-link" onclick="copyPermalink('5.02', 'item-5-02', event)" title="Click to navigate or copy link for 5.02">5.02</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Definition to Introduction Rule</strong>
               <div class="entry-notes">Unfolding definition to intro form.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))"><div class="formula-chunk">\(\frac{\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)}{\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B)}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))"><div class="formula-chunk">\(\\frac{\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)}{\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B)}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-5-02.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="item-5-03" data-num="5.03" data-classification="inference-rule" data-section="sec-5">
-            <td class="num-cell" style="text-align: center;"><a id="5.03" href="#5.03" class="entry-num-link" onclick="copyPermalink('5.03', 'item-5-03', event)" title="Click to share or copy permalink #5.03">#5.03</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="5.03" href="#5.03" class="entry-num-link" onclick="copyPermalink('5.03', 'item-5-03', event)" title="Click to navigate or copy link for 5.03">5.03</a></td>
             <td>
               <span class="classification-badge badge-rule">Inference Rule</span>
               <strong style="color: #fff; margin-left: 6px;">Deduction Rule Application</strong>
               <div class="entry-notes">Deduction theorem discharging premise into implication.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))"><div class="formula-chunk">\((\mathcal{F}, [] \vdash (B \in x) \to \mathrm{isSet}(B))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))"><div class="formula-chunk">\((\\mathcal{F}, [] \\vdash (B \\in x) \\to \\mathrm{isSet}(B))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(B, x : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-5-03.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
 
           <tr id="item-5-04" data-num="5.04" data-classification="theorem" data-section="sec-5">
-            <td class="num-cell" style="text-align: center;"><a id="5.04" href="#5.04" class="entry-num-link" onclick="copyPermalink('5.04', 'item-5-04', event)" title="Click to share or copy permalink #5.04">#5.04</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="5.04" href="#5.04" class="entry-num-link" onclick="copyPermalink('5.04', 'item-5-04', event)" title="Click to navigate or copy link for 5.04">5.04</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Tactics Proof Example</strong>
               <div class="entry-notes">6-step verified derivation in LCF kernel.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)"><div class="formula-chunk">\(\mathcal{F}, [] \vdash (\exists (y : \mathsf{Class})\; \forall (x : \mathsf{Class})\; (x \in y)) \to \forall (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (x \in y)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \mathsf{Class}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)"><div class="formula-chunk">\(\\mathcal{F}, [] \\vdash (\\exists (y : \\mathsf{Class})\\; \\forall (x : \\mathsf{Class})\\; (x \\in y)) \\to \\forall (x : \\mathsf{Class})\\; \\exists (y : \\mathsf{Class})\\; (x \\in y)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(x, y : \\mathsf{Class}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-5-04.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
 
@@ -1049,21 +1105,21 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
         
 
           <tr id="item-6-01" data-num="6.01" data-classification="axiom" data-section="sec-6">
-            <td class="num-cell" style="text-align: center;"><a id="6.01" href="#6.01" class="entry-num-link" onclick="copyPermalink('6.01', 'item-6-01', event)" title="Click to share or copy permalink #6.01">#6.01</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="6.01" href="#6.01" class="entry-num-link" onclick="copyPermalink('6.01', 'item-6-01', event)" title="Click to navigate or copy link for 6.01">6.01</a></td>
             <td>
               <span class="classification-badge badge-axiom">Axiom</span>
               <strong style="color: #fff; margin-left: 6px;">Theories (Metalevel Stratification)</strong>
               <div class="entry-notes">W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)"><div class="formula-chunk">\(\mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{W}, \mathcal{Q}, \mathcal{T}, \mathcal{F} : \mathsf{Theory}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td class="formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)"><div class="formula-chunk">\(\\mathcal{W} \\subseteq \\mathcal{Q} \\subseteq \\mathcal{T} \\subseteq \\mathcal{F}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge">\(\\mathcal{W}, \\mathcal{Q}, \\mathcal{T}, \\mathcal{F} : \\mathsf{Theory}\)</span></td>
+            <td style="text-align: center;"><a href="proofs/item-6-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
 
           <tr id="item-6-02" data-num="6.02" data-classification="theorem" data-section="sec-6">
-            <td class="num-cell" style="text-align: center;"><a id="6.02" href="#6.02" class="entry-num-link" onclick="copyPermalink('6.02', 'item-6-02', event)" title="Click to share or copy permalink #6.02">#6.02</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="6.02" href="#6.02" class="entry-num-link" onclick="copyPermalink('6.02', 'item-6-02', event)" title="Click to navigate or copy link for 6.02">6.02</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Löb&#x27;s Theorem</strong>
@@ -1072,12 +1128,12 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             </td>
             <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))"><div class="formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div></td>
             <td class="syntax-cell"><span class="syntax-badge">\(\phi : \mathsf{Fm}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><a href="proofs/item-6-02.html" class="status-badge badge-verified-weak" title="Click to view formal verification certificate and proof details">Weakly Verified (Lit)</a></td>
           </tr>
             
 
           <tr id="item-6-03" data-num="6.03" data-classification="theorem" data-section="sec-6">
-            <td class="num-cell" style="text-align: center;"><a id="6.03" href="#6.03" class="entry-num-link" onclick="copyPermalink('6.03', 'item-6-03', event)" title="Click to share or copy permalink #6.03">#6.03</a></td>
+            <td class="num-cell" style="text-align: center;"><a id="6.03" href="#6.03" class="entry-num-link" onclick="copyPermalink('6.03', 'item-6-03', event)" title="Click to navigate or copy link for 6.03">6.03</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
               <strong style="color: #fff; margin-left: 6px;">Gödel&#x27;s Second Incompleteness Theorem</strong>
@@ -1086,7 +1142,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             </td>
             <td class="formula-cell" data-unicode="Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))"><div class="formula-chunk">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</div></td>
             <td class="syntax-cell"><span class="syntax-badge">\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\)</span></td>
-            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><a href="proofs/item-6-03.html" class="status-badge badge-verified-weak" title="Click to view formal verification certificate and proof details">Weakly Verified (Lit)</a></td>
           </tr>
             
       </tbody>
@@ -1154,9 +1210,9 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
       const url = window.location.origin + window.location.pathname + hash;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(url).then(() => {
-          showToast('Copied permalink #' + num + ' to clipboard!');
+          showToast('Copied link for ' + num + ' to clipboard!');
         }).catch(() => {
-          showToast('Linked to #' + num);
+          showToast('Navigated to ' + num);
         });
       } else {
         showToast('Linked to #' + num);

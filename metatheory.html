@@ -8,19 +8,14 @@
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']],
         processEscapes: true,
         macros: {
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          llbracket: ["\\unicode{x27E6}"],
-          rrbracket: ["\\unicode{x27E7}"],
-          lsemantic: ["\\unicode{x27E6}"],
-          rsemantic: ["\\unicode{x27E7}"]
+          llbracket: ["\unicode{x27E6}"],
+          rrbracket: ["\unicode{x27E7}"],
+          lsemantic: ["\unicode{x27E6}"],
+          rsemantic: ["\unicode{x27E7}"]
         }
       },
       options: {
@@ -33,6 +28,23 @@
     /* Semantic denotation bracket styling and font fallback */
     mjx-c.mjx-c27E6::before, mjx-c[c="27E6"]::before { content: "⟦"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
     mjx-c.mjx-c27E7::before, mjx-c[c="27E7"]::before { content: "⟧"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
+    
+    /* Metatheoretic constants vs object variables visual distinction */
+    .meta-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f472b6 !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    }
+    .obj-var {
+      font-style: italic !important;
+      color: #38bdf8 !important;
+    }
+    /* MathJax bold upright metatheoretic constant distinction */
+    .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
+      color: #f472b6 !important;
+    }
+
     :root {
       --bg-dark: #07090e;
       --card-bg: rgba(15, 23, 42, 0.75);
@@ -141,6 +153,7 @@
       <a href="metatheory.html" class="active">Metatheory</a>
       <a href="output.html">Demo Output</a>
       <a href="output.pdf" target="_blank">PDF Manual</a>
+      <a href="repl.html">Web REPL</a>
       <a href="about.html">About</a>
     </nav>
   </header>
@@ -153,19 +166,22 @@
 
     <!-- METATHEORY PRINCIPLES -->
     <div class="theory-box">
-      <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan); margin-top: 0;">The Metatheory Invariant</h2>
+      <h2 style="font-size: 1.3rem; font-weight: 700; color: var(--accent-cyan); margin-top: 0;">The Recursive Side Condition Tower &amp; Metatheory Invariant</h2>
       <p>
-        The key epistemic insight of the Obelisk Proof Assistant is that <strong>the metatheory is the same Morse–Kelley (MK) theory</strong>:
+        The key epistemic insight of the Obelisk Proof Assistant is that <strong>the same Morse–Kelley (MK) theory serves as both object theory and metatheory</strong>:
       </p>
       <ul>
         <li>
-          <strong>Reflected Side Conditions:</strong> What appears as a "syntactic side condition" on the manual page is reflected in the <strong>Semantic column</strong> here. It is not an axiom or theorem, but an ordinary formula whose truth value is checkable or provable.
+          <strong>Recursive Tower of Formulas:</strong> Side conditions can have side-side conditions, side-side conditions can have side-side-side conditions, etc. Formulas are stored as formulas regardless of their metalevel: Level 0 (host axioms/theorems), Level 1 (metatheoretic side condition formula), Level 2 (metametatheoretic side-side condition formula), and Level 3 (ambient well-formedness context).
         </li>
         <li>
-          <strong>Constant Identifiers:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \(v_x : \mathsf{Variable}\) in the metatheory. We assume a standard set-theoretic encoding of the syntax language.
+          <strong>Decidability as Formal Metatheorems:</strong> If it is claimed that a side condition formula is decidable, then that decidability is itself established as a formal theorem in the metatheory with a constructive kernel witness algorithm.
         </li>
         <li>
-          <strong>Side-Side Conditions:</strong> The "Syntax" column at this level represents meta-metatheoretic requirements (typing, context finiteness, structural induction termination).
+          <strong>Constants Representing Variables:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \( \mathbf{v}_x \in \mathsf{Variable} \) in the metatheory. Constants representing variables are rendered distinctly in upright pink (<span class="meta-const">v_x</span>, <span class="meta-const">v_C</span>), preventing confusion with italic blue object variables.
+        </li>
+        <li>
+          <strong>Formulas Without Superfluous Typing Suffixes:</strong> A side condition like \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) is a genuine mathematical formula; it does not take a redundant <code>: Bool</code> or <code>&isin; Bool</code> suffix.
         </li>
       </ul>
     </div>
@@ -185,160 +201,280 @@
         <tr id="nfv-c-phi" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_C, φ)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(v_C \notin \mathrm{FV}(\phi) : \mathsf{Bool}\)</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            <div class="semantic-box">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C ∈ Variable does not occur as a free variable in formula φ : Fm.</div>
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\phi))\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-01" style="color: var(--accent-blue); text-decoration: none;">Class Comprehension Axiom Schema (3.01) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(v_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+            <div class="syntax-box">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteContext}(\Gamma)\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="fresh-vy-vx" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">Fresh(v_Y, v_X)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(v_Y \ne v_X : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v}_1, \mathbf{v}_2 : \mathsf{Variable}).\; \mathrm{Decidable}(\mathbf{v}_1 \ne \mathbf{v}_2)\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Variable.eq / SideCondFresh</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-02" style="color: var(--accent-blue); text-decoration: none;">Extensionality / Pairing Binders &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(v_Y, v_X : \mathsf{Variable}\)</div>
+            <div class="syntax-box">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{discrete}(\mathsf{Variable})\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="ffi-t-vx-phi" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">FFI(t, v_x, φ)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathrm{isFreeFor}(t, v_x, \phi) : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(t : \mathsf{Term}, \mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathrm{isFreeFor}(t, \mathbf{v}, \phi))\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFreeFor / SideCondFFI</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-fi" style="color: var(--accent-blue); text-decoration: none;">Forall Instantiation (FI, 2.02) &amp; Exists Instantiation (EI, 2.03) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(t : \mathsf{Term} \land v_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
+            <div class="syntax-box">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\phi)\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="nfv-vx-psi" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, ψ)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(v_x \notin \mathrm{FV}(\psi) : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi))\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-fa" style="color: var(--accent-blue); text-decoration: none;">Forall Abstraction (FA, 2.04) &amp; Exists Abstraction (EA, 2.05) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
+            <div class="syntax-box">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\psi)\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="nfv-vx-gamma" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, Γ)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(v_x \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \Gamma : \mathsf{Ctx}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Context.isFree / SideCondNFV_Ctx</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#rule-gen" style="color: var(--accent-blue); text-decoration: none;">Generalisation Rule (Gen, 2.06) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(v_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div class="syntax-box">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteContext}(\Gamma)\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="nfv-vv-psi" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_v, ψ)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(v_v \notin \mathrm{FV}(\psi) : \mathsf{Bool} \land v_v \notin \mathrm{Ctx.FV}(\Gamma) : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}, \Gamma : \mathsf{Ctx}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi) \land \mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-22-class-if" style="color: var(--accent-blue); text-decoration: none;">Class Conditional Definition (IF-THEN-ELSE-FI, 3.22) &rarr;</a>
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(v_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div class="syntax-box">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\psi) \land \mathrm{finiteContext}(\Gamma)\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="simple-if-typing" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">simple_if_typing(α, t1, t2)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket) : \mathsf{Bool}\)</div>
+            <div class="semantic-box">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\alpha : \mathsf{Type}, t_1, t_2 : \alpha).\; \mathrm{Normalizes}(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket, t_1)\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>EvalSimpleIf / RedStep</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-23-simple-if" style="color: var(--accent-blue); text-decoration: none;">simple_if Definition (3.23) &rarr;</a>
             </div>
           </td>
           <td>
             <div class="syntax-box">\(\alpha : \mathcal{U}_i\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{stratifiedUniverses}\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
         <tr id="dependent-if-typing" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">dependent_if_typing(T, b, t1, t2)</strong>
-            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Computable</span></div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
             <div class="semantic-box">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(T : \mathsf{Bool} \to \mathsf{Type}, b : \mathsf{Bool}, t_1, t_2).\; \mathrm{TypeChecked}(T, b, t_1, t_2)\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>DependentIfTypeCheck</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#item-3-24-dependent-if" style="color: var(--accent-blue); text-decoration: none;">dependent_if Definition (3.24) &rarr;</a>
             </div>
           </td>
           <td>
             <div class="syntax-box">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{preservationOfTyping}\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
 
@@ -346,19 +482,34 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">WF(∈, On)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #8b5cf6;">Provable Metatheorem</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathrm{WellFounded}(\in, \mathrm{On}) : \mathsf{Bool}\)</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an axiom; justified by MK Regularity.</div>
-            <div style="margin-top: 4px; font-size: 0.8rem; color: var(--text-muted);">
+            <div class="semantic-box">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an ad-hoc axiom; derived in MK from the Regularity Axiom.</div>
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\mathrm{MK} \vdash \forall(X : \mathsf{Class}).\; X \ne \emptyset \implies \exists(y : \mathsf{Class}).\; y \in X \land y \cap X = \emptyset\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>MK_regularity_axm / on_ord_thm</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
               <strong>Origin in Manual:</strong> <a href="manual.html#thm-ord-ind" style="color: var(--accent-blue); text-decoration: none;">Ordinal Induction (3.32) &rarr;</a>
             </div>
           </td>
           <td>
             <div class="syntax-box">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\mathrm{MorseKelleyClassTheory}\)
+            </div>
+        
           </td>
-          <td style="text-align: center;"><span class="badge">Checkable</span></td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
         </tr>
         
       </tbody>

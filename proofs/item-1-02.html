@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Verification: 1.02 A02 (Distribution of Implication) — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: ["\unicode{x27E6}"],
+          rrbracket: ["\unicode{x27E7}"],
+          lsemantic: ["\unicode{x27E6}"],
+          rsemantic: ["\unicode{x27E7}"]
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    /* Semantic denotation bracket styling and font fallback */
+    mjx-c.mjx-c27E6::before, mjx-c[c="27E6"]::before { content: "⟦"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
+    mjx-c.mjx-c27E7::before, mjx-c[c="27E7"]::before { content: "⟧"; font-family: "DejaVu Sans", "STIX Two Math", "Cambria Math", sans-serif; }
+    
+    /* Metatheoretic constants vs object variables visual distinction */
+    .meta-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f472b6 !important;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+    }
+    .obj-var {
+      font-style: italic !important;
+      color: #38bdf8 !important;
+    }
+    /* MathJax bold upright metatheoretic constant distinction */
+    .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
+      color: #f472b6 !important;
+    }
+
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(56, 189, 248, 0.18);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --accent-pink: #f472b6;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.2rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.5rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1.2rem; font-size: 0.95rem; font-weight: 500; transition: color 0.2s; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .breadcrumb {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .breadcrumb a { color: var(--accent-cyan); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin-bottom: 1.8rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .formula-display {
+      background: rgba(30, 41, 59, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 8px;
+      padding: 1.2rem 1.5rem;
+      font-size: 1.25rem;
+      color: #fff;
+      overflow-x: auto;
+      text-align: center;
+    }
+    .syntax-display {
+      background: rgba(88, 28, 135, 0.2);
+      border: 1px solid rgba(192, 132, 252, 0.3);
+      border-radius: 8px;
+      padding: 0.9rem 1.2rem;
+      font-size: 1.05rem;
+      color: #e2e8f0;
+      overflow-x: auto;
+    }
+    .unicode-box {
+      margin-top: 10px;
+      font-size: 0.88rem;
+      font-family: monospace;
+      color: var(--accent-cyan);
+      background: rgba(0, 0, 0, 0.4);
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px dashed rgba(56, 189, 248, 0.2);
+    }
+    .code-block {
+      background: #020617;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      padding: 1.2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: #a7f3d0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      line-height: 1.5;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+    .meta-item {
+      margin-bottom: 12px;
+    }
+    .meta-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .meta-val {
+      font-size: 0.95rem;
+      color: #f1f5f9;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #07090e;
+      border: 1px solid var(--accent-blue);
+    }
+    .btn-primary:hover {
+      background: #0284c7;
+      color: #fff;
+    }
+    .btn-secondary {
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn-secondary:hover {
+      background: #334155;
+      color: #fff;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 0.03em;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 2rem 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      background: #07090e;
+    }
+  </style>
+</head>
+<body>
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Verification Authority</span></div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../manual.html">Manual &amp; Theory</a>
+      <a href="../metatheory.html">Metatheory</a>
+      <a href="../output.html">Demo Output</a>
+      <a href="../output.pdf" target="_blank">PDF Manual</a>
+      <a href="../repl.html">Web REPL</a>
+    </nav>
+  </header>
+
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <div class="breadcrumb">
+      <a href="../index.html">Obelisk</a> &gt; 
+      <a href="../manual.html">Catalog Manual</a> &gt; 
+      <a href="../manual.html#1.02">Section 1 (1.02)</a> &gt; 
+      <span>Verification Certificate</span>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
+          <span class="classification-badge badge-axiom">Axiom</span>
+          <span class="status-badge badge-axiom-status">Axiomatic Base</span>
+          <span style="color: var(--text-muted); font-size: 0.9rem;">Catalog ID: <strong>1.02</strong></span>
+        </div>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">A02 (Distribution of Implication)</h1>
+        <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Section 1: Propositional logic</div>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <a href="../manual.html#1.02" class="btn btn-secondary">&larr; Return to Manual #1.02</a>
+        <a href="../repl.html" class="btn btn-primary">Open in Web REPL &rarr;</a>
+      </div>
+    </div>
+
+    <!-- MATHEMATICAL FORMULA -->
+    <div class="card">
+      <div class="card-title">
+        <span style="color: var(--accent-blue);">Semantic Mathematical Statement</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
+      </div>
+      <div class="formula-display">
+        \[ ((\\alpha \\to (\\beta \\to \\gamma)) \\to ((\\alpha \\to \\beta) \\to (\\alpha \\to \\gamma))) \]
+      </div>
+      <div class="unicode-box">
+        <strong>Clean Unicode:</strong> ((α → (β → γ)) → ((α → β) → (α → γ)))
+      </div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Self-distribution of implication.</div>
+    </div>
+
+    
+    <div class="card" style="margin-top: 1.5rem;">
+      <div class="card-title">
+        <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
+      </div>
+      <div class="syntax-display">\(\\alpha, \\beta, \\gamma : \\mathsf{Bool}\)</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
+        Reflected in Metatheory: <a href="../metatheory.html#sec-metatheory" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
+      </div>
+    </div>
+                
+
+    <!-- VERIFICATION CERTIFICATE & AUDIT -->
+    <div class="card">
+      <div class="card-title">
+        <span style="color: var(--accent-green);">Formal Verification Audit &amp; Epistemic Authority</span>
+        <span class="status-badge badge-axiom-status">Axiomatic Base</span>
+      </div>
+      <div class="grid-2">
+        <div>
+          <div class="meta-item">
+            <div class="meta-label">Verification Classification</div>
+            <div class="meta-val"><strong>Axiomatic Base</strong></div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Verification Method</div>
+            <div class="meta-val">Axiomatic Postulate (Classical Logic / Morse–Kelley Class Theory)</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Microkernel / Checker Confirmation</div>
+            <div class="meta-val" style="color: #6ee7b7;">Directly accepted as a primitive sequent by the PolyML kernel (Thm constructor). No further derivation is required as this forms the base of deductive inference.</div>
+          </div>
+        </div>
+        <div>
+          <div class="meta-item">
+            <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
+            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ((α → (β → γ)) → ((α → β) → (α → γ)))).</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( (A, B)_D = (\{0\} 	imes A) \cup (\{1\} 	imes B) \) to prevent rank explosion.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROOF PROGRAM / KERNEL DERIVATION -->
+    <div class="card">
+      <div class="card-title">
+        <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
+        <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
+      </div>
+      <pre class="code-block"><code>(* Primitive Axiom Postulate *)
+val thm_item_1_02 = Thm ([], parse_formula &quot;((α → (β → γ)) → ((α → β) → (α → γ)))&quot;);</code></pre>
+      <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
+        Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-top: 2rem;">
+      <a href="../manual.html#1.02" class="btn btn-secondary">&larr; Back to Catalog #1.02</a>
+      <div style="display: flex; gap: 8px;">
+        <a href="../metatheory.html" class="btn btn-secondary">Metatheory Specification</a>
+        <a href="../repl.html" class="btn btn-primary">Try Interactive Proof in REPL &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Obelisk Proof Assistant &bull; Machine-Checked Mathematical Foundations &bull; All Rights Reserved &copy; 2026</p>
+  </footer>
+</body>
+</html>
