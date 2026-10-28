@@ -93,6 +93,18 @@
       border-radius: 0 4px 4px 0;
       line-height: 1.4;
     }
+    .type-theoretic-formula {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #fbbf24;
+      background: rgba(251, 191, 36, 0.12);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 1px 5px;
+      border-radius: 4px;
+      margin-bottom: 3px;
+    }
     .side-condition-none {
       font-size: 0.78rem;
       color: var(--text-muted);
@@ -160,7 +172,7 @@
       <div>
         <a href="index.html" class="back-link">← Return to Obelisk Main Site</a>
         <h1 style="margin-top: 0.5rem;">Obelisk Reference Manual &amp; Axiomatics</h1>
-        <p style="color: var(--text-muted);">Formal specification of Morse–Kelley class theory, LCF architecture, deduction rules, and syntactic side conditions.</p>
+        <p style="color: var(--text-muted);">Formal specification of Morse–Kelley class theory, LCF architecture, deduction rules, and type-theoretic syntactic side conditions.</p>
       </div>
       <div>
         <a href="Obelisk_Report.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Download Audit Report (PDF)</a>
@@ -189,23 +201,32 @@
       <button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &hArr; &exist; Y. X &isin; Y', 'def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y')">📋 Copy</button>
     </div>
 
-    <!-- Foundational Note on Side Conditions vs Internal Meaning -->
-    <div style="margin: 1.5rem 0; padding: 1.15rem 1.35rem; background: rgba(30, 58, 138, 0.22); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 4px solid var(--primary); border-radius: 8px;">
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-        <span style="font-size: 1.15rem;">📐</span>
-        <strong style="color: #38bdf8; font-size: 0.98rem;">Foundational Principle: Syntactic Side Conditions vs. Internal Formula Preconditions</strong>
+    <!-- Foundational Note on Decoupling Semantic Objects vs Syntactic Variables -->
+    <div style="margin: 1.5rem 0; padding: 1.25rem 1.4rem; background: rgba(30, 58, 138, 0.22); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 4px solid var(--primary); border-radius: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+        <span style="font-size: 1.2rem;">📐</span>
+        <strong style="color: #38bdf8; font-size: 1rem;">Foundational Decoupling: "x" as a Semantic Set vs. "x" as a Syntactic Variable</strong>
       </div>
-      <p style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.6;">
-        In formal mathematical logic (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4) and in LCF-style proof assistants (such as Obelisk's <code>foundations.ML</code> and <code>newchecker.ML</code>), <strong>side conditions</strong> (<em>боковые условия</em>) are not arbitrary semantic prerequisites. They are metamathematical statements strictly about <strong>formulas, terms, and the variables within them</strong> (such as variable freeness \(x \notin \mathrm{FV}(\phi)\), term substitutability without quantifier capture <code>sidconFFI</code>, or eigenvariable freshness <code>sidconNFV</code>).
+      <p style="font-size: 0.89rem; color: #e2e8f0; line-height: 1.65;">
+        A crucial distinction in Obelisk (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4; Obelisk <code>program/types/typetheory.ML</code> and <code>program/types/foundations.ML</code>) is the decoupling of the <strong>semantic level</strong> from the <strong>syntactic level</strong>:
       </p>
-      <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-top: 6px;">
-        Whenever a condition is about the <strong>mathematical meaning, semantics, or object properties</strong> (e.g. that a class is a set \(\mathrm{isSet}(B)\), that a relation is injective \(\mathrm{Inj}(f)\), or that a class is non-empty \(X \ne \emptyset\)), that condition is expressed <strong>directly inside the object-language formula of the statement itself</strong> (as an antecedent \(A \to B\), bounded quantifier, or conjunct). Closed axioms and theorems therefore have <em>no</em> syntactic side conditions; side conditions strictly govern axiom schemata and inference rules that manipulate syntactic metavariables.
-      </p>
+      <ul style="font-size: 0.87rem; color: #cbd5e1; margin: 8px 0 10px 1.5rem; line-height: 1.65;">
+        <li>
+          <strong style="color: #38bdf8;">The Semantic Column (Object Theory):</strong>
+          Here, \(x\) is a mathematical entity (a <strong>set or class</strong>) inhabiting the domain of discourse: \(x \in Y\), \(A \subseteq B\), \(\mathrm{isSet}(x)\).
+          Any condition regarding <em>meaning</em> (such as \(\mathrm{isSet}(B)\), non-emptiness \(X \ne \emptyset\), or injectivity \(\mathrm{Inj}(f)\)) is formulated <strong>directly within the formula of the statement itself</strong> (as an antecedent \(P \to Q\), bounded quantifier, or conjunct).
+        </li>
+        <li>
+          <strong style="color: #fbbf24;">The Syntax Column (Ambient Syntactic Type Theory):</strong>
+          Here, \(x\) is a <strong>variable identifier / symbol</strong> (type \(x : \mathsf{Variable}\)), belonging to the syntactic AST alongside terms (\(t : \mathsf{Term}\)) and formulas (\(\phi : \mathsf{Fm}\)).
+          <strong>Side conditions</strong> are not informal prose: they are <strong>formulas themselves</strong> within an ambient type theory (e.g. \(\mathsf{FFI}(t, x, \phi) : \mathsf{Bool}\) for freedom of substitution, \(\mathsf{NFV}(x, \psi) : \mathsf{Bool}\) for not-free-variable checks). Closed axioms and theorems carry no syntactic side conditions.
+        </li>
+      </ul>
     </div>
 
-    <h2>2. Complete Axiom Catalog &amp; Syntactic Side Conditions</h2>
+    <h2>2. Complete Axiom Catalog: Semantic Formulas &amp; Syntactic Side Conditions</h2>
     <p style="color: var(--text-muted); margin-bottom: 1rem;">
-      Axioms and definitions of Morse–Kelley class theory. Closed axioms formulate all mathematical preconditions internally as antecedents within the formula; only axiom schemata carry syntactic side conditions on formula metavariables.
+      Axioms and definitions of Morse–Kelley class theory. Main formulas in the <strong>Semantic</strong> column express all mathematical preconditions internally. The <strong>Syntax</strong> column records side conditions as formulas of the ambient type theory.
     </p>
     <div style="overflow-x: auto;">
       <table class="axiom-table">
@@ -213,8 +234,8 @@
           <tr>
             <th style="width: 65px;">Item</th>
             <th style="width: 175px;">Name &amp; Classification</th>
-            <th>Formal Statement</th>
-            <th style="width: 270px;">Syntactic Side Conditions</th>
+            <th>Semantic (Object Formula)</th>
+            <th style="width: 290px;">Syntax (Type-Theoretic Side Condition)</th>
             <th style="width: 85px; text-align: center;">Status</th>
             <th style="width: 75px; text-align: center;">Action</th>
           </tr>
@@ -230,9 +251,13 @@
             <td>
               <div class="stmt-unicode"><code>&exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_comprehension (phi : Class -&gt; Prop) : &exist; C, &forall; x, x &isin; C &hArr; isSet x &and; phi x</code></div>
+              <div class="formula-hypo-note">Semantic note: x is an object variable (set/class) inside &phi;</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>C &notin; FV(&phi;)</strong><br/>Class variable C does not occur free in formula &phi; (prevents self-referential capture / Russell paradox)</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">NFV(C, &phi;) : Bool</span><br/>
+                Variable identifier C : Var does not occur free in formula &phi; : Fm (C &notin; FV(&phi;); prevents Russell capture)
+              </div>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))', 'axiom ax_comprehension (phi : Class -&gt; Prop) : &exist; C, &forall; x, x &isin; C &hArr; isSet x &and; phi x')">📋 Copy</button></td>
@@ -248,9 +273,13 @@
             <td>
               <div class="stmt-unicode"><code>isSet(X) &hArr; &exist; Y. X &isin; Y</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y</code></div>
+              <div class="formula-hypo-note">Semantic note: X, Y are class objects in universe of classes</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>Y &notin; FV(X)</strong><br/>Bound witness variable Y is fresh (distinct from parameter X)</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">Fresh(Y, X) : Bool</span><br/>
+                Bound witness identifier Y : Var is distinct from parameter identifier X : Var
+              </div>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &hArr; &exist; Y. X &isin; Y', 'def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y')">📋 Copy</button></td>
@@ -268,7 +297,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_extensionality (X Y : Class) : (&forall; z, z &isin; X &hArr; z &isin; Y) -&gt; X = Y</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; element-wise equality is the antecedent in the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; element equivalence is an antecedent inside the semantic formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X Y. (&forall; z. z &isin; X &hArr; z &isin; Y) &rArr; X = Y', 'axiom ax_extensionality (X Y : Class) : (&forall; z, z &isin; X &hArr; z &isin; Y) -&gt; X = Y')">📋 Copy</button></td>
@@ -284,9 +313,10 @@
             <td>
               <div class="stmt-unicode"><code>&forall; A B. A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_heredity (A B : Class) : A &sube; B -&gt; isSet B -&gt; isSet A</code></div>
+              <div class="formula-hypo-note">Semantic antecedents: A &sube; B and isSet(B) are in the formula</div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; A &sube; B and isSet(B) are antecedents in the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; sethood of B is part of semantic formula, not a syntactic side condition)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; A B. A &sube; B &and; isSet(B) &rArr; isSet(A)', 'axiom ax_heredity (A B : Class) : A &sube; B -&gt; isSet B -&gt; isSet A')">📋 Copy</button></td>
@@ -304,7 +334,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_power_set (X : Class) : isSet X -&gt; isSet (powerClass X)</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; isSet(X) is the premise inside the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; isSet(X) is the premise inside the semantic formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &rArr; isSet(P(X))', 'axiom ax_power_set (X : Class) : isSet X -&gt; isSet (powerClass X)')">📋 Copy</button></td>
@@ -322,7 +352,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_regularity (X : Class) : (&forall; x, (&forall; y, y &isin; x -&gt; y &isin; X) -&gt; x &isin; X) -&gt; V &sube; X</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; well-foundedness is formulated directly in the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; foundation is formulated directly in the semantic formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. (&forall; x. (&forall; y &isin; x. y &isin; X) &rArr; x &isin; X) &rArr; V &sube; X', 'axiom ax_regularity (X : Class) : (&forall; x, (&forall; y, y &isin; x -&gt; y &isin; X) -&gt; x &isin; X) -&gt; V &sube; X')">📋 Copy</button></td>
@@ -338,9 +368,13 @@
             <td>
               <div class="stmt-unicode"><code>X &preceq; Y &hArr; &exist; f. Inj(f) &and; Dom(f) = X &and; Ran(f) &sube; Y</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def size_le (X Y : Class) : Prop := &exist; f : Class, is_injective f &and; dom f = X &and; ran f &sube; Y</code></div>
+              <div class="formula-hypo-note">Semantic matrix: Inj(f) &and; Dom(f) = X are conjuncts in formula</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>f &notin; FV(X, Y)</strong><br/>Bound function variable f is fresh; injectivity &amp; domain are matrix conjuncts in formula</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">Fresh(f, {X, Y}) : Bool</span><br/>
+                Bound function identifier f : Var is fresh; injectivity is in the semantic formula
+              </div>
             </td>
             <td style="text-align: center;"><span class="badge" style="color:#fbbf24; background:rgba(251,191,36,0.15);">Repaired</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'X &preceq; Y &hArr; &exist; f. Inj(f) &and; Dom(f) = X &and; Ran(f) &sube; Y', 'def size_le (X Y : Class) : Prop := &exist; f : Class, is_injective f &and; dom f = X &and; ran f &sube; Y')">📋 Copy</button></td>
@@ -358,7 +392,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_limitation_of_size (X : Class) : isSet X &hArr; &not;(size_le V X)</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; equinumerosity with V is inside the equivalence formula)</span>
+              <span class="side-condition-none">None (Closed axiom; equinumerosity with V is inside the semantic equivalence formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &hArr; &not;(V &preceq; X)', 'axiom ax_limitation_of_size (X : Class) : isSet X &hArr; &not;(size_le V X)')">📋 Copy</button></td>
@@ -376,7 +410,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def tagged_pair (A B : Class) : Class := class_union (tag1 A) (tag2 B)</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed definition; fiber disjointness is a proven internal theorem)</span>
+              <span class="side-condition-none">None (Closed definition; fiber disjointness is a proven internal theorem in Morse–Kelley)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Independent</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&lang;A, B&rang;tag := inj1(A) &cup; inj2(B)', 'def tagged_pair (A B : Class) : Class := class_union (tag1 A) (tag2 B)')">📋 Copy</button></td>
@@ -394,7 +428,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">theorem tagged_pair_proj1 (A B : Class) : proj1 (tagged_pair A B) = A</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes)</span>
+              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes alike)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&pi;1(&lang;A, B&rang;tag) = A', 'theorem tagged_pair_proj1 (A B : Class) : proj1 (tagged_pair A B) = A')">📋 Copy</button></td>
@@ -410,7 +444,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">theorem tagged_pair_proj2 (A B : Class) : proj2 (tagged_pair A B) = B</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes)</span>
+              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes alike)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&pi;2(&lang;A, B&rang;tag) = B', 'theorem tagged_pair_proj2 (A B : Class) : proj2 (tagged_pair A B) = B')">📋 Copy</button></td>
@@ -428,7 +462,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_infinity : isSet omega &and; empty &isin; omega &and; (&forall; x, x &isin; omega -&gt; succ x &isin; omega)</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; inductive closure is formulated inside the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; inductive closure is formulated inside the semantic formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(&omega;) &and; &empty; &isin; &omega; &and; (&forall; x &isin; &omega;. x &cup; {x} &isin; &omega;)', 'axiom ax_infinity : isSet omega &and; empty &isin; omega &and; (&forall; x, x &isin; omega -&gt; succ x &isin; omega)')">📋 Copy</button></td>
@@ -446,7 +480,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, isSet U &and; is_universe U &and; X &isin; U</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Closed axiom; sethood condition is the antecedent of the formula)</span>
+              <span class="side-condition-none">None (Closed axiom; sethood condition is the antecedent of the semantic formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &rArr; &exist; U. isSet(U) &and; isUniverse(U) &and; X &isin; U', 'axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, isSet U &and; is_universe U &and; X &isin; U')">📋 Copy</button></td>
@@ -455,17 +489,17 @@
       </table>
     </div>
 
-    <h2>2.1 Core Inference Rules &amp; Syntactic Side Conditions (LCF Engine)</h2>
+    <h2>2.1 Core Inference Rules: Semantic Schemata &amp; Syntactic Side Conditions</h2>
     <p style="color: var(--text-muted); margin-bottom: 1rem;">
-      In LCF-style proof assistants and formal predicate calculi (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4; Obelisk <code>program/types/foundations.ML</code> and <code>program/newchecker.ML</code>), sound logical deduction depends strictly on validating <strong>syntactic side conditions</strong> (such as variable freeness, absence of variable capture, and eigenvariable freshness) before firing an inference rule:
+      In the Obelisk LCF kernel (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4; Obelisk <code>program/types/foundations.ML</code> and <code>program/newchecker.ML</code>), inference rules transform semantic formulas under the guard of <strong>syntactic side-condition formulas</strong> in the ambient type theory:
     </p>
     <div style="overflow-x: auto;">
       <table class="axiom-table">
         <thead>
           <tr>
             <th style="width: 170px;">Inference Rule</th>
-            <th>Formal Derivation Schema</th>
-            <th style="width: 320px;">Syntactic Side Conditions (Metalogical Provisos)</th>
+            <th>Semantic Derivation Schema</th>
+            <th style="width: 320px;">Syntax (Type-Theoretic Side Condition)</th>
             <th style="width: 75px; text-align: center;">Action</th>
           </tr>
         </thead>
@@ -478,7 +512,7 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val MP : thm -&gt; thm -&gt; thm</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Unconditional propositional elimination on formulas A, B)</span>
+              <span class="side-condition-none">None (Type: A, B : Fm; unconditional propositional rule)</span>
             </td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; A &rarr; B, &Delta; &vdash; A &Longrightarrow; &Gamma; &cup; &Delta; &vdash; B', 'val MP : thm -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
@@ -489,11 +523,15 @@
             <td>
               <div class="stmt-unicode"><code>&vdash; (&forall; x. &phi;) &rarr; &phi;[t/x] &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &forall; x. &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &phi;[t/x])</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_FI : term -&gt; variable -&gt; thm -&gt; thm (* foundations.ML: sidconFFI *)</code></div>
+              <div class="formula-hypo-note">Semantic note: x is an object variable instantiated with term t</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>t is free for x in &phi; (sidconFFI)</strong><br/>Correct substitution: no free variable in term t becomes captured by a quantifier in formula &phi;</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">FFI(t, x, &phi;) : Bool</span><br/>
+                Term t : Term is free for substitution for variable identifier x : Var in formula &phi; : Fm (sidconFFI; no quantifier capture)
+              </div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; (&forall; x. &phi;) &rarr; &phi;[t/x] [t free for x in &phi;]', 'val rule_FI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; (&forall; x. &phi;) &rarr; &phi;[t/x] [FFI(t, x, &phi;)]', 'val rule_FI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
           </tr>
 
           <!-- Exists Instantiation (EI / ExisR) -->
@@ -502,11 +540,15 @@
             <td>
               <div class="stmt-unicode"><code>&vdash; &phi;[t/x] &rarr; &exist; x. &phi; &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &phi;[t/x] &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &exist; x. &phi;)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_EI : term -&gt; variable -&gt; thm -&gt; thm (* foundations.ML: sidconFFI *)</code></div>
+              <div class="formula-hypo-note">Semantic note: x is an object variable witnessed by term t</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>t is free for x in &phi; (sidconFFI)</strong><br/>Term t is free for substitution for all free occurrences of variable x in formula &phi;</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">FFI(t, x, &phi;) : Bool</span><br/>
+                Term t : Term is free for variable identifier x : Var in formula &phi; : Fm (sidconFFI)
+              </div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi;[t/x] &rarr; &exist; x. &phi; [t free for x in &phi;]', 'val rule_EI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi;[t/x] &rarr; &exist; x. &phi; [FFI(t, x, &phi;)]', 'val rule_EI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
           </tr>
 
           <!-- Forall Abstraction (FA / Bernays 1 / ForaR) -->
@@ -515,11 +557,15 @@
             <td>
               <div class="stmt-unicode"><code>&Gamma; &vdash; &psi; &rarr; &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &psi; &rarr; &forall; x. &phi; &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &forall; x. &phi;)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_FA : variable -&gt; thm -&gt; thm (* foundations.ML: sidconNFV *)</code></div>
+              <div class="formula-hypo-note">Semantic note: universal generalization over class variable x</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>x &notin; FV(&psi;) &nbsp;|&nbsp; x &notin; FV(&Gamma;) (sidconNFV)</strong><br/>Eigenvariable condition: variable x must NOT occur free in antecedent &psi; or active context &Gamma;</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">NFV(x, &psi;) : Bool &nbsp;|&nbsp; NFV(x, &Gamma;) : Bool</span><br/>
+                Eigenvariable condition: variable identifier x : Var does not occur free in antecedent &psi; : Fm or context &Gamma; : Ctx (sidconNFV)
+              </div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &psi; &rarr; &phi; &Longrightarrow; &Gamma; &vdash; &psi; &rarr; &forall; x. &phi; [x &notin; FV(&psi;)]', 'val rule_FA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &psi; &rarr; &phi; &Longrightarrow; &Gamma; &vdash; &psi; &rarr; &forall; x. &phi; [NFV(x, &psi;)]', 'val rule_FA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
           </tr>
 
           <!-- Exists Abstraction (EA / Bernays 2 / ExisL) -->
@@ -530,9 +576,12 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_EA : variable -&gt; thm -&gt; thm (* foundations.ML: sidconNFV *)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>x &notin; FV(&psi;) &nbsp;|&nbsp; y &notin; FV(&Delta; &cup; {&exist; x. &phi;, &psi;})</strong><br/>Eigenvariable condition: variable x (resp. fresh y) does not occur free in &psi; or hypotheses</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">NFV(x, &psi;) : Bool &nbsp;|&nbsp; NFV(y, &Delta; &cup; {&exist; x. &phi;, &psi;}) : Bool</span><br/>
+                Eigenvariable condition: variable identifier x : Var (resp. fresh y : Var) does not occur free in consequent &psi; : Fm or hypotheses (sidconNFV)
+              </div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &phi; &rarr; &psi; &Longrightarrow; &Gamma; &vdash; (&exist; x. &phi;) &rarr; &psi; [x &notin; FV(&psi;)]', 'val rule_EA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &phi; &rarr; &psi; &Longrightarrow; &Gamma; &vdash; (&exist; x. &phi;) &rarr; &psi; [NFV(x, &psi;)]', 'val rule_EA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
           </tr>
 
           <!-- Generalisation (Gen) -->
@@ -543,9 +592,12 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_Gen : variable -&gt; thm -&gt; thm (* Generalisation_rul *)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>x &notin; FV(&Gamma;)</strong><br/>Variable x does not occur free in any active undischarged assumption in context &Gamma;</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">NFV(x, &Gamma;) : Bool</span><br/>
+                Variable identifier x : Var is not free in any active undischarged assumption in context &Gamma;
+              </div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi; &Longrightarrow; &vdash; &forall; x. &phi; [x &notin; FV(&Gamma;)]', 'val rule_Gen : variable -&gt; thm -&gt; thm')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi; &Longrightarrow; &vdash; &forall; x. &phi; [NFV(x, &Gamma;)]', 'val rule_Gen : variable -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
 
           <!-- Equality Substitution -->
@@ -556,7 +608,10 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_subst : thm -&gt; thm -&gt; thm</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>s, t free for x in &phi;</strong><br/>No free variables in terms s or t become captured after substitution into formula &phi;</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">FFI(s, x, &phi;) &and; FFI(t, x, &phi;) : Bool</span><br/>
+                Terms s, t : Term are free for variable identifier x : Var in formula &phi; : Fm (no variable capture)
+              </div>
             </td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; s = t, &Delta; &vdash; &phi;[s/x] &Longrightarrow; &Gamma; &cup; &Delta; &vdash; &phi;[t/x]', 'val rule_subst : thm -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
@@ -567,9 +622,13 @@
             <td>
               <div class="stmt-unicode"><code>&vdash; y &isin; {x | &phi;(x)} &hArr; isSet(y) &and; &phi;[y/x]</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val ComprAx : (Truth.Expression LBound) -&gt; Thm (* newchecker: ComprAx *)</code></div>
+              <div class="formula-hypo-note">Semantic note: x, y are class/set variables in comprehension</div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>y free for x in &phi; &amp; y &notin; FV({x | &phi;})</strong><br/>Variable y is free for substitution for bound variable x and does not clash with the binder</div>
+              <div class="side-condition-box">
+                <span class="type-theoretic-formula">FFI(y, x, &phi;) &and; NFV(y, {x | &phi;}) : Bool</span><br/>
+                Variable identifier y : Var is free for bound variable identifier x : Var in &phi; : Fm and does not clash with the binder
+              </div>
             </td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; y &isin; {x | &phi;(x)} &hArr; isSet(y) &and; &phi;[y/x]', 'val ComprAx : (Truth.Expression LBound) -&gt; Thm')">📋 Copy</button></td>
           </tr>
@@ -583,7 +642,7 @@
       Source file: <a href="Obelisk.lean" target="_blank" style="color:var(--primary);">Obelisk.lean</a>.
     </p>
     <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">
-      In Morse–Kelley class theory, all theorems are proven statements in the object language. All mathematical prerequisites (such as sethood or element membership) are <strong>internal antecedents within the formula</strong>, not external side conditions. Closed theorems have no syntactic side conditions.
+      In Morse–Kelley class theory, all theorems are proven statements in the object language. All mathematical prerequisites (such as sethood or element membership) are <strong>internal antecedents within the semantic formula</strong>, not external side conditions. Closed theorems have no syntactic side conditions.
     </p>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 1.5rem 0;">
@@ -593,10 +652,10 @@
           <strong style="color: #38bdf8;">Thm 1: empty_unique</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&forall; E1 E2. (&forall; x. &not;(x &isin; E1)) &and; (&forall; x. &not;(x &isin; E2)) &rArr; E1 = E2', 'theorem empty_unique (E1 E2 : Class) (h1 : &forall; x, &not; x &isin; E1) (h2 : &forall; x, &not; x &isin; E2) : E1 = E2')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Uniqueness of the empty class: <code>&forall; E1 E2. &empty;(E1) &and; &empty;(E2) &rArr; E1 = E2</code></div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>&forall; E1 E2. &empty;(E1) &and; &empty;(E2) &rArr; E1 = E2</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem empty_unique (E1 E2 : Class) : E1 = E2</code>
-        <div class="formula-hypo-note">Hypotheses in formula: &forall; x. &not;(x &isin; E1) and &forall; x. &not;(x &isin; E2) (antecedents in implication)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; element non-membership is internal to formula)</div>
+        <div class="formula-hypo-note">Semantic Hypotheses (in formula): &forall; x. &not;(x &isin; E1) and &forall; x. &not;(x &isin; E2)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem; element non-membership is internal to formula)</div>
       </div>
 
       <!-- Theorem 2 -->
@@ -605,10 +664,10 @@
           <strong style="color: #38bdf8;">Thm 2: extensionality</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&forall; X Y. (&forall; z. z &isin; X &hArr; z &isin; Y) &rArr; X = Y', 'theorem extensionality (X Y : Class) (h : &forall; z, z &isin; X &hArr; z &isin; Y) : X = Y')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Extensionality of classes: <code>X = Y &hArr; &forall; z. (z &isin; X &hArr; z &isin; Y)</code></div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>X = Y &hArr; &forall; z. (z &isin; X &hArr; z &isin; Y)</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem extensionality (X Y : Class) : X = Y</code>
-        <div class="formula-hypo-note">Hypothesis in formula: &forall; z. (z &isin; X &hArr; z &isin; Y) (antecedent in implication)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; element equivalence is an internal antecedent)</div>
+        <div class="formula-hypo-note">Semantic Hypothesis (in formula): &forall; z. (z &isin; X &hArr; z &isin; Y) (antecedent in implication)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem; element equivalence is an internal antecedent)</div>
       </div>
 
       <!-- Theorem 3 -->
@@ -617,10 +676,10 @@
           <strong style="color: #38bdf8;">Thm 3: hereditary_subsets</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&forall; A B. A &sube; B &and; isSet(B) &rArr; isSet(A)', 'theorem hereditary_subsets (A B : Class) (hsub : A &sube; B) (hset : isSet B) : isSet A')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Subclasses of sets are sets: <code>A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem hereditary_subsets (A B : Class) : isSet A</code>
-        <div class="formula-hypo-note">Hypotheses in formula: A &sube; B and isSet(B) (explicit antecedents in implication)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; sethood of B is part of the formula, not an external proviso)</div>
+        <div class="formula-hypo-note">Semantic Hypotheses (in formula): A &sube; B and isSet(B) (explicit antecedents in implication)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem; sethood of B is part of the formula, not an external proviso)</div>
       </div>
 
       <!-- Theorem 5 -->
@@ -629,10 +688,10 @@
           <strong style="color: #38bdf8;">Thm 5: not_isSet_V (Russell)</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&not; isSet(V)', 'theorem not_isSet_V : &not; isSet V')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Universal Class is Proper: <code>&not; isSet(V)</code> (Resolves Russell Paradox)</div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>&not; isSet(V)</code> (Resolves Russell Paradox)</div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem not_isSet_V : &not; isSet V</code>
-        <div class="formula-hypo-note">Hypotheses in formula: None (unconditional negation theorem)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem)</div>
+        <div class="formula-hypo-note">Semantic Hypotheses (in formula): None (unconditional negation theorem)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem)</div>
       </div>
 
       <!-- Theorem 7 -->
@@ -641,10 +700,10 @@
           <strong style="color: #38bdf8;">Thm 7: on_not_set (Burali-Forti)</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&not; isSet(On)', 'theorem on_not_set : &not; isSet On')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Ordinal Class is Proper: <code>&not; isSet(On)</code> (Resolves Burali-Forti Paradox)</div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>&not; isSet(On)</code> (Resolves Burali-Forti Paradox)</div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem on_not_set : &not; isSet On</code>
-        <div class="formula-hypo-note">Hypotheses in formula: None (unconditional negation theorem)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem)</div>
+        <div class="formula-hypo-note">Semantic Hypotheses (in formula): None (unconditional negation theorem)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem)</div>
       </div>
 
       <!-- Theorem 9 -->
@@ -653,10 +712,10 @@
           <strong style="color: #38bdf8;">Thm 9: tagged_pair_proj</strong>
           <button class="copy-btn" onclick="copySnippet(this, '&pi;1(&lang;A, B&rang;tag) = A &and; &pi;2(&lang;A, B&rang;tag) = B', 'theorem tagged_pair_proj (A B : Class) : proj1 (tagged_pair A B) = A &and; proj2 (tagged_pair A B) = B')">📋 Copy</button>
         </div>
-        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Tagged pair invertibility: <code>&pi;<sub>1</sub>(&lang;A, B&rang;) = A &and; &pi;<sub>2</sub>(&lang;A, B&rang;) = B</code></div>
+        <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Semantic Formula: <code>&pi;<sub>1</sub>(&lang;A, B&rang;) = A &and; &pi;<sub>2</sub>(&lang;A, B&rang;) = B</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem tagged_pair_proj (A B : Class) : proj1 (tagged_pair A B) = A &and; proj2 (tagged_pair A B) = B</code>
-        <div class="formula-hypo-note">Hypotheses in formula: None (holds universally for all classes A, B)</div>
-        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; holds unconditionally)</div>
+        <div class="formula-hypo-note">Semantic Hypotheses (in formula): None (holds universally for all classes A, B)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntax (Type-Theoretic Side Condition):</strong> None (Closed theorem; holds unconditionally)</div>
       </div>
     </div>
 
