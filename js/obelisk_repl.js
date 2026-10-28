@@ -1,19 +1,24 @@
-// Obelisk In-Browser Real Interactive REPL Engine & Proof State
-// Integrates with obelisk_engine.js for real machine-checked deduction.
+/**
+ * Obelisk WebREPL Workbench Controller
+ * Connects the `.nbg` Source Editor and Command Bar to:
+ * 1. Live Poly/ML 5.7.1 `NBGSurfaceCompiler` (`/api/obelisk/compile`) when available
+ * 2. Client-side `ObeliskNBGCompiler` bidirectional kernel type-checker
+ */
+
 class ObeliskREPL {
-  constructor(outputElement, goalBoxElement) {
-    this.out = outputElement;
-    this.goalBox = goalBoxElement;
-    this.history = [];
-    this.activeProof = null;
+  constructor(outputEl, goalBoxEl, editorEl) {
+    this.outputEl = outputEl;
+    this.goalBoxEl = goalBoxEl;
+    this.editorEl = editorEl;
+    this.clientCompiler = new window.ObeliskNBGCompiler();
+    this.lastResult = null;
     this.theorems = new Map();
     this.initDefaultTheorems();
-    this.updateGoalBox();
   }
 
   initDefaultTheorems() {
     this.theorems.set("and_comm", "Theorem and_comm: (A ∧ B) → (B ∧ A)");
-    this.theorems.set("or_comm", "Theorem or_comm: (A ∨ B) → (B ∨ A)");
+    this.theorems.set("or_comm", "Theorem or_comm: (A ∨ B) → (B ∧ A)");
     this.theorems.set("identity", "Theorem identity: (P → Q) → (P → Q)");
     this.theorems.set("russell", "Theorem russell_paradox: ~ isSet(R) where R = {x | x ∉ x}");
     this.theorems.set("empty_unique", "Theorem empty_set_unique: ∀X. ∅ ⊆ X ∧ (isSet(0) ∧ ∀x. x ∉ ∅)");
@@ -22,185 +27,186 @@ class ObeliskREPL {
     this.theorems.set("hereditary_subsets", "Theorem hereditary_subsets: ∀x y. isSet(x) ∧ y ⊆ x → isSet(y)");
     this.theorems.set("extensionality", "Theorem extensionality: (∀x. x ∈ A ↔ x ∈ B) → A = B");
     this.theorems.set("burali_forti", "Theorem burali_forti_paradox: ~ isSet(On)");
+    this.theorems.set("modus_ponens", "Theorem modus_ponens: (A → B) ∧ A → B");
+    this.theorems.set("currying", "Theorem currying: (A ∧ B → C) ↔ (A → B → C)");
+    this.theorems.set("cantor_diagonal", "Theorem cantor_diagonal: ~ ∃f. surjection(f, X, P(X))");
+    this.theorems.set("quantifier_swap", "Theorem quantifier_swap: (∀x ∀y. P(x, y)) → (∀y ∀x. P(x, y))");
+    this.theorems.set("sub_succ", "Theorem sub_succ: ∀x. x ⊆ succ(x)");
+    this.theorems.set("stage3_quat", "Theorem stage3_quat: [| phi |] ↔ phi (Quotation Equivalence)");
+    this.theorems.set("tagged_pairing", "Theorem tagged_pairing: ⟨x, y⟩_tag = ⟨u, v⟩_tag → x = u ∧ y = v");
+    this.theorems.set("nbg_no_self_membership", "Theorem nbg_no_self_membership: ∀x. x ∉ x");
+    this.theorems.set("nbg_no_two_cycle", "Theorem nbg_no_two_cycle: ∀x y. ~(x ∈ y ∧ y ∈ x)");
+    this.theorems.set("nbg_singleton_choice", "Theorem nbg_singleton_choice: ∀x. Choice({x}) = x");
   }
 
-  updateGoalBox() {
-    if (!this.goalBox) return;
-    if (!this.activeProof) {
-      this.goalBox.innerHTML = `
-        <span style="color:#10b981;">Mode: Ready</span><br>
-        Type <code>prove &lt;thm&gt;</code> to start an interactive proof.<br>
-        Presets: <code>and_comm</code>, <code>or_comm</code>, <code>identity</code>.
-      `;
+  async compileCurrentEditor(presetTitle = null) {
+    const src = this.editorEl ? this.editorEl.value : '';
+    return this.compileSource(src, presetTitle);
+  }
+
+  async compileSource(src, presetTitle = null) {
+    if (!src || !src.trim()) {
+      this.renderReport({
+        status: 'REJECTED',
+        engine: 'Obelisk Kernel Type-Checker',
+        elapsed_ms: 0,
+        theory: 'NBG_Predicative',
+        defined_formulas: [],
+        verified_theorems: [],
+        error: 'Empty Obelisk source program.'
+      }, presetTitle);
       return;
     }
 
-    if (this.activeProof.isSolved()) {
-      this.goalBox.innerHTML = `
-        <span style="color:#10b981; font-weight:700;">✓ ALL GOALS SOLVED!</span><br>
-        Type <code>qed</code> to seal theorem '${this.activeProof.name}'.
-      `;
-      return;
-    }
+    // 1. Always run client-side recursive-descent parser & bidirectional type-checker immediately
+    const clientReport = this.clientCompiler.compileSource(src);
 
-    const g = this.activeProof.currentGoal();
-    let hypsHtml = "";
-    for (const h in g.hypotheses) {
-      hypsHtml += `<div><span style="color:#38bdf8;">${h}</span> : ${escapeHtml(g.hypotheses[h].toString())}</div>`;
-    }
-    if (!hypsHtml) hypsHtml = `<div style="color:#64748b;">(No local hypotheses)</div>`;
-
-    this.goalBox.innerHTML = `
-      <div style="color:#f59e0b; font-weight:700; margin-bottom:4px;">Subgoal 1 of ${this.activeProof.goals.length}:</div>
-      <div style="background:rgba(0,0,0,0.4); padding:6px; border-radius:4px; margin-bottom:6px; font-size:0.75rem;">
-        ${hypsHtml}
-      </div>
-      <div style="border-top:1px dashed #475569; padding-top:4px;">
-        <span style="color:#10b981; font-weight:700;">⊢</span> <code>${escapeHtml(g.conclusion.toString())}</code>
-      </div>
-    `;
-  }
-
-  evalCommand(cmd) {
-    cmd = cmd.trim();
-    if (!cmd) return "";
-    this.history.push(cmd);
-
-    // Help
-    if (cmd === "help") {
-      return "Commands:\n  prove <name>     Start interactive proof (and_comm, or_comm, identity)\n  intro [name]     Introduce hypothesis\n  split            Break conjunction goal into 2 subgoals\n  left / right     Choose disjunction branch\n  destruct <hyp>   Unpack hypothesis (A /\\ B or A \\/ B)\n  exact <hyp>      Solve goal with matching hypothesis\n  auto             Automated goal solver\n  qed              Complete proof\n  axioms, theorems, clear";
-    }
-
-    if (cmd === "axioms") {
-      return "Morse-Kelley Core Axioms Loaded:\n  1. Extensionality\n  2. Class Comprehension\n  3. Foundation (Regularity)\n  4. Pairing & Dunaev Tagged Pairs\n  5. Union & Power Set\n  6. Limitation of Size (Von Neumann)";
-    }
-
-    if (cmd === "theorems") {
-      return Array.from(this.theorems.values()).join("\n");
-    }
-
-    // Start theorem proof
-    if (cmd.startsWith("prove ")) {
-      const thmName = cmd.substring(6).trim();
-      if (window.Obelisk && window.Obelisk.PRESETS[thmName]) {
-        const p = window.Obelisk.PRESETS[thmName];
-        this.activeProof = new window.Obelisk.ProofState(p.name, p.formula);
-        this.updateGoalBox();
-        return `[PROOF STARTED] Proving ${p.desc}\nGoal 1: |- ${p.formula}\nType 'intro', 'split', 'exact', or 'auto' to proceed.`;
-      }
-      return `Unknown preset '${thmName}'. Try: and_comm, or_comm, identity`;
-    }
-
-    // NBG Propositions-as-Types SML Compiler Check
-    if (cmd.startsWith("typecheck ")) {
-      const thm = cmd.substring(10).trim();
-      const nbgTheorems = {
-        "identity": {
-          expr: "ELam (\"h\", tyA, EVar \"h\")",
-          type: "A -> A",
-          desc: "Identity Tautology"
-        },
-        "modus_ponens": {
-          expr: "ELam (\"f\", TArrow(tyA, tyB), ELam (\"x\", tyA, EApp (EVar \"f\", EVar \"x\")))",
-          type: "(A -> B) -> A -> B",
-          desc: "Modus Ponens Deduction"
-        },
-        "and_comm": {
-          expr: "ELam (\"p\", TProd(tyA, tyB), EPair (ESnd (EVar \"p\"), EFst (EVar \"p\")))",
-          type: "(A /\\ B) -> (B /\\ A)",
-          desc: "Conjunction Commutativity"
-        },
-        "currying": {
-          expr: "ELam (\"f\", TArrow(TProd(tyA, tyB), tyC), ELam (\"a\", tyA, ELam (\"b\", tyB, EApp (EVar \"f\", EPair (EVar \"a\", EVar \"b\")))))",
-          type: "((A /\\ B) -> C) -> (A -> B -> C)",
-          desc: "Currying Isomorphism"
-        },
-        "russell": {
-          expr: "ELam (\"hSetR\", TSet(russellClass), EApp(proofNoFixedPointNegIff rInR, EPair(ELam(\"hIn\", rInR, ESnd(EApp(EFst(EAxCompr(\"x\", russellFormula, russellClass)), EVar \"hIn\"))), ELam(\"hNotIn\", notRInR, EApp(ESnd(EAxCompr(\"x\", russellFormula, russellClass)), EPair(EVar \"hSetR\", EVar \"hNotIn\"))))))",
-          type: "Set({ x | (x in x -> _|_) }) -> _|_",
-          desc: "Russell Class Non-Sethood Theorem (Pure NBG Comprehension, Zero Diagonal Axiom)"
-        },
-        "cantor_diagonal": {
-          expr: "ETLam (\"R\", ClassSort, ETLam (\"c\", SetSort, ELam (\"hSetC\", TSet(FVar \"c\"), ELam (\"hEqv\", equivTy, EApp(prfNotCCInR, EApp(EFst(EVar \"hEqv\"), EApp(ESnd(EAxCompr(\"x\", diagPhi, FVar \"c\")), EPair(EVar \"hSetC\", prfNotCCInR))))))))",
-          type: "forall R:Class. forall c:Set. Set(c) -> ((c in {x | [x,x]_D in R -> _|_} <-> [c,c]_D in R) -> _|_)",
-          desc: "Cantor's Diagonal Theorem in Pure NBG with Dunaev Tagged Pairs"
-        },
-        "quantifier_swap": {
-          expr: "ELam (\"hEx\", TSigma(\"y\", SetSort, TPi(\"x\", SetSort, TIn(FVar \"x\", FVar \"y\"))), ETLam (\"x\", SetSort, EUnpack(EVar \"hEx\", \"y0\", \"hAllX\", EPack(FVar \"y0\", ETApp(EVar \"hAllX\", FVar \"x\"), TSigma(\"y\", SetSort, TIn(FVar \"x\", FVar \"y\"))))))",
-          type: "(exists y:Set. forall x:Set. x in y) -> (forall x:Set. exists y:Set. x in y)",
-          desc: "First-Order Existential-Universal Quantifier Swap"
-        },
-        "sub_succ": {
-          expr: "ETLam (\"x\", ClassSort, ETLam (\"z\", ClassSort, ELam (\"hInX\", TIn(FVar \"z\", FVar \"x\"), EApp(ESnd(EAxCompr(\"u\", TSum(TIn(FVar \"u\", FVar \"x\"), TEq(FVar \"u\", FVar \"x\")), FVar \"z\")), EPair(EApp(EAxHeredity(FVar \"z\", FVar \"x\"), EVar \"hInX\"), EInl(EVar \"hInX\", TEq(FVar \"z\", FVar \"x\")))))))",
-          type: "forall x:Class. forall z:Class. z in x -> z in { u | u in x \\/ u = x }",
-          desc: "Ordinal Successor Subclass Inclusion via NBG Heredity + Comprehension"
-        },
-        "stage3_quat": {
-          expr: "NBGQuatStage3.instantiateSeparationRussellProof Fau (FVar \"x\")",
-          type: "(Set({ x_1 | (x_1 in x /\\ (x_1 in x_1 -> _|_)) }) /\\ { x_1 | (x_1 in x /\\ (x_1 in x_1 -> _|_)) } in x) -> _|_",
-          desc: "Stage III Staged Quotation ‹...› & Antiquotation ⟦...⟧ with Tarski Stratification (Tau < Fau)"
-        },
-        "tagged_pairing": {
-          expr: "ETLam (\"A\", ClassSort, ETLam (\"B\", ClassSort, EAxDunaevPairProj (FVar \"A\", FVar \"B\")))",
-          type: "forall A:Class. forall B:Class. pr1([A, B]_D) = A /\\ pr2([A, B]_D) = B",
-          desc: "Dunaev Tagged Pair Projections for Arbitrary Classes (Sets & Proper Classes)"
-        },
-        "ordinal_induction": {
-          expr: "ELam (\"P\", TArrow(TOrdinal, TProp), ELam (\"step\", TWellFoundedStep, EFixInd (EVar \"P\", EVar \"step\")))",
-          type: "(On -> Prop) -> (∀α. (∀β < α. P β) -> P α) -> ∀α. P α",
-          desc: "Transfinite Well-Founded Ordinal Induction"
-        },
-        "hereditary_subsets": {
-          expr: "ELam (\"hSub\", TSubset(FVar \"y\", FVar \"x\"), ELam (\"hSet\", TSet(FVar \"x\"), EApp(EApp(EVar \"ax_heredity\", EVar \"hSub\"), EVar \"hSet\")))",
-          type: "y ⊆ x -> isSet(x) -> isSet(y)",
-          desc: "Hereditary Subclass Sethood Preservation"
-        },
-        "nbg_no_self_membership": {
-          expr: "NBGRegularity.proofNoSelfMembership",
-          type: "forall a:Class. Set(a) -> (a in a -> _|_)",
-          desc: "Irreflexivity of Membership from Foundation (No Self-Membership)"
-        },
-        "nbg_no_two_cycle": {
-          expr: "NBGRegularity.proofNoTwoCycle",
-          type: "forall a:Class. forall b:Class. (Set(a) /\\ Set(b)) -> ((a in b /\\ b in a) -> _|_)",
-          desc: "No Membership 2-Cycle from Foundation Axiom on {a, b}"
-        },
-        "nbg_singleton_choice": {
-          expr: "NBGChoiceTheorems.proofSingletonChoiceEq",
-          type: "forall a:Class. (eps x. x = a) = a",
-          desc: "Hilbert Global Choice Definite Description on Singletons"
+    // 2. Also query live Poly/ML 5.7.1 `/api/obelisk/compile` if reachable
+    let finalReport = clientReport;
+    try {
+      const resp = await fetch('/api/obelisk/compile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: src })
+      });
+      if (resp.ok || resp.status === 400 || resp.status === 408) {
+        const serverData = await resp.json();
+        if (serverData && (serverData.status === 'COMPILED' || serverData.status === 'REJECTED')) {
+          finalReport = serverData;
         }
-      };
-
-      if (nbgTheorems[thm]) {
-        const item = nbgTheorems[thm];
-        return `======================================================================
-[SML NBG COMPILER: PROPOSITIONS-AS-TYPES TYPECHECK]
-Theorem:         ${item.desc}
-Target Type:     ${item.type}
-SML Proof Term:  ${item.expr}
-Compiler Backend: Standard ML 97 / CakeML verified compiler
-Check Result:    ✓ SUCCESS: Term strictly inhabits target theorem type
-Code Generation: SKIPPED (Compiler compiles to check, not execute)
-Soundness:       CERTIFIED under NBG Class Theory & Curry-Howard
-======================================================================`;
       }
-      return `Unknown theorem for typecheck. Try: identity, modus_ponens, and_comm, currying, russell, tagged_pairing, ordinal_induction, hereditary_subsets`;
+    } catch (_e) {
+      // Offline / static GitHub Pages fallback uses clientReport
     }
 
-    // Tactic commands during active proof
-    if (this.activeProof) {
-      const res = this.activeProof.execute(cmd);
-      this.updateGoalBox();
-      if (res.solved) {
-        this.activeProof = null;
-        this.updateGoalBox();
-        return res.msg;
+    this.lastResult = finalReport;
+    this.renderReport(finalReport, presetTitle);
+    return finalReport;
+  }
+
+  renderReport(r, presetTitle = null) {
+    const lines = [];
+    const bar = '════════════════════════════════════════════════════════════════════════';
+    lines.push(bar);
+    if (presetTitle) {
+      lines.push(`Preset: ${presetTitle}`);
+    }
+    lines.push(`Engine: ${r.engine} (${r.elapsed_ms || 0} ms)`);
+    lines.push(`Active Theory Level: ${r.theory || 'NBG_Predicative'}`);
+    lines.push(bar);
+
+    if (r.defined_formulas && r.defined_formulas.length > 0) {
+      lines.push(`\n[1] DEFINED FORMULAS (WELL-FORMED TYPES — NOT THEOREMS):`);
+      for (const f of r.defined_formulas) {
+        lines.push(`  • formula ${f.name} : Fm`);
+        lines.push(`      = ${f.formula}`);
+        lines.push(`      (Status: Valid MK/NBG Type definition. Defining a formula does NOT prove it!)`);
       }
-      return (res.success ? "✓ " : "✗ ") + res.msg;
+    } else {
+      lines.push(`\n[1] DEFINED FORMULAS (TYPES): (none declared via 'formula')`);
     }
 
-    if (cmd.startsWith("check ")) {
+    if (r.status === 'COMPILED') {
+      lines.push(`\n[2] VERIFIED THEOREMS (PROOF TERMS INHABITING TARGET FORMULA TYPES):`);
+      if (r.verified_theorems && r.verified_theorems.length > 0) {
+        for (const t of r.verified_theorems) {
+          lines.push(`  ✔ theorem ${t.name}`);
+          lines.push(`      Inhabited Type (Formula): ${t.formula}`);
+          lines.push(`      Proof Term AST Nodes:     ${t.proof_size} (beta-normalized: ${t.normalized_size})`);
+        }
+      } else {
+        lines.push(`  (0 theorem declarations — only formula type definitions were checked)`);
+      }
+      lines.push(`\n✅ COMPILATION SUCCEEDED: All proof terms deterministically type-checked.`);
+    } else {
+      lines.push(`\n[2] KERNEL TYPE-CHECKER REJECTION (DETERMINISTIC REFUSAL):`);
+      lines.push(`  🛑 ${r.error}`);
+      lines.push(`\n❌ COMPILATION REJECTED: The candidate term does not inhabit the claimed MK/NBG formula type.`);
+    }
+
+    if (this.outputEl) {
+      this.outputEl.textContent = lines.join('\n');
+      this.outputEl.scrollTop = 0;
+    }
+    this.updateInspector(r);
+  }
+
+  updateInspector(r) {
+    if (!this.goalBoxEl) return;
+    if (!r) {
+      this.goalBoxEl.innerHTML = `<span style="color:#94a3b8;">Click "Compile &amp; Type-Check Proof" or select a preset on the left.</span>`;
+      return;
+    }
+    const fCount = (r.defined_formulas || []).length;
+    const tCount = (r.verified_theorems || []).length;
+    if (r.status === 'COMPILED') {
+      const fList = (r.defined_formulas || [])
+        .map(f => `<div style="margin-top:4px;color:#38bdf8;"><code>formula ${this.escapeHtml(f.name)}</code> <span style="color:#94a3b8;">(Type)</span></div>`)
+        .join('');
+      const tList = (r.verified_theorems || [])
+        .map(t => `<div style="margin-top:4px;color:#10b981;"><code>✔ ${this.escapeHtml(t.name)}</code> <span style="color:#94a3b8;">(${t.proof_size} nodes)</span></div>`)
+        .join('');
+      this.goalBoxEl.innerHTML =
+        `<div style="color:#10b981;font-weight:700;margin-bottom:6px;">✅ COMPILED &amp; VERIFIED</div>` +
+        `<div><strong>Engine:</strong> ${this.escapeHtml(r.engine)}</div>` +
+        `<div><strong>Theory:</strong> <code>${this.escapeHtml(r.theory)}</code></div>` +
+        `<div style="margin-top:8px;"><strong>Formula Types Defined:</strong> ${fCount}</div>` +
+        fList +
+        `<div style="margin-top:8px;"><strong>Theorems Proved (Terms):</strong> ${tCount}</div>` +
+        tList;
+    } else {
+      this.goalBoxEl.innerHTML =
+        `<div style="color:#ef4444;font-weight:700;margin-bottom:6px;">🛑 REJECTED BY KERNEL</div>` +
+        `<div><strong>Engine:</strong> ${this.escapeHtml(r.engine)}</div>` +
+        `<div style="margin-top:8px;color:#fca5a5;white-space:pre-wrap;">${this.escapeHtml(r.error)}</div>`;
+    }
+  }
+
+  loadPreset(key) {
+    const p = window.OBELISK_PRESETS && window.OBELISK_PRESETS[key];
+    if (!p) return;
+    if (this.editorEl) {
+      this.editorEl.value = p.source;
+    }
+    this.compileSource(p.source, p.title);
+  }
+
+  evalCommand(cmdRaw) {
+    const cmd = (cmdRaw || '').trim();
+    if (!cmd) return '';
+    if (cmd === 'help') {
+      return [
+        'Obelisk Propositions-as-Types Compiler Commands:',
+        '  compile                      - Compile & typecheck the .nbg source in the editor above',
+        '  load <preset_key>            - Load a True or False MK/NBG preset into the editor and compile',
+        '  formula <Name> = <Formula>;  - Parse & check a formula definition (Type)',
+        '  theorem <Name> : <F> = <E>;  - Compile a single theorem proof term directly',
+        '  primitives                   - List all closed kernel proof-term primitives'
+      ].join('\n');
+    }
+    if (cmd === 'primitives') {
+      return [
+        'Kernel Proof-Term Constructors (NBGCompiler.Expr):',
+        '  compr(x. Phi, z)             : z in {x | Phi} <-> (Set(z) /\\ Phi[z/x])   (Predicative in Stage I, Impredicative in Stage II MK)',
+        '  fn (h : A) => e              : A -> B                                    (Implication Introduction)',
+        '  e1 e2                        : B                                         (Modus Ponens: e1 : A -> B, e2 : A)',
+        '  Lam (x : Sort) => e          : forall (x:Sort). P(x)                     (Universal Introduction, eigenvariable fresh)',
+        '  tapp(e, t)                   : P[t/x]                                    (Universal Elimination; checks Set(t) if Sort=Set!)',
+        '  pack(w, prf, exists x:S. P)  : exists (x:S). P(x)                        (Existential Intro; checks Set(w) if Sort=Set!)',
+        '  unpack e1 as (v, h) in e2    : C                                         (Existential Elimination)',
+        '  pair(e1, e2) / fst(e) / snd(e) : A /\\ B                                  (Conjunction Intro / Elim)',
+        '  inl(e, B) / inr(e, A) / case : A \\/ B                                    (Disjunction Intro / Elim)',
+        '  abort(e, A) / dne(e, A) / lem(A) : Classical / Ex Falso rules',
+        '  refl(t) / sym(e) / trans(e1,e2) / rewrite(eq, u.Phi, base) : Equality rules',
+        '  heredity(x, y)               : Set(y) -> x in y -> Set(x)',
+        '  dunaev_proj(A, B)            : pr1([A, B]_D) = A /\\ pr2([A, B]_D) = B'
+      ].join('\n');
+    }
+    if (cmd === 'compile') {
+      this.compileCurrentEditor();
+      return 'Compiling editor source...';
+    }
+    if (cmd.startsWith('check ')) {
       const thm = cmd.substring(6).trim();
       if (this.theorems.has(thm)) {
         const desc = this.theorems.get(thm);
@@ -208,15 +214,28 @@ Soundness:       CERTIFIED under NBG Class Theory & Curry-Howard
       }
       return `[ERROR] Unknown theorem '${thm}'. Available certified theorems:\n  ` + Array.from(this.theorems.keys()).join(", ");
     }
+    if (cmd.startsWith('load ')) {
+      const key = cmd.slice(5).trim();
+      if (window.OBELISK_PRESETS && window.OBELISK_PRESETS[key]) {
+        this.loadPreset(key);
+        return `Loaded preset '${key}'.`;
+      }
+      return `Unknown preset '${key}'. Available: ${Object.keys(window.OBELISK_PRESETS || {}).join(', ')}`;
+    }
+    // Otherwise treat the command itself as a snippet of Obelisk `.nbg` code and compile it!
+    if (this.editorEl) {
+      this.editorEl.value = cmd;
+    }
+    this.compileSource(cmd, 'Interactive Command Snippet');
+    return 'Compiled snippet.';
+  }
 
-    return `Unrecognized command '${cmd}'. Type 'help' or 'prove and_comm'.`;
+  escapeHtml(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
   }
 }
 
-function escapeHtml(s) {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-if (typeof window !== 'undefined') {
-  window.ObeliskREPL = ObeliskREPL;
-}
+window.ObeliskREPL = ObeliskREPL;

@@ -183,9 +183,9 @@
   <header class="full-width-container">
     <div class="logo">Obelisk <span>Metatheory</span></div>
     <div class="dialect-switch-wrap">
-      <span class="dialect-switch-label">Notation Dialect:</span>
-      <button id="btn-dialect-typing" class="dialect-btn active" onclick="setDialectMode('typing')" title="Typing Judgment in Metalanguage: (x : Class)">Typing <code>(x : Class)</code></button>
-      <button id="btn-dialect-membership" class="dialect-btn" onclick="setDialectMode('membership')" title="Set-theoretic Membership: (x ∈ Class)">Membership <code>(x &isin; Class)</code></button>
+      <span class="dialect-switch-label">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')" title="Meaning in Model inside NBG (Pure set/class theory: ∀X, ∀x ∈ V, isSet(x); strictly no pseudo-membership in Class or Theory)">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')" title="Checkable / Executable Code in CakeML &amp; Poly/ML (AST expressions: Class_Expre, Fm_Expre, Theory_Expre; decidable boolean functions)">⚡ Executable SML (CakeML / PolyML)</button>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -203,6 +203,19 @@
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
       When moving from object-theory to metatheory, syntactic side conditions become first-class semantic statements, accompanied by meta-metatheoretic conditions.
     </p>
+
+    <!-- EPISTEMIC SOUNDNESS & LEVEL DISPARITY BANNER -->
+    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 12px;">
+      <span style="font-size: 1.3rem;">💡</span>
+      <div style="font-size: 0.88rem; line-height: 1.5; color: #cbd5e1;">
+        <strong style="color: #38bdf8;">Epistemic Soundness &amp; Level Disparity Invariant:</strong>
+        Notation is fragile—always consult <code>typetheory.ML</code> for semantics, never surface syntax!
+        We distinguish between:
+        (1) <strong>Meaning in Model inside NBG</strong> (pure set/class universe: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), strictly no category errors like \(\in \mathrm{Theory}\) or \(\in \mathrm{Class}\)), and
+        (2) <strong>Checkable or Executable Code in CakeML &amp; Poly/ML</strong> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>).
+        <span style="color: #f59e0b;">Off-by-One Level Rule:</span> Standard ML cannot have a type of all classes or sets (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+      </div>
+    </div>
 
     <!-- METATHEORY PRINCIPLES -->
     <div class="theory-box">
@@ -264,7 +277,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_C \in \mathsf{Variable} \land \phi \in \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_C  \land \phi  \land \mathrm{finiteContext}(\Gamma)\)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -305,7 +318,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X \in \mathsf{Variable}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X \)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -346,7 +359,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
-              <div class="view-membership" style="display:none;">\(t : \mathsf{Term} \land \mathbf{v}_x \in \mathsf{Variable} \land \phi \in \mathsf{Fm}\)</div>
+              <div class="view-membership" style="display:none;">\(t : \mathsf{Term} \land \mathbf{v}_x  \land \phi \)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -387,7 +400,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \in \mathsf{Variable} \land \psi \in \mathsf{Fm}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \psi \)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -428,7 +441,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \in \mathsf{Variable} \land \Gamma \in \mathsf{Ctx}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \Gamma \)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -469,7 +482,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_v \in \mathsf{Variable} \land \psi \in \mathsf{Fm} \land \Gamma \in \mathsf{Ctx}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_v  \land \psi  \land \Gamma \)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
@@ -493,7 +506,7 @@
           <td>
             <div class="semantic-box">
               <div class="view-typing">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
-              <div class="view-membership" style="display:none;">\((\alpha \in \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+              <div class="view-membership" style="display:none;">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
             </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
             
@@ -592,7 +605,7 @@
           <td>
             <div class="syntax-box">
               <div class="view-typing">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathrm{On} \in \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{On}  \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             

@@ -375,9 +375,9 @@
   <header class="full-width-container">
     <div class="logo">Obelisk <span>Proof Assistant</span></div>
     <div class="dialect-switch-wrap">
-      <span class="dialect-switch-label">Notation Dialect:</span>
-      <button id="btn-dialect-typing" class="dialect-btn active" onclick="setDialectMode('typing')" title="Typing Judgment in Metalanguage: (x : Class)">Typing <code>(x : Class)</code></button>
-      <button id="btn-dialect-membership" class="dialect-btn" onclick="setDialectMode('membership')" title="Set-theoretic Membership: (x ∈ Class)">Membership <code>(x &isin; Class)</code></button>
+      <span class="dialect-switch-label">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')" title="Meaning in Model inside NBG (Pure set/class theory: ∀X, ∀x ∈ V, isSet(x); strictly no pseudo-membership in Class or Theory)">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')" title="Checkable / Executable Code in CakeML &amp; Poly/ML (AST expressions: Class_Expre, Fm_Expre, Theory_Expre; decidable boolean functions)">⚡ Executable SML (CakeML / PolyML)</button>
     </div>
     <nav>
       <a href="index.html">Home</a>
@@ -396,6 +396,19 @@
       Formal machine-checked specification of classical logic, Morse–Kelley class theory, LCF architecture, and type-theoretic syntactic side conditions. Click any verification status to inspect its proof certificate.
     </p>
 
+    <!-- EPISTEMIC SOUNDNESS & LEVEL DISPARITY BANNER -->
+    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 12px;">
+      <span style="font-size: 1.3rem;">💡</span>
+      <div style="font-size: 0.88rem; line-height: 1.5; color: #cbd5e1;">
+        <strong style="color: #38bdf8;">Epistemic Soundness &amp; Level Disparity Invariant:</strong>
+        Notation is fragile—always consult <code>typetheory.ML</code> for semantics, never surface syntax!
+        We distinguish between:
+        (1) <strong>Meaning in Model inside NBG</strong> (pure set/class universe: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), strictly no category errors like \(\in \mathrm{Theory}\) or \(\in \mathrm{Class}\)), and
+        (2) <strong>Checkable or Executable Code in CakeML &amp; Poly/ML</strong> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>).
+        <span style="color: #f59e0b;">Off-by-One Level Rule:</span> Standard ML cannot have a type of all classes or sets (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+      </div>
+    </div>
+
     <!-- ARCHITECTURAL CLARIFICATION -->
     <div class="clarification-card">
       <div class="clarification-title">
@@ -407,7 +420,7 @@
       </p>
       <ul style="margin: 0.5rem 0 0.5rem 1.2rem; padding: 0;">
         <li>
-          <strong>Dual Notation Standard (Typing vs. Membership):</strong> When speaking about \(\mathsf{Class}\) or \(\mathsf{Theory}\) as a type in a programming language or metalanguage, the typing judgment \((x : \mathsf{Class})\) or \((\mathcal{W} : \mathsf{Theory})\) provides structural precision and avoids treating conglomerates as object-level sets. Conversely, when viewing \(\mathsf{Class}\) as a universe collection, \((x \in \mathsf{Class})\) provides classical set-theoretic intuition. Obelisk supports both perspectives—use the <strong>Notation Dialect</strong> switcher in the header to toggle between Typing Mode and Membership Mode.
+          <strong>The Two Real Interpretations (NBG Model vs. Executable SML Code):</strong> We strictly distinguish between (1) <em>Meaning in Model inside NBG</em> (pure mathematical assertions: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), avoiding any pseudo-membership like \(\in \mathsf{Theory}\) or \(\in \mathsf{Class}\)), and (2) <em>Checkable / Executable Code in CakeML and Poly/ML</em> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>, <code>Ctx</code>). Use the <strong>Interpretation</strong> switch in the header to view either representation.
         </li>
         <li>
           <strong>Side Conditions as Genuine Metatheoretic Formulas:</strong> A side condition is not an informal remark or separate type assertion—it is an ordinary decidable formula in the metatheory (e.g. \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) or \( \mathrm{FFI}(t, \mathbf{v}_x, \phi) = \mathrm{True} \)).
@@ -654,8 +667,8 @@
               <div class="entry-notes">Ensures the universe of discourse contains at least one class.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(K : Class) ⊤"><div class="view-typing formula-chunk">\(\\exists (K : \\mathsf{Class})\\; \\top\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists (K \\in \\mathsf{Class})\\; \\top\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(K : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(K \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∃(K : Class) ⊤"><div class="view-typing formula-chunk">\(\\exists (K : \\mathsf{Class})\\; \\top\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists K \\; \\top\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(K : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(K \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-2-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -668,7 +681,7 @@
               <div class="entry-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]"><div class="view-typing formula-chunk">\(((\\forall (x : \\mathsf{Class})\\; \\phi) \\to \\phi[t/x])\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\\forall (x \\in \\mathsf{Class})\\; \\phi) \\to \\phi[t/x])\)</div></td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]"><div class="view-typing formula-chunk">\(((\\forall (x : \\mathsf{Class})\\; \\phi) \\to \\phi[t/x])\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\\forall x \\; \\phi) \\to \\phi[t/x])\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/rule-fi.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
@@ -682,7 +695,7 @@
               <div class="entry-notes">Witness substitution into existential quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ"><div class="view-typing formula-chunk">\((\\phi[t/x] \\to \\exists (x : \\mathsf{Class})\\; \\phi)\)</div><div class="view-membership formula-chunk" style="display:none;">\((\\phi[t/x] \\to \\exists (x \\in \\mathsf{Class})\\; \\phi)\)</div></td>
+            <td class="formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ"><div class="view-typing formula-chunk">\((\\phi[t/x] \\to \\exists (x : \\mathsf{Class})\\; \\phi)\)</div><div class="view-membership formula-chunk" style="display:none;">\((\\phi[t/x] \\to \\exists x \\; \\phi)\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/rule-ei.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
@@ -696,7 +709,7 @@
               <div class="entry-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)"><div class="view-typing formula-chunk">\(\\frac{\\psi \\to \\phi}{\\psi \\to \\forall (x : \\mathsf{Class})\\; \\phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\psi \\to \\phi}{\\psi \\to \\forall (x \\in \\mathsf{Class})\\; \\phi}\)</div></td>
+            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)"><div class="view-typing formula-chunk">\(\\frac{\\psi \\to \\phi}{\\psi \\to \\forall (x : \\mathsf{Class})\\; \\phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\psi \\to \\phi}{\\psi \\to \\forall x \\; \\phi}\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/rule-fa.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
@@ -710,7 +723,7 @@
               <div class="entry-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)"><div class="view-typing formula-chunk">\(\\frac{\\phi \\to \\psi}{\\exists (x : \\mathsf{Class})\\; \\phi \\to \\psi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\phi \\to \\psi}{\\exists (x \\in \\mathsf{Class})\\; \\phi \\to \\psi}\)</div></td>
+            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)"><div class="view-typing formula-chunk">\(\\frac{\\phi \\to \\psi}{\\exists (x : \\mathsf{Class})\\; \\phi \\to \\psi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\phi \\to \\psi}{\\exists x \\; \\phi \\to \\psi}\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-vx-psi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\\mathrm{NFV}(\mathbf{v}_x, \\psi) : \\mathsf{Bool} \\land \\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/rule-ea.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
@@ -724,7 +737,7 @@
               <div class="entry-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ"><div class="view-typing formula-chunk">\(\\frac{\\phi}{\\forall (x : \\mathsf{Class})\\; \\phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\phi}{\\forall (x \\in \\mathsf{Class})\\; \\phi}\)</div></td>
+            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ"><div class="view-typing formula-chunk">\(\\frac{\\phi}{\\forall (x : \\mathsf{Class})\\; \\phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\phi}{\\forall x \\; \\phi}\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\\mathrm{NFV}(\mathbf{v}_x, \\Gamma) : \\mathsf{Bool}\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/rule-gen.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
@@ -746,7 +759,7 @@
               <div class="entry-notes">Predicative/impredicative comprehension for all first-order and higher-order formulas.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))"><div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (X \in \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div></td>
+            <td class="formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))"><div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall X \; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-c-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\mathrm{NFV}(\mathbf{v}_C, \phi)\)</span><span class="view-membership" style="display:none;">\(\mathrm{NFV}(\mathbf{v}_C, \phi)\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-3-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
@@ -760,8 +773,8 @@
               <div class="entry-notes">Two classes having identical elements are identical.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)"><div class="view-typing formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\forall (x : \\mathsf{Class})\\; (x \\in A \\longleftrightarrow x \\in B)) \\to A = B)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (A, B \\in \\mathsf{Class})\\; ((\\forall (x \\in \\mathsf{Class})\\; (x \\in A \\longleftrightarrow x \\in B)) \\to A = B)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)"><div class="view-typing formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\forall (x : \\mathsf{Class})\\; (x \\in A \\longleftrightarrow x \\in B)) \\to A = B)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall A, B \\; ((\\forall x \\; (x \\in A \\longleftrightarrow x \\in B)) \\to A = B)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-02.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -774,8 +787,8 @@
               <div class="entry-notes">Any subclass of a set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))"><div class="view-typing formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\mathrm{isSet}(B) \\land A \\subseteq B) \\to \\mathrm{isSet}(A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (A, B \\in \\mathsf{Class})\\; ((\\mathrm{isSet}(B) \\land A \\subseteq B) \\to \\mathrm{isSet}(A))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, B : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))"><div class="view-typing formula-chunk">\(\\forall (A, B : \\mathsf{Class})\\; ((\\mathrm{isSet}(B) \\land A \\subseteq B) \\to \\mathrm{isSet}(A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall A, B \\; ((\\mathrm{isSet}(B) \\land A \\subseteq B) \\to \\mathrm{isSet}(A))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, B : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-08.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -788,8 +801,8 @@
               <div class="entry-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))"><div class="view-typing formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (A \\ne \\emptyset \\to \\exists (x : \\mathsf{Class})\\; (x \\in A \\land x \\cap A = \\emptyset))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (A \\in \\mathsf{Class})\\; (A \\ne \\emptyset \\to \\exists (x \\in \\mathsf{Class})\\; (x \\in A \\land x \\cap A = \\emptyset))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))"><div class="view-typing formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (A \\ne \\emptyset \\to \\exists (x : \\mathsf{Class})\\; (x \\in A \\land x \\cap A = \\emptyset))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall A \\; (A \\ne \\emptyset \\to \\exists x \\; (x \\in A \\land x \\cap A = \\emptyset))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-12.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -802,8 +815,8 @@
               <div class="entry-notes">Unordered pair of two sets is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))"><div class="view-typing formula-chunk">\(\\forall (a, b : \\mathsf{Class})\\; ((\\mathrm{isSet}(a) \\land \\mathrm{isSet}(b)) \\to \\mathrm{isSet}(\\{a, b\\}))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (a, b \\in \\mathsf{Class})\\; ((\\mathrm{isSet}(a) \\land \\mathrm{isSet}(b)) \\to \\mathrm{isSet}(\\{a, b\\}))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(a, b : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a, b \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))"><div class="view-typing formula-chunk">\(\\forall (a, b : \\mathsf{Class})\\; ((\\mathrm{isSet}(a) \\land \\mathrm{isSet}(b)) \\to \\mathrm{isSet}(\\{a, b\\}))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall a, b \\; ((\\mathrm{isSet}(a) \\land \\mathrm{isSet}(b)) \\to \\mathrm{isSet}(\\{a, b\\}))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(a, b : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a, b \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-13.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -816,8 +829,8 @@
               <div class="entry-notes">The unary union of any set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))"><div class="view-typing formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (\\mathrm{isSet}(A) \\to \\mathrm{isSet}(\\bigcup A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (A \\in \\mathsf{Class})\\; (\\mathrm{isSet}(A) \\to \\mathrm{isSet}(\\bigcup A))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))"><div class="view-typing formula-chunk">\(\\forall (A : \\mathsf{Class})\\; (\\mathrm{isSet}(A) \\to \\mathrm{isSet}(\\bigcup A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall A \\; (\\mathrm{isSet}(A) \\to \\mathrm{isSet}(\\bigcup A))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-14.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -846,9 +859,9 @@
             </td>
             <td class="formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α
 ⟦simple_if α true t1 t2⟧ = ⟦t1⟧,   ⟦simple_if α false t1 t2⟧ = ⟦t2⟧"><div class="view-typing"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha\)</div>
-<div class="formula-chunk">\(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \quad \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha \in \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha\)</div>
+<div class="formula-chunk">\(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \quad \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha\)</div>
 <div class="formula-chunk">\(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \quad \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket\)</div></div></td>
-            <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span><span class="view-membership" style="display:none;">\(\alpha \in \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span></a></td>
+            <td class="syntax-cell"><a href="metatheory.html#simple-if-typing" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span><span class="view-membership" style="display:none;">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-3-23-simple-if.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
@@ -883,9 +896,9 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
             </td>
             <td class="formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α))))
 → ∀(α : Class) (α ∈ On → φ(α))"><div class="view-typing"><div class="formula-chunk">\((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha))))\)</div>
-<div class="formula-chunk">\(\to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha))\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\((\forall (\alpha \in \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta \in \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha))))\)</div>
-<div class="formula-chunk">\(\to \forall (\alpha \in \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha))\)</div></div></td>
-            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On})\)</span><span class="view-membership" style="display:none;">\(\mathrm{On} \in \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On})\)</span></a></td>
+<div class="formula-chunk">\(\to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha))\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\((\forall \alpha \; (\alpha \in \mathrm{On} \to ((\forall \beta \; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha))))\)</div>
+<div class="formula-chunk">\(\to \forall \alpha \; (\alpha \in \mathrm{On} \to \phi(\alpha))\)</div></div></td>
+            <td class="syntax-cell"><a href="metatheory.html#ord-induction" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On})\)</span><span class="view-membership" style="display:none;">\(\mathrm{On} , \quad \mathrm{WF}(\in, \mathrm{On})\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/thm-ord-ind.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
@@ -898,8 +911,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Power class of any set is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))"><div class="view-typing formula-chunk">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (a \in \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(a : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a \in \mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))"><div class="view-typing formula-chunk">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall a \; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(a : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-34.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -912,8 +925,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Image of a set under a class function is a set.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))"><div class="view-typing formula-chunk">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (F, A \in \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(F, A : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(F, A \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))"><div class="view-typing formula-chunk">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall F, A \; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(F, A : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(F, A \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-37.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -926,8 +939,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Guarantees existence of the set of natural numbers ω.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))"><div class="view-typing formula-chunk">\(\\exists (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\land \\emptyset \\in x \\land \\forall (y : \\mathsf{Class})\\; (y \\in x \\to y \\cup \\{y\\} \\in x))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists (x \\in \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\land \\emptyset \\in x \\land \\forall (y \\in \\mathsf{Class})\\; (y \\in x \\to y \\cup \\{y\\} \\in x))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, y : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))"><div class="view-typing formula-chunk">\(\\exists (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\land \\emptyset \\in x \\land \\forall (y : \\mathsf{Class})\\; (y \\in x \\to y \\cup \\{y\\} \\in x))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists x \\; (\\mathrm{isSet}(x) \\land \\emptyset \\in x \\land \\forall y \\; (y \\in x \\to y \\cup \\{y\\} \\in x))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, y : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-45.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -940,8 +953,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Global choice function over all non-empty sets.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))"><div class="view-typing formula-chunk">\(\\exists (c : \\mathsf{Class})\\; (\\mathrm{isClassFunction}(c) \\land \\forall (x : \\mathsf{Class})\\; ((\\mathrm{isSet}(x) \\land x \\ne \\emptyset) \\to c(x) \\in x))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists (c \\in \\mathsf{Class})\\; (\\mathrm{isClassFunction}(c) \\land \\forall (x \\in \\mathsf{Class})\\; ((\\mathrm{isSet}(x) \\land x \\ne \\emptyset) \\to c(x) \\in x))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(c, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(c, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))"><div class="view-typing formula-chunk">\(\\exists (c : \\mathsf{Class})\\; (\\mathrm{isClassFunction}(c) \\land \\forall (x : \\mathsf{Class})\\; ((\\mathrm{isSet}(x) \\land x \\ne \\emptyset) \\to c(x) \\in x))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\exists c \\; (\\mathrm{isClassFunction}(c) \\land \\forall x \\; ((\\mathrm{isSet}(x) \\land x \\ne \\emptyset) \\to c(x) \\in x))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(c, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(c, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-46.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -955,7 +968,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="V = {x | x = x}"><div class="view-typing formula-chunk">\(V = \\{x \\mid x = x\\}\)</div><div class="view-membership formula-chunk" style="display:none;">\(V = \\{x \\mid x = x\\}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(V : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(V \\in \\mathsf{Class}\)</span></span></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(V : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(V \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-47.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
@@ -968,8 +981,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">A class is transitive if every element of it is also a subclass.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)"><div class="view-typing formula-chunk">\(\\mathrm{Tr}(A) \\longleftrightarrow \\forall (x : \\mathsf{Class})\\; (x \\in A \\to x \\subseteq A)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\mathrm{Tr}(A) \\longleftrightarrow \\forall (x \\in \\mathsf{Class})\\; (x \\in A \\to x \\subseteq A)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)"><div class="view-typing formula-chunk">\(\\mathrm{Tr}(A) \\longleftrightarrow \\forall (x : \\mathsf{Class})\\; (x \\in A \\to x \\subseteq A)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\mathrm{Tr}(A) \\longleftrightarrow \\forall x \\; (x \\in A \\to x \\subseteq A)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(A, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-53.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
@@ -982,8 +995,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))"><div class="view-typing formula-chunk">\(\\forall (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\to \\exists (u : \\mathsf{Class})\\; (\\mathrm{isUniverse}(u) \\land x \\in u \\land \\mathrm{isSet}(u)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (x \\in \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\to \\exists (u \\in \\mathsf{Class})\\; (\\mathrm{isUniverse}(u) \\land x \\in u \\land \\mathrm{isSet}(u)))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, u : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))"><div class="view-typing formula-chunk">\(\\forall (x : \\mathsf{Class})\\; (\\mathrm{isSet}(x) \\to \\exists (u : \\mathsf{Class})\\; (\\mathrm{isUniverse}(u) \\land x \\in u \\land \\mathrm{isSet}(u)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall x \\; (\\mathrm{isSet}(x) \\to \\exists u \\; (\\mathrm{isUniverse}(u) \\land x \\in u \\land \\mathrm{isSet}(u)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, u : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-66.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -1004,8 +1017,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Metatheoretic instantiation across arbitrary typed expressions.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (A \in \mathsf{Type})\; \forall (G \in \mathsf{Ctx})\; \forall (\phi \in \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v \in \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(t : \mathrm{eval}(A), \quad v : \mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(t : \mathrm{eval}(A), \quad v \in \mathsf{Variable}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall G \; \forall \phi \; \forall (t : \mathrm{eval}(A))\; \forall v \; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(t : \mathrm{eval}(A), \quad v : \mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(t : \mathrm{eval}(A), \quad v \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-4-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -1018,7 +1031,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Universal generalization in metatheory guarded by non-free context occurrence.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (A \in \mathsf{Type})\; \forall (\Gamma \in \mathsf{Ctx})\; \forall (\phi \in \mathsf{Fm})\; \forall (v \in \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div></td>
+            <td class="formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall \Gamma \; \forall \phi \; \forall v \; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#nfv-vx-gamma" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\mathrm{NFV}(v, \Gamma)\)</span><span class="view-membership" style="display:none;">\(\mathrm{NFV}(v, \Gamma)\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-4-02.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
@@ -1033,7 +1046,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)"><div class="view-typing formula-chunk">\(\\frac{\\mathcal{F}, [] \\vdash \\langle \\mathcal{F}, \\Gamma \\vdash \\phi \\rangle}{\\mathcal{F}, \\Gamma \\vdash \\phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\mathcal{F}, [] \\vdash \\langle \\mathcal{F}, \\Gamma \\vdash \\phi \\rangle}{\\mathcal{F}, \\Gamma \\vdash \\phi}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\\mathcal{F} : \\mathsf{Theory}, \\quad \\Gamma : \\mathsf{Ctx}, \\quad \\phi : \\mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\\mathcal{F} \\in \\mathsf{Theory}, \\quad \\Gamma \\in \\mathsf{Ctx}, \\quad \\phi \\in \\mathsf{Fm}\)</span></span></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\\mathcal{F} : \\mathsf{Theory}, \\quad \\Gamma : \\mathsf{Ctx}, \\quad \\phi : \\mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\\mathcal{F} , \\quad \\Gamma , \\quad \\phi \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-4-03.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
@@ -1046,8 +1059,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">At-most-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))"><div class="view-typing formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; ((! (z : \\mathsf{Class})\\; \\phi) \\longleftrightarrow \\forall (x, y : \\mathsf{Class})\\; ((\\phi[x/z] \\land \\phi[y/z]) \\to x = y))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (\\phi \\in \\mathsf{Fm})\\; ((! (z \\in \\mathsf{Class})\\; \\phi) \\longleftrightarrow \\forall (x, y \\in \\mathsf{Class})\\; ((\\phi[x/z] \\land \\phi[y/z]) \\to x = y))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(z, x, y : \\mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(z, x, y \\in \\mathsf{Variable}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))"><div class="view-typing formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; ((! (z : \\mathsf{Class})\\; \\phi) \\longleftrightarrow \\forall (x, y : \\mathsf{Class})\\; ((\\phi[x/z] \\land \\phi[y/z]) \\to x = y))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall \\phi \\; ((! (z )\\; \\phi) \\longleftrightarrow \\forall x, y \\; ((\\phi[x/z] \\land \\phi[y/z]) \\to x = y))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(z, x, y : \\mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(z, x, y \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-4-04.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
@@ -1060,8 +1073,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Exactly-one quantifier.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))"><div class="view-typing formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; (\\mathcal{T}, [] \\vdash (\\exists! (x : \\mathsf{Class})\\; \\phi) \\longleftrightarrow ((\\exists (x : \\mathsf{Class})\\; \\phi) \\land ! (x : \\mathsf{Class})\\; \\phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall (\\phi \\in \\mathsf{Fm})\\; (\\mathcal{T}, [] \\vdash (\\exists! (x \\in \\mathsf{Class})\\; \\phi) \\longleftrightarrow ((\\exists (x \\in \\mathsf{Class})\\; \\phi) \\land ! (x \\in \\mathsf{Class})\\; \\phi))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x : \\mathsf{Variable}, \\quad \\phi : \\mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(x \\in \\mathsf{Variable}, \\quad \\phi \\in \\mathsf{Fm}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))"><div class="view-typing formula-chunk">\(\\forall (\\phi : \\mathsf{Fm})\\; (\\mathcal{T}, [] \\vdash (\\exists! (x : \\mathsf{Class})\\; \\phi) \\longleftrightarrow ((\\exists (x : \\mathsf{Class})\\; \\phi) \\land ! (x : \\mathsf{Class})\\; \\phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\forall \\phi \\; (\\mathcal{T}, [] \\vdash (\\exists! (x )\\; \\phi) \\longleftrightarrow ((\\exists x \\; \\phi) \\land ! (x )\\; \\phi))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x : \\mathsf{Variable}, \\quad \\phi : \\mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(x , \\quad \\phi \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-4-05.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
           </tr>
             
@@ -1074,7 +1087,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Reflected class comprehension in base theory T.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (\phi \in \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; \forall x \; \forall k \; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div></td>
             <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(\mathrm{FFI}(k, x, \phi)\)</span><span class="view-membership" style="display:none;">\(\mathrm{FFI}(k, x, \phi)\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-4-06.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
@@ -1096,8 +1109,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Basic elementhood implies sethood.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))"><div class="view-typing formula-chunk">\((\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)) \\land (\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\\mathcal{F}, [B \\in x] \\vdash \\exists (x \\in \\mathsf{Class})\\; (B \\in x)) \\land (\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))"><div class="view-typing formula-chunk">\((\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)) \\land (\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\\mathcal{F}, [B \\in x] \\vdash \\exists x \\; (B \\in x)) \\land (\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-5-01.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
@@ -1110,8 +1123,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Unfolding definition to intro form.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))"><div class="view-typing formula-chunk">\(\\frac{\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)}{\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B)}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\mathcal{F}, [B \\in x] \\vdash \\exists (x \\in \\mathsf{Class})\\; (B \\in x)}{\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B)}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))"><div class="view-typing formula-chunk">\(\\frac{\\mathcal{F}, [B \\in x] \\vdash \\exists (x : \\mathsf{Class})\\; (B \\in x)}{\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B)}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\frac{\\mathcal{F}, [B \\in x] \\vdash \\exists x \\; (B \\in x)}{\\mathcal{F}, [B \\in x] \\vdash \\mathrm{isSet}(B)}\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-5-02.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
@@ -1125,7 +1138,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))"><div class="view-typing formula-chunk">\((\\mathcal{F}, [] \\vdash (B \\in x) \\to \\mathrm{isSet}(B))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\\mathcal{F}, [] \\vdash (B \\in x) \\to \\mathrm{isSet}(B))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \\in \\mathsf{Class}\)</span></span></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, x : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-5-03.html" class="status-badge badge-rule-status" title="Click to view formal verification certificate and proof details">Primitive Rule</a></td>
           </tr>
             
@@ -1138,8 +1151,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">6-step verified derivation in LCF kernel.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)"><div class="view-typing formula-chunk">\(\\mathcal{F}, [] \\vdash (\\exists (y : \\mathsf{Class})\\; \\forall (x : \\mathsf{Class})\\; (x \\in y)) \\to \\forall (x : \\mathsf{Class})\\; \\exists (y : \\mathsf{Class})\\; (x \\in y)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\mathcal{F}, [] \\vdash (\\exists (y \\in \\mathsf{Class})\\; \\forall (x \\in \\mathsf{Class})\\; (x \\in y)) \\to \\forall (x \\in \\mathsf{Class})\\; \\exists (y \\in \\mathsf{Class})\\; (x \\in y)\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, y : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y \\in \\mathsf{Class}\)</span></span></td>
+            <td class="formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)"><div class="view-typing formula-chunk">\(\\mathcal{F}, [] \\vdash (\\exists (y : \\mathsf{Class})\\; \\forall (x : \\mathsf{Class})\\; (x \\in y)) \\to \\forall (x : \\mathsf{Class})\\; \\exists (y : \\mathsf{Class})\\; (x \\in y)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\mathcal{F}, [] \\vdash (\\exists y \\; \\forall x \\; (x \\in y)) \\to \\forall x \\; \\exists y \\; (x \\in y)\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, y : \\mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-5-04.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
           </tr>
             
@@ -1161,7 +1174,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)"><div class="view-typing formula-chunk">\(\\mathcal{W} \\subseteq \\mathcal{Q} \\subseteq \\mathcal{T} \\subseteq \\mathcal{F}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\\mathcal{W} \\subseteq \\mathcal{Q} \\subseteq \\mathcal{T} \\subseteq \\mathcal{F}\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\\mathcal{W}, \\mathcal{Q}, \\mathcal{T}, \\mathcal{F} : \\mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\\mathcal{W}, \\mathcal{Q}, \\mathcal{T}, \\mathcal{F} \\in \\mathsf{Theory}\)</span></span></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\\mathcal{W}, \\mathcal{Q}, \\mathcal{T}, \\mathcal{F} : \\mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\\mathcal{W}, \\mathcal{Q}, \\mathcal{T}, \\mathcal{F} \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-6-01.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
             
@@ -1174,8 +1187,8 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               <div class="entry-notes">Formalized Henkin modal provability principle.</div>
               
             </td>
-            <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (\phi \in \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\phi \in \mathsf{Fm}\)</span></span></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\phi \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-6-02.html" class="status-badge badge-verified-weak" title="Click to view formal verification certificate and proof details">Weakly Verified (Lit)</a></td>
           </tr>
             
@@ -1189,7 +1202,7 @@ typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2
               
             </td>
             <td class="formula-cell" data-unicode="Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))"><div class="view-typing formula-chunk">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</div></td>
-            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\mathcal{T}, \mathcal{Q} \in \mathsf{Theory}\)</span></span></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\mathcal{T}, \mathcal{Q} \)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-6-03.html" class="status-badge badge-verified-weak" title="Click to view formal verification certificate and proof details">Weakly Verified (Lit)</a></td>
           </tr>
             
