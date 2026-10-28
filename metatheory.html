@@ -142,11 +142,51 @@
       font-size: 0.75rem;
       font-weight: 700;
     }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-switch-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+    }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
   </style>
 </head>
 <body>
   <header class="full-width-container">
     <div class="logo">Obelisk <span>Metatheory</span></div>
+    <div class="dialect-switch-wrap">
+      <span class="dialect-switch-label">Notation Dialect:</span>
+      <button id="btn-dialect-typing" class="dialect-btn active" onclick="setDialectMode('typing')" title="Typing Judgment in Metalanguage: (x : Class)">Typing <code>(x : Class)</code></button>
+      <button id="btn-dialect-membership" class="dialect-btn" onclick="setDialectMode('membership')" title="Set-theoretic Membership: (x ∈ Class)">Membership <code>(x &isin; Class)</code></button>
+    </div>
     <nav>
       <a href="index.html">Home</a>
       <a href="manual.html">Manual &amp; Theory</a>
@@ -205,8 +245,11 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C ∈ Variable does not occur as a free variable in formula φ : Fm.</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -219,7 +262,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_C \in \mathsf{Variable} \land \phi \in \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -240,7 +286,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -254,7 +303,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X \in \mathsf{Variable}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -275,7 +327,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -289,7 +344,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
+              <div class="view-membership" style="display:none;">\(t : \mathsf{Term} \land \mathbf{v}_x \in \mathsf{Variable} \land \phi \in \mathsf{Fm}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -310,7 +368,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -324,7 +385,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \in \mathsf{Variable} \land \psi \in \mathsf{Fm}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -345,7 +409,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -359,7 +426,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \in \mathsf{Variable} \land \Gamma \in \mathsf{Ctx}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -380,7 +450,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -394,7 +467,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_v \in \mathsf{Variable} \land \psi \in \mathsf{Fm} \land \Gamma \in \mathsf{Ctx}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -415,7 +491,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+              <div class="view-membership" style="display:none;">\((\alpha \in \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -429,7 +508,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\alpha : \mathcal{U}_i\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\alpha : \mathcal{U}_i\)</div>
+              <div class="view-membership" style="display:none;">\(\alpha : \mathcal{U}_i\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -450,7 +532,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -464,7 +549,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
+              <div class="view-membership" style="display:none;">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -485,7 +573,10 @@
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
           </td>
           <td>
-            <div class="semantic-box">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
+            <div class="semantic-box">
+              <div class="view-typing">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
+            </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an ad-hoc axiom; derived in MK from the Regularity Axiom.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
@@ -499,7 +590,10 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+            <div class="syntax-box">
+              <div class="view-typing">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{On} \in \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+            </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
@@ -515,5 +609,34 @@
       </tbody>
     </table>
   </div>
+
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        const bMem = document.getElementById('btn-dialect-membership');
+        const bTyp = document.getElementById('btn-dialect-typing');
+        if (bMem) bMem.classList.add('active');
+        if (bTyp) bTyp.classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        const bMem = document.getElementById('btn-dialect-membership');
+        const bTyp = document.getElementById('btn-dialect-typing');
+        if (bTyp) bTyp.classList.add('active');
+        if (bMem) bMem.classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode');
+      if (saved === 'membership') {
+        setDialectMode('membership');
+      }
+    });
+  </script>
 </body>
 </html>

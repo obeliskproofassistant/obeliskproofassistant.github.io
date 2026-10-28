@@ -41,11 +41,24 @@
     .badge-verified-strong { background: rgba(16, 185, 129, 0.25); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.5); }
     .anchor-link { color: #f1f5f9; text-decoration: none; font-weight: 700; }
     .anchor-link:hover { color: var(--accent-blue); text-decoration: underline; }
+    .dialect-switch-wrap { display: flex; align-items: center; gap: 6px; background: rgba(15, 23, 42, 0.85); border: 1px solid var(--card-border); padding: 4px 8px; border-radius: 6px; }
+    .dialect-switch-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+    .dialect-btn { background: transparent; border: 1px solid transparent; color: #94a3b8; border-radius: 4px; padding: 3px 8px; cursor: pointer; font-size: 0.78rem; font-weight: 600; transition: all 0.2s; }
+    .dialect-btn.active { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border-color: rgba(56, 189, 248, 0.4); box-shadow: 0 0 8px rgba(56, 189, 248, 0.2); }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: inline !important; }
+    body:not(.mode-membership) .view-typing { display: inline !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
   </style>
 </head>
 <body>
   <header class="full-width-container">
     <div class="logo">OBELISK <span>PROOF ASSISTANT</span></div>
+    <div class="dialect-switch-wrap">
+      <span class="dialect-switch-label">Notation Dialect:</span>
+      <button id="btn-dialect-typing" class="dialect-btn active" onclick="setDialectMode('typing')">Typing <code>(x : Class)</code></button>
+      <button id="btn-dialect-membership" class="dialect-btn" onclick="setDialectMode('membership')">Membership <code>(x &isin; Class)</code></button>
+    </div>
     <nav>
       <a href="manual.html" class="active">Theory Manual</a>
       <a href="metatheory.html">Metatheory &amp; Side Conditions</a>
@@ -892,6 +905,30 @@
       </tbody>
     </table>
   </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        var bM = document.getElementById('btn-dialect-membership');
+        var bT = document.getElementById('btn-dialect-typing');
+        if (bM) bM.classList.add('active');
+        if (bT) bT.classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        var bM = document.getElementById('btn-dialect-membership');
+        var bT = document.getElementById('btn-dialect-typing');
+        if (bT) bT.classList.add('active');
+        if (bM) bM.classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      var saved = localStorage.getItem('obelisk_notation_mode');
+      if (saved === 'membership') {
+        setDialectMode('membership');
+      }
+    });
+  </script>
   <footer style="background: #0f172a; border-top: 1px solid rgba(56, 189, 248, 0.18); padding: 1.5rem 24px; text-align: center; color: #94a3b8; font-size: 0.9rem;">
     <p>Obelisk Proof Assistant &bull; Native Standard ML Kernel Generator &bull; Morse&ndash;Kelley Foundations &bull; &copy; 2026</p>
   </footer>
