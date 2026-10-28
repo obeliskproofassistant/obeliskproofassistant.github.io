@@ -98,6 +98,12 @@
       color: var(--text-muted);
       font-style: italic;
     }
+    .formula-hypo-note {
+      font-size: 0.76rem;
+      color: #38bdf8;
+      margin-top: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     /* Copy Button */
     .copy-btn {
@@ -154,7 +160,7 @@
       <div>
         <a href="index.html" class="back-link">← Return to Obelisk Main Site</a>
         <h1 style="margin-top: 0.5rem;">Obelisk Reference Manual &amp; Axiomatics</h1>
-        <p style="color: var(--text-muted);">Formal specification of Morse–Kelley class theory, deduction rules, side conditions, and LCF architecture.</p>
+        <p style="color: var(--text-muted);">Formal specification of Morse–Kelley class theory, LCF architecture, deduction rules, and syntactic side conditions.</p>
       </div>
       <div>
         <a href="Obelisk_Report.pdf" target="_blank" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.85rem;">Download Audit Report (PDF)</a>
@@ -183,16 +189,33 @@
       <button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &hArr; &exist; Y. X &isin; Y', 'def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y')">📋 Copy</button>
     </div>
 
-    <h2>2. Complete Axiom Catalog &amp; Explicit Side Conditions</h2>
+    <!-- Foundational Note on Side Conditions vs Internal Meaning -->
+    <div style="margin: 1.5rem 0; padding: 1.15rem 1.35rem; background: rgba(30, 58, 138, 0.22); border: 1px solid rgba(56, 189, 248, 0.35); border-left: 4px solid var(--primary); border-radius: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+        <span style="font-size: 1.15rem;">📐</span>
+        <strong style="color: #38bdf8; font-size: 0.98rem;">Foundational Principle: Syntactic Side Conditions vs. Internal Formula Preconditions</strong>
+      </div>
+      <p style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.6;">
+        In formal mathematical logic (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4) and in LCF-style proof assistants (such as Obelisk's <code>foundations.ML</code> and <code>newchecker.ML</code>), <strong>side conditions</strong> (<em>боковые условия</em>) are not arbitrary semantic prerequisites. They are metamathematical statements strictly about <strong>formulas, terms, and the variables within them</strong> (such as variable freeness \(x \notin \mathrm{FV}(\phi)\), term substitutability without quantifier capture <code>sidconFFI</code>, or eigenvariable freshness <code>sidconNFV</code>).
+      </p>
+      <p style="font-size: 0.88rem; color: #cbd5e1; line-height: 1.6; margin-top: 6px;">
+        Whenever a condition is about the <strong>mathematical meaning, semantics, or object properties</strong> (e.g. that a class is a set \(\mathrm{isSet}(B)\), that a relation is injective \(\mathrm{Inj}(f)\), or that a class is non-empty \(X \ne \emptyset\)), that condition is expressed <strong>directly inside the object-language formula of the statement itself</strong> (as an antecedent \(A \to B\), bounded quantifier, or conjunct). Closed axioms and theorems therefore have <em>no</em> syntactic side conditions; side conditions strictly govern axiom schemata and inference rules that manipulate syntactic metavariables.
+      </p>
+    </div>
+
+    <h2>2. Complete Axiom Catalog &amp; Syntactic Side Conditions</h2>
+    <p style="color: var(--text-muted); margin-bottom: 1rem;">
+      Axioms and definitions of Morse–Kelley class theory. Closed axioms formulate all mathematical preconditions internally as antecedents within the formula; only axiom schemata carry syntactic side conditions on formula metavariables.
+    </p>
     <div style="overflow-x: auto;">
       <table class="axiom-table">
         <thead>
           <tr>
-            <th style="width: 70px;">Item</th>
-            <th style="width: 170px;">Axiom Name</th>
+            <th style="width: 65px;">Item</th>
+            <th style="width: 175px;">Name &amp; Classification</th>
             <th>Formal Statement</th>
-            <th style="width: 250px;">Explicit Side Conditions</th>
-            <th style="width: 90px; text-align: center;">Status</th>
+            <th style="width: 270px;">Syntactic Side Conditions</th>
+            <th style="width: 85px; text-align: center;">Status</th>
             <th style="width: 75px; text-align: center;">Action</th>
           </tr>
         </thead>
@@ -200,58 +223,106 @@
           <!-- 3.01 Comprehension -->
           <tr>
             <td><strong>3.01</strong></td>
-            <td>Impredicative Comprehension</td>
+            <td>
+              Impredicative Comprehension<br/>
+              <span class="badge" style="background:rgba(167,139,250,0.15);color:#a78bfa;font-size:0.72rem;padding:1px 5px;">Axiom Schema</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>&exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_comprehension (phi : Class -&gt; Prop) : &exist; C, &forall; x, x &isin; C &hArr; isSet x &and; phi x</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>C &notin; FV(&phi;)</strong><br/>Class parameter C does not occur free in formula &phi; (prevents Russell paradox)</div>
+              <div class="side-condition-box"><strong>C &notin; FV(&phi;)</strong><br/>Class variable C does not occur free in formula &phi; (prevents self-referential capture / Russell paradox)</div>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&exist; C. &forall; x. (x &isin; C &hArr; isSet(x) &and; &phi;(x))', 'axiom ax_comprehension (phi : Class -&gt; Prop) : &exist; C, &forall; x, x &isin; C &hArr; isSet x &and; phi x')">📋 Copy</button></td>
           </tr>
 
+          <!-- 3.02 Sethood Criterion -->
+          <tr>
+            <td><strong>3.02</strong></td>
+            <td>
+              Sethood Criterion<br/>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;font-size:0.72rem;padding:1px 5px;">Definition</span>
+            </td>
+            <td>
+              <div class="stmt-unicode"><code>isSet(X) &hArr; &exist; Y. X &isin; Y</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y</code></div>
+            </td>
+            <td>
+              <div class="side-condition-box"><strong>Y &notin; FV(X)</strong><br/>Bound witness variable Y is fresh (distinct from parameter X)</div>
+            </td>
+            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &hArr; &exist; Y. X &isin; Y', 'def isSet (X : Class) : Prop := &exist; Y : Class, X &isin; Y')">📋 Copy</button></td>
+          </tr>
+
+          <!-- 3.08 Extensionality -->
+          <tr>
+            <td><strong>3.08</strong></td>
+            <td>
+              Extensionality<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
+            <td>
+              <div class="stmt-unicode"><code>&forall; X Y. (&forall; z. z &isin; X &hArr; z &isin; Y) &rArr; X = Y</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_extensionality (X Y : Class) : (&forall; z, z &isin; X &hArr; z &isin; Y) -&gt; X = Y</code></div>
+            </td>
+            <td>
+              <span class="side-condition-none">None (Closed axiom; element-wise equality is the antecedent in the formula)</span>
+            </td>
+            <td style="text-align: center;"><span class="badge">Verified</span></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X Y. (&forall; z. z &isin; X &hArr; z &isin; Y) &rArr; X = Y', 'axiom ax_extensionality (X Y : Class) : (&forall; z, z &isin; X &hArr; z &isin; Y) -&gt; X = Y')">📋 Copy</button></td>
+          </tr>
+
           <!-- 3.12 Heredity -->
           <tr>
             <td><strong>3.12</strong></td>
-            <td>Heredity Axiom</td>
             <td>
-              <div class="stmt-unicode"><code>A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
+              Heredity Axiom<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
+            <td>
+              <div class="stmt-unicode"><code>&forall; A B. A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_heredity (A B : Class) : A &sube; B -&gt; isSet B -&gt; isSet A</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>A, B &isin; Class</strong><br/>Subclass relation; requires sethood precondition on bounding class B</div>
+              <span class="side-condition-none">None (Closed axiom; A &sube; B and isSet(B) are antecedents in the formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'A &sube; B &and; isSet(B) &rArr; isSet(A)', 'axiom ax_heredity (A B : Class) : A &sube; B -&gt; isSet B -&gt; isSet A')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; A B. A &sube; B &and; isSet(B) &rArr; isSet(A)', 'axiom ax_heredity (A B : Class) : A &sube; B -&gt; isSet B -&gt; isSet A')">📋 Copy</button></td>
           </tr>
 
           <!-- 3.13 Exponent -->
           <tr>
             <td><strong>3.13</strong></td>
-            <td>Exponent (Powerclass)</td>
             <td>
-              <div class="stmt-unicode"><code>isSet(X) &rArr; isSet(&weierp;(X))</code></div>
+              Exponent (Powerclass)<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
+            <td>
+              <div class="stmt-unicode"><code>&forall; X. isSet(X) &rArr; isSet(&weierp;(X))</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_power_set (X : Class) : isSet X -&gt; isSet (powerClass X)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>isSet(X)</strong><br/>Base object X must be a set (subclasses of sets form a set)</div>
+              <span class="side-condition-none">None (Closed axiom; isSet(X) is the premise inside the formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &rArr; isSet(P(X))', 'axiom ax_power_set (X : Class) : isSet X -&gt; isSet (powerClass X)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &rArr; isSet(P(X))', 'axiom ax_power_set (X : Class) : isSet X -&gt; isSet (powerClass X)')">📋 Copy</button></td>
           </tr>
 
           <!-- 3.14 Regularity -->
           <tr>
             <td><strong>3.14</strong></td>
-            <td>Regularity (&isin;-Induction)</td>
+            <td>
+              Regularity (&isin;-Induction)<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>&forall; X. (&forall; x. (&forall; y &isin; x. y &isin; X) &rArr; x &isin; X) &rArr; V &sube; X</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_regularity (X : Class) : (&forall; x, (&forall; y, y &isin; x -&gt; y &isin; X) -&gt; x &isin; X) -&gt; V &sube; X</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>X &ne; &empty;</strong><br/>Well-foundedness: every non-empty class possesses an &isin;-minimal element</div>
+              <span class="side-condition-none">None (Closed axiom; well-foundedness is formulated directly in the formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. (&forall; x. (&forall; y &isin; x. y &isin; X) &rArr; x &isin; X) &rArr; V &sube; X', 'axiom ax_regularity (X : Class) : (&forall; x, (&forall; y, y &isin; x -&gt; y &isin; X) -&gt; x &isin; X) -&gt; V &sube; X')">📋 Copy</button></td>
@@ -260,13 +331,16 @@
           <!-- 3.34 Ordering Relation -->
           <tr>
             <td><strong>3.34</strong></td>
-            <td>Ordering Relation &preceq;</td>
+            <td>
+              Ordering Relation &preceq;<br/>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;font-size:0.72rem;padding:1px 5px;">Definition</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>X &preceq; Y &hArr; &exist; f. Inj(f) &and; Dom(f) = X &and; Ran(f) &sube; Y</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def size_le (X Y : Class) : Prop := &exist; f : Class, is_injective f &and; dom f = X &and; ran f &sube; Y</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>Inj(f) &and; Dom(f) = X</strong><br/>Function f is well-defined, injective, with total domain on X</div>
+              <div class="side-condition-box"><strong>f &notin; FV(X, Y)</strong><br/>Bound function variable f is fresh; injectivity &amp; domain are matrix conjuncts in formula</div>
             </td>
             <td style="text-align: center;"><span class="badge" style="color:#fbbf24; background:rgba(251,191,36,0.15);">Repaired</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'X &preceq; Y &hArr; &exist; f. Inj(f) &and; Dom(f) = X &and; Ran(f) &sube; Y', 'def size_le (X Y : Class) : Prop := &exist; f : Class, is_injective f &and; dom f = X &and; ran f &sube; Y')">📋 Copy</button></td>
@@ -275,28 +349,34 @@
           <!-- 3.37 Limitation of Size -->
           <tr>
             <td><strong>3.37</strong></td>
-            <td>Limitation of Size</td>
             <td>
-              <div class="stmt-unicode"><code>isSet(X) &hArr; &not;(V &preceq; X)</code></div>
+              Limitation of Size<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
+            <td>
+              <div class="stmt-unicode"><code>&forall; X. isSet(X) &hArr; &not;(V &preceq; X)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_limitation_of_size (X : Class) : isSet X &hArr; &not;(size_le V X)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>V = {x | isSet(x)}</strong><br/>von Neumann limitation: a class is proper iff equinumerous with the universe V</div>
+              <span class="side-condition-none">None (Closed axiom; equinumerosity with V is inside the equivalence formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &hArr; &not;(V &preceq; X)', 'axiom ax_limitation_of_size (X : Class) : isSet X &hArr; &not;(size_le V X)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &hArr; &not;(V &preceq; X)', 'axiom ax_limitation_of_size (X : Class) : isSet X &hArr; &not;(size_le V X)')">📋 Copy</button></td>
           </tr>
 
           <!-- 3.45 Tagged Pair -->
           <tr>
             <td><strong>3.45</strong></td>
-            <td>Tagged Pair Construction</td>
+            <td>
+              Tagged Pair Construction<br/>
+              <span class="badge" style="background:rgba(56,189,248,0.15);color:#38bdf8;font-size:0.72rem;padding:1px 5px;">Definition</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>&lang;A, B&rang;<sub>tag</sub> := inj<sub>1</sub>(A) &cup; inj<sub>2</sub>(B)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">def tagged_pair (A B : Class) : Class := class_union (tag1 A) (tag2 B)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>ran(inj<sub>1</sub>) &cap; ran(inj<sub>2</sub>) = &empty;</strong><br/>Tagged canonical injection fibers must be strictly disjoint</div>
+              <span class="side-condition-none">None (Closed definition; fiber disjointness is a proven internal theorem)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Independent</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&lang;A, B&rang;tag := inj1(A) &cup; inj2(B)', 'def tagged_pair (A B : Class) : Class := class_union (tag1 A) (tag2 B)')">📋 Copy</button></td>
@@ -305,26 +385,32 @@
           <!-- 3.46 & 3.47 Projections -->
           <tr>
             <td><strong>3.46</strong></td>
-            <td>Left Projection (&pi;<sub>1</sub>)</td>
+            <td>
+              Left Projection (&pi;<sub>1</sub>)<br/>
+              <span class="badge" style="background:rgba(96,165,250,0.15);color:#60a5fa;font-size:0.72rem;padding:1px 5px;">Theorem</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>&pi;<sub>1</sub>(&lang;A, B&rang;<sub>tag</sub>) = A</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">theorem tagged_pair_proj1 (A B : Class) : proj1 (tagged_pair A B) = A</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>A, B &isin; Class</strong><br/>Holds uniformly for both proper classes and sets</div>
+              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&pi;1(&lang;A, B&rang;tag) = A', 'theorem tagged_pair_proj1 (A B : Class) : proj1 (tagged_pair A B) = A')">📋 Copy</button></td>
           </tr>
           <tr>
             <td><strong>3.47</strong></td>
-            <td>Right Projection (&pi;<sub>2</sub>)</td>
+            <td>
+              Right Projection (&pi;<sub>2</sub>)<br/>
+              <span class="badge" style="background:rgba(96,165,250,0.15);color:#60a5fa;font-size:0.72rem;padding:1px 5px;">Theorem</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>&pi;<sub>2</sub>(&lang;A, B&rang;<sub>tag</sub>) = B</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">theorem tagged_pair_proj2 (A B : Class) : proj2 (tagged_pair A B) = B</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>A, B &isin; Class</strong><br/>Holds uniformly for both proper classes and sets</div>
+              <span class="side-condition-none">None (Closed theorem; holds unconditionally for sets and proper classes)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&pi;2(&lang;A, B&rang;tag) = B', 'theorem tagged_pair_proj2 (A B : Class) : proj2 (tagged_pair A B) = B')">📋 Copy</button></td>
@@ -333,13 +419,16 @@
           <!-- 3.53 Infinity -->
           <tr>
             <td><strong>3.53</strong></td>
-            <td>Axiom of Infinity</td>
+            <td>
+              Axiom of Infinity<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
+            </td>
             <td>
               <div class="stmt-unicode"><code>isSet(&omega;) &and; &empty; &isin; &omega; &and; (&forall; x &isin; &omega;. x &cup; {x} &isin; &omega;)</code></div>
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_infinity : isSet omega &and; empty &isin; omega &and; (&forall; x, x &isin; omega -&gt; succ x &isin; omega)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>von Neumann &omega;</strong><br/>Successor map is inductive; &omega; is closed under finite ordinal successors</div>
+              <span class="side-condition-none">None (Closed axiom; inductive closure is formulated inside the formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(&omega;) &and; &empty; &isin; &omega; &and; (&forall; x &isin; &omega;. x &cup; {x} &isin; &omega;)', 'axiom ax_infinity : isSet omega &and; empty &isin; omega &and; (&forall; x, x &isin; omega -&gt; succ x &isin; omega)')">📋 Copy</button></td>
@@ -348,32 +437,35 @@
           <!-- 3.66 Tarski Universe -->
           <tr>
             <td><strong>3.66</strong></td>
-            <td>Tarski's Universe Axiom</td>
             <td>
-              <div class="stmt-unicode"><code>isSet(X) &rArr; &exist; U. X &isin; U &and; isUniverse(U)</code></div>
-              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, X &isin; U &and; is_universe U</code></div>
+              Tarski's Universe Axiom<br/>
+              <span class="badge" style="background:rgba(52,211,153,0.15);color:#34d399;font-size:0.72rem;padding:1px 5px;">Axiom</span>
             </td>
             <td>
-              <div class="side-condition-box"><strong>isSet(X)</strong><br/>U is Grothendieck universe: transitive, closed under pairs, powers, union</div>
+              <div class="stmt-unicode"><code>&forall; X. isSet(X) &rArr; &exist; U. isSet(U) &and; isUniverse(U) &and; X &isin; U</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, isSet U &and; is_universe U &and; X &isin; U</code></div>
+            </td>
+            <td>
+              <span class="side-condition-none">None (Closed axiom; sethood condition is the antecedent of the formula)</span>
             </td>
             <td style="text-align: center;"><span class="badge">Verified</span></td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, 'isSet(X) &rArr; &exist; U. X &isin; U &and; isUniverse(U)', 'axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, X &isin; U &and; is_universe U')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&forall; X. isSet(X) &rArr; &exist; U. isSet(U) &and; isUniverse(U) &and; X &isin; U', 'axiom ax_tarski_universe (X : Class) : isSet X -&gt; &exist; U, isSet U &and; is_universe U &and; X &isin; U')">📋 Copy</button></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h2>2.1 Core Inference Rules &amp; Explicit Side Conditions</h2>
+    <h2>2.1 Core Inference Rules &amp; Syntactic Side Conditions (LCF Engine)</h2>
     <p style="color: var(--text-muted); margin-bottom: 1rem;">
-      In LCF-style proof assistants, sound logical derivation depends strictly on validating all <strong>side conditions</strong> (such as variable freeness and eigenvariable freshness) before firing an inference rule:
+      In LCF-style proof assistants and formal predicate calculi (cf. Vereshchagin &amp; Shen, <em>Languages and Calculi</em>, Part 2, Ch. 4; Obelisk <code>program/types/foundations.ML</code> and <code>program/newchecker.ML</code>), sound logical deduction depends strictly on validating <strong>syntactic side conditions</strong> (such as variable freeness, absence of variable capture, and eigenvariable freshness) before firing an inference rule:
     </p>
     <div style="overflow-x: auto;">
       <table class="axiom-table">
         <thead>
           <tr>
-            <th style="width: 160px;">Inference Rule</th>
+            <th style="width: 170px;">Inference Rule</th>
             <th>Formal Derivation Schema</th>
-            <th style="width: 320px;">Explicit Side Conditions (Required Checks)</th>
+            <th style="width: 320px;">Syntactic Side Conditions (Metalogical Provisos)</th>
             <th style="width: 75px; text-align: center;">Action</th>
           </tr>
         </thead>
@@ -383,38 +475,77 @@
             <td><strong>Modus Ponens (MP)</strong></td>
             <td>
               <div class="stmt-unicode"><code>&Gamma; &vdash; A &rarr; B &nbsp;&nbsp;&nbsp; &Delta; &vdash; A &nbsp;&Longrightarrow;&nbsp; &Gamma; &cup; &Delta; &vdash; B</code></div>
-              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_mp : thm -&gt; thm -&gt; thm</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val MP : thm -&gt; thm -&gt; thm</code></div>
             </td>
             <td>
-              <span class="side-condition-none">None (Unconditional propositional elimination)</span>
+              <span class="side-condition-none">None (Unconditional propositional elimination on formulas A, B)</span>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; A &rarr; B, &Delta; &vdash; A &Longrightarrow; &Gamma; &cup; &Delta; &vdash; B', 'val rule_mp : thm -&gt; thm -&gt; thm')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; A &rarr; B, &Delta; &vdash; A &Longrightarrow; &Gamma; &cup; &Delta; &vdash; B', 'val MP : thm -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
 
-          <!-- Forall Generalization -->
+          <!-- Forall Instantiation (FI / ForaL) -->
           <tr>
-            <td><strong>&forall;-Introduction (&forall;I)</strong></td>
+            <td><strong>&forall;-Instantiation (FI / Axm 12)</strong></td>
             <td>
-              <div class="stmt-unicode"><code>&Gamma; &vdash; &phi;(x) &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &forall; x. &phi;(x)</code></div>
-              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_forall_intro : string -&gt; thm -&gt; thm</code></div>
+              <div class="stmt-unicode"><code>&vdash; (&forall; x. &phi;) &rarr; &phi;[t/x] &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &forall; x. &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &phi;[t/x])</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_FI : term -&gt; variable -&gt; thm -&gt; thm (* foundations.ML: sidconFFI *)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>x &notin; FV(&Gamma;)</strong><br/>Eigenvariable condition: variable x must NOT occur free in any active hypothesis in &Gamma;</div>
+              <div class="side-condition-box"><strong>t is free for x in &phi; (sidconFFI)</strong><br/>Correct substitution: no free variable in term t becomes captured by a quantifier in formula &phi;</div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &phi;(x) &Longrightarrow; &Gamma; &vdash; &forall; x. &phi;(x) [x &notin; FV(&Gamma;)]', 'val rule_forall_intro : string -&gt; thm -&gt; thm (* x not free in Gamma *)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; (&forall; x. &phi;) &rarr; &phi;[t/x] [t free for x in &phi;]', 'val rule_FI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
           </tr>
 
-          <!-- Exists Elimination -->
+          <!-- Exists Instantiation (EI / ExisR) -->
           <tr>
-            <td><strong>&exist;-Elimination (&exist;E)</strong></td>
+            <td><strong>&exist;-Instantiation (EI / Axm 13)</strong></td>
             <td>
-              <div class="stmt-unicode"><code>&Gamma; &vdash; &exist; x. &phi;(x) &nbsp;&nbsp;&nbsp; &Delta;, &phi;(y) &vdash; &psi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &cup; &Delta; &vdash; &psi;</code></div>
-              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_exists_elim : thm -&gt; string -&gt; thm -&gt; thm</code></div>
+              <div class="stmt-unicode"><code>&vdash; &phi;[t/x] &rarr; &exist; x. &phi; &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &phi;[t/x] &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &exist; x. &phi;)</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_EI : term -&gt; variable -&gt; thm -&gt; thm (* foundations.ML: sidconFFI *)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>y &notin; FV(&Delta; &cup; {&exist; x. &phi;(x), &psi;})</strong><br/>Fresh witness parameter y cannot occur free in hypotheses or conclusion</div>
+              <div class="side-condition-box"><strong>t is free for x in &phi; (sidconFFI)</strong><br/>Term t is free for substitution for all free occurrences of variable x in formula &phi;</div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &exist; x. &phi;(x), &Delta;, &phi;(y) &vdash; &psi; &Longrightarrow; &Gamma; &cup; &Delta; &vdash; &psi;', 'val rule_exists_elim : thm -&gt; string -&gt; thm -&gt; thm')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi;[t/x] &rarr; &exist; x. &phi; [t free for x in &phi;]', 'val rule_EI : term -&gt; variable -&gt; thm -&gt; thm (* sidconFFI *)')">📋 Copy</button></td>
+          </tr>
+
+          <!-- Forall Abstraction (FA / Bernays 1 / ForaR) -->
+          <tr>
+            <td><strong>&forall;-Abstraction (FA / &forall;I)</strong></td>
+            <td>
+              <div class="stmt-unicode"><code>&Gamma; &vdash; &psi; &rarr; &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &psi; &rarr; &forall; x. &phi; &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &phi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; &forall; x. &phi;)</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_FA : variable -&gt; thm -&gt; thm (* foundations.ML: sidconNFV *)</code></div>
+            </td>
+            <td>
+              <div class="side-condition-box"><strong>x &notin; FV(&psi;) &nbsp;|&nbsp; x &notin; FV(&Gamma;) (sidconNFV)</strong><br/>Eigenvariable condition: variable x must NOT occur free in antecedent &psi; or active context &Gamma;</div>
+            </td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &psi; &rarr; &phi; &Longrightarrow; &Gamma; &vdash; &psi; &rarr; &forall; x. &phi; [x &notin; FV(&psi;)]', 'val rule_FA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
+          </tr>
+
+          <!-- Exists Abstraction (EA / Bernays 2 / ExisL) -->
+          <tr>
+            <td><strong>&exist;-Abstraction (EA / &exist;E)</strong></td>
+            <td>
+              <div class="stmt-unicode"><code>&Gamma; &vdash; &phi; &rarr; &psi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &vdash; (&exist; x. &phi;) &rarr; &psi; &nbsp;&nbsp;&nbsp; (&Gamma; &vdash; &exist; x. &phi;, &Delta;, &phi;[y/x] &vdash; &psi; &nbsp;&Longrightarrow;&nbsp; &Gamma; &cup; &Delta; &vdash; &psi;)</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_EA : variable -&gt; thm -&gt; thm (* foundations.ML: sidconNFV *)</code></div>
+            </td>
+            <td>
+              <div class="side-condition-box"><strong>x &notin; FV(&psi;) &nbsp;|&nbsp; y &notin; FV(&Delta; &cup; {&exist; x. &phi;, &psi;})</strong><br/>Eigenvariable condition: variable x (resp. fresh y) does not occur free in &psi; or hypotheses</div>
+            </td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; &phi; &rarr; &psi; &Longrightarrow; &Gamma; &vdash; (&exist; x. &phi;) &rarr; &psi; [x &notin; FV(&psi;)]', 'val rule_EA : variable -&gt; thm -&gt; thm (* sidconNFV *)')">📋 Copy</button></td>
+          </tr>
+
+          <!-- Generalisation (Gen) -->
+          <tr>
+            <td><strong>Generalisation (Gen)</strong></td>
+            <td>
+              <div class="stmt-unicode"><code>&vdash; &phi; &nbsp;&Longrightarrow;&nbsp; &vdash; &forall; x. &phi;</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_Gen : variable -&gt; thm -&gt; thm (* Generalisation_rul *)</code></div>
+            </td>
+            <td>
+              <div class="side-condition-box"><strong>x &notin; FV(&Gamma;)</strong><br/>Variable x does not occur free in any active undischarged assumption in context &Gamma;</div>
+            </td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; &phi; &Longrightarrow; &vdash; &forall; x. &phi; [x &notin; FV(&Gamma;)]', 'val rule_Gen : variable -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
 
           <!-- Equality Substitution -->
@@ -425,31 +556,34 @@
               <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val rule_subst : thm -&gt; thm -&gt; thm</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>s, t free for x in &phi;</strong><br/>No free variables in terms s or t become bound after substitution</div>
+              <div class="side-condition-box"><strong>s, t free for x in &phi;</strong><br/>No free variables in terms s or t become captured after substitution into formula &phi;</div>
             </td>
             <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&Gamma; &vdash; s = t, &Delta; &vdash; &phi;[s/x] &Longrightarrow; &Gamma; &cup; &Delta; &vdash; &phi;[t/x]', 'val rule_subst : thm -&gt; thm -&gt; thm')">📋 Copy</button></td>
           </tr>
 
-          <!-- Class Induction -->
+          <!-- Class Comprehension Rule (CCR / ComprAx) -->
           <tr>
-            <td><strong>Ord Induction (&isin;-Ind)</strong></td>
+            <td><strong>Class Comprehension (CCR)</strong></td>
             <td>
-              <div class="stmt-unicode"><code>(&forall; &alpha; &isin; On. (&forall; &beta; &lt; &alpha;. P(&beta;)) &rArr; P(&alpha;)) &nbsp;&Longrightarrow;&nbsp; &forall; &alpha; &isin; On. P(&alpha;)</code></div>
-              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">theorem ordinal_induction (P : Class -&gt; Prop) : (&forall; a, is_ord a -&gt; (&forall; b, b &isin; a -&gt; P b) -&gt; P a) -&gt; (&forall; a, is_ord a -&gt; P a)</code></div>
+              <div class="stmt-unicode"><code>&vdash; y &isin; {x | &phi;(x)} &hArr; isSet(y) &and; &phi;[y/x]</code></div>
+              <div class="stmt-concrete" style="display: none;"><code style="color:var(--concrete-color);">val ComprAx : (Truth.Expression LBound) -&gt; Thm (* newchecker: ComprAx *)</code></div>
             </td>
             <td>
-              <div class="side-condition-box"><strong>&alpha;, &beta; &isin; On</strong><br/>Restricted strictly to the well-ordered class of ordinals On</div>
+              <div class="side-condition-box"><strong>y free for x in &phi; &amp; y &notin; FV({x | &phi;})</strong><br/>Variable y is free for substitution for bound variable x and does not clash with the binder</div>
             </td>
-            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '(&forall; &alpha; &isin; On. (&forall; &beta; &lt; &alpha;. P(&beta;)) &rArr; P(&alpha;)) &Longrightarrow; &forall; &alpha; &isin; On. P(&alpha;)', 'theorem ordinal_induction (P : Class -&gt; Prop) : (&forall; a, is_ord a -&gt; (&forall; b, b &isin; a -&gt; P b) -&gt; P a) -&gt; (&forall; a, is_ord a -&gt; P a)')">📋 Copy</button></td>
+            <td style="text-align: center;"><button class="copy-btn" onclick="copySnippet(this, '&vdash; y &isin; {x | &phi;(x)} &hArr; isSet(y) &and; &phi;[y/x]', 'val ComprAx : (Truth.Expression LBound) -&gt; Thm')">📋 Copy</button></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <h2>3. The Machine-Checked Lean 4 Verification (9 Core Theorems)</h2>
+    <h2>3. The Machine-Checked Lean 4 Verification (Core Showcased Theorems)</h2>
     <p>
-      All 9 core theorems from the Obelisk demonstration were formalized in Lean 4 without Mathlib dependencies.
+      Core theorems from the Obelisk demonstration formalized and machine-checked in Lean 4 without Mathlib dependencies.
       Source file: <a href="Obelisk.lean" target="_blank" style="color:var(--primary);">Obelisk.lean</a>.
+    </p>
+    <p style="font-size: 0.88rem; color: var(--text-muted); margin-top: 0.5rem;">
+      In Morse–Kelley class theory, all theorems are proven statements in the object language. All mathematical prerequisites (such as sethood or element membership) are <strong>internal antecedents within the formula</strong>, not external side conditions. Closed theorems have no syntactic side conditions.
     </p>
     
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin: 1.5rem 0;">
@@ -461,7 +595,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Uniqueness of the empty class: <code>&forall; E1 E2. &empty;(E1) &and; &empty;(E2) &rArr; E1 = E2</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem empty_unique (E1 E2 : Class) : E1 = E2</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> None (Unconditional theorem)</div>
+        <div class="formula-hypo-note">Hypotheses in formula: &forall; x. &not;(x &isin; E1) and &forall; x. &not;(x &isin; E2) (antecedents in implication)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; element non-membership is internal to formula)</div>
       </div>
 
       <!-- Theorem 2 -->
@@ -472,7 +607,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Extensionality of classes: <code>X = Y &hArr; &forall; z. (z &isin; X &hArr; z &isin; Y)</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem extensionality (X Y : Class) : X = Y</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> Classes X and Y share identical element membership</div>
+        <div class="formula-hypo-note">Hypothesis in formula: &forall; z. (z &isin; X &hArr; z &isin; Y) (antecedent in implication)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; element equivalence is an internal antecedent)</div>
       </div>
 
       <!-- Theorem 3 -->
@@ -483,7 +619,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Subclasses of sets are sets: <code>A &sube; B &and; isSet(B) &rArr; isSet(A)</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem hereditary_subsets (A B : Class) : isSet A</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> isSet(B) required as hypothesis</div>
+        <div class="formula-hypo-note">Hypotheses in formula: A &sube; B and isSet(B) (explicit antecedents in implication)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; sethood of B is part of the formula, not an external proviso)</div>
       </div>
 
       <!-- Theorem 5 -->
@@ -494,7 +631,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Universal Class is Proper: <code>&not; isSet(V)</code> (Resolves Russell Paradox)</div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem not_isSet_V : &not; isSet V</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> Universal class definition V := {x | isSet(x)}</div>
+        <div class="formula-hypo-note">Hypotheses in formula: None (unconditional negation theorem)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem)</div>
       </div>
 
       <!-- Theorem 7 -->
@@ -505,7 +643,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Ordinal Class is Proper: <code>&not; isSet(On)</code> (Resolves Burali-Forti Paradox)</div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem on_not_set : &not; isSet On</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> On := {a | is_ord(a)} under transfinite induction</div>
+        <div class="formula-hypo-note">Hypotheses in formula: None (unconditional negation theorem)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem)</div>
       </div>
 
       <!-- Theorem 9 -->
@@ -516,7 +655,8 @@
         </div>
         <div class="stmt-unicode" style="font-size: 0.88rem; color: #f1f5f9;">Tagged pair invertibility: <code>&pi;<sub>1</sub>(&lang;A, B&rang;) = A &and; &pi;<sub>2</sub>(&lang;A, B&rang;) = B</code></div>
         <code class="stmt-concrete" style="display: none; font-size: 0.8rem; color: var(--concrete-color);">theorem tagged_pair_proj (A B : Class) : proj1 (tagged_pair A B) = A &and; proj2 (tagged_pair A B) = B</code>
-        <div class="side-condition-box" style="margin-top: 8px;"><strong>Side Condition:</strong> Valid for all classes A, B (sets or proper classes)</div>
+        <div class="formula-hypo-note">Hypotheses in formula: None (holds universally for all classes A, B)</div>
+        <div class="side-condition-box" style="margin-top: 8px; background: rgba(15, 23, 42, 0.6); border-left: 3px solid #38bdf8; color: #94a3b8;"><strong style="color: #38bdf8;">Syntactic Side Condition:</strong> None (Closed theorem; holds unconditionally)</div>
       </div>
     </div>
 
