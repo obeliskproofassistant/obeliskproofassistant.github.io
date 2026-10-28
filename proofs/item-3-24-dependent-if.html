@@ -8,8 +8,8 @@
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\(', '\)']],
-        displayMath: [['$$', '$$'], ['\[', '\]']],
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         macros: {
           llbracket: ["\unicode{x27E6}"],
@@ -39,6 +39,37 @@
     .obj-var {
       font-style: italic !important;
       color: #38bdf8 !important;
+    }
+    .obj-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #38bdf8 !important;
+    }
+    .obj-pred {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #34d399 !important;
+      letter-spacing: 0.02em;
+    }
+    .meta-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #60a5fa !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+    .expr-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f59e0b !important;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+    }
+    .expr-term {
+      font-style: normal !important;
+      color: #fbbf24 !important;
+      background: rgba(245, 158, 11, 0.12);
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
     }
     /* MathJax bold upright metatheoretic constant distinction */
     .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
@@ -299,7 +330,7 @@
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(T \to \mathsf{Type}, \quad t_1 \in T(\mathrm{true}), \; t_2 \in T(\mathrm{false})\)</div>
+      <div class="syntax-display">\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#dependent-if-typing" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -334,7 +365,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( (A, B)_D = (\{0\} 	imes A) \cup (\{1\} 	imes B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( \langle A, B \rangle_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>

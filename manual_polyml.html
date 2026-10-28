@@ -68,6 +68,14 @@
     </nav>
   </header>
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 4rem;">
+    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.28); border-radius: 8px; padding: 14px 20px; margin-bottom: 1.5rem; color: #cbd5e1; font-size: 0.88rem; line-height: 1.55;">
+      <strong style="color: #38bdf8;">Epistemic Grounding: Untangling Objects, Predicates, Types, and Expressions</strong><br>
+      <ul style="margin: 8px 0 6px 1.2rem; padding: 0;">
+        <li><strong>1. Class Variables vs. Expressions:</strong> For a class variable x, you can write (x : Class), but never x &isin; Class. For an AST expression term t, you can write both (t : Class.Expression) and t &isin; Class.Expression (e.g. t = &lang;x&rang;).</li>
+        <li><strong>2. Types as Predicates on Classes:</strong> In Morse--Kelley, types correspond to predicates on classes. Formula CLASS(V) is an object-level theorem asserting universal class V satisfies the class predicate, distinct from the compiler typing judgment (V : Class).</li>
+        <li><strong>3. The Off-by-One Level Rule:</strong> SML cannot store classes (Class = Nonstored.t); it stores expressions of classes (Class_Expre). Decidable side conditions are directly executable and testable boolean functions.</li>
+      </ul>
+    </div>
     <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem;">Obelisk Proof Assistant &mdash; Reference Manual</h1>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
       Machine-checked specification of classical propositional logic, first-order predicate logic, Morse&ndash;Kelley class theory, and type-theoretic side conditions directly generated from Standard ML kernel data structures.

@@ -8,8 +8,8 @@
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\(', '\)']],
-        displayMath: [['$$', '$$'], ['\[', '\]']],
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         macros: {
           llbracket: ["\unicode{x27E6}"],
@@ -39,6 +39,37 @@
     .obj-var {
       font-style: italic !important;
       color: #38bdf8 !important;
+    }
+    .obj-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #38bdf8 !important;
+    }
+    .obj-pred {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #34d399 !important;
+      letter-spacing: 0.02em;
+    }
+    .meta-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #60a5fa !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+    .expr-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f59e0b !important;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+    }
+    .expr-term {
+      font-style: normal !important;
+      color: #fbbf24 !important;
+      background: rgba(245, 158, 11, 0.12);
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
     }
     /* MathJax bold upright metatheoretic constant distinction */
     .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
@@ -204,16 +235,23 @@
       When moving from object-theory to metatheory, syntactic side conditions become first-class semantic statements, accompanied by meta-metatheoretic conditions.
     </p>
 
-    <!-- EPISTEMIC SOUNDNESS & LEVEL DISPARITY BANNER -->
-    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 12px;">
-      <span style="font-size: 1.3rem;">💡</span>
-      <div style="font-size: 0.88rem; line-height: 1.5; color: #cbd5e1;">
-        <strong style="color: #38bdf8;">Epistemic Soundness &amp; Level Disparity Invariant:</strong>
-        Notation is fragile—always consult <code>typetheory.ML</code> for semantics, never surface syntax!
-        We distinguish between:
-        (1) <strong>Meaning in Model inside NBG</strong> (pure set/class universe: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), strictly no category errors like \(\in \mathrm{Theory}\) or \(\in \mathrm{Class}\)), and
-        (2) <strong>Checkable or Executable Code in CakeML &amp; Poly/ML</strong> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>).
-        <span style="color: #f59e0b;">Off-by-One Level Rule:</span> Standard ML cannot have a type of all classes or sets (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+    <!-- EPISTEMIC GROUNDING & UNTANGLING BANNER -->
+    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.28); border-radius: 8px; padding: 14px 20px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 14px;">
+      <span style="font-size: 1.4rem;">💡</span>
+      <div style="font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+        <strong style="color: #38bdf8; font-size: 0.95rem;">Epistemic Grounding: Untangling Objects, Predicates, Types, and Expressions</strong><br>
+        <span style="color: #94a3b8;">Notation is fragile—always consult <code>typetheory.ML</code> for semantics rather than surface syntax:</span>
+        <ul style="margin: 8px 0 6px 1.2rem; padding: 0;">
+          <li>
+            <strong>1. Class Variables vs. Expressions:</strong> For a class variable <span class="obj-var">x</span>, you can write \( x : \mathsf{Class} \), but <em>never</em> <code>x &isin; Class</code>. For an AST expression <span class="expr-term">t</span>, you can write <em>both</em> \( t : \mathsf{Class.Expression} \) and \( t \in \mathsf{Class.Expression} \). An example is \( t = \langle x \rangle \).
+          </li>
+          <li>
+            <strong>2. Types as Predicates on Classes:</strong> In Morse–Kelley, types correspond to predicates on classes. Formula \( \mathrm{CLASS}(V) \) is an object-level <strong>theorem</strong> (\( \vdash \mathrm{CLASS}(V) \)), having a completely different sense from the compiler typing judgment \( \mathcal{W} : \mathsf{Theory} \) or <code>(V : Class)</code>.
+          </li>
+          <li>
+            <strong>3. The "Off-by-One" Level Rule:</strong> SML cannot store classes (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -231,7 +269,7 @@
           <strong>Decidability as Formal Metatheorems:</strong> If it is claimed that a side condition formula is decidable, then that decidability is itself established as a formal theorem in the metatheory with a constructive kernel witness algorithm.
         </li>
         <li>
-          <strong>Constants Representing Variables:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \( \mathbf{v}_x \in \mathsf{Variable} \) in the metatheory. Constants representing variables are rendered distinctly in upright pink (<span class="meta-const">v_x</span>, <span class="meta-const">v_C</span>), preventing confusion with italic blue object variables.
+          <strong>Constants Representing Variables:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \( \mathbf{v}_x : \mathsf{Variable} \) in the metatheory. Constants representing variables are rendered distinctly in upright pink (<span class="meta-const">v_x</span>, <span class="meta-const">v_C</span>), preventing confusion with italic blue object variables.
         </li>
         <li>
           <strong>Formulas Without Superfluous Typing Suffixes:</strong> A side condition like \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) is a genuine mathematical formula; it does not take a redundant <code>: Bool</code> or <code>&isin; Bool</code> suffix.

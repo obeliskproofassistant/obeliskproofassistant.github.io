@@ -8,8 +8,8 @@
   <script>
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\(', '\)']],
-        displayMath: [['$$', '$$'], ['\[', '\]']],
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         macros: {
           llbracket: ["\unicode{x27E6}"],
@@ -39,6 +39,37 @@
     .obj-var {
       font-style: italic !important;
       color: #38bdf8 !important;
+    }
+    .obj-const {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #38bdf8 !important;
+    }
+    .obj-pred {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #34d399 !important;
+      letter-spacing: 0.02em;
+    }
+    .meta-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #60a5fa !important;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    }
+    .expr-type {
+      font-style: normal !important;
+      font-weight: 700 !important;
+      color: #f59e0b !important;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
+    }
+    .expr-term {
+      font-style: normal !important;
+      color: #fbbf24 !important;
+      background: rgba(245, 158, 11, 0.12);
+      padding: 1px 4px;
+      border-radius: 3px;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace !important;
     }
     /* MathJax bold upright metatheoretic constant distinction */
     .mjx-b, mjx-c[c="1D42F"], mjx-c[c="1D415"] {
@@ -396,16 +427,23 @@
       Formal machine-checked specification of classical logic, Morse–Kelley class theory, LCF architecture, and type-theoretic syntactic side conditions. Click any verification status to inspect its proof certificate.
     </p>
 
-    <!-- EPISTEMIC SOUNDNESS & LEVEL DISPARITY BANNER -->
-    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.25); border-radius: 8px; padding: 12px 18px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 12px;">
-      <span style="font-size: 1.3rem;">💡</span>
-      <div style="font-size: 0.88rem; line-height: 1.5; color: #cbd5e1;">
-        <strong style="color: #38bdf8;">Epistemic Soundness &amp; Level Disparity Invariant:</strong>
-        Notation is fragile—always consult <code>typetheory.ML</code> for semantics, never surface syntax!
-        We distinguish between:
-        (1) <strong>Meaning in Model inside NBG</strong> (pure set/class universe: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), strictly no category errors like \(\in \mathrm{Theory}\) or \(\in \mathrm{Class}\)), and
-        (2) <strong>Checkable or Executable Code in CakeML &amp; Poly/ML</strong> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>).
-        <span style="color: #f59e0b;">Off-by-One Level Rule:</span> Standard ML cannot have a type of all classes or sets (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+    <!-- EPISTEMIC GROUNDING & UNTANGLING BANNER -->
+    <div style="background: rgba(14, 165, 233, 0.08); border: 1px solid rgba(14, 165, 233, 0.28); border-radius: 8px; padding: 14px 20px; margin-bottom: 1.5rem; display: flex; align-items: flex-start; gap: 14px;">
+      <span style="font-size: 1.4rem;">💡</span>
+      <div style="font-size: 0.88rem; line-height: 1.55; color: #cbd5e1;">
+        <strong style="color: #38bdf8; font-size: 0.95rem;">Epistemic Grounding: Untangling Objects, Predicates, Types, and Expressions</strong><br>
+        <span style="color: #94a3b8;">Notation is fragile—always consult <code>typetheory.ML</code> for semantics rather than surface syntax. In Obelisk, we rigorously disambiguate four distinct levels:</span>
+        <ul style="margin: 8px 0 6px 1.2rem; padding: 0;">
+          <li>
+            <strong>1. Class Variables vs. Expressions:</strong> For a class variable <span class="obj-var">x</span>, you can write the typing judgment \( x : \mathsf{Class} \). But you <em>cannot write</em> <code>x &isin; Class</code> because there is no class of all classes in Morse–Kelley. Conversely, for a class term expression <span class="expr-term">t</span>, because <span class="expr-type">Class.Expression</span> is a genuine datatype of syntax trees, you can write <em>both</em> \( t : \mathsf{Class.Expression} \) and \( t \in \mathsf{Class.Expression} \). An example of such a term is \( t = \langle x \rangle \) (the syntactic AST embedding variable <span class="obj-var">x</span>).
+          </li>
+          <li>
+            <strong>2. Types as Predicates on Classes:</strong> In Morse–Kelley, types semantically correspond to <em>predicates on classes</em>. Therefore, \( \mathrm{CLASS}(V) \) is a well-formed mathematical formula inside the object theory, and in fact it is a <strong>theorem</strong> (\( \vdash \mathrm{CLASS}(V) \), asserting that universal class <span class="obj-const">V</span> satisfies the class predicate). This has a completely different sense from the compiler typing judgment \( \mathcal{W} : \mathsf{Theory} \) or <code>(V : Class)</code>. Similarly, \( \mathrm{SET}(\emptyset) \) is a theorem, while \( \neg\mathrm{SET}(V) \) is Russell's theorem.
+          </li>
+          <li>
+            <strong>3. The "Off-by-One" Level Rule:</strong> Standard ML cannot have a type of all classes or sets (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+          </li>
+        </ul>
       </div>
     </div>
 
@@ -420,13 +458,13 @@
       </p>
       <ul style="margin: 0.5rem 0 0.5rem 1.2rem; padding: 0;">
         <li>
-          <strong>The Two Real Interpretations (NBG Model vs. Executable SML Code):</strong> We strictly distinguish between (1) <em>Meaning in Model inside NBG</em> (pure mathematical assertions: \(orall X\), \(orall (x \in V)\), \(\mathrm{isSet}(x)\), avoiding any pseudo-membership like \(\in \mathsf{Theory}\) or \(\in \mathsf{Class}\)), and (2) <em>Checkable / Executable Code in CakeML and Poly/ML</em> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>, <code>Ctx</code>). Use the <strong>Interpretation</strong> switch in the header to view either representation.
+          <strong>The Two Real Interpretations (NBG Model vs. Executable SML Code):</strong> We strictly distinguish between (1) <em>Meaning in Model inside NBG</em> (pure mathematical assertions: \( \forall X \), \( \forall (x \in V) \), \( \mathrm{isSet}(x) \), avoiding any pseudo-membership like <code>&isin; Theory</code> or <code>&isin; Class</code>), and (2) <em>Checkable / Executable Code in CakeML and Poly/ML</em> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>, <code>Ctx</code>). Use the <strong>Interpretation</strong> switch in the header to view either representation.
+        </li>
+        <li>
+          <strong>Visual Separation of Constants vs Object Variables:</strong> When an object variable <span class="obj-var">x</span> is reasoned about in a side condition, it is represented by a constant identifier \( \mathbf{v}_x : \mathsf{Variable} \). Metatheoretic constants (<span class="meta-const">v_x</span>, <span class="meta-const">v_y</span>, <span class="meta-const">v_C</span>, \( \mathbf{v}_x \)) are rendered in <strong>bold upright pink</strong>, visually decoupled from italic object variables (<span class="obj-var">x</span>, <span class="obj-var">y</span>, <span class="obj-var">C</span>) in <strong>italic cyan</strong>, class predicates (<span class="obj-pred">CLASS</span>, <span class="obj-pred">SET</span>) in <strong>bold green</strong>, and expression terms (<span class="expr-term">t</span>, <span class="expr-term">&lang;x&rang;</span>) in <strong>amber code</strong>.
         </li>
         <li>
           <strong>Side Conditions as Genuine Metatheoretic Formulas:</strong> A side condition is not an informal remark or separate type assertion—it is an ordinary decidable formula in the metatheory (e.g. \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) or \( \mathrm{FFI}(t, \mathbf{v}_x, \phi) = \mathrm{True} \)).
-        </li>
-        <li>
-          <strong>Visual Separation of Constants vs Object Variables:</strong> When an object variable \(x\) is reasoned about in a side condition, it is represented by a constant identifier \( \mathbf{v}_x \in \mathsf{Variable} \). Metatheoretic constants (<span class="meta-const">v_x</span>, <span class="meta-const">v_y</span>, <span class="meta-const">v_C</span>, \( \mathbf{v}_x \)) are rendered in <strong>bold upright pink</strong>, visually decoupled from italic object variables (<span class="obj-var">x</span>, <span class="obj-var">y</span>, <span class="obj-var">C</span>) in <strong>italic cyan</strong>. Click any side condition to navigate to its reflected certificate in the <a href="metatheory.html" style="color: var(--accent-cyan); font-weight: 600;">Metatheory Specification</a>.
         </li>
         <li>
           <strong>Formula Taxonomy &amp; Schemata:</strong> A closed formula without metavariables is <em>non-schematic</em>. Standard formulas with variables/metavariables are simply <em>formulas</em> (Theorems, Axioms, Definitions). The term <em>schema</em> is strictly reserved for infinite families of statements generated at the metalevel by syntactic formula substitution where object-level quantification is absent. In Morse–Kelley class theory, because classes are first-class mathematical entities, principles such as <em>Ordinal Induction</em> (3.32) and <em>Replacement</em> (3.37) are single finitely-quantified theorems and axioms.
