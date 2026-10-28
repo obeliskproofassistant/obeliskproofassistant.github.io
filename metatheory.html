@@ -6,22 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
   <script>
+    
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         macros: {
-          llbracket: ["\unicode{x27E6}"],
-          rrbracket: ["\unicode{x27E7}"],
-          lsemantic: ["\unicode{x27E6}"],
-          rsemantic: ["\unicode{x27E7}"]
+          llbracket: '⟦',
+          rrbracket: '⟧',
+          llbrackets: '⟦',
+          rrbrackets: '⟧',
+          lsemantic: '⟦',
+          rsemantic: '⟧'
         }
       },
       options: {
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
       }
     };
+
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
@@ -221,6 +225,7 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="manual.html">Manual &amp; Theory</a>
+      <a href="proofs.html">Proofs Gallery</a>
       <a href="metatheory.html" class="active">Metatheory</a>
       <a href="output.html">Demo Output</a>
       <a href="output.pdf" target="_blank">PDF Manual</a>
@@ -250,6 +255,13 @@
           </li>
           <li>
             <strong>3. The "Off-by-One" Level Rule:</strong> SML cannot store classes (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
+          </li>
+          <li>
+            <strong>4. Turnstiles, Statements &amp; Theorems (Dependent Type Foundation):</strong> The turnstile \( \mathcal{T}, \Gamma \vdash \phi \) is a <em>ternary relation</em> between Theory \( \mathcal{T} \), Context \( \Gamma \), and Formula \( \phi \) (in the kernel: <code>Stmt_p = ApStmt of Theory * Ctx * Fm</code>). Because theory \( \mathcal{T} \) may be arbitrary or uncountable, this relation is in general <strong>undecidable</strong>. In metatheory, turnstiles must never be used where simple implication (\( \to \)) is intended. Furthermore, we explicitly distinguish:
+            <ul style="margin: 4px 0 2px 1.2rem; padding: 0;">
+              <li><strong>Statement:</strong> A syntactic judgement \( \mathcal{T}, \Gamma \vdash \phi \) asserting that formula \( \phi \) holds in theory \( \mathcal{T} \) under context \( \Gamma \).</li>
+              <li><strong>Theorem:</strong> A dependent pair (Sigma-type \( \Sigma(s : \mathsf{Stmt})\; \mathsf{Prf}(s) \)) consisting of a Statement and a verified Proof term witnessing it (in SML: <code>datatype Thm = Thm of Stmt.Expression * Prf</code>). A theorem is constructively <em>a statement together with a proof of it</em>.</li>
+            </ul>
           </li>
         </ul>
       </div>
@@ -304,7 +316,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\phi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\phi))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -345,7 +357,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v}_1, \mathbf{v}_2 : \mathsf{Variable}).\; \mathrm{Decidable}(\mathbf{v}_1 \ne \mathbf{v}_2)\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v}_1, \mathbf{v}_2 : \mathsf{Variable}).\; \mathrm{Decidable}(\mathbf{v}_1 \ne \mathbf{v}_2)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Variable.eq / SideCondFresh</code></div>
             </div>
         
@@ -386,7 +398,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(t : \mathsf{Term}, \mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathrm{isFreeFor}(t, \mathbf{v}, \phi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(t : \mathsf{Term}, \mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathrm{isFreeFor}(t, \mathbf{v}, \phi))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFreeFor / SideCondFFI</code></div>
             </div>
         
@@ -427,7 +439,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}).\; \mathrm{isFinite}(\psi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -468,7 +480,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \Gamma : \mathsf{Ctx}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \Gamma : \mathsf{Ctx}).\; \mathrm{isFinite}(\Gamma) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Context.isFree / SideCondNFV_Ctx</code></div>
             </div>
         
@@ -509,7 +521,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}, \Gamma : \mathsf{Ctx}).\; \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi) \land \mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}, \Gamma : \mathsf{Ctx}).\; (\mathrm{isFinite}(\psi) \land \mathrm{isFinite}(\Gamma)) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi) \land \mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -543,14 +555,14 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
-              <div class="view-membership" style="display:none;">\((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha) \vdash (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+              <div class="view-typing">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+              <div class="view-membership" style="display:none;">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
             </div>
             <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(\alpha : \mathsf{Type}, t_1, t_2 : \alpha).\; \mathrm{Normalizes}(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket, t_1)\)</div>
+              <div style="margin-top: 2px;">\(\forall(\alpha : \mathsf{Type}, t_1, t_2 : \alpha).\; \mathrm{Normalizes}(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket, t_1)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>EvalSimpleIf / RedStep</code></div>
             </div>
         
@@ -591,7 +603,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash_{\mathrm{Meta}} \forall(T : \mathsf{Bool} \to \mathsf{Type}, b : \mathsf{Bool}, t_1, t_2).\; \mathrm{TypeChecked}(T, b, t_1, t_2)\)</div>
+              <div style="margin-top: 2px;">\(\forall(T : \mathsf{Bool} \to \mathsf{Type}, b : \mathsf{Bool}, t_1, t_2).\; \mathrm{TypeChecked}(T, b, t_1, t_2)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>DependentIfTypeCheck</code></div>
             </div>
         
@@ -632,7 +644,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\mathrm{MK} \vdash \forall(X : \mathsf{Class}).\; X \ne \emptyset \implies \exists(y : \mathsf{Class}).\; y \in X \land y \cap X = \emptyset\)</div>
+              <div style="margin-top: 2px;">\(\mathrm{provable}(\mathrm{MK}, \forall(X : \mathsf{Class}).\; X \ne \emptyset \implies \exists(y : \mathsf{Class}).\; y \in X \land y \cap X = \emptyset)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>MK_regularity_axm / on_ord_thm</code></div>
             </div>
         
@@ -642,8 +654,8 @@
           </td>
           <td>
             <div class="syntax-box">
-              <div class="view-typing">\(\mathrm{On} : \mathsf{Class} \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathrm{On}  \land \mathrm{MK} \vdash \mathrm{Regularity}\)</div>
+              <div class="view-typing">\(\mathrm{On} : \mathsf{Class} \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity})\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{On}  \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity})\)</div>
             </div>
             <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
             
