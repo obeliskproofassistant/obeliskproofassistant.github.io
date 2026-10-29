@@ -91,9 +91,9 @@
         <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
     </div>
     <div class="toolbar-nav">
-        <button class="toolbar-btn" onclick="scrollToText('Propositional logic')">1. Propositional Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('First-order logic')">2. First-Order Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('Class theory')">3. Class Axioms</button>
+        <button class="toolbar-btn" onclick="scrollToText('1) Propositional logic')">1. Propositional Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('2) Predicate logic')">2. First-Order Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('3) Set/class-theoretic foundations')">3. Class Axioms</button>
         <a class="toolbar-btn" href="output.pdf" target="_blank">📄 View PDF</a>
         <a class="toolbar-btn" href="output_white.pdf" target="_blank">📄 Light PDF</a>
     </div>
@@ -112,7 +112,7 @@ const localAddr = "output.html";
 const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
 
 async function getText() {
-    let text = sessionStorage.getItem("obelisk_demo_output");
+    let text = sessionStorage.getItem("obelisk_demo_output_v2");
     if (!text) {
         try {
             const res = await fetch(localAddr);
@@ -127,7 +127,7 @@ async function getText() {
             text = await remoteRes.text();
         }
         if (text) {
-            sessionStorage.setItem("obelisk_demo_output", text);
+            sessionStorage.setItem("obelisk_demo_output_v2", text);
         }
     }
     return text;
@@ -136,15 +136,38 @@ async function getText() {
 function scrollToText(searchText) {
     const el = document.getElementById("myhtmloutput");
     if (!el) return;
+    const needle = searchText.toLowerCase();
     const spans = el.querySelectorAll("span, p, pre");
+    // Pick the MOST SPECIFIC match (smallest text content) instead of the first:
+    // output.html wraps the entire document in one <pre> whose text contains every
+    // section header, so first-match order would always hit that giant wrapper.
+    let best = null;
+    let bestLen = Infinity;
     for (let s of spans) {
-        if (s.textContent && s.textContent.includes(searchText)) {
-            s.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            s.style.outline = '2px solid #38bdf8';
-            setTimeout(() => { s.style.outline = 'none'; }, 2000);
-            break;
+        const text = (s.textContent || '').toLowerCase();
+        if (text.includes(needle) && text.length < bestLen) {
+            best = s;
+            bestLen = text.length;
         }
     }
+    if (!best) {
+        // Fallback: match partial words inside longer headers (e.g. "class axioms" -> "Class Axiom (...)")
+        const words = needle.split(/\s+/);
+        for (let s of spans) {
+            const hay = (s.textContent || '').toLowerCase();
+            if (words.length && words.every(w => hay.includes(w)) && hay.length < bestLen) {
+                best = s;
+                bestLen = hay.length;
+            }
+        }
+    }
+    if (best) {
+        best.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        best.style.outline = '2px solid #38bdf8';
+        setTimeout(() => { best.style.outline = 'none'; }, 2000);
+        return;
+    }
+    console.warn("scrollToText: no match for", searchText);
 }
 
 async function renderOutput() {
