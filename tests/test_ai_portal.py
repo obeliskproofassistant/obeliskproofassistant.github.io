@@ -37,7 +37,7 @@ class TestAIPortal(unittest.TestCase):
         content = self.contents["ai.html"]
         self.assertIn("manual.html#nbg-library", content)
         self.assertIn("NBG Standard Library", content)
-        self.assertIn("16 kernel-checked theorems", content)
+        self.assertIn("17 kernel-checked theorems", content)
 
     def test_ai_portal_reports_dunaev_injectivity(self):
         content = self.contents["ai.html"]

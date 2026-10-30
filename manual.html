@@ -3846,7 +3846,7 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
         <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);">Machine-Checked Standard Library</div>
         <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">NBG Propositions-as-Types</h2>
       </div>
-      <span class="status-badge badge-verified-strong">16 kernel-checked theorems</span>
+      <span class="status-badge badge-verified-strong">17 kernel-checked theorems</span>
     </div>
     <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 980px;">
       Each row is a closed proof term in <code>examples/nbg_verified_programs.nbg</code>, compiled by
@@ -4065,13 +4065,25 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
             <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
           </tr>
         
+          <tr id="nbg-dunaev_cartesian_elim" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_cartesian_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Elimination for the Dunaev Cartesian product: membership yields set components u, v with p = [u,v]_D.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall p:Class. (p in { q | (exists u:Set. (exists v:Set. ((u in A /\ v in B) /\ q = [u, v]_D))) } -&gt; (exists u:Set. (exists v:Set. ((u in A /\ v in B) /\ p = [u, v]_D)))))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
         </tbody>
       </table>
     </div>
     <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.9rem;">
       Reproduce locally: <code>python3 obelisk_cli.py compile examples/nbg_verified_programs.nbg</code>
       &nbsp;•&nbsp; Manifest: <code>data/nbg_library.json</code>
-      &nbsp;•&nbsp; Source SHA-256 prefix: <code>26d00eaeefa3ace0</code>
+      &nbsp;•&nbsp; Source SHA-256 prefix: <code>6e9b363032714391</code>
     </p>
   </div>
 

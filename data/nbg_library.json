@@ -1,7 +1,7 @@
 {
   "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
-  "source_sha256_prefix": "26d00eaeefa3ace0",
-  "count": 16,
+  "source_sha256_prefix": "6e9b363032714391",
+  "count": 17,
   "theorems": [
     {
       "name": "empty_class_no_elements",
@@ -114,6 +114,13 @@
       "proof_size": 26,
       "normalized_size": 26,
       "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -> A = C and B = D."
+    },
+    {
+      "name": "dunaev_cartesian_elim",
+      "formula": "(forall A:Class. (forall B:Class. (forall p:Class. (p in { q | (exists u:Set. (exists v:Set. ((u in A /\\ v in B) /\\ q = [u, v]_D))) } -> (exists u:Set. (exists v:Set. ((u in A /\\ v in B) /\\ p = [u, v]_D)))))))",
+      "proof_size": 9,
+      "normalized_size": 9,
+      "description": "Elimination for the Dunaev Cartesian product: membership yields set components u, v with p = [u,v]_D."
     }
   ]
 }
