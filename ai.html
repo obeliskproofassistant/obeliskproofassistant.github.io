@@ -640,7 +640,7 @@
       </a>
       <nav class="main-nav">
         <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">🏛 Classic Author Portal</a>
-        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Theory Manual (49)</a>
+        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Theory Manual (49 + 16 NBG)</a>
         <a href="#overview">Overview</a>
         <a href="#inspector">Theorem Inspector</a>
         <a href="#triad">Architecture</a>
@@ -668,7 +668,7 @@
         Featuring an audited LCF-style trusted kernel in Standard ML, declarative syntax, and rigorous class theory foundations.
       </p>
       <div class="hero-actions">
-        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (49 Machine-Checked Statements) &rarr;</a>
+        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (49 Core + 16 NBG Theorems) &rarr;</a>
         <a href="repl.html" class="btn btn-secondary">⚡ Launch Web REPL</a>
         <a href="Obelisk_Report.pdf" class="btn btn-secondary" target="_blank">📄 Read Lean 4 Audit Report</a>
         <a href="Obelisk.lean" class="btn btn-secondary" target="_blank">💻 View Obelisk.lean Source</a>
@@ -682,9 +682,9 @@
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;">
         <div>
           <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations</div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual &amp; Verification Certificates</h3>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual &amp; 16-Theorem NBG Library</h3>
         </div>
-        <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Complete Manual (49 Entries) &rarr;</a>
+        <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Manual + NBG Library &rarr;</a>
       </div>
       <p style="color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.2rem; max-width: 900px;">
         Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Each theorem and rule links to an individual machine-checked verification certificate with full PolyML microkernel proof programs.
@@ -720,6 +720,11 @@
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Incompleteness</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Löb's theorem &amp; Gödel II</div>
         </a>
+        <a href="manual.html#nbg-library" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
+          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">APPENDIX</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">NBG Standard Library</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">16 kernel-checked theorems</div>
+        </a>
       </div>
     </section>
 
@@ -748,7 +753,7 @@
           <h4 style="color: #c084fc;"><span>🏷️</span> Dunaev Tagged Ordered Pairs</h4>
           <p>
             Standard Kuratowski pairs \(\langle A, B \rangle = \{\{A\}, \{A, B\}\}\) fail for proper classes because proper classes cannot be elements of sets. 
-            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \(\langle \text{tag}, A, B \rangle_{\text{tag}}\), allowing proper classes and infinite families to form pairs and lists with zero set-theoretic rank inflation and full algebraic projection invertibility.
+            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \([A, B]_D = \mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)\), allowing proper classes and infinite families to form pairs and lists with minimal rank growth and full algebraic projection injectivity.
           </p>
         </div>
 
@@ -758,6 +763,54 @@
             Type-theoretic proof assistants suffer from fragile computational reduction (\(\beta\delta\iota\)): definition updates break proof scripts invisibly. 
             Obelisk separates syntax from semantics through the explicit valuation bracket \(\llbracket \cdot \rrbracket\). Every deduction is a checkable syntactic tree; inference rules have explicit side conditions with no hidden normalization noise.
           </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT KERNEL & MANUAL ADVANCES -->
+    <section id="recent" style="margin-bottom: 4rem;">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Latest Verified Changes &middot; 2026-10-30</div>
+        <h2 class="section-title">Recent Kernel &amp; Manual Advances</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem; max-width: 900px;">
+          The prover and its generated manual are continuously re-audited. These are the latest changes now visible in the Theory Manual and the publication PDFs.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(56, 189, 248, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #38bdf8; margin-bottom: 0.5rem;">🪪 Dunaev Pair Injectivity</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            <code>[A,B]<sub>D</sub> = [C,D]<sub>D</sub> &rarr; A = C &and; B = D</code> is now proved for arbitrary classes
+            (<code>proofDunaevPairInjectivity</code> and surface <code>dunaev_pair_injective</code>).
+            The general <code>Pair</code>/<code>Func</code> interface no longer falls back to Kuratowski pairs.
+          </p>
+          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(16, 185, 129, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem;">🛡️ Trusted Checker: No Cheat Path</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            <code>ThmWithPrf.cheat</code> now raises, and <code>derive</code>, <code>check</code>,
+            <code>slow_check</code>, and <code>checkPlus</code> all reject <code>PCheat_prf</code>.
+            Unsupported legacy <code>PS1_prf</code>/<code>PHenkin_prf</code> constructors fail explicitly.
+          </p>
+          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Read the manual &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(192, 132, 252, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #c084fc; margin-bottom: 0.5rem;">📊 Epistemic Catalog Audit</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            The dependent catalog now reports <strong>41 derived proofs</strong>,
+            <strong>16 conservative definitions</strong>, and <strong>7 irreducible MK axioms</strong>.
+            Plan witnesses are classified, and an unclassified witness prevents the catalog from loading.
+          </p>
+          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Inspect the catalog &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(251, 191, 36, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #fbbf24; margin-bottom: 0.5rem;">📚 NBG Library in the Manual</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            All <strong>16 machine-checked NBG surface theorems</strong> are now rendered as a manual appendix,
+            with formulas, proof AST sizes, and normalized sizes. The same table is included in the publication PDFs.
+          </p>
+          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Browse the appendix &rarr;</a>
         </div>
       </div>
     </section>
@@ -776,7 +829,7 @@
         <!-- Theorem Selector Tabs -->
         <div class="inspector-nav" id="thm-tabs">
           <button class="thm-btn active" onclick="selectTheorem('russell')">1. Russell Proper Class</button>
-          <button class="thm-btn" onclick="selectTheorem('tagged_pair')">2. Tagged Pair Inversion</button>
+          <button class="thm-btn" onclick="selectTheorem('tagged_pair')">2. Dunaev Pair Injectivity</button>
           <button class="thm-btn" onclick="selectTheorem('mk_comprehension')">3. MK Class Comprehension</button>
           <button class="thm-btn" onclick="selectTheorem('conditional_term')">4. Syntactic Conditional (CIf)</button>
           <button class="thm-btn" onclick="selectTheorem('modus_ponens')">5. Modus Ponens &amp; Shift</button>
@@ -882,7 +935,7 @@
           <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
             <h4 style="color: #c084fc; font-size: 0.95rem; margin-bottom: 0.5rem;">Dunaev Tagged Ordered Pairs</h4>
             <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
-              Replaces Kuratowski pairs (which inflate rank by +2) with tagged tuples <code>&lt;tag, x, y&gt;</code> that preserve set-theoretic rank, well-foundedness, and algebraic projections without universe elevation.
+              Replaces Kuratowski pairs (which collapse on proper classes) with <code>[A, B]_D</code> tagged pairs that preserve well-foundedness and algebraic projections without universe elevation.
             </p>
           </div>
         </div>
@@ -1014,8 +1067,12 @@
       <p style="margin-top: 0.5rem; font-size: 0.82rem;">
         <a href="Obelisk_Report.pdf" target="_blank">Lean 4 Audit Report</a> · 
         <a href="Obelisk.lean" target="_blank">Obelisk.lean</a> · 
+        <a href="manual.html#nbg-library" style="color: var(--primary); font-weight: 600;">NBG Standard Library (16)</a> · 
         <a href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
         <a href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted);">
+        Kernel, manual, and NBG library re-verified 2026-10-30 · Prover suite: 114 tests · Web suite: 31 tests
       </p>
     </div>
   </footer>
@@ -1036,24 +1093,27 @@
         ]
       },
       tagged_pair: {
-        title: "Dunaev Tagged Ordered Pair Inversion",
-        math: `∀ tag ∈ ℕ_tag. ∀ A, B, C, D : Class. 
-  ⟨tag, A, B⟩_tag = ⟨tag, C, D⟩_tag  ⟹  (A = C ∧ B = D)`,
-        ascii: `val thm_tagged_pair_inversion : Term =
-  Forall "tag" TTag (
-    Forall "A" TClass (Forall "B" TClass (
-      Forall "C" TClass (Forall "D" TClass (
-        Impl (Eq (OPairTag (Var "tag") (Var "A") (Var "B"))
-                 (OPairTag (Var "tag") (Var "C") (Var "D")))
-             (And (Eq (Var "A") (Var "C"))
-                  (Eq (Var "B") (Var "D")))
-      ))
-    ))
-  )`,
+        title: "Dunaev Tagged Pair Injectivity (Arbitrary Classes)",
+        math: `∀ A, B, C, D : Class.
+  [A, B]_D = [C, D]_D  ⟹  (A = C ∧ B = D)`,
+        ascii: `theorem dunaev_pair_injective :
+  forall (A B C D : Class).
+    ([A, B]_D = [C, D]_D -> (A = C /\\ B = D)) =
+  Lam (A:Class) => Lam (B:Class) => Lam (C:Class) => Lam (D:Class) =>
+    fn (h : [A, B]_D = [C, D]_D) =>
+      pair(
+        trans(sym(fst(dunaev_proj(A, B))),
+          trans(rewrite(h, u. pr1([A, B]_D) = pr1(u), refl(pr1([A, B]_D))),
+                fst(dunaev_proj(C, D)))),
+        trans(sym(snd(dunaev_proj(A, B))),
+          trans(rewrite(h, u. pr2([A, B]_D) = pr2(u), refl(pr2([A, B]_D))),
+                snd(dunaev_proj(C, D))))
+      );`,
         sideConditions: [
-          "Side condition: tag is drawn from disjoint tag signature ℕ_tag.",
-          "Zero rank inflation: rank(⟨tag, A, B⟩) = max(rank A, rank B) + 0.",
-          "Proper classes A, B, C, D are permitted; bypasses set-membership prohibition."
+          "Kernel theorem: NBGTactics.proofDunaevPairInjectivity; surface proof: examples/nbg_verified_programs.nbg#dunaev_pair_injective.",
+          "Projection axioms: pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes, including proper classes.",
+          "Leibniz rewriting transports equality through pr1/pr2; no set-membership of a proper class is required.",
+          "This is exactly what Kuratowski pairs lose: for a proper class Y, <x,Y>_K collapses to <x,x>_K."
         ]
       },
       mk_comprehension: {
