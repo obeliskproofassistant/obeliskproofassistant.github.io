@@ -4,10 +4,10 @@ test_ai_portal.py — Regression checks for the modern AI portal.
 
 The AI portal (`ai.html`) and its aliases (`ai_version.html`, `obelisk_ai.html`)
 must stay in sync and must surface the latest prover/manual advances:
-  - the 16-theorem NBG standard library appendix link;
+  - the 17-theorem NBG standard library appendix link;
   - Dunaev pair injectivity (kernel and surface theorem);
   - the trusted-checker / PCHeat rejection guarantee;
-  - the epistemic catalog counts (41 derived / 16 definitions / 7 axioms).
+  - the epistemic catalog counts (42 derived / 16 definitions / 7 axioms).
 """
 
 import hashlib
@@ -56,7 +56,7 @@ class TestAIPortal(unittest.TestCase):
 
     def test_ai_portal_reports_epistemic_counts(self):
         content = self.contents["ai.html"]
-        self.assertIn("41 derived proofs", content)
+        self.assertIn("42 derived proofs", content)
         self.assertIn("16 conservative definitions", content)
         self.assertIn("7 irreducible MK axioms", content)
 
