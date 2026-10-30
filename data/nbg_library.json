@@ -1,0 +1,119 @@
+{
+  "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
+  "source_sha256_prefix": "26d00eaeefa3ace0",
+  "count": 16,
+  "theorems": [
+    {
+      "name": "empty_class_no_elements",
+      "formula": "(forall z:Class. (z in { x | _|_ } -> _|_))",
+      "proof_size": 7,
+      "normalized_size": 7,
+      "description": "The empty class has no elements."
+    },
+    {
+      "name": "empty_class_is_subclass",
+      "formula": "(forall X:Class. (forall z:Class. (z in { x | _|_ } -> z in X)))",
+      "proof_size": 8,
+      "normalized_size": 8,
+      "description": "The empty class is a subclass of every class."
+    },
+    {
+      "name": "universal_class_characterization",
+      "formula": "(forall z:Class. ((z in { x | Top } -> Set(z)) /\\ (Set(z) -> z in { x | Top })))",
+      "proof_size": 15,
+      "normalized_size": 15,
+      "description": "V = {x | Top}: membership in the universal class is exactly sethood."
+    },
+    {
+      "name": "russell_class_is_not_a_set",
+      "formula": "(Set({ x | (x in x -> _|_) }) -> _|_)",
+      "proof_size": 19,
+      "normalized_size": 32,
+      "description": "Russell's class {x | x notin x} is a proper class, not a set."
+    },
+    {
+      "name": "binary_inter_comm",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A /\\ x in B) } -> z in { x | (x in B /\\ x in A) }))))",
+      "proof_size": 26,
+      "normalized_size": 26,
+      "description": "Binary class intersection is commutative."
+    },
+    {
+      "name": "binary_union_comm",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A \\/ x in B) } -> z in { x | (x in B \\/ x in A) }))))",
+      "proof_size": 23,
+      "normalized_size": 23,
+      "description": "Binary class union is commutative."
+    },
+    {
+      "name": "class_diff_subclass_left",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A /\\ (x in B -> _|_)) } -> z in A))))",
+      "proof_size": 10,
+      "normalized_size": 10,
+      "description": "The class difference A \\ B is a subclass of A."
+    },
+    {
+      "name": "class_eq_sym",
+      "formula": "(forall X:Class. (forall Y:Class. (X = Y -> Y = X)))",
+      "proof_size": 6,
+      "normalized_size": 6,
+      "description": "Class equality is symmetric."
+    },
+    {
+      "name": "class_eq_trans",
+      "formula": "(forall X:Class. (forall Y:Class. (forall Z:Class. ((X = Y /\\ Y = Z) -> X = Z))))",
+      "proof_size": 9,
+      "normalized_size": 9,
+      "description": "Class equality is transitive."
+    },
+    {
+      "name": "quantifier_swap",
+      "formula": "((exists y:Set. (forall x:Set. x in y)) -> (forall x:Set. (exists y:Set. x in y)))",
+      "proof_size": 7,
+      "normalized_size": 7,
+      "description": "An existential set with a universal property implies the corresponding forall-exists statement."
+    },
+    {
+      "name": "dunaev_tagged_pair_projections",
+      "formula": "(forall A:Class. (forall B:Class. (pr1([A, B]_D) = A /\\ pr2([A, B]_D) = B)))",
+      "proof_size": 3,
+      "normalized_size": 3,
+      "description": "pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes."
+    },
+    {
+      "name": "cantor_diagonal_theorem",
+      "formula": "(forall R:Class. (forall c:Set. (Set(c) -> (((c in { x | ([x, x]_D in R -> _|_) } -> [c, c]_D in R) /\\ ([c, c]_D in R -> c in { x | ([x, x]_D in R -> _|_) })) -> _|_))))",
+      "proof_size": 28,
+      "normalized_size": 50,
+      "description": "Cantor's diagonal theorem stated with Dunaev tagged pairs."
+    },
+    {
+      "name": "self_in_singleton",
+      "formula": "(forall x:Class. (Set(x) -> x in { u | u = x }))",
+      "proof_size": 8,
+      "normalized_size": 8,
+      "description": "Every set belongs to its singleton class."
+    },
+    {
+      "name": "self_in_succ",
+      "formula": "(forall x:Class. (Set(x) -> x in { u | (u in x \\/ u = x) }))",
+      "proof_size": 9,
+      "normalized_size": 9,
+      "description": "Every set belongs to its ordinal successor."
+    },
+    {
+      "name": "class_sub_succ",
+      "formula": "(forall x:Class. (forall z:Class. (z in x -> z in { u | (u in x \\/ u = x) })))",
+      "proof_size": 12,
+      "normalized_size": 12,
+      "description": "Every class is a subclass of its successor."
+    },
+    {
+      "name": "dunaev_pair_injective",
+      "formula": "(forall A:Class. (forall B:Class. (forall C:Class. (forall D:Class. ([A, B]_D = [C, D]_D -> (A = C /\\ B = D))))))",
+      "proof_size": 26,
+      "normalized_size": 26,
+      "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -> A = C and B = D."
+    }
+  ]
+}

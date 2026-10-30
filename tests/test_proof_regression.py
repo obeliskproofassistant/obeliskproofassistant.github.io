@@ -78,7 +78,18 @@ class TestProofRegression(unittest.TestCase):
             index_content = f.read()
         self.assertEqual(self.proofs_html, index_content, "proofs/index.html does not match proofs.html")
 
-    def test_verified_theorems_have_sound_programs(self):
+    def test_nbg_library_appendix_is_present(self):
+        """manual.html must include the machine-checked NBG standard library appendix."""
+        self.assertIn('id="nbg-library"', self.manual_html)
+        self.assertIn('id="nbg-dunaev_pair_injective"', self.manual_html)
+        self.assertIn('class="nbg-row"', self.manual_html)
+        with open(os.path.join(SITE_DIR, "data", "nbg_library.json"), "r", encoding="utf-8") as f:
+            lib = json.load(f)
+        self.assertEqual(lib["count"], 16)
+        self.assertEqual(len(lib["theorems"]), 16)
+        self.assertEqual(self.manual_html.count('class="nbg-row"'), len(lib["theorems"]))
+
+
         """Every entry marked 'Verified' must have a constructive proof program without cheating axioms."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:

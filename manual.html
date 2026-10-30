@@ -563,6 +563,7 @@
       <a href="index.html">Home</a>
       <a href="manual.html" class="active">Manual &amp; Theory</a>
       <a href="proofs.html">Proofs Gallery</a>
+      <a href="#nbg-library">NBG Library</a>
       <a href="metatheory.html">Metatheory</a>
       <a href="output.html">Demo Output</a>
       <a href="output.pdf" target="_blank">PDF Manual</a>
@@ -3838,6 +3839,236 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
             
       </tbody>
     </table>
+
+  <div class="card" id="nbg-library" style="margin-top: 2rem; border: 1px solid rgba(56, 189, 248, 0.35);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem;">
+      <div>
+        <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);">Machine-Checked Standard Library</div>
+        <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">NBG Propositions-as-Types</h2>
+      </div>
+      <span class="status-badge badge-verified-strong">16 kernel-checked theorems</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 980px;">
+      Each row is a closed proof term in <code>examples/nbg_verified_programs.nbg</code>, compiled by
+      <code>NBGSurfaceCompiler</code> in Poly/ML. A formula is a <em>type</em>; the proof program is a
+      <em>term</em> inhabiting it. The library includes the Dunaev tagged-pair injectivity theorem
+      <code>[A,B]_D = [C,D]_D -&gt; A = C /\ B = D</code>, which is exactly the property Kuratowski
+      pairs lose on proper classes.
+    </p>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">
+        <thead>
+          <tr style="background: rgba(30, 41, 59, 0.85); color: #38bdf8; text-align: left;">
+            <th style="padding: 9px 12px; width: 34%;">Theorem</th>
+            <th style="padding: 9px 12px;">Formula (Type)</th>
+            <th style="padding: 9px 12px; width: 80px; text-align: center;">AST</th>
+            <th style="padding: 9px 12px; width: 90px; text-align: center;">Normal</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr id="nbg-empty_class_no_elements" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">empty_class_no_elements</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">The empty class has no elements.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall z:Class. (z in { x | _|_ } -&gt; _|_))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="nbg-empty_class_is_subclass" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">empty_class_is_subclass</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">The empty class is a subclass of every class.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall X:Class. (forall z:Class. (z in { x | _|_ } -&gt; z in X)))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-universal_class_characterization" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">universal_class_characterization</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">V = {x | Top}: membership in the universal class is exactly sethood.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall z:Class. ((z in { x | Top } -&gt; Set(z)) /\ (Set(z) -&gt; z in { x | Top })))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">15</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">15</td>
+          </tr>
+        
+          <tr id="nbg-russell_class_is_not_a_set" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">russell_class_is_not_a_set</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Russell&#x27;s class {x | x notin x} is a proper class, not a set.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(Set({ x | (x in x -&gt; _|_) }) -&gt; _|_)</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">19</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">32</td>
+          </tr>
+        
+          <tr id="nbg-binary_inter_comm" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">binary_inter_comm</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Binary class intersection is commutative.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A /\ x in B) } -&gt; z in { x | (x in B /\ x in A) }))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+          <tr id="nbg-binary_union_comm" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">binary_union_comm</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Binary class union is commutative.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A \/ x in B) } -&gt; z in { x | (x in B \/ x in A) }))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">23</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">23</td>
+          </tr>
+        
+          <tr id="nbg-class_diff_subclass_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_diff_subclass_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">The class difference A \ B is a subclass of A.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in { x | (x in A /\ (x in B -&gt; _|_)) } -&gt; z in A))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-class_eq_sym" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_eq_sym</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Class equality is symmetric.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall X:Class. (forall Y:Class. (X = Y -&gt; Y = X)))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">6</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">6</td>
+          </tr>
+        
+          <tr id="nbg-class_eq_trans" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_eq_trans</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Class equality is transitive.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall X:Class. (forall Y:Class. (forall Z:Class. ((X = Y /\ Y = Z) -&gt; X = Z))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-quantifier_swap" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">quantifier_swap</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">An existential set with a universal property implies the corresponding forall-exists statement.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">((exists y:Set. (forall x:Set. x in y)) -&gt; (forall x:Set. (exists y:Set. x in y)))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="nbg-dunaev_tagged_pair_projections" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_tagged_pair_projections</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (pr1([A, B]_D) = A /\ pr2([A, B]_D) = B)))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">3</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">3</td>
+          </tr>
+        
+          <tr id="nbg-cantor_diagonal_theorem" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">cantor_diagonal_theorem</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Cantor&#x27;s diagonal theorem stated with Dunaev tagged pairs.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall R:Class. (forall c:Set. (Set(c) -&gt; (((c in { x | ([x, x]_D in R -&gt; _|_) } -&gt; [c, c]_D in R) /\ ([c, c]_D in R -&gt; c in { x | ([x, x]_D in R -&gt; _|_) })) -&gt; _|_))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">28</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">50</td>
+          </tr>
+        
+          <tr id="nbg-self_in_singleton" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">self_in_singleton</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Every set belongs to its singleton class.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall x:Class. (Set(x) -&gt; x in { u | u = x }))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-self_in_succ" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">self_in_succ</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Every set belongs to its ordinal successor.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall x:Class. (Set(x) -&gt; x in { u | (u in x \/ u = x) }))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-class_sub_succ" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_sub_succ</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Every class is a subclass of its successor.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall x:Class. (forall z:Class. (z in x -&gt; z in { u | (u in x \/ u = x) })))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">12</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">12</td>
+          </tr>
+        
+          <tr id="nbg-dunaev_pair_injective" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_pair_injective</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -&gt; A = C and B = D.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall C:Class. (forall D:Class. ([A, B]_D = [C, D]_D -&gt; (A = C /\ B = D))))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.9rem;">
+      Reproduce locally: <code>python3 obelisk_cli.py compile examples/nbg_verified_programs.nbg</code>
+      &nbsp;•&nbsp; Manifest: <code>data/nbg_library.json</code>
+      &nbsp;•&nbsp; Source SHA-256 prefix: <code>26d00eaeefa3ace0</code>
+    </p>
+  </div>
+
   </div>
 
   <div id="toast" class="toast-popup"></div>
