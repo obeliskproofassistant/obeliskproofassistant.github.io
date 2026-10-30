@@ -5,7 +5,7 @@ test_proof_tree_viewer.py — Unit & Integration Tests for Proof Tree Viewer
 Part of Obelisk Proof Assistant (obeliskproofassistant.github.io)
 Verifies Ticket 002 acceptance criteria:
 1. Deliverable js/proof_tree_viewer.js exists and is syntactically valid.
-2. Preset deduction trees (Modus Ponens, Russell Refutation, Tagged Pair) are defined.
+2. Preset deduction trees (Modus Ponens, Russell Refutation, Dunaev Pair) are defined.
 3. Node layout and Gentzen tree structure are correctly formatted.
 """
 
@@ -47,10 +47,12 @@ class TestProofTreeViewer(unittest.TestCase):
         self.assertIn("toggleNode", self.content)
 
     def test_side_conditions_and_morse_kelley_soundness(self):
-        # Must reflect MK side conditions on Russell and Tagged Pairs
+        # Must reflect MK side conditions on Russell and Dunaev pairs
         self.assertIn("Proper(X)", self.content)
-        self.assertIn("ℕ_tag", self.content)
-        self.assertIn("rank", self.content)
+        self.assertIn("[A,B]_D", self.content)
+        self.assertIn("pr1", self.content)
+        self.assertNotIn("ℕ_tag", self.content)
+        self.assertNotIn("tag ∈", self.content)
 
 
 if __name__ == "__main__":

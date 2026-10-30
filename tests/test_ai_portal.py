@@ -45,6 +45,8 @@ class TestAIPortal(unittest.TestCase):
         self.assertIn("dunaev_pair_injective", content)
         self.assertIn("dunaev_cartesian_elim", content)
         self.assertIn("[A, B]_D", content)
+        self.assertNotIn("∀ tag", content)
+        self.assertNotIn("⟨tag", content)
 
     def test_ai_portal_reports_trusted_checker(self):
         content = self.contents["ai.html"]

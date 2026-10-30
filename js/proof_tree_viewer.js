@@ -80,33 +80,33 @@
       ]
     },
     tagged_pair_inversion: {
-      id: "tag_root",
-      rule: "Tagged Pair Inversion (Axiom 3.46)",
+      id: "dunaev_pair_root",
+      rule: "Dunaev Pair Injectivity",
       conclusion: "A = C ∧ B = D",
-      sideCondition: "tag ∈ ℕ_tag; rank(⟨tag, A, B⟩) = max(rank A, rank B)",
+      sideCondition: "fixed tags 1,2; pr1([A,B]_D) = A; pr2([A,B]_D) = B; A, B, C, D may be proper classes",
       premises: [
         {
-          id: "tag_p1",
-          rule: "Projection 1 (π₁)",
+          id: "dunaev_p1",
+          rule: "Projection 1 (pr1)",
           conclusion: "A = C",
           premises: [
             {
-              id: "tag_hyp",
+              id: "dunaev_hyp_1",
               rule: "Equality Hypothesis",
-              conclusion: "⟨tag, A, B⟩ = ⟨tag, C, D⟩",
+              conclusion: "[A,B]_D = [C,D]_D",
               premises: []
             }
           ]
         },
         {
-          id: "tag_p2",
-          rule: "Projection 2 (π₂)",
+          id: "dunaev_p2",
+          rule: "Projection 2 (pr2)",
           conclusion: "B = D",
           premises: [
             {
-              id: "tag_hyp_2",
+              id: "dunaev_hyp_2",
               rule: "Equality Hypothesis",
-              conclusion: "⟨tag, A, B⟩ = ⟨tag, C, D⟩",
+              conclusion: "[A,B]_D = [C,D]_D",
               premises: []
             }
           ]
