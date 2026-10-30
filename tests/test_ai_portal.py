@@ -52,6 +52,7 @@ class TestAIPortal(unittest.TestCase):
         content = self.contents["ai.html"]
         self.assertIn("PCheat_prf", content)
         self.assertIn("ThmWithPrf.cheat", content)
+        self.assertIn("free class variables", content)
 
     def test_ai_portal_reports_epistemic_counts(self):
         content = self.contents["ai.html"]
