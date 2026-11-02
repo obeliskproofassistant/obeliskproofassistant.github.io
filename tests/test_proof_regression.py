@@ -33,10 +33,10 @@ class TestProofRegression(unittest.TestCase):
             cls.proofs_html = f.read()
 
     def test_database_entries_count(self):
-        """Database must contain 6 sections and 51 formal items."""
+        """Database must contain 6 sections and 54 formal items."""
         self.assertEqual(len(self.db["sections"]), 6)
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
-        self.assertEqual(total_entries, 51)
+        self.assertEqual(total_entries, 54)
 
     def test_certificate_pages_exist_and_non_empty(self):
         """Every entry must have a corresponding verification certificate in proofs/."""
