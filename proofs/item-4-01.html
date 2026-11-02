@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi)) \]
+        \[ \forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi)) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))
+        <strong>Clean Unicode:</strong> ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Metatheoretic instantiation across arbitrary typed expressions.</div>
     </div>
@@ -366,7 +366,7 @@
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))).</div>
+            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -383,7 +383,7 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
       <pre class="code-block"><code>(* Primitive Axiom Postulate *)
-val thm_item_4_01 = Thm ([], parse_formula &quot;∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))&quot;);</code></pre>
+val thm_item_4_01 = Thm ([], parse_formula &quot;∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))&quot;);</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>

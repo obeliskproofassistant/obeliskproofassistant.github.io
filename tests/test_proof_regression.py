@@ -33,10 +33,10 @@ class TestProofRegression(unittest.TestCase):
             cls.proofs_html = f.read()
 
     def test_database_entries_count(self):
-        """Database must contain 6 sections and 49 formal items."""
+        """Database must contain 6 sections and 51 formal items."""
         self.assertEqual(len(self.db["sections"]), 6)
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
-        self.assertEqual(total_entries, 49)
+        self.assertEqual(total_entries, 51)
 
     def test_certificate_pages_exist_and_non_empty(self):
         """Every entry must have a corresponding verification certificate in proofs/."""
@@ -89,7 +89,7 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(len(lib["theorems"]), 17)
         self.assertEqual(self.manual_html.count('class="nbg-row"'), len(lib["theorems"]))
 
-
+    def test_verified_entries_have_no_cheating_axioms(self):
         """Every entry marked 'Verified' must have a constructive proof program without cheating axioms."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:

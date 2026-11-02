@@ -535,13 +535,13 @@
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
     <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Interactive Proofs &amp; Verification Explorer</h1>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
-      Unified gallery displaying formal Standard ML proof programs, derivation tactics, and microkernel verification audits for all 49 mathematical principles in the Obelisk Proof Assistant.
+      Unified gallery displaying formal Standard ML proof programs, derivation tactics, and microkernel verification audits for all 51 mathematical principles in the Obelisk Proof Assistant.
     </p>
 
     <!-- STATS ROW -->
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-num" style="color: var(--accent-cyan);">49</div>
+        <div class="stat-num" style="color: var(--accent-cyan);">51</div>
         <div class="stat-label">Total Verified Items</div>
       </div>
       <div class="stat-card">
@@ -549,7 +549,7 @@
         <div class="stat-label">Machine-Checked Theorems</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num" style="color: var(--accent-purple);">28</div>
+        <div class="stat-num" style="color: var(--accent-purple);">30</div>
         <div class="stat-label">Axiomatic Postulates</div>
       </div>
       <div class="stat-card">
@@ -566,9 +566,9 @@
     <div class="gallery-toolbar">
       <div class="filter-btn-group">
         <span style="font-weight: 600; font-size: 0.85rem; color: #94a3b8; margin-right: 4px;">Filter:</span>
-        <button class="filter-btn active" onclick="filterGallery('all', this)">All (49)</button>
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All (51)</button>
         <button class="filter-btn" onclick="filterGallery('theorem', this)">Theorems (5)</button>
-        <button class="filter-btn" onclick="filterGallery('axiom', this)">Axioms (28)</button>
+        <button class="filter-btn" onclick="filterGallery('axiom', this)">Axioms (30)</button>
         <button class="filter-btn" onclick="filterGallery('rule', this)">Inference Rules (9)</button>
         <button class="filter-btn" onclick="filterGallery('definition', this)">Definitions (7)</button>
       </div>
@@ -2726,8 +2726,8 @@ val thm_item_3_66 = Thm ([], parse_formula &quot;∀(x : Class) (isSet(x) → �
     <div class="proofs-grid">
         
 
-      <div class="proof-card" id="card-item-4-01" data-num="4.01" data-classification="axiom" data-search="4.01 instantiation axiom axiom ∀(a : type) ∀(g : ctx) ∀(φ : fm) ∀(t : eval(a)) ∀(v : variable) (w, g ⊢ (∀(x : a) φ) → (let v = t in φ)) (* primitive axiom postulate *)
-val thm_item_4_01 = thm ([], parse_formula &quot;∀(a : type) ∀(g : ctx) ∀(φ : fm) ∀(t : eval(a)) ∀(v : variable) (w, g ⊢ (∀(x : a) φ) → (let v = t in φ))&quot;);">
+      <div class="proof-card" id="card-item-4-01" data-num="4.01" data-classification="axiom" data-search="4.01 instantiation axiom axiom ∀(a : type) ∀(g : ctx) ∀(φ : fm) ∀(t : eval(a)) ∀(v : variable) (w, g ⊢ (∀(v : a) φ) → (let v = t in φ)) (* primitive axiom postulate *)
+val thm_item_4_01 = thm ([], parse_formula &quot;∀(a : type) ∀(g : ctx) ∀(φ : fm) ∀(t : eval(a)) ∀(v : variable) (w, g ⊢ (∀(v : a) φ) → (let v = t in φ))&quot;);">
         <div class="proof-card-header">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <a href="manual.html#4.01" class="entry-num-link" title="Navigate to reference manual entry">4.01</a>
@@ -2743,9 +2743,9 @@ val thm_item_4_01 = thm ([], parse_formula &quot;∀(a : type) ∀(g : ctx) ∀(
         <h3 class="proof-card-title">Instantiation Axiom</h3>
         <div class="proof-card-notes">Metatheoretic instantiation across arbitrary typed expressions.</div>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(G : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(t : eval(A)) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Variable&lt;/span&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, G &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : A) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (let v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; t in φ))">
-          <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
-          <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall G \; \forall \phi \; \forall (t : \mathrm{eval}(A))\; \forall v \; (\mathcal{W}, G \vdash (\forall (x : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
+        <div class="formula-display formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(G : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(t : eval(A)) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Variable&lt;/span&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, G &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : A) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (let v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; t in φ))">
+          <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall G \; \forall \phi \; \forall (t : \mathrm{eval}(A))\; \forall v \; (\mathcal{W}, G \vdash (\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
         </div>
         
         
@@ -2764,7 +2764,7 @@ val thm_item_4_01 = thm ([], parse_formula &quot;∀(a : type) ∀(g : ctx) ∀(
             <button class="btn-copy-code" onclick="copyCode(this, 'gcode-item-4-01')" title="Copy SML script">📋 Copy SML</button>
           </div>
           <pre class="code-block"><code id="gcode-item-4-01">(* Primitive Axiom Postulate *)
-val thm_item_4_01 = Thm ([], parse_formula &quot;∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))&quot;);</code></pre>
+val thm_item_4_01 = Thm ([], parse_formula &quot;∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))&quot;);</code></pre>
         </div>
         
         <div class="proof-audit-pane" style="margin-top: 10px;">
@@ -2774,7 +2774,7 @@ val thm_item_4_01 = Thm ([], parse_formula &quot;∀(A : Type) ∀(G : Ctx) ∀(
           </div>
           <div class="audit-item" style="margin-top: 6px;">
             <div class="audit-label">Soundness Invariant:</div>
-            <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(x : A) φ) → (let v = t in φ))).</div>
+            <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))).</div>
           </div>
           <div class="audit-item" style="margin-top: 6px;">
             <div class="audit-label">Kernel Confirmation:</div>
@@ -3069,6 +3069,122 @@ val thm_item_4_06 = Thm ([], parse_formula &quot;∀(φ : Fm) ∀(x : Name) ∀(
           <div class="audit-item" style="margin-top: 6px;">
             <div class="audit-label">Soundness Invariant:</div>
             <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))).</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Directly accepted as a primitive sequent by the PolyML kernel (Thm constructor). No further derivation is required as this forms the base of deductive inference.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-item-4-07" data-num="4.07" data-classification="axiom" data-search="4.07 soundness / reflection axiom axiom ∀(φ : fm) (⟦φ⟧ → (f, [] ⊢ φ)) (* primitive axiom postulate *)
+val thm_item_4_07 = thm ([], parse_formula &quot;∀(φ : fm) (⟦φ⟧ → (f, [] ⊢ φ))&quot;);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.07" class="entry-num-link" title="Navigate to reference manual entry">4.07</a>
+            <span class="classification-badge badge-axiom">Axiom</span>
+            <a href="proofs/item-4-07.html" class="status-badge badge-axiom-status" title="Inspect formal verification certificate">Axiomatic Base</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/item-4-07.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Soundness / Reflection Axiom</h3>
+        <div class="proof-card-notes">Metatheoretic reflection into full theory F (soundness_def_entry_fm in foundations.ML).</div>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) (⟦φ⟧ → (F, [] ⊢ φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) (&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;φ&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ))">
+          <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(\phi : \mathsf{Fm}, \quad \mathcal{F} : \mathsf{Theory}\)</span>
+          <span class="view-membership" style="display:none;">\(\phi , \quad \mathcal{F} \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-item-4-07')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-item-4-07">(* Primitive Axiom Postulate *)
+val thm_item_4_07 = Thm ([], parse_formula &quot;∀(φ : Fm) (⟦φ⟧ → (F, [] ⊢ φ))&quot;);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Axiomatic Postulate (Classical Logic / Morse–Kelley Class Theory)</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(φ : Fm) (⟦φ⟧ → (F, [] ⊢ φ))).</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Directly accepted as a primitive sequent by the PolyML kernel (Thm constructor). No further derivation is required as this forms the base of deductive inference.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-item-4-08" data-num="4.08" data-classification="axiom" data-search="4.08 theory inclusion (t ⊆ f) axiom ∀(γ : ctx) ∀(φ : fm) ((t, γ ⊢ φ) → (f, γ ⊢ φ)) (* primitive axiom postulate *)
+val thm_item_4_08 = thm ([], parse_formula &quot;∀(γ : ctx) ∀(φ : fm) ((t, γ ⊢ φ) → (f, γ ⊢ φ))&quot;);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.08" class="entry-num-link" title="Navigate to reference manual entry">4.08</a>
+            <span class="classification-badge badge-axiom">Axiom</span>
+            <a href="proofs/item-4-08.html" class="status-badge badge-axiom-status" title="Inspect formal verification certificate">Axiomatic Base</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/item-4-08.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Theory Inclusion (T ⊆ F)</h3>
+        <div class="proof-card-notes">Every theorem of the base NBG theory T is derivable in the full reflected theory F (theory_inclusion_def_entry_fm in foundations.ML).</div>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(Γ : Ctx) ∀(φ : Fm) ((T, Γ ⊢ φ) → (F, Γ ⊢ φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ))">
+          <div class="view-typing formula-chunk">\(\forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall \Gamma \; \forall \phi \; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(\mathcal{T}, \mathcal{F} : \mathsf{Theory}, \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\)</span>
+          <span class="view-membership" style="display:none;">\(\mathcal{T}, \mathcal{F} , \quad \Gamma , \quad \phi \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-item-4-08')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-item-4-08">(* Primitive Axiom Postulate *)
+val thm_item_4_08 = Thm ([], parse_formula &quot;∀(Γ : Ctx) ∀(φ : Fm) ((T, Γ ⊢ φ) → (F, Γ ⊢ φ))&quot;);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Axiomatic Postulate (Classical Logic / Morse–Kelley Class Theory)</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(Γ : Ctx) ∀(φ : Fm) ((T, Γ ⊢ φ) → (F, Γ ⊢ φ))).</div>
           </div>
           <div class="audit-item" style="margin-top: 6px;">
             <div class="audit-label">Kernel Confirmation:</div>
