@@ -302,18 +302,59 @@
       </thead>
       <tbody>
 
+        <tr id="sc-top" class="anchor-highlight">
+          <td>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">⊤</strong>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
+          </td>
+          <td>
+            <div class="semantic-box">
+              <div class="view-typing">\(\top\)</div>
+              <div class="view-membership" style="display:none;">\(\top\)</div>
+            </div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Trivial truth formula ⊤. Serves as the side condition for closed axioms/definitions and as the terminal fixed point (⊤ → ⊤) for side-side-conditions.</div></details>
+            
+            <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
+              <strong style="color: #34d399;">Decidability Theorem:</strong>
+              <div style="margin-top: 2px;">\(\vdash \top\)</div>
+              <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>ETrue / Top_thm</code></div>
+            </div>
+        
+            <div style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">
+              <strong>Origin in Manual:</strong> <a href="manual.html#sec-prop" style="color: var(--accent-blue); text-decoration: none;">Axioms, Definitions, and Side-Side-Conditions &rarr;</a>
+            </div>
+          </td>
+          <td>
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
+              <div class="view-typing">\(\top\)</div>
+              <div class="view-membership" style="display:none;">\(\top\)</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
+            
+            <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
+              <strong>Level 3 Ambient:</strong> \(\top\)
+            </div>
+        
+          </td>
+          <td style="text-align: center;">
+            <span class="badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">Checkable</span>
+          </td>
+        </tr>
+        
+
         <tr id="nfv-c-phi" class="anchor-highlight">
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_C, φ)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -326,11 +367,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_C  \land \phi  \land \mathrm{finiteContext}(\Gamma)\)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{finiteContext}(\Gamma)\)
@@ -347,14 +388,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">Fresh(v_Y, v_X)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -367,11 +408,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X \)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{discrete}(\mathsf{Variable})\)
@@ -388,14 +429,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">FFI(t, v_x, φ)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
               <div class="view-membership" style="display:none;">\(\mathrm{isFreeFor}(t, \mathbf{v}_x, \phi)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Term expression t is free for substitution for variable identifier v_x in formula φ without variable capture.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -408,11 +449,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
               <div class="view-membership" style="display:none;">\(t : \mathsf{Term} \land \mathbf{v}_x  \land \phi \)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\phi)\)
@@ -429,14 +470,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, ψ)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -449,11 +490,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \psi \)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\psi)\)
@@ -470,14 +511,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_x, Γ)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -490,11 +531,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \Gamma \)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{finiteContext}(\Gamma)\)
@@ -511,14 +552,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">NFV(v_v, ψ)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -531,11 +572,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
               <div class="view-membership" style="display:none;">\(\mathbf{v}_v  \land \psi  \land \Gamma \)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\psi) \land \mathrm{finiteContext}(\Gamma)\)
@@ -552,14 +593,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">simple_if_typing(α, t1, t2)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
               <div class="view-membership" style="display:none;">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -572,11 +613,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\alpha : \mathcal{U}_i\)</div>
               <div class="view-membership" style="display:none;">\(\alpha : \mathcal{U}_i\)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{stratifiedUniverses}\)
@@ -593,14 +634,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">dependent_if_typing(T, b, t1, t2)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
               <div class="view-membership" style="display:none;">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -613,11 +654,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
               <div class="view-membership" style="display:none;">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{preservationOfTyping}\)
@@ -634,14 +675,14 @@
           <td>
             <strong style="color: var(--accent-cyan); font-family: monospace;">WF(∈, On)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #8b5cf6;">Provable Metatheorem</span></div>
-            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula</div>
+            <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
               <div class="view-typing">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
               <div class="view-membership" style="display:none;">\(\mathrm{WellFounded}(\in, \mathrm{On})\)</div>
             </div>
-            <div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an ad-hoc axiom; derived in MK from the Regularity Axiom.</div>
+            <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">The membership relation ∈ is well-founded on the class of ordinals On. Not an ad-hoc axiom; derived in MK from the Regularity Axiom.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
@@ -654,11 +695,11 @@
             </div>
           </td>
           <td>
-            <div class="syntax-box">
-              <div class="view-typing">\(\mathrm{On} : \mathsf{Class} \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity})\)</div>
-              <div class="view-membership" style="display:none;">\(\mathrm{On}  \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity})\)</div>
-            </div>
-            <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 4px;">Structural induction on formula AST; finite context size.</div>
+            <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
+              <div class="view-typing">\(\top\)</div>
+              <div class="view-membership" style="display:none;">\(\top\)</div>
+              <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
+            </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
               <strong>Level 3 Ambient:</strong> \(\mathrm{MorseKelleyClassTheory}\)

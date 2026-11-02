@@ -535,13 +535,13 @@
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
     <h1 style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 0.5rem;">Interactive Proofs &amp; Verification Explorer</h1>
     <p style="color: var(--text-muted); font-size: 1.05rem; margin-bottom: 1.5rem;">
-      Unified gallery displaying formal Standard ML proof programs, derivation tactics, and microkernel verification audits for all 54 mathematical principles in the Obelisk Proof Assistant.
+      Unified gallery displaying formal Standard ML proof programs, derivation tactics, and microkernel verification audits for all 59 mathematical principles in the Obelisk Proof Assistant.
     </p>
 
     <!-- STATS ROW -->
     <div class="stats-row">
       <div class="stat-card">
-        <div class="stat-num" style="color: var(--accent-cyan);">54</div>
+        <div class="stat-num" style="color: var(--accent-cyan);">59</div>
         <div class="stat-label">Total Verified Items</div>
       </div>
       <div class="stat-card">
@@ -557,7 +557,7 @@
         <div class="stat-label">LCF Primitive Rules</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num" style="color: var(--accent-blue);">8</div>
+        <div class="stat-num" style="color: var(--accent-blue);">13</div>
         <div class="stat-label">Definitional Extensions</div>
       </div>
     </div>
@@ -566,11 +566,11 @@
     <div class="gallery-toolbar">
       <div class="filter-btn-group">
         <span style="font-weight: 600; font-size: 0.85rem; color: #94a3b8; margin-right: 4px;">Filter:</span>
-        <button class="filter-btn active" onclick="filterGallery('all', this)">All (54)</button>
+        <button class="filter-btn active" onclick="filterGallery('all', this)">All (59)</button>
         <button class="filter-btn" onclick="filterGallery('theorem', this)">Theorems (7)</button>
         <button class="filter-btn" onclick="filterGallery('axiom', this)">Axioms (30)</button>
         <button class="filter-btn" onclick="filterGallery('rule', this)">Inference Rules (9)</button>
-        <button class="filter-btn" onclick="filterGallery('definition', this)">Definitions (8)</button>
+        <button class="filter-btn" onclick="filterGallery('definition', this)">Definitions (13)</button>
       </div>
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
         <input type="text" id="gallery-search-input" class="search-input-box" placeholder="🔍 Search proof scripts, names, symbols..." oninput="handleSearch(this.value)">
@@ -605,11 +605,12 @@ val thm_item_1_01 = thm ([], parse_formula &quot;(α → (β → α))&quot;);">
         </div>
         
         <h3 class="proof-card-title">A01 (Affirmation of Consequent)</h3>
-        <div class="proof-card-notes">Positive implicative axiom.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Positive implicative axiom.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(α → (β → α))" data-unicode-colored="(α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (β &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α))">
           <div class="view-typing formula-chunk">\((\alpha \to (\beta \to \alpha))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\beta \to \alpha))\)</div>
+          
         </div>
         
         
@@ -663,11 +664,12 @@ val thm_item_1_02 = thm ([], parse_formula &quot;((α → (β → γ)) → ((α 
         </div>
         
         <h3 class="proof-card-title">A02 (Distribution of Implication)</h3>
-        <div class="proof-card-notes">Self-distribution of implication.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Self-distribution of implication.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((α → (β → γ)) → ((α → β) → (α → γ)))" data-unicode-colored="((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (β &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; γ)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; γ)))">
           <div class="view-typing formula-chunk">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</div>
+          
         </div>
         
         
@@ -721,11 +723,12 @@ val thm_item_1_03 = thm ([], parse_formula &quot;((α ∧ β) → α)&quot;);">
         </div>
         
         <h3 class="proof-card-title">A03 (Conjunction Elimination Left)</h3>
-        <div class="proof-card-notes">Left projection.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Left projection.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((α ∧ β) → α)" data-unicode-colored="((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α)">
           <div class="view-typing formula-chunk">\(((\alpha \land \beta) \to \alpha)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\alpha \land \beta) \to \alpha)\)</div>
+          
         </div>
         
         
@@ -779,11 +782,12 @@ val thm_item_1_04 = thm ([], parse_formula &quot;((α ∧ β) → β)&quot;);">
         </div>
         
         <h3 class="proof-card-title">A04 (Conjunction Elimination Right)</h3>
-        <div class="proof-card-notes">Right projection.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Right projection.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((α ∧ β) → β)" data-unicode-colored="((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; β)">
           <div class="view-typing formula-chunk">\(((\alpha \land \beta) \to \beta)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\alpha \land \beta) \to \beta)\)</div>
+          
         </div>
         
         
@@ -837,11 +841,12 @@ val thm_item_1_05 = thm ([], parse_formula &quot;(α → (β → (α ∧ β)))&q
         </div>
         
         <h3 class="proof-card-title">A05 (Conjunction Introduction)</h3>
-        <div class="proof-card-notes">Pairing of propositional truths.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Pairing of propositional truths.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(α → (β → (α ∧ β)))" data-unicode-colored="(α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (β &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; β)))">
           <div class="view-typing formula-chunk">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</div>
+          
         </div>
         
         
@@ -895,11 +900,12 @@ val thm_item_1_06 = thm ([], parse_formula &quot;(α → (α ∨ β))&quot;);">
         </div>
         
         <h3 class="proof-card-title">A06 (Disjunction Introduction Left)</h3>
-        <div class="proof-card-notes">Left injection.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Left injection.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(α → (α ∨ β))" data-unicode-colored="(α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; β))">
           <div class="view-typing formula-chunk">\((\alpha \to (\alpha \lor \beta))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\alpha \lor \beta))\)</div>
+          
         </div>
         
         
@@ -953,11 +959,12 @@ val thm_item_1_07 = thm ([], parse_formula &quot;(β → (α ∨ β))&quot;);">
         </div>
         
         <h3 class="proof-card-title">A07 (Disjunction Introduction Right)</h3>
-        <div class="proof-card-notes">Right injection.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Right injection.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(β → (α ∨ β))" data-unicode-colored="(β &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; β))">
           <div class="view-typing formula-chunk">\((\beta \to (\alpha \lor \beta))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\beta \to (\alpha \lor \beta))\)</div>
+          
         </div>
         
         
@@ -1011,11 +1018,12 @@ val thm_item_1_08 = thm ([], parse_formula &quot;((α → γ) → ((β → γ) �
         </div>
         
         <h3 class="proof-card-title">A08 (Disjunction Elimination / Cases)</h3>
-        <div class="proof-card-notes">Proof by cases.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Proof by cases.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((α → γ) → ((β → γ) → ((α ∨ β) → γ)))" data-unicode-colored="((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; γ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((β &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; γ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; γ)))">
           <div class="view-typing formula-chunk">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</div>
+          
         </div>
         
         
@@ -1069,11 +1077,12 @@ val thm_item_1_09 = thm ([], parse_formula &quot;((¬α) → (α → ⊥))&quot;
         </div>
         
         <h3 class="proof-card-title">A09 (Negation Introduction / Contradiction)</h3>
-        <div class="proof-card-notes">Contradiction to bottom.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Contradiction to bottom.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((¬α) → (α → ⊥))" data-unicode-colored="((&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;α) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥))">
           <div class="view-typing formula-chunk">\(((\neg \alpha) \to (\alpha \to \bot))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\neg \alpha) \to (\alpha \to \bot))\)</div>
+          
         </div>
         
         
@@ -1127,11 +1136,12 @@ val thm_item_1_10 = thm ([], parse_formula &quot;((α → β) → ((α → ¬β)
         </div>
         
         <h3 class="proof-card-title">A10 (Reductio Ad Absurdum)</h3>
-        <div class="proof-card-notes">Proof of negation.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Proof of negation.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="((α → β) → ((α → ¬β) → ¬α))" data-unicode-colored="((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;α))">
           <div class="view-typing formula-chunk">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</div>
+          
         </div>
         
         
@@ -1185,11 +1195,12 @@ val thm_item_1_11 = thm ([], parse_formula &quot;(⊥ → α)&quot;);">
         </div>
         
         <h3 class="proof-card-title">A11 (Ex Falso Quodlibet)</h3>
-        <div class="proof-card-notes">Principle of explosion.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Principle of explosion.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(⊥ → α)" data-unicode-colored="(⊥ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α)">
           <div class="view-typing formula-chunk">\((\bot \to \alpha)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\bot \to \alpha)\)</div>
+          
         </div>
         
         
@@ -1243,11 +1254,12 @@ val thm_item_1_12 = thm ([], parse_formula &quot;(α ∨ ¬α)&quot;);">
         </div>
         
         <h3 class="proof-card-title">A12 (Law of Excluded Middle)</h3>
-        <div class="proof-card-notes">Classical tertium non datur.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Classical tertium non datur.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(α ∨ ¬α)" data-unicode-colored="(α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;α)">
           <div class="view-typing formula-chunk">\((\alpha \lor \neg \alpha)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\alpha \lor \neg \alpha)\)</div>
+          
         </div>
         
         
@@ -1303,11 +1315,12 @@ fun rule_rule_mp_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Modus Ponens (MP)</h3>
-        <div class="proof-card-notes">Fundamental detachment rule.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Fundamental detachment rule.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="α, (α → β) ⊢ β" data-unicode-colored="α, (α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; β) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; β">
           <div class="view-typing formula-chunk">\(\frac{\alpha \quad \alpha \to \beta}{\beta}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\alpha \quad \alpha \to \beta}{\beta}\)</div>
+          
         </div>
         
         
@@ -1371,11 +1384,12 @@ val thm_item_2_01 = thm ([], parse_formula &quot;∃(k : class) ⊤&quot;);">
         </div>
         
         <h3 class="proof-card-title">Discourse domain is non-empty</h3>
-        <div class="proof-card-notes">Ensures the universe of discourse contains at least one class.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Ensures the universe of discourse contains at least one class.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∃(K : Class) ⊤" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(K : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ⊤">
           <div class="view-typing formula-chunk">\(\exists (K : \mathsf{Class})\; \top\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\exists K \; \top\)</div>
+          
         </div>
         
         
@@ -1431,11 +1445,12 @@ fun rule_rule_fi_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Forall Instantiation (FI)</h3>
-        <div class="proof-card-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(∀(x : Class) φ) → φ[t/x]" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ[t/x]">
           <div class="view-typing formula-chunk">\(((\forall (x : \mathsf{Class})\; \phi) \to \phi[t/x])\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\forall x \; \phi) \to \phi[t/x])\)</div>
+          
         </div>
         
         
@@ -1493,11 +1508,12 @@ fun rule_rule_ei_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Exists Instantiation (EI)</h3>
-        <div class="proof-card-notes">Witness substitution into existential quantifier.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Witness substitution into existential quantifier.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="φ[t/x] → ∃(x : Class) φ" data-unicode-colored="φ[t/x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ">
           <div class="view-typing formula-chunk">\((\phi[t/x] \to \exists (x : \mathsf{Class})\; \phi)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\phi[t/x] \to \exists x \; \phi)\)</div>
+          
         </div>
         
         
@@ -1555,11 +1571,12 @@ fun rule_rule_fa_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Forall Abstraction (FA / Bernays)</h3>
-        <div class="proof-card-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)" data-unicode-colored="(ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ)">
           <div class="view-typing formula-chunk">\(\frac{\psi \to \phi}{\psi \to \forall (x : \mathsf{Class})\; \phi}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\psi \to \phi}{\psi \to \forall x \; \phi}\)</div>
+          
         </div>
         
         
@@ -1617,11 +1634,12 @@ fun rule_rule_ea_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Exists Abstraction (EA / Bernays)</h3>
-        <div class="proof-card-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) φ → ψ)" data-unicode-colored="(φ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ψ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ψ)">
           <div class="view-typing formula-chunk">\(\frac{\phi \to \psi}{\exists (x : \mathsf{Class})\; \phi \to \psi}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\phi \to \psi}{\exists x \; \phi \to \psi}\)</div>
+          
         </div>
         
         
@@ -1679,11 +1697,12 @@ fun rule_rule_gen_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Generalisation (Gen)</h3>
-        <div class="proof-card-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ" data-unicode-colored="φ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ">
           <div class="view-typing formula-chunk">\(\frac{\phi}{\forall (x : \mathsf{Class})\; \phi}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\phi}{\forall x \; \phi}\)</div>
+          
         </div>
         
         
@@ -1747,11 +1766,12 @@ val thm_item_3_01 = thm ([], parse_formula &quot;∀(x : class) (x ∈ {x | φ(x
         </div>
         
         <h3 class="proof-card-title">Class Comprehension Axiom</h3>
-        <div class="proof-card-notes">Predicative/impredicative comprehension for all first-order and higher-order formulas.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Predicative/impredicative comprehension for all first-order and higher-order formulas.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (X &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; {x | φ(x)} &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; φ(X)))">
+        <div class="formula-display formula-cell" data-unicode="∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (X &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; {x | φ(x)} &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; φ(X)))">
           <div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall X \; (X \in \{x \mid \phi(x)\} \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -1805,11 +1825,12 @@ val thm_item_3_02 = thm ([], parse_formula &quot;∀(a, b : class) ((∀(x : cla
         </div>
         
         <h3 class="proof-card-title">Extensionality Axiom</h3>
-        <div class="proof-card-notes">Two classes having identical elements are identical.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Two classes having identical elements are identical.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; A &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; B)">
           <div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\forall (x : \mathsf{Class})\; (x \in A \longleftrightarrow x \in B)) \to A = B)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ((\forall x \; (x \in A \longleftrightarrow x \in B)) \to A = B)\)</div>
+          
         </div>
         
         
@@ -1863,11 +1884,12 @@ val thm_item_3_08 = thm ([], parse_formula &quot;∀(a, b : class) ((isset(b) �
         </div>
         
         <h3 class="proof-card-title">Heredity Axiom (Subclasses of Sets are Sets)</h3>
-        <div class="proof-card-notes">Any subclass of a set is a set.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Any subclass of a set is a set.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; A &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt; B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(A))">
+        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; A &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(A))">
           <div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div>
         </div>
         
         
@@ -1921,11 +1943,12 @@ val thm_item_3_12 = thm ([], parse_formula &quot;∀(a : class) (a ≠ ∅ → �
         </div>
         
         <h3 class="proof-card-title">Regularity (Foundation) Axiom</h3>
-        <div class="proof-card-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (A ≠ ∅ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∩&lt;/span&gt; A &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; ∅))">
+        <div class="formula-display formula-cell" data-unicode="∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (A ≠ &lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x &lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;(∩) : Class × Class → Class (3.12 Binary Intersection)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∩&lt;/span&gt;&lt;/a&gt; A &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;))">
           <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Class})\; (A \ne \emptyset \to \exists (x : \mathsf{Class})\; (x \in A \land x \cap A = \emptyset))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; (A \ne \emptyset \to \exists x \; (x \in A \land x \cap A = \emptyset))\)</div>
+          
         </div>
         
         
@@ -1979,11 +2002,12 @@ val thm_item_3_13 = thm ([], parse_formula &quot;∀(a, b : class) ((isset(a) �
         </div>
         
         <h3 class="proof-card-title">Pairing Axiom</h3>
-        <div class="proof-card-notes">Unordered pair of two sets is a set.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Unordered pair of two sets is a set.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(a, b : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(a) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(b)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;({a, b}))">
+        <div class="formula-display formula-cell" data-unicode="∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(a, b : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(a) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(b)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;({a, b}))">
           <div class="view-typing formula-chunk">\(\forall (a, b : \mathsf{Class})\; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall a, b \; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -2037,11 +2061,12 @@ val thm_item_3_14 = thm ([], parse_formula &quot;∀(a : class) (isset(a) → is
         </div>
         
         <h3 class="proof-card-title">Union Axiom</h3>
-        <div class="proof-card-notes">The unary union of any set is a set.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">The unary union of any set is a set.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(⋃ A))">
+        <div class="formula-display formula-cell" data-unicode="∀(A : Class) (isSet(A) → isSet(⋃ A))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#item-3-14&quot; class=&quot;sym-inline-link&quot; title=&quot;⋃ : Class → Class (3.14 Class Union)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⋃&lt;/span&gt;&lt;/a&gt; A))">
           <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Class})\; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -2095,11 +2120,12 @@ val def_item_3_22_class_if = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</h3>
-        <div class="proof-card-notes">Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;IF&lt;/span&gt; ψ &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;THEN&lt;/span&gt; A &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;ELSE&lt;/span&gt; B &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;FI&lt;/span&gt;&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; { v | (ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) }">
+        <div class="formula-display formula-cell" data-unicode="W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;a href=&quot;#item-3-22-class-if&quot; class=&quot;sym-inline-link&quot; title=&quot;IF_THEN_ELSE_FI : Bool × Class × Class → Class (3.22 Class Conditional)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;IF&lt;/span&gt;&lt;/a&gt; ψ &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;THEN&lt;/span&gt; A &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;ELSE&lt;/span&gt; B &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;FI&lt;/span&gt;&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; { v | (ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;ψ &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) }">
           <div class="view-typing formula-chunk">\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \}\)</div>
+          
         </div>
         
         
@@ -2153,11 +2179,12 @@ val def_item_3_23_simple_if = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">simple_if (polymorphic non-dependent conditional over arbitrary Type)</h3>
-        <div class="proof-card-notes">Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)" data-unicode-colored="&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt; : &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∏&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;). &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α   (&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt; α &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt; t1 t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t1&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt; α &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt; t1 t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;)">
+        <div class="formula-display formula-cell" data-unicode="simple_if : ∏(α : Type). Bool → α → α → α   (⟦simple_if α true t1 t2⟧ = ⟦t1⟧, ⟦simple_if α false t1 t2⟧ = ⟦t2⟧)" data-unicode-colored="&lt;a href=&quot;#item-3-23-simple-if&quot; class=&quot;sym-inline-link&quot; title=&quot;simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt;&lt;/a&gt; : &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∏&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;). &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; α   (&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;a href=&quot;#item-3-23-simple-if&quot; class=&quot;sym-inline-link&quot; title=&quot;simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt;&lt;/a&gt; α &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt; t1 t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t1&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;a href=&quot;#item-3-23-simple-if&quot; class=&quot;sym-inline-link&quot; title=&quot;simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt;&lt;/a&gt; α &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt; t1 t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;)">
           <div class="view-typing formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha \in \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathrm{simple\_if} : \Pi (\alpha \in \mathsf{Type}).\; \mathsf{Bool} \to \alpha \to \alpha \to \alpha \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div>
+          
         </div>
         
         
@@ -2211,11 +2238,12 @@ val def_item_3_24_dependent_if = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">dependent_if (polymorphic dependent conditional with type computation)</h3>
-        <div class="proof-card-notes">Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)" data-unicode-colored="&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;dependent_if&lt;/span&gt; : &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∏&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) (b : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt;). &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(b)   (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt;(&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if b then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt; b (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt; t1) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt; t2)&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt; then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t1&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt; then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;)">
+        <div class="formula-display formula-cell" data-unicode="dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)" data-unicode-colored="&lt;a href=&quot;#item-3-24-dependent-if&quot; class=&quot;sym-inline-link&quot; title=&quot;dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b) (3.24 dependent_if)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;dependent_if&lt;/span&gt;&lt;/a&gt; : &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∏&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) (b : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Bool&lt;/span&gt;). &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;(b)   (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt;(&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if b then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;&lt;a href=&quot;#item-3-23-simple-if&quot; class=&quot;sym-inline-link&quot; title=&quot;simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;simple_if&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt; b (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt; t1) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;typeof&lt;/span&gt; t2)&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;true&lt;/span&gt; then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t1&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;, &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;if &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;false&lt;/span&gt; then t1 else t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;t2&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt;)">
           <div class="view-typing formula-chunk">\(\mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-23-simple-if" class="sym-def-chip" title="simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)"><span class="sym-chip-name">simple_if</span><span class="sym-chip-type">∏(α : Type). Bool → α → α → α</span></a></div>
         </div>
         
         
@@ -2269,18 +2297,19 @@ let rec ord_ind (p : prog) (a : class) : prf = ...">
         </div>
         
         <h3 class="proof-card-title">Ordinal Induction (∈-Ind)</h3>
-        <div class="proof-card-notes">On is a Class object (On : Class). Ordinal induction is formulated as a formula in Morse–Kelley class theory, accompanied by a constructive proof program.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Ordinal induction is formulated as a theorem in Morse–Kelley class theory over the previously defined constant On.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (α &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;On&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(β : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (β &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(β)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(α)))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (α &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;On&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(α))">
+        <div class="formula-display formula-cell" data-unicode="(∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (α &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#thm-ord-ind&quot; class=&quot;sym-inline-link&quot; title=&quot;On : Class (3.32 Class of All Ordinals)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;On&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(β : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (β &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; α &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(β)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(α)))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(α : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (α &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#thm-ord-ind&quot; class=&quot;sym-inline-link&quot; title=&quot;On : Class (3.32 Class of All Ordinals)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;On&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ(α))">
           <div class="view-typing formula-chunk">\(((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(((\forall \alpha \; (\alpha \in \mathrm{On} \to ((\forall \beta \; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha)))) \to \forall \alpha \; (\alpha \in \mathrm{On} \to \phi(\alpha)))\)</div>
+          
         </div>
         
         
         <div class="gallery-side-box">
           <span class="gallery-side-label">Side Condition:</span>
-          <span class="view-typing">\(\mathrm{On} : \mathsf{Class}, \quad \mathrm{WF}(\in, \mathrm{On})\)</span>
-          <span class="view-membership" style="display:none;">\(\mathrm{On} , \quad \mathrm{WF}(\in, \mathrm{On})\)</span>
+          <span class="view-typing">\(\mathrm{WF}(\in, \mathrm{On})\)</span>
+          <span class="view-membership" style="display:none;">\(\mathrm{WF}(\in, \mathrm{On})\)</span>
         </div>
                 
         
@@ -2327,11 +2356,12 @@ val thm_item_3_34 = thm ([], parse_formula &quot;∀(a : class) (isset(a) → is
         </div>
         
         <h3 class="proof-card-title">Power Class Axiom</h3>
-        <div class="proof-card-notes">Power class of any set is a set.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Power class of any set is a set.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(a : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(a) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(𝒫(a)))">
+        <div class="formula-display formula-cell" data-unicode="∀(a : Class) (isSet(a) → isSet(𝒫(a)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(a : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(a) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#item-3-34&quot; class=&quot;sym-inline-link&quot; title=&quot;𝒫 : Class → Class (3.34 Power Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;𝒫&lt;/span&gt;&lt;/a&gt;(a)))">
           <div class="view-typing formula-chunk">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall a \; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -2385,11 +2415,12 @@ val thm_item_3_37 = thm ([], parse_formula &quot;∀(f, a : class) ((isclassfunc
         </div>
         
         <h3 class="proof-card-title">Replacement / Limitation of Size Axiom</h3>
-        <div class="proof-card-notes">Image of a set under a class function is a set.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Image of a set under a class function is a set.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((isClassFunction(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(A)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;[A]))">
+        <div class="formula-display formula-cell" data-unicode="∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-37&quot; class=&quot;sym-inline-link&quot; title=&quot;isClassFunction : Class → Bool (3.37 Class Function)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isClassFunction&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(A)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;[A]))">
           <div class="view-typing formula-chunk">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall F, A \; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -2443,11 +2474,12 @@ val def_item_3_40 = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">Dunaev Tagged Ordered Pair</h3>
-        <div class="proof-card-notes">Dunaev Tagged Ordered Pair (dunaev_opair_def_entry_fm in foundations.ML). Works uniformly for proper classes and sets without collapsing to ∅ when A or B is a proper class.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Dunaev Tagged Ordered Pair (dunaev_opair_def_entry_fm in foundations.ML). Works uniformly for proper classes and sets without collapsing to ∅ when A or B is a proper class.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ([A, B]_D = {z | ∃(a ∈ A) (z = {{{{a}}}, {∅}}) ∨ ∃(b ∈ B) (z = {{{{b}}}, {∅, {∅}}})})" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ([A, B]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {z | &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(a &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {{{{a}}}, {∅}}) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(b &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {{{{b}}}, {∅, {∅}}})})">
+        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ([A, B]_D = {z | ∃(a ∈ A) (z = {{{{a}}}, {∅}}) ∨ ∃(b ∈ B) (z = {{{{b}}}, {∅, {∅}}})})" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ([A, B]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {z | &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(a &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {{{{a}}}, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;}}) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(b &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {{{{b}}}, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;}}})})">
           <div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ([A, B]_D = \{z \mid \exists (a \in A)\; (z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})\})\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ([A, B]_D = \{z \mid \exists (a \in A)\; (z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})\})\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div>
         </div>
         
         
@@ -2501,11 +2533,12 @@ val thm_3_41 = nbgcompiler.verify_plan (nbgcompiler.plan_dunaev_pair_injective (
         </div>
         
         <h3 class="proof-card-title">First Projection of Dunaev Tagged Ordered Pair</h3>
-        <div class="proof-card-notes">First class projection π₁([A, B]_D) = A recovers A unconditionally for any class A (dunaev_pr1_def_entry_fm in foundations.ML).</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">First class projection π₁([A, B]_D) = A recovers A unconditionally for any class A (dunaev_pr1_def_entry_fm in foundations.ML).</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ({a | {{{{a}}}, {∅}} ∈ [A, B]_D} = A)" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ({a | {{{{a}}}, {∅}} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; [A, B]_D} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; A)">
+        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ({a | {{{{a}}}, {∅}} ∈ [A, B]_D} = A)" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ({a | {{{{a}}}, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;}} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; [A, B]_D} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; A)">
           <div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; (\{a \mid \{\{\{\{a\}\}\}, \{\emptyset\}\} \in [A, B]_D\} = A)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; (\{a \mid \{\{\{\{a\}\}\}, \{\emptyset\}\} \in [A, B]_D\} = A)\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a> <a href="manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div>
         </div>
         
         
@@ -2559,11 +2592,12 @@ val thm_3_42 = nbgcompiler.verify_plan (nbgcompiler.plan_dunaev_pair_injective (
         </div>
         
         <h3 class="proof-card-title">Second Projection of Dunaev Tagged Ordered Pair</h3>
-        <div class="proof-card-notes">Second class projection π₂([A, B]_D) = B recovers B unconditionally for any class B (dunaev_pr2_def_entry_fm in foundations.ML).</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Second class projection π₂([A, B]_D) = B recovers B unconditionally for any class B (dunaev_pr2_def_entry_fm in foundations.ML).</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ({b | {{{{b}}}, {∅, {∅}}} ∈ [A, B]_D} = B)" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ({b | {{{{b}}}, {∅, {∅}}} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; [A, B]_D} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; B)">
+        <div class="formula-display formula-cell" data-unicode="∀(A, B : Class) ({b | {{{{b}}}, {∅, {∅}}} ∈ [A, B]_D} = B)" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A, B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ({b | {{{{b}}}, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;, {&lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;}}} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; [A, B]_D} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; B)">
           <div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; (\{b \mid \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D\} = B)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; (\{b \mid \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D\} = B)\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a> <a href="manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div>
         </div>
         
         
@@ -2617,11 +2651,12 @@ val thm_item_3_45 = thm ([], parse_formula &quot;∃(x : class) (isset(x) ∧ �
         </div>
         
         <h3 class="proof-card-title">Infinity Axiom</h3>
-        <div class="proof-card-notes">Guarantees existence of the set of natural numbers ω.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Guarantees existence of the set of natural numbers ω.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ∅ &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∪&lt;/span&gt; {y} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x))">
+        <div class="formula-display formula-cell" data-unicode="∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; y &lt;a href=&quot;#item-3-14&quot; class=&quot;sym-inline-link&quot; title=&quot;(∪) : Class × Class → Class (3.14 Binary Union)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∪&lt;/span&gt;&lt;/a&gt; {y} &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x))">
           <div class="view-typing formula-chunk">\(\exists (x : \mathsf{Class})\; (\mathrm{isSet}(x) \land \emptyset \in x \land \forall (y : \mathsf{Class})\; (y \in x \to y \cup \{y\} \in x))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\exists x \; (\mathrm{isSet}(x) \land \emptyset \in x \land \forall y \; (y \in x \to y \cup \{y\} \in x))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a> <a href="manual.html#item-3-14" class="sym-def-chip" title="(∪) : Class × Class → Class (3.14 Binary Union)"><span class="sym-chip-name">∪</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
         </div>
         
         
@@ -2675,11 +2710,12 @@ val thm_item_3_46 = thm ([], parse_formula &quot;∃(c : class) (isclassfunction
         </div>
         
         <h3 class="proof-card-title">Global Choice Axiom</h3>
-        <div class="proof-card-notes">Global choice function over all non-empty sets.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Global choice function over all non-empty sets.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(c : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (isClassFunction(c) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x ≠ ∅) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; c(x) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x))">
+        <div class="formula-display formula-cell" data-unicode="∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(c : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-37&quot; class=&quot;sym-inline-link&quot; title=&quot;isClassFunction : Class → Bool (3.37 Class Function)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isClassFunction&lt;/span&gt;&lt;/a&gt;(c) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x ≠ &lt;a href=&quot;#item-3-12&quot; class=&quot;sym-inline-link&quot; title=&quot;∅ : Class (3.12 Empty Class)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∅&lt;/span&gt;&lt;/a&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; c(x) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x))">
           <div class="view-typing formula-chunk">\(\exists (c : \mathsf{Class})\; (\mathrm{isClassFunction}(c) \land \forall (x : \mathsf{Class})\; ((\mathrm{isSet}(x) \land x \ne \emptyset) \to c(x) \in x))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\exists c \; (\mathrm{isClassFunction}(c) \land \forall x \; ((\mathrm{isSet}(x) \land x \ne \emptyset) \to c(x) \in x))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-37" class="sym-def-chip" title="isClassFunction : Class → Bool (3.37 Class Function)"><span class="sym-chip-name">isClassFunction</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div>
         </div>
         
         
@@ -2733,11 +2769,12 @@ val def_item_3_47 = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">Universal Class (V)</h3>
-        <div class="proof-card-notes">Universe of all sets. V is a proper class (not a set).</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Universe of all sets. V is a proper class (not a set).</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="V = {x | x = x}" data-unicode-colored="V &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {x | x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; x}">
+        <div class="formula-display formula-cell" data-unicode="V = {x | x = x}" data-unicode-colored="&lt;a href=&quot;#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;V : Class (3.47 Universal Class)&quot;&gt;&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;V&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; {x | x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; x}">
           <div class="view-typing formula-chunk">\(V = \{x \mid x = x\}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(V = \{x \mid x = x\}\)</div>
+          
         </div>
         
         
@@ -2791,11 +2828,12 @@ val def_item_3_53 = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">Transitive Class Predicate</h3>
-        <div class="proof-card-notes">A class is transitive if every element of it is also a subclass.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">A class is transitive if every element of it is also a subclass.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)" data-unicode-colored="Tr(A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt; A)">
+        <div class="formula-display formula-cell" data-unicode="Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)" data-unicode-colored="&lt;a href=&quot;#item-3-53&quot; class=&quot;sym-inline-link&quot; title=&quot;Tr : Class → Bool (3.53 Transitive Class Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Tr&lt;/span&gt;&lt;/a&gt;(A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; x &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; A)">
           <div class="view-typing formula-chunk">\(\mathrm{Tr}(A) \longleftrightarrow \forall (x : \mathsf{Class})\; (x \in A \to x \subseteq A)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathrm{Tr}(A) \longleftrightarrow \forall x \; (x \in A \to x \subseteq A)\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div>
         </div>
         
         
@@ -2849,11 +2887,12 @@ val thm_item_3_66 = thm ([], parse_formula &quot;∀(x : class) (isset(x) → �
         </div>
         
         <h3 class="proof-card-title">Tarski&#x27;s Axiom of Universes</h3>
-        <div class="proof-card-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (isUniverse(u) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; u &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(u)))">
+        <div class="formula-display formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-66&quot; class=&quot;sym-inline-link&quot; title=&quot;isUniverse : Class → Bool (3.66 Grothendieck-Tarski Universe)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isUniverse&lt;/span&gt;&lt;/a&gt;(u) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; u &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(u)))">
           <div class="view-typing formula-chunk">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land x \in u \land \mathrm{isSet}(u)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall x \; (\mathrm{isSet}(x) \to \exists u \; (\mathrm{isUniverse}(u) \land x \in u \land \mathrm{isSet}(u)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -2915,11 +2954,12 @@ val thm_item_4_01 = thm ([], parse_formula &quot;∀(a : type) ∀(g : ctx) ∀(
         </div>
         
         <h3 class="proof-card-title">Instantiation Axiom</h3>
-        <div class="proof-card-notes">Metatheoretic instantiation across arbitrary typed expressions.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Metatheoretic instantiation across arbitrary typed expressions.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(G : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(t : eval(A)) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Variable&lt;/span&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, G &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : A) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (let v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; t in φ))">
           <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash (\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall G \; \forall \phi \; \forall (t : \mathrm{eval}(A))\; \forall v \; (\mathcal{W}, G \vdash (\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi))\)</div>
+          
         </div>
         
         
@@ -2973,11 +3013,12 @@ val thm_item_4_02 = thm ([], parse_formula &quot;∀(a : type) ∀(γ : ctx) ∀
         </div>
         
         <h3 class="proof-card-title">Generalisation Axiom</h3>
-        <div class="proof-card-notes">Universal generalization in metatheory guarded by non-free context occurrence.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Universal generalization in metatheory guarded by non-free context occurrence.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Variable&lt;/span&gt;) (&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;(Enc(v) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;.FV(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt;)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : A) φ)))">
+        <div class="formula-display formula-cell" data-unicode="∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Variable&lt;/span&gt;) (&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;(&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(v) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;.FV(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt;)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : A) φ)))">
           <div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall \Gamma \; \forall \phi \; \forall v \; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a></div>
         </div>
         
         
@@ -3033,11 +3074,12 @@ fun rule_item_4_03_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">CoNecessitation</h3>
-        <div class="proof-card-notes">Reflection elimination for provability.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Reflection elimination for provability.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="(F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;‹&lt;/span&gt;&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;›&lt;/span&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ)">
           <div class="view-typing formula-chunk">\(\frac{\mathcal{F}, [] \vdash \langle \mathcal{F}, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\mathcal{F}, [] \vdash \langle \mathcal{F}, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</div>
+          
         </div>
         
         
@@ -3093,11 +3135,12 @@ val def_item_4_04 = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">Quantifier Unique (!)</h3>
-        <div class="proof-card-notes">At-most-one quantifier.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">At-most-one quantifier.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) ((&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;!&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x, y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((φ[x/z] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; φ[y/z]) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; y))">
           <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; ((! (z : \mathsf{Class})\; \phi) \longleftrightarrow \forall (x, y : \mathsf{Class})\; ((\phi[x/z] \land \phi[y/z]) \to x = y))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; ((! (z )\; \phi) \longleftrightarrow \forall x, y \; ((\phi[x/z] \land \phi[y/z]) \to x = y))\)</div>
+          
         </div>
         
         
@@ -3151,11 +3194,12 @@ val def_item_4_05 = defthm (lhs, rhs);">
         </div>
         
         <h3 class="proof-card-title">Quantifier Exists and Unique (∃!)</h3>
-        <div class="proof-card-notes">Exactly-one quantifier.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Exactly-one quantifier.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;!&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; ((&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;!&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) φ))">
           <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{T}, [] \vdash (\exists! (x : \mathsf{Class})\; \phi) \longleftrightarrow ((\exists (x : \mathsf{Class})\; \phi) \land ! (x : \mathsf{Class})\; \phi))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{T}, [] \vdash (\exists! (x )\; \phi) \longleftrightarrow ((\exists x \; \phi) \land ! (x )\; \phi))\)</div>
+          
         </div>
         
         
@@ -3209,11 +3253,12 @@ val thm_item_4_06 = thm ([], parse_formula &quot;∀(φ : fm) ∀(x : name) ∀(
         </div>
         
         <h3 class="proof-card-title">Class Comprehension Axiom (Metatheory)</h3>
-        <div class="proof-card-notes">Reflected class comprehension in base theory T.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Reflected class comprehension in base theory T.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Name&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(k : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;.Expr) (FFI(k, x, φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (k &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; {x | φ}) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; (&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(k) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; φ[k/x])))">
+        <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Name&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(k : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;.Expr) (&lt;a href=&quot;metatheory.html#ffi-t-vx-phi&quot; class=&quot;sym-inline-link&quot; title=&quot;FFI : Class.Expr × Variable × Fm → Bool (Metatheory FFI)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;FFI&lt;/span&gt;&lt;/a&gt;(k, x, φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (k &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; {x | φ}) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(k) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; φ[k/x])))">
           <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; \forall x \; \forall k \; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash (k \in \{x \mid \phi\}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x])))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="metatheory.html#ffi-t-vx-phi" class="sym-def-chip" title="FFI : Class.Expr × Variable × Fm → Bool (Metatheory FFI)"><span class="sym-chip-name">FFI</span><span class="sym-chip-type">Class.Expr × Variable × Fm → Bool</span></a></div>
         </div>
         
         
@@ -3267,11 +3312,12 @@ val thm_item_4_07 = thm ([], parse_formula &quot;∀(φ : fm) (⟦φ⟧ → (f, 
         </div>
         
         <h3 class="proof-card-title">Soundness / Reflection Axiom</h3>
-        <div class="proof-card-notes">Metatheoretic reflection into full theory F (soundness_def_entry_fm in foundations.ML).</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Metatheoretic reflection into full theory F (soundness_def_entry_fm in foundations.ML).</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) (⟦φ⟧ → (F, [] ⊢ φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) (&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟦&lt;/span&gt;φ&lt;span style=&quot;color:#c084fc;font-weight:bold;&quot;&gt;⟧&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ))">
           <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div>
+          
         </div>
         
         
@@ -3325,11 +3371,12 @@ val thm_item_4_08 = thm ([], parse_formula &quot;∀(γ : ctx) ∀(φ : fm) ((t,
         </div>
         
         <h3 class="proof-card-title">Theory Inclusion (T ⊆ F)</h3>
-        <div class="proof-card-notes">Every theorem of the base NBG theory T is derivable in the full reflected theory F (theory_inclusion_def_entry_fm in foundations.ML).</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Every theorem of the base NBG theory T is derivable in the full reflected theory F (theory_inclusion_def_entry_fm in foundations.ML).</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(Γ : Ctx) ∀(φ : Fm) ((T, Γ ⊢ φ) → (F, Γ ⊢ φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Ctx&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Γ&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ))">
           <div class="view-typing formula-chunk">\(\forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \Gamma \; \forall \phi \; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div>
+          
         </div>
         
         
@@ -3367,6 +3414,301 @@ val thm_item_4_08 = Thm ([], parse_formula &quot;∀(Γ : Ctx) ∀(φ : Fm) ((T,
         </div>
       </div>
             
+
+      <div class="proof-card" id="card-def-enc" data-num="4.09" data-classification="definition" data-search="4.09 syntactic encoding operator (enc) definition ∀(t : type) ∀(s : t) (isset(enc(s)) ∧ (enc(s) ∈ emb(t))) (* conservative definition specification *)
+val def_def_enc = defthm (lhs, rhs);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.09" class="entry-num-link" title="Navigate to reference manual entry">4.09</a>
+            <span class="classification-badge badge-rule">Definition</span>
+            <a href="proofs/def-enc.html" class="status-badge badge-def-status" title="Inspect formal verification certificate">Conservative Def</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/def-enc.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Syntactic Encoding Operator (Enc)</h3>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Gödel / Hereditarily-Finite-Set encoding (CpEnc in typetheory.ML). Maps any finite syntactic object s : T (Fm, Ctx, Theory, Stmt, Prf) into a finite set code in V_ω ⊂ V, so isSet(Enc(s)) is always true.</div></details>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(T : Type) ∀(s : T) (isSet(Enc(s)) ∧ (Enc(s) ∈ Emb(T)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(s : &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#def-emb&quot; class=&quot;sym-inline-link&quot; title=&quot;Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Emb&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;)))">
+          <div class="view-typing formula-chunk">\(\forall (T : \mathsf{Type})\; \forall (s : T)\; (\mathrm{isSet}(\mathrm{Enc}(s)) \land (\mathrm{Enc}(s) \in \mathrm{Emb}(T)))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall T \; \forall s \; (\mathrm{isSet}(\mathrm{Enc}(s)) \land (\mathrm{Enc}(s) \in \mathrm{Emb}(T)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#def-emb" class="sym-def-chip" title="Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)"><span class="sym-chip-name">Emb</span><span class="sym-chip-type">Type → (Class → Bool)</span></a></div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(T : \mathsf{Type}, \quad s : T\)</span>
+          <span class="view-membership" style="display:none;">\(T , \quad s \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-def-enc')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-def-enc">(* Conservative Definition Specification *)
+val def_def_enc = DefThm (lhs, rhs);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Conservative Definitional Extension</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-def-dec" data-num="4.10" data-classification="definition" data-search="4.10 syntactic decoding &amp; roundtrip law (dec) definition ∀(t : type) ∀(s : t) ((dec(enc(s), emb(t)) : t) = (s : t)) (* conservative definition specification *)
+val def_def_dec = defthm (lhs, rhs);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.10" class="entry-num-link" title="Navigate to reference manual entry">4.10</a>
+            <span class="classification-badge badge-rule">Definition</span>
+            <a href="proofs/def-dec.html" class="status-badge badge-def-status" title="Inspect formal verification certificate">Conservative Def</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/def-dec.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Syntactic Decoding &amp; Roundtrip Law (Dec)</h3>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Partial syntactic decoder (VDec in typetheory.ML). Inverts Enc(s) on the carrier Emb(T), decoupled from antiquotation brackets ⟦...⟧ so that antiquoting a proper class X does not force isSet(X).</div></details>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(T : Type) ∀(s : T) ((Dec(Enc(s), Emb(T)) : T) = (s : T))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Type&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(s : &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;) ((&lt;a href=&quot;#def-dec&quot; class=&quot;sym-inline-link&quot; title=&quot;Dec : Class × Col → T (4.10 Syntactic Decoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Dec&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s), &lt;a href=&quot;#def-emb&quot; class=&quot;sym-inline-link&quot; title=&quot;Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Emb&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;)) : &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; (s : &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;))">
+          <div class="view-typing formula-chunk">\(\forall (T : \mathsf{Type})\; \forall (s : T)\; ((\mathrm{Dec}(\mathrm{Enc}(s), \mathrm{Emb}(T)) : T) = (s : T))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall T \; \forall s \; (\mathrm{Dec}(\mathrm{Enc}(s), \mathrm{Emb}(T)) = s)\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a> <a href="manual.html#def-emb" class="sym-def-chip" title="Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)"><span class="sym-chip-name">Emb</span><span class="sym-chip-type">Type → (Class → Bool)</span></a></div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(T : \mathsf{Type}, \quad s : T\)</span>
+          <span class="view-membership" style="display:none;">\(T , \quad s \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-def-dec')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-def-dec">(* Conservative Definition Specification *)
+val def_def_dec = DefThm (lhs, rhs);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Conservative Definitional Extension</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-def-emb" data-num="4.11" data-classification="definition" data-search="4.11 dual type embedding operator (emb) definition ∀(x : class) ((emb(class)(x) ⟷ ⊤) ∧ (emb(set)(x) ⟷ isset(x))) (* conservative definition specification *)
+val def_def_emb = defthm (lhs, rhs);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.11" class="entry-num-link" title="Navigate to reference manual entry">4.11</a>
+            <span class="classification-badge badge-rule">Definition</span>
+            <a href="proofs/def-emb.html" class="status-badge badge-def-status" title="Inspect formal verification certificate">Conservative Def</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/def-emb.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Dual Type Embedding Operator (Emb)</h3>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Dual semantics of types in typetheory.ML (LTpEmb / TyTpEmb): semantically, a type T is a predicate on classes Emb(T) : Class → Bool (allowing proper classes like V); syntactically, Emb(T) is the carrier class of encoded objects.</div></details>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(X : Class) ((Emb(Class)(X) ⟷ ⊤) ∧ (Emb(Set)(X) ⟷ isSet(X)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#def-emb&quot; class=&quot;sym-inline-link&quot; title=&quot;Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Emb&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)(X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; ⊤) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;a href=&quot;#def-emb&quot; class=&quot;sym-inline-link&quot; title=&quot;Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Emb&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;)(X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(X)))">
+          <div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; ((\mathrm{Emb}(\mathsf{Class})(X) \longleftrightarrow \top) \land (\mathrm{Emb}(\mathsf{Set})(X) \longleftrightarrow \mathrm{isSet}(X)))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall X \; ((\mathrm{Emb}(\mathsf{Class})(X) \longleftrightarrow \top) \land (\mathrm{Emb}(\mathsf{Set})(X) \longleftrightarrow \mathrm{isSet}(X)))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(X : \mathsf{Class}\)</span>
+          <span class="view-membership" style="display:none;">\(X \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-def-emb')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-def-emb">(* Conservative Definition Specification *)
+val def_def_emb = DefThm (lhs, rhs);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Conservative Definitional Extension</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-def-proofs-of" data-num="4.12" data-classification="definition" data-search="4.12 proof-object class family (proofsof) definition ∀(s : stmt) ∀(p : prf) ((enc(p) ∈ proofsof(enc(s))) ⟷ checkproof(p, s)) (* conservative definition specification *)
+val def_def_proofs_of = defthm (lhs, rhs);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.12" class="entry-num-link" title="Navigate to reference manual entry">4.12</a>
+            <span class="classification-badge badge-rule">Definition</span>
+            <a href="proofs/def-proofs-of.html" class="status-badge badge-def-status" title="Inspect formal verification certificate">Conservative Def</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/def-proofs-of.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Proof-Object Class Family (ProofsOf)</h3>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Maps an encoded statement Enc(s) (or formula Enc(φ)) to the class of all encoded verified proof objects witnessing it: ProofsOf : Fm → 𝒫(Proofs). Reconciles Variant 2 typing (p : ProofsOf(φ)) with Variant 1 membership (Enc(p) ∈ ProofsOf(Enc(s))).</div></details>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(s : Stmt) ∀(p : Prf) ((Enc(p) ∈ ProofsOf(Enc(s))) ⟷ CheckProof(p, s))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(s : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Stmt&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(p : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Prf&lt;/span&gt;) ((&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(p) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#def-proofs-of&quot; class=&quot;sym-inline-link&quot; title=&quot;ProofsOf : Class → Class (4.12 Proof-Object Class Family)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;ProofsOf&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; CheckProof(p, s))">
+          <div class="view-typing formula-chunk">\(\forall (s : \mathsf{Stmt})\; \forall (p : \mathsf{Prf})\; ((\mathrm{Enc}(p) \in \mathrm{ProofsOf}(\mathrm{Enc}(s))) \longleftrightarrow \mathrm{CheckProof}(p, s))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall s \; \forall p \; ((\mathrm{Enc}(p) \in \mathrm{ProofsOf}(\mathrm{Enc}(s))) \longleftrightarrow \mathrm{CheckProof}(p, s))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a></div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(s : \mathsf{Stmt}, \quad p : \mathsf{Prf}\)</span>
+          <span class="view-membership" style="display:none;">\(s , \quad p \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-def-proofs-of')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-def-proofs-of">(* Conservative Definition Specification *)
+val def_def_proofs_of = DefThm (lhs, rhs);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Conservative Definitional Extension</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+          </div>
+        </div>
+      </div>
+            
+
+      <div class="proof-card" id="card-def-theorems" data-num="4.13" data-classification="definition" data-search="4.13 class of provable statements (theorems) definition ∀(s : stmt) ((enc(s) ∈ theorems) ⟷ (∃(p : class) (p ∈ proofsof(enc(s))))) (* conservative definition specification *)
+val def_def_theorems = defthm (lhs, rhs);">
+        <div class="proof-card-header">
+          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+            <a href="manual.html#4.13" class="entry-num-link" title="Navigate to reference manual entry">4.13</a>
+            <span class="classification-badge badge-rule">Definition</span>
+            <a href="proofs/def-theorems.html" class="status-badge badge-def-status" title="Inspect formal verification certificate">Conservative Def</a>
+          </div>
+          <div class="card-action-links">
+            <a href="proofs/def-theorems.html" class="btn-card-action" title="View dedicated certificate">📜 Certificate &rarr;</a>
+            <a href="repl.html" class="btn-card-action btn-card-repl" title="Open and test in Web REPL">⚡ REPL &rarr;</a>
+          </div>
+        </div>
+        
+        <h3 class="proof-card-title">Class of Provable Statements (Theorems)</h3>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">First-order class of all encoded provable statements in NBG/MK. An encoded statement Enc(s) belongs to Theorems if and only if there exists an encoded proof witness p ∈ ProofsOf(Enc(s)).</div></details>
+        
+        <div class="formula-display formula-cell" data-unicode="∀(s : Stmt) ((Enc(s) ∈ Theorems) ⟷ (∃(p : Class) (p ∈ ProofsOf(Enc(s)))))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(s : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Stmt&lt;/span&gt;) ((&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#def-theorems&quot; class=&quot;sym-inline-link&quot; title=&quot;Theorems : Class (4.13 Class of Provable Statements)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Theorems&lt;/span&gt;&lt;/a&gt;) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(p : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (p &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; &lt;a href=&quot;#def-proofs-of&quot; class=&quot;sym-inline-link&quot; title=&quot;ProofsOf : Class → Class (4.12 Proof-Object Class Family)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;ProofsOf&lt;/span&gt;&lt;/a&gt;(&lt;a href=&quot;#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Enc : T → Class (4.09 Syntactic Encoding Operator)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;Enc&lt;/span&gt;&lt;/a&gt;(s)))))">
+          <div class="view-typing formula-chunk">\(\forall (s : \mathsf{Stmt})\; ((\mathrm{Enc}(s) \in \mathrm{Theorems}) \longleftrightarrow (\exists (p : \mathsf{Class})\; (p \in \mathrm{ProofsOf}(\mathrm{Enc}(s)))))\)</div>
+          <div class="view-membership formula-chunk" style="display:none;">\(\forall s \; ((\mathrm{Enc}(s) \in \mathrm{Theorems}) \longleftrightarrow (\exists p \; (p \in \mathrm{ProofsOf}(\mathrm{Enc}(s)))))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a> <a href="manual.html#def-proofs-of" class="sym-def-chip" title="ProofsOf : Class → Class (4.12 Proof-Object Class Family)"><span class="sym-chip-name">ProofsOf</span><span class="sym-chip-type">Class → Class</span></a></div>
+        </div>
+        
+        
+        <div class="gallery-side-box">
+          <span class="gallery-side-label">Side Condition:</span>
+          <span class="view-typing">\(s : \mathsf{Stmt}, \quad p : \mathsf{Class}\)</span>
+          <span class="view-membership" style="display:none;">\(s , \quad p \)</span>
+        </div>
+                
+        
+        <div class="proof-code-pane" style="margin-top: 12px;">
+          <div class="proof-pane-header">
+            <span style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #38bdf8;">⚡</span> Standard ML Kernel Derivation Program
+            </span>
+            <button class="btn-copy-code" onclick="copyCode(this, 'gcode-def-theorems')" title="Copy SML script">📋 Copy SML</button>
+          </div>
+          <pre class="code-block"><code id="gcode-def-theorems">(* Conservative Definition Specification *)
+val def_def_theorems = DefThm (lhs, rhs);</code></pre>
+        </div>
+        
+        <div class="proof-audit-pane" style="margin-top: 10px;">
+          <div class="audit-item">
+            <div class="audit-label">Verification Method:</div>
+            <div class="audit-value">Conservative Definitional Extension</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Soundness Invariant:</div>
+            <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+          </div>
+          <div class="audit-item" style="margin-top: 6px;">
+            <div class="audit-label">Kernel Confirmation:</div>
+            <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+          </div>
+        </div>
+      </div>
+            
 </div><!-- end proofs-grid -->
 
     <div class="gallery-section-header" id="sec-sec-5">
@@ -3395,11 +3737,12 @@ val thm_5_01 = prove (
         </div>
         
         <h3 class="proof-card-title">Elementary Theorems</h3>
-        <div class="proof-card-notes">Basic elementhood implies sethood.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Basic elementhood implies sethood.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(B))">
+        <div class="formula-display formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(B))">
           <div class="view-typing formula-chunk">\((\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)) \land (\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\mathcal{F}, [B \in x] \vdash \exists x \; (B \in x)) \land (\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -3459,11 +3802,12 @@ fun rule_item_5_02_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Definition to Introduction Rule</h3>
-        <div class="proof-card-notes">Unfolding definition to intro form.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Unfolding definition to intro form.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(B))">
+        <div class="formula-display formula-cell" data-unicode="(F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(B))">
           <div class="view-typing formula-chunk">\(\frac{\mathcal{F}, [B \in x] \vdash \exists (x : \mathsf{Class})\; (B \in x)}{\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B)}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\frac{\mathcal{F}, [B \in x] \vdash \exists x \; (B \in x)}{\mathcal{F}, [B \in x] \vdash \mathrm{isSet}(B)}\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -3521,11 +3865,12 @@ fun rule_item_5_03_tac (g : goal) : goal list * validation =
         </div>
         
         <h3 class="proof-card-title">Deduction Rule Application</h3>
-        <div class="proof-card-notes">Deduction theorem discharging premise into implication.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Deduction theorem discharging premise into implication.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;(B))">
+        <div class="formula-display formula-cell" data-unicode="(F, [] ⊢ (B ∈ x) → isSet(B))" data-unicode-colored="(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(B))">
           <div class="view-typing formula-chunk">\((\mathcal{F}, [] \vdash (B \in x) \to \mathrm{isSet}(B))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\((\mathcal{F}, [] \vdash (B \in x) \to \mathrm{isSet}(B))\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
         </div>
         
         
@@ -3588,11 +3933,12 @@ val thm_5_04 = prove (
         </div>
         
         <h3 class="proof-card-title">Tactics Proof Example</h3>
-        <div class="proof-card-notes">6-step verified derivation in LCF kernel.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">6-step verified derivation in LCF kernel.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; y)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; y)">
           <div class="view-typing formula-chunk">\(\mathcal{F}, [] \vdash (\exists (y : \mathsf{Class})\; \forall (x : \mathsf{Class})\; (x \in y)) \to \forall (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (x \in y)\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathcal{F}, [] \vdash (\exists y \; \forall x \; (x \in y)) \to \forall x \; \exists y \; (x \in y)\)</div>
+          
         </div>
         
         
@@ -3661,11 +4007,12 @@ val thm_item_6_01 = thm ([], parse_formula &quot;w ⊆ q ⊆ t ⊆ f (tarski hie
         </div>
         
         <h3 class="proof-card-title">Theories (Metalevel Stratification)</h3>
-        <div class="proof-card-notes">W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div></details>
         
-        <div class="formula-display formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt; (Tarski hierarchy of theories with Henkin constants)">
+        <div class="formula-display formula-cell" data-unicode="W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt; &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt; &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt; (Tarski hierarchy of theories with Henkin constants)">
           <div class="view-typing formula-chunk">\(\mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F}\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F}\)</div>
+          <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div>
         </div>
         
         
@@ -3721,11 +4068,12 @@ val thm_item_6_02 = weakverified (&quot;löb&#x27;s theorem&quot;, literature_re
         </div>
         
         <h3 class="proof-card-title">Löb&#x27;s Theorem</h3>
-        <div class="proof-card-notes">Formalized Henkin modal provability principle.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Formalized Henkin modal provability principle.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(φ : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; φ) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; φ))">
           <div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{Q}, [] \vdash (\mathcal{T}, [] \vdash (\mathcal{T}, [] \vdash \phi) \to \phi) \to (\mathcal{T}, [] \vdash \phi))\)</div>
+          
         </div>
         
         
@@ -3783,11 +4131,12 @@ val thm_item_6_03 = weakverified (&quot;gödel&#x27;s second incompleteness theo
         </div>
         
         <h3 class="proof-card-title">Gödel&#x27;s Second Incompleteness Theorem</h3>
-        <div class="proof-card-notes">Consistency cannot be proved within the system itself.</div>
+        <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="proof-card-notes">Consistency cannot be proved within the system itself.</div></details>
         
         <div class="formula-display formula-cell" data-unicode="Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; ⊥) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt; ⊥))">
           <div class="view-typing formula-chunk">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</div>
           <div class="view-membership formula-chunk" style="display:none;">\(\mathcal{Q}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot))\)</div>
+          
         </div>
         
         
