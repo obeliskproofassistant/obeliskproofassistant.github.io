@@ -1,0 +1,53 @@
+#!/usr/bin/env python3
+"""
+test_web_links_and_anchors.py — Automated Anchor, Dead Link, and Walkthrough Verification
+(Tickets 7543 & 698).
+"""
+
+import importlib.util
+import unittest
+from pathlib import Path
+
+REPO_DIR = Path(__file__).resolve().parent.parent
+VERIFY_TOOL = Path("/botworkspace/tools/verify_web_links.py")
+
+
+def _load_verifier():
+    spec = importlib.util.spec_from_file_location("verify_web_links", str(VERIFY_TOOL))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+class TestWebLinksAndAnchors(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.verifier = _load_verifier()
+        cls.report = cls.verifier.run_verification(REPO_DIR)
+
+    def test_scroll_to_text_targets_exist_in_output_html(self):
+        self.assertEqual(
+            self.report["scroll_to_text_errors"],
+            [],
+            f"scrollToText errors: {self.report['scroll_to_text_errors']}",
+        )
+
+    def test_all_local_links_pdfs_and_anchors_resolve(self):
+        self.assertTrue(
+            self.report["ok"],
+            f"Broken links or anchors detected: {self.report['errors']}",
+        )
+        self.assertGreater(self.report["checked_local_references"], 20)
+        self.assertGreater(self.report["checked_anchors"], 40)
+
+    def test_index_and_ai_portal_contain_formula_vs_theorem_walkthrough(self):
+        index_html = (REPO_DIR / "index.html").read_text(encoding="utf-8")
+        ai_html = (REPO_DIR / "obelisk_ai.html").read_text(encoding="utf-8")
+        for page_name, html_text in [("index.html", index_html), ("obelisk_ai.html", ai_html)]:
+            self.assertIn("NBGCompiler.typeCheck", html_text, f"{page_name} missing NBGCompiler.typeCheck")
+            self.assertIn("False_RussellIsSet", html_text, f"{page_name} missing False_RussellIsSet example")
+            self.assertIn("repl.html", html_text, f"{page_name} missing link to repl.html")
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -939,6 +939,42 @@
               Replaces Kuratowski pairs (which collapse on proper classes) with <code>[A, B]_D</code> tagged pairs that preserve well-foundedness and algebraic projections without universe elevation.
             </p>
           </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #fbbf24; font-size: 0.95rem; margin-bottom: 0.5rem;">Lightweight Offline Proof Checking (&lt;50 MB RAM)</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Validates all 49 core proof certificates and NBG standard library theorems in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
+            </p>
+          </div>
+        </div>
+
+        <div class="comp-table-container" style="margin-bottom: 1.5rem;">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Surface Declaration</th>
+                <th>Kernel AST Category</th>
+                <th>Example in <code>.nbg</code> Surface Language</th>
+                <th>Checked by <code>NBGCompiler.typeCheck</code></th>
+                <th>Epistemic Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>formula F = ...;</code></td>
+                <td><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
+                <td><code>formula False_RussellIsSet = Set({ x | x in x -&gt; Bot });</code></td>
+                <td>Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
+                <td>Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
+              </tr>
+              <tr>
+                <td><code>theorem T : F = e;</code></td>
+                <td><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
+                <td><code>theorem thm_russell_not_set : Set(R) -&gt; Bot = fn (hSet : Set(R)) =&gt; ...;</code></td>
+                <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies α-equivalence with <code>F</code></td>
+                <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div style="text-align: center;">

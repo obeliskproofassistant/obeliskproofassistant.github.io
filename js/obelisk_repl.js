@@ -13,7 +13,15 @@ class ObeliskREPL {
     this.clientCompiler = new window.ObeliskNBGCompiler();
     this.lastResult = null;
     this.theorems = new Map();
+    this.commandHistory = [];
+    this.historyIndex = -1;
     this.initDefaultTheorems();
+  }
+
+  clearOutput() {
+    if (this.outputEl) {
+      this.outputEl.textContent = 'Terminal output cleared.';
+    }
   }
 
   initDefaultTheorems() {
@@ -174,6 +182,14 @@ class ObeliskREPL {
   evalCommand(cmdRaw) {
     const cmd = (cmdRaw || '').trim();
     if (!cmd) return '';
+    if (this.commandHistory[this.commandHistory.length - 1] !== cmd) {
+      this.commandHistory.push(cmd);
+    }
+    this.historyIndex = this.commandHistory.length;
+    if (cmd === 'clear') {
+      this.clearOutput();
+      return '';
+    }
     if (cmd === 'help') {
       return [
         'Obelisk Propositions-as-Types Compiler Commands:',
@@ -239,3 +255,55 @@ class ObeliskREPL {
 }
 
 window.ObeliskREPL = ObeliskREPL;
+
+/**
+ * Isolated Custom Element <obelisk-code-editor> (Ticket 7502)
+ * Provides clean API bindings (getValue, setValue, highlightSource, onCompile)
+ * wrapping the WebREPL code editor and ObeliskHighlighter.
+ */
+if (typeof window !== 'undefined' && typeof window.customElements !== 'undefined' && typeof HTMLElement !== 'undefined') {
+  class ObeliskCodeEditorElement extends HTMLElement {
+    constructor() {
+      super();
+      this._textarea = null;
+      this._onCompile = null;
+    }
+
+    connectedCallback() {
+      this._textarea = this.querySelector('textarea');
+      if (!this._textarea) {
+        this._textarea = document.createElement('textarea');
+        this._textarea.className = 'source-editor';
+        this._textarea.spellcheck = false;
+        this.appendChild(this._textarea);
+      }
+    }
+
+    getValue() {
+      return this._textarea ? this._textarea.value : '';
+    }
+
+    setValue(code) {
+      if (this._textarea) {
+        this._textarea.value = String(code || '');
+      }
+    }
+
+    highlightSource(code) {
+      const src = code !== undefined ? String(code) : this.getValue();
+      if (window.ObeliskHighlighter && typeof window.ObeliskHighlighter.highlight === 'function') {
+        return window.ObeliskHighlighter.highlight(src);
+      }
+      return { tokens: [], highlightedHtml: src };
+    }
+
+    onCompile(callback) {
+      this._onCompile = callback;
+    }
+  }
+
+  if (!window.customElements.get('obelisk-code-editor')) {
+    window.customElements.define('obelisk-code-editor', ObeliskCodeEditorElement);
+  }
+  window.ObeliskCodeEditorElement = ObeliskCodeEditorElement;
+}

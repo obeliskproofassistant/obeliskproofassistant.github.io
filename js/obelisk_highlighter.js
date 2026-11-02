@@ -253,17 +253,19 @@ function applyHighlighting(codeElement) {
 }
 
 // Export the module
-module.exports = {
-  ObeliskHighlighter: ObeliskHighlighter,
-  highlight: function (source) {
-    return new ObeliskHighlighter().highlight(source);
-  },
-  tokenize: function (src) {
-    return new ObeliskHighlighter().tokenize(src);
-  },
-  applyHighlighting: applyHighlighting,
-  OBELISK_TOKEN_TYPES: OBELISK_TOKEN_TYPES
-};
+if (typeof module === 'object' && module.exports) {
+  module.exports = {
+    ObeliskHighlighter: ObeliskHighlighter,
+    highlight: function (source) {
+      return new ObeliskHighlighter().highlight(source);
+    },
+    tokenize: function (src) {
+      return new ObeliskHighlighter().tokenize(src);
+    },
+    applyHighlighting: applyHighlighting,
+    OBELISK_TOKEN_TYPES: OBELISK_TOKEN_TYPES
+  };
+}
 
 // Also expose for direct inclusion via <script> tag
 if (typeof window !== 'undefined') {

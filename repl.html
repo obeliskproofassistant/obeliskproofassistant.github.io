@@ -273,12 +273,19 @@
           Proofs are <strong>TERMS</strong> (<code>theorem T : F = ...;</code>) ·
           Compiling = Verifying the Proof
         </div>
-        <button class="compile-btn" onclick="repl.compileCurrentEditor('Editor Buffer')">
-          ⚡ Compile &amp; Type-Check Proof (Ctrl+Enter)
-        </button>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <button type="button" id="btn-open-shortcuts" class="compile-btn" style="background: rgba(123, 88, 207, 0.28); border: 1px solid rgba(168, 85, 247, 0.5);" onclick="if(window.ObeliskShortcutsModal) ObeliskShortcutsModal.open()" title="Open Keyboard Shortcuts Cheat Sheet (?)">
+            ⌨️ Shortcuts
+          </button>
+          <button class="compile-btn" onclick="repl.compileCurrentEditor('Editor Buffer')">
+            ⚡ Compile &amp; Type-Check Proof (Ctrl+Enter)
+          </button>
+        </div>
       </div>
 
-      <textarea id="sourceEditor" class="source-editor" spellcheck="false"></textarea>
+      <obelisk-code-editor id="replEditorComponent" style="display: flex; flex-direction: column; flex: 0 0 48%;">
+        <textarea id="sourceEditor" class="source-editor" style="flex: 1; width: 100%;" spellcheck="false"></textarea>
+      </obelisk-code-editor>
 
       <div class="terminal-output" id="output">Loading Obelisk Propositions-as-Types Compiler...</div>
 
@@ -321,7 +328,9 @@
   </div>
 
   <script src="js/obelisk_engine.js"></script>
+  <script src="js/obelisk_highlighter.js"></script>
   <script src="js/obelisk_repl.js"></script>
+  <script src="js/shortcuts_modal.js"></script>
   <script>
     const outEl = document.getElementById('output');
     const goalBoxEl = document.getElementById('goalBox');
@@ -333,11 +342,34 @@
       if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
         e.preventDefault();
         repl.compileCurrentEditor('Editor Buffer');
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === 'l' || e.key === 'L')) {
+        e.preventDefault();
+        repl.clearOutput();
       }
     });
 
     inputEl.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleInput();
+      if (e.key === 'Enter') {
+        handleInput();
+      } else if ((e.ctrlKey || e.metaKey) && (e.key === 'l' || e.key === 'L')) {
+        e.preventDefault();
+        repl.clearOutput();
+      } else if (e.altKey && e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (repl.commandHistory.length > 0 && repl.historyIndex > 0) {
+          repl.historyIndex--;
+          inputEl.value = repl.commandHistory[repl.historyIndex] || '';
+        }
+      } else if (e.altKey && e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (repl.historyIndex < repl.commandHistory.length - 1) {
+          repl.historyIndex++;
+          inputEl.value = repl.commandHistory[repl.historyIndex] || '';
+        } else {
+          repl.historyIndex = repl.commandHistory.length;
+          inputEl.value = '';
+        }
+      }
     });
 
     function handleInput() {

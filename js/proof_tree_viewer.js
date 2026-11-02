@@ -130,6 +130,41 @@
       }, options);
       this.collapsedNodes = new Set();
       this.currentTree = null;
+      this._debounceTimer = null;
+      this._rafId = null;
+    }
+
+    /**
+     * Debounced requestAnimationFrame scheduler for interactive proof tree updates (Ticket 7503).
+     */
+    scheduleRender(treeData, delayMs = 16) {
+      if (treeData) {
+        this.currentTree = treeData;
+      }
+      if (this._debounceTimer) {
+        clearTimeout(this._debounceTimer);
+      }
+      const runFrame = () => {
+        if (typeof window !== 'undefined' && typeof window.requestAnimationFrame === 'function') {
+          if (this._rafId && typeof window.cancelAnimationFrame === 'function') {
+            window.cancelAnimationFrame(this._rafId);
+          }
+          this._rafId = window.requestAnimationFrame(() => {
+            this._rafId = null;
+            this.render(this.currentTree);
+          });
+        } else {
+          this.render(this.currentTree);
+        }
+      };
+      if (delayMs > 0 && typeof setTimeout === 'function') {
+        this._debounceTimer = setTimeout(() => {
+          this._debounceTimer = null;
+          runFrame();
+        }, delayMs);
+      } else {
+        runFrame();
+      }
     }
 
     /**

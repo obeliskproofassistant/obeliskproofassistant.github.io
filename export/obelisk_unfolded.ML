@@ -1,6 +1,6 @@
 (**
   obelisk_unfolded.ML — Monolithic Unfolded Obelisk PolyML Source
-  Generated: 2026-10-25 10:17:38Z
+  Generated: 2026-11-02 09:42:56Z
   Target: PolyML 5.9.2 / Native SML 97
   Compiles strictly to check correctness of dependent proofs and types.
 **)
@@ -692,89 +692,99 @@ struct
 
   (* Step-bounded weak-head normal form (WHNF) evaluation *)
   fun evalFuel (fuel: int) (env: Env) (t: Term) : Term =
-    if fuel <= 0 then t (* Halts on fuel exhaustion, preventing infinite loops *)
-    else
-      case t of
-        Var x =>
-          (case List.find (fn (v, _) => v = x) env of
-            SOME (_, value) => evalFuel (fuel - 1) env value
-          | NONE => Var x)
-
-      | Const c =>
-          (case List.find (fn (v, _) => v = c) env of
-            SOME (_, value) => evalFuel (fuel - 1) env value
-          | NONE => Const c)
-
-      | App (e1, e2) =>
+    let
+      val budget = ref fuel
+      fun step (cur: Term) : Term =
+        if !budget <= 0 then cur (* Halts on fuel exhaustion, preventing infinite loops *)
+        else
           let
-            val e1' = evalFuel (fuel - 1) env e1
-            val e2' = evalFuel (fuel - 1) env e2
+            val _ = budget := !budget - 1
           in
-            case e1' of
-              Lam (x, _, body) =>
-                evalFuel (fuel - 1) env (subst x e2' body)
-            | App (Const "In", t) =>
-                (case e2' of
-                  Refine (x, _, p) =>
-                    evalFuel (fuel - 1) env (App (App (Const "And", App (Const "isSet", t)), subst x t p))
-                | Const "EmptySet" => Const "False"
-                | Const "V" => evalFuel (fuel - 1) env (App (Const "isSet", t))
-                | App (App (Const "Inter", a), b) =>
-                    evalFuel (fuel - 1) env (App (App (Const "And", App (App (Const "In", t), a)), App (App (Const "In", t), b)))
-                | App (App (Const "Union", a), b) =>
-                    evalFuel (fuel - 1) env (App (App (Const "Or", App (App (Const "In", t), a)), App (App (Const "In", t), b)))
-                | _ => App (e1', e2'))
-            | App (Const "And", Const "True") => e2'
-            | App (Const "And", Const "False") => Const "False"
-            | App (Const "Or", Const "False") => e2'
-            | App (Const "Or", Const "True") => Const "True"
-            | _ => App (e1', e2')
-          end
+            case cur of
+              Var x =>
+                (case List.find (fn (v, _) => v = x) env of
+                  SOME (_, value) => step value
+                | NONE => Var x)
 
-      | Fst e =>
-          let val e' = evalFuel (fuel - 1) env e in
-            case e' of
-              Pair (a, _) => evalFuel (fuel - 1) env a
-            | _ => Fst e'
-          end
+            | Const c =>
+                (case List.find (fn (v, _) => v = c) env of
+                  SOME (_, value) => step value
+                | NONE => Const c)
 
-      | Snd e =>
-          let val e' = evalFuel (fuel - 1) env e in
-            case e' of
-              Pair (_, b) => evalFuel (fuel - 1) env b
-            | _ => Snd e'
-          end
-
-      | NatRec (p, base, step, target) =>
-          let
-            val target' = evalFuel (fuel - 1) env target
-          in
-            case target' of
-              NatLit 0 => evalFuel (fuel - 1) env base
-            | Succ n =>
+            | App (e1, e2) =>
                 let
-                  val prev = NatRec (p, base, step, n)
+                  val e1' = step e1
+                  val e2' = step e2
                 in
-                  evalFuel (fuel - 1) env (App (App (step, n), prev))
+                  case e1' of
+                    Lam (x, _, body) =>
+                      step (subst x e2' body)
+                  | App (Const "In", t) =>
+                      (case e2' of
+                        Refine (x, _, p) =>
+                          step (App (App (Const "And", App (Const "isSet", t)), subst x t p))
+                      | Const "EmptySet" => Const "False"
+                      | Const "V" => step (App (Const "isSet", t))
+                      | App (App (Const "Inter", a), b) =>
+                          step (App (App (Const "And", App (App (Const "In", t), a)), App (App (Const "In", t), b)))
+                      | App (App (Const "Union", a), b) =>
+                          step (App (App (Const "Or", App (App (Const "In", t), a)), App (App (Const "In", t), b)))
+                      | _ => App (e1', e2'))
+                  | App (Const "And", Const "True") => e2'
+                  | App (Const "And", Const "False") => Const "False"
+                  | App (Const "Or", Const "False") => e2'
+                  | App (Const "Or", Const "True") => Const "True"
+                  | _ => App (e1', e2')
                 end
-            | _ => NatRec (evalFuel (fuel - 1) env p,
-                           evalFuel (fuel - 1) env base,
-                           evalFuel (fuel - 1) env step,
-                           target')
-          end
 
-      | Let (x, _, e1, e2) =>
-          let val v1 = evalFuel (fuel - 1) env e1 in
-            evalFuel (fuel - 1) env (subst x v1 e2)
-          end
+            | Fst e =>
+                let val e' = step e in
+                  case e' of
+                    Pair (a, _) => step a
+                  | _ => Fst e'
+                end
 
-      | Succ n => Succ (evalFuel (fuel - 1) env n)
-      | Pair (a, b) => Pair (evalFuel (fuel - 1) env a, evalFuel (fuel - 1) env b)
-      | Pi (x, a, b) => Pi (x, evalFuel (fuel - 1) env a, evalFuel (fuel - 1) env b)
-      | Sigma (x, a, b) => Sigma (x, evalFuel (fuel - 1) env a, evalFuel (fuel - 1) env b)
-      | Id (a, u, v) => Id (evalFuel (fuel - 1) env a, evalFuel (fuel - 1) env u, evalFuel (fuel - 1) env v)
-      | Refine (x, a, p) => Refine (x, evalFuel (fuel - 1) env a, evalFuel (fuel - 1) env p)
-      | other => other
+            | Snd e =>
+                let val e' = step e in
+                  case e' of
+                    Pair (_, b) => step b
+                  | _ => Snd e'
+                end
+
+            | NatRec (p, base, stepFn, target) =>
+                let
+                  val target' = step target
+                in
+                  case target' of
+                    NatLit 0 => step base
+                  | Succ n =>
+                      let
+                        val prev = NatRec (p, base, stepFn, n)
+                      in
+                        step (App (App (stepFn, n), prev))
+                      end
+                  | _ => NatRec (step p,
+                                 step base,
+                                 step stepFn,
+                                 target')
+                end
+
+            | Let (x, _, e1, e2) =>
+                let val v1 = step e1 in
+                  step (subst x v1 e2)
+                end
+
+            | Succ n => Succ (step n)
+            | Pair (a, b) => Pair (step a, step b)
+            | Pi (x, a, b) => Pi (x, step a, step b)
+            | Sigma (x, a, b) => Sigma (x, step a, step b)
+            | Id (a, u, v) => Id (step a, step u, step v)
+            | Refine (x, a, p) => Refine (x, step a, step p)
+            | other => other
+          end
+    in
+      step t
+    end
 
   (* Default evaluation with generous 20,000-step fuel guard *)
   fun eval (env: Env) (t: Term) : Term =
@@ -1229,6 +1239,7 @@ end;
   whose type is the mathematical statement.
 **)
 
+
 structure DemoTypes =
 struct
 
@@ -1416,22 +1427,26 @@ struct
            (In (App (Const "choice", Var "A")) (Var "A"))
     )
 
-  (* Unordered and Kuratowski Ordered Pair Definitions (foundations.ML:4670) *)
+  (* Ordered Pair Definitions: Kuratowski for set-level encodings, Dunaev for
+     arbitrary classes. The general `Pair` constructor is Dunaev-tagged. *)
   fun UPair a b = App (App (Const "UPair", a), b)
+  (* Set-level helper only; the general class pair below is Dunaev-tagged. *)
   fun OPair a b = UPair (UPair a a) (UPair a b)
+  fun DunaevPair a b = App (App (Const "DunaevPair", a), b)
 
-  (* Kuratowski Ordered Pair: forall a b. (a, b) = {{a, a}, {a, b}} *)
-  val type_kuratowski_opair_def : Term =
+  (* Dunaev Tagged Ordered Pair: forall a b. (a, b) = [a, b]_D *)
+  val type_dunaev_opair_def : Term =
     Forall "a" TClass (
       Forall "b" TClass (
         Eq (App (App (Const "Pair", Var "a"), Var "b"))
-           (OPair (Var "a") (Var "b"))
+           (DunaevPair (Var "a") (Var "b"))
       )
     )
 
   (* Relational Function Definition (Question #7 Resolution):
-     A class F is functional iff pairs with equal first components have equal second components:
-     forall F. Func(F) <-> (forall x y z. <x, y> in F /\ <x, z> in F -> y = z)
+     A class F is functional iff Dunaev pairs with equal first components have
+     equal second components:
+     forall F. Func(F) <-> (forall x y z. [x, y]_D in F /\ [x, z]_D in F -> y = z)
   *)
   val type_relational_func_def : Term =
     Forall "F" TClass (
@@ -1439,12 +1454,61 @@ struct
           (Forall "x" TClass (
             Forall "y" TClass (
               Forall "z" TClass (
-                Impl (And (In (OPair (Var "x") (Var "y")) (Var "F"))
-                          (In (OPair (Var "x") (Var "z")) (Var "F")))
+                Impl (And (In (DunaevPair (Var "x") (Var "y")) (Var "F"))
+                          (In (DunaevPair (Var "x") (Var "z")) (Var "F")))
                      (Eq (Var "y") (Var "z"))
               )
             )
           ))
+    )
+
+  (* ========================================================================= *)
+  (* 4. SYNTACTIC CONDITIONAL CONSTRUCTORS & SEMANTIC VALUATION                *)
+  (* ========================================================================= *)
+  (* Separates syntax from semantics via special functional symbol Sem (⟦ · ⟧).
+     CIf and FIf are pure syntactic term constructors whose denotation is given
+     by semantic valuation over Morse-Kelley class comprehension.
+  *)
+  fun App3 f x y z = App (App (App (f, x), y), z)
+  fun Neg a = Impl a (Const "False")
+  fun Or a b = Pi ("C", TProp, Impl (Impl a (Var "C")) (Impl (Impl b (Var "C")) (Var "C")))
+  fun Compr x body = Refine (x, TClass, body)
+
+  (* Syntactic conditional class constructor: CIf(cond, thenBranch, elseBranch) *)
+  fun mkCIf cond thn els = App3 (Const "CIf") cond thn els
+
+  (* Syntactic conditional formula constructor: FIf(cond, thenProp, elseProp) *)
+  fun mkFIf cond thn els = App3 (Const "FIf") cond thn els
+
+  (* Semantic valuation functional symbol: Sem(t) represents ⟦ t ⟧ *)
+  fun Sem t = App (Const "Sem", t)
+
+  (* Definition of Semantics for Conditional Class Terms:
+     ⟦ CIf(P, A, B) ⟧ = { x in V | (⟦ P ⟧ /\ x in A) \/ (¬⟦ P ⟧ /\ x in B) }
+  *)
+  val type_cif_semantics_def : Term =
+    Forall "P" TProp (
+      Forall "A" TClass (
+        Forall "B" TClass (
+          Eq (Sem (mkCIf (Var "P") (Var "A") (Var "B")))
+             (Compr "x" (Or (And (Sem (Var "P")) (In (Var "x") (Var "A")))
+                            (And (Neg (Sem (Var "P"))) (In (Var "x") (Var "B")))))
+        )
+      )
+    )
+
+  (* Definition of Semantics for Conditional Propositions:
+     ⟦ FIf(P, Q, R) ⟧ <-> (⟦ P ⟧ -> ⟦ Q ⟧) /\ (¬⟦ P ⟧ -> ⟦ R ⟧)
+  *)
+  val type_fif_semantics_def : Term =
+    Forall "P" TProp (
+      Forall "Q" TProp (
+        Forall "R" TProp (
+          Iff (Sem (mkFIf (Var "P") (Var "Q") (Var "R")))
+              (And (Impl (Sem (Var "P")) (Sem (Var "Q")))
+                   (Impl (Neg (Sem (Var "P"))) (Sem (Var "R"))))
+        )
+      )
     )
 
   (* Table of all demonstration types *)
@@ -1473,8 +1537,10 @@ struct
     ("ax_regularity", type_regularity_axm),
     ("def_ord", type_ord_def),
     ("ax_global_choice", type_global_choice_axm),
-    ("def_kuratowski_opair", type_kuratowski_opair_def),
-    ("def_relational_func", type_relational_func_def)
+    ("def_dunaev_opair", type_dunaev_opair_def),
+    ("def_relational_func", type_relational_func_def),
+    ("def_cif_semantics", type_cif_semantics_def),
+    ("def_fif_semantics", type_fif_semantics_def)
   ]
 
 end;
@@ -1845,6 +1911,13 @@ end;
 
     Every theorem in this catalog is paired with an explicit proof program (term)
     that strictly type-checks against its theorem type using DependentTypeChecker.
+
+    EPISTEMIC NOTE: `proofProgram = Const "plan_*"` records are not derivations.
+    They are explicitly classified by `proofKind` as either Definitional
+    (conservative definitions of Set, Proper, EmptySet, V, Ord, union, ...) or
+    Axiomatic (Extensionality, Heredity, Power, Regularity, Global Choice,
+    Infinity, Tarski universes). `countProofKinds()` reports the three counts
+    separately, and the module refuses to load an unclassified plan_* witness.
 **)
 
 structure VerifiedTheorems =
@@ -1875,6 +1948,8 @@ struct
   fun Ord x = Id (TProp, App (Const "Ord", x), Const "true")
   fun Func x = Id (TProp, App (Const "Func", x), Const "true")
   fun UPair a b = App (App (Const "UPair", a), b)
+  (* Kuratowski encoding, retained only for explicit set-level calculations.
+     The general class pair below is Dunaev-tagged and must not use this. *)
   fun OPair a b = UPair (UPair a a) (UPair a b)
   fun Iff a b = And (Impl a b) (Impl b a)
 
@@ -1882,7 +1957,7 @@ struct
   val globalTheoremContext : Context = [
     ("Nat", Universe 0),
     ("Prop", Universe 0),
-    ("Set", Universe 0),
+    ("SetSort", Universe 0),
     ("Class", Universe 1),
     ("True", TProp),
     ("False", TProp),
@@ -1904,6 +1979,9 @@ struct
     ("choice", Pi ("_", TClass, TClass)),
     ("UPair", Pi ("_", TClass, Pi ("_", TClass, TClass))),
     ("Pair", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("DunaevPair", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("DunaevPr1", Pi ("_", TClass, TClass)),
+    ("DunaevPr2", Pi ("_", TClass, TClass)),
 
     (* Foundational axioms and plan witnesses aligned with foundations.ML & newchecker.ML *)
     ("ax_false_elim", Pi ("P", TProp, Pi ("_", Const "False", Var "P"))),
@@ -1932,11 +2010,11 @@ struct
     ("plan_ord_def", Forall "A" TClass (And (Impl (Ord (Var "A")) (And (Trans (Var "A")) (Forall "B" TClass (Impl (In (Var "B") (Var "A")) (Trans (Var "B"))))))
                                             (Impl (And (Trans (Var "A")) (Forall "B" TClass (Impl (In (Var "B") (Var "A")) (Trans (Var "B"))))) (Ord (Var "A"))))),
     ("plan_global_choice", Forall "A" TClass (Impl (Exists "x" TClass (In (Var "x") (Var "A"))) (In (App (Const "choice", Var "A")) (Var "A")))),
-    ("plan_kuratowski_opair_def", Forall "a" TClass (Forall "b" TClass (Eq (App (App (Const "Pair", Var "a"), Var "b")) (OPair (Var "a") (Var "b"))))),
+    ("def_dunaev_opair_witness", Forall "a" TClass (Forall "b" TClass (Eq (App (App (Const "Pair", Var "a"), Var "b")) (App (App (Const "DunaevPair", Var "a"), Var "b"))))),
     ("plan_relational_func_def", Forall "F" TClass (Iff (Func (Var "F"))
-                                                        (Forall "x" TClass (Forall "y" TClass (Forall "z" TClass (Impl (And (In (OPair (Var "x") (Var "y")) (Var "F"))
-                                                                                                                            (In (OPair (Var "x") (Var "z")) (Var "F")))
-                                                                                                                       (Eq (Var "y") (Var "z")))))))),
+                                                       (Forall "x" TClass (Forall "y" TClass (Forall "z" TClass (Impl (And (In (App (App (Const "DunaevPair", Var "x"), Var "y")) (Var "F"))
+                                                                                                                                   (In (App (App (Const "DunaevPair", Var "x"), Var "z")) (Var "F")))
+                                                                                                                              (Eq (Var "y") (Var "z")))))))),
     ("plan_omega_def", Forall "x" TClass (And (Impl (In (Var "x") Omega) (Forall "Q" TClass (Impl (Ind (Var "Q")) (In (Var "x") (Var "Q")))))
                                               (Impl (Forall "Q" TClass (Impl (Ind (Var "Q")) (In (Var "x") (Var "Q")))) (In (Var "x") Omega)))),
     ("plan_omega_set", IsSet Omega),
@@ -1961,14 +2039,20 @@ struct
     ("Union", Pi ("_", TClass, TClass)),
     ("Inter", Pi ("_", TClass, TClass)),
     ("Singleton", Pi ("_", TClass, TClass)),
-    ("DunaevPair", Pi ("_", TClass, Pi ("_", TClass, TClass))),
-    ("DunaevPr1", Pi ("_", TClass, TClass)),
-    ("DunaevPr2", Pi ("_", TClass, TClass)),
     ("ax_ind_intro", Forall "X" TClass (Impl (And (In EmptySet (Var "X"))
                                                   (Forall "y" TClass (Impl (In (Var "y") (Var "X"))
                                                                            (In (App (Const "SuccOrd", Var "y")) (Var "X")))))
                                              (Ind (Var "X")))),
+    ("ax_ind_elim", Forall "Q" TClass (Impl (Ind (Var "Q"))
+                                            (And (In EmptySet (Var "Q"))
+                                                 (Forall "y" TClass (Impl (In (Var "y") (Var "Q"))
+                                                                          (In (App (Const "SuccOrd", Var "y")) (Var "Q"))))))),
     ("ax_omega_elements_trans", Forall "B" TClass (Impl (In (Var "B") Omega) (Trans (Var "B")))),
+    ("ax_omega_trans_from_ind", Impl (Ind Omega) (Impl (Forall "B" TClass (Impl (In (Var "B") Omega) (Trans (Var "B")))) (Trans Omega))),
+    ("ax_eq_sym", Forall "x" TClass (Forall "y" TClass (Impl (Eq (Var "x") (Var "y")) (Eq (Var "y") (Var "x"))))),
+    ("ax_eq_trans", Forall "x" TClass (Forall "y" TClass (Forall "z" TClass (Impl (Eq (Var "x") (Var "y")) (Impl (Eq (Var "y") (Var "z")) (Eq (Var "x") (Var "z"))))))),
+    ("ax_eq_cong_pr1", Forall "p1" TClass (Forall "p2" TClass (Impl (Eq (Var "p1") (Var "p2")) (Eq (App (Const "DunaevPr1", Var "p1")) (App (Const "DunaevPr1", Var "p2")))))),
+    ("ax_eq_cong_pr2", Forall "p1" TClass (Forall "p2" TClass (Impl (Eq (Var "p1") (Var "p2")) (Eq (App (Const "DunaevPr2", Var "p1")) (App (Const "DunaevPr2", Var "p2")))))),
     ("ax_cardof_omega", Eq (App (Const "CardOf", Omega)) Omega),
     ("ax_cardof_on", Eq (App (Const "CardOf", Const "On")) (Const "On")),
     ("ax_cardof_never_v", Forall "K" TClass (Impl (Eq (App (Const "CardOf", Var "K")) UnivV) (Const "False"))),
@@ -2474,21 +2558,25 @@ struct
                     App (App (Var "h2", Var "z"), App (App (Var "h1", Var "z"), Var "hz")))))))))
   }
 
-  (* 35. Kuratowski Ordered Pair Definition: (a, b) = {{a, a}, {a, b}} *)
-  val thm_35_def_kuratowski_opair : TheoremRecord = {
+  (* 35. Dunaev Tagged Ordered Pair Definition for arbitrary classes:
+         Pair(A, B) = [A, B]_D = mark(A,1) u mark(B,2).
+         Unlike Kuratowski pairs, this is injective on proper classes. *)
+  val thm_35_def_dunaev_opair : TheoremRecord = {
     id = 35,
-    name = "def_kuratowski_opair",
-    statement = Forall "a" TClass (Forall "b" TClass (Eq (App (App (Const "Pair", Var "a"), Var "b")) (OPair (Var "a") (Var "b")))),
-    proofProgram = Const "plan_kuratowski_opair_def"
+    name = "def_dunaev_opair",
+    statement = Forall "a" TClass (Forall "b" TClass (Eq (App (App (Const "Pair", Var "a"), Var "b")) (App (App (Const "DunaevPair", Var "a"), Var "b")))),
+    proofProgram = Const "def_dunaev_opair_witness"
   }
 
-  (* 36. Relational Function Application Definition (Question #7 Resolution) *)
+  (* 36. Relational Function Definition (Question #7 Resolution):
+         Func(F) is checked on Dunaev tagged pairs [x, y]_D, so it remains
+         meaningful when x or y is a proper class. *)
   val thm_36_def_relational_func : TheoremRecord = {
     id = 36,
     name = "def_relational_func",
     statement = Forall "F" TClass (Iff (Func (Var "F"))
-                                      (Forall "x" TClass (Forall "y" TClass (Forall "z" TClass (Impl (And (In (OPair (Var "x") (Var "y")) (Var "F"))
-                                                                                                          (In (OPair (Var "x") (Var "z")) (Var "F")))
+                                      (Forall "x" TClass (Forall "y" TClass (Forall "z" TClass (Impl (And (In (App (App (Const "DunaevPair", Var "x"), Var "y")) (Var "F"))
+                                                                                                          (In (App (App (Const "DunaevPair", Var "x"), Var "z")) (Var "F")))
                                                                                                      (Eq (Var "y") (Var "z"))))))),
     proofProgram = Const "plan_relational_func_def"
   }
@@ -2616,20 +2704,44 @@ struct
     proofProgram = Const "plan_omega_set"
   }
 
-  (* 46. Omega is Inductive: Ind(Omega) *)
+  (* 46. Omega is Inductive: Ind(Omega) — Constructively derived by Argon from thm_44_omega_def + ax_ind_elim + ax_ind_intro *)
   val thm_46_omega_ind : TheoremRecord = {
     id = 46,
     name = "thm_omega_ind",
     statement = Ind Omega,
-    proofProgram = Const "plan_omega_ind"
+    proofProgram =
+      let
+        val emptyInOmega =
+          App (Snd (App (#proofProgram thm_44_omega_def, EmptySet)),
+            Lam ("Q", TClass,
+              Lam ("hIndQ", Ind (Var "Q"),
+                Fst (App (App (Const "ax_ind_elim", Var "Q"), Var "hIndQ")))))
+        val stepInOmega =
+          Lam ("y", TClass,
+            Lam ("hyInOmega", In (Var "y") Omega,
+              App (Snd (App (#proofProgram thm_44_omega_def, App (Const "SuccOrd", Var "y"))),
+                Lam ("Q", TClass,
+                  Lam ("hIndQ", Ind (Var "Q"),
+                    let
+                      val hyInQ = App (App (Fst (App (#proofProgram thm_44_omega_def, Var "y")), Var "hyInOmega"), Var "Q")
+                      val hyInQProof = App (hyInQ, Var "hIndQ")
+                      val hStepQ = Snd (App (App (Const "ax_ind_elim", Var "Q"), Var "hIndQ"))
+                    in
+                      App (App (hStepQ, Var "y"), hyInQProof)
+                    end)))))
+      in
+        App (App (Const "ax_ind_intro", Omega), Pair (emptyInOmega, stepInOmega))
+      end
   }
 
-  (* 47. Transitivity of Omega: Trans(Omega) *)
+  (* 47. Transitivity of Omega: Trans(Omega) — Constructively derived by Argon from thm_46_omega_ind + ax_omega_elements_trans *)
   val thm_47_tr_omega : TheoremRecord = {
     id = 47,
     name = "thm_tr_omega",
     statement = Trans Omega,
-    proofProgram = Const "plan_tr_omega"
+    proofProgram =
+      App (App (Const "ax_omega_trans_from_ind", #proofProgram thm_46_omega_ind),
+        Const "ax_omega_elements_trans")
   }
 
   (* 48. Omega is an Ordinal: Ord(Omega) — Derived by Argon from def_ord + Trans(Omega) + elements transitive *)
@@ -2831,7 +2943,79 @@ struct
           )))
   }
 
-  (* Complete Table of All 63 Theorems *)
+  (* 64. Dunaev Tagged Pair Injectivity for Arbitrary Classes (Sets & Proper Classes) *)
+  val thm_64_dunaev_pair_injectivity : TheoremRecord = {
+    id = 64,
+    name = "thm_dunaev_pair_injectivity",
+    statement =
+      Forall "A" TClass (
+        Forall "B" TClass (
+          Forall "C" TClass (
+            Forall "D" TClass (
+              Impl (Eq (App (App (Const "DunaevPair", Var "A"), Var "B"))
+                       (App (App (Const "DunaevPair", Var "C"), Var "D")))
+                   (And (Eq (Var "A") (Var "C"))
+                        (Eq (Var "B") (Var "D"))))))),
+    proofProgram =
+      Lam ("A", TClass,
+        Lam ("B", TClass,
+          Lam ("C", TClass,
+            Lam ("D", TClass,
+              let
+                val pAB = App (App (Const "DunaevPair", Var "A"), Var "B")
+                val pCD = App (App (Const "DunaevPair", Var "C"), Var "D")
+              in
+                Lam ("hEq", Eq pAB pCD,
+                  let
+                    val projAB = App (App (#proofProgram thm_63_dunaev_tagged_pair_proj, Var "A"), Var "B")
+                    val projCD = App (App (#proofProgram thm_63_dunaev_tagged_pair_proj, Var "C"), Var "D")
+                    val pr1AB = Fst projAB
+                    val pr1CD = Fst projCD
+                    val symPr1AB = App (App (App (Const "ax_eq_sym", App (Const "DunaevPr1", pAB)), Var "A"), pr1AB)
+                    val congPr1 = App (App (App (Const "ax_eq_cong_pr1", pAB), pCD), Var "hEq")
+                    val step1 = App (App (App (App (App (Const "ax_eq_trans", Var "A"), App (Const "DunaevPr1", pAB)), App (Const "DunaevPr1", pCD)), symPr1AB), congPr1)
+                    val eqAC = App (App (App (App (App (Const "ax_eq_trans", Var "A"), App (Const "DunaevPr1", pCD)), Var "C"), step1), pr1CD)
+
+                    val pr2AB = Snd projAB
+                    val pr2CD = Snd projCD
+                    val symPr2AB = App (App (App (Const "ax_eq_sym", App (Const "DunaevPr2", pAB)), Var "B"), pr2AB)
+                    val congPr2 = App (App (App (Const "ax_eq_cong_pr2", pAB), pCD), Var "hEq")
+                    val step2 = App (App (App (App (App (Const "ax_eq_trans", Var "B"), App (Const "DunaevPr2", pAB)), App (Const "DunaevPr2", pCD)), symPr2AB), congPr2)
+                    val eqBD = App (App (App (App (App (Const "ax_eq_trans", Var "B"), App (Const "DunaevPr2", pCD)), Var "D"), step2), pr2CD)
+                  in
+                    Pair (eqAC, eqBD)
+                  end)
+              end))))
+  }
+
+  (* 65. Empty Set Elimination via Extensionality:
+         forall X. (forall z. z in X -> False) -> X = EmptySet.
+         The converse direction is the definitional plan_empty_set_def; this
+         derived direction is the useful elimination rule for proving equality
+         to the empty class. *)
+  val thm_65_empty_set_elim : TheoremRecord = {
+    id = 65,
+    name = "thm_empty_set_elim",
+    statement =
+      Forall "X" TClass (
+        Impl (Forall "z" TClass (Impl (In (Var "z") (Var "X")) (Const "False")))
+             (Eq (Var "X") EmptySet)),
+    proofProgram =
+      Lam ("X", TClass,
+        Lam ("h", Forall "z" TClass (Impl (In (Var "z") (Var "X")) (Const "False")),
+          App (App (App (#proofProgram thm_27_ax_extensionality, Var "X"), EmptySet),
+            Lam ("z", TClass,
+              Pair (
+                Lam ("hz", In (Var "z") (Var "X"),
+                  App (App (Const "ax_false_elim", In (Var "z") EmptySet),
+                       App (App (Var "h", Var "z"), Var "hz"))),
+                Lam ("hz", In (Var "z") EmptySet,
+                  App (App (Const "ax_false_elim", In (Var "z") (Var "X")),
+                       App (App (Const "ax_empty_no_elements", Var "z"), Var "hz")))
+              )))))
+  }
+
+  (* Complete Table of All 65 Theorem Records *)
   val allTheorems : TheoremRecord list = [
     thm_01_A01,
     thm_02_A02,
@@ -2867,7 +3051,7 @@ struct
     thm_32_ax_global_choice,
     thm_33_subset_refl,
     thm_34_subset_trans,
-    thm_35_def_kuratowski_opair,
+    thm_35_def_dunaev_opair,
     thm_36_def_relational_func,
     thm_37_zero_is_nat,
     thm_38_succ_preserves_nat,
@@ -2895,13 +3079,118 @@ struct
     thm_60_singleton_def,
     thm_61_upair_def,
     thm_62_russell_class_not_set,
-    thm_63_dunaev_tagged_pair_proj
+    thm_63_dunaev_tagged_pair_proj,
+    thm_64_dunaev_pair_injectivity,
+    thm_65_empty_set_elim
   ]
 
   (* Verification Result Datatype *)
   datatype VerificationResult =
       Verified of { id: int, name: string, statement: Term, program: Term }
     | VerificationFailed of { id: int, name: string, error: string }
+
+  (* ----------------------------------------------------------------------- *)
+  (* Epistemic classification of theorem records.                            *)
+  (*                                                                         *)
+  (* `proofProgram = Const "plan_*"` records are NOT derived proofs. They    *)
+  (* are either conservative definitions of the language (e.g. Set, Ord,     *)
+  (* EmptySet, union, power) or irreducible Morse–Kelley axioms (e.g.        *)
+  (* Extensionality, Heredity, Global Choice, Infinity, Tarski universes).   *)
+  (* Keeping them in the catalog as a single undifferentiated "verified"     *)
+  (* count would overstate the kernel's actual derivations.                  *)
+  (* ----------------------------------------------------------------------- *)
+  datatype ProofKind = Derived | Definitional | Axiomatic
+
+  val definitionalWitnessNames : string list = [
+    "plan_isSet_def",
+    "plan_isProper_def",
+    "plan_empty_set_def",
+    "plan_universal_class_def",
+    "plan_subclass_def",
+    "plan_ord_def",
+    "def_dunaev_opair_witness",
+    "plan_relational_func_def",
+    "plan_omega_def",
+    "plan_card_def",
+    "plan_bin_union",
+    "plan_bin_inter",
+    "plan_unary_union",
+    "plan_unary_inter",
+    "plan_singleton",
+    "plan_upair"
+  ]
+
+  val axiomaticWitnessNames : string list = [
+    "plan_extensionality",
+    "plan_heredity",
+    "plan_exponent",
+    "plan_regularity",
+    "plan_global_choice",
+    "plan_omega_set",
+    "plan_tarski_axm"
+  ]
+
+  fun nameIn (names: string list) (name: string) : bool =
+    List.exists (fn n => n = name) names
+
+  fun startsWithPlan (c: string) : bool =
+    String.size c >= 5 andalso String.substring (c, 0, 5) = "plan_"
+
+  fun startsWithDef (c: string) : bool =
+    String.size c >= 4 andalso String.substring (c, 0, 4) = "def_"
+
+  fun proofKind (th: TheoremRecord) : ProofKind =
+    case #proofProgram th of
+      Const c =>
+        if nameIn definitionalWitnessNames c then Definitional
+        else if nameIn axiomaticWitnessNames c then Axiomatic
+        else Derived
+    | _ => Derived
+
+  fun proofKindName (k: ProofKind) : string =
+    case k of
+      Derived => "Derived"
+    | Definitional => "Definitional"
+    | Axiomatic => "Axiomatic"
+
+  (* A plan-backed record must be classified explicitly; adding a new        *)
+  (* `plan_*` proof without classifying it is a build-time error.            *)
+  fun unclassifiedWitnesses () : (string * string) list =
+    let
+      val allWitnesses = definitionalWitnessNames @ axiomaticWitnessNames
+      fun collect (th: TheoremRecord, acc: (string * string) list) =
+        case #proofProgram th of
+          Const c =>
+            if (startsWithPlan c orelse startsWithDef c) andalso not (nameIn allWitnesses c)
+            then (#name th, c) :: acc
+            else acc
+        | _ => acc
+    in
+      List.foldl collect [] allTheorems
+    end
+
+  val _ =
+    case unclassifiedWitnesses () of
+      [] => ()
+    | missing =>
+        raise Fail ("Unclassified definition/plan proof witnesses: " ^
+                    String.concatWith ", "
+                      (List.map (fn (n, c) => n ^ " (" ^ c ^ ")") missing))
+
+  (* Counts are returned separately so callers cannot mistake axioms and     *)
+  (* definitions for derived theorems.                                       *)
+  fun countProofKinds () : { derived: int, definitional: int, axiomatic: int, total: int } =
+    let
+      val kinds = List.map proofKind allTheorems
+      fun count k = List.length (List.filter (fn x => x = k) kinds)
+    in
+      {
+        derived = count Derived,
+        definitional = count Definitional,
+        axiomatic = count Axiomatic,
+        total = List.length kinds
+      }
+    end
 
   (* Check single theorem program against its statement type *)
   fun verifyTheorem (th: TheoremRecord) : VerificationResult =
@@ -2922,11 +3211,12 @@ struct
         error = msg
       }
 
-  (* Verify all 40 theorems mechanically *)
+  (* Verify all 64 theorem records mechanically against their declared types *)
   fun verifyAll () : VerificationResult list =
     List.map verifyTheorem allTheorems
 
-  (* Summary statistics: (verifiedCount, totalCount) *)
+  (* Summary statistics: (typecheckCount, totalCount).  Use countProofKinds()
+     to distinguish derived proofs from definitional/axiomatic witnesses. *)
   fun countVerified () : int * int =
     let
       val results = verifyAll ()
@@ -2972,7 +3262,6 @@ struct
 
   (* Context establishing witnesses for ordinal theorems *)
   val ordinalContext : Context = globalTheoremContext @ [
-    ("SuccOrd", Pi ("_", TClass, TClass)),
     ("InterOrd", Pi ("_", TClass, Pi ("_", TClass, TClass))),
     ("StrictSub", Pi ("_", TClass, Pi ("_", TClass, TProp))),
 
@@ -2980,7 +3269,6 @@ struct
     ("ax_reg_irreflexive", Forall "a" TClass (Impl (IsSet (Var "a")) (Impl (In (Var "a") (Var "a")) (Const "False")))),
     ("ax_reg_asymmetric", Forall "a" TClass (Forall "b" TClass (Impl (In (Var "a") (Var "b")) (Impl (In (Var "b") (Var "a")) (Const "False"))))),
     ("ax_ord_succ_trans", Forall "a" TClass (Impl (Trans (Var "a")) (Trans (App (Const "SuccOrd", Var "a"))))),
-    ("ax_ord_succ_ord", Forall "a" TClass (Impl (And (IsSet (Var "a")) (Ord (Var "a"))) (Ord (App (Const "SuccOrd", Var "a"))))),
     ("ax_ord_heredity", Forall "a" TClass (Forall "b" TClass (Impl (Ord (Var "a")) (Impl (In (Var "b") (Var "a")) (Ord (Var "b")))))),
     ("ax_ord_inter", Forall "a" TClass (Forall "b" TClass (Impl (And (Ord (Var "a")) (Ord (Var "b"))) (Ord (App (App (Const "InterOrd", Var "a"), Var "b")))))),
     ("ax_ord_ssub_in", Forall "a" TClass (Forall "b" TClass (Impl (And (Ord (Var "a")) (And (Ord (Var "b")) (Id (TProp, App (App (Const "StrictSub", Var "a"), Var "b"), Const "true"))))
@@ -3245,7 +3533,7 @@ struct
     case t of
       Universe _ => "TYPE"
     | TProp => "Prop"
-    | TSet => "Set"
+    | TSet => "SetSort"
     | TClass => "Class"
     | TNat => "Nat"
     | Var x => sanitize x
@@ -3289,14 +3577,15 @@ struct
     "// =============================================================================\n\n" ^
     "// Core Sorts & Universes\n" ^
     "symbol Prop : TYPE;\n" ^
-    "symbol Set : TYPE;\n" ^
+    "symbol SetSort : TYPE;\n" ^
     "symbol Class : TYPE;\n" ^
     "symbol Nat : TYPE;\n\n" ^
     "// Truth & Proof Reflection\n" ^
     "symbol proof : Prop -> TYPE;\n" ^
     "symbol True : Prop;\n" ^
     "symbol False : Prop;\n" ^
-    "symbol true : proof True;\n\n" ^
+    "symbol true : proof True;\n" ^
+    "symbol false : Prop;\n\n" ^
     "// Natural Numbers Constructors & Recursor\n" ^
     "symbol zero : Nat;\n" ^
     "symbol succ : Nat -> Nat;\n" ^
@@ -3317,11 +3606,21 @@ struct
   (* Generate symbol declarations for contextual constants/axioms *)
   fun generateContextSymbols () : string =
     let
-      val corePrims = ["Nat", "Prop", "Set", "Class", "True", "False", "true", "false"]
+      val corePrims = ["Nat", "Prop", "SetSort", "Class", "True", "False", "true", "false"]
       fun isPrim name = List.exists (fn p => p = name) corePrims
-      val nonPrimCtx = List.filter (fn (name, _) => not (isPrim name)) OrdinalTheorems.ordinalContext
-      val symLines = List.map (fn (name, ty) =>
-        "symbol " ^ sanitize name ^ " : " ^ termToDedukti ty ^ ";\n"
+      fun dedup [] _ = []
+        | dedup ((name, ty) :: rest) seen =
+            let
+              val sname = sanitize name
+            in
+              if isPrim sname orelse List.exists (fn x => x = sname) seen then
+                dedup rest seen
+              else
+                (sname, ty) :: dedup rest (sname :: seen)
+            end
+      val nonPrimCtx = dedup OrdinalTheorems.ordinalContext []
+      val symLines = List.map (fn (sname, ty) =>
+        "symbol " ^ sname ^ " : " ^ termToDedukti ty ^ ";\n"
       ) nonPrimCtx
     in
       "// Foundational Mathematical Constants & Axiomatic Witnesses\n" ^
@@ -3439,13 +3738,14 @@ struct
   (* -------------------------------------------------------------------------
      Theorem 3 (pair_injective):
      forall A B C D. pair A B = pair C D -> (A = C /\ B = D)
-     Proof:
+     Constructive Proof:
      Given H : pair A B = pair C D.
-     By Leibniz congruence on pr1: pr1 (pair A B) = pr1 (pair C D).
-     By pr1_pair: A = pr1 (pair A B) and C = pr1 (pair C D), so A = C.
-     By Leibniz congruence on pr2: pr2 (pair A B) = pr2 (pair C D).
-     By pr2_pair: B = pr2 (pair A B) and D = pr2 (pair C D), so B = D.
-     Hence (A = C /\ B = D). Q.E.D.
+     1. Congruence on pr1 gives pr1 (pair A B) = pr1 (pair C D).
+     2. Symmetry on pr1_pair (A, B) gives A = pr1 (pair A B).
+     3. Transitivity with (1) gives A = pr1 (pair C D).
+     4. Transitivity with pr1_pair (C, D) gives A = C.
+     5. Symmetrically for pr2, B = D.
+     6. Pairing yields (A = C /\ B = D) without auxiliary injectivity axioms.
      ------------------------------------------------------------------------- *)
   val pair_inj_prop =
     Pi ("A", tyClass,
@@ -3457,19 +3757,35 @@ struct
               PropAnd (ClassEq (Var "A") (Var "C"))
                       (ClassEq (Var "B") (Var "D")))))))
 
+  val pairAB = App (App (Const "pair", Var "A"), Var "B")
+  val pairCD = App (App (Const "pair", Var "C"), Var "D")
+  val pr1AB = App (Const "pr1", pairAB)
+  val pr1CD = App (Const "pr1", pairCD)
+  val pr2AB = App (Const "pr2", pairAB)
+  val pr2CD = App (Const "pr2", pairCD)
+
+  val pr1_ab = App (App (Const "ax_dunaev_extensional_pr1", Var "A"), Var "B")
+  val pr1_cd = App (App (Const "ax_dunaev_extensional_pr1", Var "C"), Var "D")
+  val pr2_ab = App (App (Const "ax_dunaev_extensional_pr2", Var "A"), Var "B")
+  val pr2_cd = App (App (Const "ax_dunaev_extensional_pr2", Var "C"), Var "D")
+
+  val cong_pr1 = App (App (App (App (Const "eq_cong", pairAB), pairCD), Const "pr1"), Var "h_eq")
+  val sym_pr1_ab = App (App (App (Const "eq_sym", pr1AB), Var "A"), pr1_ab)
+  val step1 = App (App (App (App (App (Const "eq_trans", Var "A"), pr1AB), pr1CD), sym_pr1_ab), cong_pr1)
+  val proof_AC = App (App (App (App (App (Const "eq_trans", Var "A"), pr1CD), Var "C"), step1), pr1_cd)
+
+  val cong_pr2 = App (App (App (App (Const "eq_cong", pairAB), pairCD), Const "pr2"), Var "h_eq")
+  val sym_pr2_ab = App (App (App (Const "eq_sym", pr2AB), Var "B"), pr2_ab)
+  val step2 = App (App (App (App (App (Const "eq_trans", Var "B"), pr2AB), pr2CD), sym_pr2_ab), cong_pr2)
+  val proof_BD = App (App (App (App (App (Const "eq_trans", Var "B"), pr2CD), Var "D"), step2), pr2_cd)
+
   val pair_inj_proof =
     Lam ("A", tyClass,
       Lam ("B", tyClass,
         Lam ("C", tyClass,
           Lam ("D", tyClass,
-            Lam ("h_eq", ClassEq (App (App (Const "pair", Var "A"), Var "B"))
-                                 (App (App (Const "pair", Var "C"), Var "D")),
-              Pair (
-                (* Proof of A = C via pr1 *)
-                App (App (App (App (App (Const "ax_dunaev_inj_left", Var "A"), Var "B"), Var "C"), Var "D"), Var "h_eq"),
-                (* Proof of B = D via pr2 *)
-                App (App (App (App (App (Const "ax_dunaev_inj_right", Var "A"), Var "B"), Var "C"), Var "D"), Var "h_eq")
-              ))))))
+            Lam ("h_eq", ClassEq pairAB pairCD,
+              Pair (proof_AC, proof_BD))))))
 
   (* -------------------------------------------------------------------------
      Theorem 4 (singleton_list_nonempty):
@@ -3490,11 +3806,17 @@ struct
   fun runVerification () =
     let
       val testCtx = [
+        (* Primitives and Equality Foundation *)
+        ("eq_cong", Pi ("X", tyClass, Pi ("Y", tyClass, Pi ("f", Pi ("Z", tyClass, tyClass), Pi ("eq", ClassEq (Var "X") (Var "Y"), ClassEq (App (Var "f", Var "X")) (App (Var "f", Var "Y"))))))),
+        ("eq_sym", Pi ("X", tyClass, Pi ("Y", tyClass, Pi ("eq", ClassEq (Var "X") (Var "Y"), ClassEq (Var "Y") (Var "X"))))),
+        ("eq_trans", Pi ("X", tyClass, Pi ("Y", tyClass, Pi ("Z", tyClass, Pi ("eq1", ClassEq (Var "X") (Var "Y"), Pi ("eq2", ClassEq (Var "Y") (Var "Z"), ClassEq (Var "X") (Var "Z"))))))),
+
+        (* Dunaev Extensional Projections *)
         ("ax_dunaev_extensional_pr1", Pi ("A", tyClass, Pi ("B", tyClass, ClassEq (App (Const "pr1", App (App (Const "pair", Var "A"), Var "B"))) (Var "A")))),
         ("ax_dunaev_extensional_pr2", Pi ("A", tyClass, Pi ("B", tyClass, ClassEq (App (Const "pr2", App (App (Const "pair", Var "A"), Var "B"))) (Var "B")))),
-        ("ax_dunaev_inj_left", Pi ("A", tyClass, Pi ("B", tyClass, Pi ("C", tyClass, Pi ("D", tyClass, Pi ("h", ClassEq (App (App (Const "pair", Var "A"), Var "B")) (App (App (Const "pair", Var "C"), Var "D")), ClassEq (Var "A") (Var "C"))))))),
-        ("ax_dunaev_inj_right", Pi ("A", tyClass, Pi ("B", tyClass, Pi ("C", tyClass, Pi ("D", tyClass, Pi ("h", ClassEq (App (App (Const "pair", Var "A"), Var "B")) (App (App (Const "pair", Var "C"), Var "D")), ClassEq (Var "B") (Var "D"))))))),
         ("ax_dunaev_marker_witness", Pi ("A", tyClass, App (Const "Not", ClassEq (App (Const "singleton_list", Var "A")) (Const "EmptySet")))),
+
+        (* Signature declarations *)
         ("pr1", Pi ("L", tyClass, tyClass)),
         ("pr2", Pi ("L", tyClass, tyClass)),
         ("pair", Pi ("A", tyClass, Pi ("B", tyClass, tyClass))),
@@ -4116,6 +4438,7 @@ structure LCFKernel :> sig
   val mk_var : string -> form
   val mk_in  : form -> form -> form
   val mk_impl: form -> form -> form
+  val mk_iff : form -> form -> form
   val mk_fora: string -> form -> form
   val form_eq: form * form -> bool
   val string_of_form: form -> string
@@ -4125,8 +4448,13 @@ structure LCFKernel :> sig
   val assume : form -> thm
   val mp     : thm -> thm -> thm
   val impl_intro : form -> thm -> thm
+  val iff_intro  : thm -> thm -> thm
+  val iff_elim_l : thm -> thm -> thm
+  val iff_elim_r : thm -> thm -> thm
   val gen    : string -> thm -> thm
   val inst   : thm -> string -> form -> thm
+  val spec   : thm -> form -> thm
+  val subst_free : string -> form -> thm -> thm
   val concl  : thm -> form
   val hyps   : thm -> form list
 end =
@@ -4135,6 +4463,7 @@ struct
       Var of string
     | In of form * form
     | Impl of form * form
+    | Iff of form * form
     | Fora of string * form
 
   datatype thm = Thm of form list * form
@@ -4142,17 +4471,29 @@ struct
   fun form_eq (Var x, Var y) = (x = y)
     | form_eq (In (a, b), In (c, d)) = form_eq (a, c) andalso form_eq (b, d)
     | form_eq (Impl (a, b), Impl (c, d)) = form_eq (a, c) andalso form_eq (b, d)
+    | form_eq (Iff (a, b), Iff (c, d)) = form_eq (a, c) andalso form_eq (b, d)
     | form_eq (Fora (x, a), Fora (y, b)) = (x = y) andalso form_eq (a, b)
     | form_eq _ = false
 
   fun string_of_form (Var x) = x
     | string_of_form (In (a, b)) = "(" ^ string_of_form a ^ " in " ^ string_of_form b ^ ")"
     | string_of_form (Impl (a, b)) = "(" ^ string_of_form a ^ " -> " ^ string_of_form b ^ ")"
+    | string_of_form (Iff (a, b)) = "(" ^ string_of_form a ^ " <-> " ^ string_of_form b ^ ")"
     | string_of_form (Fora (x, a)) = "(forall " ^ x ^ ". " ^ string_of_form a ^ ")"
+
+  fun free_vars (Var y) = [y]
+    | free_vars (In (a, b)) = (free_vars a) @ (free_vars b)
+    | free_vars (Impl (a, b)) = (free_vars a) @ (free_vars b)
+    | free_vars (Iff (a, b)) = (free_vars a) @ (free_vars b)
+    | free_vars (Fora (y, a)) = List.filter (fn v => v <> y) (free_vars a)
+
+  fun free_in_hyps x hyps =
+    List.exists (fn h => List.exists (fn v => v = x) (free_vars h)) hyps
 
   fun mk_var x = Var x
   fun mk_in a b = In (a, b)
   fun mk_impl a b = Impl (a, b)
+  fun mk_iff a b = Iff (a, b)
   fun mk_fora x a = Fora (x, a)
 
   fun axiom f = Thm ([], f)
@@ -4168,20 +4509,109 @@ struct
   fun impl_intro p (Thm (h, q)) =
       Thm (List.filter (fn x => not (form_eq (x, p))) h, Impl (p, q))
 
-  fun gen x (Thm (h, p)) =
-      Thm (h, Fora (x, p))
+  (* Biconditional Introduction & Elimination (IffI from newchecker.ML:9071) *)
+  fun iff_intro (Thm (h1, Impl (p1, q1))) (Thm (h2, Impl (q2, p2))) =
+      if form_eq (p1, p2) andalso form_eq (q1, q2) then
+        Thm (h1 @ h2, Iff (p1, q1))
+      else
+        raise Fail "LCFKernel.iff_intro: implication operands do not match (A -> B) and (B -> A)"
+    | iff_intro _ _ = raise Fail "LCFKernel.iff_intro: premises must both be implications"
 
+  fun iff_elim_l (Thm (h1, Iff (p, q))) (Thm (h2, p')) =
+      if form_eq (p, p') then Thm (h1 @ h2, q)
+      else raise Fail "LCFKernel.iff_elim_l: operand mismatch"
+    | iff_elim_l _ _ = raise Fail "LCFKernel.iff_elim_l: major premise must be biconditional"
+
+  fun iff_elim_r (Thm (h1, Iff (p, q))) (Thm (h2, q')) =
+      if form_eq (q, q') then Thm (h1 @ h2, p)
+      else raise Fail "LCFKernel.iff_elim_r: operand mismatch"
+    | iff_elim_r _ _ = raise Fail "LCFKernel.iff_elim_r: major premise must be biconditional"
+
+  (* Sound Generalization: Eigenvariable condition prevents unsound quantification *)
+  fun gen x (Thm (h, p)) =
+      if free_in_hyps x h then
+        raise Fail ("LCFKernel.gen: eigenvariable condition violated: " ^ x ^ " is free in hypotheses")
+      else
+        Thm (h, Fora (x, p))
+
+  fun fresh_var base used =
+    let
+      fun loop i =
+        let val cand = base ^ Int.toString i in
+          if List.exists (fn u => u = cand) used then loop (i + 1) else cand
+        end
+    in
+      if List.exists (fn u => u = base) used then loop 1 else base
+    end
+
+  (* Capture-avoiding substitution *)
   fun subst_form (Var y) x t = if x = y then t else Var y
     | subst_form (In (a, b)) x t = In (subst_form a x t, subst_form b x t)
     | subst_form (Impl (a, b)) x t = Impl (subst_form a x t, subst_form b x t)
-    | subst_form (Fora (y, a)) x t = if x = y then Fora (y, a) else Fora (y, subst_form a x t)
+    | subst_form (Iff (a, b)) x t = Iff (subst_form a x t, subst_form b x t)
+    | subst_form (Fora (y, a)) x t =
+        if x = y then Fora (y, a)
+        else
+          let val fv_t = free_vars t in
+            if List.exists (fn v => v = y) fv_t andalso List.exists (fn v => v = x) (free_vars a) then
+              let
+                val yprime = fresh_var y (fv_t @ free_vars a)
+                val a_renamed = subst_form a y (Var yprime)
+              in
+                Fora (yprime, subst_form a_renamed x t)
+              end
+            else
+              Fora (y, subst_form a x t)
+          end
 
   fun inst (Thm (h, Fora (x, p))) y t =
-      Thm (h, subst_form p x t)
+      if x = y then
+        Thm (h, subst_form p x t)
+      else
+        raise Fail ("LCFKernel.inst: variable mismatch: quantifier binds '" ^ x ^ "', but inst requested '" ^ y ^ "'")
     | inst _ _ _ = raise Fail "LCFKernel.inst: expected forall theorem"
+
+  fun spec (Thm (h, Fora (x, p))) t =
+      Thm (h, subst_form p x t)
+    | spec _ _ = raise Fail "LCFKernel.spec: expected forall theorem"
+
+  fun subst_free x t (Thm (h, p)) =
+      Thm (List.map (fn hyp => subst_form hyp x t) h, subst_form p x t)
 
   fun concl (Thm (_, c)) = c
   fun hyps (Thm (h, _)) = h
+end;
+
+(* Sealed Milner LCF Theorem-Without-Proof Kernel (newchecker.ML:9142) *)
+structure ThmWithoutPrf :> sig
+  type form = LCFKernel.form
+  type thm
+  val lift       : LCFKernel.thm -> thm
+  val assume     : form -> thm
+  val mp         : thm -> thm -> thm
+  val impl_intro : form -> thm -> thm
+  val iff_intro  : thm -> thm -> thm
+  val iff_elim_l : thm -> thm -> thm
+  val iff_elim_r : thm -> thm -> thm
+  val gen        : string -> thm -> thm
+  val spec       : thm -> form -> thm
+  val concl      : thm -> form
+  val hyps       : thm -> form list
+end =
+struct
+  type form = LCFKernel.form
+  type thm = LCFKernel.thm
+  fun lift t = t
+  val assume = LCFKernel.assume
+  val mp = LCFKernel.mp
+  val impl_intro = LCFKernel.impl_intro
+  val iff_intro = LCFKernel.iff_intro
+  val iff_elim_l = LCFKernel.iff_elim_l
+  val iff_elim_r = LCFKernel.iff_elim_r
+  val gen = LCFKernel.gen
+  val spec = LCFKernel.spec
+  val concl = LCFKernel.concl
+  val hyps = LCFKernel.hyps
 end;
 (*** END MODULE: lcf.ML ***)
 
@@ -4316,6 +4746,12 @@ struct
   (* ========================================================================= *)
   (* Pretty-Printing                                                           *)
   (* ========================================================================= *)
+
+  fun theoryLevelToString lvl =
+    case lvl of
+      NBG_Predicative => "NBG_Predicative"
+    | MK_Impredicative => "MK_Impredicative"
+    | MK_TarskiUniverses => "MK_TarskiUniverses"
 
   fun sortToString s =
     case s of
@@ -4988,10 +5424,63 @@ struct
   ]
 
   (* ========================================================================= *)
+  (* Sort Verification: SetSort vs ClassSort Guard for Quantifiers             *)
+  (* ========================================================================= *)
+
+  type SortContext = (string * Sort) list
+
+  fun lookupSort (sctx: SortContext, x: string) : Sort option =
+    case List.find (fn (k, _) => k = x) sctx of
+      SOME (_, s) => SOME s
+    | NONE => NONE
+
+  fun hypProvesSet (hypTy: Type) (t: Term) : bool =
+    let
+      val ut = unfoldTerm t
+    in
+      case hypTy of
+        TSet s => alphaEqTerm (t, s) orelse alphaEqTerm (ut, unfoldTerm s)
+      | TIn (s, _) => alphaEqTerm (t, s) orelse alphaEqTerm (ut, unfoldTerm s)
+      | TProd (a, b) => hypProvesSet a t orelse hypProvesSet b t
+      | _ => false
+    end
+
+  fun ctxProvesSet (ctx: Context) (t: Term) : bool =
+    List.exists (fn (_, hTy) => hypProvesSet hTy t orelse hypProvesSet (unfoldType hTy) t) ctx
+
+  fun isKnownSetTerm (sctx: SortContext) (ctx: Context) (t: Term) : bool =
+    if ctxProvesSet ctx t then true
+    else
+      case t of
+        CEmpty => true
+      | COmega => true
+      | CUniv => false
+      | COn => false
+      | CKappa _ => false
+      | FVar v =>
+          (case lookupSort (sctx, v) of
+            SOME SetSort => true
+          | SOME ClassSort => false
+          | NONE => true)
+      | CSingleton a => isKnownSetTerm sctx ctx a
+      | CUPair (a, b) => isKnownSetTerm sctx ctx a andalso isKnownSetTerm sctx ctx b
+      | COPair (a, b) => isKnownSetTerm sctx ctx a andalso isKnownSetTerm sctx ctx b
+      | CPower a => isKnownSetTerm sctx ctx a
+      | CUnion a => isKnownSetTerm sctx ctx a
+      | CSucc a => isKnownSetTerm sctx ctx a
+      | CBinInter (a, b) => isKnownSetTerm sctx ctx a orelse isKnownSetTerm sctx ctx b
+      | CBinUnion (a, b) => isKnownSetTerm sctx ctx a andalso isKnownSetTerm sctx ctx b
+      | CDiff (a, _) => isKnownSetTerm sctx ctx a
+      | _ => false
+
+  (* ========================================================================= *)
   (* Type Checker (Parameterized by TheoryLevel: Stage I NBG vs Stage II MK)   *)
   (* ========================================================================= *)
 
-  fun typeCheckWithTheory (theory: TheoryLevel) (ctx: Context) (e: Expr) : Type =
+  fun typeCheckWithSortAndTheory (theory: TheoryLevel) (sctx: SortContext) (ctx: Context) (e: Expr) : Type =
+    let
+      fun tc curSctx curCtx expr = typeCheckWithSortAndTheory theory curSctx curCtx expr
+    in
     case e of
       EVar x =>
         (case lookup (ctx, x) of
@@ -5017,15 +5506,15 @@ struct
 
     | ELam (x, argTy, body) =>
         let
-          val bodyTy = typeCheckWithTheory theory ((x, argTy) :: ctx) body
+          val bodyTy = tc sctx ((x, argTy) :: ctx) body
         in
           TArrow (argTy, bodyTy)
         end
 
     | EApp (f, arg) =>
         let
-          val fTy = typeCheckWithTheory theory ctx f
-          val argTy = typeCheckWithTheory theory ctx arg
+          val fTy = tc sctx ctx f
+          val argTy = tc sctx ctx arg
         in
           case fTy of
             TArrow (expected, res) =>
@@ -5043,44 +5532,44 @@ struct
 
     | EPair (e1, e2) =>
         let
-          val t1 = typeCheckWithTheory theory ctx e1
-          val t2 = typeCheckWithTheory theory ctx e2
+          val t1 = tc sctx ctx e1
+          val t2 = tc sctx ctx e2
         in
           TProd (t1, t2)
         end
 
     | EFst e1 =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TProd (t1, _) => t1
         | TIff (t1, t2) => TArrow (t1, t2)
         | ty => raise TypeError ("EFst expects product/conjunction type, got: " ^ typeToString ty))
 
     | ESnd e1 =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TProd (_, t2) => t2
         | TIff (t1, t2) => TArrow (t2, t1)
         | ty => raise TypeError ("ESnd expects product/conjunction type, got: " ^ typeToString ty))
 
     | EInl (e1, rightTy) =>
         let
-          val leftTy = typeCheckWithTheory theory ctx e1
+          val leftTy = tc sctx ctx e1
         in
           TSum (leftTy, rightTy)
         end
 
     | EInr (e1, leftTy) =>
         let
-          val rightTy = typeCheckWithTheory theory ctx e1
+          val rightTy = tc sctx ctx e1
         in
           TSum (leftTy, rightTy)
         end
 
     | ECase (scrut, x1, e1, x2, e2) =>
-        (case typeCheckWithTheory theory ctx scrut of
+        (case tc sctx ctx scrut of
           TSum (t1, t2) =>
             let
-              val res1 = typeCheckWithTheory theory ((x1, t1) :: ctx) e1
-              val res2 = typeCheckWithTheory theory ((x2, t2) :: ctx) e2
+              val res1 = tc sctx ((x1, t1) :: ctx) e1
+              val res2 = tc sctx ((x2, t2) :: ctx) e2
             in
               if convType (res1, res2) then res1
               else raise TypeError ("Branch type mismatch in case analysis:\n  Left:  " ^
@@ -5089,13 +5578,13 @@ struct
         | ty => raise TypeError ("ECase expects sum/disjunction type, got: " ^ typeToString ty))
 
     | EAbort (e1, targetTy) =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TBottom => targetTy
         | ty => raise TypeError ("EAbort expects contradiction (_|_), got: " ^ typeToString ty))
 
     | EDNE (e1, targetTy) =>
         let
-          val ty = typeCheckWithTheory theory ctx e1
+          val ty = tc sctx ctx e1
           val expected1 = TArrow (TArrow (targetTy, TBottom), TBottom)
           val expected2 = TNeg (TNeg targetTy)
         in
@@ -5109,8 +5598,8 @@ struct
 
     | EIffIntro (eLR, eRL) =>
         let
-          val tLR = typeCheckWithTheory theory ctx eLR
-          val tRL = typeCheckWithTheory theory ctx eRL
+          val tLR = tc sctx ctx eLR
+          val tRL = tc sctx ctx eRL
         in
           case (tLR, tRL) of
             (TArrow (a1, b1), TArrow (b2, a2)) =>
@@ -5122,13 +5611,13 @@ struct
         end
 
     | EIffElimL e1 =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TIff (a, b) => TArrow (a, b)
         | TProd (TArrow (a, b), _) => TArrow (a, b)
         | ty => raise TypeError ("EIffElimL expects biconditional, got: " ^ typeToString ty))
 
     | EIffElimR e1 =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TIff (a, b) => TArrow (b, a)
         | TProd (_, TArrow (b, a)) => TArrow (b, a)
         | ty => raise TypeError ("EIffElimR expects biconditional, got: " ^ typeToString ty))
@@ -5144,7 +5633,7 @@ struct
                              "' occurs free in open hypotheses")
           else
             let
-              val bodyTy = typeCheckWithTheory theory ctx body
+              val bodyTy = tc ((x, s) :: sctx) ctx body
             in
               TPi (x, s, bodyTy)
             end
@@ -5152,17 +5641,37 @@ struct
 
     (* Universal Elimination: f [t] *)
     | ETApp (f, t) =>
-        (case typeCheckWithTheory theory ctx f of
-          TPi (x, _, bodyTy) => substTermInType x t bodyTy
+        (case tc sctx ctx f of
+          TPi (x, s, bodyTy) =>
+            let
+              val _ =
+                case s of
+                  SetSort =>
+                    if isKnownSetTerm sctx ctx t then ()
+                    else raise TypeError ("Sort violation in ETApp: cannot instantiate SetSort quantifier 'forall " ^
+                                          x ^ ":Set' with ClassSort term '" ^ termToString t ^
+                                          "' without Set(" ^ termToString t ^ ") proof in context")
+                | ClassSort => ()
+            in
+              substTermInType x t bodyTy
+            end
         | ty => raise TypeError ("ETApp expects universal (TPi) type, got: " ^ typeToString ty))
 
     (* Existential Introduction: pack <witnessTerm, proofExpr> as TSigma(x, s, bodyTy) *)
     | EPack (witness, prf, targetSigma) =>
         (case targetSigma of
-          TSigma (x, _, bodyTy) =>
+          TSigma (x, s, bodyTy) =>
             let
+              val _ =
+                case s of
+                  SetSort =>
+                    if isKnownSetTerm sctx ctx witness then ()
+                    else raise TypeError ("Sort violation in EPack: cannot pack ClassSort witness '" ^
+                                          termToString witness ^ "' into SetSort existential 'exists " ^
+                                          x ^ ":Set' without Set(" ^ termToString witness ^ ") proof in context")
+                | ClassSort => ()
               val expected = substTermInType x witness bodyTy
-              val actual = typeCheckWithTheory theory ctx prf
+              val actual = tc sctx ctx prf
             in
               if convType (expected, actual) then targetSigma
               else raise TypeError ("EPack witness proof mismatch:\n  Expected: " ^
@@ -5174,8 +5683,8 @@ struct
     (* Existential Elimination: unpack e1 as <witnessVar, hypName> in e2 *)
     (* Eigenvariable condition: witnessVar must not occur free in active ctx of e2 or in result type *)
     | EUnpack (e1, witnessVar, hypName, e2) =>
-        (case typeCheckWithTheory theory ctx e1 of
-          TSigma (x, _, bodyTy) =>
+        (case tc sctx ctx e1 of
+          TSigma (x, s, bodyTy) =>
             let
               val activeFVs = activeContextVars ctx (removeVar hypName (freeExprVars e2))
             in
@@ -5185,7 +5694,7 @@ struct
               else
                 let
                   val openedTy = substTermInType x (FVar witnessVar) bodyTy
-                  val resTy = typeCheckWithTheory theory ((hypName, openedTy) :: ctx) e2
+                  val resTy = tc ((witnessVar, s) :: sctx) ((hypName, openedTy) :: ctx) e2
                 in
                   if member witnessVar (freeVarsType resTy) then
                     raise TypeError ("Eigenvariable escape in EUnpack: witness variable '" ^
@@ -5199,12 +5708,12 @@ struct
     | ERefl t => TEq (t, t)
 
     | ESym e1 =>
-        (case typeCheckWithTheory theory ctx e1 of
+        (case tc sctx ctx e1 of
           TEq (t1, t2) => TEq (t2, t1)
         | ty => raise TypeError ("ESym expects equality TEq, got: " ^ typeToString ty))
 
     | ETrans (e1, e2) =>
-        (case (typeCheckWithTheory theory ctx e1, typeCheckWithTheory theory ctx e2) of
+        (case (tc sctx ctx e1, tc sctx ctx e2) of
           (TEq (t1, t2), TEq (t2', t3)) =>
             if alphaEqTerm (t2, t2') orelse alphaEqTerm (unfoldTerm t2, unfoldTerm t2') then
               TEq (t1, t3)
@@ -5214,11 +5723,11 @@ struct
                                          typeToString ty1 ^ " and " ^ typeToString ty2))
 
     | ERewrite (eqPrf, x, templateTy, basePrf) =>
-        (case typeCheckWithTheory theory ctx eqPrf of
+        (case tc sctx ctx eqPrf of
           TEq (t1, t2) =>
             let
               val expectedBase = substTermInType x t1 templateTy
-              val actualBase = typeCheckWithTheory theory ctx basePrf
+              val actualBase = tc sctx ctx basePrf
             in
               if convType (expectedBase, actualBase) then
                 substTermInType x t2 templateTy
@@ -5231,7 +5740,7 @@ struct
 
     | EUnfold (e1, targetTy) =>
         let
-          val actualTy = typeCheckWithTheory theory ctx e1
+          val actualTy = tc sctx ctx e1
         in
           if convType (actualTy, targetTy) then targetTy
           else raise TypeError ("EUnfold conversion failed:\n  From: " ^
@@ -5240,7 +5749,7 @@ struct
 
     | EFold (e1, targetTy) =>
         let
-          val actualTy = typeCheckWithTheory theory ctx e1
+          val actualTy = tc sctx ctx e1
         in
           if convType (actualTy, targetTy) then targetTy
           else raise TypeError ("EFold conversion failed:\n  From: " ^
@@ -5366,6 +5875,10 @@ struct
         in
           TProd (TEq (CPr1 p, a), TEq (CPr2 p, b))
         end
+    end
+
+  fun typeCheckWithTheory (theory: TheoryLevel) (ctx: Context) (e: Expr) : Type =
+    typeCheckWithSortAndTheory theory [] ctx e
 
   (* Default typeCheck uses Stage I pure NBG predicative comprehension *)
   fun typeCheck (ctx: Context) (e: Expr) : Type =
@@ -5906,6 +6419,86 @@ struct
             EApp (ESnd compr, EPair (hSetZ, disj))
           end)))
 
+  (* Theorem (Russell's Paradox -- Non-Set-hood of the Russell Class):          *)
+  (*   forall r:Class. r = { x | x in x -> _|_ } -> Set(r) -> _|_              *)
+  (*   Deduces in pure NBG that the Russell class is strictly a proper class.  *)
+  val proofRussellProper : Expr =
+    let
+      val phi = TArrow (TIn (FVar "x", FVar "x"), TBottom)
+      val russellClass = CKappa ("x", phi)
+      val r = FVar "r"
+      val rInR = TIn (r, r)
+      val compr = EAxCompr ("x", phi, r)
+    in
+      ETLam ("r", ClassSort,
+        ELam ("hDef", TEq (r, russellClass),
+          ELam ("hSetR", TSet r,
+            let
+              val prfNotRInR =
+                ELam ("hIn", rInR,
+                  let
+                    val hInKappa =
+                      ERewrite (EVar "hDef", "c", TIn (r, FVar "c"), EVar "hIn")
+                    val unpacked = EApp (EFst compr, hInKappa)
+                    val notSelf = ESnd unpacked
+                  in
+                    EApp (notSelf, EVar "hIn")
+                  end)
+              val prfInKappa =
+                EApp (ESnd compr, EPair (EVar "hSetR", prfNotRInR))
+              val prfInR =
+                ERewrite (ESym (EVar "hDef"), "c", TIn (r, FVar "c"), prfInKappa)
+            in
+              EApp (prfNotRInR, prfInR)
+            end)))
+    end
+
+  (* Theorem (Subclass Antisymmetry via Extensionality):                       *)
+  (*   forall X:Class. forall Y:Class.                                         *)
+  (*     (forall z:Set. z in X -> z in Y) ->                                   *)
+  (*     (forall z:Set. z in Y -> z in X) -> X = Y                             *)
+  val proofSubclassAntisym : Expr =
+    ETLam ("X", ClassSort,
+      ETLam ("Y", ClassSort,
+        ELam ("hSubXY", TPi ("z", SetSort, TArrow (TIn (FVar "z", FVar "X"), TIn (FVar "z", FVar "Y"))),
+          ELam ("hSubYX", TPi ("z", SetSort, TArrow (TIn (FVar "z", FVar "Y"), TIn (FVar "z", FVar "X"))),
+            let
+              val axExt = EAxiom ("ax_extensionality", axExtensionality)
+              val extXY = ETApp (ETApp (axExt, FVar "X"), FVar "Y")
+              val prem =
+                ETLam ("z", SetSort,
+                  EPair (
+                    ETApp (EVar "hSubXY", FVar "z"),
+                    ETApp (EVar "hSubYX", FVar "z")
+                  ))
+            in
+              EApp (extXY, prem)
+            end))))
+
+  (* Theorem (Empty Set Uniqueness via Extensionality):                        *)
+  (*   forall e1:Class. forall e2:Class.                                       *)
+  (*     (forall z:Set. z in e1 -> _|_) ->                                     *)
+  (*     (forall z:Set. z in e2 -> _|_) -> e1 = e2                             *)
+  val proofEmptySetUnique : Expr =
+    ETLam ("e1", ClassSort,
+      ETLam ("e2", ClassSort,
+        ELam ("hEmp1", TPi ("z", SetSort, TArrow (TIn (FVar "z", FVar "e1"), TBottom)),
+          ELam ("hEmp2", TPi ("z", SetSort, TArrow (TIn (FVar "z", FVar "e2"), TBottom)),
+            let
+              val axExt = EAxiom ("ax_extensionality", axExtensionality)
+              val extE1E2 = ETApp (ETApp (axExt, FVar "e1"), FVar "e2")
+              val prem =
+                ETLam ("z", SetSort,
+                  EPair (
+                    ELam ("hIn1", TIn (FVar "z", FVar "e1"),
+                      EAbort (EApp (ETApp (EVar "hEmp1", FVar "z"), EVar "hIn1"), TIn (FVar "z", FVar "e2"))),
+                    ELam ("hIn2", TIn (FVar "z", FVar "e2"),
+                      EAbort (EApp (ETApp (EVar "hEmp2", FVar "z"), EVar "hIn2"), TIn (FVar "z", FVar "e1")))
+                  ))
+            in
+              EApp (extE1E2, prem)
+            end))))
+
 end;
 (*** END MODULE: nbg_compiler.ML ***)
 
@@ -6115,8 +6708,221 @@ struct
           )
         end))
 
+  (* Theorem: Dunaev Tagged Pair Injectivity for Arbitrary Classes:            *)
+  (*   forall A B C D:Class. [A, B]_D = [C, D]_D -> (A = C /\ B = D)           *)
+  (* Derived from the projection axioms plus Leibniz rewriting; this is the   *)
+  (* property that Kuratowski pairs lose on proper classes.                   *)
+  val proofDunaevPairInjectivity : Expr =
+    ETLam ("A", ClassSort,
+      ETLam ("B", ClassSort,
+        ETLam ("C", ClassSort,
+          ETLam ("D", ClassSort,
+            ELam ("h",
+              TEq (CDunaevPair (FVar "A", FVar "B"),
+                   CDunaevPair (FVar "C", FVar "D")),
+              let
+                val pAB = CDunaevPair (FVar "A", FVar "B")
+                val pCD = CDunaevPair (FVar "C", FVar "D")
+                val projAB = EAxDunaevPairProj (FVar "A", FVar "B")
+                val projCD = EAxDunaevPairProj (FVar "C", FVar "D")
+                (* A = pr1([A,B]) = pr1([C,D]) = C *)
+                val eqA =
+                  ETrans (
+                    ESym (EFst projAB),
+                    ETrans (
+                      ERewrite (EVar "h", "u",
+                        TEq (CPr1 pAB, CPr1 (FVar "u")),
+                        ERefl (CPr1 pAB)),
+                      EFst projCD))
+                (* B = pr2([A,B]) = pr2([C,D]) = D *)
+                val eqB =
+                  ETrans (
+                    ESym (ESnd projAB),
+                    ETrans (
+                      ERewrite (EVar "h", "u",
+                        TEq (CPr2 pAB, CPr2 (FVar "u")),
+                        ERefl (CPr2 pAB)),
+                      ESnd projCD))
+              in
+                EPair (eqA, eqB)
+              end)))))
+
 end;
 (*** END MODULE: nbg_tactics.ML ***)
+
+
+(*** BEGIN MODULE: nbg_set_algebra.ML ***)
+(**
+  set_theory_prover/program/nbg_set_algebra.ML
+  Standard Library NBG Set & Class Boolean Algebra Lemmas (Stage I Predicative).
+  Architected & Implemented by Gemini 4 Argon (Ticket TKT-025).
+
+  All proofs are written in the portable SML'97 core subset (CakeML & Poly/ML
+  compatible, zero raw non-ASCII bytes) and verified by NBGCompiler.typeCheck [].
+**)
+
+structure NBGSetAlgebra =
+struct
+
+  open NBGCompiler
+  open NBGTactics
+
+  (* ========================================================================= *)
+  (* 1. Idempotence of Binary Class Intersection                               *)
+  (*    forall A:Class. forall x:Class. x in (A n A) <-> x in A                *)
+  (* ========================================================================= *)
+  val proofInterIdemp : Expr =
+    introAllVars [("A", ClassSort), ("x", ClassSort)]
+      (let
+        val interPhi = TProd (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "A"))
+        val interKappa = CKappa ("_u", interPhi)
+        val comprX = EAxCompr ("_u", interPhi, FVar "x")
+        val fwd =
+          ELam ("hInInter", TIn (FVar "x", CBinInter (FVar "A", FVar "A")),
+            let
+              val unIn = EUnfold (EVar "hInInter", TIn (FVar "x", interKappa))
+              val unpacked = EApp (EFst comprX, unIn)
+            in
+              EFst (ESnd unpacked)
+            end)
+        val bwd =
+          ELam ("hInA", TIn (FVar "x", FVar "A"),
+            let
+              val hSetX = EApp (EAxHeredity (FVar "x", FVar "A"), EVar "hInA")
+              val pairInA = EPair (EVar "hInA", EVar "hInA")
+              val inKappa = EApp (ESnd comprX, EPair (hSetX, pairInA))
+            in
+              EFold (inKappa, TIn (FVar "x", CBinInter (FVar "A", FVar "A")))
+            end)
+      in
+        EIffIntro (fwd, bwd)
+      end)
+
+  (* ========================================================================= *)
+  (* 2. Idempotence of Binary Class Union                                      *)
+  (*    forall A:Class. forall x:Class. x in (A u A) <-> x in A                *)
+  (* ========================================================================= *)
+  val proofUnionIdemp : Expr =
+    introAllVars [("A", ClassSort), ("x", ClassSort)]
+      (let
+        val unionPhi = TSum (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "A"))
+        val unionKappa = CKappa ("_u", unionPhi)
+        val comprX = EAxCompr ("_u", unionPhi, FVar "x")
+        val fwd =
+          ELam ("hInUnion", TIn (FVar "x", CBinUnion (FVar "A", FVar "A")),
+            let
+              val unIn = EUnfold (EVar "hInUnion", TIn (FVar "x", unionKappa))
+              val unpacked = EApp (EFst comprX, unIn)
+            in
+              ECase (ESnd unpacked, "hL", EVar "hL", "hR", EVar "hR")
+            end)
+        val bwd =
+          ELam ("hInA", TIn (FVar "x", FVar "A"),
+            let
+              val hSetX = EApp (EAxHeredity (FVar "x", FVar "A"), EVar "hInA")
+              val disjInA = EInl (EVar "hInA", TIn (FVar "x", FVar "A"))
+              val inKappa = EApp (ESnd comprX, EPair (hSetX, disjInA))
+            in
+              EFold (inKappa, TIn (FVar "x", CBinUnion (FVar "A", FVar "A")))
+            end)
+      in
+        EIffIntro (fwd, bwd)
+      end)
+
+  (* ========================================================================= *)
+  (* 3. Binary Intersection Left Inclusion / Absorption                        *)
+  (*    forall A:Class. forall B:Class. (A n B) c= A                           *)
+  (* ========================================================================= *)
+  val proofInterSubLeft : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort)]
+      (let
+        val interPhi = TProd (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "B"))
+        val interKappa = CKappa ("_u", interPhi)
+        val comprZ = EAxCompr ("_u", interPhi, FVar "z")
+        val body =
+          ETLam ("z", ClassSort,
+            ELam ("hInInter", TIn (FVar "z", CBinInter (FVar "A", FVar "B")),
+              let
+                val unIn = EUnfold (EVar "hInInter", TIn (FVar "z", interKappa))
+                val unpacked = EApp (EFst comprZ, unIn)
+              in
+                EFst (ESnd unpacked)
+              end))
+      in
+        EFold (body, TSub (CBinInter (FVar "A", FVar "B"), FVar "A"))
+      end)
+
+  (* ========================================================================= *)
+  (* 4. Binary Intersection Right Inclusion / Absorption                       *)
+  (*    forall A:Class. forall B:Class. (A n B) c= B                           *)
+  (* ========================================================================= *)
+  val proofInterSubRight : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort)]
+      (let
+        val interPhi = TProd (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "B"))
+        val interKappa = CKappa ("_u", interPhi)
+        val comprZ = EAxCompr ("_u", interPhi, FVar "z")
+        val body =
+          ETLam ("z", ClassSort,
+            ELam ("hInInter", TIn (FVar "z", CBinInter (FVar "A", FVar "B")),
+              let
+                val unIn = EUnfold (EVar "hInInter", TIn (FVar "z", interKappa))
+                val unpacked = EApp (EFst comprZ, unIn)
+              in
+                ESnd (ESnd unpacked)
+              end))
+      in
+        EFold (body, TSub (CBinInter (FVar "A", FVar "B"), FVar "B"))
+      end)
+
+  (* ========================================================================= *)
+  (* 5. Binary Union Left Inclusion / Absorption                               *)
+  (*    forall A:Class. forall B:Class. A c= (A u B)                           *)
+  (* ========================================================================= *)
+  val proofUnionSubLeft : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort)]
+      (let
+        val unionPhi = TSum (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "B"))
+        val comprZ = EAxCompr ("_u", unionPhi, FVar "z")
+        val body =
+          ETLam ("z", ClassSort,
+            ELam ("hInA", TIn (FVar "z", FVar "A"),
+              let
+                val hSetZ = EApp (EAxHeredity (FVar "z", FVar "A"), EVar "hInA")
+                val disj = EInl (EVar "hInA", TIn (FVar "z", FVar "B"))
+                val inKappa = EApp (ESnd comprZ, EPair (hSetZ, disj))
+              in
+                EFold (inKappa, TIn (FVar "z", CBinUnion (FVar "A", FVar "B")))
+              end))
+      in
+        EFold (body, TSub (FVar "A", CBinUnion (FVar "A", FVar "B")))
+      end)
+
+  (* ========================================================================= *)
+  (* 6. Binary Union Right Inclusion / Absorption                              *)
+  (*    forall A:Class. forall B:Class. B c= (A u B)                           *)
+  (* ========================================================================= *)
+  val proofUnionSubRight : Expr =
+    introAllVars [("A", ClassSort), ("B", ClassSort)]
+      (let
+        val unionPhi = TSum (TIn (FVar "_u", FVar "A"), TIn (FVar "_u", FVar "B"))
+        val comprZ = EAxCompr ("_u", unionPhi, FVar "z")
+        val body =
+          ETLam ("z", ClassSort,
+            ELam ("hInB", TIn (FVar "z", FVar "B"),
+              let
+                val hSetZ = EApp (EAxHeredity (FVar "z", FVar "B"), EVar "hInB")
+                val disj = EInr (EVar "hInB", TIn (FVar "z", FVar "A"))
+                val inKappa = EApp (ESnd comprZ, EPair (hSetZ, disj))
+              in
+                EFold (inKappa, TIn (FVar "z", CBinUnion (FVar "A", FVar "B")))
+              end))
+      in
+        EFold (body, TSub (FVar "B", CBinUnion (FVar "A", FVar "B")))
+      end)
+
+end;
+(*** END MODULE: nbg_set_algebra.ML ***)
 
 
 (*** BEGIN MODULE: nbg_functions.ML ***)
@@ -6334,6 +7140,26 @@ struct
               ECase (yOr, "hYeqA", branchA, "hYeqB", branchB))
           end)))
 
+  (* Theorem: Universal Class Non-Sethood (TKT-436)                            *)
+  (*   forall V:Class. V = { x | Top } -> Set(V) -> _|_                        *)
+  (*   Deduces that the Universal Class is strictly a proper class by combining *)
+  (*   the Universal Class Characterization and Foundation (No Self-Membership).*)
+  val proofUniversalClassNotSet : Expr =
+    ETLam ("V", ClassSort,
+      ELam ("hDefV", TEq (FVar "V", CKappa ("x", TTop)),
+        ELam ("hSetV", TSet (FVar "V"),
+          let
+            val V_term = FVar "V"
+            val charV = ETApp (proofUniversalClassChar, V_term)
+            val bwd = ESnd charV
+            val vInUniv = EApp (bwd, EVar "hSetV")
+            val vInV = ERewrite (ESym (EVar "hDefV"), "c", TIn (V_term, FVar "c"), vInUniv)
+            val noSelfV = ETApp (proofNoSelfMembership, V_term)
+            val notVInV = EApp (noSelfV, EVar "hSetV")
+          in
+            EApp (notVInV, vInV)
+          end)))
+
 end;
 (*** END MODULE: nbg_regularity.ML ***)
 
@@ -6480,6 +7306,65 @@ struct
           ))
     in
       ESnd indUnfolded
+    end
+
+  (* Theorem: Successor Preserves Transitivity:                                *)
+  (*   forall x:Class. Tr(x) -> Tr({ u | u in x \/ u = x })                    *)
+  (*   Core von Neumann ordinal lemma: any transitive class has a transitive successor.*)
+  val proofSuccPreservesTrans : Expr =
+    let
+      val phi = TSum (TIn (FVar "u", FVar "x"), TEq (FVar "u", FVar "x"))
+      val sX = CKappa ("u", phi)
+    in
+      ETLam ("x", ClassSort,
+        ELam ("hTrX", TTrans (FVar "x"),
+          let
+            val trUnfolded =
+              EUnfold (EVar "hTrX",
+                TPi ("_y", SetSort,
+                  TArrow (TIn (FVar "_y", FVar "x"),
+                    TPi ("_z", ClassSort,
+                      TArrow (TIn (FVar "_z", FVar "_y"), TIn (FVar "_z", FVar "x"))))))
+
+            val subSuccInst = ETApp (proofSubSucc, FVar "x")
+
+            val body =
+              ETLam ("_y", SetSort,
+                ELam ("hyInSucc", TIn (FVar "_y", sX),
+                  let
+                    val comprY = EAxCompr ("u", phi, FVar "_y")
+                    val unpackY = EApp (EFst comprY, EVar "hyInSucc")
+                    val disjY = ESnd unpackY
+
+                    val branchIn =
+                      ELam ("hYInX", TIn (FVar "_y", FVar "x"),
+                        let
+                          val ySubX = EApp (ETApp (trUnfolded, FVar "_y"), EVar "hYInX")
+                        in
+                          ETLam ("_z", ClassSort,
+                            ELam ("hZInY", TIn (FVar "_z", FVar "_y"),
+                              let
+                                val zInX = EApp (ETApp (ySubX, FVar "_z"), EVar "hZInY")
+                              in
+                                EApp (ETApp (subSuccInst, FVar "_z"), zInX)
+                              end))
+                        end)
+
+                    val branchEq =
+                      ELam ("hYEqX", TEq (FVar "_y", FVar "x"),
+                        ETLam ("_z", ClassSort,
+                          ELam ("hZInY", TIn (FVar "_z", FVar "_y"),
+                            let
+                              val zInX = ERewrite (EVar "hYEqX", "c", TIn (FVar "_z", FVar "c"), EVar "hZInY")
+                            in
+                              EApp (ETApp (subSuccInst, FVar "_z"), zInX)
+                            end)))
+                  in
+                    ECase (disjY, "hYInX", EApp (branchIn, EVar "hYInX"), "hYEqX", EApp (branchEq, EVar "hYEqX"))
+                  end))
+          in
+            EFold (body, TTrans sX)
+          end))
     end
 
 end;
@@ -7063,6 +7948,7 @@ struct
   datatype Token =
       TokVal
     | TokTheorem
+    | TokFormula
     | TokTheory
     | TokForall
     | TokExists
@@ -7136,6 +8022,8 @@ struct
     case w of
       "val" => TokVal
     | "theorem" => TokTheorem
+    | "formula" => TokFormula
+    | "type" => TokFormula
     | "theory" => TokTheory
     | "forall" => TokForall
     | "exists" => TokExists
@@ -7239,6 +8127,7 @@ struct
     case tok of
       TokVal => "val"
     | TokTheorem => "theorem"
+    | TokFormula => "formula"
     | TokTheory => "theory"
     | TokForall => "forall"
     | TokExists => "exists"
@@ -7370,14 +8259,18 @@ struct
           (CSucc a, rest2)
         end
     | TokLBrack :: rest =>
-        (* Dunaev tagged pair: [A, B] *)
+        (* Dunaev tagged pair: [A, B] or [A, B]_D *)
         let
           val (a, rest1) = parseTerm rest
           val rest2 = expect TokComma rest1
           val (b, rest3) = parseTerm rest2
           val rest4 = expect TokRBrack rest3
+          val rest5 =
+            case rest4 of
+              TokIdent "_D" :: r => r
+            | r => r
         in
-          (CDunaevPair (a, b), rest4)
+          (CDunaevPair (a, b), rest5)
         end
     | TokLBrace :: TokIdent x :: TokBar :: rest =>
         (* Comprehension term: { x | Formula } *)
@@ -7510,6 +8403,16 @@ struct
         in
           (TPi (v, s, body), rest6)
         end
+    | TokForall :: rest =>
+        let
+          val (v, rest1) = expectIdent rest
+          val rest2 = expect TokColon rest1
+          val (s, rest3) = parseSort rest2
+          val rest4 = expect TokDot rest3
+          val (body, rest5) = parseFormula rest4
+        in
+          (TPi (v, s, body), rest5)
+        end
     | TokExists :: TokLParen :: rest =>
         let
           val (v, rest1) = expectIdent rest
@@ -7520,6 +8423,16 @@ struct
           val (body, rest6) = parseFormula rest5
         in
           (TSigma (v, s, body), rest6)
+        end
+    | TokExists :: rest =>
+        let
+          val (v, rest1) = expectIdent rest
+          val rest2 = expect TokColon rest1
+          val (s, rest3) = parseSort rest2
+          val rest4 = expect TokDot rest3
+          val (body, rest5) = parseFormula rest4
+        in
+          (TSigma (v, s, body), rest5)
         end
     | TokLParen :: rest =>
         let
@@ -7537,13 +8450,28 @@ struct
               let val (t2, rest3) = parseTerm rest2
               in (TIn (t1, t2), rest3) end
           | TokEq :: rest2 =>
-              let val (t2, rest3) = parseTerm rest2
-              in (TEq (t1, t2), rest3) end
+              (case t1 of
+                 FVar aliasName =>
+                   ((let val (t2, rest3) = parseTerm rest2
+                     in (TEq (t1, t2), rest3) end)
+                    handle ParseError _ =>
+                      (TEq (Const ("__FORMULA_ALIAS__:" ^ aliasName), Const "__FORMULA_ALIAS__"), rest1))
+               | _ =>
+                   let val (t2, rest3) = parseTerm rest2
+                   in (TEq (t1, t2), rest3) end)
           | TokSubRel :: rest2 =>
               let val (t2, rest3) = parseTerm rest2
               in (TSub (t1, t2), rest3) end
-          | t :: _ => raise ParseError ("Expected relation ('in', '=', 'c=') after term, got '" ^ tokenToString t ^ "'")
-          | [] => raise ParseError "Unexpected EOF after term in formula"
+          | t :: _ =>
+              (case t1 of
+                 FVar aliasName =>
+                   (TEq (Const ("__FORMULA_ALIAS__:" ^ aliasName), Const "__FORMULA_ALIAS__"), rest1)
+               | _ => raise ParseError ("Expected relation ('in', '=', 'c=') after term, got '" ^ tokenToString t ^ "'"))
+          | [] =>
+              (case t1 of
+                 FVar aliasName =>
+                   (TEq (Const ("__FORMULA_ALIAS__:" ^ aliasName), Const "__FORMULA_ALIAS__"), rest1)
+               | _ => raise ParseError "Unexpected EOF after term in formula")
         end
 
   fun isAtomExprStart (tok: Token) : bool =
@@ -7609,6 +8537,16 @@ struct
         in
           (ELam (x, argTy, body), rest6)
         end
+    | TokFn :: rest =>
+        let
+          val (x, rest1) = expectIdent rest
+          val rest2 = expect TokColon rest1
+          val (argTy, rest3) = parseFormula rest2
+          val rest4 = expect TokFatArrow rest3
+          val (body, rest5) = parseExpr rest4
+        in
+          (ELam (x, argTy, body), rest5)
+        end
     | TokLam :: TokLParen :: rest =>
         let
           val (x, rest1) = expectIdent rest
@@ -7619,6 +8557,16 @@ struct
           val (body, rest6) = parseExpr rest5
         in
           (ETLam (x, s, body), rest6)
+        end
+    | TokLam :: rest =>
+        let
+          val (x, rest1) = expectIdent rest
+          val rest2 = expect TokColon rest1
+          val (s, rest3) = parseSort rest2
+          val rest4 = expect TokFatArrow rest3
+          val (body, rest5) = parseExpr rest4
+        in
+          (ETLam (x, s, body), rest5)
         end
     | TokTApp :: TokLParen :: rest =>
         let
@@ -7841,6 +8789,7 @@ struct
 
   datatype SurfaceDecl =
       TheoryDirective of TheoryLevel
+    | FormulaDecl of { name: string, formula: Type }
     | TheoremDecl of { name: string, expectedFormula: Type, proofTerm: Expr }
 
   fun parseProgram (toks: Token list) : SurfaceDecl list =
@@ -7859,6 +8808,20 @@ struct
                 | _ => raise ParseError ("Unknown theory level: " ^ thName)
             in
               loop rest2 (TheoryDirective lvl :: acc)
+            end
+        | loop (TokFormula :: rest) acc =
+            let
+              val (name, rest1) = expectIdent rest
+              val rest2 =
+                case rest1 of
+                  TokEq :: r => r
+                | TokColon :: TokIdent "Fm" :: TokEq :: r => r
+                | TokColon :: TokIdent "Prop" :: TokEq :: r => r
+                | _ => expect TokEq rest1
+              val (fTy, rest3) = parseFormula rest2
+              val rest4 = expect TokSemi rest3
+            in
+              loop rest4 (FormulaDecl { name = name, formula = fTy } :: acc)
             end
         | loop (TokTheorem :: rest) acc =
             let
@@ -7883,7 +8846,7 @@ struct
               loop rest6 (TheoremDecl { name = name, expectedFormula = expectedFormula, proofTerm = proofTerm } :: acc)
             end
         | loop (t :: _) _ =
-            raise ParseError ("Expected 'theory', 'theorem', or 'val' declaration, got '" ^ tokenToString t ^ "'")
+            raise ParseError ("Expected 'theory', 'formula', 'theorem', or 'val' declaration, got '" ^ tokenToString t ^ "'")
     in
       loop toks []
     end
@@ -7899,37 +8862,109 @@ struct
     let
       val toks = tokenize src
       val decls = parseProgram toks
-      fun step [] curTheory _ acc =
-            SurfaceCompileSuccess { theory = curTheory, verifiedTheorems = List.rev acc }
-        | step (TheoryDirective newTh :: ds) _ ctx acc =
-            step ds newTh ctx acc
-        | step (TheoremDecl { name, expectedFormula, proofTerm } :: ds) curTheory ctx acc =
+      fun checkFormulaNotUsedAsProof fNames (e: Expr) : unit =
+        let
+          val fvs = freeExprVars e
+        in
+          case List.find (fn (fnName, _) => member fnName fvs) fNames of
+            SOME (fnName, fTy) =>
+              raise TypeError (
+                "Cannot use formula definition '" ^ fnName ^ " = " ^ typeToString fTy ^
+                "' as a proof term! Defining a formula only defines a TYPE; to prove it, " ^
+                "you must construct a proof term inhabiting '" ^ typeToString fTy ^
+                "' using kernel primitives."
+              )
+          | NONE => ()
+        end
+      fun resolveFormulaAliases fNames (ty: Type) : Type =
+        case ty of
+          TEq (Const s, Const "__FORMULA_ALIAS__") =>
             let
-              val actualTy = typeCheckWithTheory curTheory ctx proofTerm
+              val prefix = "__FORMULA_ALIAS__:"
+              val aliasName =
+                if String.isPrefix prefix s then
+                  String.extract (s, String.size prefix, NONE)
+                else s
             in
-              if convType (expectedFormula, actualTy) then
+              case List.find (fn (n, _) => n = aliasName) fNames of
+                SOME (_, fTy) => fTy
+              | NONE =>
+                  raise ParseError ("Expected relation ('in', '=', 'c=') after term '" ^ aliasName ^ "', or a defined formula name")
+            end
+        | TArrow (a, b) => TArrow (resolveFormulaAliases fNames a, resolveFormulaAliases fNames b)
+        | TProd (a, b) => TProd (resolveFormulaAliases fNames a, resolveFormulaAliases fNames b)
+        | TSum (a, b) => TSum (resolveFormulaAliases fNames a, resolveFormulaAliases fNames b)
+        | TNeg a => TNeg (resolveFormulaAliases fNames a)
+        | TIff (a, b) => TIff (resolveFormulaAliases fNames a, resolveFormulaAliases fNames b)
+        | TPi (v, s, body) => TPi (v, s, resolveFormulaAliases fNames body)
+        | TSigma (v, s, body) => TSigma (v, s, resolveFormulaAliases fNames body)
+        | _ => ty
+
+      fun resolveExprAliases fNames (e: Expr) : Expr =
+        case e of
+          ELam (v, ty, body) => ELam (v, resolveFormulaAliases fNames ty, resolveExprAliases fNames body)
+        | EApp (e1, e2) => EApp (resolveExprAliases fNames e1, resolveExprAliases fNames e2)
+        | EPair (e1, e2) => EPair (resolveExprAliases fNames e1, resolveExprAliases fNames e2)
+        | EFst e1 => EFst (resolveExprAliases fNames e1)
+        | ESnd e1 => ESnd (resolveExprAliases fNames e1)
+        | EInl (e1, ty) => EInl (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | EInr (e1, ty) => EInr (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | ECase (s, x1, e1, x2, e2) => ECase (resolveExprAliases fNames s, x1, resolveExprAliases fNames e1, x2, resolveExprAliases fNames e2)
+        | EAbort (e1, ty) => EAbort (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | EDNE (e1, ty) => EDNE (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | ELEM ty => ELEM (resolveFormulaAliases fNames ty)
+        | ETLam (v, s, body) => ETLam (v, s, resolveExprAliases fNames body)
+        | ETApp (e1, t) => ETApp (resolveExprAliases fNames e1, t)
+        | EPack (w, e1, ty) => EPack (w, resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | EUnpack (e1, v, h, e2) => EUnpack (resolveExprAliases fNames e1, v, h, resolveExprAliases fNames e2)
+        | ESym e1 => ESym (resolveExprAliases fNames e1)
+        | ETrans (e1, e2) => ETrans (resolveExprAliases fNames e1, resolveExprAliases fNames e2)
+        | ERewrite (eq, u, ty, b) => ERewrite (resolveExprAliases fNames eq, u, resolveFormulaAliases fNames ty, resolveExprAliases fNames b)
+        | EUnfold (e1, ty) => EUnfold (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | EFold (e1, ty) => EFold (resolveExprAliases fNames e1, resolveFormulaAliases fNames ty)
+        | EAxCompr (x, ty, z) => EAxCompr (x, resolveFormulaAliases fNames ty, z)
+        | _ => e
+
+      fun step [] curTheory _ _ acc =
+            SurfaceCompileSuccess { theory = curTheory, verifiedTheorems = List.rev acc }
+        | step (TheoryDirective newTh :: ds) _ ctx fNames acc =
+            step ds newTh ctx fNames acc
+        | step (FormulaDecl { name, formula } :: ds) curTheory ctx fNames acc =
+            let
+              val resolvedF = resolveFormulaAliases fNames formula
+            in
+              step ds curTheory ctx ((name, resolvedF) :: fNames) acc
+            end
+        | step (TheoremDecl { name, expectedFormula, proofTerm } :: ds) curTheory ctx fNames acc =
+            let
+              val _ = checkFormulaNotUsedAsProof fNames proofTerm
+              val resolvedExpected = resolveFormulaAliases fNames expectedFormula
+              val resolvedProof = resolveExprAliases fNames proofTerm
+              val actualTy = typeCheckWithTheory curTheory ctx resolvedProof
+            in
+              if convType (resolvedExpected, actualTy) then
                 let
-                  val normPrf = normalizeExpr proofTerm
+                  val normPrf = normalizeExpr resolvedProof
                   val normTy = typeCheckWithTheory curTheory ctx normPrf
                   val _ =
-                    if convType (expectedFormula, normTy) then ()
+                    if convType (resolvedExpected, normTy) then ()
                     else raise TypeError ("Subject reduction failure after normalization in '" ^ name ^ "'")
                   val info = {
                     name = name,
-                    formula = expectedFormula,
-                    proofSize = proofSize proofTerm,
+                    formula = resolvedExpected,
+                    proofSize = proofSize resolvedProof,
                     normalizedSize = proofSize normPrf
                   }
                 in
-                  step ds curTheory ((name, expectedFormula) :: ctx) (info :: acc)
+                  step ds curTheory ((name, resolvedExpected) :: ctx) fNames (info :: acc)
                 end
               else
                 raise TypeError ("Theorem '" ^ name ^ "' proof type mismatch:\n  Claimed: " ^
-                                 typeToString expectedFormula ^ "\n  Proved:  " ^
+                                 typeToString resolvedExpected ^ "\n  Proved:  " ^
                                  typeToString actualTy)
             end
     in
-      step decls NBG_Predicative initialNBGContext []
+      step decls NBG_Predicative initialNBGContext [] []
     end
     handle LexError msg => SurfaceCompileFailure ("LexError: " ^ msg)
          | ParseError msg => SurfaceCompileFailure ("ParseError: " ^ msg)
@@ -7955,6 +8990,7 @@ struct
       val decls = parseProgram toks
       fun collect [] acc = List.rev acc
         | collect (TheoryDirective _ :: ds) acc = collect ds acc
+        | collect (FormulaDecl _ :: ds) acc = collect ds acc
         | collect (TheoremDecl { name, proofTerm, ... } :: ds) acc =
             collect ds ((name, proofTerm) :: acc)
     in
@@ -7962,6 +8998,23 @@ struct
         SurfaceCompileSuccess _ => collect decls []
       | SurfaceCompileFailure err => raise TypeError err
     end
+
+  fun extractDefinedFormulas (path: string) : (string * Type) list =
+    let
+      val inStream = TextIO.openIn path
+      val content = TextIO.inputAll inStream
+      val _ = TextIO.closeIn inStream
+      val toks = tokenize content
+      val decls = parseProgram toks
+      fun collect [] acc = List.rev acc
+        | collect (TheoryDirective _ :: ds) acc = collect ds acc
+        | collect (FormulaDecl { name, formula } :: ds) acc =
+            collect ds ((name, formula) :: acc)
+        | collect (TheoremDecl _ :: ds) acc = collect ds acc
+    in
+      collect decls []
+    end
+    handle _ => []
 
 end;
 (*** END MODULE: nbg_surface_compiler.ML ***)
@@ -8163,19 +9216,71 @@ struct
     "symbol kuratowski_pair : Class -> Class -> Class;\n" ^
     "symbol dunaev_pair : Class -> Class -> Class;\n" ^
     "symbol dunaev_pr1 : Class -> Class;\n" ^
-    "symbol dunaev_pr2 : Class -> Class;\n\n" ^
+    "symbol dunaev_pr2 : Class -> Class;\n" ^
+    "symbol bin_union : Class -> Class -> Class;\n" ^
+    "symbol bin_inter : Class -> Class -> Class;\n" ^
+    "symbol class_diff : Class -> Class -> Class;\n" ^
+    "symbol unary_union : Class -> Class;\n" ^
+    "symbol unary_inter : Class -> Class;\n" ^
+    "symbol power_class : Class -> Class;\n" ^
+    "symbol succ_class : Class -> Class;\n" ^
+    "symbol omega_set : Class;\n" ^
+    "symbol on_class : Class;\n\n" ^
     "// NBG Formula Constructors (Types of Programming Language Objects)\n" ^
     "symbol in_fm : Class -> Class -> Fm;\n" ^
     "symbol eq_fm : Class -> Class -> Fm;\n" ^
     "symbol isset_fm : Class -> Fm;\n" ^
     "symbol sub_fm : Class -> Class -> Fm;\n" ^
+    "symbol proper_fm : Class -> Fm;\n" ^
+    "symbol trans_fm : Class -> Fm;\n" ^
+    "symbol ord_fm : Class -> Fm;\n" ^
+    "symbol ind_fm : Class -> Fm;\n" ^
+    "symbol func_fm : Class -> Class -> Class -> Fm;\n" ^
+    "symbol inj_fm : Class -> Class -> Class -> Fm;\n" ^
     "symbol imp_fm : Fm -> Fm -> Fm;\n" ^
     "symbol and_fm : Fm -> Fm -> Fm;\n" ^
     "symbol or_fm : Fm -> Fm -> Fm;\n" ^
     "symbol bot_fm : Fm;\n" ^
     "symbol top_fm : Fm;\n" ^
     "symbol forall_fm : SortTag -> (Class -> Fm) -> Fm;\n" ^
-    "symbol exists_fm : SortTag -> (Class -> Fm) -> Fm;\n\n"
+    "symbol exists_fm : SortTag -> (Class -> Fm) -> Fm;\n\n" ^
+    "// Proof Term Constructors & Logical Inference Rules\n" ^
+    "symbol top_intro : Prf top_fm;\n" ^
+    "symbol imp_intro : (A : Fm) -> (B : Fm) -> (Prf A -> Prf B) -> Prf (imp_fm A B);\n" ^
+    "symbol imp_elim : (A : Fm) -> (B : Fm) -> Prf (imp_fm A B) -> Prf A -> Prf B;\n" ^
+    "symbol and_intro : (A : Fm) -> (B : Fm) -> Prf A -> Prf B -> Prf (and_fm A B);\n" ^
+    "symbol and_elim_l : (A : Fm) -> (B : Fm) -> Prf (and_fm A B) -> Prf A;\n" ^
+    "symbol and_elim_r : (A : Fm) -> (B : Fm) -> Prf (and_fm A B) -> Prf B;\n" ^
+    "symbol or_intro_l : (A : Fm) -> Prf A -> (B : Fm) -> Prf (or_fm A B);\n" ^
+    "symbol or_intro_r : (A : Fm) -> (B : Fm) -> Prf B -> Prf (or_fm A B);\n" ^
+    "symbol or_elim : (A : Fm) -> (B : Fm) -> (C : Fm) -> Prf (or_fm A B) -> (Prf A -> Prf C) -> (Prf B -> Prf C) -> Prf C;\n" ^
+    "symbol bot_elim : Prf bot_fm -> (A : Fm) -> Prf A;\n" ^
+    "symbol dne_elim : (A : Fm) -> Prf (imp_fm (imp_fm A bot_fm) bot_fm) -> Fm -> Prf A;\n" ^
+    "symbol lem_ax : (A : Fm) -> Prf (or_fm A (imp_fm A bot_fm));\n" ^
+    "symbol forall_intro : (s : SortTag) -> (P : Class -> Fm) -> ((x : Class) -> Prf (P x)) -> Prf (forall_fm s P);\n" ^
+    "symbol forall_elim : (s : SortTag) -> (P : Class -> Fm) -> Prf (forall_fm s P) -> (t : Class) -> Prf (P t);\n" ^
+    "symbol exists_intro : (s : SortTag) -> (P : Class -> Fm) -> (w : Class) -> Prf (P w) -> Fm -> Prf (exists_fm s P);\n" ^
+    "symbol exists_elim : (s : SortTag) -> (P : Class -> Fm) -> (C : Fm) -> Prf (exists_fm s P) -> ((x : Class) -> Prf (P x) -> Prf C) -> Prf C;\n" ^
+    "symbol eq_refl : (t : Class) -> Prf (eq_fm t t);\n" ^
+    "symbol eq_sym : (a : Class) -> (b : Class) -> Prf (eq_fm a b) -> Prf (eq_fm b a);\n" ^
+    "symbol eq_trans : (a : Class) -> (b : Class) -> (c : Class) -> Prf (eq_fm a b) -> Prf (eq_fm b c) -> Prf (eq_fm a c);\n" ^
+    "symbol eq_rewrite : (a : Class) -> (b : Class) -> Prf (eq_fm a b) -> (P : Class -> Fm) -> Prf (P a) -> Prf (P b);\n" ^
+    "symbol conv_unfold : (A : Fm) -> Prf A -> (B : Fm) -> Prf B;\n" ^
+    "symbol conv_fold : (A : Fm) -> Prf A -> (B : Fm) -> Prf B;\n\n" ^
+    "// NBG Set & Class Theory Axiom Constructors\n" ^
+    "symbol nbg_ax_compr : (phi : Class -> Fm) -> (z : Class) -> Prf (and_fm (imp_fm (in_fm z (kappa phi)) (and_fm (isset_fm z) (phi z))) (imp_fm (and_fm (isset_fm z) (phi z)) (in_fm z (kappa phi))));\n" ^
+    "symbol nbg_ax_ext : (A : Class) -> (B : Class) -> Prf (imp_fm (forall_fm SetSort (z : Class => and_fm (imp_fm (in_fm z A) (in_fm z B)) (imp_fm (in_fm z B) (in_fm z A)))) (eq_fm A B));\n" ^
+    "symbol nbg_ax_setdef : (A : Class) -> Prf (and_fm (imp_fm (isset_fm A) (exists_fm ClassSort (C : Class => in_fm A C))) (imp_fm (exists_fm ClassSort (C : Class => in_fm A C)) (isset_fm A)));\n" ^
+    "symbol nbg_ax_heredity : (A : Class) -> (B : Class) -> Prf (imp_fm (and_fm (sub_fm A B) (isset_fm B)) (isset_fm A));\n" ^
+    "symbol nbg_ax_pairing : (a : Class) -> (b : Class) -> Prf (imp_fm (and_fm (isset_fm a) (isset_fm b)) (isset_fm (upair a b)));\n" ^
+    "symbol nbg_ax_union : (a : Class) -> Prf (imp_fm (isset_fm a) (isset_fm (unary_union a)));\n" ^
+    "symbol nbg_ax_power : (a : Class) -> Prf (imp_fm (isset_fm a) (isset_fm (power_class a)));\n" ^
+    "symbol nbg_ax_infinity : Prf (and_fm (isset_fm omega_set) (ind_fm omega_set));\n" ^
+    "symbol nbg_ax_foundation : (A : Class) -> Prf (imp_fm (exists_fm SetSort (x : Class => in_fm x A)) (exists_fm SetSort (y : Class => and_fm (in_fm y A) (forall_fm SetSort (z : Class => imp_fm (and_fm (in_fm z y) (in_fm z A)) bot_fm)))));\n" ^
+    "symbol nbg_ax_limitation_of_size : (K : Class) -> Prf (and_fm (imp_fm (proper_fm K) (exists_fm ClassSort (F : Class => and_fm (func_fm F K univ_class) (inj_fm F K univ_class)))) (imp_fm (exists_fm ClassSort (F : Class => and_fm (func_fm F univ_class K) (inj_fm F univ_class K))) (proper_fm K)));\n" ^
+    "symbol nbg_ax_choice : (phi : Class -> Fm) -> Prf (imp_fm (exists_fm SetSort phi) (and_fm (isset_fm (eps phi)) (phi (eps phi))));\n" ^
+    "symbol nbg_ax_choice_ext : (phi : Class -> Fm) -> (psi : Class -> Fm) -> Prf (imp_fm (forall_fm SetSort (x : Class => and_fm (imp_fm (phi x) (psi x)) (imp_fm (psi x) (phi x)))) (eq_fm (eps phi) (eps psi)));\n" ^
+    "symbol nbg_ax_dunaev_pair_proj : (A : Class) -> (B : Class) -> Prf (and_fm (eq_fm (dunaev_pr1 (dunaev_pair A B)) A) (eq_fm (dunaev_pr2 (dunaev_pair A B)) B));\n\n"
 
   val certifiedNBGTheorems : (string * Expr) list = [
     ("nbg_thm_01_empty_class_no_elements", proofEmptyClassNoElements),

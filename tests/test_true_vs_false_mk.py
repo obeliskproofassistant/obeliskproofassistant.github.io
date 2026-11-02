@@ -59,9 +59,14 @@ const out = {};
 for (const [name, preset] of Object.entries(presets)) {
   try {
     const result = new Compiler().compileSource(preset.source);
-    out[name] = { status: result.status, error: result.error || "" };
+    out[name] = {
+      status: result.status,
+      ok: result.status === "COMPILED",
+      error: result.error || "",
+      verified_theorems: (result.verified_theorems || []).map(t => t.name),
+    };
   } catch (e) {
-    out[name] = { status: "THREW", error: String(e) };
+    out[name] = { status: "THREW", ok: false, error: String(e), verified_theorems: [] };
   }
 }
 process.stdout.write(JSON.stringify(out));
@@ -118,6 +123,17 @@ class TestPresetLibraryParity(unittest.TestCase):
         self.assertEqual(len(TRUE_PRESETS), 6)
         self.assertEqual(len(FALSE_PRESETS), 6)
         self.assertTrue(set(TRUE_PRESETS).isdisjoint(FALSE_PRESETS))
+
+    def test_guide_parity_intersection_and_dunaev_theorems(self):
+        inter_thms = self.results["true_univ_and_inter"]["verified_theorems"]
+        self.assertIn("thm_inter_comm", inter_thms)
+        self.assertIn("thm_inter_assoc", inter_thms)
+        self.assertIn("thm_inter_distrib_union", inter_thms)
+
+        dunaev_thms = self.results["true_succ_and_dunaev"]["verified_theorems"]
+        self.assertIn("thm_dunaev_pair_projections", dunaev_thms)
+        self.assertIn("thm_dunaev_pair_first_proj", dunaev_thms)
+        self.assertIn("thm_dunaev_pair_second_proj", dunaev_thms)
 
 
 if __name__ == "__main__":

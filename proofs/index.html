@@ -574,6 +574,8 @@
       </div>
       <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
         <input type="text" id="gallery-search-input" class="search-input-box" placeholder="🔍 Search proof scripts, names, symbols..." oninput="handleSearch(this.value)">
+        <button class="filter-btn" id="btn-expand-all-proofs" onclick="if(window.ProofTreeCollapse) ProofTreeCollapse.expandAll()" title="Expand all proof derivation nodes">Expand All</button>
+        <button class="filter-btn" id="btn-collapse-all-proofs" onclick="if(window.ProofTreeCollapse) ProofTreeCollapse.collapseAll()" title="Collapse all proof derivation nodes">Collapse All</button>
         <button class="filter-btn" id="toggle-notation-btn" onclick="toggleNotation()">Show Colorful Unicode</button>
       </div>
     </div>
@@ -3659,5 +3661,6 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
       setDialectMode(savedDialect);
     });
   </script>
+  <script src="js/proof_tree_collapse.js"></script>
 </body>
 </html>

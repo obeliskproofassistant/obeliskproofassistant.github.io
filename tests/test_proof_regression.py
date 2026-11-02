@@ -15,7 +15,7 @@ import json
 import os
 import re
 
-SITE_DIR = "/botworkspace/obeliskproofassistant.github.io"
+SITE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DB_PATH = os.path.join(SITE_DIR, "data/theory_database.json")
 MANUAL_PATH = os.path.join(SITE_DIR, "manual.html")
 PROOFS_PATH = os.path.join(SITE_DIR, "proofs.html")

@@ -443,12 +443,34 @@ class ObeliskNBGCompiler {
         const scrut = parseExpr();
         expect('WORD', 'of');
         expect('WORD', 'inl');
-        const x1 = expectIdent();
+        let x1;
+        if (peek().type === 'LPAREN') {
+          next();
+          x1 = expectIdent();
+          if (peek().type === 'COLON') {
+            next();
+            parseFormula();
+          }
+          expect('RPAREN');
+        } else {
+          x1 = expectIdent();
+        }
         expect('FATARROW');
         const e1 = parseExpr();
         expect('BAR');
         expect('WORD', 'inr');
-        const x2 = expectIdent();
+        let x2;
+        if (peek().type === 'LPAREN') {
+          next();
+          x2 = expectIdent();
+          if (peek().type === 'COLON') {
+            next();
+            parseFormula();
+          }
+          expect('RPAREN');
+        } else {
+          x2 = expectIdent();
+        }
         expect('FATARROW');
         const e2 = parseExpr();
         return { tag: 'ECase', scrut, x1, e1, x2, e2 };
@@ -1087,10 +1109,10 @@ theorem thm_russell_not_set : Set({ x | x in x -> Bot }) -> Bot =
 
   true_univ_and_inter: {
     category: 'TRUE_MK_NBG',
-    title: '3. Universal Class V = {x | Top} & Intersection Commutativity',
-    summary: 'Proves z in {x | Top} <-> Set(z) and binary intersection symmetry using compr, pair, fst, snd.',
+    title: '3. Universal Class V = {x | Top} & Intersection Algebra (Comm, Assoc, Distrib)',
+    summary: 'Proves z in {x | Top} <-> Set(z), binary intersection symmetry, associativity, and distributivity over union.',
     source: `(* ===================================================================== *)
-(* TRUE NBG/MK THEOREM #3: Universal Class V & Intersection Symmetry     *)
+(* TRUE NBG/MK THEOREM #3: Universal Class V & Intersection Algebra      *)
 (* ===================================================================== *)
 
 theory NBG_Predicative;
@@ -1110,7 +1132,27 @@ theorem thm_inter_comm : forall (A:Class). forall (B:Class). forall (z:Class).
     Lam (B:Class) =>
       Lam (z:Class) =>
         fn (h : z in A /\\ z in B) =>
-          pair(snd(h), fst(h));`
+          pair(snd(h), fst(h));
+
+theorem thm_inter_assoc : forall (A:Class). forall (B:Class). forall (C:Class). forall (z:Class).
+    ((z in A /\\ z in B) /\\ z in C) -> (z in A /\\ (z in B /\\ z in C)) =
+  Lam (A:Class) =>
+    Lam (B:Class) =>
+      Lam (C:Class) =>
+        Lam (z:Class) =>
+          fn (h : (z in A /\\ z in B) /\\ z in C) =>
+            pair(fst(fst(h)), pair(snd(fst(h)), snd(h)));
+
+theorem thm_inter_distrib_union : forall (A:Class). forall (B:Class). forall (C:Class). forall (z:Class).
+    (z in A /\\ (z in B \\/ z in C)) -> ((z in A /\\ z in B) \\/ (z in A /\\ z in C)) =
+  Lam (A:Class) =>
+    Lam (B:Class) =>
+      Lam (C:Class) =>
+        Lam (z:Class) =>
+          fn (h : z in A /\\ (z in B \\/ z in C)) =>
+            case snd(h) of
+              inl (hB : z in B) => inl(pair(fst(h), hB), z in A /\\ z in C)
+            | inr (hC : z in C) => inr(pair(fst(h), hC), z in A /\\ z in B);`
   },
 
   true_succ_and_dunaev: {
@@ -1130,6 +1172,18 @@ theorem thm_dunaev_pair_projections :
   Lam (A:Class) =>
     Lam (B:Class) =>
       dunaev_proj(A, B);
+
+theorem thm_dunaev_pair_first_proj :
+  forall (A:Class). forall (B:Class). pr1([A, B]_D) = A =
+  Lam (A:Class) =>
+    Lam (B:Class) =>
+      fst(dunaev_proj(A, B));
+
+theorem thm_dunaev_pair_second_proj :
+  forall (A:Class). forall (B:Class). pr2([A, B]_D) = B =
+  Lam (A:Class) =>
+    Lam (B:Class) =>
+      snd(dunaev_proj(A, B));
 
 theorem thm_sub_succ :
   forall (x:Class). Set(x) -> forall (z:Class). z in x -> z in (x u {x}) =
