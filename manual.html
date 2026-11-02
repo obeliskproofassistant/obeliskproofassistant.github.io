@@ -3972,7 +3972,7 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
         <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);">Machine-Checked Standard Library</div>
         <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">NBG Propositions-as-Types</h2>
       </div>
-      <span class="status-badge badge-verified-strong">17 kernel-checked theorems</span>
+      <span class="status-badge badge-verified-strong">20 kernel-checked theorems</span>
     </div>
     <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 980px;">
       Each row is a closed proof term in <code>examples/nbg_verified_programs.nbg</code>, compiled by
@@ -3982,8 +3982,8 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
       pairs lose on proper classes.
     </p>
     <p style="color: var(--text-muted); font-size: 0.86rem; max-width: 980px; border-left: 3px solid var(--accent-cyan); padding-left: 0.8rem;">
-      The dependent-checker catalog is audited separately: <strong>47 derived proofs</strong>,
-      <strong>16 conservative definitions</strong>, and <strong>7 irreducible MK axioms</strong> (70 total).
+      The dependent-checker catalog is audited separately: <strong>52 derived proofs</strong>,
+      <strong>16 conservative definitions</strong>, and <strong>7 irreducible MK axioms</strong> (75 total).
       Definitional and axiomatic witnesses are never counted as derived theorems, and the kernel
       rejects the untrusted <code>PCheat_prf</code> placeholder on every certified path.
       The CLI and WebREPL also enforce a closedness gate: theorem statements with free class
@@ -4205,13 +4205,49 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
             <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
           </tr>
         
+          <tr id="nbg-inter_sub_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">inter_sub_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Binary class intersection A inter B is a subclass of the left operand A.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in { u | (u in A /\ u in B) } -&gt; z in A))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-inter_sub_right" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">inter_sub_right</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Binary class intersection A inter B is a subclass of the right operand B.</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in { u | (u in A /\ u in B) } -&gt; z in B))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-union_sub_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">union_sub_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 3px;">Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension).</div>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <code style="color: #a7f3d0; font-size: 0.78rem; white-space: pre-wrap;">(forall A:Class. (forall B:Class. (forall z:Class. (z in A -&gt; z in { u | (u in A \/ u in B) }))))</code>
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">13</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">13</td>
+          </tr>
+        
         </tbody>
       </table>
     </div>
     <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.9rem;">
       Reproduce locally: <code>python3 obelisk_cli.py compile examples/nbg_verified_programs.nbg</code>
       &nbsp;•&nbsp; Manifest: <code>data/nbg_library.json</code>
-      &nbsp;•&nbsp; Source SHA-256 prefix: <code>6e9b363032714391</code>
+      &nbsp;•&nbsp; Source SHA-256 prefix: <code>dae9b14418906b6d</code>
     </p>
   </div>
 

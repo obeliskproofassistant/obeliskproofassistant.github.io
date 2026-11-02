@@ -1,6 +1,6 @@
 (**
   obelisk_unfolded.ML — Monolithic Unfolded Obelisk PolyML Source
-  Generated: 2026-11-02 09:42:56Z
+  Generated: 2026-11-02 12:14:34Z
   Target: PolyML 5.9.2 / Native SML 97
   Compiles strictly to check correctness of dependent proofs and types.
 **)
@@ -3015,7 +3015,150 @@ struct
               )))))
   }
 
-  (* Complete Table of All 65 Theorem Records *)
+  (* 66. Every set belongs to the Universal Class V:
+         forall x. Set(x) -> x in V
+         Derived from universal_class definition (thm_24) instantiated at X := V and Refl V. *)
+  val thm_66_every_set_in_v : TheoremRecord = {
+    id = 66,
+    name = "thm_every_set_in_v",
+    statement = Forall "x" TClass (Impl (IsSet (Var "x")) (In (Var "x") UnivV)),
+    proofProgram =
+      Lam ("x", TClass,
+        Snd (App (App (Fst (App (#proofProgram thm_24_def_universal_class, UnivV)), Refl UnivV), Var "x")))
+  }
+
+  (* 67. Every element of the Universal Class V is a set:
+         forall x. x in V -> Set(x)
+         Derived from universal_class definition (thm_24) instantiated at X := V and Refl V. *)
+  val thm_67_in_v_is_set : TheoremRecord = {
+    id = 67,
+    name = "thm_in_v_is_set",
+    statement = Forall "x" TClass (Impl (In (Var "x") UnivV) (IsSet (Var "x"))),
+    proofProgram =
+      Lam ("x", TClass,
+        Fst (App (App (Fst (App (#proofProgram thm_24_def_universal_class, UnivV)), Refl UnivV), Var "x")))
+  }
+
+  (* 68. The Empty Set belongs to the Universal Class V:
+         EmptySet in V
+         Derived from thm_66_every_set_in_v and ax_empty_set. *)
+  val thm_68_emptyset_in_v : TheoremRecord = {
+    id = 68,
+    name = "thm_emptyset_in_v",
+    statement = In EmptySet UnivV,
+    proofProgram =
+      App (App (#proofProgram thm_66_every_set_in_v, EmptySet), Const "ax_empty_set")
+  }
+
+  (* 69. Omega belongs to the Universal Class V:
+         omega in V
+         Derived from thm_66_every_set_in_v and thm_45_omega_set. *)
+  val thm_69_omega_in_v : TheoremRecord = {
+    id = 69,
+    name = "thm_omega_in_v",
+    statement = In Omega UnivV,
+    proofProgram =
+      App (App (#proofProgram thm_66_every_set_in_v, Omega), #proofProgram thm_45_omega_set)
+  }
+
+  (* 70. The Powerset of Omega is a Set:
+         Set(Power(omega))
+         Derived from thm_29_ax_exponent and thm_45_omega_set. *)
+  val thm_70_power_omega_is_set : TheoremRecord = {
+    id = 70,
+    name = "thm_power_omega_is_set",
+    statement = IsSet (Power Omega),
+    proofProgram =
+      App (App (#proofProgram thm_29_ax_exponent, Omega), #proofProgram thm_45_omega_set)
+  }
+
+  (* 71. Every class belongs to its Singleton Class:
+         forall a. a in Singleton(a)
+         Derived from thm_60_singleton_def and Refl. *)
+  val thm_71_singleton_self_in : TheoremRecord = {
+    id = 71,
+    name = "thm_singleton_self_in",
+    statement = Forall "a" TClass (In (Var "a") (App (Const "Singleton", Var "a"))),
+    proofProgram =
+      Lam ("a", TClass,
+        App (Snd (App (App (#proofProgram thm_60_singleton_def, Var "a"), Var "a")), Refl (Var "a")))
+  }
+
+  (* 72. Left Element Membership in Unordered Pair:
+         forall a b. a in {a, b}
+         Derived from thm_61_upair_def and Refl. *)
+  val thm_72_upair_left_in : TheoremRecord = {
+    id = 72,
+    name = "thm_upair_left_in",
+    statement = Forall "a" TClass (Forall "b" TClass (In (Var "a") (UPair (Var "a") (Var "b")))),
+    proofProgram =
+      Lam ("a", TClass,
+        Lam ("b", TClass,
+          App (Snd (App (App (App (#proofProgram thm_61_upair_def, Var "a"), Var "b"), Var "a")),
+               Lam ("C", TProp,
+                 Lam ("fa", Impl (Eq (Var "a") (Var "a")) (Var "C"),
+                   Lam ("fb", Impl (Eq (Var "a") (Var "b")) (Var "C"),
+                     App (Var "fa", Refl (Var "a"))))))))
+  }
+
+  (* 73. Right Element Membership in Unordered Pair:
+         forall a b. b in {a, b}
+         Derived from thm_61_upair_def and Refl. *)
+  val thm_73_upair_right_in : TheoremRecord = {
+    id = 73,
+    name = "thm_upair_right_in",
+    statement = Forall "a" TClass (Forall "b" TClass (In (Var "b") (UPair (Var "a") (Var "b")))),
+    proofProgram =
+      Lam ("a", TClass,
+        Lam ("b", TClass,
+          App (Snd (App (App (App (#proofProgram thm_61_upair_def, Var "a"), Var "b"), Var "b")),
+               Lam ("C", TProp,
+                 Lam ("fa", Impl (Eq (Var "b") (Var "a")) (Var "C"),
+                   Lam ("fb", Impl (Eq (Var "b") (Var "b")) (Var "C"),
+                     App (Var "fb", Refl (Var "b"))))))))
+  }
+
+  (* 74. Binary Intersection is a Subclass of Left Operand:
+         forall A B. Subset(BinInter(A, B), A)
+         Derived from thm_25_def_subclass and thm_57_binary_inter_def. *)
+  val thm_74_inter_subset_left : TheoremRecord = {
+    id = 74,
+    name = "thm_inter_subset_left",
+    statement = Forall "A" TClass (Forall "B" TClass (Subset (App (App (Const "BinInter", Var "A"), Var "B")) (Var "A"))),
+    proofProgram =
+      Lam ("A", TClass,
+        Lam ("B", TClass,
+          let
+            val interAB = App (App (Const "BinInter", Var "A"), Var "B")
+          in
+            App (Snd (App (App (#proofProgram thm_25_def_subclass, interAB), Var "A")),
+                 Lam ("z", TClass,
+                   Lam ("hz", In (Var "z") interAB,
+                     Fst (App (Fst (App (App (App (#proofProgram thm_57_binary_inter_def, Var "A"), Var "B"), Var "z")), Var "hz")))))
+          end))
+  }
+
+  (* 75. Binary Intersection is a Subclass of Right Operand:
+         forall A B. Subset(BinInter(A, B), B)
+         Derived from thm_25_def_subclass and thm_57_binary_inter_def. *)
+  val thm_75_inter_subset_right : TheoremRecord = {
+    id = 75,
+    name = "thm_inter_subset_right",
+    statement = Forall "A" TClass (Forall "B" TClass (Subset (App (App (Const "BinInter", Var "A"), Var "B")) (Var "B"))),
+    proofProgram =
+      Lam ("A", TClass,
+        Lam ("B", TClass,
+          let
+            val interAB = App (App (Const "BinInter", Var "A"), Var "B")
+          in
+            App (Snd (App (App (#proofProgram thm_25_def_subclass, interAB), Var "B")),
+                 Lam ("z", TClass,
+                   Lam ("hz", In (Var "z") interAB,
+                     Snd (App (Fst (App (App (App (#proofProgram thm_57_binary_inter_def, Var "A"), Var "B"), Var "z")), Var "hz")))))
+          end))
+  }
+
+  (* Complete Table of All 75 Theorem Records *)
   val allTheorems : TheoremRecord list = [
     thm_01_A01,
     thm_02_A02,
@@ -3081,7 +3224,17 @@ struct
     thm_62_russell_class_not_set,
     thm_63_dunaev_tagged_pair_proj,
     thm_64_dunaev_pair_injectivity,
-    thm_65_empty_set_elim
+    thm_65_empty_set_elim,
+    thm_66_every_set_in_v,
+    thm_67_in_v_is_set,
+    thm_68_emptyset_in_v,
+    thm_69_omega_in_v,
+    thm_70_power_omega_is_set,
+    thm_71_singleton_self_in,
+    thm_72_upair_left_in,
+    thm_73_upair_right_in,
+    thm_74_inter_subset_left,
+    thm_75_inter_subset_right
   ]
 
   (* Verification Result Datatype *)
@@ -4643,6 +4796,7 @@ struct
       NBG_Predicative
     | MK_Impredicative
     | MK_TarskiUniverses
+    | StageIII_MetaQuotation
 
   datatype Sort =
       SetSort
@@ -4752,6 +4906,7 @@ struct
       NBG_Predicative => "NBG_Predicative"
     | MK_Impredicative => "MK_Impredicative"
     | MK_TarskiUniverses => "MK_TarskiUniverses"
+    | StageIII_MetaQuotation => "StageIII_MetaQuotation"
 
   fun sortToString s =
     case s of
@@ -4960,6 +5115,215 @@ struct
       (fn ((h, ty), acc) => if member h usedHyps then unionVars (freeVarsType ty) acc else acc)
       []
       ctx
+
+  (* ========================================================================= *)
+  (* Decidable Side-Condition Boolean Functions (NFV & FFI)                    *)
+  (* ========================================================================= *)
+
+  (* check_nfv_term x t: true iff variable x has NO free occurrences in term t *)
+  fun check_nfv_term (x: string) (t: Term) : bool =
+    not (member x (freeVarsTerm t))
+
+  (* check_nfv x phi: true iff variable x has NO free occurrences in formula phi *)
+  fun check_nfv (x: string) (phi: Type) : bool =
+    not (member x (freeVarsType phi))
+
+  (* check_ffi_term t x target: true iff term t is free for x in term target *)
+  fun check_ffi_term (t: Term) (x: string) (target: Term) : bool =
+    let
+      val fvsT = freeVarsTerm t
+      fun okTerm bound tm =
+        case tm of
+          Const _ => true
+        | BVar _ => true
+        | FVar y =>
+            if x = y andalso not (member x bound) then
+              not (List.exists (fn fv => member fv bound) fvsT)
+            else true
+        | Fn (_, args) => List.all (okTerm bound) args
+        | CKappa (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CEps (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CIota (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CEmpty => true
+        | CUniv => true
+        | CSingleton a => okTerm bound a
+        | CUPair (a, b) => okTerm bound a andalso okTerm bound b
+        | COPair (a, b) => okTerm bound a andalso okTerm bound b
+        | CDunaevPair (a, b) => okTerm bound a andalso okTerm bound b
+        | CPr1 p => okTerm bound p
+        | CPr2 p => okTerm bound p
+        | CBinUnion (a, b) => okTerm bound a andalso okTerm bound b
+        | CBinInter (a, b) => okTerm bound a andalso okTerm bound b
+        | CDiff (a, b) => okTerm bound a andalso okTerm bound b
+        | CUnion a => okTerm bound a
+        | CInter a => okTerm bound a
+        | CPower a => okTerm bound a
+        | CSucc a => okTerm bound a
+        | COmega => true
+        | COn => true
+      and okType bound ty =
+        case ty of
+          TProp => true
+        | TIn (a, b) => okTerm bound a andalso okTerm bound b
+        | TEq (a, b) => okTerm bound a andalso okTerm bound b
+        | TSet a => okTerm bound a
+        | TSub (a, b) => okTerm bound a andalso okTerm bound b
+        | TProper a => okTerm bound a
+        | TTrans a => okTerm bound a
+        | TOrd a => okTerm bound a
+        | TInd a => okTerm bound a
+        | TFunc (f, a, b) => okTerm bound f andalso okTerm bound a andalso okTerm bound b
+        | TInjective (f, a, b) => okTerm bound f andalso okTerm bound a andalso okTerm bound b
+        | TArrow (a, b) => okType bound a andalso okType bound b
+        | TProd (a, b) => okType bound a andalso okType bound b
+        | TSum (a, b) => okType bound a andalso okType bound b
+        | TBottom => true
+        | TTop => true
+        | TNeg a => okType bound a
+        | TIff (a, b) => okType bound a andalso okType bound b
+        | TPi (v, _, body) =>
+            if x = v then true else okType (v :: bound) body
+        | TSigma (v, _, body) =>
+            if x = v then true else okType (v :: bound) body
+    in
+      okTerm [] target
+    end
+
+  (* check_ffi t x phi: true iff term t is free for x in formula phi (no free var of t captured) *)
+  fun check_ffi (t: Term) (x: string) (phi: Type) : bool =
+    let
+      val fvsT = freeVarsTerm t
+      fun okTerm bound tm =
+        case tm of
+          Const _ => true
+        | BVar _ => true
+        | FVar y =>
+            if x = y andalso not (member x bound) then
+              not (List.exists (fn fv => member fv bound) fvsT)
+            else true
+        | Fn (_, args) => List.all (okTerm bound) args
+        | CKappa (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CEps (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CIota (v, body) =>
+            if x = v then true else okType (v :: bound) body
+        | CEmpty => true
+        | CUniv => true
+        | CSingleton a => okTerm bound a
+        | CUPair (a, b) => okTerm bound a andalso okTerm bound b
+        | COPair (a, b) => okTerm bound a andalso okTerm bound b
+        | CDunaevPair (a, b) => okTerm bound a andalso okTerm bound b
+        | CPr1 p => okTerm bound p
+        | CPr2 p => okTerm bound p
+        | CBinUnion (a, b) => okTerm bound a andalso okTerm bound b
+        | CBinInter (a, b) => okTerm bound a andalso okTerm bound b
+        | CDiff (a, b) => okTerm bound a andalso okTerm bound b
+        | CUnion a => okTerm bound a
+        | CInter a => okTerm bound a
+        | CPower a => okTerm bound a
+        | CSucc a => okTerm bound a
+        | COmega => true
+        | COn => true
+      and okType bound ty =
+        case ty of
+          TProp => true
+        | TIn (a, b) => okTerm bound a andalso okTerm bound b
+        | TEq (a, b) => okTerm bound a andalso okTerm bound b
+        | TSet a => okTerm bound a
+        | TSub (a, b) => okTerm bound a andalso okTerm bound b
+        | TProper a => okTerm bound a
+        | TTrans a => okTerm bound a
+        | TOrd a => okTerm bound a
+        | TInd a => okTerm bound a
+        | TFunc (f, a, b) => okTerm bound f andalso okTerm bound a andalso okTerm bound b
+        | TInjective (f, a, b) => okTerm bound f andalso okTerm bound a andalso okTerm bound b
+        | TArrow (a, b) => okType bound a andalso okType bound b
+        | TProd (a, b) => okType bound a andalso okType bound b
+        | TSum (a, b) => okType bound a andalso okType bound b
+        | TBottom => true
+        | TTop => true
+        | TNeg a => okType bound a
+        | TIff (a, b) => okType bound a andalso okType bound b
+        | TPi (v, _, body) =>
+            if x = v then true else okType (v :: bound) body
+        | TSigma (v, _, body) =>
+            if x = v then true else okType (v :: bound) body
+    in
+      okType [] phi
+    end
+
+  datatype SideCondition =
+      SC_NotFreeInFormula of string * Type
+    | SC_NotFreeInTerm of string * Term
+    | SC_NotFreeInContext of string * Context
+    | SC_FreeForInFormula of Term * string * Type
+    | SC_FreeForInTerm of Term * string * Term
+    | SC_Predicative of Type
+
+  fun eval_side_condition (sc: SideCondition) : bool =
+    case sc of
+      SC_NotFreeInFormula (x, phi) => check_nfv x phi
+    | SC_NotFreeInTerm (x, t) => check_nfv_term x t
+    | SC_NotFreeInContext (x, ctx) => not (member x (freeVarsContext ctx))
+    | SC_FreeForInFormula (t, x, phi) => check_ffi t x phi
+    | SC_FreeForInTerm (t, x, target) => check_ffi_term t x target
+    | SC_Predicative phi => isPredicativeFormula phi
+
+  and isPredicativeTerm (t: Term) : bool =
+    case t of
+      Const _ => true
+    | BVar _ => true
+    | FVar _ => true
+    | Fn (_, args) => List.all isPredicativeTerm args
+    | CKappa (_, phi) => isPredicativeFormula phi
+    | CEps (_, phi) => isPredicativeFormula phi
+    | CIota (_, phi) => isPredicativeFormula phi
+    | CEmpty => true
+    | CUniv => true
+    | CSingleton a => isPredicativeTerm a
+    | CUPair (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | COPair (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | CDunaevPair (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | CPr1 p => isPredicativeTerm p
+    | CPr2 p => isPredicativeTerm p
+    | CBinUnion (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | CBinInter (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | CDiff (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | CUnion a => isPredicativeTerm a
+    | CInter a => isPredicativeTerm a
+    | CPower a => isPredicativeTerm a
+    | CSucc a => isPredicativeTerm a
+    | COmega => true
+    | COn => true
+
+  and isPredicativeFormula (ty: Type) : bool =
+    case ty of
+      TProp => true
+    | TIn (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | TEq (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | TSet a => isPredicativeTerm a
+    | TSub (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | TProper _ => false
+    | TTrans a => isPredicativeTerm a
+    | TOrd a => isPredicativeTerm a
+    | TInd a => isPredicativeTerm a
+    | TFunc (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
+    | TInjective (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
+    | TArrow (a, b) => isPredicativeFormula a andalso isPredicativeFormula b
+    | TProd (a, b) => isPredicativeFormula a andalso isPredicativeFormula b
+    | TSum (a, b) => isPredicativeFormula a andalso isPredicativeFormula b
+    | TBottom => true
+    | TTop => true
+    | TNeg a => isPredicativeFormula a
+    | TIff (a, b) => isPredicativeFormula a andalso isPredicativeFormula b
+    | TPi (_, SetSort, body) => isPredicativeFormula body
+    | TPi (_, ClassSort, _) => false
+    | TSigma (_, SetSort, body) => isPredicativeFormula body
+    | TSigma (_, ClassSort, _) => false
 
   fun freshVar (base: string) (avoid: string list) : string =
     let
@@ -8009,6 +8373,11 @@ struct
     | TokRBrace
     | TokLBrack
     | TokRBrack
+    | TokLQuote
+    | TokRQuote
+    | TokLAnti
+    | TokRAnti
+    | TokHolds
     | TokIdent of string
     | TokEOF
 
@@ -8064,6 +8433,7 @@ struct
     | "Succ" => TokSucc
     | "Top" => TokTop
     | "Bot" => TokBot
+    | "Holds" => TokHolds
     | "in" => TokInRel
     | "c=" => TokSubRel
     | _ => TokIdent w
@@ -8095,6 +8465,10 @@ struct
                 (#"-", #">" :: rest) => loop rest (TokArrow :: acc)
               | (#"=", #">" :: rest) => loop rest (TokFatArrow :: acc)
               | (#"<", #"-" :: #">" :: rest) => loop rest (TokIff :: acc)
+              | (#"<", #"<" :: rest) => loop rest (TokLQuote :: acc)
+              | (#">", #">" :: rest) => loop rest (TokRQuote :: acc)
+              | (#"[", #"[" :: rest) => loop rest (TokLAnti :: acc)
+              | (#"]", #"]" :: rest) => loop rest (TokRAnti :: acc)
               | (#"/", #"\\" :: rest) => loop rest (TokAnd :: acc)
               | (#"\\", #"/" :: rest) => loop rest (TokOr :: acc)
               | (#"c", #"=" :: rest) => loop rest (TokSubRel :: acc)
@@ -8188,6 +8562,11 @@ struct
     | TokRBrace => "}"
     | TokLBrack => "["
     | TokRBrack => "]"
+    | TokLQuote => "<<"
+    | TokRQuote => ">>"
+    | TokLAnti => "[["
+    | TokRAnti => "]]"
+    | TokHolds => "Holds"
     | TokIdent s => "Ident(" ^ s ^ ")"
     | TokEOF => "EOF"
 
@@ -8216,6 +8595,61 @@ struct
   (* Recursive-Descent Parser for NBG Terms, Formulas (Types), and Proofs      *)
   (* ========================================================================= *)
 
+  fun encodeQuotedTerm (t: Term) : Term =
+    case t of
+      Fn ("__ANTIQUOTE_TERM__", [inner]) => inner
+    | FVar x => CDunaevPair (Const "Q_FVar", Const x)
+    | Const c => CDunaevPair (Const "Q_Const", Const c)
+    | BVar i => CDunaevPair (Const "Q_BVar", Const (Int.toString i))
+    | CEmpty => CDunaevPair (Const "Q_Empty", CEmpty)
+    | CUniv => CDunaevPair (Const "Q_Univ", CEmpty)
+    | COmega => CDunaevPair (Const "Q_Omega", CEmpty)
+    | COn => CDunaevPair (Const "Q_On", CEmpty)
+    | CSingleton a => CDunaevPair (Const "Q_Singleton", encodeQuotedTerm a)
+    | CUPair (a, b) => CDunaevPair (Const "Q_UPair", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | COPair (a, b) => CDunaevPair (Const "Q_OPair", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | CDunaevPair (a, b) => CDunaevPair (Const "Q_DunaevPair", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | CPr1 p => CDunaevPair (Const "Q_Pr1", encodeQuotedTerm p)
+    | CPr2 p => CDunaevPair (Const "Q_Pr2", encodeQuotedTerm p)
+    | CBinUnion (a, b) => CDunaevPair (Const "Q_BinUnion", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | CBinInter (a, b) => CDunaevPair (Const "Q_BinInter", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | CDiff (a, b) => CDunaevPair (Const "Q_Diff", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | CUnion a => CDunaevPair (Const "Q_Union", encodeQuotedTerm a)
+    | CInter a => CDunaevPair (Const "Q_Inter", encodeQuotedTerm a)
+    | CPower a => CDunaevPair (Const "Q_Power", encodeQuotedTerm a)
+    | CSucc a => CDunaevPair (Const "Q_Succ", encodeQuotedTerm a)
+    | CKappa (x, phi) => CDunaevPair (Const "Q_Kappa", CDunaevPair (Const x, encodeQuotedFormula phi))
+    | CEps (x, phi) => CDunaevPair (Const "Q_Eps", CDunaevPair (Const x, encodeQuotedFormula phi))
+    | CIota (x, phi) => CDunaevPair (Const "Q_Iota", CDunaevPair (Const x, encodeQuotedFormula phi))
+    | Fn (f, args) =>
+        CDunaevPair (Const ("Q_Fn:" ^ f), List.foldr CDunaevPair CEmpty (List.map encodeQuotedTerm args))
+
+  and encodeQuotedFormula (ty: Type) : Term =
+    case ty of
+      TProp => CDunaevPair (Const "Q_Prop", CEmpty)
+    | TTop => CDunaevPair (Const "Q_Top", CEmpty)
+    | TBottom => CDunaevPair (Const "Q_Bot", CEmpty)
+    | TIn (a, b) => CDunaevPair (Const "Q_In", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | TEq (Fn ("__ANTIQUOTE_FORMULA__", [inner]), Const "__ANTIQUOTE_FORMULA__") => inner
+    | TEq (a, b) => CDunaevPair (Const "Q_Eq", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | TSub (a, b) => CDunaevPair (Const "Q_Sub", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | TSet a => CDunaevPair (Const "Q_Set", encodeQuotedTerm a)
+    | TProper a => CDunaevPair (Const "Q_Proper", encodeQuotedTerm a)
+    | TTrans a => CDunaevPair (Const "Q_Trans", encodeQuotedTerm a)
+    | TOrd a => CDunaevPair (Const "Q_Ord", encodeQuotedTerm a)
+    | TInd a => CDunaevPair (Const "Q_Ind", encodeQuotedTerm a)
+    | TFunc (f, a, b) => CDunaevPair (Const "Q_Func", CDunaevPair (encodeQuotedTerm f, CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b)))
+    | TInjective (f, a, b) => CDunaevPair (Const "Q_Injective", CDunaevPair (encodeQuotedTerm f, CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b)))
+    | TArrow (a, b) => CDunaevPair (Const "Q_Impl", CDunaevPair (encodeQuotedFormula a, encodeQuotedFormula b))
+    | TProd (a, b) => CDunaevPair (Const "Q_And", CDunaevPair (encodeQuotedFormula a, encodeQuotedFormula b))
+    | TSum (a, b) => CDunaevPair (Const "Q_Or", CDunaevPair (encodeQuotedFormula a, encodeQuotedFormula b))
+    | TNeg a => CDunaevPair (Const "Q_Neg", encodeQuotedFormula a)
+    | TIff (a, b) => CDunaevPair (Const "Q_Iff", CDunaevPair (encodeQuotedFormula a, encodeQuotedFormula b))
+    | TPi (x, s, body) =>
+        CDunaevPair (Const "Q_Forall", CDunaevPair (Const (x ^ ":" ^ sortToString s), encodeQuotedFormula body))
+    | TSigma (x, s, body) =>
+        CDunaevPair (Const "Q_Exists", CDunaevPair (Const (x ^ ":" ^ sortToString s), encodeQuotedFormula body))
+
   fun parseTerm (toks: Token list) : Term * Token list =
     case toks of
       TokIdent "0" :: rest => (CEmpty, rest)
@@ -8223,6 +8657,33 @@ struct
     | TokIdent "V" :: rest => (CUniv, rest)
     | TokIdent "omega" :: rest => (COmega, rest)
     | TokIdent "On" :: rest => (COn, rest)
+    | TokLQuote :: rest =>
+        (* Stage III Quotation << Formula >> or << Term >> *)
+        ((let
+            val (phi, rest1) = parseFormula rest
+            val _ =
+              case phi of
+                TEq (Const _, Const "__FORMULA_ALIAS__") => raise ParseError "Bare term in quote"
+              | _ => ()
+            val rest2 = expect TokRQuote rest1
+          in
+            (encodeQuotedFormula phi, rest2)
+          end)
+         handle ParseError _ =>
+           let
+             val (tm, rest1) = parseTerm rest
+             val rest2 = expect TokRQuote rest1
+           in
+             (encodeQuotedTerm tm, rest2)
+           end)
+    | TokLAnti :: rest =>
+        (* Stage III Antiquotation [[ Term ]] *)
+        let
+          val (tm, rest1) = parseTerm rest
+          val rest2 = expect TokRAnti rest1
+        in
+          (Fn ("__ANTIQUOTE_TERM__", [tm]), rest2)
+        end
     | TokPr1 :: TokLParen :: rest =>
         let
           val (p, rest1) = parseTerm rest
@@ -8391,6 +8852,34 @@ struct
           val rest2 = expect TokRParen rest1
         in
           (TProper t, rest2)
+        end
+    | TokHolds :: TokLParen :: rest =>
+        let
+          val (thTerm, rest1) = parseTerm rest
+          val rest2 = expect TokComma rest1
+          val (arg2, rest3) = parseTerm rest2
+        in
+          case rest3 of
+            TokComma :: rest4 =>
+              let
+                val (fmTerm, rest5) = parseTerm rest4
+                val rest6 = expect TokRParen rest5
+              in
+                (TIn (CDunaevPair (arg2, fmTerm), thTerm), rest6)
+              end
+          | _ =>
+              let
+                val rest4 = expect TokRParen rest3
+              in
+                (TIn (CDunaevPair (CEmpty, arg2), thTerm), rest4)
+              end
+        end
+    | TokLAnti :: rest =>
+        let
+          val (tm, rest1) = parseTerm rest
+          val rest2 = expect TokRAnti rest1
+        in
+          (TEq (Fn ("__ANTIQUOTE_FORMULA__", [tm]), Const "__ANTIQUOTE_FORMULA__"), rest2)
         end
     | TokForall :: TokLParen :: rest =>
         let
@@ -8805,6 +9294,7 @@ struct
                   "NBG_Predicative" => NBG_Predicative
                 | "MK_Impredicative" => MK_Impredicative
                 | "MK_TarskiUniverses" => MK_TarskiUniverses
+                | "StageIII_MetaQuotation" => StageIII_MetaQuotation
                 | _ => raise ParseError ("Unknown theory level: " ^ thName)
             in
               loop rest2 (TheoryDirective lvl :: acc)
@@ -9296,7 +9786,10 @@ struct
     ("nbg_thm_11_cantor_diagonal", proofCantorDiagonal),
     ("nbg_thm_12_self_in_singleton", proofSelfInSingleton),
     ("nbg_thm_13_self_in_succ", proofSelfInSucc),
-    ("nbg_thm_14_sub_succ", proofSubSucc)
+    ("nbg_thm_14_sub_succ", proofSubSucc),
+    ("nbg_thm_15_russell_proper", proofRussellProper),
+    ("nbg_thm_16_subclass_antisym", proofSubclassAntisym),
+    ("nbg_thm_17_empty_set_unique", proofEmptySetUnique)
   ]
 
   fun exportTheoremsToLPString (thms: (string * Expr) list) : string =

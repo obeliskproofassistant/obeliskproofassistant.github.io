@@ -85,8 +85,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn('class="nbg-row"', self.manual_html)
         with open(os.path.join(SITE_DIR, "data", "nbg_library.json"), "r", encoding="utf-8") as f:
             lib = json.load(f)
-        self.assertEqual(lib["count"], 17)
-        self.assertEqual(len(lib["theorems"]), 17)
+        self.assertEqual(lib["count"], 20)
+        self.assertEqual(len(lib["theorems"]), 20)
         self.assertEqual(self.manual_html.count('class="nbg-row"'), len(lib["theorems"]))
 
     def test_verified_entries_have_no_cheating_axioms(self):

@@ -1,7 +1,7 @@
 {
   "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
-  "source_sha256_prefix": "6e9b363032714391",
-  "count": 17,
+  "source_sha256_prefix": "dae9b14418906b6d",
+  "count": 20,
   "theorems": [
     {
       "name": "empty_class_no_elements",
@@ -121,6 +121,27 @@
       "proof_size": 9,
       "normalized_size": 9,
       "description": "Elimination for the Dunaev Cartesian product: membership yields set components u, v with p = [u,v]_D."
+    },
+    {
+      "name": "inter_sub_left",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in { u | (u in A /\\ u in B) } -> z in A))))",
+      "proof_size": 10,
+      "normalized_size": 10,
+      "description": "Binary class intersection A inter B is a subclass of the left operand A."
+    },
+    {
+      "name": "inter_sub_right",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in { u | (u in A /\\ u in B) } -> z in B))))",
+      "proof_size": 10,
+      "normalized_size": 10,
+      "description": "Binary class intersection A inter B is a subclass of the right operand B."
+    },
+    {
+      "name": "union_sub_left",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in A -> z in { u | (u in A \\/ u in B) }))))",
+      "proof_size": 13,
+      "normalized_size": 13,
+      "description": "Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension)."
     }
   ]
 }
