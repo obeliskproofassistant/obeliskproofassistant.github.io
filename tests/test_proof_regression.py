@@ -33,10 +33,20 @@ class TestProofRegression(unittest.TestCase):
             cls.proofs_html = f.read()
 
     def test_database_entries_count(self):
-        """Database must contain 6 sections and 54 formal items."""
+        """Database must contain 6 sections and 59 formal items (including Enc, Dec, Emb, ProofsOf, Theorems)."""
         self.assertEqual(len(self.db["sections"]), 6)
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
-        self.assertEqual(total_entries, 54)
+        self.assertEqual(total_entries, 59)
+
+    def test_two_variants_and_decoupled_operators_present(self):
+        """manual.html must include Enc, Dec, Emb, ProofsOf, Theorems, Two Variants architecture, and 3 global toggles."""
+        for eid in ("def-enc", "def-dec", "def-emb", "def-proofs-of", "def-theorems"):
+            self.assertIn(f'id="{eid}"', self.manual_html)
+        self.assertIn('id="two-variants-architecture"', self.manual_html)
+        self.assertIn('id="global-config-bar"', self.manual_html)
+        self.assertIn('setTerminologyMode', self.manual_html)
+        self.assertIn('setObjectTheory', self.manual_html)
+        self.assertIn('setAssistantVariant', self.manual_html)
 
     def test_certificate_pages_exist_and_non_empty(self):
         """Every entry must have a corresponding verification certificate in proofs/."""
