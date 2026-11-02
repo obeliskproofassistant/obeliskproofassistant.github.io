@@ -13,12 +13,12 @@
         displayMath: [['$$', '$$'], ['\\[', '\\]']],
         processEscapes: true,
         macros: {
-          llbracket: '⟦',
-          rrbracket: '⟧',
-          llbrackets: '⟦',
-          rrbrackets: '⟧',
-          lsemantic: '⟦',
-          rsemantic: '⟧'
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
         }
       },
       options: {
@@ -321,7 +321,7 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ ((\\forall (x : \\mathsf{Class})\\; \\phi) \\to \\phi[t/x]) \]
+        \[ ((\forall (x : \mathsf{Class})\; \phi) \to \phi[t/x]) \]
       </div>
       <div class="unicode-box">
         <strong>Clean Unicode:</strong> (∀(x : Class) φ) → φ[t/x]
@@ -335,7 +335,7 @@
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\\mathrm{FFI}(t, \mathbf{v}_x, \\phi) : \\mathsf{Bool}\)</div>
+      <div class="syntax-display">\(\mathrm{FFI}(t, \mathbf{v}_x, \phi) : \mathsf{Bool}\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#ffi-t-vx-phi" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -370,7 +370,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( \langle A, B \rangle_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>
