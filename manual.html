@@ -3023,7 +3023,9 @@ val def_item_3_22_class_if = DefThm (lhs, rhs);</code></pre>
               <strong style="color: #fff; margin-left: 6px;">simple_if (metalevel conditional over Type_Expression)</strong>
               <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Because semantic quantification ∀(T : Type) is forbidden in MK/NBG (type Type = Nonstored.t has no carrier class), simple_if is quantified at the metalevel over syntactic type expressions T_e : Type_Expression around the quoted formula ◁ ... ⟦T_e⟧ ... ▷.</div></details>
               <div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>∀(T<sub style="font-size:0.76em;">e</sub>: Type_Expression), ◁ (simple_if: (Bool → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>⟧)))) ▷</code></span><span class="view-not-unambig"><code>∀(T<sub style="font-size:0.76em;">e</sub> :: Type_Expression), ◁ (simple_if :: (Bool → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>⟧)))) ▷</code></span> &nbsp;|&nbsp; <span class="view-not-std"><code>(◁·▷: (Syn → Stmt))</code></span><span class="view-not-unambig"><code>(◁·▷ :: (Syn → Stmt))</code></span></div>
-              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>fun simple_if (T_e : Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_23_simple_if = simple_if_then_else_def_entry ();</code></div>
               <div style="margin-top: 8px;">
                 <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-23-simple-if', this)" title="Toggle inline SML proof derivation">
                   <span class="proof-btn-icon">📜</span> Proof Program
@@ -3049,7 +3051,9 @@ val def_item_3_22_class_if = DefThm (lhs, rhs);</code></pre>
                       <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-23-simple-if')" title="Copy SML proof script">📋 Copy SML</button>
                     </div>
                     <pre class="code-block"><code id="code-item-3-23-simple-if">(* Conservative Definition Specification *)
-val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
+fun simple_if (T_e : Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_23_simple_if = simple_if_then_else_def_entry ();</code></pre>
                   </div>
                   <div class="proof-audit-pane">
                     <div class="proof-pane-header">
@@ -3090,7 +3094,9 @@ val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
               <strong style="color: #fff; margin-left: 6px;">if_dep (dependent conditional over Bool → Type_Expression)</strong>
               <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Dependent conditional constructor if_dep (displayed as if_{dep}) quantified at the metalevel over syntactic type-family expressions T_e : (Bool → Type_Expression). For boolean condition b : Bool and branches t₁ : ⟦T_e(true)⟧, t₂ : ⟦T_e(false)⟧, if_dep(b, t₁, t₂) has dependent type ⟦T_e(b)⟧ and reduces to t₁ on true and t₂ on false.</div></details>
               <div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>∀(T<sub style="font-size:0.76em;">e</sub>: (Bool → Type_Expression)), ◁ (if<sub style="font-size:0.76em;">dep</sub>: (∏(b: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code></span><span class="view-not-unambig"><code>∀(T<sub style="font-size:0.76em;">e</sub> :: (Bool → Type_Expression)), ◁ (if<sub style="font-size:0.76em;">dep</sub> :: (∏(b :: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code></span></div>
-              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>fun if_dep (T_e : Bool -&gt; Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_24_if_dep = if_dep_def_entry ();</code></div>
               <div style="margin-top: 8px;">
                 <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-24-dependent-if', this)" title="Toggle inline SML proof derivation">
                   <span class="proof-btn-icon">📜</span> Proof Program
@@ -3116,7 +3122,9 @@ val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
                       <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-24-dependent-if')" title="Copy SML proof script">📋 Copy SML</button>
                     </div>
                     <pre class="code-block"><code id="code-item-3-24-dependent-if">(* Conservative Definition Specification *)
-val def_item_3_24_dependent_if = DefThm (lhs, rhs);</code></pre>
+fun if_dep (T_e : Bool -&gt; Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_24_if_dep = if_dep_def_entry ();</code></pre>
                   </div>
                   <div class="proof-audit-pane">
                     <div class="proof-pane-header">

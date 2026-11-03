@@ -2359,7 +2359,9 @@ val def_item_3_22_class_if = DefThm (lhs, rhs);</code></pre>
             
 
       <div class="proof-card" id="card-item-3-23-simple-if" data-num="3.23" data-classification="definition" data-search="3.23 simple_if (metalevel conditional over type_expression) definition ∀(t_e : type_expression), ◁ ((simple_if(⟦t_e⟧) : (bool → (⟦t_e⟧ → (⟦t_e⟧ → ⟦t_e⟧)))) ∧ ∀(t₁ : ⟦t_e⟧) ∀(t₂ : ⟦t_e⟧) ((simple_if(⟦t_e⟧, true, t₁, t₂) = t₁) ∧ (simple_if(⟦t_e⟧, false, t₁, t₂) = t₂))) ▷ (* conservative definition specification *)
-val def_item_3_23_simple_if = defthm (lhs, rhs);">
+fun simple_if (t_e : type_expression) (b : bool) (t1 : term) (t2 : term) : term =
+  if b then t1 else t2;
+val def_item_3_23_simple_if = simple_if_then_else_def_entry ();">
         <div class="proof-card-header">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <a href="manual.html#3.23" class="entry-num-link" title="Navigate to reference manual entry">3.23</a>
@@ -2397,7 +2399,9 @@ val def_item_3_23_simple_if = defthm (lhs, rhs);">
             <button class="btn-copy-code" onclick="copyCode(this, 'gcode-item-3-23-simple-if')" title="Copy SML script">📋 Copy SML</button>
           </div>
           <pre class="code-block"><code id="gcode-item-3-23-simple-if">(* Conservative Definition Specification *)
-val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
+fun simple_if (T_e : Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_23_simple_if = simple_if_then_else_def_entry ();</code></pre>
         </div>
         
         <div class="proof-audit-pane" style="margin-top: 10px;">
@@ -2418,7 +2422,9 @@ val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
             
 
       <div class="proof-card" id="card-item-3-24-dependent-if" data-num="3.24" data-classification="definition" data-search="3.24 if_dep (dependent conditional over bool → type_expression) definition ∀(t_e : (bool → type_expression)), ◁ ((if_dep : π(b : bool), ⟦t_e(true)⟧ → (⟦t_e(false)⟧ → ⟦t_e(b)⟧)) ∧ ∀(b : bool) ∀(t₁ : ⟦t_e(true)⟧) ∀(t₂ : ⟦t_e(false)⟧) ((if_dep(b, t₁, t₂) : ⟦t_e(b)⟧) ∧ ((if_dep(true, t₁, t₂) = t₁) ∧ (if_dep(false, t₁, t₂) = t₂)))) ▷ (* conservative definition specification *)
-val def_item_3_24_dependent_if = defthm (lhs, rhs);">
+fun if_dep (t_e : bool -&gt; type_expression) (b : bool) (t1 : term) (t2 : term) : term =
+  if b then t1 else t2;
+val def_item_3_24_if_dep = if_dep_def_entry ();">
         <div class="proof-card-header">
           <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
             <a href="manual.html#3.24" class="entry-num-link" title="Navigate to reference manual entry">3.24</a>
@@ -2456,7 +2462,9 @@ val def_item_3_24_dependent_if = defthm (lhs, rhs);">
             <button class="btn-copy-code" onclick="copyCode(this, 'gcode-item-3-24-dependent-if')" title="Copy SML script">📋 Copy SML</button>
           </div>
           <pre class="code-block"><code id="gcode-item-3-24-dependent-if">(* Conservative Definition Specification *)
-val def_item_3_24_dependent_if = DefThm (lhs, rhs);</code></pre>
+fun if_dep (T_e : Bool -&gt; Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_24_if_dep = if_dep_def_entry ();</code></pre>
         </div>
         
         <div class="proof-audit-pane" style="margin-top: 10px;">

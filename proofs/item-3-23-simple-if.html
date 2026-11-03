@@ -577,7 +577,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
       <pre class="code-block"><code>(* Conservative Definition Specification *)
-val def_item_3_23_simple_if = DefThm (lhs, rhs);</code></pre>
+fun simple_if (T_e : Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
+  if b then t1 else t2;
+val def_item_3_23_simple_if = simple_if_then_else_def_entry ();</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>
