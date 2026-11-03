@@ -502,12 +502,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathrm{simple\_if} : \Pi (\alpha \in \mathsf{Type}).\; (\mathsf{Bool} \to (\alpha \to (\alpha \to \alpha))) \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket) \]
+        \[ \mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; (\mathsf{Bool} \to (\alpha \to (\alpha \to \alpha))) \quad (\llbracket \mathrm{simple\_if}(\alpha, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket) \quad (\llbracket \mathrm{simple\_if}(\alpha, \mathrm{false}, t_1, t_2) \rrbracket = \llbracket t_2 \rrbracket) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> simple_if : ∏(α : Type). (Bool → (α → (α → α   ((⟦simple_if α true t1 t2⟧ = ⟦t1⟧), (⟦simple_if α false t1 t2⟧ = ⟦t2⟧)))))
+        <strong>Clean Unicode:</strong> simple_if : ∏(α : Type). (Bool → (α → (α → α))); (⟦simple_if(α, true, t₁, t₂)⟧ = ⟦t₁⟧); (⟦simple_if(α, false, t₁, t₂)⟧ = ⟦t₂⟧)
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Non-dependent type-theoretic conditional constructor working parametrically over any metatype α : Type, with reduction rules for b = true and b = false under denotation brackets ⟦...⟧.</div>
     </div>
 
     
@@ -516,7 +516,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</div>
+      <div class="syntax-display">\(\alpha : \mathsf{Type}, \quad t_1 : \alpha,  \quad t_2 : \alpha\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#simple-if-typing" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>

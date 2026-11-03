@@ -507,7 +507,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       <div class="unicode-box">
         <strong>Clean Unicode:</strong> ((∀(α : Class) ((α ∈ On) → ((∀(β : Class) ((β ∈ α) → φ(β))) → φ(α)))) → ∀(α : Class) ((α ∈ On) → φ(α)))
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> On is a Class object (On : Class). Ordinal induction is formulated as a formula in Morse–Kelley class theory, accompanied by a constructive proof program.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Transfinite induction over the class of ordinals (On : Class). Syntactic side condition (PEpsIndAx_prf in newchecker.ML): bound variable v_β must be distinct from v_α (Fresh(v_β, v_α)) and not free in φ(α) (NFV(v_β, φ(α))). Semantic justification: membership ∈ is well-founded on On (WF(∈, On)), derived in Morse–Kelley from the Regularity Axiom (3.12) by taking the ∈-minimal element of {α ∈ On | ¬φ(α)}.</div>
     </div>
 
     
@@ -516,7 +516,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\mathrm{On} : \mathsf{Class},  \quad \mathrm{WF}(\in, \mathrm{On})\)</div>
+      <div class="syntax-display">\((\mathrm{Fresh}(\mathbf{v}_\beta, \mathbf{v}_\alpha) \land \mathrm{NFV}(\mathbf{v}_\beta, \phi(\alpha)))\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#ord-induction" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
