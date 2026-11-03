@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -795,20 +805,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 
         <tr id="simple-if-typing" class="anchor-highlight">
           <td>
-            <strong style="color: var(--accent-cyan); font-family: monospace;">simple_if_typing(α, t1, t2)</strong>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">simple_if_typing(T_e, t1, t2)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\((((\alpha : \mathsf{Type}) \land ((t_1 : \alpha) \land (t_2 : \alpha))) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket))\)</div>
-              <div class="view-membership" style="display:none;">\((((\alpha : \mathsf{Type}) \land ((t_1 : \alpha) \land (t_2 : \alpha))) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket))\)</div>
+              <div class="view-typing">\(\forall (T_e : \mathsf{Type\_Expression}), \; \triangleleft\; (((t_1 : \llbracket T_e \rrbracket) \land (t_2 : \llbracket T_e \rrbracket)) \to (\llbracket \mathrm{simple\_if}(T_e, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket)) \;\triangleright\)</div>
+              <div class="view-membership" style="display:none;">\(\forall (T_e : \mathsf{Type\_Expression}), \; \triangleleft\; (((t_1 : \llbracket T_e \rrbracket) \land (t_2 : \llbracket T_e \rrbracket)) \to (\llbracket \mathrm{simple\_if}(T_e, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket)) \;\triangleright\)</div>
             </div>
-            <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div></details>
+            <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Metalevel polymorphism over syntactic type expression T_e : Type_Expression ensuring branches t1 and t2 share common evaluated metatype ⟦T_e⟧ without quantifying over semantic Type.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(\alpha : \mathsf{Type}, t_1, t_2 : \alpha).\; \mathrm{Normalizes}(\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket, t_1)\)</div>
+              <div style="margin-top: 2px;">\(\forall(T_e : \mathsf{Type\_Expression}, t_1, t_2 : \llbracket T_e \rrbracket).\; \mathrm{Normalizes}(\llbracket \mathrm{simple\_if}(T_e, \mathrm{true}, t_1, t_2) \rrbracket, \llbracket t_1 \rrbracket)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>EvalSimpleIf / RedStep</code></div>
             </div>
         
@@ -818,13 +828,13 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\alpha : \mathcal{U}_i\)</div>
-              <div class="view-membership" style="display:none;">\(\alpha : \mathcal{U}_i\)</div>
+              <div class="view-typing">\(T_e : \mathsf{Type\_Expression}\)</div>
+              <div class="view-membership" style="display:none;">\(T_e : \mathsf{Type\_Expression}\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
-              <strong>Level 3 Ambient:</strong> \(\mathrm{stratifiedUniverses}\)
+              <strong>Level 3 Ambient:</strong> \(\mathrm{inductiveTypeAST}(\mathsf{Type\_Expression})\)
             </div>
         
           </td>
@@ -836,20 +846,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 
         <tr id="dependent-if-typing" class="anchor-highlight">
           <td>
-            <strong style="color: var(--accent-cyan); font-family: monospace;">dependent_if_typing(T, b, t1, t2)</strong>
+            <strong style="color: var(--accent-cyan); font-family: monospace;">dependent_if_typing(T_e, b, t1, t2)</strong>
             <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;"><span class="badge" style="background: #10b981;">Decidable / Computable</span></div>
             <div style="font-size: 0.72rem; color: #f472b6; margin-top: 4px; font-weight: 600;">Metalevel 1 Formula (is_side_condition=true)</div>
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div>
-              <div class="view-membership" style="display:none;">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div>
+              <div class="view-typing">\(\forall (T_e : (\mathsf{Bool} \to \mathsf{Type\_Expression})), \; \triangleleft\; (\mathrm{typeof}(\llbracket \mathrm{dependent\_if}(T_e, b, t_1, t_2) \rrbracket) = \llbracket \mathrm{simple\_if}(\mathsf{Type\_Expression}, b, \mathrm{typeof}(t_1), \mathrm{typeof}(t_2)) \rrbracket) \;\triangleright\)</div>
+              <div class="view-membership" style="display:none;">\(\forall (T_e : (\mathsf{Bool} \to \mathsf{Type\_Expression})), \; \triangleleft\; (\mathrm{typeof}(\llbracket \mathrm{dependent\_if}(T_e, b, t_1, t_2) \rrbracket) = \llbracket \mathrm{simple\_if}(\mathsf{Type\_Expression}, b, \mathrm{typeof}(t_1), \mathrm{typeof}(t_2)) \rrbracket) \;\triangleright\)</div>
             </div>
-            <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div></details>
+            <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing syntactic branch type expressions from boolean value b using simple_if at Type_Expression and evaluating via ⟦...⟧.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(T : \mathsf{Bool} \to \mathsf{Type}, b : \mathsf{Bool}, t_1, t_2).\; \mathrm{TypeChecked}(T, b, t_1, t_2)\)</div>
+              <div style="margin-top: 2px;">\(\forall(T_e : \mathsf{Bool} \to \mathsf{Type\_Expression}, b : \mathsf{Bool}, t_1, t_2).\; \mathrm{TypeChecked}(T_e, b, t_1, t_2)\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>DependentIfTypeCheck</code></div>
             </div>
         
@@ -859,8 +869,8 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(T : (\mathsf{Bool} \to (\mathsf{Type} \land b : \mathsf{Bool}))\)</div>
-              <div class="view-membership" style="display:none;">\(T : (\mathsf{Bool} \to (\mathsf{Type} \land b : \mathsf{Bool}))\)</div>
+              <div class="view-typing">\(T_e : ((\mathsf{Bool} \to \mathsf{Type\_Expression}) \land b : \mathsf{Bool})\)</div>
+              <div class="view-membership" style="display:none;">\(T_e : ((\mathsf{Bool} \to \mathsf{Type\_Expression}) \land b : \mathsf{Bool})\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             

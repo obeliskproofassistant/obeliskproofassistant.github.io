@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -408,6 +418,15 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     body.mode-notation-standard div.view-not-std { display: block !important; }
     body:not(.mode-notation-standard) div.view-not-std { display: none !important; }
     body:not(.mode-notation-standard) div.view-not-unambig { display: block !important; }
+    /* Type Quantification Mode Switching (triangle / anglebar / shorthand) */
+    .view-typequant-anglebar, .view-typequant-shorthand { display: none !important; }
+    .view-typequant-triangle { display: inline !important; }
+    body.mode-typequant-anglebar .view-typequant-triangle,
+    body.mode-typequant-anglebar .view-typequant-shorthand { display: none !important; }
+    body.mode-typequant-anglebar .view-typequant-anglebar { display: inline !important; }
+    body.mode-typequant-shorthand .view-typequant-triangle,
+    body.mode-typequant-shorthand .view-typequant-anglebar { display: none !important; }
+    body.mode-typequant-shorthand .view-typequant-shorthand { display: inline !important; }
     .config-lines-box {
       background: rgba(15, 23, 42, 0.92);
       border: 1px solid rgba(56, 189, 248, 0.32);
@@ -441,7 +460,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   <div id="global-presentation-config-bar" class="config-lines-box">
     <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2px;">
       <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation &amp; Notation Configuration (Synchronized Across All Pages):</span>
-      <a href="symbols.html" style="font-size: 0.78rem; color: #38bdf8; text-decoration: underline dotted;">Open Master Symbol &amp; Notation Reference (&ldquo;:&rdquo; vs &ldquo;::&rdquo;) &rarr;</a>
+      <a href="symbols.html" style="font-size: 0.78rem; color: #38bdf8; text-decoration: underline dotted;">Open Master Symbol, Notation &amp; Color System Reference (&ldquo;:&rdquo; vs &ldquo;::&rdquo;) &rarr;</a>
     </div>
     <div class="config-line-row">
       <span class="config-line-label">Notation Option:</span>
@@ -450,14 +469,19 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     </div>
     <div class="config-line-row">
       <span class="config-line-label">Unicode / LaTeX:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setRenderFormat('latex')" id="btn-fmt-latex" title="Render formulas with MathJax LaTeX (copiable as LaTeX and clickable symbols)">LaTeX (MathJax)</button>
+      <button type="button" class="dialect-btn active" onclick="window.setRenderFormat('latex')" id="btn-fmt-latex" title="Render formulas with Colorful MathJax LaTeX (copiable as clean LaTeX and clickable symbols)">Colorful LaTeX (MathJax)</button>
       <button type="button" class="dialect-btn" onclick="window.setRenderFormat('unicode')" id="btn-fmt-unicode" title="Render formulas with syntax-highlighted Colorful Unicode and clickable symbol links">Colorful Unicode</button>
     </div>
     <div class="config-line-row">
       <span class="config-line-label">Assistant Variant:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setAssistantVariant('both')" id="cfg-variant-both" title="Display both Proof Assistant Variants and their VariantBridge translation">Both Variants</button>
-      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v1')" id="cfg-variant-v1" title="Focus on Variant 1: Syntactical (1st-Order Proof Assistant, uses ProofOf / ProofsOf on Stmt syntax trees)">Variant 1: Syntactical (1st-Order)</button>
+      <button type="button" class="dialect-btn active" onclick="window.setAssistantVariant('v1')" id="cfg-variant-v1" title="Focus on Variant 1: Syntactical (1st-Order Proof Assistant, uses ProofOf / ProofsOf on Stmt syntax trees)">Variant 1: Syntactical (1st-Order)</button>
       <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v2')" id="cfg-variant-v2" title="Focus on Variant 2: Semantical (RoqC / Higher-Order Formulas-as-Types, no ProofOf needed)">Variant 2: Semantical (Higher-Order)</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Type Quantification:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setTypeQuantMode('triangle')" id="btn-tq-triangle" title="Syntactic Metalevel Quantification over Type_Expression using ◁ ... ⟦T_e⟧ ... ▷ (avoids quantifying over semantic Type)">Syntactic: ∀(T<sub>e</sub> : Type_Expression), ◁ ... ⟦T<sub>e</sub>⟧ ... ▷</button>
+      <button type="button" class="dialect-btn" onclick="window.setTypeQuantMode('anglebar')" id="btn-tq-anglebar" title="Syntactic Metalevel Quantification over Type_Expression using ⟨| ... [|T_e|] ... |⟩">Angle-Bar: ∀(T<sub>e</sub> : Type_Expression), ⟨| ... [|T<sub>e</sub>|] ... |⟩</button>
+      <button type="button" class="dialect-btn" onclick="window.setTypeQuantMode('shorthand')" id="btn-tq-shorthand" title="Informal Polymorphic Type Shorthand ∀(T : Type) (syntactic sugar only)">Polymorphic Shorthand: ∀(T : Type)</button>
     </div>
     <div class="config-line-row">
       <span class="config-line-label">Proof Display:</span>
@@ -472,7 +496,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   </div>
   <script>
     (function() {
-      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact","notationPrecision":"unambiguous","renderFormat":"latex"}');
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact","notationPrecision":"unambiguous","renderFormat":"latex","typeQuantMode":"triangle"}');
       window.setNotationPrecision = function(mode) {
         window.OBELISK_PRESENTATION_CONFIG.notationPrecision = mode;
         try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
@@ -481,7 +505,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         } else {
           document.body.classList.remove('mode-notation-standard');
         }
-        ['btn-not-unambig', ' btn-not-unambig-2'].forEach(function(id) {
+        ['btn-not-unambig', 'btn-not-unambig-2'].forEach(function(id) {
           var el = document.getElementById(id.trim());
           if (el) el.classList.toggle('active', mode !== 'standard');
         });
@@ -494,6 +518,47 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
           });
         }
+      };
+      window.setTypeQuantMode = function(mode) {
+        window.OBELISK_PRESENTATION_CONFIG.typeQuantMode = mode;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        document.body.classList.remove('mode-typequant-anglebar', 'mode-typequant-shorthand');
+        if (mode === 'anglebar') document.body.classList.add('mode-typequant-anglebar');
+        else if (mode === 'shorthand') document.body.classList.add('mode-typequant-shorthand');
+        ['btn-tq-triangle', 'btn-tq-triangle-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', mode !== 'anglebar' && mode !== 'shorthand');
+        });
+        ['btn-tq-anglebar', 'btn-tq-anglebar-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', mode === 'anglebar');
+        });
+        ['btn-tq-shorthand', 'btn-tq-shorthand-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', mode === 'shorthand');
+        });
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise().then(function() {
+            if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
+          });
+        }
+      };
+      window.setAssistantVariant = function(variant) {
+        var v = (variant === 'v2') ? 'v2' : 'v1';
+        ['btn-variant-v1', 'cfg-variant-v1', 'btn-variant-v2', 'cfg-variant-v2'].forEach(function(id) {
+          var b = document.getElementById(id);
+          if (b) b.classList.remove('active');
+        });
+        if (v === 'v2') {
+          ['btn-variant-v2', 'cfg-variant-v2'].forEach(function(id) { var b = document.getElementById(id); if (b) b.classList.add('active'); });
+          document.querySelectorAll('.variant-v2-view').forEach(function(el) { el.style.display = 'block'; });
+          document.querySelectorAll('.variant-v1-details').forEach(function(el) { el.style.display = 'none'; el.open = false; });
+        } else {
+          ['btn-variant-v1', 'cfg-variant-v1'].forEach(function(id) { var b = document.getElementById(id); if (b) b.classList.add('active'); });
+          document.querySelectorAll('.variant-v2-view').forEach(function(el) { el.style.display = 'none'; });
+          document.querySelectorAll('.variant-v1-details').forEach(function(el) { el.style.display = 'block'; el.open = true; });
+        }
+        try { localStorage.setItem('obelisk_assistant_variant', v); } catch (e) {}
       };
       window.setRenderFormat = function(fmt) {
         window.OBELISK_PRESENTATION_CONFIG.renderFormat = fmt;
@@ -553,7 +618,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         if (tBtn) tBtn.textContent = (fmt === 'unicode') ? 'Show LaTeX (MathJax)' : 'Show Colorful Unicode';
       };
       window.applyObeliskConfig = function() {
-        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact', notationPrecision: 'unambiguous', renderFormat: 'latex'};
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact', notationPrecision: 'unambiguous', renderFormat: 'latex', typeQuantMode: 'triangle'};
         document.querySelectorAll('.proof-row').forEach(function(r) {
           r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
         });
@@ -569,6 +634,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
         if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
         window.setNotationPrecision(cfg.notationPrecision || 'unambiguous');
+        window.setTypeQuantMode(cfg.typeQuantMode || 'triangle');
+        var savedVar = localStorage.getItem('obelisk_assistant_variant') || 'v1';
+        window.setAssistantVariant(savedVar === 'v2' ? 'v2' : 'v1');
         if (cfg.renderFormat === 'unicode') window.setRenderFormat('unicode');
       };
       window.setObeliskConfig = function(key, val) {
@@ -581,6 +649,44 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   </script>
 
     
+    
+<div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 12px 16px; margin: 1rem 0;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+    <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8;">🎨 Uniform 7-Category Color System (Identical in MathJax LaTeX, Colorful Unicode &amp; PDF):</span>
+    <span style="font-size: 0.75rem; color: #94a3b8;">Copying any MathJax formula copies clean standard LaTeX without color macros</span>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 8px; font-size: 0.8rem;">
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #fde047;">
+      <strong style="color: #fde047;">1. Quantifiers &amp; Binders (<code>#fde047</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>&forall;</code>, <code>&exist;</code>, <code>&exist;!</code>, <code>&prod;</code>, <code>&lambda;</code>, <code>&Lambda;</code>, <code>&Sigma;</code>, <code>&Pi;</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+      <strong style="color: #38bdf8;">2. Connectives &amp; Turnstile (<code>#38bdf8</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>&rarr;</code>, <code>&harr;</code>, <code>&and;</code>, <code>&or;</code>, <code>&not;</code>, <code>&vdash;</code>, <code>&perp;</code>, <code>&top;</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #34d399;">
+      <strong style="color: #34d399;">3. Set/Class Relations &amp; Ops (<code>#34d399</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>&isin;</code>, <code>&notin;</code>, <code>&sube;</code>, <code>&cup;</code>, <code>&cap;</code>, <code>&empty;</code>, <code>&#x1D4AB;</code>, <code>&bigcup;</code>, <code>&omega;</code>, <code>=</code>, <code>&ne;</code>, <code>:=</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #c084fc;">
+      <strong style="color: #c084fc;">4. Quotation &amp; Eval Brackets (<code>#c084fc</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>&lang;&middot;&rang;</code>, <code>&#x27E6;&middot;&#x27E7;</code>, <code>&#x25C1;&middot;&#x25B7;</code>, <code>&lang;|&middot;|&rang;</code>, <code>[|&middot;|]</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f472b6;">
+      <strong style="color: #f472b6;">5. Metavariables &amp; Theories (<code>#f472b6</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>v<sub>x</sub></code>, <code>v<sub>y</sub></code>, <code>v<sub>C</sub></code>, <code>T<sub>e</sub></code>, <code>c<sub>x</sub></code>, <code>&tau;<sub>MK</sub></code>, <code>&tau;<sub>NBG</sub></code>, <code>&#x1D4B2;</code>, <code>&Gamma;</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #22d3ee;">
+      <strong style="color: #22d3ee;">6. Sorts &amp; Syntax Collections (<code>#22d3ee</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>Class</code>, <code>Set</code>, <code>Bool</code>, <code>Type_Expression</code>, <code>Fm</code>, <code>Stmt</code>, <code>Ctx</code>, <code>Prf</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #fb923c;">
+      <strong style="color: #fb923c;">7. Predicates, Pairs &amp; Keywords (<code>#fb923c</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>isSet</code>, <code>[A, B]<sub>D</sub></code>, <code>&pi;<sub>1</sub></code>, <code>&pi;<sub>2</sub></code>, <code>sss</code>, <code>NFV</code>, <code>FFI</code>, <code>Enc</code>, <code>Dec</code></span>
+    </div>
+  </div>
+</div>
+
     <div style="background: rgba(30, 41, 59, 0.78); border: 1px solid rgba(56, 189, 248, 0.42); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem;">
       <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #38bdf8;">Two Switchable Notation Options: Standard (&ldquo;:&rdquo;) vs. Non-Ambiguous (&ldquo;::&rdquo;)</div>
       <p style="font-size: 0.93rem; color: #e2e8f0; margin: 0.5rem 0; line-height: 1.6;">
@@ -690,10 +796,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td><strong style="color: #f8fafc;">3.24 Dependent Conditional (dependent_if)</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(dependent_if: (∏(T: (Bool → Type)) (b: Bool), (T(true) → (T(false) → T(b)))))</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub>: (Bool → Type_Expression)), ◁ (dependent_if: (∏(b: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(dependent_if :: (∏(T :: (Bool → Type)) (b :: Bool), (T(true) → (T(false) → T(b)))))</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub> :: (Bool → Type_Expression)), ◁ (dependent_if :: (∏(b :: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-24-dependent-if" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -706,10 +812,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td><strong style="color: #f8fafc;">3.23 Simple Conditional (simple_if)</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(simple_if: (∏(α: Type), (Bool → (α → (α → α)))))</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub>: Type_Expression), ◁ (simple_if: (Bool → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>⟧)))) ▷</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(simple_if :: (∏(α :: Type), (Bool → (α → (α → α)))))</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub> :: Type_Expression), ◁ (simple_if :: (Bool → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>⟧)))) ▷</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-23-simple-if" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -830,14 +936,14 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         
           <tr id="sym-π₁">
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
-              <a href="manual.html#item-3-41" style="color: #38bdf8; text-decoration: none;">π₁</a>
+              <a href="manual.html#item-3-41" style="color: #38bdf8; text-decoration: none;">π<sub style="font-size:0.76em;">1</sub></a>
             </td>
             <td><strong style="color: #f8fafc;">3.41 First Dunaev Projection</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(π₁: (Class → Class))</code>
+              <code>(π<sub style="font-size:0.76em;">1</sub>: (Class → Class))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(π₁ :: (Class → Class))</code>
+              <code>(π<sub style="font-size:0.76em;">1</sub> :: (Class → Class))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-41" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -846,14 +952,14 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         
           <tr id="sym-π₂">
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
-              <a href="manual.html#item-3-42" style="color: #38bdf8; text-decoration: none;">π₂</a>
+              <a href="manual.html#item-3-42" style="color: #38bdf8; text-decoration: none;">π<sub style="font-size:0.76em;">2</sub></a>
             </td>
             <td><strong style="color: #f8fafc;">3.42 Second Dunaev Projection</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(π₂: (Class → Class))</code>
+              <code>(π<sub style="font-size:0.76em;">2</sub>: (Class → Class))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(π₂ :: (Class → Class))</code>
+              <code>(π<sub style="font-size:0.76em;">2</sub> :: (Class → Class))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-42" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -862,14 +968,14 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         
           <tr id="sym-]_D">
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
-              <a href="manual.html#item-3-40" style="color: #38bdf8; text-decoration: none;">]_D</a>
+              <a href="manual.html#item-3-40" style="color: #38bdf8; text-decoration: none;">]<sub style="font-size:0.76em;">D</sub></a>
             </td>
             <td><strong style="color: #f8fafc;">3.40 Dunaev Tagged Ordered Pair</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>([A, B]_D: (Class × Class → Class))</code>
+              <code>([A, B]<sub style="font-size:0.76em;">D</sub>: (Class × Class → Class))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>([A, B]_D :: ((Class × Class) → Class))</code>
+              <code>([A, B]<sub style="font-size:0.76em;">D</sub> :: ((Class × Class) → Class))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-40" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -1234,10 +1340,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td><strong style="color: #f8fafc;">4.09 Syntactic Gödel Encoding Operator</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(Enc: (T → Class))</code>
+              <code>(Enc: (T<sub style="font-size:0.76em;">e</sub> → Class))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(Enc :: (T → Class))</code>
+              <code>(Enc :: (T<sub style="font-size:0.76em;">e</sub> → Class))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#def-enc" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -1250,10 +1356,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td><strong style="color: #f8fafc;">4.10 Syntactic Decoding Operator</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(Dec: (Class × Col → T))</code>
+              <code>(Dec: (Class × Col → T<sub style="font-size:0.76em;">e</sub>))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(Dec :: ((Class × Col) → T))</code>
+              <code>(Dec :: ((Class × Col) → T<sub style="font-size:0.76em;">e</sub>))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#def-dec" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -1266,10 +1372,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td><strong style="color: #f8fafc;">4.11 Dual Type Embedding Operator</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>(Emb: (Type → (Class → Bool)))</code>
+              <code>(Emb: (Type_Expression → (Class → Bool)))</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>(Emb :: (Type → (Class → Bool)))</code>
+              <code>(Emb :: (Type_Expression → (Class → Bool)))</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#def-emb" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
@@ -1324,6 +1430,22 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
           </tr>
         
+          <tr id="sym-◁">
+            <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
+              <a href="manual.html#item-3-23-simple-if" style="color: #38bdf8; text-decoration: none;">◁</a>
+            </td>
+            <td><strong style="color: #f8fafc;">Metalevel Formula / Judgment Quotation Brackets (◁ ... ⟦T<sub style="font-size:0.76em;">e</sub>⟧ ... ▷)</strong></td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
+              <code>(◁·▷: (Syn → Stmt))</code>
+            </td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
+              <code>(◁·▷ :: (Syn → Stmt))</code>
+            </td>
+            <td style="text-align: center;">
+              <a href="manual.html#item-3-23-simple-if" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
+            </td>
+          </tr>
+        
           <tr id="sym-⟨">
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
               <a href="manual.html#def-enc" style="color: #38bdf8; text-decoration: none;">⟨</a>
@@ -1344,7 +1466,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
               <a href="manual.html#def-enc" style="color: #38bdf8; text-decoration: none;">⟦</a>
             </td>
-            <td><strong style="color: #f8fafc;">Antiquotation Bracket (Syntax Splicing)</strong></td>
+            <td><strong style="color: #f8fafc;">Antiquotation / Evaluation Bracket (Syntax Splicing)</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
               <code>(⟦·⟧: (Expr → Syn))</code>
             </td>
@@ -1417,6 +1539,22 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
             <td style="text-align: center;">
               <a href="metatheory.html#ord-induction" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
+            </td>
+          </tr>
+        
+          <tr id="sym-Type_Expression">
+            <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
+              <a href="manual.html#item-3-23-simple-if" style="color: #38bdf8; text-decoration: none;">Type_Expression</a>
+            </td>
+            <td><strong style="color: #f8fafc;">Syntactic Collection of Type Expressions (T<sub style="font-size:0.76em;">e</sub> : Type_Expression)</strong></td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
+              <code>(Type_Expression: Col)</code>
+            </td>
+            <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
+              <code>(Type_Expression :: Col)</code>
+            </td>
+            <td style="text-align: center;">
+              <a href="manual.html#item-3-23-simple-if" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
             </td>
           </tr>
         

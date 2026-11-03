@@ -13,7 +13,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Verification: 3.23 simple_if (polymorphic non-dependent conditional over arbitrary Type) — Obelisk Proof Assistant</title>
+  <title>Verification: 3.23 simple_if (metalevel conditional over Type_Expression) — Obelisk Proof Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
   <script>
@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -486,7 +496,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           <span class="status-badge badge-def-status">Conservative Def</span>
           <span style="color: var(--text-muted); font-size: 0.9rem;">Catalog ID: <strong>3.23</strong></span>
         </div>
-        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</h1>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">simple_if (metalevel conditional over Type_Expression)</h1>
         <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Section 3: Set/class-theoretic foundations of mathematics</div>
       </div>
       <div style="display: flex; gap: 8px;">
@@ -502,12 +512,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; (\mathsf{Bool} \to (\alpha \to (\alpha \to \alpha))) \quad (\llbracket \mathrm{simple\_if}(\alpha, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket) \quad (\llbracket \mathrm{simple\_if}(\alpha, \mathrm{false}, t_1, t_2) \rrbracket = \llbracket t_2 \rrbracket) \]
+        \[ \forall (T_e : \mathsf{Type\_Expression}), (\; \triangleleft\; (\mathrm{simple\_if}(T_e) : (\mathsf{Bool} \to (\llbracket T_e \rrbracket \to (\llbracket T_e \rrbracket \to \llbracket T_e \rrbracket)))) \; \land \; ((\llbracket \mathrm{simple\_if}(T_e, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket) \land (\llbracket \mathrm{simple\_if}(T_e, \mathrm{false}, t_1, t_2) \rrbracket = \llbracket t_2 \rrbracket)) \;\triangleright) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> simple_if : ∏(α : Type). (Bool → (α → (α → α))); (⟦simple_if(α, true, t₁, t₂)⟧ = ⟦t₁⟧); (⟦simple_if(α, false, t₁, t₂)⟧ = ⟦t₂⟧)
+        <strong>Clean Unicode:</strong> ∀(T_e : Type_Expression), (◁ (simple_if(T_e) : (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ∧ ((⟦simple_if(T_e, true, t₁, t₂)⟧ = ⟦t₁⟧) ∧ (⟦simple_if(T_e, false, t₁, t₂)⟧ = ⟦t₂⟧)) ▷)
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Non-dependent type-theoretic conditional constructor working parametrically over any metatype α : Type, with reduction rules for b = true and b = false under denotation brackets ⟦...⟧.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Because semantic quantification ∀(T : Type) is forbidden in MK/NBG (type Type = Nonstored.t has no carrier class), simple_if is quantified at the metalevel over syntactic type expressions T_e : Type_Expression around the quoted formula ◁ ... ⟦T_e⟧ ... ▷.</div>
     </div>
 
     
@@ -516,7 +526,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\alpha : \mathsf{Type}, \quad t_1 : \alpha,  \quad t_2 : \alpha\)</div>
+      <div class="syntax-display">\(T_e : \mathsf{Type\_Expression},  \quad t_1 : \llbracket T_e \rrbracket,  \quad t_2 : \llbracket T_e \rrbracket\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#simple-if-typing" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>

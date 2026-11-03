@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -502,12 +512,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ (\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \}) \]
+        \[ (\Pi B = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \}) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> (Π(B) = { f | ((isClassFunction(f) ∧ (Dom(f) = Dom(B))) ∧ ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x)))) })
+        <strong>Clean Unicode:</strong> (ΠB = { f | ((isClassFunction(f) ∧ (Dom(f) = Dom(B))) ∧ ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x)))) })
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as class functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as ΠB, the class of functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div>
     </div>
 
     

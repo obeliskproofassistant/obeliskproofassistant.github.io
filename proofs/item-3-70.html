@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -502,12 +512,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ (\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \}) \]
+        \[ (\Sigma B = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \}) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> (Σ(B) = { p | ∃(x : Class) ∃(y : Class) (((x ∈ Dom(B)) ∧ (y ∈ B(x))) ∧ (p = [x, y]_D)) })
+        <strong>Clean Unicode:</strong> (ΣB = { p | ∃(x : Class) ∃(y : Class) (((x ∈ Dom(B)) ∧ (y ∈ B(x))) ∧ (p = [x, y]_D)) })
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Sum Σ): models the dependent pair type Σ_{x ∈ A} B(x) using Dunaev tagged pairs [x, y]_D.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Sum Σ): models the dependent pair type Σ_{x ∈ A} B(x) as ΣB using Dunaev tagged pairs [x, y]_D.</div>
     </div>
 
     

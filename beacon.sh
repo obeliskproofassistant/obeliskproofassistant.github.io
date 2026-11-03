@@ -1,64 +1,48 @@
 #!/usr/bin/env bash
-#
-# auto-push.sh — Push a git repository at random intervals (10–20 minutes).
-#
-# Usage:
-#   ./auto-push.sh <repo-path> [remote] [branch]
-#
-# Example:
-#   ./auto-push.sh /home/me/project origin main
-#
-# Requires: bash, git, $RANDOM (built into bash).
+# beacon.sh — Host-side synchronization beacon for branch 'main'
+# Naming Agreements:
+#   1) Explicit remotes 'github' and 'gitlab' only (never 'origin').
+#   2) Main branch is always 'main' (never 'master').
+set -e
 
-set -u
+REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${REPO_DIR}"
 
-# -------- config ------------------------------------------------------------
-REPO_PATH="${1:-}"
-REMOTE="${2:-origin}"
-BRANCH="${3:-$(git -C "${REPO_PATH:-.}" rev-parse --abbrev-ref HEAD 2>/dev/null || echo main)}"
-
-MIN_MIN=10
-MAX_MIN=20
-MIN_SEC=$((MIN_MIN * 60))
-MAX_SEC=$((MAX_MIN * 60))
-# ----------------------------------------------------------------------------
-
-if [[ -z "$REPO_PATH" ]]; then
-    echo "Usage: $0 <repo-path> [remote] [branch]" >&2
-    exit 1
-fi
-
-if [[ ! -d "$REPO_PATH/.git" ]]; then
-    echo "Error: '$REPO_PATH' is not a git repository." >&2
-    exit 1
-fi
-
-log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"; }
-
-# Random sleep between MIN_SEC and MAX_SEC (bash 3.2+ compatible).
-random_sleep() {
-    local span=$((MAX_SEC - MIN_SEC + 1))
-    local secs=$((MIN_SEC + RANDOM % span))
-    log "Sleeping $((secs / 60))m $((secs % 60))s before next push..."
-    sleep "$secs"
-}
-
-push_once() {
-    log "Pushing to ${REMOTE}/${BRANCH} ..."
-    if git -C "$REPO_PATH" push "$REMOTE" "$BRANCH"; then
-        log "Push OK."
+# Enforce no 'origin' remote
+if git remote get-url origin >/dev/null 2>&1; then
+    if ! git remote get-url github >/dev/null 2>&1; then
+        git remote rename origin github 2>/dev/null || true
     else
-        log "Push FAILED (exit $?). Will retry on next cycle."
+        git remote remove origin 2>/dev/null || true
     fi
-}
+fi
 
-# Stop cleanly on Ctrl-C / SIGTERM.
-trap 'log "Interrupted, exiting."; exit 0' INT TERM
+# Enforce 'main' branch
+BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "main")"
+if [ "${BRANCH}" = "master" ]; then
+    git branch -M master main 2>/dev/null || true
+    BRANCH="main"
+fi
 
-log "Starting auto-push loop for '$REPO_PATH' -> $REMOTE/$BRANCH"
-log "Interval: ${MIN_MIN}-${MAX_MIN} minutes."
+git add -A
+git commit -m "beacon sync $(date -u +%Y-%m-%dT%H:%M:%SZ)" || true
 
-while true; do
-    push_once
-    random_sleep
-done
+# Politely fetch and integrate before pushing to github
+if git remote get-url github >/dev/null 2>&1; then
+    if git fetch github main >/dev/null 2>&1; then
+        if git rev-parse --verify github/main >/dev/null 2>&1; then
+            if ! git merge-base --is-ancestor github/main HEAD 2>/dev/null; then
+                git rebase -X ours github/main >/dev/null 2>&1 || {
+                    git rebase --abort >/dev/null 2>&1 || true
+                    git merge --no-edit -X ours --allow-unrelated-histories github/main >/dev/null 2>&1 || git merge --abort >/dev/null 2>&1 || true
+                }
+            fi
+        fi
+    fi
+    git push github HEAD:main || true
+fi
+
+# Also keep Local GitLab synced if reachable
+if git remote get-url gitlab >/dev/null 2>&1; then
+    git push gitlab HEAD:main >/dev/null 2>&1 || true
+fi

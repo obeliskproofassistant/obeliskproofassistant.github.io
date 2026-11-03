@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -502,12 +512,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi))) \]
+        \[ \forall (T_e : \mathsf{Type\_Expression}), \; \triangleleft\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : \llbracket T_e \rrbracket)\; \phi))) \;\triangleright \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> ∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))
+        <strong>Clean Unicode:</strong> ∀(T_e : Type_Expression), ◁ ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : ⟦T_e⟧) φ))) ▷
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Universal generalization in metatheory guarded by non-free context occurrence.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Universal generalization in metatheory over syntactic type expressions T_e : Type_Expression guarded by non-free context occurrence.</div>
     </div>
 
     
@@ -516,7 +526,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\mathrm{NFV}(v, \Gamma)\)</div>
+      <div class="syntax-display">\(\mathrm{NFV}(v, \Gamma),  \quad T_e : \mathsf{Type\_Expression}\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#nfv-vx-gamma" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -547,7 +557,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))).</div>
+            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(T_e : Type_Expression), ◁ ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : ⟦T_e⟧) φ))) ▷).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -564,7 +574,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
       <pre class="code-block"><code>(* Primitive Axiom Postulate *)
-val thm_item_4_02 = Thm ([], parse_formula &quot;∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))&quot;);</code></pre>
+val thm_item_4_02 = Thm ([], parse_formula &quot;∀(T_e : Type_Expression), ◁ ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : ⟦T_e⟧) φ))) ▷&quot;);</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>

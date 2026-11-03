@@ -13,7 +13,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Verification: 3.24 dependent_if (polymorphic dependent conditional with type computation) — Obelisk Proof Assistant</title>
+  <title>Verification: 3.24 dependent_if (dependent conditional over Bool → Type_Expression) — Obelisk Proof Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
   <script>
@@ -152,10 +152,20 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         pageReady: function() {
           return MathJax.startup.defaultPageReady().then(function() {
             try {
+              var stripColorMacros = function(tex) {
+                var prev = tex;
+                for (var iter = 0; iter < 8; iter++) {
+                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
+                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
+                  if (next === prev) break;
+                  prev = next;
+                }
+                return prev.trim();
+              };
               var items = MathJax.startup.document.math;
               items.forEach(function(item) {
                 if (item.typesetRoot && item.math) {
-                  var rawTex = item.math.trim();
+                  var rawTex = stripColorMacros(item.math.trim());
                   var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
                   item.typesetRoot.setAttribute('data-latex', rawTex);
                   item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
@@ -486,7 +496,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           <span class="status-badge badge-def-status">Conservative Def</span>
           <span style="color: var(--text-muted); font-size: 0.9rem;">Catalog ID: <strong>3.24</strong></span>
         </div>
-        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">dependent_if (polymorphic dependent conditional with type computation)</h1>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">dependent_if (dependent conditional over Bool → Type_Expression)</h1>
         <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Section 3: Set/class-theoretic foundations of mathematics</div>
       </div>
       <div style="display: flex; gap: 8px;">
@@ -502,12 +512,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathrm{dependent\_if} : \Pi (T : (\mathsf{Bool} \to \mathsf{Type}))\; (b : \mathsf{Bool}).\; (T(\mathrm{true}) \to (T(\mathrm{false}) \to T(b))) \quad (\mathrm{typeof}(\llbracket \mathrm{dependent\_if}(T, b, t_1, t_2) \rrbracket) := \llbracket \mathrm{simple\_if}(\mathsf{Type}, b, \mathrm{typeof}(t_1), \mathrm{typeof}(t_2)) \rrbracket) \quad (\llbracket \mathrm{dependent\_if}(T, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket) \quad (\llbracket \mathrm{dependent\_if}(T, \mathrm{false}, t_1, t_2) \rrbracket = \llbracket t_2 \rrbracket) \]
+        \[ \forall (T_e : (\mathsf{Bool} \to \mathsf{Type\_Expression})), (\; \triangleleft\; (\mathrm{dependent\_if}(T_e) : \Pi (b : \mathsf{Bool}).\; (\llbracket T_e(\mathrm{true}) \rrbracket \to (\llbracket T_e(\mathrm{false}) \rrbracket \to \llbracket T_e(b) \rrbracket))) \; \land \; ((\mathrm{typeof}(\llbracket \mathrm{dependent\_if}(T_e, b, t_1, t_2) \rrbracket) := \llbracket \mathrm{simple\_if}(\mathsf{Type\_Expression}, b, \mathrm{typeof}(t_1), \mathrm{typeof}(t_2)) \rrbracket) \land ((\llbracket \mathrm{dependent\_if}(T_e, \mathrm{true}, t_1, t_2) \rrbracket = \llbracket t_1 \rrbracket) \land (\llbracket \mathrm{dependent\_if}(T_e, \mathrm{false}, t_1, t_2) \rrbracket = \llbracket t_2 \rrbracket))) \;\triangleright) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> dependent_if : ∏(T : (Bool → Type)) (b : Bool). (T(true) → (T(false) → T(b))); (typeof(⟦dependent_if(T, b, t₁, t₂)⟧) := ⟦simple_if(Type, b, typeof(t₁), typeof(t₂))⟧); (⟦dependent_if(T, true, t₁, t₂)⟧ = ⟦t₁⟧); (⟦dependent_if(T, false, t₁, t₂)⟧ = ⟦t₂⟧)
+        <strong>Clean Unicode:</strong> ∀(T_e : (Bool → Type_Expression)), (◁ (dependent_if(T_e) : ∏(b : Bool). (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))) ∧ ((typeof(⟦dependent_if(T_e, b, t₁, t₂)⟧) := ⟦simple_if(Type_Expression, b, typeof(t₁), typeof(t₂))⟧) ∧ ((⟦dependent_if(T_e, true, t₁, t₂)⟧ = ⟦t₁⟧) ∧ (⟦dependent_if(T_e, false, t₁, t₂)⟧ = ⟦t₂⟧))) ▷)
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Dependent conditional AST constructor where the return type T(b) depends on the boolean condition b : Bool, dynamically computed at the universe of Types via simple_if(Type, b, typeof(t₁), typeof(t₂)).</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Dependent conditional AST constructor quantified at the metalevel over syntactic type-family expressions T_e : (Bool → Type_Expression), where the branch type ⟦T_e(b)⟧ is dynamically selected via simple_if(Type_Expression, b, typeof(t₁), typeof(t₂)).</div>
     </div>
 
     
@@ -516,7 +526,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(T : (\mathsf{Bool} \to \mathsf{Type}),  \quad b : \mathsf{Bool},  \quad t_1 : T(\mathrm{true}),  \quad t_2 : T(\mathrm{false})\)</div>
+      <div class="syntax-display">\(T_e : (\mathsf{Bool} \to \mathsf{Type\_Expression}),  \quad b : \mathsf{Bool},  \quad t_1 : \llbracket T_e(\mathrm{true}) \rrbracket,  \quad t_2 : \llbracket T_e(\mathrm{false}) \rrbracket\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#dependent-if-typing" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
