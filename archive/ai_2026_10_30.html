@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant — Rigorous Foundations & Zero Implicit Computation</title>
+  <meta name="description" content="Obelisk: A new proof assistant for Morse-Kelley class theory with zero implicit computation, declarative syntax, and an ultra-small trusted LCF kernel. Audited and verified in Lean 4.">
+  
+  <!-- Fonts & Math -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/x-icon" href="myfavicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="myfavicon-96x96.png">
+
+  <!-- Consent Manager (Silktide) -->
+  <link rel="stylesheet" href="assets/silktide-consent-manager.css">
+  <script src="assets/silktide-consent-manager.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #38bdf8;
+      --primary-hover: #0284c7;
+      --accent: #2563eb;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --tag-bg: rgba(56, 189, 248, 0.12);
+      --tag-border: rgba(56, 189, 248, 0.3);
+      --code-bg: #030712;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --side-bg: rgba(16, 185, 129, 0.08);
+      --side-border: rgba(16, 185, 129, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.65;
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.2) 0px, transparent 50%),
+        radial-gradient(at 100% 50%, rgba(56, 189, 248, 0.12) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navbar */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 0.85rem 0;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+
+    .logo-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .logo-title span {
+      color: var(--primary);
+    }
+
+    nav.main-nav {
+      display: flex;
+      gap: 1.1rem;
+      align-items: center;
+    }
+
+    nav.main-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav.main-nav a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb 0%, #0284c7 100%);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 15px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.45);
+    }
+
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: #e2e8f0;
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.9rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 9999px;
+      color: var(--primary);
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.18rem;
+      color: var(--text-muted);
+      max-width: 820px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* 60-Second Executive Clarity Section */
+    .exec-overview {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 16px;
+      padding: 2.25rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .exec-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .exec-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .exec-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+    }
+
+    .exec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .exec-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.35rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .exec-card h4 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .exec-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Interactive Theorem & Rule Inspector */
+    .inspector-section {
+      margin-bottom: 4rem;
+    }
+
+    .inspector-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .inspector-nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .thm-btn {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.45rem 0.9rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .thm-btn:hover {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--primary);
+    }
+
+    .thm-btn.active {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.4) 0%, rgba(56, 189, 248, 0.2) 100%);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .inspector-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .syntax-toggle-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.45rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.2s ease;
+    }
+
+    .syntax-toggle-btn:hover {
+      background: var(--primary);
+      color: #030712;
+    }
+
+    .copy-btn {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      color: #e2e8f0;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.2s;
+    }
+
+    .copy-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fff;
+    }
+
+    .syntax-display-frame {
+      background: #030712;
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .syntax-display-frame pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #38bdf8;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .side-conditions-box {
+      background: var(--side-bg);
+      border: 1px solid var(--side-border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+
+    .side-conditions-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--success);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .side-conditions-list {
+      list-style-type: disc;
+      padding-left: 1.5rem;
+      color: #cbd5e1;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* Triad Grid */
+    .section-title-wrap {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .triad-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .triad-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+    }
+
+    .triad-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .triad-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .triad-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .triad-text {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Comparison Table */
+    .comp-table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      overflow-x: auto;
+      margin-bottom: 4rem;
+    }
+
+    table.comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    table.comp-table th, table.comp-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    table.comp-table th {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    table.comp-table tr:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge-highlight {
+      display: inline-block;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: var(--tag-bg);
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    /* Lean 4 Audit Box */
+    .audit-box {
+      background: linear-gradient(135deg, rgba(30, 58, 138, 0.3) 0%, rgba(15, 23, 42, 0.8) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-bottom: 4rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .audit-info h3 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+
+    .audit-info p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .audit-metrics {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .metric-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .metric-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .metric-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    /* Interactive Demo Frame */
+    .demo-section {
+      margin-bottom: 4rem;
+    }
+
+    .demo-frame-container {
+      width: 100%;
+      height: 620px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #000;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .demo-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 3rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .audit-box {
+        grid-template-columns: 1fr;
+      }
+      nav.main-nav {
+        display: none;
+      }
+      .exec-header {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo-container">
+        <img src="images/logo.png" alt="Obelisk Logo" class="logo-img">
+        <div class="logo-title">Obelisk <span>Proof Assistant</span></div>
+      </a>
+      <nav class="main-nav">
+        <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">🏛 Classic Author Portal</a>
+        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Theory Manual (49 + 17 NBG)</a>
+        <a href="#overview">Overview</a>
+        <a href="#inspector">Theorem Inspector</a>
+        <a href="#triad">Architecture</a>
+        <a href="#comparison">Comparison</a>
+        <a href="#audit">Lean 4 Audit</a>
+        <a href="repl.html">Web REPL</a>
+        <a href="#demo">Live Demo</a>
+        <a href="https://georgydunaev.github.io" target="_blank">Author: Georgy Dunaev ↗</a>
+        <a href="Obelisk_Report.pdf" class="btn btn-primary" target="_blank">Audit Report (PDF)</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">LCF Architecture · Standard ML · Morse–Kelley Class Theory</div>
+      <h1>
+        Next-Generation Proof Assistant<br>
+        <span class="gradient-text">Zero Implicit Computation</span>
+      </h1>
+      <p class="hero-desc">
+        Obelisk is an interactive proof assistant engineered for mathematical clarity and high assurance. 
+        Featuring an audited LCF-style trusted kernel in Standard ML, declarative syntax, and rigorous class theory foundations.
+      </p>
+      <div class="hero-actions">
+        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (49 Core + 17 NBG Theorems) &rarr;</a>
+        <a href="repl.html" class="btn btn-secondary">⚡ Launch Web REPL</a>
+        <a href="Obelisk_Report.pdf" class="btn btn-secondary" target="_blank">📄 Read Lean 4 Audit Report</a>
+        <a href="Obelisk.lean" class="btn btn-secondary" target="_blank">💻 View Obelisk.lean Source</a>
+        <a href="#demo" class="btn btn-secondary">Explore Demonstration</a>
+        <a href="https://georgydunaev.github.io" class="btn btn-secondary" target="_blank">👤 Author Portfolio</a>
+      </div>
+    </section>
+
+    <!-- FEATURED INTERACTIVE THEORY MANUAL CALLOUT -->
+    <section class="card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 132, 199, 0.15) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 1.8rem 2rem; margin-bottom: 3rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;">
+        <div>
+          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations</div>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual &amp; 17-Theorem NBG Library</h3>
+        </div>
+        <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Manual + NBG Library &rarr;</a>
+      </div>
+      <p style="color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.2rem; max-width: 900px;">
+        Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Each theorem and rule links to an individual machine-checked verification certificate with full PolyML microkernel proof programs.
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem;">
+        <a href="manual.html#sec-1" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 1</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Propositional Logic</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">13 axioms &amp; Modus Ponens</div>
+        </a>
+        <a href="manual.html#sec-2" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 2</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Predicate Logic</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Bernays quantifiers &amp; Gen</div>
+        </a>
+        <a href="manual.html#sec-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 3</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Morse–Kelley &amp; Conditionals</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">⟦ if ... then ⟧, Ord-Ind, V</div>
+        </a>
+        <a href="manual.html#sec-4" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 4</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Metalogical Laws</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Reflected metatheory &amp; ∃!</div>
+        </a>
+        <a href="manual.html#sec-5" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 5</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Verified Tactics</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Sequent derivations &amp; rules</div>
+        </a>
+        <a href="manual.html#sec-6" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 6</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Incompleteness</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Löb's theorem &amp; Gödel II</div>
+        </a>
+        <a href="manual.html#nbg-library" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
+          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">APPENDIX</div>
+          <div style="font-weight: 600; color: #fff; margin-top: 2px;">NBG Standard Library</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">17 kernel-checked theorems</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 60-SECOND EXECUTIVE OVERVIEW -->
+    <section id="overview" class="exec-overview">
+      <div class="exec-header">
+        <div>
+          <div class="exec-tag">Foundational Clarity in 60 Seconds</div>
+          <h2 class="exec-title" style="margin-top: 0.4rem;">What is Obelisk &amp; Why It Solves Modern Proof Gridlock</h2>
+        </div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--primary);">
+          Curry–Howard for Impredicative Classes
+        </div>
+      </div>
+
+      <div class="exec-grid">
+        <div class="exec-card">
+          <h4 style="color: #38bdf8;"><span>🌌</span> First-Class Proper Classes</h4>
+          <p>
+            In standard ZFC and dependent type systems (Lean 4, Coq), collections like the universal class \(V\) or the category of all sets \(\mathbf{Set}\) cannot be manipulated as ordinary elements without triggering Russell's paradox or ascending into infinite universe hierarchies (<code>Type u</code>). 
+            Obelisk adopts <strong>Morse–Kelley (MK) class theory</strong>: proper classes are native first-class objects with full impredicative comprehension over classes.
+          </p>
+        </div>
+
+        <div class="exec-card">
+          <h4 style="color: #c084fc;"><span>🏷️</span> Dunaev Tagged Ordered Pairs</h4>
+          <p>
+            Standard Kuratowski pairs \(\langle A, B \rangle = \{\{A\}, \{A, B\}\}\) fail for proper classes because proper classes cannot be elements of sets. 
+            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \([A, B]_D = \mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)\), allowing proper classes and infinite families to form pairs and lists with minimal rank growth and full algebraic projection injectivity.
+          </p>
+        </div>
+
+        <div class="exec-card">
+          <h4 style="color: #10b981;"><span>⚖️</span> Zero Implicit Computation</h4>
+          <p>
+            Type-theoretic proof assistants suffer from fragile computational reduction (\(\beta\delta\iota\)): definition updates break proof scripts invisibly. 
+            Obelisk separates syntax from semantics through the explicit valuation bracket \(\llbracket \cdot \rrbracket\). Every deduction is a checkable syntactic tree; inference rules have explicit side conditions with no hidden normalization noise.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT KERNEL & MANUAL ADVANCES -->
+    <section id="recent" style="margin-bottom: 4rem;">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Latest Verified Changes &middot; 2026-10-30</div>
+        <h2 class="section-title">Recent Kernel &amp; Manual Advances</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem; max-width: 900px;">
+          The prover and its generated manual are continuously re-audited. These are the latest changes now visible in the Theory Manual and the publication PDFs.
+        </p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem;">
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(56, 189, 248, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #38bdf8; margin-bottom: 0.5rem;">🪪 Dunaev Pair Injectivity</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            <code>[A,B]<sub>D</sub> = [C,D]<sub>D</sub> &rarr; A = C &and; B = D</code> is now proved for arbitrary classes
+            (<code>proofDunaevPairInjectivity</code> and surface <code>dunaev_pair_injective</code>).
+            The general <code>Pair</code>/<code>Func</code> interface no longer falls back to Kuratowski pairs.
+          </p>
+          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(16, 185, 129, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem;">🛡️ Trusted Checker: No Cheat Path</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            <code>ThmWithPrf.cheat</code> now raises, and <code>derive</code>, <code>check</code>,
+            <code>slow_check</code>, and <code>checkPlus</code> all reject <code>PCheat_prf</code>.
+            Unsupported legacy <code>PS1_prf</code>/<code>PHenkin_prf</code> constructors fail explicitly. A closedness gate also rejects theorem statements with free class variables, so an open formula cannot be packed as a Set witness.
+          </p>
+          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Read the manual &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(192, 132, 252, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #c084fc; margin-bottom: 0.5rem;">📊 Epistemic Catalog Audit</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            The dependent catalog now reports <strong>42 derived proofs</strong>,
+            <strong>16 conservative definitions</strong>, and <strong>7 irreducible MK axioms</strong>.
+            Plan witnesses are classified, and an unclassified witness prevents the catalog from loading.
+          </p>
+          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Inspect the catalog &rarr;</a>
+        </div>
+        <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(251, 191, 36, 0.35);">
+          <h3 style="font-size: 1.05rem; color: #fbbf24; margin-bottom: 0.5rem;">📚 NBG Library in the Manual</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            All <strong>17 machine-checked NBG surface theorems</strong> are now rendered as a manual appendix,
+            including Dunaev pair injectivity and Cartesian-product elimination (<code>dunaev_cartesian_elim</code>), with formulas, proof AST sizes,
+            and normalized sizes. The same table is included in the publication PDFs.
+          </p>
+          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Browse the appendix &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTERACTIVE THEOREM & RULE INSPECTOR -->
+    <section id="inspector" class="inspector-section">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Mathematical Precision &amp; Concrete Code</div>
+        <h2 class="section-title">Interactive Theorem &amp; Rule Inspector</h2>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 0.5rem;">
+          Toggle between formal mathematical notation (Unicode / LaTeX) and concrete executable SML/Obelisk syntax. Side conditions are made fully visible and explicit.
+        </p>
+      </div>
+
+      <div class="inspector-card">
+        <!-- Theorem Selector Tabs -->
+        <div class="inspector-nav" id="thm-tabs">
+          <button class="thm-btn active" onclick="selectTheorem('russell')">1. Russell Proper Class</button>
+          <button class="thm-btn" onclick="selectTheorem('tagged_pair')">2. Dunaev Pair Injectivity</button>
+          <button class="thm-btn" onclick="selectTheorem('mk_comprehension')">3. MK Class Comprehension</button>
+          <button class="thm-btn" onclick="selectTheorem('conditional_term')">4. Syntactic Conditional (CIf)</button>
+          <button class="thm-btn" onclick="selectTheorem('modus_ponens')">5. Modus Ponens &amp; Shift</button>
+          <button class="thm-btn" onclick="selectTheorem('ordinal_ind')">6. Ordinal Foundation</button>
+        </div>
+
+        <!-- Toolbar: Switcher & Copy -->
+        <div class="inspector-toolbar">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <button class="syntax-toggle-btn" id="syntax-toggle-btn" onclick="toggleSyntaxMode()">
+              <span>🔀</span> <span id="syntax-toggle-label">Switch to Concrete ASCII Syntax</span>
+            </button>
+            <span class="badge-highlight" id="active-format-badge">Active: Mathematical Unicode</span>
+          </div>
+          <div>
+            <button class="copy-btn" id="copy-syntax-btn" onclick="copyActiveSyntax()">
+              <span>📋</span> <span id="copy-btn-text">Copy Statement</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Syntax Display Frame -->
+        <div class="syntax-display-frame">
+          <pre id="theorem-code-display"></pre>
+        </div>
+
+        <!-- Prominent Side Conditions Box -->
+        <div class="side-conditions-box">
+          <div class="side-conditions-header">
+            <span>🛡️</span> Explicit Side Conditions &amp; Meta-Constraints
+          </div>
+          <ul class="side-conditions-list" id="side-conditions-list">
+            <!-- Dynamically populated -->
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURAL TRIAD -->
+    <section id="triad">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Core Objectives</div>
+        <h2 class="section-title">The Obelisk Triad</h2>
+      </div>
+
+      <div class="triad-grid">
+        <div class="triad-card">
+          <div class="triad-icon">🏛️</div>
+          <h3 class="triad-title">Bidirectional Proof Assistant</h3>
+          <p class="triad-text">
+            Significantly reduces the steep learning curve for working mathematicians. 
+            Eliminates opaque tactic noise (<code>intro</code>, <code>apply</code>, <code>rewrite</code>) and normalisation tricks. 
+            Every proof step forms an explicit, checkable syntactic tree without hidden reduction steps.
+          </p>
+        </div>
+
+        <div class="triad-card">
+          <div class="triad-icon">⚙️</div>
+          <h3 class="triad-title">Enhanced Language atop CakeML</h3>
+          <p class="triad-text">
+            Constructs a new high-assurance language with full polymorphism (types depending on values) 
+            by introducing a clean abstraction and code-generation layer above the verified <a href="https://cakeml.org/" target="_blank" style="color:var(--primary);">CakeML</a> compiler.
+          </p>
+        </div>
+
+        <div class="triad-card">
+          <div class="triad-icon">📐</div>
+          <h3 class="triad-title">Refactored Class Foundations</h3>
+          <p class="triad-text">
+            Modernized Morse–Kelley (MK) class-theoretic foundations equipped with Tarski–Grothendieck universes, 
+            regularity via powerclasses (&isin;-induction), and an innovative independent construction of tagged pairs and lists for proper classes.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORSE-KELLEY PROPOSITIONS-AS-TYPES COMPILER SECTION -->
+    <section id="compiler" style="margin-bottom: 4rem;">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Compiler Architecture · Standard ML &amp; CakeML</div>
+        <h2 class="section-title">Morse-Kelley Propositions-as-Types: Compiling to Check, Not Execute</h2>
+      </div>
+
+      <div style="background: var(--card-bg); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px; padding: 2rem;">
+        <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+          In Obelisk, we establish a strict <strong>1-to-1 Curry–Howard correspondence</strong> between mathematical theorems of <strong>Morse-Kelley (MK) Impredicative Class Theory</strong> and compiler types.
+          Because MK allows quantification over proper classes in class comprehension, it provides the full expressive strength of higher-order logic over sets, while the compiler operates under the foundational principle: <em>it compiles not to generate runtime executable bytecode, but strictly to verify whether the proof expression type-checks</em>.
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem;">
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #38bdf8; font-size: 0.95rem; margin-bottom: 0.5rem;">Standard ML Native Kernel</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Eliminates dynamically typed languages like Python from the trusted kernel. Fully written in Standard ML 97 targeting the CakeML verified compiler for machine-code assurance down to silicon.
+            </p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #10b981; font-size: 0.95rem; margin-bottom: 0.5rem;">Theorems as Types (1-to-1)</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Every mathematical theorem (Modus Ponens, Conjunction Symmetry, Russell Paradox Refutation) corresponds to a unique type. Proof terms are formal witnesses checked by the SML type checker.
+            </p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #c084fc; font-size: 0.95rem; margin-bottom: 0.5rem;">Dunaev Tagged Ordered Pairs</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Replaces Kuratowski pairs (which collapse on proper classes) with <code>[A, B]_D</code> tagged pairs that preserve well-foundedness and algebraic projections without universe elevation.
+            </p>
+          </div>
+          <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
+            <h4 style="color: #fbbf24; font-size: 0.95rem; margin-bottom: 0.5rem;">Lightweight Offline Proof Checking (&lt;50 MB RAM)</h4>
+            <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
+              Validates all 49 core proof certificates and NBG standard library theorems in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
+            </p>
+          </div>
+        </div>
+
+        <div class="comp-table-container" style="margin-bottom: 1.5rem;">
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Surface Declaration</th>
+                <th>Kernel AST Category</th>
+                <th>Example in <code>.nbg</code> Surface Language</th>
+                <th>Checked by <code>NBGCompiler.typeCheck</code></th>
+                <th>Epistemic Meaning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>formula F = ...;</code></td>
+                <td><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
+                <td><code>formula False_RussellIsSet = Set({ x | x in x -&gt; Bot });</code></td>
+                <td>Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
+                <td>Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
+              </tr>
+              <tr>
+                <td><code>theorem T : F = e;</code></td>
+                <td><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
+                <td><code>theorem thm_russell_not_set : Set(R) -&gt; Bot = fn (hSet : Set(R)) =&gt; ...;</code></td>
+                <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies α-equivalence with <code>F</code></td>
+                <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="repl.html" class="btn btn-primary">⚡ Test NBG Compiler in Web REPL</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM COMPARISON -->
+    <section id="comparison">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Foundational Perspective</div>
+        <h2 class="section-title">Architectural Comparison</h2>
+      </div>
+
+      <div class="comp-table-container">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>System</th>
+              <th>Logical Foundation</th>
+              <th>Proof Execution</th>
+              <th>Trusted Kernel</th>
+              <th>Mathematical Workflow</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Obelisk</strong></td>
+              <td>Morse–Kelley Class Theory + Tarski Universes</td>
+              <td><span class="badge-highlight">Zero Implicit Computation</span> (Syntactic Trees)</td>
+              <td>Small LCF Kernel (~20k LOC SML)</td>
+              <td>Declarative, human-readable, stable under definition updates</td>
+            </tr>
+            <tr>
+              <td><strong>Lean 4</strong></td>
+              <td>Calculus of Inductive Constructions (CIC)</td>
+              <td>Type reduction, unification, tactic elaboration</td>
+              <td>Complex C++ kernel + elaborator</td>
+              <td>Tactic-heavy, dependent types, steep learning curve</td>
+            </tr>
+            <tr>
+              <td><strong>Rocq (Coq)</strong></td>
+              <td>Calculus of Inductive Constructions (CIC)</td>
+              <td>Computational reduction (&beta;, &iota;, &delta;)</td>
+              <td>OCaml kernel (~30k LOC)</td>
+              <td>Constructive type theory, Ltac scripting</td>
+            </tr>
+            <tr>
+              <td><strong>Isabelle/ZF</strong></td>
+              <td>ZFC over Higher-Order Logic (Isabelle/Pure)</td>
+              <td>Term rewriting, tableau provers, Sledgehammer</td>
+              <td>Standard ML LCF kernel</td>
+              <td>Isar declarative proofs, Isabelle framework</td>
+            </tr>
+            <tr>
+              <td><strong>Metamath</strong></td>
+              <td>First-Order Logic + Set Theory (ZFC)</td>
+              <td>Pure syntactic replacement &amp; verification</td>
+              <td>Minimalist (~1k LOC)</td>
+              <td>Very low-level, lacks higher polymorphism &amp; reflection</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- LEAN 4 AUDIT -->
+    <section id="audit">
+      <div class="audit-box">
+        <div class="audit-info">
+          <span class="badge-highlight" style="margin-bottom:0.75rem;">Independent Machine Verification</span>
+          <h3>Formally Audited in Lean 4</h3>
+          <p>
+            The Obelisk system axiomatics and independent constructions (including Dunaev tagged pairs &amp; lists) 
+            were audited and machine-checked in <strong>Lean 4</strong>. 
+            All core theorems were verified with <strong>0 errors and 0 sorry</strong>.
+          </p>
+          <div class="audit-metrics">
+            <div class="metric-item">
+              <span class="metric-val">0</span>
+              <span class="metric-lbl">Errors / Sorry</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">9</span>
+              <span class="metric-lbl">Core Theorems Verified</span>
+            </div>
+            <div class="metric-item">
+              <span class="metric-val">3</span>
+              <span class="metric-lbl">Tagged List Axioms Checked</span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <a href="Obelisk_Report.pdf" class="btn btn-primary" target="_blank" style="padding: 0.8rem 1.4rem;">
+            📄 Download Audit Report (PDF)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE DEMONSTRATION -->
+    <section id="demo" class="demo-section">
+      <div class="section-title-wrap">
+        <div class="section-subtitle">Interactive Environment</div>
+        <h2 class="section-title">System Demonstration</h2>
+        <p style="color:var(--text-muted); margin-top:0.5rem; font-size:0.95rem;">
+          Live demonstration of Obelisk proofs, axiomatics, and mathematical derivations directly from the kernel.
+        </p>
+      </div>
+
+      <div class="demo-frame-container">
+        <iframe src="embedding.html" class="demo-iframe" title="Obelisk Proof Assistant Live Demo"></iframe>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        <strong>Obelisk Proof Assistant</strong> · Designed and Developed by 
+        <a href="https://georgydunaev.github.io" target="_blank">Georgy Dunaev</a> · 
+        <a href="classic.html" style="color: var(--primary); font-weight: 600;">🏛 Classic Author Portal</a>
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.82rem;">
+        <a href="Obelisk_Report.pdf" target="_blank">Lean 4 Audit Report</a> · 
+        <a href="Obelisk.lean" target="_blank">Obelisk.lean</a> · 
+        <a href="manual.html#nbg-library" style="color: var(--primary); font-weight: 600;">NBG Standard Library (17)</a> · 
+        <a href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
+        <a href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted);">
+        Kernel, manual, and NBG library re-verified 2026-10-30 · Prover suite: 115 tests · Web suite: 36 tests
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Theorem Registry for Inspector
+    const THEOREMS = {
+      russell: {
+        title: "Russell's Proper Class Theorem (Condensed Form)",
+        math: `⊢ Proper({ y ∈ V | y ∉ y })`,
+        ascii: `val thm_russell_proper : Term =
+  IsProper (Compr "y" (Neg (In (Var "y") (Var "y"))))`,
+        sideConditions: [
+          "Condensed form (0 assumptions): Unconditionally proves the Russell collection is a proper class.",
+          "Detaches intermediate lemma: ⊢ ¬(∃ x ∈ V. x = R) via Modus Ponens with Proper(K) ⟺ ¬Set(K).",
+          "Universal class V ≝ { x | x = x }; Set(x) ⟺ x ∈ V.",
+          "Derived without Kuratowski rank elevation; directly resolves Russell's paradox in MK class theory."
+        ]
+      },
+      tagged_pair: {
+        title: "Dunaev Tagged Pair Injectivity (Arbitrary Classes)",
+        math: `∀ A, B, C, D : Class.
+  [A, B]_D = [C, D]_D  ⟹  (A = C ∧ B = D)`,
+        ascii: `theorem dunaev_pair_injective :
+  forall (A B C D : Class).
+    ([A, B]_D = [C, D]_D -> (A = C /\\ B = D)) =
+  Lam (A:Class) => Lam (B:Class) => Lam (C:Class) => Lam (D:Class) =>
+    fn (h : [A, B]_D = [C, D]_D) =>
+      pair(
+        trans(sym(fst(dunaev_proj(A, B))),
+          trans(rewrite(h, u. pr1([A, B]_D) = pr1(u), refl(pr1([A, B]_D))),
+                fst(dunaev_proj(C, D)))),
+        trans(sym(snd(dunaev_proj(A, B))),
+          trans(rewrite(h, u. pr2([A, B]_D) = pr2(u), refl(pr2([A, B]_D))),
+                snd(dunaev_proj(C, D))))
+      );`,
+        sideConditions: [
+          "Kernel theorem: NBGTactics.proofDunaevPairInjectivity; surface proof: examples/nbg_verified_programs.nbg#dunaev_pair_injective.",
+          "Tags are the fixed constants 1 and 2; there is no bound `tag` variable and no tag-indexed family.",
+          "Projection axioms: pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes, including proper classes.",
+          "Leibniz rewriting transports equality through pr1/pr2; no set-membership of a proper class is required.",
+          "This is exactly what Kuratowski pairs lose: for a proper class Y, <x,Y>_K collapses to <x,x>_K."
+        ]
+      },
+      mk_comprehension: {
+        title: "Morse–Kelley Class Comprehension",
+        math: `∃ X : Class. ∀ x : Class. (x ∈ X  ⟺  x ∈ V ∧ ⟦ φ(x) ⟧)`,
+        ascii: `val ax_mk_comprehension : Term =
+  Exists "X" TClass (
+    Forall "x" TClass (
+      Iff (In (Var "x") (Var "X"))
+          (And (IsSet (Var "x"))
+               (App (Const "Sem") (App (Const "phi") (Var "x"))))
+    )
+  )`,
+        sideConditions: [
+          "Syntactic side condition: variable 'X' does not occur free in formula φ.",
+          "Impredicativity condition: formula φ may quantify over proper classes.",
+          "x is restricted to set realm (x ∈ V); proper classes cannot be elements."
+        ]
+      },
+      conditional_term: {
+        title: "Syntactic Conditional Term Constructor (CIf)",
+        math: `⟦ CIf(P, A, B) ⟧ = { x ∈ V | (⟦ P ⟧ ∧ x ∈ A) ∨ (⟦ ¬ P ⟧ ∧ x ∈ B) }`,
+        ascii: `val def_cif_semantics : Term =
+  Eq (App (Const "Sem") (App3 (Const "CIf") (Var "P") (Var "A") (Var "B")))
+     (Compr "x" (Or (And (App (Const "Sem") (Var "P")) (In (Var "x") (Var "A")))
+                    (And (Neg (App (Const "Sem") (Var "P"))) (In (Var "x") (Var "B")))))`,
+        sideConditions: [
+          "Syntax/Semantics separation: CIf is a pure syntactic constructor (not an opaque Value).",
+          "Denotation is mediated strictly by semantic valuation operator ⟦ · ⟧.",
+          "When P holds, ⟦ CIf(P, A, B) ⟧ = A; when ¬P holds, ⟦ CIf(P, A, B) ⟧ = B."
+        ]
+      },
+      modus_ponens: {
+        title: "LCF Modus Ponens & Shift-to-Term",
+        math: `⟦ Γ ⊢ φ → ψ ⟧   and   ⟦ Γ ⊢ φ ⟧   ⟹   ⟦ Γ ⊢ ψ ⟧`,
+        ascii: `val thm_modus_ponens_shift : Term =
+  Impl (AStmt Tau (Var "Gamma") (FImpl (Var "phi") (Var "psi")))
+       (Impl (AStmt Tau (Var "Gamma") (Var "phi"))
+             (AStmt Tau (Var "Gamma") (Var "psi")))`,
+        sideConditions: [
+          "Context unification: Theory Tau and context Gamma match syntactically in LCF kernel.",
+          "Zero implicit computation: No hidden βδι reductions; proof object is an explicit tree node.",
+          "Checked in < 250 LOC Standard ML kernel targeting CakeML."
+        ]
+      },
+      ordinal_ind: {
+        title: "Von Neumann Ordinal Foundation (∈-Induction)",
+        math: `Ord(A) ⟺ Trans(A) ∧ ∀ B ∈ A. Trans(B)
+  where Trans(X) ⟺ ∀ y ∈ X. y ⊆ X`,
+        ascii: `val def_ordinal : Term =
+  Iff (Ord (Var "A"))
+      (And (Trans (Var "A"))
+           (Forall "B" TClass (Impl (In (Var "B") (Var "A"))
+                                    (Trans (Var "B")))))`,
+        sideConditions: [
+          "Foundation / Regularity side condition: Powerclass induction (Power(X) ⊆ X ⟹ V ⊆ X).",
+          "Every element of an ordinal is also transitively closed.",
+          "Ordinals can be proper classes (e.g., On is the class of all ordinals)."
+        ]
+      }
+    };
+
+    let activeThmKey = "russell";
+    let isMathMode = true;
+
+    function renderActiveTheorem() {
+      const thm = THEOREMS[activeThmKey];
+      if (!thm) return;
+
+      const codeBox = document.getElementById("theorem-code-display");
+      const list = document.getElementById("side-conditions-list");
+      const badge = document.getElementById("active-format-badge");
+      const toggleLabel = document.getElementById("syntax-toggle-label");
+
+      if (isMathMode) {
+        codeBox.textContent = thm.math;
+        badge.textContent = "Active: Mathematical Unicode / LaTeX";
+        toggleLabel.textContent = "Switch to Concrete ASCII Syntax";
+      } else {
+        codeBox.textContent = thm.ascii;
+        badge.textContent = "Active: Concrete SML / Obelisk Syntax";
+        toggleLabel.textContent = "Switch to Mathematical Unicode";
+      }
+
+      list.innerHTML = "";
+      thm.sideConditions.forEach(sc => {
+        const li = document.createElement("li");
+        li.textContent = sc;
+        list.appendChild(li);
+      });
+    }
+
+    function selectTheorem(key) {
+      activeThmKey = key;
+      const tabs = document.querySelectorAll(".thm-btn");
+      tabs.forEach(t => t.classList.remove("active"));
+      event.target.classList.add("active");
+      renderActiveTheorem();
+    }
+
+    function toggleSyntaxMode() {
+      isMathMode = !isMathMode;
+      renderActiveTheorem();
+    }
+
+    function copyActiveSyntax() {
+      const thm = THEOREMS[activeThmKey];
+      const textToCopy = isMathMode ? thm.math : thm.ascii;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        const btnText = document.getElementById("copy-btn-text");
+        btnText.textContent = "✓ Copied to Clipboard!";
+        setTimeout(() => {
+          btnText.textContent = "Copy Statement";
+        }, 2200);
+      });
+    }
+
+    // Initial render
+    renderActiveTheorem();
+
+    // Initialize Silktide Cookie Consent Manager
+    if (window.silktideConsentManager) {
+      window.silktideConsentManager.init({
+        consentTypes: [
+          {
+            id: 'essential',
+            label: 'Essential',
+            description: 'Necessary for basic site navigation and core functionality.',
+            required: true,
+          },
+          {
+            id: 'analytics',
+            label: 'Analytics',
+            description: 'Helps us measure visitor traffic and technical performance.',
+            defaultValue: true,
+          }
+        ]
+      });
+    }
+  </script>
+
+</body>
+</html>

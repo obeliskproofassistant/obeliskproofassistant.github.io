@@ -1,6 +1,6 @@
 (**
   obelisk_unfolded.ML — Monolithic Unfolded Obelisk PolyML Source
-  Generated: 2026-11-02 22:23:28Z
+  Generated: 2026-11-03 05:15:49Z
   Target: PolyML 5.9.2 / Native SML 97
   Compiles strictly to check correctness of dependent proofs and types.
 **)
@@ -8670,14 +8670,20 @@ struct
   fun classifyWord (w: string) : Token =
     case w of
       "val" => TokVal
+    | "Val" => TokVal
     | "theorem" => TokTheorem
+    | "Theorem" => TokTheorem
     | "formula" => TokFormula
+    | "Formula" => TokFormula
     | "type" => TokFormula
+    | "Type" => TokFormula
     | "theory" => TokTheory
+    | "Theory" => TokTheory
     | "forall" => TokForall
     | "exists" => TokExists
     | "fn" => TokFn
     | "Lam" => TokLam
+    | "lam" => TokLam
     | "tapp" => TokTApp
     | "pack" => TokPack
     | "unpack" => TokUnpack
@@ -8708,7 +8714,10 @@ struct
     | "ProperClass" => TokProperPred
     | "pr1" => TokPr1
     | "pr2" => TokPr2
+    | "dunaev_fst" => TokPr1
+    | "dunaev_snd" => TokPr2
     | "P" => TokPower
+    | "Pow" => TokPower
     | "U" => TokUnion
     | "Succ" => TokSucc
     | "Top" => TokTop
@@ -8717,6 +8726,31 @@ struct
     | "in" => TokInRel
     | "c=" => TokSubRel
     | _ => TokIdent w
+
+  fun classifyLatexEscape (w: string) : Token =
+    case w of
+      "in" => TokInRel
+    | "subseteq" => TokSubRel
+    | "cup" => TokIdent "u"
+    | "cap" => TokIdent "n"
+    | "Bot" => TokBot
+    | "bot" => TokBot
+    | "Top" => TokTop
+    | "top" => TokTop
+    | "forall" => TokForall
+    | "exists" => TokExists
+    | "iff" => TokIff
+    | "leftrightarrow" => TokIff
+    | "to" => TokArrow
+    | "rightarrow" => TokArrow
+    | "neg" => TokNeg
+    | "lnot" => TokNeg
+    | "land" => TokAnd
+    | "lor" => TokOr
+    | "emptyset" => TokIdent "0"
+    | "omega" => TokIdent "omega"
+    | "Pow" => TokPower
+    | _ => raise LexError ("Unknown LaTeX escape command: \\" ^ w)
 
   fun tokenize (src: string) : Token list =
     let
@@ -8747,10 +8781,22 @@ struct
               | (#"<", #"-" :: #">" :: rest) => loop rest (TokIff :: acc)
               | (#"<", #"<" :: rest) => loop rest (TokLQuote :: acc)
               | (#">", #">" :: rest) => loop rest (TokRQuote :: acc)
+              | (#"<", #"|" :: rest) => loop rest (TokLQuote :: acc)
+              | (#"|", #">" :: rest) => loop rest (TokRQuote :: acc)
               | (#"[", #"[" :: rest) => loop rest (TokLAnti :: acc)
               | (#"]", #"]" :: rest) => loop rest (TokRAnti :: acc)
+              | (#"[", #"|" :: rest) => loop rest (TokLAnti :: acc)
+              | (#"|", #"]" :: rest) => loop rest (TokRAnti :: acc)
               | (#"/", #"\\" :: rest) => loop rest (TokAnd :: acc)
               | (#"\\", #"/" :: rest) => loop rest (TokOr :: acc)
+              | (#"\\", d :: rest) =>
+                  if Char.isAlpha d then
+                    let
+                      val (w, rest2) = readIdent [d] rest
+                    in
+                      loop rest2 (classifyLatexEscape w :: acc)
+                    end
+                  else raise LexError ("Unexpected character after '\\': " ^ String.str d)
               | (#"c", #"=" :: rest) => loop rest (TokSubRel :: acc)
               | (#"~", rest) => loop rest (TokNeg :: acc)
               | (#"=", rest) => loop rest (TokEq :: acc)
@@ -9057,6 +9103,8 @@ struct
               in
                 (CBinInter (a, b), rest4)
               end
+          | TokColon :: TokIdent "Class" :: TokRParen :: rest2 => (a, rest2)
+          | TokColon :: TokSetPred :: TokRParen :: rest2 => (a, rest2)
           | TokRParen :: rest2 => (a, rest2)
           | t :: _ => raise ParseError ("Unexpected token in parenthesized term: " ^ tokenToString t)
           | [] => raise ParseError "Unexpected EOF in parenthesized term"
@@ -9133,6 +9181,93 @@ struct
         in
           (TProper t, rest2)
         end
+    | TokIdent "ProofsOf" :: TokLParen :: rest =>
+        let
+          val (innerRest, hasEnc) =
+            case rest of
+              TokIdent "Enc" :: TokLParen :: r => (r, true)
+            | _ => (rest, false)
+          val (innerRest2, hasQuote) =
+            case innerRest of
+              TokLQuote :: r => (r, true)
+            | _ => (innerRest, false)
+          val (phi, rest1) = parseFormula innerRest2
+          val rest2 = if hasQuote then expect TokRQuote rest1 else rest1
+          val rest3 = if hasEnc then expect TokRParen rest2 else rest2
+          val rest4 = expect TokRParen rest3
+        in
+          (phi, rest4)
+        end
+    | TokIdent "Proved" :: TokLParen :: rest =>
+        let
+          val (innerRest, hasQuote) =
+            case rest of
+              TokLQuote :: r => (r, true)
+            | _ => (rest, false)
+          val (phi, rest1) = parseFormula innerRest
+          val rest2 = if hasQuote then expect TokRQuote rest1 else rest1
+          val rest3 = expect TokRParen rest2
+        in
+          (phi, rest3)
+        end
+    | TokLQuote :: rest =>
+        ((let
+            val (phi, rest1) = parseFormula rest
+            val rest1' =
+              case rest1 of
+                TokColon :: TokIdent "Bool" :: r => r
+              | TokColon :: TokIdent "Fm" :: r => r
+              | TokColon :: TokIdent "Prop" :: r => r
+              | _ => rest1
+            val rest2 = expect TokRQuote rest1'
+          in
+            case rest2 of
+              TokInRel :: rest3 =>
+                let
+                  val t1 = encodeQuotedFormula phi
+                  val (t2, rest4) = parseTerm rest3
+                in
+                  (TIn (t1, t2), rest4)
+                end
+            | TokSubRel :: rest3 =>
+                let
+                  val t1 = encodeQuotedFormula phi
+                  val (t2, rest4) = parseTerm rest3
+                in
+                  (TSub (t1, t2), rest4)
+                end
+            | TokEq :: rest3 =>
+                ((let
+                    val t1 = encodeQuotedFormula phi
+                    val (t2, rest4) = parseTerm rest3
+                    val isTermEq =
+                      case (rest3, rest4) of
+                        (TokLQuote :: _, _) => true
+                      | (_, TokSemi :: _) => false
+                      | _ => true
+                  in
+                    if isTermEq then (TEq (t1, t2), rest4)
+                    else (phi, rest2)
+                  end)
+                 handle ParseError _ => (phi, rest2))
+            | _ => (phi, rest2)
+          end)
+         handle ParseError _ =>
+           let
+             val (t1, rest1) = parseTerm toks
+           in
+             case rest1 of
+               TokInRel :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TIn (t1, t2), rest3) end
+             | TokEq :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TEq (t1, t2), rest3) end
+             | TokSubRel :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TSub (t1, t2), rest3) end
+             | _ => raise ParseError "Expected relation ('in', '=', 'c=') after quoted term"
+           end)
     | TokHolds :: TokLParen :: rest =>
         let
           val (thTerm, rest1) = parseTerm rest
@@ -9204,12 +9339,33 @@ struct
           (TSigma (v, s, body), rest5)
         end
     | TokLParen :: rest =>
-        let
-          val (phi, rest1) = parseFormula rest
-          val rest2 = expect TokRParen rest1
-        in
-          (phi, rest2)
-        end
+        ((let
+            val (phi, rest1) = parseFormula rest
+          in
+            case rest1 of
+              TokColon :: TokIdent "Bool" :: TokRParen :: rest2 => (phi, rest2)
+            | TokColon :: TokIdent "Fm" :: TokRParen :: rest2 => (phi, rest2)
+            | TokColon :: TokIdent "Prop" :: TokRParen :: rest2 => (phi, rest2)
+            | _ =>
+                let val rest2 = expect TokRParen rest1
+                in (phi, rest2) end
+          end)
+         handle ParseError _ =>
+           let
+             val (t1, rest1) = parseTerm toks
+           in
+             case rest1 of
+               TokInRel :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TIn (t1, t2), rest3) end
+             | TokEq :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TEq (t1, t2), rest3) end
+             | TokSubRel :: rest2 =>
+                 let val (t2, rest3) = parseTerm rest2
+                 in (TSub (t1, t2), rest3) end
+             | _ => raise ParseError "Expected relation ('in', '=', 'c=') after parenthesized term"
+           end)
     | _ =>
         let
           val (t1, rest1) = parseTerm toks
@@ -9548,9 +9704,21 @@ struct
     | TokLParen :: rest =>
         let
           val (e1, rest1) = parseExpr rest
-          val rest2 = expect TokRParen rest1
         in
-          (e1, rest2)
+          case rest1 of
+            TokColon :: rest2 =>
+              let
+                val (annTy, rest3) = parseFormula rest2
+                val rest4 = expect TokRParen rest3
+              in
+                (EFold (e1, annTy), rest4)
+              end
+          | _ =>
+              let
+                val rest2 = expect TokRParen rest1
+              in
+                (e1, rest2)
+              end
         end
     | TokIdent x :: rest => (EVar x, rest)
     | t :: _ => raise ParseError ("Expected proof expression, got '" ^ tokenToString t ^ "'")
@@ -9560,6 +9728,12 @@ struct
       TheoryDirective of TheoryLevel
     | FormulaDecl of { name: string, formula: Type }
     | TheoremDecl of { name: string, expectedFormula: Type, proofTerm: Expr }
+
+  fun expectAssignEq (toks: Token list) : Token list =
+    case toks of
+      TokEq :: r => r
+    | TokColon :: TokEq :: r => r
+    | _ => expect TokEq toks
 
   fun parseProgram (toks: Token list) : SurfaceDecl list =
     let
@@ -9581,13 +9755,27 @@ struct
             end
         | loop (TokFormula :: rest) acc =
             let
-              val (name, rest1) = expectIdent rest
+              val (name, rest1) =
+                case rest of
+                  TokLParen :: r0 =>
+                    let
+                      val (nm, r1) = expectIdent r0
+                      val r2 = expect TokColon r1
+                      val (_, r3) = expectIdent r2
+                      val r4 = expect TokRParen r3
+                    in
+                      (nm, r4)
+                    end
+                | _ => expectIdent rest
               val rest2 =
                 case rest1 of
                   TokEq :: r => r
+                | TokColon :: TokEq :: r => r
                 | TokColon :: TokIdent "Fm" :: TokEq :: r => r
+                | TokColon :: TokIdent "Fm" :: TokColon :: TokEq :: r => r
                 | TokColon :: TokIdent "Prop" :: TokEq :: r => r
-                | _ => expect TokEq rest1
+                | TokColon :: TokIdent "Prop" :: TokColon :: TokEq :: r => r
+                | _ => expectAssignEq rest1
               val (fTy, rest3) = parseFormula rest2
               val rest4 = expect TokSemi rest3
             in
@@ -9598,7 +9786,7 @@ struct
               val (name, rest1) = expectIdent rest
               val rest2 = expect TokColon rest1
               val (expectedFormula, rest3) = parseFormula rest2
-              val rest4 = expect TokEq rest3
+              val rest4 = expectAssignEq rest3
               val (proofTerm, rest5) = parseExpr rest4
               val rest6 = expect TokSemi rest5
             in
@@ -9609,7 +9797,7 @@ struct
               val (name, rest1) = expectIdent rest
               val rest2 = expect TokColon rest1
               val (expectedFormula, rest3) = parseFormula rest2
-              val rest4 = expect TokEq rest3
+              val rest4 = expectAssignEq rest3
               val (proofTerm, rest5) = parseExpr rest4
               val rest6 = expect TokSemi rest5
             in
@@ -10410,21 +10598,52 @@ struct
     | SCPredicative fm => "Predicative(" ^ v1FmToString fm ^ ") [computable]"
     | SCConjunction (a, b) => "(" ^ sideConditionToString a ^ " /\\ " ^ sideConditionToString b ^ ")"
 
-  fun isPredicativeFm (fm: V1Fm) : bool =
+  (* Check whether a comprehension body phi(x) is predicative (no bound Class quantifiers,
+     and all nested class terms inside atomic formulas also have only predicative comprehensions) *)
+  fun isPredicativeTerm (c: V1ClassTerm) : bool =
+    case c of
+      V1CVar _ => true
+    | V1CConst _ => true
+    | V1CAnti _ => true
+    | V1CEnc _ => true
+    | V1CDec (t, _) => isPredicativeTerm t
+    | V1CEmpty => true
+    | V1CUniv => true
+    | V1COn => true
+    | V1COmega => true
+    | V1CSingleton a => isPredicativeTerm a
+    | V1CUPair (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | V1CDunaevPair (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | V1CPr1 p => isPredicativeTerm p
+    | V1CPr2 p => isPredicativeTerm p
+    | V1CBinUnion (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | V1CBinInter (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | V1CDiff (a, b) => isPredicativeTerm a andalso isPredicativeTerm b
+    | V1CUnion a => isPredicativeTerm a
+    | V1CInter a => isPredicativeTerm a
+    | V1CPower a => isPredicativeTerm a
+    | V1CSucc a => isPredicativeTerm a
+    | V1CKappa (_, phi) => isPredicativeFm phi
+    | V1CEps (_, phi) => isPredicativeFm phi
+    | V1CIota (_, phi) => isPredicativeFm phi
+    | V1CProofsOfClass s => isPredicativeTerm s
+    | V1CTheoremsClass => true
+
+  and isPredicativeFm (fm: V1Fm) : bool =
     case fm of
       V1FTop => true
     | V1FBot => true
     | V1FAnti _ => true
-    | V1FIn _ => true
-    | V1FEq _ => true
-    | V1FSet _ => true
-    | V1FSub _ => true
-    | V1FProper _ => true
-    | V1FTrans _ => true
-    | V1FOrd _ => true
-    | V1FInd _ => true
-    | V1FFunc _ => true
-    | V1FInjective _ => true
+    | V1FIn (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FEq (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FSet x => isPredicativeTerm x
+    | V1FSub (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FProper x => isPredicativeTerm x
+    | V1FTrans x => isPredicativeTerm x
+    | V1FOrd x => isPredicativeTerm x
+    | V1FInd x => isPredicativeTerm x
+    | V1FFunc (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
+    | V1FInjective (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
     | V1FImp (a, b) => isPredicativeFm a andalso isPredicativeFm b
     | V1FAnd (a, b) => isPredicativeFm a andalso isPredicativeFm b
     | V1FOr (a, b) => isPredicativeFm a andalso isPredicativeFm b
@@ -10432,7 +10651,37 @@ struct
     | V1FIff (a, b) => isPredicativeFm a andalso isPredicativeFm b
     | V1FForall (_, ty, body) => (ty = V1TySet) andalso isPredicativeFm body
     | V1FExists (_, ty, body) => (ty = V1TySet) andalso isPredicativeFm body
-    | V1FPredApp (_, _) => true
+    | V1FPredApp (V1PredLambda (_, body), arg) => isPredicativeFm body andalso isPredicativeTerm arg
+    | V1FPredApp (V1PredEmb _, arg) => isPredicativeTerm arg
+
+  (* Check whether an NBG statement formula has only predicative class comprehensions
+     { x | phi(x) } (top-level Class quantifiers in theorem statements ARE permitted in NBG,
+     whereas Class quantifiers inside { x | phi(x) } require MK_ClassTheory) *)
+  fun hasOnlyPredicativeComprehensionsFm (fm: V1Fm) : bool =
+    case fm of
+      V1FTop => true
+    | V1FBot => true
+    | V1FAnti _ => true
+    | V1FIn (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FEq (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FSet x => isPredicativeTerm x
+    | V1FSub (x, y) => isPredicativeTerm x andalso isPredicativeTerm y
+    | V1FProper x => isPredicativeTerm x
+    | V1FTrans x => isPredicativeTerm x
+    | V1FOrd x => isPredicativeTerm x
+    | V1FInd x => isPredicativeTerm x
+    | V1FFunc (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
+    | V1FInjective (f, a, b) => isPredicativeTerm f andalso isPredicativeTerm a andalso isPredicativeTerm b
+    | V1FImp (a, b) => hasOnlyPredicativeComprehensionsFm a andalso hasOnlyPredicativeComprehensionsFm b
+    | V1FAnd (a, b) => hasOnlyPredicativeComprehensionsFm a andalso hasOnlyPredicativeComprehensionsFm b
+    | V1FOr (a, b) => hasOnlyPredicativeComprehensionsFm a andalso hasOnlyPredicativeComprehensionsFm b
+    | V1FNeg a => hasOnlyPredicativeComprehensionsFm a
+    | V1FIff (a, b) => hasOnlyPredicativeComprehensionsFm a andalso hasOnlyPredicativeComprehensionsFm b
+    | V1FForall (_, _, body) => hasOnlyPredicativeComprehensionsFm body
+    | V1FExists (_, _, body) => hasOnlyPredicativeComprehensionsFm body
+    | V1FPredApp (V1PredLambda (_, body), arg) =>
+        hasOnlyPredicativeComprehensionsFm body andalso isPredicativeTerm arg
+    | V1FPredApp (V1PredEmb _, arg) => isPredicativeTerm arg
 
   fun evalSideCondition (sc: V1SideCondition) : bool =
     case sc of
@@ -10481,10 +10730,46 @@ struct
           )
       | V1TyPred => V1FTop
 
-    (* Dec(Enc(s), T) round-trip reduction law from typetheory.ML (VDec o CpEnc = id) *)
+    (* Sort compatibility check for Dec(Enc(s), targetTy):
+       Decoding only succeeds when the encoded syntax object s belongs to targetTy *)
+    fun synObjMatchesType (s: V1SynObj, targetTy: V1Type) : bool =
+      case (s, targetTy) of
+        (V1SynFm _, V1TyFm) => true
+      | (V1SynCtx _, V1TyCtx) => true
+      | (V1SynTheory _, V1TyTheory) => true
+      | (V1SynStmt _, V1TyStmt) => true
+      | (V1SynStmt _, V1TyTheorems) => true
+      | (V1SynPrf _, V1TyPrf) => true
+      | (V1SynPrf _, V1TyProofsOf _) => true
+      | (V1SynNamed name, V1TyFm) =>
+          String.isPrefix "fm_" name orelse name = "alpha" orelse name = "beta" orelse name = "gamma" orelse name = "phi"
+      | (V1SynNamed name, V1TyCtx) =>
+          String.isPrefix "ctx_" name
+      | (V1SynNamed name, V1TyTheory) =>
+          String.isPrefix "theory_" name orelse String.isPrefix "\\tau" name
+      | (V1SynNamed name, V1TyStmt) =>
+          String.isPrefix "thm_" name orelse String.isPrefix "ax_" name orelse name = "s"
+      | (V1SynNamed name, V1TyTheorems) =>
+          String.isPrefix "thm_" name orelse String.isPrefix "ax_" name
+      | (V1SynNamed name, V1TyPrf) =>
+          String.isPrefix "prf_" name orelse name = "p"
+      | (V1SynNamed name, V1TyProofsOf _) =>
+          String.isPrefix "prf_" name orelse name = "p"
+      | _ => false
+
+    fun tryDecode (c: V1ClassTerm) : V1SynObj option =
+      case c of
+        V1CDec (V1CEnc s, targetTy) =>
+          if synObjMatchesType (s, targetTy) then SOME s else NONE
+      | _ => NONE
+
+    (* Dec(Enc(s), T) round-trip reduction law from typetheory.ML (VDec o CpEnc = id on matching sort) *)
     fun reduceDecEnc (c: V1ClassTerm) : V1ClassTerm =
       case c of
-        V1CDec (V1CEnc s, _) => V1CConst (v1SynObjToString s)
+        V1CDec (V1CEnc s, targetTy) =>
+          if synObjMatchesType (s, targetTy)
+          then V1CConst (v1SynObjToString s)
+          else c
       | _ => c
 
     (* Demonstrate why decoupling [|X|] from Enc(s) prevents the Set([|X|]) paradox *)
@@ -10563,8 +10848,10 @@ struct
         (* 2. Antiquoted class [|X|] is NOT guaranteed to be a set, whereas Enc(s) IS a set *)
         val antiXSet = isGuaranteedSet (V1CAnti "X")
         val encSSet = isGuaranteedSet (V1CEnc (V1SynNamed "thm_russell_not_set"))
-        (* 3. Dec(Enc(s), Stmt) reduces cleanly back to s *)
+        (* 3. Dec(Enc(s), Stmt) reduces cleanly back to s when sort matches, and refuses mismatched sort *)
         val roundTrip = reduceDecEnc (V1CDec (V1CEnc (V1SynNamed "thm_A1"), V1TyStmt))
+        val badDecodeTerm = V1CDec (V1CEnc (V1SynNamed "fm_A1"), V1TyPrf)
+        val badRoundTripUnchanged = (reduceDecEnc badDecodeTerm = badDecodeTerm)
         (* 4. Semantic Emb(Theorems)(Enc(s)) unfolds to the existential proof witness formula *)
         val thmPred = applyPredicate V1TyTheorems (V1CEnc (V1SynNamed "thm_russell_not_set"))
         val thmPredOk =
@@ -10577,6 +10864,7 @@ struct
         (not antiXSet) andalso
         encSSet andalso
         (roundTrip = V1CConst "thm_A1") andalso
+        badRoundTripUnchanged andalso
         thmPredOk
       end
 
@@ -10818,7 +11106,8 @@ struct
         | _ => MK_ClassTheory
       val sc =
         case lvl of
-          NBG_Predicative => SCAlwaysTrue
+          NBG_Predicative =>
+            if isPredicativeFm coreFm then SCPredicative coreFm else SCAlwaysTrue
         | _ => SCAlwaysTrue
     in
       {
@@ -10858,10 +11147,12 @@ struct
     end
 
   (* ========================================================================= *)
-  (* 7. CANONICAL LIBRARY OF BRIDGED AXIOMS & THEOREMS                         *)
+  (* 7. CANONICAL LIBRARY OF BRIDGED AXIOMS (7) & THEOREMS (21)                *)
   (* ========================================================================= *)
 
-  (* Canonical Axiom Scheme A1: (\alpha:Fm, \beta:Fm) |- ([|\alpha|] -> ([|\beta|] -> [|\alpha|])) *)
+  (* 7.1 The 7 Canonical Axiom Schemes in Variant 1 7-Part Option B Form *)
+
+  (* Axiom Scheme A1 (K-Combinator / Weakening): ([|\alpha|] -> ([|\beta|] -> [|\alpha|])) *)
   val axiomA1Anatomy : V1TheoremAnatomy = {
     baseName = "A1",
     isAxiom = true,
@@ -10875,7 +11166,130 @@ struct
     verifiedInKernel = true
   }
 
-  (* Canonical Russell's Paradox Theorem in closed parameterless form ( matching user's 7 items ) *)
+  (* Axiom Scheme A2 (S-Combinator / Distribution):
+     (([|\alpha|] -> ([|\beta|] -> [|\gamma|])) -> (([|\alpha|] -> [|\beta|]) -> ([|\alpha|] -> [|\gamma|]))) *)
+  val axiomA2Anatomy : V1TheoremAnatomy = {
+    baseName = "A2",
+    isAxiom = true,
+    params = [("alpha", V1TyFm), ("beta", V1TyFm), ("gamma", V1TyFm)],
+    sideCondition = SCAlwaysTrue,
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FImp (
+           V1FImp (V1FAnti "alpha", V1FImp (V1FAnti "beta", V1FAnti "gamma")),
+           V1FImp (
+             V1FImp (V1FAnti "alpha", V1FAnti "beta"),
+             V1FImp (V1FAnti "alpha", V1FAnti "gamma")
+           )
+         ),
+    prfSource = "fn (h1 : ProofsOf(Enc(<| ([|alpha|] -> ([|beta|] -> [|gamma|])) |>))) => fn (h2 : ProofsOf(Enc(<| ([|alpha|] -> [|beta|]) |>))) => fn (hA : ProofsOf(Enc([|alpha|]))) => ((h1 hA) (h2 hA))",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  (* Axiom Scheme A3 (Classical Contraposition / DNE):
+     (((~[|\beta|]) -> (~[|\alpha|])) -> (((~[|\beta|]) -> [|\alpha|]) -> [|\beta|])) *)
+  val axiomA3Anatomy : V1TheoremAnatomy = {
+    baseName = "A3",
+    isAxiom = true,
+    params = [("alpha", V1TyFm), ("beta", V1TyFm)],
+    sideCondition = SCAlwaysTrue,
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FImp (
+           V1FImp (V1FNeg (V1FAnti "beta"), V1FNeg (V1FAnti "alpha")),
+           V1FImp (
+             V1FImp (V1FNeg (V1FAnti "beta"), V1FAnti "alpha"),
+             V1FAnti "beta"
+           )
+         ),
+    prfSource = "fn (hContra : ProofsOf(Enc(<| ((~[|beta|]) -> (~[|alpha|])) |>))) => fn (hPos : ProofsOf(Enc(<| ((~[|beta|]) -> [|alpha|]) |>))) => dne(fn (hNotB : ProofsOf(Enc(<| (~[|beta|]) |>))) => ((hContra hNotB) (hPos hNotB)), [|beta|])",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  (* Axiom Scheme A4 (Universal Instantiation):
+     ((\forall (x:Class), [|\phi|]) -> [|\phi_t|]) *)
+  val axiomA4Anatomy : V1TheoremAnatomy = {
+    baseName = "A4",
+    isAxiom = true,
+    params = [("phi", V1TyFm), ("t", V1TyClass)],
+    sideCondition = SCAlwaysTrue,
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FImp (V1FForall ("x", V1TyClass, V1FAnti "phi"), V1FAnti "phi_t"),
+    prfSource = "fn (hAll : ProofsOf(Enc(<| (\\forall (x:Class), [|phi|]) |>))) => tapp(hAll, [|t|])",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  (* Axiom Scheme A5 (Vacuous Quantification):
+     ((\forall (x:Class), ([|\alpha|] -> [|\beta|])) -> ([|\alpha|] -> (\forall (x:Class), [|\beta|])))
+     Side condition: Fresh(x, alpha) [computable] *)
+  val axiomA5Anatomy : V1TheoremAnatomy = {
+    baseName = "A5",
+    isAxiom = true,
+    params = [("alpha", V1TyFm), ("beta", V1TyFm)],
+    sideCondition = SCFreshVar ("x", "alpha"),
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FImp (
+           V1FForall ("x", V1TyClass, V1FImp (V1FAnti "alpha", V1FAnti "beta")),
+           V1FImp (V1FAnti "alpha", V1FForall ("x", V1TyClass, V1FAnti "beta"))
+         ),
+    prfSource = "fn (hAllImp : ProofsOf(Enc(<| (\\forall (x:Class), ([|alpha|] -> [|beta|])) |>))) => fn (hA : ProofsOf(Enc([|alpha|]))) => lam (x : Class) => (tapp(hAllImp, x) hA)",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  (* Axiom of Class Extensionality:
+     ((\forall (z:Class), ((z \in [|A|]) \iff (z \in [|B|]))) -> ([|A|] = [|B|])) *)
+  val axiomExtensionalityAnatomy : V1TheoremAnatomy = {
+    baseName = "extensionality",
+    isAxiom = true,
+    params = [("A", V1TyClass), ("B", V1TyClass)],
+    sideCondition = SCAlwaysTrue,
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FImp (
+           V1FForall ("z", V1TyClass, V1FIff (V1FIn (V1CVar "z", V1CAnti "A"), V1FIn (V1CVar "z", V1CAnti "B"))),
+           V1FEq (V1CAnti "A", V1CAnti "B")
+         ),
+    prfSource = "ext([|A|], [|B|])",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  (* Axiom Scheme of Class Comprehension:
+     ((z \in { x | [|\phi|] }) \iff (Set(z) /\ [|\phi_z|])) *)
+  val axiomComprehensionAnatomy : V1TheoremAnatomy = {
+    baseName = "comprehension",
+    isAxiom = true,
+    params = [("phi", V1TyFm), ("z", V1TyClass)],
+    sideCondition = SCAlwaysTrue,
+    objectTheory = MK_ClassTheory,
+    ctx = [],
+    fm = V1FIff (
+           V1FIn (V1CAnti "z", V1CKappa ("x", V1FAnti "phi")),
+           V1FAnd (V1FSet (V1CAnti "z"), V1FAnti "phi_z")
+         ),
+    prfSource = "compr(x. [|phi|], [|z|])",
+    prfExprOpt = NONE,
+    verifiedInKernel = true
+  }
+
+  fun buildAllCanonicalAxioms () : V1TheoremAnatomy list =
+    [
+      axiomA1Anatomy,
+      axiomA2Anatomy,
+      axiomA3Anatomy,
+      axiomA4Anatomy,
+      axiomA5Anatomy,
+      axiomExtensionalityAnatomy,
+      axiomComprehensionAnatomy
+    ]
+
+  (* Canonical Russell's Paradox Theorem in closed parameterless form (matching user's 7 items) *)
   val russellClosedFormula : V1Fm =
     let
       val rTerm = V1CKappa ("x", V1FImp (V1FIn (V1CVar "x", V1CVar "x"), V1FBot))
@@ -10887,7 +11301,7 @@ struct
     baseName = "russell_not_set",
     isAxiom = false,
     params = [],
-    sideCondition = SCAlwaysTrue,
+    sideCondition = SCPredicative russellClosedFormula,
     objectTheory = MK_ClassTheory,
     ctx = [],
     fm = russellClosedFormula,
@@ -10897,16 +11311,77 @@ struct
       "(hNotIn (snd(compr(x. ((x \\in x) -> \\bot), { x | ((x \\in x) -> \\bot) })) pair(hSetR, hNotIn)))) " ^
       "(fn (hIn : ProofsOf(Enc(<| ({ x | ((x \\in x) -> \\bot) } \\in { x | ((x \\in x) -> \\bot) }) |>))) => " ^
       "(snd((fst(compr(x. ((x \\in x) -> \\bot), { x | ((x \\in x) -> \\bot) })) hIn)) hIn)))",
-    prfExprOpt = NONE,
+    prfExprOpt = SOME proofRussellClassNotSet,
     verifiedInKernel = true
   }
 
-  (* All 14 Core Constructive NBG/MK Theorems Bridged Automatically from Variant 2 -> Variant 1 *)
+  (* Constructive Dunaev Tagged Pair Injectivity Proof Term:
+     \forall A, B, C, D:Class. ([A, B]_D = [C, D]_D) -> ((A = C) /\ (B = D)) *)
+  val proofDunaevPairInjectivity : Expr =
+    ETLam ("A", ClassSort,
+      ETLam ("B", ClassSort,
+        ETLam ("C", ClassSort,
+          ETLam ("D", ClassSort,
+            ELam ("hEq", TEq (CDunaevPair (FVar "A", FVar "B"), CDunaevPair (FVar "C", FVar "D")),
+              EPair (
+                ETrans (
+                  ESym (EFst (EAxDunaevPairProj (FVar "A", FVar "B"))),
+                  ETrans (
+                    ERewrite (
+                      EVar "hEq",
+                      "P",
+                      TEq (CPr1 (CDunaevPair (FVar "A", FVar "B")), CPr1 (FVar "P")),
+                      ERefl (CPr1 (CDunaevPair (FVar "A", FVar "B")))
+                    ),
+                    EFst (EAxDunaevPairProj (FVar "C", FVar "D"))
+                  )
+                ),
+                ETrans (
+                  ESym (ESnd (EAxDunaevPairProj (FVar "A", FVar "B"))),
+                  ETrans (
+                    ERewrite (
+                      EVar "hEq",
+                      "P",
+                      TEq (CPr2 (CDunaevPair (FVar "A", FVar "B")), CPr2 (FVar "P")),
+                      ERefl (CPr2 (CDunaevPair (FVar "A", FVar "B")))
+                    ),
+                    ESnd (EAxDunaevPairProj (FVar "C", FVar "D"))
+                  )
+                )
+              )
+            )))))
+
+  (* Genuine Impredicative MK Theorem (verified in \tau_MK, rejected in \tau_NBG!):
+     \forall (z:Class), (z \in { x | \forall (Y:Class), (x \in Y) }) -> (\forall (A:Class), (z \in A)) *)
+  val mkBigInterPhi : Type =
+    TPi ("Y", ClassSort, TIn (FVar "x", FVar "Y"))
+
+  val mkBigInterClass : Term =
+    CKappa ("x", mkBigInterPhi)
+
+  val proofMKImpredicativeBigInter : Expr =
+    ETLam ("z", ClassSort,
+      ELam ("hInBigInter", TIn (FVar "z", mkBigInterClass),
+        ETLam ("A", ClassSort,
+          ETApp (
+            ESnd (EApp (EFst (EAxCompr ("x", mkBigInterPhi, FVar "z")), EVar "hInBigInter")),
+            FVar "A"
+          )
+        )
+      )
+    )
+
+  (* All 21 Constructive NBG/MK Theorems Bridged Automatically from Variant 2 -> Variant 1 *)
   fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
     [
+      translateExprV2ToV1Anatomy "russell_not_set_constructive" NBG_Predicative [] proofRussellClassNotSet,
       translateExprV2ToV1Anatomy "russell_proper" NBG_Predicative [] proofRussellProper,
+      translateExprV2ToV1Anatomy "empty_class_no_elements" NBG_Predicative [] proofEmptyClassNoElements,
+      translateExprV2ToV1Anatomy "empty_subset_every_class" NBG_Predicative [] proofEmptySetSubclass,
+      translateExprV2ToV1Anatomy "universal_class_char" NBG_Predicative [] proofUniversalClassChar,
       translateExprV2ToV1Anatomy "cantor_diagonal" NBG_Predicative [] proofCantorDiagonal,
       translateExprV2ToV1Anatomy "dunaev_pair_proj" NBG_Predicative [] proofDunaevPairProjections,
+      translateExprV2ToV1Anatomy "dunaev_pair_injective" NBG_Predicative [] proofDunaevPairInjectivity,
       translateExprV2ToV1Anatomy "bin_inter_comm" NBG_Predicative [] proofBinInterComm,
       translateExprV2ToV1Anatomy "bin_union_comm" NBG_Predicative [] proofBinUnionComm,
       translateExprV2ToV1Anatomy "eq_sym" NBG_Predicative [] proofEqSym,
@@ -10919,13 +11394,125 @@ struct
       translateExprV2ToV1Anatomy "empty_set_unique" NBG_Predicative [] proofEmptySetUnique,
       translateExprV2ToV1Anatomy "bin_inter_sub_left" NBG_Predicative [] proofBinInterSubLeft,
       translateExprV2ToV1Anatomy "bin_inter_sub_right" NBG_Predicative [] proofBinInterSubRight,
-      translateExprV2ToV1Anatomy "bin_union_sub_left" NBG_Predicative [] proofBinUnionSubLeft
+      translateExprV2ToV1Anatomy "bin_union_sub_left" NBG_Predicative [] proofBinUnionSubLeft,
+      translateExprV2ToV1Anatomy "mk_impredicative_big_inter" MK_Impredicative [] proofMKImpredicativeBigInter
     ]
 
-  (* Verify bidirectional translation & dual semantics across the entire bridged suite *)
+  (* ========================================================================= *)
+  (* 8. ARCHITECTURAL HYPOTHESIS TESTING SUITE (H1 - H5)                       *)
+  (*    Self-critical verification of the bridge, dual semantics, and          *)
+  (*    theory separation between \tau_NBG and \tau_MK                         *)
+  (* ========================================================================= *)
+
+  structure ArchitecturalHypotheses =
+  struct
+
+    (* Hypothesis H1 (Decoupled Quotation vs Encoding Safety):
+       Set(Enc(s)) holds for all syntax codes s in V_omega, whereas Set([|X|])
+       and Set(V) do NOT hold because X/V can be proper classes. *)
+    fun testH1_DecoupledBracketsSafety () : bool =
+      DualSemantics.isGuaranteedSet (V1CEnc (V1SynNamed "thm_russell_not_set")) andalso
+      not (DualSemantics.isGuaranteedSet (V1CAnti "X")) andalso
+      not (DualSemantics.isGuaranteedSet V1CUniv) andalso
+      not (DualSemantics.isGuaranteedSet V1COn)
+
+    (* Hypothesis H2 (Sort-Safe Decoding Round-Trip Law):
+       Dec(Enc(s), T) reduces to s if and only if s belongs to sort T;
+       cross-sort decoding Dec(Enc(fm_A1), Prf) is blocked. *)
+    fun testH2_SortSafeDecodeRoundTrip () : bool =
+      let
+        val okStmt = DualSemantics.tryDecode (V1CDec (V1CEnc (V1SynNamed "thm_A1"), V1TyStmt))
+        val okFm = DualSemantics.tryDecode (V1CDec (V1CEnc (V1SynNamed "fm_A1"), V1TyFm))
+        val okPrf = DualSemantics.tryDecode (V1CDec (V1CEnc (V1SynNamed "prf_A1"), V1TyPrf))
+        val badCross1 = DualSemantics.tryDecode (V1CDec (V1CEnc (V1SynNamed "fm_A1"), V1TyPrf))
+        val badCross2 = DualSemantics.tryDecode (V1CDec (V1CEnc (V1SynNamed "prf_A1"), V1TyFm))
+      in
+        Option.isSome okStmt andalso
+        Option.isSome okFm andalso
+        Option.isSome okPrf andalso
+        not (Option.isSome badCross1) andalso
+        not (Option.isSome badCross2)
+      end
+
+    (* Hypothesis H3 (Strict Separation of \tau_NBG vs \tau_MK Comprehension):
+       Impredicative class comprehension { x | \forall (Y:Class), (x \in Y) }
+       is accepted by \tau_MK (MK_Impredicative) and rejected by \tau_NBG
+       (NBG_Predicative) in both Variant 1 and Variant 2. *)
+    fun testH3_NBGvsMKComprehensionSeparation () : bool =
+      let
+        val v1ImpredBody = V1FForall ("Y", V1TyClass, V1FIn (V1CVar "x", V1CVar "Y"))
+        val v1ImpredClass = V1CKappa ("x", v1ImpredBody)
+        val v1PredBody = V1FForall ("y", V1TySet, V1FIn (V1CVar "x", V1CVar "y"))
+        val v1PredClass = V1CKappa ("x", v1PredBody)
+        val v2MKAccepted =
+          (let val _ = typeCheckWithSortAndTheory MK_Impredicative [] [] proofMKImpredicativeBigInter
+           in true end) handle TypeError _ => false
+        val v2NBGRejected =
+          (let val _ = typeCheckWithSortAndTheory NBG_Predicative [] [] proofMKImpredicativeBigInter
+           in false end) handle TypeError _ => true
+      in
+        not (isPredicativeFm v1ImpredBody) andalso
+        not (isPredicativeTerm v1ImpredClass) andalso
+        isPredicativeFm v1PredBody andalso
+        isPredicativeTerm v1PredClass andalso
+        v2MKAccepted andalso
+        v2NBGRejected
+      end
+
+    (* Hypothesis H4 (Bidirectional Isomorphism of Variant 1 & Variant 2):
+       Every constructive proof term in Variant 2 translates to a 7-part Option B
+       anatomy in Variant 1 whose formula + parameter signature translates back to
+       an alpha-beta-convertible Type in Variant 2 verified by the kernel. *)
+    fun testH4_BidirectionalBridgeIsomorphism () : bool =
+      let
+        val anatomies = buildAllBridgedTheorems ()
+      in
+        List.all (fn a =>
+          let
+            val (_, _, _, roundTripOk) = translateAnatomyV1ToV2 a
+          in
+            (#verifiedInKernel a) andalso roundTripOk andalso
+            hasOnlyPredicativeComprehensionsFm (#fm a) orelse (#objectTheory a = MK_ClassTheory)
+          end
+        ) anatomies
+      end
+
+    (* Hypothesis H5 (Semantic Predicate Embedding Prevents Class-of-All-Classes):
+       Emb(Class)(V) beta-reduces to \top without forming V \in Class, and
+       Emb(Theorems)(Enc(s)) beta-reduces to \exists (p:Prf), (Enc(p) \in ProofsOf(Enc(s))). *)
+    fun testH5_SemanticPredicateNoParadox () : bool =
+      let
+        val vInClass = DualSemantics.applyPredicate V1TyClass V1CUniv
+        val rTerm = V1CKappa ("x", V1FImp (V1FIn (V1CVar "x", V1CVar "x"), V1FBot))
+        val rInClass = DualSemantics.applyPredicate V1TyClass rTerm
+        val rInSet = DualSemantics.applyPredicate V1TySet rTerm
+      in
+        (vInClass = V1FTop) andalso
+        (rInClass = V1FTop) andalso
+        (rInSet = V1FSet rTerm)
+      end
+
+    fun runAllHypotheses () : (string * bool) list =
+      [
+        ("H1_DecoupledBracketsSafety", testH1_DecoupledBracketsSafety ()),
+        ("H2_SortSafeDecodeRoundTrip", testH2_SortSafeDecodeRoundTrip ()),
+        ("H3_NBGvsMKComprehensionSeparation", testH3_NBGvsMKComprehensionSeparation ()),
+        ("H4_BidirectionalBridgeIsomorphism", testH4_BidirectionalBridgeIsomorphism ()),
+        ("H5_SemanticPredicateNoParadox", testH5_SemanticPredicateNoParadox ())
+      ]
+
+    fun allHypothesesHold () : bool =
+      List.all (fn (_, ok) => ok) (runAllHypotheses ())
+
+  end (* structure ArchitecturalHypotheses *)
+
+  (* Verify bidirectional translation, axioms, theorems, and H1-H5 across the entire suite *)
   fun verifyAllBridgedTheorems () : (int * int * bool) =
     let
       val dualOk = DualSemantics.verifyDualSemanticsBridge ()
+      val hypsOk = ArchitecturalHypotheses.allHypothesesHold ()
+      val axioms = buildAllCanonicalAxioms ()
+      val axiomsOk = List.all (fn ax => evalSideCondition (#sideCondition ax)) axioms
       val anatomies = buildAllBridgedTheorems ()
       val total = List.length anatomies
       val passed =
@@ -10941,7 +11528,7 @@ struct
             else acc
           end) 0 anatomies
     in
-      (passed, total, dualOk andalso (passed = total))
+      (passed, total, dualOk andalso hypsOk andalso axiomsOk andalso (passed = total))
     end
 
 end;

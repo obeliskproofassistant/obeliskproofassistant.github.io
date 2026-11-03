@@ -3,959 +3,342 @@ Demonstration of the “Obelisk” proof assistant.
 Variant: higher-order logic
 Author: Georgy Dunaev
 Email: contact@obelisk.mozmail.com
-Date: Tue Sep 29 10:46:56 2026
+Date: 2026-10-28
 License: All rights reserved.©
 ====================================================================
+
 1) Propositional logic:
 
-Axm. A01:
-(⟦ ⟧→(⟦ ⟧→⟦ ⟧))
+1.01) Axm. A01 (Affirmation of Consequent):
+           (α → (β → α))
+           Side condition: α, β : Bool
 
-Axm. A02:
-((⟦ ⟧→(⟦ ⟧→⟦ ⟧))→((⟦ ⟧→⟦ ⟧)→(⟦ ⟧→⟦ ⟧)))
+1.02) Axm. A02 (Distribution of Implication):
+           ((α → (β → γ)) → ((α → β) → (α → γ)))
+           Side condition: α, β, γ : Bool
 
-Axm. A03:
-((⟦ ⟧∧⟦ ⟧)→⟦ ⟧)
+1.03) Axm. A03 (Conjunction Elimination Left):
+           ((α ∧ β) → α)
+           Side condition: α, β : Bool
 
-Axm. A04:
-((⟦ ⟧∧⟦ ⟧)→⟦ ⟧)
+1.04) Axm. A04 (Conjunction Elimination Right):
+           ((α ∧ β) → β)
+           Side condition: α, β : Bool
 
-Axm. A05:
-(⟦ ⟧→(⟦ ⟧→(⟦ ⟧∧⟦ ⟧)))
+1.05) Axm. A05 (Conjunction Introduction):
+           (α → (β → (α ∧ β)))
+           Side condition: α, β : Bool
 
-Axm. A06:
-(⟦ ⟧→(⟦ ⟧∨⟦ ⟧))
+1.06) Axm. A06 (Disjunction Introduction Left):
+           (α → (α ∨ β))
+           Side condition: α, β : Bool
 
-Axm. A07:
-(⟦ ⟧→(⟦ ⟧∨⟦ ⟧))
+1.07) Axm. A07 (Disjunction Introduction Right):
+           (β → (α ∨ β))
+           Side condition: α, β : Bool
 
-Axm. A08:
-((⟦ ⟧→⟦ ⟧)→((⟦ ⟧→⟦ ⟧)→((⟦ ⟧∨⟦ ⟧)→⟦ ⟧)))
+1.08) Axm. A08 (Disjunction Elimination / Cases):
+           ((α → γ) → ((β → γ) → ((α ∨ β) → γ)))
+           Side condition: α, β, γ : Bool
 
-Axm. A09:
-((¬⟦ ⟧)→(⟦ ⟧→ ))
+1.09) Axm. A09 (Negation Introduction / Contradiction):
+           ((¬α) → (α → ⊥))
+           Side condition: α : Bool
 
-Axm. A10:
-((⟦ ⟧→⟦ ⟧)→((⟦ ⟧→¬⟦ ⟧)→¬⟦ ⟧))
+1.10) Axm. A10 (Reductio Ad Absurdum):
+           ((α → β) → ((α → ¬β) → ¬α))
+           Side condition: α, β : Bool
 
-Axm. A11:
-( →⟦ ⟧)
+1.11) Axm. A11 (Ex Falso Quodlibet):
+           (⊥ → α)
+           Side condition: α : Bool
 
-Axm. A12:
-(⟦ ⟧∨¬⟦ ⟧)
+1.12) Axm. A12 (Law of Excluded Middle):
+           (α ∨ ¬α)
+           Side condition: α : Bool
 
-Rule Modus Ponens:
-⟦ ⟧
-(⟦ ⟧→⟦ ⟧)
------------------------------------------⟦ ⟧
-
-(MP)
+1.13) Rule Modus Ponens (MP):
+           α, (α → β) ⊢ β
+           Side condition: α, β : Bool
 
 2) Predicate logic:
 
-Axm. Discourse domain is non-empty:
-(∃
+2.01) Axm. Discourse domain is non-empty:
+           ∃(K : Class) ⊤
+           Side condition: K : Class
 
-)
+2.02) Rule Forall Instantiation (FI):
+           (∀(x : Class) φ) → φ[t/x]
+           Side condition: FFI(t, v_x, φ)
 
-Rule Forall Instantiation:
-⟦term
-is free for substitution instead of all samely typed free occurences of
-the variable
-in the formula ⟧
------------------------------------------- (FI)
-((∀
-⟦ ⟧ ⟦ ⟧)→⟦ [ / ]⟧)
+2.03) Rule Exists Instantiation (EI):
+           φ[t/x] → ∃(x : Class) φ
+           Side condition: FFI(t, v_x, φ)
 
-Rule Exists Instantiation:
-⟦term
-is free for substitution instead of all samely typed free occurences of
-the variable
-in the formula ⟧
------------------------------------------- (EI)
-(⟦ [ / ]⟧→∃
-⟦ ⟧ ⟦ ⟧)
+2.04) Rule Forall Abstraction (FA / Bernays):
+           (ψ → φ) ⊢ (ψ → ∀(x : Class) φ)
+           Side condition: NFV(v_x, ψ) ∧ NFV(v_x, Γ)
 
-Rule Forall Abstraction:
-⟦name
-does not occure free as a variable of type
-(⟦ ⟧→⟦ ⟧)
------------------------------------------- (FA)
-(⟦ ⟧→∀
-⟦ ⟧ ⟦ ⟧)
+2.05) Rule Exists Abstraction (EA / Bernays):
+           (φ → ψ) ⊢ (∃(x : Class) φ → ψ)
+           Side condition: NFV(v_x, ψ) ∧ NFV(v_x, Γ)
 
-in formula
-
-⟧
-
-in formula
-
-⟧
-
-Rule Exists Abstraction:
-⟦name
-does not occure free as a variable of type
-(⟦ ⟧→⟦ ⟧)
------------------------------------------- (EA)
-((∃
-⟦ ⟧ ⟦ ⟧)→⟦ ⟧)
-
-Rule Generalisation (admissible rule):
-⟦ ⟧
------------------------------------------(∀
-⟦ ⟧ ⟦ ⟧)
-
-(Gen)
+2.06) Rule Generalisation (Gen):
+           φ ⊢ ∀(x : Class) φ
+           Side condition: NFV(v_x, Γ)
 
 3) Set/class-theoretic foundations of mathematics:
 
-Rule Class comprehension:
-⟦( :
-)⟧
-⟦( : )⟧
------------------------------------------((
-∈
-⟦ ⟧ )⟷((
-set)∧⟦ ⟧))
-
-(CCR)
-
-Def. “Is a set” predicate:
-(∀
-
-((
-
-set)⟷(∃
-
-( ∈ ))))
-
-Def. “Is a proper class” predicate:
-(∀
-
-((
-
-proper)⟷(¬(
-
-set))))
-
-Def. Empty set:
-( =
-
-)
-
-Def. Universal class:
-( =
-
-)
-
-Def. Subclass relation:
-(∀
-
-∀
-
-(( ⊆ )⟷(∀
-
-(( ∈ )→( ∈ )))))
-
-Thm. Example: “The empty class is a subclass of any class” statement:
-(∀
-
-( ⊆ ))
-
-Axm. “Membership respects equality from the left”:
-(∀
-
-∀
-
-(( = )→∀
-
-(( ∈ )⟷( ∈ ))))
-
-Axm. “Membership respects equality from the right”:
-(∀
-
-∀
-
-(( = )→∀
-
-(( ∈ )⟷( ∈ ))))
-
-Axm. “Extensionality”:
-(∀
-
-∀
-
-((∀
-
-(( ∈ )⟷( ∈ )))→( = )))
-
-Thm. “Intensionality”(admissible):
-(∀
-∀
-(( ∈ )⟷( ∈ )))→( = ))))
-
-(((
-
-set)∧(
-
-set))→((∀
-
-Axm. “Heredity”(a subclass of a set is also a set):
-(∀
-
-∀
-
-((( ⊆ )∧(
-
-set))→(
-
-set)))
-
-Axm. “Exponent”(powerclass of a set is also a set):
-(∀
-
-((
-
-set)→(( ) set)))
-
-Axm. “Regularity”(only universal class is equal to its powerclass):
-(∀
-
-((( )⊆ )→( ⊆ )))
-
-Def. Transitivity predicate:
-(∀
-
-(
-
-( )⟷(∀
-
-Def. Ordinality predicate:
-
-(( ∈ )→( ⊆ )))))
-
-(∀
-
-(
-
-( )⟷(
-
-( )∧∀
-
-(( ∈ )→
-
-( )))))
-
-Def. Class of all ordinal sets(ordinal numbers):
-(
-
-=
-
-( ) )
-
-Thm. The class of all ordinals is an ordinal class:
-(
-
-)
-
-Def. Union of the elements of a class:
-(∀
-
-(⋃ =
-
-∃
-
-(( ∈ )∧( ∈ )) ))
-
-Def. Intersection of the elements of a class:
-(∀
-
-(⋂ =
-
-∀
-
-(( ∈ )→( ∈ )) ))
-
-Def. Domain (includes arguments with proper class values):
-(∀
-
-(
-
-( )=
-
-∃
-
-(
-
-∈ ) ))
-
-Def. IF-THEN-ELSE-FI(meta,semantic,Class-specific,WIP, TODO: add side
-condition that v is not free in psi, add (W,G|-<... = ... >):
-(∀
-(⟦ ⟧∧(
-
-∀
-∈ ))∨((¬⟦ ⟧)∧(
-
-∀
-∈ )) ))
-
-∀
-
-((IF ⟦ ⟧ THEN
-
-ELSE
-
-FI)=
-
-Def. if-then-else-fi(meta,syntactic,polymorphic over one type,nondependent,TBI):
-(ToDo: “simple_if”, a non-dependent type-theoretic verison of the conditional,
-which works not only for Class, but also for any other type)
-
-Def. If-Then-Else-Fi(meta,syntactic,polymorphic over one
-value,dependent,TBI):
-(ToDo: Add “typeof(if b then t1 else t2) := [| simple_if b then typeof(t1) else
-typeof(t2) fi |]”; simple_if is an instance using polymorphic over one metatype
-variable; The expression inside [|-|] brackets has type Type.)
-
-Def. Evaluation of a [function|class-function|family]:
-ELSE
-
-(∀
-FI)))
-
-∀
-
-(
-
-=(IF (∃
-
-(
-
-=
-
-(
-
-∈ )) THEN ⋃
-
-Def. Image class:
-(∀
-
-∀
-
-∃
-
-(( ∈ )∧(
-
-= )) ))
-
-Def. “Has exactly one element” predicate:
-(∀
-
-((
-
-singleton)⟷(∃!
-
-( ∈ ))))
-
-Def. “Is set-valued” predicate:
-(∀
-
-((
-
-set-valued)⟷(∀
-
-(( ∈
-
-( ))→(
-
-set)))))
-
-∈
-
-Def. “Has concentrated set values” predicate:
-(∀
-set)→∃!
-
-(( concentrated set values)⟷(∀
-∈ ))))))
-
-(
-
-(( ∈
-
-( ))→((
-
-Def. “Has flat proper values” predicate:
-(∀
-
-((
-
-proper)→∀
-
-((
-
-flat proper values)⟷(∀
-∈ )→( singleton)))))))
-
-(( ∈
-
-( ))→((
-
-Def. “Is a family” predicate:
-(∀
-
-((
-
-family)⟷((
-
-concentrated set values)∧(
-
-flat proper
-
-values))))
-
-Def. “Is a class-function” predicate:
-(∀
-
-((
-
-class-function)⟷((
-
-family)∧(
-
-set-valued))))
-
-Def. “Is injective” predicate:
-(((( ∈
-
-(∀
-( ))∧( ∈
-
-(( injective)⟷(∀
-∀
-( )))∧(
-=
-))→( = )))))
-
-Def. “Is a function” predicate:
-(∀
-
-((
-
-function)⟷((
-
-class-function)∧(
-
-set))))
-
-Def. “Is not strictly larger than” binary relation:
-(∀
-function)∧(
-
-⊆ ))∧(
-
-∀
-(( ≼ )⟷(∃
-injective)))))
-
-(((
-
-class-
-
-Def. Class cardinality:
-(∀
-
-(| |=(
-
-∩⋂
-
-( ∈
-
-)∧( ≼ ) )))
-
-Def. “Is strictly smaller than” binary relation:
-(∀
-
-∀
-
-(( ≺ )⟷(¬( ≼ ))))
-
-Axm. Size limitation axiom related statement:
-(∀
-
-(( ∈ )⟷(| |≺| |)))
-
-Def. “Is hereditary” predicate:
-(∀
-(( ⊆ )→( ∈ ))))))
-
-(
-
-( )⟷(∀
-
-(( ∈ )→∀
-
-Def. “Is powerful” predicate:
-(∀
-
-(
-
-( )⟷(∀
-
-(( ∈ )→(( )∈ )))))
-
-Def. “Is pairful” predicate:
-(∀
-∈ )))))
-
-(
-
-( )⟷(∀
-
-∀
-
-((( ∈ )∧( ∈ ))→(
-
-Def. “Is tight” predicate:
-(∀
-
-(
-
-( )⟷(∀
-
-(( ⊆ )→(( ≺ )⟷( ∈ ))))))
-
-Def. Singleton set:
-(∀
-
-(
-
-=
-
-=
-
-))
-
-Def. Unordered pair:
-(∀
-
-∀
-
-(
-
-=
-
-( = )∨( = ) ))
-
-Def. Set-theoretic models of natural numbers(TBI):
-Def.:
-Def.:
-Def.:
-Def.:
-Def.:
-
-(0:Class) = ∅
-(1:Class) = {∅}
-(2:Class) = {∅,{∅}}
-(3:Class) = {∅,{∅},{∅,{∅}}}
-...
-
-Def. General definition of lists of classes which applicable not only for
-sets, but for proper classes too(TBI):
-Def.:
-Def.:
-Def.:
-Def.:
-Def.:
-
-mark(A,n) = { {0,n} } ∪ { ( { {{a}} , n } : Class ) | (a ∈ A)}
-[] = ∅
-[A] = mark(A,1)
-[A,B] = mark(A,1) ∪ mark(B,2)
-...
-
-Def. Ordered pair(Dunaev's):
-Def.:
-
-(A,B) = [A,B]
-
-Def. Projections:
-Def.:
-Def.:
-Def.:
-
-pr1(L) = { a | ({{{a}},1} ∈ L)}
-pr2(L) = { b | ({{{b}},2} ∈ L)}
-...
-
-Def. Ordered pair(Kuratowsky's):
-(∀
-
-∀
-
-(
-
-=
-
-))
-
-Def. Binary union:
-(∀
-Special Def.:
-General Def.:
-
-∀
-
-(( ∪ )=
-
-( ∈ )∨( ∈ ) ))
-
-(x ∪ y) = ⋃{x,y}
-(A ∪ B) = { z | (z ∈ A) ∨ (z ∈ B)}
-
-Def. Binary intersection:
-(∀
-
-∀
-
-(( ∩ )=
-
-( ∈ )∧( ∈ ) ))
-
-( bad def)
-(good def)
-
-Def. “Is inductive” predicate:
-(∀
-
-(
-
-( )⟷(( ∈ )∧∀
-
-(( ∈ )→(( ∪
-
-)∈ )))))
-
-Def. The intersection class of all inductive classes is called omega:
-(∀
-
-(( ∈ )⟷(∀
-
-Special Def.:
-General Def.:
-
-(
-
-( )→( ∈ )))))
-
-ω = ⋂{ q | Ind(q) }
-∀ x, (x ∈ ω) ⟷ (∀ Q, Ind(Q) → (x ∈ Q))
-
-( bad def)
-(good def)
-
-Axm. “Infinity”(ω is a set):
-(
-
-set)
-
-Thm. Class of all sets is inductive:
-( )
-
-Thm. Intersection of all inductive classes is an inductive class itself:
-( )
-
-Thm. Class of all ordinal numbers is inductive:
-(
-
-)
-
-Thm. ω is transitive:
-( )
-
-Thm. ω is ordinal:
-( )
-
-Thm. ω is in the class of all ordinal numbers(=sets):
-( ∈
-
-)
-
-Thm. “Is cardinal” predicate:
-(∀
-
-(
-
-( )⟷(∃
-
-(| |= ))))
-
-Thm. ω is cardinal:
-( )
-
-Thm. On is a cardinal class:
-(
-
-)
-
-Thm. Class of all sets is not a cardinal class:
-(¬
-
-( ))
-
-Def. “Is a universe” predicate:
-(∀
-universe)⟷((( ∈ )∧((
-
-((
-( )∧
-
-( ))∧(
-
-( )∧
-
-( ))))∧
-
-( ))))
-
-Thm. The class of all sets is a universe:
-(
-
-universe)
-
-Axm. “Tarski's axiom”:
-(∀
-
-((
-
-set)→∃
-
-(((
-
-universe)∧( ∈ ))∧(
-
-set))))
-
-Thm. General form of the induction principle on a transitive class:
-(∀
-
-∀
-
-((
-
-Axm. Soundness of the theory
-(∀
-
-:
-
-(( ,[]⊢ )→eval( )))
-
-Axm. Soundness of the theory
-(∀
-
-( )∧(( ∩( ))⊆ ))→( ⊆ )))
-
-:
-
-(( ,[]⊢ )→eval( )))
-
-Def. Completeness of the theory
-(∀
-
-:
-
-(eval( )→( ,[]⊢ )))
-
-Axm. If a formula is derivable in
-(∀
-
-∀
-
-, then it is derivable in
-
-:
-
-(( , ⊢ )→( , ⊢ )))
-
-4) Metalogical laws(WIP: too much known errors in this section):
-
-Axm. Instantiation(meta,WIP):
-(∀
-⊢‹(∀
-
-∀
-.
-∀
-∀
-eval( ).
-⟦ ⟧ ⟦ ⟧)→(let ⟦ ⟧ = ⟦ ⟧ in ⟦ ⟧)›))
-
-∀
-
-( ,⟦ ⟧
-
-Axm. Generalisation(meta,WIP):
-((¬(
-
-(
-
-(∀
-)∈
-
-∀
-∀
-∀
-( )))→(( , ⊢ )→( , ⊢‹∀
-
-⟦ ⟧›))))
-
-(A theory
-is assumed here to contain only formulas without free variables, so
-the variable x has no free occurences in any formula of a set of formulas
-[|Dec(Theory.Expression)(W)|]. (Strictly: even if the type is different from X?)
-)
-
-Rule CoNecessitation(meta,WIP):
-If a formula <
-is derived in
-
-,Γ⊢ > is derived in
-from the context Γ.
-
-from the empty context, then the formula
-
-Def. Quantifier “unique”(meta,WIP):
-∧(let z =
-
-(∀
-((!
-⟦ ⟧)⟷(∀
-in ⟦ ⟧))→( = )))))
-
-∀
-
-Def. Quantifier “exists and unique”(meta,WIP):
-
-((⟦ [( :Class)/‹z›]⟧
-
-(∀
-
-( ,[]⊢‹(∃!
-
-⟦ ⟧)⟷((∃
-
-⟦ ⟧)∧!
-
-⟦ ⟧)›))
-
-Axm. Class comprehension axiom schema(meta,WIP):
-(∀
-[]⊢‹(⟦ ⟧∈
-
-∀
-∀
-⟦ ⟧ )⟷((⟦ ⟧ set)∧(let
-
-.
-(
-(( :Class),‹ ›,( :Bool))→( ,
-= ⟦ ⟧ in ⟦ ⟧))›)))
+3.01) Axm. Class Comprehension Axiom:
+           ∀(X : Class) (X ∈ {x | φ(x)} ⟷ (isSet(X) ∧ φ(X)))
+           Side condition: NFV(v_C, φ)
+
+3.02) Axm. Extensionality Axiom:
+           ∀(A, B : Class) ((∀(x : Class) (x ∈ A ⟷ x ∈ B)) → A = B)
+           Side condition: A, B, x : Class
+
+3.08) Axm. Heredity Axiom (Subclasses of Sets are Sets):
+           ∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))
+           Side condition: A, B : Class
+
+3.12) Axm. Regularity (Foundation) Axiom:
+           ∀(A : Class) (A ≠ ∅ → ∃(x : Class) (x ∈ A ∧ x ∩ A = ∅))
+           Side condition: A, x : Class
+
+3.13) Axm. Pairing Axiom:
+           ∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))
+           Side condition: a, b : Class
+
+3.14) Axm. Union Axiom:
+           ∀(A : Class) (isSet(A) → isSet(⋃ A))
+           Side condition: A : Class
+
+3.22) Def. IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile):
+           W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }
+           Side condition: NFV(v_v, ψ) ∧ NFV(v_v, Γ)
+
+3.23) Def. simple_if (polymorphic non-dependent conditional over arbitrary Type):
+           simple_if : ∏(α : Type). Bool → α → α → α
+           ⟦simple_if α true t1 t2⟧ = ⟦t1⟧,   ⟦simple_if α false t1 t2⟧ = ⟦t2⟧
+           Side condition: α : Type, t1, t2 : α
+
+3.24) Def. dependent_if (polymorphic dependent conditional with type computation):
+           dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)
+           typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧
+           ⟦if true then t1 else t2⟧ = ⟦t1⟧,   ⟦if false then t1 else t2⟧ = ⟦t2⟧
+           Side condition: T : Bool → Type, t1 : T(true), t2 : T(false)
+
+3.32) Thm. Ordinal Induction (∈-Ind):
+           (∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α))))
+           → ∀(α : Class) (α ∈ On → φ(α))
+           Side condition: WF(∈, On)
+
+3.34) Axm. Power Class Axiom:
+           ∀(a : Class) (isSet(a) → isSet(𝒫(a)))
+           Side condition: a : Class
+
+3.37) Axm. Replacement / Limitation of Size Axiom:
+           ∀(F, A : Class) ((isClassFunction(F) ∧ isSet(A)) → isSet(F[A]))
+           Side condition: F, A : Class
+
+3.40) Def. Dunaev Tagged Ordered Pair:
+           ∀(A, B : Class) ([A, B]_D = {z | ∃(a ∈ A) (z = {{{{a}}}, {∅}}) ∨ ∃(b ∈ B) (z = {{{{b}}}, {∅, {∅}}})})
+           Side condition: A, B : Class
+
+3.41) Thm. First Projection of Dunaev Tagged Ordered Pair:
+           ∀(A, B : Class) ({a | {{{{a}}}, {∅}} ∈ [A, B]_D} = A)
+           Side condition: A, B : Class
+
+3.42) Thm. Second Projection of Dunaev Tagged Ordered Pair:
+           ∀(A, B : Class) ({b | {{{{b}}}, {∅, {∅}}} ∈ [A, B]_D} = B)
+           Side condition: A, B : Class
+
+3.45) Axm. Infinity Axiom:
+           ∃(x : Class) (isSet(x) ∧ ∅ ∈ x ∧ ∀(y : Class) (y ∈ x → y ∪ {y} ∈ x))
+           Side condition: x, y : Class
+
+3.46) Axm. Global Choice Axiom:
+           ∃(c : Class) (isClassFunction(c) ∧ ∀(x : Class) ((isSet(x) ∧ x ≠ ∅) → c(x) ∈ x))
+           Side condition: c, x : Class
+
+3.47) Def. Universal Class (V):
+           V = {x | x = x}
+           Side condition: V : Class
+
+3.53) Def. Transitive Class Predicate:
+           Tr(A) ⟷ ∀(x : Class) (x ∈ A → x ⊆ A)
+           Side condition: A, x : Class
+
+3.66) Axm. Tarski's Axiom of Universes:
+           ∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ x ∈ u ∧ isSet(u)))
+           Side condition: x, u : Class
+
+4) Metalogical laws:
+
+4.01) Axm. Instantiation Axiom:
+           ∀(A : Type) ∀(G : Ctx) ∀(φ : Fm) ∀(t : eval(A)) ∀(v : Variable) (W, G ⊢ (∀(v : A) φ) → (let v = t in φ))
+           Side condition: t : eval(A), v : Variable
+
+4.02) Axm. Generalisation Axiom:
+           ∀(A : Type) ∀(Γ : Ctx) ∀(φ : Fm) ∀(v : Variable) (¬(Enc(v) ∈ Ctx.FV(Γ)) → ((W, Γ ⊢ φ) → (W, Γ ⊢ ∀(v : A) φ)))
+           Side condition: NFV(v, Γ)
+
+4.03) Rule CoNecessitation:
+           (F, [] ⊢ ‹F, Γ ⊢ φ›) ⊢ (F, Γ ⊢ φ)
+           Side condition: F : Theory, Γ : Ctx, φ : Fm
+
+4.04) Def. Quantifier Unique (!):
+           ∀(φ : Fm) ((!(z : Class) φ) ⟷ ∀(x, y : Class) ((φ[x/z] ∧ φ[y/z]) → x = y))
+           Side condition: z, x, y : Variable
+
+4.05) Def. Quantifier Exists and Unique (∃!):
+           ∀(φ : Fm) (T, [] ⊢ (∃!(x : Class) φ) ⟷ ((∃(x : Class) φ) ∧ !(x : Class) φ))
+           Side condition: x : Variable, φ : Fm
+
+4.06) Axm. Class Comprehension Axiom (Metatheory):
+           ∀(φ : Fm) ∀(x : Name) ∀(k : Class.Expr) (FFI(k, x, φ) → (T, [] ⊢ (k ∈ {x | φ}) ⟷ (isSet(k) ∧ φ[k/x])))
+           Side condition: FFI(k, x, φ)
+
+4.07) Axm. Soundness / Reflection Axiom:
+           ∀(φ : Fm) (⟦φ⟧ → (F, [] ⊢ φ))
+           Side condition: φ : Fm, F : Theory
+
+4.08) Axm. Theory Inclusion (T ⊆ F):
+           ∀(Γ : Ctx) ∀(φ : Fm) ((T, Γ ⊢ φ) → (F, Γ ⊢ φ))
+           Side condition: T, F : Theory, Γ : Ctx, φ : Fm
+
+4.09) Def. Syntactic Encoding Operator (Enc):
+           ∀(T : Type) ∀(s : T) (isSet(Enc(s)) ∧ (Enc(s) ∈ Emb(T)))
+           Side condition: T : Type, s : T
+
+4.10) Def. Syntactic Decoding & Roundtrip Law (Dec):
+           ∀(T : Type) ∀(s : T) ((Dec(Enc(s), Emb(T)) : T) = (s : T))
+           Side condition: T : Type, s : T
+
+4.11) Def. Dual Type Embedding Operator (Emb):
+           ∀(X : Class) ((Emb(Class)(X) ⟷ ⊤) ∧ (Emb(Set)(X) ⟷ isSet(X)))
+           Side condition: X : Class
+
+4.12) Def. Proof-Object Class Family (ProofsOf):
+           ∀(s : Stmt) ∀(p : Prf) ((Enc(p) ∈ ProofsOf(Enc(s))) ⟷ CheckProof(p, s))
+           Side condition: s : Stmt, p : Prf
+
+4.13) Def. Class of Provable Statements (Theorems):
+           ∀(s : Stmt) ((Enc(s) ∈ Theorems) ⟷ (∃(p : Class) (p ∈ ProofsOf(Enc(s)))))
+           Side condition: s : Stmt, p : Class
 
 5) Tactics and inference rules:
 
-Elementary theorems:
-( ,[‹ ∈ ›]⊢‹∃
-( ,[‹ ∈ ›]⊢‹∀
-( ,[‹ ∈ ›]⊢‹(
+5.01) Thm. Elementary Theorems:
+           (F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ∧ (F, [B ∈ x] ⊢ isSet(B))
+           Side condition: B, x : Class
 
-( ∈ )›)
-(( set)⟷(∃
-set)⟷(∃
-( ∈ ))›)
+5.02) Rule Definition to Introduction Rule:
+           (F, [B ∈ x] ⊢ ∃(x : Class) (B ∈ x)) ⊢ (F, [B ∈ x] ⊢ isSet(B))
+           Side condition: B, x : Class
 
-( ∈ )))›)
+5.03) Rule Deduction Rule Application:
+           (F, [] ⊢ (B ∈ x) → isSet(B))
+           Side condition: B, x : Class
 
-An example of inference rule:
-( ,[‹ ∈ ›]⊢‹∃
-( ∈ )›)
------------------------------------------( ,[‹ ∈ ›]⊢‹ set›)
+5.04) Thm. Tactics Proof Example:
+           F, [] ⊢ (∃(y : Class) ∀(x : Class) (x ∈ y)) → ∀(x : Class) ∃(y : Class) (x ∈ y)
+           Side condition: x, y : Class
 
-(def_to_intro th2)
+6) Incompleteness-related statements:
 
-An application of a deduction rule:
-( ,[]⊢‹( ∈ )→(
+6.01) Axm. Theories (Metalevel Stratification):
+           W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)
+           Side condition: W, Q, T, F : Theory
 
-set)›)
+6.02) Thm. Löb's Theorem:
+           ∀(φ : Fm) (Q, [] ⊢ (T, [] ⊢ (T, [] ⊢ φ) → φ) → (T, [] ⊢ φ))
+           Side condition: φ : Fm
 
-A simple theorem being proven using tactics:
-( ,[‹∃
-∀
-⟦ ⟧›]⊢‹∃
-⟦ ⟧›)
-( ,[‹∀
-⟦ ⟧›]⊢‹∃
-⟦ ⟧›)
-( ,[‹⟦ ⟧›]⊢‹∃
-⟦ ⟧›)
-( ,[‹⟦ ⟧›]⊢‹⟦ ⟧›)
-Displaying the proof of that theorem:
-Proof.
-1
-|( ,[‹⟦ ⟧›]⊢‹⟦ ⟧›)
-2
-|( ,[‹⟦ ⟧›]⊢‹∃
-⟦ ⟧›)
-3
-|( ,[‹∀
-⟦ ⟧›]⊢‹∃
-⟦ ⟧›)
-4
-|( ,[‹∃
-∀
-⟦ ⟧›]⊢‹∃
-5
-|( ,[‹∃
-∀
-⟦ ⟧›]⊢‹∀
-6
-|( ,[]⊢‹(∃
-∀
-⟦ ⟧)→∀
-Q.E.D.
+6.03) Thm. Gödel's Second Incompleteness Theorem:
+           Q, [] ⊢ ¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥))
+           Side condition: T, Q : Theory
 
-⟦ ⟧›)
-∃
-∃
 
-⟦ ⟧›)
-⟦ ⟧›)
+Appendix: NBG Formulas-as-Types Standard Library
+====================================================================
 
-6) Incompleteness-related statements(WIP: too much known errors in this section):
+empty_class_no_elements:
+    (∀(z : Class)  (z ∈ { x | ⊥ } → ⊥))
+    proof AST size: 7 (normalized: 7)
 
-Axm. Theories:
-Let
-be an arbitrary theory.
-Let
-be Robinson's arithmetic.
-Let
-be a recursively axiomatizable theory of classes. (The base theory of the
-proof assistant.)
-Let
-be an extension(note: it is not recursively axiomatizable) of
-(in the
-language extended by adding all Henkin constants), which is complete and admits
-the reflection axiom.
-The introducing of the types allows to hide both Gödel's encoding and decoding,
-and to keep all variables on the same metalevel.
+empty_class_is_subclass:
+    (∀(X : Class)  (∀(z : Class)  (z ∈ { x | ⊥ } → z ∈ X)))
+    proof AST size: 8 (normalized: 8)
 
-Thm. Löb's theorem(WIP):
+universal_class_characterization:
+    (∀(z : Class)  ((z ∈ { x | ⊤ } → isSet(z)) ∧ (isSet(z) → z ∈ { x | ⊤ })))
+    proof AST size: 15 (normalized: 15)
 
-(∀
+russell_class_is_not_a_set:
+    (isSet({ x | (x ∈ x → ⊥) }) → ⊥)
+    proof AST size: 19 (normalized: 32)
 
-( ,[]⊢‹( ,[]⊢‹( ,[]⊢ )→⟦ ⟧›)→( ,[]⊢ )›))
+binary_inter_comm:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ { x | (x ∈ A ∧ x ∈ B) } → z ∈ { x | (x ∈ B ∧ x ∈ A) }))))
+    proof AST size: 26 (normalized: 26)
 
-Thm. Gödel's second incompleteness theorem(WIP):
-( ,[]⊢‹(¬( ,[]⊢‹ ›))→¬( ,[]⊢‹¬( ,[]⊢‹ ›)›)›)
+binary_union_comm:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ { x | (x ∈ A ∨ x ∈ B) } → z ∈ { x | (x ∈ B ∨ x ∈ A) }))))
+    proof AST size: 23 (normalized: 23)
 
-
+class_diff_subclass_left:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ { x | (x ∈ A ∧ (x ∈ B → ⊥)) } → z ∈ A))))
+    proof AST size: 10 (normalized: 10)
+
+class_eq_sym:
+    (∀(X : Class)  (∀(Y : Class)  (X = Y → Y = X)))
+    proof AST size: 6 (normalized: 6)
+
+class_eq_trans:
+    (∀(X : Class)  (∀(Y : Class)  (∀(Z : Class)  ((X = Y ∧ Y = Z) → X = Z))))
+    proof AST size: 9 (normalized: 9)
+
+quantifier_swap:
+    ((∃(y : Set)  (∀(x : Set)  x ∈ y)) → (∀(x : Set)  (∃(y : Set)  x ∈ y)))
+    proof AST size: 7 (normalized: 7)
+
+dunaev_tagged_pair_projections:
+    (∀(A : Class)  (∀(B : Class)  (π₁([A, B]_D) = A ∧ π₂([A, B]_D) = B)))
+    proof AST size: 3 (normalized: 3)
+
+cantor_diagonal_theorem:
+    (∀(R : Class)  (∀(c : Set)  (isSet(c) → (((c ∈ { x | ([x, x](_D ∈ R) → ⊥) } → [c, c]_D ∈ R) ∧ ([c, c](_D ∈ R) → c ∈ { x | ([x, x](_D ∈ R) → ⊥) })) → ⊥))))
+    proof AST size: 28 (normalized: 50)
+
+self_in_singleton:
+    (∀(x : Class)  (isSet(x) → x ∈ { u | u = x }))
+    proof AST size: 8 (normalized: 8)
+
+self_in_succ:
+    (∀(x : Class)  (isSet(x) → x ∈ { u | (u ∈ x ∨ u = x) }))
+    proof AST size: 9 (normalized: 9)
+
+class_sub_succ:
+    (∀(x : Class)  (∀(z : Class)  (z ∈ x → z ∈ { u | (u ∈ x ∨ u = x) })))
+    proof AST size: 12 (normalized: 12)
+
+dunaev_pair_injective:
+    (∀(A : Class)  (∀(B : Class)  (∀(C : Class)  (∀(D : Class)  ([A, B]_D = [C, D]_D → (A = C ∧ B = D))))))
+    proof AST size: 26 (normalized: 26)
+
+dunaev_cartesian_elim:
+    (∀(A : Class)  (∀(B : Class)  (∀(p : Class)  (p ∈ { q | (∃(u : Set)  (∃(v : Set)  ((u ∈ A ∧ v ∈ B) ∧ q = [u, v]_D))) } → (∃(u : Set)  (∃(v : Set)  ((u ∈ A ∧ v ∈ B) ∧ p = [u, v]_D)))))))
+    proof AST size: 9 (normalized: 9)
+
+inter_sub_left:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ { u | (u ∈ A ∧ u ∈ B) } → z ∈ A))))
+    proof AST size: 10 (normalized: 10)
+
+inter_sub_right:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ { u | (u ∈ A ∧ u ∈ B) } → z ∈ B))))
+    proof AST size: 10 (normalized: 10)
+
+union_sub_left:
+    (∀(A : Class)  (∀(B : Class)  (∀(z : Class)  (z ∈ A → z ∈ { u | (u ∈ A ∨ u ∈ B) }))))
+    proof AST size: 13 (normalized: 13)
