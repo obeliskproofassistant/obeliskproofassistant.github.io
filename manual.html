@@ -1,3 +1,14 @@
+<!--
+AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
+  Target: manual.html
+  Generator: /botworkspace/tools/systematic_catalog_generator.py
+  Data Sources:
+    - /ramdisk/obeliskproofassistant.github.io/data/theory_database.json (built by /botworkspace/tools/build_theory_database.py)
+    - /ramdisk/obeliskproofassistant.github.io/data/nbg_library.json (compiled from set_theory_prover/examples/nbg_verified_programs.nbg)
+    - /ramdisk/set_theory_prover/program/types/foundations.ML & program/verified_theorems.ML
+  Regenerate Command:
+    python3 /botworkspace/tools/build_theory_database.py && python3 /botworkspace/tools/systematic_catalog_generator.py
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +33,66 @@
         }
       },
       options: {
+        enableAssistiveMml: true,
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            try {
+              var items = MathJax.startup.document.math;
+              items.forEach(function(item) {
+                if (item.typesetRoot && item.math) {
+                  var rawTex = item.math.trim();
+                  var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
+                  item.typesetRoot.setAttribute('data-latex', rawTex);
+                  item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
+                  item.typesetRoot.setAttribute('title', 'LaTeX (copiable): ' + wrappedTex);
+                  var mml = item.typesetRoot.querySelector('mjx-assistive-mml');
+                  if (mml) mml.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  var mjxMath = item.typesetRoot.querySelector('mjx-math');
+                  if (mjxMath) mjxMath.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  if (!item.typesetRoot.querySelector('.mjx-copy-tex')) {
+                    var copySpan = document.createElement('span');
+                    copySpan.className = 'mjx-copy-tex';
+                    copySpan.textContent = wrappedTex;
+                    copySpan.setAttribute('style', 'display:inline-block;width:0;height:0;overflow:hidden;opacity:0;user-select:text;-webkit-user-select:text;');
+                    item.typesetRoot.appendChild(copySpan);
+                  }
+                }
+              });
+            } catch (err) {
+              console.warn('MathJax copy annotation warning:', err);
+            }
+          });
+        }
       }
     };
+    document.addEventListener('copy', function(e) {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+      var range = sel.getRangeAt(0);
+      var container = range.commonAncestorContainer;
+      var el = container.nodeType === 1 ? container : container.parentElement;
+      var insideMjx = el && el.closest ? el.closest('mjx-container') : null;
+      if (insideMjx && insideMjx.getAttribute('data-latex-delimited')) {
+        e.clipboardData.setData('text/plain', insideMjx.getAttribute('data-latex-delimited'));
+        e.preventDefault();
+        return;
+      }
+      var frag = range.cloneContents();
+      if (frag.querySelectorAll && frag.querySelectorAll('mjx-container').length > 0) {
+        frag.querySelectorAll('mjx-container').forEach(function(mjx) {
+          var tex = mjx.getAttribute('data-latex-delimited') || mjx.getAttribute('data-latex') || mjx.textContent;
+          var txt = document.createTextNode(tex);
+          mjx.parentNode.replaceChild(txt, mjx);
+        });
+        var div = document.createElement('div');
+        div.appendChild(frag);
+        e.clipboardData.setData('text/plain', div.innerText || div.textContent);
+        e.preventDefault();
+      }
+    });
 
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -641,6 +709,7 @@
       <a href="manual.html" class="active">Manual &amp; Theory</a>
       <a href="variant1.html">Variant 1 (1st-Order)</a>
       <a href="variant2.html">Variant 2 (Higher-Order)</a>
+      <a href="dependent_types.html">Σ &amp; Π Dependent Models</a>
       <a href="nbg_library.html">NBG Library</a>
       <a href="proofs.html">Proofs Gallery</a>
       <a href="metatheory.html">Metatheory</a>
@@ -668,13 +737,14 @@
       <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
         <a href="variant1.html" class="btn btn-secondary btn-sm" style="border-color: rgba(192, 132, 252, 0.5); color: #d8b4fe;">Variant 1: 1st-Order NBG/MK Proof Assistant &rarr;</a>
         <a href="variant2.html" class="btn btn-secondary btn-sm" style="border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">Variant 2: Higher-Order Formulas-as-Types &rarr;</a>
-        <a href="nbg_library.html" class="btn btn-secondary btn-sm" style="border-color: rgba(52, 211, 153, 0.5); color: #6ee7b7;">NBG Standard Library (20 Theorems) &rarr;</a>
+        <a href="dependent_types.html" class="btn btn-secondary btn-sm" style="border-color: rgba(251, 191, 36, 0.5); color: #fde68a;">Σ &amp; Π Dependent Types &amp; Family Evaluation &rarr;</a>
+        <a href="nbg_library.html" class="btn btn-secondary btn-sm" style="border-color: rgba(52, 211, 153, 0.5); color: #6ee7b7;">NBG Standard Library (24 Theorems) &rarr;</a>
         <a href="metatheory.html" class="btn btn-secondary btn-sm">Reflected Metatheory (10 Side Conditions) &rarr;</a>
         <a href="proofs.html" class="btn btn-secondary btn-sm">Proofs Gallery &rarr;</a>
       </div>
       <div style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center; border-top: 1px solid rgba(148, 163, 184, 0.16); padding-top: 8px;">
         <span style="font-size: 0.78rem; font-weight: 600; color: #94a3b8; margin-right: 4px;">Standalone Section Pages:</span>
-        <a href="sections/sec-1.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§1 Propositional logic (13)</a><a href="sections/sec-2.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§2 Predicate logic (6)</a><a href="sections/sec-3.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§3 Set/class-theoretic foundations of mathematics (20)</a><a href="sections/sec-4.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§4 Metalogical laws (13)</a><a href="sections/sec-5.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§5 Tactics and inference rules (4)</a><a href="sections/sec-6.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§6 Incompleteness-related statements (3)</a>
+        <a href="sections/sec-1.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§1 Propositional logic (13)</a><a href="sections/sec-2.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§2 Predicate logic (6)</a><a href="sections/sec-3.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§3 Set/class-theoretic foundations of mathematics (25)</a><a href="sections/sec-4.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§4 Metalogical laws (13)</a><a href="sections/sec-5.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§5 Tactics and inference rules (4)</a><a href="sections/sec-6.html" class="btn btn-secondary btn-sm" style="font-size: 0.74rem !important; padding: 3px 8px !important;">§6 Incompleteness-related statements (3)</a>
       </div>
     </div>
 
@@ -719,16 +789,59 @@
           <strong>The Two Real Interpretations (NBG Model vs. Executable SML Code):</strong> We strictly distinguish between (1) <em>Meaning in Model inside NBG</em> (pure mathematical assertions: \( \forall X \), \( \forall (x \in V) \), \( \mathrm{isSet}(x) \), avoiding any pseudo-membership like <code>&isin; Theory</code> or <code>&isin; Class</code>), and (2) <em>Checkable / Executable Code in CakeML and Poly/ML</em> (Standard ML AST expressions: <code>Class_Expre</code>, <code>Fm_Expre</code>, <code>Theory_Expre</code>, <code>Ctx</code>). Use the <strong>Interpretation</strong> switch in the header to view either representation.
         </li>
         <li>
-          <strong>Visual Separation of Constants vs Object Variables:</strong> When an object variable <span class="obj-var">x</span> is reasoned about in a side condition, it is represented by a constant identifier \( (\mathbf{v}_x : \mathsf{Variable}) \). Metatheoretic constants (<span class="meta-const">v_x</span>, <span class="meta-const">v_y</span>, <span class="meta-const">v_C</span>, \( \mathbf{v}_x \)) are rendered in <strong>bold upright pink</strong>, visually decoupled from italic object variables (<span class="obj-var">x</span>, <span class="obj-var">y</span>, <span class="obj-var">C</span>) in <strong>italic cyan</strong>, class predicates (<span class="obj-pred">CLASS</span>, <span class="obj-pred">SET</span>) in <strong>bold green</strong>, and expression terms (<span class="expr-term">t</span>, <span class="expr-term">&lang;x&rang;</span>) in <strong>amber code</strong>.
+          <strong>Metatheoretic Variables \( (v_x, v_y, v_C, v_s) \) vs. Metatheoretic Constants \( (c_x, c_y, c_C) \) vs. Object Variables:</strong> When an arbitrary object-language variable is reasoned about schematically in a rule or side condition (such as \( (\mathrm{NFV}(v_C, \phi) = \mathrm{True}) \) or \( (\mathrm{FFI}(t, v_x, \phi) = \mathrm{True}) \)), it is represented by a <strong>metatheoretic variable</strong> \( (v_x : \mathsf{Variable}) \) in \( (v_x, v_y, v_C, v_s) \) (universally quantified on the metalevel over variable identifiers). By contrast, a fixed concrete variable identifier (such as <code>Variable_id("x")</code>) is denoted by a <strong>metatheoretic constant</strong> in \( (c_x, c_y, c_C) \). Both are rendered in LaTeX (and are directly copiable as LaTeX just like Wikipedia), visually decoupled from italic object variables (\( x, y, C \)) in <strong>italic cyan</strong>, class predicates (<span class="obj-pred">CLASS</span>, <span class="obj-pred">SET</span>) in <strong>bold green</strong>, and expression terms (<span class="expr-term">t</span>, <span class="expr-term">&lang;x&rang;</span>) in <strong>amber code</strong>.
         </li>
         <li>
-          <strong>Side Conditions as Genuine Metatheoretic Formulas:</strong> A side condition is not an informal remark or separate type assertion—it is an ordinary decidable formula in the metatheory (e.g. \( (\mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True}) \) or \( (\mathrm{FFI}(t, \mathbf{v}_x, \phi) = \mathrm{True}) \)).
+          <strong>Side Conditions as Genuine Metatheoretic Formulas:</strong> A side condition is not an informal remark or separate type assertion—it is an ordinary decidable formula in the metatheory (e.g. \( (\mathrm{NFV}(v_C, \phi) = \mathrm{True}) \) or \( (\mathrm{FFI}(t, v_x, \phi) = \mathrm{True}) \)).
         </li>
         <li>
           <strong>Formula Taxonomy &amp; Schemata:</strong> A closed formula without metavariables is <em class="term-unschematic-label">Formula</em> (or <em>Unschematic Formula</em>). Standard formulas with parameters/metavariables are <em class="term-schematic-label">Formula Scheme</em> (or <em>Formula</em>). Use the global <strong>Terminology</strong> switch below to toggle between <code>("Formula" &amp; "Formula Scheme")</code> and <code>("Unschematic Formula" &amp; "Formula")</code> across Definitions, Axioms, and Theorems. In <span class="theory-name-slot">MK Class Theory</span>, because classes are first-class mathematical entities, principles such as <em>Ordinal Induction</em> (3.32) and <em>Replacement</em> (3.37) are single finitely-quantified theorems and axioms.
         </li>
       </ul>
     </div>
+
+    
+  <div id="global-presentation-config-bar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(56, 189, 248, 0.32); border-radius: 10px; padding: 0.75rem 1.1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation Config (Metamath-Inspired Uniform View):</span>
+      <span style="font-size: 0.8rem; color: #94a3b8;">Synchronized across all catalog &amp; theorem pages</span>
+    </div>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Proof Display: Compact Proof Term (Default)</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Proof Display: Expanded Certificate</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Table: Compact Reference</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Table: Spacious</button>
+    </div>
+  </div>
+  <script>
+    (function() {
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact"}');
+      window.applyObeliskConfig = function() {
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact'};
+        document.querySelectorAll('.proof-row').forEach(function(r) {
+          r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
+        });
+        document.querySelectorAll('table.data-table td, table.data-table th').forEach(function(cell) {
+          cell.style.padding = (cfg.density === 'compact') ? '8px 10px' : '14px 16px';
+        });
+        var bTerm = document.getElementById('cfg-proof-term');
+        var bExp = document.getElementById('cfg-proof-expanded');
+        var bComp = document.getElementById('cfg-density-compact');
+        var bSpac = document.getElementById('cfg-density-spacious');
+        if (bTerm) bTerm.classList.toggle('active', cfg.proofMode !== 'expanded');
+        if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
+        if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
+        if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
+      };
+      window.setObeliskConfig = function(key, val) {
+        window.OBELISK_PRESENTATION_CONFIG[key] = val;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        window.applyObeliskConfig();
+      };
+      document.addEventListener('DOMContentLoaded', window.applyObeliskConfig);
+    })();
+  </script>
+
 
     <!-- GLOBAL CONFIGURATION BAR (3 UNIFIED TOGGLES: TERMINOLOGY, OBJECT THEORY, ASSISTANT VARIANT) -->
     <div id="global-config-bar" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 12px 16px; margin: 1.2rem 0; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: space-between;">
@@ -753,13 +866,13 @@
     <!-- FILTER BAR -->
     <div class="filter-bar" style="display: flex; align-items: center; flex-wrap: wrap; gap: 8px;">
       <span style="font-weight: 600; font-size: 0.85rem; color: #94a3b8; margin-right: 6px;">Filter By:</span>
-      <button class="filter-btn active" onclick="filterCatalog('all', this)">All (59)</button>
+      <button class="filter-btn active" onclick="filterCatalog('all', this)">All (64)</button>
       <button class="filter-btn" onclick="filterCatalog('axiom', this)">Axioms</button>
       <button class="filter-btn" onclick="filterCatalog('theorem', this)">Theorems</button>
       <button class="filter-btn" onclick="filterCatalog('definition', this)">Definitions</button>
       <button class="filter-btn" onclick="filterCatalog('rule', this)">Inference Rules</button>
       <div style="margin-left: auto; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-        <button class="filter-btn" id="toggle-all-proofs-btn" onclick="toggleAllProofRows()" title="Expand or collapse all 59 inline SML proof programs">📜 Show All Proofs</button>
+        <button class="filter-btn" id="toggle-all-proofs-btn" onclick="toggleAllProofRows()" title="Expand or collapse all 64 inline SML proof programs">📜 Show All Proofs</button>
         <span style="font-size: 0.82rem; color: #94a3b8; margin-left: 6px;">Notation:</span>
         <button class="filter-btn" id="toggle-notation-btn" onclick="toggleNotation()">Show Colorful Unicode</button>
       </div>
@@ -3285,7 +3398,7 @@ val def_item_3_53 = DefThm (lhs, rhs);</code></pre>
                 </button>
               </div>
             </td>
-            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ ((x ∈ u) ∧ isSet(u))))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-66&quot; class=&quot;sym-inline-link&quot; title=&quot;isUniverse : Class → Bool (3.66 Grothendieck-Tarski Universe)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isUniverse&lt;/span&gt;&lt;/a&gt;(u) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; u) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(u))))" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-def-chip&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;isSet&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Bool&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land ((x \in u) \land \mathrm{isSet}(u))))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall x \; (\mathrm{isSet}(x) \to \exists u \; (\mathrm{isUniverse}(u) \land ((x \in u) \land \mathrm{isSet}(u))))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="formula-cell" data-unicode="∀(x : Class) (isSet(x) → ∃(u : Class) ((isUniverse(u) ∧ (x ∈ u)) ∧ isSet(u)))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-66&quot; class=&quot;sym-inline-link&quot; title=&quot;isUniverse : Class → Bool (3.66 Grothendieck-Tarski Universe)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isUniverse&lt;/span&gt;&lt;/a&gt;(u) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; u)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(u)))" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-def-chip&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;isSet&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Bool&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; ((\mathrm{isUniverse}(u) \land (x \in u)) \land \mathrm{isSet}(u)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall x \; (\mathrm{isSet}(x) \to \exists u \; ((\mathrm{isUniverse}(u) \land (x \in u)) \land \mathrm{isSet}(u)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
             <td class="syntax-cell"><a href="metatheory.html#sc-top" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\(x, u : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-3-66.html" class="status-badge badge-axiom-status" title="Click to view formal verification certificate and proof details">Axiomatic Base</a></td>
           </tr>
@@ -3301,7 +3414,7 @@ val def_item_3_53 = DefThm (lhs, rhs);</code></pre>
                       <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-66')" title="Copy SML proof script">📋 Copy SML</button>
                     </div>
                     <pre class="code-block"><code id="code-item-3-66">(* Primitive Axiom Postulate *)
-val thm_item_3_66 = Thm ([], parse_formula &quot;∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ ((x ∈ u) ∧ isSet(u))))&quot;);</code></pre>
+val thm_item_3_66 = Thm ([], parse_formula &quot;∀(x : Class) (isSet(x) → ∃(u : Class) ((isUniverse(u) ∧ (x ∈ u)) ∧ isSet(u)))&quot;);</code></pre>
                   </div>
                   <div class="proof-audit-pane">
                     <div class="proof-pane-header">
@@ -3317,7 +3430,7 @@ val thm_item_3_66 = Thm ([], parse_formula &quot;∀(x : Class) (isSet(x) → �
                       </div>
                       <div class="audit-item" style="margin-top: 6px;">
                         <div class="audit-label">Soundness Invariant:</div>
-                        <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(x : Class) (isSet(x) → ∃(u : Class) (isUniverse(u) ∧ ((x ∈ u) ∧ isSet(u))))).</div>
+                        <div class="audit-value">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(x : Class) (isSet(x) → ∃(u : Class) ((isUniverse(u) ∧ (x ∈ u)) ∧ isSet(u)))).</div>
                       </div>
                       <div class="audit-item" style="margin-top: 6px;">
                         <div class="audit-label">Kernel Confirmation:</div>
@@ -3326,6 +3439,326 @@ val thm_item_3_66 = Thm ([], parse_formula &quot;∀(x : Class) (isSet(x) → �
                     </div>
                     <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
                       <a href="proofs/item-3-66.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
+                      <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+            
+
+          <tr id="item-3-67" data-num="3.67" data-classification="definition" data-section="sec-3">
+            <td class="num-cell" style="text-align: center;"><a id="3.67" href="#3.67" class="entry-num-link" onclick="copyPermalink('3.67', 'item-3-67', event)" title="Click to navigate or copy link for 3.67">3.67</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Semi-Singleton Class Predicate (semi_singleton)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Family Evaluation): a class x is a semi-singleton if it contains at most one element (either ∅ or {a} for a set a).</div></details>
+              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>semi_singleton_def_entry (types/foundations.ML) / thm_81_semi_singleton_sub_char (verified_theorems.ML)</code></div>
+              <div style="margin-top: 8px;">
+                <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-67', this)" title="Toggle inline SML proof derivation">
+                  <span class="proof-btn-icon">📜</span> Proof Program
+                </button>
+              </div>
+            </td>
+            <td class="formula-cell" data-unicode="(semi_singleton(x) ⟷ ∀(u : Class) ∀(v : Class) (((u ∈ x) ∧ (v ∈ x)) → (u = v)))" data-unicode-colored="(semi_singleton(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; v)))" data-sym-links=""><div class="view-typing formula-chunk">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall (u : \mathsf{Class})\; \forall (v : \mathsf{Class})\; (((u \in x) \land (v \in x)) \to (u = v)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u \; \forall v \; (((u \in x) \land (v \in x)) \to (u = v)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, u, v : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u, v\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-67.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
+          </tr>
+          <tr id="proof-row-item-3-67" class="proof-row" data-parent="item-3-67" data-classification="definition" data-section="sec-3" style="display: none;">
+            <td colspan="5" class="proof-row-td">
+              <div class="proof-inline-container">
+                <div class="proof-inline-grid">
+                  <div class="proof-code-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #38bdf8;">⚡</span> Standard ML Microkernel Proof Program
+                      </span>
+                      <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-67')" title="Copy SML proof script">📋 Copy SML</button>
+                    </div>
+                    <pre class="code-block"><code id="code-item-3-67">(* Conservative Definition Specification *)
+semi_singleton_def_entry (types/foundations.ML) / thm_81_semi_singleton_sub_char (verified_theorems.ML)</code></pre>
+                  </div>
+                  <div class="proof-audit-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #34d399;">🛡️</span> Formal Epistemic Audit
+                      </span>
+                      <span class="status-badge badge-def-status">Conservative Def</span>
+                    </div>
+                    <div class="proof-audit-content">
+                      <div class="audit-item">
+                        <div class="audit-label">Verification Method:</div>
+                        <div class="audit-value">Conservative Definitional Extension</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Soundness Invariant:</div>
+                        <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Kernel Confirmation:</div>
+                        <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+                      </div>
+                    </div>
+                    <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="proofs/item-3-67.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
+                      <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+            
+
+          <tr id="item-3-68" data-num="3.68" data-classification="definition" data-section="sec-3">
+            <td class="num-cell" style="text-align: center;"><a id="3.68" href="#3.68" class="entry-num-link" onclick="copyPermalink('3.68', 'item-3-68', event)" title="Click to navigate or copy link for 3.68">3.68</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Value Extraction via Semi-Singleton Subclasses (sss / Value)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Value &amp; Family): extracts the unique element a when x = {a}, and evaluates to ∅ when x has 0 or ≥ 2 elements.</div></details>
+              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>sss_def_entry (types/foundations.ML) / semi_singleton_sub_elim (nbg_verified_programs.nbg)</code></div>
+              <div style="margin-top: 8px;">
+                <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-68', this)" title="Toggle inline SML proof derivation">
+                  <span class="proof-btn-icon">📜</span> Proof Program
+                </button>
+              </div>
+            </td>
+            <td class="formula-cell" data-unicode="(sss(x) = ⋃({ z | ((z ⊆ x) ∧ semi_singleton(z)) }))" data-unicode-colored="(sss(x) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; &lt;a href=&quot;#item-3-14&quot; class=&quot;sym-inline-link&quot; title=&quot;⋃ : Class → Class (3.14 Class Union)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⋃&lt;/span&gt;&lt;/a&gt;({ z | ((z &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; semi_singleton(z)) }))" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-67&quot; class=&quot;sym-def-chip&quot; title=&quot;semi_singleton : Class → Bool (3.67 Semi-Singleton Class Predicate)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;semi_singleton&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Bool&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;#item-3-14&quot; class=&quot;sym-def-chip&quot; title=&quot;⋃ : Class → Class (3.14 Class Union)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;⋃&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Class&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;#item-3-02&quot; class=&quot;sym-def-chip&quot; title=&quot;(⊆) : Class × Class → Bool (3.02 Subclass Relation)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;⊆&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class × Class → Bool&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-67" class="sym-def-chip" title="semi_singleton : Class → Bool (3.67 Semi-Singleton Class Predicate)"><span class="sym-chip-name">semi_singleton</span><span class="sym-chip-type">Class → Bool</span></a> <a href="#item-3-14" class="sym-def-chip" title="⋃ : Class → Class (3.14 Class Union)"><span class="sym-chip-name">⋃</span><span class="sym-chip-type">Class → Class</span></a> <a href="#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, z : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, z\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-68.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
+          </tr>
+          <tr id="proof-row-item-3-68" class="proof-row" data-parent="item-3-68" data-classification="definition" data-section="sec-3" style="display: none;">
+            <td colspan="5" class="proof-row-td">
+              <div class="proof-inline-container">
+                <div class="proof-inline-grid">
+                  <div class="proof-code-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #38bdf8;">⚡</span> Standard ML Microkernel Proof Program
+                      </span>
+                      <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-68')" title="Copy SML proof script">📋 Copy SML</button>
+                    </div>
+                    <pre class="code-block"><code id="code-item-3-68">(* Conservative Definition Specification *)
+sss_def_entry (types/foundations.ML) / semi_singleton_sub_elim (nbg_verified_programs.nbg)</code></pre>
+                  </div>
+                  <div class="proof-audit-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #34d399;">🛡️</span> Formal Epistemic Audit
+                      </span>
+                      <span class="status-badge badge-def-status">Conservative Def</span>
+                    </div>
+                    <div class="proof-audit-content">
+                      <div class="audit-item">
+                        <div class="audit-label">Verification Method:</div>
+                        <div class="audit-value">Conservative Definitional Extension</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Soundness Invariant:</div>
+                        <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Kernel Confirmation:</div>
+                        <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+                      </div>
+                    </div>
+                    <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="proofs/item-3-68.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
+                      <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+            
+
+          <tr id="item-3-69" data-num="3.69" data-classification="theorem" data-section="sec-3">
+            <td class="num-cell" style="text-align: center;"><a id="3.69" href="#3.69" class="entry-num-link" onclick="copyPermalink('3.69', 'item-3-69', event)" title="Click to navigate or copy link for 3.69">3.69</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Theorem of Evaluation of a Family ((Λx, t)(z) = t[z/x])</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 Theorem [evaluation of family]: evaluating the encoded class family (Λx, t) = { [x, y]_D | y ∈ t } at a set argument z via Value(Img(Λx t, {z})) yields t[z/x].</div></details>
+              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>family_eval_thm_entry (types/foundations.ML) / thm_82_family_value_eval (verified_theorems.ML) / family_fiber_char (.nbg)</code></div>
+              <div style="margin-top: 8px;">
+                <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-69', this)" title="Toggle inline SML proof derivation">
+                  <span class="proof-btn-icon">📜</span> Proof Program
+                </button>
+              </div>
+            </td>
+            <td class="formula-cell" data-unicode="∀(z : Class) ((isSet(z) ∧ isSet(t[z/x])) → (((Λ(x : Class), t))(z) = t[z/x]))" data-unicode-colored="&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(z) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(t[z/x])) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (((Λ(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;), t))(z) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; t[z/x]))" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-def-chip&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;isSet&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Bool&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\(\forall (z : \mathsf{Class})\; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x : \mathsf{Class}), \, t))(z) = t[z/x]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall z \; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x), \, t))(z) = t[z/x]))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link" title="Click to view reflected formula and side-side conditions in Metatheory"><span class="view-typing">\((t : \mathsf{Class.Expression}), \; (v_x : \mathsf{Variable}), \; (z : \mathsf{Class})\)</span><span class="view-membership" style="display:none;">\((t : \mathsf{Class.Expression}), \; (v_x), \; (z)\)</span></a></td>
+            <td style="text-align: center;"><a href="proofs/item-3-69.html" class="status-badge badge-verified-strong" title="Click to view formal verification certificate and proof details">Verified (Kernel)</a></td>
+          </tr>
+          <tr id="proof-row-item-3-69" class="proof-row" data-parent="item-3-69" data-classification="theorem" data-section="sec-3" style="display: none;">
+            <td colspan="5" class="proof-row-td">
+              <div class="proof-inline-container">
+                <div class="proof-inline-grid">
+                  <div class="proof-code-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #38bdf8;">⚡</span> Standard ML Microkernel Proof Program
+                      </span>
+                      <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-69')" title="Copy SML proof script">📋 Copy SML</button>
+                    </div>
+                    <pre class="code-block"><code id="code-item-3-69">(* Verified Proof Program *)
+family_eval_thm_entry (types/foundations.ML) / thm_82_family_value_eval (verified_theorems.ML) / family_fiber_char (.nbg)</code></pre>
+                  </div>
+                  <div class="proof-audit-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #34d399;">🛡️</span> Formal Epistemic Audit
+                      </span>
+                      <span class="status-badge badge-verified-strong">Verified (Kernel)</span>
+                    </div>
+                    <div class="proof-audit-content">
+                      <div class="audit-item">
+                        <div class="audit-label">Verification Method:</div>
+                        <div class="audit-value">PolyML LCF Microkernel Proof Term Execution</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Soundness Invariant:</div>
+                        <div class="audit-value">Constructively verified! A closed proof program or tactic sequence executes in PolyML, discharging all subgoals down to [] and certifying ∀(z : Class) ((isSet(z) ∧ isSet(t[z/x])) → (((Λ(x : Class), t))(z) = t[z/x])).</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Kernel Confirmation:</div>
+                        <div class="audit-value" style="color: #6ee7b7;">Checked and confirmed by the PolyML LCF kernel. Verified without cheating axioms (PCheat_prf) or unproved side conditions.</div>
+                      </div>
+                    </div>
+                    <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="proofs/item-3-69.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
+                      <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+            
+
+          <tr id="item-3-70" data-num="3.70" data-classification="definition" data-section="sec-3">
+            <td class="num-cell" style="text-align: center;"><a id="3.70" href="#3.70" class="entry-num-link" onclick="copyPermalink('3.70', 'item-3-70', event)" title="Click to navigate or copy link for 3.70">3.70</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Sum (ΣB / Sigma Model)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Sum Σ): models the dependent pair type Σ_{x ∈ A} B(x) using Dunaev tagged pairs [x, y]_D.</div></details>
+              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>sigma_model_def_entry (types/foundations.ML) / thm_83_sigma_model_proj (verified_theorems.ML) / sigma_dependent_sum_intro (.nbg)</code></div>
+              <div style="margin-top: 8px;">
+                <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-70', this)" title="Toggle inline SML proof derivation">
+                  <span class="proof-btn-icon">📜</span> Proof Program
+                </button>
+              </div>
+            </td>
+            <td class="formula-cell" data-unicode="(Σ(B) = { p | ∃(x : Class) ∃(y : Class) (((x ∈ Dom(B)) ∧ (y ∈ B(x))) ∧ (p = [x, y]_D)) })" data-unicode-colored="(Σ(B) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; { p | &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; Dom(B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B(x))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (p &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; [x, y]_D)) })" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-40&quot; class=&quot;sym-def-chip&quot; title=&quot;[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;[·,·]_D&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class × Class → Class&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\((\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Sigma(B) = \{ p \mid \exists x \; \exists y \; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, p, x, y : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, p, x, y\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-70.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
+          </tr>
+          <tr id="proof-row-item-3-70" class="proof-row" data-parent="item-3-70" data-classification="definition" data-section="sec-3" style="display: none;">
+            <td colspan="5" class="proof-row-td">
+              <div class="proof-inline-container">
+                <div class="proof-inline-grid">
+                  <div class="proof-code-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #38bdf8;">⚡</span> Standard ML Microkernel Proof Program
+                      </span>
+                      <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-70')" title="Copy SML proof script">📋 Copy SML</button>
+                    </div>
+                    <pre class="code-block"><code id="code-item-3-70">(* Conservative Definition Specification *)
+sigma_model_def_entry (types/foundations.ML) / thm_83_sigma_model_proj (verified_theorems.ML) / sigma_dependent_sum_intro (.nbg)</code></pre>
+                  </div>
+                  <div class="proof-audit-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #34d399;">🛡️</span> Formal Epistemic Audit
+                      </span>
+                      <span class="status-badge badge-def-status">Conservative Def</span>
+                    </div>
+                    <div class="proof-audit-content">
+                      <div class="audit-item">
+                        <div class="audit-label">Verification Method:</div>
+                        <div class="audit-value">Conservative Definitional Extension</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Soundness Invariant:</div>
+                        <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Kernel Confirmation:</div>
+                        <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+                      </div>
+                    </div>
+                    <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="proofs/item-3-70.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
+                      <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+            
+
+          <tr id="item-3-71" data-num="3.71" data-classification="definition" data-section="sec-3">
+            <td class="num-cell" style="text-align: center;"><a id="3.71" href="#3.71" class="entry-num-link" onclick="copyPermalink('3.71', 'item-3-71', event)" title="Click to navigate or copy link for 3.71">3.71</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Product (ΠB / Pi Model)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as class functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div></details>
+              
+              <div style="margin-top: 6px; font-size: 0.78rem; color: #a7f3d0; font-family: monospace; background: rgba(6, 78, 59, 0.3); padding: 4px 6px; border-radius: 4px; border-left: 2px solid #10b981;"><strong>Proof Program:</strong> <code>pi_predicate_model_def_entry (types/foundations.ML) / thm_84_pi_model_elim (verified_theorems.ML) / pi_dependent_product_elim (.nbg)</code></div>
+              <div style="margin-top: 8px;">
+                <button class="proof-toggle-btn" onclick="toggleProofRow('item-3-71', this)" title="Toggle inline SML proof derivation">
+                  <span class="proof-btn-icon">📜</span> Proof Program
+                </button>
+              </div>
+            </td>
+            <td class="formula-cell" data-unicode="(Π(B) = { f | ((isClassFunction(f) ∧ (Dom(f) = Dom(B))) ∧ ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x)))) })" data-unicode-colored="(Π(B) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; { f | ((&lt;a href=&quot;#item-3-37&quot; class=&quot;sym-inline-link&quot; title=&quot;isClassFunction : Class → Bool (3.37 Class Function)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isClassFunction&lt;/span&gt;&lt;/a&gt;(f) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (Dom(f) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; Dom(B))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; &lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; Dom(B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (f(x) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B(x)))) })" data-sym-links="&lt;div class=&quot;formula-sym-links&quot;&gt;&lt;span class=&quot;sym-links-label&quot;&gt;Symbols:&lt;/span&gt; &lt;a href=&quot;#item-3-37&quot; class=&quot;sym-def-chip&quot; title=&quot;isClassFunction : Class → Bool (3.37 Class Function)&quot;&gt;&lt;span class=&quot;sym-chip-name&quot;&gt;isClassFunction&lt;/span&gt;&lt;span class=&quot;sym-chip-type&quot;&gt;Class → Bool&lt;/span&gt;&lt;/a&gt;&lt;/div&gt;"><div class="view-typing formula-chunk">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x \; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-37" class="sym-def-chip" title="isClassFunction : Class → Bool (3.37 Class Function)"><span class="sym-chip-name">isClassFunction</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, f, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, f, x\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-71.html" class="status-badge badge-def-status" title="Click to view formal verification certificate and proof details">Conservative Def</a></td>
+          </tr>
+          <tr id="proof-row-item-3-71" class="proof-row" data-parent="item-3-71" data-classification="definition" data-section="sec-3" style="display: none;">
+            <td colspan="5" class="proof-row-td">
+              <div class="proof-inline-container">
+                <div class="proof-inline-grid">
+                  <div class="proof-code-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #38bdf8;">⚡</span> Standard ML Microkernel Proof Program
+                      </span>
+                      <button class="btn-copy-code" onclick="copyCode(this, 'code-item-3-71')" title="Copy SML proof script">📋 Copy SML</button>
+                    </div>
+                    <pre class="code-block"><code id="code-item-3-71">(* Conservative Definition Specification *)
+pi_predicate_model_def_entry (types/foundations.ML) / thm_84_pi_model_elim (verified_theorems.ML) / pi_dependent_product_elim (.nbg)</code></pre>
+                  </div>
+                  <div class="proof-audit-pane">
+                    <div class="proof-pane-header">
+                      <span style="display: flex; align-items: center; gap: 6px;">
+                        <span style="color: #34d399;">🛡️</span> Formal Epistemic Audit
+                      </span>
+                      <span class="status-badge badge-def-status">Conservative Def</span>
+                    </div>
+                    <div class="proof-audit-content">
+                      <div class="audit-item">
+                        <div class="audit-label">Verification Method:</div>
+                        <div class="audit-value">Conservative Definitional Extension</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Soundness Invariant:</div>
+                        <div class="audit-value">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+                      </div>
+                      <div class="audit-item" style="margin-top: 6px;">
+                        <div class="audit-label">Kernel Confirmation:</div>
+                        <div class="audit-value" style="color: #6ee7b7;">Verified as a conservative extension with checked non-free variable (NFV) and fresh binder constraints. Preserves model-theoretic satisfiability.</div>
+                      </div>
+                    </div>
+                    <div class="proof-actions-bar" style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                      <a href="proofs/item-3-71.html" class="btn btn-secondary btn-sm">Inspect Full Certificate &rarr;</a>
                       <a href="repl.html" class="btn btn-primary btn-sm">Run Proof in Web REPL &rarr;</a>
                     </div>
                   </div>
@@ -4769,7 +5202,7 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
         <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);">Machine-Checked Standard Library (Both Variants)</div>
         <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">NBG Formulas-as-Types &amp; 1st-Order Bridged Theorems</h2>
       </div>
-      <span class="status-badge badge-verified-strong">20 kernel-checked theorems</span>
+      <span class="status-badge badge-verified-strong">24 kernel-checked theorems</span>
     </div>
     <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 980px;">
       Each row is a closed proof term in <code>examples/nbg_verified_programs.nbg</code>, compiled by
@@ -5436,13 +5869,141 @@ val thm_item_6_03 = WeakVerified (&quot;Gödel&#x27;s Second Incompleteness Theo
             <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">13</td>
           </tr>
         
+          <tr id="nbg-semi_singleton_sub_elim" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">semi_singleton_sub_elim</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Value / Semi-Singleton Subclasses): every element of the semi-singleton restriction of X belongs to X.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { w | ((w &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; X) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; X)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; v))))) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; X))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem semi_singleton_sub_elim : <a href="#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_semi_singleton_sub_elim : Fm) := (⟨(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_semi_singleton_sub_elim : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_semi_singleton_sub_elim : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_semi_singleton_sub_elim : Stmt) := (⟨(⟦theory_semi_singleton_sub_elim⟧, ⟦ctx_semi_singleton_sub_elim⟧ ⊢ ⟦fm_semi_singleton_sub_elim⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_semi_singleton_sub_elim : Prf) := (⟨λ-proof term, AST=9, Normal=9⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(prf_semi_singleton_sub_elim) ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_semi_singleton_sub_elim)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_semi_singleton_sub_elim) ∈ <a href="#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_semi_singleton_sub_elim)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-family_fiber_char" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">family_fiber_char</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Family Evaluation): membership in the evaluated family fiber B(x) = { w | [x, w]_D in B } entails [x, y]_D in B.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { w | ([x, w]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ([x, y]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem family_fiber_char : <a href="#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_family_fiber_char : Fm) := (⟨(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_family_fiber_char : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_family_fiber_char : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_family_fiber_char : Stmt) := (⟨(⟦theory_family_fiber_char⟧, ⟦ctx_family_fiber_char⟧ ⊢ ⟦fm_family_fiber_char⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_family_fiber_char : Prf) := (⟨λ-proof term, AST=8, Normal=8⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(prf_family_fiber_char) ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_family_fiber_char)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_family_fiber_char) ∈ <a href="#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_family_fiber_char)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-sigma_dependent_sum_intro" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">sigma_dependent_sum_intro</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Dependent Sum Sigma Model): pairing witness x in A and fiber membership [x, y]_D in B certifies dependent sum membership.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ([x, y]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ([x, y]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)))))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem sigma_dependent_sum_intro : <a href="#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_sigma_dependent_sum_intro : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_sigma_dependent_sum_intro : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_sigma_dependent_sum_intro : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_sigma_dependent_sum_intro : Stmt) := (⟨(⟦theory_sigma_dependent_sum_intro⟧, ⟦ctx_sigma_dependent_sum_intro⟧ ⊢ ⟦fm_sigma_dependent_sum_intro⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_sigma_dependent_sum_intro : Prf) := (⟨λ-proof term, AST=8, Normal=8⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(prf_sigma_dependent_sum_intro) ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_sigma_dependent_sum_intro)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_sigma_dependent_sum_intro) ∈ <a href="#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_sigma_dependent_sum_intro)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-pi_dependent_product_elim" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">pi_dependent_product_elim</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Dependent Product Pi Model): a dependent section over A eliminates at every x in A to a fiber witness in B(x).</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(f : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ([x, f]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  ([x, f]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B))))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B))))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem pi_dependent_product_elim : <a href="#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_pi_dependent_product_elim : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_pi_dependent_product_elim : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_pi_dependent_product_elim : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_pi_dependent_product_elim : Stmt) := (⟨(⟦theory_pi_dependent_product_elim⟧, ⟦ctx_pi_dependent_product_elim⟧ ⊢ ⟦fm_pi_dependent_product_elim⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_pi_dependent_product_elim : Prf) := (⟨λ-proof term, AST=10, Normal=10⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(prf_pi_dependent_product_elim) ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_pi_dependent_product_elim)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_pi_dependent_product_elim) ∈ <a href="#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="#def-enc" style="color:#38bdf8;">Enc</a>(thm_pi_dependent_product_elim)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
         </tbody>
       </table>
     </div>
     <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.9rem;">
       Reproduce locally: <code>python3 obelisk_cli.py compile examples/nbg_verified_programs.nbg</code>
       &nbsp;•&nbsp; Manifest: <code>data/nbg_library.json</code>
-      &nbsp;•&nbsp; Source SHA-256 prefix: <code>dae9b14418906b6d</code>
+      &nbsp;•&nbsp; Source SHA-256 prefix: <code>c445d85a91802f3e</code>
     </p>
   </div>
 

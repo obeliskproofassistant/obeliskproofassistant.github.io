@@ -1,7 +1,8 @@
 {
+  "_generated_comment": "AUTO-GENERATED FILE — DO NOT EDIT MANUALLY. Generated from set_theory_prover/examples/nbg_verified_programs.nbg by NBGSurfaceCompiler (program/nbg_surface_compiler.ML) and tools/systematic_catalog_generator.py.",
   "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
-  "source_sha256_prefix": "dae9b14418906b6d",
-  "count": 20,
+  "source_sha256_prefix": "c445d85a91802f3e",
+  "count": 24,
   "theorems": [
     {
       "name": "empty_class_no_elements",
@@ -138,10 +139,38 @@
     },
     {
       "name": "union_sub_left",
-      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (z in A -> z in { u | (u in A \\/ u in B) }))))",
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in A) -> (z in { u | ((u in A) \\/ (u in B)) })))))",
       "proof_size": 13,
       "normalized_size": 13,
       "description": "Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension)."
+    },
+    {
+      "name": "semi_singleton_sub_elim",
+      "formula": "(forall X:Class. (forall z:Class. ((z in { w | ((w in X) /\\ (forall u:Class. (forall v:Class. (((u in X) /\\ (v in X)) -> (u = v))))) }) -> (z in X))))",
+      "proof_size": 9,
+      "normalized_size": 9,
+      "description": "Foundations ch. 110 (Value / Semi-Singleton Subclasses): every element of the semi-singleton restriction of X belongs to X."
+    },
+    {
+      "name": "family_fiber_char",
+      "formula": "(forall B:Class. (forall x:Class. (forall y:Class. ((y in { w | ([x, w]_D in B) }) -> ([x, y]_D in B)))))",
+      "proof_size": 8,
+      "normalized_size": 8,
+      "description": "Foundations ch. 110 (Family Evaluation): membership in the evaluated family fiber B(x) = { w | [x, w]_D in B } entails [x, y]_D in B."
+    },
+    {
+      "name": "sigma_dependent_sum_intro",
+      "formula": "(forall A:Class. (forall B:Class. (forall x:Class. (forall y:Class. (((x in A) /\\ ([x, y]_D in B)) -> ((x in A) /\\ ([x, y]_D in B)))))))",
+      "proof_size": 8,
+      "normalized_size": 8,
+      "description": "Foundations ch. 130 (Dependent Sum Sigma Model): pairing witness x in A and fiber membership [x, y]_D in B certifies dependent sum membership."
+    },
+    {
+      "name": "pi_dependent_product_elim",
+      "formula": "(forall A:Class. (forall B:Class. (forall f:Class. ((((forall x:Class. ((x in A) -> ([x, f]_D in B))) /\\ (forall x:Class. (x in A))) -> (forall x:Class. ([x, f]_D in B)))))))",
+      "proof_size": 10,
+      "normalized_size": 10,
+      "description": "Foundations ch. 130 (Dependent Product Pi Model): a dependent section over A eliminates at every x in A to a fiber witness in B(x)."
     }
   ]
 }

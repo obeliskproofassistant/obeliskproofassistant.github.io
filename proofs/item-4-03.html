@@ -1,3 +1,14 @@
+<!--
+AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
+  Target: proofs/item-4-03.html
+  Generator: /botworkspace/tools/systematic_catalog_generator.py
+  Data Sources:
+    - /ramdisk/obeliskproofassistant.github.io/data/theory_database.json (built by /botworkspace/tools/build_theory_database.py)
+    - /ramdisk/obeliskproofassistant.github.io/data/nbg_library.json (compiled from set_theory_prover/examples/nbg_verified_programs.nbg)
+    - /ramdisk/set_theory_prover/program/types/foundations.ML & program/verified_theorems.ML
+  Regenerate Command:
+    python3 /botworkspace/tools/build_theory_database.py && python3 /botworkspace/tools/systematic_catalog_generator.py
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +33,66 @@
         }
       },
       options: {
+        enableAssistiveMml: true,
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            try {
+              var items = MathJax.startup.document.math;
+              items.forEach(function(item) {
+                if (item.typesetRoot && item.math) {
+                  var rawTex = item.math.trim();
+                  var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
+                  item.typesetRoot.setAttribute('data-latex', rawTex);
+                  item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
+                  item.typesetRoot.setAttribute('title', 'LaTeX (copiable): ' + wrappedTex);
+                  var mml = item.typesetRoot.querySelector('mjx-assistive-mml');
+                  if (mml) mml.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  var mjxMath = item.typesetRoot.querySelector('mjx-math');
+                  if (mjxMath) mjxMath.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  if (!item.typesetRoot.querySelector('.mjx-copy-tex')) {
+                    var copySpan = document.createElement('span');
+                    copySpan.className = 'mjx-copy-tex';
+                    copySpan.textContent = wrappedTex;
+                    copySpan.setAttribute('style', 'display:inline-block;width:0;height:0;overflow:hidden;opacity:0;user-select:text;-webkit-user-select:text;');
+                    item.typesetRoot.appendChild(copySpan);
+                  }
+                }
+              });
+            } catch (err) {
+              console.warn('MathJax copy annotation warning:', err);
+            }
+          });
+        }
       }
     };
+    document.addEventListener('copy', function(e) {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+      var range = sel.getRangeAt(0);
+      var container = range.commonAncestorContainer;
+      var el = container.nodeType === 1 ? container : container.parentElement;
+      var insideMjx = el && el.closest ? el.closest('mjx-container') : null;
+      if (insideMjx && insideMjx.getAttribute('data-latex-delimited')) {
+        e.clipboardData.setData('text/plain', insideMjx.getAttribute('data-latex-delimited'));
+        e.preventDefault();
+        return;
+      }
+      var frag = range.cloneContents();
+      if (frag.querySelectorAll && frag.querySelectorAll('mjx-container').length > 0) {
+        frag.querySelectorAll('mjx-container').forEach(function(mjx) {
+          var tex = mjx.getAttribute('data-latex-delimited') || mjx.getAttribute('data-latex') || mjx.textContent;
+          var txt = document.createTextNode(tex);
+          mjx.parentNode.replaceChild(txt, mjx);
+        });
+        var div = document.createElement('div');
+        div.appendChild(frag);
+        e.clipboardData.setData('text/plain', div.innerText || div.textContent);
+        e.preventDefault();
+      }
+    });
 
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

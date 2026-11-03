@@ -1,0 +1,535 @@
+<!--
+AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
+  Target: dependent_types.html
+  Generator: /botworkspace/tools/systematic_catalog_generator.py
+  Data Sources:
+    - /ramdisk/obeliskproofassistant.github.io/data/theory_database.json (built by /botworkspace/tools/build_theory_database.py)
+    - /ramdisk/obeliskproofassistant.github.io/data/nbg_library.json (compiled from set_theory_prover/examples/nbg_verified_programs.nbg)
+    - /ramdisk/set_theory_prover/program/types/foundations.ML & program/verified_theorems.ML
+  Regenerate Command:
+    python3 /botworkspace/tools/build_theory_database.py && python3 /botworkspace/tools/systematic_catalog_generator.py
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Models of Σ &amp; Π Dependent Types, Value &amp; Family Evaluation — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        enableAssistiveMml: true,
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            try {
+              var items = MathJax.startup.document.math;
+              items.forEach(function(item) {
+                if (item.typesetRoot && item.math) {
+                  var rawTex = item.math.trim();
+                  var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
+                  item.typesetRoot.setAttribute('data-latex', rawTex);
+                  item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
+                  item.typesetRoot.setAttribute('title', 'LaTeX (copiable): ' + wrappedTex);
+                  var mml = item.typesetRoot.querySelector('mjx-assistive-mml');
+                  if (mml) mml.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  var mjxMath = item.typesetRoot.querySelector('mjx-math');
+                  if (mjxMath) mjxMath.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  if (!item.typesetRoot.querySelector('.mjx-copy-tex')) {
+                    var copySpan = document.createElement('span');
+                    copySpan.className = 'mjx-copy-tex';
+                    copySpan.textContent = wrappedTex;
+                    copySpan.setAttribute('style', 'display:inline-block;width:0;height:0;overflow:hidden;opacity:0;user-select:text;-webkit-user-select:text;');
+                    item.typesetRoot.appendChild(copySpan);
+                  }
+                }
+              });
+            } catch (err) {
+              console.warn('MathJax copy annotation warning:', err);
+            }
+          });
+        }
+      }
+    };
+    document.addEventListener('copy', function(e) {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+      var range = sel.getRangeAt(0);
+      var container = range.commonAncestorContainer;
+      var el = container.nodeType === 1 ? container : container.parentElement;
+      var insideMjx = el && el.closest ? el.closest('mjx-container') : null;
+      if (insideMjx && insideMjx.getAttribute('data-latex-delimited')) {
+        e.clipboardData.setData('text/plain', insideMjx.getAttribute('data-latex-delimited'));
+        e.preventDefault();
+        return;
+      }
+      var frag = range.cloneContents();
+      if (frag.querySelectorAll && frag.querySelectorAll('mjx-container').length > 0) {
+        frag.querySelectorAll('mjx-container').forEach(function(mjx) {
+          var tex = mjx.getAttribute('data-latex-delimited') || mjx.getAttribute('data-latex') || mjx.textContent;
+          var txt = document.createTextNode(tex);
+          mjx.parentNode.replaceChild(txt, mjx);
+        });
+        var div = document.createElement('div');
+        div.appendChild(frag);
+        e.clipboardData.setData('text/plain', div.innerText || div.textContent);
+        e.preventDefault();
+      }
+    });
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn, .filter-btn {
+      background: transparent;
+      border: 1px solid rgba(56, 189, 248, 0.24);
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 4px 10px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active, .filter-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="manual.html">Manual</a>
+      <a href="variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="dependent_types.html" class="active">Σ &amp; Π Models</a>
+      <a href="nbg_library.html" class="">NBG Library</a>
+      <a href="proofs.html">Proofs</a>
+      <a href="metatheory.html">Metatheory</a>
+      <a href="output.pdf" target="_blank">PDF Manual</a>
+      <a href="repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Models of Σ &amp; Π Dependent Types, Value &amp; Family Evaluation</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">Machine-checked formalization of `foundations` chapters 110 & 130 in both Variant 1 (1st-Order NBG/MK) and Variant 2 (Higher-Order Formulas-as-Types).</p>
+    
+  <div id="global-presentation-config-bar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(56, 189, 248, 0.32); border-radius: 10px; padding: 0.75rem 1.1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation Config (Metamath-Inspired Uniform View):</span>
+      <span style="font-size: 0.8rem; color: #94a3b8;">Synchronized across all catalog &amp; theorem pages</span>
+    </div>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Proof Display: Compact Proof Term (Default)</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Proof Display: Expanded Certificate</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Table: Compact Reference</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Table: Spacious</button>
+    </div>
+  </div>
+  <script>
+    (function() {
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact"}');
+      window.applyObeliskConfig = function() {
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact'};
+        document.querySelectorAll('.proof-row').forEach(function(r) {
+          r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
+        });
+        document.querySelectorAll('table.data-table td, table.data-table th').forEach(function(cell) {
+          cell.style.padding = (cfg.density === 'compact') ? '8px 10px' : '14px 16px';
+        });
+        var bTerm = document.getElementById('cfg-proof-term');
+        var bExp = document.getElementById('cfg-proof-expanded');
+        var bComp = document.getElementById('cfg-density-compact');
+        var bSpac = document.getElementById('cfg-density-spacious');
+        if (bTerm) bTerm.classList.toggle('active', cfg.proofMode !== 'expanded');
+        if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
+        if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
+        if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
+      };
+      window.setObeliskConfig = function(key, val) {
+        window.OBELISK_PRESENTATION_CONFIG[key] = val;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        window.applyObeliskConfig();
+      };
+      document.addEventListener('DOMContentLoaded', window.applyObeliskConfig);
+    })();
+  </script>
+
+    
+    <div style="background: rgba(30, 41, 59, 0.78); border: 1px solid rgba(251, 191, 36, 0.45); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem;">
+      <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #fbbf24;">Foundations Book Formalization (`110_family_evaluation.tex` &amp; `130_classes_as_types.tex`)</div>
+      <p style="font-size: 0.94rem; color: #e2e8f0; margin: 0.5rem 0;">
+        In Morse–Kelley / NBG class theory, dependent type constructors \( \Sigma_{x \in A} B(x) \) and \( \Pi_{x \in A} B(x) \) are modeled via class families encoded by Dunaev tagged ordered pairs \( [x, y]_D \) and evaluated via semi-singleton subclass extraction:
+      </p>
+      <ul style="font-size: 0.9rem; color: #cbd5e1; line-height: 1.65; margin: 0.4rem 0 0 1.2rem;">
+        <li><strong>Semi-Singleton Predicate (<code>3.67 semi_singleton</code>):</strong> \( (\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u\; \forall v\; (((u \in x) \land (v \in x)) \to (u = v))) \).</li>
+        <li><strong>Value Operator (<code>3.68 sss / Value</code>):</strong> \( (\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \}) \), satisfying \( (\mathrm{sss}(\{a\}) = a) \) for every set \( a \) and \( (\mathrm{sss}(x) = \emptyset) \) whenever \( x \) is not a singleton.</li>
+        <li><strong>Family Evaluation Theorem (<code>3.69 family_eval_thm</code>):</strong> For an encoded family \( (\Lambda x,\, t) = \{ [x, y]_D \mid (y \in t) \} \) with fiber \( B(z) = \{ y \mid ([z, y]_D \in B) \} \), evaluating at a set \( z \) yields \( (((\Lambda x,\, t))(z) = t[z/x]) \).</li>
+        <li><strong>Dependent Sum Model (<code>3.70 ΣB</code>):</strong> \( (\Sigma(B) = \{ p \mid \exists x\; \exists y\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \}) \).</li>
+        <li><strong>Dependent Product Model (<code>3.71 ΠB</code>):</strong> \( (\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \}) \).</li>
+      </ul>
+    </div>
+
+    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">1. Variant 1 (1st-Order NBG/MK Proof Assistant — `program/types/foundations.ML`)</h2>
+    <div class="table-scroll-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="width: 72px; text-align: center;">No.</th>
+            <th style="min-width: 220px;">Name &amp; Classification</th>
+            <th style="min-width: 340px;">1st-Order Formula (Fully Parenthesized Infix Operators)</th>
+            <th style="min-width: 210px;">Syntactic Side Condition</th>
+            <th style="width: 135px; text-align: center;">Verification</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr id="sec-dependent-models" class="section-divider" data-section="sec-dependent-models">
+            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
+              3) Set-Theoretic Models of Value, Family Evaluation, ΣB &amp; ΠB (Variant 1: 1st-Order NBG/MK)
+              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">Formalized in program/types/foundations.ML &amp; program/types/entries.ML (corresponding to Foundations book ch. 110 &amp; ch. 130).</span>
+            </td>
+          </tr>
+        
+
+          <tr id="item-3-67" data-num="3.67">
+            <td class="num-cell" style="text-align: center;"><a id="3.67" href="#3.67" class="entry-num-link">3.67</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Semi-Singleton Class Predicate (semi_singleton)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Family Evaluation): a class x is a semi-singleton if it contains at most one element (either ∅ or {a} for a set a).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall (u : \mathsf{Class})\; \forall (v : \mathsf{Class})\; (((u \in x) \land (v \in x)) \to (u = v)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u \; \forall v \; (((u \in x) \land (v \in x)) \to (u = v)))\)</div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, u, v : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u, v\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-67.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-68" data-num="3.68">
+            <td class="num-cell" style="text-align: center;"><a id="3.68" href="#3.68" class="entry-num-link">3.68</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Value Extraction via Semi-Singleton Subclasses (sss / Value)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Value &amp; Family): extracts the unique element a when x = {a}, and evaluates to ∅ when x has 0 or ≥ 2 elements.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-67" class="sym-def-chip" title="semi_singleton : Class → Bool (3.67 Semi-Singleton Class Predicate)"><span class="sym-chip-name">semi_singleton</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#item-3-14" class="sym-def-chip" title="⋃ : Class → Class (3.14 Class Union)"><span class="sym-chip-name">⋃</span><span class="sym-chip-type">Class → Class</span></a> <a href="manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, z : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, z\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-68.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-69" data-num="3.69">
+            <td class="num-cell" style="text-align: center;"><a id="3.69" href="#3.69" class="entry-num-link">3.69</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Theorem of Evaluation of a Family ((Λx, t)(z) = t[z/x])</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 Theorem [evaluation of family]: evaluating the encoded class family (Λx, t) = { [x, y]_D | y ∈ t } at a set argument z via Value(Img(Λx t, {z})) yields t[z/x].</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (z : \mathsf{Class})\; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x : \mathsf{Class}), \, t))(z) = t[z/x]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall z \; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x), \, t))(z) = t[z/x]))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link"><span class="view-typing">\((t : \mathsf{Class.Expression}), \; (v_x : \mathsf{Variable}), \; (z : \mathsf{Class})\)</span><span class="view-membership" style="display:none;">\((t : \mathsf{Class.Expression}), \; (v_x), \; (z)\)</span></a></td>
+            <td style="text-align: center;"><a href="proofs/item-3-69.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+
+          <tr id="item-3-70" data-num="3.70">
+            <td class="num-cell" style="text-align: center;"><a id="3.70" href="#3.70" class="entry-num-link">3.70</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Sum (ΣB / Sigma Model)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Sum Σ): models the dependent pair type Σ_{x ∈ A} B(x) using Dunaev tagged pairs [x, y]_D.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Sigma(B) = \{ p \mid \exists x \; \exists y \; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, p, x, y : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, p, x, y\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-70.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-71" data-num="3.71">
+            <td class="num-cell" style="text-align: center;"><a id="3.71" href="#3.71" class="entry-num-link">3.71</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Product (ΠB / Pi Model)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as class functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x \; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-37" class="sym-def-chip" title="isClassFunction : Class → Bool (3.37 Class Function)"><span class="sym-chip-name">isClassFunction</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, f, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, f, x\)</span></span></td>
+            <td style="text-align: center;"><a href="proofs/item-3-71.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+        </tbody>
+      </table>
+    </div>
+
+    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 2rem;">2. Variant 2 (Higher-Order Formulas-as-Types Proof Assistant — `verified_theorems.ML` #81–#84 &amp; `.nbg` #21–#24)</h2>
+    <div class="table-scroll-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width: 220px;">Theorem Identifier</th>
+            <th style="min-width: 380px;">Formula Type Signature (`ProofsOf(⟨φ⟩)`)</th>
+            <th style="width: 90px; text-align: center;">AST Size</th>
+            <th style="width: 100px; text-align: center;">Normal Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr id="v2-semi_singleton_sub_elim">
+            <td>
+              <strong style="color: #38bdf8;">semi_singleton_sub_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Value / Semi-Singleton Subclasses): every element of the semi-singleton restriction of X belongs to X.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem semi_singleton_sub_elim : ProofsOf(⟨(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="v2-family_fiber_char">
+            <td>
+              <strong style="color: #38bdf8;">family_fiber_char</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Family Evaluation): membership in the evaluated family fiber B(x) = { w | [x, w]_D in B } entails [x, y]_D in B.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem family_fiber_char : ProofsOf(⟨(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-sigma_dependent_sum_intro">
+            <td>
+              <strong style="color: #38bdf8;">sigma_dependent_sum_intro</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Sum Sigma Model): pairing witness x in A and fiber membership [x, y]_D in B certifies dependent sum membership.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem sigma_dependent_sum_intro : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-pi_dependent_product_elim">
+            <td>
+              <strong style="color: #38bdf8;">pi_dependent_product_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Product Pi Model): a dependent section over A eliminates at every x in A to a fiber witness in B(x).</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem pi_dependent_product_elim : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

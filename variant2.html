@@ -1,3 +1,14 @@
+<!--
+AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
+  Target: variant2.html
+  Generator: /botworkspace/tools/systematic_catalog_generator.py
+  Data Sources:
+    - /ramdisk/obeliskproofassistant.github.io/data/theory_database.json (built by /botworkspace/tools/build_theory_database.py)
+    - /ramdisk/obeliskproofassistant.github.io/data/nbg_library.json (compiled from set_theory_prover/examples/nbg_verified_programs.nbg)
+    - /ramdisk/set_theory_prover/program/types/foundations.ML & program/verified_theorems.ML
+  Regenerate Command:
+    python3 /botworkspace/tools/build_theory_database.py && python3 /botworkspace/tools/systematic_catalog_generator.py
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,9 +33,66 @@
         }
       },
       options: {
+        enableAssistiveMml: true,
         skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      startup: {
+        pageReady: function() {
+          return MathJax.startup.defaultPageReady().then(function() {
+            try {
+              var items = MathJax.startup.document.math;
+              items.forEach(function(item) {
+                if (item.typesetRoot && item.math) {
+                  var rawTex = item.math.trim();
+                  var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
+                  item.typesetRoot.setAttribute('data-latex', rawTex);
+                  item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
+                  item.typesetRoot.setAttribute('title', 'LaTeX (copiable): ' + wrappedTex);
+                  var mml = item.typesetRoot.querySelector('mjx-assistive-mml');
+                  if (mml) mml.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  var mjxMath = item.typesetRoot.querySelector('mjx-math');
+                  if (mjxMath) mjxMath.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
+                  if (!item.typesetRoot.querySelector('.mjx-copy-tex')) {
+                    var copySpan = document.createElement('span');
+                    copySpan.className = 'mjx-copy-tex';
+                    copySpan.textContent = wrappedTex;
+                    copySpan.setAttribute('style', 'display:inline-block;width:0;height:0;overflow:hidden;opacity:0;user-select:text;-webkit-user-select:text;');
+                    item.typesetRoot.appendChild(copySpan);
+                  }
+                }
+              });
+            } catch (err) {
+              console.warn('MathJax copy annotation warning:', err);
+            }
+          });
+        }
       }
     };
+    document.addEventListener('copy', function(e) {
+      var sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
+      var range = sel.getRangeAt(0);
+      var container = range.commonAncestorContainer;
+      var el = container.nodeType === 1 ? container : container.parentElement;
+      var insideMjx = el && el.closest ? el.closest('mjx-container') : null;
+      if (insideMjx && insideMjx.getAttribute('data-latex-delimited')) {
+        e.clipboardData.setData('text/plain', insideMjx.getAttribute('data-latex-delimited'));
+        e.preventDefault();
+        return;
+      }
+      var frag = range.cloneContents();
+      if (frag.querySelectorAll && frag.querySelectorAll('mjx-container').length > 0) {
+        frag.querySelectorAll('mjx-container').forEach(function(mjx) {
+          var tex = mjx.getAttribute('data-latex-delimited') || mjx.getAttribute('data-latex') || mjx.textContent;
+          var txt = document.createTextNode(tex);
+          mjx.parentNode.replaceChild(txt, mjx);
+        });
+        var div = document.createElement('div');
+        div.appendChild(frag);
+        e.clipboardData.setData('text/plain', div.innerText || div.textContent);
+        e.preventDefault();
+      }
+    });
 
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -152,20 +220,20 @@
       padding: 4px 8px;
       border-radius: 6px;
     }
-    .dialect-btn {
+    .dialect-btn, .filter-btn {
       background: transparent;
-      border: 1px solid transparent;
+      border: 1px solid rgba(56, 189, 248, 0.24);
       color: #94a3b8;
       border-radius: 4px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       cursor: pointer;
       font-size: 0.78rem;
       font-weight: 600;
     }
-    .dialect-btn.active {
+    .dialect-btn.active, .filter-btn.active {
       background: rgba(56, 189, 248, 0.2);
       color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.4);
+      border-color: rgba(56, 189, 248, 0.45);
     }
     .btn {
       display: inline-flex;
@@ -204,15 +272,59 @@
       <a href="manual.html">Manual</a>
       <a href="variant1.html" class="">Variant 1 (1st-Order)</a>
       <a href="variant2.html" class="active">Variant 2 (Higher-Order)</a>
+      <a href="dependent_types.html" class="">Σ &amp; Π Models</a>
       <a href="nbg_library.html" class="">NBG Library</a>
       <a href="proofs.html">Proofs</a>
       <a href="metatheory.html">Metatheory</a>
+      <a href="output.pdf" target="_blank">PDF Manual</a>
       <a href="repl.html">Web REPL</a>
     </nav>
   </header>
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
     <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Variant 2 — Higher-Order Formulas-as-Types Proof Assistant</h1>
-    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Dedicated page for the Higher-Order Formulas-as-Types proof assistant (`nbg_compiler.ML`, `nbg_surface_compiler.ML`, `.nbg` λ-term proofs), decoupled from Variant 1.</p>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">Dedicated page for the Higher-Order Formulas-as-Types proof assistant (`nbg_compiler.ML`, `nbg_surface_compiler.ML`, `.nbg` λ-term proofs), decoupled from Variant 1.</p>
+    
+  <div id="global-presentation-config-bar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(56, 189, 248, 0.32); border-radius: 10px; padding: 0.75rem 1.1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation Config (Metamath-Inspired Uniform View):</span>
+      <span style="font-size: 0.8rem; color: #94a3b8;">Synchronized across all catalog &amp; theorem pages</span>
+    </div>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Proof Display: Compact Proof Term (Default)</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Proof Display: Expanded Certificate</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Table: Compact Reference</button>
+      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Table: Spacious</button>
+    </div>
+  </div>
+  <script>
+    (function() {
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact"}');
+      window.applyObeliskConfig = function() {
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact'};
+        document.querySelectorAll('.proof-row').forEach(function(r) {
+          r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
+        });
+        document.querySelectorAll('table.data-table td, table.data-table th').forEach(function(cell) {
+          cell.style.padding = (cfg.density === 'compact') ? '8px 10px' : '14px 16px';
+        });
+        var bTerm = document.getElementById('cfg-proof-term');
+        var bExp = document.getElementById('cfg-proof-expanded');
+        var bComp = document.getElementById('cfg-density-compact');
+        var bSpac = document.getElementById('cfg-density-spacious');
+        if (bTerm) bTerm.classList.toggle('active', cfg.proofMode !== 'expanded');
+        if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
+        if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
+        if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
+      };
+      window.setObeliskConfig = function(key, val) {
+        window.OBELISK_PRESENTATION_CONFIG[key] = val;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        window.applyObeliskConfig();
+      };
+      document.addEventListener('DOMContentLoaded', window.applyObeliskConfig);
+    })();
+  </script>
+
     
     <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
       <div>
@@ -221,9 +333,12 @@
           RoqC / Curry–Howard propositions-as-types architecture (<code>nbg_compiler.ML</code>, <code>nbg_surface_compiler.ML</code>, <code>dependent_eval.ML</code>) where formulas are types via <code>ProofsOf(⟨φ⟩)</code>, implications are function spaces, quantifiers are dependent products/sums, and proofs are constructive λ-terms.
         </div>
       </div>
-      <a href="variant1.html" class="btn" style="border-color: #c084fc; color: #d8b4fe;">Switch to Variant 1 (1st-Order NBG) &rarr;</a>
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <a href="dependent_types.html" class="btn" style="border-color: #fbbf24; color: #fde68a;">Σ &amp; Π Dependent Models &rarr;</a>
+        <a href="variant1.html" class="btn" style="border-color: #c084fc; color: #d8b4fe;">Switch to Variant 1 (1st-Order NBG) &rarr;</a>
+      </div>
     </div>
-    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">Higher-Order Formulas-as-Types Standard Library (20 Constructive λ-Term Proofs)</h2>
+    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">Higher-Order Formulas-as-Types Standard Library (24 Constructive λ-Term Proofs)</h2>
     <div class="table-scroll-wrap">
       <table class="data-table">
         <thead>
@@ -554,6 +669,70 @@
             </td>
             <td style="text-align: center; color: #cbd5e1;">13</td>
             <td style="text-align: center; color: #cbd5e1;">13</td>
+          </tr>
+        
+          <tr id="v2-semi_singleton_sub_elim">
+            <td>
+              <strong style="color: #38bdf8;">semi_singleton_sub_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Value / Semi-Singleton Subclasses): every element of the semi-singleton restriction of X belongs to X.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem semi_singleton_sub_elim : ProofsOf(⟨(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="v2-family_fiber_char">
+            <td>
+              <strong style="color: #38bdf8;">family_fiber_char</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Family Evaluation): membership in the evaluated family fiber B(x) = { w | [x, w]_D in B } entails [x, y]_D in B.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem family_fiber_char : ProofsOf(⟨(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-sigma_dependent_sum_intro">
+            <td>
+              <strong style="color: #38bdf8;">sigma_dependent_sum_intro</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Sum Sigma Model): pairing witness x in A and fiber membership [x, y]_D in B certifies dependent sum membership.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem sigma_dependent_sum_intro : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-pi_dependent_product_elim">
+            <td>
+              <strong style="color: #38bdf8;">pi_dependent_product_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Product Pi Model): a dependent section over A eliminates at every x in A to a fiber witness in B(x).</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem pi_dependent_product_elim : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
           </tr>
         
         </tbody>
