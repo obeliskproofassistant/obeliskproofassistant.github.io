@@ -18,6 +18,118 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   <link rel="stylesheet" href="../styles.css">
   <script>
     
+    window.OBELISK_SYMBOL_MAP = {
+      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate" },
+      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class → Class))", unambig: "(sss :: (Class → Class))", label: "3.68 Value Extraction (Semi-Singleton Subclasses)" },
+      "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
+      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
+      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
+      "dependent_if": { href: "manual.html#item-3-24-dependent-if", std: "(dependent_if: (∏(T: (Bool → Type)) (b: Bool), (T(true) → (T(false) → T(b)))))", unambig: "(dependent_if :: (∏(T :: (Bool → Type)) (b :: Bool), (T(true) → (T(false) → T(b)))))", label: "3.24 Dependent Conditional" },
+      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "(simple_if: (∏(α: Type), (Bool → (α → (α → α)))))", unambig: "(simple_if :: (∏(α :: Type), (Bool → (α → (α → α)))))", label: "3.23 Simple Conditional" },
+      "IF": { href: "manual.html#item-3-22-class-if", std: "(IF_THEN_ELSE_FI: (Bool × Class × Class → Class))", unambig: "(IF_THEN_ELSE_FI :: ((Bool × (Class × Class)) → Class))", label: "3.22 Class Conditional" },
+      "isClassFunction": { href: "manual.html#item-3-37", std: "(isClassFunction: (Class → Bool))", unambig: "(isClassFunction :: (Class → Bool))", label: "3.37 Class Function Predicate" },
+      "isUniverse": { href: "manual.html#item-3-66", std: "(isUniverse: (Class → Bool))", unambig: "(isUniverse :: (Class → Bool))", label: "3.66 Grothendieck-Tarski Universe Predicate" },
+      "isSet": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
+      "SET": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
+      "CLASS": { href: "manual.html#item-3-07", std: "(CLASS: (Class → Bool))", unambig: "(CLASS :: (Class → Bool))", label: "3.07 Universal Classhood Predicate" },
+      "On": { href: "manual.html#thm-ord-ind", std: "(On: Class)", unambig: "(On :: Class)", label: "3.32 Class of All Ordinals" },
+      "Tr": { href: "manual.html#item-3-53", std: "(Tr: (Class → Bool))", unambig: "(Tr :: (Class → Bool))", label: "3.53 Transitive Class Predicate" },
+      "succ": { href: "manual.html#item-3-45", std: "(succ: (Class → Class))", unambig: "(succ :: (Class → Class))", label: "3.45 Ordinal Successor" },
+      "π₁": { href: "manual.html#item-3-41", std: "(π₁: (Class → Class))", unambig: "(π₁ :: (Class → Class))", label: "3.41 First Dunaev Projection" },
+      "π₂": { href: "manual.html#item-3-42", std: "(π₂: (Class → Class))", unambig: "(π₂ :: (Class → Class))", label: "3.42 Second Dunaev Projection" },
+      "𝒫": { href: "manual.html#item-3-34", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.34 Power Class" },
+      "⋃": { href: "manual.html#item-3-14", std: "(⋃: (Class → Class))", unambig: "(⋃ :: (Class → Class))", label: "3.14 Unary Class Union" },
+      "∅": { href: "manual.html#item-3-12", std: "(∅: Class)", unambig: "(∅ :: Class)", label: "3.12 Empty Class" },
+      "ω": { href: "manual.html#item-3-45", std: "(ω: Class)", unambig: "(ω :: Class)", label: "3.45 Least Infinite Ordinal" },
+      "V": { href: "manual.html#item-3-47", std: "(V: Class)", unambig: "(V :: Class)", label: "3.47 Universal Class" },
+      "⊆": { href: "manual.html#item-3-02", std: "(⊆: (Class × Class → Bool))", unambig: "((⊆) :: ((Class × Class) → Bool))", label: "3.02 Subclass Relation" },
+      "∩": { href: "manual.html#item-3-12", std: "(∩: (Class × Class → Class))", unambig: "((∩) :: ((Class × Class) → Class))", label: "3.12 Binary Class Intersection" },
+      "∪": { href: "manual.html#item-3-14", std: "(∪: (Class × Class → Class))", unambig: "((∪) :: ((Class × Class) → Class))", label: "3.14 Binary Class Union" },
+      "∈": { href: "manual.html#item-3-01", std: "(∈: (Class × Class → Bool))", unambig: "((∈) :: ((Class × Class) → Bool))", label: "3.01 Class Membership Relation" },
+      "∉": { href: "manual.html#item-3-01", std: "(∉: (Class × Class → Bool))", unambig: "((∉) :: ((Class × Class) → Bool))", label: "3.01 Negated Class Membership" },
+      "=": { href: "manual.html#item-3-01", std: "(=: (Class × Class → Bool))", unambig: "((=) :: ((Class × Class) → Bool))", label: "3.01 Extensional Equality" },
+      "≠": { href: "manual.html#item-3-03", std: "(≠: (Class × Class → Bool))", unambig: "((≠) :: ((Class × Class) → Bool))", label: "3.03 Class Inequality" },
+      "∀": { href: "manual.html#item-2-01", std: "(∀: ((Class → Bool) → Bool))", unambig: "((∀) :: ((Class → Bool) → Bool))", label: "2.01 Universal Quantifier" },
+      "∃": { href: "manual.html#item-2-02", std: "(∃: ((Class → Bool) → Bool))", unambig: "((∃) :: ((Class → Bool) → Bool))", label: "2.02 Existential Quantifier" },
+      "→": { href: "manual.html#item-1-01", std: "(→: (Bool × Bool → Bool))", unambig: "((→) :: ((Bool × Bool) → Bool))", label: "1.01 Material Implication" },
+      "⟷": { href: "manual.html#item-1-04", std: "(⟷: (Bool × Bool → Bool))", unambig: "((⟷) :: ((Bool × Bool) → Bool))", label: "1.04 Logical Equivalence" },
+      "∧": { href: "manual.html#item-1-05", std: "(∧: (Bool × Bool → Bool))", unambig: "((∧) :: ((Bool × Bool) → Bool))", label: "1.05 Logical Conjunction" },
+      "∨": { href: "manual.html#item-1-06", std: "(∨: (Bool × Bool → Bool))", unambig: "((∨) :: ((Bool × Bool) → Bool))", label: "1.06 Logical Disjunction" },
+      "¬": { href: "manual.html#item-1-07", std: "(¬: (Bool → Bool))", unambig: "((¬) :: (Bool → Bool))", label: "1.07 Logical Negation" },
+      "⊥": { href: "manual.html#item-1-08", std: "(⊥: Bool)", unambig: "(⊥ :: Bool)", label: "1.08 Falsity Constant" },
+      "⊤": { href: "manual.html#item-1-09", std: "(⊤: Bool)", unambig: "(⊤ :: Bool)", label: "1.09 Truth Constant" },
+      "⊢": { href: "manual.html#rule-mp", std: "(⊢: (Theory × Ctx × Fm → Stmt))", unambig: "((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))", label: "Sequent Turnstile" },
+      "Enc": { href: "manual.html#def-enc", std: "(Enc: (T → Class))", unambig: "(Enc :: (T → Class))", label: "4.09 Syntactic Gödel Encoding" },
+      "Dec": { href: "manual.html#def-dec", std: "(Dec: (Class × Col → T))", unambig: "(Dec :: ((Class × Col) → T))", label: "4.10 Syntactic Decoding" },
+      "Emb": { href: "manual.html#def-emb", std: "(Emb: (Type → (Class → Bool)))", unambig: "(Emb :: (Type → (Class → Bool)))", label: "4.11 Dual Type Embedding" },
+      "ProofsOf": { href: "manual.html#def-proofs-of", std: "(ProofsOf: (Class → Class))", unambig: "(ProofsOf :: (Class → Class))", label: "4.12 Proof-Object Class Family" },
+      "Theorems": { href: "manual.html#def-theorems", std: "(Theorems: Class)", unambig: "(Theorems :: Class)", label: "4.13 Class of Provable Statements" },
+      "NFV": { href: "metatheory.html#nfv-vx-psi", std: "(NFV: (Variable × Fm → Bool))", unambig: "(NFV :: ((Variable × Fm) → Bool))", label: "Metatheory: Not Free Variable" },
+      "FFI": { href: "metatheory.html#ffi-t-vx-phi", std: "(FFI: (Class.Expr × Variable × Fm → Bool))", unambig: "(FFI :: ((Class.Expr × (Variable × Fm)) → Bool))", label: "Metatheory: Free For Instantiation" },
+      "Fresh": { href: "metatheory.html#fresh-vy-vx", std: "(Fresh: (Variable × Variable → Bool))", unambig: "(Fresh :: ((Variable × Variable) → Bool))", label: "Metatheory: Variable Distinctness" },
+      "WF": { href: "metatheory.html#ord-induction", std: "(WF: ((Class × Class → Bool) × Class → Bool))", unambig: "(WF :: ((((Class × Class) → Bool) × Class) → Bool))", label: "Metatheory: Well-Foundedness" },
+      "Class": { href: "manual.html#item-3-07", std: "(Class: Type)", unambig: "(Class :: Type)", label: "Sort of Classes" },
+      "Set": { href: "manual.html#item-3-08", std: "(Set: Type)", unambig: "(Set :: Type)", label: "Sort of Sets" },
+      "Bool": { href: "manual.html#item-1-01", std: "(Bool: Type)", unambig: "(Bool :: Type)", label: "Sort of Propositions" },
+      "Fm": { href: "manual.html#def-enc", std: "(Fm: Col)", unambig: "(Fm :: Col)", label: "Syntactic Collection of Formulas" },
+      "Stmt": { href: "manual.html#def-enc", std: "(Stmt: Col)", unambig: "(Stmt :: Col)", label: "Syntactic Collection of Sequents" },
+      "Ctx": { href: "manual.html#def-enc", std: "(Ctx: Col)", unambig: "(Ctx :: Col)", label: "Syntactic Collection of Contexts" },
+      "Theory": { href: "manual.html#def-enc", std: "(Theory: Col)", unambig: "(Theory :: Col)", label: "Syntactic Collection of Theories" },
+      "Prf": { href: "manual.html#def-proofs-of", std: "(Prf: Col)", unambig: "(Prf :: Col)", label: "Syntactic Collection of Proofs" }
+    };
+
+    window.extractMjxTokenText = function(el) {
+      if (!el || !el.querySelectorAll) return "";
+      var chars = [];
+      el.querySelectorAll('mjx-c').forEach(function(c) {
+        c.classList.forEach(function(cls) {
+          var m = cls.match(/^mjx-c([0-9A-Fa-f]+)$/);
+          if (m) {
+            var cp = parseInt(m[1], 16);
+            if (cp === 0x27F7) chars.push("⟷");
+            else if (cp === 0x2192 || cp === 0x27F6) chars.push("→");
+            else if (cp === 0x1D4AB) chars.push("𝒫");
+            else if (!isNaN(cp)) chars.push(String.fromCodePoint(cp));
+          }
+        });
+      });
+      return chars.join("");
+    };
+
+    window.enhanceMathJaxSymbolLinks = function(root) {
+      var scope = root || document;
+      var inSubdir = window.location.pathname.indexOf('/sections/') !== -1 || window.location.pathname.indexOf('/proofs/') !== -1;
+      var prefix = inSubdir ? '../' : '';
+      scope.querySelectorAll('mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
+        if (tok.getAttribute('data-sym-bound') === '1') return;
+        if (tok.tagName.toLowerCase() === 'mjx-texatom' && tok.querySelectorAll('mjx-texatom').length > 0) return;
+        var txt = window.extractMjxTokenText(tok);
+        if (!txt) return;
+        var info = window.OBELISK_SYMBOL_MAP[txt];
+        if (!info) return;
+        tok.setAttribute('data-sym-bound', '1');
+        tok.style.cursor = 'pointer';
+        tok.style.borderRadius = '2px';
+        tok.setAttribute('title', info.label + ' — Standard: ' + info.std + ' | Non-Ambiguous: ' + info.unambig + ' (Click for definition)');
+        tok.addEventListener('mouseenter', function() { tok.style.background = 'rgba(56, 189, 248, 0.22)'; });
+        tok.addEventListener('mouseleave', function() { tok.style.background = ''; });
+        tok.addEventListener('click', function(ev) {
+          var sel = window.getSelection();
+          if (sel && sel.toString().length > 0) return;
+          if (tok.closest('a')) return;
+          ev.stopPropagation();
+          var targetHref = prefix + info.href;
+          var onManual = window.location.pathname.endsWith('/manual.html') || window.location.pathname === '/manual.html';
+          if (onManual && info.href.indexOf('manual.html#') === 0) {
+            var hash = info.href.substring('manual.html'.length);
+            window.location.hash = hash;
+          } else {
+            window.location.href = targetHref;
+          }
+        });
+      });
+    };
+
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -61,6 +173,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
                   }
                 }
               });
+              window.enhanceMathJaxSymbolLinks(document);
             } catch (err) {
               console.warn('MathJax copy annotation warning:', err);
             }
@@ -270,6 +383,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     <nav>
       <a href="../index.html">Home</a>
       <a href="../manual.html">Manual</a>
+      <a href="../symbols.html" class="">Symbols &amp; Notations</a>
       <a href="../variant1.html" class="">Variant 1 (1st-Order)</a>
       <a href="../variant2.html" class="">Variant 2 (Higher-Order)</a>
       <a href="../dependent_types.html" class="">Σ &amp; Π Models</a>
@@ -284,23 +398,162 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 6: Incompleteness-related statements</h1>
     <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">Theories W, Q, T, F, Löb&#x27;s theorem, and Gödel&#x27;s second incompleteness theorem.</p>
     
-  <div id="global-presentation-config-bar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(56, 189, 248, 0.32); border-radius: 10px; padding: 0.75rem 1.1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation Config (Metamath-Inspired Uniform View):</span>
-      <span style="font-size: 0.8rem; color: #94a3b8;">Synchronized across all catalog &amp; theorem pages</span>
+  <style>
+    body.mode-notation-standard .view-not-unambig { display: none !important; }
+    body.mode-notation-standard .view-not-std { display: inline !important; }
+    body:not(.mode-notation-standard) .view-not-std { display: none !important; }
+    body:not(.mode-notation-standard) .view-not-unambig { display: inline !important; }
+    div.view-not-std, div.view-not-unambig { display: block; }
+    body.mode-notation-standard div.view-not-unambig { display: none !important; }
+    body.mode-notation-standard div.view-not-std { display: block !important; }
+    body:not(.mode-notation-standard) div.view-not-std { display: none !important; }
+    body:not(.mode-notation-standard) div.view-not-unambig { display: block !important; }
+    .config-lines-box {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .config-line-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .config-line-row:last-child {
+      border-bottom: none;
+    }
+    .config-line-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      min-width: 155px;
+    }
+  </style>
+  <div id="global-presentation-config-bar" class="config-lines-box">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2px;">
+      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation &amp; Notation Configuration (Synchronized Across All Pages):</span>
+      <a href="symbols.html" style="font-size: 0.78rem; color: #38bdf8; text-decoration: underline dotted;">Open Master Symbol &amp; Notation Reference (&ldquo;:&rdquo; vs &ldquo;::&rdquo;) &rarr;</a>
     </div>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Proof Display: Compact Proof Term (Default)</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Proof Display: Expanded Certificate</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Table: Compact Reference</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Table: Spacious</button>
+    <div class="config-line-row">
+      <span class="config-line-label">Notation Option:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setNotationPrecision('unambiguous')" id="btn-not-unambig" title="Non-Ambiguous notation: uses '::' for metalevel symbol signatures e.g. (isSet :: (Class → Bool)) and explicit parentheses around all binary infix operators">Non-Ambiguous</button>
+      <button type="button" class="dialect-btn" onclick="window.setNotationPrecision('standard')" id="btn-not-std" title="Beautiful, standard, but potentially ambiguous notation: uses ':' e.g. (isSet: (Class → Bool)) and standard textbook parenthesization">Beautiful, Standard (Potentially Ambiguous)</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Unicode / LaTeX:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setRenderFormat('latex')" id="btn-fmt-latex" title="Render formulas with MathJax LaTeX (copiable as LaTeX and clickable symbols)">LaTeX (MathJax)</button>
+      <button type="button" class="dialect-btn" onclick="window.setRenderFormat('unicode')" id="btn-fmt-unicode" title="Render formulas with syntax-highlighted Colorful Unicode and clickable symbol links">Colorful Unicode</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Assistant Variant:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setAssistantVariant('both')" id="cfg-variant-both" title="Display both Proof Assistant Variants and their VariantBridge translation">Both Variants</button>
+      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v1')" id="cfg-variant-v1" title="Focus on Variant 1: 1st-Order Proof Assistant (Option B 7-part Stmt/Enc/ProofsOf/Theorems anatomy)">Variant 1: 1st-Order</button>
+      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v2')" id="cfg-variant-v2" title="Focus on Variant 2: Higher-Order Formulas-as-Types (RoqC / Curry–Howard ProofsOf(⟨φ⟩))">Variant 2: Higher-Order</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Proof Display:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Compact Proof Term (Default)</button>
+      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Expanded Certificate</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Table Density:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Compact Reference</button>
+      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Spacious</button>
     </div>
   </div>
   <script>
     (function() {
-      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact"}');
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact","notationPrecision":"unambiguous","renderFormat":"latex"}');
+      window.setNotationPrecision = function(mode) {
+        window.OBELISK_PRESENTATION_CONFIG.notationPrecision = mode;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        if (mode === 'standard') {
+          document.body.classList.add('mode-notation-standard');
+        } else {
+          document.body.classList.remove('mode-notation-standard');
+        }
+        ['btn-not-unambig', ' btn-not-unambig-2'].forEach(function(id) {
+          var el = document.getElementById(id.trim());
+          if (el) el.classList.toggle('active', mode !== 'standard');
+        });
+        ['btn-not-std', 'btn-not-std-2'].forEach(function(id) {
+          var el = document.getElementById(id.trim());
+          if (el) el.classList.toggle('active', mode === 'standard');
+        });
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise().then(function() {
+            if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
+          });
+        }
+      };
+      window.setRenderFormat = function(fmt) {
+        window.OBELISK_PRESENTATION_CONFIG.renderFormat = fmt;
+        window.showingUnicode = (fmt === 'unicode');
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        document.querySelectorAll('.formula-cell').forEach(function(cell) {
+          var target = cell.querySelector('.formula-render-target');
+          if (target) {
+            if (fmt === 'unicode') {
+              if (!target.getAttribute('data-latex-saved')) {
+                target.setAttribute('data-latex-saved', target.innerHTML);
+              }
+              var colored = cell.getAttribute('data-unicode-colored');
+              if (colored) target.innerHTML = colored;
+              else if (cell.getAttribute('data-unicode')) target.textContent = cell.getAttribute('data-unicode');
+            } else {
+              var saved = target.getAttribute('data-latex-saved');
+              if (saved) {
+                target.innerHTML = saved;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                  window.MathJax.typesetPromise([target]).then(function() {
+                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(target);
+                  });
+                }
+              }
+            }
+          } else if (cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode')) {
+            if (fmt === 'unicode') {
+              if (!cell.getAttribute('data-latex-saved')) {
+                cell.setAttribute('data-latex-saved', cell.innerHTML);
+              }
+              var coloredCell = cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode');
+              var symLinks = cell.getAttribute('data-sym-links') || '';
+              cell.innerHTML = coloredCell + symLinks;
+            } else {
+              var savedCell = cell.getAttribute('data-latex-saved');
+              if (savedCell) {
+                cell.innerHTML = savedCell;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                  window.MathJax.typesetPromise([cell]).then(function() {
+                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(cell);
+                  });
+                }
+              }
+            }
+          }
+        });
+        ['btn-fmt-latex', 'btn-fmt-latex-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', fmt !== 'unicode');
+        });
+        ['btn-fmt-unicode', 'btn-fmt-unicode-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', fmt === 'unicode');
+        });
+        var tBtn = document.getElementById('toggle-notation-btn');
+        if (tBtn) tBtn.textContent = (fmt === 'unicode') ? 'Show LaTeX (MathJax)' : 'Show Colorful Unicode';
+      };
       window.applyObeliskConfig = function() {
-        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact'};
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact', notationPrecision: 'unambiguous', renderFormat: 'latex'};
         document.querySelectorAll('.proof-row').forEach(function(r) {
           r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
         });
@@ -315,6 +568,8 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
         if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
         if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
+        window.setNotationPrecision(cfg.notationPrecision || 'unambiguous');
+        if (cfg.renderFormat === 'unicode') window.setRenderFormat('unicode');
       };
       window.setObeliskConfig = function(key, val) {
         window.OBELISK_PRESENTATION_CONFIG[key] = val;
@@ -357,7 +612,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <strong style="color: #fff; margin-left: 6px;">Theories (Metalevel Stratification)</strong>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Tarski hierarchy of theories with Henkin constants: W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F})))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F})))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="formula-cell" data-unicode="((W ⊆ Q) ∧ ((Q ⊆ T) ∧ (T ⊆ F)))" data-unicode-colored="((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;W&lt;/span&gt; &lt;a href=&quot;../manual.html#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;3.02 Subclass Relation — (⊆: (Class × Class → Bool)) / ((⊆) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt;) &lt;a href=&quot;../manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt; &lt;a href=&quot;../manual.html#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;3.02 Subclass Relation — (⊆: (Class × Class → Bool)) / ((⊆) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;) &lt;a href=&quot;../manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt; &lt;a href=&quot;../manual.html#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;3.02 Subclass Relation — (⊆: (Class × Class → Bool)) / ((⊆) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; &lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;F&lt;/span&gt;)))"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\(((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F})))\)</span><span class="view-not-std">\((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F}))\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\(((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F})))\)</span><span class="view-not-std">\((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F}))\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-02" class="sym-def-chip" title="3.02 Subclass Relation — Standard: (⊆: (Class × Class → Bool)) | Non-Ambiguous: ((⊆) :: ((Class × Class) → Bool))"><span class="view-not-std">(⊆: (Class × Class → Bool))</span><span class="view-not-unambig">((⊆) :: ((Class × Class) → Bool))</span></a> <a href="../manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a></div></td>
             <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\mathcal{W}, \mathcal{Q}, \mathcal{T}, \mathcal{F} : \mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\mathcal{W}, \mathcal{Q}, \mathcal{T}, \mathcal{F}\)</span></a></td>
             <td style="text-align: center;"><a href="../proofs/item-6-01.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
           </tr>
@@ -370,7 +625,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <strong style="color: #fff; margin-left: 6px;">Löb&#x27;s Theorem</strong>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Formalized Henkin modal provability principle.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash ((\mathcal{T}, [] \vdash ((\mathcal{T}, [] \vdash \phi) \to \phi)) \to (\mathcal{T}, [] \vdash \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{Q}, [] \vdash ((\mathcal{T}, [] \vdash ((\mathcal{T}, [] \vdash \phi) \to \phi)) \to (\mathcal{T}, [] \vdash \phi)))\)</div></td>
+            <td class="formula-cell" data-unicode="∀(φ : Fm) (Q, [] ⊢ ((T, [] ⊢ ((T, [] ⊢ φ) → φ)) → (T, [] ⊢ φ)))" data-unicode-colored="&lt;a href=&quot;../manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(φ : &lt;a href=&quot;../manual.html#def-enc&quot; class=&quot;sym-inline-link&quot; title=&quot;Syntactic Collection of Formula Expressions — (Fm: Col) / (Fm :: Col)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Fm&lt;/span&gt;&lt;/a&gt;) (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; ((&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; φ) &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; φ)) &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; (&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; φ)))"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{Q}, [] \vdash ((\mathcal{T}, [] \vdash ((\mathcal{T}, [] \vdash \phi) \to \phi)) \to (\mathcal{T}, [] \vdash \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{Q}, [] \vdash ((\mathcal{T}, [] \vdash ((\mathcal{T}, [] \vdash \phi) \to \phi)) \to (\mathcal{T}, [] \vdash \phi)))\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="../manual.html#rule-mp" class="sym-def-chip" title="Sequent / Provability Judgement Turnstile — Standard: (⊢: (Theory × Ctx × Fm → Stmt)) | Non-Ambiguous: ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))"><span class="view-not-std">(⊢: (Theory × Ctx × Fm → Stmt))</span><span class="view-not-unambig">((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))</span></a> <a href="../manual.html#def-enc" class="sym-def-chip" title="Syntactic Collection of Formula Expressions — Standard: (Fm: Col) | Non-Ambiguous: (Fm :: Col)"><span class="view-not-std">(Fm: Col)</span><span class="view-not-unambig">(Fm :: Col)</span></a></div></td>
             <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\phi\)</span></a></td>
             <td style="text-align: center;"><a href="../proofs/item-6-02.html" class="status-badge badge-verified-weak">Weakly Verified (Lit)</a></td>
           </tr>
@@ -383,7 +638,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <strong style="color: #fff; margin-left: 6px;">Gödel&#x27;s Second Incompleteness Theorem</strong>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Consistency cannot be proved within the system itself.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\(\mathcal{Q}, [] \vdash (\neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\mathcal{Q}, [] \vdash (\neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot)))\)</div></td>
+            <td class="formula-cell" data-unicode="Q, [] ⊢ (¬(T, [] ⊢ ⊥) → ¬(T, [] ⊢ ¬(T, [] ⊢ ⊥)))" data-unicode-colored="&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;Q&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; (&lt;a href=&quot;../manual.html#item-1-07&quot; class=&quot;sym-inline-link&quot; title=&quot;1.07 Logical Negation — (¬: (Bool → Bool)) / ((¬) :: (Bool → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-1-08&quot; class=&quot;sym-inline-link&quot; title=&quot;1.08 Falsity / Absurdity Constant — (⊥: Bool) / (⊥ :: Bool)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊥&lt;/span&gt;&lt;/a&gt;) &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-1-07&quot; class=&quot;sym-inline-link&quot; title=&quot;1.07 Logical Negation — (¬: (Bool → Bool)) / ((¬) :: (Bool → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-1-07&quot; class=&quot;sym-inline-link&quot; title=&quot;1.07 Logical Negation — (¬: (Bool → Bool)) / ((¬) :: (Bool → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;¬&lt;/span&gt;&lt;/a&gt;(&lt;span style=&quot;color:#f472b6;font-weight:bold;&quot;&gt;T&lt;/span&gt;, [] &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-1-08&quot; class=&quot;sym-inline-link&quot; title=&quot;1.08 Falsity / Absurdity Constant — (⊥: Bool) / (⊥ :: Bool)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊥&lt;/span&gt;&lt;/a&gt;)))"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\mathcal{Q}, [] \vdash (\neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\mathcal{Q}, [] \vdash (\neg(\mathcal{T}, [] \vdash \bot) \to \neg(\mathcal{T}, [] \vdash \neg(\mathcal{T}, [] \vdash \bot)))\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="../manual.html#item-1-07" class="sym-def-chip" title="1.07 Logical Negation — Standard: (¬: (Bool → Bool)) | Non-Ambiguous: ((¬) :: (Bool → Bool))"><span class="view-not-std">(¬: (Bool → Bool))</span><span class="view-not-unambig">((¬) :: (Bool → Bool))</span></a> <a href="../manual.html#item-1-08" class="sym-def-chip" title="1.08 Falsity / Absurdity Constant — Standard: (⊥: Bool) | Non-Ambiguous: (⊥ :: Bool)"><span class="view-not-std">(⊥: Bool)</span><span class="view-not-unambig">(⊥ :: Bool)</span></a> <a href="../manual.html#rule-mp" class="sym-def-chip" title="Sequent / Provability Judgement Turnstile — Standard: (⊢: (Theory × Ctx × Fm → Stmt)) | Non-Ambiguous: ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))"><span class="view-not-std">(⊢: (Theory × Ctx × Fm → Stmt))</span><span class="view-not-unambig">((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))</span></a></div></td>
             <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\mathcal{T}, \mathcal{Q} : \mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\mathcal{T}, \mathcal{Q}\)</span></a></td>
             <td style="text-align: center;"><a href="../proofs/item-6-03.html" class="status-badge badge-verified-weak">Weakly Verified (Lit)</a></td>
           </tr>

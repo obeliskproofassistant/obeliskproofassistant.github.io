@@ -18,6 +18,118 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   <link rel="stylesheet" href="styles.css">
   <script>
     
+    window.OBELISK_SYMBOL_MAP = {
+      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate" },
+      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class → Class))", unambig: "(sss :: (Class → Class))", label: "3.68 Value Extraction (Semi-Singleton Subclasses)" },
+      "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
+      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
+      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
+      "dependent_if": { href: "manual.html#item-3-24-dependent-if", std: "(dependent_if: (∏(T: (Bool → Type)) (b: Bool), (T(true) → (T(false) → T(b)))))", unambig: "(dependent_if :: (∏(T :: (Bool → Type)) (b :: Bool), (T(true) → (T(false) → T(b)))))", label: "3.24 Dependent Conditional" },
+      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "(simple_if: (∏(α: Type), (Bool → (α → (α → α)))))", unambig: "(simple_if :: (∏(α :: Type), (Bool → (α → (α → α)))))", label: "3.23 Simple Conditional" },
+      "IF": { href: "manual.html#item-3-22-class-if", std: "(IF_THEN_ELSE_FI: (Bool × Class × Class → Class))", unambig: "(IF_THEN_ELSE_FI :: ((Bool × (Class × Class)) → Class))", label: "3.22 Class Conditional" },
+      "isClassFunction": { href: "manual.html#item-3-37", std: "(isClassFunction: (Class → Bool))", unambig: "(isClassFunction :: (Class → Bool))", label: "3.37 Class Function Predicate" },
+      "isUniverse": { href: "manual.html#item-3-66", std: "(isUniverse: (Class → Bool))", unambig: "(isUniverse :: (Class → Bool))", label: "3.66 Grothendieck-Tarski Universe Predicate" },
+      "isSet": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
+      "SET": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
+      "CLASS": { href: "manual.html#item-3-07", std: "(CLASS: (Class → Bool))", unambig: "(CLASS :: (Class → Bool))", label: "3.07 Universal Classhood Predicate" },
+      "On": { href: "manual.html#thm-ord-ind", std: "(On: Class)", unambig: "(On :: Class)", label: "3.32 Class of All Ordinals" },
+      "Tr": { href: "manual.html#item-3-53", std: "(Tr: (Class → Bool))", unambig: "(Tr :: (Class → Bool))", label: "3.53 Transitive Class Predicate" },
+      "succ": { href: "manual.html#item-3-45", std: "(succ: (Class → Class))", unambig: "(succ :: (Class → Class))", label: "3.45 Ordinal Successor" },
+      "π₁": { href: "manual.html#item-3-41", std: "(π₁: (Class → Class))", unambig: "(π₁ :: (Class → Class))", label: "3.41 First Dunaev Projection" },
+      "π₂": { href: "manual.html#item-3-42", std: "(π₂: (Class → Class))", unambig: "(π₂ :: (Class → Class))", label: "3.42 Second Dunaev Projection" },
+      "𝒫": { href: "manual.html#item-3-34", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.34 Power Class" },
+      "⋃": { href: "manual.html#item-3-14", std: "(⋃: (Class → Class))", unambig: "(⋃ :: (Class → Class))", label: "3.14 Unary Class Union" },
+      "∅": { href: "manual.html#item-3-12", std: "(∅: Class)", unambig: "(∅ :: Class)", label: "3.12 Empty Class" },
+      "ω": { href: "manual.html#item-3-45", std: "(ω: Class)", unambig: "(ω :: Class)", label: "3.45 Least Infinite Ordinal" },
+      "V": { href: "manual.html#item-3-47", std: "(V: Class)", unambig: "(V :: Class)", label: "3.47 Universal Class" },
+      "⊆": { href: "manual.html#item-3-02", std: "(⊆: (Class × Class → Bool))", unambig: "((⊆) :: ((Class × Class) → Bool))", label: "3.02 Subclass Relation" },
+      "∩": { href: "manual.html#item-3-12", std: "(∩: (Class × Class → Class))", unambig: "((∩) :: ((Class × Class) → Class))", label: "3.12 Binary Class Intersection" },
+      "∪": { href: "manual.html#item-3-14", std: "(∪: (Class × Class → Class))", unambig: "((∪) :: ((Class × Class) → Class))", label: "3.14 Binary Class Union" },
+      "∈": { href: "manual.html#item-3-01", std: "(∈: (Class × Class → Bool))", unambig: "((∈) :: ((Class × Class) → Bool))", label: "3.01 Class Membership Relation" },
+      "∉": { href: "manual.html#item-3-01", std: "(∉: (Class × Class → Bool))", unambig: "((∉) :: ((Class × Class) → Bool))", label: "3.01 Negated Class Membership" },
+      "=": { href: "manual.html#item-3-01", std: "(=: (Class × Class → Bool))", unambig: "((=) :: ((Class × Class) → Bool))", label: "3.01 Extensional Equality" },
+      "≠": { href: "manual.html#item-3-03", std: "(≠: (Class × Class → Bool))", unambig: "((≠) :: ((Class × Class) → Bool))", label: "3.03 Class Inequality" },
+      "∀": { href: "manual.html#item-2-01", std: "(∀: ((Class → Bool) → Bool))", unambig: "((∀) :: ((Class → Bool) → Bool))", label: "2.01 Universal Quantifier" },
+      "∃": { href: "manual.html#item-2-02", std: "(∃: ((Class → Bool) → Bool))", unambig: "((∃) :: ((Class → Bool) → Bool))", label: "2.02 Existential Quantifier" },
+      "→": { href: "manual.html#item-1-01", std: "(→: (Bool × Bool → Bool))", unambig: "((→) :: ((Bool × Bool) → Bool))", label: "1.01 Material Implication" },
+      "⟷": { href: "manual.html#item-1-04", std: "(⟷: (Bool × Bool → Bool))", unambig: "((⟷) :: ((Bool × Bool) → Bool))", label: "1.04 Logical Equivalence" },
+      "∧": { href: "manual.html#item-1-05", std: "(∧: (Bool × Bool → Bool))", unambig: "((∧) :: ((Bool × Bool) → Bool))", label: "1.05 Logical Conjunction" },
+      "∨": { href: "manual.html#item-1-06", std: "(∨: (Bool × Bool → Bool))", unambig: "((∨) :: ((Bool × Bool) → Bool))", label: "1.06 Logical Disjunction" },
+      "¬": { href: "manual.html#item-1-07", std: "(¬: (Bool → Bool))", unambig: "((¬) :: (Bool → Bool))", label: "1.07 Logical Negation" },
+      "⊥": { href: "manual.html#item-1-08", std: "(⊥: Bool)", unambig: "(⊥ :: Bool)", label: "1.08 Falsity Constant" },
+      "⊤": { href: "manual.html#item-1-09", std: "(⊤: Bool)", unambig: "(⊤ :: Bool)", label: "1.09 Truth Constant" },
+      "⊢": { href: "manual.html#rule-mp", std: "(⊢: (Theory × Ctx × Fm → Stmt))", unambig: "((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))", label: "Sequent Turnstile" },
+      "Enc": { href: "manual.html#def-enc", std: "(Enc: (T → Class))", unambig: "(Enc :: (T → Class))", label: "4.09 Syntactic Gödel Encoding" },
+      "Dec": { href: "manual.html#def-dec", std: "(Dec: (Class × Col → T))", unambig: "(Dec :: ((Class × Col) → T))", label: "4.10 Syntactic Decoding" },
+      "Emb": { href: "manual.html#def-emb", std: "(Emb: (Type → (Class → Bool)))", unambig: "(Emb :: (Type → (Class → Bool)))", label: "4.11 Dual Type Embedding" },
+      "ProofsOf": { href: "manual.html#def-proofs-of", std: "(ProofsOf: (Class → Class))", unambig: "(ProofsOf :: (Class → Class))", label: "4.12 Proof-Object Class Family" },
+      "Theorems": { href: "manual.html#def-theorems", std: "(Theorems: Class)", unambig: "(Theorems :: Class)", label: "4.13 Class of Provable Statements" },
+      "NFV": { href: "metatheory.html#nfv-vx-psi", std: "(NFV: (Variable × Fm → Bool))", unambig: "(NFV :: ((Variable × Fm) → Bool))", label: "Metatheory: Not Free Variable" },
+      "FFI": { href: "metatheory.html#ffi-t-vx-phi", std: "(FFI: (Class.Expr × Variable × Fm → Bool))", unambig: "(FFI :: ((Class.Expr × (Variable × Fm)) → Bool))", label: "Metatheory: Free For Instantiation" },
+      "Fresh": { href: "metatheory.html#fresh-vy-vx", std: "(Fresh: (Variable × Variable → Bool))", unambig: "(Fresh :: ((Variable × Variable) → Bool))", label: "Metatheory: Variable Distinctness" },
+      "WF": { href: "metatheory.html#ord-induction", std: "(WF: ((Class × Class → Bool) × Class → Bool))", unambig: "(WF :: ((((Class × Class) → Bool) × Class) → Bool))", label: "Metatheory: Well-Foundedness" },
+      "Class": { href: "manual.html#item-3-07", std: "(Class: Type)", unambig: "(Class :: Type)", label: "Sort of Classes" },
+      "Set": { href: "manual.html#item-3-08", std: "(Set: Type)", unambig: "(Set :: Type)", label: "Sort of Sets" },
+      "Bool": { href: "manual.html#item-1-01", std: "(Bool: Type)", unambig: "(Bool :: Type)", label: "Sort of Propositions" },
+      "Fm": { href: "manual.html#def-enc", std: "(Fm: Col)", unambig: "(Fm :: Col)", label: "Syntactic Collection of Formulas" },
+      "Stmt": { href: "manual.html#def-enc", std: "(Stmt: Col)", unambig: "(Stmt :: Col)", label: "Syntactic Collection of Sequents" },
+      "Ctx": { href: "manual.html#def-enc", std: "(Ctx: Col)", unambig: "(Ctx :: Col)", label: "Syntactic Collection of Contexts" },
+      "Theory": { href: "manual.html#def-enc", std: "(Theory: Col)", unambig: "(Theory :: Col)", label: "Syntactic Collection of Theories" },
+      "Prf": { href: "manual.html#def-proofs-of", std: "(Prf: Col)", unambig: "(Prf :: Col)", label: "Syntactic Collection of Proofs" }
+    };
+
+    window.extractMjxTokenText = function(el) {
+      if (!el || !el.querySelectorAll) return "";
+      var chars = [];
+      el.querySelectorAll('mjx-c').forEach(function(c) {
+        c.classList.forEach(function(cls) {
+          var m = cls.match(/^mjx-c([0-9A-Fa-f]+)$/);
+          if (m) {
+            var cp = parseInt(m[1], 16);
+            if (cp === 0x27F7) chars.push("⟷");
+            else if (cp === 0x2192 || cp === 0x27F6) chars.push("→");
+            else if (cp === 0x1D4AB) chars.push("𝒫");
+            else if (!isNaN(cp)) chars.push(String.fromCodePoint(cp));
+          }
+        });
+      });
+      return chars.join("");
+    };
+
+    window.enhanceMathJaxSymbolLinks = function(root) {
+      var scope = root || document;
+      var inSubdir = window.location.pathname.indexOf('/sections/') !== -1 || window.location.pathname.indexOf('/proofs/') !== -1;
+      var prefix = inSubdir ? '../' : '';
+      scope.querySelectorAll('mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
+        if (tok.getAttribute('data-sym-bound') === '1') return;
+        if (tok.tagName.toLowerCase() === 'mjx-texatom' && tok.querySelectorAll('mjx-texatom').length > 0) return;
+        var txt = window.extractMjxTokenText(tok);
+        if (!txt) return;
+        var info = window.OBELISK_SYMBOL_MAP[txt];
+        if (!info) return;
+        tok.setAttribute('data-sym-bound', '1');
+        tok.style.cursor = 'pointer';
+        tok.style.borderRadius = '2px';
+        tok.setAttribute('title', info.label + ' — Standard: ' + info.std + ' | Non-Ambiguous: ' + info.unambig + ' (Click for definition)');
+        tok.addEventListener('mouseenter', function() { tok.style.background = 'rgba(56, 189, 248, 0.22)'; });
+        tok.addEventListener('mouseleave', function() { tok.style.background = ''; });
+        tok.addEventListener('click', function(ev) {
+          var sel = window.getSelection();
+          if (sel && sel.toString().length > 0) return;
+          if (tok.closest('a')) return;
+          ev.stopPropagation();
+          var targetHref = prefix + info.href;
+          var onManual = window.location.pathname.endsWith('/manual.html') || window.location.pathname === '/manual.html';
+          if (onManual && info.href.indexOf('manual.html#') === 0) {
+            var hash = info.href.substring('manual.html'.length);
+            window.location.hash = hash;
+          } else {
+            window.location.href = targetHref;
+          }
+        });
+      });
+    };
+
     window.MathJax = {
       tex: {
         inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -61,6 +173,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
                   }
                 }
               });
+              window.enhanceMathJaxSymbolLinks(document);
             } catch (err) {
               console.warn('MathJax copy annotation warning:', err);
             }
@@ -270,6 +383,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     <nav>
       <a href="index.html">Home</a>
       <a href="manual.html">Manual</a>
+      <a href="symbols.html" class="">Symbols &amp; Notations</a>
       <a href="variant1.html" class="">Variant 1 (1st-Order)</a>
       <a href="variant2.html" class="">Variant 2 (Higher-Order)</a>
       <a href="dependent_types.html" class="active">Σ &amp; Π Models</a>
@@ -282,25 +396,164 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
   </header>
   <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
     <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Models of Σ &amp; Π Dependent Types, Value &amp; Family Evaluation</h1>
-    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">Machine-checked formalization of `foundations` chapters 110 & 130 in both Variant 1 (1st-Order NBG/MK) and Variant 2 (Higher-Order Formulas-as-Types).</p>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">Machine-checked formalization of `foundations` chapters 110 & 130 in both Variant 1 (1st-Order) and Variant 2 (Higher-Order Formulas-as-Types).</p>
     
-  <div id="global-presentation-config-bar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(56, 189, 248, 0.32); border-radius: 10px; padding: 0.75rem 1.1rem; margin: 1rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
-    <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation Config (Metamath-Inspired Uniform View):</span>
-      <span style="font-size: 0.8rem; color: #94a3b8;">Synchronized across all catalog &amp; theorem pages</span>
+  <style>
+    body.mode-notation-standard .view-not-unambig { display: none !important; }
+    body.mode-notation-standard .view-not-std { display: inline !important; }
+    body:not(.mode-notation-standard) .view-not-std { display: none !important; }
+    body:not(.mode-notation-standard) .view-not-unambig { display: inline !important; }
+    div.view-not-std, div.view-not-unambig { display: block; }
+    body.mode-notation-standard div.view-not-unambig { display: none !important; }
+    body.mode-notation-standard div.view-not-std { display: block !important; }
+    body:not(.mode-notation-standard) div.view-not-std { display: none !important; }
+    body:not(.mode-notation-standard) div.view-not-unambig { display: block !important; }
+    .config-lines-box {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.32);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .config-line-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      padding: 3px 0;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    }
+    .config-line-row:last-child {
+      border-bottom: none;
+    }
+    .config-line-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      min-width: 155px;
+    }
+  </style>
+  <div id="global-presentation-config-bar" class="config-lines-box">
+    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2px;">
+      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation &amp; Notation Configuration (Synchronized Across All Pages):</span>
+      <a href="symbols.html" style="font-size: 0.78rem; color: #38bdf8; text-decoration: underline dotted;">Open Master Symbol &amp; Notation Reference (&ldquo;:&rdquo; vs &ldquo;::&rdquo;) &rarr;</a>
     </div>
-    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Proof Display: Compact Proof Term (Default)</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Proof Display: Expanded Certificate</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Table: Compact Reference</button>
-      <button type="button" class="filter-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Table: Spacious</button>
+    <div class="config-line-row">
+      <span class="config-line-label">Notation Option:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setNotationPrecision('unambiguous')" id="btn-not-unambig" title="Non-Ambiguous notation: uses '::' for metalevel symbol signatures e.g. (isSet :: (Class → Bool)) and explicit parentheses around all binary infix operators">Non-Ambiguous</button>
+      <button type="button" class="dialect-btn" onclick="window.setNotationPrecision('standard')" id="btn-not-std" title="Beautiful, standard, but potentially ambiguous notation: uses ':' e.g. (isSet: (Class → Bool)) and standard textbook parenthesization">Beautiful, Standard (Potentially Ambiguous)</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Unicode / LaTeX:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setRenderFormat('latex')" id="btn-fmt-latex" title="Render formulas with MathJax LaTeX (copiable as LaTeX and clickable symbols)">LaTeX (MathJax)</button>
+      <button type="button" class="dialect-btn" onclick="window.setRenderFormat('unicode')" id="btn-fmt-unicode" title="Render formulas with syntax-highlighted Colorful Unicode and clickable symbol links">Colorful Unicode</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Assistant Variant:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setAssistantVariant('both')" id="cfg-variant-both" title="Display both Proof Assistant Variants and their VariantBridge translation">Both Variants</button>
+      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v1')" id="cfg-variant-v1" title="Focus on Variant 1: 1st-Order Proof Assistant (Option B 7-part Stmt/Enc/ProofsOf/Theorems anatomy)">Variant 1: 1st-Order</button>
+      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v2')" id="cfg-variant-v2" title="Focus on Variant 2: Higher-Order Formulas-as-Types (RoqC / Curry–Howard ProofsOf(⟨φ⟩))">Variant 2: Higher-Order</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Proof Display:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Compact Proof Term (Default)</button>
+      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Expanded Certificate</button>
+    </div>
+    <div class="config-line-row">
+      <span class="config-line-label">Table Density:</span>
+      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Compact Reference</button>
+      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Spacious</button>
     </div>
   </div>
   <script>
     (function() {
-      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact"}');
+      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact","notationPrecision":"unambiguous","renderFormat":"latex"}');
+      window.setNotationPrecision = function(mode) {
+        window.OBELISK_PRESENTATION_CONFIG.notationPrecision = mode;
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        if (mode === 'standard') {
+          document.body.classList.add('mode-notation-standard');
+        } else {
+          document.body.classList.remove('mode-notation-standard');
+        }
+        ['btn-not-unambig', ' btn-not-unambig-2'].forEach(function(id) {
+          var el = document.getElementById(id.trim());
+          if (el) el.classList.toggle('active', mode !== 'standard');
+        });
+        ['btn-not-std', 'btn-not-std-2'].forEach(function(id) {
+          var el = document.getElementById(id.trim());
+          if (el) el.classList.toggle('active', mode === 'standard');
+        });
+        if (window.MathJax && window.MathJax.typesetPromise) {
+          window.MathJax.typesetPromise().then(function() {
+            if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
+          });
+        }
+      };
+      window.setRenderFormat = function(fmt) {
+        window.OBELISK_PRESENTATION_CONFIG.renderFormat = fmt;
+        window.showingUnicode = (fmt === 'unicode');
+        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
+        document.querySelectorAll('.formula-cell').forEach(function(cell) {
+          var target = cell.querySelector('.formula-render-target');
+          if (target) {
+            if (fmt === 'unicode') {
+              if (!target.getAttribute('data-latex-saved')) {
+                target.setAttribute('data-latex-saved', target.innerHTML);
+              }
+              var colored = cell.getAttribute('data-unicode-colored');
+              if (colored) target.innerHTML = colored;
+              else if (cell.getAttribute('data-unicode')) target.textContent = cell.getAttribute('data-unicode');
+            } else {
+              var saved = target.getAttribute('data-latex-saved');
+              if (saved) {
+                target.innerHTML = saved;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                  window.MathJax.typesetPromise([target]).then(function() {
+                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(target);
+                  });
+                }
+              }
+            }
+          } else if (cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode')) {
+            if (fmt === 'unicode') {
+              if (!cell.getAttribute('data-latex-saved')) {
+                cell.setAttribute('data-latex-saved', cell.innerHTML);
+              }
+              var coloredCell = cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode');
+              var symLinks = cell.getAttribute('data-sym-links') || '';
+              cell.innerHTML = coloredCell + symLinks;
+            } else {
+              var savedCell = cell.getAttribute('data-latex-saved');
+              if (savedCell) {
+                cell.innerHTML = savedCell;
+                if (window.MathJax && window.MathJax.typesetPromise) {
+                  window.MathJax.typesetPromise([cell]).then(function() {
+                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(cell);
+                  });
+                }
+              }
+            }
+          }
+        });
+        ['btn-fmt-latex', 'btn-fmt-latex-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', fmt !== 'unicode');
+        });
+        ['btn-fmt-unicode', 'btn-fmt-unicode-2'].forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el) el.classList.toggle('active', fmt === 'unicode');
+        });
+        var tBtn = document.getElementById('toggle-notation-btn');
+        if (tBtn) tBtn.textContent = (fmt === 'unicode') ? 'Show LaTeX (MathJax)' : 'Show Colorful Unicode';
+      };
       window.applyObeliskConfig = function() {
-        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact'};
+        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact', notationPrecision: 'unambiguous', renderFormat: 'latex'};
         document.querySelectorAll('.proof-row').forEach(function(r) {
           r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
         });
@@ -315,6 +568,8 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
         if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
         if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
+        window.setNotationPrecision(cfg.notationPrecision || 'unambiguous');
+        if (cfg.renderFormat === 'unicode') window.setRenderFormat('unicode');
       };
       window.setObeliskConfig = function(key, val) {
         window.OBELISK_PRESENTATION_CONFIG[key] = val;
@@ -340,7 +595,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       </ul>
     </div>
 
-    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">1. Variant 1 (1st-Order NBG/MK Proof Assistant — `program/types/foundations.ML`)</h2>
+    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">1. Variant 1 (1st-Order Proof Assistant — `program/types/foundations.ML`)</h2>
     <div class="table-scroll-wrap">
       <table class="data-table">
         <thead>
@@ -356,7 +611,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           
           <tr id="sec-dependent-models" class="section-divider" data-section="sec-dependent-models">
             <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
-              3) Set-Theoretic Models of Value, Family Evaluation, ΣB &amp; ΠB (Variant 1: 1st-Order NBG/MK)
+              3) Set-Theoretic Models of Value, Family Evaluation, ΣB &amp; ΠB (Variant 1: 1st-Order)
               <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">Formalized in program/types/foundations.ML &amp; program/types/entries.ML (corresponding to Foundations book ch. 110 &amp; ch. 130).</span>
             </td>
           </tr>
@@ -366,10 +621,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td class="num-cell" style="text-align: center;"><a id="3.67" href="#3.67" class="entry-num-link">3.67</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
-              <strong style="color: #fff; margin-left: 6px;">Semi-Singleton Class Predicate (semi_singleton)</strong>
+              <strong style="color: #fff; margin-left: 6px;">Semi-Singleton Class Predicate (semi_singleton)</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(semi_singleton: (Class → Bool))</code></span><span class="view-not-unambig"><code>(semi_singleton :: (Class → Bool))</code></span></div>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Family Evaluation): a class x is a semi-singleton if it contains at most one element (either ∅ or {a} for a set a).</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall (u : \mathsf{Class})\; \forall (v : \mathsf{Class})\; (((u \in x) \land (v \in x)) \to (u = v)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u \; \forall v \; (((u \in x) \land (v \in x)) \to (u = v)))\)</div></td>
+            <td class="formula-cell" data-unicode="(semi_singleton(x) ⟷ ∀(u : Class) ∀(v : Class) (((u ∈ x) ∧ (v ∈ x)) → (u = v)))" data-unicode-colored="(&lt;a href=&quot;manual.html#item-3-67&quot; class=&quot;sym-inline-link&quot; title=&quot;3.67 Semi-Singleton Class Predicate — (semi_singleton: (Class → Bool)) / (semi_singleton :: (Class → Bool))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;semi_singleton&lt;/span&gt;&lt;/a&gt;(x) &lt;a href=&quot;manual.html#item-1-04&quot; class=&quot;sym-inline-link&quot; title=&quot;1.04 Logical Equivalence (Biconditional) — (⟷: (Bool × Bool → Bool)) / ((⟷) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⟷&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(u : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) &lt;a href=&quot;manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(v : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) (((u &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; x) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; (v &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; x)) &lt;a href=&quot;manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; (u &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; v)))"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall (u : \mathsf{Class})\; \forall (v : \mathsf{Class})\; (((u \in x) \land (v \in x)) \to (u = v)))\)</span><span class="view-not-std">\(\mathrm{semi\_singleton}(x) \longleftrightarrow \forall (u : \mathsf{Class})\; \forall (v : \mathsf{Class})\; (((u \in x) \land (v \in x)) \to (u = v))\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u \; \forall v \; (((u \in x) \land (v \in x)) \to (u = v)))\)</span><span class="view-not-std">\(\mathrm{semi\_singleton}(x) \longleftrightarrow \forall u \; \forall v \; (((u \in x) \land (v \in x)) \to (u = v))\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-04" class="sym-def-chip" title="1.04 Logical Equivalence (Biconditional) — Standard: (⟷: (Bool × Bool → Bool)) | Non-Ambiguous: ((⟷) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(⟷: (Bool × Bool → Bool))</span><span class="view-not-unambig">((⟷) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
             <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, u, v : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u, v\)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-67.html" class="status-badge badge-def-status">Conservative Def</a></td>
           </tr>
@@ -379,10 +634,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td class="num-cell" style="text-align: center;"><a id="3.68" href="#3.68" class="entry-num-link">3.68</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
-              <strong style="color: #fff; margin-left: 6px;">Value Extraction via Semi-Singleton Subclasses (sss / Value)</strong>
+              <strong style="color: #fff; margin-left: 6px;">Value Extraction via Semi-Singleton Subclasses (sss / Value)</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(sss: (Class → Class))</code></span><span class="view-not-unambig"><code>(sss :: (Class → Class))</code></span></div>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 (Value &amp; Family): extracts the unique element a when x = {a}, and evaluates to ∅ when x has 0 or ≥ 2 elements.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-67" class="sym-def-chip" title="semi_singleton : Class → Bool (3.67 Semi-Singleton Class Predicate)"><span class="sym-chip-name">semi_singleton</span><span class="sym-chip-type">Class → Bool</span></a> <a href="manual.html#item-3-14" class="sym-def-chip" title="⋃ : Class → Class (3.14 Class Union)"><span class="sym-chip-name">⋃</span><span class="sym-chip-type">Class → Class</span></a> <a href="manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="formula-cell" data-unicode="(sss(x) = ⋃({ z | ((z ⊆ x) ∧ semi_singleton(z)) }))" data-unicode-colored="(&lt;a href=&quot;manual.html#item-3-68&quot; class=&quot;sym-inline-link&quot; title=&quot;3.68 Value Extraction (Semi-Singleton Subclasses) — (sss: (Class → Class)) / (sss :: (Class → Class))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;sss&lt;/span&gt;&lt;/a&gt;(x) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;manual.html#item-3-14&quot; class=&quot;sym-inline-link&quot; title=&quot;3.14 Unary Class Union — (⋃: (Class → Class)) / (⋃ :: (Class → Class))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⋃&lt;/span&gt;&lt;/a&gt;({ z | ((z &lt;a href=&quot;manual.html#item-3-02&quot; class=&quot;sym-inline-link&quot; title=&quot;3.02 Subclass Relation — (⊆: (Class × Class → Bool)) / ((⊆) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;⊆&lt;/span&gt;&lt;/a&gt; x) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;manual.html#item-3-67&quot; class=&quot;sym-inline-link&quot; title=&quot;3.67 Semi-Singleton Class Predicate — (semi_singleton: (Class → Bool)) / (semi_singleton :: (Class → Bool))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;semi_singleton&lt;/span&gt;&lt;/a&gt;(z)) }))"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</span><span class="view-not-std">\(\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \}\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \})\)</span><span class="view-not-std">\(\mathrm{sss}(x) = \bigcup \{ z \mid ((z \subseteq x) \land \mathrm{semi\_singleton}(z)) \}\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-67" class="sym-def-chip" title="3.67 Semi-Singleton Class Predicate — Standard: (semi_singleton: (Class → Bool)) | Non-Ambiguous: (semi_singleton :: (Class → Bool))"><span class="view-not-std">(semi_singleton: (Class → Bool))</span><span class="view-not-unambig">(semi_singleton :: (Class → Bool))</span></a> <a href="manual.html#item-3-14" class="sym-def-chip" title="3.14 Unary Class Union — Standard: (⋃: (Class → Class)) | Non-Ambiguous: (⋃ :: (Class → Class))"><span class="view-not-std">(⋃: (Class → Class))</span><span class="view-not-unambig">(⋃ :: (Class → Class))</span></a> <a href="manual.html#item-3-02" class="sym-def-chip" title="3.02 Subclass Relation — Standard: (⊆: (Class × Class → Bool)) | Non-Ambiguous: ((⊆) :: ((Class × Class) → Bool))"><span class="view-not-std">(⊆: (Class × Class → Bool))</span><span class="view-not-unambig">((⊆) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a></div></td>
             <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(x, z : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, z\)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-68.html" class="status-badge badge-def-status">Conservative Def</a></td>
           </tr>
@@ -392,10 +647,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td class="num-cell" style="text-align: center;"><a id="3.69" href="#3.69" class="entry-num-link">3.69</a></td>
             <td>
               <span class="classification-badge badge-theorem">Theorem</span>
-              <strong style="color: #fff; margin-left: 6px;">Theorem of Evaluation of a Family ((Λx, t)(z) = t[z/x])</strong>
+              <strong style="color: #fff; margin-left: 6px;">Theorem of Evaluation of a Family ((Λx, t)(z) = t[z/x])</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(Λ: ((Set → Class) → Class))</code></span><span class="view-not-unambig"><code>((Λ) :: ((Set → Class) → Class))</code></span></div>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 110 Theorem [evaluation of family]: evaluating the encoded class family (Λx, t) = { [x, y]_D | y ∈ t } at a set argument z via Value(Img(Λx t, {z})) yields t[z/x].</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (z : \mathsf{Class})\; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x : \mathsf{Class}), \, t))(z) = t[z/x]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall z \; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x), \, t))(z) = t[z/x]))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="formula-cell" data-unicode="∀(z : Class) ((isSet(z) ∧ isSet(t[z/x])) → (((Λ(x : Class), t))(z) = t[z/x]))" data-unicode-colored="&lt;a href=&quot;manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(z : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) ((&lt;a href=&quot;manual.html#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;3.08 Sethood Predicate — (isSet: (Class → Bool)) / (isSet :: (Class → Bool))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(z) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;manual.html#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;3.08 Sethood Predicate — (isSet: (Class → Bool)) / (isSet :: (Class → Bool))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(t[z/x])) &lt;a href=&quot;manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; (((&lt;a href=&quot;manual.html#item-3-69&quot; class=&quot;sym-inline-link&quot; title=&quot;3.69 Encoded Class Family Constructor — (Λ: ((Set → Class) → Class)) / ((Λ) :: ((Set → Class) → Class))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;Λ&lt;/span&gt;&lt;/a&gt;(x : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;), t))(z) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; t[z/x]))"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\forall (z : \mathsf{Class})\; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x : \mathsf{Class}), \, t))(z) = t[z/x]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall z \; ((\mathrm{isSet}(z) \land \mathrm{isSet}(t[z/x])) \to (((\Lambda (x), \, t))(z) = t[z/x]))\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-08" class="sym-def-chip" title="3.08 Sethood Predicate — Standard: (isSet: (Class → Bool)) | Non-Ambiguous: (isSet :: (Class → Bool))"><span class="view-not-std">(isSet: (Class → Bool))</span><span class="view-not-unambig">(isSet :: (Class → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
             <td class="syntax-cell"><a href="metatheory.html#ffi-t-vx-phi" class="side-condition-link"><span class="view-typing">\((t : \mathsf{Class.Expression}), \; (v_x : \mathsf{Variable}), \; (z : \mathsf{Class})\)</span><span class="view-membership" style="display:none;">\((t : \mathsf{Class.Expression}), \; (v_x), \; (z)\)</span></a></td>
             <td style="text-align: center;"><a href="proofs/item-3-69.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
           </tr>
@@ -405,10 +660,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td class="num-cell" style="text-align: center;"><a id="3.70" href="#3.70" class="entry-num-link">3.70</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
-              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Sum (ΣB / Sigma Model)</strong>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Sum (ΣB / Sigma Model)</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(Σ: (Class → Class))</code></span><span class="view-not-unambig"><code>(Σ :: (Class → Class))</code></span></div>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Sum Σ): models the dependent pair type Σ_{x ∈ A} B(x) using Dunaev tagged pairs [x, y]_D.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\((\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Sigma(B) = \{ p \mid \exists x \; \exists y \; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div></td>
+            <td class="formula-cell" data-unicode="(Σ(B) = { p | ∃(x : Class) ∃(y : Class) (((x ∈ Dom(B)) ∧ (y ∈ B(x))) ∧ (p = [x, y]_D)) })" data-unicode-colored="(&lt;a href=&quot;manual.html#item-3-70&quot; class=&quot;sym-inline-link&quot; title=&quot;3.70 Dependent Sum Model (ΣB) — (Σ: (Class → Class)) / (Σ :: (Class → Class))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;Σ&lt;/span&gt;&lt;/a&gt;(B) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; { p | &lt;a href=&quot;manual.html#item-2-02&quot; class=&quot;sym-inline-link&quot; title=&quot;2.02 Existential Quantifier — (∃: ((Class → Bool) → Bool)) / ((∃) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;/a&gt;(x : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) &lt;a href=&quot;manual.html#item-2-02&quot; class=&quot;sym-inline-link&quot; title=&quot;2.02 Existential Quantifier — (∃: ((Class → Bool) → Bool)) / ((∃) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;/a&gt;(y : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) (((x &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; Dom(B)) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; (y &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; B(x))) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; (p &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; [x, y&lt;a href=&quot;manual.html#item-3-40&quot; class=&quot;sym-inline-link&quot; title=&quot;3.40 Dunaev Tagged Ordered Pair — ([A, B]_D: (Class × Class → Class)) / ([A, B]_D :: ((Class × Class) → Class))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;]_D&lt;/span&gt;&lt;/a&gt;)) })"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</span><span class="view-not-std">\(\Sigma(B) = \{ p \mid \exists (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \}\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\Sigma(B) = \{ p \mid \exists x \; \exists y \; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \})\)</span><span class="view-not-std">\(\Sigma(B) = \{ p \mid \exists x \; \exists y \; (((x \in \mathrm{Dom}(B)) \land (y \in B(x))) \land (p = [x, y]_D)) \}\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="3.40 Dunaev Tagged Ordered Pair — Standard: ([A, B]_D: (Class × Class → Class)) | Non-Ambiguous: ([A, B]_D :: ((Class × Class) → Class))"><span class="view-not-std">([A, B]_D: (Class × Class → Class))</span><span class="view-not-unambig">([A, B]_D :: ((Class × Class) → Class))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-02" class="sym-def-chip" title="2.02 Existential Quantifier — Standard: (∃: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∃) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∃: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∃) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
             <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, p, x, y : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, p, x, y\)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-70.html" class="status-badge badge-def-status">Conservative Def</a></td>
           </tr>
@@ -418,10 +673,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             <td class="num-cell" style="text-align: center;"><a id="3.71" href="#3.71" class="entry-num-link">3.71</a></td>
             <td>
               <span class="classification-badge badge-rule">Definition</span>
-              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Product (ΠB / Pi Model)</strong>
+              <strong style="color: #fff; margin-left: 6px;">Set-Theoretic Model of Dependent Product (ΠB / Pi Model)</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(Π: (Class → Class))</code></span><span class="view-not-unambig"><code>(Π :: (Class → Class))</code></span></div>
               <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as class functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div></details>
             </td>
-            <td class="formula-cell"><div class="view-typing formula-chunk">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x \; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-37" class="sym-def-chip" title="isClassFunction : Class → Bool (3.37 Class Function)"><span class="sym-chip-name">isClassFunction</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="formula-cell" data-unicode="(Π(B) = { f | ((isClassFunction(f) ∧ (Dom(f) = Dom(B))) ∧ ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x)))) })" data-unicode-colored="(&lt;a href=&quot;manual.html#item-3-71&quot; class=&quot;sym-inline-link&quot; title=&quot;3.71 Dependent Product Model (ΠB) — (Π: (Class → Class)) / (Π :: (Class → Class))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;Π&lt;/span&gt;&lt;/a&gt;(B) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; { f | ((&lt;a href=&quot;manual.html#item-3-37&quot; class=&quot;sym-inline-link&quot; title=&quot;3.37 Class Function Predicate — (isClassFunction: (Class → Bool)) / (isClassFunction :: (Class → Bool))&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isClassFunction&lt;/span&gt;&lt;/a&gt;(f) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; (Dom(f) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Extensional Equality of Classes — (=: (Class × Class → Bool)) / ((=) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt;&lt;/a&gt; Dom(B))) &lt;a href=&quot;manual.html#item-1-05&quot; class=&quot;sym-inline-link&quot; title=&quot;1.05 Logical Conjunction — (∧: (Bool × Bool → Bool)) / ((∧) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(x : &lt;a href=&quot;manual.html#item-3-07&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) ((x &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; Dom(B)) &lt;a href=&quot;manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Material Implication — (→: (Bool × Bool → Bool)) / ((→) :: ((Bool × Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; (f(x) &lt;a href=&quot;manual.html#item-3-01&quot; class=&quot;sym-inline-link&quot; title=&quot;3.01 Class Membership Relation — (∈: (Class × Class → Bool)) / ((∈) :: ((Class × Class) → Bool))&quot;&gt;&lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt;&lt;/a&gt; B(x)))) })"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</span><span class="view-not-std">\(\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall (x : \mathsf{Class})\; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \}\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x \; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \})\)</span><span class="view-not-std">\(\Pi(B) = \{ f \mid ((\mathrm{isClassFunction}(f) \land (\mathrm{Dom}(f) = \mathrm{Dom}(B))) \land \forall x \; ((x \in \mathrm{Dom}(B)) \to (f(x) \in B(x)))) \}\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-37" class="sym-def-chip" title="3.37 Class Function Predicate — Standard: (isClassFunction: (Class → Bool)) | Non-Ambiguous: (isClassFunction :: (Class → Bool))"><span class="view-not-std">(isClassFunction: (Class → Bool))</span><span class="view-not-unambig">(isClassFunction :: (Class → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
             <td class="syntax-cell"><span class="syntax-badge"><span class="view-typing">\(B, f, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, f, x\)</span></span></td>
             <td style="text-align: center;"><a href="proofs/item-3-71.html" class="status-badge badge-def-status">Conservative Def</a></td>
           </tr>
@@ -449,8 +704,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Value / Semi-Singleton Subclasses): every element of the semi-singleton restriction of X belongs to X.</div>
             </td>
             <td class="formula-cell">
-              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
-              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</div>
+              <div class="view-typing formula-chunk"><span class="view-not-unambig">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</span><span class="view-not-std">\(\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ w \mid ((w \in X) \land (\forall (u : \mathsf{Class})\; (\forall (v : \mathsf{Class})\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X)))\)</span></div>
+              <div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X))))\)</span><span class="view-not-std">\(\forall X\; (\forall z\; ((z \in \{ w \mid ((w \in X) \land (\forall u\; (\forall v\; (((u \in X) \land (v \in X)) \to (u = v))))) \}) \to (z \in X)))\)</span></div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Extensional Equality of Classes — Standard: (=: (Class × Class → Bool)) | Non-Ambiguous: ((=) :: ((Class × Class) → Bool))"><span class="view-not-std">(=: (Class × Class → Bool))</span><span class="view-not-unambig">((=) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div>
               <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
                 <code>Theorem semi_singleton_sub_elim : ProofsOf(⟨(∀(X : Class) (∀(z : Class) ((z ∈ { w | ((w ∈ X) ∧ (∀(u : Class) (∀(v : Class) (((u ∈ X) ∧ (v ∈ X)) → (u = v))))) }) → (z ∈ X))))⟩)</code>
               </div>
@@ -465,8 +721,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 110 (Family Evaluation): membership in the evaluated family fiber B(x) = { w | [x, w]_D in B } entails [x, y]_D in B.</div>
             </td>
             <td class="formula-cell">
-              <div class="view-typing formula-chunk">\((\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
-              <div class="view-membership formula-chunk" style="display:none;">\((\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</div>
+              <div class="view-typing formula-chunk"><span class="view-not-unambig">\((\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</span><span class="view-not-std">\(\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B))))\)</span></div>
+              <div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B)))))\)</span><span class="view-not-std">\(\forall B\; (\forall x\; (\forall y\; ((y \in \{ w \mid ([x, w]_D \in B) \}) \to ([x, y]_D \in B))))\)</span></div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="3.40 Dunaev Tagged Ordered Pair — Standard: ([A, B]_D: (Class × Class → Class)) | Non-Ambiguous: ([A, B]_D :: ((Class × Class) → Class))"><span class="view-not-std">([A, B]_D: (Class × Class → Class))</span><span class="view-not-unambig">([A, B]_D :: ((Class × Class) → Class))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div>
               <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
                 <code>Theorem family_fiber_char : ProofsOf(⟨(∀(B : Class) (∀(x : Class) (∀(y : Class) ((y ∈ { w | ([x, w]_D ∈ B) }) → ([x, y]_D ∈ B)))))⟩)</code>
               </div>
@@ -481,8 +738,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Sum Sigma Model): pairing witness x in A and fiber membership [x, y]_D in B certifies dependent sum membership.</div>
             </td>
             <td class="formula-cell">
-              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
-              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</div>
+              <div class="view-typing formula-chunk"><span class="view-not-unambig">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</span><span class="view-not-std">\(\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (x : \mathsf{Class})\; (\forall (y : \mathsf{Class})\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B))))))\)</span></div>
+              <div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B)))))))\)</span><span class="view-not-std">\(\forall A\; (\forall B\; (\forall x\; (\forall y\; (((x \in A) \land ([x, y]_D \in B)) \to ((x \in A) \land ([x, y]_D \in B))))))\)</span></div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="3.40 Dunaev Tagged Ordered Pair — Standard: ([A, B]_D: (Class × Class → Class)) | Non-Ambiguous: ([A, B]_D :: ((Class × Class) → Class))"><span class="view-not-std">([A, B]_D: (Class × Class → Class))</span><span class="view-not-unambig">([A, B]_D :: ((Class × Class) → Class))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div>
               <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
                 <code>Theorem sigma_dependent_sum_intro : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(x : Class) (∀(y : Class) (((x ∈ A) ∧ ([x, y]_D ∈ B)) → ((x ∈ A) ∧ ([x, y]_D ∈ B)))))))⟩)</code>
               </div>
@@ -497,8 +755,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
               <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Foundations ch. 130 (Dependent Product Pi Model): a dependent section over A eliminates at every x in A to a fiber witness in B(x).</div>
             </td>
             <td class="formula-cell">
-              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B))))))\)</div>
-              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B))))))\)</div>
+              <div class="view-typing formula-chunk"><span class="view-not-unambig">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B))))))\)</span><span class="view-not-std">\(\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (f : \mathsf{Class})\; (((\forall (x : \mathsf{Class})\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall (x : \mathsf{Class})\; (x \in A))) \to (\forall (x : \mathsf{Class})\; ([x, f]_D \in B)))))\)</span></div>
+              <div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B))))))\)</span><span class="view-not-std">\(\forall A\; (\forall B\; (\forall f\; (((\forall x\; ((x \in A) \to ([x, f]_D \in B))) \land (\forall x\; (x \in A))) \to (\forall x\; ([x, f]_D \in B)))))\)</span></div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="manual.html#item-3-40" class="sym-def-chip" title="3.40 Dunaev Tagged Ordered Pair — Standard: ([A, B]_D: (Class × Class → Class)) | Non-Ambiguous: ([A, B]_D :: ((Class × Class) → Class))"><span class="view-not-std">([A, B]_D: (Class × Class → Class))</span><span class="view-not-unambig">([A, B]_D :: ((Class × Class) → Class))</span></a> <a href="manual.html#item-3-01" class="sym-def-chip" title="3.01 Class Membership Relation — Standard: (∈: (Class × Class → Bool)) | Non-Ambiguous: ((∈) :: ((Class × Class) → Bool))"><span class="view-not-std">(∈: (Class × Class → Bool))</span><span class="view-not-unambig">((∈) :: ((Class × Class) → Bool))</span></a> <a href="manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="manual.html#item-1-01" class="sym-def-chip" title="1.01 Material Implication — Standard: (→: (Bool × Bool → Bool)) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(→: (Bool × Bool → Bool))</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-1-05" class="sym-def-chip" title="1.05 Logical Conjunction — Standard: (∧: (Bool × Bool → Bool)) | Non-Ambiguous: ((∧) :: ((Bool × Bool) → Bool))"><span class="view-not-std">(∧: (Bool × Bool → Bool))</span><span class="view-not-unambig">((∧) :: ((Bool × Bool) → Bool))</span></a> <a href="manual.html#item-3-07" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div>
               <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
                 <code>Theorem pi_dependent_product_elim : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(f : Class) (((∀(x : Class)  ((x ∈ A) → ([x, f]_D ∈ B))) ∧ (∀(x : Class)  (x ∈ A))) → (∀(x : Class)  ([x, f]_D ∈ B))))))⟩)</code>
               </div>
