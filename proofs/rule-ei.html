@@ -24,8 +24,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
       "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
       "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
-      "dependent_if": { href: "manual.html#item-3-24-dependent-if", std: "(dependent_if: (∏(T: (Bool → Type)) (b: Bool), (T(true) → (T(false) → T(b)))))", unambig: "(dependent_if :: (∏(T :: (Bool → Type)) (b :: Bool), (T(true) → (T(false) → T(b)))))", label: "3.24 Dependent Conditional" },
-      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "(simple_if: (∏(α: Type), (Bool → (α → (α → α)))))", unambig: "(simple_if :: (∏(α :: Type), (Bool → (α → (α → α)))))", label: "3.23 Simple Conditional" },
+      "if_dep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), ◁ (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", unambig: "∀(T_e :: (Bool → Type_Expression)), ◁ (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", label: "3.24 Dependent Conditional (if_dep)" },
+      "ifdep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), ◁ (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", unambig: "∀(T_e :: (Bool → Type_Expression)), ◁ (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", label: "3.24 Dependent Conditional (if_dep)" },
+      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "∀(T_e: Type_Expression), ◁ (simple_if: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ▷", unambig: "∀(T_e :: Type_Expression), ◁ (simple_if :: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ▷", label: "3.23 Simple Conditional (simple_if)" },
       "IF": { href: "manual.html#item-3-22-class-if", std: "(IF_THEN_ELSE_FI: (Bool × Class × Class → Class))", unambig: "(IF_THEN_ELSE_FI :: ((Bool × (Class × Class)) → Class))", label: "3.22 Class Conditional" },
       "isClassFunction": { href: "manual.html#item-3-37", std: "(isClassFunction: (Class → Bool))", unambig: "(isClassFunction :: (Class → Bool))", label: "3.37 Class Function Predicate" },
       "isUniverse": { href: "manual.html#item-3-66", std: "(isUniverse: (Class → Bool))", unambig: "(isUniverse :: (Class → Bool))", label: "3.66 Grothendieck-Tarski Universe Predicate" },
@@ -100,8 +101,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       var scope = root || document;
       var inSubdir = window.location.pathname.indexOf('/sections/') !== -1 || window.location.pathname.indexOf('/proofs/') !== -1;
       var prefix = inSubdir ? '../' : '';
-      scope.querySelectorAll('mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
+      scope.querySelectorAll('mjx-container mjx-msubsup, mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
         if (tok.getAttribute('data-sym-bound') === '1') return;
+        if (tok.closest('[data-sym-bound="1"]')) return;
         if (tok.tagName.toLowerCase() === 'mjx-texatom' && tok.querySelectorAll('mjx-texatom').length > 0) return;
         var txt = window.extractMjxTokenText(tok);
         if (!txt) return;
@@ -233,7 +235,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     }
     .obj-var {
       font-style: italic !important;
-      color: #38bdf8 !important;
+      color: #f87171 !important;
     }
     .obj-const {
       font-style: normal !important;
@@ -442,6 +444,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     }
     .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
     .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-def { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
     .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
     .status-badge {
       display: inline-block;
@@ -512,7 +515,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ (\phi[t/x] \to \exists (x : \mathsf{Class})\; \phi) \]
+        \[ (\phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}] {\color{#38bdf8}{\to}} {\color{#fde047}{\exists}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi) \]
       </div>
       <div class="unicode-box">
         <strong>Clean Unicode:</strong> (φ[t/x] → ∃(x : Class) φ)
@@ -526,7 +529,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\mathrm{FFI}(t, \mathbf{v}_x, \phi) : \mathsf{Bool}\)</div>
+      <div class="syntax-display">\({\color{#fb923c}{\mathrm{FFI}}}({\color{#f87171}{t}}, {\color{#f472b6}{\mathbf{v}}}_x, \phi) : {\color{#22d3ee}{\mathsf{Bool}}}\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#ffi-t-vx-phi" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -561,7 +564,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_{\mathrm{D}} = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>

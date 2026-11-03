@@ -24,8 +24,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
       "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
       "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
-      "dependent_if": { href: "manual.html#item-3-24-dependent-if", std: "(dependent_if: (∏(T: (Bool → Type)) (b: Bool), (T(true) → (T(false) → T(b)))))", unambig: "(dependent_if :: (∏(T :: (Bool → Type)) (b :: Bool), (T(true) → (T(false) → T(b)))))", label: "3.24 Dependent Conditional" },
-      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "(simple_if: (∏(α: Type), (Bool → (α → (α → α)))))", unambig: "(simple_if :: (∏(α :: Type), (Bool → (α → (α → α)))))", label: "3.23 Simple Conditional" },
+      "if_dep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), ◁ (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", unambig: "∀(T_e :: (Bool → Type_Expression)), ◁ (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", label: "3.24 Dependent Conditional (if_dep)" },
+      "ifdep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), ◁ (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", unambig: "∀(T_e :: (Bool → Type_Expression)), ◁ (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)))) ▷", label: "3.24 Dependent Conditional (if_dep)" },
+      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "∀(T_e: Type_Expression), ◁ (simple_if: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ▷", unambig: "∀(T_e :: Type_Expression), ◁ (simple_if :: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ▷", label: "3.23 Simple Conditional (simple_if)" },
       "IF": { href: "manual.html#item-3-22-class-if", std: "(IF_THEN_ELSE_FI: (Bool × Class × Class → Class))", unambig: "(IF_THEN_ELSE_FI :: ((Bool × (Class × Class)) → Class))", label: "3.22 Class Conditional" },
       "isClassFunction": { href: "manual.html#item-3-37", std: "(isClassFunction: (Class → Bool))", unambig: "(isClassFunction :: (Class → Bool))", label: "3.37 Class Function Predicate" },
       "isUniverse": { href: "manual.html#item-3-66", std: "(isUniverse: (Class → Bool))", unambig: "(isUniverse :: (Class → Bool))", label: "3.66 Grothendieck-Tarski Universe Predicate" },
@@ -100,8 +101,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       var scope = root || document;
       var inSubdir = window.location.pathname.indexOf('/sections/') !== -1 || window.location.pathname.indexOf('/proofs/') !== -1;
       var prefix = inSubdir ? '../' : '';
-      scope.querySelectorAll('mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
+      scope.querySelectorAll('mjx-container mjx-msubsup, mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
         if (tok.getAttribute('data-sym-bound') === '1') return;
+        if (tok.closest('[data-sym-bound="1"]')) return;
         if (tok.tagName.toLowerCase() === 'mjx-texatom' && tok.querySelectorAll('mjx-texatom').length > 0) return;
         var txt = window.extractMjxTokenText(tok);
         if (!txt) return;
@@ -319,6 +321,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     }
     .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
     .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-def { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
     .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
     .status-badge {
       display: inline-block;
@@ -652,10 +655,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
     
 <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 12px 16px; margin: 1rem 0;">
   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-    <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8;">🎨 Uniform 7-Category Color System (Identical in MathJax LaTeX, Colorful Unicode &amp; PDF):</span>
-    <span style="font-size: 0.75rem; color: #94a3b8;">Copying any MathJax formula copies clean standard LaTeX without color macros</span>
+    <span style="font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: #38bdf8;">🎨 Uniform 8-Category Color &amp; Upright/Italic System (Identical in MathJax LaTeX, Colorful Unicode &amp; PDF):</span>
+    <span style="font-size: 0.75rem; color: #94a3b8;">Constants, functions, predicates &amp; theory symbols are <strong>upright</strong>; variables are <em>italicized</em> (class variables in <strong style="color:#f87171;">red</strong>)</span>
   </div>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(235px, 1fr)); gap: 8px; font-size: 0.8rem;">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 8px; font-size: 0.8rem;">
     <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #fde047;">
       <strong style="color: #fde047;">1. Quantifiers &amp; Binders (<code>#fde047</code>):</strong><br>
       <span style="color: #cbd5e1;"><code>&forall;</code>, <code>&exist;</code>, <code>&exist;!</code>, <code>&prod;</code>, <code>&lambda;</code>, <code>&Lambda;</code>, <code>&Sigma;</code>, <code>&Pi;</code></span>
@@ -681,8 +684,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       <span style="color: #cbd5e1;"><code>Class</code>, <code>Set</code>, <code>Bool</code>, <code>Type_Expression</code>, <code>Fm</code>, <code>Stmt</code>, <code>Ctx</code>, <code>Prf</code></span>
     </div>
     <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #fb923c;">
-      <strong style="color: #fb923c;">7. Predicates, Pairs &amp; Keywords (<code>#fb923c</code>):</strong><br>
-      <span style="color: #cbd5e1;"><code>isSet</code>, <code>[A, B]<sub>D</sub></code>, <code>&pi;<sub>1</sub></code>, <code>&pi;<sub>2</sub></code>, <code>sss</code>, <code>NFV</code>, <code>FFI</code>, <code>Enc</code>, <code>Dec</code></span>
+      <strong style="color: #fb923c;">7. Upright Constants, Functions &amp; Predicates (<code>#fb923c</code>):</strong><br>
+      <span style="color: #cbd5e1;"><code>V</code>, <code>On</code>, <code>if<sub>dep</sub></code>, <code>simple_if</code>, <code>isSet</code>, <code>[A, B]<sub>D</sub></code>, <code>&pi;<sub>1</sub></code>, <code>&pi;<sub>2</sub></code>, <code>sss</code>, <code>NFV</code>, <code>FFI</code></span>
+    </div>
+    <div style="background: rgba(30, 41, 59, 0.65); padding: 6px 10px; border-radius: 6px; border-left: 3px solid #f87171;">
+      <strong style="color: #f87171;">8. Italic Red Class Variables (<code>#f87171</code>):</strong><br>
+      <span style="color: #cbd5e1;"><em style="color:#f87171;">X, Y, Z, A, B, C, F, R</em> (general classes); <em style="color:#f87171;">x, y, z, a, b, u, v</em> (lowercase naming convention when a set is intended)</span>
     </div>
   </div>
 </div>
@@ -790,16 +797,16 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
             </td>
           </tr>
         
-          <tr id="sym-dependent_if">
+          <tr id="sym-if_dep">
             <td style="font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem;">
-              <a href="manual.html#item-3-24-dependent-if" style="color: #38bdf8; text-decoration: none;">dependent_if</a>
+              <a href="manual.html#item-3-24-dependent-if" style="color: #38bdf8; text-decoration: none;">if<sub style="font-size:0.76em;">dep</sub></a>
             </td>
-            <td><strong style="color: #f8fafc;">3.24 Dependent Conditional (dependent_if)</strong></td>
+            <td><strong style="color: #f8fafc;">3.24 Dependent Conditional (if<sub style="font-size:0.76em;">dep</sub>)</strong></td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #cbd5e1;">
-              <code>∀(T<sub style="font-size:0.76em;">e</sub>: (Bool → Type_Expression)), ◁ (dependent_if: (∏(b: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub>: (Bool → Type_Expression)), ◁ (if<sub style="font-size:0.76em;">dep</sub>: (∏(b: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
             </td>
             <td style="font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-              <code>∀(T<sub style="font-size:0.76em;">e</sub> :: (Bool → Type_Expression)), ◁ (dependent_if :: (∏(b :: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
+              <code>∀(T<sub style="font-size:0.76em;">e</sub> :: (Bool → Type_Expression)), ◁ (if<sub style="font-size:0.76em;">dep</sub> :: (∏(b :: Bool), (⟦T<sub style="font-size:0.76em;">e</sub>(true)⟧ → (⟦T<sub style="font-size:0.76em;">e</sub>(false)⟧ → ⟦T<sub style="font-size:0.76em;">e</sub>(b)⟧)))) ▷</code>
             </td>
             <td style="text-align: center;">
               <a href="manual.html#item-3-24-dependent-if" class="status-badge badge-def-status">Jump to Definition &rarr;</a>
