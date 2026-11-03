@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 5: Tactics and inference rules — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../manual.html">Manual</a>
+      <a href="../variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="../variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="../nbg_library.html" class="">NBG Library</a>
+      <a href="../proofs.html">Proofs</a>
+      <a href="../metatheory.html">Metatheory</a>
+      <a href="../repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 5: Tactics and inference rules</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">LCF-style forward and backward proof derivation tactics and verified derivations.</p>
+    
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem;">
+          <a href="../manual.html" class="btn">&larr; All Sections (Manual)</a><a href="sec-4.html" class="btn">&larr; §4 Metalogical laws</a><a href="sec-6.html" class="btn">§6 Incompleteness-related statements &rarr;</a>
+        </div>
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 72px; text-align: center;">No.</th>
+                <th style="min-width: 220px;">Name &amp; Classification</th>
+                <th style="min-width: 340px;">Semantic Formula (Fully Parenthesized Infix Operators)</th>
+                <th style="min-width: 210px;">Syntactic Side Condition</th>
+                <th style="width: 135px; text-align: center;">Verification</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+          <tr id="sec-5" class="section-divider" data-section="sec-5">
+            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
+              5) Tactics and inference rules
+              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">LCF-style forward and backward proof derivation tactics and verified derivations.</span>
+            </td>
+          </tr>
+        
+
+          <tr id="item-5-01" data-num="5.01">
+            <td class="num-cell" style="text-align: center;"><a id="5.01" href="#5.01" class="entry-num-link">5.01</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Elementary Theorems</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Basic elementhood implies sethood.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\mathcal{F}, [(B \in x)] \vdash \exists (x : \mathsf{Class})\; (B \in x)) \land (\mathcal{F}, [(B \in x)] \vdash \mathrm{isSet}(B)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\mathcal{F}, [(B \in x)] \vdash \exists x \; (B \in x)) \land (\mathcal{F}, [(B \in x)] \vdash \mathrm{isSet}(B)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(B, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-5-01.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+
+          <tr id="item-5-02" data-num="5.02">
+            <td class="num-cell" style="text-align: center;"><a id="5.02" href="#5.02" class="entry-num-link">5.02</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Inference Rule</span>
+              <strong style="color: #fff; margin-left: 6px;">Definition to Introduction Rule</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Unfolding definition to intro form.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\frac{\mathcal{F}, [(B \in x)] \vdash \exists (x : \mathsf{Class})\; (B \in x)}{\mathcal{F}, [(B \in x)] \vdash \mathrm{isSet}(B)}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{\mathcal{F}, [(B \in x)] \vdash \exists x \; (B \in x)}{\mathcal{F}, [(B \in x)] \vdash \mathrm{isSet}(B)}\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(B, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-5-02.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
+          </tr>
+            
+
+          <tr id="item-5-03" data-num="5.03">
+            <td class="num-cell" style="text-align: center;"><a id="5.03" href="#5.03" class="entry-num-link">5.03</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Inference Rule</span>
+              <strong style="color: #fff; margin-left: 6px;">Deduction Rule Application</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Deduction theorem discharging premise into implication.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathcal{F}, [] \vdash ((B \in x) \to \mathrm{isSet}(B)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathcal{F}, [] \vdash ((B \in x) \to \mathrm{isSet}(B)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(B, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(B, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-5-03.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
+          </tr>
+            
+
+          <tr id="item-5-04" data-num="5.04">
+            <td class="num-cell" style="text-align: center;"><a id="5.04" href="#5.04" class="entry-num-link">5.04</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Tactics Proof Example</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">6-step verified derivation in LCF kernel.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\mathcal{F}, [] \vdash ((\exists (y : \mathsf{Class})\; \forall (x : \mathsf{Class})\; (x \in y)) \to \forall (x : \mathsf{Class})\; \exists (y : \mathsf{Class})\; (x \in y))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\mathcal{F}, [] \vdash ((\exists y \; \forall x \; (x \in y)) \to \forall x \; \exists y \; (x \in y))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(x, y : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-5-04.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

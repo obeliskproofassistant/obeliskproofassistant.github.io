@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathcal{W}, \Gamma \vdash \llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid (\psi \land v \in A) \lor (\neg\psi \land v \in B) \} \]
+        \[ \mathcal{W}, \Gamma \vdash (\llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid ((\psi \land (v \in A)) \lor (\neg \psi \land (v \in B))) \}) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> W, Γ ⊢ ⟦IF ψ THEN A ELSE B FI⟧ = { v | (ψ ∧ v ∈ A) ∨ (¬ψ ∧ v ∈ B) }
+        <strong>Clean Unicode:</strong> W, Γ ⊢ (⟦IF ψ THEN A ELSE B FI⟧ = { v | ((ψ ∧ (v ∈ A)) ∨ (¬ψ ∧ (v ∈ B))) })
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div>
     </div>
@@ -335,7 +335,7 @@
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\mathrm{NFV}(\mathbf{v}_v, \psi) \land \mathrm{NFV}(\mathbf{v}_v, \Gamma)\)</div>
+      <div class="syntax-display">\((\mathrm{NFV}(\mathbf{v}_v, \psi) \land \mathrm{NFV}(\mathbf{v}_v, \Gamma))\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#nfv-vv-psi" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -370,7 +370,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>

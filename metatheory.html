@@ -123,15 +123,23 @@
       margin: 1.5rem 0;
       line-height: 1.6;
     }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1.5rem 0 3rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
     table.data-table {
       width: 100%;
+      table-layout: auto;
       border-collapse: separate;
       border-spacing: 0;
-      margin: 1.5rem 0 3rem;
-      background: rgba(15, 23, 42, 0.5);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      overflow: hidden;
+      margin: 0;
+      background: transparent;
     }
     table.data-table th {
       background: #0f172a;
@@ -148,6 +156,8 @@
       border-bottom: 1px solid rgba(56, 189, 248, 0.08);
       vertical-align: top;
       font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
     .semantic-box {
       background: rgba(56, 189, 248, 0.08);
@@ -156,6 +166,8 @@
       border-radius: 4px;
       font-size: 1.05rem;
       color: #fff;
+      overflow-x: auto;
+      max-width: 100%;
     }
     .syntax-box {
       background: rgba(192, 132, 252, 0.08);
@@ -164,6 +176,13 @@
       border-radius: 4px;
       font-size: 0.95rem;
       color: #e2e8f0;
+      overflow-x: auto;
+      max-width: 100%;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
     }
     .anchor-highlight:target {
       background: rgba(56, 189, 248, 0.18) !important;
@@ -225,7 +244,9 @@
     <nav>
       <a href="index.html">Home</a>
       <a href="manual.html">Manual &amp; Theory</a>
-      <a href="manual.html#nbg-library">NBG Library</a>
+      <a href="variant1.html">Variant 1 (1st-Order)</a>
+      <a href="variant2.html">Variant 2 (Higher-Order)</a>
+      <a href="nbg_library.html">NBG Library</a>
       <a href="proofs.html">Proofs Gallery</a>
       <a href="metatheory.html" class="active">Metatheory</a>
       <a href="output.html">Demo Output</a>
@@ -249,10 +270,10 @@
         <span style="color: #94a3b8;">Notation is fragile—always consult <code>typetheory.ML</code> for semantics rather than surface syntax:</span>
         <ul style="margin: 8px 0 6px 1.2rem; padding: 0;">
           <li>
-            <strong>1. Class Variables vs. Expressions:</strong> For a class variable <span class="obj-var">x</span>, you can write \( x : \mathsf{Class} \), but <em>never</em> <code>x &isin; Class</code>. For an AST expression <span class="expr-term">t</span>, you can write <em>both</em> \( t : \mathsf{Class.Expression} \) and \( t \in \mathsf{Class.Expression} \). An example is \( t = \langle x \rangle \).
+            <strong>1. Class Variables vs. Expressions:</strong> For a class variable <span class="obj-var">x</span>, you can write \( (x : \mathsf{Class}) \), but <em>never</em> <code>x &isin; Class</code>. For an AST expression <span class="expr-term">t</span>, you can write <em>both</em> \( (t : \mathsf{Class.Expression}) \) and \( (t \in \mathsf{Class.Expression}) \). An example is \( (t = \langle x \rangle) \).
           </li>
           <li>
-            <strong>2. Types as Predicates on Classes:</strong> In Morse–Kelley, types correspond to predicates on classes. Formula \( \mathrm{CLASS}(V) \) is an object-level <strong>theorem</strong> (\( \vdash \mathrm{CLASS}(V) \)), having a completely different sense from the compiler typing judgment \( \mathcal{W} : \mathsf{Theory} \) or <code>(V : Class)</code>.
+            <strong>2. Types as Predicates on Classes:</strong> In Morse–Kelley, types correspond to predicates on classes. Formula \( \mathrm{CLASS}(V) \) is an object-level <strong>theorem</strong> (\( \vdash \mathrm{CLASS}(V) \)), having a completely different sense from the compiler typing judgment \( (\mathcal{W} : \mathsf{Theory}) \) or <code>(V : Class)</code>.
           </li>
           <li>
             <strong>3. The "Off-by-One" Level Rule:</strong> SML cannot store classes (<code>type Class = Nonstored.t</code>); it stores <em>expressions</em> of classes (<code>Class_Expre</code>). Decidable side conditions are directly executable and testable boolean functions in CakeML and Poly/ML.
@@ -282,25 +303,26 @@
           <strong>Decidability as Formal Metatheorems:</strong> If it is claimed that a side condition formula is decidable, then that decidability is itself established as a formal theorem in the metatheory with a constructive kernel witness algorithm.
         </li>
         <li>
-          <strong>Constants Representing Variables:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \( \mathbf{v}_x : \mathsf{Variable} \) in the metatheory. Constants representing variables are rendered distinctly in upright pink (<span class="meta-const">v_x</span>, <span class="meta-const">v_C</span>), preventing confusion with italic blue object variables.
+          <strong>Constants Representing Variables:</strong> What was an object variable \(x\) becomes an unspecified constant identifier \( (\mathbf{v}_x : \mathsf{Variable}) \) in the metatheory. Constants representing variables are rendered distinctly in upright pink (<span class="meta-const">v_x</span>, <span class="meta-const">v_C</span>), preventing confusion with italic blue object variables.
         </li>
         <li>
-          <strong>Formulas Without Superfluous Typing Suffixes:</strong> A side condition like \( \mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True} \) is a genuine mathematical formula; it does not take a redundant <code>: Bool</code> or <code>&isin; Bool</code> suffix.
+          <strong>Formulas Without Superfluous Typing Suffixes:</strong> A side condition like \( (\mathrm{NFV}(\mathbf{v}_C, \phi) = \mathrm{True}) \) is a genuine mathematical formula; it does not take a redundant <code>: Bool</code> or <code>&isin; Bool</code> suffix.
         </li>
       </ul>
     </div>
 
     <!-- METATHEORY TABLE -->
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th style="width: 220px;">Condition Identifier</th>
-          <th>Semantic (Metatheoretic Formula)</th>
-          <th style="width: 320px;">Syntax (Meta-Metatheoretic Condition)</th>
-          <th style="width: 100px; text-align: center;">Nature</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="table-scroll-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width: 190px;">Condition Identifier</th>
+            <th style="min-width: 320px;">Semantic (Metatheoretic Formula)</th>
+            <th style="min-width: 260px;">Syntax (Meta-Metatheoretic Condition)</th>
+            <th style="width: 100px; text-align: center;">Nature</th>
+          </tr>
+        </thead>
+        <tbody>
 
         <tr id="sc-top" class="anchor-highlight">
           <td>
@@ -317,7 +339,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\vdash \top\)</div>
+              <div style="margin-top: 2px;">\( \vdash \top\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>ETrue / Top_thm</code></div>
             </div>
         
@@ -351,14 +373,14 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_C \notin \mathrm{FV}(\phi)\)</div>
+              <div class="view-typing">\((\mathbf{v}_C \notin \mathrm{FV}(\phi))\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_C \notin \mathrm{FV}(\phi))\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_C : Variable does not occur as a free variable in formula φ : Fm.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\phi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; (\mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\phi)))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -368,8 +390,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\mathbf{v}_C : \mathsf{Variable} \land \phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_C  \land \phi  \land \mathrm{finiteContext}(\Gamma)\)</div>
+              <div class="view-typing">\((\mathbf{v}_C : \mathsf{Variable} \land (\phi : \mathsf{Fm} \land \mathrm{finiteContext}(\Gamma)))\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_C \land (\phi \land \mathrm{finiteContext}(\Gamma)))\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -392,8 +414,8 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y \ne \mathbf{v}_X\)</div>
+              <div class="view-typing">\((\mathbf{v}_Y \ne \mathbf{v}_X)\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_Y \ne \mathbf{v}_X)\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier constant v_Y is not equal to parameter identifier v_X.</div></details>
             
@@ -410,7 +432,7 @@
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
               <div class="view-typing">\(\mathbf{v}_Y, \mathbf{v}_X : \mathsf{Variable}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X \)</div>
+              <div class="view-membership" style="display:none;">\(\mathbf{v}_Y, \mathbf{v}_X\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -440,7 +462,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(t : \mathsf{Term}, \mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; \mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathrm{isFreeFor}(t, \mathbf{v}, \phi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(t : \mathsf{Term}, \mathbf{v} : \mathsf{Variable}, \phi : \mathsf{Fm}).\; (\mathrm{isFinite}(\phi) \to \mathrm{Decidable}(\mathrm{isFreeFor}(t, \mathbf{v}, \phi)))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFreeFor / SideCondFFI</code></div>
             </div>
         
@@ -450,8 +472,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(t : \mathsf{Term} \land \mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}\)</div>
-              <div class="view-membership" style="display:none;">\(t : \mathsf{Term} \land \mathbf{v}_x  \land \phi \)</div>
+              <div class="view-typing">\(t : (\mathsf{Term} \land (\mathbf{v}_x : \mathsf{Variable} \land \phi : \mathsf{Fm}))\)</div>
+              <div class="view-membership" style="display:none;">\(t : (\mathsf{Term} \land (\mathbf{v}_x \land \phi))\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -474,14 +496,14 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{FV}(\psi)\)</div>
+              <div class="view-typing">\((\mathbf{v}_x \notin \mathrm{FV}(\psi))\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_x \notin \mathrm{FV}(\psi))\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition: variable identifier v_x does not occur free in formula ψ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}).\; \mathrm{isFinite}(\psi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}).\; (\mathrm{isFinite}(\psi) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi)))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -491,8 +513,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \psi \)</div>
+              <div class="view-typing">\((\mathbf{v}_x : \mathsf{Variable} \land \psi : \mathsf{Fm})\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_x \land \psi)\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -515,14 +537,14 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+              <div class="view-typing">\((\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_x \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Variable identifier v_x does not occur free in any active undischarged assumption in context Γ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \Gamma : \mathsf{Ctx}).\; \mathrm{isFinite}(\Gamma) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \Gamma : \mathsf{Ctx}).\; (\mathrm{isFinite}(\Gamma) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma)))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Context.isFree / SideCondNFV_Ctx</code></div>
             </div>
         
@@ -532,8 +554,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_x  \land \Gamma \)</div>
+              <div class="view-typing">\((\mathbf{v}_x : \mathsf{Variable} \land \Gamma : \mathsf{Ctx})\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_x \land \Gamma)\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -556,14 +578,14 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_v \notin \mathrm{FV}(\psi) \land \mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)\)</div>
+              <div class="view-typing">\(((\mathbf{v}_v \notin \mathrm{FV}(\psi)) \land (\mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)))\)</div>
+              <div class="view-membership" style="display:none;">\(((\mathbf{v}_v \notin \mathrm{FV}(\psi)) \land (\mathbf{v}_v \notin \mathrm{Ctx.FV}(\Gamma)))\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Eigenvariable condition for class conditional: bound comprehension variable v_v is not free in condition formula ψ or active context Γ.</div></details>
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}, \Gamma : \mathsf{Ctx}).\; (\mathrm{isFinite}(\psi) \land \mathrm{isFinite}(\Gamma)) \to \mathrm{Decidable}(\mathbf{v} \notin \mathrm{FV}(\psi) \land \mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))\)</div>
+              <div style="margin-top: 2px;">\(\forall(\mathbf{v} : \mathsf{Variable}, \psi : \mathsf{Fm}, \Gamma : \mathsf{Ctx}).\; ((\mathrm{isFinite}(\psi) \land \mathrm{isFinite}(\Gamma)) \to \mathrm{Decidable}((\mathbf{v} \notin \mathrm{FV}(\psi)) \land (\mathbf{v} \notin \mathrm{Ctx.FV}(\Gamma))))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>Truth.Expression.isFree / SideCondNFV</code></div>
             </div>
         
@@ -573,13 +595,13 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\mathbf{v}_v : \mathsf{Variable} \land \psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}\)</div>
-              <div class="view-membership" style="display:none;">\(\mathbf{v}_v  \land \psi  \land \Gamma \)</div>
+              <div class="view-typing">\((\mathbf{v}_v : \mathsf{Variable} \land (\psi : \mathsf{Fm} \land \Gamma : \mathsf{Ctx}))\)</div>
+              <div class="view-membership" style="display:none;">\((\mathbf{v}_v \land (\psi \land \Gamma))\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
             <div style="margin-top: 4px; font-size: 0.78rem; color: #a78bfa;">
-              <strong>Level 3 Ambient:</strong> \(\mathrm{finiteTree}(\psi) \land \mathrm{finiteContext}(\Gamma)\)
+              <strong>Level 3 Ambient:</strong> \((\mathrm{finiteTree}(\psi) \land \mathrm{finiteContext}(\Gamma))\)
             </div>
         
           </td>
@@ -597,8 +619,8 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
-              <div class="view-membership" style="display:none;">\(((\alpha : \mathsf{Type}) \land (t_1 : \alpha) \land (t_2 : \alpha)) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket)\)</div>
+              <div class="view-typing">\((((\alpha : \mathsf{Type}) \land ((t_1 : \alpha) \land (t_2 : \alpha))) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket))\)</div>
+              <div class="view-membership" style="display:none;">\((((\alpha : \mathsf{Type}) \land ((t_1 : \alpha) \land (t_2 : \alpha))) \to (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket))\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Parametric polymorphism typing rule ensuring branches t1 and t2 share common metatype α under denotation brackets ⟦...⟧.</div></details>
             
@@ -638,8 +660,8 @@
           </td>
           <td>
             <div class="semantic-box">
-              <div class="view-typing">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
-              <div class="view-membership" style="display:none;">\(\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket\)</div>
+              <div class="view-typing">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div>
+              <div class="view-membership" style="display:none;">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) = \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div>
             </div>
             <details class="comment-toggle"><summary class="comment-link">comment</summary><div style="margin-top: 6px; font-size: 0.85rem; color: #cbd5e1;">Dependent type computation dynamically computing branch types from boolean value b using simple_if at the Type metalevel under denotation brackets ⟦...⟧.</div></details>
             
@@ -655,8 +677,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
-              <div class="view-membership" style="display:none;">\(T : \mathsf{Bool} \to \mathsf{Type} \land b : \mathsf{Bool}\)</div>
+              <div class="view-typing">\(T : (\mathsf{Bool} \to (\mathsf{Type} \land b : \mathsf{Bool}))\)</div>
+              <div class="view-membership" style="display:none;">\(T : (\mathsf{Bool} \to (\mathsf{Type} \land b : \mathsf{Bool}))\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -686,7 +708,7 @@
             
             <div style="margin-top: 6px; padding: 6px 10px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; border-radius: 4px; font-size: 0.82rem;">
               <strong style="color: #34d399;">Decidability Theorem:</strong>
-              <div style="margin-top: 2px;">\(\mathrm{provable}(\mathrm{MK}, \forall(X : \mathsf{Class}).\; X \ne \emptyset \implies \exists(y : \mathsf{Class}).\; y \in X \land y \cap X = \emptyset)\)</div>
+              <div style="margin-top: 2px;">\(\mathrm{provable}(\mathrm{MK}, \forall(X : \mathsf{Class}).\; ((X \ne \emptyset) \implies \exists(y : \mathsf{Class}).\; ((y \in X) \land ((y \cap X) = \emptyset))))\)</div>
               <div style="color: var(--text-muted); font-size: 0.75rem; margin-top: 2px;">Kernel Witness: <code>MK_regularity_axm / on_ord_thm</code></div>
             </div>
         
@@ -696,8 +718,8 @@
           </td>
           <td>
             <a href="metatheory.html#sc-top" class="syntax-box" style="display: block; text-decoration: none; color: inherit; border: 1px dashed rgba(56, 189, 248, 0.45); padding: 6px 10px; border-radius: 6px;" title="Click to inspect side-side condition (terminates cyclically at ⊤)">
-              <div class="view-typing">\(\top\)</div>
-              <div class="view-membership" style="display:none;">\(\top\)</div>
+              <div class="view-typing">\(\mathrm{On} : (\mathsf{Class} \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity}))\)</div>
+              <div class="view-membership" style="display:none;">\(\mathrm{On} : (\mathsf{Class} \land \mathrm{provable}(\mathrm{MK}, \mathrm{Regularity}))\)</div>
               <div style="font-size: 0.7rem; color: #38bdf8; margin-top: 3px;">↳ side_condition_id: <code>sc-top</code> &rarr;</div>
             </a>
             
@@ -711,8 +733,9 @@
           </td>
         </tr>
         
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <script>

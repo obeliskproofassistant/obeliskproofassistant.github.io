@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 3: Set/class-theoretic foundations of mathematics — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../manual.html">Manual</a>
+      <a href="../variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="../variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="../nbg_library.html" class="">NBG Library</a>
+      <a href="../proofs.html">Proofs</a>
+      <a href="../metatheory.html">Metatheory</a>
+      <a href="../repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 3: Set/class-theoretic foundations of mathematics</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Morse–Kelley (MK) axiomatic class theory with Dunaev tagged ordered pairs, class comprehension, class conditional if-then-else, simple_if, dependent_if, and Ordinal Induction.</p>
+    
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem;">
+          <a href="../manual.html" class="btn">&larr; All Sections (Manual)</a><a href="sec-2.html" class="btn">&larr; §2 Predicate logic</a><a href="sec-4.html" class="btn">§4 Metalogical laws &rarr;</a>
+        </div>
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 72px; text-align: center;">No.</th>
+                <th style="min-width: 220px;">Name &amp; Classification</th>
+                <th style="min-width: 340px;">Semantic Formula (Fully Parenthesized Infix Operators)</th>
+                <th style="min-width: 210px;">Syntactic Side Condition</th>
+                <th style="width: 135px; text-align: center;">Verification</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+          <tr id="sec-3" class="section-divider" data-section="sec-3">
+            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
+              3) Set/class-theoretic foundations of mathematics
+              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">Morse–Kelley (MK) axiomatic class theory with Dunaev tagged ordered pairs, class comprehension, class conditional if-then-else, simple_if, dependent_if, and Ordinal Induction.</span>
+            </td>
+          </tr>
+        
+
+          <tr id="item-3-01" data-num="3.01">
+            <td class="num-cell" style="text-align: center;"><a id="3.01" href="#3.01" class="entry-num-link">3.01</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Predicative/impredicative comprehension for all first-order and higher-order formulas.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; ((X \in \{ x \mid \phi(x) \}) \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall X \; ((X \in \{ x \mid \phi(x) \}) \longleftrightarrow (\mathrm{isSet}(X) \land \phi(X)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#nfv-c-phi" class="side-condition-link"><span class="view-typing">\(\mathrm{NFV}(\mathbf{v}_C, \phi)\)</span><span class="view-membership" style="display:none;">\(\mathrm{NFV}(\mathbf{v}_C, \phi)\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-01.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-02" data-num="3.02">
+            <td class="num-cell" style="text-align: center;"><a id="3.02" href="#3.02" class="entry-num-link">3.02</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Extensionality Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Two classes having identical elements are identical.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\forall (x : \mathsf{Class})\; ((x \in A) \longleftrightarrow (x \in B))) \to (A = B))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ((\forall x \; ((x \in A) \longleftrightarrow (x \in B))) \to (A = B))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, B, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-02.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-08" data-num="3.08">
+            <td class="num-cell" style="text-align: center;"><a id="3.08" href="#3.08" class="entry-num-link">3.08</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Heredity Axiom (Subclasses of Sets are Sets)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Any subclass of a set is a set.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land (A \subseteq B)) \to \mathrm{isSet}(A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ((\mathrm{isSet}(B) \land (A \subseteq B)) \to \mathrm{isSet}(A))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, B : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-08.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-12" data-num="3.12">
+            <td class="num-cell" style="text-align: center;"><a id="3.12" href="#3.12" class="entry-num-link">3.12</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Regularity (Foundation) Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Every non-empty class contains an ∈-minimal element. Rules out infinite descending ∈-chains.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Class})\; ((A \ne \emptyset) \to \exists (x : \mathsf{Class})\; ((x \in A) \land ((x \cap A) = \emptyset)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; ((A \ne \emptyset) \to \exists x \; ((x \in A) \land ((x \cap A) = \emptyset)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-12.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-13" data-num="3.13">
+            <td class="num-cell" style="text-align: center;"><a id="3.13" href="#3.13" class="entry-num-link">3.13</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Pairing Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Unordered pair of two sets is a set.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (a, b : \mathsf{Class})\; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall a, b \; ((\mathrm{isSet}(a) \land \mathrm{isSet}(b)) \to \mathrm{isSet}(\{a, b\}))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(a, b : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a, b\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-13.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-14" data-num="3.14">
+            <td class="num-cell" style="text-align: center;"><a id="3.14" href="#3.14" class="entry-num-link">3.14</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Union Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">The unary union of any set is a set.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Class})\; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; (\mathrm{isSet}(A) \to \mathrm{isSet}(\bigcup A))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-14.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-22-class-if" data-num="3.22">
+            <td class="num-cell" style="text-align: center;"><a id="3.22" href="#3.22" class="entry-num-link">3.22</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Class-level conditional defined via class comprehension. The syntactic constructor IF-THEN-ELSE-FI denotes a class valuation ⟦IF ψ THEN A ELSE B FI⟧. Soundness requires variable identifier v_v not free in formula ψ or context Γ.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\mathcal{W}, \Gamma \vdash (\llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid ((\psi \land (v \in A)) \lor (\neg \psi \land (v \in B))) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\(\mathcal{W}, \Gamma \vdash (\llbracket \mathrm{IF}\; \psi\; \mathrm{THEN}\; A\; \mathrm{ELSE}\; B\; \mathrm{FI} \rrbracket = \{ v \mid ((\psi \land (v \in A)) \lor (\neg \psi \land (v \in B))) \})\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#nfv-vv-psi" class="side-condition-link"><span class="view-typing">\((\mathrm{NFV}(\mathbf{v}_v, \psi) \land \mathrm{NFV}(\mathbf{v}_v, \Gamma))\)</span><span class="view-membership" style="display:none;">\((\mathrm{NFV}(\mathbf{v}_v, \psi) \land \mathrm{NFV}(\mathbf{v}_v, \Gamma))\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-22-class-if.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-23-simple-if" data-num="3.23">
+            <td class="num-cell" style="text-align: center;"><a id="3.23" href="#3.23" class="entry-num-link">3.23</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">simple_if (polymorphic non-dependent conditional over arbitrary Type)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Non-dependent type-theoretic conditional constructor working parametrically over any metatype, evaluated via denotation brackets ⟦simple_if ...⟧.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; (\mathsf{Bool} \to (\alpha \to (\alpha \to \alpha)))\)</div><div class="formula-chunk">\((\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket),  \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\(\mathrm{simple\_if} : \Pi (\alpha : \mathsf{Type}).\; (\mathsf{Bool} \to (\alpha \to (\alpha \to \alpha)))\)</div><div class="formula-chunk">\((\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{true}\;t_1\;t_2 \rrbracket = \llbracket t_1 \rrbracket),  \quad (\llbracket \mathrm{simple\_if}\;\alpha\;\mathrm{false}\;t_1\;t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#simple-if-typing" class="side-condition-link"><span class="view-typing">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span><span class="view-membership" style="display:none;">\(\alpha : \mathsf{Type}, \quad t_1, t_2 : \alpha\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-23-simple-if.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-24-dependent-if" data-num="3.24">
+            <td class="num-cell" style="text-align: center;"><a id="3.24" href="#3.24" class="entry-num-link">3.24</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">dependent_if (polymorphic dependent conditional with type computation)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing"><div class="formula-chunk">\(\mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; (T(\mathrm{true}) \to (T(\mathrm{false}) \to T(b)))\)</div><div class="formula-chunk">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div><div class="formula-chunk">\((\llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket),  \quad (\llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div></div><div class="view-membership" style="display:none;"><div class="formula-chunk">\(\mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; (T(\mathrm{true}) \to (T(\mathrm{false}) \to T(b)))\)</div><div class="formula-chunk">\((\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket)\)</div><div class="formula-chunk">\((\llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket),  \quad (\llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket)\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-23-simple-if" class="sym-def-chip" title="simple_if : ∏(α : Type). Bool → α → α → α (3.23 simple_if)"><span class="sym-chip-name">simple_if</span><span class="sym-chip-type">∏(α : Type). Bool → α → α → α</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#dependent-if-typing" class="side-condition-link"><span class="view-typing">\(T : (\mathsf{Bool} \to \mathsf{Type}),  \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</span><span class="view-membership" style="display:none;">\(T : (\mathsf{Bool} \to \mathsf{Type}),  \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-24-dependent-if.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="thm-ord-ind" data-num="3.32">
+            <td class="num-cell" style="text-align: center;"><a id="3.32" href="#3.32" class="entry-num-link">3.32</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Ordinal Induction (∈-Ind)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">On is a Class object (On : Class). Ordinal induction is formulated as a formula in Morse–Kelley class theory, accompanied by a constructive proof program.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\forall (\alpha : \mathsf{Class})\; ((\alpha \in \mathrm{On}) \to ((\forall (\beta : \mathsf{Class})\; ((\beta \in \alpha) \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; ((\alpha \in \mathrm{On}) \to \phi(\alpha)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\forall \alpha \; ((\alpha \in \mathrm{On}) \to ((\forall \beta \; ((\beta \in \alpha) \to \phi(\beta))) \to \phi(\alpha)))) \to \forall \alpha \; ((\alpha \in \mathrm{On}) \to \phi(\alpha)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#ord-induction" class="side-condition-link"><span class="view-typing">\(\mathrm{On} : \mathsf{Class},  \quad \mathrm{WF}(\in, \mathrm{On})\)</span><span class="view-membership" style="display:none;">\(\mathrm{On},  \quad \mathrm{WF}(\in, \mathrm{On})\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/thm-ord-ind.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+
+          <tr id="item-3-34" data-num="3.34">
+            <td class="num-cell" style="text-align: center;"><a id="3.34" href="#3.34" class="entry-num-link">3.34</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Power Class Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Power class of any set is a set.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (a : \mathsf{Class})\; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall a \; (\mathrm{isSet}(a) \to \mathrm{isSet}(\mathcal{P}(a)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(a : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(a\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-34.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-37" data-num="3.37">
+            <td class="num-cell" style="text-align: center;"><a id="3.37" href="#3.37" class="entry-num-link">3.37</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Replacement / Limitation of Size Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Image of a set under a class function is a set.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (F, A : \mathsf{Class})\; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall F, A \; ((\mathrm{isClassFunction}(F) \land \mathrm{isSet}(A)) \to \mathrm{isSet}(F[A]))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(F, A : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(F, A\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-37.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-40" data-num="3.40">
+            <td class="num-cell" style="text-align: center;"><a id="3.40" href="#3.40" class="entry-num-link">3.40</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Dunaev Tagged Ordered Pair</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Dunaev Tagged Ordered Pair (dunaev_opair_def_entry_fm in foundations.ML). Works uniformly for proper classes and sets without collapsing to ∅ when A or B is a proper class.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; ([A, B]_D = \{ z \mid \exists (a \in A)\; ((z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; ([A, B]_D = \{ z \mid \exists (a \in A)\; ((z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})) \})\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, B : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-40.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-41" data-num="3.41">
+            <td class="num-cell" style="text-align: center;"><a id="3.41" href="#3.41" class="entry-num-link">3.41</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">First Projection of Dunaev Tagged Ordered Pair</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">First class projection π₁([A, B]_D) = A recovers A unconditionally for any class A (dunaev_pr1_def_entry_fm in foundations.ML).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; (\{ a \mid (\{\{\{\{a\}\}\}, \{\emptyset\}\} \in [A, B]_D) \} = A)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; (\{ a \mid (\{\{\{\{a\}\}\}, \{\emptyset\}\} \in [A, B]_D) \} = A)\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a> <a href="../manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, B : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-41.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+
+          <tr id="item-3-42" data-num="3.42">
+            <td class="num-cell" style="text-align: center;"><a id="3.42" href="#3.42" class="entry-num-link">3.42</a></td>
+            <td>
+              <span class="classification-badge badge-theorem">Theorem</span>
+              <strong style="color: #fff; margin-left: 6px;">Second Projection of Dunaev Tagged Ordered Pair</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Second class projection π₂([A, B]_D) = B recovers B unconditionally for any class B (dunaev_pr2_def_entry_fm in foundations.ML).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A, B : \mathsf{Class})\; (\{ b \mid (\{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D) \} = B)\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A, B \; (\{ b \mid (\{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D) \} = B)\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a> <a href="../manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, B : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, B\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-42.html" class="status-badge badge-verified-strong">Verified (Kernel)</a></td>
+          </tr>
+            
+
+          <tr id="item-3-45" data-num="3.45">
+            <td class="num-cell" style="text-align: center;"><a id="3.45" href="#3.45" class="entry-num-link">3.45</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Infinity Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Guarantees existence of the set of natural numbers ω.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\exists (x : \mathsf{Class})\; (\mathrm{isSet}(x) \land ((\emptyset \in x) \land \forall (y : \mathsf{Class})\; ((y \in x) \to ((y \cup \{y\}) \in x))))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\exists x \; (\mathrm{isSet}(x) \land ((\emptyset \in x) \land \forall y \; ((y \in x) \to ((y \cup \{y\}) \in x))))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="../manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a> <a href="../manual.html#item-3-14" class="sym-def-chip" title="(∪) : Class × Class → Class (3.14 Binary Union)"><span class="sym-chip-name">∪</span><span class="sym-chip-type">Class × Class → Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(x, y : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, y\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-45.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-46" data-num="3.46">
+            <td class="num-cell" style="text-align: center;"><a id="3.46" href="#3.46" class="entry-num-link">3.46</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Global Choice Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Global choice function over all non-empty sets.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\exists (c : \mathsf{Class})\; (\mathrm{isClassFunction}(c) \land \forall (x : \mathsf{Class})\; ((\mathrm{isSet}(x) \land (x \ne \emptyset)) \to (c(x) \in x)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\exists c \; (\mathrm{isClassFunction}(c) \land \forall x \; ((\mathrm{isSet}(x) \land (x \ne \emptyset)) \to (c(x) \in x)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-37" class="sym-def-chip" title="isClassFunction : Class → Bool (3.37 Class Function)"><span class="sym-chip-name">isClassFunction</span><span class="sym-chip-type">Class → Bool</span></a> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="../manual.html#item-3-12" class="sym-def-chip" title="∅ : Class (3.12 Empty Class)"><span class="sym-chip-name">∅</span><span class="sym-chip-type">Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(c, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(c, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-46.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-3-47" data-num="3.47">
+            <td class="num-cell" style="text-align: center;"><a id="3.47" href="#3.47" class="entry-num-link">3.47</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Universal Class (V)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Universe of all sets. V is a proper class (not a set).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((V = \{ x \mid (x = x) \})\)</div><div class="view-membership formula-chunk" style="display:none;">\((V = \{ x \mid (x = x) \})\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(V : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(V\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-47.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-53" data-num="3.53">
+            <td class="num-cell" style="text-align: center;"><a id="3.53" href="#3.53" class="entry-num-link">3.53</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Transitive Class Predicate</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">A class is transitive if every element of it is also a subclass.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\mathrm{Tr}(A) \longleftrightarrow \forall (x : \mathsf{Class})\; ((x \in A) \to (x \subseteq A)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\mathrm{Tr}(A) \longleftrightarrow \forall x \; ((x \in A) \to (x \subseteq A)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-02" class="sym-def-chip" title="(⊆) : Class × Class → Bool (3.02 Subclass Relation)"><span class="sym-chip-name">⊆</span><span class="sym-chip-type">Class × Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(A, x : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(A, x\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-53.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-3-66" data-num="3.66">
+            <td class="num-cell" style="text-align: center;"><a id="3.66" href="#3.66" class="entry-num-link">3.66</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Tarski&#x27;s Axiom of Universes</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Grothendieck-Tarski universes: every set belongs to a transitive, power-closed universe.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to \exists (u : \mathsf{Class})\; (\mathrm{isUniverse}(u) \land ((x \in u) \land \mathrm{isSet}(u))))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall x \; (\mathrm{isSet}(x) \to \exists u \; (\mathrm{isUniverse}(u) \land ((x \in u) \land \mathrm{isSet}(u))))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(x, u : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(x, u\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-3-66.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

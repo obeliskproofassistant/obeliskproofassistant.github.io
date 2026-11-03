@@ -321,12 +321,12 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathcal{W} \subseteq \mathcal{Q} \subseteq \mathcal{T} \subseteq \mathcal{F} \]
+        \[ ((\mathcal{W} \subseteq \mathcal{Q}) \land ((\mathcal{Q} \subseteq \mathcal{T}) \land (\mathcal{T} \subseteq \mathcal{F}))) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)
+        <strong>Clean Unicode:</strong> ((W ⊆ Q) ∧ ((Q ⊆ T) ∧ (T ⊆ F)))
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Tarski hierarchy of theories with Henkin constants: W is arbitrary, Q is Robinson arithmetic, T is recursive MK, F is Henkin-complete extension.</div>
     </div>
 
     
@@ -366,11 +366,11 @@
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)).</div>
+            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ((W ⊆ Q) ∧ ((Q ⊆ T) ∧ (T ⊆ F)))).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>
@@ -383,7 +383,7 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
       <pre class="code-block"><code>(* Primitive Axiom Postulate *)
-val thm_item_6_01 = Thm ([], parse_formula &quot;W ⊆ Q ⊆ T ⊆ F (Tarski hierarchy of theories with Henkin constants)&quot;);</code></pre>
+val thm_item_6_01 = Thm ([], parse_formula &quot;((W ⊆ Q) ∧ ((Q ⊆ T) ∧ (T ⊆ F)))&quot;);</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 1: Propositional logic — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../manual.html">Manual</a>
+      <a href="../variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="../variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="../nbg_library.html" class="">NBG Library</a>
+      <a href="../proofs.html">Proofs</a>
+      <a href="../metatheory.html">Metatheory</a>
+      <a href="../repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 1: Propositional logic</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Classical propositional calculus axioms A01–A12 and Modus Ponens inference rule.</p>
+    
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem;">
+          <a href="../manual.html" class="btn">&larr; All Sections (Manual)</a><a href="sec-2.html" class="btn">§2 Predicate logic &rarr;</a>
+        </div>
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 72px; text-align: center;">No.</th>
+                <th style="min-width: 220px;">Name &amp; Classification</th>
+                <th style="min-width: 340px;">Semantic Formula (Fully Parenthesized Infix Operators)</th>
+                <th style="min-width: 210px;">Syntactic Side Condition</th>
+                <th style="width: 135px; text-align: center;">Verification</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+          <tr id="sec-1" class="section-divider" data-section="sec-1">
+            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
+              1) Propositional logic
+              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">Classical propositional calculus axioms A01–A12 and Modus Ponens inference rule.</span>
+            </td>
+          </tr>
+        
+
+          <tr id="item-1-01" data-num="1.01">
+            <td class="num-cell" style="text-align: center;"><a id="1.01" href="#1.01" class="entry-num-link">1.01</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A01 (Affirmation of Consequent)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Positive implicative axiom.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\alpha \to (\beta \to \alpha))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\beta \to \alpha))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-01.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-02" data-num="1.02">
+            <td class="num-cell" style="text-align: center;"><a id="1.02" href="#1.02" class="entry-num-link">1.02</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A02 (Distribution of Implication)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Self-distribution of implication.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to (\beta \to \gamma)) \to ((\alpha \to \beta) \to (\alpha \to \gamma)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-02.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-03" data-num="1.03">
+            <td class="num-cell" style="text-align: center;"><a id="1.03" href="#1.03" class="entry-num-link">1.03</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A03 (Conjunction Elimination Left)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Left projection.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\alpha \land \beta) \to \alpha)\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\alpha \land \beta) \to \alpha)\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-03.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-04" data-num="1.04">
+            <td class="num-cell" style="text-align: center;"><a id="1.04" href="#1.04" class="entry-num-link">1.04</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A04 (Conjunction Elimination Right)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Right projection.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\alpha \land \beta) \to \beta)\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\alpha \land \beta) \to \beta)\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-04.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-05" data-num="1.05">
+            <td class="num-cell" style="text-align: center;"><a id="1.05" href="#1.05" class="entry-num-link">1.05</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A05 (Conjunction Introduction)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Pairing of propositional truths.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\beta \to (\alpha \land \beta)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-05.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-06" data-num="1.06">
+            <td class="num-cell" style="text-align: center;"><a id="1.06" href="#1.06" class="entry-num-link">1.06</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A06 (Disjunction Introduction Left)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Left injection.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\alpha \to (\alpha \lor \beta))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\alpha \to (\alpha \lor \beta))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-06.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-07" data-num="1.07">
+            <td class="num-cell" style="text-align: center;"><a id="1.07" href="#1.07" class="entry-num-link">1.07</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A07 (Disjunction Introduction Right)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Right injection.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\beta \to (\alpha \lor \beta))\)</div><div class="view-membership formula-chunk" style="display:none;">\((\beta \to (\alpha \lor \beta))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-07.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-08" data-num="1.08">
+            <td class="num-cell" style="text-align: center;"><a id="1.08" href="#1.08" class="entry-num-link">1.08</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A08 (Disjunction Elimination / Cases)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Proof by cases.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to \gamma) \to ((\beta \to \gamma) \to ((\alpha \lor \beta) \to \gamma)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta, \gamma : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-08.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-09" data-num="1.09">
+            <td class="num-cell" style="text-align: center;"><a id="1.09" href="#1.09" class="entry-num-link">1.09</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A09 (Negation Introduction / Contradiction)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Contradiction to bottom.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\neg \alpha) \to (\alpha \to \bot))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\neg \alpha) \to (\alpha \to \bot))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-09.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-10" data-num="1.10">
+            <td class="num-cell" style="text-align: center;"><a id="1.10" href="#1.10" class="entry-num-link">1.10</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A10 (Reductio Ad Absurdum)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Proof of negation.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</div><div class="view-membership formula-chunk" style="display:none;">\(((\alpha \to \beta) \to ((\alpha \to \neg \beta) \to \neg \alpha))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-10.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-11" data-num="1.11">
+            <td class="num-cell" style="text-align: center;"><a id="1.11" href="#1.11" class="entry-num-link">1.11</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A11 (Ex Falso Quodlibet)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Principle of explosion.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\bot \to \alpha)\)</div><div class="view-membership formula-chunk" style="display:none;">\((\bot \to \alpha)\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-11.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-1-12" data-num="1.12">
+            <td class="num-cell" style="text-align: center;"><a id="1.12" href="#1.12" class="entry-num-link">1.12</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">A12 (Law of Excluded Middle)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Classical tertium non datur.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\((\alpha \lor \neg \alpha)\)</div><div class="view-membership formula-chunk" style="display:none;">\((\alpha \lor \neg \alpha)\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-1-12.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="rule-mp" data-num="1.13">
+            <td class="num-cell" style="text-align: center;"><a id="1.13" href="#1.13" class="entry-num-link">1.13</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Inference Rule</span>
+              <strong style="color: #fff; margin-left: 6px;">Modus Ponens (MP)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Fundamental detachment rule.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\frac{\alpha \quad (\alpha \to \beta)}{\beta}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{\alpha \quad (\alpha \to \beta)}{\beta}\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\alpha, \beta : \mathsf{Bool}\)</span><span class="view-membership" style="display:none;">\(\alpha, \beta : \mathsf{Bool}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/rule-mp.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
+          </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

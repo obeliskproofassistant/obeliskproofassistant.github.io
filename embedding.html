@@ -71,8 +71,10 @@
         }
 
         #myhtmloutput {
-            max-width: 1000px;
+            max-width: 100%;
+            width: 100%;
             margin: 0 auto;
+            overflow-x: auto;
         }
 
         /* Adjust pre formatting inside output */
@@ -80,6 +82,7 @@
             font-size: 13.5px !important;
             line-height: 1.5 !important;
             font-family: 'JetBrains Mono', monospace !important;
+            overflow-x: auto;
         }
     </style>
 </head>
@@ -115,7 +118,7 @@ const localAddr = "output.html";
 const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
 
 async function getText() {
-    let text = sessionStorage.getItem("obelisk_demo_output_v2");
+    let text = sessionStorage.getItem("obelisk_demo_output_v3");
     if (!text) {
         try {
             const res = await fetch(localAddr);
@@ -130,7 +133,7 @@ async function getText() {
             text = await remoteRes.text();
         }
         if (text) {
-            sessionStorage.setItem("obelisk_demo_output_v2", text);
+            sessionStorage.setItem("obelisk_demo_output_v3", text);
         }
     }
     return text;

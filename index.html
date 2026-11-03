@@ -113,6 +113,15 @@
             <button type="button" id="toggle-derivation-walkthrough" class="switch-link" style="cursor: pointer; font-family: inherit;" onclick="var p=document.getElementById('formula-vs-theorem-walkthrough'); p.style.display=(p.style.display==='none'?'block':'none');">
                 🔍 Formula vs. Theorem Walkthrough
             </button>
+            <a href="variant1.html" target="_top" class="switch-link" style="color: #c084fc; border-color: rgba(192,132,252,0.4); background: rgba(192,132,252,0.12);">
+                🏛 Variant 1 (1st-Order)
+            </a>
+            <a href="variant2.html" target="_top" class="switch-link" style="color: #38bdf8;">
+                λ Variant 2 (Higher-Order)
+            </a>
+            <a href="nbg_library.html" target="_top" class="switch-link" style="color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.12);">
+                📚 NBG Library
+            </a>
             <a href="repl.html" target="_top" class="switch-link">
                 ⚡ Web REPL Compiler &rarr;
             </a>
@@ -149,14 +158,14 @@
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                     <td style="padding: 6px 8px;"><code>formula F = ...;</code></td>
                     <td style="padding: 6px 8px;"><strong>Type Definition</strong> (<code>NBGCompiler.Type</code> / <code>Fm</code>)</td>
-                    <td style="padding: 6px 8px;"><code>formula False_RussellIsSet = Set({ x | x in x -&gt; Bot });</code></td>
+                    <td style="padding: 6px 8px;"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code></td>
                     <td style="padding: 6px 8px;">Checks syntactic sort well-formedness &amp; Stage I/II comprehension bounds</td>
                     <td style="padding: 6px 8px; color: #fbbf24;"><strong>Yes as an uninhabited Type</strong> (defining a proposition never proves it!)</td>
                 </tr>
                 <tr>
                     <td style="padding: 6px 8px;"><code>theorem T : F = e;</code></td>
                     <td style="padding: 6px 8px;"><strong>Proof Term Witness</strong> (<code>NBGCompiler.Expr</code>)</td>
-                    <td style="padding: 6px 8px;"><code>theorem thm_russell_not_set : Set(R) -&gt; Bot = fn (hSet : Set(R)) =&gt; ...;</code></td>
+                    <td style="padding: 6px 8px;"><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
                     <td style="padding: 6px 8px;">Bidirectionally synthesizes type of proof term <code>e</code> via <code>NBGCompiler.typeCheck</code> and checks α-equivalence with <code>F</code></td>
                     <td style="padding: 6px 8px; color: #34d399;"><strong>Never</strong> — every candidate term for an uninhabited type is deterministically rejected</td>
                 </tr>
@@ -169,11 +178,11 @@
             </div>
             <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 8px;">
                 <strong style="color: #38bdf8;">Step 2 · Implication Intro (<code>EFn</code>)</strong><br>
-                <code>fn (hIn : z in {x | Bot}) =&gt; ...</code> adds antecedent hypothesis <code>hIn</code> to proof context <code>Γ</code>.
+                <code>fn (hIn : (z in {x | Bot})) =&gt; ...</code> adds antecedent hypothesis <code>hIn</code> to proof context <code>Γ</code>.
             </div>
             <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 8px;">
                 <strong style="color: #38bdf8;">Step 3 · Comprehension Axiom (<code>ECompr</code>)</strong><br>
-                <code>compr(x. Bot, z)</code> synthesizes <code>(z in {x | Bot}) &lt;-&gt; (Set(z) /\ Bot)</code>.
+                <code>compr(x. Bot, z)</code> synthesizes <code>((z in {x | Bot}) &lt;-&gt; (Set(z) /\ Bot))</code>.
             </div>
             <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(16,185,129,0.35); border-radius: 6px; padding: 8px;">
                 <strong style="color: #34d399;">Step 4 · Modus Ponens &amp; Projection (<code>EApp</code>, <code>ESnd</code>)</strong><br>
@@ -181,7 +190,7 @@
             </div>
             <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(192,132,252,0.4); border-radius: 6px; padding: 8px;">
                 <strong style="color: #d8b4fe;">Two Proof Assistant Variants &amp; Bridge</strong><br>
-                <strong>Variant 1</strong> (1st-Order NBG/MK with <code>Enc</code>, <code>Dec</code>, <code>Emb</code>, <code>ProofsOf</code>, <code>Theorems</code>) &amp; <strong>Variant 2</strong> (Higher-Order Formulas-as-Types). <a href="manual.html#two-variants-architecture" target="_top" style="color: #38bdf8;">Inspect in manual.html &rarr;</a>
+                <a href="variant1.html" target="_top" style="color: #c084fc; font-weight: 600;">Variant 1 Page</a> (1st-Order NBG/MK with <code>Enc</code>, <code>Dec</code>, <code>Emb</code>, <code>ProofsOf</code>, <code>Theorems</code>) &bull; <a href="variant2.html" target="_top" style="color: #38bdf8; font-weight: 600;">Variant 2 Page</a> (Higher-Order Formulas-as-Types) &bull; <a href="nbg_library.html" target="_top" style="color: #34d399; font-weight: 600;">NBG Library Page</a>
             </div>
         </div>
     </section>

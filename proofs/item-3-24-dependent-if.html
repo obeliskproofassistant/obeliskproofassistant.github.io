@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; T(\mathrm{true}) \to T(\mathrm{false}) \to T(b) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket) \]
+        \[ \mathrm{dependent\_if} : \Pi (T \to \mathsf{Type}) (b).\; (T(\mathrm{true}) \to (T(\mathrm{false}) \to T(b))) \quad (\mathrm{typeof}(\llbracket \mathrm{if}\; b\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket) := \llbracket \mathrm{simple\_if}\;\mathsf{Type}\;b\;(\mathrm{typeof}\;t_1)\;(\mathrm{typeof}\;t_2) \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{true}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_1 \rrbracket, \; \llbracket \mathrm{if}\; \mathrm{false}\; \mathrm{then}\; t_1\; \mathrm{else}\; t_2 \rrbracket = \llbracket t_2 \rrbracket) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> dependent_if : ∏(T : Bool → Type) (b : Bool). T(true) → T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)
+        <strong>Clean Unicode:</strong> dependent_if : ∏(T : Bool → Type) (b : Bool). (T(true) → (T(false) → T(b)   (typeof(⟦if b then t1 else t2⟧) := ⟦simple_if Type b (typeof t1) (typeof t2)⟧, ⟦if true then t1 else t2⟧ = ⟦t1⟧, ⟦if false then t1 else t2⟧ = ⟦t2⟧)))
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Dependent conditional AST constructor with branch typing dynamically evaluated using simple_if at the universe of Types under valuation brackets ⟦...⟧.</div>
     </div>
@@ -335,7 +335,7 @@
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(T : \mathsf{Bool} \to \mathsf{Type}, \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</div>
+      <div class="syntax-display">\(T : (\mathsf{Bool} \to \mathsf{Type}),  \quad t_1 : T(\mathrm{true}), \; t_2 : T(\mathrm{false})\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#dependent-if-typing" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -370,7 +370,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>

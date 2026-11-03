@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NBG Standard Library — 20 Machine-Checked Theorems — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="manual.html">Manual</a>
+      <a href="variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="nbg_library.html" class="active">NBG Library</a>
+      <a href="proofs.html">Proofs</a>
+      <a href="metatheory.html">Metatheory</a>
+      <a href="repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">NBG Standard Library — 20 Machine-Checked Theorems</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Standalone page for the 20 theorems in `examples/nbg_verified_programs.nbg` with Variant 2 λ-types and Variant 1 Option B certificates.</p>
+    
+  <!-- TWO PROOF ASSISTANT VARIANTS & DUAL SEMANTICS OF TYPETHEORY.ML -->
+  <div class="card" id="two-variants-architecture" style="margin-top: 2rem; border: 1px solid rgba(192, 132, 252, 0.4); background: rgba(15, 23, 42, 0.82); padding: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem;">
+      <div>
+        <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-purple);">Unified Multi-Variant Architecture &amp; Dual Semantics</div>
+        <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">Two Proof Assistant Variants, Decoupled Operators (Enc / Dec / Emb), and Option B Anatomy</h2>
+      </div>
+      <span class="status-badge badge-verified-strong">Variant Bridge Verified (Poly/ML + CakeML)</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 1rem;">
+      Obelisk maintains <strong>two co-existing proof assistant variants</strong> in dedicated subdirectories of <code>set_theory_prover/variants/</code>, connected by an executable bidirectional translation bridge (<code>program/variant_bridge.ML</code>) and grounded in the dual semantics of <code>program/types/typetheory.ML</code>:
+    </p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 1rem; margin-bottom: 1.2rem;">
+      <div style="background: rgba(30, 41, 59, 0.65); border: 1px solid rgba(192, 132, 252, 0.35); border-radius: 8px; padding: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 0.4rem;">
+          <div style="font-weight: 700; color: #d8b4fe; font-size: 1rem;">1. Variant 1 — 1st-Order NBG/MK Proof Assistant</div>
+          <a href="variant1.html" class="btn btn-secondary btn-sm" style="border-color: rgba(192, 132, 252, 0.5); color: #d8b4fe;">Open Dedicated Variant 1 Page &rarr;</a>
+        </div>
+        <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+          <div><strong>Location:</strong> <code>variants/variant1_first_order/</code> (<code>newchecker.ML</code>, <code>types/typetheory.ML</code>, <code>types/foundations.ML</code>)</div>
+          <div style="margin-top: 4px;"><strong>Core Principle:</strong> Bare-bones 1st-order <span class="theory-name-slot">MK Class Theory</span> statements about classes, enriched with types (<code>Fm</code>, <code>Ctx</code>, <code>Theory</code>, <code>Stmt</code>, <code>Prf</code>, <code>Class</code>, <code>Set</code>) and bridged to 1st-order class membership via <a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>, <a href="manual.html#def-dec" style="color:#38bdf8;">Dec</a>, <a href="manual.html#def-emb" style="color:#38bdf8;">Emb</a>, <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>, and <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>.</div>
+        </div>
+      </div>
+      <div style="background: rgba(30, 41, 59, 0.65); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; padding: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 0.4rem;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 1rem;">2. Variant 2 — Higher-Order Formulas-as-Types Assistant</div>
+          <a href="variant2.html" class="btn btn-secondary btn-sm" style="border-color: rgba(56, 189, 248, 0.5); color: #38bdf8;">Open Dedicated Variant 2 Page &rarr;</a>
+        </div>
+        <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5;">
+          <div><strong>Location:</strong> <code>variants/variant2_higher_order/</code> (<code>nbg_compiler.ML</code>, <code>nbg_surface_compiler.ML</code>, <code>dependent_eval.ML</code>)</div>
+          <div style="margin-top: 4px;"><strong>Core Principle:</strong> RoqC / Curry–Howard dependent type theory where formulas are types via the type family <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a><code>(⟨φ⟩)</code>, implications are function spaces, quantifiers are dependent products/sums, and proofs are constructive λ-terms.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DECOUPLED BRACKETS VS SPECIAL FUNCTIONAL SYMBOLS -->
+    <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.28); border-radius: 8px; padding: 1rem; margin-bottom: 1.2rem;">
+      <div style="font-weight: 700; color: var(--accent-cyan); font-size: 0.95rem; margin-bottom: 0.5rem;">
+        Decoupled Brackets (<code>⟨...⟩</code> / <code>⟦...⟧</code>) vs. Special Functional Symbols (<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>, <a href="manual.html#def-dec" style="color:#38bdf8;">Dec</a>, <a href="manual.html#def-emb" style="color:#38bdf8;">Emb</a>)
+      </div>
+      <ul style="margin: 0; padding-left: 1.2rem; font-size: 0.84rem; color: #cbd5e1; line-height: 1.55;">
+        <li><strong>Quotation <code>⟨...⟩</code> (<code>&lt;|...|&gt;</code>) &amp; Antiquotation <code>⟦...⟧</code> (<code>[|...|]</code>):</strong> Purely syntax-splicing brackets. Inside <code>⟨...⟩</code>, antiquoting a class variable <code>⟦X⟧</code> splices the class <code>X</code> itself—which may be a proper class like <code>V</code> or <code>On</code>! Therefore, <code>isSet(⟦X⟧)</code> is <strong>NOT</strong> automatically true (e.g. <code>¬isSet(V)</code> by Russell's theorem).</li>
+        <li><strong>Syntactic Encoding <a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a><code>(s)</code> (<code>CpEnc</code> in <code>typetheory.ML</code>):</strong> Maps any syntactic object <code>(s : T)</code> (<code>Fm</code>, <code>Stmt</code>, <code>Prf</code>, <code>Ctx</code>, <code>Theory</code>) to its finite Gödel/hereditarily-finite set code in <code>(V_ω ⊂ V)</code>. Because every finite syntax tree code is a finite set, <code>isSet(Enc(s))</code> <strong>IS</strong> unconditionally true!</li>
+        <li><strong>Syntactic Decoding <a href="manual.html#def-dec" style="color:#38bdf8;">Dec</a><code>(c, T)</code> (<code>VDec</code> in <code>typetheory.ML</code>):</strong> Partially decodes a set code <code>(c : Class)</code> back into target syntactic collection <code>(T : Col)</code>, satisfying the roundtrip law <code>∀(s : T) (Dec(Enc(s), T) = s)</code>.</li>
+        <li><strong>Dual Type Embedding <a href="manual.html#def-emb" style="color:#38bdf8;">Emb</a><code>(T)</code> (<code>LTpEmb</code> / <code>TyTpEmb</code> in <code>typetheory.ML</code>):</strong> Captures the <strong>Dual Semantics of <code>typetheory.ML</code></strong>:
+          (A) <em>Semantic Predicate Interpretation</em>: <code>(Emb(Class)(X) ⟷ ⊤)</code> (so <code>Emb(Class)(V)</code> is a theorem!) and <code>(Emb(Set)(X) ⟷ isSet(X))</code> (so <code>¬Emb(Set)(V)</code> is Russell's theorem);
+          (B) <em>Syntactic Code-Class Interpretation</em>: for syntactic types <code>(T ∈ {Fm, Stmt, Prf, Ctx, Theory})</code>, <code>(Emb(T)(x) ⟷ (x ∈ CodeClass(T)))</code>, where <code>(CodeClass(T) = { c | (isSet(c) ∧ ∃(s : T) (c = Enc(s))) })</code>.</li>
+      </ul>
+    </div>
+
+    <!-- CANONICAL 7-PART OPTION B ANATOMIES (A1 AND RUSSELL) -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 1rem;">
+      <div style="background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 0.9rem 1rem;">
+        <div style="font-size: 0.82rem; font-weight: 700; color: #38bdf8; margin-bottom: 6px;">Canonical Parameterized Axiom Anatomy — <code>ax_A1(α : Fm, β : Fm)</code></div>
+        <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0; white-space: pre-wrap; line-height: 1.5;"><code>1) (A1_fm(α : Fm, β : Fm) : Fm) :=
+     (⟨((⟦α⟧ → (⟦β⟧ → ⟦α⟧)) : Bool)⟩ : Fm)   |   ⊤
+2) (ctx_A1 : Ctx) := ([] : Ctx)
+3) (theory_A1 : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)
+4) (ax_A1(α : Fm, β : Fm) : Stmt) :=
+     (⟨⟦theory_A1⟧, ⟦ctx_A1⟧ ⊢ ⟦A1_fm(α, β)⟧⟩ : Stmt)
+5) (A1_prf(α : Fm, β : Fm) : Prf) :=
+     (⟨fn hA =&gt; fn hB =&gt; hA⟩ : Prf)
+6) ∀(α : Fm) ∀(β : Fm)
+     (Enc(A1_prf(α, β)) ∈ ProofsOf(Enc(ax_A1(α, β))))
+7) ∀(α : Fm) ∀(β : Fm)
+     ((Enc(ax_A1(α, β)) ∈ Theorems) ⟷
+      (∃(p : Class) (p ∈ ProofsOf(Enc(ax_A1(α, β))))))</code></pre>
+      </div>
+      <div style="background: #020617; border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 8px; padding: 0.9rem 1rem;">
+        <div style="font-size: 0.82rem; font-weight: 700; color: #34d399; margin-bottom: 6px;">Canonical 7-Part Option B Theorem Anatomy — <code>thm_russell_not_set</code></div>
+        <pre style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0; white-space: pre-wrap; line-height: 1.5;"><code>1) (fm_russell_not_set : Fm) :=
+     (⟨(isSet({ x | ((x ∈ x) → ⊥) }) → ⊥)⟩ : Fm)   |   ⊤
+2) (ctx_russell_not_set : Ctx) := ([] : Ctx)
+3) (theory_russell_not_set : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)
+4) (thm_russell_not_set : Stmt) :=
+     (⟨(⟦theory_russell_not_set⟧, ⟦ctx_russell_not_set⟧ ⊢ ⟦fm_russell_not_set⟧)⟩ : Stmt)
+5) (prf_russell_not_set : Prf) :=
+     (⟨fn (hSetR : ProofsOf(⟨isSet({ x | ((x ∈ x) → ⊥) })⟩)) =&gt; ...⟩ : Prf)
+6) (Enc(prf_russell_not_set) ∈ ProofsOf(Enc(thm_russell_not_set)))
+7) ((Enc(thm_russell_not_set) ∈ Theorems) ⟷
+     (∃(p : Class) (p ∈ ProofsOf(Enc(thm_russell_not_set)))))</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" id="nbg-library" style="margin-top: 2rem; border: 1px solid rgba(56, 189, 248, 0.35);">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem;">
+      <div>
+        <div style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent-cyan);">Machine-Checked Standard Library (Both Variants)</div>
+        <h2 style="font-size: 1.45rem; font-weight: 800; color: #fff; margin: 0.35rem 0 0;">NBG Formulas-as-Types &amp; 1st-Order Bridged Theorems</h2>
+      </div>
+      <span class="status-badge badge-verified-strong">20 kernel-checked theorems</span>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 980px;">
+      Each row is a closed proof term in <code>examples/nbg_verified_programs.nbg</code>, compiled by
+      <code>NBGSurfaceCompiler</code> (Variant 2) and automatically translated by <code>VariantBridge</code> into a
+      7-part Option B 1st-order NBG certificate (Variant 1) in Poly/ML and CakeML. A formula is a <em>type</em> via
+      <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a><code>(⟨φ⟩)</code> in Variant 2, and a Gödel-encoded statement in
+      <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a> in Variant 1.
+    </p>
+    <p style="color: var(--text-muted); font-size: 0.86rem; max-width: 980px; border-left: 3px solid var(--accent-cyan); padding-left: 0.8rem;">
+      The dependent-checker catalog is audited separately: <strong>52 derived proofs</strong>,
+      <strong>21 conservative definitions</strong> (including <code>Enc</code>, <code>Dec</code>, <code>Emb</code>, <code>ProofsOf</code>, <code>Theorems</code>), and <strong>7 irreducible MK axioms</strong>.
+      Definitional and axiomatic witnesses are never counted as derived theorems, and the kernel
+      rejects the untrusted <code>PCheat_prf</code> placeholder on every certified path.
+    </p>
+    <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 0.86rem;">
+        <thead>
+          <tr style="background: rgba(30, 41, 59, 0.85); color: #38bdf8; text-align: left;">
+            <th style="padding: 9px 12px; width: 30%;">Theorem</th>
+            <th style="padding: 9px 12px;">Formula, Variant 2 Signature &amp; Variant 1 (Option B 7-Part Anatomy)</th>
+            <th style="padding: 9px 12px; width: 80px; text-align: center;">AST</th>
+            <th style="padding: 9px 12px; width: 90px; text-align: center;">Normal</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr id="nbg-empty_class_no_elements" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">empty_class_no_elements</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">The empty class has no elements.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(z : Class)  ((z ∈ { x | ⊥ }) → ⊥))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ⊥ }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (z : \mathsf{Class})\; ((z \in \{ x \mid \bot \}) \to \bot))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall z\; ((z \in \{ x \mid \bot \}) \to \bot))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem empty_class_no_elements : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(z : Class)  ((z ∈ { x | ⊥ }) → ⊥))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_empty_class_no_elements : Fm) := (⟨(∀(z : Class)  ((z ∈ { x | ⊥ }) → ⊥))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_empty_class_no_elements : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_empty_class_no_elements : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_empty_class_no_elements : Stmt) := (⟨(⟦theory_empty_class_no_elements⟧, ⟦ctx_empty_class_no_elements⟧ ⊢ ⟦fm_empty_class_no_elements⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_empty_class_no_elements : Prf) := (⟨λ-proof term, AST=7, Normal=7⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_empty_class_no_elements) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_no_elements)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_no_elements) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_no_elements)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="nbg-empty_class_is_subclass" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">empty_class_is_subclass</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">The empty class is a subclass of every class.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(X : Class) (∀(z : Class)  ((z ∈ { x | ⊥ }) → (z ∈ X))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ⊥ }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; X))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid \bot \}) \to (z \in X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ x \mid \bot \}) \to (z \in X))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem empty_class_is_subclass : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(X : Class) (∀(z : Class)  ((z ∈ { x | ⊥ }) → (z ∈ X))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_empty_class_is_subclass : Fm) := (⟨(∀(X : Class) (∀(z : Class)  ((z ∈ { x | ⊥ }) → (z ∈ X))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_empty_class_is_subclass : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_empty_class_is_subclass : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_empty_class_is_subclass : Stmt) := (⟨(⟦theory_empty_class_is_subclass⟧, ⟦ctx_empty_class_is_subclass⟧ ⊢ ⟦fm_empty_class_is_subclass⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_empty_class_is_subclass : Prf) := (⟨λ-proof term, AST=8, Normal=8⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_empty_class_is_subclass) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_is_subclass)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_is_subclass) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_empty_class_is_subclass)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-universal_class_characterization" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">universal_class_characterization</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">V = {x | Top}: membership in the universal class is exactly sethood.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(z : Class) (((z ∈ { x | ⊤ }) → isSet(z)) ∧ (isSet(z) → (z ∈ { x | ⊤ }))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ⊤ }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; &lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(z)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(z) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ⊤ }))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (z : \mathsf{Class})\; (((z \in \{ x \mid \top \}) \to \mathrm{isSet}(z)) \land (\mathrm{isSet}(z) \to (z \in \{ x \mid \top \}))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall z\; (((z \in \{ x \mid \top \}) \to \mathrm{isSet}(z)) \land (\mathrm{isSet}(z) \to (z \in \{ x \mid \top \}))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem universal_class_characterization : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(z : Class) (((z ∈ { x | ⊤ }) → isSet(z)) ∧ (isSet(z) → (z ∈ { x | ⊤ }))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_universal_class_characterization : Fm) := (⟨(∀(z : Class) (((z ∈ { x | ⊤ }) → isSet(z)) ∧ (isSet(z) → (z ∈ { x | ⊤ }))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_universal_class_characterization : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_universal_class_characterization : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_universal_class_characterization : Stmt) := (⟨(⟦theory_universal_class_characterization⟧, ⟦ctx_universal_class_characterization⟧ ⊢ ⟦fm_universal_class_characterization⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_universal_class_characterization : Prf) := (⟨λ-proof term, AST=15, Normal=15⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_universal_class_characterization) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_universal_class_characterization)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_universal_class_characterization) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_universal_class_characterization)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">15</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">15</td>
+          </tr>
+        
+          <tr id="nbg-russell_class_is_not_a_set" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">russell_class_is_not_a_set</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Russell&#x27;s class {x | x notin x} is a proper class, not a set.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(isSet({ x | ((x ∈ x) → ⊥) }) → ⊥)" data-unicode-colored="(&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;({ x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥)" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\mathrm{isSet}(\{ x \mid ((x \in x) \to \bot) \}) \to \bot)\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\mathrm{isSet}(\{ x \mid ((x \in x) \to \bot) \}) \to \bot)\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem russell_class_is_not_a_set : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(isSet({ x | ((x ∈ x) → ⊥) }) → ⊥)⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_russell_class_is_not_a_set : Fm) := (⟨(isSet({ x | ((x ∈ x) → ⊥) }) → ⊥)⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_russell_class_is_not_a_set : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_russell_class_is_not_a_set : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_russell_class_is_not_a_set : Stmt) := (⟨(⟦theory_russell_class_is_not_a_set⟧, ⟦ctx_russell_class_is_not_a_set⟧ ⊢ ⟦fm_russell_class_is_not_a_set⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_russell_class_is_not_a_set : Prf) := (⟨λ-proof term, AST=19, Normal=32⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_russell_class_is_not_a_set) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_russell_class_is_not_a_set)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_russell_class_is_not_a_set) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_russell_class_is_not_a_set)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">19</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">32</td>
+          </tr>
+        
+          <tr id="nbg-binary_inter_comm" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">binary_inter_comm</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Binary class intersection is commutative.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A)) })))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \land (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \land (x \in A)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \land (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \land (x \in A)) \})))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem binary_inter_comm : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_binary_inter_comm : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_binary_inter_comm : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_binary_inter_comm : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_binary_inter_comm : Stmt) := (⟨(⟦theory_binary_inter_comm⟧, ⟦ctx_binary_inter_comm⟧ ⊢ ⟦fm_binary_inter_comm⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_binary_inter_comm : Prf) := (⟨λ-proof term, AST=26, Normal=26⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_binary_inter_comm) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_inter_comm)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_inter_comm) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_inter_comm)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+          <tr id="nbg-binary_union_comm" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">binary_union_comm</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Binary class union is commutative.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A)) })))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \lor (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \lor (x \in A)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \lor (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \lor (x \in A)) \})))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem binary_union_comm : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_binary_union_comm : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_binary_union_comm : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_binary_union_comm : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_binary_union_comm : Stmt) := (⟨(⟦theory_binary_union_comm⟧, ⟦ctx_binary_union_comm⟧ ⊢ ⟦fm_binary_union_comm⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_binary_union_comm : Prf) := (⟨λ-proof term, AST=23, Normal=23⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_binary_union_comm) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_union_comm)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_union_comm) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_binary_union_comm)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">23</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">23</td>
+          </tr>
+        
+          <tr id="nbg-class_diff_subclass_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_diff_subclass_left</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">The class difference A \ B is a subclass of A.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ ((x ∈ B) → ⊥)) }) → (z ∈ A)))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ((x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥)) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A)))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \land ((x \in B) \to \bot)) \}) \to (z \in A)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \land ((x \in B) \to \bot)) \}) \to (z \in A)))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem class_diff_subclass_left : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ ((x ∈ B) → ⊥)) }) → (z ∈ A)))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_class_diff_subclass_left : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ ((x ∈ B) → ⊥)) }) → (z ∈ A)))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_class_diff_subclass_left : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_class_diff_subclass_left : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_class_diff_subclass_left : Stmt) := (⟨(⟦theory_class_diff_subclass_left⟧, ⟦ctx_class_diff_subclass_left⟧ ⊢ ⟦fm_class_diff_subclass_left⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_class_diff_subclass_left : Prf) := (⟨λ-proof term, AST=10, Normal=10⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_class_diff_subclass_left) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_diff_subclass_left)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_diff_subclass_left) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_diff_subclass_left)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-class_eq_sym" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_eq_sym</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Class equality is symmetric.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(X : Class) (∀(Y : Class)  ((X = Y) → (Y = X))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(Y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;)  ((X &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; Y) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (Y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; X))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (Y : \mathsf{Class})\; ((X = Y) \to (Y = X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall Y\; ((X = Y) \to (Y = X))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem class_eq_sym : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(X : Class) (∀(Y : Class)  ((X = Y) → (Y = X))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_class_eq_sym : Fm) := (⟨(∀(X : Class) (∀(Y : Class)  ((X = Y) → (Y = X))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_class_eq_sym : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_class_eq_sym : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_class_eq_sym : Stmt) := (⟨(⟦theory_class_eq_sym⟧, ⟦ctx_class_eq_sym⟧ ⊢ ⟦fm_class_eq_sym⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_class_eq_sym : Prf) := (⟨λ-proof term, AST=6, Normal=6⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_class_eq_sym) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_sym)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_sym) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_sym)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">6</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">6</td>
+          </tr>
+        
+          <tr id="nbg-class_eq_trans" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_eq_trans</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Class equality is transitive.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(X : Class) (∀(Y : Class) (∀(Z : Class) (((X = Y) ∧ (Y = Z)) → (X = Z)))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(X : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(Y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(Z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (((X &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; Y) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (Y &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; Z)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (X &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; Z)))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (Y : \mathsf{Class})\; (\forall (Z : \mathsf{Class})\; (((X = Y) \land (Y = Z)) \to (X = Z)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall Y\; (\forall Z\; (((X = Y) \land (Y = Z)) \to (X = Z)))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem class_eq_trans : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(X : Class) (∀(Y : Class) (∀(Z : Class) (((X = Y) ∧ (Y = Z)) → (X = Z)))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_class_eq_trans : Fm) := (⟨(∀(X : Class) (∀(Y : Class) (∀(Z : Class) (((X = Y) ∧ (Y = Z)) → (X = Z)))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_class_eq_trans : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_class_eq_trans : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_class_eq_trans : Stmt) := (⟨(⟦theory_class_eq_trans⟧, ⟦ctx_class_eq_trans⟧ ⊢ ⟦fm_class_eq_trans⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_class_eq_trans : Prf) := (⟨λ-proof term, AST=9, Normal=9⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_class_eq_trans) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_trans)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_trans) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_eq_trans)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-quantifier_swap" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">quantifier_swap</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">An existential set with a universal property implies the corresponding forall-exists statement.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="((∃(y : Set)  (∀(x : Set) (x ∈ y))) → (∀(x : Set)  (∃(y : Set) (x ∈ y))))" data-unicode-colored="((&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;)  (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; y))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;)  (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(y : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; y))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\(((\exists (y : \mathsf{Set})\; (\forall (x : \mathsf{Set})\; (x \in y))) \to (\forall (x : \mathsf{Set})\; (\exists (y : \mathsf{Set})\; (x \in y))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\(((\exists (y \in V)\; (\forall (x \in V)\; (x \in y))) \to (\forall (x \in V)\; (\exists (y \in V)\; (x \in y))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem quantifier_swap : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨((∃(y : Set)  (∀(x : Set) (x ∈ y))) → (∀(x : Set)  (∃(y : Set) (x ∈ y))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_quantifier_swap : Fm) := (⟨((∃(y : Set)  (∀(x : Set) (x ∈ y))) → (∀(x : Set)  (∃(y : Set) (x ∈ y))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_quantifier_swap : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_quantifier_swap : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_quantifier_swap : Stmt) := (⟨(⟦theory_quantifier_swap⟧, ⟦ctx_quantifier_swap⟧ ⊢ ⟦fm_quantifier_swap⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_quantifier_swap : Prf) := (⟨λ-proof term, AST=7, Normal=7⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_quantifier_swap) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_quantifier_swap)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_quantifier_swap) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_quantifier_swap)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="nbg-dunaev_tagged_pair_projections" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_tagged_pair_projections</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) ((π₁([A, B]_D) = A) ∧ (π₂([A, B]_D) = B))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((&lt;a href=&quot;#item-3-41&quot; class=&quot;sym-inline-link&quot; title=&quot;π₁ : Class → Class (3.41 First Dunaev Projection)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;π₁&lt;/span&gt;&lt;/a&gt;([A, B]_D) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (&lt;a href=&quot;#item-3-42&quot; class=&quot;sym-inline-link&quot; title=&quot;π₂ : Class → Class (3.42 Second Dunaev Projection)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;π₂&lt;/span&gt;&lt;/a&gt;([A, B]_D) &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; B))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; ((\pi_1([A, B]_D) = A) \land (\pi_2([A, B]_D) = B))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; ((\pi_1([A, B]_D) = A) \land (\pi_2([A, B]_D) = B))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-41" class="sym-def-chip" title="π₁ : Class → Class (3.41 First Dunaev Projection)"><span class="sym-chip-name">π₁</span><span class="sym-chip-type">Class → Class</span></a> <a href="#item-3-42" class="sym-def-chip" title="π₂ : Class → Class (3.42 Second Dunaev Projection)"><span class="sym-chip-name">π₂</span><span class="sym-chip-type">Class → Class</span></a> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem dunaev_tagged_pair_projections : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) ((π₁([A, B]_D) = A) ∧ (π₂([A, B]_D) = B))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_dunaev_tagged_pair_projections : Fm) := (⟨(∀(A : Class) (∀(B : Class) ((π₁([A, B]_D) = A) ∧ (π₂([A, B]_D) = B))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_dunaev_tagged_pair_projections : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_dunaev_tagged_pair_projections : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_dunaev_tagged_pair_projections : Stmt) := (⟨(⟦theory_dunaev_tagged_pair_projections⟧, ⟦ctx_dunaev_tagged_pair_projections⟧ ⊢ ⟦fm_dunaev_tagged_pair_projections⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_dunaev_tagged_pair_projections : Prf) := (⟨λ-proof term, AST=3, Normal=3⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_dunaev_tagged_pair_projections) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_tagged_pair_projections)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_tagged_pair_projections) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_tagged_pair_projections)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">3</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">3</td>
+          </tr>
+        
+          <tr id="nbg-cantor_diagonal_theorem" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">cantor_diagonal_theorem</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Cantor&#x27;s diagonal theorem stated with Dunaev tagged pairs.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(R : Class) (∀(c : Set) (isSet(c) → ((((c ∈ { x | ([x, x](_D ∈ R) → ⊥) }) → ([c, c]_D ∈ R)) ∧ ([c, c](_D ∈ R) → (c ∈ { x | ([x, x](_D ∈ R) → ⊥) }))) → ⊥))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(R : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(c : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(c) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((((c &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ([x, x](_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; R) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ([c, c]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; R)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; ([c, c](_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; R) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (c &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { x | ([x, x](_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; R) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥) }))) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ⊥))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (R : \mathsf{Class})\; (\forall (c : \mathsf{Set})\; (\mathrm{isSet}(c) \to ((((c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}) \to ([c, c]_D \in R)) \land ([c, c](_D \in R) \to (c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}))) \to \bot))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall R\; (\forall (c \in V)\; (\mathrm{isSet}(c) \to ((((c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}) \to ([c, c]_D \in R)) \land ([c, c](_D \in R) \to (c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}))) \to \bot))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem cantor_diagonal_theorem : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(R : Class) (∀(c : Set) (isSet(c) → ((((c ∈ { x | ([x, x](_D ∈ R) → ⊥) }) → ([c, c]_D ∈ R)) ∧ ([c, c](_D ∈ R) → (c ∈ { x | ([x, x](_D ∈ R) → ⊥) }))) → ⊥))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_cantor_diagonal_theorem : Fm) := (⟨(∀(R : Class) (∀(c : Set) (isSet(c) → ((((c ∈ { x | ([x, x](_D ∈ R) → ⊥) }) → ([c, c]_D ∈ R)) ∧ ([c, c](_D ∈ R) → (c ∈ { x | ([x, x](_D ∈ R) → ⊥) }))) → ⊥))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_cantor_diagonal_theorem : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_cantor_diagonal_theorem : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_cantor_diagonal_theorem : Stmt) := (⟨(⟦theory_cantor_diagonal_theorem⟧, ⟦ctx_cantor_diagonal_theorem⟧ ⊢ ⟦fm_cantor_diagonal_theorem⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_cantor_diagonal_theorem : Prf) := (⟨λ-proof term, AST=28, Normal=50⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_cantor_diagonal_theorem) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_cantor_diagonal_theorem)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_cantor_diagonal_theorem) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_cantor_diagonal_theorem)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">28</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">50</td>
+          </tr>
+        
+          <tr id="nbg-self_in_singleton" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">self_in_singleton</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Every set belongs to its singleton class.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) (isSet(x) → (x ∈ { u | (u = x) })))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; x) })))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to (x \in \{ u \mid (u = x) \})))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\mathrm{isSet}(x) \to (x \in \{ u \mid (u = x) \})))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem self_in_singleton : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(x : Class) (isSet(x) → (x ∈ { u | (u = x) })))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_self_in_singleton : Fm) := (⟨(∀(x : Class) (isSet(x) → (x ∈ { u | (u = x) })))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_self_in_singleton : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_self_in_singleton : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_self_in_singleton : Stmt) := (⟨(⟦theory_self_in_singleton⟧, ⟦ctx_self_in_singleton⟧ ⊢ ⟦fm_self_in_singleton⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_self_in_singleton : Prf) := (⟨λ-proof term, AST=8, Normal=8⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_self_in_singleton) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_singleton)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_singleton) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_singleton)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="nbg-self_in_succ" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">self_in_succ</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Every set belongs to its ordinal successor.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) (isSet(x) → (x ∈ { u | ((u ∈ x) ∨ (u = x)) })))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;a href=&quot;#item-3-08&quot; class=&quot;sym-inline-link&quot; title=&quot;isSet : Class → Bool (3.08 Sethood Predicate)&quot;&gt;&lt;span style=&quot;color:#fb923c;font-weight:bold;&quot;&gt;isSet&lt;/span&gt;&lt;/a&gt;(x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (x &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | ((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; x)) })))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to (x \in \{ u \mid ((u \in x) \lor (u = x)) \})))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\mathrm{isSet}(x) \to (x \in \{ u \mid ((u \in x) \lor (u = x)) \})))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem self_in_succ : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(x : Class) (isSet(x) → (x ∈ { u | ((u ∈ x) ∨ (u = x)) })))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_self_in_succ : Fm) := (⟨(∀(x : Class) (isSet(x) → (x ∈ { u | ((u ∈ x) ∨ (u = x)) })))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_self_in_succ : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_self_in_succ : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_self_in_succ : Stmt) := (⟨(⟦theory_self_in_succ⟧, ⟦ctx_self_in_succ⟧ ⊢ ⟦fm_self_in_succ⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_self_in_succ : Prf) := (⟨λ-proof term, AST=9, Normal=9⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_self_in_succ) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_succ)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_succ) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_self_in_succ)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-class_sub_succ" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">class_sub_succ</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Every class is a subclass of its successor.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(x : Class) (∀(z : Class) ((z ∈ x) → (z ∈ { u | ((u ∈ x) ∨ (u = x)) }))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(x : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | ((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; x) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; x)) }))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in x) \to (z \in \{ u \mid ((u \in x) \lor (u = x)) \}))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\forall z\; ((z \in x) \to (z \in \{ u \mid ((u \in x) \lor (u = x)) \}))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem class_sub_succ : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(x : Class) (∀(z : Class) ((z ∈ x) → (z ∈ { u | ((u ∈ x) ∨ (u = x)) }))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_class_sub_succ : Fm) := (⟨(∀(x : Class) (∀(z : Class) ((z ∈ x) → (z ∈ { u | ((u ∈ x) ∨ (u = x)) }))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_class_sub_succ : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_class_sub_succ : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_class_sub_succ : Stmt) := (⟨(⟦theory_class_sub_succ⟧, ⟦ctx_class_sub_succ⟧ ⊢ ⟦fm_class_sub_succ⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_class_sub_succ : Prf) := (⟨λ-proof term, AST=12, Normal=12⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_class_sub_succ) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_sub_succ)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_sub_succ) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_class_sub_succ)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">12</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">12</td>
+          </tr>
+        
+          <tr id="nbg-dunaev_pair_injective" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_pair_injective</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -&gt; A = C and B = D.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(C : Class) (∀(D : Class) (([A, B]_D = [C, D]_D) → ((A = C) ∧ (B = D)))))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(C : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(D : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (([A, B]_D &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; [C, D]_D) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; ((A &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; C) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (B &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; D)))))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (C : \mathsf{Class})\; (\forall (D : \mathsf{Class})\; (([A, B]_D = [C, D]_D) \to ((A = C) \land (B = D)))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall C\; (\forall D\; (([A, B]_D = [C, D]_D) \to ((A = C) \land (B = D)))))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem dunaev_pair_injective : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(C : Class) (∀(D : Class) (([A, B]_D = [C, D]_D) → ((A = C) ∧ (B = D)))))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_dunaev_pair_injective : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(C : Class) (∀(D : Class) (([A, B]_D = [C, D]_D) → ((A = C) ∧ (B = D)))))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_dunaev_pair_injective : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_dunaev_pair_injective : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_dunaev_pair_injective : Stmt) := (⟨(⟦theory_dunaev_pair_injective⟧, ⟦ctx_dunaev_pair_injective⟧ ⊢ ⟦fm_dunaev_pair_injective⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_dunaev_pair_injective : Prf) := (⟨λ-proof term, AST=26, Normal=26⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_dunaev_pair_injective) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_pair_injective)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_pair_injective) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_pair_injective)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+          <tr id="nbg-dunaev_cartesian_elim" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">dunaev_cartesian_elim</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Elimination for the Dunaev Cartesian product: membership yields set components u, v with p = [u,v]_D.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(p : Class) ((p ∈ { q | (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (q = [u, v]_D)))) }) → (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (p = [u, v]_D))))))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(p : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((p &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { q | (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (q &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; [u, v]_D)))) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(u : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;(v : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Set&lt;/span&gt;) (((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (v &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (p &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;=&lt;/span&gt; [u, v]_D))))))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (p : \mathsf{Class})\; ((p \in \{ q \mid (\exists (u : \mathsf{Set})\; (\exists (v : \mathsf{Set})\; (((u \in A) \land (v \in B)) \land (q = [u, v]_D)))) \}) \to (\exists (u : \mathsf{Set})\; (\exists (v : \mathsf{Set})\; (((u \in A) \land (v \in B)) \land (p = [u, v]_D))))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall p\; ((p \in \{ q \mid (\exists (u \in V)\; (\exists (v \in V)\; (((u \in A) \land (v \in B)) \land (q = [u, v]_D)))) \}) \to (\exists (u \in V)\; (\exists (v \in V)\; (((u \in A) \land (v \in B)) \land (p = [u, v]_D))))))))\)</div>
+              <div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="#item-3-40" class="sym-def-chip" title="[A, B]_D : Class × Class → Class (3.40 Dunaev Tagged Ordered Pair)"><span class="sym-chip-name">[·,·]_D</span><span class="sym-chip-type">Class × Class → Class</span></a></div>
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem dunaev_cartesian_elim : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(p : Class) ((p ∈ { q | (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (q = [u, v]_D)))) }) → (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (p = [u, v]_D))))))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_dunaev_cartesian_elim : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(p : Class) ((p ∈ { q | (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (q = [u, v]_D)))) }) → (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (p = [u, v]_D))))))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_dunaev_cartesian_elim : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_dunaev_cartesian_elim : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_dunaev_cartesian_elim : Stmt) := (⟨(⟦theory_dunaev_cartesian_elim⟧, ⟦ctx_dunaev_cartesian_elim⟧ ⊢ ⟦fm_dunaev_cartesian_elim⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_dunaev_cartesian_elim : Prf) := (⟨λ-proof term, AST=9, Normal=9⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_dunaev_cartesian_elim) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_cartesian_elim)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_cartesian_elim) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_dunaev_cartesian_elim)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="nbg-inter_sub_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">inter_sub_left</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Binary class intersection A inter B is a subclass of the left operand A.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ A)))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | ((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A)))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in A)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in A)))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem inter_sub_left : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ A)))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_inter_sub_left : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ A)))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_inter_sub_left : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_inter_sub_left : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_inter_sub_left : Stmt) := (⟨(⟦theory_inter_sub_left⟧, ⟦ctx_inter_sub_left⟧ ⊢ ⟦fm_inter_sub_left⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_inter_sub_left : Prf) := (⟨λ-proof term, AST=10, Normal=10⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_inter_sub_left) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_left)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_left) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_left)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-inter_sub_right" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">inter_sub_right</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Binary class intersection A inter B is a subclass of the right operand B.</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ B)))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | ((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∧&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) }) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in B)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in B)))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem inter_sub_right : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ B)))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_inter_sub_right : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ B)))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_inter_sub_right : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_inter_sub_right : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_inter_sub_right : Stmt) := (⟨(⟦theory_inter_sub_right⟧, ⟦ctx_inter_sub_right⟧ ⊢ ⟦fm_inter_sub_right⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_inter_sub_right : Prf) := (⟨λ-proof term, AST=10, Normal=10⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_inter_sub_right) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_right)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_right) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_inter_sub_right)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="nbg-union_sub_left" class="nbg-row">
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); vertical-align: top;">
+              <strong style="color: #fff;">union_sub_left</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension).</div></details>
+            </td>
+            <td class="formula-cell" data-unicode="(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ A) → (z ∈ { u | ((u ∈ A) ∨ (u ∈ B)) })))))" data-unicode-colored="(&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(A : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(B : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) (&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;(z : &lt;span style=&quot;color:#22d3ee;font-weight:bold;&quot;&gt;Class&lt;/span&gt;) ((z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt; (z &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; { u | ((u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; A) &lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;∨&lt;/span&gt; (u &lt;span style=&quot;color:#34d399;font-weight:bold;&quot;&gt;∈&lt;/span&gt; B)) })))))" style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18);">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in A) \to (z \in \{ u \mid ((u \in A) \lor (u \in B)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in A) \to (z \in \{ u \mid ((u \in A) \lor (u \in B)) \})))))\)</div>
+              
+              
+              <div class="variant-v2-view" style="margin-top: 6px; padding: 5px 8px; background: rgba(56, 189, 248, 0.08); border-left: 2px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0;">
+                <span style="color: #38bdf8; font-weight: 700;">Variant 2 (Higher-Order):</span>
+                <code>Theorem union_sub_left : <a href="manual.html#def-proofs-of" class="sym-inline-link" style="color:#34d399;text-decoration:underline dotted;">ProofsOf</a>(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ A) → (z ∈ { u | ((u ∈ A) ∨ (u ∈ B)) })))))⟩)</code>
+              </div>
+              <details class="comment-toggle variant-v1-details" style="display: block; margin-left: 0; margin-top: 6px;">
+                <summary class="comment-link" style="color: #c084fc; font-weight: 600;">▸ Variant 1 (1st-Order NBG Option B 7-Part Anatomy &amp; Enc/ProofsOf/Theorems)</summary>
+                <div class="entry-notes" style="border-left-color: #c084fc; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #e2e8f0; line-height: 1.55;">
+                  <div><strong style="color:#f472b6;">(1) Formula Def:</strong> <code>(fm_union_sub_left : Fm) := (⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ A) → (z ∈ { u | ((u ∈ A) ∨ (u ∈ B)) })))))⟩ : Fm)</code> &nbsp;|&nbsp; Side cond: <code>⊤</code></div>
+                  <div><strong style="color:#f472b6;">(2) Context Def:</strong> <code>(ctx_union_sub_left : Ctx) := ([] : Ctx)</code></div>
+                  <div><strong style="color:#f472b6;">(3) Theory Def:</strong> <code>(theory_union_sub_left : Theory) := (<span class="theory-symbol-slot">τ_MK</span> : Theory)</code></div>
+                  <div><strong style="color:#f472b6;">(4) Statement (Option B):</strong> <code>(thm_union_sub_left : Stmt) := (⟨(⟦theory_union_sub_left⟧, ⟦ctx_union_sub_left⟧ ⊢ ⟦fm_union_sub_left⟧)⟩ : Stmt)</code></div>
+                  <div><strong style="color:#f472b6;">(5) Proof Term:</strong> <code>(prf_union_sub_left : Prf) := (⟨λ-proof term, AST=13, Normal=13⟩ : Prf)</code></div>
+                  <div><strong style="color:#f472b6;">(6) Proof Witness:</strong> <code>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(prf_union_sub_left) ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_union_sub_left)))</code></div>
+                  <div><strong style="color:#f472b6;">(7) Theoremhood Law:</strong> <code>((<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_union_sub_left) ∈ <a href="manual.html#def-theorems" style="color:#fbbf24;">Theorems</a>) ⟷ (∃(p : Class) (p ∈ <a href="manual.html#def-proofs-of" style="color:#34d399;">ProofsOf</a>(<a href="manual.html#def-enc" style="color:#38bdf8;">Enc</a>(thm_union_sub_left)))))</code></div>
+                </div>
+              </details>
+        
+            </td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">13</td>
+            <td style="padding: 10px 12px; border-bottom: 1px solid rgba(148, 163, 184, 0.18); text-align: center; color: #cbd5e1;">13</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    <p style="color: var(--text-muted); font-size: 0.82rem; margin-top: 0.9rem;">
+      Reproduce locally: <code>python3 obelisk_cli.py compile examples/nbg_verified_programs.nbg</code>
+      &nbsp;•&nbsp; Manifest: <code>data/nbg_library.json</code>
+      &nbsp;•&nbsp; Source SHA-256 prefix: <code>dae9b14418906b6d</code>
+    </p>
+  </div>
+
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

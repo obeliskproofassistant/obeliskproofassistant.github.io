@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \forall (A, B : \mathsf{Class})\; ([A, B]_D = \{z \mid \exists (a \in A)\; (z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})\}) \]
+        \[ \forall (A, B : \mathsf{Class})\; ([A, B]_D = \{ z \mid \exists (a \in A)\; ((z = \{\{\{\{a\}\}\}, \{\emptyset\}\}) \lor \exists (b \in B)\; (z = \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\})) \}) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> ∀(A, B : Class) ([A, B]_D = {z | ∃(a ∈ A) (z = {{{{a}}}, {∅}}) ∨ ∃(b ∈ B) (z = {{{{b}}}, {∅, {∅}}})})
+        <strong>Clean Unicode:</strong> ∀(A, B : Class) ([A, B]_D = { z | ∃(a ∈ A) (z = {{{{a}}}, {∅}}) ∨ ∃(b ∈ B) (z = {{{{b}}}, {∅, {∅}}}) })
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Dunaev Tagged Ordered Pair (dunaev_opair_def_entry_fm in foundations.ML). Works uniformly for proper classes and sets without collapsing to ∅ when A or B is a proper class.</div>
     </div>
@@ -370,7 +370,7 @@
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>
