@@ -540,7 +540,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.24: if_dep (if_{dep}: dependent conditional over (Bool -&gt; Type_Expression))) :: if_dep (if_{dep}: dependent conditional over (Bool -&gt; Type_Expression)))</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -550,7 +550,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.24: if_dep (if_{dep}: dependent conditional over (Bool -&gt; Type_Expression)))). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -566,7 +566,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* Conservative Definition Specification *)
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.24: if_dep (if_{dep}: dependent conditional over (Bool -&gt; Type_Expression))) :: if_dep (if_{dep}: dependent conditional over (Bool -&gt; Type_Expression)) *)
+∀(T_e : (Bool → Type_Expression)), ((if_dep : Π(b : Bool), ⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧)) ∧ ∀(b : Bool) ∀(t1 : ⟦T_e(true)⟧) ∀(t2 : ⟦T_e(false)⟧) ((if_dep(b, t1, t2) : ⟦T_e(b)⟧) ∧ ((if_dep(true, t1, t2) = t1) ∧ (if_dep(false, t1, t2) = t2))))
+
+(* Conservative Definition Witness *)
 fun if_dep (T_e : Bool -&gt; Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
   if b then t1 else t2;
 val def_item_3_24_if_dep = if_dep_def_entry ();</code></pre>

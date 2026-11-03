@@ -551,7 +551,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.22: IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)) :: IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile))</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -561,7 +561,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.22: IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile))). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -577,7 +577,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* Conservative Definition Specification *)
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.22: IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)) :: IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) *)
+(∀([Γ@Variable]:[Ctx@Type])∀([v@Variable]:[Variable@Type])∀([ψ@Variable]:[Fm@Type])∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type]) ((¬(Enc([⦃[v@Variable.Expression]⦄@LCEWIP]) ∈ FV([ψ@Fm.Expression]:Bool))) → (W, [Γ@Ctx.Expression] ⊢ ‹⟦IF ⟦[ψ@Fm.Expression]⟧ THEN [A@Class.Expression] ELSE [B@Class.Expression] FI⟧ = { [⦃[v@Variable.Expression]⦄@Class.Expression] | ((⟦[ψ@Fm.Expression]⟧ ∧ ([⦃[v@Variable.Expression]⦄@Class.Expression] ∈ [A@Class.Expression])) ∨ ((¬⟦[ψ@Fm.Expression]⟧) ∧ ([⦃[v@Variable.Expression]⦄@Class.Expression] ∈ [B@Class.Expression]))) }›)))
+
+(* Conservative Definition Witness *)
 IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (types/foundations.ML)</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.

@@ -551,7 +551,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.33: “Is injective” predicate) :: “Is injective” predicate)</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -561,7 +561,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.33: “Is injective” predicate)). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -577,7 +577,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* Conservative Definition Specification *)
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.33: “Is injective” predicate) :: “Is injective” predicate *)
+(∀([F@Variable]:[Class@Type]) (([F@Class.Expression] injective) ⟷ ((([F@Class.Expression] family) ∧ ([F@Class.Expression] set-valued)) ∧ ∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type]) (((([x@Class.Expression] ∈ Dom([F@Class.Expression])) ∧ ([y@Class.Expression] ∈ Dom([F@Class.Expression]))) ∧ ([F@Class.Expression]([x@Class.Expression]) = [F@Class.Expression]([y@Class.Expression]))) → ([x@Class.Expression] = [y@Class.Expression])))))
+
+(* Conservative Definition Witness *)
 (* CpPower constructor in typetheory.ML line 514: 𝒫(A) = { x | (isSet(x) ∧ (x ⊆ A)) } *)</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.

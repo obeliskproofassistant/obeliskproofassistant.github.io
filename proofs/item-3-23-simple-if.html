@@ -540,7 +540,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.23: simple_if (polymorphic non-dependent conditional over Type_Expression)) :: simple_if (polymorphic non-dependent conditional over Type_Expression))</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -550,7 +550,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory. Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.23: simple_if (polymorphic non-dependent conditional over Type_Expression))). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -566,7 +566,10 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* Conservative Definition Specification *)
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.23: simple_if (polymorphic non-dependent conditional over Type_Expression)) :: simple_if (polymorphic non-dependent conditional over Type_Expression) *)
+∀(T_e : Type_Expression), ((simple_if(⟦T_e⟧) : (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧)))) ∧ ∀(t1 : ⟦T_e⟧) ∀(t2 : ⟦T_e⟧) ((simple_if(⟦T_e⟧, true, t1, t2) = t1) ∧ (simple_if(⟦T_e⟧, false, t1, t2) = t2)))
+
+(* Conservative Definition Witness *)
 fun simple_if (T_e : Type_Expression) (b : Bool) (t1 : Term) (t2 : Term) : Term =
   if b then t1 else t2;
 val def_item_3_23_simple_if = simple_if_then_else_def_entry ();</code></pre>
