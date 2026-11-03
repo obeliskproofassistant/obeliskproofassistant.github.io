@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) with GDPR Consent Mode v2 (denied by default) & IP Anonymization -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCXK5XYFYQ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied'
+      });
       gtag('js', new Date());
-      gtag('config', 'G-TCXK5XYFYQ');
+      gtag('config', 'G-TCXK5XYFYQ', { 'anonymize_ip': true });
     </script>
     <!--(no title)-->
     <title>
@@ -49,8 +55,8 @@
         {
           id: 'analytics',
           label: 'Analytics',
-          description: 'These help us understand how visitors interact with the website.',
-          defaultValue: true,
+          description: 'These help us understand how visitors interact with the website. Strictly opt-in (disabled by default) with IP anonymization (anonymize_ip: true) enabled.',
+          defaultValue: false,
           gtag: 'analytics_storage', // Automatic Google Tag Manager / Silktide Analytics integration
         },
         {

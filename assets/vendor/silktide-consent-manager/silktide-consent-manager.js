@@ -521,7 +521,7 @@ class SilktideConsentManager {
           if (storedValue !== null) {
             checkbox.checked = storedValue;
           } else {
-            checkbox.checked = !!consentType.defaultValue;
+            checkbox.checked = false;
           }
         }
       }
@@ -1056,9 +1056,9 @@ class SilktideConsentManager {
               isChecked = true;
             }
 
-            // if nothing has been accepted / rejected yet, then show as checked if the default value is true
+            // GDPR compliance: if nothing has been accepted / rejected yet, non-required cookies must remain unchecked (opt-in only)
             if (!accepted && !this.hasConsented()) {
-              isChecked = type.defaultValue;
+              isChecked = Boolean(type.required);
             }
 
             return `
@@ -1201,8 +1201,8 @@ class SilktideConsentManager {
   handleDefaultConsent() {
     this.config.consentTypes.forEach((type) => {
       let accepted = true;
-      // Set localStorage and run accept/reject callbacks
-      if (type.required || type.defaultValue) {
+      // Set localStorage and run accept/reject callbacks (GDPR: only required cookies default to true)
+      if (type.required) {
         this.setConsentChoice(type.id, true);
       } else {
         accepted = false;
