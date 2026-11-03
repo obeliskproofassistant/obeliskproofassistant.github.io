@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 4: Metalogical laws — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="../index.html">Home</a>
+      <a href="../manual.html">Manual</a>
+      <a href="../variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="../variant2.html" class="">Variant 2 (Higher-Order)</a>
+      <a href="../nbg_library.html" class="">NBG Library</a>
+      <a href="../proofs.html">Proofs</a>
+      <a href="../metatheory.html">Metatheory</a>
+      <a href="../repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 4: Metalogical laws</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Reflected metatheory in Morse–Kelley, Hilbert-style rules, and checkable syntactic side conditions.</p>
+    
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem;">
+          <a href="../manual.html" class="btn">&larr; All Sections (Manual)</a><a href="sec-3.html" class="btn">&larr; §3 Set/class-theoretic foundations of mathematics</a><a href="sec-5.html" class="btn">§5 Tactics and inference rules &rarr;</a>
+        </div>
+        <div class="table-scroll-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 72px; text-align: center;">No.</th>
+                <th style="min-width: 220px;">Name &amp; Classification</th>
+                <th style="min-width: 340px;">Semantic Formula (Fully Parenthesized Infix Operators)</th>
+                <th style="min-width: 210px;">Syntactic Side Condition</th>
+                <th style="width: 135px; text-align: center;">Verification</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+          <tr id="sec-4" class="section-divider" data-section="sec-4">
+            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
+              4) Metalogical laws
+              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">Reflected metatheory in Morse–Kelley, Hilbert-style rules, and checkable syntactic side conditions.</span>
+            </td>
+          </tr>
+        
+
+          <tr id="item-4-01" data-num="4.01">
+            <td class="num-cell" style="text-align: center;"><a id="4.01" href="#4.01" class="entry-num-link">4.01</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Instantiation Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Metatheoretic instantiation across arbitrary typed expressions.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (G : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (t : \mathrm{eval}(A))\; \forall (v : \mathsf{Variable})\; (\mathcal{W}, G \vdash ((\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall G \; \forall \phi \; \forall (t : \mathrm{eval}(A))\; \forall v \; (\mathcal{W}, G \vdash ((\forall (v : A)\; \phi) \to (\mathrm{let}\; v = t\; \mathrm{in}\; \phi)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(t : \mathrm{eval}(A),  \quad v : \mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(t : \mathrm{eval}(A),  \quad v\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-01.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-4-02" data-num="4.02">
+            <td class="num-cell" style="text-align: center;"><a id="4.02" href="#4.02" class="entry-num-link">4.02</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Generalisation Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Universal generalization in metatheory guarded by non-free context occurrence.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (A : \mathsf{Type})\; \forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; \forall (v : \mathsf{Variable})\; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall A \; \forall \Gamma \; \forall \phi \; \forall v \; (\neg(\mathrm{Enc}(v) \in \mathrm{Ctx.FV}(\Gamma)) \to ((\mathcal{W}, \Gamma \vdash \phi) \to (\mathcal{W}, \Gamma \vdash \forall (v : A)\; \phi)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#nfv-vx-gamma" class="side-condition-link"><span class="view-typing">\(\mathrm{NFV}(v, \Gamma)\)</span><span class="view-membership" style="display:none;">\(\mathrm{NFV}(v, \Gamma)\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-02.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-4-03" data-num="4.03">
+            <td class="num-cell" style="text-align: center;"><a id="4.03" href="#4.03" class="entry-num-link">4.03</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Inference Rule</span>
+              <strong style="color: #fff; margin-left: 6px;">CoNecessitation</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Reflection elimination for provability.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\frac{\mathcal{F}, [] \vdash \langle \mat \rangle, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{\mathcal{F}, [] \vdash \langle \mat \rangle, \Gamma \vdash \phi \rangle}{\mathcal{F}, \Gamma \vdash \phi}\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\mathcal{F} : \mathsf{Theory},  \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\mathcal{F},  \quad \Gamma,  \quad \phi\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-03.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
+          </tr>
+            
+
+          <tr id="item-4-04" data-num="4.04">
+            <td class="num-cell" style="text-align: center;"><a id="4.04" href="#4.04" class="entry-num-link">4.04</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Quantifier Unique (!)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">At-most-one quantifier.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; ((! (z : \mathsf{Class})\; \phi) \longleftrightarrow \forall (x, y : \mathsf{Class})\; ((\phi[x/z] \land \phi[y/z]) \to (x = y)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; ((! z \; \phi) \longleftrightarrow \forall x, y \; ((\phi[x/z] \land \phi[y/z]) \to (x = y)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(z, x, y : \mathsf{Variable}\)</span><span class="view-membership" style="display:none;">\(z, x, y\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-04.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-4-05" data-num="4.05">
+            <td class="num-cell" style="text-align: center;"><a id="4.05" href="#4.05" class="entry-num-link">4.05</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Quantifier Exists and Unique (∃!)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Exactly-one quantifier.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\mathcal{T}, [] \vdash ((\exists! (x : \mathsf{Class})\; \phi) \longleftrightarrow ((\exists (x : \mathsf{Class})\; \phi) \land ! (x : \mathsf{Class})\; \phi)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\mathcal{T}, [] \vdash ((\exists! x \; \phi) \longleftrightarrow ((\exists x \; \phi) \land ! x \; \phi)))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(x : \mathsf{Variable},  \quad \phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(x,  \quad \phi\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-05.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="item-4-06" data-num="4.06">
+            <td class="num-cell" style="text-align: center;"><a id="4.06" href="#4.06" class="entry-num-link">4.06</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Class Comprehension Axiom (Metatheory)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Reflected class comprehension in base theory T.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; \forall (x : \mathsf{Name})\; \forall (k : \mathsf{Class.Expr})\; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash ((k \in \{ x \mid \phi \}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x]))))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; \forall x \; \forall k \; (\mathrm{FFI}(k, x, \phi) \to (\mathcal{T}, [] \vdash ((k \in \{ x \mid \phi \}) \longleftrightarrow (\mathrm{isSet}(k) \land \phi[k/x]))))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="../metatheory.html#ffi-t-vx-phi" class="sym-def-chip" title="FFI : Class.Expr × Variable × Fm → Bool (Metatheory FFI)"><span class="sym-chip-name">FFI</span><span class="sym-chip-type">Class.Expr × Variable × Fm → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#ffi-t-vx-phi" class="side-condition-link"><span class="view-typing">\(\mathrm{FFI}(k, x, \phi)\)</span><span class="view-membership" style="display:none;">\(\mathrm{FFI}(k, x, \phi)\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-06.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-4-07" data-num="4.07">
+            <td class="num-cell" style="text-align: center;"><a id="4.07" href="#4.07" class="entry-num-link">4.07</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Soundness / Reflection Axiom</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Metatheoretic reflection into full theory F (soundness_def_entry_fm in foundations.ML).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\phi : \mathsf{Fm})\; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \phi \; (\llbracket \phi \rrbracket \to (\mathcal{F}, [] \vdash \phi))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\phi : \mathsf{Fm}, \quad \mathcal{F} : \mathsf{Theory}\)</span><span class="view-membership" style="display:none;">\(\phi,  \quad \mathcal{F}\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-07.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="item-4-08" data-num="4.08">
+            <td class="num-cell" style="text-align: center;"><a id="4.08" href="#4.08" class="entry-num-link">4.08</a></td>
+            <td>
+              <span class="classification-badge badge-axiom">Axiom</span>
+              <strong style="color: #fff; margin-left: 6px;">Theory Inclusion (T ⊆ F)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Every theorem of the base NBG theory T is derivable in the full reflected theory F (theory_inclusion_def_entry_fm in foundations.ML).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (\Gamma : \mathsf{Ctx})\; \forall (\phi : \mathsf{Fm})\; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall \Gamma \; \forall \phi \; ((\mathcal{T}, \Gamma \vdash \phi) \to (\mathcal{F}, \Gamma \vdash \phi))\)</div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(\mathcal{T}, \mathcal{F} : \mathsf{Theory},  \quad \Gamma : \mathsf{Ctx}, \quad \phi : \mathsf{Fm}\)</span><span class="view-membership" style="display:none;">\(\mathcal{T}, \mathcal{F},  \quad \Gamma,  \quad \phi\)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/item-4-08.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
+          </tr>
+            
+
+          <tr id="def-enc" data-num="4.09">
+            <td class="num-cell" style="text-align: center;"><a id="4.09" href="#4.09" class="entry-num-link">4.09</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Syntactic Encoding Operator (Enc)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Gödel / Hereditarily-Finite-Set encoding (CpEnc in typetheory.ML). Maps any finite syntactic object s : T (Fm, Ctx, Theory, Stmt, Prf) into a finite set code in V_ω ⊂ V, so isSet(Enc(s)) is always true.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (T : \mathsf{Type})\; \forall (s : T)\; (\mathrm{isSet}(\mathrm{Enc}(s)) \land (\mathrm{Enc}(s) \in \mathrm{Emb}(T)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall T \; \forall (s : T)\; (\mathrm{isSet}(\mathrm{Enc}(s)) \land (\mathrm{Enc}(s) \in \mathrm{Emb}(T)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a> <a href="../manual.html#def-emb" class="sym-def-chip" title="Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)"><span class="sym-chip-name">Emb</span><span class="sym-chip-type">Type → (Class → Bool)</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(T : \mathsf{Type},  \quad s : T\)</span><span class="view-membership" style="display:none;">\(T , \quad s \)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/def-enc.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="def-dec" data-num="4.10">
+            <td class="num-cell" style="text-align: center;"><a id="4.10" href="#4.10" class="entry-num-link">4.10</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Syntactic Decoding &amp; Roundtrip Law (Dec)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Partial syntactic decoder (VDec in typetheory.ML). Inverts Enc(s) on the carrier Emb(T), decoupled from antiquotation brackets ⟦...⟧ so that antiquoting a proper class X does not force isSet(X).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (T : \mathsf{Type})\; \forall (s : T)\; ((\mathrm{Dec}(\mathrm{Enc}(s), \mathrm{Emb}(T)) : T) = (s : T))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall T \; \forall (s : T)\; ((\mathrm{Dec}(\mathrm{Enc}(s), \mathrm{Emb}(T)) : T) = (s : T))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a> <a href="../manual.html#def-emb" class="sym-def-chip" title="Emb : Type → (Class → Bool) (4.11 Dual Type Embedding Operator)"><span class="sym-chip-name">Emb</span><span class="sym-chip-type">Type → (Class → Bool)</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(T : \mathsf{Type},  \quad s : T\)</span><span class="view-membership" style="display:none;">\(T , \quad s \)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/def-dec.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="def-emb" data-num="4.11">
+            <td class="num-cell" style="text-align: center;"><a id="4.11" href="#4.11" class="entry-num-link">4.11</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Dual Type Embedding Operator (Emb)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Dual semantics of types in typetheory.ML (LTpEmb / TyTpEmb): semantically, a type T is a predicate on classes Emb(T) : Class → Bool (allowing proper classes like V); syntactically, Emb(T) is the carrier class of encoded objects.</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (X : \mathsf{Class})\; ((\mathrm{Emb}(\mathsf{Class})(X) \longleftrightarrow \top) \land (\mathrm{Emb}(\mathsf{Set})(X) \longleftrightarrow \mathrm{isSet}(X)))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall X \; ((\mathrm{Emb}(\mathsf{Class})(X) \longleftrightarrow \top) \land (\mathrm{Emb}(\mathsf{Set})(X) \longleftrightarrow \mathrm{isSet}(X)))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-3-08" class="sym-def-chip" title="isSet : Class → Bool (3.08 Sethood Predicate)"><span class="sym-chip-name">isSet</span><span class="sym-chip-type">Class → Bool</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(X : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(X \)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/def-emb.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="def-proofs-of" data-num="4.12">
+            <td class="num-cell" style="text-align: center;"><a id="4.12" href="#4.12" class="entry-num-link">4.12</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Proof-Object Class Family (ProofsOf)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">Maps an encoded statement Enc(s) (or formula Enc(φ)) to the class of all encoded verified proof objects witnessing it: ProofsOf : Fm → 𝒫(Proofs). Reconciles Variant 2 typing (p : ProofsOf(φ)) with Variant 1 membership (Enc(p) ∈ ProofsOf(Enc(s))).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (s : \mathsf{Stmt})\; \forall (p : \mathsf{Prf})\; ((\mathrm{Enc}(p) \in \mathrm{ProofsOf}(\mathrm{Enc}(s))) \longleftrightarrow \mathrm{CheckProof}(p, s))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (s : \mathsf{Stmt})\; \forall (p : \mathsf{Prf})\; ((\mathrm{Enc}(p) \in \mathrm{ProofsOf}(\mathrm{Enc}(s))) \longleftrightarrow \mathrm{CheckProof}(p, s))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(s : \mathsf{Stmt},  \quad p : \mathsf{Prf}\)</span><span class="view-membership" style="display:none;">\(s , \quad p \)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/def-proofs-of.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+
+          <tr id="def-theorems" data-num="4.13">
+            <td class="num-cell" style="text-align: center;"><a id="4.13" href="#4.13" class="entry-num-link">4.13</a></td>
+            <td>
+              <span class="classification-badge badge-rule">Definition</span>
+              <strong style="color: #fff; margin-left: 6px;">Class of Provable Statements (Theorems)</strong>
+              <details class="comment-toggle"><summary class="comment-link">comment</summary><div class="entry-notes">First-order class of all encoded provable statements in NBG/MK. An encoded statement Enc(s) belongs to Theorems if and only if there exists an encoded proof witness p ∈ ProofsOf(Enc(s)).</div></details>
+            </td>
+            <td class="formula-cell"><div class="view-typing formula-chunk">\(\forall (s : \mathsf{Stmt})\; ((\mathrm{Enc}(s) \in \mathrm{Theorems}) \longleftrightarrow (\exists (p : \mathsf{Class})\; (p \in \mathrm{ProofsOf}(\mathrm{Enc}(s)))))\)</div><div class="view-membership formula-chunk" style="display:none;">\(\forall (s : \mathsf{Stmt})\; ((\mathrm{Enc}(s) \in \mathrm{Theorems}) \longleftrightarrow (\exists p \; (p \in \mathrm{ProofsOf}(\mathrm{Enc}(s)))))\)</div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#def-enc" class="sym-def-chip" title="Enc : T → Class (4.09 Syntactic Encoding Operator)"><span class="sym-chip-name">Enc</span><span class="sym-chip-type">T → Class</span></a> <a href="../manual.html#def-proofs-of" class="sym-def-chip" title="ProofsOf : Class → Class (4.12 Proof-Object Class Family)"><span class="sym-chip-name">ProofsOf</span><span class="sym-chip-type">Class → Class</span></a></div></td>
+            <td class="syntax-cell"><a href="../metatheory.html#sc-top" class="side-condition-link"><span class="view-typing">\(s : \mathsf{Stmt},  \quad p : \mathsf{Class}\)</span><span class="view-membership" style="display:none;">\(s , \quad p \)</span></a></td>
+            <td style="text-align: center;"><a href="../proofs/def-theorems.html" class="status-badge badge-def-status">Conservative Def</a></td>
+          </tr>
+            
+            </tbody>
+          </table>
+        </div>
+        
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

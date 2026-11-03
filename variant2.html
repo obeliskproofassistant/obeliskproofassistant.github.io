@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Variant 2 — Higher-Order Formulas-as-Types Proof Assistant — Obelisk Proof Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        macros: {
+          llbracket: '[\\![',
+          rrbracket: ']\\!]',
+          llbrackets: '[\\![',
+          rrbrackets: ']\\!]',
+          lsemantic: '[\\![',
+          rsemantic: ']\\!]'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --card-bg: rgba(15, 23, 42, 0.78);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent-blue: #38bdf8;
+      --accent-cyan: #22d3ee;
+      --accent-purple: #c084fc;
+      --accent-gold: #fbbf24;
+      --accent-green: #34d399;
+      --text-muted: #94a3b8;
+    }
+    body {
+      background-color: var(--bg-dark);
+      color: #f1f5f9;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .full-width-container {
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+    }
+    header {
+      background: rgba(15, 23, 42, 0.92);
+      border-bottom: 1px solid var(--card-border);
+      padding: 1.1rem 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
+    .logo span { color: var(--accent-blue); }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
+    nav a:hover, nav a.active { color: var(--accent-blue); }
+    .table-scroll-wrap {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 2rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+      background: rgba(15, 23, 42, 0.5);
+    }
+    table.data-table {
+      width: 100%;
+      table-layout: auto;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 0;
+    }
+    table.data-table th {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: left;
+      padding: 12px 14px;
+      font-weight: 600;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--card-border);
+    }
+    table.data-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
+      vertical-align: top;
+      font-size: 0.92rem;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+    }
+    .formula-cell, .syntax-cell, .formula-chunk {
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      line-height: 1.65;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    .classification-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
+    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .status-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
+    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
+    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+    .dialect-switch-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--card-border);
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .dialect-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #94a3b8;
+      border-radius: 4px;
+      padding: 3px 8px;
+      cursor: pointer;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .dialect-btn.active {
+      background: rgba(56, 189, 248, 0.2);
+      color: #38bdf8;
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid var(--card-border);
+    }
+    .btn:hover { background: #334155; color: #fff; }
+    body.mode-membership .view-typing { display: none !important; }
+    body.mode-membership .view-membership { display: block !important; }
+    body:not(.mode-membership) .view-typing { display: block !important; }
+    body:not(.mode-membership) .view-membership { display: none !important; }
+    span.view-typing { display: inline !important; }
+    span.view-membership { display: none !important; }
+    body.mode-membership span.view-typing { display: none !important; }
+    body.mode-membership span.view-membership { display: inline !important; }
+  </style>
+</head>
+<body class="mode-membership">
+  <header class="full-width-container">
+    <div class="logo">Obelisk <span>Proof Assistant</span></div>
+    <div class="dialect-switch-wrap">
+      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
+      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 NBG Model</button>
+      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="manual.html">Manual</a>
+      <a href="variant1.html" class="">Variant 1 (1st-Order)</a>
+      <a href="variant2.html" class="active">Variant 2 (Higher-Order)</a>
+      <a href="nbg_library.html" class="">NBG Library</a>
+      <a href="proofs.html">Proofs</a>
+      <a href="metatheory.html">Metatheory</a>
+      <a href="repl.html">Web REPL</a>
+    </nav>
+  </header>
+  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
+    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Variant 2 — Higher-Order Formulas-as-Types Proof Assistant</h1>
+    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.4rem;">Dedicated page for the Higher-Order Formulas-as-Types proof assistant (`nbg_compiler.ML`, `nbg_surface_compiler.ML`, `.nbg` λ-term proofs), decoupled from Variant 1.</p>
+    
+    <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 10px; padding: 1.2rem 1.5rem; margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <div style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #38bdf8;">Variant 2 Architecture (`variants/variant2_higher_order/`)</div>
+        <div style="font-size: 0.92rem; color: #e2e8f0; margin-top: 4px;">
+          RoqC / Curry–Howard propositions-as-types architecture (<code>nbg_compiler.ML</code>, <code>nbg_surface_compiler.ML</code>, <code>dependent_eval.ML</code>) where formulas are types via <code>ProofsOf(⟨φ⟩)</code>, implications are function spaces, quantifiers are dependent products/sums, and proofs are constructive λ-terms.
+        </div>
+      </div>
+      <a href="variant1.html" class="btn" style="border-color: #c084fc; color: #d8b4fe;">Switch to Variant 1 (1st-Order NBG) &rarr;</a>
+    </div>
+    <h2 style="font-size: 1.35rem; color: #fff; margin-top: 1.5rem;">Higher-Order Formulas-as-Types Standard Library (20 Constructive λ-Term Proofs)</h2>
+    <div class="table-scroll-wrap">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th style="min-width: 220px;">Theorem Identifier</th>
+            <th style="min-width: 380px;">Formula Type Signature (`ProofsOf(⟨φ⟩)`)</th>
+            <th style="width: 90px; text-align: center;">AST Size</th>
+            <th style="width: 100px; text-align: center;">Normal Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr id="v2-empty_class_no_elements">
+            <td>
+              <strong style="color: #38bdf8;">empty_class_no_elements</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">The empty class has no elements.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (z : \mathsf{Class})\; ((z \in \{ x \mid \bot \}) \to \bot))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall z\; ((z \in \{ x \mid \bot \}) \to \bot))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem empty_class_no_elements : ProofsOf(⟨(∀(z : Class)  ((z ∈ { x | ⊥ }) → ⊥))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">7</td>
+            <td style="text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="v2-empty_class_is_subclass">
+            <td>
+              <strong style="color: #38bdf8;">empty_class_is_subclass</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">The empty class is a subclass of every class.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid \bot \}) \to (z \in X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall z\; ((z \in \{ x \mid \bot \}) \to (z \in X))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem empty_class_is_subclass : ProofsOf(⟨(∀(X : Class) (∀(z : Class)  ((z ∈ { x | ⊥ }) → (z ∈ X))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-universal_class_characterization">
+            <td>
+              <strong style="color: #38bdf8;">universal_class_characterization</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">V = {x | Top}: membership in the universal class is exactly sethood.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (z : \mathsf{Class})\; (((z \in \{ x \mid \top \}) \to \mathrm{isSet}(z)) \land (\mathrm{isSet}(z) \to (z \in \{ x \mid \top \}))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall z\; (((z \in \{ x \mid \top \}) \to \mathrm{isSet}(z)) \land (\mathrm{isSet}(z) \to (z \in \{ x \mid \top \}))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem universal_class_characterization : ProofsOf(⟨(∀(z : Class) (((z ∈ { x | ⊤ }) → isSet(z)) ∧ (isSet(z) → (z ∈ { x | ⊤ }))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">15</td>
+            <td style="text-align: center; color: #cbd5e1;">15</td>
+          </tr>
+        
+          <tr id="v2-russell_class_is_not_a_set">
+            <td>
+              <strong style="color: #38bdf8;">russell_class_is_not_a_set</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Russell&#x27;s class {x | x notin x} is a proper class, not a set.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\mathrm{isSet}(\{ x \mid ((x \in x) \to \bot) \}) \to \bot)\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\mathrm{isSet}(\{ x \mid ((x \in x) \to \bot) \}) \to \bot)\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem russell_class_is_not_a_set : ProofsOf(⟨(isSet({ x | ((x ∈ x) → ⊥) }) → ⊥)⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">19</td>
+            <td style="text-align: center; color: #cbd5e1;">32</td>
+          </tr>
+        
+          <tr id="v2-binary_inter_comm">
+            <td>
+              <strong style="color: #38bdf8;">binary_inter_comm</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Binary class intersection is commutative.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \land (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \land (x \in A)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \land (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \land (x \in A)) \})))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem binary_inter_comm : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">26</td>
+            <td style="text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+          <tr id="v2-binary_union_comm">
+            <td>
+              <strong style="color: #38bdf8;">binary_union_comm</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Binary class union is commutative.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \lor (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \lor (x \in A)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \lor (x \in B)) \}) \to (z \in \{ x \mid ((x \in B) \lor (x \in A)) \})))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem binary_union_comm : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">23</td>
+            <td style="text-align: center; color: #cbd5e1;">23</td>
+          </tr>
+        
+          <tr id="v2-class_diff_subclass_left">
+            <td>
+              <strong style="color: #38bdf8;">class_diff_subclass_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">The class difference A \ B is a subclass of A.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ x \mid ((x \in A) \land ((x \in B) \to \bot)) \}) \to (z \in A)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ x \mid ((x \in A) \land ((x \in B) \to \bot)) \}) \to (z \in A)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem class_diff_subclass_left : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ ((x ∈ B) → ⊥)) }) → (z ∈ A)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="v2-class_eq_sym">
+            <td>
+              <strong style="color: #38bdf8;">class_eq_sym</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Class equality is symmetric.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (Y : \mathsf{Class})\; ((X = Y) \to (Y = X))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall Y\; ((X = Y) \to (Y = X))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem class_eq_sym : ProofsOf(⟨(∀(X : Class) (∀(Y : Class)  ((X = Y) → (Y = X))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">6</td>
+            <td style="text-align: center; color: #cbd5e1;">6</td>
+          </tr>
+        
+          <tr id="v2-class_eq_trans">
+            <td>
+              <strong style="color: #38bdf8;">class_eq_trans</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Class equality is transitive.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (X : \mathsf{Class})\; (\forall (Y : \mathsf{Class})\; (\forall (Z : \mathsf{Class})\; (((X = Y) \land (Y = Z)) \to (X = Z)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall X\; (\forall Y\; (\forall Z\; (((X = Y) \land (Y = Z)) \to (X = Z)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem class_eq_trans : ProofsOf(⟨(∀(X : Class) (∀(Y : Class) (∀(Z : Class) (((X = Y) ∧ (Y = Z)) → (X = Z)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="v2-quantifier_swap">
+            <td>
+              <strong style="color: #38bdf8;">quantifier_swap</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">An existential set with a universal property implies the corresponding forall-exists statement.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\(((\exists (y : \mathsf{Set})\; (\forall (x : \mathsf{Set})\; (x \in y))) \to (\forall (x : \mathsf{Set})\; (\exists (y : \mathsf{Set})\; (x \in y))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\(((\exists (y \in V)\; (\forall (x \in V)\; (x \in y))) \to (\forall (x \in V)\; (\exists (y \in V)\; (x \in y))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem quantifier_swap : ProofsOf(⟨((∃(y : Set)  (∀(x : Set) (x ∈ y))) → (∀(x : Set)  (∃(y : Set) (x ∈ y))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">7</td>
+            <td style="text-align: center; color: #cbd5e1;">7</td>
+          </tr>
+        
+          <tr id="v2-dunaev_tagged_pair_projections">
+            <td>
+              <strong style="color: #38bdf8;">dunaev_tagged_pair_projections</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; ((\pi_1([A, B]_D) = A) \land (\pi_2([A, B]_D) = B))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; ((\pi_1([A, B]_D) = A) \land (\pi_2([A, B]_D) = B))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem dunaev_tagged_pair_projections : ProofsOf(⟨(∀(A : Class) (∀(B : Class) ((π₁([A, B]_D) = A) ∧ (π₂([A, B]_D) = B))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">3</td>
+            <td style="text-align: center; color: #cbd5e1;">3</td>
+          </tr>
+        
+          <tr id="v2-cantor_diagonal_theorem">
+            <td>
+              <strong style="color: #38bdf8;">cantor_diagonal_theorem</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Cantor&#x27;s diagonal theorem stated with Dunaev tagged pairs.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (R : \mathsf{Class})\; (\forall (c : \mathsf{Set})\; (\mathrm{isSet}(c) \to ((((c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}) \to ([c, c]_D \in R)) \land ([c, c](_D \in R) \to (c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}))) \to \bot))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall R\; (\forall (c \in V)\; (\mathrm{isSet}(c) \to ((((c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}) \to ([c, c]_D \in R)) \land ([c, c](_D \in R) \to (c \in \{ x \mid ([x, x](_D \in R) \to \bot) \}))) \to \bot))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem cantor_diagonal_theorem : ProofsOf(⟨(∀(R : Class) (∀(c : Set) (isSet(c) → ((((c ∈ { x | ([x, x](_D ∈ R) → ⊥) }) → ([c, c]_D ∈ R)) ∧ ([c, c](_D ∈ R) → (c ∈ { x | ([x, x](_D ∈ R) → ⊥) }))) → ⊥))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">28</td>
+            <td style="text-align: center; color: #cbd5e1;">50</td>
+          </tr>
+        
+          <tr id="v2-self_in_singleton">
+            <td>
+              <strong style="color: #38bdf8;">self_in_singleton</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Every set belongs to its singleton class.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to (x \in \{ u \mid (u = x) \})))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\mathrm{isSet}(x) \to (x \in \{ u \mid (u = x) \})))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem self_in_singleton : ProofsOf(⟨(∀(x : Class) (isSet(x) → (x ∈ { u | (u = x) })))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+            <td style="text-align: center; color: #cbd5e1;">8</td>
+          </tr>
+        
+          <tr id="v2-self_in_succ">
+            <td>
+              <strong style="color: #38bdf8;">self_in_succ</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Every set belongs to its ordinal successor.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\mathrm{isSet}(x) \to (x \in \{ u \mid ((u \in x) \lor (u = x)) \})))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\mathrm{isSet}(x) \to (x \in \{ u \mid ((u \in x) \lor (u = x)) \})))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem self_in_succ : ProofsOf(⟨(∀(x : Class) (isSet(x) → (x ∈ { u | ((u ∈ x) ∨ (u = x)) })))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="v2-class_sub_succ">
+            <td>
+              <strong style="color: #38bdf8;">class_sub_succ</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Every class is a subclass of its successor.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (x : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in x) \to (z \in \{ u \mid ((u \in x) \lor (u = x)) \}))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall x\; (\forall z\; ((z \in x) \to (z \in \{ u \mid ((u \in x) \lor (u = x)) \}))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem class_sub_succ : ProofsOf(⟨(∀(x : Class) (∀(z : Class) ((z ∈ x) → (z ∈ { u | ((u ∈ x) ∨ (u = x)) }))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">12</td>
+            <td style="text-align: center; color: #cbd5e1;">12</td>
+          </tr>
+        
+          <tr id="v2-dunaev_pair_injective">
+            <td>
+              <strong style="color: #38bdf8;">dunaev_pair_injective</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -&gt; A = C and B = D.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (C : \mathsf{Class})\; (\forall (D : \mathsf{Class})\; (([A, B]_D = [C, D]_D) \to ((A = C) \land (B = D)))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall C\; (\forall D\; (([A, B]_D = [C, D]_D) \to ((A = C) \land (B = D)))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem dunaev_pair_injective : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(C : Class) (∀(D : Class) (([A, B]_D = [C, D]_D) → ((A = C) ∧ (B = D)))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">26</td>
+            <td style="text-align: center; color: #cbd5e1;">26</td>
+          </tr>
+        
+          <tr id="v2-dunaev_cartesian_elim">
+            <td>
+              <strong style="color: #38bdf8;">dunaev_cartesian_elim</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Elimination for the Dunaev Cartesian product: membership yields set components u, v with p = [u,v]_D.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (p : \mathsf{Class})\; ((p \in \{ q \mid (\exists (u : \mathsf{Set})\; (\exists (v : \mathsf{Set})\; (((u \in A) \land (v \in B)) \land (q = [u, v]_D)))) \}) \to (\exists (u : \mathsf{Set})\; (\exists (v : \mathsf{Set})\; (((u \in A) \land (v \in B)) \land (p = [u, v]_D))))))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall p\; ((p \in \{ q \mid (\exists (u \in V)\; (\exists (v \in V)\; (((u \in A) \land (v \in B)) \land (q = [u, v]_D)))) \}) \to (\exists (u \in V)\; (\exists (v \in V)\; (((u \in A) \land (v \in B)) \land (p = [u, v]_D))))))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem dunaev_cartesian_elim : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(p : Class) ((p ∈ { q | (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (q = [u, v]_D)))) }) → (∃(u : Set) (∃(v : Set) (((u ∈ A) ∧ (v ∈ B)) ∧ (p = [u, v]_D))))))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+            <td style="text-align: center; color: #cbd5e1;">9</td>
+          </tr>
+        
+          <tr id="v2-inter_sub_left">
+            <td>
+              <strong style="color: #38bdf8;">inter_sub_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Binary class intersection A inter B is a subclass of the left operand A.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in A)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in A)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem inter_sub_left : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ A)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="v2-inter_sub_right">
+            <td>
+              <strong style="color: #38bdf8;">inter_sub_right</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Binary class intersection A inter B is a subclass of the right operand B.</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in B)))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in \{ u \mid ((u \in A) \land (u \in B)) \}) \to (z \in B)))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem inter_sub_right : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { u | ((u ∈ A) ∧ (u ∈ B)) }) → (z ∈ B)))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+            <td style="text-align: center; color: #cbd5e1;">10</td>
+          </tr>
+        
+          <tr id="v2-union_sub_left">
+            <td>
+              <strong style="color: #38bdf8;">union_sub_left</strong>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension).</div>
+            </td>
+            <td class="formula-cell">
+              <div class="view-typing formula-chunk">\((\forall (A : \mathsf{Class})\; (\forall (B : \mathsf{Class})\; (\forall (z : \mathsf{Class})\; ((z \in A) \to (z \in \{ u \mid ((u \in A) \lor (u \in B)) \})))))\)</div>
+              <div class="view-membership formula-chunk" style="display:none;">\((\forall A\; (\forall B\; (\forall z\; ((z \in A) \to (z \in \{ u \mid ((u \in A) \lor (u \in B)) \})))))\)</div>
+              <div style="margin-top: 6px; padding: 6px 10px; background: rgba(56, 189, 248, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: #e2e8f0;">
+                <code>Theorem union_sub_left : ProofsOf(⟨(∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ A) → (z ∈ { u | ((u ∈ A) ∨ (u ∈ B)) })))))⟩)</code>
+              </div>
+            </td>
+            <td style="text-align: center; color: #cbd5e1;">13</td>
+            <td style="text-align: center; color: #cbd5e1;">13</td>
+          </tr>
+        
+        </tbody>
+      </table>
+    </div>
+    
+  </div>
+  <script>
+    function setDialectMode(mode) {
+      if (mode === 'membership') {
+        document.body.classList.add('mode-membership');
+        document.getElementById('btn-dialect-membership').classList.add('active');
+        document.getElementById('btn-dialect-typing').classList.remove('active');
+      } else {
+        document.body.classList.remove('mode-membership');
+        document.getElementById('btn-dialect-typing').classList.add('active');
+        document.getElementById('btn-dialect-membership').classList.remove('active');
+      }
+      localStorage.setItem('obelisk_notation_mode', mode);
+      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
+      setDialectMode(saved);
+    });
+  </script>
+</body>
+</html>

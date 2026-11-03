@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \forall (A, B : \mathsf{Class})\; (\{b \mid \{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D\} = B) \]
+        \[ \forall (A, B : \mathsf{Class})\; (\{ b \mid (\{\{\{\{b\}\}\}, \{\emptyset, \{\emptyset\}\}\} \in [A, B]_D) \} = B) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> ∀(A, B : Class) ({b | {{{{b}}}, {∅, {∅}}} ∈ [A, B]_D} = B)
+        <strong>Clean Unicode:</strong> ∀(A, B : Class) ({ b | ({{{{b}}}, {∅, {∅}}} ∈ [A, B]_D) } = B)
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Second class projection π₂([A, B]_D) = B recovers B unconditionally for any class B (dunaev_pr2_def_entry_fm in foundations.ML).</div>
     </div>
@@ -366,11 +366,11 @@
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Constructively verified! A closed proof program or tactic sequence executes in PolyML, discharging all subgoals down to [] and certifying ∀(A, B : Class) ({b | {{{{b}}}, {∅, {∅}}} ∈ [A, B]_D} = B).</div>
+            <div class="meta-val">Constructively verified! A closed proof program or tactic sequence executes in PolyML, discharging all subgoals down to [] and certifying ∀(A, B : Class) ({ b | ({{{{b}}}, {∅, {∅}}} ∈ [A, B]_D) } = B).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>

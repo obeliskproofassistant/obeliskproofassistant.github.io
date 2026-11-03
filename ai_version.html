@@ -76,9 +76,17 @@
     }
 
     .container {
-      max-width: 1140px;
+      max-width: 100%;
+      width: 100%;
       margin: 0 auto;
-      padding: 0 1.5rem;
+      padding: 0 24px;
+      box-sizing: border-box;
+    }
+    mjx-container {
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 2px 0;
     }
 
     /* Navbar */
@@ -661,12 +669,10 @@
       </a>
       <nav class="main-nav">
         <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">🏛 Classic Author Portal</a>
-        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Theory Manual (49 + 17 NBG)</a>
-        <a href="#overview">Overview</a>
-        <a href="#inspector">Theorem Inspector</a>
-        <a href="#triad">Architecture</a>
-        <a href="#comparison">Comparison</a>
-        <a href="#audit">Lean 4 Audit</a>
+        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Unified Manual</a>
+        <a href="variant1.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.15); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">🏛 Variant 1 (1st-Order)</a>
+        <a href="variant2.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">λ Variant 2 (Higher-Order)</a>
+        <a href="nbg_library.html" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">📚 NBG Library</a>
         <a href="repl.html">Web REPL</a>
         <a href="#demo">Live Demo</a>
         <a href="https://georgydunaev.github.io" target="_blank">Author: Georgy Dunaev ↗</a>
@@ -702,49 +708,54 @@
     <section class="card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 132, 199, 0.15) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 1.8rem 2rem; margin-bottom: 3rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;">
         <div>
-          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations</div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual &amp; 17-Theorem NBG Library</h3>
+          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations · Decoupled Pages</div>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual, Standalone Variants &amp; Section Pages</h3>
         </div>
-        <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Manual + NBG Library &rarr;</a>
+        <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+          <a href="variant1.html" class="btn btn-secondary" style="border-color: rgba(192, 132, 252, 0.55); color: #d8b4fe;">🏛 Variant 1 (1st-Order) Page</a>
+          <a href="variant2.html" class="btn btn-secondary" style="border-color: rgba(56, 189, 248, 0.55); color: #38bdf8;">λ Variant 2 (Higher-Order) Page</a>
+          <a href="nbg_library.html" class="btn btn-secondary" style="border-color: rgba(52, 211, 153, 0.55); color: #34d399;">📚 NBG Library Page</a>
+          <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Unified Manual &rarr;</a>
+        </div>
       </div>
       <p style="color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.2rem; max-width: 900px;">
-        Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Each theorem and rule links to an individual machine-checked verification certificate with full PolyML microkernel proof programs.
+        Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Browse either the dedicated single-variant pages (<a href="variant1.html" style="color:#d8b4fe;">Variant 1</a>, <a href="variant2.html" style="color:#38bdf8;">Variant 2</a>), the standalone section pages below, or the unified catalog.
       </p>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem;">
-        <a href="manual.html#sec-1" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 1</div>
+        <a href="sections/sec-1.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 1 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Propositional Logic</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">13 axioms &amp; Modus Ponens</div>
         </a>
-        <a href="manual.html#sec-2" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 2</div>
+        <a href="sections/sec-2.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 2 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Predicate Logic</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Bernays quantifiers &amp; Gen</div>
         </a>
-        <a href="manual.html#sec-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 3</div>
+        <a href="sections/sec-3.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 3 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Morse–Kelley &amp; Conditionals</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">⟦ if ... then ⟧, Ord-Ind, V</div>
         </a>
-        <a href="manual.html#sec-4" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 4</div>
+        <a href="sections/sec-4.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 4 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Metalogical Laws</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Reflected metatheory &amp; ∃!</div>
         </a>
-        <a href="manual.html#sec-5" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 5</div>
+        <a href="sections/sec-5.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 5 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Verified Tactics</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Sequent derivations &amp; rules</div>
         </a>
-        <a href="manual.html#sec-6" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 6</div>
+        <a href="sections/sec-6.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 6 (STANDALONE PAGE)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Incompleteness</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Löb's theorem &amp; Gödel II</div>
         </a>
-        <a href="manual.html#nbg-library" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
-          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">APPENDIX</div>
+        <a href="nbg_library.html" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
+          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">DEDICATED PAGE</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">NBG Standard Library</div>
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">17 kernel-checked theorems</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">17 kernel-checked theorems (+3 bridge)</div>
         </a>
       </div>
     </section>
@@ -773,8 +784,8 @@
         <div class="exec-card">
           <h4 style="color: #c084fc;"><span>🏷️</span> Dunaev Tagged Ordered Pairs</h4>
           <p>
-            Standard Kuratowski pairs \(\langle A, B \rangle = \{\{A\}, \{A, B\}\}\) fail for proper classes because proper classes cannot be elements of sets. 
-            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \([A, B]_D = \mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)\), allowing proper classes and infinite families to form pairs and lists with minimal rank growth and full algebraic projection injectivity.
+            Standard Kuratowski pairs \((\langle A, B \rangle = \{\{A\}, \{A, B\}\})\) fail for proper classes because proper classes cannot be elements of sets. 
+            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), allowing proper classes and infinite families to form pairs and lists with minimal rank growth and full algebraic projection injectivity.
           </p>
         </div>
 
@@ -801,11 +812,11 @@
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(56, 189, 248, 0.35);">
           <h3 style="font-size: 1.05rem; color: #38bdf8; margin-bottom: 0.5rem;">🪪 Dunaev Pair Injectivity</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted);">
-            <code>[A,B]<sub>D</sub> = [C,D]<sub>D</sub> &rarr; A = C &and; B = D</code> is now proved for arbitrary classes
+            <code>(([A,B]<sub>D</sub> = [C,D]<sub>D</sub>) &rarr; ((A = C) &and; (B = D)))</code> is now proved for arbitrary classes
             (<code>proofDunaevPairInjectivity</code> and surface <code>dunaev_pair_injective</code>).
             The general <code>Pair</code>/<code>Func</code> interface no longer falls back to Kuratowski pairs.
           </p>
-          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
+          <a href="nbg_library.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
         </div>
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(16, 185, 129, 0.35);">
           <h3 style="font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem;">🛡️ Trusted Checker: No Cheat Path</h3>
@@ -983,14 +994,14 @@
               <tr>
                 <td><code>formula F = ...;</code></td>
                 <td><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
-                <td><code>formula False_RussellIsSet = Set({ x | x in x -&gt; Bot });</code></td>
+                <td><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code></td>
                 <td>Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
                 <td>Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
               </tr>
               <tr>
                 <td><code>theorem T : F = e;</code></td>
                 <td><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
-                <td><code>theorem thm_russell_not_set : Set(R) -&gt; Bot = fn (hSet : Set(R)) =&gt; ...;</code></td>
+                <td><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
                 <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies α-equivalence with <code>F</code></td>
                 <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected.</td>
               </tr>
@@ -1140,44 +1151,44 @@
     const THEOREMS = {
       russell: {
         title: "Russell's Proper Class Theorem (Condensed Form)",
-        math: `⊢ Proper({ y ∈ V | y ∉ y })`,
+        math: `(⊢ Proper({ (y ∈ V) | (y ∉ y) }))`,
         ascii: `val thm_russell_proper : Term =
   IsProper (Compr "y" (Neg (In (Var "y") (Var "y"))))`,
         sideConditions: [
           "Condensed form (0 assumptions): Unconditionally proves the Russell collection is a proper class.",
-          "Detaches intermediate lemma: ⊢ ¬(∃ x ∈ V. x = R) via Modus Ponens with Proper(K) ⟺ ¬Set(K).",
-          "Universal class V ≝ { x | x = x }; Set(x) ⟺ x ∈ V.",
+          "Detaches intermediate lemma: (⊢ ¬(∃(x ∈ V) (x = R))) via Modus Ponens with (Proper(K) ⟺ ¬Set(K)).",
+          "Universal class (V ≝ { x | (x = x) }); (Set(x) ⟺ (x ∈ V)).",
           "Derived without Kuratowski rank elevation; directly resolves Russell's paradox in MK class theory."
         ]
       },
       tagged_pair: {
         title: "Dunaev Tagged Pair Injectivity (Arbitrary Classes)",
-        math: `∀ A, B, C, D : Class.
-  [A, B]_D = [C, D]_D  ⟹  (A = C ∧ B = D)`,
+        math: `∀(A : Class) ∀(B : Class) ∀(C : Class) ∀(D : Class)
+  (([A, B]_D = [C, D]_D)  ⟹  ((A = C) ∧ (B = D)))`,
         ascii: `theorem dunaev_pair_injective :
   forall (A B C D : Class).
-    ([A, B]_D = [C, D]_D -> (A = C /\\ B = D)) =
+    (([A, B]_D = [C, D]_D) -> ((A = C) /\\ (B = D))) =
   Lam (A:Class) => Lam (B:Class) => Lam (C:Class) => Lam (D:Class) =>
-    fn (h : [A, B]_D = [C, D]_D) =>
+    fn (h : ([A, B]_D = [C, D]_D)) =>
       pair(
         trans(sym(fst(dunaev_proj(A, B))),
-          trans(rewrite(h, u. pr1([A, B]_D) = pr1(u), refl(pr1([A, B]_D))),
+          trans(rewrite(h, u. (pr1([A, B]_D) = pr1(u)), refl(pr1([A, B]_D))),
                 fst(dunaev_proj(C, D)))),
         trans(sym(snd(dunaev_proj(A, B))),
-          trans(rewrite(h, u. pr2([A, B]_D) = pr2(u), refl(pr2([A, B]_D))),
+          trans(rewrite(h, u. (pr2([A, B]_D) = pr2(u)), refl(pr2([A, B]_D))),
                 snd(dunaev_proj(C, D))))
       );`,
         sideConditions: [
           "Kernel theorem: NBGTactics.proofDunaevPairInjectivity; surface proof: examples/nbg_verified_programs.nbg#dunaev_pair_injective.",
           "Tags are the fixed constants 1 and 2; there is no bound `tag` variable and no tag-indexed family.",
-          "Projection axioms: pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes, including proper classes.",
+          "Projection axioms: (pr1([A,B]_D) = A) and (pr2([A,B]_D) = B) for arbitrary classes, including proper classes.",
           "Leibniz rewriting transports equality through pr1/pr2; no set-membership of a proper class is required.",
-          "This is exactly what Kuratowski pairs lose: for a proper class Y, <x,Y>_K collapses to <x,x>_K."
+          "This is exactly what Kuratowski pairs lose: for a proper class Y, (<x,Y>_K = <x,x>_K)."
         ]
       },
       mk_comprehension: {
         title: "Morse–Kelley Class Comprehension",
-        math: `∃ X : Class. ∀ x : Class. (x ∈ X  ⟺  x ∈ V ∧ ⟦ φ(x) ⟧)`,
+        math: `∃(X : Class) ∀(x : Class) ((x ∈ X)  ⟺  ((x ∈ V) ∧ ⟦ φ(x) ⟧))`,
         ascii: `val ax_mk_comprehension : Term =
   Exists "X" TClass (
     Forall "x" TClass (
@@ -1194,7 +1205,7 @@
       },
       conditional_term: {
         title: "Syntactic Conditional Term Constructor (CIf)",
-        math: `⟦ CIf(P, A, B) ⟧ = { x ∈ V | (⟦ P ⟧ ∧ x ∈ A) ∨ (⟦ ¬ P ⟧ ∧ x ∈ B) }`,
+        math: `(⟦ CIf(P, A, B) ⟧ = { (x ∈ V) | ((⟦ P ⟧ ∧ (x ∈ A)) ∨ (⟦ ¬ P ⟧ ∧ (x ∈ B))) })`,
         ascii: `val def_cif_semantics : Term =
   Eq (App (Const "Sem") (App3 (Const "CIf") (Var "P") (Var "A") (Var "B")))
      (Compr "x" (Or (And (App (Const "Sem") (Var "P")) (In (Var "x") (Var "A")))
@@ -1202,12 +1213,12 @@
         sideConditions: [
           "Syntax/Semantics separation: CIf is a pure syntactic constructor (not an opaque Value).",
           "Denotation is mediated strictly by semantic valuation operator ⟦ · ⟧.",
-          "When P holds, ⟦ CIf(P, A, B) ⟧ = A; when ¬P holds, ⟦ CIf(P, A, B) ⟧ = B."
+          "When P holds, (⟦ CIf(P, A, B) ⟧ = A); when ¬P holds, (⟦ CIf(P, A, B) ⟧ = B)."
         ]
       },
       modus_ponens: {
         title: "LCF Modus Ponens & Shift-to-Term",
-        math: `⟦ Γ ⊢ φ → ψ ⟧   and   ⟦ Γ ⊢ φ ⟧   ⟹   ⟦ Γ ⊢ ψ ⟧`,
+        math: `((⟦ (Γ ⊢ (φ → ψ)) ⟧ ∧ ⟦ (Γ ⊢ φ) ⟧)   ⟹   ⟦ (Γ ⊢ ψ) ⟧)`,
         ascii: `val thm_modus_ponens_shift : Term =
   Impl (AStmt Tau (Var "Gamma") (FImpl (Var "phi") (Var "psi")))
        (Impl (AStmt Tau (Var "Gamma") (Var "phi"))
@@ -1220,15 +1231,15 @@
       },
       ordinal_ind: {
         title: "Von Neumann Ordinal Foundation (∈-Induction)",
-        math: `Ord(A) ⟺ Trans(A) ∧ ∀ B ∈ A. Trans(B)
-  where Trans(X) ⟺ ∀ y ∈ X. y ⊆ X`,
+        math: `(Ord(A) ⟺ (Trans(A) ∧ ∀(B : Class) ((B ∈ A) → Trans(B))))
+  where (Trans(X) ⟺ ∀(y : Class) ((y ∈ X) → (y ⊆ X)))`,
         ascii: `val def_ordinal : Term =
   Iff (Ord (Var "A"))
       (And (Trans (Var "A"))
            (Forall "B" TClass (Impl (In (Var "B") (Var "A"))
                                     (Trans (Var "B")))))`,
         sideConditions: [
-          "Foundation / Regularity side condition: Powerclass induction (Power(X) ⊆ X ⟹ V ⊆ X).",
+          "Foundation / Regularity side condition: Powerclass induction ((Power(X) ⊆ X) ⟹ (V ⊆ X)).",
           "Every element of an ordinal is also transitively closed.",
           "Ordinals can be proper classes (e.g., On is the class of all ordinals)."
         ]

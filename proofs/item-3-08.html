@@ -321,10 +321,10 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ \forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land A \subseteq B) \to \mathrm{isSet}(A)) \]
+        \[ \forall (A, B : \mathsf{Class})\; ((\mathrm{isSet}(B) \land (A \subseteq B)) \to \mathrm{isSet}(A)) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> ∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))
+        <strong>Clean Unicode:</strong> ∀(A, B : Class) ((isSet(B) ∧ (A ⊆ B)) → isSet(A))
       </div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Any subclass of a set is a set.</div>
     </div>
@@ -366,11 +366,11 @@
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))).</div>
+            <div class="meta-val">Admitted as an irreducible axiomatic foundation for the formal deductive system. In the LCF architecture, axioms instantiate valid sequents without antecedent premises (⊢ ∀(A, B : Class) ((isSet(B) ∧ (A ⊆ B)) → isSet(A))).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>
@@ -383,7 +383,7 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
       <pre class="code-block"><code>(* Primitive Axiom Postulate *)
-val thm_item_3_08 = Thm ([], parse_formula &quot;∀(A, B : Class) ((isSet(B) ∧ A ⊆ B) → isSet(A))&quot;);</code></pre>
+val thm_item_3_08 = Thm ([], parse_formula &quot;∀(A, B : Class) ((isSet(B) ∧ (A ⊆ B)) → isSet(A))&quot;);</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>

@@ -321,12 +321,12 @@
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ ((\forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to ((\forall (\beta : \mathsf{Class})\; (\beta \in \alpha \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; (\alpha \in \mathrm{On} \to \phi(\alpha))) \]
+        \[ ((\forall (\alpha : \mathsf{Class})\; ((\alpha \in \mathrm{On}) \to ((\forall (\beta : \mathsf{Class})\; ((\beta \in \alpha) \to \phi(\beta))) \to \phi(\alpha)))) \to \forall (\alpha : \mathsf{Class})\; ((\alpha \in \mathrm{On}) \to \phi(\alpha))) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> (∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α))
+        <strong>Clean Unicode:</strong> ((∀(α : Class) ((α ∈ On) → ((∀(β : Class) ((β ∈ α) → φ(β))) → φ(α)))) → ∀(α : Class) ((α ∈ On) → φ(α)))
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Ordinal induction is formulated as a theorem in Morse–Kelley class theory over the previously defined constant On.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> On is a Class object (On : Class). Ordinal induction is formulated as a formula in Morse–Kelley class theory, accompanied by a constructive proof program.</div>
     </div>
 
     
@@ -335,7 +335,7 @@
         <span style="color: var(--accent-purple);">Syntactic Side Condition</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400; margin-left: 10px;">(Ambient Type Theory)</span>
       </div>
-      <div class="syntax-display">\(\mathrm{WF}(\in, \mathrm{On})\)</div>
+      <div class="syntax-display">\(\mathrm{On} : \mathsf{Class},  \quad \mathrm{WF}(\in, \mathrm{On})\)</div>
       <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);">
         Reflected in Metatheory: <a href="../metatheory.html#ord-induction" style="color: var(--accent-cyan); text-decoration: none; font-weight: 600;">View reflected specification &rarr;</a>
       </div>
@@ -366,11 +366,11 @@
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Constructively verified! A closed proof program or tactic sequence executes in PolyML, discharging all subgoals down to [] and certifying (∀(α : Class) (α ∈ On → (∀(β : Class) (β ∈ α → φ(β)) → φ(α)))) → ∀(α : Class) (α ∈ On → φ(α)).</div>
+            <div class="meta-val">Constructively verified! A closed proof program or tactic sequence executes in PolyML, discharging all subgoals down to [] and certifying ((∀(α : Class) ((α ∈ On) → ((∀(β : Class) ((β ∈ α) → φ(β))) → φ(α)))) → ∀(α : Class) ((α ∈ On) → φ(α))).</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
-            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( [A, B]_D = (\{0\} \times A) \cup (\{1\} \times B) \) to prevent rank explosion.</div>
+            <div class="meta-val">Single atomic type <code>Class</code>. Proper classes use Dunaev Tagged Ordered Pairs \( ([A, B]_D = ((\{0\} \times A) \cup (\{1\} \times B))) \) to prevent rank explosion.</div>
           </div>
         </div>
       </div>
