@@ -49,6 +49,41 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn(r'\href{#item-', self.gen_manual_html)
         self.assertGreaterEqual(len(self.gen_db["entries"]), 100)
 
+    def test_ml_generated_subpages_and_nbg_library(self):
+        """All subpages in generated/ must exist and carry the ML provenance header and Unicode default."""
+        expected_pages = [
+            "manual.html",
+            "output.html",
+            "variant1.html",
+            "variant2.html",
+            "nbg_library.html",
+            "proofs.html",
+            "symbols.html",
+            "dependent_types.html",
+            "metatheory.html",
+            "sections/sec-1.html",
+            "sections/sec-2.html",
+            "sections/sec-3.html",
+            "sections/sec-4.html",
+            "sections/sec-5.html",
+        ]
+        for rel in expected_pages:
+            path = os.path.join(SITE_DIR, "generated", rel)
+            self.assertTrue(os.path.isfile(path), f"Missing ML-generated page: {path}")
+            with open(path, "r", encoding="utf-8") as f:
+                html = f.read()
+            self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", html, f"Missing ML provenance header in {rel}")
+            self.assertIn('class="mode-membership mode-unicode"', html, f"Unicode default missing in {rel}")
+            self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")
+        nbg_json_path = os.path.join(SITE_DIR, "generated", "nbg_library.json")
+        self.assertTrue(os.path.isfile(nbg_json_path))
+        with open(nbg_json_path, "r", encoding="utf-8") as f:
+            nbg_lib = json.load(f)
+        self.assertEqual(nbg_lib["total_count"], 100)
+        self.assertEqual(nbg_lib["derived_count"], 77)
+        self.assertEqual(nbg_lib["definitional_count"], 16)
+        self.assertEqual(nbg_lib["axiomatic_count"], 7)
+
     def test_database_entries_count(self):
         """Frozen database must contain 6 sections and at least 59 formal items (currently 69)."""
         self.assertEqual(len(self.db["sections"]), 6)

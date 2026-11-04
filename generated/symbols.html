@@ -1,0 +1,2798 @@
+<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+     Source files: set_theory_prover/program/newchecker.ML,
+                   set_theory_prover/program/types/typetheory.ML,
+                   set_theory_prover/program/types/foundations.ML,
+                   set_theory_prover/program/types/entries.ML
+     Generator:    set_theory_prover/program/html_generator.ML
+     Regenerate:   cd /ramdisk/set_theory_prover/program && poly -q --use html_generator.ML
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant &mdash; Algorithmic Symbol &amp; Type Index</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+      },
+      startup: { typeset: true }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1e293b;
+      --bg-row-hover: #263349;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --border-color: #334155;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.75rem 2rem;
+    }
+    .header-inner {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .nav-bar {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .nav-link {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.85rem;
+      color: #f8fafc;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      margin: 0 0 1.25rem 0;
+      font-size: 0.98rem;
+    }
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.75rem;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-right: 0.25rem;
+    }
+    .toggle-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .toggle-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-blue);
+    }
+    .toggle-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .toc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .toc-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+    }
+    .toc-link:hover {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    main {
+      max-width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+    }
+    .manual-section {
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-size: 1.45rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--accent-blue);
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      margin: 0 0 1rem 0;
+      font-size: 0.92rem;
+    }
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      overflow-x: auto;
+    }
+    /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
+    .section-external-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .section-external-table > thead > tr > th {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .col-num { width: 90px; text-align: center; }
+    .external-row {
+      border-bottom: 2px solid var(--border-color);
+      transition: background 0.15s ease;
+    }
+    .external-row:target {
+      background: rgba(56, 189, 248, 0.14);
+      outline: 2px solid var(--accent-blue);
+    }
+    .external-num {
+      width: 90px;
+      vertical-align: top;
+      text-align: center;
+      padding: 1rem 0.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .num-anchor {
+      color: var(--accent-blue);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .num-anchor:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+    .external-entity {
+      padding: 0;
+      vertical-align: top;
+    }
+    /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
+    .internal-entity-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .internal-entity-table tr {
+      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .internal-entity-table tr:last-child {
+      border-bottom: none;
+    }
+    .internal-entity-table th.field-name {
+      width: 165px;
+      padding: 0.6rem 1rem;
+      background: rgba(30, 41, 59, 0.45);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-right: 1px solid rgba(51, 65, 85, 0.6);
+      vertical-align: middle;
+    }
+    .internal-entity-table td.field-value {
+      padding: 0.65rem 1rem;
+      vertical-align: middle;
+    }
+    .entry-title-cell {
+      font-weight: 600;
+      color: #f8fafc;
+      font-size: 0.98rem;
+    }
+    .formula-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
+      font-size: 0.96rem;
+      overflow-x: auto;
+    }
+    .proof-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
+    a.sym-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease;
+    }
+    a.sym-link:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+    }
+    /* ANSI Syntax Highlighting Classes */
+    .ansi-bold-red { color: #f87171; font-weight: 700; }
+    .ansi-bold-green { color: #4ade80; font-weight: 700; }
+    .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
+    .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
+    .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
+    .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
+    .ansi-yellow { color: #fde047; }
+    .ansi-cyan { color: #67e8f9; }
+    .ansi-gray { color: #94a3b8; }
+    .ansi-light-red { color: #fca5a5; }
+    .ansi-light-green { color: #86efac; }
+    .ansi-light-yellow { color: #fef08a; }
+    .ansi-light-blue { color: #93c5fd; }
+    .ansi-light-magenta { color: #f0abfc; }
+    .ansi-light-cyan { color: #a5f3fc; }
+    .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
+    /* Mode Toggles: Unicode is Default */
+    body.mode-membership .rel-colon { display: none; }
+    body.mode-membership .rel-in { display: inline; color: #f87171; font-weight: 700; }
+    body.mode-typing .rel-colon { display: inline; }
+    body.mode-typing .rel-in { display: none; }
+    body.mode-unicode .formula-unicode { display: block; }
+    body.mode-unicode .formula-latex { display: none; }
+    body.mode-latex .formula-unicode { display: none; }
+    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+  </style>
+</head>
+<body class="mode-membership mode-unicode">
+  <header>
+    <div class="header-inner">
+      <nav class="nav-bar">
+        <a class="nav-link" href="../index.html">&larr; Obelisk Portal</a>
+        <a class="nav-link" href="manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
+        <a class="nav-link" href="variant1.html">Variant 1 (1st-Order Kernel)</a>
+        <a class="nav-link" href="variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="proofs.html">Verified Theorems &amp; Rules</a>
+        <a class="nav-link" href="symbols.html">Symbol &amp; Type Index</a>
+        <a class="nav-link" href="dependent_types.html">Dependent Types</a>
+        <a class="nav-link" href="metatheory.html">Metatheory</a>
+        <a class="nav-link" href="theory_db.json">JSON DB</a>
+        <a class="nav-link" href="../repl.html">Interactive REPL</a>
+      </nav>
+      <h1>Obelisk Proof Assistant &mdash; Algorithmic Symbol &amp; Type Index</h1>
+      <p class="subtitle">Directly generated from <code>word_symbols</code> and <code>utf8_operators</code> in <code>set_theory_prover/program/html_generator.ML</code> (86 hyperlinked symbols and types).</p>
+      <div class="controls-bar">
+        <div class="control-group">
+          <span class="control-label">Formula Display:</span>
+          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
+          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Interpretation:</span>
+          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Meaning in Model inside NBG (∈)</button>
+          <button id="btn-typing" class="toggle-btn" onclick="setRelMode('typing')">2. Checkable / Executable Code in CakeML &amp; PolyML (:)</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+  <section class="manual-section" id="symbols-index">
+    <div class="section-header">
+      <h2>Algorithmic Symbol, Operator &amp; Type Registry (86 Entries)</h2>
+      <p class="section-desc">Every symbol and type listed below is automatically recognized inside both Unicode and LaTeX formulas and hyperlinked to its canonical kernel definition or axiom.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">Target</th>
+            <th class="col-entity">Symbol Registry Record (Vertical Field Table)</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr id="sym-1" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.05" class="num-anchor">4.05</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.05" class="sym-link">∃!</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.05}{\exists!}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.05" class="sym-link">4.05: Exists and unique quantifier</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\exists!</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-2" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.72" class="num-anchor">3.72</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.72" class="sym-link">𝘛</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.72}{\mathcal{T}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.72" class="sym-link">3.72: Base NBG/MK Theory T</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathcal{T}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-3" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.73" class="num-anchor">3.73</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.73" class="sym-link">𝘍</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.73}{\mathcal{F}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.73" class="sym-link">3.73: Strengthened System F</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathcal{F}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-4" class="external-row">
+        <td class="external-num"><a href="manual.html#item-5.01" class="num-anchor">5.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-5.01" class="sym-link">𝘘</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-5.01}{\mathcal{Q}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-5.01" class="sym-link">5.01: Arithmetic Base Theory Q</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathcal{Q}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-5" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">𝘞</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathcal{W}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Arbitrary Theory W</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathcal{W}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-6" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.13" class="num-anchor">3.13</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.13" class="sym-link">𝒫</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.13}{\mathcal{P}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.13" class="sym-link">3.13: Powerclass / Exponent operator</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathcal{P}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-7" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.12" class="num-anchor">1.12</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.12" class="sym-link">⟷</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.12}{\longleftrightarrow}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.12" class="sym-link">1.12: Logical equivalence</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\longleftrightarrow</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-8" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.01" class="num-anchor">1.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.01" class="sym-link">→</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.01}{\rightarrow}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.01" class="sym-link">1.01: Logical implication</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\rightarrow</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-9" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.03" class="num-anchor">1.03</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.03" class="sym-link">∧</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.03}{\land}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.03" class="sym-link">1.03: Logical conjunction</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\land</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-10" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.06" class="num-anchor">1.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.06" class="sym-link">∨</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.06}{\lor}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.06" class="sym-link">1.06: Logical disjunction</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\lor</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-11" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.10" class="num-anchor">1.10</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.10" class="sym-link">⊥</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.10}{\bot}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.10" class="sym-link">1.10: Logical falsity (bottom)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\bot</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-12" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.11" class="num-anchor">1.11</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.11" class="sym-link">⊤</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.11}{\top}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.11" class="sym-link">1.11: Logical truth (top)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\top</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-13" class="external-row">
+        <td class="external-num"><a href="manual.html#item-2.02" class="num-anchor">2.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-2.02" class="sym-link">∀</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-2.02}{\forall}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-2.02" class="sym-link">2.02: Universal quantifier</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\forall</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-14" class="external-row">
+        <td class="external-num"><a href="manual.html#item-2.03" class="num-anchor">2.03</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-2.03" class="sym-link">∃</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-2.03}{\exists}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-2.03" class="sym-link">2.03: Existential quantifier</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\exists</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-15" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.01" class="num-anchor">3.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.01" class="sym-link">∈</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.01}{\in}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.01" class="sym-link">3.01: Class membership relation</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\in</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-16" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.06" class="num-anchor">3.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.06" class="sym-link">⊆</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.06}{\subseteq}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.06" class="sym-link">3.06: Subclass relation</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\subseteq</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-17" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.04" class="num-anchor">3.04</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.04" class="sym-link">∅</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.04}{\emptyset}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.04" class="sym-link">3.04: Empty set</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\emptyset</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-18" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.19" class="num-anchor">3.19</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.19" class="sym-link">⋃</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.19}{\bigcup}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.19" class="sym-link">3.19: Unary union of a class</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\bigcup</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-19" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.20" class="num-anchor">3.20</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.20" class="sym-link">⋂</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.20}{\bigcap}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.20" class="sym-link">3.20: Unary intersection of a class</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\bigcap</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-20" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.53" class="num-anchor">3.53</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.53" class="sym-link">∪</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.53}{\cup}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.53" class="sym-link">3.53: Binary union</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\cup</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-21" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.54" class="num-anchor">3.54</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.54" class="sym-link">∩</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.54}{\cap}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.54" class="sym-link">3.54: Binary intersection</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\cap</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-22" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.75" class="num-anchor">3.75</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.75" class="sym-link">⊢</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.75}{\vdash}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.75" class="sym-link">3.75: Derivability turnstile</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\vdash</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-23" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.40" class="num-anchor">3.40</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.40" class="sym-link">⪯</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.40}{\preceq}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.40" class="sym-link">3.40: Less than or equal in size</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\preceq</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-24" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.41" class="num-anchor">3.41</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.41" class="sym-link">≺</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.41}{\prec}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.41" class="sym-link">3.41: Strictly less in size</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\prec</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-25" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.38" class="num-anchor">3.38</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.38" class="sym-link">Σ</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.38}{\Sigma}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.38" class="sym-link">3.38: Dependent sum (Sigma)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\Sigma</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-26" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.39" class="num-anchor">3.39</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.39" class="sym-link">Π</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.39}{\Pi}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.39" class="sym-link">3.39: Dependent product (Pi)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\Pi</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-27" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.56" class="num-anchor">3.56</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.56" class="sym-link">ω</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.56}{\omega}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.56" class="sym-link">3.56: Smallest inductive ordinal (omega)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\omega</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-28" class="external-row">
+        <td class="external-num"><a href="manual.html#item-1.09" class="num-anchor">1.09</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-1.09" class="sym-link">¬</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-1.09}{\neg}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-1.09" class="sym-link">1.09: Logical negation</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\neg</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-29" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.10" class="num-anchor">3.10</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.10" class="sym-link">=</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.10}{=}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.10" class="sym-link">3.10: Extensional equality</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>=</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-30" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.25" class="num-anchor">3.25</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.25" class="sym-link">valOf</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.25}{\mathsf{valOf}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.25" class="sym-link">3.25: Evaluation of a function/family (valOf)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{valOf}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-31" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.50" class="num-anchor">3.50</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.50" class="sym-link">Model</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.50}{\mathrm{Model}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.50" class="sym-link">3.50: Set-theoretic models (Model)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Model}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-32" class="external-row">
+        <td class="external-num"><a href="manual.html#item-2.01" class="num-anchor">2.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-2.01" class="sym-link">Class</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-2.01}{\mathsf{Class}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-2.01" class="sym-link">2.01 / 3.01: Class sort (Morse-Kelley / NBG)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Class}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-33" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.02" class="num-anchor">3.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.02" class="sym-link">Set</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.02}{\mathsf{Set}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.02" class="sym-link">3.02: Set sort (elements of V)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Set}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-34" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.02" class="num-anchor">3.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.02" class="sym-link">set</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.02}{\mathsf{set}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.02" class="sym-link">3.02: Is a set predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{set}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-35" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.03" class="num-anchor">3.03</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.03" class="sym-link">proper</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.03}{\mathsf{proper}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.03" class="sym-link">3.03: Is a proper class predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{proper}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-36" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.05" class="num-anchor">3.05</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.05" class="sym-link">V</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.05}{\mathbf{V}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.05" class="sym-link">3.05: Universal class V</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{V}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-37" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.15" class="num-anchor">3.15</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.15" class="sym-link">Tr</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.15}{\mathrm{Tr}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.15" class="sym-link">3.15: Transitivity predicate (Tr)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Tr}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-38" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.16" class="num-anchor">3.16</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.16" class="sym-link">Ord</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.16}{\mathrm{Ord}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.16" class="sym-link">3.16: Ordinality predicate (Ord)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Ord}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-39" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.17" class="num-anchor">3.17</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.17" class="sym-link">On</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.17}{\mathbf{On}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.17" class="sym-link">3.17: Class of all ordinal sets (On)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{On}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-40" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.21" class="num-anchor">3.21</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.21" class="sym-link">Dom</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.21}{\mathrm{Dom}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.21" class="sym-link">3.21: Domain of a class (Dom)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Dom}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-41" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.22" class="num-anchor">3.22</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.22" class="sym-link">IF</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.22}{\mathbf{IF}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.22" class="sym-link">3.22: Conditional class IF-THEN-ELSE-FI</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{IF}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-42" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.22" class="num-anchor">3.22</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.22" class="sym-link">THEN</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.22}{\mathbf{THEN}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.22" class="sym-link">3.22: Conditional class IF-THEN-ELSE-FI</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{THEN}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-43" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.22" class="num-anchor">3.22</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.22" class="sym-link">ELSE</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.22}{\mathbf{ELSE}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.22" class="sym-link">3.22: Conditional class IF-THEN-ELSE-FI</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{ELSE}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-44" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.22" class="num-anchor">3.22</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.22" class="sym-link">FI</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.22}{\mathbf{FI}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.22" class="sym-link">3.22: Conditional class IF-THEN-ELSE-FI</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{FI}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-45" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.23" class="num-anchor">3.23</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.23" class="sym-link">simple_if</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.23}{\mathsf{simple\_if}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.23" class="sym-link">3.23: Simple conditional class (simple_if)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{simple\_if}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-46" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.24" class="num-anchor">3.24</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.24" class="sym-link">if_dep</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.24}{\mathsf{if\_dep}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.24" class="sym-link">3.24: Dependent conditional class (if_dep)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{if\_dep}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-47" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.27" class="num-anchor">3.27</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.27" class="sym-link">singleton</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.27}{\mathsf{singleton}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.27" class="sym-link">3.27: Has exactly one element predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{singleton}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-48" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.28" class="num-anchor">3.28</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.28" class="sym-link">set-valued</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.28}{\mathsf{set\text{-}valued}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.28" class="sym-link">3.28: Is set-valued predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{set\text{-}valued}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-49" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.29" class="num-anchor">3.29</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.29" class="sym-link">concentrated</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.29}{\mathsf{concentrated}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.29" class="sym-link">3.29: Has concentrated set values predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{concentrated}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-50" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.30" class="num-anchor">3.30</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.30" class="sym-link">flat</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.30}{\mathsf{flat}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.30" class="sym-link">3.30: Has flat proper values predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{flat}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-51" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.31" class="num-anchor">3.31</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.31" class="sym-link">family</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.31}{\mathsf{family}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.31" class="sym-link">3.31: Is a family predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{family}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-52" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.31" class="num-anchor">3.31</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.31" class="sym-link">Family</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.31}{\mathsf{Family}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.31" class="sym-link">3.31: Family sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Family}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-53" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.32" class="num-anchor">3.32</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.32" class="sym-link">class-function</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.32}{\mathsf{class\text{-}function}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.32" class="sym-link">3.32: Is a class-function predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{class\text{-}function}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-54" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.33" class="num-anchor">3.33</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.33" class="sym-link">injective</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.33}{\mathsf{injective}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.33" class="sym-link">3.33: Is injective predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{injective}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-55" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.34" class="num-anchor">3.34</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.34" class="sym-link">function</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.34}{\mathsf{function}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.34" class="sym-link">3.34: Is a function predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{function}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-56" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.34" class="num-anchor">3.34</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.34" class="sym-link">Func</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.34}{\mathsf{Func}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.34" class="sym-link">3.34: Function sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Func}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-57" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.35" class="num-anchor">3.35</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.35" class="sym-link">semi-singleton</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.35}{\mathsf{semi\text{-}singleton}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.35" class="sym-link">3.35: Has at most one element predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{semi\text{-}singleton}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-58" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.36" class="num-anchor">3.36</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.36" class="sym-link">sss</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.36}{\mathsf{sss}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.36" class="sym-link">3.36: Is a semi-singleton subclass relation</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{sss}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-59" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.44" class="num-anchor">3.44</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.44" class="sym-link">Hereditary</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.44}{\mathsf{Hereditary}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.44" class="sym-link">3.44: Is hereditary predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Hereditary}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-60" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.45" class="num-anchor">3.45</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.45" class="sym-link">Powerful</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.45}{\mathsf{Powerful}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.45" class="sym-link">3.45: Is powerful predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Powerful}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-61" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.46" class="num-anchor">3.46</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.46" class="sym-link">Pairful</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.46}{\mathsf{Pairful}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.46" class="sym-link">3.46: Is pairful predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Pairful}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-62" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.47" class="num-anchor">3.47</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.47" class="sym-link">Tight</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.47}{\mathsf{Tight}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.47" class="sym-link">3.47: Is tight predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Tight}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-63" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.51" class="num-anchor">3.51</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.51" class="sym-link">mark</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.51}{\mathrm{mark}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.51" class="sym-link">3.51: Dunaev class-list mark operator (mark)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{mark}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-64" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.77" class="num-anchor">3.77</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.77" class="sym-link">pr1</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.77}{\mathrm{pr}_1}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.77" class="sym-link">3.77: First projection of Dunaev pair (pr1)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{pr}_1</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-65" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.78" class="num-anchor">3.78</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.78" class="sym-link">pr2</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.78}{\mathrm{pr}_2}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.78" class="sym-link">3.78: Second projection of Dunaev pair (pr2)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{pr}_2</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-66" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.55" class="num-anchor">3.55</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.55" class="sym-link">Ind</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.55}{\mathrm{Ind}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.55" class="sym-link">3.55: Is inductive predicate (Ind)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Ind}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-67" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.64" class="num-anchor">3.64</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.64" class="sym-link">Card</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.64}{\mathrm{Card}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.64" class="sym-link">3.64: Is cardinal predicate (Card)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{Card}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-68" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.68" class="num-anchor">3.68</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.68" class="sym-link">universe</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.68}{\mathsf{universe}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.68" class="sym-link">3.68: Is a Grothendieck/Tarski universe predicate</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{universe}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-69" class="external-row">
+        <td class="external-num"><a href="manual.html#item-3.72" class="num-anchor">3.72</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-3.72" class="sym-link">eval</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-3.72}{\mathsf{eval}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-3.72" class="sym-link">3.72: Metatheoretic formula valuation (eval)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{eval}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-70" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">let</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathbf{let}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Local substitution binding (let)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{let}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-71" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">in</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathbf{in}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Local substitution scope (in)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathbf{in}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-72" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Type</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Type}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Kernel Type sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Type}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-73" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Ctx</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Ctx}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Typing Context sort (Ctx)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Ctx}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-74" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Fm</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Fm}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Object Formula sort (Fm)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Fm}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-75" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Variable</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Variable}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Bound/Free Variable sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Variable}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-76" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Expression</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Expression}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Kernel Expression sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Expression}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-77" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Stmt</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Stmt}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Metatheoretic Statement sort (Stmt)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Stmt}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-78" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Theory</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Theory}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Object Theory sort (Theory)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Theory}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-79" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">Prf</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{Prf}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Proof Certificate sort (Prf)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Prf}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-80" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.01" class="num-anchor">4.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.01" class="sym-link">LCEWIP</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.01}{\mathsf{LCEWIP}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.01" class="sym-link">4.01: Locally Checked Expression WIP status</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{LCEWIP}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-81" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.02" class="num-anchor">4.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.02" class="sym-link">Enc</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.02}{\mathsf{Enc}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.02" class="sym-link">4.02: Context Variable Encoding (Enc)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Enc}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-82" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.02" class="num-anchor">4.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.02" class="sym-link">Dec</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.02}{\mathsf{Dec}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.02" class="sym-link">4.02: Context Variable Decoding (Dec)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Dec}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-83" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.02" class="num-anchor">4.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.02" class="sym-link">FV</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.02}{\mathrm{FV}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.02" class="sym-link">4.02: Free Variables operator (FV)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{FV}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-84" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.06" class="num-anchor">4.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.06" class="sym-link">FFI</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.06}{\mathrm{FFI}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.06" class="sym-link">4.06: Free For Instantiation predicate (FFI)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathrm{FFI}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-85" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.06" class="num-anchor">4.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.06" class="sym-link">Name</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.06}{\mathsf{Name}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.06" class="sym-link">4.06: Variable Name sort</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Name}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-86" class="external-row">
+        <td class="external-num"><a href="manual.html#item-4.06" class="num-anchor">4.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol / Identifier</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="manual.html#item-4.06" class="sym-link">Bool</a></div>
+                <div class="formula-latex">\(\href{manual.html#item-4.06}{\mathsf{Bool}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Type / Predicate / Function</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Entry</th>
+              <td class="field-value entry-title-cell"><a href="manual.html#item-4.06" class="sym-link">4.06: Kernel Boolean sort (Bool)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">LaTeX Macro</th>
+              <td class="field-value proof-cell"><code>\mathsf{Bool}</code></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </main>
+  <script>
+    function setRelMode(mode) {
+      document.body.classList.remove('mode-membership', 'mode-typing');
+      document.body.classList.add('mode-' + mode);
+      document.getElementById('btn-membership').classList.toggle('active', mode === 'membership');
+      document.getElementById('btn-typing').classList.toggle('active', mode === 'typing');
+    }
+    function setFormatMode(mode) {
+      document.body.classList.remove('mode-unicode', 'mode-latex');
+      document.body.classList.add('mode-' + mode);
+      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
+      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
+      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+  </script>
+</body>
+</html>

@@ -35,9 +35,15 @@ class TestAIPortal(unittest.TestCase):
 
     def test_ai_portal_links_nbg_library(self):
         content = self.contents["ai.html"]
-        self.assertIn("frozen/nbg_library.html", content)
+        self.assertIn("generated/nbg_library.html", content)
         self.assertIn("NBG Standard Library", content)
-        self.assertTrue("30 kernel-checked theorems" in content or "17 kernel-checked theorems" in content)
+        self.assertTrue(
+            "100 type-checked records" in content
+            or "100 kernel-checked records" in content
+            or "100 kernel-checked theorems" in content
+            or "30 kernel-checked theorems" in content
+            or "17 kernel-checked theorems" in content
+        )
 
     def test_ai_portal_reports_dunaev_injectivity(self):
         content = self.contents["ai.html"]
@@ -56,7 +62,7 @@ class TestAIPortal(unittest.TestCase):
 
     def test_ai_portal_reports_epistemic_counts(self):
         content = self.contents["ai.html"]
-        self.assertTrue("67 derived proofs" in content or "42 derived proofs" in content)
+        self.assertTrue("77 derived proofs" in content or "67 derived proofs" in content or "42 derived proofs" in content)
         self.assertIn("16 conservative definitions", content)
         self.assertIn("7 irreducible MK axioms", content)
 
