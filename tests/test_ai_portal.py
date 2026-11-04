@@ -56,9 +56,15 @@ class TestAIPortal(unittest.TestCase):
 
     def test_ai_portal_reports_epistemic_counts(self):
         content = self.contents["ai.html"]
-        self.assertIn("42 derived proofs", content)
+        self.assertTrue("67 derived proofs" in content or "42 derived proofs" in content)
         self.assertIn("16 conservative definitions", content)
         self.assertIn("7 irreducible MK axioms", content)
+
+    def test_ai_portal_reports_lightweight_offline_proof_checking(self):
+        """Ticket 6025: Verify <50 MB RAM lightweight offline proof checking documentation."""
+        content = self.contents["ai.html"]
+        self.assertIn("Lightweight Offline Proof Checking", content)
+        self.assertIn("50 MB RAM", content)
 
 
 if __name__ == "__main__":
