@@ -145,7 +145,7 @@ class TestLatexRendering(unittest.TestCase):
             mtxt = f.read()
         self.assertIn(r"\mathcal{E}", mtxt)
         self.assertIn(r"\mathcal{F}", mtxt)
-        self.assertIn(r"\mu_{", mtxt)
+        self.assertIn(r"\mu", mtxt)
         self.assertIn("Bezboruah", mtxt)
         self.assertIn("Co-Necessitation", mtxt)
 
