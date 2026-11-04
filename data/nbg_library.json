@@ -1,6 +1,6 @@
 {
   "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
-  "source_sha256_prefix": "4c014c542dd34e5b",
+  "source_sha256_prefix": "df4dbdbf386502a2",
   "count": 30,
   "theorems": [
     {
@@ -68,10 +68,10 @@
     },
     {
       "name": "quantifier_swap",
-      "formula": "((exists y:Set. (forall x:Set. (x in y))) -> (forall x:Set. (exists y:Set. (x in y))))",
-      "proof_size": 7,
-      "normalized_size": 7,
-      "description": "An existential set with a universal property implies the corresponding forall-exists statement."
+      "formula": "(forall R:Class. ((exists y:Set. (forall x:Set. ([x, y]_D in R))) -> (forall x:Set. (exists y:Set. ([x, y]_D in R)))))",
+      "proof_size": 8,
+      "normalized_size": 8,
+      "description": "An existential set witness for a binary relation R implies the corresponding forall-exists statement."
     },
     {
       "name": "dunaev_tagged_pair_projections",
@@ -82,10 +82,10 @@
     },
     {
       "name": "cantor_diagonal_theorem",
-      "formula": "(forall R:Class. (forall c:Set. (Set(c) -> ((((c in { x | (([x, x]_D in R) -> _|_) }) -> ([c, c]_D in R)) /\\ (([c, c]_D in R) -> (c in { x | (([x, x]_D in R) -> _|_) }))) -> _|_))))",
-      "proof_size": 28,
-      "normalized_size": 50,
-      "description": "Cantor's diagonal theorem stated with Dunaev tagged pairs."
+      "formula": "(forall S:Class. (forall R:Class. (forall c:Class. ((c in S) -> ((((c in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) }) -> ([c, c]_D in R)) /\\ (([c, c]_D in R) -> (c in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) }))) -> _|_)))))",
+      "proof_size": 34,
+      "normalized_size": 62,
+      "description": "Cantor's diagonal theorem on domain class S with Dunaev tagged pairs (using NBG Heredity to derive Set(c) from c in S)."
     },
     {
       "name": "self_in_singleton",
@@ -110,10 +110,10 @@
     },
     {
       "name": "dunaev_pair_injective",
-      "formula": "(forall A:Class. (forall B:Class. (forall C:Class. (forall D:Class. (([A, B]_D = [C, D]_D) -> ((A = C) /\\ (B = D)))))))",
+      "formula": "(forall A:Class. (forall B:Class. (forall C:Class. (forall E:Class. (([A, B]_D = [C, E]_D) -> ((A = C) /\\ (B = E)))))))",
       "proof_size": 26,
       "normalized_size": 26,
-      "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,D]_D -> A = C and B = D."
+      "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,E]_D -> A = C and B = E."
     },
     {
       "name": "dunaev_cartesian_elim",
@@ -159,17 +159,17 @@
     },
     {
       "name": "sigma_dependent_sum_intro",
-      "formula": "(forall D:Class. (forall Fiber:Class. (forall x:Class. (forall y:Class. ((Set(x) /\\ ((x in D) /\\ (y in Fiber))) -> (x in { u | ((u in D) /\\ (y in Fiber)) }))))))",
-      "proof_size": 9,
-      "normalized_size": 9,
-      "description": "Dependent sum (Sigma-type) fiber witness introduction in class comprehension (Foundations ch. 130)."
+      "formula": "(forall B:Class. (forall x:Set. (forall y:Set. ((Set([x, y]_D) /\\ ((x in Dom(B)) /\\ (y in ValOf(B, x)))) -> ([x, y]_D in { p | (exists a:Set. (exists b:Set. (((a in Dom(B)) /\\ (b in ValOf(B, a))) /\\ (p = [a, b]_D)))) })))))",
+      "proof_size": 16,
+      "normalized_size": 16,
+      "description": "Dependent sum (Sigma-type) Dunaev pair [x, y]_D introduction from x in Dom(B) and y in ValOf(B, x) (Foundations ch. 130)."
     },
     {
       "name": "pi_dependent_product_elim",
-      "formula": "(forall D:Class. (forall B:Class. (forall x:Class. (((forall u:Class. ((u in D) -> (u in B))) /\\ (x in D)) -> (x in B)))))",
+      "formula": "(forall B:Class. (forall f:Class. (forall x:Class. (((forall u:Class. ((u in Dom(B)) -> (ValOf(f, u) in ValOf(B, u)))) /\\ (x in Dom(B))) -> (ValOf(f, x) in ValOf(B, x))))))",
       "proof_size": 10,
       "normalized_size": 10,
-      "description": "Dependent product (Pi-type) section evaluation elimination (Foundations ch. 130)."
+      "description": "Dependent product (Pi-type) section evaluation elimination: ValOf(f, x) in ValOf(B, x) for x in Dom(B) (Foundations ch. 130)."
     },
     {
       "name": "union_sub_right",
@@ -180,24 +180,24 @@
     },
     {
       "name": "model_stratification_trans",
-      "formula": "(forall MW:Class. (forall MQ:Class. (forall MT:Class. (forall MF:Class. (((forall z:Class. ((z in MW) -> (z in MQ))) /\\ ((forall z:Class. ((z in MQ) -> (z in MT))) /\\ (forall z:Class. ((z in MT) -> (z in MF))))) -> (forall z:Class. ((z in MW) -> (z in MF))))))))",
+      "formula": "(forall W:Class. (forall Q:Class. (forall T:Class. (forall F:Class. (((forall z:Class. ((z in Model(W)) -> (z in Model(Q)))) /\\ ((forall z:Class. ((z in Model(Q)) -> (z in Model(T)))) /\\ (forall z:Class. ((z in Model(T)) -> (z in Model(F)))))) -> (forall z:Class. ((z in Model(W)) -> (z in Model(F)))))))))",
       "proof_size": 22,
       "normalized_size": 22,
       "description": "Metalevel theory stratification transitivity: (Model(W) c= Model(Q) /\\ Model(Q) c= Model(T) /\\ Model(T) c= Model(F)) -> Model(W) c= Model(F) (Entry 6.01)."
     },
     {
       "name": "if_dep_true_elim",
-      "formula": "(forall A:Class. (forall T1:Class. (forall T2:Class. (forall x:Class. (((((x in A) -> (x in T1)) /\\ (((x in A) -> _|_) -> (x in T2))) /\\ (x in A)) -> (x in T1))))))",
-      "proof_size": 11,
-      "normalized_size": 11,
-      "description": "Constructive dependent conditional (if_dep) true-branch elimination (Entry 3.24)."
+      "formula": "(forall A:Class. (forall T1:Class. (forall T2:Class. (forall x:Class. (forall z:Class. (((((x in A) -> (if_dep(x, A, ValOf(T1, x), ValOf(T2, x)) = ValOf(T1, x))) /\\ (((x in A) -> _|_) -> (if_dep(x, A, ValOf(T1, x), ValOf(T2, x)) = ValOf(T2, x)))) /\\ ((x in A) /\\ (z in if_dep(x, A, ValOf(T1, x), ValOf(T2, x))))) -> (z in ValOf(T1, x))))))))",
+      "proof_size": 17,
+      "normalized_size": 17,
+      "description": "Constructive dependent conditional (if_dep) true-branch membership elimination via Leibniz rewriting (Entry 3.24)."
     },
     {
       "name": "if_dep_false_elim",
-      "formula": "(forall A:Class. (forall T1:Class. (forall T2:Class. (forall x:Class. (((((x in A) -> (x in T1)) /\\ (((x in A) -> _|_) -> (x in T2))) /\\ ((x in A) -> _|_)) -> (x in T2))))))",
-      "proof_size": 11,
-      "normalized_size": 11,
-      "description": "Constructive dependent conditional (if_dep) false-branch elimination (Entry 3.24)."
+      "formula": "(forall A:Class. (forall T1:Class. (forall T2:Class. (forall x:Class. (forall z:Class. (((((x in A) -> (if_dep(x, A, ValOf(T1, x), ValOf(T2, x)) = ValOf(T1, x))) /\\ (((x in A) -> _|_) -> (if_dep(x, A, ValOf(T1, x), ValOf(T2, x)) = ValOf(T2, x)))) /\\ (((x in A) -> _|_) /\\ (z in if_dep(x, A, ValOf(T1, x), ValOf(T2, x))))) -> (z in ValOf(T2, x))))))))",
+      "proof_size": 17,
+      "normalized_size": 17,
+      "description": "Constructive dependent conditional (if_dep) false-branch membership elimination via Leibniz rewriting (Entry 3.24)."
     },
     {
       "name": "inter_idempotent_elim",

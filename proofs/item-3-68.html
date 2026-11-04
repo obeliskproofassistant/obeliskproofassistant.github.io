@@ -13,17 +13,19 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Verification: 3.68 Value Extraction via Semi-Singleton Subclasses (sss / Value) — Obelisk Proof Assistant</title>
+  <title>Verification: 3.68 Semi-Singleton Subset Relation (s sss A) — Obelisk Proof Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
   <script>
     
     window.OBELISK_SYMBOL_MAP = {
-      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate" },
-      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class → Class))", unambig: "(sss :: (Class → Class))", label: "3.68 Value Extraction (Semi-Singleton Subclasses)" },
+      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate (SML ID 3.35)" },
+      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class × Class → Bool)) | Value: (Class → Class)", unambig: "((sss) :: ((Class × Class) → Bool)) | Value: (Class → Class)", label: "3.68 Semi-Singleton Subclass Relation (s sss A, SML ID 3.36) & Value Extraction" },
       "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
-      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
-      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
+      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB, SML ID 3.45)" },
+      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB, SML ID 3.46)" },
+      "ValOf": { href: "manual.html#item-3-24-dependent-if", std: "(ValOf: (Bool × Class × Class → Class))", unambig: "(ValOf :: ((Bool × (Class × Class)) → Class))", label: "3.24 Dependent Conditional Value Witness (ValOf)" },
+      "Dom": { href: "manual.html#item-3-68", std: "(Dom: (Class → Class))", unambig: "(Dom :: (Class → Class))", label: "3.68 Class Domain Operator (Dom)" },
       "if_dep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
       "ifdep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
       "simple_if": { href: "manual.html#item-3-23-simple-if", std: "∀(T_e: Type_Expression), (simple_if: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", unambig: "∀(T_e :: Type_Expression), (simple_if :: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", label: "3.23 Simple Conditional (simple_if)" },
@@ -38,7 +40,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       "succ": { href: "manual.html#item-3-45", std: "(succ: (Class → Class))", unambig: "(succ :: (Class → Class))", label: "3.45 Ordinal Successor" },
       "π₁": { href: "manual.html#item-3-41", std: "(π₁: (Class → Class))", unambig: "(π₁ :: (Class → Class))", label: "3.41 First Dunaev Projection" },
       "π₂": { href: "manual.html#item-3-42", std: "(π₂: (Class → Class))", unambig: "(π₂ :: (Class → Class))", label: "3.42 Second Dunaev Projection" },
-      "𝒫": { href: "manual.html#item-3-34", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.34 Power Class" },
+      "𝒫": { href: "manual.html#item-3-33", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.33 Power Class Definition" },
+      "⪯": { href: "manual.html#item-3-35-lesseq", std: "(⪯: (Class × Class → Bool))", unambig: "((⪯) :: ((Class × Class) → Bool))", label: "3.35 Class Subvalence / Injection Relation (A ⪯ B, SML ID 3.34)" },
+      "≺": { href: "manual.html#item-3-38-less", std: "(≺: (Class × Class → Bool))", unambig: "((≺) :: ((Class × Class) → Bool))", label: "3.38 Strict Class Subvalence (A ≺ B, SML ID 3.38)" },
       "⋃": { href: "manual.html#item-3-14", std: "(⋃: (Class → Class))", unambig: "(⋃ :: (Class → Class))", label: "3.14 Unary Class Union" },
       "∅": { href: "manual.html#item-3-12", std: "(∅: Class)", unambig: "(∅ :: Class)", label: "3.12 Empty Class" },
       "ω": { href: "manual.html#item-3-45", std: "(ω: Class)", unambig: "(ω :: Class)", label: "3.45 Least Infinite Ordinal" },
@@ -500,7 +504,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           <span class="status-badge badge-def-status">Conservative Def</span>
           <span style="color: var(--text-muted); font-size: 0.9rem;">Catalog ID: <strong>3.68</strong></span>
         </div>
-        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">Value Extraction via Semi-Singleton Subclasses (sss / Value)</h1>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">Semi-Singleton Subset Relation (s sss A)</h1>
         <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Section 3: Set/class-theoretic foundations of mathematics</div>
       </div>
       <div style="display: flex; gap: 8px;">
@@ -516,12 +520,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ ({\color{#fb923c}{\mathrm{sss}}}({\color{#f87171}{X}}) {\color{#34d399}{=}} {\color{#34d399}{\bigcup}} \{ {\color{#f87171}{z}} \mid (({\color{#f87171}{z}} {\color{#34d399}{\subseteq}} {\color{#f87171}{X}}) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{semi\_singleton}}}({\color{#f87171}{z}})) \}) \]
+        \[ {\color{#fde047}{\forall}} ({\color{#f87171}{s}} : {\color{#22d3ee}{\mathsf{Class}}})\; {\color{#fde047}{\forall}} ({\color{#f87171}{A}} : {\color{#22d3ee}{\mathsf{Class}}})\; (({\color{#f87171}{s}} \;{\color{#fb923c}{\mathrm{sss}}}\; {\color{#f87171}{A}}) {\color{#38bdf8}{\longleftrightarrow}} (({\color{#f87171}{s}} {\color{#34d399}{\subseteq}} {\color{#f87171}{A}}) {\color{#38bdf8}{\land}} {\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; {\color{#fde047}{\forall}} ({\color{#f87171}{y}} : {\color{#22d3ee}{\mathsf{Class}}})\; ((({\color{#f87171}{x}} {\color{#34d399}{\in}} {\color{#f87171}{s}}) {\color{#38bdf8}{\land}} ({\color{#f87171}{y}} {\color{#34d399}{\in}} {\color{#f87171}{s}})) {\color{#38bdf8}{\to}} ({\color{#f87171}{x}} {\color{#34d399}{=}} {\color{#f87171}{y}})))) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> (sss(X) = ⋃({ z | ((z ⊆ X) ∧ semi_singleton(z)) }))
+        <strong>Clean Unicode:</strong> ∀(s : Class) ∀(A : Class) ((s sss A) ⟷ ((s ⊆ A) ∧ ∀(x : Class) ∀(y : Class) (((x ∈ s) ∧ (y ∈ s)) → (x = y))))
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 110 (Value &amp; Family): extracts the unique set element a when X = {a}, and evaluates to ∅ when X has 0 or ≥ 2 elements. Note on sets vs. proper classes in Morse–Kelley: comprehension { z | ... } collects only sets z (isSet(z)), so sss({a}) = ⋃{∅, {a}} = a requires isSet(a). For families of potentially proper classes (Λx, t) = { [x, y]_D | y ∈ t }, the fiber at x is recovered directly via the flat relational union ⋃{ s | [x, s]_D ∈ F } (where each element s ∈ t(x) is a set) without requiring the fiber t(x) itself to be a set.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 110 (Semi-Singleton Subset, sss_def_entry, 3.36 in foundations.ML): binary infix relation (s sss A) asserting that s is a subclass of A with at most one element: (s ⊆ A) ∧ semi_singleton(s). For any class A (whether a set or a proper class), the sets s satisfying (s sss A) are ∅ and {a} for each element a ∈ A; hence ⋃{ s | s sss A } = A unconditionally (Theorem 110.1 in 110_family_evaluation.tex).</div>
     </div>
 
     
@@ -540,7 +544,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.68: “Is a universe” predicate) :: “Is a universe” predicate)</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.36: “Semi-singleton subset” relation (s sss A)) :: “Semi-singleton subset” relation (s sss A))</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -550,7 +554,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.68: “Is a universe” predicate)). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.36: “Semi-singleton subset” relation (s sss A))). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -566,11 +570,11 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.68: “Is a universe” predicate) :: “Is a universe” predicate *)
-(∀([U@Variable]:[Class@Type]) (([U@Class.Expression] universe) ⟷ (((ω ∈ [U@Class.Expression]) ∧ ((Tr([U@Class.Expression]) ∧ Hereditary([U@Class.Expression])) ∧ (Powerful([U@Class.Expression]) ∧ Tight([U@Class.Expression])))) ∧ Pairful([U@Class.Expression]))))
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.36: “Semi-singleton subset” relation (s sss A)) :: “Semi-singleton subset” relation (s sss A) *)
+(∀([s@Variable]:[Class@Type])∀([A@Variable]:[Class@Type]) (([s@Class.Expression] ⊆ [A@Class.Expression]) ∧ ∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type]) ((([x@Class.Expression] ∈ [s@Class.Expression]) ∧ ([y@Class.Expression] ∈ [s@Class.Expression])) → ([x@Class.Expression] = [y@Class.Expression]))))
 
 (* Conservative Definition Witness *)
-sss_def_entry (types/foundations.ML) / semi_singleton_sub_elim (nbg_verified_programs.nbg)</code></pre>
+sss_def_entry (types/foundations.ML, 3.36) / semi_singleton_sub_elim (nbg_verified_programs.nbg)</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>

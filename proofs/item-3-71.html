@@ -13,17 +13,19 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Verification: 3.71 Set-Theoretic Model of Dependent Product (ΠB / Pi Model) — Obelisk Proof Assistant</title>
+  <title>Verification: 3.71 Set-Theoretic Model of Dependent Product (ΠB / Pi Predicate &amp; Set-Section Models) — Obelisk Proof Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../styles.css">
   <script>
     
     window.OBELISK_SYMBOL_MAP = {
-      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate" },
-      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class → Class))", unambig: "(sss :: (Class → Class))", label: "3.68 Value Extraction (Semi-Singleton Subclasses)" },
+      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate (SML ID 3.35)" },
+      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class × Class → Bool)) | Value: (Class → Class)", unambig: "((sss) :: ((Class × Class) → Bool)) | Value: (Class → Class)", label: "3.68 Semi-Singleton Subclass Relation (s sss A, SML ID 3.36) & Value Extraction" },
       "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor" },
-      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB)" },
-      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB)" },
+      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB, SML ID 3.45)" },
+      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB, SML ID 3.46)" },
+      "ValOf": { href: "manual.html#item-3-24-dependent-if", std: "(ValOf: (Bool × Class × Class → Class))", unambig: "(ValOf :: ((Bool × (Class × Class)) → Class))", label: "3.24 Dependent Conditional Value Witness (ValOf)" },
+      "Dom": { href: "manual.html#item-3-68", std: "(Dom: (Class → Class))", unambig: "(Dom :: (Class → Class))", label: "3.68 Class Domain Operator (Dom)" },
       "if_dep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
       "ifdep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
       "simple_if": { href: "manual.html#item-3-23-simple-if", std: "∀(T_e: Type_Expression), (simple_if: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", unambig: "∀(T_e :: Type_Expression), (simple_if :: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", label: "3.23 Simple Conditional (simple_if)" },
@@ -38,7 +40,9 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       "succ": { href: "manual.html#item-3-45", std: "(succ: (Class → Class))", unambig: "(succ :: (Class → Class))", label: "3.45 Ordinal Successor" },
       "π₁": { href: "manual.html#item-3-41", std: "(π₁: (Class → Class))", unambig: "(π₁ :: (Class → Class))", label: "3.41 First Dunaev Projection" },
       "π₂": { href: "manual.html#item-3-42", std: "(π₂: (Class → Class))", unambig: "(π₂ :: (Class → Class))", label: "3.42 Second Dunaev Projection" },
-      "𝒫": { href: "manual.html#item-3-34", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.34 Power Class" },
+      "𝒫": { href: "manual.html#item-3-33", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.33 Power Class Definition" },
+      "⪯": { href: "manual.html#item-3-35-lesseq", std: "(⪯: (Class × Class → Bool))", unambig: "((⪯) :: ((Class × Class) → Bool))", label: "3.35 Class Subvalence / Injection Relation (A ⪯ B, SML ID 3.34)" },
+      "≺": { href: "manual.html#item-3-38-less", std: "(≺: (Class × Class → Bool))", unambig: "((≺) :: ((Class × Class) → Bool))", label: "3.38 Strict Class Subvalence (A ≺ B, SML ID 3.38)" },
       "⋃": { href: "manual.html#item-3-14", std: "(⋃: (Class → Class))", unambig: "(⋃ :: (Class → Class))", label: "3.14 Unary Class Union" },
       "∅": { href: "manual.html#item-3-12", std: "(∅: Class)", unambig: "(∅ :: Class)", label: "3.12 Empty Class" },
       "ω": { href: "manual.html#item-3-45", std: "(ω: Class)", unambig: "(ω :: Class)", label: "3.45 Least Infinite Ordinal" },
@@ -500,7 +504,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           <span class="status-badge badge-def-status">Conservative Def</span>
           <span style="color: var(--text-muted); font-size: 0.9rem;">Catalog ID: <strong>3.71</strong></span>
         </div>
-        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">Set-Theoretic Model of Dependent Product (ΠB / Pi Model)</h1>
+        <h1 style="font-size: 2.1rem; font-weight: 800; color: #fff; margin: 0;">Set-Theoretic Model of Dependent Product (ΠB / Pi Predicate &amp; Set-Section Models)</h1>
         <div style="color: var(--text-muted); font-size: 0.95rem; margin-top: 4px;">Section 3: Set/class-theoretic foundations of mathematics</div>
       </div>
       <div style="display: flex; gap: 8px;">
@@ -516,12 +520,12 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Morse–Kelley Object Theory</span>
       </div>
       <div class="formula-display">
-        \[ ({\color{#fde047}{\Pi}} {\color{#f87171}{B}} {\color{#34d399}{=}} \{ {\color{#f87171}{f}} \mid (({\color{#fb923c}{\mathrm{isClassFunction}}}({\color{#f87171}{f}}) {\color{#38bdf8}{\land}} ({\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{f}}) {\color{#34d399}{=}} {\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{B}}))) {\color{#38bdf8}{\land}} {\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; (({\color{#f87171}{x}} {\color{#34d399}{\in}} {\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{B}})) {\color{#38bdf8}{\to}} ({\color{#f87171}{f}}({\color{#f87171}{x}}) {\color{#34d399}{\in}} {\color{#f87171}{B}}({\color{#f87171}{x}})))) \}) \]
+        \[ {\color{#fde047}{\forall}} ({\color{#f87171}{B}} : {\color{#22d3ee}{\mathsf{Class}}})\; {\color{#fde047}{\forall}} ({\color{#f87171}{f}} : {\color{#22d3ee}{\mathsf{Class}}})\; ((\mathrm{isFamily}({\color{#f87171}{B}}) {\color{#38bdf8}{\land}} (\mathrm{isFamily}({\color{#f87171}{f}}) {\color{#38bdf8}{\land}} ({\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{f}}) {\color{#34d399}{=}} {\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{B}})))) {\color{#38bdf8}{\to}} {\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; (({\color{#f87171}{x}} {\color{#34d399}{\in}} {\color{#fb923c}{\mathrm{Dom}}}({\color{#f87171}{B}})) {\color{#38bdf8}{\to}} ({\color{#f87171}{f}}({\color{#f87171}{x}}) {\color{#34d399}{\in}} {\color{#f87171}{B}}({\color{#f87171}{x}})))) \]
       </div>
       <div class="unicode-box">
-        <strong>Clean Unicode:</strong> (ΠB = { f | ((isClassFunction(f) ∧ (Dom(f) = Dom(B))) ∧ ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x)))) })
+        <strong>Clean Unicode:</strong> ∀(B : Class) ∀(f : Class) ((isFamily(B) ∧ (isFamily(f) ∧ (Dom(f) = Dom(B)))) → ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x))))
       </div>
-      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Product Π): models the dependent function space Π_{x ∈ A} B(x) as ΠB, the class of functions f with domain A = Dom(B) such that f(x) ∈ B(x) for every x ∈ A.</div>
+      <div style="margin-top: 10px; font-size: 0.85rem; color: var(--text-muted);"><strong>Mathematical Notes:</strong> Foundations ch. 130 (Classes as Types — Dependent Product Π, lines 949–1086 of 130_classes_as_types.tex): provides two complementary models depending on whether the domain A = Dom(B) is a proper class or a set. (1) Model 1 — Conglomerate / Typing Predicate (f : ΠB) (general class domain Dom(B), pi_predicate_model_def_entry, 3.39 in foundations.ML): when Dom(B) is a proper class (such as V or On), a section f with Dom(f) = Dom(B) is itself a proper class and cannot be an element of a class comprehension { f | ... }; instead, (f : ΠB) is defined directly as the first-order predicate isFamily(f) ∧ (Dom(f) = Dom(B)) ∧ ∀(x ∈ Dom(B)) (f(x) ∈ B(x)). (2) Model 2 — Class of Set Sections ΠB (when isSet(Dom(B)) holds): when the domain A = Dom(B) is a set, every section f ⊆ ΣB with Dom(f) = A is a set (by Replacement and Union), so the class comprehension ΠB = { f ∈ 𝒫(ΣB) | isFunction(f) ∧ (Dom(f) = Dom(B)) ∧ ∀(x ∈ Dom(B)) (f(x) ∈ B(x)) } collects all dependent functions.</div>
     </div>
 
     
@@ -540,7 +544,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
           </div>
           <div class="meta-item">
             <div class="meta-label">Verification Method</div>
-            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.71: General form of the induction principle on a transitive class) :: General form of the induction principle on a transitive class)</div>
+            <div class="meta-val">Conservative Definitional Extension (program/types/foundations.ML (3.39: “Dependent Product (Pi-Type)” predicate and section model) :: “Dependent Product (Pi-Type)” predicate and section model)</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Microkernel / Checker Confirmation</div>
@@ -550,7 +554,7 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <div>
           <div class="meta-item">
             <div class="meta-label">Epistemic Soundness &amp; Invariants</div>
-            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.71: General form of the induction principle on a transitive class)). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
+            <div class="meta-val">Introduces a conservative definitional extension into Morse–Kelley class theory (program/types/foundations.ML (3.39: “Dependent Product (Pi-Type)” predicate and section model)). Definitional extensions are eliminable by syntactic expansion and cannot introduce inconsistencies.</div>
           </div>
           <div class="meta-item">
             <div class="meta-label">Discourse Domain &amp; Pair Representation</div>
@@ -566,11 +570,11 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         <span style="color: var(--accent-cyan);">Microkernel Proof Program / Constructor Representation</span>
         <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 400;">Standard ML (PolyML Kernel)</span>
       </div>
-      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.71: General form of the induction principle on a transitive class) :: General form of the induction principle on a transitive class *)
-(∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type]) ((Tr([K@Class.Expression]) ∧ (([K@Class.Expression] ∩ 𝒫([A@Class.Expression])) ⊆ [A@Class.Expression])) → ([K@Class.Expression] ⊆ [A@Class.Expression])))
+      <pre class="code-block"><code>(* SML Kernel AST Source: program/types/foundations.ML (3.39: “Dependent Product (Pi-Type)” predicate and section model) :: “Dependent Product (Pi-Type)” predicate and section model *)
+(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type]) ((([B@Class.Expression] family) ∧ (([f@Class.Expression] family) ∧ (Dom([f@Class.Expression]) = Dom([B@Class.Expression])))) → ∀([x@Variable]:[Class@Type]) (([x@Class.Expression] ∈ Dom([B@Class.Expression])) → ([f@Class.Expression]([x@Class.Expression]) ∈ [B@Class.Expression]([x@Class.Expression])))))
 
 (* Conservative Definition Witness *)
-pi_predicate_model_def_entry (types/foundations.ML) / thm_84_pi_model_elim (verified_theorems.ML) / pi_dependent_product_elim (.nbg)</code></pre>
+pi_predicate_model_def_entry (types/foundations.ML, 3.39) / thm_84_pi_model_elim (verified_theorems.ML) / pi_dependent_product_elim (.nbg)</code></pre>
       <div style="margin-top: 10px; font-size: 0.82rem; color: var(--text-muted);">
         Certified by the Obelisk Proof Assistant LCF microkernel. Zero implicit computation.
       </div>
