@@ -6,7 +6,7 @@
 - **Audited System:** [obeliskproofassistant.github.io](https://obeliskproofassistant.github.io/) / [georgydunaev.github.io](https://georgydunaev.github.io/)
 - **System Author:** Georgy Dunaev
 - **Formal Verification:** Lean 4 (Core Lean, self-contained, no Mathlib dependency)
-- **Source Code:** [Obelisk.lean](file:///home/user/AI/AGY/Obelisk.lean)
+- **Source Code:** [Obelisk.lean](https://obeliskproofassistant.github.io/Obelisk.lean)
 
 ---
 
@@ -243,7 +243,7 @@ The Obelisk system offers an exceptional platform for formal foundational resear
 
 ## 7. Reproduction & Verification
 
-The formalization is entirely self-contained in a single file [Obelisk.lean](file:///home/user/AI/AGY/Obelisk.lean) (~850 lines) with no external library dependencies.
+The formalization is entirely self-contained in a single file [Obelisk.lean](https://obeliskproofassistant.github.io/Obelisk.lean) (~910 lines) with no external library dependencies.
 
 ### Verification Instructions
 
@@ -269,4 +269,25 @@ Upon execution, `lean Obelisk.lean` succeeds with return code `0`, reporting **0
 'Obelisk.thm_3_67' depends on axioms: [Obelisk.Class, Obelisk.Mem, Obelisk.cls, Obelisk.mem_cls, Obelisk.regularity]
 'Obelisk.dpair_inj' depends on axioms: [Obelisk.Class, Obelisk.cls, Obelisk.Mem, Obelisk.extAx, Obelisk.mem_cls, Obelisk.heredity, Obelisk.infinity, Obelisk.pairing]
 'Obelisk.dsingle_ne_dnil' depends on axioms: [Obelisk.Class, Obelisk.cls, Obelisk.Mem, Obelisk.mem_cls, Obelisk.pairing, Obelisk.heredity, Obelisk.infinity, Obelisk.extAx]
+'Obelisk.not_RepairedWleq_V_Null' depends on axioms: [Obelisk.Class, Obelisk.Mem, Obelisk.cls, Obelisk.mem_cls, Obelisk.extAx, Obelisk.infinity]
 ```
+
+---
+
+## 8. Post-Audit Implementation & Verification Status (2026-11-04)
+
+All 5 steps of the minimal repair (Section 5) and the corresponding formalizations have been integrated across the SML kernel (`program/types/foundations.ML`), the `.nbg` dependent-type library (`examples/nbg_verified_programs.nbg`), the Lean 4 audit artifact (`Obelisk.lean` Part 4), and the interactive catalog (`theory_database.json`):
+
+1. **Definition 3.34 ($\preceq$) Repaired in SML Kernel & Lean 4:**
+   - In `foundations.ML` (`lesseq_def_entry_fm`), $A \preceq B$ now explicitly requires the domain inclusion condition $(A \subseteq \mathrm{Dom}(f))$ in addition to `class-function(f)`, $(f[A] \subseteq B)$, and injectivity on $A$.
+   - In `Obelisk.lean` (Part 4), `RepairedWleq` and `RepairedWlt` are formalized, with machine-checked theorems `Null_not_domain_of_nonempty`, `Null_rejected_for_V`, `RepairedWleq_Null_imp_eq_Null`, and `not_RepairedWleq_V_Null` proving that $\emptyset$ is rejected as a witness for nonempty $A$ and that $\emptyset \prec V$ holds.
+   - In `nbg_verified_programs.nbg`, Theorem 22 (`empty_not_witness_lesseq_nonempty`) constructively verifies in the NBG dependent-type compiler that $\emptyset$ cannot witness $A \preceq B$ for any nonempty class $A$.
+2. **Pairing (3.13a) and Union (3.13b) Axioms Added to Core:**
+   - Explicit axioms `3.13a` ($\forall a, b.\, \mathrm{isSet}(a) \land \mathrm{isSet}(b) \to \mathrm{isSet}(\{a, b\})$) and `3.13b` ($\forall X.\, \mathrm{isSet}(X) \to \mathrm{isSet}(\bigcup X)$) are present in the SML kernel (`foundations.ML` lines 4219–4233) and catalog (`theory_database.json`).
+3. **Definition 3.29 (`concentrated`) Set-Restricted Uniqueness:**
+   - In `foundations.ML` (`concentrated_def_entry_fm`, line 4383), the uniqueness quantifier is explicitly guarded by `isSet(y)` ($\exists! y.\, (\mathrm{isSet}(y) \land ((x, y) \in F))$), preventing proper-class phantom witnesses for Kuratowski pairs.
+4. **Dunaev Tagged Pairs & Lists (3.40–3.44 / 3.45–3.47):**
+   - Fully implemented in `foundations.ML` (`mark_def_entry_fm`, `dpair_def_entry_fm`, `pr1_def_entry_fm`, `pr2_def_entry_fm`, `dpair_inj_entry_fm`), exported to `sml_kernel_export.json` (`3.40`–`3.44`), and constructively verified in `nbg_verified_programs.nbg` (Theorems 23–25: `dunaev_pr1_beta`, `dunaev_pr2_beta`, `dunaev_pair_injective`).
+5. **Metatheory Stratification & Typing Judgments (Section 6):**
+   - In `6.01` (`Theories (Metalevel Stratification)`), theory inclusion is formulated over models/theorem-sets `((\mathrm{Model}(\mathcal{W}) \subseteq \mathrm{Model}(\mathcal{Q})) \land ((\mathrm{Model}(\mathcal{Q}) \subseteq \mathrm{Model}(\mathcal{T})) \land (\mathrm{Model}(\mathcal{T}) \subseteq \mathrm{Model}(\mathcal{F}))))` with parenthesized typing judgments `((\mathcal{W} : \mathrm{Theory}) \land ((\mathcal{Q} : \mathrm{Theory}) \land ((\mathcal{T} : \mathrm{Theory}) \land (\mathcal{F} : \mathrm{Theory}))))`, and vacuous `isFinite(φ)` hypotheses have been removed from `6.02`–`6.05`.
+

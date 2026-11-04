@@ -831,6 +831,61 @@ theorem dsingle_ne_dnil (A : Class) : markC A one ≠ Null :=
   mark_ne_Null A one isSet_one
 
 
+/-! ### Part 4.     Formalization of the Repaired System (Definition 3.34' & 3.29') -/
+
+
+/-- 3.29' Repaired concentrated predicate: uniqueness restricted to sets. -/
+def concentratedRepaired (F : Class) : Prop :=
+  ∀ x, x ∈' Dom F → isSet (app F x) →
+    ∃ y, (isSet y ∧ kpair x y ∈' F) ∧ ∀ z, (isSet z ∧ kpair x z ∈' F) → z = y
+
+
+/-- 3.34' Repaired "Is not strictly larger than" binary relation:
+    requires domain inclusion `A ⊆' Dom f` and injectivity on `A`. -/
+def RepairedWleq (A B : Class) : Prop :=
+  ∃ f, isClassFunction f ∧ A ⊆' Dom f ∧ img f A ⊆' B ∧
+    (∀ x y, x ∈' A → y ∈' A → app f x = app f y → x = y)
+
+
+/-- 3.36' Repaired strict ordering: `A ≺ B ⟷ ¬(B ≼ A)`. -/
+def RepairedWlt (A B : Class) : Prop := ¬ RepairedWleq B A
+
+
+/-- Under the repaired Definition 3.34', the empty class `∅` cannot witness `A ≼ B`
+    for any nonempty class `A`, because `A ⊆' Dom ∅` fails immediately. -/
+theorem Null_not_domain_of_nonempty {A x : Class} (hx : x ∈' A) :
+    ¬ (A ⊆' Dom Null) :=
+  fun hsub => Dom_Null_empty x (hsub x hx)
+
+
+/-- In particular, `∅` is rejected as a witness for `V ≼ B` (since `ω ∈ V`). -/
+theorem Null_rejected_for_V : ¬ (V ⊆' Dom Null) :=
+  Null_not_domain_of_nonempty (mem_V.mpr infinity)
+
+
+/-- Under `RepairedWleq`, `A ≼ ∅` holds only when `A = ∅`. -/
+theorem RepairedWleq_Null_imp_eq_Null {A : Class} (h : RepairedWleq A Null) :
+    A = Null := by
+  rcases h with ⟨f, ⟨_, hsetVal⟩, hdom, himg, _⟩
+  apply extAx
+  intro x
+  constructor
+  · intro hx
+    have hfx_set : isSet (app f x) := hsetVal x (hdom x hx)
+    have hfx_img : app f x ∈' img f A := (mem_cls _ (app f x)).mpr ⟨hfx_set, ⟨x, hx, rfl⟩⟩
+    exact absurd (himg (app f x) hfx_img) (not_mem_Null (app f x))
+  · intro hx
+    exact absurd hx (not_mem_Null x)
+
+
+/-- Consequently, `∅ ≺ V` holds (`¬ RepairedWleq V ∅`), blocking the Route 1 collapse. -/
+theorem not_RepairedWleq_V_Null : RepairedWlt Null V := by
+  intro h
+  have hV : V = Null := RepairedWleq_Null_imp_eq_Null h
+  have hom : omega ∈' Null := hV ▸ (mem_V.mpr infinity)
+  exact not_mem_Null omega hom
+
+
 end
 end Obelisk
 
@@ -844,11 +899,10 @@ end Obelisk
 #print axioms Obelisk.thm_3_55
 #print axioms Obelisk.thm_3_56
 #print axioms Obelisk.thm_3_58
-
-
-    #print axioms Obelisk.thm_3_67
-    #print axioms Obelisk.dpair_inj
-    #print axioms Obelisk.dsingle_ne_dnil
+#print axioms Obelisk.thm_3_67
+#print axioms Obelisk.dpair_inj
+#print axioms Obelisk.dsingle_ne_dnil
+#print axioms Obelisk.not_RepairedWleq_V_Null
 
 
 

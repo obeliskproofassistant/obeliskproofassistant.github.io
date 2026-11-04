@@ -695,7 +695,7 @@
         Featuring an audited LCF-style trusted kernel in Standard ML, declarative syntax, and rigorous class theory foundations.
       </p>
       <div class="hero-actions">
-        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (49 Core + 17 NBG Theorems) &rarr;</a>
+        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (69 Core + 30 NBG Theorems) &rarr;</a>
         <a href="repl.html" class="btn btn-secondary">⚡ Launch Web REPL</a>
         <a href="Obelisk_Report.pdf" class="btn btn-secondary" target="_blank">📄 Read Lean 4 Audit Report</a>
         <a href="Obelisk.lean" class="btn btn-secondary" target="_blank">💻 View Obelisk.lean Source</a>
@@ -755,7 +755,7 @@
         <a href="nbg_library.html" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
           <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">DEDICATED PAGE</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">NBG Standard Library</div>
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">17 kernel-checked theorems (+3 bridge)</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">30 kernel-checked theorems</div>
         </a>
       </div>
     </section>
@@ -839,8 +839,8 @@
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(251, 191, 36, 0.35);">
           <h3 style="font-size: 1.05rem; color: #fbbf24; margin-bottom: 0.5rem;">📚 NBG Library in the Manual</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted);">
-            All <strong>17 machine-checked NBG surface theorems</strong> are now rendered as a manual appendix,
-            including Dunaev pair injectivity and Cartesian-product elimination (<code>dunaev_cartesian_elim</code>), with formulas, proof AST sizes,
+            All <strong>30 machine-checked NBG surface theorems</strong> are now rendered as a manual appendix,
+            including Dunaev pair injectivity, dependent Σ/Π models, and Cartesian-product elimination (<code>dunaev_cartesian_elim</code>), with formulas, proof AST sizes,
             and normalized sizes. The same table is included in the publication PDFs.
           </p>
           <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Browse the appendix &rarr;</a>
@@ -974,7 +974,7 @@
           <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
             <h4 style="color: #fbbf24; font-size: 0.95rem; margin-bottom: 0.5rem;">Lightweight Offline Proof Checking (&lt;50 MB RAM)</h4>
             <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
-              Validates all 49 core proof certificates and NBG standard library theorems in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
+              Validates all 69 core catalog entries, 90 verified higher-order theorems, and 30 NBG standard library theorems in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
             </p>
           </div>
         </div>
@@ -994,7 +994,7 @@
               <tr>
                 <td><code>formula F = ...;</code></td>
                 <td><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
-                <td><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code></td>
+                <td><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="font-size:0.78rem;color:#94a3b8;">(ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
                 <td>Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
                 <td>Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
               </tr>
@@ -1002,8 +1002,8 @@
                 <td><code>theorem T : F = e;</code></td>
                 <td><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
                 <td><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
-                <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies α-equivalence with <code>F</code></td>
-                <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected.</td>
+                <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
+                <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected (relative to MK/NBG consistency).</td>
               </tr>
             </tbody>
           </table>
@@ -1136,7 +1136,7 @@
       <p style="margin-top: 0.5rem; font-size: 0.82rem;">
         <a href="Obelisk_Report.pdf" target="_blank">Lean 4 Audit Report</a> · 
         <a href="Obelisk.lean" target="_blank">Obelisk.lean</a> · 
-        <a href="manual.html#nbg-library" style="color: var(--primary); font-weight: 600;">NBG Standard Library (17)</a> · 
+        <a href="manual.html#nbg-library" style="color: var(--primary); font-weight: 600;">NBG Standard Library (30)</a> · 
         <a href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
         <a href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
       </p>

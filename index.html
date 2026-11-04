@@ -167,19 +167,23 @@
                 <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
                     <td style="padding: 6px 8px;"><code>formula F = ...;</code></td>
                     <td style="padding: 6px 8px;"><strong>Type Definition</strong> (<code>NBGCompiler.Type</code> / <code>Fm</code>)</td>
-                    <td style="padding: 6px 8px;"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code></td>
+                    <td style="padding: 6px 8px;"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="color:#94a3b8;font-size:11px;">(<code>.nbg</code> ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
                     <td style="padding: 6px 8px;">Checks syntactic sort well-formedness &amp; Stage I/II comprehension bounds</td>
                     <td style="padding: 6px 8px; color: #fbbf24;"><strong>Yes as an uninhabited Type</strong> (defining a proposition never proves it!)</td>
                 </tr>
                 <tr>
                     <td style="padding: 6px 8px;"><code>theorem T : F = e;</code></td>
                     <td style="padding: 6px 8px;"><strong>Proof Term Witness</strong> (<code>NBGCompiler.Expr</code>)</td>
-                    <td style="padding: 6px 8px;"><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
-                    <td style="padding: 6px 8px;">Bidirectionally synthesizes type of proof term <code>e</code> via <code>NBGCompiler.typeCheck</code> and checks α-equivalence with <code>F</code></td>
-                    <td style="padding: 6px 8px; color: #34d399;"><strong>Never</strong> — every candidate term for an uninhabited type is deterministically rejected</td>
+                    <td style="padding: 6px 8px;"><code>theorem empty_class_no_elements : (forall (z:Class). ((z in {x | Bot}) -&gt; Bot)) = Lam (z:Class) =&gt; ...;</code><br><span style="color:#94a3b8;font-size:11px;">(and <code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = ...;</code>)</span></td>
+                    <td style="padding: 6px 8px;">Bidirectionally synthesizes type of proof term <code>e</code> via <code>NBGCompiler.typeCheck</code> and checks definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
+                    <td style="padding: 6px 8px; color: #34d399;"><strong>Never</strong> (relative to MK/NBG consistency) — every candidate term for an uninhabited type is deterministically rejected</td>
                 </tr>
             </tbody>
         </table>
+        <div style="font-size: 11.5px; color: #cbd5e1; margin-bottom: 6px;">
+            <strong>4-Step Walkthrough of <code>empty_class_no_elements : ∀(z : Class) ((z ∈ {x | ⊥}) → ⊥)</code>:</strong>
+            (Note: in <code>.nbg</code> ASCII surface syntax, <code>Set(z)</code> is the surface keyword for the sethood predicate rendered as <code>isSet(z)</code> in the Unicode/LaTeX catalog.)
+        </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 8px;">
             <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 8px;">
                 <strong style="color: #38bdf8;">Step 1 · Universal Intro (<code>ELam</code>)</strong><br>

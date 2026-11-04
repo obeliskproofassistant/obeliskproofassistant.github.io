@@ -114,11 +114,11 @@
 </div>
 
 <script>
-const localAddr = "output.html";
+const localAddr = "output.html?v=20261104";
 const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
 
 async function getText() {
-    let text = sessionStorage.getItem("obelisk_demo_output_v3");
+    let text = sessionStorage.getItem("obelisk_demo_output_v4");
     if (!text) {
         try {
             const res = await fetch(localAddr);
@@ -133,7 +133,7 @@ async function getText() {
             text = await remoteRes.text();
         }
         if (text) {
-            sessionStorage.setItem("obelisk_demo_output_v3", text);
+            sessionStorage.setItem("obelisk_demo_output_v4", text);
         }
     }
     return text;
