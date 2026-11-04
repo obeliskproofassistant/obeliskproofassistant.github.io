@@ -223,6 +223,28 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
         e.preventDefault();
       }
     });
+    (function() {
+      var fallbackTriggered = false;
+      function fallbackToUnicodeMath() {
+        if (fallbackTriggered) return;
+        fallbackTriggered = true;
+        if (window.setRenderFormat) {
+          window.setRenderFormat('unicode');
+        }
+      }
+      window.addEventListener('DOMContentLoaded', function() {
+        var scriptEl = document.getElementById('MathJax-script');
+        if (scriptEl) {
+          scriptEl.addEventListener('error', function() {
+            var alt = document.createElement('script');
+            alt.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
+            alt.async = true;
+            alt.onerror = fallbackToUnicodeMath;
+            document.head.appendChild(alt);
+          });
+        }
+      });
+    })();
 
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
