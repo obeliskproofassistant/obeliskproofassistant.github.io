@@ -147,7 +147,7 @@ class TestLatexRendering(unittest.TestCase):
         self.assertIn(r"\mathcal{F}", mtxt)
         self.assertIn(r"\mu", mtxt)
         self.assertIn("Bezboruah", mtxt)
-        self.assertIn("Co-Necessitation", mtxt)
+        self.assertIn("CoNecessitation", mtxt)
 
         for dep_rel in [
             "embedding_anti.html",
