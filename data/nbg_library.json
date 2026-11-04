@@ -1,6 +1,6 @@
 {
   "source": "set_theory_prover/examples/nbg_verified_programs.nbg",
-  "source_sha256_prefix": "df4dbdbf386502a2",
+  "source_sha256_prefix": "632f9faed99809b5",
   "count": 30,
   "theorems": [
     {
@@ -8,42 +8,42 @@
       "formula": "(forall z:Class. ((z in { x | _|_ }) -> _|_))",
       "proof_size": 7,
       "normalized_size": 7,
-      "description": "The empty class has no elements."
+      "description": "The empty class ∅ = {x | ⊥} has no elements."
     },
     {
       "name": "empty_class_is_subclass",
       "formula": "(forall X:Class. (forall z:Class. ((z in { x | _|_ }) -> (z in X))))",
       "proof_size": 8,
       "normalized_size": 8,
-      "description": "The empty class is a subclass of every class."
+      "description": "The empty class ∅ is a subclass of every class."
     },
     {
       "name": "universal_class_characterization",
       "formula": "(forall z:Class. (((z in { x | Top }) -> Set(z)) /\\ (Set(z) -> (z in { x | Top }))))",
       "proof_size": 15,
       "normalized_size": 15,
-      "description": "V = {x | Top}: membership in the universal class is exactly sethood."
+      "description": "V = {x | ⊤}: membership in the universal class is exactly sethood isSet(z)."
     },
     {
       "name": "russell_class_is_not_a_set",
       "formula": "(Set({ x | ((x in x) -> _|_) }) -> _|_)",
       "proof_size": 19,
       "normalized_size": 32,
-      "description": "Russell's class {x | x notin x} is a proper class, not a set."
+      "description": "Russell's class R = {x | x ∉ x} is a proper class (¬isSet(R))."
     },
     {
       "name": "binary_inter_comm",
-      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in { x | ((x in A) /\\ (x in B)) }) -> (z in { x | ((x in B) /\\ (x in A)) })))))",
-      "proof_size": 26,
-      "normalized_size": 26,
-      "description": "Binary class intersection is commutative."
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (((z in { x | ((x in A) /\\ (x in B)) }) -> (z in { x | ((x in B) /\\ (x in A)) })) /\\ ((z in { x | ((x in B) /\\ (x in A)) }) -> (z in { x | ((x in A) /\\ (x in B)) }))))))",
+      "proof_size": 50,
+      "normalized_size": 50,
+      "description": "Binary class intersection is symmetric (bidirectional membership equivalence z ∈ A ∩ B ↔ z ∈ B ∩ A)."
     },
     {
       "name": "binary_union_comm",
-      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in { x | ((x in A) \\/ (x in B)) }) -> (z in { x | ((x in B) \\/ (x in A)) })))))",
-      "proof_size": 23,
-      "normalized_size": 23,
-      "description": "Binary class union is commutative."
+      "formula": "(forall A:Class. (forall B:Class. (forall z:Class. (((z in { x | ((x in A) \\/ (x in B)) }) -> (z in { x | ((x in B) \\/ (x in A)) })) /\\ ((z in { x | ((x in B) \\/ (x in A)) }) -> (z in { x | ((x in A) \\/ (x in B)) }))))))",
+      "proof_size": 44,
+      "normalized_size": 44,
+      "description": "Binary class union is symmetric (bidirectional membership equivalence z ∈ A ∪ B ↔ z ∈ B ∪ A)."
     },
     {
       "name": "class_diff_subclass_left",
@@ -57,63 +57,63 @@
       "formula": "(forall X:Class. (forall Y:Class. ((X = Y) -> (Y = X))))",
       "proof_size": 6,
       "normalized_size": 6,
-      "description": "Class equality is symmetric."
+      "description": "Class equality is symmetric (X = Y → Y = X)."
     },
     {
       "name": "class_eq_trans",
       "formula": "(forall X:Class. (forall Y:Class. (forall Z:Class. (((X = Y) /\\ (Y = Z)) -> (X = Z)))))",
       "proof_size": 9,
       "normalized_size": 9,
-      "description": "Class equality is transitive."
+      "description": "Class equality is transitive ((X = Y ∧ Y = Z) → X = Z)."
     },
     {
       "name": "quantifier_swap",
       "formula": "(forall R:Class. ((exists y:Set. (forall x:Set. ([x, y]_D in R))) -> (forall x:Set. (exists y:Set. ([x, y]_D in R)))))",
       "proof_size": 8,
       "normalized_size": 8,
-      "description": "An existential set witness for a binary relation R implies the corresponding forall-exists statement."
+      "description": "An existential set witness for a binary relation R implies the corresponding ∀x ∃y statement."
     },
     {
       "name": "dunaev_tagged_pair_projections",
       "formula": "(forall A:Class. (forall B:Class. ((pr1([A, B]_D) = A) /\\ (pr2([A, B]_D) = B))))",
       "proof_size": 3,
       "normalized_size": 3,
-      "description": "pr1([A,B]_D) = A and pr2([A,B]_D) = B for arbitrary classes."
+      "description": "pr₁([A,B]_D) = A and pr₂([A,B]_D) = B for arbitrary classes."
     },
     {
       "name": "cantor_diagonal_theorem",
-      "formula": "(forall S:Class. (forall R:Class. (forall c:Class. ((c in S) -> ((((c in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) }) -> ([c, c]_D in R)) /\\ (([c, c]_D in R) -> (c in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) }))) -> _|_)))))",
-      "proof_size": 34,
-      "normalized_size": 62,
-      "description": "Cantor's diagonal theorem on domain class S with Dunaev tagged pairs (using NBG Heredity to derive Set(c) from c in S)."
+      "formula": "(forall S:Class. (forall R:Class. (forall c:Class. ((c in S) -> ((forall z:Class. (((z in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) }) -> ([c, z]_D in R)) /\\ (([c, z]_D in R) -> (z in { x | ((x in S) /\\ (([x, x]_D in R) -> _|_)) })))) -> _|_)))))",
+      "proof_size": 36,
+      "normalized_size": 67,
+      "description": "Cantor's diagonal theorem on domain class S and relation R with Dunaev tagged pairs: no index c ∈ S has the anti-diagonal D = {x ∈ S | [x,x]_D ∉ R} as its R-fiber {z | [c,z]_D ∈ R} (using Element-Sethood c ∈ S → isSet(c))."
     },
     {
       "name": "self_in_singleton",
       "formula": "(forall x:Class. (Set(x) -> (x in { u | (u = x) })))",
       "proof_size": 8,
       "normalized_size": 8,
-      "description": "Every set belongs to its singleton class."
+      "description": "Every set belongs to its singleton class (isSet(x) → x ∈ {u | u = x})."
     },
     {
       "name": "self_in_succ",
       "formula": "(forall x:Class. (Set(x) -> (x in { u | ((u in x) \\/ (u = x)) })))",
       "proof_size": 9,
       "normalized_size": 9,
-      "description": "Every set belongs to its ordinal successor."
+      "description": "Every set belongs to its ordinal successor (isSet(x) → x ∈ x ∪ {x})."
     },
     {
       "name": "class_sub_succ",
       "formula": "(forall x:Class. (forall z:Class. ((z in x) -> (z in { u | ((u in x) \\/ (u = x)) }))))",
       "proof_size": 12,
       "normalized_size": 12,
-      "description": "Every class is a subclass of its successor."
+      "description": "Every class is a subclass of its successor (via Element-Sethood z ∈ x → isSet(z) + Comprehension)."
     },
     {
       "name": "dunaev_pair_injective",
       "formula": "(forall A:Class. (forall B:Class. (forall C:Class. (forall E:Class. (([A, B]_D = [C, E]_D) -> ((A = C) /\\ (B = E)))))))",
       "proof_size": 26,
       "normalized_size": 26,
-      "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,E]_D -> A = C and B = E."
+      "description": "Dunaev pairs are injective for arbitrary classes: [A,B]_D = [C,E]_D → (A = C ∧ B = E)."
     },
     {
       "name": "dunaev_cartesian_elim",
@@ -127,63 +127,63 @@
       "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in { u | ((u in A) /\\ (u in B)) }) -> (z in A)))))",
       "proof_size": 10,
       "normalized_size": 10,
-      "description": "Binary class intersection A inter B is a subclass of the left operand A."
+      "description": "Binary class intersection A ∩ B is a subclass of the left operand A."
     },
     {
       "name": "inter_sub_right",
       "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in { u | ((u in A) /\\ (u in B)) }) -> (z in B)))))",
       "proof_size": 10,
       "normalized_size": 10,
-      "description": "Binary class intersection A inter B is a subclass of the right operand B."
+      "description": "Binary class intersection A ∩ B is a subclass of the right operand B."
     },
     {
       "name": "union_sub_left",
       "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in A) -> (z in { u | ((u in A) \\/ (u in B)) })))))",
       "proof_size": 13,
       "normalized_size": 13,
-      "description": "Left operand A is a subclass of the binary class union A union B (via NBG Heredity + Comprehension)."
+      "description": "Left operand A is a subclass of the binary class union A ∪ B (via Element-Sethood + Comprehension)."
     },
     {
       "name": "semi_singleton_sub_elim",
       "formula": "(forall s:Class. (forall A:Class. (forall x:Class. (forall y:Class. (((forall u:Class. ((u in s) -> (u in A))) /\\ (forall u:Class. (forall v:Class. (((u in s) /\\ (v in s)) -> (u = v))))) -> (((x in s) /\\ (y in s)) -> ((x in A) /\\ (x = y))))))))",
       "proof_size": 19,
       "normalized_size": 19,
-      "description": "Semi-singleton subset s c= A uniqueness and inclusion elimination (Foundations ch. 110)."
+      "description": "Semi-singleton subclass (s sss A) uniqueness and inclusion elimination: (s ⊆ A ∧ semi_singleton(s)) → ((x ∈ s ∧ y ∈ s) → (x ∈ A ∧ x = y)) (Foundations ch. 110)."
     },
     {
       "name": "family_fiber_char",
       "formula": "(forall A:Class. (forall s:Class. ((s in { u | (u c= A) }) -> (Set(s) /\\ (s c= A)))))",
       "proof_size": 7,
       "normalized_size": 7,
-      "description": "Family value fiber comprehension characterization s in { u | u c= A } -> Set(s) /\\ s c= A."
+      "description": "Power-subclass comprehension characterization: s ∈ {u | u ⊆ A} → (isSet(s) ∧ s ⊆ A)."
     },
     {
       "name": "sigma_dependent_sum_intro",
       "formula": "(forall B:Class. (forall x:Set. (forall y:Set. ((Set([x, y]_D) /\\ ((x in Dom(B)) /\\ (y in ValOf(B, x)))) -> ([x, y]_D in { p | (exists a:Set. (exists b:Set. (((a in Dom(B)) /\\ (b in ValOf(B, a))) /\\ (p = [a, b]_D)))) })))))",
       "proof_size": 16,
       "normalized_size": 16,
-      "description": "Dependent sum (Sigma-type) Dunaev pair [x, y]_D introduction from x in Dom(B) and y in ValOf(B, x) (Foundations ch. 130)."
+      "description": "Dependent sum (Σ-type) Dunaev pair [x, y]_D introduction from x ∈ Dom(B) and y ∈ ValOf(B, x) (Foundations ch. 130)."
     },
     {
       "name": "pi_dependent_product_elim",
       "formula": "(forall B:Class. (forall f:Class. (forall x:Class. (((forall u:Class. ((u in Dom(B)) -> (ValOf(f, u) in ValOf(B, u)))) /\\ (x in Dom(B))) -> (ValOf(f, x) in ValOf(B, x))))))",
       "proof_size": 10,
       "normalized_size": 10,
-      "description": "Dependent product (Pi-type) section evaluation elimination: ValOf(f, x) in ValOf(B, x) for x in Dom(B) (Foundations ch. 130)."
+      "description": "Dependent product (Π-type) section evaluation elimination: ValOf(f, x) ∈ ValOf(B, x) for x ∈ Dom(B) (Foundations ch. 130)."
     },
     {
       "name": "union_sub_right",
       "formula": "(forall A:Class. (forall B:Class. (forall z:Class. ((z in B) -> (z in { u | ((u in A) \\/ (u in B)) })))))",
       "proof_size": 13,
       "normalized_size": 13,
-      "description": "Right operand B is a subclass of the binary class union A union B (via NBG Heredity + Comprehension)."
+      "description": "Right operand B is a subclass of the binary class union A ∪ B (via Element-Sethood + Comprehension)."
     },
     {
       "name": "model_stratification_trans",
       "formula": "(forall W:Class. (forall Q:Class. (forall T:Class. (forall F:Class. (((forall z:Class. ((z in Model(W)) -> (z in Model(Q)))) /\\ ((forall z:Class. ((z in Model(Q)) -> (z in Model(T)))) /\\ (forall z:Class. ((z in Model(T)) -> (z in Model(F)))))) -> (forall z:Class. ((z in Model(W)) -> (z in Model(F)))))))))",
       "proof_size": 22,
       "normalized_size": 22,
-      "description": "Metalevel theory stratification transitivity: (Model(W) c= Model(Q) /\\ Model(Q) c= Model(T) /\\ Model(T) c= Model(F)) -> Model(W) c= Model(F) (Entry 6.01)."
+      "description": "Metalevel theory model inclusion transitivity: (Model(W) ⊆ Model(Q) ∧ Model(Q) ⊆ Model(T) ∧ Model(T) ⊆ Model(F)) → Model(W) ⊆ Model(F) (Entry 6.01)."
     },
     {
       "name": "if_dep_true_elim",
@@ -204,14 +204,14 @@
       "formula": "(forall A:Class. (forall z:Class. ((z in { u | ((u in A) /\\ (u in A)) }) -> (z in A))))",
       "proof_size": 9,
       "normalized_size": 9,
-      "description": "Binary class intersection idempotence elimination: z in A inter A -> z in A."
+      "description": "Binary class intersection idempotence elimination: z ∈ A ∩ A → z ∈ A."
     },
     {
       "name": "singleton_membership_eq",
       "formula": "(forall a:Class. (forall z:Class. ((z in { u | (u = a) }) -> (z = a))))",
       "proof_size": 8,
       "normalized_size": 8,
-      "description": "Singleton membership inversion: z in {a} -> z = a."
+      "description": "Singleton membership inversion: z ∈ {a} → z = a."
     }
   ]
 }
