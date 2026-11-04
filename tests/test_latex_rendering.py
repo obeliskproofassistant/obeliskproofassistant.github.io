@@ -117,6 +117,51 @@ class TestLatexRendering(unittest.TestCase):
                 f"{rel} has MathJax delimiters inside <code> tags (skipped by skipHtmlTags): {code_with_mathjax[:5]}",
             )
 
+    def test_output_html_has_zero_leaked_ansi_escape_codes(self):
+        output_html = os.path.join(SITE_DIR, "generated", "output.html")
+        with open(output_html, "r", encoding="utf-8") as f:
+            txt = f.read()
+        self.assertNotIn("\x1b[", txt)
+        leaked = re.findall(r"\[(?:0|1)?;\d+m", txt)
+        self.assertEqual(
+            leaked,
+            [],
+            f"generated/output.html contains leaked ANSI CSI color codes: {leaked[:10]}",
+        )
+
+    def test_embedding_html_wires_mathjax_and_format_toggles(self):
+        embedding_html = os.path.join(SITE_DIR, "embedding.html")
+        with open(embedding_html, "r", encoding="utf-8") as f:
+            txt = f.read()
+        self.assertIn("window.MathJax", txt)
+        self.assertIn("tex-mml-chtml.js", txt)
+        self.assertIn("setRelMode", txt)
+        self.assertIn("setFormatMode", txt)
+        self.assertIn("typesetPromise", txt)
+
+    def test_four_theory_hierarchy_mu_interpretation_and_deprecated_banners(self):
+        manual_html = os.path.join(SITE_DIR, "generated", "manual.html")
+        with open(manual_html, "r", encoding="utf-8") as f:
+            mtxt = f.read()
+        self.assertIn(r"\mathcal{E}", mtxt)
+        self.assertIn(r"\mathcal{F}", mtxt)
+        self.assertIn(r"\mu_{", mtxt)
+        self.assertIn("Bezboruah", mtxt)
+        self.assertIn("Co-Necessitation", mtxt)
+
+        for dep_rel in [
+            "embedding_anti.html",
+            "archive/index.html",
+            "archive/manual_polyml_legacy.html",
+            "archive/ai_2026_10_30.html",
+            "archive/classic_portal.html",
+        ]:
+            dep_path = os.path.join(SITE_DIR, dep_rel)
+            with open(dep_path, "r", encoding="utf-8") as f:
+                dtxt = f.read()
+            self.assertIn("(deprecated)", dtxt, f"{dep_rel} missing (deprecated) marker")
+            self.assertIn("generated/", dtxt, f"{dep_rel} missing link to canonical generated/ replacement")
+
 
 if __name__ == "__main__":
     unittest.main()
