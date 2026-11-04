@@ -383,20 +383,20 @@
   Formula:        (∀(Γ:Ctx)∀(𝛗:Fm)((𝘛,Γ⊢𝛗)→(𝘍,Γ⊢𝛗)))
   Verification:   Postulated (Kernel Axiom)
 
-[3.76] Dunaev Tagged Ordered Pair (Definition)
+[3.76] Ordered pair(Dunaev's tagged class pair) (Definition)
   Formula:        (∀(A:Class)∀(B:Class)((A,B)=(({{∅,{∅}}}∪{x|∃(a:Class)((a∈A)∧(x={{{{a}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{x|∃(a:Class)((a∈B)∧(x={{{{a}}},{∅,{∅}}}))}))))
   Kernel Note:    Dunaev tagged class ordered pair (A,B) = mark(A,1) ∪ mark(B,2), sound for arbitrary proper classes.
   Verification:   Definitional (Kernel AST)
 
-[3.77] First Projection of Dunaev Pair (Definition)
+[3.77] First projection of Dunaev's tagged ordered pair (Theorem)
   Formula:        (∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
   Kernel Note:    Recovers A from (A,B) via tag 1 without requiring A or B to be sets.
-  Verification:   Definitional (Kernel AST)
+  Verification:   Verified (Kernel)
 
-[3.78] Second Projection of Dunaev Pair (Definition)
+[3.78] Second projection of Dunaev's tagged ordered pair (Theorem)
   Formula:        (∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
   Kernel Note:    Recovers B from (A,B) via tag 2 without requiring A or B to be sets.
-  Verification:   Definitional (Kernel AST)
+  Verification:   Verified (Kernel)
 
 [4.01] Instantiation(meta,WIP) (Axiom)
   Formula:        (∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))
