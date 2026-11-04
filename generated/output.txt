@@ -1,0 +1,429 @@
+# AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+# Source: set_theory_prover/program/newchecker.ML
+# Generator: set_theory_prover/program/html_generator.ML
+
+[1.01] A01 (Axiom)
+  Formula:        (⟦𝛂⟧→(⟦𝛃⟧→⟦𝛂⟧))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.02] A02 (Axiom)
+  Formula:        ((⟦𝛂⟧→(⟦𝛃⟧→⟦𝛄⟧))→((⟦𝛂⟧→⟦𝛃⟧)→(⟦𝛂⟧→⟦𝛄⟧)))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.03] A03 (Axiom)
+  Formula:        ((⟦𝛂⟧∧⟦𝛃⟧)→⟦𝛂⟧)
+  Verification:   Postulated (Kernel Axiom)
+
+[1.04] A04 (Axiom)
+  Formula:        ((⟦𝛂⟧∧⟦𝛃⟧)→⟦𝛃⟧)
+  Verification:   Postulated (Kernel Axiom)
+
+[1.05] A05 (Axiom)
+  Formula:        (⟦𝛂⟧→(⟦𝛃⟧→(⟦𝛂⟧∧⟦𝛃⟧)))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.06] A06 (Axiom)
+  Formula:        (⟦𝛂⟧→(⟦𝛂⟧∨⟦𝛃⟧))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.07] A07 (Axiom)
+  Formula:        (⟦𝛃⟧→(⟦𝛂⟧∨⟦𝛃⟧))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.08] A08 (Axiom)
+  Formula:        ((⟦𝛂⟧→⟦𝛄⟧)→((⟦𝛃⟧→⟦𝛄⟧)→((⟦𝛂⟧∨⟦𝛃⟧)→⟦𝛄⟧)))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.09] A09 (Axiom)
+  Formula:        ((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.10] A10 (Axiom)
+  Formula:        ((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))
+  Verification:   Postulated (Kernel Axiom)
+
+[1.11] A11 (Axiom)
+  Formula:        (⊥→⟦𝛂⟧)
+  Verification:   Postulated (Kernel Axiom)
+
+[1.12] A12 (Axiom)
+  Formula:        (⟦𝛂⟧∨¬⟦𝛂⟧)
+  Verification:   Postulated (Kernel Axiom)
+
+[1.13] Modus Ponens (Inference Rule)
+  Formula:        (⟦𝛂⟧, (⟦𝛂⟧→⟦𝛃⟧) ⊢ ⟦𝛃⟧)
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[2.01] Discourse domain is non-empty (Axiom)
+  Formula:        (∃(K:∈Class)⊤)
+  Verification:   Postulated (Kernel Axiom)
+
+[2.02] Forall Instantiation (Inference Rule)
+  Formula:        ((∀(⦃x⦄:∈⟦X⟧)⟦𝛗⟧)→⟦𝛗[t/x]⟧)
+  Side Condition: ⟦term t is free for substitution instead of all samely typed free occurences of the variable x in the formula 𝛗⟧
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[2.03] Exists Instantiation (Inference Rule)
+  Formula:        (⟦𝛗[t/x]⟧→∃(⦃x⦄:∈⟦X⟧)⟦𝛗⟧)
+  Side Condition: ⟦term t is free for substitution instead of all samely typed free occurences of the variable x in the formula 𝛗⟧
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[2.04] Forall Abstraction (Inference Rule)
+  Formula:        ((⟦𝛃⟧→⟦𝛂⟧) ⊢ (⟦𝛃⟧→∀(⦃x⦄:∈⟦X⟧)⟦𝛂⟧))
+  Side Condition: ⟦name x does not occure free as a variable of type X in formula 𝛃⟧
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[2.05] Exists Abstraction (Inference Rule)
+  Formula:        ((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:∈⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))
+  Side Condition: ⟦name x does not occure free as a variable of type X in formula 𝛃⟧
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[2.06] Generalisation (admissible rule) (Inference Rule)
+  Formula:        (⟦𝛂⟧ ⊢ (∀(⦃x⦄:∈⟦X⟧)⟦𝛂⟧))
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[3.01] Class comprehension (Inference Rule)
+  Formula:        ((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})⟷((⦃x⦄ set)∧⟦𝛗⟧))
+  Side Condition: ⟦(x:∈Name)⟧ ∧ ⟦(𝛗:∈Fm)⟧
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[3.02] “Is a set” predicate (Definition)
+  Formula:        (∀(X:∈Class)((X set)⟷(∃(Y:∈Class)(X∈Y))))
+  Verification:   Definitional (Kernel AST)
+
+[3.03] “Is a proper class” predicate (Definition)
+  Formula:        (∀(K:∈Class)((K proper)⟷(¬(K set))))
+  Verification:   Definitional (Kernel AST)
+
+[3.04] Empty set (Definition)
+  Formula:        (∅={x|⊥})
+  Verification:   Definitional (Kernel AST)
+
+[3.05] Universal class (Definition)
+  Formula:        (V={x|⊤})
+  Verification:   Definitional (Kernel AST)
+
+[3.06] Subclass relation (Definition)
+  Formula:        (∀(X:∈Class)∀(Y:∈Class)((X⊆Y)⟷(∀(a:∈Class)((a∈X)→(a∈Y)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.07] Example: “The empty class is a subclass of any class” statement (Theorem)
+  Formula:        (∀(X:∈Class)(∅⊆X))
+  Verification:   Verified (Kernel)
+
+[3.08] “Membership respects equality from the left” (Axiom)
+  Formula:        (∀(X:∈Class)∀(Y:∈Class)((X=Y)→∀(z:∈Class)((z∈X)⟷(z∈Y))))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.09] “Membership respects equality from the right” (Axiom)
+  Formula:        (∀(X:∈Class)∀(Y:∈Class)((X=Y)→∀(W:∈Class)((X∈W)⟷(Y∈W))))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.10] “Extensionality” (Axiom)
+  Formula:        (∀(X:∈Class)∀(Y:∈Class)((∀(z:∈Class)((z∈X)⟷(z∈Y)))→(X=Y)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.11] “Intensionality”(admissible) (Theorem)
+  Formula:        (∀(X:∈Class)∀(Y:∈Class)(((X set)∧(Y set))→((∀(W:∈Class)((X∈W)⟷(Y∈W)))→(X=Y))))
+  Verification:   Verified (Kernel)
+
+[3.12] “Heredity”(a subclass of a set is also a set) (Axiom)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)(((A⊆B)∧(B set))→(A set)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.13] “Exponent”(powerclass of a set is also a set) (Axiom)
+  Formula:        (∀(X:∈Class)((X set)→(𝒫(X) set)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.14] “Regularity”(only universal class is equal to its powerclass) (Axiom)
+  Formula:        (∀(X:∈Class)((𝒫(X)⊆X)→(V⊆X)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.15] Transitivity predicate (Definition)
+  Formula:        (∀(A:∈Class)(Tr(A)⟷(∀(B:∈Class)((B∈A)→(B⊆A)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.16] Ordinality predicate (Definition)
+  Formula:        (∀(A:∈Class)(Ord(A)⟷(Tr(A)∧∀(B:∈Class)((B∈A)→Tr(B)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.17] Class of all ordinal sets(ordinal numbers) (Definition)
+  Formula:        (On={w|Ord(w)})
+  Verification:   Definitional (Kernel AST)
+
+[3.18] The class of all ordinals is an ordinal class (Theorem)
+  Formula:        Ord(On)
+  Verification:   Verified (Kernel)
+
+[3.19] Union of the elements of a class (Definition)
+  Formula:        (∀(K:∈Class)(⋃K={x|∃(y:∈Class)((y∈K)∧(x∈y))}))
+  Verification:   Definitional (Kernel AST)
+
+[3.20] Intersection of the elements of a class (Definition)
+  Formula:        (∀(K:∈Class)(⋂K={x|∀(y:∈Class)((y∈K)→(x∈y))}))
+  Verification:   Definitional (Kernel AST)
+
+[3.21] Domain (includes arguments with proper class values) (Definition)
+  Formula:        (∀(F:∈Class)(Dom(F)={x|∃(b:∈Class)((x,b)∈F)}))
+  Verification:   Definitional (Kernel AST)
+
+[3.22] IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
+  Formula:        (∀(Γ:∈Ctx)∀(v:∈Variable)∀(𝛙:∈Fm)∀(A:∈Class)∀(B:∈Class)((¬(Enc(⦃v⦄)∈FV(𝛙:∈Bool)))→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
+  Verification:   Definitional (Kernel AST)
+
+[3.23] simple_if (polymorphic non-dependent conditional over Type_Expression) (Definition)
+  Formula:        ∀(T_e:∈Type), ((simple_if(⟦T_e⟧):∈Bool→(⟦T_e⟧→(⟦T_e⟧→⟦T_e⟧)))∧∀(t1:∈⟦T_e⟧)∀(t2:∈⟦T_e⟧)((simple_if(⟦T_e⟧,⊤,t1,t2)=t1)∧(simple_if(⟦T_e⟧,⊥,t1,t2)=t2)))
+  Verification:   Definitional (Kernel AST)
+
+[3.24] if_dep (if_{dep}: dependent conditional over (Bool -> Type_Expression)) (Definition)
+  Formula:        ∀(T_e:∈Bool→Type), ((if_dep:∈Π(b:∈Bool),(⟦T_e(⊤)⟧→(⟦T_e(⊥)⟧→⟦T_e(b)⟧)))∧∀(b:∈Bool)∀(t1:∈⟦T_e(⊤)⟧)∀(t2:∈⟦T_e(⊥)⟧)((if_dep(b,t1,t2):∈⟦T_e(b)⟧)∧((if_dep(⊤,t1,t2)=t1)∧(if_dep(⊥,t1,t2)=t2))))
+  Verification:   Definitional (Kernel AST)
+
+[3.25] Evaluation of a [function|class-function|family] (Definition)
+  Formula:        (∀(F:∈Class)∀(a:∈Class)(F(a)=⟦IF (∃(s:∈Class)((a,s)∈F)) THEN ⋃{s|(a,s)∈F} ELSE V FI⟧))
+  Verification:   Definitional (Kernel AST)
+
+[3.26] Image class (Definition)
+  Formula:        (∀(f:∈Class)∀(A:∈Class)(f[A]={b|∃(a:∈Class)((a∈A)∧(f(a)=b))}))
+  Verification:   Definitional (Kernel AST)
+
+[3.27] “Has exactly one element” predicate (Definition)
+  Formula:        (∀(s:∈Class)((s singleton)⟷(∃!(x:∈Class)(x∈s))))
+  Verification:   Definitional (Kernel AST)
+
+[3.28] “Is set-valued” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F set-valued)⟷(∀(x:∈Class)((x∈Dom(F))→(F(x) set)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.29] “Has concentrated set values” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F concentrated set values)⟷(∀(x:∈Class)((x∈Dom(F))→((F(x) set)→∃!(y:∈Class)((x,y)∈F))))))
+  Verification:   Definitional (Kernel AST)
+
+[3.30] “Has flat proper values” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F flat proper values)⟷(∀(x:∈Class)((x∈Dom(F))→((F(x) proper)→∀(b:∈Class)(((x,b)∈F)→(b singleton)))))))
+  Verification:   Definitional (Kernel AST)
+
+[3.31] “Is a family” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F family)⟷((F concentrated set values)∧(F flat proper values))))
+  Verification:   Definitional (Kernel AST)
+
+[3.32] “Is a class-function” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F class-function)⟷((F family)∧(F set-valued))))
+  Verification:   Definitional (Kernel AST)
+
+[3.33] “Is injective” predicate (Definition)
+  Formula:        (∀(F:∈Class)((F injective)⟷(((F family)∧(F set-valued))∧∀(x:∈Class)∀(y:∈Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))→(x=y)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.34] “Is a function” predicate (Definition)
+  Formula:        (∀(f:∈Class)((f function)⟷((f class-function)∧(f set))))
+  Verification:   Definitional (Kernel AST)
+
+[3.35] “Semi-singleton” predicate (Definition)
+  Formula:        (∀(s:∈Class)∀(x:∈Class)∀(y:∈Class)(((x∈s)∧(y∈s))→(x=y)))
+  Verification:   Definitional (Kernel AST)
+
+[3.36] “Semi-singleton subset” relation (s sss A) (Definition)
+  Formula:        (∀(s:∈Class)∀(A:∈Class)((s⊆A)∧∀(x:∈Class)∀(y:∈Class)(((x∈s)∧(y∈s))→(x=y))))
+  Verification:   Definitional (Kernel AST)
+
+[3.37] Evaluation of “Family Value” via semi-singleton subsets (Theorem)
+  Formula:        (∀(F:∈Class)∀(x:∈Class)((F family)→(F(x)=⋃{s|(x,s)∈F})))
+  Verification:   Verified (Kernel)
+
+[3.38] “Dependent Sum (Sigma-Type)” model over a family (Definition)
+  Formula:        (∀(B:∈Class)∀(x:∈Class)∀(y:∈Class)((B family)→(((x∈Dom(B))∧(y∈B(x)))⟷((x,y)∈{s|∃(a:∈Class)∃(b:∈Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))
+  Verification:   Definitional (Kernel AST)
+
+[3.39] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
+  Formula:        (∀(B:∈Class)∀(f:∈Class)(((B family)∧((f family)∧(Dom(f)=Dom(B))))→∀(x:∈Class)((x∈Dom(B))→(f(x)∈B(x)))))
+  Verification:   Verified (Kernel)
+
+[3.40] “Is not strictly larger than” binary relation (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)((A≼B)⟷(∃(f:∈Class)((((f class-function)∧(A⊆Dom(f)))∧(f[A]⊆B))∧(f injective)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.41] Class cardinality (Definition)
+  Formula:        (∀(K:∈Class)(|K|=(On∩⋂{a|(a∈On)∧(K≼a)})))
+  Verification:   Definitional (Kernel AST)
+
+[3.42] “Is strictly smaller than” binary relation (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)((A≺B)⟷(¬(B≼A))))
+  Verification:   Definitional (Kernel AST)
+
+[3.43] Size limitation axiom related statement (Axiom)
+  Formula:        (∀(X:∈Class)((X∈V)⟷(|X|≺|V|)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.44] “Is hereditary” predicate (Definition)
+  Formula:        (∀(A:∈Class)(Hereditary(A)⟷(∀(B:∈Class)((B∈A)→∀(X:∈Class)((X⊆B)→(X∈A))))))
+  Verification:   Definitional (Kernel AST)
+
+[3.45] “Is powerful” predicate (Definition)
+  Formula:        (∀(U:∈Class)(Powerful(U)⟷(∀(B:∈Class)((B∈U)→(𝒫(B)∈U)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.46] “Is pairful” predicate (Definition)
+  Formula:        (∀(U:∈Class)(Pairful(U)⟷(∀(A:∈Class)∀(B:∈Class)(((A∈U)∧(B∈U))→({A,B}∈U)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.47] “Is tight” predicate (Definition)
+  Formula:        (∀(U:∈Class)(Tight(U)⟷(∀(B:∈Class)((B⊆U)→((B≺U)⟷(B∈U))))))
+  Verification:   Definitional (Kernel AST)
+
+[3.48] Singleton set (Definition)
+  Formula:        (∀(a:∈Class)({a}={x|x=a}))
+  Verification:   Definitional (Kernel AST)
+
+[3.49] Unordered pair (Definition)
+  Formula:        (∀(a:∈Class)∀(b:∈Class)({a,b}={x|(x=a)∨(x=b)}))
+  Verification:   Definitional (Kernel AST)
+
+[3.50] Set-theoretic models of natural numbers(TBI) (Definition)
+  Formula:        (Evaluated Kernel Rule Definition)
+  Verification:   Definitional (Kernel AST)
+
+[3.51] General definition of lists of classes which applicable not only for sets, but for proper classes too(TBI) (Definition)
+  Formula:        (Evaluated Kernel Rule Definition)
+  Verification:   Definitional (Kernel AST)
+
+[3.52] Ordered pair(Kuratowsky's) (Definition)
+  Formula:        (∀(a:∈Class)∀(b:∈Class)((a,b)={{a,a},{a,b}}))
+  Verification:   Definitional (Kernel AST)
+
+[3.53] Binary union (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)((A∪B)={x|(x∈A)∨(x∈B)}))
+  Verification:   Definitional (Kernel AST)
+
+[3.54] Binary intersection (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)((A∩B)={x|(x∈A)∧(x∈B)}))
+  Verification:   Definitional (Kernel AST)
+
+[3.55] “Is inductive” predicate (Definition)
+  Formula:        (∀(X:∈Class)(Ind(X)⟷((∅∈X)∧∀(a:∈Class)((a∈X)→((a∪{a})∈X)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.56] The intersection class of all inductive classes is called omega (Definition)
+  Formula:        (∀(x:∈Class)((x∈ω)⟷(∀(Q:∈Class)(Ind(Q)→(x∈Q)))))
+  Verification:   Definitional (Kernel AST)
+
+[3.57] “Infinity”(ω is a set) (Axiom)
+  Formula:        (ω set)
+  Verification:   Postulated (Kernel Axiom)
+
+[3.58] Class of all sets is inductive (Theorem)
+  Formula:        Ind(V)
+  Verification:   Verified (Kernel)
+
+[3.59] Intersection of all inductive classes is an inductive class itself (Theorem)
+  Formula:        Ind(ω)
+  Verification:   Verified (Kernel)
+
+[3.60] Class of all ordinal numbers is inductive (Theorem)
+  Formula:        Ind(On)
+  Verification:   Verified (Kernel)
+
+[3.61] ω is transitive (Theorem)
+  Formula:        Tr(ω)
+  Verification:   Verified (Kernel)
+
+[3.62] ω is ordinal (Theorem)
+  Formula:        Ord(ω)
+  Verification:   Verified (Kernel)
+
+[3.63] ω is in the class of all ordinal numbers(=sets) (Theorem)
+  Formula:        (ω∈On)
+  Verification:   Verified (Kernel)
+
+[3.64] “Is cardinal” predicate (Theorem)
+  Formula:        (∀(C:∈Class)(Card(C)⟷(∃(K:∈Class)(|K|=C))))
+  Verification:   Verified (Kernel)
+
+[3.65] ω is cardinal (Theorem)
+  Formula:        Card(ω)
+  Verification:   Verified (Kernel)
+
+[3.66] On is a cardinal class (Theorem)
+  Formula:        Card(On)
+  Verification:   Verified (Kernel)
+
+[3.67] Class of all sets is not a cardinal class (Theorem)
+  Formula:        (¬Card(V))
+  Verification:   Verified (Kernel)
+
+[3.68] “Is a universe” predicate (Definition)
+  Formula:        (∀(U:∈Class)((U universe)⟷(((ω∈U)∧((Tr(U)∧Hereditary(U))∧(Powerful(U)∧Tight(U))))∧Pairful(U))))
+  Verification:   Definitional (Kernel AST)
+
+[3.69] The class of all sets is a universe (Theorem)
+  Formula:        (V universe)
+  Verification:   Verified (Kernel)
+
+[3.70] “Tarski's axiom” (Axiom)
+  Formula:        (∀(x:∈Class)((x set)→∃(u:∈Class)(((u universe)∧(x∈u))∧(u set))))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.71] General form of the induction principle on a transitive class (Theorem)
+  Formula:        (∀(K:∈Class)∀(A:∈Class)((Tr(K)∧((K∩𝒫(A))⊆A))→(K⊆A)))
+  Verification:   Verified (Kernel)
+
+[3.72] Soundness of the theory 𝘛 (Axiom)
+  Formula:        (∀(𝛗:∈Fm)((𝘛,[]⊢𝛗)→eval(𝛗)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.73] Soundness of the theory 𝘍 (Axiom)
+  Formula:        (∀(𝛗:∈Fm)((𝘍,[]⊢𝛗)→eval(𝛗)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.74] Completeness of the theory 𝘍 (Definition)
+  Formula:        (∀(𝛗:∈Fm)(eval(𝛗)→(𝘍,[]⊢𝛗)))
+  Verification:   Definitional (Kernel AST)
+
+[3.75] If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+  Formula:        (∀(Γ:∈Ctx)∀(𝛗:∈Fm)((𝘛,Γ⊢𝛗)→(𝘍,Γ⊢𝛗)))
+  Verification:   Postulated (Kernel Axiom)
+
+[3.76] Dunaev Tagged Ordered Pair (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)((A,B)=(({{∅,{∅}}}∪{x|∃(a:∈Class)((a∈A)∧(x={{{{a}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{x|∃(a:∈Class)((a∈B)∧(x={{{{a}}},{∅,{∅}}}))}))))
+  Verification:   Definitional (Kernel AST)
+
+[3.77] First Projection of Dunaev Pair (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
+  Verification:   Definitional (Kernel AST)
+
+[3.78] Second Projection of Dunaev Pair (Definition)
+  Formula:        (∀(A:∈Class)∀(B:∈Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
+  Verification:   Definitional (Kernel AST)
+
+[4.01] Instantiation(meta,WIP) (Axiom)
+  Formula:        (∀(A:∈Type)∀(G:∈Ctx.Expression)∀(𝛗:∈Fm)∀(t:∈eval(A).Expression)∀(v:∈Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:∈⟦A⟧)⟦𝛗⟧)→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))
+  Verification:   Postulated (Kernel Axiom)
+
+[4.02] Generalisation(meta,WIP) (Axiom)
+  Formula:        (∀(A:∈Type)∀(Γ:∈Ctx)∀(𝛗:∈Fm)∀(v:∈Variable)((¬(Enc(⦃v⦄)∈Ctx.FV(Γ)))→((𝘞,Γ⊢𝛗)→(𝘞,Γ⊢‹∀(⦃v⦄:∈A)⟦𝛗⟧›))))
+  Verification:   Postulated (Kernel Axiom)
+
+[4.03] CoNecessitation(meta,WIP) (Inference Rule)
+  Formula:        (∀(Γ:∈Ctx)∀(𝛗:∈Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)→(𝘍,Γ⊢𝛗)))
+  Verification:   Primitive / Derived Rule (Kernel)
+
+[4.04] Quantifier “unique”(meta,WIP) (Definition)
+  Formula:        (∀(𝛗:∈Fm)((!(z:∈Class)⟦𝛗⟧)⟷(∀(x:∈Class)∀(y:∈Class)((⟦𝛗[(x:∈Class)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))→(x=y)))))
+  Verification:   Definitional (Kernel AST)
+
+[4.05] Quantifier “exists and unique”(meta,WIP) (Definition)
+  Formula:        (∀(𝛗:∈Fm)(𝘛,[]⊢‹(∃!(x:∈Class)⟦𝛗⟧)⟷((∃(x:∈Class)⟦𝛗⟧)∧!(x:∈Class)⟦𝛗⟧)›))
+  Verification:   Definitional (Kernel AST)
+
+[4.06] Class comprehension axiom schema(meta,WIP) (Axiom)
+  Formula:        (∀(𝛗:∈Fm)∀(x:∈Name)∀(k:∈Class.Expression)(FFI((k:∈Class),‹x›,(𝛗:∈Bool))→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})⟷((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))
+  Verification:   Postulated (Kernel Axiom)
+
+[5.01] Löb's theorem(WIP) (Theorem)
+  Formula:        (∀(𝛗:∈Fm)(𝘘,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)→⟦𝛗⟧›)→(𝘛,[]⊢𝛗)›))
+  Verification:   Verified (Kernel)
+
+[5.02] Gödel's second incompleteness theorem(WIP) (Theorem)
+  Formula:        (𝘘,[]⊢‹(¬(𝘛,[]⊢‹⊥›))→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
+  Verification:   Verified (Kernel)
+

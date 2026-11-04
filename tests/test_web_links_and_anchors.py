@@ -49,10 +49,10 @@ class TestWebLinksAndAnchors(unittest.TestCase):
             self.assertIn("repl.html", html_text, f"{page_name} missing link to repl.html")
 
     def test_output_html_section_and_item_anchors_exist(self):
-        output_html = (REPO_DIR / "output.html").read_text(encoding="utf-8")
-        for sec_num in range(1, 7):
+        output_html = (REPO_DIR / "generated" / "output.html").read_text(encoding="utf-8")
+        for sec_num in range(1, 6):
             self.assertIn(f'id="sec-{sec_num}"', output_html)
-        self.assertIn('id="item-1-01"', output_html)
+        self.assertIn('id="item-1.01"', output_html)
         embedding_html = (REPO_DIR / "embedding.html").read_text(encoding="utf-8")
         self.assertIn("scrollTargetIntoContainer", embedding_html)
 

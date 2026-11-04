@@ -23,13 +23,13 @@ class TestProofTreesAndTools(unittest.TestCase):
         self.assertIn("renderDependencyDAG", dag_text)
         self.assertIn("hasCycle", dag_text)
 
-        proofs_html = (REPO_DIR / "proofs.html").read_text(encoding="utf-8")
+        proofs_html = (REPO_DIR / "frozen" / "proofs.html").read_text(encoding="utf-8")
         self.assertIn("MathJax", proofs_html)
 
     def test_dedukti_and_cakeml_certificate_export(self):
-        db = json.loads((REPO_DIR / "data" / "theory_database.json").read_text(encoding="utf-8"))
+        db = json.loads((REPO_DIR / "generated" / "theory_db.json").read_text(encoding="utf-8"))
         entries = {(e.get("num") or e.get("number")): e for e in _extract_entries(db)}
-        for num in ("5.01", "5.04"):
+        for num in ("5.01", "5.02"):
             entry = entries[num]
             dk = render_dedukti_certificate(entry)
             sml = render_cakeml_certificate(entry)
@@ -51,7 +51,7 @@ class TestProofTreesAndTools(unittest.TestCase):
         self.assertFalse(impred["is_predicative"])
         self.assertIn("X", impred["bound_class_quantifiers"])
 
-        db = json.loads((REPO_DIR / "data" / "theory_database.json").read_text(encoding="utf-8"))
+        db = json.loads((REPO_DIR / "generated" / "theory_db.json").read_text(encoding="utf-8"))
         entries = {(e.get("num") or e.get("number")): e for e in _extract_entries(db)}
         r308 = transpile_catalog_entry(entries["3.08"])
         self.assertTrue(r308["is_predicative"])

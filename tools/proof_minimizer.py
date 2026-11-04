@@ -13,7 +13,7 @@ import re
 from typing import Any, Dict, List, Set
 
 REPO_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = REPO_DIR / "data" / "theory_database.json"
+DB_PATH = REPO_DIR / "generated" / "theory_db.json"
 
 
 def compute_referenced_variables(proof_body: str) -> Set[str]:
@@ -102,7 +102,14 @@ def analyze_database_proofs(db_path: Path = DB_PATH) -> Dict[str, Any]:
             entries.extend(sec.get("entries", []))
     analyzed = 0
     for entry in entries:
-        sml = entry.get("sml_implementation") or entry.get("concrete") or entry.get("semantic") or ""
+        sml = (
+            entry.get("sml_implementation")
+            or entry.get("concrete")
+            or entry.get("semantic")
+            or entry.get("formula_unicode")
+            or entry.get("unicode")
+            or ""
+        )
         if sml:
             minimize_sml_proof_script(sml)
             analyzed += 1

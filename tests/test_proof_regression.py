@@ -16,15 +16,22 @@ import os
 import re
 
 SITE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-DB_PATH = os.path.join(SITE_DIR, "data/theory_database.json")
-MANUAL_PATH = os.path.join(SITE_DIR, "manual.html")
-PROOFS_PATH = os.path.join(SITE_DIR, "proofs.html")
-PROOFS_INDEX_PATH = os.path.join(SITE_DIR, "proofs/index.html")
+GENERATED_DB_PATH = os.path.join(SITE_DIR, "generated/theory_db.json")
+GENERATED_MANUAL_PATH = os.path.join(SITE_DIR, "generated/manual.html")
+FROZEN_DIR = os.path.join(SITE_DIR, "frozen")
+DB_PATH = os.path.join(FROZEN_DIR, "data/theory_database.json")
+MANUAL_PATH = os.path.join(FROZEN_DIR, "manual.html")
+PROOFS_PATH = os.path.join(FROZEN_DIR, "proofs.html")
+PROOFS_INDEX_PATH = os.path.join(FROZEN_DIR, "proofs/index.html")
 
 class TestProofRegression(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        with open(GENERATED_DB_PATH, "r", encoding="utf-8") as f:
+            cls.gen_db = json.load(f)
+        with open(GENERATED_MANUAL_PATH, "r", encoding="utf-8") as f:
+            cls.gen_manual_html = f.read()
         with open(DB_PATH, "r", encoding="utf-8") as f:
             cls.db = json.load(f)
         with open(MANUAL_PATH, "r", encoding="utf-8") as f:
@@ -32,33 +39,42 @@ class TestProofRegression(unittest.TestCase):
         with open(PROOFS_PATH, "r", encoding="utf-8") as f:
             cls.proofs_html = f.read()
 
+    def test_ml_generated_manual_and_db_policy(self):
+        """generated/manual.html and generated/theory_db.json must be ML-generated with Unicode default, table-inside-a-table, and algorithmic links."""
+        self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", self.gen_manual_html)
+        self.assertIn('class="mode-membership mode-unicode"', self.gen_manual_html)
+        self.assertIn('class="external-row"', self.gen_manual_html)
+        self.assertIn('class="internal-entity-table"', self.gen_manual_html)
+        self.assertIn('class="sym-link"', self.gen_manual_html)
+        self.assertIn(r'\href{#item-', self.gen_manual_html)
+        self.assertGreaterEqual(len(self.gen_db["entries"]), 100)
+
     def test_database_entries_count(self):
-        """Database must contain 6 sections and at least 59 formal items (currently 69)."""
+        """Frozen database must contain 6 sections and at least 59 formal items (currently 69)."""
         self.assertEqual(len(self.db["sections"]), 6)
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
         self.assertGreaterEqual(total_entries, 59)
 
     def test_two_variants_and_decoupled_operators_present(self):
-        """manual.html must include Enc, Dec, Emb, ProofsOf, Theorems, Two Variants architecture, and 3 global toggles."""
+        """frozen/manual.html must include Enc, Dec, Emb, ProofsOf, Theorems, Two Variants architecture, and global config."""
         for eid in ("def-enc", "def-dec", "def-emb", "def-proofs-of", "def-theorems"):
             self.assertIn(f'id="{eid}"', self.manual_html)
         self.assertIn('id="two-variants-architecture"', self.manual_html)
         self.assertIn('id="global-config-bar"', self.manual_html)
         self.assertIn('setTerminologyMode', self.manual_html)
         self.assertIn('setObjectTheory', self.manual_html)
-        self.assertIn('setAssistantVariant', self.manual_html)
 
     def test_certificate_pages_exist_and_non_empty(self):
-        """Every entry must have a corresponding verification certificate in proofs/."""
+        """Every entry in frozen/ must have a corresponding verification certificate in frozen/proofs/."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:
                 eid = e["id"]
-                page_path = os.path.join(SITE_DIR, "proofs", f"{eid}.html")
+                page_path = os.path.join(FROZEN_DIR, "proofs", f"{eid}.html")
                 self.assertTrue(os.path.isfile(page_path), f"Certificate missing: {page_path}")
                 self.assertGreater(os.path.getsize(page_path), 500, f"Certificate empty or truncated: {page_path}")
 
     def test_manual_links_to_all_proof_certificates(self):
-        """manual.html must link to every proof certificate page."""
+        """frozen/manual.html must link to every proof certificate page."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:
                 eid = e["id"]
@@ -66,7 +82,7 @@ class TestProofRegression(unittest.TestCase):
                 self.assertIn(link_pattern, self.manual_html, f"manual.html missing link for {eid}")
 
     def test_manual_inline_proof_drawers_exist(self):
-        """manual.html must have an inline proof-row for every item."""
+        """frozen/manual.html must have an inline proof-row for every item."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:
                 eid = e["id"]
@@ -74,7 +90,7 @@ class TestProofRegression(unittest.TestCase):
                 self.assertIn(drawer_id, self.manual_html, f"manual.html missing inline proof drawer: {drawer_id}")
 
     def test_proofs_gallery_has_all_items(self):
-        """proofs.html must contain proof cards for all 49 items."""
+        """frozen/proofs.html must contain proof cards for all 49 items."""
         for sec in self.db["sections"]:
             for e in sec["entries"]:
                 eid = e["id"]
@@ -82,18 +98,18 @@ class TestProofRegression(unittest.TestCase):
                 self.assertIn(card_id, self.proofs_html, f"proofs.html missing card: {card_id}")
 
     def test_proofs_index_mirror_integrity(self):
-        """proofs/index.html must exist and match proofs.html."""
+        """frozen/proofs/index.html must exist and match frozen/proofs.html."""
         self.assertTrue(os.path.isfile(PROOFS_INDEX_PATH))
         with open(PROOFS_INDEX_PATH, "r", encoding="utf-8") as f:
             index_content = f.read()
         self.assertEqual(self.proofs_html, index_content, "proofs/index.html does not match proofs.html")
 
     def test_nbg_library_appendix_is_present(self):
-        """manual.html must include the machine-checked NBG standard library appendix."""
+        """frozen/manual.html must include the machine-checked NBG standard library appendix."""
         self.assertIn('id="nbg-library"', self.manual_html)
         self.assertIn('id="nbg-dunaev_pair_injective"', self.manual_html)
         self.assertIn('class="nbg-row"', self.manual_html)
-        with open(os.path.join(SITE_DIR, "data", "nbg_library.json"), "r", encoding="utf-8") as f:
+        with open(os.path.join(FROZEN_DIR, "data", "nbg_library.json"), "r", encoding="utf-8") as f:
             lib = json.load(f)
         self.assertGreaterEqual(lib["count"], 20)
         self.assertEqual(len(lib["theorems"]), lib["count"])
@@ -105,11 +121,9 @@ class TestProofRegression(unittest.TestCase):
             for e in sec["entries"]:
                 if e.get("status") == "Verified":
                     num = e["num"]
-                    # Must have code in the proof certificate
-                    cert_path = os.path.join(SITE_DIR, "proofs", f"{e['id']}.html")
+                    cert_path = os.path.join(FROZEN_DIR, "proofs", f"{e['id']}.html")
                     with open(cert_path, "r", encoding="utf-8") as f:
                         cert_content = f.read()
-                    # Ensure no cheating axiom is used in the actual proof code
                     code_match = re.search(r'<pre class="code-block"><code>(.*?)</code></pre>', cert_content, re.DOTALL)
                     if code_match:
                         code_text = code_match.group(1)

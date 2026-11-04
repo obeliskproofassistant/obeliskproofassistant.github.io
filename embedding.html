@@ -94,14 +94,13 @@
         <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
     </div>
     <div class="toolbar-nav">
-        <button class="toolbar-btn" onclick="scrollToText('1) Propositional logic')">1. Propositional Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('2) Predicate logic')">2. First-Order Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('3) Set/class-theoretic foundations of mathematics')">3. Class Axioms</button>
-        <button class="toolbar-btn" onclick="scrollToText('4) Metalogical laws')">4. Metalogic</button>
-        <button class="toolbar-btn" onclick="scrollToText('5) Tactics and inference rules')">5. Tactics & Rules</button>
-        <button class="toolbar-btn" onclick="scrollToText('6) Incompleteness-related statements')">6. Incompleteness</button>
-        <a class="toolbar-btn" href="output.pdf" target="_blank">📄 View PDF</a>
-        <a class="toolbar-btn" href="output_white.pdf" target="_blank">📄 Light PDF</a>
+        <button class="toolbar-btn" onclick="scrollToText('1. Propositional Logic')">1. Propositional Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('2. Predicate Logic')">2. Predicate Logic</button>
+        <button class="toolbar-btn" onclick="scrollToText('3. Set/Class-Theoretic')">3. Set/Class Foundations</button>
+        <button class="toolbar-btn" onclick="scrollToText('4. Metalogical Laws')">4. Metalogical Laws</button>
+        <button class="toolbar-btn" onclick="scrollToText('5. Incompleteness')">5. Incompleteness</button>
+        <a class="toolbar-btn" href="generated/manual.html" target="_blank">📖 Open Full Manual</a>
+        <a class="toolbar-btn" href="generated/theory_db.json" target="_blank">🗄️ JSON DB</a>
     </div>
 </div>
 
@@ -114,9 +113,9 @@
 </div>
 
 <script>
-const localAddr = "output.html?v=20261104b";
-const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
-const CACHE_KEY = "obelisk_demo_output_v5";
+const localAddr = "generated/output.html?v=20261104c";
+const remoteAddr = "generated/manual.html";
+const CACHE_KEY = "obelisk_demo_output_v6";
 
 async function getText() {
     let text = sessionStorage.getItem(CACHE_KEY);

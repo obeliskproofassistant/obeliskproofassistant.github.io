@@ -13,8 +13,8 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 REPO_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = REPO_DIR / "data" / "theory_database.json"
-OUT_DIR = REPO_DIR / "export" / "certificates"
+DB_PATH = REPO_DIR / "generated" / "theory_db.json"
+OUT_DIR = REPO_DIR / "frozen" / "export" / "certificates"
 
 
 def _ascii_escape(text: str) -> str:

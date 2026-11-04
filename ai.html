@@ -683,14 +683,13 @@
       </a>
       <nav class="main-nav">
         <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">🏛 Classic Author Portal</a>
-        <a href="manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 Unified Manual</a>
-        <a href="variant1.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.15); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">🏛 Variant 1 (1st-Order)</a>
-        <a href="variant2.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">λ Variant 2 (Higher-Order)</a>
-        <a href="nbg_library.html" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">📚 NBG Library</a>
+        <a href="generated/manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">📖 ML-Generated Manual</a>
+        <a href="frozen/variant1.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.15); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">🏛 Variant 1 (Frozen)</a>
+        <a href="frozen/variant2.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">λ Variant 2 (Frozen)</a>
+        <a href="frozen/nbg_library.html" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">📚 NBG Library (Frozen)</a>
         <a href="repl.html">Web REPL</a>
         <a href="#demo">Live Demo</a>
         <a href="https://georgydunaev.github.io" target="_blank">Author: Georgy Dunaev ↗</a>
-        <a href="Obelisk_Report.pdf" class="btn btn-primary" target="_blank">Audit Report (PDF)</a>
       </nav>
     </div>
   </header>
@@ -706,13 +705,11 @@
       </h1>
       <p class="hero-desc">
         Obelisk is an interactive proof assistant engineered for mathematical clarity and high assurance. 
-        Featuring an audited LCF-style trusted kernel in Standard ML, declarative syntax, and rigorous class theory foundations.
+        Featuring an LCF-style trusted kernel in Standard ML, declarative syntax, and rigorous class theory foundations.
       </p>
       <div class="hero-actions">
-        <a href="manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 Interactive Theory Manual (69 Core + 30 NBG Theorems) &rarr;</a>
+        <a href="generated/manual.html" class="btn btn-primary" style="background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%); box-shadow: 0 4px 18px rgba(56, 189, 248, 0.45); font-weight: 700;">📖 ML-Generated Theory Manual &rarr;</a>
         <a href="repl.html" class="btn btn-secondary">⚡ Launch Web REPL</a>
-        <a href="Obelisk_Report.pdf" class="btn btn-secondary" target="_blank">📄 Read Lean 4 Audit Report</a>
-        <a href="Obelisk.lean" class="btn btn-secondary" target="_blank">💻 View Obelisk.lean Source</a>
         <a href="#demo" class="btn btn-secondary">Explore Demonstration</a>
         <a href="https://georgydunaev.github.io" class="btn btn-secondary" target="_blank">👤 Author Portfolio</a>
       </div>
@@ -722,52 +719,47 @@
     <section class="card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 132, 199, 0.15) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 1.8rem 2rem; margin-bottom: 3rem; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);">
       <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.2rem;">
         <div>
-          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations · Decoupled Pages</div>
-          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">Interactive Theory Manual, Standalone Variants &amp; Section Pages</h3>
+          <div style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary);">Systematic Mathematical Foundations · ML-Generated &amp; Frozen Reference</div>
+          <h3 style="font-size: 1.5rem; font-weight: 800; color: #fff; margin-top: 0.3rem;">ML-Generated Theory Manual (`generated/`) &amp; Frozen Reference (`frozen/`)</h3>
         </div>
         <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
-          <a href="variant1.html" class="btn btn-secondary" style="border-color: rgba(192, 132, 252, 0.55); color: #d8b4fe;">🏛 Variant 1 (1st-Order) Page</a>
-          <a href="variant2.html" class="btn btn-secondary" style="border-color: rgba(56, 189, 248, 0.55); color: #38bdf8;">λ Variant 2 (Higher-Order) Page</a>
-          <a href="nbg_library.html" class="btn btn-secondary" style="border-color: rgba(52, 211, 153, 0.55); color: #34d399;">📚 NBG Library Page</a>
-          <a href="manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse Unified Manual &rarr;</a>
+          <a href="frozen/variant1.html" class="btn btn-secondary" style="border-color: rgba(192, 132, 252, 0.55); color: #d8b4fe;">🏛 Variant 1 (Frozen)</a>
+          <a href="frozen/variant2.html" class="btn btn-secondary" style="border-color: rgba(56, 189, 248, 0.55); color: #38bdf8;">λ Variant 2 (Frozen)</a>
+          <a href="frozen/nbg_library.html" class="btn btn-secondary" style="border-color: rgba(52, 211, 153, 0.55); color: #34d399;">📚 NBG Library (Frozen)</a>
+          <a href="generated/manual.html" class="btn btn-primary" style="background: var(--primary); color: #07090e; font-weight: 700;">Browse ML-Generated Manual &rarr;</a>
         </div>
       </div>
       <p style="color: var(--text-muted); font-size: 0.96rem; margin-bottom: 1.2rem; max-width: 900px;">
-        Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Browse either the dedicated single-variant pages (<a href="variant1.html" style="color:#d8b4fe;">Variant 1</a>, <a href="variant2.html" style="color:#38bdf8;">Variant 2</a>), the standalone section pages below, or the unified catalog.
+        Every statement is formally decoupled into <strong>Morse–Kelley Semantic Objects</strong> and <strong>Ambient Type-Theoretic Syntactic Side Conditions</strong>. Browse the honestly ML-generated catalog in <a href="generated/manual.html" style="color:#38bdf8;"><code>generated/manual.html</code></a> or the frozen reference pages (<a href="frozen/variant1.html" style="color:#d8b4fe;">Variant 1</a>, <a href="frozen/variant2.html" style="color:#38bdf8;">Variant 2</a>) below.
       </p>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem;">
-        <a href="sections/sec-1.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 1 (STANDALONE PAGE)</div>
+        <a href="generated/manual.html#sec-1" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 1 (ML-GENERATED)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Propositional Logic</div>
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">13 axioms &amp; Modus Ponens</div>
+          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Axioms, rules &amp; Modus Ponens</div>
         </a>
-        <a href="sections/sec-2.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 2 (STANDALONE PAGE)</div>
+        <a href="generated/manual.html#sec-2" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 2 (ML-GENERATED)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Predicate Logic</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Bernays quantifiers &amp; Gen</div>
         </a>
-        <a href="sections/sec-3.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 3 (STANDALONE PAGE)</div>
+        <a href="generated/manual.html#sec-3" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 3 (ML-GENERATED)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Morse–Kelley &amp; Conditionals</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">⟦ if ... then ⟧, Ord-Ind, V</div>
         </a>
-        <a href="sections/sec-4.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 4 (STANDALONE PAGE)</div>
+        <a href="generated/manual.html#sec-4" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 4 (ML-GENERATED)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Metalogical Laws</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Reflected metatheory &amp; ∃!</div>
         </a>
-        <a href="sections/sec-5.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 5 (STANDALONE PAGE)</div>
-          <div style="font-weight: 600; color: #fff; margin-top: 2px;">Verified Tactics</div>
-          <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Sequent derivations &amp; rules</div>
-        </a>
-        <a href="sections/sec-6.html" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
-          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 6 (STANDALONE PAGE)</div>
+        <a href="generated/manual.html#sec-5" style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--card-border); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--card-border)'">
+          <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700;">SECTION 5 (ML-GENERATED)</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">Incompleteness</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">Löb's theorem &amp; Gödel II</div>
         </a>
-        <a href="nbg_library.html" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
-          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">DEDICATED PAGE</div>
+        <a href="frozen/nbg_library.html" style="background: rgba(6, 78, 59, 0.35); border: 1px solid rgba(16, 185, 129, 0.5); padding: 0.8rem 1rem; border-radius: 8px; text-decoration: none; color: #cbd5e1; transition: all 0.2s;" onmouseover="this.style.borderColor='#34d399'" onmouseout="this.style.borderColor='rgba(16, 185, 129, 0.5)'">
+          <div style="font-size: 0.75rem; color: #34d399; font-weight: 700;">FROZEN REFERENCE</div>
           <div style="font-weight: 600; color: #fff; margin-top: 2px;">NBG Standard Library</div>
           <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 2px;">30 kernel-checked theorems</div>
         </a>
@@ -830,7 +822,7 @@
             (<code>proofDunaevPairInjectivity</code> and surface <code>dunaev_pair_injective</code>).
             The general <code>Pair</code>/<code>Func</code> interface no longer falls back to Kuratowski pairs.
           </p>
-          <a href="nbg_library.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
+          <a href="frozen/nbg_library.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Open NBG library &rarr;</a>
         </div>
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(16, 185, 129, 0.35);">
           <h3 style="font-size: 1.05rem; color: #34d399; margin-bottom: 0.5rem;">🛡️ Trusted Checker: No Cheat Path</h3>
@@ -839,7 +831,7 @@
             <code>slow_check</code>, and <code>checkPlus</code> all reject <code>PCheat_prf</code>.
             Unsupported legacy <code>PS1_prf</code>/<code>PHenkin_prf</code> constructors fail explicitly. A closedness gate also rejects theorem statements with free class variables, so an open formula cannot be packed as a Set witness.
           </p>
-          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Read the manual &rarr;</a>
+          <a href="generated/manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Read the manual &rarr;</a>
         </div>
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(192, 132, 252, 0.35);">
           <h3 style="font-size: 1.05rem; color: #c084fc; margin-bottom: 0.5rem;">📊 Epistemic Catalog Audit</h3>
@@ -848,16 +840,16 @@
             <strong>16 conservative definitions</strong>, and <strong>7 irreducible MK axioms</strong> (90 certified items total).
             Plan witnesses are classified, and an unclassified witness prevents the catalog from loading.
           </p>
-          <a href="manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Inspect the catalog &rarr;</a>
+          <a href="generated/manual.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Inspect the catalog &rarr;</a>
         </div>
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(251, 191, 36, 0.35);">
           <h3 style="font-size: 1.05rem; color: #fbbf24; margin-bottom: 0.5rem;">📚 NBG Library in the Manual</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted);">
             All <strong>30 machine-checked NBG surface theorems</strong> are now rendered as a manual appendix,
             including Dunaev pair injectivity, dependent Σ/Π models, and Cartesian-product elimination (<code>dunaev_cartesian_elim</code>), with formulas, proof AST sizes,
-            and normalized sizes. The same table is included in the publication PDFs.
+            and normalized sizes.
           </p>
-          <a href="manual.html#nbg-library" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Browse the appendix &rarr;</a>
+          <a href="frozen/nbg_library.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">Browse the NBG library &rarr;</a>
         </div>
       </div>
     </section>
@@ -1088,40 +1080,6 @@
       </div>
     </section>
 
-    <!-- LEAN 4 AUDIT -->
-    <section id="audit">
-      <div class="audit-box">
-        <div class="audit-info">
-          <span class="badge-highlight" style="margin-bottom:0.75rem;">Independent Machine Verification</span>
-          <h3>Formally Audited in Lean 4</h3>
-          <p>
-            The Obelisk system axiomatics and independent constructions (including Dunaev tagged pairs &amp; lists) 
-            were audited and machine-checked in <strong>Lean 4</strong>. 
-            All core theorems were verified with <strong>0 errors and 0 sorry</strong>.
-          </p>
-          <div class="audit-metrics">
-            <div class="metric-item">
-              <span class="metric-val">0</span>
-              <span class="metric-lbl">Errors / Sorry</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val">9</span>
-              <span class="metric-lbl">Core Theorems Verified</span>
-            </div>
-            <div class="metric-item">
-              <span class="metric-val">3</span>
-              <span class="metric-lbl">Tagged List Axioms Checked</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <a href="Obelisk_Report.pdf" class="btn btn-primary" target="_blank" style="padding: 0.8rem 1.4rem;">
-            📄 Download Audit Report (PDF)
-          </a>
-        </div>
-      </div>
-    </section>
-
     <!-- LIVE DEMONSTRATION -->
     <section id="demo" class="demo-section">
       <div class="section-title-wrap">
@@ -1148,9 +1106,8 @@
         <a href="classic.html" style="color: var(--primary); font-weight: 600;">🏛 Classic Author Portal</a>
       </p>
       <p style="margin-top: 0.5rem; font-size: 0.82rem;">
-        <a href="Obelisk_Report.pdf" target="_blank">Lean 4 Audit Report</a> · 
-        <a href="Obelisk.lean" target="_blank">Obelisk.lean</a> · 
-        <a href="manual.html#nbg-library" style="color: var(--primary); font-weight: 600;">NBG Standard Library (30)</a> · 
+        <a href="generated/manual.html" style="color: var(--primary); font-weight: 600;">ML-Generated Manual</a> · 
+        <a href="frozen/nbg_library.html" style="color: var(--primary); font-weight: 600;">NBG Standard Library (Frozen)</a> · 
         <a href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
         <a href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
       </p>

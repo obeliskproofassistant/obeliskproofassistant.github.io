@@ -35,7 +35,7 @@ class TestAIPortal(unittest.TestCase):
 
     def test_ai_portal_links_nbg_library(self):
         content = self.contents["ai.html"]
-        self.assertIn("manual.html#nbg-library", content)
+        self.assertIn("frozen/nbg_library.html", content)
         self.assertIn("NBG Standard Library", content)
         self.assertTrue("30 kernel-checked theorems" in content or "17 kernel-checked theorems" in content)
 

@@ -15,7 +15,7 @@ import re
 from typing import Any, Dict, List
 
 REPO_DIR = Path(__file__).resolve().parent.parent
-DB_PATH = REPO_DIR / "data" / "theory_database.json"
+DB_PATH = REPO_DIR / "generated" / "theory_db.json"
 
 # Uppercase class variable quantifiers not immediately restricted to V / isSet
 IMPREDICATIVE_QUANT_RE = re.compile(
@@ -65,15 +65,22 @@ def classify_comprehension_formula(formula: str) -> Dict[str, Any]:
 
 def transpile_catalog_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
     """Return dual NBG/MK classification and SML vs. NBG Model representations for a catalog entry."""
-    stmt = entry.get("semantic") or entry.get("unicode") or entry.get("latex") or ""
+    stmt = (
+        entry.get("semantic")
+        or entry.get("formula_unicode")
+        or entry.get("unicode")
+        or entry.get("formula_latex")
+        or entry.get("latex")
+        or ""
+    )
     info = classify_comprehension_formula(stmt)
     return {
-        "id": entry.get("id"),
+        "id": entry.get("id") or f"item-{entry.get('num') or entry.get('number')}",
         "number": entry.get("num") or entry.get("number"),
         "title": entry.get("title"),
         "classification": info["classification"],
         "is_predicative": info["is_predicative"],
-        "nbg_model_view": entry.get("semantic") or entry.get("unicode") or "",
+        "nbg_model_view": entry.get("semantic") or entry.get("formula_unicode") or entry.get("unicode") or "",
         "executable_sml_view": entry.get("concrete", ""),
         "bernays_reduction": info["bernays_reduction"],
     }

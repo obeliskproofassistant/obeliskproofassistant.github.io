@@ -5,7 +5,7 @@ import re
 import unittest
 
 SITE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.path.join(SITE_DIR, "data", "theory_database.json")
+DB_PATH = os.path.join(SITE_DIR, "generated", "theory_db.json")
 
 MATH_BLOCK_RE = re.compile(r"(\\\(.*?\\\)|\\\[.*?\\\]|\$\$.*?\$\$)", re.S)
 DOUBLE_BACKSLASH_CMD_RE = re.compile(r"\\\\[a-zA-Z]+")

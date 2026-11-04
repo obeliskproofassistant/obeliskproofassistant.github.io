@@ -10,7 +10,7 @@ from pathlib import Path
 REPO_DIR = Path(__file__).resolve().parent.parent
 COLLAPSE_JS = REPO_DIR / "js" / "proof_tree_collapse.js"
 VIEWER_JS = REPO_DIR / "js" / "proof_tree_viewer.js"
-PROOFS_HTML = REPO_DIR / "proofs.html"
+PROOFS_HTML = REPO_DIR / "frozen" / "proofs.html"
 
 
 class TestProofTreeUI(unittest.TestCase):
