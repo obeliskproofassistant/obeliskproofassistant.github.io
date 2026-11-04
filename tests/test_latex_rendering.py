@@ -108,6 +108,15 @@ class TestLatexRendering(unittest.TestCase):
                 f"{rel} has raw LaTeX commands outside math mode: {stray[:10]}",
             )
 
+            # 5. No inline MathJax delimiters \(...\) inside <code> tags (skipped by skipHtmlTags)
+            code_blocks = re.findall(r"<code\b[^>]*>.*?</code>", body, flags=re.S | re.I)
+            code_with_mathjax = [c for c in code_blocks if r"\(" in c or r"\[" in c]
+            self.assertEqual(
+                code_with_mathjax,
+                [],
+                f"{rel} has MathJax delimiters inside <code> tags (skipped by skipHtmlTags): {code_with_mathjax[:5]}",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

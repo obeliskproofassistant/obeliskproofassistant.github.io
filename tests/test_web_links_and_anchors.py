@@ -48,6 +48,22 @@ class TestWebLinksAndAnchors(unittest.TestCase):
             self.assertIn("False_RussellIsSet", html_text, f"{page_name} missing False_RussellIsSet example")
             self.assertIn("repl.html", html_text, f"{page_name} missing link to repl.html")
 
+    def test_output_html_section_and_item_anchors_exist(self):
+        output_html = (REPO_DIR / "output.html").read_text(encoding="utf-8")
+        for sec_num in range(1, 7):
+            self.assertIn(f'id="sec-{sec_num}"', output_html)
+        self.assertIn('id="item-1-01"', output_html)
+        embedding_html = (REPO_DIR / "embedding.html").read_text(encoding="utf-8")
+        self.assertIn("scrollTargetIntoContainer", embedding_html)
+
+    def test_mobile_responsive_rules_keep_portals_accessible(self):
+        index_html = (REPO_DIR / "index.html").read_text(encoding="utf-8")
+        self.assertIn("@media (max-width: 768px)", index_html)
+        repl_html = (REPO_DIR / "repl.html").read_text(encoding="utf-8")
+        self.assertNotIn(".sidebar-left, .sidebar-right { display: none; }", repl_html)
+        ai_html = (REPO_DIR / "obelisk_ai.html").read_text(encoding="utf-8")
+        self.assertNotIn("nav.main-nav {\n        display: none;", ai_html)
+
 
 if __name__ == "__main__":
     unittest.main()

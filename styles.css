@@ -180,15 +180,19 @@ horizontal-align: right;
             background-color:black;
         }
 
-@media (max-width: 767px) {
-        .left {
-            width: 100%;
-            height: 100%;
+@media (max-width: 768px) {
+        .indexbody {
+            flex-direction: column;
+            height: auto;
+            min-height: 100vh;
+            overflow-y: auto;
         }
-
-       .right {
-            display: none;
-       }
+        .left, .right {
+            width: 100%;
+            height: 75vh;
+            min-height: 420px;
+            display: block;
+        }
 }
 
 

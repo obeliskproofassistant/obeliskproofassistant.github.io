@@ -203,8 +203,13 @@
     }
 
     @media (max-width: 960px) {
-      .main-layout { grid-template-columns: 1fr; }
-      .sidebar-left, .sidebar-right { display: none; }
+      body { height: auto; min-height: 100vh; }
+      header { flex-wrap: wrap; gap: 0.5rem; padding: 0.65rem 1rem; }
+      .nav-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+      .nav-links a { margin-left: 0; }
+      .main-layout { display: flex; flex-direction: column; overflow: visible; }
+      .sidebar-left, .sidebar-right { border-right: none; border-left: none; border-bottom: 1px solid var(--border); max-height: 320px; }
+      .repl-center { min-height: 520px; }
     }
   </style>
 </head>

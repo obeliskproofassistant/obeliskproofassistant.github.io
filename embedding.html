@@ -114,11 +114,12 @@
 </div>
 
 <script>
-const localAddr = "output.html?v=20261104";
+const localAddr = "output.html?v=20261104b";
 const remoteAddr = "https://raw.githubusercontent.com/georgydunaev/variousreleases/refs/heads/main/output.html";
+const CACHE_KEY = "obelisk_demo_output_v5";
 
 async function getText() {
-    let text = sessionStorage.getItem("obelisk_demo_output_v4");
+    let text = sessionStorage.getItem(CACHE_KEY);
     if (!text) {
         try {
             const res = await fetch(localAddr);
@@ -133,15 +134,38 @@ async function getText() {
             text = await remoteRes.text();
         }
         if (text) {
-            sessionStorage.setItem("obelisk_demo_output_v4", text);
+            sessionStorage.setItem(CACHE_KEY, text);
         }
     }
     return text;
 }
 
+function scrollTargetIntoContainer(targetEl) {
+    if (!targetEl) return;
+    const toolbar = document.getElementById("nav-toolbar");
+    const toolbarHeight = toolbar ? toolbar.offsetHeight : 44;
+    const rect = targetEl.getBoundingClientRect();
+    const targetTop = Math.max(0, window.pageYOffset + rect.top - toolbarHeight - 14);
+    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    targetEl.style.outline = '2px solid #38bdf8';
+    targetEl.style.backgroundColor = 'rgba(56, 189, 248, 0.22)';
+    setTimeout(() => {
+        targetEl.style.outline = 'none';
+        targetEl.style.backgroundColor = '';
+    }, 2000);
+}
+
 function scrollToText(searchText) {
     const el = document.getElementById("myhtmloutput");
     if (!el) return;
+    const secMatch = /^\s*([1-6])\)/.exec(searchText);
+    if (secMatch) {
+        const byId = el.querySelector("#sec-" + secMatch[1]);
+        if (byId) {
+            scrollTargetIntoContainer(byId);
+            return;
+        }
+    }
     const needle = searchText.toLowerCase();
     const spans = el.querySelectorAll("span, p, pre");
     // Pick the MOST SPECIFIC match (smallest text content) instead of the first:
@@ -168,9 +192,7 @@ function scrollToText(searchText) {
         }
     }
     if (best) {
-        best.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        best.style.outline = '2px solid #38bdf8';
-        setTimeout(() => { best.style.outline = 'none'; }, 2000);
+        scrollTargetIntoContainer(best);
         return;
     }
     console.warn("scrollToText: no match for", searchText);
@@ -181,6 +203,17 @@ async function renderOutput() {
         const rawHtml = await getText();
         const target = document.getElementById("myhtmloutput");
         target.innerHTML = rawHtml;
+        target.addEventListener("click", function(ev) {
+            const link = ev.target.closest ? ev.target.closest('a[href^="#item-"], a[href^="#sec-"]') : null;
+            if (link) {
+                const hash = link.getAttribute("href");
+                const dest = target.querySelector(hash);
+                if (dest) {
+                    ev.preventDefault();
+                    scrollTargetIntoContainer(dest);
+                }
+            }
+        });
     } catch (e) {
         document.getElementById("myhtmloutput").innerHTML = 
             "<div style='color:#ef4444; padding:20px;'>Failed to load output: " + e.message + "</div>";
