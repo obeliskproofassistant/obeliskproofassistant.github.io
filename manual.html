@@ -987,6 +987,51 @@ AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
       </ul>
     </div>
 
+    <!-- TICKET 685: FORMULA (TYPE) VS. THEOREM (PROOF TERM) SURFACE SYNTAX REFERENCE -->
+    <div id="surface-syntax-reference" class="clarification-card" style="border-color: rgba(52, 211, 153, 0.35); background: rgba(15, 23, 42, 0.82);">
+      <div class="clarification-title" style="color: #34d399;">
+        <span>📐</span> Surface Compiler Reference: <code>formula &lt;Name&gt; = &lt;Formula&gt;;</code> (Type) vs. <code>theorem &lt;Name&gt; : &lt;Formula&gt; = &lt;ProofTerm&gt;;</code> (Proof Term)
+      </div>
+      <p style="margin: 0.4rem 0; font-size: 0.9rem; color: #cbd5e1;">
+        In Variant 2&rsquo;s Curry–Howard surface language (<code>examples/true_and_false_mk_guide.nbg</code>, compiled by <code>NBGSurfaceCompiler.compileSurfaceFile</code>), formulas of Morse–Kelley / NBG are <strong>Types</strong> (<code>NBGCompiler.Type</code>) and proofs are explicit <strong>Kernel Terms</strong> (<code>NBGCompiler.Expr</code>):
+      </p>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-top: 10px;">
+        <div style="background: rgba(2, 6, 23, 0.75); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-weight: 700; color: #38bdf8; font-size: 0.86rem; margin-bottom: 6px;">1. Defining a Formula (Type) — True &amp; False Alike</div>
+          <pre class="code-block" style="font-size: 0.78rem; color: #e2e8f0;"><code>(* Defining a formula ONLY defines a Type (never a proof!): *)
+formula EmptyHasNoElements =
+  forall (z:Class). z in { x | Bot } -&gt; Bot;
+
+(* Uninhabited (false) formulas are legal Type definitions: *)
+formula False_RussellIsSet = Set({ x | x in x -&gt; Bot });
+formula False_EveryClassIsSet = forall (X:Class). Set(X);</code></pre>
+        </div>
+        <div style="background: rgba(2, 6, 23, 0.75); border: 1px solid rgba(52, 211, 153, 0.35); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 0.86rem; margin-bottom: 6px;">2. True Theorems (Inhabited by Kernel Proof Terms — Compile ✓)</div>
+          <pre class="code-block" style="font-size: 0.78rem; color: #a7f3d0;"><code>theorem thm_empty_no_elements :
+  forall (z:Class). z in { x | Bot } -&gt; Bot =
+  Lam (z:Class) =&gt; fn (hIn : z in { x | Bot }) =&gt;
+    snd((fst(compr(x. Bot, z)) hIn));
+
+theorem thm_dunaev_proj :
+  forall (A:Class). forall (B:Class).
+    pr1([A, B]_D) = A /\ pr2([A, B]_D) = B =
+  Lam (A:Class) =&gt; Lam (B:Class) =&gt; dunaev_proj(A, B);</code></pre>
+        </div>
+        <div style="background: rgba(2, 6, 23, 0.75); border: 1px solid rgba(248, 113, 113, 0.35); border-radius: 8px; padding: 12px 14px;">
+          <div style="font-weight: 700; color: #f87171; font-size: 0.86rem; margin-bottom: 6px;">3. False Statements (Deterministically Rejected by Kernel ✗)</div>
+          <pre class="code-block" style="font-size: 0.78rem; color: #fca5a5;"><code>(* REJECTED #1: Using a formula name as a proof term *)
+theorem bad_1 : Set({ x | x in x -&gt; Bot }) = False_RussellIsSet;
+(* --&gt; TypeError: Cannot use formula definition as a proof term *)
+
+(* REJECTED #2: Packing proper class On into SetSort existential *)
+theorem bad_on : exists (y:Set). y = On =
+  pack(On, refl(On), exists (y:Set). y = On);
+(* --&gt; TypeError: Sort violation in EPack (Burali-Forti guard) *)</code></pre>
+        </div>
+      </div>
+    </div>
+
     
 <div style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 12px 16px; margin: 1rem 0;">
   <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
