@@ -349,7 +349,7 @@
         </div>
         <div class="control-group">
           <span class="control-label">Interpretation:</span>
-          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Meaning in Model inside NBG (∈)</button>
+          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Explicit Term Interpretation / Valuation (μ_A in NBG/MK) (∈)</button>
           <button id="btn-typing" class="toggle-btn" onclick="setRelMode('typing')">2. Checkable / Executable Code in CakeML &amp; PolyML (:)</button>
         </div>
       </div>
@@ -386,9 +386,13 @@
             <tr>
               <th class="field-name">Formula</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode">(<a href="../manual.html#item-2.02" class="sym-link" title="2.02: Universal quantifier">∀</a><span class="ansi-light-cyan">(</span><span class="ansi-light-yellow">𝛗</span><span class="ansi-light-cyan"><span class="set-rel"><span class="rel-colon">:</span><span class="rel-in"><a href="../manual.html#item-3.01" class="sym-link" title="3.01: Class membership relation">∈</a></span></span></span><span class="ansi-light-green"><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Object Formula sort (Fm)">Fm</a></span><span class="ansi-light-cyan">)</span>(<a href="../manual.html#item-3.72" class="sym-link" title="3.72: Metatheoretic formula valuation (eval)">eval</a>(<span class="ansi-light-yellow">𝛗</span>)<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>(<span class="ansi-light-magenta"><a href="../manual.html#item-3.73" class="sym-link" title="3.73: Strengthened System F">𝘍</a></span>,[]<a href="../manual.html#item-3.75" class="sym-link" title="3.75: Derivability turnstile">⊢</a><span class="ansi-light-yellow">𝛗</span>)))</div>
+                <div class="formula-unicode">(<a href="../manual.html#item-2.02" class="sym-link" title="2.02: Universal quantifier">∀</a><span class="ansi-light-cyan">(</span><span class="ansi-light-yellow">𝛗</span><span class="ansi-light-cyan"><span class="set-rel"><span class="rel-colon">:</span><span class="rel-in"><a href="../manual.html#item-3.01" class="sym-link" title="3.01: Class membership relation">∈</a></span></span></span><span class="ansi-light-green"><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Object Formula sort (Fm)">Fm</a></span><span class="ansi-light-cyan">)</span>(<a href="../manual.html#item-3.72" class="sym-link" title="3.72: Metatheoretic formula valuation (eval)">eval</a>(<span class="ansi-light-yellow">𝛗</span>)<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>(<span class="ansi-light-magenta"><a href="../manual.html#item-3.73" class="sym-link" title="3.73: Non-r.e. Henkin-Complete Extension F">𝘍</a></span>,[]<a href="../manual.html#item-3.75" class="sym-link" title="3.75: Derivability turnstile">⊢</a><span class="ansi-light-yellow">𝛗</span>)))</div>
                 <div class="formula-latex">\((\href{../manual.html#item-2.02}{\forall} (\varphi :\href{../manual.html#item-4.01}{\mathsf{Fm}} )(\href{../manual.html#item-3.72}{\mathsf{eval}} (\varphi )\href{../manual.html#item-1.01}{\rightarrow} (\href{../manual.html#item-3.73}{\mathcal{F}} ,[]\href{../manual.html#item-3.75}{\vdash} \varphi )))\)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Negation-completeness of the non-r.e. Henkin extension <span class="ansi-light-magenta"><a href="../manual.html#item-3.73" class="sym-link" title="3.73: Non-r.e. Henkin-Complete Extension F">𝘍</a></span>: for every sentence φ, if <a href="../manual.html#item-1.09" class="sym-link" title="1.09: Logical negation">¬</a>φ is not derivable <a href="../manual.html#item-4.01" class="sym-link" title="4.01: Local substitution scope (in)">in</a> <span class="ansi-light-magenta"><a href="../manual.html#item-3.73" class="sym-link" title="3.73: Non-r.e. Henkin-Complete Extension F">𝘍</a></span>, then φ is derivable <a href="../manual.html#item-4.01" class="sym-link" title="4.01: Local substitution scope (in)">in</a> <span class="ansi-light-magenta"><a href="../manual.html#item-3.73" class="sym-link" title="3.73: Non-r.e. Henkin-Complete Extension F">𝘍</a></span>.</td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>

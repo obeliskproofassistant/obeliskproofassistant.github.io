@@ -787,9 +787,9 @@
       "num": "NBG-087",
       "name": "thm_model_stratification_trans",
       "kind": "Derived",
-      "statement_unicode": "∀(W:Class), ∀(Q:Class), ∀(T:Class), ∀(F:Class), ((((Model W) ⊆ (Model Q)) ∧ (((Model Q) ⊆ (Model T)) ∧ ((Model T) ⊆ (Model F)))) → ((Model W) ⊆ (Model F)))",
-      "proof_unicode": "(λ(W:Class). (λ(Q:Class). (λ(T:Class). (λ(F:Class). (λ(hStrat:(((Model W) ⊆ (Model Q)) ∧ (((Model Q) ⊆ (Model T)) ∧ ((Model T) ⊆ (Model F))))). (snd(((plan_subclass_def (Model W)) (Model F))) (λ(z:Class). (λ(hz:(z ∈ (Model W))). (((fst(((plan_subclass_def (Model T)) (Model F))) snd(snd(hStrat))) z) (((fst(((plan_subclass_def (Model Q)) (Model T))) fst(snd(hStrat))) z) (((fst(((plan_subclass_def (Model W)) (Model Q))) fst(hStrat)) z) hz)))))))))))",
-      "statement_ast": "(Pi (W : Class) -> (Pi (Q : Class) -> (Pi (T : Class) -> (Pi (F : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset (Model W)) (Model Q)) true)) * (Sigma (_ : (Id Prop ((Subset (Model Q)) (Model T)) true)) * (Id Prop ((Subset (Model T)) (Model F)) true)))) -> (Id Prop ((Subset (Model W)) (Model F)) true))))))"
+      "statement_unicode": "∀(W:Class), ∀(E:Class), ∀(T:Class), ∀(F:Class), ((((mu_A W) ⊆ (mu_A E)) ∧ (((mu_A E) ⊆ (mu_A T)) ∧ ((mu_A T) ⊆ (mu_A F)))) → ((mu_A W) ⊆ (mu_A F)))",
+      "proof_unicode": "(λ(W:Class). (λ(E:Class). (λ(T:Class). (λ(F:Class). (λ(hStrat:(((mu_A W) ⊆ (mu_A E)) ∧ (((mu_A E) ⊆ (mu_A T)) ∧ ((mu_A T) ⊆ (mu_A F))))). (snd(((plan_subclass_def (mu_A W)) (mu_A F))) (λ(z:Class). (λ(hz:(z ∈ (mu_A W))). (((fst(((plan_subclass_def (mu_A T)) (mu_A F))) snd(snd(hStrat))) z) (((fst(((plan_subclass_def (mu_A E)) (mu_A T))) fst(snd(hStrat))) z) (((fst(((plan_subclass_def (mu_A W)) (mu_A E))) fst(hStrat)) z) hz)))))))))))",
+      "statement_ast": "(Pi (W : Class) -> (Pi (E : Class) -> (Pi (T : Class) -> (Pi (F : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset (mu_A W)) (mu_A E)) true)) * (Sigma (_ : (Id Prop ((Subset (mu_A E)) (mu_A T)) true)) * (Id Prop ((Subset (mu_A T)) (mu_A F)) true)))) -> (Id Prop ((Subset (mu_A W)) (mu_A F)) true))))))"
     },
     {
       "id": 88,
