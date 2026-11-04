@@ -222,6 +222,14 @@ License: All rights reserved.©
            ∀(B : Class) ∀(f : Class) ((isFamily(B) ∧ (isFamily(f) ∧ (Dom(f) = Dom(B)))) → ∀(x : Class) ((x ∈ Dom(B)) → (f(x) ∈ B(x))))
            Typing judgment: ((B : Class) ∧ ((f : Class) ∧ (x : Class)))
 
+3.72) Thm. Subclass Antisymmetry via Extensionality:
+           ∀(X : Class) ∀(Y : Class) (((X ⊆ Y) ∧ (Y ⊆ X)) → (X = Y))
+           Typing judgment: ((X : Class) ∧ (Y : Class))
+
+3.73) Thm. Singleton-to-Unordered-Pair & Intersection-to-Union Inclusions:
+           ∀(a : Class) ∀(b : Class) (({a} ⊆ {a, b}) ∧ (({b} ⊆ {a, b}) ∧ ((a ∩ b) ⊆ (a ∪ b))))
+           Typing judgment: ((a : Class) ∧ (b : Class))
+
 4) Metalogical laws:
 
 4.01) Axm. Instantiation Axiom:
