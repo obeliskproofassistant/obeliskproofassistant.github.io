@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Obelisk Interactive Demonstration</title>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['\\(', '\\)']],
+          displayMath: [['\\[', '\\]']],
+          packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+        },
+        startup: { typeset: true }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         * { box-sizing: border-box; }
         body {
@@ -86,7 +97,7 @@
         }
     </style>
 </head>
-<body>
+<body class="mode-membership mode-unicode">
 
 <div id="nav-toolbar">
     <div class="toolbar-title">
@@ -113,9 +124,33 @@
 </div>
 
 <script>
-const localAddr = "generated/output.html?v=20261104c";
+const localAddr = "generated/output.html?v=20261104e";
 const remoteAddr = "generated/manual.html";
-const CACHE_KEY = "obelisk_demo_output_v6";
+const CACHE_KEY = "obelisk_demo_output_v9";
+
+function setRelMode(mode) {
+    document.body.classList.remove('mode-membership', 'mode-typing');
+    document.body.classList.add('mode-' + mode);
+    const btnMem = document.getElementById('btn-membership');
+    const btnTyp = document.getElementById('btn-typing');
+    if (btnMem) btnMem.classList.toggle('active', mode === 'membership');
+    if (btnTyp) btnTyp.classList.toggle('active', mode === 'typing');
+}
+
+function setFormatMode(mode) {
+    document.body.classList.remove('mode-unicode', 'mode-latex');
+    document.body.classList.add('mode-' + mode);
+    const btnUni = document.getElementById('btn-unicode');
+    const btnLtx = document.getElementById('btn-latex');
+    if (btnUni) btnUni.classList.toggle('active', mode === 'unicode');
+    if (btnLtx) btnLtx.classList.toggle('active', mode === 'latex');
+    if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+        const target = document.getElementById("myhtmloutput");
+        window.MathJax.typesetPromise(target ? [target] : undefined);
+    }
+}
+window.setRelMode = setRelMode;
+window.setFormatMode = setFormatMode;
 
 async function getText() {
     let text = sessionStorage.getItem(CACHE_KEY);
@@ -202,6 +237,31 @@ async function renderOutput() {
         const rawHtml = await getText();
         const target = document.getElementById("myhtmloutput");
         target.innerHTML = rawHtml;
+        // Rewrite relative links originating from generated/output.html so they resolve from root embedding.html
+        const anchors = target.querySelectorAll("a[href]");
+        for (const a of anchors) {
+            const href = a.getAttribute("href");
+            if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
+                continue;
+            }
+            if (href.startsWith("../")) {
+                a.setAttribute("href", href.slice(3));
+            } else {
+                a.setAttribute("href", "generated/" + href);
+            }
+        }
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            window.MathJax.typesetPromise([target]).catch(err => console.warn("MathJax typeset warning:", err));
+        } else {
+            const mjScript = document.getElementById("MathJax-script");
+            if (mjScript) {
+                mjScript.addEventListener("load", () => {
+                    if (window.MathJax && window.MathJax.typesetPromise) {
+                        window.MathJax.typesetPromise([target]).catch(err => console.warn("MathJax typeset warning:", err));
+                    }
+                });
+            }
+        }
         target.addEventListener("click", function(ev) {
             const link = ev.target.closest ? ev.target.closest('a[href^="#item-"], a[href^="#sec-"]') : null;
             if (link) {
