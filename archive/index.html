@@ -86,68 +86,74 @@
         <h1 style="margin-top: 0.5rem;">Obelisk Historical Archive &amp; Legacy Snapshots</h1>
       </div>
       <div class="nav-links">
-        <a href="../ai.html">&larr; Modern AI Portal</a>
-        <a href="../variant1.html">Variant 1 (1st-Order)</a>
-        <a href="../variant2.html">Variant 2 (Higher-Order)</a>
-        <a href="../manual.html">Theory Manual</a>
-        <a href="../index.html">Classic Portal</a>
+        <a href="../obelisk_ai.html">&larr; Modern AI Portal</a>
+        <a href="../generated/variant1.html">Variant 1 (ML-Generated)</a>
+        <a href="../generated/variant2.html">Variant 2 (ML-Generated)</a>
+        <a href="../generated/manual.html">ML-Generated Manual</a>
+        <a href="../index.html">Main Split-Screen Portal</a>
       </div>
     </header>
 
     <div class="card">
-      <h2>Zero-Deletion Archival Guarantee</h2>
+      <h2>Zero-Deletion Archival &amp; Explicit <code>(deprecated)</code> Policy</h2>
       <p>
-        In accordance with the Obelisk Non-Destructive Multi-Approach Policy, earlier web portal snapshots, legacy manuals, and historical kernel outputs are permanently preserved in this <code>archive/</code> directory whenever the main portals (<code>ai.html</code>, <code>manual.html</code>, <code>variant1.html</code>, <code>variant2.html</code>) are upgraded.
+        In accordance with the Obelisk Non-Destructive Preservation Policy (Point 7), no historical pages are deleted. Instead, legacy or static snapshots are explicitly marked as <strong><code>(deprecated)</code></strong> with a direct link to their canonical Standard ML-generated replacement in <a href="../generated/index.html"><code>generated/</code></a> and a technical explanation of why the newer source supersedes them.
       </p>
     </div>
 
     <div class="card">
-      <h2>Archived Snapshots &amp; Historical Artifacts</h2>
+      <h2>Archived Snapshots &amp; Deprecated Legacy Pages</h2>
       <table>
         <thead>
           <tr>
-            <th>Archived File</th>
-            <th>Original Path</th>
-            <th>Snapshot Era</th>
-            <th>Description</th>
+            <th>Archived / Legacy Page</th>
+            <th>Status</th>
+            <th>Better Canonical Source</th>
+            <th>Why Deprecated</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><a href="ai_2026_10_30.html"><code>ai_2026_10_30.html</code></a></td>
-            <td><code>/ai.html</code></td>
-            <td>2026-10-30</td>
-            <td>Pre-Two-Variants AI Portal (49 Core + 17 NBG Theorems, prior to <code>Enc</code>/<code>Dec</code>/<code>Emb</code>/<code>ProofsOf</code>/<code>Theorems</code> and Variant 1 &amp; 2 split).</td>
+            <td><a href="manual_polyml_legacy.html"><code>archive/manual_polyml_legacy.html</code></a></td>
+            <td><strong><code>(deprecated)</code></strong></td>
+            <td><a href="../generated/manual.html"><code>generated/manual.html</code></a> &amp; <a href="../generated/metatheory.html"><code>generated/metatheory.html</code></a></td>
+            <td>Static pre-generator snapshot that used Robinson's \(Q\) instead of elementary metatheory \(\mathcal{E} \in \{I\Sigma_1, \mathcal{T}, \mathrm{NBG}, \mathrm{MK}\}\), used ambiguous <code>Model</code> wording instead of explicit typed term valuation \(\mu_A\), and lacked algorithmic symbol links.</td>
           </tr>
           <tr>
-            <td><a href="manual_polyml_legacy.html"><code>manual_polyml_legacy.html</code></a></td>
-            <td><code>/manual_polyml.html</code></td>
-            <td>2026-11-02 (Early)</td>
-            <td>Earlier Poly/ML Theory Manual snapshot prior to the 59-entry catalog and 7-part Option B theorem anatomies.</td>
+            <td><a href="ai_2026_10_30.html"><code>archive/ai_2026_10_30.html</code></a></td>
+            <td><strong><code>(deprecated)</code></strong></td>
+            <td><a href="../obelisk_ai.html"><code>obelisk_ai.html</code></a></td>
+            <td>Pre-Two-Variants AI Portal snapshot (2026-10-30) prior to the 105-entry ML-generated Variant 1 catalog and 100-record ML-generated Variant 2 NBG library.</td>
           </tr>
           <tr>
-            <td><a href="output_legacy.txt"><code>output_legacy.txt</code></a></td>
-            <td><code>/output.txt</code></td>
-            <td>2026-10-28</td>
-            <td>Early Poly/ML kernel execution log (54-step baseline prior to the 20-theorem NBG Standard Library and VariantBridge).</td>
+            <td><a href="../frozen/index.html"><code>frozen/*.html</code></a></td>
+            <td><strong><code>(deprecated)</code> frozen baseline</strong></td>
+            <td><a href="../generated/index.html"><code>generated/index.html</code></a> (<a href="../generated/manual.html"><code>generated/manual.html</code></a>, <a href="../generated/nbg_library.html"><code>generated/nbg_library.html</code></a>)</td>
+            <td>Read-only historical snapshot of earlier HTML outputs; superseded by <code>generated/</code> which is emitted directly by <code>poly -q --use html_generator.ML</code> and <code>nbg_html_generator.ML</code> from live kernel ASTs.</td>
           </tr>
           <tr>
-            <td><a href="classic_portal.html"><code>classic_portal.html</code></a></td>
-            <td><code>/classic.html</code></td>
-            <td>2026-10-24</td>
-            <td>Original 2-pane Author Portal snapshot (Georgy Dunaev's split view of <code>about.html</code> and <code>embedding.html</code>).</td>
+            <td><a href="embedding_anti.html"><code>archive/embedding_anti.html</code></a> &amp; <a href="../embedding_anti.html"><code>embedding_anti.html</code></a></td>
+            <td><strong><code>(deprecated)</code></strong></td>
+            <td><a href="../embedding.html"><code>embedding.html</code></a> &amp; <a href="../generated/output.html"><code>generated/output.html</code></a></td>
+            <td>Legacy loader fetching an uncompiled external raw HTML dump without MathJax LaTeX rendering or full ANSI color escape conversion.</td>
           </tr>
           <tr>
-            <td><a href="embedding_anti.html"><code>embedding_anti.html</code></a></td>
-            <td><code>/embedding_anti.html</code></td>
-            <td>2026-10-24</td>
-            <td>Historical Anti-Vibe-Coding formalization embedding page.</td>
+            <td><a href="classic_portal.html"><code>archive/classic_portal.html</code></a></td>
+            <td><strong><code>(deprecated)</code></strong></td>
+            <td><a href="../index.html"><code>index.html</code></a> &amp; <a href="../classic.html"><code>classic.html</code></a></td>
+            <td>Historical 2026-10-24 snapshot of the 2-pane split portal prior to the synchronized MathJax &amp; ANSI-clean right-pane <code>embedding.html</code> viewer.</td>
+          </tr>
+          <tr>
+            <td><a href="output_legacy.txt"><code>archive/output_legacy.txt</code></a></td>
+            <td><strong><code>(deprecated)</code></strong></td>
+            <td><a href="../generated/output.txt"><code>generated/output.txt</code></a></td>
+            <td>Early 54-step plain-text kernel log superseded by the 105-entry ML-generated plain-text database <code>generated/output.txt</code>.</td>
           </tr>
           <tr>
             <td><a href="question_from_another_ai_process/note.html"><code>question_from_another_ai_process/note.html</code></a></td>
-            <td><code>/question_from_another_ai_process/note.html</code></td>
-            <td>2026-10-24</td>
-            <td>Historical inter-process mathematical note on class foundations.</td>
+            <td>Historical Note</td>
+            <td><a href="../generated/dependent_types.html"><code>generated/dependent_types.html</code></a></td>
+            <td>Historical inter-process mathematical note on class foundations; canonical formalization is now in <code>generated/dependent_types.html</code> (entries 3.21&ndash;3.46).</td>
           </tr>
         </tbody>
       </table>
