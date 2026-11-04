@@ -51,11 +51,11 @@ License: All rights reserved.©
            ((α → γ) → ((β → γ) → ((α ∨ β) → γ)))
            Typing judgment: ((α : Bool) ∧ ((β : Bool) ∧ (γ : Bool)))
 
-1.09) Axm. A09 (Negation Introduction / Contradiction):
+1.09) Axm. A09 (Negation Elimination / Contradiction to Bottom):
            ((¬α) → (α → ⊥))
            Typing judgment: (α : Bool)
 
-1.10) Axm. A10 (Reductio Ad Absurdum):
+1.10) Axm. A10 (Reductio Ad Absurdum / Negation Introduction):
            ((α → β) → ((α → ¬β) → ¬α))
            Typing judgment: ((α : Bool) ∧ (β : Bool))
 
@@ -107,21 +107,21 @@ License: All rights reserved.©
            ∀(A, B : Class) ((∀(x : Class) ((x ∈ A) ⟷ (x ∈ B))) → (A = B))
            Typing judgment: ((A : Class) ∧ ((B : Class) ∧ (x : Class)))
 
-3.08) Axm. Heredity Axiom (Subclasses of Sets are Sets):
+3.08) Axm. Subset-Sethood / Heredity Axiom (Subclasses of Sets are Sets):
            ∀(A, b : Class) ((isSet(b) ∧ (A ⊆ b)) → isSet(A))
            Typing judgment: ((A : Class) ∧ (b : Class))
 
-3.12) Axm. Regularity (Foundation) Axiom:
-           ∀(A : Class) ((A ≠ ∅) → ∃(x : Class) ((x ∈ A) ∧ ((x ∩ A) = ∅)))
-           Typing judgment: ((A : Class) ∧ (x : Class))
+3.12) Axm. Regularity (Foundation / Cumulative 𝒫-Induction) Axiom:
+           ((∀(X : Class) ((𝒫(X) ⊆ X) → (V ⊆ X))) ∧ (∀(A : Class) ((A ≠ ∅) → ∃(x : Class) ((x ∈ A) ∧ ((x ∩ A) = ∅)))))
+           Typing judgment: ((X : Class) ∧ ((A : Class) ∧ (x : Class)))
 
-3.13) Axm. Pairing Axiom:
-           ∀(a, b : Class) ((isSet(a) ∧ isSet(b)) → isSet({a, b}))
-           Typing judgment: ((a : Class) ∧ (b : Class))
+3.13) Axm. Unordered Pair Definition & Pairing Axiom:
+           ∀(a, b : Class) (({a, b} = { x | ((x = a) ∨ (x = b)) }) ∧ ((isSet(a) ∧ isSet(b)) → isSet({a, b})))
+           Typing judgment: ((a : Class) ∧ ((b : Class) ∧ (x : Class)))
 
-3.14) Axm. Union Axiom:
-           ∀(a : Class) (isSet(a) → isSet(⋃ a))
-           Typing judgment: (a : Class)
+3.14) Axm. Unary Union Definition & Union Axiom:
+           ∀(a : Class) ((⋃ a = { x | ∃(y : Class) ((y ∈ a) ∧ (x ∈ y)) }) ∧ (isSet(a) → isSet(⋃ a)))
+           Typing judgment: ((a : Class) ∧ ((x : Class) ∧ (y : Class)))
 
 3.22) Def. IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile):
            W, Γ ⊢ (⟦IF ψ THEN A ELSE B FI⟧ = { v | ((ψ ∧ (v ∈ A)) ∨ (¬ψ ∧ (v ∈ B))) })
@@ -137,8 +137,8 @@ License: All rights reserved.©
            ∀(T_e : (Bool → Type_Expression)), ∀(b : Bool) ∀(t₁ : ⟦T_e(true)⟧) ∀(t₂ : ⟦T_e(false)⟧) ((if_dep(b, t₁, t₂) : ⟦T_e(b)⟧) ∧ ((if_dep(true, t₁, t₂) = t₁) ∧ (if_dep(false, t₁, t₂) = t₂)))
            Typing judgment: ((T_e : (Bool → Type_Expression)) ∧ ((b : Bool) ∧ ((t₁ : ⟦T_e(true)⟧) ∧ (t₂ : ⟦T_e(false)⟧))))
 
-3.32) Thm. Ordinal Induction (∈-Ind):
-           ((∀(x : Class) ((x ∈ On) → ((∀(y : Class) ((y ∈ x) → φ(y))) → φ(x)))) → ∀(x : Class) ((x ∈ On) → φ(x)))
+3.32) Thm. Ordinal / Transitive-Class ∈-Induction (∈-Ind):
+           ((∀(K, A : Class) ((Tr(K) ∧ ((K ∩ 𝒫(A)) ⊆ A)) → (K ⊆ A))) ∧ ((∀(x : Class) ((x ∈ On) → ((∀(y : Class) ((y ∈ x) → φ(y))) → φ(x)))) → ∀(x : Class) ((x ∈ On) → φ(x))))
            Side condition: (Fresh(v_y, v_x) ∧ NFV(v_y, φ(x)))
 
 3.33) Def. Power Class Definition (𝒫(A)):
@@ -211,8 +211,8 @@ License: All rights reserved.©
 
 3.69) Thm. Theorem of Evaluation of a Family (F(x) = ⋃{ s | [x, s]_D ∈ F } and (Λx, t)(z) = t[z/x]):
            ∀(F : Class) ∀(x : Class) (isFamily(F) → (F(x) = ⋃({ s | ([x, s]_D ∈ F) })))
-           Typing judgment: ((F : Class) ∧ ((x : Class) ∧ ((z : Class) ∧ ((t : Class.Expression) ∧ (v_x : Variable)))))
-           Side condition: FFI(z, v_x, t)
+           Typing judgment: ((F : Class) ∧ ((x : Class) ∧ ((z : Class) ∧ ((s : Class) ∧ ((t : Class.Expression) ∧ ((v_x : Variable) ∧ (v_s : Variable)))))))
+           Side condition: (FFI(z, v_x, (s sss t)) ∧ (Fresh(v_s, v_x) ∧ NFV(v_s, t)))
 
 3.70) Def. Set-Theoretic Model of Dependent Sum (ΣB / Sigma Model):
            ∀(B : Class) ∀(x : Class) ∀(y : Class) (isFamily(B) → (((x ∈ Dom(B)) ∧ (y ∈ B(x))) ⟷ ([x, y]_D ∈ { s | ∃(a : Class) ∃(b : Class) ((s = [a, b]_D) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) })))
@@ -330,12 +330,12 @@ russell_class_is_not_a_set:
     proof AST size: 19 (normalized: 32)
 
 binary_inter_comm:
-    (∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })))))
-    proof AST size: 26 (normalized: 26)
+    (∀(A : Class) (∀(B : Class) (∀(z : Class) (((z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) })) ∧ ((z ∈ { x | ((x ∈ B) ∧ (x ∈ A)) }) → (z ∈ { x | ((x ∈ A) ∧ (x ∈ B)) }))))))
+    proof AST size: 50 (normalized: 50)
 
 binary_union_comm:
-    (∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })))))
-    proof AST size: 23 (normalized: 23)
+    (∀(A : Class) (∀(B : Class) (∀(z : Class) (((z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }) → (z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) })) ∧ ((z ∈ { x | ((x ∈ B) ∨ (x ∈ A)) }) → (z ∈ { x | ((x ∈ A) ∨ (x ∈ B)) }))))))
+    proof AST size: 44 (normalized: 44)
 
 class_diff_subclass_left:
     (∀(A : Class) (∀(B : Class) (∀(z : Class) ((z ∈ { x | ((x ∈ A) ∧ ((x ∈ B) → ⊥)) }) → (z ∈ A)))))
@@ -358,8 +358,8 @@ dunaev_tagged_pair_projections:
     proof AST size: 3 (normalized: 3)
 
 cantor_diagonal_theorem:
-    (∀(S : Class) (∀(R : Class) (∀(c : Class) ((c ∈ S) → ((((c ∈ { x | ((x ∈ S) ∧ (([x, x]_D ∈ R) → ⊥)) }) → ([c, c]_D ∈ R)) ∧ (([c, c]_D ∈ R) → (c ∈ { x | ((x ∈ S) ∧ (([x, x]_D ∈ R) → ⊥)) }))) → ⊥)))))
-    proof AST size: 34 (normalized: 62)
+    (∀(S : Class) (∀(R : Class) (∀(c : Class) ((c ∈ S) → ((∀(z : Class) (((z ∈ { x | ((x ∈ S) ∧ (([x, x]_D ∈ R) → ⊥)) }) → ([c, z]_D ∈ R)) ∧ (([c, z]_D ∈ R) → (z ∈ { x | ((x ∈ S) ∧ (([x, x]_D ∈ R) → ⊥)) })))) → ⊥)))))
+    proof AST size: 36 (normalized: 67)
 
 self_in_singleton:
     (∀(x : Class) (isSet(x) → (x ∈ { u | (u = x) })))
