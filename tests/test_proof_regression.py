@@ -52,6 +52,10 @@ class TestProofRegression(unittest.TestCase):
         for tok in ("𝛂", "𝛃", "⟦", "⟧", "(", ")", "{", "}", "x", "A"):
             self.assertIn(f'>{tok}</a>', self.gen_manual_html, f"Token {tok!r} must be clickable in generated/manual.html")
         self.assertIn("Unspecified Elementary Metatheory E in {I\\Sigma_1, PA, T, NBG, MK}", self.gen_manual_html)
+        clean_manual = re.sub(r"<[^>]+>", "", self.gen_manual_html)
+        self.assertIn("(∃(K:Class)⊤)", clean_manual)
+        for bad in ("∈Class", "∈ Class", "∈Prop", "∈ Prop", "∈Bool", "∈ Bool"):
+            self.assertNotIn(bad, clean_manual, f"Forbidden pseudo-membership {bad!r} found in generated/manual.html")
         self.assertGreaterEqual(len(self.gen_db["entries"]), 100)
 
     def test_ml_generated_subpages_and_nbg_library(self):

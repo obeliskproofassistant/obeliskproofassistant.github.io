@@ -97,7 +97,7 @@
         }
     </style>
 </head>
-<body class="mode-membership mode-unicode">
+<body class="mode-unicode">
 
 <div id="nav-toolbar">
     <div class="toolbar-title">
@@ -107,7 +107,7 @@
     <div class="toolbar-nav">
         <button class="toolbar-btn" onclick="scrollToText('1. Propositional Logic')">1. Propositional Logic</button>
         <button class="toolbar-btn" onclick="scrollToText('2. Predicate Logic')">2. Predicate Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('3. Set/Class-Theoretic')">3. Set/Class Foundations</button>
+        <button class="toolbar-btn" onclick="scrollToText('3. Set/Class Foundations')">3. Set/Class Foundations</button>
         <button class="toolbar-btn" onclick="scrollToText('4. Metalogical Laws')">4. Metalogical Laws</button>
         <button class="toolbar-btn" onclick="scrollToText('5. Incompleteness')">5. Incompleteness</button>
         <a class="toolbar-btn" href="generated/manual.html" target="_blank">📖 Open Full Manual</a>
@@ -124,18 +124,12 @@
 </div>
 
 <script>
-const localAddr = "generated/output.html?v=20261104f";
+const localAddr = "generated/output.html?v=20261105a";
 const remoteAddr = "generated/manual.html";
-const CACHE_KEY = "obelisk_demo_output_v10";
 
-function setRelMode(mode) {
-    document.body.classList.remove('mode-membership', 'mode-typing');
-    document.body.classList.add('mode-' + mode);
-    const btnMem = document.getElementById('btn-membership');
-    const btnTyp = document.getElementById('btn-typing');
-    if (btnMem) btnMem.classList.toggle('active', mode === 'membership');
-    if (btnTyp) btnTyp.classList.toggle('active', mode === 'typing');
-}
+try {
+    sessionStorage.clear();
+} catch (e) {}
 
 function setFormatMode(mode) {
     document.body.classList.remove('mode-unicode', 'mode-latex');
@@ -149,33 +143,26 @@ function setFormatMode(mode) {
         window.MathJax.typesetPromise(target ? [target] : undefined);
     }
 }
-window.setRelMode = setRelMode;
 window.setFormatMode = setFormatMode;
 
 async function getText() {
-    let text = sessionStorage.getItem(CACHE_KEY);
-    if (!text) {
-        try {
-            const res = await fetch(localAddr);
-            if (res.ok) {
-                text = await res.text();
-            } else {
-                throw new Error("Local fetch failed: " + res.status);
-            }
-        } catch (err) {
-            console.warn("Falling back to remote URL due to:", err);
-            const remoteRes = await fetch(remoteAddr);
-            text = await remoteRes.text();
+    try {
+        const res = await fetch(localAddr, { cache: "no-store" });
+        if (res.ok) {
+            return await res.text();
         }
-        if (text) {
-            sessionStorage.setItem(CACHE_KEY, text);
-        }
+        throw new Error("Local fetch failed: " + res.status);
+    } catch (err) {
+        console.warn("Falling back to manual URL due to:", err);
+        const remoteRes = await fetch(remoteAddr, { cache: "no-store" });
+        return await remoteRes.text();
     }
-    return text;
 }
 
 function scrollTargetIntoContainer(targetEl) {
     if (!targetEl) return;
+    targetEl.style.scrollMarginTop = '64px';
+    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const toolbar = document.getElementById("nav-toolbar");
     const toolbarHeight = toolbar ? toolbar.offsetHeight : 44;
     const rect = targetEl.getBoundingClientRect();
@@ -192,7 +179,7 @@ function scrollTargetIntoContainer(targetEl) {
 function scrollToText(searchText) {
     const el = document.getElementById("myhtmloutput");
     if (!el) return;
-    const secMatch = /^\s*([1-6])\)/.exec(searchText);
+    const secMatch = /^\s*([1-6])\s*[.)]/.exec(searchText);
     if (secMatch) {
         const byId = el.querySelector("#sec-" + secMatch[1]);
         if (byId) {
@@ -201,13 +188,10 @@ function scrollToText(searchText) {
         }
     }
     const needle = searchText.toLowerCase();
-    const spans = el.querySelectorAll("span, p, pre");
-    // Pick the MOST SPECIFIC match (smallest text content) instead of the first:
-    // output.html wraps the entire document in one <pre> whose text contains every
-    // section header, so first-match order would always hit that giant wrapper.
+    const nodes = el.querySelectorAll("h1, h2, h3, section, span, p, pre, td, a");
     let best = null;
     let bestLen = Infinity;
-    for (let s of spans) {
+    for (let s of nodes) {
         const text = (s.textContent || '').toLowerCase();
         if (text.includes(needle) && text.length < bestLen) {
             best = s;
@@ -215,9 +199,8 @@ function scrollToText(searchText) {
         }
     }
     if (!best) {
-        // Fallback: match partial words inside longer headers (e.g. "class axioms" -> "Class Axiom (...)")
         const words = needle.split(/\s+/);
-        for (let s of spans) {
+        for (let s of nodes) {
             const hay = (s.textContent || '').toLowerCase();
             if (words.length && words.every(w => hay.includes(w)) && hay.length < bestLen) {
                 best = s;
@@ -263,13 +246,17 @@ async function renderOutput() {
             }
         }
         target.addEventListener("click", function(ev) {
-            const link = ev.target.closest ? ev.target.closest('a[href^="#item-"], a[href^="#sec-"]') : null;
+            const link = ev.target.closest ? ev.target.closest('a[href*="#item-"], a[href*="#sec-"]') : null;
             if (link) {
-                const hash = link.getAttribute("href");
-                const dest = target.querySelector(hash);
-                if (dest) {
-                    ev.preventDefault();
-                    scrollTargetIntoContainer(dest);
+                const href = link.getAttribute("href") || "";
+                const hashIdx = href.indexOf("#");
+                if (hashIdx !== -1) {
+                    const idStr = href.slice(hashIdx + 1);
+                    const dest = document.getElementById(idStr);
+                    if (dest && target.contains(dest)) {
+                        ev.preventDefault();
+                        scrollTargetIntoContainer(dest);
+                    }
                 }
             }
         });
