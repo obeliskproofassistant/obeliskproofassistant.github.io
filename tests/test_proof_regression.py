@@ -40,13 +40,18 @@ class TestProofRegression(unittest.TestCase):
             cls.proofs_html = f.read()
 
     def test_ml_generated_manual_and_db_policy(self):
-        """generated/manual.html and generated/theory_db.json must be ML-generated with Unicode default, table-inside-a-table, and algorithmic links."""
+        """generated/manual.html and generated/theory_db.json must be ML-generated with Unicode default, table-inside-a-table, and algorithmic links for all tokens."""
         self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", self.gen_manual_html)
-        self.assertIn('class="mode-membership mode-unicode"', self.gen_manual_html)
+        self.assertIn('class="mode-unicode"', self.gen_manual_html)
+        self.assertNotIn("mode-membership", self.gen_manual_html)
+        self.assertNotIn("Explicit Term Interpretation", self.gen_manual_html)
         self.assertIn('class="external-row"', self.gen_manual_html)
         self.assertIn('class="internal-entity-table"', self.gen_manual_html)
         self.assertIn('class="sym-link"', self.gen_manual_html)
         self.assertIn(r'\href{#item-', self.gen_manual_html)
+        for tok in ("𝛂", "𝛃", "⟦", "⟧", "(", ")", "{", "}", "x", "A"):
+            self.assertIn(f'>{tok}</a>', self.gen_manual_html, f"Token {tok!r} must be clickable in generated/manual.html")
+        self.assertIn("Unspecified Elementary Metatheory E in {I\\Sigma_1, PA, T, NBG, MK}", self.gen_manual_html)
         self.assertGreaterEqual(len(self.gen_db["entries"]), 100)
 
     def test_ml_generated_subpages_and_nbg_library(self):
@@ -73,7 +78,8 @@ class TestProofRegression(unittest.TestCase):
             with open(path, "r", encoding="utf-8") as f:
                 html = f.read()
             self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", html, f"Missing ML provenance header in {rel}")
-            self.assertIn('class="mode-membership mode-unicode"', html, f"Unicode default missing in {rel}")
+            self.assertIn('class="mode-unicode"', html, f"Unicode default missing in {rel}")
+            self.assertNotIn("mode-membership", html, f"Forbidden CSS hack mode-membership in {rel}")
             self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")
         nbg_json_path = os.path.join(SITE_DIR, "generated", "nbg_library.json")
         self.assertTrue(os.path.isfile(nbg_json_path))
