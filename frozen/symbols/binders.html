@@ -404,7 +404,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>Unified Binder Architecture (Directives 1, 2, 8 &amp; 10):</strong></p><p>In Obelisk, quantifiers are one specialization of the general family of <strong>variable-binding operators (binders)</strong>:</p><ul><li><strong>Universal &amp; Existential Quantifiers (<code>∀(x:Class). 𝛂</code>, <code>∃(x:Class). 𝛂</code>, <code>∃!(x:Class). 𝛂</code>)</strong>: Logical binders over classes (Entries 2.01&ndash;2.06, 3.09).</li><li><strong>Bound Quantifiers</strong>: <code>∀(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∀(x:Class). ((x ∈ Y) ⇒ 𝛂)</code>, and <code>∃(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∃(x:Class). ((x ∈ Y) ∧ 𝛂)</code>.</li><li><strong>Class Comprehension Binder (<code>κ(x:Class). 𝛂(x)</code> / <code>{x:Class | 𝛂(x)}</code>)</strong>: Forms the class of all sets <code>x : Class</code> satisfying <code>𝛂(x)</code> (Entry 3.02). Always binds a <code>Class</code> variable!</li><li><strong>Definite Description (<code>ι(x:Class). 𝛂(x)</code>, Iota-Operator)</strong>: Selects the unique class satisfying <code>𝛂(x)</code> (or the default empty class when uniqueness fails).</li><li><strong>Hilbert Epsilon / Bourbaki Tau Operator (<code>τ(x:Class). 𝛂(x)</code> / <code>ε(x:Class). 𝛂(x)</code>)</strong>: Canonical global choice binder selecting a witness if one exists.</li><li><strong>Type-Theoretic Binders (<code>λ</code>, <code>Π</code>, <code>Σ</code>)</strong>: Constructive function abstraction, dependent product, and dependent sum binders (Entries 3.25&ndash;3.46).</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Unified Binder Architecture (Directives 1, 2, 8 &amp; 10):</strong></p><p>In Obelisk, quantifiers are one specialization of the general family of <strong>variable-binding operators (binders)</strong>:</p><ul><li><strong>Universal &amp; Existential Quantifiers (<code>∀(x:Class). 𝛂</code>, <code>∃(x:Class). 𝛂</code>, <code>∃!(x:Class). 𝛂</code>)</strong>: Logical binders over classes (Entries AxmDiscourseNonEmpty (2.01)&ndash;RulGeneralisation (2.06), AxmExtensionality (3.10)).</li><li><strong>Bound Quantifiers</strong>: <code>∀(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∀(x:Class). ((x ∈ Y) ⇒ 𝛂)</code>, and <code>∃(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∃(x:Class). ((x ∈ Y) ∧ 𝛂)</code>.</li><li><strong>Class Comprehension Binder (<code>κ(x:Class). 𝛂(x)</code> / <code>{x:Class | 𝛂(x)}</code>)</strong>: Forms the class of all sets <code>x : Class</code> satisfying <code>𝛂(x)</code> (Entry DefIsSet (3.02)). Always binds a <code>Class</code> variable!</li><li><strong>Definite Description (<code>ι(x:Class). 𝛂(x)</code>, Iota-Operator)</strong>: Selects the unique class satisfying <code>𝛂(x)</code> (or the default empty class when uniqueness fails).</li><li><strong>Hilbert Epsilon / Bourbaki Tau Operator (<code>τ(x:Class). 𝛂(x)</code> / <code>ε(x:Class). 𝛂(x)</code>)</strong>: Canonical global choice binder selecting a witness if one exists.</li><li><strong>Type-Theoretic Binders (<code>λ</code>, <code>Π</code>, <code>Σ</code>)</strong>: Constructive function abstraction, dependent product, and dependent sum binders (Entries DefRelationalImage (3.26)&ndash;DefTightClass (3.47)).</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -414,11 +414,11 @@
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="class-type.html" class="sym-link">Default Domain Type Class</a></li>
-<li><a href="../manual.html#item-2.01" class="sym-link">Entry 2.01: Existential Quantifier Definition</a></li>
-<li><a href="../manual.html#item-3.02" class="sym-link">Entry 3.02: Class Comprehension Schema</a></li>
-<li><a href="../manual.html#item-3.09" class="sym-link">Entry 3.09: Unique Existence ∃!</a></li>
-<li><a href="../manual.html#item-3.25" class="sym-link">Entry 3.25: Dependent Sum Σ</a></li>
-<li><a href="../manual.html#item-3.30" class="sym-link">Entry 3.30: Dependent Function Π</a></li>
+<li><a href="../manual.html#AxmDiscourseNonEmpty" class="sym-link">Axiom AxmDiscourseNonEmpty (2.01): Discourse domain is non-empty</a></li>
+<li><a href="../manual.html#RulClassComprehension" class="sym-link">Inference Rule RulClassComprehension (3.01): Class comprehension</a></li>
+<li><a href="../manual.html#DefExistsUniqueBinder" class="sym-link">Definition DefExistsUniqueBinder (4.05): Quantifier “exists and unique”(meta,WIP)</a></li>
+<li><a href="../manual.html#DefSigmaModel" class="sym-link">Definition DefSigmaModel (3.38): “Dependent Sum (Sigma-Type)” model over a family</a></li>
+<li><a href="../manual.html#DefPiPredicateModel" class="sym-link">Theorem DefPiPredicateModel (3.39): “Dependent Product (Pi-Type)” predicate and section model</a></li>
 </ul></td>
           </tr>
         </tbody>

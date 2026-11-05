@@ -404,7 +404,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>Meaning of Each Hygiene Predicate:</strong></p><ul><li><strong><code>FV(𝛂)</code> (Free Variables)</strong>: The set/collection of syntactic variables occurring free in formula or expression <code>𝛂</code>.</li><li><strong><code>NFV(e, x)</code> / <code>Fresh(x, 𝛂)</code> (Not Free Variable / Freshness)</strong>: Asserts that variable <code>x</code> does <em>not</em> occur free in <code>e</code> (or <code>𝛂</code>). Crucial in Class Comprehension (Entry 3.02 / 4.01) to prevent circular Russell-style capture where the defined class variable occurs free in its own defining formula, and in Universal Generalisation (Entry 2.03 / 4.02) to verify <code>x ∉ FV(𝒞)</code>.</li><li><strong><code>FFI(t, x, 𝛂)</code> (Free For In / Capture-Avoiding Substitutability)</strong>: Asserts that term <code>t</code> is free for variable <code>x</code> in formula <code>𝛂</code> (no free variable of <code>t</code> becomes captured by a binder in <code>𝛂</code> when substituting <code>t</code> for free occurrences of <code>x</code>). Used in Entries 2.02, 2.05, and 4.03&ndash;4.06.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Meaning of Each Hygiene Predicate:</strong></p><ul><li><strong><code>FV(𝛂)</code> (Free Variables)</strong>: The set/collection of syntactic variables occurring free in formula or expression <code>𝛂</code>.</li><li><strong><code>NFV(e, x)</code> / <code>Fresh(x, 𝛂)</code> (Not Free Variable / Freshness)</strong>: Asserts that variable <code>x</code> does <em>not</em> occur free in <code>e</code> (or <code>𝛂</code>). Crucial in Class Comprehension (Entry DefIsSet (3.02) / DefMetaInstantiation (4.01)) to prevent circular Russell-style capture where the defined class variable occurs free in its own defining formula, and in Universal Generalisation (Entry RulExistsInstantiation (2.03) / DefMetaGeneralisation (4.02)) to verify <code>x ∉ FV(𝒞)</code>.</li><li><strong><code>FFI(t, x, 𝛂)</code> (Free For In / Capture-Avoiding Substitutability)</strong>: Asserts that term <code>t</code> is free for variable <code>x</code> in formula <code>𝛂</code> (no free variable of <code>t</code> becomes captured by a binder in <code>𝛂</code> when substituting <code>t</code> for free occurrences of <code>x</code>). Used in Entries RulForallInstantiation (2.02), RulExistsAbstraction (2.05), and DefMetaConecessitation (4.03)&ndash;AxmMetaClassComprehension (4.06).</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -414,9 +414,9 @@
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="substitution-let.html" class="sym-link">Explicit Substitution let x ↤ t in 𝛂</a></li>
-<li><a href="../manual.html#item-2.02" class="sym-link">Entry 2.02: Forall Instantiation</a></li>
-<li><a href="../manual.html#item-4.03" class="sym-link">Entry 4.03: Substitution Law for Implication</a></li>
-<li><a href="../manual.html#item-4.05" class="sym-link">Entry 4.05: Substitution Law for Forall</a></li>
+<li><a href="../manual.html#RulForallInstantiation" class="sym-link">Inference Rule RulForallInstantiation (2.02): Forall Instantiation</a></li>
+<li><a href="../manual.html#DefMetaInstantiation" class="sym-link">Axiom DefMetaInstantiation (4.01): Instantiation(meta,WIP)</a></li>
+<li><a href="../manual.html#DefExistsUniqueBinder" class="sym-link">Definition DefExistsUniqueBinder (4.05): Quantifier “exists and unique”(meta,WIP)</a></li>
 </ul></td>
           </tr>
         </tbody>

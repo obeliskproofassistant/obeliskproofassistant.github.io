@@ -356,7 +356,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2><span class="formula-unicode">=</span> <span class="formula-latex">\(=\)</span> &mdash; Class &amp; Term Equality Predicate (=, AST Constructor: TpEq)</h2>
-      <p class="section-desc">Binary identity predicate <code>X = Y</code> on classes and typed terms, governed by Left/Right ∈-Soundness (3.07–3.08), Extensionality (3.09), and Intensionality (3.10).</p>
+      <p class="section-desc">Binary identity predicate <code>X = Y</code> on classes and typed terms, governed by Left/Right ∈-Soundness (RulClassComprehension (3.01)), Extensionality (AxmExtensionality (3.10)), and Intensionality (AxmIntensionality (3.11)).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -404,7 +404,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>SML AST Constructor:</strong> <code>HP (TpEq of (UCol * 'a * 'a))</code> in <code>Truth_p</code> (<code>typetheory.ML:660</code>). Takes conglomerate type <code>A : UCol</code> and two operands <code>(X : A, Y : A)</code>.</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpEq of (UCol * 'a * 'a))</code> in <code>Truth_p</code> (<code>typetheory.ML:660</code>). Takes conglomerate type <code>A : UCol</code> and two operands <code>(X : A, Y : A)</code>.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -413,10 +413,10 @@
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="../manual.html#label-left-soundness-of" class="sym-link">Axiom 3.07: Left soundness (#label-left-soundness-of)</a></li>
-<li><a href="../manual.html#label-right-soundness-of" class="sym-link">Axiom 3.08: Right soundness (#label-right-soundness-of)</a></li>
-<li><a href="../manual.html#label-extensionality" class="sym-link">Axiom 3.09: Extensionality (#label-extensionality)</a></li>
-<li><a href="../manual.html#label-intensionality" class="sym-link">Rule 3.10: Intensionality (#label-intensionality)</a></li>
+<li><a href="../manual.html#AxmLeftInSound" class="sym-link">Axiom AxmLeftInSound (3.08): “Membership respects equality from the left”</a></li>
+<li><a href="../manual.html#AxmRightInSound" class="sym-link">Axiom AxmRightInSound (3.09): “Membership respects equality from the right”</a></li>
+<li><a href="../manual.html#AxmExtensionality" class="sym-link">Axiom AxmExtensionality (3.10): “Extensionality”</a></li>
+<li><a href="../manual.html#AxmIntensionality" class="sym-link">Theorem AxmIntensionality (3.11): “Intensionality”(admissible)</a></li>
 </ul></td>
           </tr>
         </tbody>

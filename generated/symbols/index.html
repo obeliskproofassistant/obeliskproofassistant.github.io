@@ -753,7 +753,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value"><code>Prop</code> is the Curry-Howard sort of logical propositions in Variant 2 (<strong>MKTD2</strong>); <code>Bool</code> is the two-element Boolean type with canonical inhabitants <code>⊤</code> (True) and <code>⊥</code> (False) used in conditional branching (Entries 3.21&ndash;3.24).</td>
+              <td class="field-value"><code>Prop</code> is the Curry-Howard sort of logical propositions in Variant 2 (<strong>MKTD2</strong>); <code>Bool</code> is the two-element Boolean type with canonical inhabitants <code>⊤</code> (True) and <code>⊥</code> (False) used in conditional branching (Entries DefClassConditional (3.22)&ndash;DefDependentConditional (3.24)).</td>
             </tr>
             </tbody>
           </table>
@@ -1033,7 +1033,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Eliminates a Boolean condition <code>b : Bool</code> into a dependent type family <code>Tₑ : Bool → Type</code> (Entry 3.24), where the true branch has type <code>Tₑ(⊤)</code> and the false branch has type <code>Tₑ(⊥)</code>.</td>
+              <td class="field-value">Eliminates a Boolean condition <code>b : Bool</code> into a dependent type family <code>Tₑ : Bool → Type</code> (Entry DefDependentConditional (3.24)), where the true branch has type <code>Tₑ(⊤)</code> and the false branch has type <code>Tₑ(⊥)</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -1173,7 +1173,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Primitive binary logical connective of material implication (<code>𝛂 → 𝛃</code>), governed by Hilbert axioms A01, A02 and Modus Ponens (Rule 1.14).</td>
+              <td class="field-value">Primitive binary logical connective of material implication (<code>𝛂 → 𝛃</code>), governed by Hilbert axioms A01, A02 and Modus Ponens (Rule RulModusPonens (1.14)).</td>
             </tr>
             </tbody>
           </table>
@@ -1313,7 +1313,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">0-ary logical truth constant <code>⊤</code> (Verum), postulated directly by Axiom A13 (<code>1.13: ⊤</code>).</td>
+              <td class="field-value">0-ary logical truth constant <code>⊤</code> (Verum), postulated directly by Axiom A13 (<code>AxmPropVerum (1.13): ⊤</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -1537,7 +1537,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Variable-binding abstraction operator <code>λ(x:A). t(x)</code> constructing a class-family (3.36) or dependent function in <code>Π(x:A), B(x)</code> (3.38).</td>
+              <td class="field-value">Variable-binding abstraction operator <code>λ(x:A). t(x)</code> constructing a class-family (ThmFamilyEvaluation (3.37)) or dependent function in <code>Π(x:A), B(x)</code> (DefSigmaModel (3.38)).</td>
             </tr>
             </tbody>
           </table>
@@ -1557,7 +1557,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="sigma-binder.html" class="sym-link"><strong>Dependent Sum Type Binder (Σ, Entry 3.37)</strong> (<code>symbols/sigma-binder.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="sigma-binder.html" class="sym-link"><strong>Dependent Sum Type Binder (Σ, Entry DefSigmaModel (3.38))</strong> (<code>symbols/sigma-binder.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -1585,7 +1585,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="pi-binder.html" class="sym-link"><strong>Dependent Product Type Binder (Π, Entry 3.38)</strong> (<code>symbols/pi-binder.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="pi-binder.html" class="sym-link"><strong>Dependent Product Type Binder (Π, Entry DefSigmaModel (3.38))</strong> (<code>symbols/pi-binder.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -1621,7 +1621,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Undefinable primitive binary membership predicate <code>x ∈ Y</code> asserting that class <code>x</code> is an element of class <code>Y</code> (which implies <code>x set</code> by Entry 3.02). Never used for typing (use <code>:</code>).</td>
+              <td class="field-value">Undefinable primitive binary membership predicate <code>x ∈ Y</code> asserting that class <code>x</code> is an element of class <code>Y</code> (which implies <code>x set</code> by Entry DefIsSet (3.02)). Never used for typing (use <code>:</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -1649,7 +1649,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary identity predicate <code>X = Y</code> on classes and typed terms, governed by Left/Right ∈-Soundness (3.07–3.08), Extensionality (3.09), and Intensionality (3.10).</td>
+              <td class="field-value">Binary identity predicate <code>X = Y</code> on classes and typed terms, governed by Left/Right ∈-Soundness (RulClassComprehension (3.01)), Extensionality (AxmExtensionality (3.10)), and Intensionality (AxmIntensionality (3.11)).</td>
             </tr>
             </tbody>
           </table>
@@ -1677,7 +1677,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary subclass inclusion predicate <code>X ⊆ Y</code> defined by <code>∀(z:Class)((z∈X) → (z∈Y))</code> (Entry 3.06).</td>
+              <td class="field-value">Binary subclass inclusion predicate <code>X ⊆ Y</code> defined by <code>∀(z:Class)((z∈X) → (z∈Y))</code> (Entry DefSubclass (3.06)).</td>
             </tr>
             </tbody>
           </table>
@@ -1705,7 +1705,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary sethood predicate <code>X set</code> asserting that class <code>X</code> is an element of some class <code>Y</code> (Entry 3.02). Variables always keep default type <code>Class</code>; sethood is always a predicate on <code>Class</code>.</td>
+              <td class="field-value">Unary sethood predicate <code>X set</code> asserting that class <code>X</code> is an element of some class <code>Y</code> (Entry DefIsSet (3.02)). Variables always keep default type <code>Class</code>; sethood is always a predicate on <code>Class</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -1733,7 +1733,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>K proper</code> asserting that class <code>K</code> is not a set: <code>¬(K set)</code> (Entry 3.03).</td>
+              <td class="field-value">Unary predicate <code>K proper</code> asserting that class <code>K</code> is not a set: <code>¬(K set)</code> (Entry DefIsProperClass (3.03)).</td>
             </tr>
             </tbody>
           </table>
@@ -1761,7 +1761,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">0-ary class constant <code>∅ = {x | ⊥}</code> denoting the unique empty class/set (Entry 3.04) and the ordinal <code>0</code>.</td>
+              <td class="field-value">0-ary class constant <code>∅ = {x | ⊥}</code> denoting the unique empty class/set (Entry DefEmptySet (3.04)) and the ordinal <code>0</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -1789,7 +1789,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">0-ary class constant <code>𝒱 = {x | ⊤}</code> denoting the proper class of all sets (Entry 3.05).</td>
+              <td class="field-value">0-ary class constant <code>𝒱 = {x | ⊤}</code> denoting the proper class of all sets (Entry DefUniversalClass (3.05)).</td>
             </tr>
             </tbody>
           </table>
@@ -1817,7 +1817,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>𝒫(X) = {y | y ⊆ X}</code> mapping any class <code>X</code> to the class of all its subsets (Entry 3.12–3.13).</td>
+              <td class="field-value">Unary functional symbol <code>𝒫(X) = {y | y ⊆ X}</code> mapping any class <code>X</code> to the class of all its subsets (Entry RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -1845,7 +1845,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Tr(X)</code> asserting that every element of <code>X</code> is a subclass of <code>X</code> (Entry 3.14).</td>
+              <td class="field-value">Unary predicate <code>Tr(X)</code> asserting that every element of <code>X</code> is a subclass of <code>X</code> (Entry DefTransitiveClass (3.15)).</td>
             </tr>
             </tbody>
           </table>
@@ -1873,7 +1873,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Ord(X)</code> asserting that <code>X</code> is transitive and all its elements are transitive (Entry 3.15).</td>
+              <td class="field-value">Unary predicate <code>Ord(X)</code> asserting that <code>X</code> is transitive and all its elements are transitive (Entry DefOrdinalClass (3.16)).</td>
             </tr>
             </tbody>
           </table>
@@ -1901,7 +1901,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">0-ary class constant <code>On = {x | Ord(x)}</code> denoting the proper class of all ordinal sets (Entry 3.16).</td>
+              <td class="field-value">0-ary class constant <code>On = {x | Ord(x)}</code> denoting the proper class of all ordinal sets (Entry DefClassOfOrdinals (3.17)).</td>
             </tr>
             </tbody>
           </table>
@@ -1929,7 +1929,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary union functional symbol <code>⋃X = {z | ∃(y:Class)((z∈y) ∧ (y∈X))}</code> (Entries 3.17–3.18).</td>
+              <td class="field-value">Unary union functional symbol <code>⋃X = {z | ∃(y:Class)((z∈y) ∧ (y∈X))}</code> (Entries RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -1957,7 +1957,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary intersection functional symbol <code>⋂X = {z | ∀(y:Class)((y∈X) → (z∈y))}</code> (Entry 3.19).</td>
+              <td class="field-value">Unary intersection functional symbol <code>⋂X = {z | ∀(y:Class)((y∈X) → (z∈y))}</code> (Entry DefUnaryIntersection (3.20)).</td>
             </tr>
             </tbody>
           </table>
@@ -1985,7 +1985,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary class union functional symbol <code>A ∪ B = {x | (x∈A) ∨ (x∈B)}</code> (Entry 3.52).</td>
+              <td class="field-value">Binary class union functional symbol <code>A ∪ B = {x | (x∈A) ∨ (x∈B)}</code> (Entry DefBinaryUnion (3.53)).</td>
             </tr>
             </tbody>
           </table>
@@ -2013,7 +2013,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary class intersection functional symbol <code>A ∩ B = {x | (x∈A) ∧ (x∈B)}</code> (Entry 3.53).</td>
+              <td class="field-value">Binary class intersection functional symbol <code>A ∩ B = {x | (x∈A) ∧ (x∈B)}</code> (Entry DefBinaryIntersection (3.54)).</td>
             </tr>
             </tbody>
           </table>
@@ -2041,7 +2041,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>Dom(F) = {x | ∃(y:Class)((x,y) ∈ F)}</code> returning the domain class of relation <code>F</code> (Entry 3.20).</td>
+              <td class="field-value">Unary functional symbol <code>Dom(F) = {x | ∃(y:Class)((x,y) ∈ F)}</code> returning the domain class of relation <code>F</code> (Entry DefBigDomain (3.21)).</td>
             </tr>
             </tbody>
           </table>
@@ -2069,7 +2069,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary functional symbol <code>F(x) = ⋃{y | (x,y) ∈ F}</code> evaluating a class relation/family <code>F</code> at argument <code>x</code> (Entry 3.24).</td>
+              <td class="field-value">Binary functional symbol <code>F(x) = ⋃{y | (x,y) ∈ F}</code> evaluating a class relation/family <code>F</code> at argument <code>x</code> (Entry DefDependentConditional (3.24)).</td>
             </tr>
             </tbody>
           </table>
@@ -2097,7 +2097,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary functional symbol <code>f[A] = {y | ∃(x∈A)(y = f(x))}</code> returning the image of class <code>A</code> under <code>f</code> (Entry 3.25).</td>
+              <td class="field-value">Binary functional symbol <code>f[A] = {y | ∃(x∈A)(y = f(x))}</code> returning the image of class <code>A</code> under <code>f</code> (Entry DefValueAtArg (3.25)).</td>
             </tr>
             </tbody>
           </table>
@@ -2125,7 +2125,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>{a} = {x | (a set) → (x = a)}</code> (Entry 3.47). Clicking <code>{</code> or <code>}</code> in a 1-element brace expression <code>{a}</code> navigates to this page.</td>
+              <td class="field-value">Unary functional symbol <code>{a} = {x | (a set) → (x = a)}</code> (Entry DefSingletonSet (3.48)). Clicking <code>{</code> or <code>}</code> in a 1-element brace expression <code>{a}</code> navigates to this page.</td>
             </tr>
             </tbody>
           </table>
@@ -2153,7 +2153,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>X is a singleton ⟷ ∃(a:Class)(X = {a})</code> (Entry 3.26).</td>
+              <td class="field-value">Unary predicate <code>X is a singleton ⟷ ∃(a:Class)(X = {a})</code> (Entry DefIsSingleton (3.27)).</td>
             </tr>
             </tbody>
           </table>
@@ -2181,7 +2181,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary functional symbol <code>{a, b} = {a} ∪ {b}</code> (Entry 3.49). Clicking <code>{</code> or <code>}</code> in a 2-element pair expression <code>{a, b}</code> navigates to this page.</td>
+              <td class="field-value">Binary functional symbol <code>{a, b} = {a} ∪ {b}</code> (Entry DefUnorderedPair (3.49)). Clicking <code>{</code> or <code>}</code> in a 2-element pair expression <code>{a, b}</code> navigates to this page.</td>
             </tr>
             </tbody>
           </table>
@@ -2209,7 +2209,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary Dunaev ordered class-pair functional symbol <code>(A, B) = mark(A, 1) ∪ mark(B, 2)</code> supporting arbitrary proper classes (Entry 3.51).</td>
+              <td class="field-value">Binary Dunaev ordered class-pair functional symbol <code>(A, B) = mark(A, 1) ∪ mark(B, 2)</code> supporting arbitrary proper classes (Entry DefDunaevOrderedPair (3.76)).</td>
             </tr>
             </tbody>
           </table>
@@ -2237,7 +2237,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>(F is set-valued) ⟷ ∀(x:Class)(F(x) set)</code> (Entry 3.27).</td>
+              <td class="field-value">Unary predicate <code>(F is set-valued) ⟷ ∀(x:Class)(F(x) set)</code> (Entry DefIsSetValued (3.28)).</td>
             </tr>
             </tbody>
           </table>
@@ -2265,7 +2265,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate asserting that for every <code>x ∈ Dom(F)</code>, if <code>F(x)</code> is a set then the fiber <code>{y | (x,y)∈F}</code> is a singleton (Entry 3.28).</td>
+              <td class="field-value">Unary predicate asserting that for every <code>x ∈ Dom(F)</code>, if <code>F(x)</code> is a set then the fiber <code>{y | (x,y)∈F}</code> is a singleton (Entry DefHasConcentratedValues (3.29)).</td>
             </tr>
             </tbody>
           </table>
@@ -2293,7 +2293,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate asserting that proper-class fibers of <code>F</code> are stored directly via their elements (Entry 3.29).</td>
+              <td class="field-value">Unary predicate asserting that proper-class fibers of <code>F</code> are stored directly via their elements (Entry DefFlatValues (3.30)).</td>
             </tr>
             </tbody>
           </table>
@@ -2321,7 +2321,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>(F is a family) ⟷ ((F has concentrated set values) ∧ (F has flat proper values))</code> (Entry 3.30).</td>
+              <td class="field-value">Unary predicate <code>(F is a family) ⟷ ((F has concentrated set values) ∧ (F has flat proper values))</code> (Entry DefFamily (3.31)).</td>
             </tr>
             </tbody>
           </table>
@@ -2349,7 +2349,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>(F is a class-function) ⟷ ((F is a family) ∧ (F is set-valued))</code> (Entry 3.31).</td>
+              <td class="field-value">Unary predicate <code>(F is a class-function) ⟷ ((F is a family) ∧ (F is set-valued))</code> (Entry DefClassFunction (3.32)).</td>
             </tr>
             </tbody>
           </table>
@@ -2377,7 +2377,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate asserting that <code>f</code> is a class-function that is one-to-one on <code>Dom(f)</code> (Entry 3.32).</td>
+              <td class="field-value">Unary predicate asserting that <code>f</code> is a class-function that is one-to-one on <code>Dom(f)</code> (Entry DefInjectiveFunction (3.33)).</td>
             </tr>
             </tbody>
           </table>
@@ -2405,7 +2405,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>(f is a function) ⟷ ((f is a class-function) ∧ (f set))</code> (Entry 3.33).</td>
+              <td class="field-value">Unary predicate <code>(f is a function) ⟷ ((f is a class-function) ∧ (f set))</code> (Entry DefSetFunction (3.34)).</td>
             </tr>
             </tbody>
           </table>
@@ -2425,7 +2425,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="semi-singleton-pred.html" class="sym-link"><strong>Semi-Singleton Class Predicate (semi-singleton, Entry 3.34)</strong> (<code>symbols/semi-singleton-pred.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="semi-singleton-pred.html" class="sym-link"><strong>Semi-Singleton Class Predicate (semi-singleton, Entry DefSemiSingleton (3.35))</strong> (<code>symbols/semi-singleton-pred.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2433,7 +2433,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate asserting that class <code>X</code> has at most one element: <code>∀(u∈X)∀(v∈X)(u=v)</code> (Entry 3.34).</td>
+              <td class="field-value">Unary predicate asserting that class <code>X</code> has at most one element: <code>∀(u∈X)∀(v∈X)(u=v)</code> (Entry DefSemiSingleton (3.35)).</td>
             </tr>
             </tbody>
           </table>
@@ -2453,7 +2453,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="sss-pred.html" class="sym-link"><strong>Semi-Singleton Subclass Relation (sss, Entry 3.35)</strong> (<code>symbols/sss-pred.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="sss-pred.html" class="sym-link"><strong>Semi-Singleton Subclass Relation (sss, Entry DefSemiSingletonSubclass (3.36))</strong> (<code>symbols/sss-pred.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2461,7 +2461,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary relation <code>s sss t</code> used to uniformly encode both set-valued and proper-class-valued fibers in lambda families (Entries 3.35–3.36).</td>
+              <td class="field-value">Binary relation <code>s sss t</code> used to uniformly encode both set-valued and proper-class-valued fibers in lambda families (Entries RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -2489,7 +2489,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary cardinality preorder <code>A ⪯ B</code> asserting existence of an injective class-function from <code>A</code> into <code>B</code> (Entry 3.39).</td>
+              <td class="field-value">Binary cardinality preorder <code>A ⪯ B</code> asserting existence of an injective class-function from <code>A</code> into <code>B</code> (Entry DefPiPredicateModel (3.39)).</td>
             </tr>
             </tbody>
           </table>
@@ -2517,7 +2517,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary strict cardinality relation <code>(A ≺ B) ⟷ ¬(B ⪯ A)</code> (Entry 3.41).</td>
+              <td class="field-value">Binary strict cardinality relation <code>(A ≺ B) ⟷ ¬(B ⪯ A)</code> (Entry DefCardLess (3.42)).</td>
             </tr>
             </tbody>
           </table>
@@ -2545,7 +2545,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>|C| = ⋂{w | (w∈On) ∧ (C ⪯ w)}</code> mapping a class <code>C</code> to its initial ordinal cardinal (Entry 3.40).</td>
+              <td class="field-value">Unary functional symbol <code>|C| = ⋂{w | (w∈On) ∧ (C ⪯ w)}</code> mapping a class <code>C</code> to its initial ordinal cardinal (Entry DefCardinality (3.41)).</td>
             </tr>
             </tbody>
           </table>
@@ -2573,7 +2573,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Card(K) ⟷ ∃(C:Class)(|C| = K)</code> asserting that <code>K</code> is the cardinality of some class (Entry 3.63).</td>
+              <td class="field-value">Unary predicate <code>Card(K) ⟷ ∃(C:Class)(|C| = K)</code> asserting that <code>K</code> is the cardinality of some class (Entry ThmOmegaInOrdinals (3.63)).</td>
             </tr>
             </tbody>
           </table>
@@ -2601,7 +2601,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Hereditary(U) ⟷ ∀(x∈U)((𝒫(x) ∩ 𝒱) ⊆ U)</code> asserting closure under subsets (Entry 3.43).</td>
+              <td class="field-value">Unary predicate <code>Hereditary(U) ⟷ ∀(x∈U)((𝒫(x) ∩ 𝒱) ⊆ U)</code> asserting closure under subsets (Entry DefHereditaryClass (3.44)).</td>
             </tr>
             </tbody>
           </table>
@@ -2629,7 +2629,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Powerful(U) ⟷ ∀(x∈U)(𝒫(x) ∈ U)</code> asserting closure under power sets (Entry 3.44).</td>
+              <td class="field-value">Unary predicate <code>Powerful(U) ⟷ ∀(x∈U)(𝒫(x) ∈ U)</code> asserting closure under power sets (Entry DefPowerfulClass (3.45)).</td>
             </tr>
             </tbody>
           </table>
@@ -2657,7 +2657,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Pairful(U) ⟷ ∀(x∈U)∀(y∈U)({x,y} ∈ U)</code> asserting closure under unordered pairs (Entry 3.45).</td>
+              <td class="field-value">Unary predicate <code>Pairful(U) ⟷ ∀(x∈U)∀(y∈U)({x,y} ∈ U)</code> asserting closure under unordered pairs (Entry DefPairfulClass (3.46)).</td>
             </tr>
             </tbody>
           </table>
@@ -2685,7 +2685,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Tight(U)</code> asserting closure of <code>U</code> under images of class-functions (Entry 3.46).</td>
+              <td class="field-value">Unary predicate <code>Tight(U)</code> asserting closure of <code>U</code> under images of class-functions (Entry DefTightClass (3.47)).</td>
             </tr>
             </tbody>
           </table>
@@ -2713,7 +2713,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>(U is a universe) ⟷ (Tr(U) ∧ Hereditary(U) ∧ Powerful(U) ∧ Pairful(U) ∧ Tight(U))</code> (Entries 3.67–3.68).</td>
+              <td class="field-value">Unary predicate <code>(U is a universe) ⟷ (Tr(U) ∧ Hereditary(U) ∧ Powerful(U) ∧ Pairful(U) ∧ Tight(U))</code> (Entries RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -2733,7 +2733,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="mark-op.html" class="sym-link"><strong>Dunaev Class-List Tagging Functional Symbol (mark, Entry 3.50)</strong> (<code>symbols/mark-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="mark-op.html" class="sym-link"><strong>Dunaev Class-List Tagging Functional Symbol (mark, Entry DefNaturalNumberModels (3.50))</strong> (<code>symbols/mark-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2741,7 +2741,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary functional symbol <code>mark(A, n) = ({{0, n}} ∪ {({{{a}}, n}:Class) | a ∈ A})</code> tagging elements of arbitrary class <code>A</code> with index <code>n</code> so proper classes can be paired (Entry 3.50).</td>
+              <td class="field-value">Binary functional symbol <code>mark(A, n) = ({{0, n}} ∪ {({{{a}}, n}:Class) | a ∈ A})</code> tagging elements of arbitrary class <code>A</code> with index <code>n</code> so proper classes can be paired (Entry DefNaturalNumberModels (3.50)).</td>
             </tr>
             </tbody>
           </table>
@@ -2761,7 +2761,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="pr1-op.html" class="sym-link"><strong>First Class-Pair Projection Functional Symbol (pr1, Entry 3.76)</strong> (<code>symbols/pr1-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="pr1-op.html" class="sym-link"><strong>First Class-Pair Projection Functional Symbol (pr1, Entry DefDunaevOrderedPair (3.76))</strong> (<code>symbols/pr1-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2769,7 +2769,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>pr1(L) = {a | ({{{a}}, 1} ∈ L)}</code> extracting the first component of a Dunaev class-pair (Entries 3.76, 3.78).</td>
+              <td class="field-value">Unary functional symbol <code>pr1(L) = {a | ({{{a}}, 1} ∈ L)}</code> extracting the first component of a Dunaev class-pair (Entries DefDunaevOrderedPair (3.76), RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -2789,7 +2789,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="pr2-op.html" class="sym-link"><strong>Second Class-Pair Projection Functional Symbol (pr2, Entry 3.77)</strong> (<code>symbols/pr2-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="pr2-op.html" class="sym-link"><strong>Second Class-Pair Projection Functional Symbol (pr2, Entry ThmDunaevFirstProjection (3.77))</strong> (<code>symbols/pr2-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2797,7 +2797,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>pr2(L) = {b | ({{{b}}, 2} ∈ L)}</code> extracting the second component of a Dunaev class-pair (Entries 3.77, 3.79).</td>
+              <td class="field-value">Unary functional symbol <code>pr2(L) = {b | ({{{b}}, 2} ∈ L)}</code> extracting the second component of a Dunaev class-pair (Entries ThmDunaevFirstProjection (3.77), RulClassComprehension (3.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -2825,7 +2825,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary predicate <code>Ind(X) ⟷ ((∅∈X) ∧ ∀(a:Class)((a∈X)→((a∪{a})∈X)))</code> expressing the narrowest Peano successor-inductive property (Entry 3.54).</td>
+              <td class="field-value">Unary predicate <code>Ind(X) ⟷ ((∅∈X) ∧ ∀(a:Class)((a∈X)→((a∪{a})∈X)))</code> expressing the narrowest Peano successor-inductive property (Entry DefInductiveClass (3.55)).</td>
             </tr>
             </tbody>
           </table>
@@ -2853,7 +2853,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">0-ary class constant <code>ω</code> defined as the intersection of all successor-inductive classes <code>Q</code> (Entry 3.55), making <code>ω</code> both the smallest successor-inductive ordinal and the <code>⊆</code>-minimal successor-inductive class.</td>
+              <td class="field-value">0-ary class constant <code>ω</code> defined as the intersection of all successor-inductive classes <code>Q</code> (Entry DefInductiveClass (3.55)), making <code>ω</code> both the smallest successor-inductive ordinal and the <code>⊆</code>-minimal successor-inductive class.</td>
             </tr>
             </tbody>
           </table>
@@ -2881,7 +2881,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">3-ary mixfix class conditional <code>IF 𝛙 THEN A ELSE B FI</code> defined by class comprehension (Entry 3.21). Clicking any of <code>IF</code>, <code>THEN</code>, <code>ELSE</code>, or <code>FI</code> navigates to this single symbol page.</td>
+              <td class="field-value">3-ary mixfix class conditional <code>IF 𝛙 THEN A ELSE B FI</code> defined by class comprehension (Entry DefClassConditional (3.22)). Clicking any of <code>IF</code>, <code>THEN</code>, <code>ELSE</code>, or <code>FI</code> navigates to this single symbol page.</td>
             </tr>
             </tbody>
           </table>
@@ -2909,7 +2909,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Polymorphic non-dependent conditional <code>simple_if(Tₑ, b, t₁, t₂)</code> returning <code>t₁</code> when <code>b = ⊤</code> and <code>t₂</code> when <code>b = ⊥</code> (Entry 3.22).</td>
+              <td class="field-value">Polymorphic non-dependent conditional <code>simple_if(Tₑ, b, t₁, t₂)</code> returning <code>t₁</code> when <code>b = ⊤</code> and <code>t₂</code> when <code>b = ⊥</code> (Entry DefSimpleConditional (3.23)).</td>
             </tr>
             </tbody>
           </table>
@@ -2937,7 +2937,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Explicit substitution binder <code>let v = t in ⟦𝛗⟧</code> binding variable <code>v</code> to value <code>t</code> inside <code>𝛗</code> (Entry 4.01).</td>
+              <td class="field-value">Explicit substitution binder <code>let v = t in ⟦𝛗⟧</code> binding variable <code>v</code> to value <code>t</code> inside <code>𝛗</code> (Entry DefMetaInstantiation (4.01)).</td>
             </tr>
             </tbody>
           </table>
@@ -2965,7 +2965,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Keyword <code>in</code> separating the variable binding <code>v = t</code> from the body expression in <code>let v = t in e</code> (Entry 4.01). Note: set membership is always written with the Unicode symbol <code>∈</code> (<a href="in-pred.html" class="sym-link"><code>symbols/in-pred.html</code></a>).</td>
+              <td class="field-value">Keyword <code>in</code> separating the variable binding <code>v = t</code> from the body expression in <code>let v = t in e</code> (Entry DefMetaInstantiation (4.01)). Note: set membership is always written with the Unicode symbol <code>∈</code> (<a href="in-pred.html" class="sym-link"><code>symbols/in-pred.html</code></a>).</td>
             </tr>
             </tbody>
           </table>
@@ -2985,7 +2985,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="fst-op.html" class="sym-link"><strong>Dependent Pair First Projection Functional Symbol (fst, Entry 3.37)</strong> (<code>symbols/fst-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="fst-op.html" class="sym-link"><strong>Dependent Pair First Projection Functional Symbol (fst, Entry DefSigmaModel (3.38))</strong> (<code>symbols/fst-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -3013,7 +3013,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="snd-op.html" class="sym-link"><strong>Dependent Pair Second Projection Functional Symbol (snd, Entry 3.37)</strong> (<code>symbols/snd-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="snd-op.html" class="sym-link"><strong>Dependent Pair Second Projection Functional Symbol (snd, Entry DefSigmaModel (3.38))</strong> (<code>symbols/snd-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>

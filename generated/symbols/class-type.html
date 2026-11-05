@@ -404,7 +404,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>Core Foundational Semantics of <code>Class</code> (Directives 1&ndash;3 &amp; 8):</strong></p><ul><li><strong>Terms are Classes; Conglomerates are Types</strong>: Unlike standard set-theoretic type theories where terms are sets and classes are types, in Obelisk (<strong>MKTD1</strong> and <strong>MKTD2</strong>) <em>terms are interpreted as classes</em>, and <em>types are interpreted as conglomerates</em> (predicates on the conglomerate of all classes).</li><li><strong><code>Class</code> as a Conglomerate</strong>: Each type <code>T : Type</code> represents a predicate on classes (informally, a conglomerate-function <code>Class → Bool</code>). The type <code>Class</code> itself is the constant predicate on classes that is always true.</li><li><strong>Default Type</strong>: <code>Class</code> is the default type for all untyped binders and bound quantifiers: <code>∀(x ∈ Y), 𝛂(x)</code> expands to <code>∀(x:Class). ((x ∈ Y) ⇒ 𝛂(x))</code>, and <code>∃(x ∈ Y), 𝛂(x)</code> expands to <code>∃(x:Class). ((x ∈ Y) ∧ 𝛂(x))</code>.</li><li><strong>Strict Avoidance of <code>Set</code> as a Type</strong>: We never use <code>Set</code> as a variable type annotation; class comprehension always binds <code>(x:Class)</code> and tests sethood via the predicate <code>Set(x)</code> (Entry 3.01: <code>Set(x) ⇔ ∃(u:Class). (x ∈ u)</code>).</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Core Foundational Semantics of <code>Class</code> (Directives 1&ndash;3 &amp; 8):</strong></p><ul><li><strong>Terms are Classes; Conglomerates are Types</strong>: Unlike standard set-theoretic type theories where terms are sets and classes are types, in Obelisk (<strong>MKTD1</strong> and <strong>MKTD2</strong>) <em>terms are interpreted as classes</em>, and <em>types are interpreted as conglomerates</em> (predicates on the conglomerate of all classes).</li><li><strong><code>Class</code> as a Conglomerate</strong>: Each type <code>T : Type</code> represents a predicate on classes (informally, a conglomerate-function <code>Class → Bool</code>). The type <code>Class</code> itself is the constant predicate on classes that is always true.</li><li><strong>Default Type</strong>: <code>Class</code> is the default type for all untyped binders and bound quantifiers: <code>∀(x ∈ Y), 𝛂(x)</code> expands to <code>∀(x:Class). ((x ∈ Y) ⇒ 𝛂(x))</code>, and <code>∃(x ∈ Y), 𝛂(x)</code> expands to <code>∃(x:Class). ((x ∈ Y) ∧ 𝛂(x))</code>.</li><li><strong>Strict Avoidance of <code>Set</code> as a Type</strong>: We never use <code>Set</code> as a variable type annotation; class comprehension always binds <code>(x:Class)</code> and tests sethood via the predicate <code>Set(x)</code> (Entry RulClassComprehension (3.01): <code>Set(x) ⇔ ∃(u:Class). (x ∈ u)</code>).</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -415,8 +415,8 @@
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="typing-colon.html" class="sym-link">Type / Conglomerate Judgment Colon :</a></li>
 <li><a href="type-sort.html" class="sym-link">Universe of Types / Conglomerates Type</a></li>
-<li><a href="../manual.html#item-3.01" class="sym-link">Entry 3.01: Being a Set Predicate Set(x)</a></li>
-<li><a href="../manual.html#item-3.02" class="sym-link">Entry 3.02: Class Comprehension Schema</a></li>
+<li><a href="../manual.html#DefIsSet" class="sym-link">Definition DefIsSet (3.02): “Is a set” predicate</a></li>
+<li><a href="../manual.html#RulClassComprehension" class="sym-link">Inference Rule RulClassComprehension (3.01): Class comprehension</a></li>
 </ul></td>
           </tr>
         </tbody>
