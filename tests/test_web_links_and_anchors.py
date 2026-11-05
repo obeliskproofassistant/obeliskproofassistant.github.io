@@ -64,6 +64,22 @@ class TestWebLinksAndAnchors(unittest.TestCase):
         ai_html = (REPO_DIR / "obelisk_ai.html").read_text(encoding="utf-8")
         self.assertNotIn("nav.main-nav {\n        display: none;", ai_html)
 
+    def test_class_comprehension_and_symbol_pages_and_ml_labels(self):
+        comp_page = (REPO_DIR / "generated" / "symbols" / "class-comprehension.html").read_text(encoding="utf-8")
+        self.assertIn("CpKappa", comp_page)
+        self.assertIn("Binder", comp_page)
+        self.assertIn("#label-class-comprehension", comp_page)
+        self.assertIn('id="symbol-defining-axioms"', comp_page)
+        manual_html = (REPO_DIR / "generated" / "manual.html").read_text(encoding="utf-8")
+        self.assertIn('id="label-class-comprehension"', manual_html)
+        self.assertIn('id="label-a13"', manual_html)
+        for token in ("{", "|", "}"):
+            self.assertIn(
+                f'href="symbols/class-comprehension.html" class="sym-link" title="Class comprehension',
+                manual_html,
+            )
+            self.assertIn(f">{token}</a>", manual_html)
+
 
 if __name__ == "__main__":
     unittest.main()

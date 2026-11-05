@@ -48,7 +48,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn('class="external-row"', self.gen_manual_html)
         self.assertIn('class="internal-entity-table"', self.gen_manual_html)
         self.assertIn('class="sym-link"', self.gen_manual_html)
-        self.assertIn(r'\href{#item-', self.gen_manual_html)
+        self.assertIn(r'\href{symbols/', self.gen_manual_html)
+        self.assertIn('id="label-class-comprehension"', self.gen_manual_html)
         for tok in ("𝛂", "𝛃", "⟦", "⟧", "(", ")", "{", "}", "x", "A"):
             self.assertIn(f'>{tok}</a>', self.gen_manual_html, f"Token {tok!r} must be clickable in generated/manual.html")
         self.assertIn("Unspecified Elementary Metatheory E in {I\\Sigma_1, PA, T, NBG, MK}", self.gen_manual_html)
