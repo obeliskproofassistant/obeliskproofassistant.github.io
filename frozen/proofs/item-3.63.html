@@ -1,0 +1,419 @@
+<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+     Source files: set_theory_prover/program/newchecker.ML,
+                   set_theory_prover/program/types/typetheory.ML,
+                   set_theory_prover/program/types/foundations.ML,
+                   set_theory_prover/program/types/entries.ML
+     Generator:    set_theory_prover/program/html_generator.ML
+     Regenerate:   cd /ramdisk/set_theory_prover/program && poly -q --use html_generator.ML
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entry 3.63 (Theorem): ω is in the class of all ordinal numbers(=sets)</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+      },
+      startup: { typeset: true }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1e293b;
+      --bg-row-hover: #263349;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --border-color: #334155;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.75rem 2rem;
+    }
+    .header-inner {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .nav-bar {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .nav-link {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.85rem;
+      color: #f8fafc;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      margin: 0 0 1.25rem 0;
+      font-size: 0.98rem;
+    }
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.75rem;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-right: 0.25rem;
+    }
+    .toggle-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .toggle-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-blue);
+    }
+    .toggle-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .toc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .toc-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+    }
+    .toc-link:hover {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    main {
+      max-width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+    }
+    .manual-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 64px;
+    }
+    .section-header h2 {
+      font-size: 1.45rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--accent-blue);
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      margin: 0 0 1rem 0;
+      font-size: 0.92rem;
+    }
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      overflow-x: auto;
+    }
+    /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
+    .section-external-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .section-external-table > thead > tr > th {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .col-num { width: 90px; text-align: center; }
+    .external-row {
+      border-bottom: 2px solid var(--border-color);
+      transition: background 0.15s ease;
+      scroll-margin-top: 64px;
+    }
+    .external-row:target {
+      background: rgba(56, 189, 248, 0.14);
+      outline: 2px solid var(--accent-blue);
+    }
+    .external-num {
+      width: 90px;
+      vertical-align: top;
+      text-align: center;
+      padding: 1rem 0.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .num-anchor {
+      color: var(--accent-blue);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .num-anchor:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+    .external-entity {
+      padding: 0;
+      vertical-align: top;
+    }
+    /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
+    .internal-entity-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .internal-entity-table tr {
+      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .internal-entity-table tr:last-child {
+      border-bottom: none;
+    }
+    .internal-entity-table th.field-name {
+      width: 165px;
+      padding: 0.6rem 1rem;
+      background: rgba(30, 41, 59, 0.45);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-right: 1px solid rgba(51, 65, 85, 0.6);
+      vertical-align: middle;
+    }
+    .internal-entity-table td.field-value {
+      padding: 0.65rem 1rem;
+      vertical-align: middle;
+    }
+    .entry-title-cell {
+      font-weight: 600;
+      color: #f8fafc;
+      font-size: 0.98rem;
+    }
+    .formula-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
+      font-size: 0.96rem;
+      overflow-x: auto;
+    }
+    .proof-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
+    a.sym-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease;
+    }
+    a.sym-link:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+    }
+    /* ANSI Syntax Highlighting Classes */
+    .ansi-bold-red { color: #f87171; font-weight: 700; }
+    .ansi-bold-green { color: #4ade80; font-weight: 700; }
+    .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
+    .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
+    .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
+    .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
+    .ansi-yellow { color: #fde047; }
+    .ansi-cyan { color: #67e8f9; }
+    .ansi-gray { color: #94a3b8; }
+    .ansi-light-red { color: #fca5a5; }
+    .ansi-light-green { color: #86efac; }
+    .ansi-light-yellow { color: #fef08a; }
+    .ansi-light-blue { color: #93c5fd; }
+    .ansi-light-magenta { color: #f0abfc; }
+    .ansi-light-cyan { color: #a5f3fc; }
+    .ansi-white { color: #f8fafc; }
+    .ansi-bold-white { color: #ffffff; font-weight: 700; }
+    .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
+    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    .formula-unicode { display: block; }
+    .formula-latex { display: none; }
+    body.mode-unicode .formula-unicode { display: block; }
+    body.mode-unicode .formula-latex { display: none; }
+    body.mode-latex .formula-unicode { display: none; }
+    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+  </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
+</head>
+<body class="mode-unicode">
+  <header>
+    <div class="header-inner">
+      <nav class="nav-bar">
+        <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
+        <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
+        <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
+        <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
+        <a class="nav-link" href="../metatheory.html">Metatheory</a>
+        <a class="nav-link" href="../theory_db.json">JSON DB</a>
+        <a class="nav-link" href="../../repl.html">Interactive REPL</a>
+      </nav>
+      <h1>Entry 3.63 (Theorem): ω is in the class of all ordinal numbers(=sets)</h1>
+      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.78) &mdash; <a href="../manual.html#item-3.63" style="color: #38bdf8;">View in Complete Entity Database &rarr;</a></p>
+      <div class="controls-bar">
+        <div class="control-group">
+          <span class="control-label">Formula Display:</span>
+          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
+          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+  <section class="manual-section" id="sec-3">
+    <div class="section-header">
+      <h2>Entry 3.63 &mdash; ω is in the class of all ordinal numbers(=sets)</h2>
+      <p class="section-desc">Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">Num</th>
+            <th class="col-entity">Entity Database Record (Vertical Field Table)</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr id="item-3.63" class="external-row">
+        <td class="external-num"><span id="label-is-in-the-class-of-all-ordinal-numbers-sets"></span><span id="label-is-in-the-class-of-all-ordinal-numbers-sets-3-63"></span><a href="#item-3.63" class="num-anchor">3.63</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">ω is in the class of all ordinal numbers(=sets) <a href="../manual.html#label-is-in-the-class-of-all-ordinal-numbers-sets" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-is-in-the-class-of-all-ordinal-numbers-sets</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-theorem">Theorem</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/omega-const.html" class="sym-link" title="Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)">ω</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-bold-yellow"><a href="../symbols/on-const.html" class="sym-link" title="Class of all ordinal sets On constant (Constructor: HC CpOn)">On</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/omega-const.html}{\omega} \href{../symbols/in-pred.html}{\in} \href{../symbols/on-const.html}{\mathbf{On}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(ω∈On)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Verified (Kernel) &middot; <a href="../proofs/item-3.63.html" class="sym-link">Standalone Entry (3.63) &rarr;</a> &middot; <a href="../manual.html#label-is-in-the-class-of-all-ordinal-numbers-sets" class="sym-link"><code>#label-is-in-the-class-of-all-ordinal-numbers-sets</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </main>
+  <script>
+    function setFormatMode(mode) {
+      document.body.classList.remove('mode-unicode', 'mode-latex');
+      document.body.classList.add('mode-' + mode);
+      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
+      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
+      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+  </script>
+</body>
+</html>

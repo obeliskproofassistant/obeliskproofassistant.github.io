@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -343,13 +344,18 @@
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
         </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+        </div>
       </div>
     </div>
   </header>
   <main>
   <section class="manual-section" id="generated-index">
     <div class="section-header">
-      <h2>ML-Generated Output Registry (18 Primary Artifacts + 105 Standalone Entry Pages + 27 Personal Symbol Pages)</h2>
+      <h2>ML-Generated Output Registry (18 Primary Artifacts + 106 Standalone Entry Pages + 96 Personal Symbol Pages)</h2>
       <p class="section-desc">AI processes are strictly forbidden to edit any file inside <code>generated/</code> directly; all outputs are produced by running <code>poly -q --use html_generator.ML</code> and <code>poly -q --use nbg_html_generator.ML</code>.</p>
     </div>
     <div class="table-container">
@@ -380,7 +386,7 @@
             </tr>
             <tr>
               <th class="field-name">Description</th>
-              <td class="field-value">All 105 1st-order kernel axioms, inference rules, definitions, and theorems with clickable Unicode &amp; LaTeX formulas.</td>
+              <td class="field-value">All 106 1st-order kernel axioms, inference rules, definitions, and theorems with clickable Unicode &amp; LaTeX formulas.</td>
             </tr>
             </tbody>
           </table>
@@ -580,7 +586,7 @@
             </tr>
             <tr>
               <th class="field-name">Description</th>
-              <td class="field-value">27 standalone personal reference pages under generated/symbols/&lt;slug&gt;.html explaining the mathematical semantics of quotation/antiquotation, Enc/Dec, Emb, mu_A, Class, binders, and dependent conditionals in MKTD1 and MKTD2.</td>
+              <td class="field-value">96 standalone personal reference pages under generated/symbols/&lt;slug&gt;.html explaining the mathematical semantics of quotation/antiquotation, Enc/Dec, Emb, mu_A, Class, binders, and dependent conditionals in MKTD1 and MKTD2.</td>
             </tr>
             </tbody>
           </table>
@@ -605,7 +611,7 @@
             </tr>
             <tr>
               <th class="field-name">Description</th>
-              <td class="field-value">Index of 105 standalone entity pages under generated/proofs/item-&lt;num&gt;.html.</td>
+              <td class="field-value">Index of 106 standalone entity pages under generated/proofs/item-&lt;num&gt;.html.</td>
             </tr>
             </tbody>
           </table>
@@ -618,7 +624,7 @@
             <tbody>
             <tr>
               <th class="field-name">Artifact</th>
-              <td class="field-value entry-title-cell"><a href="sections/sec-1.html" class="sym-link"><code>generated/sections/sec-1.html</code> &mdash; Section 1: Propositional Logic (1.01-1.13)</a></td>
+              <td class="field-value entry-title-cell"><a href="sections/sec-1.html" class="sym-link"><code>generated/sections/sec-1.html</code> &mdash; Section 1: Propositional Logic (1.01-1.14)</a></td>
             </tr>
             <tr>
               <th class="field-name">Format</th>
@@ -755,7 +761,7 @@
             </tr>
             <tr>
               <th class="field-name">Description</th>
-              <td class="field-value">105 kernel entries with Unicode, HTML-linked Unicode, and hyperlinked LaTeX fields.</td>
+              <td class="field-value">106 kernel entries with Unicode, SML Kernel AST, HTML-linked Unicode, and hyperlinked LaTeX fields.</td>
             </tr>
             </tbody>
           </table>
@@ -805,7 +811,7 @@
             </tr>
             <tr>
               <th class="field-name">Description</th>
-              <td class="field-value">Clean plain-text dump of all 105 entries (1.01-5.02).</td>
+              <td class="field-value">Clean plain-text dump of all 106 entries (1.01-5.02).</td>
             </tr>
             </tbody>
           </table>

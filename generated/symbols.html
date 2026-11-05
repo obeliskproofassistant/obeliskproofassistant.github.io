@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -336,12 +337,17 @@
         <a class="nav-link" href="../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</h1>
-      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (178 entries) + <a href="symbols/index.html" style="color: #38bdf8;">27 Personal Symbol Reference Pages &rarr;</a>.</p>
+      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (178 entries) + <a href="symbols/index.html" style="color: #38bdf8;">96 Personal Symbol Reference Pages &rarr;</a>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
         </div>
       </div>
     </div>

@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -336,12 +337,17 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Entry 1.13 (Axiom): A13</h1>
-      <p class="subtitle">Standalone kernel entity record from 1. Propositional Logic &mdash; <a href="../manual.html#item-1.13" style="color: #38bdf8;">View in Complete Entity Database &rarr;</a></p>
+      <p class="subtitle">Standalone kernel entity record from 1. Propositional Logic (1.01&ndash;1.14) &mdash; <a href="../manual.html#item-1.13" style="color: #38bdf8;">View in Complete Entity Database &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
         </div>
       </div>
     </div>
@@ -350,7 +356,7 @@
   <section class="manual-section" id="sec-1">
     <div class="section-header">
       <h2>Entry 1.13 &mdash; A13</h2>
-      <p class="section-desc">Classical propositional calculus axiom schemas (A01-A12) and Modus Ponens.</p>
+      <p class="section-desc">Classical propositional calculus axiom schemas (A01&ndash;A13) and Modus Ponens.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -380,6 +386,10 @@
                 <div class="formula-unicode"><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></span></div>
                 <div class="formula-latex">\(\href{../symbols/top-const.html}{\top} \)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>⊤</code></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>

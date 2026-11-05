@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -336,12 +337,17 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Entry 2.03 (Inference Rule): Exists Instantiation</h1>
-      <p class="subtitle">Standalone kernel entity record from 2. Predicate Logic &mdash; <a href="../manual.html#item-2.03" style="color: #38bdf8;">View in Complete Entity Database &rarr;</a></p>
+      <p class="subtitle">Standalone kernel entity record from 2. Predicate Logic (2.01&ndash;2.06) &mdash; <a href="../manual.html#item-2.03" style="color: #38bdf8;">View in Complete Entity Database &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
         </div>
       </div>
     </div>
@@ -380,6 +386,10 @@
                 <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Term / Expression metavariable t">t</a></span><a href="../symbols/substitution-let.html" class="sym-link" title="Capture-avoiding substitution slash ([t/x])">/</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/exists-binder.html" class="sym-link" title="Existential quantifier binder (Constructor: HP (TpExis ...))">∃</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
                 <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/image-op.html}{[} \href{../symbols/variables.html}{t} \href{../symbols/substitution-let.html}{/} \href{../symbols/variables.html}{x} \href{../symbols/image-op.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/exists-binder.html}{\exists} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)</code></td>
             </tr>
             <tr>
               <th class="field-name">Side Condition</th>

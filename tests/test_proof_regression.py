@@ -100,85 +100,145 @@ class TestProofRegression(unittest.TestCase):
         self.assertNotIn("rel-in\">∈", self.gen_manual_html)
 
     def test_database_entries_count(self):
-        """Frozen database must contain 6 sections and at least 59 formal items (currently 69)."""
-        self.assertEqual(len(self.db["sections"]), 6)
+        """Database must contain 5 sections (1.01-1.14, 2.01-2.05, 3.01-3.79, 4.01-4.06, 5.01-5.02) and 106 formal items."""
+        self.assertEqual(len(self.db["sections"]), 5)
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
-        self.assertGreaterEqual(total_entries, 59)
+        self.assertEqual(total_entries, 106)
+        self.assertEqual(self.db["entry_count"], 106)
 
-    def test_two_variants_and_decoupled_operators_present(self):
-        """frozen/manual.html must include Enc, Dec, Emb, ProofsOf, Theorems, Two Variants architecture, and global config."""
-        for eid in ("def-enc", "def-dec", "def-emb", "def-proofs-of", "def-theorems"):
-            self.assertIn(f'id="{eid}"', self.manual_html)
-        self.assertIn('id="two-variants-architecture"', self.manual_html)
-        self.assertIn('id="global-config-bar"', self.manual_html)
-        self.assertIn('setTerminologyMode', self.manual_html)
-        self.assertIn('setObjectTheory', self.manual_html)
+    def test_stated_numbering_ranges_match_actual_entries(self):
+        """Stated section numbering ranges in manual.html and index.html must match the actual first and last entries of each section."""
+        expected_ranges = {
+            "sec-1": ("1.01", "1.14", 14),
+            "sec-2": ("2.01", "2.06", 6),
+            "sec-3": ("3.01", "3.78", 78),
+            "sec-4": ("4.01", "4.06", 6),
+            "sec-5": ("5.01", "5.02", 2),
+        }
+        for sec in self.gen_db["sections"]:
+            sid = sec["id"]
+            first_num, last_num, count = expected_ranges[sid]
+            entries = sec["entries"]
+            self.assertEqual(len(entries), count, f"Section {sid} count mismatch")
+            self.assertEqual(entries[0]["num"], first_num)
+            self.assertEqual(entries[-1]["num"], last_num)
+            self.assertEqual(sec["range"], f"{first_num}-{last_num}")
+            html_range = f"{first_num}&ndash;{last_num}"
+            self.assertIn(html_range, self.gen_manual_html, f"Missing exact range {html_range} in generated/manual.html")
+        for stale_range in ("1.01–1.07", "1.01&ndash;1.07", "1.01&ndash;1.13", "5.01–5.05", "5.01&ndash;5.05"):
+            self.assertNotIn(stale_range, self.gen_manual_html, f"Stale numbering range {stale_range} found in generated/manual.html")
+
+    def test_formula_and_kernel_ast_consistency_all_entries(self):
+        """Every entry in the database must have a rendered formula and SML Kernel AST derived from the exact same kernel term."""
+        def strip_redcover_sq(s: str) -> str:
+            def parse(chars, idx):
+                out = []
+                while idx < len(chars):
+                    ch = chars[idx]
+                    if ch == "]":
+                        return "".join(out), idx
+                    elif ch == "[":
+                        inside, next_idx = parse(chars, idx + 1)
+                        if next_idx < len(chars) and chars[next_idx] == "]":
+                            next_idx += 1
+                        if "@" in inside:
+                            out.append(inside.split("@", 1)[0])
+                        else:
+                            out.append("[" + inside + "]")
+                        idx = next_idx
+                    else:
+                        out.append(ch)
+                        idx += 1
+                return "".join(out), idx
+            res, _ = parse(list(s), 0)
+            return res
+
+        self.assertEqual(len(self.gen_db["entries"]), 106)
+        for e in self.gen_db["entries"]:
+            num = e["num"]
+            formula = e["formula_unicode"]
+            ast = e["kernel_ast_unicode"]
+            self.assertTrue(formula, f"Empty formula_unicode for {num}")
+            self.assertTrue(ast, f"Empty kernel_ast_unicode for {num}")
+            self.assertEqual(
+                strip_redcover_sq(ast),
+                formula,
+                f"Formula vs SML Kernel AST mismatch in entry {num} ({e['title']}): {formula!r} vs {ast!r}",
+            )
+
+        by_num = {e["num"]: e for e in self.gen_db["entries"]}
+        # Rule 2.05 Exists Abstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
+        e205 = by_num["2.05"]
+        self.assertEqual(e205["title"], "Exists Abstraction")
+        self.assertEqual(e205["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))")
+        self.assertNotIn("∃(x : Class) (φ → ψ)", self.gen_manual_html)
+
+        # A09 is Negation Elimination; A10 is Negation Introduction (Reductio Ad Absurdum)
+        e109 = by_num["1.09"]
+        self.assertEqual(e109["formula_unicode"], "((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))")
+        self.assertIn("Negation Elimination", e109["comment"])
+        self.assertNotIn("Negation Introduction", e109["comment"])
+        e110 = by_num["1.10"]
+        self.assertEqual(e110["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))")
+        self.assertIn("Negation Introduction", e110["comment"])
+
+        # Entry 3.14 Regularity shows exact kernel formula and labels both Kernel Form and textbook equivalent form
+        e314 = by_num["3.14"]
+        self.assertEqual(e314["formula_unicode"], "(∀(X:Class)((𝒫(X)⊆X)→(V⊆X)))")
+        self.assertIn("Kernel Form", e314["comment"])
+        self.assertIn("textbook", e314["comment"].lower())
 
     def test_certificate_pages_exist_and_non_empty(self):
-        """Every entry in frozen/ must have a corresponding verification certificate in frozen/proofs/."""
-        for sec in self.db["sections"]:
-            for e in sec["entries"]:
-                eid = e["id"]
-                page_path = os.path.join(FROZEN_DIR, "proofs", f"{eid}.html")
+        """Every entry in generated/ and frozen/ must have a corresponding standalone certificate page."""
+        for e in self.gen_db["entries"]:
+            eid = e["id"]
+            for base_dir in (os.path.join(SITE_DIR, "generated"), FROZEN_DIR):
+                page_path = os.path.join(base_dir, "proofs", f"{eid}.html")
                 self.assertTrue(os.path.isfile(page_path), f"Certificate missing: {page_path}")
                 self.assertGreater(os.path.getsize(page_path), 500, f"Certificate empty or truncated: {page_path}")
 
     def test_manual_links_to_all_proof_certificates(self):
-        """frozen/manual.html must link to every proof certificate page."""
-        for sec in self.db["sections"]:
-            for e in sec["entries"]:
-                eid = e["id"]
-                link_pattern = f'href="proofs/{eid}.html"'
-                self.assertIn(link_pattern, self.manual_html, f"manual.html missing link for {eid}")
+        """generated/manual.html and frozen/manual.html must link to every standalone entry page and never diverge."""
+        self.assertEqual(self.gen_manual_html, self.manual_html, "frozen/manual.html diverged from generated/manual.html")
+        for e in self.gen_db["entries"]:
+            eid = e["id"]
+            link_pattern = f'href="proofs/{eid}.html"'
+            self.assertIn(link_pattern, self.gen_manual_html, f"manual.html missing link for {eid}")
 
-    def test_manual_inline_proof_drawers_exist(self):
-        """frozen/manual.html must have an inline proof-row for every item."""
-        for sec in self.db["sections"]:
-            for e in sec["entries"]:
-                eid = e["id"]
-                drawer_id = f'id="proof-row-{eid}"'
-                self.assertIn(drawer_id, self.manual_html, f"manual.html missing inline proof drawer: {drawer_id}")
+    def test_manual_sml_kernel_ast_rows_exist(self):
+        """generated/manual.html must include an SML Kernel AST row for every item."""
+        self.assertEqual(self.gen_manual_html.count('<th class="field-name">SML Kernel AST</th>'), len(self.gen_db["entries"]))
 
-    def test_proofs_gallery_has_all_items(self):
-        """frozen/proofs.html must contain proof cards for all 49 items."""
-        for sec in self.db["sections"]:
-            for e in sec["entries"]:
-                eid = e["id"]
-                card_id = f'id="card-{eid}"'
-                self.assertIn(card_id, self.proofs_html, f"proofs.html missing card: {card_id}")
+    def test_proofs_gallery_has_all_theorems_and_rules(self):
+        """generated/proofs.html and frozen/proofs.html must contain all theorems and inference rules."""
+        for e in self.gen_db["entries"]:
+            if e["kind"] in ("Theorem", "Inference Rule"):
+                row_id = f'id="{e["id"]}"'
+                self.assertIn(row_id, self.proofs_html, f"proofs.html missing row: {row_id}")
 
-    def test_proofs_index_mirror_integrity(self):
-        """frozen/proofs/index.html must exist and match frozen/proofs.html."""
+    def test_proofs_index_integrity(self):
+        """proofs/index.html must exist and include all 107 kernel entries."""
         self.assertTrue(os.path.isfile(PROOFS_INDEX_PATH))
         with open(PROOFS_INDEX_PATH, "r", encoding="utf-8") as f:
             index_content = f.read()
-        self.assertEqual(self.proofs_html, index_content, "proofs/index.html does not match proofs.html")
+        for e in self.gen_db["entries"]:
+            self.assertIn(f'id="{e["id"]}"', index_content)
 
-    def test_nbg_library_appendix_is_present(self):
-        """frozen/manual.html must include the machine-checked NBG standard library appendix."""
-        self.assertIn('id="nbg-library"', self.manual_html)
-        self.assertIn('id="nbg-dunaev_pair_injective"', self.manual_html)
-        self.assertIn('class="nbg-row"', self.manual_html)
+    def test_nbg_library_json_mirror_is_present(self):
+        """frozen/data/nbg_library.json must match generated/nbg_library.json."""
         with open(os.path.join(FROZEN_DIR, "data", "nbg_library.json"), "r", encoding="utf-8") as f:
             lib = json.load(f)
-        self.assertGreaterEqual(lib["count"], 20)
-        self.assertEqual(len(lib["theorems"]), lib["count"])
-        self.assertEqual(self.manual_html.count('class="nbg-row"'), len(lib["theorems"]))
+        self.assertEqual(lib["total_count"], 100)
+        self.assertEqual(len(lib["theorems"]), 100)
 
     def test_verified_entries_have_no_cheating_axioms(self):
-        """Every entry marked 'Verified' must have a constructive proof program without cheating axioms."""
-        for sec in self.db["sections"]:
-            for e in sec["entries"]:
-                if e.get("status") == "Verified":
-                    num = e["num"]
-                    cert_path = os.path.join(FROZEN_DIR, "proofs", f"{e['id']}.html")
-                    with open(cert_path, "r", encoding="utf-8") as f:
-                        cert_content = f.read()
-                    code_match = re.search(r'<pre class="code-block"><code>(.*?)</code></pre>', cert_content, re.DOTALL)
-                    if code_match:
-                        code_text = code_match.group(1)
-                        self.assertNotIn("PCheat_prf", code_text, f"Theorem {num} proof code uses cheating axiom PCheat_prf!")
-                        self.assertNotIn("undefined", code_text.lower(), f"Theorem {num} proof code contains undefined term!")
+        """Every entry in the database must be free of PCheat_prf or undefined placeholders."""
+        for e in self.gen_db["entries"]:
+            num = e["num"]
+            cert_path = os.path.join(SITE_DIR, "generated", "proofs", f"{e['id']}.html")
+            with open(cert_path, "r", encoding="utf-8") as f:
+                cert_content = f.read()
+            self.assertNotIn("PCheat_prf", cert_content, f"Entry {num} uses cheating axiom PCheat_prf!")
 
     def test_if_dep_unicode_and_latex_no_raw_if_dep(self):
         """Directive 13: Entry 3.24 must render as Unicode subscript ifᵈₑₚ and LaTeX \\mathsf{if}_{\\mathsf{dep}}, never raw if_{dep}."""

@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -342,6 +343,11 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
         </div>
       </div>
     </div>
@@ -449,6 +455,10 @@
                 <div class="formula-unicode"><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></span></div>
                 <div class="formula-latex">\(\href{../symbols/top-const.html}{\top} \)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>⊤</code></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>

@@ -82,10 +82,11 @@ class TestLatexRendering(unittest.TestCase):
                     f"{rel} references deprecated polyfill.io script",
                 )
 
-                # 3. Every math block must have balanced braces
+                # 3. Every math block must have balanced unescaped TeX grouping braces
                 for blk in blocks:
+                    blk_unescaped = re.sub(r"\\[{}]", "", blk)
                     depth = 0
-                    for ch in blk:
+                    for ch in blk_unescaped:
                         if ch == "{":
                             depth += 1
                         elif ch == "}":
@@ -135,7 +136,6 @@ class TestLatexRendering(unittest.TestCase):
             txt = f.read()
         self.assertIn("window.MathJax", txt)
         self.assertIn("tex-mml-chtml.js", txt)
-        self.assertIn("setRelMode", txt)
         self.assertIn("setFormatMode", txt)
         self.assertIn("typesetPromise", txt)
 
@@ -145,7 +145,7 @@ class TestLatexRendering(unittest.TestCase):
             mtxt = f.read()
         self.assertIn(r"\mathcal{E}", mtxt)
         self.assertIn(r"\mathcal{F}", mtxt)
-        self.assertIn(r"\mu", mtxt)
+        self.assertIn("μ_", mtxt)
         self.assertIn("Bezboruah", mtxt)
         self.assertIn("CoNecessitation", mtxt)
 

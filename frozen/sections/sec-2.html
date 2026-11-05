@@ -1,827 +1,614 @@
-<!--
-AUTO-GENERATED FILE — DO NOT EDIT MANUALLY
-  Target: sections/sec-2.html
-  Generator: /botworkspace/tools/systematic_catalog_generator.py
-  Data Sources:
-    - /ramdisk/obeliskproofassistant.github.io/data/theory_database.json (built by /botworkspace/tools/build_theory_database.py)
-    - /ramdisk/obeliskproofassistant.github.io/data/nbg_library.json (compiled from set_theory_prover/examples/nbg_verified_programs.nbg)
-    - /ramdisk/set_theory_prover/program/types/foundations.ML & program/verified_theorems.ML
-  Regenerate Command:
-    python3 /botworkspace/tools/build_theory_database.py && python3 /botworkspace/tools/systematic_catalog_generator.py
+<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+     Source files: set_theory_prover/program/newchecker.ML,
+                   set_theory_prover/program/types/typetheory.ML,
+                   set_theory_prover/program/types/foundations.ML,
+                   set_theory_prover/program/types/entries.ML
+     Generator:    set_theory_prover/program/html_generator.ML
+     Regenerate:   cd /ramdisk/set_theory_prover/program && poly -q --use html_generator.ML
 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Section 2: Predicate logic — Obelisk Proof Assistant</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../styles.css">
+  <title>Obelisk Entity Database &mdash; 2. Predicate Logic (2.01&ndash;2.06)</title>
   <script>
-    
-    window.OBELISK_SYMBOL_MAP = {
-      "semi_singleton": { href: "manual.html#item-3-67", std: "(semi_singleton: (Class → Bool))", unambig: "(semi_singleton :: (Class → Bool))", label: "3.67 Semi-Singleton Class Predicate (SML ID 3.35)" },
-      "sss": { href: "manual.html#item-3-68", std: "(sss: (Class × Class → Bool)) | Value: (Class → Class)", unambig: "((sss) :: ((Class × Class) → Bool)) | Value: (Class → Class)", label: "3.68 Semi-Singleton Subclass Relation (s sss A, SML ID 3.36) & Value Extraction" },
-      "Λ": { href: "manual.html#item-3-69", std: "(Λ: ((Set → Class) → Class))", unambig: "((Λ) :: ((Set → Class) → Class))", label: "3.69 Encoded Class Family Constructor (SML ID 3.37)" },
-      "Σ": { href: "manual.html#item-3-70", std: "(Σ: (Class → Class))", unambig: "(Σ :: (Class → Class))", label: "3.70 Dependent Sum Model (ΣB, SML ID 3.38)" },
-      "Π": { href: "manual.html#item-3-71", std: "(Π: (Class → Class))", unambig: "(Π :: (Class → Class))", label: "3.71 Dependent Product Model (ΠB, SML ID 3.39)" },
-      "ValOf": { href: "manual.html#item-3-24-dependent-if", std: "(ValOf: (Bool × Class × Class → Class))", unambig: "(ValOf :: ((Bool × (Class × Class)) → Class))", label: "3.24 Dependent Conditional Value Witness (ValOf)" },
-      "Dom": { href: "manual.html#item-3-68", std: "(Dom: (Class → Class))", unambig: "(Dom :: (Class → Class))", label: "3.68 Class Domain Operator (Dom)" },
-      "if_dep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
-      "ifdep": { href: "manual.html#item-3-24-dependent-if", std: "∀(T_e: (Bool → Type_Expression)), (if_dep: (∏(b: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", unambig: "∀(T_e :: (Bool → Type_Expression)), (if_dep :: (∏(b :: Bool), (⟦T_e(true)⟧ → (⟦T_e(false)⟧ → ⟦T_e(b)⟧))))", label: "3.24 Dependent Conditional (if_dep)" },
-      "simple_if": { href: "manual.html#item-3-23-simple-if", std: "∀(T_e: Type_Expression), (simple_if: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", unambig: "∀(T_e :: Type_Expression), (simple_if :: (Bool → (⟦T_e⟧ → (⟦T_e⟧ → ⟦T_e⟧))))", label: "3.23 Simple Conditional (simple_if)" },
-      "IF": { href: "manual.html#item-3-22-class-if", std: "(IF_THEN_ELSE_FI: (Bool × Class × Class → Class))", unambig: "(IF_THEN_ELSE_FI :: ((Bool × (Class × Class)) → Class))", label: "3.22 Class Conditional" },
-      "isClassFunction": { href: "manual.html#item-3-37", std: "(isClassFunction: (Class → Bool))", unambig: "(isClassFunction :: (Class → Bool))", label: "3.37 Class Function Predicate" },
-      "isUniverse": { href: "manual.html#item-3-66", std: "(isUniverse: (Class → Bool))", unambig: "(isUniverse :: (Class → Bool))", label: "3.66 Grothendieck-Tarski Universe Predicate" },
-      "isSet": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
-      "SET": { href: "manual.html#item-3-08", std: "(isSet: (Class → Bool))", unambig: "(isSet :: (Class → Bool))", label: "3.08 Sethood Predicate" },
-      "CLASS": { href: "manual.html#item-3-47", std: "(CLASS: (Class → Bool))", unambig: "(CLASS :: (Class → Bool))", label: "3.47 Universal Classhood Predicate" },
-      "On": { href: "manual.html#thm-ord-ind", std: "(On: Class)", unambig: "(On :: Class)", label: "3.32 Class of All Ordinals" },
-      "Tr": { href: "manual.html#item-3-53", std: "(Tr: (Class → Bool))", unambig: "(Tr :: (Class → Bool))", label: "3.53 Transitive Class Predicate" },
-      "succ": { href: "manual.html#item-3-45", std: "(succ: (Class → Class))", unambig: "(succ :: (Class → Class))", label: "3.45 Ordinal Successor" },
-      "π₁": { href: "manual.html#item-3-41", std: "(π₁: (Class → Class))", unambig: "(π₁ :: (Class → Class))", label: "3.41 First Dunaev Projection" },
-      "π₂": { href: "manual.html#item-3-42", std: "(π₂: (Class → Class))", unambig: "(π₂ :: (Class → Class))", label: "3.42 Second Dunaev Projection" },
-      "𝒫": { href: "manual.html#item-3-33", std: "(𝒫: (Class → Class))", unambig: "(𝒫 :: (Class → Class))", label: "3.33 Power Class Definition" },
-      "⪯": { href: "manual.html#item-3-35-lesseq", std: "(⪯: (Class × Class → Bool))", unambig: "((⪯) :: ((Class × Class) → Bool))", label: "3.35 Class Subvalence / Injection Relation (A ⪯ B, SML ID 3.40)" },
-      "≺": { href: "manual.html#item-3-38-less", std: "(≺: (Class × Class → Bool))", unambig: "((≺) :: ((Class × Class) → Bool))", label: "3.38 Strict Class Subvalence (A ≺ B, SML ID 3.42)" },
-      "⋃": { href: "manual.html#item-3-14", std: "(⋃: (Class → Class))", unambig: "(⋃ :: (Class → Class))", label: "3.14 Unary Class Union" },
-      "∅": { href: "manual.html#item-3-12", std: "(∅: Class)", unambig: "(∅ :: Class)", label: "3.12 Empty Class" },
-      "ω": { href: "manual.html#item-3-45", std: "(ω: Class)", unambig: "(ω :: Class)", label: "3.45 Least Infinite Ordinal" },
-      "V": { href: "manual.html#item-3-47", std: "(V: Class)", unambig: "(V :: Class)", label: "3.47 Universal Class" },
-      "⊆": { href: "manual.html#item-3-02", std: "(⊆: (Class × Class → Bool))", unambig: "((⊆) :: ((Class × Class) → Bool))", label: "3.02 Subclass Relation" },
-      "∩": { href: "manual.html#item-3-12", std: "(∩: (Class × Class → Class))", unambig: "((∩) :: ((Class × Class) → Class))", label: "3.12 Binary Class Intersection" },
-      "∪": { href: "manual.html#item-3-14", std: "(∪: (Class × Class → Class))", unambig: "((∪) :: ((Class × Class) → Class))", label: "3.14 Binary Class Union" },
-      "∈": { href: "manual.html#item-3-01", std: "(∈: (Class × Class → Bool))", unambig: "((∈) :: ((Class × Class) → Bool))", label: "3.01 Class Membership Relation" },
-      "∉": { href: "manual.html#item-3-01", std: "(∉: (Class × Class → Bool))", unambig: "((∉) :: ((Class × Class) → Bool))", label: "3.01 Negated Class Membership" },
-      "=": { href: "manual.html#item-3-01", std: "(=: (Class × Class → Bool))", unambig: "((=) :: ((Class × Class) → Bool))", label: "3.01 Extensional Equality" },
-      "≠": { href: "manual.html#item-3-02", std: "(≠: (Class × Class → Bool))", unambig: "((≠) :: ((Class × Class) → Bool))", label: "3.02 Class Inequality" },
-      "∀": { href: "manual.html#item-2-01", std: "(∀: ((Class → Bool) → Bool))", unambig: "((∀) :: ((Class → Bool) → Bool))", label: "2.01 Universal Quantifier" },
-      "∃": { href: "manual.html#rule-ei", std: "(∃: ((Class → Bool) → Bool))", unambig: "((∃) :: ((Class → Bool) → Bool))", label: "2.03 Existential Quantifier" },
-      "→": { href: "manual.html#item-1-01", std: "(→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class)", unambig: "((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)", label: "1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic)" },
-      "⟷": { href: "manual.html#item-1-10", std: "(⟷: (Bool × Bool → Bool))", unambig: "((⟷) :: ((Bool × Bool) → Bool))", label: "1.10 Logical Equivalence (Biconditional)" },
-      "∧": { href: "manual.html#item-1-06", std: "(∧: (Bool × Bool → Bool))", unambig: "((∧) :: ((Bool × Bool) → Bool))", label: "1.06 Logical Conjunction" },
-      "∨": { href: "manual.html#item-1-03", std: "(∨: (Bool × Bool → Bool))", unambig: "((∨) :: ((Bool × Bool) → Bool))", label: "1.03 Logical Disjunction" },
-      "¬": { href: "manual.html#item-1-09", std: "(¬: (Bool → Bool))", unambig: "((¬) :: (Bool → Bool))", label: "1.09 Logical Negation" },
-      "⊥": { href: "manual.html#item-1-11", std: "(⊥: Bool)", unambig: "(⊥ :: Bool)", label: "1.11 Falsity Constant" },
-      "⊤": { href: "metatheory.html#sc-top", std: "(⊤: Bool)", unambig: "(⊤ :: Bool)", label: "Truth Constant" },
-      "⊢": { href: "manual.html#rule-mp", std: "(⊢: (Theory × Ctx × Fm → Stmt))", unambig: "((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))", label: "Sequent Turnstile" },
-      "Model": { href: "manual.html#item-6-01", std: "(Model: (T_e → Class))", unambig: "(Model :: (T_e → Class))", label: "6.01 Syntactic Model / Class Simulation Operator (CpEnc)" },
-      "Enc": { href: "manual.html#def-enc", std: "(Enc: (T → Class))", unambig: "(Enc :: (T → Class))", label: "4.09 Syntactic Gödel Encoding" },
-      "Dec": { href: "manual.html#def-dec", std: "(Dec: (Class × Col → T))", unambig: "(Dec :: ((Class × Col) → T))", label: "4.10 Syntactic Decoding" },
-      "Emb": { href: "manual.html#def-emb", std: "(Emb: (Type → (Class → Bool)))", unambig: "(Emb :: (Type → (Class → Bool)))", label: "4.11 Dual Type Embedding" },
-      "ProofsOf": { href: "manual.html#def-proofs-of", std: "(ProofsOf: (Class → Class))", unambig: "(ProofsOf :: (Class → Class))", label: "4.12 Proof-Object Class Family" },
-      "Theorems": { href: "manual.html#def-theorems", std: "(Theorems: Class)", unambig: "(Theorems :: Class)", label: "4.13 Class of Provable Statements" },
-      "NFV": { href: "metatheory.html#nfv-vx-psi", std: "(NFV: (Variable × Fm → Bool))", unambig: "(NFV :: ((Variable × Fm) → Bool))", label: "Metatheory: Not Free Variable" },
-      "FFI": { href: "metatheory.html#ffi-t-vx-phi", std: "(FFI: (Class.Expr × Variable × Fm → Bool))", unambig: "(FFI :: ((Class.Expr × (Variable × Fm)) → Bool))", label: "Metatheory: Free For Instantiation" },
-      "Fresh": { href: "metatheory.html#fresh-vy-vx", std: "(Fresh: (Variable × Variable → Bool))", unambig: "(Fresh :: ((Variable × Variable) → Bool))", label: "Metatheory: Variable Distinctness" },
-      "WF": { href: "metatheory.html#ord-induction", std: "(WF: ((Class × Class → Bool) × Class → Bool))", unambig: "(WF :: ((((Class × Class) → Bool) × Class) → Bool))", label: "Metatheory: Well-Foundedness" },
-      "Class": { href: "manual.html#item-3-47", std: "(Class: Type)", unambig: "(Class :: Type)", label: "Sort of Classes" },
-      "Set": { href: "manual.html#item-3-08", std: "(Set: Type)", unambig: "(Set :: Type)", label: "Sort of Sets" },
-      "Bool": { href: "manual.html#item-1-01", std: "(Bool: Type)", unambig: "(Bool :: Type)", label: "Sort of Propositions" },
-      "Fm": { href: "manual.html#def-enc", std: "(Fm: Col)", unambig: "(Fm :: Col)", label: "Syntactic Collection of Formulas" },
-      "Stmt": { href: "manual.html#def-enc", std: "(Stmt: Col)", unambig: "(Stmt :: Col)", label: "Syntactic Collection of Sequents" },
-      "Ctx": { href: "manual.html#def-enc", std: "(Ctx: Col)", unambig: "(Ctx :: Col)", label: "Syntactic Collection of Contexts" },
-      "Theory": { href: "manual.html#def-enc", std: "(Theory: Col)", unambig: "(Theory :: Col)", label: "Syntactic Collection of Theories" },
-      "Prf": { href: "manual.html#def-proofs-of", std: "(Prf: Col)", unambig: "(Prf :: Col)", label: "Syntactic Collection of Proofs" }
-    };
-
-    window.extractMjxTokenText = function(el) {
-      if (!el || !el.querySelectorAll) return "";
-      var chars = [];
-      el.querySelectorAll('mjx-c').forEach(function(c) {
-        c.classList.forEach(function(cls) {
-          var m = cls.match(/^mjx-c([0-9A-Fa-f]+)$/);
-          if (m) {
-            var cp = parseInt(m[1], 16);
-            if (cp === 0x27F7) chars.push("⟷");
-            else if (cp === 0x2192 || cp === 0x27F6) chars.push("→");
-            else if (cp === 0x1D4AB) chars.push("𝒫");
-            else if (!isNaN(cp)) chars.push(String.fromCodePoint(cp));
-          }
-        });
-      });
-      return chars.join("");
-    };
-
-    window.enhanceMathJaxSymbolLinks = function(root) {
-      var scope = root || document;
-      var inSubdir = window.location.pathname.indexOf('/sections/') !== -1 || window.location.pathname.indexOf('/proofs/') !== -1;
-      var prefix = inSubdir ? '../' : '';
-      scope.querySelectorAll('mjx-container mjx-msubsup, mjx-container mjx-mi, mjx-container mjx-mo, mjx-container mjx-mtext, mjx-container mjx-texatom').forEach(function(tok) {
-        if (tok.getAttribute('data-sym-bound') === '1') return;
-        if (tok.closest('[data-sym-bound="1"]')) return;
-        if (tok.tagName.toLowerCase() === 'mjx-texatom' && tok.querySelectorAll('mjx-texatom').length > 0) return;
-        var txt = window.extractMjxTokenText(tok);
-        if (!txt) return;
-        var info = window.OBELISK_SYMBOL_MAP[txt];
-        if (!info) return;
-        tok.setAttribute('data-sym-bound', '1');
-        tok.style.cursor = 'pointer';
-        tok.style.borderRadius = '2px';
-        tok.setAttribute('title', info.label + ' — Standard: ' + info.std + ' | Non-Ambiguous: ' + info.unambig + ' (Click for definition)');
-        tok.addEventListener('mouseenter', function() { tok.style.background = 'rgba(56, 189, 248, 0.22)'; });
-        tok.addEventListener('mouseleave', function() { tok.style.background = ''; });
-        tok.addEventListener('click', function(ev) {
-          var sel = window.getSelection();
-          if (sel && sel.toString().length > 0) return;
-          if (tok.closest('a')) return;
-          ev.stopPropagation();
-          var targetHref = prefix + info.href;
-          var onManual = window.location.pathname.endsWith('/manual.html') || window.location.pathname === '/manual.html';
-          if (onManual && info.href.indexOf('manual.html#') === 0) {
-            var hash = info.href.substring('manual.html'.length);
-            window.location.hash = hash;
-          } else {
-            window.location.href = targetHref;
-          }
-        });
-      });
-    };
-
     window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']],
-        processEscapes: true,
-        macros: {
-          llbracket: '[\\![',
-          rrbracket: ']\\!]',
-          llbrackets: '[\\![',
-          rrbrackets: ']\\!]',
-          lsemantic: '[\\![',
-          rsemantic: ']\\!]'
-        }
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
       },
-      options: {
-        enableAssistiveMml: true,
-        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      },
-      startup: {
-        pageReady: function() {
-          return MathJax.startup.defaultPageReady().then(function() {
-            try {
-              var stripColorMacros = function(tex) {
-                var prev = tex;
-                for (var iter = 0; iter < 8; iter++) {
-                  var next = prev.replace(/\{\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}\}/g, '$1');
-                  next = next.replace(/\\color\{#[0-9a-fA-F]+\}\{([^{}]*(?:\{[^{}]*\}[^{}]*)*)\}/g, '$1');
-                  if (next === prev) break;
-                  prev = next;
-                }
-                return prev.trim();
-              };
-              var items = MathJax.startup.document.math;
-              items.forEach(function(item) {
-                if (item.typesetRoot && item.math) {
-                  var rawTex = stripColorMacros(item.math.trim());
-                  var wrappedTex = item.display ? ('$$' + rawTex + '$$') : ('$' + rawTex + '$');
-                  item.typesetRoot.setAttribute('data-latex', rawTex);
-                  item.typesetRoot.setAttribute('data-latex-delimited', wrappedTex);
-                  item.typesetRoot.setAttribute('title', 'LaTeX (copiable): ' + wrappedTex);
-                  var mml = item.typesetRoot.querySelector('mjx-assistive-mml');
-                  if (mml) mml.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
-                  var mjxMath = item.typesetRoot.querySelector('mjx-math');
-                  if (mjxMath) mjxMath.setAttribute('style', 'user-select:none;-webkit-user-select:none;');
-                  if (!item.typesetRoot.querySelector('.mjx-copy-tex')) {
-                    var copySpan = document.createElement('span');
-                    copySpan.className = 'mjx-copy-tex';
-                    copySpan.textContent = wrappedTex;
-                    copySpan.setAttribute('style', 'display:inline-block;width:0;height:0;overflow:hidden;opacity:0;user-select:text;-webkit-user-select:text;');
-                    item.typesetRoot.appendChild(copySpan);
-                  }
-                }
-              });
-              window.enhanceMathJaxSymbolLinks(document);
-            } catch (err) {
-              console.warn('MathJax copy annotation warning:', err);
-            }
-          });
-        }
-      }
+      startup: { typeset: true }
     };
-    document.addEventListener('copy', function(e) {
-      var sel = window.getSelection();
-      if (!sel || sel.isCollapsed || sel.rangeCount === 0) return;
-      var range = sel.getRangeAt(0);
-      var container = range.commonAncestorContainer;
-      var el = container.nodeType === 1 ? container : container.parentElement;
-      var insideMjx = el && el.closest ? el.closest('mjx-container') : null;
-      if (insideMjx && insideMjx.getAttribute('data-latex-delimited')) {
-        e.clipboardData.setData('text/plain', insideMjx.getAttribute('data-latex-delimited'));
-        e.preventDefault();
-        return;
-      }
-      var frag = range.cloneContents();
-      if (frag.querySelectorAll && frag.querySelectorAll('mjx-container').length > 0) {
-        frag.querySelectorAll('mjx-container').forEach(function(mjx) {
-          var tex = mjx.getAttribute('data-latex-delimited') || mjx.getAttribute('data-latex') || mjx.textContent;
-          var txt = document.createTextNode(tex);
-          mjx.parentNode.replaceChild(txt, mjx);
-        });
-        var div = document.createElement('div');
-        div.appendChild(frag);
-        e.clipboardData.setData('text/plain', div.innerText || div.textContent);
-        e.preventDefault();
-      }
-    });
-    (function() {
-      var fallbackTriggered = false;
-      function fallbackToUnicodeMath() {
-        if (fallbackTriggered) return;
-        fallbackTriggered = true;
-        if (window.setRenderFormat) {
-          window.setRenderFormat('unicode');
-        }
-      }
-      window.addEventListener('DOMContentLoaded', function() {
-        var scriptEl = document.getElementById('MathJax-script');
-        if (scriptEl) {
-          scriptEl.addEventListener('error', function() {
-            var alt = document.createElement('script');
-            alt.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js';
-            alt.async = true;
-            alt.onerror = fallbackToUnicodeMath;
-            document.head.appendChild(alt);
-          });
-        }
-      });
-    })();
-
   </script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
   <style>
     :root {
-      --bg-dark: #07090e;
-      --card-bg: rgba(15, 23, 42, 0.78);
-      --card-border: rgba(56, 189, 248, 0.2);
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1e293b;
+      --bg-row-hover: #263349;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
       --accent-blue: #38bdf8;
-      --accent-cyan: #22d3ee;
-      --accent-purple: #c084fc;
-      --accent-gold: #fbbf24;
-      --accent-green: #34d399;
-      --text-muted: #94a3b8;
+      --accent-purple: #a855f7;
+      --border-color: #334155;
     }
+    * { box-sizing: border-box; }
     body {
-      background-color: var(--bg-dark);
-      color: #f1f5f9;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       margin: 0;
       padding: 0;
-      width: 100%;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-    .full-width-container {
-      max-width: 100% !important;
-      width: 100% !important;
-      padding: 0 24px !important;
-      box-sizing: border-box;
+      line-height: 1.6;
     }
     header {
-      background: rgba(15, 23, 42, 0.92);
-      border-bottom: 1px solid var(--card-border);
-      padding: 1.1rem 24px;
+      background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.75rem 2rem;
+    }
+    .header-inner {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .nav-bar {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      gap: 0.65rem;
       flex-wrap: wrap;
-      gap: 1rem;
+      margin-bottom: 1rem;
     }
-    .logo { font-size: 1.45rem; font-weight: 800; color: #fff; }
-    .logo span { color: var(--accent-blue); }
-    nav a { color: var(--text-muted); text-decoration: none; margin-left: 1rem; font-size: 0.92rem; font-weight: 500; }
-    nav a:hover, nav a.active { color: var(--accent-blue); }
-    .table-scroll-wrap {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      margin: 1rem 0 2rem;
-      border-radius: 8px;
-      border: 1px solid var(--card-border);
-      background: rgba(15, 23, 42, 0.5);
-    }
-    table.data-table {
-      width: 100%;
-      table-layout: auto;
-      border-collapse: separate;
-      border-spacing: 0;
-      margin: 0;
-    }
-    table.data-table th {
-      background: #0f172a;
-      color: #94a3b8;
-      text-align: left;
-      padding: 12px 14px;
-      font-weight: 600;
-      font-size: 0.84rem;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--card-border);
-    }
-    table.data-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(56, 189, 248, 0.08);
-      vertical-align: top;
-      font-size: 0.92rem;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-    }
-    .formula-cell, .syntax-cell, .formula-chunk {
-      overflow-x: auto;
-      overflow-y: hidden;
-      max-width: 100%;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-      line-height: 1.65;
-    }
-    mjx-container {
-      max-width: 100%;
-      overflow-x: auto;
-      overflow-y: hidden;
-    }
-    .classification-badge {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 4px;
-    }
-    .badge-axiom { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
-    .badge-theorem { background: rgba(52, 211, 153, 0.2); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.4); }
-    .badge-def { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
-    .badge-rule { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
-    .status-badge {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 0.72rem;
-      font-weight: 700;
+    .nav-link {
+      color: var(--accent-blue);
       text-decoration: none;
-      white-space: nowrap;
-    }
-    .badge-verified-strong { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-    .badge-axiom-status { background: rgba(192, 132, 252, 0.2); color: #d8b4fe; border: 1px solid rgba(192, 132, 252, 0.4); }
-    .badge-rule-status { background: rgba(251, 191, 36, 0.2); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.4); }
-    .badge-def-status { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
-    .badge-verified-weak { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
-    .dialect-switch-wrap {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(15, 23, 42, 0.85);
-      border: 1px solid var(--card-border);
-      padding: 4px 8px;
-      border-radius: 6px;
-    }
-    .dialect-btn, .filter-btn {
-      background: transparent;
-      border: 1px solid rgba(56, 189, 248, 0.24);
-      color: #94a3b8;
-      border-radius: 4px;
-      padding: 4px 10px;
-      cursor: pointer;
-      font-size: 0.78rem;
+      font-size: 0.88rem;
       font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.08);
     }
-    .dialect-btn.active, .filter-btn.active {
+    .nav-link:hover {
       background: rgba(56, 189, 248, 0.2);
-      color: #38bdf8;
-      border-color: rgba(56, 189, 248, 0.45);
     }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      text-decoration: none;
-      background: #1e293b;
-      color: #cbd5e1;
-      border: 1px solid var(--card-border);
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.85rem;
+      color: #f8fafc;
     }
-    .btn:hover { background: #334155; color: #fff; }
-    body.mode-membership .view-typing { display: none !important; }
-    body.mode-membership .view-membership { display: block !important; }
-    body:not(.mode-membership) .view-typing { display: block !important; }
-    body:not(.mode-membership) .view-membership { display: none !important; }
-    span.view-typing { display: inline !important; }
-    span.view-membership { display: none !important; }
-    body.mode-membership span.view-typing { display: none !important; }
-    body.mode-membership span.view-membership { display: inline !important; }
-  </style>
-</head>
-<body class="mode-membership">
-  <header class="full-width-container">
-    <div class="logo">Obelisk <span>Proof Assistant</span></div>
-    <div class="dialect-switch-wrap">
-      <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 600;">Interpretation:</span>
-      <button id="btn-dialect-membership" class="dialect-btn active" onclick="setDialectMode('membership')">🌐 Set/Class Model (MK / NBG)</button>
-      <button id="btn-dialect-typing" class="dialect-btn" onclick="setDialectMode('typing')">⚡ Executable SML (CakeML / PolyML)</button>
-    </div>
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../manual.html">Manual</a>
-      <a href="../symbols.html" class="">Symbols &amp; Notations</a>
-      <a href="../variant1.html" class="">Variant 1 (Syntactical / 1st-Order)</a>
-      <a href="../variant2.html" class="">Variant 2 (Semantical / Higher-Order)</a>
-      <a href="../dependent_types.html" class="">Σ &amp; Π Models</a>
-      <a href="../nbg_library.html" class="">NBG Library</a>
-      <a href="../proofs.html">Proofs</a>
-      <a href="../metatheory.html">Metatheory</a>
-      <a href="../output.pdf" target="_blank">PDF Manual</a>
-      <a href="../repl.html">Web REPL</a>
-    </nav>
-  </header>
-  <div class="full-width-container" style="padding-top: 2rem; padding-bottom: 3rem;">
-    <h1 style="font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 0.4rem;">Section 2: Predicate logic</h1>
-    <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 1.1rem;">First-order predicate calculus with typed domain, Bernays rules, substitution, and eigenvariable conditions.</p>
-    
-  <style>
-    body.mode-notation-standard .view-not-unambig { display: none !important; }
-    body.mode-notation-standard .view-not-std { display: inline !important; }
-    body:not(.mode-notation-standard) .view-not-std { display: none !important; }
-    body:not(.mode-notation-standard) .view-not-unambig { display: inline !important; }
-    div.view-not-std, div.view-not-unambig { display: block; }
-    body.mode-notation-standard div.view-not-unambig { display: none !important; }
-    body.mode-notation-standard div.view-not-std { display: block !important; }
-    body:not(.mode-notation-standard) div.view-not-std { display: none !important; }
-    body:not(.mode-notation-standard) div.view-not-unambig { display: block !important; }
-    /* Type Quantification Mode Switching (triangle / anglebar / shorthand) */
-    .view-typequant-anglebar, .view-typequant-shorthand { display: none !important; }
-    .view-typequant-triangle { display: inline !important; }
-    body.mode-typequant-anglebar .view-typequant-triangle,
-    body.mode-typequant-anglebar .view-typequant-shorthand { display: none !important; }
-    body.mode-typequant-anglebar .view-typequant-anglebar { display: inline !important; }
-    body.mode-typequant-shorthand .view-typequant-triangle,
-    body.mode-typequant-shorthand .view-typequant-anglebar { display: none !important; }
-    body.mode-typequant-shorthand .view-typequant-shorthand { display: inline !important; }
-    .config-lines-box {
-      background: rgba(15, 23, 42, 0.92);
-      border: 1px solid rgba(56, 189, 248, 0.32);
-      border-radius: 10px;
-      padding: 12px 16px;
-      margin: 1rem 0;
+    .subtitle {
+      color: var(--text-secondary);
+      margin: 0 0 1.25rem 0;
+      font-size: 0.98rem;
+    }
+    .controls-bar {
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .config-line-row {
-      display: flex;
-      align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
-      width: 100%;
-      padding: 3px 0;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.75rem;
     }
-    .config-line-row:last-child {
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-right: 0.25rem;
+    }
+    .toggle-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .toggle-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-blue);
+    }
+    .toggle-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .toc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .toc-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+    }
+    .toc-link:hover {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    main {
+      max-width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+    }
+    .manual-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 64px;
+    }
+    .section-header h2 {
+      font-size: 1.45rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--accent-blue);
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      margin: 0 0 1rem 0;
+      font-size: 0.92rem;
+    }
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      overflow-x: auto;
+    }
+    /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
+    .section-external-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .section-external-table > thead > tr > th {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .col-num { width: 90px; text-align: center; }
+    .external-row {
+      border-bottom: 2px solid var(--border-color);
+      transition: background 0.15s ease;
+      scroll-margin-top: 64px;
+    }
+    .external-row:target {
+      background: rgba(56, 189, 248, 0.14);
+      outline: 2px solid var(--accent-blue);
+    }
+    .external-num {
+      width: 90px;
+      vertical-align: top;
+      text-align: center;
+      padding: 1rem 0.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .num-anchor {
+      color: var(--accent-blue);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .num-anchor:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+    .external-entity {
+      padding: 0;
+      vertical-align: top;
+    }
+    /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
+    .internal-entity-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .internal-entity-table tr {
+      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .internal-entity-table tr:last-child {
       border-bottom: none;
     }
-    .config-line-label {
-      font-size: 0.8rem;
+    .internal-entity-table th.field-name {
+      width: 165px;
+      padding: 0.6rem 1rem;
+      background: rgba(30, 41, 59, 0.45);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
       font-weight: 700;
-      color: #cbd5e1;
-      min-width: 155px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-right: 1px solid rgba(51, 65, 85, 0.6);
+      vertical-align: middle;
     }
+    .internal-entity-table td.field-value {
+      padding: 0.65rem 1rem;
+      vertical-align: middle;
+    }
+    .entry-title-cell {
+      font-weight: 600;
+      color: #f8fafc;
+      font-size: 0.98rem;
+    }
+    .formula-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
+      font-size: 0.96rem;
+      overflow-x: auto;
+    }
+    .proof-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
+    a.sym-link {
+      color: inherit;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease;
+    }
+    a.sym-link:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+    }
+    /* ANSI Syntax Highlighting Classes */
+    .ansi-bold-red { color: #f87171; font-weight: 700; }
+    .ansi-bold-green { color: #4ade80; font-weight: 700; }
+    .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
+    .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
+    .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
+    .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
+    .ansi-yellow { color: #fde047; }
+    .ansi-cyan { color: #67e8f9; }
+    .ansi-gray { color: #94a3b8; }
+    .ansi-light-red { color: #fca5a5; }
+    .ansi-light-green { color: #86efac; }
+    .ansi-light-yellow { color: #fef08a; }
+    .ansi-light-blue { color: #93c5fd; }
+    .ansi-light-magenta { color: #f0abfc; }
+    .ansi-light-cyan { color: #a5f3fc; }
+    .ansi-white { color: #f8fafc; }
+    .ansi-bold-white { color: #ffffff; font-weight: 700; }
+    .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
+    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    .formula-unicode { display: block; }
+    .formula-latex { display: none; }
+    body.mode-unicode .formula-unicode { display: block; }
+    body.mode-unicode .formula-latex { display: none; }
+    body.mode-latex .formula-unicode { display: none; }
+    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
-  <div id="global-presentation-config-bar" class="config-lines-box">
-    <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2px;">
-      <span style="font-size: 0.76rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: #38bdf8;">Global Presentation &amp; Notation Configuration (Synchronized Across All Pages):</span>
-      <a href="symbols.html" style="font-size: 0.78rem; color: #38bdf8; text-decoration: underline dotted;">Open Master Symbol, Notation &amp; Color System Reference (&ldquo;:&rdquo; vs &ldquo;::&rdquo;) &rarr;</a>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Notation Option:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setNotationPrecision('unambiguous')" id="btn-not-unambig" title="Non-Ambiguous notation: uses '::' for metalevel symbol signatures e.g. (isSet :: (Class → Bool)) and explicit parentheses around all binary infix operators">Non-Ambiguous</button>
-      <button type="button" class="dialect-btn" onclick="window.setNotationPrecision('standard')" id="btn-not-std" title="Beautiful, standard, but potentially ambiguous notation: uses ':' e.g. (isSet: (Class → Bool)) and standard textbook parenthesization">Beautiful, Standard (Potentially Ambiguous)</button>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Unicode / LaTeX:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setRenderFormat('latex')" id="btn-fmt-latex" title="Render formulas with Colorful MathJax LaTeX (copiable as clean LaTeX and clickable symbols)">Colorful LaTeX (MathJax)</button>
-      <button type="button" class="dialect-btn" onclick="window.setRenderFormat('unicode')" id="btn-fmt-unicode" title="Render formulas with syntax-highlighted Colorful Unicode and clickable symbol links">Colorful Unicode</button>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Assistant Variant:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setAssistantVariant('v1')" id="cfg-variant-v1" title="Focus on Variant 1: Syntactical (1st-Order Proof Assistant, uses ProofOf / ProofsOf on Stmt syntax trees)">Variant 1: Syntactical (1st-Order)</button>
-      <button type="button" class="dialect-btn" onclick="window.setAssistantVariant('v2')" id="cfg-variant-v2" title="Focus on Variant 2: Semantical (Rocq / Higher-Order Formulas-as-Types, no ProofOf needed)">Variant 2: Semantical (Higher-Order)</button>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Type Quantification:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setTypeQuantMode('triangle')" id="btn-tq-triangle" title="Syntactic Metalevel Quantification over Type_Expression using ⟦T_e⟧ valuation brackets (avoids quantifying over semantic Type)">Syntactic: ∀(T<sub>e</sub> : Type_Expression), ... ⟦T<sub>e</sub>⟧ ...</button>
-      <button type="button" class="dialect-btn" onclick="window.setTypeQuantMode('anglebar')" id="btn-tq-anglebar" title="Syntactic Metalevel Quantification over Type_Expression using ASCII [|T_e|] valuation brackets">ASCII Valuation: ∀(T<sub>e</sub> : Type_Expression), ... [|T<sub>e</sub>|] ...</button>
-      <button type="button" class="dialect-btn" onclick="window.setTypeQuantMode('shorthand')" id="btn-tq-shorthand" title="Informal Polymorphic Type Shorthand ∀(T : Type) (syntactic sugar only)">Polymorphic Shorthand: ∀(T : Type)</button>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Proof Display:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('proofMode', 'term')" id="cfg-proof-term" title="Show compact λ-term / tactic expression instead of verbose step-by-step RPN dumps">Compact Proof Term (Default)</button>
-      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('proofMode', 'expanded')" id="cfg-proof-expanded" title="Expand inline kernel audit &amp; SML proof script">Expanded Certificate</button>
-    </div>
-    <div class="config-line-row">
-      <span class="config-line-label">Table Density:</span>
-      <button type="button" class="dialect-btn active" onclick="window.setObeliskConfig('density', 'compact')" id="cfg-density-compact" title="Compact Metamath-style reference table rows">Compact Reference</button>
-      <button type="button" class="dialect-btn" onclick="window.setObeliskConfig('density', 'spacious')" id="cfg-density-spacious" title="Spacious table rows with full notes">Spacious</button>
-    </div>
-  </div>
-  <script>
-    (function() {
-      window.OBELISK_PRESENTATION_CONFIG = JSON.parse(localStorage.getItem('obelisk_presentation_config') || '{"proofMode":"term","density":"compact","notationPrecision":"unambiguous","renderFormat":"latex","typeQuantMode":"triangle"}');
-      window.setNotationPrecision = function(mode) {
-        window.OBELISK_PRESENTATION_CONFIG.notationPrecision = mode;
-        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
-        if (mode === 'standard') {
-          document.body.classList.add('mode-notation-standard');
-        } else {
-          document.body.classList.remove('mode-notation-standard');
-        }
-        ['btn-not-unambig', 'btn-not-unambig-2'].forEach(function(id) {
-          var el = document.getElementById(id.trim());
-          if (el) el.classList.toggle('active', mode !== 'standard');
-        });
-        ['btn-not-std', 'btn-not-std-2'].forEach(function(id) {
-          var el = document.getElementById(id.trim());
-          if (el) el.classList.toggle('active', mode === 'standard');
-        });
-        if (window.MathJax && window.MathJax.typesetPromise) {
-          window.MathJax.typesetPromise().then(function() {
-            if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
-          });
-        }
-      };
-      window.setTypeQuantMode = function(mode) {
-        if (mode === 'direct') mode = 'shorthand';
-        window.OBELISK_PRESENTATION_CONFIG.typeQuantMode = mode;
-        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
-        document.body.classList.remove('mode-typequant-anglebar', 'mode-typequant-shorthand');
-        if (mode === 'anglebar') document.body.classList.add('mode-typequant-anglebar');
-        else if (mode === 'shorthand') document.body.classList.add('mode-typequant-shorthand');
-        ['btn-tq-triangle', 'btn-tq-triangle-2', 'btn-typeq-triangle'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.classList.toggle('active', mode !== 'anglebar' && mode !== 'shorthand');
-        });
-        ['btn-tq-anglebar', 'btn-tq-anglebar-2', 'btn-typeq-anglebar'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.classList.toggle('active', mode === 'anglebar');
-        });
-        ['btn-tq-shorthand', 'btn-tq-shorthand-2', 'btn-typeq-direct'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.classList.toggle('active', mode === 'shorthand');
-        });
-        if (window.MathJax && window.MathJax.typesetPromise) {
-          window.MathJax.typesetPromise().then(function() {
-            if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(document);
-          });
-        }
-      };
-      window.setTypeQuantNotation = window.setTypeQuantMode;
-      window.setAssistantVariant = function(variant) {
-        var v = (variant === 'v2') ? 'v2' : 'v1';
-        ['btn-variant-v1', 'cfg-variant-v1', 'btn-variant-v2', 'cfg-variant-v2'].forEach(function(id) {
-          var b = document.getElementById(id);
-          if (b) b.classList.remove('active');
-        });
-        if (v === 'v2') {
-          ['btn-variant-v2', 'cfg-variant-v2'].forEach(function(id) { var b = document.getElementById(id); if (b) b.classList.add('active'); });
-          document.querySelectorAll('.variant-v2-view').forEach(function(el) { el.style.display = 'block'; });
-          document.querySelectorAll('.variant-v1-details').forEach(function(el) { el.style.display = 'none'; el.open = false; });
-        } else {
-          ['btn-variant-v1', 'cfg-variant-v1'].forEach(function(id) { var b = document.getElementById(id); if (b) b.classList.add('active'); });
-          document.querySelectorAll('.variant-v2-view').forEach(function(el) { el.style.display = 'none'; });
-          document.querySelectorAll('.variant-v1-details').forEach(function(el) { el.style.display = 'block'; el.open = true; });
-        }
-        try { localStorage.setItem('obelisk_assistant_variant', v); } catch (e) {}
-      };
-      window.setRenderFormat = function(fmt) {
-        window.OBELISK_PRESENTATION_CONFIG.renderFormat = fmt;
-        window.showingUnicode = (fmt === 'unicode');
-        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
-        document.querySelectorAll('.formula-cell').forEach(function(cell) {
-          var target = cell.querySelector('.formula-render-target');
-          if (target) {
-            if (fmt === 'unicode') {
-              if (!target.getAttribute('data-latex-saved')) {
-                target.setAttribute('data-latex-saved', target.innerHTML);
-              }
-              var colored = cell.getAttribute('data-unicode-colored');
-              if (colored) target.innerHTML = colored;
-              else if (cell.getAttribute('data-unicode')) target.textContent = cell.getAttribute('data-unicode');
-            } else {
-              var saved = target.getAttribute('data-latex-saved');
-              if (saved) {
-                target.innerHTML = saved;
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                  window.MathJax.typesetPromise([target]).then(function() {
-                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(target);
-                  });
-                }
-              }
-            }
-          } else if (cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode')) {
-            if (fmt === 'unicode') {
-              if (!cell.getAttribute('data-latex-saved')) {
-                cell.setAttribute('data-latex-saved', cell.innerHTML);
-              }
-              var coloredCell = cell.getAttribute('data-unicode-colored') || cell.getAttribute('data-unicode');
-              var symLinks = cell.getAttribute('data-sym-links') || '';
-              cell.innerHTML = coloredCell + symLinks;
-            } else {
-              var savedCell = cell.getAttribute('data-latex-saved');
-              if (savedCell) {
-                cell.innerHTML = savedCell;
-                if (window.MathJax && window.MathJax.typesetPromise) {
-                  window.MathJax.typesetPromise([cell]).then(function() {
-                    if (window.enhanceMathJaxSymbolLinks) window.enhanceMathJaxSymbolLinks(cell);
-                  });
-                }
-              }
-            }
-          }
-        });
-        ['btn-fmt-latex', 'btn-fmt-latex-2'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.classList.toggle('active', fmt !== 'unicode');
-        });
-        ['btn-fmt-unicode', 'btn-fmt-unicode-2'].forEach(function(id) {
-          var el = document.getElementById(id);
-          if (el) el.classList.toggle('active', fmt === 'unicode');
-        });
-        var tBtn = document.getElementById('toggle-notation-btn');
-        if (tBtn) tBtn.textContent = (fmt === 'unicode') ? 'Show LaTeX (MathJax)' : 'Show Colorful Unicode';
-      };
-      window.applyObeliskConfig = function() {
-        document.querySelectorAll('.formula-cell .formula-render-target').forEach(function(target) {
-          if (!target.getAttribute('data-latex-saved') && !target.querySelector('mjx-container')) {
-            target.setAttribute('data-latex-saved', target.innerHTML);
-          }
-        });
-        var cfg = window.OBELISK_PRESENTATION_CONFIG || {proofMode: 'term', density: 'compact', notationPrecision: 'unambiguous', renderFormat: 'latex', typeQuantMode: 'triangle'};
-        document.querySelectorAll('.proof-row').forEach(function(r) {
-          r.style.display = (cfg.proofMode === 'expanded') ? 'table-row' : 'none';
-        });
-        document.querySelectorAll('table.data-table td, table.data-table th').forEach(function(cell) {
-          cell.style.padding = (cfg.density === 'compact') ? '8px 10px' : '14px 16px';
-        });
-        var bTerm = document.getElementById('cfg-proof-term');
-        var bExp = document.getElementById('cfg-proof-expanded');
-        var bComp = document.getElementById('cfg-density-compact');
-        var bSpac = document.getElementById('cfg-density-spacious');
-        if (bTerm) bTerm.classList.toggle('active', cfg.proofMode !== 'expanded');
-        if (bExp) bExp.classList.toggle('active', cfg.proofMode === 'expanded');
-        if (bComp) bComp.classList.toggle('active', cfg.density !== 'spacious');
-        if (bSpac) bSpac.classList.toggle('active', cfg.density === 'spacious');
-        window.setNotationPrecision(cfg.notationPrecision || 'unambiguous');
-        window.setTypeQuantMode(cfg.typeQuantMode || 'triangle');
-        var savedVar = localStorage.getItem('obelisk_assistant_variant') || 'v1';
-        window.setAssistantVariant(savedVar === 'v2' ? 'v2' : 'v1');
-        if (cfg.renderFormat === 'unicode') window.setRenderFormat('unicode');
-      };
-      window.setObeliskConfig = function(key, val) {
-        window.OBELISK_PRESENTATION_CONFIG[key] = val;
-        try { localStorage.setItem('obelisk_presentation_config', JSON.stringify(window.OBELISK_PRESENTATION_CONFIG)); } catch (e) {}
-        window.applyObeliskConfig();
-      };
-      document.addEventListener('DOMContentLoaded', window.applyObeliskConfig);
-    })();
-  </script>
-
-    
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.2rem;">
-          <a href="../manual.html" class="btn">&larr; All Sections (Manual)</a><a href="sec-1.html" class="btn">&larr; §1 Propositional logic</a><a href="sec-3.html" class="btn">§3 Set/class-theoretic foundations of mathematics &rarr;</a>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
+</head>
+<body class="mode-unicode">
+  <header>
+    <div class="header-inner">
+      <nav class="nav-bar">
+        <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
+        <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
+        <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
+        <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
+        <a class="nav-link" href="../metatheory.html">Metatheory</a>
+        <a class="nav-link" href="../theory_db.json">JSON DB</a>
+        <a class="nav-link" href="../../repl.html">Interactive REPL</a>
+      </nav>
+      <h1>Obelisk Entity Database &mdash; 2. Predicate Logic (2.01&ndash;2.06)</h1>
+      <p class="subtitle">First-order quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes. (Generated directly from <code>newchecker.ML</code> via <code>html_generator.ML</code>).</p>
+      <div class="controls-bar">
+        <div class="control-group">
+          <span class="control-label">Formula Display:</span>
+          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
+          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
         </div>
-        <div class="table-scroll-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th style="width: 72px; text-align: center;">No.</th>
-                <th style="min-width: 220px;">Name &amp; Classification</th>
-                <th style="min-width: 340px;">Semantic Formula (Fully Parenthesized Infix Operators)</th>
-                <th style="min-width: 210px;">Syntactic Side Condition</th>
-                <th style="width: 135px; text-align: center;">Verification</th>
-              </tr>
-            </thead>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+        </div>
+      </div>
+      <nav class="toc-nav">
+        <a class="toc-link" href="../manual.html#sec-1">1. Propositional Logic (1.01&ndash;1.14)</a>
+        <a class="toc-link" href="../manual.html#sec-2">2. Predicate Logic (2.01&ndash;2.06)</a>
+        <a class="toc-link" href="../manual.html#sec-3">3. Set/Class Foundations (3.01&ndash;3.78)</a>
+        <a class="toc-link" href="../manual.html#sec-4">4. Metalogical Laws (4.01&ndash;4.06)</a>
+        <a class="toc-link" href="../manual.html#sec-5">5. Incompleteness Statements (5.01&ndash;5.02)</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+  <section class="manual-section" id="sec-2">
+    <div class="section-header">
+      <h2>2. Predicate Logic (2.01&ndash;2.06)</h2>
+      <p class="section-desc">First-order quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">Num</th>
+            <th class="col-entity">Entity Database Record (Vertical Field Table)</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr id="item-2.01" class="external-row">
+        <td class="external-num"><span id="label-discourse-domain-is-non-empty"></span><span id="label-discourse-domain-is-non-empty-2-01"></span><a href="#item-2.01" class="num-anchor">2.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
             <tbody>
-              
-          <tr id="sec-2" class="section-divider" data-section="sec-2">
-            <td colspan="5" style="background: rgba(30, 41, 59, 0.85); font-weight: 700; color: #38bdf8; padding: 12px 14px; font-size: 1.05rem; border-top: 2px solid var(--accent-blue);">
-              2) Predicate logic
-              <span style="font-size: 0.82rem; font-weight: 400; color: var(--text-muted); margin-left: 12px;">First-order predicate calculus with typed domain, Bernays rules, substitution, and eigenvariable conditions.</span>
-            </td>
-          </tr>
-        
-
-          <tr id="item-2-01" data-num="2.01">
-            <td class="num-cell" style="text-align: center;"><a id="2.01" href="#2.01" class="entry-num-link">2.01</a></td>
-            <td>
-              <span class="classification-badge badge-axiom">Axiom</span>
-              <strong style="color: #fff; margin-left: 6px;">Discourse domain is non-empty</strong>
-              <div style="margin-top: 4px; font-size: 0.76rem; color: #c084fc; background: rgba(192, 132, 252, 0.08); border: 1px solid rgba(192, 132, 252, 0.25); display: inline-block; padding: 2px 7px; border-radius: 4px;"><strong>Typing Judgments:</strong> <span class="view-not-unambig">\(({\color{#f87171}{K}} : {\color{#22d3ee}{\mathsf{Class}}})\)</span><span class="view-not-std">\({\color{#f87171}{K}} : {\color{#22d3ee}{\mathsf{Class}}}\)</span></div>
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.01: Discourse domain is non-empty) :: Discourse domain is non-empty</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>(∃([K@Variable]:[Class@Type]) ⊤)</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Layered axiomatization: Section 2 axiomatizes pure First-Order Predicate Logic over sort Class prior to Section 3 (Class Comprehension). In multi-sorted / inclusive predicate logic (where some sorts like Nonstored / Void are uninhabited), 2.01 explicitly postulates that the sort Class is inhabited so (∀(K : Class) φ) → (∃(K : Class) φ) holds in pure predicate logic; once Section 3&#x27;s Class Comprehension Axiom (3.01) is added, 2.01 becomes derivable (witnessed by ∅).</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="∃(K : Class) ⊤" data-unicode-colored="&lt;a href=&quot;../manual.html#rule-ei&quot; class=&quot;sym-inline-link&quot; title=&quot;2.03 Existential Quantifier — (∃: ((Class → Bool) → Bool)) / ((∃) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;K&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) &lt;a href=&quot;metatheory.html#sc-top&quot; class=&quot;sym-inline-link&quot; title=&quot;Truth Constant — (⊤: Bool) / (⊤ :: Bool)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊤&lt;/span&gt;&lt;/a&gt;"><div class="formula-render-target"><div class="view-typing formula-chunk">\({\color{#fde047}{\exists}} ({\color{#f87171}{K}} : {\color{#22d3ee}{\mathsf{Class}}})\; {\color{#38bdf8}{\top}}\)</div><div class="view-membership formula-chunk" style="display:none;">\({\color{#fde047}{\exists}} {\color{#f87171}{K}} \; {\color{#38bdf8}{\top}}\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#rule-ei" class="sym-def-chip" title="2.03 Existential Quantifier — Standard: (∃: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∃) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∃: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∃) :: ((Class → Bool) → Bool))</span></a> <a href="../metatheory.html#sc-top" class="sym-def-chip" title="Truth Constant — Standard: (⊤: Bool) | Non-Ambiguous: (⊤ :: Bool)"><span class="view-not-std">(⊤: Bool)</span><span class="view-not-unambig">(⊤ :: Bool)</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell">—</td>
-            <td style="text-align: center;"><a href="../proofs/item-2-01.html" class="status-badge badge-axiom-status">Axiomatic Base</a></td>
-          </tr>
-            
-
-          <tr id="rule-fi" data-num="2.02">
-            <td class="num-cell" style="text-align: center;"><a id="2.02" href="#2.02" class="entry-num-link">2.02</a></td>
-            <td>
-              <span class="classification-badge badge-rule">Inference Rule</span>
-              <strong style="color: #fff; margin-left: 6px;">Forall Instantiation (FI)</strong>
-              
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.02: Forall Instantiation) :: Forall Instantiation</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type]) ⟦[φ@Fm.Expression]⟧) → ⟦[φ@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Term t is free for substitution for variable identifier v_x in formula φ.</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="((∀(x : Class) φ) → φ[t/x])" data-unicode-colored="((&lt;a href=&quot;../manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) φ) &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; φ[&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;t&lt;/span&gt;/&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt;])"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((({\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi) {\color{#38bdf8}{\to}} \phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}])\)</span><span class="view-not-std">\(({\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi) {\color{#38bdf8}{\to}} \phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}]\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((({\color{#fde047}{\forall}} {\color{#f87171}{x}} \; \phi) {\color{#38bdf8}{\to}} \phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}])\)</span><span class="view-not-std">\(({\color{#fde047}{\forall}} {\color{#f87171}{x}} \; \phi) {\color{#38bdf8}{\to}} \phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}]\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — Standard: (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)"><span class="view-not-std">(→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class)</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell"><a href="../metatheory.html#ffi-t-vx-phi" class="side-condition-link"><span class="view-typing">\({\color{#fb923c}{\mathrm{FFI}}}({\color{#f87171}{t}}, {\color{#f472b6}{\mathbf{v}}}_x, \phi)\)</span><span class="view-membership" style="display:none;">\({\color{#fb923c}{\mathrm{FFI}}}({\color{#f87171}{t}}, {\color{#f472b6}{\mathbf{v}}}_x, \phi)\)</span></a></td>
-            <td style="text-align: center;"><a href="../proofs/rule-fi.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
-          </tr>
-            
-
-          <tr id="rule-ei" data-num="2.03">
-            <td class="num-cell" style="text-align: center;"><a id="2.03" href="#2.03" class="entry-num-link">2.03</a></td>
-            <td>
-              <span class="classification-badge badge-rule">Inference Rule</span>
-              <strong style="color: #fff; margin-left: 6px;">Exists Instantiation (EI)</strong><div style="margin-top: 4px; font-size: 0.78rem; color: #f59e0b; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.28); display: inline-block; padding: 2px 8px; border-radius: 4px;"><strong>Symbol Signature:</strong> <span class="view-not-std"><code>(∃: ((Class → Bool) → Bool))</code></span><span class="view-not-unambig"><code>((∃) :: ((Class → Bool) → Bool))</code></span></div>
-              
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.03: Exists Instantiation) :: Exists Instantiation</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>(⟦[φ@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧ → ∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type]) ⟦[φ@Fm.Expression]⟧)</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Witness substitution into existential quantifier.</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="(φ[t/x] → ∃(x : Class) φ)" data-unicode-colored="(φ[&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;t&lt;/span&gt;/&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt;] &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#rule-ei&quot; class=&quot;sym-inline-link&quot; title=&quot;2.03 Existential Quantifier — (∃: ((Class → Bool) → Bool)) / ((∃) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) φ)"><div class="formula-render-target"><div class="view-typing formula-chunk"><span class="view-not-unambig">\((\phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}] {\color{#38bdf8}{\to}} {\color{#fde047}{\exists}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi)\)</span><span class="view-not-std">\(\phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}] {\color{#38bdf8}{\to}} {\color{#fde047}{\exists}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi\)</span></div><div class="view-membership formula-chunk" style="display:none;"><span class="view-not-unambig">\((\phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}] {\color{#38bdf8}{\to}} {\color{#fde047}{\exists}} {\color{#f87171}{x}} \; \phi)\)</span><span class="view-not-std">\(\phi[{\color{#f87171}{t}}/{\color{#f87171}{x}}] {\color{#38bdf8}{\to}} {\color{#fde047}{\exists}} {\color{#f87171}{x}} \; \phi\)</span></div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#rule-ei" class="sym-def-chip" title="2.03 Existential Quantifier — Standard: (∃: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∃) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∃: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∃) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — Standard: (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)"><span class="view-not-std">(→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class)</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell"><a href="../metatheory.html#ffi-t-vx-phi" class="side-condition-link"><span class="view-typing">\({\color{#fb923c}{\mathrm{FFI}}}({\color{#f87171}{t}}, {\color{#f472b6}{\mathbf{v}}}_x, \phi)\)</span><span class="view-membership" style="display:none;">\({\color{#fb923c}{\mathrm{FFI}}}({\color{#f87171}{t}}, {\color{#f472b6}{\mathbf{v}}}_x, \phi)\)</span></a></td>
-            <td style="text-align: center;"><a href="../proofs/rule-ei.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
-          </tr>
-            
-
-          <tr id="rule-fa" data-num="2.04">
-            <td class="num-cell" style="text-align: center;"><a id="2.04" href="#2.04" class="entry-num-link">2.04</a></td>
-            <td>
-              <span class="classification-badge badge-rule">Inference Rule</span>
-              <strong style="color: #fff; margin-left: 6px;">Forall Abstraction (FA / Bernays)</strong>
-              
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.04: Forall Abstraction) :: Forall Abstraction</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>((⟦[β@Fm.Expression]⟧ → ⟦[α@Fm.Expression]⟧) |- (⟦[β@Fm.Expression]⟧ → ∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type]) ⟦[α@Fm.Expression]⟧))</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Eigenvariable condition: variable identifier v_x does not occur free in antecedent ψ or context Γ.</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="(ψ → φ) ⊢ (ψ → ∀(x : Class) φ)" data-unicode-colored="(ψ &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; φ) &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; (ψ &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) φ)"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\frac{(\psi {\color{#38bdf8}{\to}} \phi)}{(\psi {\color{#38bdf8}{\to}} {\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi)}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{(\psi {\color{#38bdf8}{\to}} \phi)}{(\psi {\color{#38bdf8}{\to}} {\color{#fde047}{\forall}} {\color{#f87171}{x}} \; \phi)}\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — Standard: (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)"><span class="view-not-std">(→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class)</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)</span></a> <a href="../manual.html#rule-mp" class="sym-def-chip" title="Sequent / Provability Judgement Turnstile — Standard: (⊢: (Theory × Ctx × Fm → Stmt)) | Non-Ambiguous: ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))"><span class="view-not-std">(⊢: (Theory × Ctx × Fm → Stmt))</span><span class="view-not-unambig">((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell"><a href="../metatheory.html#nfv-vx-psi" class="side-condition-link"><span class="view-typing"><span class="view-not-unambig">\(({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}}))\)</span><span class="view-not-std">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span></span><span class="view-membership" style="display:none;"><span class="view-not-unambig">\(({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}}))\)</span><span class="view-not-std">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span></span></a></td>
-            <td style="text-align: center;"><a href="../proofs/rule-fa.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
-          </tr>
-            
-
-          <tr id="rule-ea" data-num="2.05">
-            <td class="num-cell" style="text-align: center;"><a id="2.05" href="#2.05" class="entry-num-link">2.05</a></td>
-            <td>
-              <span class="classification-badge badge-rule">Inference Rule</span>
-              <strong style="color: #fff; margin-left: 6px;">Exists Abstraction (EA / Bernays)</strong>
-              
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.05: Exists Abstraction) :: Exists Abstraction</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>((⟦[α@Fm.Expression]⟧ → ⟦[β@Fm.Expression]⟧) |- ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type]) ⟦[α@Fm.Expression]⟧) → ⟦[β@Fm.Expression]⟧))</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Dual eigenvariable condition: v_x not free in consequent ψ or assumptions.</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="(φ → ψ) ⊢ (∃(x : Class) (φ → ψ))" data-unicode-colored="(φ &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; ψ) &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; (&lt;a href=&quot;../manual.html#rule-ei&quot; class=&quot;sym-inline-link&quot; title=&quot;2.03 Existential Quantifier — (∃: ((Class → Bool) → Bool)) / ((∃) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∃&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) (φ &lt;a href=&quot;../manual.html#item-1-01&quot; class=&quot;sym-inline-link&quot; title=&quot;1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) / ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;→&lt;/span&gt;&lt;/a&gt; ψ))"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\frac{(\phi {\color{#38bdf8}{\to}} \psi)}{{\color{#fde047}{\exists}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; (\phi {\color{#38bdf8}{\to}} \psi)}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{(\phi {\color{#38bdf8}{\to}} \psi)}{{\color{#fde047}{\exists}} {\color{#f87171}{x}} \; (\phi {\color{#38bdf8}{\to}} \psi)}\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#rule-ei" class="sym-def-chip" title="2.03 Existential Quantifier — Standard: (∃: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∃) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∃: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∃) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#item-1-01" class="sym-def-chip" title="1.01 Implication Connective (Variant 1 Syntactic) / Function Class (Variant 2 Semantic) — Standard: (→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class) | Non-Ambiguous: ((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)"><span class="view-not-std">(→: (Bool × Bool → Bool)) | Variant 2: ((A → B): Class)</span><span class="view-not-unambig">((→) :: ((Bool × Bool) → Bool)) | Variant 2: ((A → B) :: Class)</span></a> <a href="../manual.html#rule-mp" class="sym-def-chip" title="Sequent / Provability Judgement Turnstile — Standard: (⊢: (Theory × Ctx × Fm → Stmt)) | Non-Ambiguous: ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))"><span class="view-not-std">(⊢: (Theory × Ctx × Fm → Stmt))</span><span class="view-not-unambig">((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell"><a href="../metatheory.html#nfv-vx-psi" class="side-condition-link"><span class="view-typing"><span class="view-not-unambig">\(({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}}))\)</span><span class="view-not-std">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span></span><span class="view-membership" style="display:none;"><span class="view-not-unambig">\(({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}}))\)</span><span class="view-not-std">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, \psi) {\color{#38bdf8}{\land}} {\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span></span></a></td>
-            <td style="text-align: center;"><a href="../proofs/rule-ea.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
-          </tr>
-            
-
-          <tr id="rule-gen" data-num="2.06">
-            <td class="num-cell" style="text-align: center;"><a id="2.06" href="#2.06" class="entry-num-link">2.06</a></td>
-            <td>
-              <span class="classification-badge badge-rule">Inference Rule</span>
-              <strong style="color: #fff; margin-left: 6px;">Generalisation (Gen)</strong>
-              
-              <details style="margin-top: 4px; font-size: 0.74rem; color: #38bdf8; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); padding: 2px 7px; border-radius: 4px;"><summary style="cursor: pointer; font-weight: 600; user-select: none;">⚡ SML Kernel AST: <code>program/types/foundations.ML (2.06: Generalisation (admissible rule)) :: Generalisation (admissible rule)</code></summary><pre style="margin: 4px 0 0; padding: 6px 8px; background: #020617; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 4px; color: #e2e8f0; font-family: monospace; font-size: 0.72rem; white-space: pre-wrap; overflow-x: auto;"><code>(⟦[α@Fm.Expression]⟧ |- (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type]) ⟦[α@Fm.Expression]⟧))</code></pre></details>
-              <details class="comment-toggle"><summary class="comment-link">▸ Note</summary><div class="entry-notes">Universal generalization over variable identifier v_x not free in active context Γ.</div></details>
-            </td>
-            <td class="formula-cell" data-unicode="φ ⊢ ∀(x : Class) φ" data-unicode-colored="φ &lt;a href=&quot;../manual.html#rule-mp&quot; class=&quot;sym-inline-link&quot; title=&quot;Sequent / Provability Judgement Turnstile — (⊢: (Theory × Ctx × Fm → Stmt)) / ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))&quot;&gt;&lt;span style=&quot;color:#38bdf8;font-weight:bold;&quot;&gt;⊢&lt;/span&gt;&lt;/a&gt; &lt;a href=&quot;../manual.html#item-2-01&quot; class=&quot;sym-inline-link&quot; title=&quot;2.01 Universal Quantifier — (∀: ((Class → Bool) → Bool)) / ((∀) :: ((Class → Bool) → Bool))&quot;&gt;&lt;span style=&quot;color:#fde047;font-weight:bold;&quot;&gt;∀&lt;/span&gt;&lt;/a&gt;(&lt;span class=&quot;obj-var&quot; style=&quot;color:#f87171;font-style:italic;font-weight:600;&quot;&gt;x&lt;/span&gt; : &lt;a href=&quot;../manual.html#item-3-47&quot; class=&quot;sym-inline-link&quot; title=&quot;Sort of Classes (Morse-Kelley / NBG) — (Class: Type) / (Class :: Type)&quot;&gt;&lt;span style=&quot;color:#22d3ee;font-weight:bold;font-style:normal;&quot;&gt;Class&lt;/span&gt;&lt;/a&gt;) φ"><div class="formula-render-target"><div class="view-typing formula-chunk">\(\frac{\phi}{{\color{#fde047}{\forall}} ({\color{#f87171}{x}} : {\color{#22d3ee}{\mathsf{Class}}})\; \phi}\)</div><div class="view-membership formula-chunk" style="display:none;">\(\frac{\phi}{{\color{#fde047}{\forall}} {\color{#f87171}{x}} \; \phi}\)</div></div><div class="formula-sym-links"><span class="sym-links-label">Symbols:</span> <a href="../manual.html#item-2-01" class="sym-def-chip" title="2.01 Universal Quantifier — Standard: (∀: ((Class → Bool) → Bool)) | Non-Ambiguous: ((∀) :: ((Class → Bool) → Bool))"><span class="view-not-std">(∀: ((Class → Bool) → Bool))</span><span class="view-not-unambig">((∀) :: ((Class → Bool) → Bool))</span></a> <a href="../manual.html#rule-mp" class="sym-def-chip" title="Sequent / Provability Judgement Turnstile — Standard: (⊢: (Theory × Ctx × Fm → Stmt)) | Non-Ambiguous: ((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))"><span class="view-not-std">(⊢: (Theory × Ctx × Fm → Stmt))</span><span class="view-not-unambig">((⊢) :: ((Theory × (Ctx × Fm)) → Stmt))</span></a> <a href="../manual.html#item-3-47" class="sym-def-chip" title="Sort of Classes (Morse-Kelley / NBG) — Standard: (Class: Type) | Non-Ambiguous: (Class :: Type)"><span class="view-not-std">(Class: Type)</span><span class="view-not-unambig">(Class :: Type)</span></a></div></td>
-            <td class="syntax-cell"><a href="../metatheory.html#nfv-vx-gamma" class="side-condition-link"><span class="view-typing">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span><span class="view-membership" style="display:none;">\({\color{#fb923c}{\mathrm{NFV}}}({\color{#f472b6}{\mathbf{v}}}_x, {\color{#f472b6}{\Gamma}})\)</span></a></td>
-            <td style="text-align: center;"><a href="../proofs/rule-gen.html" class="status-badge badge-rule-status">Primitive Rule</a></td>
-          </tr>
-            
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Discourse domain is non-empty <a href="../manual.html#label-discourse-domain-is-non-empty" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-discourse-domain-is-non-empty</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-axiom">Axiom</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/exists-binder.html" class="sym-link" title="Existential quantifier binder (Constructor: HP (TpExis ...))">∃</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Class variable K">K</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/exists-binder.html}{\exists} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{K} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/top-const.html}{\top} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(∃([K@Variable]:[Class@Type])⊤)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Postulated (Kernel Axiom) &middot; <a href="../proofs/item-2.01.html" class="sym-link">Standalone Entry (2.01) &rarr;</a> &middot; <a href="../manual.html#label-discourse-domain-is-non-empty" class="sym-link"><code>#label-discourse-domain-is-non-empty</code></a></td>
+            </tr>
             </tbody>
           </table>
-        </div>
-        
-  </div>
+        </td>
+      </tr>
+      <tr id="item-2.02" class="external-row">
+        <td class="external-num"><span id="label-forall-instantiation"></span><span id="label-forall-instantiation-2-02"></span><a href="#item-2.02" class="num-anchor">2.02</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Forall Instantiation <a href="../manual.html#label-forall-instantiation" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-forall-instantiation</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Term / Expression metavariable t">t</a></span><a href="../symbols/substitution-let.html" class="sym-link" title="Capture-avoiding substitution slash ([t/x])">/</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/image-op.html}{[} \href{../symbols/variables.html}{t} \href{../symbols/substitution-let.html}{/} \href{../symbols/variables.html}{x} \href{../symbols/image-op.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Side Condition</th>
+              <td class="field-value">
+                <div class="formula-unicode side-cond"><a href="../symbols/hygiene-ffi-fv.html" class="sym-link" title="Free For Instantiation capture-avoidance predicate symbol (Constructor: HP (TpFFI ...))">FFI</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Term / Expression metavariable t">t</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/variable-expression.html" class="sym-link" title="Parameterized Kernel Expression sort (A.Expression)">Expression</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex side-cond">\(\href{../symbols/hygiene-ffi-fv.html}{\mathrm{FFI}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{t} \href{../symbols/typing-colon.html}{:} \href{../symbols/variables.html}{X} \href{../symbols/delimiters-brackets.html}{.} \href{../symbols/variable-expression.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-2.02.html" class="sym-link">Standalone Entry (2.02) &rarr;</a> &middot; <a href="../manual.html#label-forall-instantiation" class="sym-link"><code>#label-forall-instantiation</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="item-2.03" class="external-row">
+        <td class="external-num"><span id="label-exists-instantiation"></span><span id="label-exists-instantiation-2-03"></span><a href="#item-2.03" class="num-anchor">2.03</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Exists Instantiation <a href="../manual.html#label-exists-instantiation" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-exists-instantiation</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Term / Expression metavariable t">t</a></span><a href="../symbols/substitution-let.html" class="sym-link" title="Capture-avoiding substitution slash ([t/x])">/</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/exists-binder.html" class="sym-link" title="Existential quantifier binder (Constructor: HP (TpExis ...))">∃</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/image-op.html}{[} \href{../symbols/variables.html}{t} \href{../symbols/substitution-let.html}{/} \href{../symbols/variables.html}{x} \href{../symbols/image-op.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/exists-binder.html}{\exists} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Side Condition</th>
+              <td class="field-value">
+                <div class="formula-unicode side-cond"><a href="../symbols/hygiene-ffi-fv.html" class="sym-link" title="Free For Instantiation capture-avoidance predicate symbol (Constructor: HP (TpFFI ...))">FFI</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Term / Expression metavariable t">t</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/variable-expression.html" class="sym-link" title="Parameterized Kernel Expression sort (A.Expression)">Expression</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex side-cond">\(\href{../symbols/hygiene-ffi-fv.html}{\mathrm{FFI}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{t} \href{../symbols/typing-colon.html}{:} \href{../symbols/variables.html}{X} \href{../symbols/delimiters-brackets.html}{.} \href{../symbols/variable-expression.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-2.03.html" class="sym-link">Standalone Entry (2.03) &rarr;</a> &middot; <a href="../manual.html#label-exists-instantiation" class="sym-link"><code>#label-exists-instantiation</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="item-2.04" class="external-row">
+        <td class="external-num"><span id="label-forall-abstraction"></span><span id="label-forall-abstraction-2-04"></span><a href="#item-2.04" class="num-anchor">2.04</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Forall Abstraction <a href="../manual.html#label-forall-abstraction" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-forall-abstraction</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/turnstile-derivability.html}{\vdash}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>((⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Side Condition</th>
+              <td class="field-value">
+                <div class="formula-unicode side-cond"><a href="../symbols/hygiene-ffi-fv.html" class="sym-link" title="Not Free Variable eigenvariable predicate symbol (NFV)">NFV</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex side-cond">\(\href{../symbols/hygiene-ffi-fv.html}{\mathrm{NFV}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{X} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-2.04.html" class="sym-link">Standalone Entry (2.04) &rarr;</a> &middot; <a href="../manual.html#label-forall-abstraction" class="sym-link"><code>#label-forall-abstraction</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="item-2.05" class="external-row">
+        <td class="external-num"><span id="label-exists-abstraction"></span><span id="label-exists-abstraction-2-05"></span><a href="#item-2.05" class="num-anchor">2.05</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Exists Abstraction <a href="../manual.html#label-exists-abstraction" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-exists-abstraction</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/exists-binder.html" class="sym-link" title="Existential quantifier binder (Constructor: HP (TpExis ...))">∃</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/turnstile-derivability.html}{\vdash}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/exists-binder.html}{\exists} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>((⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)→⟦[𝛃@Fm.Expression]⟧))</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Side Condition</th>
+              <td class="field-value">
+                <div class="formula-unicode side-cond"><a href="../symbols/hygiene-ffi-fv.html" class="sym-link" title="Not Free Variable eigenvariable predicate symbol (NFV)">NFV</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable beta (beta : Fm)">𝛃</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex side-cond">\(\href{../symbols/hygiene-ffi-fv.html}{\mathrm{NFV}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{X} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-2.05.html" class="sym-link">Standalone Entry (2.05) &rarr;</a> &middot; <a href="../manual.html#label-exists-abstraction" class="sym-link"><code>#label-exists-abstraction</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="item-2.06" class="external-row">
+        <td class="external-num"><span id="label-generalisation-admissible-rule"></span><span id="label-generalisation-admissible-rule-2-06"></span><a href="#item-2.06" class="num-anchor">2.06</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Generalisation (admissible rule) <a href="../manual.html#label-generalisation-admissible-rule" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-generalisation-admissible-rule</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a> <a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Class or Type variable X">X</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-cyan"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]}  \href{../symbols/turnstile-derivability.html}{\vdash}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/typing-colon.html}{:} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{X} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-2.06.html" class="sym-link">Standalone Entry (2.06) &rarr;</a> &middot; <a href="../manual.html#label-generalisation-admissible-rule" class="sym-link"><code>#label-generalisation-admissible-rule</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </main>
   <script>
-    function setDialectMode(mode) {
-      if (mode === 'membership') {
-        document.body.classList.add('mode-membership');
-        document.getElementById('btn-dialect-membership').classList.add('active');
-        document.getElementById('btn-dialect-typing').classList.remove('active');
-      } else {
-        document.body.classList.remove('mode-membership');
-        document.getElementById('btn-dialect-typing').classList.add('active');
-        document.getElementById('btn-dialect-membership').classList.remove('active');
+    function setFormatMode(mode) {
+      document.body.classList.remove('mode-unicode', 'mode-latex');
+      document.body.classList.add('mode-' + mode);
+      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
+      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
+      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
       }
-      localStorage.setItem('obelisk_notation_mode', mode);
-      if (window.MathJax && window.MathJax.typesetPromise) window.MathJax.typesetPromise();
     }
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('obelisk_notation_mode') || 'membership';
-      setDialectMode(saved);
-    });
   </script>
 </body>
 </html>

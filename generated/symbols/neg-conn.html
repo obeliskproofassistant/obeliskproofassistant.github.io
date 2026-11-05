@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -342,6 +343,11 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
         </div>
       </div>
     </div>
@@ -451,6 +457,14 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>((¬⟦[𝛂@Fm.Expression]⟧)→(⟦[𝛂@Fm.Expression]⟧→⊥))</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Negation Elimination (Contradiction to Bottom): (¬⟦𝛂⟧) → (⟦𝛂⟧ → ⊥).</td>
+            </tr>
+            <tr>
               <th class="field-name">Verification</th>
               <td class="field-value proof-cell">Postulated (Kernel Axiom) &middot; <a href="../proofs/item-1.09.html" class="sym-link">Standalone Entry (1.09) &rarr;</a> &middot; <a href="../manual.html#label-a09" class="sym-link"><code>#label-a09</code></a></td>
             </tr>
@@ -479,6 +493,14 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>((⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧)→((⟦[𝛂@Fm.Expression]⟧→¬⟦[𝛃@Fm.Expression]⟧)→¬⟦[𝛂@Fm.Expression]⟧))</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Negation Introduction (Reductio Ad Absurdum): (⟦𝛂⟧ → ⟦𝛃⟧) → ((⟦𝛂⟧ → ¬⟦𝛃⟧) → ¬⟦𝛂⟧).</td>
+            </tr>
+            <tr>
               <th class="field-name">Verification</th>
               <td class="field-value proof-cell">Postulated (Kernel Axiom) &middot; <a href="../proofs/item-1.10.html" class="sym-link">Standalone Entry (1.10) &rarr;</a> &middot; <a href="../manual.html#label-a10" class="sym-link"><code>#label-a10</code></a></td>
             </tr>
@@ -505,6 +527,10 @@
                 <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/or-conn.html" class="sym-link" title="Logical disjunction connective (Constructor: HP (TpOr ...))">∨</a><a href="../symbols/neg-conn.html" class="sym-link" title="Logical negation connective (Constructor: HP (TpNeg ...))">¬</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable alpha (alpha : Fm)">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
                 <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/or-conn.html}{\lor} \href{../symbols/neg-conn.html}{\neg} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(⟦[𝛂@Fm.Expression]⟧∨¬⟦[𝛂@Fm.Expression]⟧)</code></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>

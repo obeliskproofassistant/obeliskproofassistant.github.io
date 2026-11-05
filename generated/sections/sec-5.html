@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Entity Database &mdash; 5. Incompleteness-Related Statements</title>
+  <title>Obelisk Entity Database &mdash; 5. Incompleteness-Related Statements (5.01&ndash;5.02)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -319,6 +319,7 @@
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
 <body class="mode-unicode">
   <header>
@@ -335,7 +336,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Obelisk Entity Database &mdash; 5. Incompleteness-Related Statements</h1>
+      <h1>Obelisk Entity Database &mdash; 5. Incompleteness-Related Statements (5.01&ndash;5.02)</h1>
       <p class="subtitle">Formalized Löb's theorem and Gödel's second incompleteness theorem. (Generated directly from <code>newchecker.ML</code> via <code>html_generator.ML</code>).</p>
       <div class="controls-bar">
         <div class="control-group">
@@ -343,9 +344,14 @@
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
         </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+        </div>
       </div>
       <nav class="toc-nav">
-        <a class="toc-link" href="../manual.html#sec-1">1. Propositional Logic (1.01&ndash;1.13)</a>
+        <a class="toc-link" href="../manual.html#sec-1">1. Propositional Logic (1.01&ndash;1.14)</a>
         <a class="toc-link" href="../manual.html#sec-2">2. Predicate Logic (2.01&ndash;2.06)</a>
         <a class="toc-link" href="../manual.html#sec-3">3. Set/Class Foundations (3.01&ndash;3.78)</a>
         <a class="toc-link" href="../manual.html#sec-4">4. Metalogical Laws (4.01&ndash;4.06)</a>
@@ -356,7 +362,7 @@
   <main>
   <section class="manual-section" id="sec-5">
     <div class="section-header">
-      <h2>5. Incompleteness-Related Statements</h2>
+      <h2>5. Incompleteness-Related Statements (5.01&ndash;5.02)</h2>
       <p class="section-desc">Formalized Löb's theorem and Gödel's second incompleteness theorem.</p>
     </div>
     <div class="table-container">
@@ -389,6 +395,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])→⟦[𝛗@Fm.Expression]⟧›)→(𝘛,[]⊢[𝛗@Fm.Expression])›))</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Kernel Note</th>
               <td class="field-value proof-cell">Here <span class="ansi-light-magenta">𝘌</span> ∈ {IΣ₁, PA, <span class="ansi-light-magenta">𝘛</span>, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory <span class="ansi-light-magenta">𝘛</span> (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek &amp; Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 &amp; Ch. III; Bezboruah &amp; Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).</td>
             </tr>
@@ -419,6 +429,10 @@
                 <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-magenta"><a href="../symbols/theory-sort.html" class="sym-link" title="Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK}">𝘌</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/ctx-sort.html" class="sym-link" title="Empty Dunaev class-list / empty hypothesis context []">[]</a><a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a><a href="../symbols/quotation.html" class="sym-link" title="Left object-language syntactic quotation bracket <phi> (Constructor: HQuote)">‹</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/neg-conn.html" class="sym-link" title="Logical negation connective (Constructor: HP (TpNeg ...))">¬</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-magenta"><a href="../symbols/theory-sort.html" class="sym-link" title="Recursively Enumerable Base Class Theory T (Constructor: HI IpTau)">𝘛</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/ctx-sort.html" class="sym-link" title="Empty Dunaev class-list / empty hypothesis context []">[]</a><a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a><a href="../symbols/quotation.html" class="sym-link" title="Left object-language syntactic quotation bracket <phi> (Constructor: HQuote)">‹</a><span class="ansi-bold-blue"><a href="../symbols/bot-const.html" class="sym-link" title="Falsum / logical falsity constant (Constructor: HP TpBot)">⊥</a></span><a href="../symbols/quotation.html" class="sym-link" title="Right object-language syntactic quotation bracket <phi> (Constructor: HQuote)">›</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective / function arrow (Constructor: HP (TpImpl ...))">→</a><a href="../symbols/neg-conn.html" class="sym-link" title="Logical negation connective (Constructor: HP (TpNeg ...))">¬</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-magenta"><a href="../symbols/theory-sort.html" class="sym-link" title="Recursively Enumerable Base Class Theory T (Constructor: HI IpTau)">𝘛</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/ctx-sort.html" class="sym-link" title="Empty Dunaev class-list / empty hypothesis context []">[]</a><a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a><a href="../symbols/quotation.html" class="sym-link" title="Left object-language syntactic quotation bracket <phi> (Constructor: HQuote)">‹</a><a href="../symbols/neg-conn.html" class="sym-link" title="Logical negation connective (Constructor: HP (TpNeg ...))">¬</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-magenta"><a href="../symbols/theory-sort.html" class="sym-link" title="Recursively Enumerable Base Class Theory T (Constructor: HI IpTau)">𝘛</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><a href="../symbols/ctx-sort.html" class="sym-link" title="Empty Dunaev class-list / empty hypothesis context []">[]</a><a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a><a href="../symbols/quotation.html" class="sym-link" title="Left object-language syntactic quotation bracket <phi> (Constructor: HQuote)">‹</a><span class="ansi-bold-blue"><a href="../symbols/bot-const.html" class="sym-link" title="Falsum / logical falsity constant (Constructor: HP TpBot)">⊥</a></span><a href="../symbols/quotation.html" class="sym-link" title="Right object-language syntactic quotation bracket <phi> (Constructor: HQuote)">›</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/quotation.html" class="sym-link" title="Right object-language syntactic quotation bracket <phi> (Constructor: HQuote)">›</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/quotation.html" class="sym-link" title="Right object-language syntactic quotation bracket <phi> (Constructor: HQuote)">›</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
                 <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/theory-sort.html}{\mathcal{E}} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/ctx-sort.html}{[\,]} \href{../symbols/turnstile-derivability.html}{\vdash} \href{../symbols/quotation.html}{\langle } \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/neg-conn.html}{\neg} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/theory-sort.html}{\mathcal{T}} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/ctx-sort.html}{[\,]} \href{../symbols/turnstile-derivability.html}{\vdash} \href{../symbols/quotation.html}{\langle } \href{../symbols/bot-const.html}{\bot} \href{../symbols/quotation.html}{\rangle } \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/impl-conn.html}{\rightarrow} \href{../symbols/neg-conn.html}{\neg} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/theory-sort.html}{\mathcal{T}} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/ctx-sort.html}{[\,]} \href{../symbols/turnstile-derivability.html}{\vdash} \href{../symbols/quotation.html}{\langle } \href{../symbols/neg-conn.html}{\neg} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/theory-sort.html}{\mathcal{T}} \href{../symbols/delimiters-brackets.html}{,} \href{../symbols/ctx-sort.html}{[\,]} \href{../symbols/turnstile-derivability.html}{\vdash} \href{../symbols/quotation.html}{\langle } \href{../symbols/bot-const.html}{\bot} \href{../symbols/quotation.html}{\rangle } \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/quotation.html}{\rangle } \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/quotation.html}{\rangle } \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)</code></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
