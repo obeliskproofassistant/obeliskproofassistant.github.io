@@ -60,22 +60,22 @@
 
 [2.02] Forall Instantiation (Inference Rule)
   Formula:        ((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)→⟦𝛗[t/x]⟧)
-  Side Condition: ⟦term t is free for substitution instead of all samely typed free occurences of the variable x in the formula 𝛗⟧
+  Side Condition: FFI((t:X.Expression),x,(𝛗:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
 [2.03] Exists Instantiation (Inference Rule)
   Formula:        (⟦𝛗[t/x]⟧→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)
-  Side Condition: ⟦term t is free for substitution instead of all samely typed free occurences of the variable x in the formula 𝛗⟧
+  Side Condition: FFI((t:X.Expression),x,(𝛗:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
 [2.04] Forall Abstraction (Inference Rule)
   Formula:        ((⟦𝛃⟧→⟦𝛂⟧) ⊢ (⟦𝛃⟧→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
-  Side Condition: ⟦name x does not occure free as a variable of type X in formula 𝛃⟧
+  Side Condition: NFV(X,x,(𝛃:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
 [2.05] Exists Abstraction (Inference Rule)
   Formula:        ((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))
-  Side Condition: ⟦name x does not occure free as a variable of type X in formula 𝛃⟧
+  Side Condition: NFV(X,x,(𝛃:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
 [2.06] Generalisation (admissible rule) (Inference Rule)
@@ -84,7 +84,7 @@
 
 [3.01] Class comprehension (Inference Rule)
   Formula:        ((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})⟷((⦃x⦄ set)∧⟦𝛗⟧))
-  Side Condition: ⟦(x:Name)⟧ ∧ ⟦(𝛗:Fm)⟧
+  Side Condition: (x:Name) ∧ (𝛗:Fm)
   Verification:   Primitive / Derived Rule (Kernel)
 
 [3.02] “Is a set” predicate (Definition)
@@ -168,7 +168,7 @@
   Verification:   Definitional (Kernel AST)
 
 [3.22] IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
-  Formula:        (∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬(Enc(⦃v⦄)∈FV(𝛙:Bool)))→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
+  Formula:        (∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬(Enc(⦃v⦄)∈FV(𝛙:Fm)))→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
   Verification:   Definitional (Kernel AST)
 
 [3.23] simple_if (polymorphic non-dependent conditional over Type) (Definition)
@@ -426,7 +426,7 @@
   Verification:   Primitive / Derived Rule (Kernel)
 
 [4.04] Quantifier “unique”(meta,WIP) (Definition)
-  Formula:        (∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)⟷(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))→(x=y)))))
+  Formula:        (∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)⟷(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))→(x=y)))))
   Verification:   Definitional (Kernel AST)
 
 [4.05] Quantifier “exists and unique”(meta,WIP) (Definition)
@@ -434,7 +434,7 @@
   Verification:   Definitional (Kernel AST)
 
 [4.06] Class comprehension axiom schema(meta,WIP) (Axiom)
-  Formula:        (∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(FFI((k:Class),‹x›,(𝛗:Bool))→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})⟷((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))
+  Formula:        (∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(FFI((k:Class.Expression),‹x›,(𝛗:Fm))→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})⟷((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))
   Verification:   Postulated (Kernel Axiom)
 
 [5.01] Löb's theorem(WIP) (Theorem)

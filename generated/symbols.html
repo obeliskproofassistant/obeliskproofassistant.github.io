@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Proof Assistant &mdash; Algorithmic Symbol &amp; Type Index</title>
+  <title>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</title>
   <script>
     window.MathJax = {
       tex: {
@@ -335,8 +335,8 @@
         <a class="nav-link" href="theory_db.json">JSON DB</a>
         <a class="nav-link" href="../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Obelisk Proof Assistant &mdash; Algorithmic Symbol &amp; Type Index</h1>
-      <p class="subtitle">Directly generated from <code>word_symbols</code> and <code>utf8_operators</code> in <code>set_theory_prover/program/html_generator.ML</code> (177 hyperlinked symbols, types, and personal symbol pages). See also <a href="symbols/index.html" style="color: #38bdf8;">Personal Symbol Reference Pages (<code>generated/symbols/index.html</code>) &rarr;</a>.</p>
+      <h1>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</h1>
+      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (177 entries) + <a href="symbols/index.html" style="color: #38bdf8;">27 Personal Symbol Reference Pages &rarr;</a>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -347,9 +347,388 @@
     </div>
   </header>
   <main>
+  <section class="manual-section" id="symbols-table">
+    <div class="section-header">
+      <h2>1. Kernel &amp; Object Symbols Table (Constants, Functions, Predicates, Connectives &amp; Binders)</h2>
+      <p class="section-desc">Structured by Symbol Kind, Metatype/Signature, Semantic Explanation in MKTD1/MKTD2, and Direct Hyperlinks to Defining Axioms &amp; Definitions.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Symbol Kind</th>
+            <th>Metatype / Signature</th>
+            <th>Kernel Meaning &amp; Semantics</th>
+            <th>Defining Axioms, Rules &amp; Definitions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="sym-impl" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">→</a></div>
+              <div class="formula-latex">\(\href{symbols/binders.html}{\rightarrow}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective / Function Arrow</span></td>
+            <td class="external-entity"><code>Fm × Fm → Fm  |  Type × Type → Type</code></td>
+            <td class="external-entity">Material implication on formulas (Variant 1) and non-dependent function type constructor (Variant 2). (<a href="symbols/binders.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.01" class="sym-link">1.01 (A01 Weakening)</a> &middot; <a href="manual.html#item-1.02" class="sym-link">1.02 (A02 Frege)</a> &middot; <a href="manual.html#item-1.04" class="sym-link">1.04 (Modus Ponens)</a></td>
+          </tr>
+          <tr id="sym-iff" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">⟷</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\longleftrightarrow}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective</span></td>
+            <td class="external-entity"><code>Fm × Fm → Fm</code></td>
+            <td class="external-entity">Logical bi-implication (equivalence) of formulas. (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.12" class="sym-link">1.12 (Equivalence Def)</a> &middot; <a href="manual.html#item-1.13" class="sym-link">1.13 (Reflexivity of ⟷)</a></td>
+          </tr>
+          <tr id="sym-and" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">∧</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\land}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective</span></td>
+            <td class="external-entity"><code>Fm × Fm → Fm</code></td>
+            <td class="external-entity">Logical conjunction (product proposition in Variant 2). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.03" class="sym-link">1.03 (A03 ∧-Elim 1)</a> &middot; <a href="manual.html#item-1.04" class="sym-link">1.04 (A04 ∧-Elim 2)</a> &middot; <a href="manual.html#item-1.05" class="sym-link">1.05 (A05 ∧-Intro)</a></td>
+          </tr>
+          <tr id="sym-or" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">∨</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\lor}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective</span></td>
+            <td class="external-entity"><code>Fm × Fm → Fm</code></td>
+            <td class="external-entity">Logical disjunction (sum proposition in Variant 2). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.06" class="sym-link">1.06 (A06 ∨-Intro 1)</a> &middot; <a href="manual.html#item-1.07" class="sym-link">1.07 (A07 ∨-Intro 2)</a> &middot; <a href="manual.html#item-1.08" class="sym-link">1.08 (A08 ∨-Elim)</a></td>
+          </tr>
+          <tr id="sym-neg" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">¬</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\neg}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective</span></td>
+            <td class="external-entity"><code>Fm → Fm</code></td>
+            <td class="external-entity">Logical negation (¬𝛂 ≡ 𝛂 → ⊥). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.09" class="sym-link">1.09 (A09 Contraposition)</a> &middot; <a href="manual.html#item-1.10" class="sym-link">1.10 (Double Negation / Classical)</a></td>
+          </tr>
+          <tr id="sym-top-bot" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">⊤ / ⊥</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\top / \bot}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Logical Constants (0-ary)</span></td>
+            <td class="external-entity"><code>Fm  |  Bool</code></td>
+            <td class="external-entity">Truth (⊤ / true) and Falsity (⊥ / false), both as formulas and as canonical inhabitants of Bool. (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.10" class="sym-link">1.10 (⊥ Axiom)</a> &middot; <a href="manual.html#item-1.11" class="sym-link">1.11 (⊤ Def)</a> &middot; <a href="manual.html#item-3.21" class="sym-link">3.21 (Bool Type)</a></td>
+          </tr>
+          <tr id="sym-in" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/typing-colon.html" class="sym-link">∈</a></div>
+              <div class="formula-latex">\(\href{symbols/typing-colon.html}{\in}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Binary Predicate Symbol (Kernel Primitive)</span></td>
+            <td class="external-entity"><code>Class.Expression × Class.Expression → Fm</code></td>
+            <td class="external-entity">Primitive class membership relation (x ∈ Y). Any element of a class is a set (3.02). Never used for typing (use ':'). (<a href="symbols/typing-colon.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.01" class="sym-link">3.01 (Extensionality)</a> &middot; <a href="manual.html#item-3.02" class="sym-link">3.02 (Sethood Predicate)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (Comprehension Schema)</a></td>
+          </tr>
+          <tr id="sym-eq" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/delimiters-brackets.html" class="sym-link">=</a></div>
+              <div class="formula-latex">\(\href{symbols/delimiters-brackets.html}{=}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Binary Predicate Symbol (Kernel Primitive)</span></td>
+            <td class="external-entity"><code>Π(A:Type). A.Expression × A.Expression → Fm</code></td>
+            <td class="external-entity">Extensional equality on classes (3.01) and propositional identity across typed terms (3.10). (<a href="symbols/delimiters-brackets.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.01" class="sym-link">3.01 (Class Extensionality)</a> &middot; <a href="manual.html#item-3.10" class="sym-link">3.10 (Equality Substitution)</a></td>
+          </tr>
+          <tr id="sym-set-pred" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/class-type.html" class="sym-link">set / proper</a></div>
+              <div class="formula-latex">\(\href{symbols/class-type.html}{\mathsf{set} / \mathsf{proper}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Unary Predicate Symbols</span></td>
+            <td class="external-entity"><code>Class.Expression → Fm</code></td>
+            <td class="external-entity">Sethood predicate (x set ⇔ ∃u:Class. x ∈ u) and proper-class predicate (x proper ⇔ ¬(x set)). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.02" class="sym-link">3.02 (Set Predicate Def)</a> &middot; <a href="manual.html#item-3.03" class="sym-link">3.03 (Proper Class Def)</a> &middot; <a href="manual.html#item-3.05" class="sym-link">3.05 (Universal Class V)</a></td>
+          </tr>
+          <tr id="sym-emptyset-v" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/class-type.html" class="sym-link">∅ / V / On / ω</a></div>
+              <div class="formula-latex">\(\href{symbols/class-type.html}{\emptyset / \mathbf{V} / \mathbf{On} / \omega}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Class Constants (0-ary)</span></td>
+            <td class="external-entity"><code>Class.Expression</code></td>
+            <td class="external-entity">Empty class ∅ (3.04), universal class of all sets V (3.05), class of all ordinals On (3.17), and smallest successor-inductive class/ordinal ω (3.56). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.04" class="sym-link">3.04 (∅ Def)</a> &middot; <a href="manual.html#item-3.05" class="sym-link">3.05 (V Def)</a> &middot; <a href="manual.html#item-3.17" class="sym-link">3.17 (On Def)</a> &middot; <a href="manual.html#item-3.56" class="sym-link">3.56 (ω Def)</a></td>
+          </tr>
+          <tr id="sym-class-ops" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/class-type.html" class="sym-link">⊆ / ∪ / ∩ / ⋃ / ⋂ / 𝒫</a></div>
+              <div class="formula-latex">\(\href{symbols/class-type.html}{\subseteq / \cup / \cap / \bigcup / \bigcap / \mathcal{P}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Class Functional &amp; Relational Symbols</span></td>
+            <td class="external-entity"><code>Class.Expression → Class.Expression</code></td>
+            <td class="external-entity">Subclass relation (3.06), binary union/intersection (3.53-3.54), unary union/intersection (3.19-3.20), and powerclass 𝒫 (3.13). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.06" class="sym-link">3.06 (Subclass ⊆)</a> &middot; <a href="manual.html#item-3.13" class="sym-link">3.13 (Powerclass 𝒫)</a> &middot; <a href="manual.html#item-3.19" class="sym-link">3.19 (Unary Union ⋃)</a> &middot; <a href="manual.html#item-3.20" class="sym-link">3.20 (Unary Intersection ⋂)</a> &middot; <a href="manual.html#item-3.53" class="sym-link">3.53 (Binary Union ∪)</a> &middot; <a href="manual.html#item-3.54" class="sym-link">3.54 (Binary Intersection ∩)</a></td>
+          </tr>
+          <tr id="sym-conditionals" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">IF..FI / simple_if / ifᵈₑₚ</a></div>
+              <div class="formula-latex">\(\href{symbols/conditionals-if-dep.html}{\mathbf{IF..FI} / \mathsf{simple\_if} / \mathsf{if}_{\mathsf{dep}}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Conditional Functional Symbols</span></td>
+            <td class="external-entity"><code>Fm × Class × Class → Class  |  Π(b:Bool). T(b)</code></td>
+            <td class="external-entity">Class conditional (3.22, with NFV freshness guard on 𝛙:Fm), simple polymorphic conditional (3.23), and dependent conditional ifᵈₑₚ (3.24). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (IF-THEN-ELSE-FI)</a> &middot; <a href="manual.html#item-3.23" class="sym-link">3.23 (simple_if)</a> &middot; <a href="manual.html#item-3.24" class="sym-link">3.24 (ifᵈₑₚ)</a></td>
+          </tr>
+          <tr id="sym-quote-anti" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/quotation.html" class="sym-link">‹...› / ⟦...⟧ / ⦃...⦄</a></div>
+              <div class="formula-latex">\(\href{symbols/quotation.html}{\lsaquo\dots\rsaquo / \llbracket\dots\rrbracket / \{\!|\dots|\!\}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Kernel Quotation &amp; Antiquotation Operators</span></td>
+            <td class="external-entity"><code>A → A.Expression  |  A.Expression → A</code></td>
+            <td class="external-entity">Explicit syntax quotation ‹...› (reifying object syntax into A.Expression), term/formula antiquotation &amp; semantic evaluation ⟦...⟧, and variable-binder antiquotation ⦃...⦄. (<a href="symbols/quotation.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (Quotation in Class Conditional)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (Meta-Instantiation)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (Comprehension Schema)</a> &middot; <a href="manual.html#item-5.01" class="sym-link">5.01 (Löb's Theorem)</a></td>
+          </tr>
+          <tr id="sym-enc-dec" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/enc.html" class="sym-link">Enc / Dec / MDec / eval</a></div>
+              <div class="formula-latex">\(\href{symbols/enc.html}{\mathsf{Enc} / \mathsf{Dec} / \mathsf{eval}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Kernel Reflection &amp; Coding Symbols</span></td>
+            <td class="external-entity"><code>A.Expression → Class.Expression  |  Type.Expression → Type</code></td>
+            <td class="external-entity">Syntactic Gödel/class encoding Enc, typed decoding Dec/MDec, and type-expression evaluation eval(A). (<a href="symbols/enc.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (Enc in FV guard)</a> &middot; <a href="manual.html#item-3.73" class="sym-link">3.73 (Soundness)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (eval(A).Expression)</a> &middot; <a href="manual.html#item-4.02" class="sym-link">4.02 (Generalisation)</a></td>
+          </tr>
+          <tr id="sym-fv-ffi" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">FV / Ctx.FV / FFI / NFV</a></div>
+              <div class="formula-latex">\(\href{symbols/hygiene-ffi-fv.html}{\mathsf{FV} / \mathsf{Ctx.FV} / \mathsf{FFI} / \mathsf{NFV}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Kernel Syntactic Hygiene Symbols</span></td>
+            <td class="external-entity"><code>A.Expression → Class.Expression  |  A.Expression × Variable × Fm → Bool</code></td>
+            <td class="external-entity">Free-variable class operator FV(e:A.Expression) (defined ONLY on syntactic expressions such as Fm = Bool.Expression or Class.Expression, never on Bool!), context free-variables Ctx.FV, capture-avoiding substitutability FFI, and non-free-variable guard NFV. (<a href="symbols/hygiene-ffi-fv.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-2.02" class="sym-link">2.02 (Forall Instantiation)</a> &middot; <a href="manual.html#item-2.04" class="sym-link">2.04 (Forall Abstraction)</a> &middot; <a href="manual.html#item-3.22" class="sym-link">3.22 (FV(𝛙:Fm))</a> &middot; <a href="manual.html#item-4.02" class="sym-link">4.02 (Ctx.FV(Γ))</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (FFI((k:Class.Expression),‹x›,(𝛗:Fm)))</a></td>
+          </tr>
+          <tr id="sym-binders" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">∀ / ∃ / ∃! / ! / {x|𝛗} / λ / Π / Σ</a></div>
+              <div class="formula-latex">\(\href{symbols/binders.html}{\forall / \exists / \exists! / ! / \{x\mid\varphi\} / \lambda / \Pi / \Sigma}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-def">Variable-Binding Operators (Binders)</span></td>
+            <td class="external-entity"><code>(Variable : Type) × Body → Term/Fm</code></td>
+            <td class="external-entity">Unified family of binders: universal, existential, unique-existential, at-most-one, class comprehension (κ), definite/indefinite descriptors (ι, τ, ε), lambda (λ), dependent product (Π), and dependent sum (Σ). (<a href="symbols/binders.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-2.02" class="sym-link">2.02 (∀ Rules)</a> &middot; <a href="manual.html#item-2.03" class="sym-link">2.03 (∃ Rules)</a> &middot; <a href="manual.html#item-3.38" class="sym-link">3.38 (Σ Type)</a> &middot; <a href="manual.html#item-3.39" class="sym-link">3.39 (Π &amp; λ)</a> &middot; <a href="manual.html#item-4.04" class="sym-link">4.04 (! Def)</a> &middot; <a href="manual.html#item-4.05" class="sym-link">4.05 (∃! Def)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 ({x|𝛗} Schema)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="manual-section" id="types-table">
+    <div class="section-header">
+      <h2>2. Types, Conglomerates &amp; Kernel Sorts Table (Formation, Intro, Elim, Computation &amp; Uniqueness Rules)</h2>
+      <p class="section-desc">Structured type-theoretically: each conglomerate type or syntactic sort is indexed with hyperlinks to its Formation, Introduction, Elimination, Computation (&beta;), and Uniqueness (&eta;/Extensionality) rules.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th>Type / Sort</th>
+            <th>Metatype / Conglomerate Meaning</th>
+            <th>Formation</th>
+            <th>Introduction (Constructors)</th>
+            <th>Elimination (Destructors)</th>
+            <th>Computation (&beta;)</th>
+            <th>Uniqueness (&eta; / Ext)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="type-class" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/class-type.html" class="sym-link">Class</a></div>
+              <div class="formula-latex">\(\href{symbols/class-type.html}{\mathsf{Class}}\)</div>
+            </td>
+            <td class="external-entity"><code>Huge_Col (Default Object Type; Constant-True Conglomerate λ(C:Class). ⊤)</code> (<a href="symbols/class-type.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-2.01" class="sym-link">2.01 (Non-emptiness)</a> &middot; <a href="manual.html#item-3.01" class="sym-link">3.01 (Class Equality)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.04" class="sym-link">3.04 (∅)</a> &middot; <a href="manual.html#item-3.05" class="sym-link">3.05 (V)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (Comprehension {x|𝛗})</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.01" class="sym-link">3.01 (Membership x ∈ Y)</a> &middot; <a href="manual.html#item-3.66" class="sym-link">3.66 (Global Choice)</a></td>
+            <td class="external-entity"><a href="manual.html#item-4.06" class="sym-link">4.06 (κ-Beta: k ∈ {x|𝛗} ⇔ (k set) ∧ 𝛗[k/x])</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.01" class="sym-link">3.01 (Extensionality: ∀z(z∈X ⇔ z∈Y) → X=Y)</a></td>
+          </tr>
+          <tr id="type-bool" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">Bool  (Truth)</a></div>
+              <div class="formula-latex">\(\href{symbols/prop-bool.html}{\mathsf{Bool}}\)</div>
+            </td>
+            <td class="external-entity"><code>Small_Col / Huge_Col (Two-Element Truth Value Type)</code> (<a href="symbols/prop-bool.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.01" class="sym-link">1.01 (Propositional Basis)</a> &middot; <a href="manual.html#item-3.21" class="sym-link">3.21 (Bool Formation)</a></td>
+            <td class="external-entity"><a href="manual.html#item-1.11" class="sym-link">1.11 (⊤ / true)</a> &middot; <a href="manual.html#item-1.10" class="sym-link">1.10 (⊥ / false)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.23" class="sym-link">3.23 (simple_if)</a> &middot; <a href="manual.html#item-3.24" class="sym-link">3.24 (ifᵈₑₚ Dependent Elim)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.23" class="sym-link">3.23 (simple_if(⊤)=t₁, simple_if(⊥)=t₂)</a> &middot; <a href="manual.html#item-3.24" class="sym-link">3.24 (ifᵈₑₚ(⊤)=t₁, ifᵈₑₚ(⊥)=t₂)</a></td>
+            <td class="external-entity"><a href="manual.html#item-1.10" class="sym-link">1.10 (Two-Valued Exhaustiveness / DNE)</a></td>
+          </tr>
+          <tr id="type-fm" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/fm-sort.html" class="sym-link">Fm  (= Bool.Expression)</a></div>
+              <div class="formula-latex">\(\href{symbols/fm-sort.html}{\mathsf{Fm}}\)</div>
+            </td>
+            <td class="external-entity"><code>Huge_Col (Syntactic Formula Expression Type; UExpression TTruth)</code> (<a href="symbols/fm-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.72" class="sym-link">3.72 (Syntactic Formula Sort)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (Fm Quantification)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (Quotation ‹...› : Fm)</a> &middot; <a href="manual.html#item-4.02" class="sym-link">4.02 (‹∀(v:A)⟦𝛗⟧›)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (Antiquotation ⟦𝛙⟧ &amp; FV(𝛙:Fm))</a> &middot; <a href="manual.html#item-3.73" class="sym-link">3.73 (Soundness ⟦ψ⟧)</a></td>
+            <td class="external-entity"><a href="manual.html#item-4.01" class="sym-link">4.01 (let v = t in ⟦𝛗⟧)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (Substitution under FFI)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.72" class="sym-link">3.72 (Injectivity of Enc on Fm)</a></td>
+          </tr>
+          <tr id="type-sigma" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">Σ(a:A), B(a)</a></div>
+              <div class="formula-latex">\(\href{symbols/binders.html}{\Sigma(a:A), B(a)}\)</div>
+            </td>
+            <td class="external-entity"><code>Dependent Sum Conglomerate / Pair Type (3.38)</code> (<a href="symbols/binders.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.38" class="sym-link">3.38 (Σ Formation over Family B)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.38" class="sym-link">3.38 (Dependent Pair ⟨a, b⟩ : Σ(a:A), B(a))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.38" class="sym-link">3.38 (Projections fst(p) : A, snd(p) : B(fst(p)))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.38" class="sym-link">3.38 (Σ-Beta: fst(⟨a,b⟩)=a ∧ snd(⟨a,b⟩)=b)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.38" class="sym-link">3.38 (Σ-Eta: ⟨fst(p), snd(p)⟩ = p)</a></td>
+          </tr>
+          <tr id="type-pi" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">Π(a:A), B(a)</a></div>
+              <div class="formula-latex">\(\href{symbols/binders.html}{\Pi(a:A), B(a)}\)</div>
+            </td>
+            <td class="external-entity"><code>Dependent Product Conglomerate / Function Type (3.39)</code> (<a href="symbols/binders.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.39" class="sym-link">3.39 (Π Formation over Family B)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.39" class="sym-link">3.39 (Lambda λ(a:A). t(a) : Π(a:A), B(a))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.25" class="sym-link">3.25 (Evaluation valOf(f, a))</a> &middot; <a href="manual.html#item-3.39" class="sym-link">3.39 (Application f(a) : B(a))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.39" class="sym-link">3.39 (Π-Beta: (λ(a:A). t(a))(x) = t(x))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.39" class="sym-link">3.39 (Π-Eta: (λ(a:A). f(a)) = f)</a></td>
+          </tr>
+          <tr id="type-nat-omega" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/class-type.html" class="sym-link">Nat  /  ω</a></div>
+              <div class="formula-latex">\(\href{symbols/class-type.html}{\mathsf{Nat} / \omega}\)</div>
+            </td>
+            <td class="external-entity"><code>Peano Natural Numbers / Smallest Successor-Inductive Ordinal (3.50, 3.56)</code> (<a href="symbols/class-type.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.55" class="sym-link">3.55 (Ind Predicate)</a> &middot; <a href="manual.html#item-3.56" class="sym-link">3.56 (ω Def)</a> &middot; <a href="manual.html#item-3.57" class="sym-link">3.57 (Axiom of Infinity: ω set)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.50" class="sym-link">3.50 (0 = ∅, n+1 = n ∪ {n})</a> &middot; <a href="manual.html#item-3.59" class="sym-link">3.59 (Ind(ω))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.56" class="sym-link">3.56 (⊆-Minimality / Peano Induction: Ind(Q) → ω ⊆ Q)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.50" class="sym-link">3.50 (Peano Recursion Base &amp; Step)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.63" class="sym-link">3.63 (ω ∈ On: Ordinal Extensionality)</a></td>
+          </tr>
+          <tr id="type-meta-sorts" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">Ctx / Theory / Stmt / Prf / Variable / Type</a></div>
+              <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathsf{Ctx}, \mathsf{Theory}, \mathsf{Stmt}, \mathsf{Prf}, \mathsf{Variable}, \mathsf{Type}}\)</div>
+            </td>
+            <td class="external-entity"><code>Kernel Metatheoretic &amp;amp; Reflection Sorts</code> (<a href="symbols/theory-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.72" class="sym-link">3.72 (Sequent &amp; Theory Sorts)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (Type, Ctx, Variable Sorts)</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.75" class="sym-link">3.75 (Sequent (𝘞, Γ ⊢ 𝛗))</a></td>
+            <td class="external-entity"><a href="manual.html#item-3.73" class="sym-link">3.73 (Soundness of 𝘍)</a> &middot; <a href="manual.html#item-4.03" class="sym-link">4.03 (CoNecessitation)</a></td>
+            <td class="external-entity"><a href="manual.html#item-4.01" class="sym-link">4.01 (eval(A) Type Evaluation)</a></td>
+            <td class="external-entity"><a href="manual.html#item-5.01" class="sym-link">5.01 (Löb)</a> &middot; <a href="manual.html#item-5.02" class="sym-link">5.02 (Gödel 2nd Incompleteness)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="manual-section" id="variables-table">
+    <div class="section-header">
+      <h2>3. Variables &amp; Metavariables Table (Sorts, Free-Variable Hygiene &amp; Scoping Conventions)</h2>
+      <p class="section-desc">Structured by Variable Category, Default Type/Metatype (e.g., Greek letters strictly have type <code>Fm = Bool.Expression</code>, never <code>Bool</code>), Hygiene Rules (<code>FV</code>, <code>NFV</code>, <code>FFI</code>), and Canonical Entries.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th>Variables</th>
+            <th>Variable Category</th>
+            <th>Metatype / Default Type</th>
+            <th>Scoping &amp; Free-Variable (FV / FFI) Semantics</th>
+            <th>Canonical Entries</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="var-formula-greek" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/formula-metavariables.html" class="sym-link">𝛂, 𝛃, 𝛄, 𝛗, 𝛙, 𝛘</a></div>
+              <div class="formula-latex">\(\href{symbols/formula-metavariables.html}{\boldsymbol{\alpha}, \boldsymbol{\beta}, \boldsymbol{\gamma}, \boldsymbol{\varphi}, \boldsymbol{\psi}, \boldsymbol{\chi}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Syntactic Formula Variables (Greek Letters)</span></td>
+            <td class="external-entity"><code>Fm  (= Bool.Expression)</code></td>
+            <td class="external-entity">Greek letters are strictly reserved for syntactic formulas of type Fm (= Bool.Expression), NEVER semantic Bool. Because they have type Fm, free-variable operators FV(𝛙:Fm) and substitution guards FFI((t:X.Expression), x, (𝛗:Fm)) are well-typed on them. (<a href="symbols/formula-metavariables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-1.01" class="sym-link">1.01 (𝛂, 𝛃)</a> &middot; <a href="manual.html#item-2.02" class="sym-link">2.02 (𝛗:Fm)</a> &middot; <a href="manual.html#item-3.22" class="sym-link">3.22 (𝛙:Fm in FV(𝛙:Fm))</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (𝛗:Fm in FFI)</a></td>
+          </tr>
+          <tr id="var-set-lowercase" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">x, y, z, a, b, c, u, w</a></div>
+              <div class="formula-latex">\(\href{symbols/variables.html}{x, y, z, a, b, c, u, w}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Lowercase Object Variables (Set-Intended Class Variables)</span></td>
+            <td class="external-entity"><code>Class  (or Class.Expression when quoted)</code></td>
+            <td class="external-entity">Bound or free variables of default type Class that typically range over elements of classes (and hence sets by 3.02). Always typed as ': Class', never ': Set'. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.01" class="sym-link">3.01 (Extensionality)</a> &middot; <a href="manual.html#item-3.02" class="sym-link">3.02 (Sethood)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (Comprehension Bound Variable)</a></td>
+          </tr>
+          <tr id="var-class-uppercase" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">A, B, C, K, Q, X, Y, Z</a></div>
+              <div class="formula-latex">\(\href{symbols/variables.html}{A, B, C, K, Q, X, Y, Z}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Uppercase Object Variables (General Class / Conglomerate Variables)</span></td>
+            <td class="external-entity"><code>Class  |  Type  |  Prop</code></td>
+            <td class="external-entity">Variables ranging over arbitrary classes (including proper classes such as V, On), successor-inductive classes Q (3.56), or conglomerate types A : Type (4.01). (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.06" class="sym-link">3.06 (Subclass A ⊆ B)</a> &middot; <a href="manual.html#item-3.22" class="sym-link">3.22 (Branches A, B : Class)</a> &middot; <a href="manual.html#item-3.56" class="sym-link">3.56 (Ind(Q))</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (A : Type)</a></td>
+          </tr>
+          <tr id="var-func-family" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">F, R, f, g, s</a></div>
+              <div class="formula-latex">\(\href{symbols/variables.html}{F, R, f, g, s}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Relation, Family &amp; Class-Function Variables</span></td>
+            <td class="external-entity"><code>Class  |  Family  |  Π(a:A), B(a)</code></td>
+            <td class="external-entity">Variables denoting relations, set-valued families, class-functions, or dependent functions. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.25" class="sym-link">3.25 (valOf(F, x))</a> &middot; <a href="manual.html#item-3.31" class="sym-link">3.31 (family(F))</a> &middot; <a href="manual.html#item-3.32" class="sym-link">3.32 (class-function(F))</a></td>
+          </tr>
+          <tr id="var-meta-syntax" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/variable-expression.html" class="sym-link">v, k, t</a></div>
+              <div class="formula-latex">\(\href{symbols/variable-expression.html}{v, k, t}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Syntactic Variable-Name &amp; Term-Expression Variables</span></td>
+            <td class="external-entity"><code>Variable  |  Name  |  Class.Expression  |  eval(A).Expression</code></td>
+            <td class="external-entity">Metatheoretic variables ranging over syntactic variable identifiers (v : Variable, x : Name) and object-language term expressions (k : Class.Expression, t : eval(A).Expression). (<a href="symbols/variable-expression.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.22" class="sym-link">3.22 (v : Variable)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (t : eval(A).Expression)</a> &middot; <a href="manual.html#item-4.06" class="sym-link">4.06 (k : Class.Expression)</a></td>
+          </tr>
+          <tr id="var-dep-branches" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">Tₑ, t₁, t₂</a></div>
+              <div class="formula-latex">\(\href{symbols/conditionals-if-dep.html}{T_{e}, t_{1}, t_{2}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Subscripted Type-Family &amp; Conditional Branch Variables</span></td>
+            <td class="external-entity"><code>Type  |  (Bool → Type)  |  ⟦Tₑ⟧</code></td>
+            <td class="external-entity">Type-expression / family parameter Tₑ and true/false branch witnesses t₁, t₂ in simple_if (3.23) and ifᵈₑₚ (3.24). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.23" class="sym-link">3.23 (simple_if)</a> &middot; <a href="manual.html#item-3.24" class="sym-link">3.24 (ifᵈₑₚ)</a></td>
+          </tr>
+          <tr id="var-ctx-theory" class="external-row">
+            <td class="external-num formula-cell">
+              <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">Γ, G, 𝘫, 𝘍, 𝘌, 𝘞</a></div>
+              <div class="formula-latex">\(\href{symbols/theory-sort.html}{\Gamma, G, \mathcal{T}, \mathcal{F}, \mathcal{E}, \mathcal{W}}\)</div>
+            </td>
+            <td class="external-entity"><span class="badge badge-thm">Sequent Context &amp; Formal Theory Variables/Constants</span></td>
+            <td class="external-entity"><code>Ctx  |  Ctx.Expression  |  Theory</code></td>
+            <td class="external-entity">Context variables (Γ : Ctx, G : Ctx.Expression) and formal theories: r.e. base theory 𝘫, non-r.e. sound Henkin completion 𝘍, unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘫, NBG, MK}, and arbitrary theory 𝘞. (<a href="symbols/theory-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><a href="manual.html#item-3.72" class="sym-link">3.72 (𝘫, 𝘍)</a> &middot; <a href="manual.html#item-4.01" class="sym-link">4.01 (𝘞, G:Ctx.Expression)</a> &middot; <a href="manual.html#item-5.01" class="sym-link">5.01 (𝘌, 𝘫 in Löb)</a> &middot; <a href="manual.html#item-5.02" class="sym-link">5.02 (2nd Incompleteness)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
   <section class="manual-section" id="symbols-index">
     <div class="section-header">
-      <h2>Algorithmic Symbol, Operator &amp; Type Registry (177 Entries)</h2>
+      <h2>4. Complete Algorithmic Token Registry (177 Entries)</h2>
       <p class="section-desc">Every symbol and type listed below is automatically recognized inside both Unicode and LaTeX formulas and hyperlinked either to its canonical kernel entry (<code>manual.html#item-X.YY</code>) or to its dedicated <strong>Personal Symbol Reference Page</strong> (<code>symbols/*.html</code>).</p>
     </div>
     <div class="table-container">
