@@ -171,12 +171,12 @@
   Formula:        (∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬(Enc(⦃v⦄)∈FV(𝛙:Bool)))→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
   Verification:   Definitional (Kernel AST)
 
-[3.23] simple_if (polymorphic non-dependent conditional over Type_Expression) (Definition)
-  Formula:        ∀(T_e:Type), ((simple_if(⟦T_e⟧):Bool→(⟦T_e⟧→(⟦T_e⟧→⟦T_e⟧)))∧∀(t1:⟦T_e⟧)∀(t2:⟦T_e⟧)((simple_if(⟦T_e⟧,⊤,t1,t2)=t1)∧(simple_if(⟦T_e⟧,⊥,t1,t2)=t2)))
+[3.23] simple_if (polymorphic non-dependent conditional over Type) (Definition)
+  Formula:        ∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,⊤,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,⊥,t₁,t₂)=t₂)))
   Verification:   Definitional (Kernel AST)
 
-[3.24] if_dep (if_{dep}: dependent conditional over (Bool -> Type_Expression)) (Definition)
-  Formula:        ∀(T_e:Bool→Type), ((if_dep:Π(b:Bool),(⟦T_e(⊤)⟧→(⟦T_e(⊥)⟧→⟦T_e(b)⟧)))∧∀(b:Bool)∀(t1:⟦T_e(⊤)⟧)∀(t2:⟦T_e(⊥)⟧)((if_dep(b,t1,t2):⟦T_e(b)⟧)∧((if_dep(⊤,t1,t2)=t1)∧(if_dep(⊥,t1,t2)=t2))))
+[3.24] ifᵈₑₚ (dependent conditional over (Bool → Type)) (Definition)
+  Formula:        ∀(Tₑ:Bool→Type), ((ifᵈₑₚ:Π(b:Bool),(⟦Tₑ(⊤)⟧→(⟦Tₑ(⊥)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(⊤)⟧)∀(t₂:⟦Tₑ(⊥)⟧)((ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧)∧((ifᵈₑₚ(⊤,t₁,t₂)=t₁)∧(ifᵈₑₚ(⊥,t₁,t₂)=t₂))))
   Verification:   Definitional (Kernel AST)
 
 [3.25] Evaluation of a [function|class-function|family] (Definition)
@@ -422,7 +422,7 @@
 
 [4.03] CoNecessitation(meta,WIP) (Inference Rule)
   Formula:        (∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)→(𝘍,Γ⊢𝛗)))
-  Kernel Note:    If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ_1-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.73 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.73 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
+  Kernel Note:    If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.73 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.73 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
   Verification:   Primitive / Derived Rule (Kernel)
 
 [4.04] Quantifier “unique”(meta,WIP) (Definition)
@@ -439,11 +439,11 @@
 
 [5.01] Löb's theorem(WIP) (Theorem)
   Formula:        (∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)→⟦𝛗⟧›)→(𝘛,[]⊢𝛗)›))
-  Kernel Note:    Here 𝘌 ∈ {IΣ_1, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ_1-completeness, which requires Σ_1-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
+  Kernel Note:    Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
   Verification:   Verified (Kernel)
 
 [5.02] Gödel's second incompleteness theorem(WIP) (Theorem)
   Formula:        (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
-  Kernel Note:    Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ_1, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ_1-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
+  Kernel Note:    Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
   Verification:   Verified (Kernel)
 

@@ -91,3 +91,51 @@ Together with Catalog Entry **3.59** ($\vdash \mathrm{Ind}(\omega)$), this defin
    This universal property is the direct class-theoretic statement of **simple countable mathematical (Peano) induction up to $\omega$**: any class $Q$ (i.e., any property of sets) that contains $\emptyset$ and is closed under $a \mapsto a \cup \{a\}$ contains all of $\omega$ ($\omega \subseteq Q$).
 2. **Smallest Successor-Inductive Ordinal**:
    Combined with the Axiom of Infinity **3.57** ($\omega\ \mathsf{set}$), $\mathrm{Tr}(\omega)$ (**3.61**), and $\mathrm{Ord}(\omega)$ (**3.62**), $\omega \in \mathbf{On}$ (**3.63**) is the smallest successor-inductive ordinal.
+
+---
+
+## 5. Fiercely Avoid Type `Set` — Class Variables Mandatory in Comprehension & Binders
+
+- **Rule**: We **fiercely avoid** using the type `Set` (`SetSort` / `: Set`) for bound variables in binders, quantifiers, and comprehensions. Use the default type `Class` (`ClassSort` / `: Class`) everywhere.
+- **Class Comprehension Invariant**:
+  > **ANY KIND OF CLASS COMPREHENSION `{ x | φ(x) }` MUST NOT BE ALTERED WITH NBG/SET-TYPE MOTIVATION. IT MUST USE `Class` VARIABLES (`{ x : Class | φ(x) }`).**
+
+---
+
+## 6. Generalizing "Quantifier" to "Binder" (Variable-Binding Operator)
+
+The language of Obelisk and `foundations` features multiple variable-binding structures beyond standard $\forall$ and $\exists$ (class comprehension $\kappa$-binder, definite description $\iota$-operator, choice $\tau$/$\epsilon$-operators, $\lambda$, $\Pi$, $\Sigma$, and $\mathsf{let}$). Always use the broader term **binder** (or **variable-binding operator**) when referring to variable-binding syntax and hygiene in general.
+
+---
+
+## 7. Unspecified Elementary Metatheory $\mathcal{E} \in \{\mathrm{I}\Sigma_1, \mathrm{PA}, \mathcal{T}, \mathrm{NBG}, \mathrm{MK}\}$
+
+- The script symbol $\mathcal{E}$ denotes an **unspecified elementary metatheory** chosen from $\{\mathrm{I}\Sigma_1,\ \mathrm{PA},\ \mathcal{T},\ \mathrm{NBG},\ \mathrm{MK}\}$, including both Peano Arithmetic ($\mathrm{PA}$) and Morse–Kelley class theory ($\mathrm{MK}$).
+
+---
+
+## 8. Pure ML Formula Generation, 100% Token Clickability & Personal Symbol Pages (`generated/symbols/*.html`)
+
+1. **All Formula Information Must Come from ML Scripts**:
+   - HTML renders formulas beautifully, and **all information about a formula** (whether Unicode or LaTeX) **must be emitted directly by the ML scripts** (`program/html_generator.ML`, `program/symbol_pages.ML`, `program/nbg_html_generator.ML`, `program/newchecker.ML`).
+2. **100% Clickable Formula Tokens & Personal Symbol Pages**:
+   - Every variable, constant, Greek metavariable, operator, and delimiter in both Unicode and LaTeX formulas is algorithmically wrapped in a clickable link.
+   - Metatheoretic, reflection, type, binder, and structural symbols link to their dedicated **Personal Symbol Reference Pages** (`../generated/symbols/*.html`, indexed at [`../generated/symbols/index.html`](../generated/symbols/index.html)), never to unrelated theorems.
+
+---
+
+## 9. `.nbg` File Headers & The 12+6 Canonical Theory / Proof-Assistant Variants (`MKTD1` & `MKTD2`)
+
+1. **Keep `.nbg` Filenames with Explicit Theory Header**:
+   - All `.nbg` files keep the `.nbg` extension and state at the very beginning of the file which theory and proof-assistant variant they target.
+2. **Default Theory (`MKTD` = Morse-Kelley + Tarski + Dunaev)**:
+   - **12 Specific Variants**: `"NBG1"`, `"NBGT1"`, `"NBGTD1"`, `"MK1"`, `"MKT1"`, **`"MKTD1"`** (Variant 1); `"NBG2"`, `"NBGT2"`, `"NBGTD2"`, `"MK2"`, `"MKT2"`, **`"MKTD2"`** (Variant 2).
+   - **6 Reserved Shared (`*`) Variants**: `"NBG*"`, `"NBGT*"`, `"NBGTD*"`, `"MK*"`, `"MKT*"`, `"MKTD*"`.
+   - Active development concentrates on **`MKTD1`** and **`MKTD2`**.
+
+---
+
+## 10. Dependent Conditional Subscript Notation (`ifᵈₑₚ` vs. `$\mathsf{if}_{\mathsf{dep}}$`)
+
+- In Entry 3.24 and Variant 2 theorems (`thm_85_if_dep_true_branch`, `thm_86_if_dep_false_branch`), the dependent conditional renders as Unicode subscript `ifᵈₑₚ` (with `Tₑ`, `t₁`, `t₂`) in Unicode mode and `\mathsf{if}_{\mathsf{dep}}` in LaTeX mode. Raw ASCII `if_{dep}` is never displayed on rendered pages.
+

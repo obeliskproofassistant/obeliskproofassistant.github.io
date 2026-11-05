@@ -179,5 +179,64 @@ class TestProofRegression(unittest.TestCase):
                         self.assertNotIn("PCheat_prf", code_text, f"Theorem {num} proof code uses cheating axiom PCheat_prf!")
                         self.assertNotIn("undefined", code_text.lower(), f"Theorem {num} proof code contains undefined term!")
 
+    def test_if_dep_unicode_and_latex_no_raw_if_dep(self):
+        """Directive 13: Entry 3.24 must render as Unicode subscript ifᵈₑₚ and LaTeX \\mathsf{if}_{\\mathsf{dep}}, never raw if_{dep}."""
+        gen_manual = os.path.join(SITE_DIR, "generated", "manual.html")
+        with open(gen_manual, "r", encoding="utf-8") as f:
+            gen_html = f.read()
+        self.assertIn("if\u1d48\u2091\u209a", gen_html)
+        self.assertIn("\\mathsf{if}_{\\mathsf{dep}}", gen_html)
+        self.assertNotIn("if_{dep}", gen_html)
+
+    def test_personal_symbol_pages_and_links(self):
+        """Directive 15: Personal symbol reference pages exist in generated/symbols/ and symbols link to them."""
+        sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
+        expected_pages = [
+            "index.html",
+            "quotation.html",
+            "antiquotation.html",
+            "binder-brackets.html",
+            "metalevel-brackets.html",
+            "enc.html",
+            "dec.html",
+            "code.html",
+            "emb.html",
+            "mu-interpretation.html",
+            "eval.html",
+            "class-type.html",
+            "typing-colon.html",
+            "type-sort.html",
+            "prop-bool.html",
+            "fm-sort.html",
+            "stmt-sort.html",
+            "ctx-sort.html",
+            "theory-sort.html",
+            "prf-sort.html",
+            "variable-expression.html",
+            "hygiene-ffi-fv.html",
+            "substitution-let.html",
+            "binders.html",
+            "conditionals-if-dep.html",
+            "formula-metavariables.html",
+            "delimiters-brackets.html",
+            "variables.html",
+        ]
+        for page in expected_pages:
+            full_path = os.path.join(sym_dir, page)
+            self.assertTrue(os.path.isfile(full_path), f"Missing personal symbol page: {full_path}")
+        gen_manual = os.path.join(SITE_DIR, "generated", "manual.html")
+        with open(gen_manual, "r", encoding="utf-8") as f:
+            gen_html = f.read()
+        gen_symbols = os.path.join(SITE_DIR, "generated", "symbols.html")
+        with open(gen_symbols, "r", encoding="utf-8") as f:
+            sym_html = f.read()
+        self.assertIn('href="symbols/quotation.html"', gen_html)
+        self.assertIn('href="symbols/enc.html"', gen_html)
+        self.assertIn('href="symbols/dec.html"', sym_html)
+        self.assertIn('href="symbols/emb.html"', sym_html)
+        self.assertIn('href="symbols/mu-interpretation.html"', sym_html)
+        self.assertIn('href="symbols/class-type.html"', gen_html)
+        self.assertIn('href="symbols/conditionals-if-dep.html"', gen_html)
+
 if __name__ == "__main__":
     unittest.main()
