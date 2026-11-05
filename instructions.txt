@@ -1,0 +1,22 @@
+================================================================================
+OBELISK WEB PORTAL (`obeliskproofassistant.github.io`) — AI AGENT INSTRUCTIONS
+================================================================================
+
+STEP 0 (MANDATORY FIRST ACTION):
+Visit `/botworkspace/` and specifically `/botworkspace/catalog/` first:
+  - `/botworkspace/catalog/index.html`
+  - `/botworkspace/catalog/rules/index.html`
+  - `/botworkspace/catalog/user_directives.html`
+  - `/botworkspace/catalog/repos/set_theory_prover/index.html`
+  - `/botworkspace/catalog/repos/web/obelisk_web.html`
+
+KEY ARCHITECTURAL RULES:
+1. All HTML/JSON/TXT files inside `generated/` are produced strictly by ML scripts in `/ramdisk/set_theory_prover/program/`:
+     cd /ramdisk/set_theory_prover/program
+     poly -q --use html_generator.ML
+     poly -q --use nbg_html_generator.ML
+2. Personal Symbol Pages (`generated/symbols/sym-*.html` and `generated/symbols.html`):
+   Every metalevel and object-level symbol — especially quotation/antiquotation signs (`⟨`, `⟩`, `⟦`, `⟧`, `⦃`, `⦄`, `⟪`, `⟫`), encoding/decoding (`Enc`, `Dec`, `ᶜᵒᵈᵉ`), embedding (`Emb`, `↪`), and interpretation/valuation (`μ_A`, `eval`) — has its own dedicated personal page explaining how it must be understood mathematically and syntactically, and every clickable token in formulas links to the right explanation rather than an unrelated fallback.
+3. Active Theory Variants:
+   `MKTD1` (Morse-Kelley + Tarski + Dunaev, Variant 1) and `MKTD2` (Morse-Kelley + Tarski + Dunaev, Variant 2) are the default active theories out of the 12+6 variants (`NBG1`, `NBGT1`, `NBGTD1`, `MK1`, `MKT1`, `MKTD1`, `NBG2`, `NBGT2`, `NBGTD2`, `MK2`, `MKT2`, `MKTD2`, `NBG*`..`MKTD*`).
+================================================================================
