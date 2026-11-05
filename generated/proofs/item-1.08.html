@@ -309,13 +309,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Mode Toggles: Typing colons (A:Prop), (p:Bool), (x:Class) are always rendered as ':' */
-    .rel-colon { display: inline; }
-    .rel-in { display: none; }
-    body.mode-membership .rel-colon { display: inline; }
-    body.mode-membership .rel-in { display: none; }
-    body.mode-typing .rel-colon { display: inline; }
-    body.mode-typing .rel-in { display: none; }
+    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
     .formula-unicode { display: block; }
     .formula-latex { display: none; }
     body.mode-unicode .formula-unicode { display: block; }
@@ -324,7 +318,7 @@
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
 </head>
-<body class="mode-membership mode-unicode">
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -346,11 +340,6 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Interpretation:</span>
-          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Explicit Term Interpretation / Valuation (μ_A in NBG/MK) (∈)</button>
-          <button id="btn-typing" class="toggle-btn" onclick="setRelMode('typing')">2. Checkable / Executable Code in CakeML &amp; PolyML (:)</button>
         </div>
       </div>
     </div>
@@ -386,8 +375,8 @@
             <tr>
               <th class="field-name">Formula</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode">((⟦<span class="ansi-light-red">𝛂</span>⟧<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>⟦<span class="ansi-light-red">𝛄</span>⟧)<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>((⟦<span class="ansi-light-red">𝛃</span>⟧<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>⟦<span class="ansi-light-red">𝛄</span>⟧)<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>((⟦<span class="ansi-light-red">𝛂</span>⟧<a href="../manual.html#item-1.06" class="sym-link" title="1.06: Logical disjunction">∨</a>⟦<span class="ansi-light-red">𝛃</span>⟧)<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a>⟦<span class="ansi-light-red">𝛄</span>⟧)))</div>
-                <div class="formula-latex">\(((\llbracket \alpha \rrbracket \href{../manual.html#item-1.01}{\rightarrow} \llbracket \gamma \rrbracket )\href{../manual.html#item-1.01}{\rightarrow} ((\llbracket \beta \rrbracket \href{../manual.html#item-1.01}{\rightarrow} \llbracket \gamma \rrbracket )\href{../manual.html#item-1.01}{\rightarrow} ((\llbracket \alpha \rrbracket \href{../manual.html#item-1.06}{\lor} \llbracket \beta \rrbracket )\href{../manual.html#item-1.01}{\rightarrow} \llbracket \gamma \rrbracket )))\)</div>
+                <div class="formula-unicode"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Propositional / Formula metavariable alpha">𝛂</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.02" class="sym-link" title="1.02: Propositional / Formula metavariable gamma">𝛄</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Propositional / Formula metavariable beta">𝛃</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.02" class="sym-link" title="1.02: Propositional / Formula metavariable gamma">𝛄</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Propositional / Formula metavariable alpha">𝛂</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.06" class="sym-link" title="1.06: Logical disjunction">∨</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Propositional / Formula metavariable beta">𝛃</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-1.02" class="sym-link" title="1.02: Propositional / Formula metavariable gamma">𝛄</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../manual.html#item-1.01}{(} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.01}{\boldsymbol{\alpha}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.02}{\boldsymbol{\gamma}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.01}{\boldsymbol{\beta}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.02}{\boldsymbol{\gamma}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.01}{\boldsymbol{\alpha}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.06}{\lor} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.01}{\boldsymbol{\beta}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-1.02}{\boldsymbol{\gamma}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{)} \)</div>
               </td>
             </tr>
             <tr>
@@ -404,12 +393,6 @@
   </section>
   </main>
   <script>
-    function setRelMode(mode) {
-      document.body.classList.remove('mode-membership', 'mode-typing');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-membership').classList.toggle('active', mode === 'membership');
-      document.getElementById('btn-typing').classList.toggle('active', mode === 'typing');
-    }
     function setFormatMode(mode) {
       document.body.classList.remove('mode-unicode', 'mode-latex');
       document.body.classList.add('mode-' + mode);

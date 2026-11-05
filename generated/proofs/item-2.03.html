@@ -309,13 +309,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Mode Toggles: Typing colons (A:Prop), (p:Bool), (x:Class) are always rendered as ':' */
-    .rel-colon { display: inline; }
-    .rel-in { display: none; }
-    body.mode-membership .rel-colon { display: inline; }
-    body.mode-membership .rel-in { display: none; }
-    body.mode-typing .rel-colon { display: inline; }
-    body.mode-typing .rel-in { display: none; }
+    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
     .formula-unicode { display: block; }
     .formula-latex { display: none; }
     body.mode-unicode .formula-unicode { display: block; }
@@ -324,7 +318,7 @@
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
 </head>
-<body class="mode-membership mode-unicode">
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -346,11 +340,6 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Interpretation:</span>
-          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Explicit Term Interpretation / Valuation (μ_A in NBG/MK) (∈)</button>
-          <button id="btn-typing" class="toggle-btn" onclick="setRelMode('typing')">2. Checkable / Executable Code in CakeML &amp; PolyML (:)</button>
         </div>
       </div>
     </div>
@@ -386,15 +375,15 @@
             <tr>
               <th class="field-name">Formula</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode">(⟦<span class="ansi-light-red">𝛗</span>[<span class="ansi-light-red">t</span>/<span class="ansi-light-red">x</span>]⟧<a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication">→</a><a href="../manual.html#item-2.03" class="sym-link" title="2.03: Existential quantifier">∃</a><span class="ansi-light-cyan">(</span><span class="ansi-white">⦃</span><span class="ansi-light-red">x</span><span class="ansi-white">⦄</span><span class="ansi-light-cyan">:</span>⟦<span class="ansi-light-red">X</span>⟧<span class="ansi-light-cyan">)</span>⟦<span class="ansi-light-red">𝛗</span>⟧)</div>
-                <div class="formula-latex">\((\llbracket \varphi [t/x]\rrbracket \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-2.03}{\exists} (\{\!\lvert x\rvert\!\}:\llbracket X\rrbracket )\llbracket \varphi \rrbracket )\)</div>
+                <div class="formula-unicode"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.01: Object Formula metavariable phi (Fm)">𝛗</a></span><a href="../manual.html#item-3.26" class="sym-link" title="3.26 / 3.51: Left image / substitution / class-list bracket">[</a><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.01: Term / Expression metavariable t">t</a></span><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.04: Capture-avoiding substitution slash ([t/x])">/</a><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 3.01: Bound or free Class / Name variable x">x</a></span><a href="../manual.html#item-3.26" class="sym-link" title="3.26 / 3.51: Right image / substitution / class-list bracket">]</a><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01: Logical implication / function type arrow">→</a><a href="../manual.html#item-2.03" class="sym-link" title="2.03: Existential binder / quantifier">∃</a><span class="ansi-light-cyan"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a></span><span class="ansi-white"><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left binder variable bracket">⦃</a></span><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 3.01: Bound or free Class / Name variable x">x</a></span><span class="ansi-white"><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right binder variable bracket">⦄</a></span><span class="ansi-light-cyan"><a href="../manual.html#item-2.01" class="sym-link" title="2.01 / 4.01: Typing judgment / binder sort annotation colon (:)">:</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 3.02: Class or Type variable X">X</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><span class="ansi-light-cyan"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.01: Object Formula metavariable phi (Fm)">𝛗</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../manual.html#item-1.01}{(} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-2.02}{\boldsymbol{\varphi}} \href{../manual.html#item-3.26}{[} \href{../manual.html#item-2.02}{t} \href{../manual.html#item-2.02}{/} \href{../manual.html#item-2.02}{x} \href{../manual.html#item-3.26}{]} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{\rightarrow} \href{../manual.html#item-2.03}{\exists} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-4.01}{\{\!\lvert } \href{../manual.html#item-2.02}{x} \href{../manual.html#item-4.01}{\rvert\!\}} \href{../manual.html#item-2.01}{:} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-2.02}{X} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-2.02}{\boldsymbol{\varphi}} \href{../manual.html#item-4.01}{ ]\!]} \href{../manual.html#item-1.01}{)} \)</div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Side Condition</th>
               <td class="field-value">
-                <div class="formula-unicode side-cond">⟦term <span class="ansi-light-red">t</span> is free for substitution instead of all samely typed free occurences of the variable <span class="ansi-light-red">x</span> <a href="../manual.html#item-4.01" class="sym-link" title="4.01: Local substitution scope (in)">in</a> the formula <span class="ansi-light-red">𝛗</span>⟧</div>
-                <div class="formula-latex side-cond">\(\llbracket term t is free for substitution instead of all samely typed free occurences of the variable x \href{../manual.html#item-4.01}{\mathbf{in}}  the formula \varphi \rrbracket \)</div>
+                <div class="formula-unicode side-cond"><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Left semantic evaluation / antiquotation bracket">⟦</a><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (term)">term</a> <span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.01: Term / Expression metavariable t">t</a></span> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (is)">is</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (free)">free</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (for)">for</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (substitution)">substitution</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (instead)">instead</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (of)">of</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (all)">all</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (samely)">samely</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (typed)">typed</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (free)">free</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (occurences)">occurences</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (of)">of</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (the)">the</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (variable)">variable</a> <span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 3.01: Bound or free Class / Name variable x">x</a></span> <a href="../manual.html#item-4.01" class="sym-link" title="4.01: Local substitution scope (in)">in</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (the)">the</a> <a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.06: Metatheoretic side-condition term (formula)">formula</a> <span class="ansi-light-red"><a href="../manual.html#item-2.02" class="sym-link" title="2.02 / 4.01: Object Formula metavariable phi (Fm)">𝛗</a></span><a href="../manual.html#item-4.01" class="sym-link" title="4.01: Right semantic evaluation / antiquotation bracket">⟧</a></div>
+                <div class="formula-latex side-cond">\(\href{../manual.html#item-4.01}{[\![ } \href{../manual.html#item-2.02}{\mathrm{term}}  \href{../manual.html#item-2.02}{t}  \href{../manual.html#item-2.02}{\mathrm{is}}  \href{../manual.html#item-2.02}{\mathrm{free}}  \href{../manual.html#item-2.02}{\mathrm{for}}  \href{../manual.html#item-2.02}{\mathrm{substitution}}  \href{../manual.html#item-2.02}{\mathrm{instead}}  \href{../manual.html#item-2.02}{\mathrm{of}}  \href{../manual.html#item-2.02}{\mathrm{all}}  \href{../manual.html#item-2.02}{\mathrm{samely}}  \href{../manual.html#item-2.02}{\mathrm{typed}}  \href{../manual.html#item-2.02}{\mathrm{free}}  \href{../manual.html#item-2.02}{\mathrm{occurences}}  \href{../manual.html#item-2.02}{\mathrm{of}}  \href{../manual.html#item-2.02}{\mathrm{the}}  \href{../manual.html#item-2.02}{\mathrm{variable}}  \href{../manual.html#item-2.02}{x}  \href{../manual.html#item-4.01}{\mathbf{in}}  \href{../manual.html#item-2.02}{\mathrm{the}}  \href{../manual.html#item-2.02}{\mathrm{formula}}  \href{../manual.html#item-2.02}{\boldsymbol{\varphi}} \href{../manual.html#item-4.01}{ ]\!]} \)</div>
               </td>
             </tr>
             <tr>
@@ -411,12 +400,6 @@
   </section>
   </main>
   <script>
-    function setRelMode(mode) {
-      document.body.classList.remove('mode-membership', 'mode-typing');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-membership').classList.toggle('active', mode === 'membership');
-      document.getElementById('btn-typing').classList.toggle('active', mode === 'typing');
-    }
     function setFormatMode(mode) {
       document.body.classList.remove('mode-unicode', 'mode-latex');
       document.body.classList.add('mode-' + mode);

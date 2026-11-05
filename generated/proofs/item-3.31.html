@@ -309,13 +309,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Mode Toggles: Typing colons (A:Prop), (p:Bool), (x:Class) are always rendered as ':' */
-    .rel-colon { display: inline; }
-    .rel-in { display: none; }
-    body.mode-membership .rel-colon { display: inline; }
-    body.mode-membership .rel-in { display: none; }
-    body.mode-typing .rel-colon { display: inline; }
-    body.mode-typing .rel-in { display: none; }
+    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
     .formula-unicode { display: block; }
     .formula-latex { display: none; }
     body.mode-unicode .formula-unicode { display: block; }
@@ -324,7 +318,7 @@
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
   </style>
 </head>
-<body class="mode-membership mode-unicode">
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -346,11 +340,6 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
           <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Interpretation:</span>
-          <button id="btn-membership" class="toggle-btn active" onclick="setRelMode('membership')">1. Explicit Term Interpretation / Valuation (μ_A in NBG/MK) (∈)</button>
-          <button id="btn-typing" class="toggle-btn" onclick="setRelMode('typing')">2. Checkable / Executable Code in CakeML &amp; PolyML (:)</button>
         </div>
       </div>
     </div>
@@ -386,8 +375,8 @@
             <tr>
               <th class="field-name">Formula</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode">(<a href="../manual.html#item-2.02" class="sym-link" title="2.02: Universal quantifier">∀</a><span class="ansi-light-cyan">(</span><span class="ansi-light-yellow">F</span><span class="ansi-light-cyan">:</span><span class="ansi-bold-green"><a href="../manual.html#item-2.01" class="sym-link" title="2.01 / 3.01: Class sort (default type; universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan">)</span>((<span class="ansi-light-yellow">F</span> <a href="../manual.html#item-3.31" class="sym-link" title="3.31: Is a family predicate">family</a>)<a href="../manual.html#item-1.12" class="sym-link" title="1.12: Logical equivalence">⟷</a>((<span class="ansi-light-yellow">F</span> <a href="../manual.html#item-3.29" class="sym-link" title="3.29: Has concentrated set values predicate">concentrated</a> <a href="../manual.html#item-3.02" class="sym-link" title="3.02: Is a set predicate">set</a> values)<a href="../manual.html#item-1.03" class="sym-link" title="1.03: Logical conjunction">∧</a>(<span class="ansi-light-yellow">F</span> <a href="../manual.html#item-3.30" class="sym-link" title="3.30: Has flat proper values predicate">flat</a> <a href="../manual.html#item-3.03" class="sym-link" title="3.03: Is a proper class predicate">proper</a> values))))</div>
-                <div class="formula-latex">\((\href{../manual.html#item-2.02}{\forall} (F:\href{../manual.html#item-2.01}{\mathsf{Class}} )((F \href{../manual.html#item-3.31}{\mathsf{family}} )\href{../manual.html#item-1.12}{\longleftrightarrow} ((F \href{../manual.html#item-3.29}{\mathsf{concentrated}}  \href{../manual.html#item-3.02}{\mathsf{set}}  values)\href{../manual.html#item-1.03}{\land} (F \href{../manual.html#item-3.30}{\mathsf{flat}}  \href{../manual.html#item-3.03}{\mathsf{proper}}  values))))\)</div>
+                <div class="formula-unicode"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-2.02" class="sym-link" title="2.02: Universal binder / quantifier">∀</a><span class="ansi-light-cyan"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../manual.html#item-3.21" class="sym-link" title="3.21 / 3.31: Relation / Family / Class-function variable F">F</a></span><span class="ansi-light-cyan"><a href="../manual.html#item-2.01" class="sym-link" title="2.01 / 4.01: Typing judgment / binder sort annotation colon (:)">:</a></span><span class="ansi-bold-green"><a href="../manual.html#item-2.01" class="sym-link" title="2.01 / 3.01: Class sort (default type; universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a></span><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../manual.html#item-3.21" class="sym-link" title="3.21 / 3.31: Relation / Family / Class-function variable F">F</a></span> <a href="../manual.html#item-3.31" class="sym-link" title="3.31: Is a family predicate">family</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.12" class="sym-link" title="1.12: Logical equivalence">⟷</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../manual.html#item-3.21" class="sym-link" title="3.21 / 3.31: Relation / Family / Class-function variable F">F</a></span> <a href="../manual.html#item-3.29" class="sym-link" title="3.29: Has concentrated set values predicate">concentrated</a> <a href="../manual.html#item-3.02" class="sym-link" title="3.02: Is a set predicate">set</a> <a href="../manual.html#item-3.29" class="sym-link" title="3.29 / 3.30: Fiber values of a class relation">values</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.03" class="sym-link" title="1.03: Logical conjunction">∧</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Left grouping / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../manual.html#item-3.21" class="sym-link" title="3.21 / 3.31: Relation / Family / Class-function variable F">F</a></span> <a href="../manual.html#item-3.30" class="sym-link" title="3.30: Has flat proper values predicate">flat</a> <a href="../manual.html#item-3.03" class="sym-link" title="3.03: Is a proper class predicate">proper</a> <a href="../manual.html#item-3.29" class="sym-link" title="3.29 / 3.30: Fiber values of a class relation">values</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a><a href="../manual.html#item-1.01" class="sym-link" title="1.01 / 3.51: Right grouping / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../manual.html#item-1.01}{(} \href{../manual.html#item-2.02}{\forall} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-3.21}{F} \href{../manual.html#item-2.01}{:} \href{../manual.html#item-2.01}{\mathsf{Class}} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-3.21}{F}  \href{../manual.html#item-3.31}{\mathsf{family}} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.12}{\longleftrightarrow} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-3.21}{F}  \href{../manual.html#item-3.29}{\mathsf{concentrated}}  \href{../manual.html#item-3.02}{\mathsf{set}}  \href{../manual.html#item-3.29}{\mathsf{values}} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.03}{\land} \href{../manual.html#item-1.01}{(} \href{../manual.html#item-3.21}{F}  \href{../manual.html#item-3.30}{\mathsf{flat}}  \href{../manual.html#item-3.03}{\mathsf{proper}}  \href{../manual.html#item-3.29}{\mathsf{values}} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{)} \href{../manual.html#item-1.01}{)} \)</div>
               </td>
             </tr>
             <tr>
@@ -404,12 +393,6 @@
   </section>
   </main>
   <script>
-    function setRelMode(mode) {
-      document.body.classList.remove('mode-membership', 'mode-typing');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-membership').classList.toggle('active', mode === 'membership');
-      document.getElementById('btn-typing').classList.toggle('active', mode === 'typing');
-    }
     function setFormatMode(mode) {
       document.body.classList.remove('mode-unicode', 'mode-latex');
       document.body.classList.add('mode-' + mode);
