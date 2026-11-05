@@ -2,560 +2,688 @@
 # Source: set_theory_prover/program/newchecker.ML
 # Generator: set_theory_prover/program/html_generator.ML
 
-[1.01] A01 (Axiom)
+[1.01 / AxmPropWeakening] A01 (Axiom)
+  Name:           AxmPropWeakening
   Formula:        (⟦𝛂⟧→(⟦𝛃⟧→⟦𝛂⟧))
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.02] A02 (Axiom)
+[1.02 / AxmPropFrege] A02 (Axiom)
+  Name:           AxmPropFrege
   Formula:        ((⟦𝛂⟧→(⟦𝛃⟧→⟦𝛄⟧))→((⟦𝛂⟧→⟦𝛃⟧)→(⟦𝛂⟧→⟦𝛄⟧)))
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛄@Fm.Expression]⟧))→((⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧)→(⟦[𝛂@Fm.Expression]⟧→⟦[𝛄@Fm.Expression]⟧)))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm), (𝛄:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.03] A03 (Axiom)
+[1.03 / AxmPropConjLeft] A03 (Axiom)
+  Name:           AxmPropConjLeft
   Formula:        ((⟦𝛂⟧∧⟦𝛃⟧)→⟦𝛂⟧)
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)→⟦[𝛂@Fm.Expression]⟧)
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.04] A04 (Axiom)
+[1.04 / AxmPropConjRight] A04 (Axiom)
+  Name:           AxmPropConjRight
   Formula:        ((⟦𝛂⟧∧⟦𝛃⟧)→⟦𝛃⟧)
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)→⟦[𝛃@Fm.Expression]⟧)
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.05] A05 (Axiom)
+[1.05 / AxmPropConjIntro] A05 (Axiom)
+  Name:           AxmPropConjIntro
   Formula:        (⟦𝛂⟧→(⟦𝛃⟧→(⟦𝛂⟧∧⟦𝛃⟧)))
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→(⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.06] A06 (Axiom)
+[1.06 / AxmPropDisjLeft] A06 (Axiom)
+  Name:           AxmPropDisjLeft
   Formula:        (⟦𝛂⟧→(⟦𝛂⟧∨⟦𝛃⟧))
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧→(⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.07] A07 (Axiom)
+[1.07 / AxmPropDisjRight] A07 (Axiom)
+  Name:           AxmPropDisjRight
   Formula:        (⟦𝛃⟧→(⟦𝛂⟧∨⟦𝛃⟧))
   SML Kernel AST: (⟦[𝛃@Fm.Expression]⟧→(⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.08] A08 (Axiom)
+[1.08 / AxmPropDisjElim] A08 (Axiom)
+  Name:           AxmPropDisjElim
   Formula:        ((⟦𝛂⟧→⟦𝛄⟧)→((⟦𝛃⟧→⟦𝛄⟧)→((⟦𝛂⟧∨⟦𝛃⟧)→⟦𝛄⟧)))
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧→⟦[𝛄@Fm.Expression]⟧)→((⟦[𝛃@Fm.Expression]⟧→⟦[𝛄@Fm.Expression]⟧)→((⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧)→⟦[𝛄@Fm.Expression]⟧)))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm), (𝛄:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.09] A09 (Axiom)
+[1.09 / AxmPropNegElim] A09 (Axiom)
+  Name:           AxmPropNegElim
   Formula:        ((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))
   SML Kernel AST: ((¬⟦[𝛂@Fm.Expression]⟧)→(⟦[𝛂@Fm.Expression]⟧→⊥))
+  Judgements:     [(𝛂:Fm)]
   Kernel Note:    Negation Elimination (Contradiction to Bottom): (¬⟦𝛂⟧) → (⟦𝛂⟧ → ⊥).
   Verification:   Postulated (Kernel Axiom)
 
-[1.10] A10 (Axiom)
+[1.10 / AxmPropNegIntro] A10 (Axiom)
+  Name:           AxmPropNegIntro
   Formula:        ((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧)→((⟦[𝛂@Fm.Expression]⟧→¬⟦[𝛃@Fm.Expression]⟧)→¬⟦[𝛂@Fm.Expression]⟧))
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
   Kernel Note:    Negation Introduction (Reductio Ad Absurdum): (⟦𝛂⟧ → ⟦𝛃⟧) → ((⟦𝛂⟧ → ¬⟦𝛃⟧) → ¬⟦𝛂⟧).
   Verification:   Postulated (Kernel Axiom)
 
-[1.11] A11 (Axiom)
+[1.11 / AxmPropExFalso] A11 (Axiom)
+  Name:           AxmPropExFalso
   Formula:        (⊥→⟦𝛂⟧)
   SML Kernel AST: (⊥→⟦[𝛂@Fm.Expression]⟧)
+  Judgements:     [(𝛂:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.12] A12 (Axiom)
+[1.12 / AxmPropExcludedMiddle] A12 (Axiom)
+  Name:           AxmPropExcludedMiddle
   Formula:        (⟦𝛂⟧∨¬⟦𝛂⟧)
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧∨¬⟦[𝛂@Fm.Expression]⟧)
+  Judgements:     [(𝛂:Fm)]
   Verification:   Postulated (Kernel Axiom)
 
-[1.13] A13 (Axiom)
+[1.13 / AxmPropVerum] A13 (Axiom)
+  Name:           AxmPropVerum
   Formula:        ⊤
   SML Kernel AST: ⊤
   Kernel Note:    Verum / Truth Introduction Axiom (⊢ ⊤).
   Verification:   Postulated (Kernel Axiom)
 
-[1.14] Modus Ponens (Inference Rule)
+[1.14 / RulModusPonens] Modus Ponens (Inference Rule)
+  Name:           RulModusPonens
   Formula:        (⟦𝛂⟧, (⟦𝛂⟧→⟦𝛃⟧) ⊢ ⟦𝛃⟧)
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)
+  Judgements:     [(𝛂:Fm), (𝛃:Fm)]
+  Side Condition: ⊤
   Verification:   Primitive / Derived Rule (Kernel)
 
-[2.01] Discourse domain is non-empty (Axiom)
+[2.01 / AxmDiscourseNonEmpty] Discourse domain is non-empty (Axiom)
+  Name:           AxmDiscourseNonEmpty
   Formula:        (∃(K:Class)⊤)
   SML Kernel AST: (∃([K@Variable]:[Class@Type])⊤)
   Verification:   Postulated (Kernel Axiom)
 
-[2.02] Forall Instantiation (Inference Rule)
+[2.02 / RulForallInstantiation] Forall Instantiation (Inference Rule)
+  Name:           RulForallInstantiation
   Formula:        ((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)→⟦𝛗[t/x]⟧)
   SML Kernel AST: ((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)
+  Judgements:     [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Condition: FFI((t:X.Expression),x,(𝛗:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
-[2.03] Exists Instantiation (Inference Rule)
+[2.03 / RulExistsInstantiation] Exists Instantiation (Inference Rule)
+  Name:           RulExistsInstantiation
   Formula:        (⟦𝛗[t/x]⟧→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)
   SML Kernel AST: (⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)
+  Judgements:     [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Condition: FFI((t:X.Expression),x,(𝛗:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
-[2.04] Forall Abstraction (Inference Rule)
+[2.04 / RulForallAbstraction] Forall Abstraction (Inference Rule)
+  Name:           RulForallAbstraction
   Formula:        ((⟦𝛃⟧→⟦𝛂⟧) ⊢ (⟦𝛃⟧→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
   SML Kernel AST: ((⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Judgements:     [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Condition: NFV(X,x,(𝛃:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
-[2.05] Exists Abstraction (Inference Rule)
+[2.05 / RulExistsAbstraction] Exists Abstraction (Inference Rule)
+  Name:           RulExistsAbstraction
   Formula:        ((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))
   SML Kernel AST: ((⟦[𝛂@Fm.Expression]⟧→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)→⟦[𝛃@Fm.Expression]⟧))
+  Judgements:     [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Condition: NFV(X,x,(𝛃:Fm))
   Verification:   Primitive / Derived Rule (Kernel)
 
-[2.06] Generalisation (admissible rule) (Inference Rule)
+[2.06 / RulGeneralisation] Generalisation (admissible rule) (Inference Rule)
+  Name:           RulGeneralisation
   Formula:        (⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
   SML Kernel AST: (⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Judgements:     [(x:Name), (X:Type), (𝛂:Fm)]
+  Side Condition: ⊤
   Verification:   Primitive / Derived Rule (Kernel)
 
-[3.01] Class comprehension (Inference Rule)
+[3.01 / RulClassComprehension] Class comprehension (Inference Rule)
+  Name:           RulClassComprehension
   Formula:        ((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})⟷((⦃x⦄ set)∧⟦𝛗⟧))
   SML Kernel AST: (([⦃[x@Variable.Expression]⦄@Class.Expression]∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})⟷(([⦃[x@Variable.Expression]⦄@Class.Expression] set)∧⟦[𝛗@Fm.Expression]⟧))
-  Side Condition: (x:Name) ∧ (𝛗:Fm)
+  Judgements:     [(x:Name), (𝛗:Fm)]
+  Side Condition: ⊤
   Verification:   Primitive / Derived Rule (Kernel)
 
-[3.02] “Is a set” predicate (Definition)
+[3.02 / DefIsSet] “Is a set” predicate (Definition)
+  Name:           DefIsSet
   Formula:        (∀(X:Class)((X set)⟷(∃(Y:Class)(X∈Y))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)⟷(∃([Y@Variable]:[Class@Type])([X@Class.Expression]∈[Y@Class.Expression]))))
   Verification:   Definitional (Kernel AST)
 
-[3.03] “Is a proper class” predicate (Definition)
+[3.03 / DefIsProperClass] “Is a proper class” predicate (Definition)
+  Name:           DefIsProperClass
   Formula:        (∀(K:Class)((K proper)⟷(¬(K set))))
   SML Kernel AST: (∀([K@Variable]:[Class@Type])(([K@Class.Expression] proper)⟷(¬([K@Class.Expression] set))))
   Verification:   Definitional (Kernel AST)
 
-[3.04] Empty set (Definition)
+[3.04 / DefEmptySet] Empty set (Definition)
+  Name:           DefEmptySet
   Formula:        (∅={x|⊥})
   SML Kernel AST: (∅={[x@Class.Expression]|⊥})
   Verification:   Definitional (Kernel AST)
 
-[3.05] Universal class (Definition)
+[3.05 / DefUniversalClass] Universal class (Definition)
+  Name:           DefUniversalClass
   Formula:        (V={x|⊤})
   SML Kernel AST: (V={[x@Class.Expression]|⊤})
   Verification:   Definitional (Kernel AST)
 
-[3.06] Subclass relation (Definition)
+[3.06 / DefSubclass] Subclass relation (Definition)
+  Name:           DefSubclass
   Formula:        (∀(X:Class)∀(Y:Class)((X⊆Y)⟷(∀(a:Class)((a∈X)→(a∈Y)))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]⊆[Y@Class.Expression])⟷(∀([a@Variable]:[Class@Type])(([a@Class.Expression]∈[X@Class.Expression])→([a@Class.Expression]∈[Y@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.07] Example: “The empty class is a subclass of any class” statement (Theorem)
+[3.07 / ThmEmptySetIsSubclass] Example: “The empty class is a subclass of any class” statement (Theorem)
+  Name:           ThmEmptySetIsSubclass
   Formula:        (∀(X:Class)(∅⊆X))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))
   Verification:   Verified (Kernel)
 
-[3.08] “Membership respects equality from the left” (Axiom)
+[3.08 / AxmLeftInSound] “Membership respects equality from the left” (Axiom)
+  Name:           AxmLeftInSound
   Formula:        (∀(X:Class)∀(Y:Class)((X=Y)→∀(z:Class)((z∈X)⟷(z∈Y))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])→∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])⟷([z@Class.Expression]∈[Y@Class.Expression]))))
   Verification:   Postulated (Kernel Axiom)
 
-[3.09] “Membership respects equality from the right” (Axiom)
+[3.09 / AxmRightInSound] “Membership respects equality from the right” (Axiom)
+  Name:           AxmRightInSound
   Formula:        (∀(X:Class)∀(Y:Class)((X=Y)→∀(W:Class)((X∈W)⟷(Y∈W))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])→∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])⟷([Y@Class.Expression]∈[W@Class.Expression]))))
   Verification:   Postulated (Kernel Axiom)
 
-[3.10] “Extensionality” (Axiom)
+[3.10 / AxmExtensionality] “Extensionality” (Axiom)
+  Name:           AxmExtensionality
   Formula:        (∀(X:Class)∀(Y:Class)((∀(z:Class)((z∈X)⟷(z∈Y)))→(X=Y)))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])⟷([z@Class.Expression]∈[Y@Class.Expression])))→([X@Class.Expression]=[Y@Class.Expression])))
   Verification:   Postulated (Kernel Axiom)
 
-[3.11] “Intensionality”(admissible) (Theorem)
+[3.11 / AxmIntensionality] “Intensionality”(admissible) (Theorem)
+  Name:           AxmIntensionality
   Formula:        (∀(X:Class)∀(Y:Class)(((X set)∧(Y set))→((∀(W:Class)((X∈W)⟷(Y∈W)))→(X=Y))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])⟷([Y@Class.Expression]∈[W@Class.Expression])))→([X@Class.Expression]=[Y@Class.Expression]))))
   Verification:   Verified (Kernel)
 
-[3.12] “Heredity”(a subclass of a set is also a set) (Axiom)
+[3.12 / AxmHeredity] “Heredity”(a subclass of a set is also a set) (Axiom)
+  Name:           AxmHeredity
   Formula:        (∀(A:Class)∀(B:Class)(((A⊆B)∧(B set))→(A set)))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((([A@Class.Expression]⊆[B@Class.Expression])∧([B@Class.Expression] set))→([A@Class.Expression] set)))
   Verification:   Postulated (Kernel Axiom)
 
-[3.13] “Exponent”(powerclass of a set is also a set) (Axiom)
+[3.13 / AxmExponent] “Exponent”(powerclass of a set is also a set) (Axiom)
+  Name:           AxmExponent
   Formula:        (∀(X:Class)((X set)→(𝒫(X) set)))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)→(𝒫([X@Class.Expression]) set)))
   Verification:   Postulated (Kernel Axiom)
 
-[3.14] “Regularity”(only universal class is equal to its powerclass) (Axiom)
+[3.14 / AxmRegularity] “Regularity”(only universal class is equal to its powerclass) (Axiom)
+  Name:           AxmRegularity
   Formula:        (∀(X:Class)((𝒫(X)⊆X)→(V⊆X)))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])((𝒫([X@Class.Expression])⊆[X@Class.Expression])→(V⊆[X@Class.Expression])))
   Kernel Note:    Kernel Form (Cumulative 𝒫-Induction): ∀(X:Class)((𝒫(X) ⊆ X) → (V ⊆ X)). Classically equivalent (via X = V \ A) to the textbook ∈-minimal-element Regularity / Foundation formulation ∀(A:Class)((A ≠ ∅) → ∃(x:Class)((x ∈ A) ∧ ((x ∩ A) = ∅))).
   Verification:   Postulated (Kernel Axiom)
 
-[3.15] Transitivity predicate (Definition)
+[3.15 / DefTransitiveClass] Transitivity predicate (Definition)
+  Name:           DefTransitiveClass
   Formula:        (∀(A:Class)(Tr(A)⟷(∀(B:Class)((B∈A)→(B⊆A)))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])(Tr([A@Class.Expression])⟷(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])→([B@Class.Expression]⊆[A@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.16] Ordinality predicate (Definition)
+[3.16 / DefOrdinalClass] Ordinality predicate (Definition)
+  Name:           DefOrdinalClass
   Formula:        (∀(A:Class)(Ord(A)⟷(Tr(A)∧∀(B:Class)((B∈A)→Tr(B)))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])⟷(Tr([A@Class.Expression])∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])→Tr([B@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.17] Class of all ordinal sets(ordinal numbers) (Definition)
+[3.17 / DefClassOfOrdinals] Class of all ordinal sets(ordinal numbers) (Definition)
+  Name:           DefClassOfOrdinals
   Formula:        (On={w|Ord(w)})
   SML Kernel AST: (On={[w@Class.Expression]|Ord([w@Class.Expression])})
   Verification:   Definitional (Kernel AST)
 
-[3.18] The class of all ordinals is an ordinal class (Theorem)
+[3.18 / ThmOrdinalsIsOrdinal] The class of all ordinals is an ordinal class (Theorem)
+  Name:           ThmOrdinalsIsOrdinal
   Formula:        Ord(On)
   SML Kernel AST: Ord(On)
   Verification:   Verified (Kernel)
 
-[3.19] Union of the elements of a class (Definition)
+[3.19 / DefUnaryUnion] Union of the elements of a class (Definition)
+  Name:           DefUnaryUnion
   Formula:        (∀(K:Class)(⋃K={x|∃(y:Class)((y∈K)∧(x∈y))}))
   SML Kernel AST: (∀([K@Variable]:[Class@Type])(⋃[K@Class.Expression]={[x@Class.Expression]|∃([y@Variable]:[Class@Type])(([y@Class.Expression]∈[K@Class.Expression])∧([x@Class.Expression]∈[y@Class.Expression]))}))
   Verification:   Definitional (Kernel AST)
 
-[3.20] Intersection of the elements of a class (Definition)
+[3.20 / DefUnaryIntersection] Intersection of the elements of a class (Definition)
+  Name:           DefUnaryIntersection
   Formula:        (∀(K:Class)(⋂K={x|∀(y:Class)((y∈K)→(x∈y))}))
   SML Kernel AST: (∀([K@Variable]:[Class@Type])(⋂[K@Class.Expression]={[x@Class.Expression]|∀([y@Variable]:[Class@Type])(([y@Class.Expression]∈[K@Class.Expression])→([x@Class.Expression]∈[y@Class.Expression]))}))
   Verification:   Definitional (Kernel AST)
 
-[3.21] Domain (includes arguments with proper class values) (Definition)
+[3.21 / DefBigDomain] Domain (includes arguments with proper class values) (Definition)
+  Name:           DefBigDomain
   Formula:        (∀(F:Class)(Dom(F)={x|∃(b:Class)((x,b)∈F)}))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(Dom([F@Class.Expression])={[x@Class.Expression]|∃([b@Variable]:[Class@Type])(([x@Class.Expression],[b@Class.Expression])∈[F@Class.Expression])}))
   Verification:   Definitional (Kernel AST)
 
-[3.22] IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
+[3.22 / DefClassConditional] IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
+  Name:           DefClassConditional
   Formula:        (∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬(Enc(⦃v⦄)∈FV(𝛙:Fm)))→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
   SML Kernel AST: (∀([Γ@Variable]:[Ctx@Type])∀([v@Variable]:[Variable@Type])∀([𝛙@Variable]:[Fm@Type])∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((¬(Enc([⦃[v@Variable.Expression]⦄@LCEWIP])∈FV([𝛙@Fm.Expression]:Fm)))→(𝘞,[Γ@Ctx.Expression]⊢‹⟦IF ⟦[𝛙@Fm.Expression]⟧ THEN [A@Class.Expression] ELSE [B@Class.Expression] FI⟧={[⦃[v@Variable.Expression]⦄@Class.Expression]|(⟦[𝛙@Fm.Expression]⟧∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[A@Class.Expression]))∨((¬⟦[𝛙@Fm.Expression]⟧)∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[B@Class.Expression]))}›)))
   Verification:   Definitional (Kernel AST)
 
-[3.23] simple_if (polymorphic non-dependent conditional over Type) (Definition)
+[3.23 / DefSimpleConditional] simple_if (polymorphic non-dependent conditional over Type) (Definition)
+  Name:           DefSimpleConditional
   Formula:        ∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,⊤,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,⊥,t₁,t₂)=t₂)))
   SML Kernel AST: ∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,⊤,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,⊥,t₁,t₂)=t₂)))
   Verification:   Definitional (Kernel AST)
 
-[3.24] ifᵈₑₚ (dependent conditional over (Bool → Type)) (Definition)
+[3.24 / DefDependentConditional] ifᵈₑₚ (dependent conditional over (Bool → Type)) (Definition)
+  Name:           DefDependentConditional
   Formula:        ∀(Tₑ:Bool→Type), ((ifᵈₑₚ:Π(b:Bool),(⟦Tₑ(⊤)⟧→(⟦Tₑ(⊥)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(⊤)⟧)∀(t₂:⟦Tₑ(⊥)⟧)((ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧)∧((ifᵈₑₚ(⊤,t₁,t₂)=t₁)∧(ifᵈₑₚ(⊥,t₁,t₂)=t₂))))
   SML Kernel AST: ∀(Tₑ:Bool→Type), ((ifᵈₑₚ:Π(b:Bool),(⟦Tₑ(⊤)⟧→(⟦Tₑ(⊥)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(⊤)⟧)∀(t₂:⟦Tₑ(⊥)⟧)((ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧)∧((ifᵈₑₚ(⊤,t₁,t₂)=t₁)∧(ifᵈₑₚ(⊥,t₁,t₂)=t₂))))
   Verification:   Definitional (Kernel AST)
 
-[3.25] Evaluation of a [function|class-function|family] (Definition)
+[3.25 / DefValueAtArg] Evaluation of a [function|class-function|family] (Definition)
+  Name:           DefValueAtArg
   Formula:        (∀(F:Class)∀(a:Class)(F(a)=⟦IF (∃(s:Class)((a,s)∈F)) THEN ⋃{s|(a,s)∈F} ELSE V FI⟧))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])∀([a@Variable]:[Class@Type])([F@Class.Expression]([a@Class.Expression])=⟦IF (∃([s@Variable]:[Class@Type])(([a@Class.Expression],[s@Class.Expression])∈[F@Class.Expression])) THEN ⋃{[s@Class.Expression]|([a@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]} ELSE V FI⟧))
   Verification:   Definitional (Kernel AST)
 
-[3.26] Image class (Definition)
+[3.26 / DefRelationalImage] Image class (Definition)
+  Name:           DefRelationalImage
   Formula:        (∀(f:Class)∀(A:Class)(f[A]={b|∃(a:Class)((a∈A)∧(f(a)=b))}))
   SML Kernel AST: (∀([f@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])([f@Class.Expression][[A@Class.Expression]]={[b@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[A@Class.Expression])∧([f@Class.Expression]([a@Class.Expression])=[b@Class.Expression]))}))
   Verification:   Definitional (Kernel AST)
 
-[3.27] “Has exactly one element” predicate (Definition)
+[3.27 / DefIsSingleton] “Has exactly one element” predicate (Definition)
+  Name:           DefIsSingleton
   Formula:        (∀(s:Class)((s singleton)⟷(∃!(x:Class)(x∈s))))
   SML Kernel AST: (∀([s@Variable]:[Class@Type])(([s@Class.Expression] singleton)⟷(∃!([x@Variable]:[Class@Type])([x@Class.Expression]∈[s@Class.Expression]))))
   Verification:   Definitional (Kernel AST)
 
-[3.28] “Is set-valued” predicate (Definition)
+[3.28 / DefIsSetValued] “Is set-valued” predicate (Definition)
+  Name:           DefIsSetValued
   Formula:        (∀(F:Class)((F set-valued)⟷(∀(x:Class)((x∈Dom(F))→(F(x) set)))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] set-valued)⟷(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))→([F@Class.Expression]([x@Class.Expression]) set)))))
   Verification:   Definitional (Kernel AST)
 
-[3.29] “Has concentrated set values” predicate (Definition)
+[3.29 / DefHasConcentratedValues] “Has concentrated set values” predicate (Definition)
+  Name:           DefHasConcentratedValues
   Formula:        (∀(F:Class)((F concentrated set values)⟷(∀(x:Class)((x∈Dom(F))→((F(x) set)→∃!(y:Class)((x,y)∈F))))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] concentrated set values)⟷(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))→(([F@Class.Expression]([x@Class.Expression]) set)→∃!([y@Variable]:[Class@Type])(([x@Class.Expression],[y@Class.Expression])∈[F@Class.Expression]))))))
   Verification:   Definitional (Kernel AST)
 
-[3.30] “Has flat proper values” predicate (Definition)
+[3.30 / DefFlatValues] “Has flat proper values” predicate (Definition)
+  Name:           DefFlatValues
   Formula:        (∀(F:Class)((F flat proper values)⟷(∀(x:Class)((x∈Dom(F))→((F(x) proper)→∀(b:Class)(((x,b)∈F)→(b singleton)))))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] flat proper values)⟷(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))→(([F@Class.Expression]([x@Class.Expression]) proper)→∀([b@Variable]:[Class@Type])((([x@Class.Expression],[b@Class.Expression])∈[F@Class.Expression])→([b@Class.Expression] singleton)))))))
   Verification:   Definitional (Kernel AST)
 
-[3.31] “Is a family” predicate (Definition)
+[3.31 / DefFamily] “Is a family” predicate (Definition)
+  Name:           DefFamily
   Formula:        (∀(F:Class)((F family)⟷((F concentrated set values)∧(F flat proper values))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] family)⟷(([F@Class.Expression] concentrated set values)∧([F@Class.Expression] flat proper values))))
   Verification:   Definitional (Kernel AST)
 
-[3.32] “Is a class-function” predicate (Definition)
+[3.32 / DefClassFunction] “Is a class-function” predicate (Definition)
+  Name:           DefClassFunction
   Formula:        (∀(F:Class)((F class-function)⟷((F family)∧(F set-valued))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] class-function)⟷(([F@Class.Expression] family)∧([F@Class.Expression] set-valued))))
   Verification:   Definitional (Kernel AST)
 
-[3.33] “Is injective” predicate (Definition)
+[3.33 / DefInjectiveFunction] “Is injective” predicate (Definition)
+  Name:           DefInjectiveFunction
   Formula:        (∀(F:Class)((F injective)⟷(((F family)∧(F set-valued))∧∀(x:Class)∀(y:Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))→(x=y)))))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)⟷((([F@Class.Expression] family)∧([F@Class.Expression] set-valued))∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(((([x@Class.Expression]∈Dom([F@Class.Expression]))∧([y@Class.Expression]∈Dom([F@Class.Expression])))∧([F@Class.Expression]([x@Class.Expression])=[F@Class.Expression]([y@Class.Expression])))→([x@Class.Expression]=[y@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.34] “Is a function” predicate (Definition)
+[3.34 / DefSetFunction] “Is a function” predicate (Definition)
+  Name:           DefSetFunction
   Formula:        (∀(f:Class)((f function)⟷((f class-function)∧(f set))))
   SML Kernel AST: (∀([f@Variable]:[Class@Type])(([f@Class.Expression] function)⟷(([f@Class.Expression] class-function)∧([f@Class.Expression] set))))
   Verification:   Definitional (Kernel AST)
 
-[3.35] “Semi-singleton” predicate (Definition)
+[3.35 / DefSemiSingleton] “Semi-singleton” predicate (Definition)
+  Name:           DefSemiSingleton
   Formula:        (∀(s:Class)∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))→(x=y)))
   SML Kernel AST: (∀([s@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))→([x@Class.Expression]=[y@Class.Expression])))
   Verification:   Definitional (Kernel AST)
 
-[3.36] “Semi-singleton subset” relation (s sss A) (Definition)
+[3.36 / DefSemiSingletonSubclass] “Semi-singleton subset” relation (s sss A) (Definition)
+  Name:           DefSemiSingletonSubclass
   Formula:        (∀(s:Class)∀(A:Class)((s⊆A)∧∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))→(x=y))))
   SML Kernel AST: (∀([s@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(([s@Class.Expression]⊆[A@Class.Expression])∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))→([x@Class.Expression]=[y@Class.Expression]))))
   Verification:   Definitional (Kernel AST)
 
-[3.37] Evaluation of “Family Value” via semi-singleton subsets (Theorem)
+[3.37 / ThmFamilyEvaluation] Evaluation of “Family Value” via semi-singleton subsets (Theorem)
+  Name:           ThmFamilyEvaluation
   Formula:        (∀(F:Class)∀(x:Class)((F family)→(F(x)=⋃{s|(x,s)∈F})))
   SML Kernel AST: (∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(([F@Class.Expression] family)→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))
   Verification:   Verified (Kernel)
 
-[3.38] “Dependent Sum (Sigma-Type)” model over a family (Definition)
+[3.38 / DefSigmaModel] “Dependent Sum (Sigma-Type)” model over a family (Definition)
+  Name:           DefSigmaModel
   Formula:        (∀(B:Class)∀(x:Class)∀(y:Class)((B family)→(((x∈Dom(B))∧(y∈B(x)))⟷((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))
   SML Kernel AST: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))⟷(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:    Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of the dependent sum Σ(x:Dom(F)) over a family F in the fixed background model.
   Verification:   Definitional (Kernel AST)
 
-[3.39] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
+[3.39 / DefPiPredicateModel] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
+  Name:           DefPiPredicateModel
   Formula:        (∀(B:Class)∀(f:Class)(((B family)∧((f family)∧(Dom(f)=Dom(B))))→∀(x:Class)((x∈Dom(B))→(f(x)∈B(x)))))
   SML Kernel AST: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧(Dom([f@Class.Expression])=Dom([B@Class.Expression]))))→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
   Kernel Note:    Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
   Verification:   Verified (Kernel)
 
-[3.40] “Is not strictly larger than” binary relation (Definition)
+[3.40 / DefCardLessEq] “Is not strictly larger than” binary relation (Definition)
+  Name:           DefCardLessEq
   Formula:        (∀(A:Class)∀(B:Class)((A≼B)⟷(∃(f:Class)((((f class-function)∧(A⊆Dom(f)))∧(f[A]⊆B))∧(f injective)))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]≼[B@Class.Expression])⟷(∃([f@Variable]:[Class@Type])(((([f@Class.Expression] class-function)∧([A@Class.Expression]⊆Dom([f@Class.Expression])))∧([f@Class.Expression][[A@Class.Expression]]⊆[B@Class.Expression]))∧([f@Class.Expression] injective)))))
   Verification:   Definitional (Kernel AST)
 
-[3.41] Class cardinality (Definition)
+[3.41 / DefCardinality] Class cardinality (Definition)
+  Name:           DefCardinality
   Formula:        (∀(K:Class)(|K|=(On∩⋂{a|(a∈On)∧(K≼a)})))
   SML Kernel AST: (∀([K@Variable]:[Class@Type])(|[K@Class.Expression]|=(On∩⋂{[a@Class.Expression]|([a@Class.Expression]∈On)∧([K@Class.Expression]≼[a@Class.Expression])})))
   Verification:   Definitional (Kernel AST)
 
-[3.42] “Is strictly smaller than” binary relation (Definition)
+[3.42 / DefCardLess] “Is strictly smaller than” binary relation (Definition)
+  Name:           DefCardLess
   Formula:        (∀(A:Class)∀(B:Class)((A≺B)⟷(¬(B≼A))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]≺[B@Class.Expression])⟷(¬([B@Class.Expression]≼[A@Class.Expression]))))
   Verification:   Definitional (Kernel AST)
 
-[3.43] Size limitation axiom related statement (Axiom)
+[3.43 / AxmSizeLimitation] Size limitation axiom related statement (Axiom)
+  Name:           AxmSizeLimitation
   Formula:        (∀(X:Class)((X∈V)⟷(|X|≺|V|)))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])(([X@Class.Expression]∈V)⟷(|[X@Class.Expression]|≺|V|)))
   Verification:   Postulated (Kernel Axiom)
 
-[3.44] “Is hereditary” predicate (Definition)
+[3.44 / DefHereditaryClass] “Is hereditary” predicate (Definition)
+  Name:           DefHereditaryClass
   Formula:        (∀(A:Class)(Hereditary(A)⟷(∀(B:Class)((B∈A)→∀(X:Class)((X⊆B)→(X∈A))))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])(Hereditary([A@Class.Expression])⟷(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])→∀([X@Variable]:[Class@Type])(([X@Class.Expression]⊆[B@Class.Expression])→([X@Class.Expression]∈[A@Class.Expression]))))))
   Verification:   Definitional (Kernel AST)
 
-[3.45] “Is powerful” predicate (Definition)
+[3.45 / DefPowerfulClass] “Is powerful” predicate (Definition)
+  Name:           DefPowerfulClass
   Formula:        (∀(U:Class)(Powerful(U)⟷(∀(B:Class)((B∈U)→(𝒫(B)∈U)))))
   SML Kernel AST: (∀([U@Variable]:[Class@Type])(Powerful([U@Class.Expression])⟷(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[U@Class.Expression])→(𝒫([B@Class.Expression])∈[U@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.46] “Is pairful” predicate (Definition)
+[3.46 / DefPairfulClass] “Is pairful” predicate (Definition)
+  Name:           DefPairfulClass
   Formula:        (∀(U:Class)(Pairful(U)⟷(∀(A:Class)∀(B:Class)(((A∈U)∧(B∈U))→({A,B}∈U)))))
   SML Kernel AST: (∀([U@Variable]:[Class@Type])(Pairful([U@Class.Expression])⟷(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((([A@Class.Expression]∈[U@Class.Expression])∧([B@Class.Expression]∈[U@Class.Expression]))→({[A@Class.Expression],[B@Class.Expression]}∈[U@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[3.47] “Is tight” predicate (Definition)
+[3.47 / DefTightClass] “Is tight” predicate (Definition)
+  Name:           DefTightClass
   Formula:        (∀(U:Class)(Tight(U)⟷(∀(B:Class)((B⊆U)→((B≺U)⟷(B∈U))))))
   SML Kernel AST: (∀([U@Variable]:[Class@Type])(Tight([U@Class.Expression])⟷(∀([B@Variable]:[Class@Type])(([B@Class.Expression]⊆[U@Class.Expression])→(([B@Class.Expression]≺[U@Class.Expression])⟷([B@Class.Expression]∈[U@Class.Expression]))))))
   Verification:   Definitional (Kernel AST)
 
-[3.48] Singleton set (Definition)
+[3.48 / DefSingletonSet] Singleton set (Definition)
+  Name:           DefSingletonSet
   Formula:        (∀(a:Class)({a}={x|x=a}))
   SML Kernel AST: (∀([a@Variable]:[Class@Type])({[a@Class.Expression]}={[x@Class.Expression]|[x@Class.Expression]=[a@Class.Expression]}))
   Verification:   Definitional (Kernel AST)
 
-[3.49] Unordered pair (Definition)
+[3.49 / DefUnorderedPair] Unordered pair (Definition)
+  Name:           DefUnorderedPair
   Formula:        (∀(a:Class)∀(b:Class)({a,b}={x|(x=a)∨(x=b)}))
   SML Kernel AST: (∀([a@Variable]:[Class@Type])∀([b@Variable]:[Class@Type])({[a@Class.Expression],[b@Class.Expression]}={[x@Class.Expression]|([x@Class.Expression]=[a@Class.Expression])∨([x@Class.Expression]=[b@Class.Expression])}))
   Verification:   Definitional (Kernel AST)
 
-[3.50] Set-theoretic models of natural numbers(TBI) (Definition)
+[3.50 / DefNaturalNumberModels] Set-theoretic models of natural numbers(TBI) (Definition)
+  Name:           DefNaturalNumberModels
   Formula:        ((0:Class) = ∅) ∧ (((1:Class) = {∅}) ∧ (((2:Class) = {∅,{∅}}) ∧ ((3:Class) = {∅,{∅},{∅,{∅}}})))
   SML Kernel AST: ((0:Class) = ∅) ∧ (((1:Class) = {∅}) ∧ (((2:Class) = {∅,{∅}}) ∧ ((3:Class) = {∅,{∅},{∅,{∅}}})))
   Kernel Note:    Explicit typed term interpretation / valuation (μ_Nat : Nat.Expression → Class.Expression) mapping numeral terms 0, 1, 2, 3 into their von Neumann ordinal classes in the fixed background model.
   Verification:   Definitional (Kernel AST)
 
-[3.51] General definition of lists of classes which applicable not only for sets, but for proper classes too(TBI) (Definition)
+[3.51 / DefClassLists] General definition of lists of classes which applicable not only for sets, but for proper classes too(TBI) (Definition)
+  Name:           DefClassLists
   Formula:        (mark(A,n) = ({{0,n}} ∪ {({{{a}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{a}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{b}},2} ∈ L)}))))))
   SML Kernel AST: (mark(A,n) = ({{0,n}} ∪ {({{{a}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{a}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{b}},2} ∈ L)}))))))
+  Judgements:     [(A:Class), (B:Class), (L:Class), (n:Class)]
   Verification:   Definitional (Kernel AST)
 
-[3.52] Ordered pair(Kuratowsky's) (Definition)
+[3.52 / DefKuratowskiPair] Ordered pair(Kuratowsky's) (Definition)
+  Name:           DefKuratowskiPair
   Formula:        (∀(a:Class)∀(b:Class)((a,b)={{a,a},{a,b}}))
   SML Kernel AST: (∀([a@Variable]:[Class@Type])∀([b@Variable]:[Class@Type])(([a@Class.Expression],[b@Class.Expression])={{[a@Class.Expression],[a@Class.Expression]},{[a@Class.Expression],[b@Class.Expression]}}))
   Verification:   Definitional (Kernel AST)
 
-[3.53] Binary union (Definition)
+[3.53 / DefBinaryUnion] Binary union (Definition)
+  Name:           DefBinaryUnion
   Formula:        (∀(A:Class)∀(B:Class)((A∪B)={x|(x∈A)∨(x∈B)}))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]∪[B@Class.Expression])={[x@Class.Expression]|([x@Class.Expression]∈[A@Class.Expression])∨([x@Class.Expression]∈[B@Class.Expression])}))
   Kernel Note:    Special Def.: (x ∪ y) = ⋃{x,y} (set-restricted); General Def.: (A ∪ B) = {z | (z ∈ A) ∨ (z ∈ B)} (general class definition).
   Verification:   Definitional (Kernel AST)
 
-[3.54] Binary intersection (Definition)
+[3.54 / DefBinaryIntersection] Binary intersection (Definition)
+  Name:           DefBinaryIntersection
   Formula:        (∀(A:Class)∀(B:Class)((A∩B)={x|(x∈A)∧(x∈B)}))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]∩[B@Class.Expression])={[x@Class.Expression]|([x@Class.Expression]∈[A@Class.Expression])∧([x@Class.Expression]∈[B@Class.Expression])}))
   Verification:   Definitional (Kernel AST)
 
-[3.55] “Is successor-inductive (Peano-inductive)” predicate (Definition)
+[3.55 / DefInductiveClass] “Is successor-inductive (Peano-inductive)” predicate (Definition)
+  Name:           DefInductiveClass
   Formula:        (∀(X:Class)(Ind(X)⟷((∅∈X)∧∀(a:Class)((a∈X)→((a∪{a})∈X)))))
   SML Kernel AST: (∀([X@Variable]:[Class@Type])(Ind([X@Class.Expression])⟷((∅∈[X@Class.Expression])∧∀([a@Variable]:[Class@Type])(([a@Class.Expression]∈[X@Class.Expression])→(([a@Class.Expression]∪{[a@Class.Expression]})∈[X@Class.Expression])))))
   Kernel Note:    Successor-inductive (Peano 0-successor-inductive) in the narrowest sense: closed under 0 = ∅ and ordinal successor a |-> a ∪ {a}, as distinguished from transfinite ∈-induction (3.70) or 𝒫-induction.
   Verification:   Definitional (Kernel AST)
 
-[3.56] The intersection class of all successor-inductive (Peano-inductive) classes is called omega (⊆-minimal successor-inductive class and smallest successor-inductive ordinal) (Definition)
+[3.56 / DefOmega] The intersection class of all successor-inductive (Peano-inductive) classes is called omega (⊆-minimal successor-inductive class and smallest successor-inductive ordinal) (Definition)
+  Name:           DefOmega
   Formula:        (∀(x:Class)((x∈ω)⟷(∀(Q:Class)(Ind(Q)→(x∈Q)))))
   SML Kernel AST: (∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈ω)⟷(∀([Q@Variable]:[Class@Type])(Ind([Q@Class.Expression])→([x@Class.Expression]∈[Q@Class.Expression])))))
   Kernel Note:    By definition, ω is not only the smallest successor-inductive ordinal, but also the ⊆-minimal (least) element among all successor-inductive (Peano-inductive) classes in the subclass (⊆) order (Ind(ω) ∧ ∀(Q:Class), Ind(Q) → (ω ⊆ Q)), directly expressing simple countable mathematical (Peano) induction up to ω. | Special Def.: ω = ⋂{q | Ind(q)}; General Def.: ∀(x:Class), (x ∈ ω) ⟷ (∀(Q:Class), Ind(Q) → (x ∈ Q)).
   Verification:   Definitional (Kernel AST)
 
-[3.57] “Infinity”(ω is a set) (Axiom)
+[3.57 / AxmOmegaIsSet] “Infinity”(ω is a set) (Axiom)
+  Name:           AxmOmegaIsSet
   Formula:        (ω set)
   SML Kernel AST: (ω set)
   Kernel Note:    Asserts that the ⊆-minimal successor-inductive (Peano-inductive) class ω is a set.
   Verification:   Postulated (Kernel Axiom)
 
-[3.58] Class of all sets is successor-inductive (Peano-inductive) (Theorem)
+[3.58 / ThmUniversalClassInductive] Class of all sets is successor-inductive (Peano-inductive) (Theorem)
+  Name:           ThmUniversalClassInductive
   Formula:        Ind(V)
   SML Kernel AST: Ind(V)
   Verification:   Verified (Kernel)
 
-[3.59] Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
+[3.59 / ThmOmegaInductive] Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
+  Name:           ThmOmegaInductive
   Formula:        Ind(ω)
   SML Kernel AST: Ind(ω)
   Kernel Note:    Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
   Verification:   Verified (Kernel)
 
-[3.60] Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
+[3.60 / ThmOrdinalsInductive] Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
+  Name:           ThmOrdinalsInductive
   Formula:        Ind(On)
   SML Kernel AST: Ind(On)
   Verification:   Verified (Kernel)
 
-[3.61] ω is transitive (Theorem)
+[3.61 / ThmOmegaTransitive] ω is transitive (Theorem)
+  Name:           ThmOmegaTransitive
   Formula:        Tr(ω)
   SML Kernel AST: Tr(ω)
   Verification:   Verified (Kernel)
 
-[3.62] ω is ordinal (Theorem)
+[3.62 / ThmOmegaOrdinal] ω is ordinal (Theorem)
+  Name:           ThmOmegaOrdinal
   Formula:        Ord(ω)
   SML Kernel AST: Ord(ω)
   Verification:   Verified (Kernel)
 
-[3.63] ω is in the class of all ordinal numbers(=sets) (Theorem)
+[3.63 / ThmOmegaInOrdinals] ω is in the class of all ordinal numbers(=sets) (Theorem)
+  Name:           ThmOmegaInOrdinals
   Formula:        (ω∈On)
   SML Kernel AST: (ω∈On)
   Verification:   Verified (Kernel)
 
-[3.64] “Is cardinal” predicate (Theorem)
+[3.64 / DefIsCardinal] “Is cardinal” predicate (Theorem)
+  Name:           DefIsCardinal
   Formula:        (∀(C:Class)(Card(C)⟷(∃(K:Class)(|K|=C))))
   SML Kernel AST: (∀([C@Variable]:[Class@Type])(Card([C@Class.Expression])⟷(∃([K@Variable]:[Class@Type])(|[K@Class.Expression]|=[C@Class.Expression]))))
   Verification:   Verified (Kernel)
 
-[3.65] ω is cardinal (Theorem)
+[3.65 / ThmOmegaCardinal] ω is cardinal (Theorem)
+  Name:           ThmOmegaCardinal
   Formula:        Card(ω)
   SML Kernel AST: Card(ω)
   Verification:   Verified (Kernel)
 
-[3.66] On is a cardinal class (Theorem)
+[3.66 / ThmOrdinalsCardinal] On is a cardinal class (Theorem)
+  Name:           ThmOrdinalsCardinal
   Formula:        Card(On)
   SML Kernel AST: Card(On)
   Verification:   Verified (Kernel)
 
-[3.67] Class of all sets is not a cardinal class (Theorem)
+[3.67 / ThmUniversalClassNotCardinal] Class of all sets is not a cardinal class (Theorem)
+  Name:           ThmUniversalClassNotCardinal
   Formula:        (¬Card(V))
   SML Kernel AST: (¬Card(V))
   Verification:   Verified (Kernel)
 
-[3.68] “Is a universe” predicate (Definition)
+[3.68 / DefGrothendieckUniverse] “Is a universe” predicate (Definition)
+  Name:           DefGrothendieckUniverse
   Formula:        (∀(U:Class)((U universe)⟷(((ω∈U)∧((Tr(U)∧Hereditary(U))∧(Powerful(U)∧Tight(U))))∧Pairful(U))))
   SML Kernel AST: (∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)⟷(((ω∈[U@Class.Expression])∧((Tr([U@Class.Expression])∧Hereditary([U@Class.Expression]))∧(Powerful([U@Class.Expression])∧Tight([U@Class.Expression]))))∧Pairful([U@Class.Expression]))))
   Verification:   Definitional (Kernel AST)
 
-[3.69] The class of all sets is a universe (Theorem)
+[3.69 / ThmUniversalClassIsUniverse] The class of all sets is a universe (Theorem)
+  Name:           ThmUniversalClassIsUniverse
   Formula:        (V universe)
   SML Kernel AST: (V universe)
   Verification:   Verified (Kernel)
 
-[3.70] “Tarski's axiom” (Axiom)
+[3.70 / AxmTarskiUniverses] “Tarski's axiom” (Axiom)
+  Name:           AxmTarskiUniverses
   Formula:        (∀(x:Class)((x set)→∃(u:Class)(((u universe)∧(x∈u))∧(u set))))
   SML Kernel AST: (∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)→∃([u@Variable]:[Class@Type])((([u@Class.Expression] universe)∧([x@Class.Expression]∈[u@Class.Expression]))∧([u@Class.Expression] set))))
   Verification:   Postulated (Kernel Axiom)
 
-[3.71] General form of the transfinite ∈-induction principle on a transitive class (Theorem)
+[3.71 / ThmTransitiveClassInduction] General form of the transfinite ∈-induction principle on a transitive class (Theorem)
+  Name:           ThmTransitiveClassInduction
   Formula:        (∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))→(K⊆A)))
   SML Kernel AST: (∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))→([K@Class.Expression]⊆[A@Class.Expression])))
   Kernel Note:    Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
   Verification:   Verified (Kernel)
 
-[3.72] Soundness of the theory 𝘛 (Axiom)
+[3.72 / AxmSoundnessOfBaseTheory] Soundness of the theory 𝘛 (Axiom)
+  Name:           AxmSoundnessOfBaseTheory
   Formula:        (∀(𝛗:Fm)((𝘛,[]⊢𝛗)→eval(𝛗)))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])((𝘛,[]⊢[𝛗@Fm.Expression])→eval([𝛗@Fm.Expression])))
   Kernel Note:    Local reflection / soundness schema for the recursively enumerable (r.e.) base theory of classes 𝘛: if (𝘛, [] ⊢ φ), then the explicit formula valuation ⟦φ⟧ holds in the fixed background model.
   Verification:   Postulated (Kernel Axiom)
 
-[3.73] Soundness of the theory 𝘍 (Axiom)
+[3.73 / AxmSoundnessOfFullTheory] Soundness of the theory 𝘍 (Axiom)
+  Name:           AxmSoundnessOfFullTheory
   Formula:        (∀(𝛗:Fm)((𝘍,[]⊢𝛗)→eval(𝛗)))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢[𝛗@Fm.Expression])→eval([𝛗@Fm.Expression])))
   Kernel Note:    𝘍 is a non-recursively-enumerable (non-r.e.), Henkin-complete extension of the r.e. base theory 𝘛 (𝘛 ⊆ 𝘍). Because 𝘍 is non-r.e., Gödel's incompleteness theorems do not apply to 𝘍 itself, and 𝘍 is postulated with full soundness (𝘍, [] ⊢ φ) → ⟦φ⟧.
   Verification:   Postulated (Kernel Axiom)
 
-[3.74] Completeness of the theory 𝘍 (Definition)
+[3.74 / AxmCompletenessOfFullTheory] Completeness of the theory 𝘍 (Definition)
+  Name:           AxmCompletenessOfFullTheory
   Formula:        (∀(𝛗:Fm)(eval(𝛗)→(𝘍,[]⊢𝛗)))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])→(𝘍,[]⊢[𝛗@Fm.Expression])))
   Kernel Note:    Negation-completeness of the non-r.e. Henkin extension 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍, then φ is derivable in 𝘍.
   Verification:   Definitional (Kernel AST)
 
-[3.75] If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+[3.75 / AxmBaseSubtheoryOfFull] If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+  Name:           AxmBaseSubtheoryOfFull
   Formula:        (∀(Γ:Ctx)∀(𝛗:Fm)((𝘛,Γ⊢𝛗)→(𝘍,Γ⊢𝛗)))
   SML Kernel AST: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘛,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
   Kernel Note:    Theory extension monotonicity (𝘛 ⊆ 𝘍): every theorem of the r.e. base theory 𝘛 is also a theorem of its non-r.e. Henkin completion 𝘍.
   Verification:   Postulated (Kernel Axiom)
 
-[3.76] Ordered pair(Dunaev's tagged class pair) (Definition)
+[3.76 / DefDunaevOrderedPair] Ordered pair(Dunaev's tagged class pair) (Definition)
+  Name:           DefDunaevOrderedPair
   Formula:        (∀(A:Class)∀(B:Class)((A,B)=(({{∅,{∅}}}∪{x|∃(a:Class)((a∈A)∧(x={{{{a}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{x|∃(a:Class)((a∈B)∧(x={{{{a}}},{∅,{∅}}}))}))))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression],[B@Class.Expression])=(({{∅,{∅}}}∪{[x@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[A@Class.Expression])∧([x@Class.Expression]={{{{[a@Class.Expression]}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{[x@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[B@Class.Expression])∧([x@Class.Expression]={{{{[a@Class.Expression]}}},{∅,{∅}}}))}))))
   Kernel Note:    Dunaev tagged class ordered pair (A,B) = mark(A,1) ∪ mark(B,2), sound for arbitrary proper classes.
   Verification:   Definitional (Kernel AST)
 
-[3.77] First projection of Dunaev's tagged ordered pair (Theorem)
+[3.77 / ThmDunaevFirstProjection] First projection of Dunaev's tagged ordered pair (Theorem)
+  Name:           ThmDunaevFirstProjection
   Formula:        (∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))
   Kernel Note:    Recovers A from (A,B) via tag 1 without requiring A or B to be sets.
   Verification:   Verified (Kernel)
 
-[3.78] Second projection of Dunaev's tagged ordered pair (Theorem)
+[3.78 / ThmDunaevSecondProjection] Second projection of Dunaev's tagged ordered pair (Theorem)
+  Name:           ThmDunaevSecondProjection
   Formula:        (∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
   SML Kernel AST: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))
   Kernel Note:    Recovers B from (A,B) via tag 2 without requiring A or B to be sets.
   Verification:   Verified (Kernel)
 
-[4.01] Instantiation(meta,WIP) (Axiom)
+[4.01 / DefMetaInstantiation] Instantiation(meta,WIP) (Axiom)
+  Name:           DefMetaInstantiation
   Formula:        (∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))
   SML Kernel AST: (∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))
   Verification:   Postulated (Kernel Axiom)
 
-[4.02] Generalisation(meta,WIP) (Axiom)
+[4.02 / DefMetaGeneralisation] Generalisation(meta,WIP) (Axiom)
+  Name:           DefMetaGeneralisation
   Formula:        (∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬(Enc(⦃v⦄)∈Ctx.FV(Γ)))→((𝘞,Γ⊢𝛗)→(𝘞,Γ⊢‹∀(⦃v⦄:A)⟦𝛗⟧›))))
   SML Kernel AST: (∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬(Enc([⦃[v@Variable.Expression]⦄@LCEWIP])∈Ctx.FV([Γ@Ctx.Expression])))→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[[A@Type]@Type])⟦[𝛗@Fm.Expression]⟧›))))
   Kernel Note:    (A theory 𝘞 is assumed here to contain only formulas without free variables, so the variable x has no free occurences in any formula of a set of formulas [|Dec(Theory.Expression)(W)|]. Here Enc(v) (μ_Variable(v) : Variable.Expression → Class.Expression) denotes the explicit typed term interpretation / valuation homomorphism mapping a typed term of sort A into a term of sort Class while respecting the fixed model and variable valuation.)
   Verification:   Postulated (Kernel Axiom)
 
-[4.03] CoNecessitation(meta,WIP) (Inference Rule)
+[4.03 / DefMetaConecessitation] CoNecessitation(meta,WIP) (Inference Rule)
+  Name:           DefMetaConecessitation
   Formula:        (∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)→(𝘍,Γ⊢𝛗)))
   SML Kernel AST: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
   Kernel Note:    If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.73 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.73 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
   Verification:   Primitive / Derived Rule (Kernel)
 
-[4.04] Quantifier “unique”(meta,WIP) (Definition)
+[4.04 / DefAtMostOneBinder] Quantifier “unique”(meta,WIP) (Definition)
+  Name:           DefAtMostOneBinder
   Formula:        (∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)⟷(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))→(x=y)))))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)⟷(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))→([x@Class.Expression]=[y@Class.Expression])))))
   Verification:   Definitional (Kernel AST)
 
-[4.05] Quantifier “exists and unique”(meta,WIP) (Definition)
+[4.05 / DefExistsUniqueBinder] Quantifier “exists and unique”(meta,WIP) (Definition)
+  Name:           DefExistsUniqueBinder
   Formula:        (∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)⟷((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])(𝘛,[]⊢‹(∃!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)⟷((∃([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)∧!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)›))
   Verification:   Definitional (Kernel AST)
 
-[4.06] Class comprehension axiom schema(meta,WIP) (Axiom)
+[4.06 / AxmMetaClassComprehension] Class comprehension axiom schema(meta,WIP) (Axiom)
+  Name:           AxmMetaClassComprehension
   Formula:        (∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(FFI((k:Class.Expression),‹x›,(𝛗:Fm))→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})⟷((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Name@Type])∀([k@Variable]:[Class.Expression@Type])(FFI(([k@Class.Expression.Expression]:Class.Expression),‹[x@Name.Expression]›,([𝛗@Fm.Expression]:Fm))→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})⟷((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))
   Verification:   Postulated (Kernel Axiom)
 
-[5.01] Löb's theorem(WIP) (Theorem)
+[5.01 / ThmLoeb] Löb's theorem(WIP) (Theorem)
+  Name:           ThmLoeb
   Formula:        (∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)→⟦𝛗⟧›)→(𝘛,[]⊢𝛗)›))
   SML Kernel AST: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])→⟦[𝛗@Fm.Expression]⟧›)→(𝘛,[]⊢[𝛗@Fm.Expression])›))
   Kernel Note:    Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
   Verification:   Verified (Kernel)
 
-[5.02] Gödel's second incompleteness theorem(WIP) (Theorem)
+[5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem(WIP) (Theorem)
+  Name:           ThmSecondIncompleteness
   Formula:        (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
   SML Kernel AST: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
   Kernel Note:    Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.

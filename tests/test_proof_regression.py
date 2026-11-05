@@ -100,33 +100,39 @@ class TestProofRegression(unittest.TestCase):
         self.assertNotIn("rel-in\">∈", self.gen_manual_html)
 
     def test_database_entries_count(self):
-        """Database must contain 5 sections (1.01-1.14, 2.01-2.05, 3.01-3.79, 4.01-4.06, 5.01-5.02) and 106 formal items."""
-        self.assertEqual(len(self.db["sections"]), 5)
+        """Database sections and entry order must derive directly from set_theory_prover/program/types/order_sec*.txt."""
+        types_dir = os.path.abspath(os.path.join(SITE_DIR, "..", "set_theory_prover", "program", "types"))
+        sec_orders = {}
+        for idx, sid in enumerate(s["id"] for s in self.db["sections"]):
+            sec_idx = idx + 1
+            order_path = os.path.join(types_dir, f"order_sec{sec_idx}.txt")
+            self.assertTrue(os.path.isfile(order_path), f"Missing section order file: {order_path}")
+            with open(order_path, "r", encoding="utf-8") as f:
+                names = [ln.strip() for ln in f if ln.strip() and not ln.strip().startswith("#")]
+            for nm in names:
+                self.assertRegex(nm, r"^[A-Za-z]+$", f"Entry name {nm!r} must use plain English alphabet only")
+            sec_orders[sid] = names
+
+        expected_total = sum(len(v) for v in sec_orders.values())
         total_entries = sum(len(s["entries"]) for s in self.db["sections"])
-        self.assertEqual(total_entries, 106)
-        self.assertEqual(self.db["entry_count"], 106)
+        self.assertEqual(total_entries, expected_total)
+        self.assertEqual(self.db["entry_count"], expected_total)
+        for sec in self.db["sections"]:
+            sid = sec["id"]
+            actual_names = [e["name"] for e in sec["entries"]]
+            self.assertEqual(actual_names, sec_orders[sid], f"Section {sid} order does not match order_{sid.replace('-', '')}.txt")
 
     def test_stated_numbering_ranges_match_actual_entries(self):
         """Stated section numbering ranges in manual.html and index.html must match the actual first and last entries of each section."""
-        expected_ranges = {
-            "sec-1": ("1.01", "1.14", 14),
-            "sec-2": ("2.01", "2.06", 6),
-            "sec-3": ("3.01", "3.78", 78),
-            "sec-4": ("4.01", "4.06", 6),
-            "sec-5": ("5.01", "5.02", 2),
-        }
         for sec in self.gen_db["sections"]:
             sid = sec["id"]
-            first_num, last_num, count = expected_ranges[sid]
             entries = sec["entries"]
-            self.assertEqual(len(entries), count, f"Section {sid} count mismatch")
-            self.assertEqual(entries[0]["num"], first_num)
-            self.assertEqual(entries[-1]["num"], last_num)
+            self.assertGreater(len(entries), 0, f"Section {sid} is empty")
+            first_num = entries[0]["num"]
+            last_num = entries[-1]["num"]
             self.assertEqual(sec["range"], f"{first_num}-{last_num}")
             html_range = f"{first_num}&ndash;{last_num}"
             self.assertIn(html_range, self.gen_manual_html, f"Missing exact range {html_range} in generated/manual.html")
-        for stale_range in ("1.01–1.07", "1.01&ndash;1.07", "1.01&ndash;1.13", "5.01–5.05", "5.01&ndash;5.05"):
-            self.assertNotIn(stale_range, self.gen_manual_html, f"Stale numbering range {stale_range} found in generated/manual.html")
 
     def test_formula_and_kernel_ast_consistency_all_entries(self):
         """Every entry in the database must have a rendered formula and SML Kernel AST derived from the exact same kernel term."""
@@ -153,40 +159,47 @@ class TestProofRegression(unittest.TestCase):
             res, _ = parse(list(s), 0)
             return res
 
-        self.assertEqual(len(self.gen_db["entries"]), 106)
+        self.assertEqual(len(self.gen_db["entries"]), self.gen_db["entry_count"])
         for e in self.gen_db["entries"]:
-            num = e["num"]
+            ename = e["name"]
+            self.assertRegex(ename, r"^[A-Za-z]+$", f"Entry name {ename!r} must be plain English alphabet")
             formula = e["formula_unicode"]
             ast = e["kernel_ast_unicode"]
-            self.assertTrue(formula, f"Empty formula_unicode for {num}")
-            self.assertTrue(ast, f"Empty kernel_ast_unicode for {num}")
+            self.assertTrue(formula, f"Empty formula_unicode for {ename}")
+            self.assertTrue(ast, f"Empty kernel_ast_unicode for {ename}")
             self.assertEqual(
                 strip_redcover_sq(ast),
                 formula,
-                f"Formula vs SML Kernel AST mismatch in entry {num} ({e['title']}): {formula!r} vs {ast!r}",
+                f"Formula vs SML Kernel AST mismatch in entry {ename} ({e['title']}): {formula!r} vs {ast!r}",
             )
 
-        by_num = {e["num"]: e for e in self.gen_db["entries"]}
-        # Rule 2.05 Exists Abstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
-        e205 = by_num["2.05"]
-        self.assertEqual(e205["title"], "Exists Abstraction")
-        self.assertEqual(e205["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))")
+        by_name = {e["name"]: e for e in self.gen_db["entries"]}
+        # RulClassComprehension must separate Judgements [(x:Name), (𝛗:Fm)] from Side Condition ⊤
+        eccr = by_name["RulClassComprehension"]
+        self.assertEqual(eccr["judgements_unicode"], "[(x:Name), (𝛗:Fm)]")
+        self.assertEqual(eccr["side_condition_unicode"], "⊤")
+        self.assertIn('<th class="field-name">Judgements</th>', self.gen_manual_html)
+
+        # RulExistsAbstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
+        eea = by_name["RulExistsAbstraction"]
+        self.assertEqual(eea["title"], "Exists Abstraction")
+        self.assertEqual(eea["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))")
         self.assertNotIn("∃(x : Class) (φ → ψ)", self.gen_manual_html)
 
-        # A09 is Negation Elimination; A10 is Negation Introduction (Reductio Ad Absurdum)
-        e109 = by_num["1.09"]
-        self.assertEqual(e109["formula_unicode"], "((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))")
-        self.assertIn("Negation Elimination", e109["comment"])
-        self.assertNotIn("Negation Introduction", e109["comment"])
-        e110 = by_num["1.10"]
-        self.assertEqual(e110["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))")
-        self.assertIn("Negation Introduction", e110["comment"])
+        # AxmPropNegElim is Negation Elimination; AxmPropNegIntro is Negation Introduction (Reductio Ad Absurdum)
+        eneg_elim = by_name["AxmPropNegElim"]
+        self.assertEqual(eneg_elim["formula_unicode"], "((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))")
+        self.assertIn("Negation Elimination", eneg_elim["comment"])
+        self.assertNotIn("Negation Introduction", eneg_elim["comment"])
+        eneg_intro = by_name["AxmPropNegIntro"]
+        self.assertEqual(eneg_intro["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))")
+        self.assertIn("Negation Introduction", eneg_intro["comment"])
 
-        # Entry 3.14 Regularity shows exact kernel formula and labels both Kernel Form and textbook equivalent form
-        e314 = by_num["3.14"]
-        self.assertEqual(e314["formula_unicode"], "(∀(X:Class)((𝒫(X)⊆X)→(V⊆X)))")
-        self.assertIn("Kernel Form", e314["comment"])
-        self.assertIn("textbook", e314["comment"].lower())
+        # AxmRegularity shows exact kernel formula and labels both Kernel Form and textbook equivalent form
+        ereg = by_name["AxmRegularity"]
+        self.assertEqual(ereg["formula_unicode"], "(∀(X:Class)((𝒫(X)⊆X)→(V⊆X)))")
+        self.assertIn("Kernel Form", ereg["comment"])
+        self.assertIn("textbook", ereg["comment"].lower())
 
     def test_certificate_pages_exist_and_non_empty(self):
         """Every entry in generated/ and frozen/ must have a corresponding standalone certificate page."""

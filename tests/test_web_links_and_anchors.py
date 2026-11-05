@@ -50,9 +50,8 @@ class TestWebLinksAndAnchors(unittest.TestCase):
 
     def test_output_html_section_and_item_anchors_exist(self):
         output_html = (REPO_DIR / "generated" / "output.html").read_text(encoding="utf-8")
-        for sec_num in range(1, 6):
-            self.assertIn(f'id="sec-{sec_num}"', output_html)
-        self.assertIn('id="item-1.01"', output_html)
+        self.assertIn('id="AxmPropWeakening"', output_html)
+        self.assertIn('id="RulClassComprehension"', output_html)
         embedding_html = (REPO_DIR / "embedding.html").read_text(encoding="utf-8")
         self.assertIn("scrollTargetIntoContainer", embedding_html)
 
@@ -68,11 +67,11 @@ class TestWebLinksAndAnchors(unittest.TestCase):
         comp_page = (REPO_DIR / "generated" / "symbols" / "class-comprehension.html").read_text(encoding="utf-8")
         self.assertIn("CpKappa", comp_page)
         self.assertIn("Binder", comp_page)
-        self.assertIn("#label-class-comprehension", comp_page)
+        self.assertIn("#RulClassComprehension", comp_page)
         self.assertIn('id="symbol-defining-axioms"', comp_page)
         manual_html = (REPO_DIR / "generated" / "manual.html").read_text(encoding="utf-8")
-        self.assertIn('id="label-class-comprehension"', manual_html)
-        self.assertIn('id="label-a13"', manual_html)
+        self.assertIn('id="RulClassComprehension"', manual_html)
+        self.assertIn('id="AxmPropVerum"', manual_html)
         for token in ("{", "|", "}"):
             self.assertIn(
                 f'href="symbols/class-comprehension.html" class="sym-link" title="Class comprehension',

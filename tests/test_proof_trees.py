@@ -28,9 +28,9 @@ class TestProofTreesAndTools(unittest.TestCase):
 
     def test_dedukti_and_cakeml_certificate_export(self):
         db = json.loads((REPO_DIR / "generated" / "theory_db.json").read_text(encoding="utf-8"))
-        entries = {(e.get("num") or e.get("number")): e for e in _extract_entries(db)}
-        for num in ("5.01", "5.02"):
-            entry = entries[num]
+        entries_by_name = {e.get("name"): e for e in _extract_entries(db)}
+        for ename in ("ThmLoeb", "ThmSecondIncompleteness"):
+            entry = entries_by_name[ename]
             dk = render_dedukti_certificate(entry)
             sml = render_cakeml_certificate(entry)
             self.assertIn("mk_prf", dk)
@@ -40,7 +40,7 @@ class TestProofTreesAndTools(unittest.TestCase):
             sml.encode("ascii")
 
     def test_mk_nbg_transpiler_distinguishes_predicative_and_impredicative(self):
-        # Russell's theorem (3.08) uses only set quantification -> NBG_Predicative
+        # Predicative comprehension uses only set quantification -> NBG_Predicative
         pred = classify_comprehension_formula("¬(isSet({x | (x ∉ x)}))")
         self.assertEqual(pred["classification"], "NBG_Predicative")
         self.assertTrue(pred["is_predicative"])
@@ -52,11 +52,11 @@ class TestProofTreesAndTools(unittest.TestCase):
         self.assertIn("X", impred["bound_class_quantifiers"])
 
         db = json.loads((REPO_DIR / "generated" / "theory_db.json").read_text(encoding="utf-8"))
-        entries = {(e.get("num") or e.get("number")): e for e in _extract_entries(db)}
-        r308 = transpile_catalog_entry(entries["3.08"])
-        self.assertTrue(r308["is_predicative"])
-        r332 = transpile_catalog_entry(entries["3.32"])
-        self.assertIn("3.32", r332["number"])
+        entries_by_name = {e.get("name"): e for e in _extract_entries(db)}
+        r_sound = transpile_catalog_entry(entries_by_name["AxmLeftInSound"])
+        self.assertTrue(r_sound["is_predicative"])
+        r_cfunc = transpile_catalog_entry(entries_by_name["DefClassFunction"])
+        self.assertEqual(r_cfunc["number"], entries_by_name["DefClassFunction"]["num"])
 
 
 if __name__ == "__main__":
