@@ -296,33 +296,38 @@
 
 [3.53] Binary union (Definition)
   Formula:        (∀(A:Class)∀(B:Class)((A∪B)={x|(x∈A)∨(x∈B)}))
+  Kernel Note:    Special Def.: (x ∪ y) = ⋃{x,y} (set-restricted); General Def.: (A ∪ B) = {z | (z ∈ A) ∨ (z ∈ B)} (general class definition).
   Verification:   Definitional (Kernel AST)
 
 [3.54] Binary intersection (Definition)
   Formula:        (∀(A:Class)∀(B:Class)((A∩B)={x|(x∈A)∧(x∈B)}))
   Verification:   Definitional (Kernel AST)
 
-[3.55] “Is inductive” predicate (Definition)
+[3.55] “Is successor-inductive (Peano-inductive)” predicate (Definition)
   Formula:        (∀(X:Class)(Ind(X)⟷((∅∈X)∧∀(a:Class)((a∈X)→((a∪{a})∈X)))))
+  Kernel Note:    Successor-inductive (Peano 0-successor-inductive) in the narrowest sense: closed under 0 = ∅ and ordinal successor a |-> a ∪ {a}, as distinguished from transfinite ∈-induction (3.70) or 𝒫-induction.
   Verification:   Definitional (Kernel AST)
 
-[3.56] The intersection class of all inductive classes is called omega (Definition)
+[3.56] The intersection class of all successor-inductive (Peano-inductive) classes is called omega (⊆-minimal successor-inductive class and smallest successor-inductive ordinal) (Definition)
   Formula:        (∀(x:Class)((x∈ω)⟷(∀(Q:Class)(Ind(Q)→(x∈Q)))))
+  Kernel Note:    By definition, ω is not only the smallest successor-inductive ordinal, but also the ⊆-minimal (least) element among all successor-inductive (Peano-inductive) classes in the subclass (⊆) order (Ind(ω) ∧ ∀(Q:Class), Ind(Q) → (ω ⊆ Q)), directly expressing simple countable mathematical (Peano) induction up to ω. | Special Def.: ω = ⋂{q | Ind(q)}; General Def.: ∀(x:Class), (x ∈ ω) ⟷ (∀(Q:Class), Ind(Q) → (x ∈ Q)).
   Verification:   Definitional (Kernel AST)
 
 [3.57] “Infinity”(ω is a set) (Axiom)
   Formula:        (ω set)
+  Kernel Note:    Asserts that the ⊆-minimal successor-inductive (Peano-inductive) class ω is a set.
   Verification:   Postulated (Kernel Axiom)
 
-[3.58] Class of all sets is inductive (Theorem)
+[3.58] Class of all sets is successor-inductive (Peano-inductive) (Theorem)
   Formula:        Ind(V)
   Verification:   Verified (Kernel)
 
-[3.59] Intersection of all inductive classes is an inductive class itself (Theorem)
+[3.59] Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
   Formula:        Ind(ω)
+  Kernel Note:    Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
   Verification:   Verified (Kernel)
 
-[3.60] Class of all ordinal numbers is inductive (Theorem)
+[3.60] Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
   Formula:        Ind(On)
   Verification:   Verified (Kernel)
 
@@ -366,8 +371,9 @@
   Formula:        (∀(x:Class)((x set)→∃(u:Class)(((u universe)∧(x∈u))∧(u set))))
   Verification:   Postulated (Kernel Axiom)
 
-[3.71] General form of the induction principle on a transitive class (Theorem)
+[3.71] General form of the transfinite ∈-induction principle on a transitive class (Theorem)
   Formula:        (∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))→(K⊆A)))
+  Kernel Note:    Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
   Verification:   Verified (Kernel)
 
 [3.72] Soundness of the theory 𝘛 (Axiom)
