@@ -83,6 +83,10 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(nbg_lib["derived_count"], 77)
         self.assertEqual(nbg_lib["definitional_count"], 16)
         self.assertEqual(nbg_lib["axiomatic_count"], 7)
+        thm_a03 = next(t for t in nbg_lib["theorems"] if t["name"] == "thm_A03")
+        self.assertIn("(λ(A:Prop). (λ(B:Prop). (λ(p:(A ∧ B)). fst(p)))) ≡ (λ(A:Prop). (λ(B:Prop). fst))", thm_a03["proof_unicode"])
+        self.assertIn("∀(A:Prop), ∀(B:Prop), ((A ∧ B) → A)", thm_a03["statement_unicode"])
+        self.assertNotIn("rel-in\">∈", self.gen_manual_html)
 
     def test_database_entries_count(self):
         """Frozen database must contain 6 sections and at least 59 formal items (currently 69)."""

@@ -309,11 +309,11 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Mode Toggles: Unicode & Membership are Default even when embedded via innerHTML */
-    .rel-colon { display: none; }
-    .rel-in { display: inline; color: #f87171; font-weight: 700; }
-    body.mode-membership .rel-colon { display: none; }
-    body.mode-membership .rel-in { display: inline; color: #f87171; font-weight: 700; }
+    /* Mode Toggles: Typing colons (A:Prop), (p:Bool), (x:Class) are always rendered as ':' */
+    .rel-colon { display: inline; }
+    .rel-in { display: none; }
+    body.mode-membership .rel-colon { display: inline; }
+    body.mode-membership .rel-in { display: none; }
     body.mode-typing .rel-colon { display: inline; }
     body.mode-typing .rel-in { display: none; }
     .formula-unicode { display: block; }

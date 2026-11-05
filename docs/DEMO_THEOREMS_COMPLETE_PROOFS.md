@@ -175,17 +175,17 @@ As instructed by the user (*"Some statement are erroneous, but you will find out
   8. Therefore, $a \cup \{a\} \in V$.
   9. Combining base and step: $\text{Ind}(V)$. $\blacksquare$
 
-#### Statement 3.5: Intersection of Inductive Classes is Inductive (`omega_ind_thm_entry`)
-- **Formula:** $\vdash \text{Ind}(\omega)$ where $\omega = \bigcap \{X \mid \text{Ind}(X)\}$
-- **Classification:** Derived theorem (Peano Axiom).
+#### Statement 3.5: Intersection of Successor-Inductive (Peano-Inductive) Classes is Successor-Inductive (`omega_ind_thm_entry`)
+- **Formula:** $\vdash \text{Ind}(\omega)$ where $\omega = \{x:\mathsf{Class} \mid \forall (Q:\mathsf{Class}),\ \text{Ind}(Q) \to (x \in Q)\}$
+- **Classification:** Derived theorem (Peano Induction Principle — establishing $\omega$ as the $\subseteq$-minimal (least) element among all successor-inductive classes in the $\subseteq$ order).
 - **Proof:**
-  1. $\omega$ is defined as the class of all sets belonging to every inductive class:
-     $$x \in \omega \iff \text{isSet}(x) \land \forall X. (\text{Ind}(X) \to x \in X)$$
-  2. Base: Let $X$ be an arbitrary inductive class ($\text{Ind}(X)$). By definition of inductive, $\emptyset \in X$. Since this holds for all inductive $X$ and $\text{isSet}(\emptyset)$, $\emptyset \in \omega$.
-  3. Step: Let $a \in \omega$. Then for every inductive class $X$, $a \in X$.
-  4. Since $X$ is inductive, $a \in X \implies a \cup \{a\} \in X$.
-  5. Since this holds for every inductive $X$, and $a \cup \{a\}$ is a set, $a \cup \{a\} \in \omega$.
-  6. Both conditions hold; therefore $\text{Ind}(\omega)$. $\blacksquare$
+  1. $\omega$ is defined as the intersection of all successor-inductive (Peano $0$-successor-closed) classes:
+     $$\forall (x:\mathsf{Class}),\ (x \in \omega) \iff (\forall (Q:\mathsf{Class}),\ \text{Ind}(Q) \to (x \in Q))$$
+  2. Base: Let $X$ be an arbitrary successor-inductive class ($\text{Ind}(X)$). By definition of successor-inductive, $\emptyset \in X$. Since this holds for all successor-inductive $X$ and $\text{isSet}(\emptyset)$, $\emptyset \in \omega$.
+  3. Step: Let $a \in \omega$. Then for every successor-inductive class $X$, $a \in X$.
+  4. Since $X$ is successor-inductive, $a \in X \implies a \cup \{a\} \in X$.
+  5. Since this holds for every successor-inductive $X$, and $a \cup \{a\}$ is a set, $a \cup \{a\} \in \omega$.
+  6. Both conditions hold; therefore $\text{Ind}(\omega)$, making $\omega$ the $\subseteq$-least successor-inductive class ($\text{Ind}(\omega) \land \forall(Q:\mathsf{Class}),\ \text{Ind}(Q) \to (\omega \subseteq Q)$). $\blacksquare$
 
 #### Statement 3.6: Transitivity of $\omega$ (`tr_omega_thm_entry`)
 - **Formula:** $\vdash \text{Tr}(\omega) \equiv \forall n \in \omega. n \subseteq \omega$

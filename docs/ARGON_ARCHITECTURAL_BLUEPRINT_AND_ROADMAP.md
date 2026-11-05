@@ -122,7 +122,7 @@ Every type in the programming language is an NBG formula $\varphi \in \text{Fm}_
 | Comprehension schema | `EAxCompr (x, phi, z)` | Checks NBG predicativity of $\varphi$, yields $z \in \{x \mid \varphi(x)\} \leftrightarrow (\text{Set}(z) \wedge \varphi[x := z])$ |
 
 #### 4. Static Enforcement of NBG Predicative Comprehension
-In pure NBG (Stage I), Bernays–Gödel class comprehension $\{x \mid \varphi(x)\}$ is **predicative**: bound quantifiers inside $\varphi(x)$ may range over **sets** (`SetSort`), or the compiler must run in `MK_Impredicative` mode (Stage II) if $\varphi(x)$ quantifies over arbitrary classes (`ClassSort`).
+In pure NBG (Stage I), Bernays–Gödel class comprehension $\{x \mid \varphi(x)\}$ is **predicative**: quantified variables inside $\varphi(x)$ must have type **Set** (`SetSort`), or the compiler must run in `MK_Impredicative` mode (Stage II) if $\varphi(x)$ quantifies over arbitrary classes (`ClassSort`, the default type). (Note: bound quantifiers $\forall(x \in Y), \psi(x)$ and $\exists(x \in Y), \psi(x)$ are short forms for $\forall(x:\mathsf{Class}), (x \in Y) \rightarrow \psi(x)$ and $\exists(x:\mathsf{Class}), (x \in Y) \land \psi(x)$.)
 - The function `isPredicativeFormula : Type -> bool` statically inspects the AST of $\varphi(x)$ and verifies that every `TPi (_, s, _)` and `TSigma (_, s, _)` inside $\varphi(x)$ has `s = SetSort`.
 - In `NBG_Predicative` mode, `EAxCompr (x, phi, z)` rejects impredicative $\varphi$ with a clear `TypeError`.
 
