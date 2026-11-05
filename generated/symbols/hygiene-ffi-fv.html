@@ -373,8 +373,24 @@
             <td class="external-entity"><span class="badge badge-def">Syntactic Hygiene &amp; Substitution</span></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">Signature / Sort</td>
+            <td class="external-num">SML AST Constructor</td>
+            <td class="external-entity"><code>HC (CpFV of (UCol * 'a)), HC (CpCtxFV of 'Ctx_EXP), HP (TpFFI of (UCol * 'a * 'Variable_EXP * 'Truth_Expression_EXP))  [typetheory.ML:575-576, 683]</code></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Constructor Arguments</td>
+            <td class="external-entity">FV: 1. Expression e : A.Expression; FFI: 1. Term t : X.Expression, 2. Variable x : Variable, 3. Formula 𝛗 : Fm</td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Metatype / Signature</td>
             <td class="external-entity"><code>Meta-Predicates on Variables, Terms, and Formulas</code></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Binder Status</td>
+            <td class="external-entity"><strong>No — Primitive Syntactic Hygiene Functional &amp; Predicate Symbols</strong></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Defining Kernel Entries (ML Labels)</td>
+            <td class="external-entity"><a href="../manual.html#label-class-comprehension" class="sym-link"><strong>Inference Rule 3.01: Class comprehension</strong> (<code>#label-class-comprehension</code> / <code>#label-class-comprehension-3-01</code>)</a></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">LaTeX Form</td>
@@ -397,6 +413,59 @@
 <li><a href="../manual.html#item-4.05" class="sym-link">Entry 4.05: Substitution Law for Forall</a></li>
 </ul></td>
           </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="manual-section" id="symbol-defining-axioms">
+    <div class="section-header">
+      <h2>Defining Axioms, Rules &amp; Formal Definitions (Rendered Directly from Kernel Entries)</h2>
+      <p class="section-desc">Generated without code duplication by invoking <code>render_entry_row_base "../manual.html"</code> on the corresponding kernel <code>Entry</code> records.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th class="col-entity">Formal Entity Specification</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr id="item-3.01" class="external-row">
+        <td class="external-num"><span id="label-class-comprehension"></span><span id="label-class-comprehension-3-01"></span><a href="#item-3.01" class="num-anchor">3.01</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Class comprehension <a href="../manual.html#label-class-comprehension" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#label-class-comprehension</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Formula</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-light-red"><a href="../symbols/class-comprehension.html" class="sym-link" title="Class comprehension { x | ϗ } (AST constructor: CpKappa, binder)">{</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span><span class="ansi-light-red"><a href="../symbols/class-comprehension.html" class="sym-link" title="Class comprehension separator | in { x | ϗ } (AST constructor: CpKappa, binder)">|</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><span class="ansi-light-red"><a href="../symbols/class-comprehension.html" class="sym-link" title="Class comprehension { x | ϗ } (AST constructor: CpKappa, binder)">}</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/iff-conn.html" class="sym-link" title="Logical equivalence connective (Constructor: HP (TpIff ...))">⟷</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦃</a></span><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><span class="ansi-white"><a href="../symbols/binder-brackets.html" class="sym-link" title="Right syntactic binder-variable bracket {| x |} (Constructor: IVariable_t)">⦄</a></span> <a href="../symbols/set-pred.html" class="sym-link" title="Is a set unary predicate symbol (Constructor: HP (TpSet ...))">set</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">∧</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/in-pred.html}{\in} \href{../symbols/class-comprehension.html}{\{} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/class-comprehension.html}{ \mid } \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/class-comprehension.html}{\}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/iff-conn.html}{\longleftrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{x} \href{../symbols/binder-brackets.html}{\rvert\!\}}  \href{../symbols/set-pred.html}{\mathsf{set}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/and-conn.html}{\land} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Side Condition</th>
+              <td class="field-value">
+                <div class="formula-unicode side-cond"><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Bound or free Class / Variable x">x</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-green"><a href="../symbols/variable-expression.html" class="sym-link" title="Variable Name syntactic sort (Name)">Name</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">∧</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Syntactic formula variable phi (phi : Fm)">𝛗</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-green"><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex side-cond">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/variable-expression.html}{\mathsf{Name}} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel) &middot; <a href="../proofs/item-3.01.html" class="sym-link">Standalone Entry (3.01) &rarr;</a> &middot; <a href="../manual.html#label-class-comprehension" class="sym-link"><code>#label-class-comprehension</code></a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
         </tbody>
       </table>
     </div>
