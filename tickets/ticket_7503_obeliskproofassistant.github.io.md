@@ -3,7 +3,7 @@
 **Repository:** `obeliskproofassistant.github.io`  
 **Assigned AI Model:** `opencode/glm-5.3-flash-free`  
 **Harness:** `opencode`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `COMPLETED` (Implemented `scheduleRender` with `requestAnimationFrame` and `debouncedRender` in `js/proof_tree_viewer.js`)  
 **Created:** `2026-10-27T22:48:44Z`  
 
 ## Task Description

@@ -241,6 +241,73 @@ class ObeliskHighlighter {
 }
 
 // -------------------------------------------------------------------------
+// Ticket 7502: Modular WebREPL Code Editor Binding & Custom Element
+// -------------------------------------------------------------------------
+class ObeliskCodeEditorBinding {
+  constructor(element, options = {}) {
+    this.element = element;
+    this.options = options;
+    this.highlighter = new ObeliskHighlighter();
+    this.value = (element && (element.value || element.textContent)) || '';
+    this.listeners = [];
+  }
+
+  getValue() {
+    return this.value;
+  }
+
+  setValue(nextSource) {
+    this.value = String(nextSource || '');
+    const result = this.highlighter.highlight(this.value);
+    if (this.element) {
+      if ('value' in this.element) {
+        this.element.value = this.value;
+      } else {
+        this.element.innerHTML = result.highlightedHtml;
+      }
+    }
+    for (const cb of this.listeners) {
+      cb({ value: this.value, tokens: result.tokens, highlightedHtml: result.highlightedHtml });
+    }
+    return result;
+  }
+
+  onChange(callback) {
+    if (typeof callback === 'function') {
+      this.listeners.push(callback);
+    }
+    return () => {
+      this.listeners = this.listeners.filter(fn => fn !== callback);
+    };
+  }
+}
+
+function createEditorBinding(element, options = {}) {
+  return new ObeliskCodeEditorBinding(element, options);
+}
+
+if (typeof window !== 'undefined' && typeof window.customElements !== 'undefined' && typeof HTMLElement !== 'undefined') {
+  if (!window.customElements.get('obelisk-code-editor')) {
+    class ObeliskCodeEditorElement extends HTMLElement {
+      connectedCallback() {
+        this._binding = new ObeliskCodeEditorBinding(this);
+        if (this.textContent) {
+          this._binding.setValue(this.textContent);
+        }
+      }
+      get value() {
+        return this._binding ? this._binding.getValue() : '';
+      }
+      set value(v) {
+        if (!this._binding) this._binding = new ObeliskCodeEditorBinding(this);
+        this._binding.setValue(v);
+      }
+    }
+    window.customElements.define('obelisk-code-editor', ObeliskCodeEditorElement);
+  }
+}
+
+// -------------------------------------------------------------------------
 // Export — CommonJS module format
 // -------------------------------------------------------------------------
 function applyHighlighting(codeElement) {
@@ -256,6 +323,8 @@ function applyHighlighting(codeElement) {
 if (typeof module === 'object' && module.exports) {
   module.exports = {
     ObeliskHighlighter: ObeliskHighlighter,
+    ObeliskCodeEditorBinding: ObeliskCodeEditorBinding,
+    createEditorBinding: createEditorBinding,
     highlight: function (source) {
       return new ObeliskHighlighter().highlight(source);
     },
@@ -272,6 +341,8 @@ if (typeof window !== 'undefined') {
   window.ObeliskHighlighter = window.ObeliskHighlighter || {};
   Object.assign(window.ObeliskHighlighter, {
     ObeliskHighlighter: ObeliskHighlighter,
+    ObeliskCodeEditorBinding: ObeliskCodeEditorBinding,
+    createEditorBinding: createEditorBinding,
     highlight: function (source) {
       return new ObeliskHighlighter().highlight(source);
     },

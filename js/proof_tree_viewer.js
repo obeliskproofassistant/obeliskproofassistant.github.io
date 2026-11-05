@@ -253,6 +253,40 @@
       this.container.innerHTML = svgHtml;
     }
 
+    /**
+     * Ticket 7503: Schedule tree graph rendering via requestAnimationFrame
+     * and support debounced state updates for rapid interactive edits.
+     */
+    scheduleRender(treeData) {
+      if (treeData) {
+        this.currentTree = treeData;
+      }
+      if (this._rafId && typeof cancelAnimationFrame === 'function') {
+        cancelAnimationFrame(this._rafId);
+      }
+      if (typeof requestAnimationFrame === 'function') {
+        this._rafId = requestAnimationFrame(() => {
+          this._rafId = null;
+          this.render(this.currentTree);
+        });
+      } else {
+        this.render(this.currentTree);
+      }
+    }
+
+    debouncedRender(treeData, delayMs = 60) {
+      if (treeData) {
+        this.currentTree = treeData;
+      }
+      if (this._debounceTimer) {
+        clearTimeout(this._debounceTimer);
+      }
+      this._debounceTimer = setTimeout(() => {
+        this._debounceTimer = null;
+        this.scheduleRender(this.currentTree);
+      }, delayMs);
+    }
+
     renderEdges(layout) {
       let edges = '';
       if (!layout.children || layout.children.length === 0) return edges;
@@ -374,6 +408,18 @@
         instances[containerId] = new ProofTreeRenderer(containerId);
       }
       instances[containerId].render(treeData);
+    },
+    scheduleRender: function (containerId, treeData) {
+      if (!instances[containerId]) {
+        instances[containerId] = new ProofTreeRenderer(containerId);
+      }
+      instances[containerId].scheduleRender(treeData);
+    },
+    debouncedRender: function (containerId, treeData, delayMs = 60) {
+      if (!instances[containerId]) {
+        instances[containerId] = new ProofTreeRenderer(containerId);
+      }
+      instances[containerId].debouncedRender(treeData, delayMs);
     }
   };
 }));
