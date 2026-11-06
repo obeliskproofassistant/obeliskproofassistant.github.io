@@ -370,7 +370,7 @@
   <main>
   <section class="manual-section" id="personal-symbols-index">
     <div class="section-header">
-      <h2>Personal Symbol Reference Directory (123 Dedicated Pages)</h2>
+      <h2>Personal Symbol Reference Directory (124 Dedicated Pages)</h2>
       <p class="section-desc">Every metatheoretic, reflection, type, binder, and structural symbol in <strong>MKTD1</strong> and <strong>MKTD2</strong> links directly to its corresponding personal page below rather than to an unrelated theorem.</p>
     </div>
     <div class="table-container">
@@ -3084,7 +3084,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="fv-op.html" class="sym-link"><strong>Free-Variables Metatheoretic Operator (FV, AST Constructor: CpFV)</strong> (<code>symbols/fv-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="fv-op.html" class="sym-link"><strong>Type-Qualified Free-Variables Metatheoretic Operator (Fm.FV, Ctx.FV, ClassTerm.FV, AST Constructor: CpFV / CpCtxFV)</strong> (<code>symbols/fv-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -3092,14 +3092,42 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Primitive metatheoretic operator <code>FV(e)</code> returning the class of encoded variable names occurring free in a syntactic expression <code>e : A.Expression</code> (such as <code>Fm</code> or <code>Class.Expression</code>) in the +1 meta-theory.</td>
+              <td class="field-value">Type-qualified metatheoretic operator <code>Fm.FV(𝛙)</code>, <code>Ctx.FV(Γ)</code>, <code>ClassTerm.FV(k)</code> returning the class of encoded variable names occurring free in a syntactic expression (note: the binary predicate <code>Fm.IFV(v, 𝛙)</code> / <code>Ctx.IFV(v, Γ)</code> is preferred over <code>x ∈ Fm.FV(𝛙)</code>).</td>
             </tr>
             </tbody>
           </table>
         </td>
       </tr>
       <tr id="psym-98" class="external-row">
-        <td class="external-num"><a href="ffi-pred.html" class="num-anchor">98</a></td>
+        <td class="external-num"><a href="ifv-pred.html" class="num-anchor">98</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="ifv-pred.html" class="sym-link">IFV</a></div>
+                <div class="formula-latex">\(\href{ifv-pred.html}{\mathrm{IFV}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="ifv-pred.html" class="sym-link"><strong>Binary Free-Variable Occurrence Predicate (Fm.IFV, Ctx.IFV, ClassTerm.IFV, AST Constructor: TpIFV / TpCtxIFV)</strong> (<code>symbols/ifv-pred.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Predicate Symbol (Metatheoretic Side-Condition Predicate)</span> &nbsp; <code>Variable × A.Expression → Bool</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Type-qualified binary syntactic hygiene predicate <code>Fm.IFV(v, 𝛙)</code>, <code>Ctx.IFV(v, Γ)</code>, <code>ClassTerm.IFV(v, k)</code> taking two arguments and asserting that variable <code>v</code> occurs free in the formula <code>𝛙</code>, context <code>Γ</code>, or class term <code>k</code> (used instead of <code>x ∈ Fm.FV(𝛙)</code>).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-99" class="external-row">
+        <td class="external-num"><a href="ffi-pred.html" class="num-anchor">99</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3112,7 +3140,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="ffi-pred.html" class="sym-link"><strong>Free-For-Instantiation Hygiene Predicate (FFI, AST Constructor: TpFFI)</strong> (<code>symbols/ffi-pred.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="ffi-pred.html" class="sym-link"><strong>Type-Qualified Free-For-Instantiation Hygiene Predicate (Fm.FFI, ClassTerm.FFI, AST Constructor: TpFFI)</strong> (<code>symbols/ffi-pred.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -3120,14 +3148,14 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Metalevel-1 syntactic hygiene predicate <code>FFI((t:X.Expression), x, (𝛗:Fm))</code> asserting that no free variable of term expression <code>t</code> becomes captured when substituted for free occurrences of variable <code>x</code> in formula <code>𝛗 : Fm</code>.</td>
+              <td class="field-value">Metalevel-1 type-qualified syntactic hygiene predicate <code>Fm.FFI((t:X.Expression), x, 𝛗)</code> (qualified by <code>Fm.</code> when its 3rd argument is a formula, or <code>ClassTerm.FFI</code> when its 3rd argument is a class term) asserting that no free variable of term expression <code>t</code> becomes captured when substituted for free occurrences of variable <code>x</code> in <code>𝛗</code>.</td>
             </tr>
             </tbody>
           </table>
         </td>
       </tr>
-      <tr id="psym-99" class="external-row">
-        <td class="external-num"><a href="nfv-pred.html" class="num-anchor">99</a></td>
+      <tr id="psym-100" class="external-row">
+        <td class="external-num"><a href="nfv-pred.html" class="num-anchor">100</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3154,8 +3182,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-100" class="external-row">
-        <td class="external-num"><a href="fresh-pred.html" class="num-anchor">100</a></td>
+      <tr id="psym-101" class="external-row">
+        <td class="external-num"><a href="fresh-pred.html" class="num-anchor">101</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3182,8 +3210,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-101" class="external-row">
-        <td class="external-num"><a href="variable-sort.html" class="num-anchor">101</a></td>
+      <tr id="psym-102" class="external-row">
+        <td class="external-num"><a href="variable-sort.html" class="num-anchor">102</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3210,8 +3238,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-102" class="external-row">
-        <td class="external-num"><a href="expression-sort.html" class="num-anchor">102</a></td>
+      <tr id="psym-103" class="external-row">
+        <td class="external-num"><a href="expression-sort.html" class="num-anchor">103</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3238,8 +3266,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-103" class="external-row">
-        <td class="external-num"><a href="name-sort.html" class="num-anchor">103</a></td>
+      <tr id="psym-104" class="external-row">
+        <td class="external-num"><a href="name-sort.html" class="num-anchor">104</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3266,8 +3294,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-104" class="external-row">
-        <td class="external-num"><a href="bool-sort.html" class="num-anchor">104</a></td>
+      <tr id="psym-105" class="external-row">
+        <td class="external-num"><a href="bool-sort.html" class="num-anchor">105</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3294,8 +3322,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-105" class="external-row">
-        <td class="external-num"><a href="prop-sort.html" class="num-anchor">105</a></td>
+      <tr id="psym-106" class="external-row">
+        <td class="external-num"><a href="prop-sort.html" class="num-anchor">106</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3322,8 +3350,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-106" class="external-row">
-        <td class="external-num"><a href="lcewip-sort.html" class="num-anchor">106</a></td>
+      <tr id="psym-107" class="external-row">
+        <td class="external-num"><a href="lcewip-sort.html" class="num-anchor">107</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3350,8 +3378,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-107" class="external-row">
-        <td class="external-num"><a href="empty-list-const.html" class="num-anchor">107</a></td>
+      <tr id="psym-108" class="external-row">
+        <td class="external-num"><a href="empty-list-const.html" class="num-anchor">108</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3378,8 +3406,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-108" class="external-row">
-        <td class="external-num"><a href="comma-delim.html" class="num-anchor">108</a></td>
+      <tr id="psym-109" class="external-row">
+        <td class="external-num"><a href="comma-delim.html" class="num-anchor">109</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3406,8 +3434,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-109" class="external-row">
-        <td class="external-num"><a href="dot-delim.html" class="num-anchor">109</a></td>
+      <tr id="psym-110" class="external-row">
+        <td class="external-num"><a href="dot-delim.html" class="num-anchor">110</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3434,8 +3462,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-110" class="external-row">
-        <td class="external-num"><a href="subst-slash.html" class="num-anchor">110</a></td>
+      <tr id="psym-111" class="external-row">
+        <td class="external-num"><a href="subst-slash.html" class="num-anchor">111</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3462,8 +3490,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-111" class="external-row">
-        <td class="external-num"><a href="model-const.html" class="num-anchor">111</a></td>
+      <tr id="psym-112" class="external-row">
+        <td class="external-num"><a href="model-const.html" class="num-anchor">112</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3490,8 +3518,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-112" class="external-row">
-        <td class="external-num"><a href="numeral-0.html" class="num-anchor">112</a></td>
+      <tr id="psym-113" class="external-row">
+        <td class="external-num"><a href="numeral-0.html" class="num-anchor">113</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3518,8 +3546,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-113" class="external-row">
-        <td class="external-num"><a href="numeral-1.html" class="num-anchor">113</a></td>
+      <tr id="psym-114" class="external-row">
+        <td class="external-num"><a href="numeral-1.html" class="num-anchor">114</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3546,8 +3574,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-114" class="external-row">
-        <td class="external-num"><a href="numeral-2.html" class="num-anchor">114</a></td>
+      <tr id="psym-115" class="external-row">
+        <td class="external-num"><a href="numeral-2.html" class="num-anchor">115</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3574,8 +3602,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-115" class="external-row">
-        <td class="external-num"><a href="numeral-3.html" class="num-anchor">115</a></td>
+      <tr id="psym-116" class="external-row">
+        <td class="external-num"><a href="numeral-3.html" class="num-anchor">116</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3602,8 +3630,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-116" class="external-row">
-        <td class="external-num"><a href="theory-tau.html" class="num-anchor">116</a></td>
+      <tr id="psym-117" class="external-row">
+        <td class="external-num"><a href="theory-tau.html" class="num-anchor">117</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3630,8 +3658,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-117" class="external-row">
-        <td class="external-num"><a href="theory-fau.html" class="num-anchor">117</a></td>
+      <tr id="psym-118" class="external-row">
+        <td class="external-num"><a href="theory-fau.html" class="num-anchor">118</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3658,8 +3686,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-118" class="external-row">
-        <td class="external-num"><a href="theory-eau.html" class="num-anchor">118</a></td>
+      <tr id="psym-119" class="external-row">
+        <td class="external-num"><a href="theory-eau.html" class="num-anchor">119</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3686,8 +3714,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-119" class="external-row">
-        <td class="external-num"><a href="theory-qau.html" class="num-anchor">119</a></td>
+      <tr id="psym-120" class="external-row">
+        <td class="external-num"><a href="theory-qau.html" class="num-anchor">120</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3714,8 +3742,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-120" class="external-row">
-        <td class="external-num"><a href="theory-wau.html" class="num-anchor">120</a></td>
+      <tr id="psym-121" class="external-row">
+        <td class="external-num"><a href="theory-wau.html" class="num-anchor">121</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3742,8 +3770,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-121" class="external-row">
-        <td class="external-num"><a href="values-pred.html" class="num-anchor">121</a></td>
+      <tr id="psym-122" class="external-row">
+        <td class="external-num"><a href="values-pred.html" class="num-anchor">122</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3770,8 +3798,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-122" class="external-row">
-        <td class="external-num"><a href="tau-binder.html" class="num-anchor">122</a></td>
+      <tr id="psym-123" class="external-row">
+        <td class="external-num"><a href="tau-binder.html" class="num-anchor">123</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -3798,8 +3826,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-123" class="external-row">
-        <td class="external-num"><a href="definitional-eq.html" class="num-anchor">123</a></td>
+      <tr id="psym-124" class="external-row">
+        <td class="external-num"><a href="definitional-eq.html" class="num-anchor">124</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>

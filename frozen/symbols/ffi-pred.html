@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: FFI &mdash; Free-For-Instantiation Hygiene Predicate (FFI, AST Constructor: TpFFI)</title>
+  <title>Symbol Reference: FFI &mdash; Type-Qualified Free-For-Instantiation Hygiene Predicate (Fm.FFI, ClassTerm.FFI, AST Constructor: TpFFI)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: FFI &mdash; Free-For-Instantiation Hygiene Predicate (FFI, AST Constructor: TpFFI)</h1>
+      <h1>Symbol Reference: FFI &mdash; Type-Qualified Free-For-Instantiation Hygiene Predicate (Fm.FFI, ClassTerm.FFI, AST Constructor: TpFFI)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">FFI</span> <span class="formula-latex">\(\mathrm{FFI}\)</span> &mdash; Free-For-Instantiation Hygiene Predicate (FFI, AST Constructor: TpFFI)</h2>
-      <p class="section-desc">Metalevel-1 syntactic hygiene predicate <code>FFI((t:X.Expression), x, (𝛗:Fm))</code> asserting that no free variable of term expression <code>t</code> becomes captured when substituted for free occurrences of variable <code>x</code> in formula <code>𝛗 : Fm</code>.</p>
+      <h2><span class="formula-unicode">FFI</span> <span class="formula-latex">\(\mathrm{FFI}\)</span> &mdash; Type-Qualified Free-For-Instantiation Hygiene Predicate (Fm.FFI, ClassTerm.FFI, AST Constructor: TpFFI)</h2>
+      <p class="section-desc">Metalevel-1 type-qualified syntactic hygiene predicate <code>Fm.FFI((t:X.Expression), x, 𝛗)</code> (qualified by <code>Fm.</code> when its 3rd argument is a formula, or <code>ClassTerm.FFI</code> when its 3rd argument is a class term) asserting that no free variable of term expression <code>t</code> becomes captured when substituted for free occurrences of variable <code>x</code> in <code>𝛗</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -419,11 +419,11 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpFFI of (UCol * 'a * 'Variable_EXP * 'Truth_Expression_EXP))</code> in <code>Truth_p</code> (<code>typetheory.ML:683</code>).</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpFFI of ('TERM * 'TERM * 'Variable_EXPRESSION))</code> in <code>Truth_p</code> (<code>typetheory.ML:760</code>).</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>FFI((t:X.Expression), x, (𝛗:Fm))</code></td>
+            <td class="external-entity formula-cell"><code>Fm.FFI((t:X.Expression), x, 𝛗)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -431,7 +431,7 @@
 <li><a href="../manual.html#RulForallInstantiation" class="sym-link">Inference Rule RulForallInstantiation (2.02): Forall Instantiation</a></li>
 <li><a href="../manual.html#RulExistsInstantiation" class="sym-link">Inference Rule RulExistsInstantiation (2.03): Exists Instantiation</a></li>
 <li><a href="../manual.html#AxmMetaClassComprehension" class="sym-link">Axiom AxmMetaClassComprehension (4.06): Class comprehension axiom schema(meta,WIP)</a></li>
-<li><a href="fv-op.html" class="sym-link">Free Variables Operator FV</a></li>
+<li><a href="ifv-pred.html" class="sym-link">Binary Free-Variable Predicate IFV</a></li>
 </ul></td>
           </tr>
         </tbody>

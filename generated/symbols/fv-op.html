@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: FV &mdash; Free-Variables Metatheoretic Operator (FV, AST Constructor: CpFV)</title>
+  <title>Symbol Reference: FV &mdash; Type-Qualified Free-Variables Metatheoretic Operator (Fm.FV, Ctx.FV, ClassTerm.FV, AST Constructor: CpFV / CpCtxFV)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: FV &mdash; Free-Variables Metatheoretic Operator (FV, AST Constructor: CpFV)</h1>
+      <h1>Symbol Reference: FV &mdash; Type-Qualified Free-Variables Metatheoretic Operator (Fm.FV, Ctx.FV, ClassTerm.FV, AST Constructor: CpFV / CpCtxFV)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">FV</span> <span class="formula-latex">\(\mathrm{FV}\)</span> &mdash; Free-Variables Metatheoretic Operator (FV, AST Constructor: CpFV)</h2>
-      <p class="section-desc">Primitive metatheoretic operator <code>FV(e)</code> returning the class of encoded variable names occurring free in a syntactic expression <code>e : A.Expression</code> (such as <code>Fm</code> or <code>Class.Expression</code>) in the +1 meta-theory.</p>
+      <h2><span class="formula-unicode">FV</span> <span class="formula-latex">\(\mathrm{FV}\)</span> &mdash; Type-Qualified Free-Variables Metatheoretic Operator (Fm.FV, Ctx.FV, ClassTerm.FV, AST Constructor: CpFV / CpCtxFV)</h2>
+      <p class="section-desc">Type-qualified metatheoretic operator <code>Fm.FV(𝛙)</code>, <code>Ctx.FV(Γ)</code>, <code>ClassTerm.FV(k)</code> returning the class of encoded variable names occurring free in a syntactic expression (note: the binary predicate <code>Fm.IFV(v, 𝛙)</code> / <code>Ctx.IFV(v, Γ)</code> is preferred over <code>x ∈ Fm.FV(𝛙)</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -419,19 +419,19 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HC (CpFV of (UCol * 'a))</code> and <code>HC (CpCtxFV of 'Ctx_EXP)</code> in <code>Class_p</code> (<code>typetheory.ML:575-576</code>). Operates strictly on syntactic expressions (metalevel 1 side conditions), never on semantic <code>Class</code> or <code>Bool</code>.</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HC (CpFV of 'Large_Obj_Term_EXPRESSION)</code> and <code>HC (CpCtxFV of 'Ctx_EXPRESSION)</code> in <code>Class_p</code> (<code>typetheory.ML:599-600</code>). Operates strictly on syntactic expressions (metalevel 1 side conditions), never on semantic <code>Class</code> or <code>Bool</code>.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>¬(Enc(x) ∈ FV(𝛙:Fm))</code></td>
+            <td class="external-entity formula-cell"><code>Fm.FV(𝛙) , Ctx.FV(Γ) , ClassTerm.FV(k)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="../manual.html#DefClassConditional" class="sym-link">Definition DefClassConditional (3.22): IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</a></li>
-<li><a href="../manual.html#RulGeneralisation" class="sym-link">Inference Rule RulGeneralisation (2.06): Generalisation (admissible rule)</a></li>
+<li><a href="../manual.html#DefMetaGeneralisation" class="sym-link">Axiom DefMetaGeneralisation (4.02): Generalisation(meta,WIP)</a></li>
+<li><a href="ifv-pred.html" class="sym-link">Binary Free-Variable Predicate IFV (Fm.IFV / Ctx.IFV)</a></li>
 <li><a href="ffi-pred.html" class="sym-link">Free-For-Instantiation Predicate FFI</a></li>
-<li><a href="nfv-pred.html" class="sym-link">Non-Free-Variable Guard NFV</a></li>
 </ul></td>
           </tr>
         </tbody>

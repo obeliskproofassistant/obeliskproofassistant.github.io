@@ -305,7 +305,8 @@ class TestProofRegression(unittest.TestCase):
         with open(gen_symbols, "r", encoding="utf-8") as f:
             sym_html = f.read()
         self.assertIn('href="symbols/quotation.html"', gen_html)
-        self.assertIn('href="symbols/enc.html"', gen_html)
+        self.assertIn('href="symbols/ifv-pred.html"', gen_html)
+        self.assertIn('href="symbols/enc.html"', sym_html)
         self.assertIn('href="symbols/dec.html"', sym_html)
         self.assertIn('href="symbols/emb.html"', sym_html)
         self.assertIn('href="symbols/mu-interpretation.html"', sym_html)
@@ -330,6 +331,7 @@ class TestProofRegression(unittest.TestCase):
         sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
         for page in (
             "fv-op.html",
+            "ifv-pred.html",
             "ffi-pred.html",
             "nfv-pred.html",
             "fresh-pred.html",
@@ -342,6 +344,11 @@ class TestProofRegression(unittest.TestCase):
             "definitional-eq.html",
         ):
             self.assertTrue(os.path.isfile(os.path.join(sym_dir, page)), f"Missing symbol page: {page}")
+        by_name = {e["name"]: e for e in self.gen_db["entries"]}
+        self.assertIn("¬Fm.IFV(v,𝛙)", by_name["DefClassConditional"]["formula_unicode"])
+        self.assertIn("¬Ctx.IFV(v,Γ)", by_name["DefMetaGeneralisation"]["formula_unicode"])
+        self.assertIn("Fm.FFI((k:Class.Expression),‹x›,𝛗)", by_name["AxmMetaClassComprehension"]["formula_unicode"])
+        self.assertEqual(by_name["RulForallInstantiation"]["side_condition_unicode"], "Fm.FFI((t:X.Expression),x,𝛗)")
 
     def test_example_b_sml_kernel_ast_and_scheme_of_types(self):
         """Example B: SML Kernel AST contains only the Prf_p constructor name (e.g. PA1_prf); Scheme of Types holds the typed formula."""
@@ -366,6 +373,41 @@ class TestProofRegression(unittest.TestCase):
             by_name["AxmPropWeakening"]["scheme_of_types_unicode"],
             "(⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))",
         )
+
+    def test_thm_universal_class_is_universe_3_69_proven(self):
+        """3.69 #ThmUniversalClassIsUniverse ('The class of all sets is a universe') is proven from other axioms and rendered with Formal Kernel Proof."""
+        by_name = {e["name"]: e for e in self.gen_db["entries"]}
+        self.assertIn("ThmUniversalClassIsUniverse", by_name)
+        e369 = by_name["ThmUniversalClassIsUniverse"]
+        self.assertEqual(e369["num"], "3.69")
+        self.assertEqual(e369["kind"], "Theorem")
+        self.assertEqual(e369["formula_unicode"], "(V universe)")
+        self.assertEqual(e369["prf_constructor"], "PVUniverseAx_prf")
+        self.assertIn("v_universe_thm_proof", e369["comment"])
+        self.assertIn("PVUniverseAx_prf", e369["comment"])
+
+        idx = self.gen_manual_html.find('id="ThmUniversalClassIsUniverse"')
+        self.assertGreaterEqual(idx, 0)
+        block_369 = self.gen_manual_html[idx:idx + 60000]
+        self.assertIn('<th class="field-name">Formal Kernel Proof</th>', block_369)
+        self.assertIn("Step 1 (ω ∈ V", block_369)
+        self.assertIn("Step 2 (V transitive", block_369)
+        self.assertIn("Step 3 (V Hereditary", block_369)
+        self.assertIn("Step 4 (V Powerful", block_369)
+        self.assertIn("Step 5 (V Tight", block_369)
+        self.assertIn("Step 6 (V Pairful", block_369)
+        self.assertIn("Step 8 (Conclusion via PAndR_prf + def_to_intro", block_369)
+
+        for kdef_name in [
+            "DefUniversalClass",
+            "DefTransitiveClass",
+            "DefHereditaryClass",
+            "DefPowerfulClass",
+            "DefPairfulClass",
+            "DefTightClass",
+            "DefGrothendieckUniverse",
+        ]:
+            self.assertEqual(by_name[kdef_name]["prf_constructor"], "PKernelDef_prf")
 
 if __name__ == "__main__":
     unittest.main()
