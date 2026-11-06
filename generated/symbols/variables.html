@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂ &mdash; Bound &amp; Free Object-Class, Function, Proof, and Type-Family Variables</title>
+  <title>Symbol Reference: x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂ &mdash; Class Variables, Variable-Name Variables, Class Expression Variables &amp; Type Variables</title>
   <script>
     window.MathJax = {
       tex: {
@@ -318,6 +318,21 @@
     body.mode-unicode .formula-latex { display: none; }
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .metalevel-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: #fde047;
+      background: rgba(250, 204, 21, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 4px;
+      padding: 0.05rem 0.32rem;
+      margin-right: 0.45rem;
+      vertical-align: middle;
+      line-height: 1.2;
+      cursor: help;
+    }
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -336,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂ &mdash; Bound &amp; Free Object-Class, Function, Proof, and Type-Family Variables</h1>
+      <h1>Symbol Reference: x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂ &mdash; Class Variables, Variable-Name Variables, Class Expression Variables &amp; Type Variables</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -355,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂</span> <span class="formula-latex">\(x, y, z, A, B, C, f, g, p, T_e, t_1, t_2\)</span> &mdash; Bound &amp; Free Object-Class, Function, Proof, and Type-Family Variables</h2>
-      <p class="section-desc">Bound and free variables ranging over classes (<code>x, y, z, A, B, C, X, Y : Class</code>), functions/relations (<code>f, g, R : Class</code>), propositions/types (<code>A, B : Prop</code> or <code>Type</code>), dependent type families (<code>Tₑ : Bool → Type</code>), and branch terms (<code>t₁, t₂</code>).</p>
+      <h2><span class="formula-unicode">x, y, z, u, v, w, A, B, C, X, Y, Z, f, g, p, Tₑ, t₁, t₂</span> <span class="formula-latex">\(x, y, z, A, B, C, f, g, p, T_e, t_1, t_2\)</span> &mdash; Class Variables, Variable-Name Variables, Class Expression Variables &amp; Type Variables</h2>
+      <p class="section-desc">Alphabet variables ranging over classes (<strong>class variables</strong> <code>x, y, z, A, B, C, X, Y : Class</code>), variable identifiers (<strong>variable-name variables</strong> <code>v : Variable</code>, <code>x : Name</code>), syntactic class terms (<strong>class expression variables</strong> <code>k, t : Class.Expression</code>), functions/relations (<code>f, g, R : Class</code>), propositions/types (<strong>type variables</strong> <code>A, B, X : Type</code> or <code>Prop</code>), dependent type families (<code>Tₑ : Bool → Type</code>), and branch terms (<code>t₁, t₂</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -388,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class | Prop | Type | (A → B)</code></td>
+            <td class="external-entity"><code>Class | Variable | Class.Expression | Prop | Type | (A → B)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -404,16 +419,17 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Variable Conventions in MKTD1 &amp; MKTD2:</strong></p><ul><li><strong>Class Variables (<code>x, y, z, u, v, w, A, B, C, X, Y, Z : Class</code>)</strong>: By default, all object variables range over <code>Class</code>. Whether a class <code>x</code> is a set is expressed by the predicate <code>Set(x)</code> (Entry RulClassComprehension (3.01)), never by changing its type away from <code>Class</code>.</li><li><strong>Type &amp; Proposition Variables (<code>A, B, C : Type</code> or <code>Prop</code>)</strong>: In dependent type entries (Entries DefClassConditional (3.22)&ndash;DefTightClass (3.47)) and Variant 2 (<strong>MKTD2</strong>), uppercase identifiers explicitly bound with <code>(A:Prop)</code> or <code>(A:Type)</code> range over propositions or conglomerates.</li><li><strong>Subscripted Dependent-Branch Variables (<code>Tₑ, t₁, t₂</code>)</strong>: Used in Entry DefDependentConditional (3.24) and Entry DefDependentConditional (3.24) (<code>ifᵈₑₚ</code>) for the target type family <code>Tₑ</code> and the true/false branch witnesses <code>t₁</code> and <code>t₂</code>.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Core Ontological &amp; Syntactic Rules for Variables (See <code>FACTBOOK.md</code>):</strong></p><ul><li><strong>Classes Cannot Be Free or Bound</strong>: A <code>Class</code> is a semantic collection, not a syntactic variable. Only <strong>variables</strong> have <strong>binder</strong> occurrences (at the binding site <code>{x | 𝛗}</code>, <code>∀(x:Class)𝛗</code>, <code>let x = t in 𝛗</code>, displayed in yellow with tooltip ending in <code>(binder)</code>), <strong>bound</strong> occurrences (inside the scope of a binder, displayed in yellow), or <strong>free</strong> occurrences (displayed in red).</li><li><strong>Strict Sort Distinction</strong>: Obelisk distinguishes <code>variable</code> (<code>Variable</code>/<code>Name</code>), <code>class</code> (<code>Class</code>), <code>class variable</code> (<code>x : Class</code>), <code>variable-name variable</code> (<code>v : Variable</code> / <code>x : Name</code>), <code>class expression variable</code> (<code>k, t : Class.Expression</code>), <code>formula variable</code> (<code>𝛗 : Fm</code>), and <code>type variable</code> (<code>A, X : Type</code>).</li><li><strong>Class Variables (<code>x, y, z, u, w, A, B, C, K, Q, X, Y, Z : Class</code>)</strong>: By default, object variables range over <code>Class</code>. Whether a class <code>x</code> is a set is expressed by the predicate <code>(x set)</code> (Entry DefIsSet (3.02)), never by changing its type away from <code>Class</code>.</li><li><strong>Subscripted Dependent-Branch Variables (<code>Tₑ, t₁, t₂</code>)</strong>: Used in Entry DefSimpleConditional (3.23) and Entry DefDependentConditional (3.24) (<code>ifᵈₑₚ</code>) for the target type family <code>Tₑ</code> and the true/false branch witnesses <code>t₁</code> and <code>t₂</code>.</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>∀(x:Class). ∀(Y:Class). ((x ∈ Y) ⇒ Set(x))</code></td>
+            <td class="external-entity formula-cell"><code>∀(x:Class). ∀(Y:Class). ((x ∈ Y) ⇒ (x set))</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="class-type.html" class="sym-link">Default Domain Type Class</a></li>
+<li><a href="variable-sort.html" class="sym-link">Syntactic Variable Sort Variable</a></li>
 <li><a href="typing-colon.html" class="sym-link">Type Judgment Colon :</a></li>
 <li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional ifᵈₑₚ</a></li>
 </ul></td>

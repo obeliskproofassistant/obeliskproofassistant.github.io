@@ -312,5 +312,60 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn('href="symbols/class-type.html"', gen_html)
         self.assertIn('href="symbols/conditionals-if-dep.html"', gen_html)
 
+    def test_example_a_binder_tooltips_and_metalevel_badges(self):
+        """Example A: Class is never free/bound; binders look like bound variables with '(binder)' suffix; metalevel badges 0/1."""
+        self.assertNotIn("Bound or free Class", self.gen_manual_html)
+        self.assertNotIn("Bound Class ", self.gen_manual_html)
+        self.assertNotIn("Free Class ", self.gen_manual_html)
+        # In #DefEmptySet, x is a binder colored ansi-light-yellow with tooltip "Bound class variable x (binder)"
+        idx = self.gen_manual_html.find('id="DefEmptySet"')
+        self.assertGreaterEqual(idx, 0)
+        def_empty_block = self.gen_manual_html[idx:idx + 3000]
+        self.assertIn(
+            '<span class="ansi-light-yellow"><a href="symbols/variables.html" class="sym-link" title="Bound class variable x (binder)">x</a></span>',
+            def_empty_block,
+        )
+        self.assertIn('<span class="metalevel-badge"', def_empty_block)
+        # Personal symbol pages for distinct symbols
+        sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
+        for page in (
+            "fv-op.html",
+            "ffi-pred.html",
+            "nfv-pred.html",
+            "fresh-pred.html",
+            "variable-sort.html",
+            "expression-sort.html",
+            "name-sort.html",
+            "bool-sort.html",
+            "prop-sort.html",
+            "tau-binder.html",
+            "definitional-eq.html",
+        ):
+            self.assertTrue(os.path.isfile(os.path.join(sym_dir, page)), f"Missing symbol page: {page}")
+
+    def test_example_b_sml_kernel_ast_and_scheme_of_types(self):
+        """Example B: SML Kernel AST contains only the Prf_p constructor name (e.g. PA1_prf); Scheme of Types holds the typed formula."""
+        self.assertEqual(
+            self.gen_manual_html.count('<th class="field-name">Scheme of Types</th>'),
+            len(self.gen_db["entries"]),
+        )
+        idx = self.gen_manual_html.find('id="AxmPropWeakening"')
+        self.assertGreaterEqual(idx, 0)
+        a01_block = self.gen_manual_html[idx:idx + 6000]
+        self.assertIn(
+            '<th class="field-name">SML Kernel AST</th>\n              <td class="field-value proof-cell"><code>PA1_prf</code></td>',
+            a01_block,
+        )
+        self.assertIn(
+            '<th class="field-name">Scheme of Types</th>\n              <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>(⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))</code></td>',
+            a01_block,
+        )
+        by_name = {e["name"]: e for e in self.gen_db["entries"]}
+        self.assertEqual(by_name["AxmPropWeakening"]["prf_constructor"], "PA1_prf")
+        self.assertEqual(
+            by_name["AxmPropWeakening"]["scheme_of_types_unicode"],
+            "(⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))",
+        )
+
 if __name__ == "__main__":
     unittest.main()

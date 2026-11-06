@@ -318,6 +318,21 @@
     body.mode-unicode .formula-latex { display: none; }
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .metalevel-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: #fde047;
+      background: rgba(250, 204, 21, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 4px;
+      padding: 0.05rem 0.32rem;
+      margin-right: 0.45rem;
+      vertical-align: middle;
+      line-height: 1.2;
+      cursor: help;
+    }
   </style>
   <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -337,7 +352,7 @@
         <a class="nav-link" href="../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</h1>
-      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (178 entries) + <a href="symbols/index.html" style="color: #38bdf8;">96 Personal Symbol Reference Pages &rarr;</a>.</p>
+      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (178 entries) + <a href="symbols/index.html" style="color: #38bdf8;">123 Personal Symbol Reference Pages &rarr;</a>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -673,9 +688,9 @@
               <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">x, y, z, a, b, c, u, w</a></div>
               <div class="formula-latex">\(\href{symbols/variables.html}{x, y, z, a, b, c, u, w}\)</div>
             </td>
-            <td class="external-entity"><span class="badge badge-thm">Lowercase Object Variables (Set-Intended Class Variables)</span></td>
+            <td class="external-entity"><span class="badge badge-thm">Lowercase Class Variables (Set-Intended Class Variables)</span></td>
             <td class="external-entity"><code>Class  (or Class.Expression when quoted)</code></td>
-            <td class="external-entity">Bound or free variables of default type Class that typically range over elements of classes (and hence sets by DefIsSet (3.02)). Always typed as ': Class', never ': Set'. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Class variables (having binder, bound, or free occurrences; note that a Class itself cannot be free or bound) of default type Class that typically range over elements of classes (and hence sets by DefIsSet (3.02)). Always typed as ': Class', never ': Set'. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
             <td class="external-entity"><a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Extensionality)</a> &middot; <a href="manual.html#DefIsSet" class="sym-link">DefIsSet (3.02: Sethood)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Comprehension Bound Variable)</a></td>
           </tr>
           <tr id="var-class-uppercase" class="external-row">
@@ -907,15 +922,15 @@
         </td>
       </tr>
       <tr id="sym-6" class="external-row">
-        <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/theory-tau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">𝘛</a></div>
-                <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathcal{T}}\)</div>
+                <div class="formula-unicode"><a href="symbols/theory-tau.html" class="sym-link">𝘛</a></div>
+                <div class="formula-latex">\(\href{symbols/theory-tau.html}{\mathcal{T}}\)</div>
               </td>
             </tr>
             <tr>
@@ -924,11 +939,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/theory-sort.html" class="sym-link">Recursively Enumerable Base Class Theory T (Constructor: HI IpTau)</a> &mdash; <code>symbols/theory-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/theory-tau.html" class="sym-link">Recursively Enumerable Base Class Theory T (Constructor: HI IpTau)</a> &mdash; <code>symbols/theory-tau.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Recursively Enumerable Base Class Theory T (Constructor: HI IpTau) &mdash; see linked <a href="symbols/theory-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Recursively Enumerable Base Class Theory T (Constructor: HI IpTau) &mdash; see linked <a href="symbols/theory-tau.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -939,15 +954,15 @@
         </td>
       </tr>
       <tr id="sym-7" class="external-row">
-        <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/theory-fau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">𝘍</a></div>
-                <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathcal{F}}\)</div>
+                <div class="formula-unicode"><a href="symbols/theory-fau.html" class="sym-link">𝘍</a></div>
+                <div class="formula-latex">\(\href{symbols/theory-fau.html}{\mathcal{F}}\)</div>
               </td>
             </tr>
             <tr>
@@ -956,11 +971,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/theory-sort.html" class="sym-link">Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau)</a> &mdash; <code>symbols/theory-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/theory-fau.html" class="sym-link">Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau)</a> &mdash; <code>symbols/theory-fau.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau) &mdash; see linked <a href="symbols/theory-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau) &mdash; see linked <a href="symbols/theory-fau.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -971,15 +986,15 @@
         </td>
       </tr>
       <tr id="sym-8" class="external-row">
-        <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/theory-eau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">𝘌</a></div>
-                <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathcal{E}}\)</div>
+                <div class="formula-unicode"><a href="symbols/theory-eau.html" class="sym-link">𝘌</a></div>
+                <div class="formula-latex">\(\href{symbols/theory-eau.html}{\mathcal{E}}\)</div>
               </td>
             </tr>
             <tr>
@@ -988,11 +1003,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/theory-sort.html" class="sym-link">Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK}</a> &mdash; <code>symbols/theory-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/theory-eau.html" class="sym-link">Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK}</a> &mdash; <code>symbols/theory-eau.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK} &mdash; see linked <a href="symbols/theory-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK} &mdash; see linked <a href="symbols/theory-eau.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1003,15 +1018,15 @@
         </td>
       </tr>
       <tr id="sym-9" class="external-row">
-        <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/theory-qau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">𝘘</a></div>
-                <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathcal{E}}\)</div>
+                <div class="formula-unicode"><a href="symbols/theory-qau.html" class="sym-link">𝘘</a></div>
+                <div class="formula-latex">\(\href{symbols/theory-qau.html}{\mathcal{Q}}\)</div>
               </td>
             </tr>
             <tr>
@@ -1020,30 +1035,30 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/theory-sort.html" class="sym-link">Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK}</a> &mdash; <code>symbols/theory-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/theory-qau.html" class="sym-link">Auxiliary Formal Theory Q (Constructor: HI IpQau)</a> &mdash; <code>symbols/theory-qau.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK} &mdash; see linked <a href="symbols/theory-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Auxiliary Formal Theory Q (Constructor: HI IpQau) &mdash; see linked <a href="symbols/theory-qau.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
-              <td class="field-value proof-cell"><code>\mathcal{E}</code></td>
+              <td class="field-value proof-cell"><code>\mathcal{Q}</code></td>
             </tr>
             </tbody>
           </table>
         </td>
       </tr>
       <tr id="sym-10" class="external-row">
-        <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/theory-wau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/theory-sort.html" class="sym-link">𝘞</a></div>
-                <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathcal{W}}\)</div>
+                <div class="formula-unicode"><a href="symbols/theory-wau.html" class="sym-link">𝘞</a></div>
+                <div class="formula-latex">\(\href{symbols/theory-wau.html}{\mathcal{W}}\)</div>
               </td>
             </tr>
             <tr>
@@ -1052,11 +1067,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/theory-sort.html" class="sym-link">Arbitrary Closed Object Theory W (Constructor: HI IpWau)</a> &mdash; <code>symbols/theory-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/theory-wau.html" class="sym-link">Schematic Formal Theory Variable W (W : Theory)</a> &mdash; <code>symbols/theory-wau.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Arbitrary Closed Object Theory W (Constructor: HI IpWau) &mdash; see linked <a href="symbols/theory-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Schematic Formal Theory Variable W (W : Theory) &mdash; see linked <a href="symbols/theory-wau.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1148,11 +1163,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable alpha (alpha : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable alpha (𝛂 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable alpha (alpha : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable alpha (𝛂 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1180,11 +1195,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable beta (beta : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable beta (𝛃 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable beta (beta : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable beta (𝛃 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1212,11 +1227,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable gamma (gamma : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable gamma (𝛄 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable gamma (gamma : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable gamma (𝛄 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1244,11 +1259,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable phi (phi : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable phi (𝛗 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable phi (phi : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable phi (𝛗 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1276,11 +1291,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable psi (psi : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable psi (𝛙 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable psi (psi : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable psi (𝛙 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -1308,11 +1323,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Syntactic formula variable chi (chi : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Formula variable chi (𝛘 : Fm)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic formula variable chi (chi : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Formula variable chi (𝛘 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2251,15 +2266,15 @@
         </td>
       </tr>
       <tr id="sym-48" class="external-row">
-        <td class="external-num"><a href="symbols/eq-pred.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/definitional-eq.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/eq-pred.html" class="sym-link">≡</a></div>
-                <div class="formula-latex">\(\href{symbols/eq-pred.html}{\equiv}\)</div>
+                <div class="formula-unicode"><a href="symbols/definitional-eq.html" class="sym-link">≡</a></div>
+                <div class="formula-latex">\(\href{symbols/definitional-eq.html}{\equiv}\)</div>
               </td>
             </tr>
             <tr>
@@ -2268,11 +2283,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/eq-pred.html" class="sym-link">Definitional / Eta equivalence</a> &mdash; <code>symbols/eq-pred.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/definitional-eq.html" class="sym-link">Definitional / syntactic identity symbol</a> &mdash; <code>symbols/definitional-eq.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Definitional / Eta equivalence &mdash; see linked <a href="symbols/eq-pred.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Definitional / syntactic identity symbol &mdash; see linked <a href="symbols/definitional-eq.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2283,15 +2298,15 @@
         </td>
       </tr>
       <tr id="sym-49" class="external-row">
-        <td class="external-num"><a href="symbols/ctx-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/ctx-sort.html" class="sym-link">Γ</a></div>
-                <div class="formula-latex">\(\href{symbols/ctx-sort.html}{\Gamma}\)</div>
+                <div class="formula-unicode"><a href="symbols/formula-metavariables.html" class="sym-link">Γ</a></div>
+                <div class="formula-latex">\(\href{symbols/formula-metavariables.html}{\Gamma}\)</div>
               </td>
             </tr>
             <tr>
@@ -2300,11 +2315,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/ctx-sort.html" class="sym-link">Typing / hypothesis context metavariable Gamma (Ctx)</a> &mdash; <code>symbols/ctx-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/formula-metavariables.html" class="sym-link">Context variable Gamma (Γ : Ctx)</a> &mdash; <code>symbols/formula-metavariables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Typing / hypothesis context metavariable Gamma (Ctx) &mdash; see linked <a href="symbols/ctx-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Context variable Gamma (Γ : Ctx) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/formula-metavariables.html" class="sym-link"><code>symbols/formula-metavariables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2443,15 +2458,15 @@
         </td>
       </tr>
       <tr id="sym-54" class="external-row">
-        <td class="external-num"><a href="symbols/eps-binder.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/tau-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/eps-binder.html" class="sym-link">τ</a></div>
-                <div class="formula-latex">\(\href{symbols/eps-binder.html}{\tau}\)</div>
+                <div class="formula-unicode"><a href="symbols/tau-binder.html" class="sym-link">τ</a></div>
+                <div class="formula-latex">\(\href{symbols/tau-binder.html}{\tau}\)</div>
               </td>
             </tr>
             <tr>
@@ -2460,11 +2475,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/eps-binder.html" class="sym-link">Indefinite description / choice binder (Constructor: HC (CpEps ...))</a> &mdash; <code>symbols/eps-binder.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/tau-binder.html" class="sym-link">Indefinite description / choice descriptor binder (tau)</a> &mdash; <code>symbols/tau-binder.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Indefinite description / choice binder (Constructor: HC (CpEps ...)) &mdash; see linked <a href="symbols/eps-binder.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Indefinite description / choice descriptor binder (tau) &mdash; see linked <a href="symbols/tau-binder.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2603,15 +2618,15 @@
         </td>
       </tr>
       <tr id="sym-59" class="external-row">
-        <td class="external-num"><a href="symbols/ctx-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/empty-list-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/ctx-sort.html" class="sym-link">[]</a></div>
-                <div class="formula-latex">\(\href{symbols/ctx-sort.html}{[\,]}\)</div>
+                <div class="formula-unicode"><a href="symbols/empty-list-const.html" class="sym-link">[]</a></div>
+                <div class="formula-latex">\(\href{symbols/empty-list-const.html}{[\,]}\)</div>
               </td>
             </tr>
             <tr>
@@ -2620,11 +2635,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/ctx-sort.html" class="sym-link">Empty Dunaev class-list / empty hypothesis context []</a> &mdash; <code>symbols/ctx-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/empty-list-const.html" class="sym-link">Empty Dunaev class-list / empty hypothesis context []</a> &mdash; <code>symbols/empty-list-const.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Empty Dunaev class-list / empty hypothesis context [] &mdash; see linked <a href="symbols/ctx-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Empty Dunaev class-list / empty hypothesis context [] &mdash; see linked <a href="symbols/empty-list-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2891,15 +2906,15 @@
         </td>
       </tr>
       <tr id="sym-68" class="external-row">
-        <td class="external-num"><a href="symbols/delimiters-brackets.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/comma-delim.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/delimiters-brackets.html" class="sym-link">,</a></div>
-                <div class="formula-latex">\(\href{symbols/delimiters-brackets.html}{,}\)</div>
+                <div class="formula-unicode"><a href="symbols/comma-delim.html" class="sym-link">,</a></div>
+                <div class="formula-latex">\(\href{symbols/comma-delim.html}{,}\)</div>
               </td>
             </tr>
             <tr>
@@ -2908,11 +2923,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/delimiters-brackets.html" class="sym-link">Tuple, sequent context, and binder body separator comma (,)</a> &mdash; <code>symbols/delimiters-brackets.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/comma-delim.html" class="sym-link">Tuple, sequent context, and binder body separator comma (,)</a> &mdash; <code>symbols/comma-delim.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Tuple, sequent context, and binder body separator comma (,) &mdash; see linked <a href="symbols/delimiters-brackets.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Tuple, sequent context, and binder body separator comma (,) &mdash; see linked <a href="symbols/comma-delim.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2923,15 +2938,15 @@
         </td>
       </tr>
       <tr id="sym-69" class="external-row">
-        <td class="external-num"><a href="symbols/delimiters-brackets.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/dot-delim.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/delimiters-brackets.html" class="sym-link">.</a></div>
-                <div class="formula-latex">\(\href{symbols/delimiters-brackets.html}{.}\)</div>
+                <div class="formula-unicode"><a href="symbols/dot-delim.html" class="sym-link">.</a></div>
+                <div class="formula-latex">\(\href{symbols/dot-delim.html}{.}\)</div>
               </td>
             </tr>
             <tr>
@@ -2940,11 +2955,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/delimiters-brackets.html" class="sym-link">Lambda binder body and sort projection separator (.)</a> &mdash; <code>symbols/delimiters-brackets.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/dot-delim.html" class="sym-link">Lambda binder body and sort projection separator (.)</a> &mdash; <code>symbols/dot-delim.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Lambda binder body and sort projection separator (.) &mdash; see linked <a href="symbols/delimiters-brackets.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Lambda binder body and sort projection separator (.) &mdash; see linked <a href="symbols/dot-delim.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -2987,15 +3002,15 @@
         </td>
       </tr>
       <tr id="sym-71" class="external-row">
-        <td class="external-num"><a href="symbols/substitution-let.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/subst-slash.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/substitution-let.html" class="sym-link">/</a></div>
-                <div class="formula-latex">\(\href{symbols/substitution-let.html}{/}\)</div>
+                <div class="formula-unicode"><a href="symbols/subst-slash.html" class="sym-link">/</a></div>
+                <div class="formula-latex">\(\href{symbols/subst-slash.html}{/}\)</div>
               </td>
             </tr>
             <tr>
@@ -3004,11 +3019,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/substitution-let.html" class="sym-link">Capture-avoiding substitution slash ([t/x])</a> &mdash; <code>symbols/substitution-let.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/subst-slash.html" class="sym-link">Capture-avoiding substitution slash ([t/x])</a> &mdash; <code>symbols/subst-slash.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Capture-avoiding substitution slash ([t/x]) &mdash; see linked <a href="symbols/substitution-let.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Capture-avoiding substitution slash ([t/x]) &mdash; see linked <a href="symbols/subst-slash.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3019,15 +3034,15 @@
         </td>
       </tr>
       <tr id="sym-72" class="external-row">
-        <td class="external-num"><a href="symbols/emptyset-const.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/numeral-0.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/emptyset-const.html" class="sym-link">0</a></div>
-                <div class="formula-latex">\(\href{symbols/emptyset-const.html}{0}\)</div>
+                <div class="formula-unicode"><a href="symbols/numeral-0.html" class="sym-link">0</a></div>
+                <div class="formula-latex">\(\href{symbols/numeral-0.html}{0}\)</div>
               </td>
             </tr>
             <tr>
@@ -3036,11 +3051,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/emptyset-const.html" class="sym-link">von Neumann natural number 0 = empty set</a> &mdash; <code>symbols/emptyset-const.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/numeral-0.html" class="sym-link">von Neumann natural number 0 = empty set</a> &mdash; <code>symbols/numeral-0.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 0 = empty set &mdash; see linked <a href="symbols/emptyset-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 0 = empty set &mdash; see linked <a href="symbols/numeral-0.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3051,15 +3066,15 @@
         </td>
       </tr>
       <tr id="sym-73" class="external-row">
-        <td class="external-num"><a href="symbols/omega-const.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/numeral-1.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/omega-const.html" class="sym-link">1</a></div>
-                <div class="formula-latex">\(\href{symbols/omega-const.html}{1}\)</div>
+                <div class="formula-unicode"><a href="symbols/numeral-1.html" class="sym-link">1</a></div>
+                <div class="formula-latex">\(\href{symbols/numeral-1.html}{1}\)</div>
               </td>
             </tr>
             <tr>
@@ -3068,11 +3083,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/omega-const.html" class="sym-link">von Neumann natural number 1 = {0}</a> &mdash; <code>symbols/omega-const.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/numeral-1.html" class="sym-link">von Neumann natural number 1 = {0}</a> &mdash; <code>symbols/numeral-1.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 1 = {0} &mdash; see linked <a href="symbols/omega-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 1 = {0} &mdash; see linked <a href="symbols/numeral-1.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3083,15 +3098,15 @@
         </td>
       </tr>
       <tr id="sym-74" class="external-row">
-        <td class="external-num"><a href="symbols/omega-const.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/numeral-2.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/omega-const.html" class="sym-link">2</a></div>
-                <div class="formula-latex">\(\href{symbols/omega-const.html}{2}\)</div>
+                <div class="formula-unicode"><a href="symbols/numeral-2.html" class="sym-link">2</a></div>
+                <div class="formula-latex">\(\href{symbols/numeral-2.html}{2}\)</div>
               </td>
             </tr>
             <tr>
@@ -3100,11 +3115,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/omega-const.html" class="sym-link">von Neumann natural number 2 = {0,1}</a> &mdash; <code>symbols/omega-const.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/numeral-2.html" class="sym-link">von Neumann natural number 2 = {0,1}</a> &mdash; <code>symbols/numeral-2.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 2 = {0,1} &mdash; see linked <a href="symbols/omega-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 2 = {0,1} &mdash; see linked <a href="symbols/numeral-2.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3115,15 +3130,15 @@
         </td>
       </tr>
       <tr id="sym-75" class="external-row">
-        <td class="external-num"><a href="symbols/omega-const.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/numeral-3.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/omega-const.html" class="sym-link">3</a></div>
-                <div class="formula-latex">\(\href{symbols/omega-const.html}{3}\)</div>
+                <div class="formula-unicode"><a href="symbols/numeral-3.html" class="sym-link">3</a></div>
+                <div class="formula-latex">\(\href{symbols/numeral-3.html}{3}\)</div>
               </td>
             </tr>
             <tr>
@@ -3132,11 +3147,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/omega-const.html" class="sym-link">von Neumann natural number 3 = {0,1,2}</a> &mdash; <code>symbols/omega-const.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/numeral-3.html" class="sym-link">von Neumann natural number 3 = {0,1,2}</a> &mdash; <code>symbols/numeral-3.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 3 = {0,1,2} &mdash; see linked <a href="symbols/omega-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> von Neumann natural number 3 = {0,1,2} &mdash; see linked <a href="symbols/numeral-3.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3243,15 +3258,15 @@
         </td>
       </tr>
       <tr id="sym-79" class="external-row">
-        <td class="external-num"><a href="symbols/omega-const.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/model-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/omega-const.html" class="sym-link">Model</a></div>
-                <div class="formula-latex">\(\href{symbols/omega-const.html}{\mathsf{Model}}\)</div>
+                <div class="formula-unicode"><a href="symbols/model-const.html" class="sym-link">Model</a></div>
+                <div class="formula-latex">\(\href{symbols/model-const.html}{\mathsf{Model}}\)</div>
               </td>
             </tr>
             <tr>
@@ -3260,11 +3275,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/omega-const.html" class="sym-link">Models of natural numbers (0, 1, 2, 3)</a> &mdash; <code>symbols/omega-const.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/model-const.html" class="sym-link">Inner set model constant (Model)</a> &mdash; <code>symbols/model-const.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Models of natural numbers (0, 1, 2, 3) &mdash; see linked <a href="symbols/omega-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Inner set model constant (Model) &mdash; see linked <a href="symbols/model-const.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -3915,15 +3930,15 @@
         </td>
       </tr>
       <tr id="sym-100" class="external-row">
-        <td class="external-num"><a href="symbols/concentrated-pred.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/values-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/concentrated-pred.html" class="sym-link">values</a></div>
-                <div class="formula-latex">\(\href{symbols/concentrated-pred.html}{\mathsf{values}}\)</div>
+                <div class="formula-unicode"><a href="symbols/values-pred.html" class="sym-link">values</a></div>
+                <div class="formula-latex">\(\href{symbols/values-pred.html}{\mathsf{values}}\)</div>
               </td>
             </tr>
             <tr>
@@ -3932,11 +3947,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/concentrated-pred.html" class="sym-link">Fiber values of a class relation</a> &mdash; <code>symbols/concentrated-pred.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/values-pred.html" class="sym-link">Fiber values keyword in concentrated/flat predicates (values)</a> &mdash; <code>symbols/values-pred.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Fiber values of a class relation &mdash; see linked <a href="symbols/concentrated-pred.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Fiber values keyword in concentrated/flat predicates (values) &mdash; see linked <a href="symbols/values-pred.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -4715,15 +4730,15 @@
         </td>
       </tr>
       <tr id="sym-125" class="external-row">
-        <td class="external-num"><a href="symbols/variable-expression.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/variable-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/variable-expression.html" class="sym-link">Variable</a></div>
-                <div class="formula-latex">\(\href{symbols/variable-expression.html}{\mathsf{Variable}}\)</div>
+                <div class="formula-unicode"><a href="symbols/variable-sort.html" class="sym-link">Variable</a></div>
+                <div class="formula-latex">\(\href{symbols/variable-sort.html}{\mathsf{Variable}}\)</div>
               </td>
             </tr>
             <tr>
@@ -4732,11 +4747,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variable-expression.html" class="sym-link">Bound/Free Variable syntactic sort for binders (Variable)</a> &mdash; <code>symbols/variable-expression.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variable-sort.html" class="sym-link">Syntactic variable identifier sort (Variable)</a> &mdash; <code>symbols/variable-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound/Free Variable syntactic sort for binders (Variable) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variable-expression.html" class="sym-link"><code>symbols/variable-expression.html</code></a>.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Syntactic variable identifier sort (Variable) &mdash; see linked <a href="symbols/variable-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -4747,15 +4762,15 @@
         </td>
       </tr>
       <tr id="sym-126" class="external-row">
-        <td class="external-num"><a href="symbols/variable-expression.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/expression-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/variable-expression.html" class="sym-link">Expression</a></div>
-                <div class="formula-latex">\(\href{symbols/variable-expression.html}{\mathsf{Expression}}\)</div>
+                <div class="formula-unicode"><a href="symbols/expression-sort.html" class="sym-link">Expression</a></div>
+                <div class="formula-latex">\(\href{symbols/expression-sort.html}{\mathsf{Expression}}\)</div>
               </td>
             </tr>
             <tr>
@@ -4764,11 +4779,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variable-expression.html" class="sym-link">Parameterized Kernel Expression sort (A.Expression)</a> &mdash; <code>symbols/variable-expression.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/expression-sort.html" class="sym-link">Parameterized syntactic AST expression sort constructor (A.Expression)</a> &mdash; <code>symbols/expression-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Parameterized Kernel Expression sort (A.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variable-expression.html" class="sym-link"><code>symbols/variable-expression.html</code></a>.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Parameterized syntactic AST expression sort constructor (A.Expression) &mdash; see linked <a href="symbols/expression-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -4875,15 +4890,15 @@
         </td>
       </tr>
       <tr id="sym-130" class="external-row">
-        <td class="external-num"><a href="symbols/prf-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/lcewip-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/prf-sort.html" class="sym-link">LCEWIP</a></div>
-                <div class="formula-latex">\(\href{symbols/prf-sort.html}{\mathsf{LCEWIP}}\)</div>
+                <div class="formula-unicode"><a href="symbols/lcewip-sort.html" class="sym-link">LCEWIP</a></div>
+                <div class="formula-latex">\(\href{symbols/lcewip-sort.html}{\mathsf{LCEWIP}}\)</div>
               </td>
             </tr>
             <tr>
@@ -4892,11 +4907,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/prf-sort.html" class="sym-link">Locally Checked Expression verification status (LCEWIP)</a> &mdash; <code>symbols/prf-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/lcewip-sort.html" class="sym-link">Large conglomerate expression internal kernel sort marker (LCEWIP)</a> &mdash; <code>symbols/lcewip-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Locally Checked Expression verification status (LCEWIP) &mdash; see linked <a href="symbols/prf-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Large conglomerate expression internal kernel sort marker (LCEWIP) &mdash; see linked <a href="symbols/lcewip-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5003,15 +5018,15 @@
         </td>
       </tr>
       <tr id="sym-134" class="external-row">
-        <td class="external-num"><a href="symbols/hygiene-ffi-fv.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/fv-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">FV</a></div>
-                <div class="formula-latex">\(\href{symbols/hygiene-ffi-fv.html}{\mathrm{FV}}\)</div>
+                <div class="formula-unicode"><a href="symbols/fv-op.html" class="sym-link">FV</a></div>
+                <div class="formula-latex">\(\href{symbols/fv-op.html}{\mathrm{FV}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5020,7 +5035,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">Free Variables functional symbol (Constructor: HC (CpFV ...))</a> &mdash; <code>symbols/hygiene-ffi-fv.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/fv-op.html" class="sym-link">Free Variables functional symbol (Constructor: HC (CpFV ...))</a> &mdash; <code>symbols/fv-op.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5035,15 +5050,15 @@
         </td>
       </tr>
       <tr id="sym-135" class="external-row">
-        <td class="external-num"><a href="symbols/hygiene-ffi-fv.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/ffi-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">FFI</a></div>
-                <div class="formula-latex">\(\href{symbols/hygiene-ffi-fv.html}{\mathrm{FFI}}\)</div>
+                <div class="formula-unicode"><a href="symbols/ffi-pred.html" class="sym-link">FFI</a></div>
+                <div class="formula-latex">\(\href{symbols/ffi-pred.html}{\mathrm{FFI}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5052,7 +5067,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">Free For Instantiation capture-avoidance predicate symbol (Constructor: HP (TpFFI ...))</a> &mdash; <code>symbols/hygiene-ffi-fv.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/ffi-pred.html" class="sym-link">Free For Instantiation capture-avoidance predicate symbol (Constructor: HP (TpFFI ...))</a> &mdash; <code>symbols/ffi-pred.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5067,15 +5082,15 @@
         </td>
       </tr>
       <tr id="sym-136" class="external-row">
-        <td class="external-num"><a href="symbols/hygiene-ffi-fv.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/nfv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">NFV</a></div>
-                <div class="formula-latex">\(\href{symbols/hygiene-ffi-fv.html}{\mathrm{NFV}}\)</div>
+                <div class="formula-unicode"><a href="symbols/nfv-pred.html" class="sym-link">NFV</a></div>
+                <div class="formula-latex">\(\href{symbols/nfv-pred.html}{\mathrm{NFV}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5084,7 +5099,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">Not Free Variable eigenvariable predicate symbol (NFV)</a> &mdash; <code>symbols/hygiene-ffi-fv.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/nfv-pred.html" class="sym-link">Not Free Variable eigenvariable predicate symbol (NFV)</a> &mdash; <code>symbols/nfv-pred.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5099,15 +5114,15 @@
         </td>
       </tr>
       <tr id="sym-137" class="external-row">
-        <td class="external-num"><a href="symbols/hygiene-ffi-fv.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/fresh-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">Fresh</a></div>
-                <div class="formula-latex">\(\href{symbols/hygiene-ffi-fv.html}{\mathrm{Fresh}}\)</div>
+                <div class="formula-unicode"><a href="symbols/fresh-pred.html" class="sym-link">Fresh</a></div>
+                <div class="formula-latex">\(\href{symbols/fresh-pred.html}{\mathrm{Fresh}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5116,7 +5131,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/hygiene-ffi-fv.html" class="sym-link">Variable freshness predicate symbol (Fresh)</a> &mdash; <code>symbols/hygiene-ffi-fv.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/fresh-pred.html" class="sym-link">Variable freshness predicate symbol (Fresh)</a> &mdash; <code>symbols/fresh-pred.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5131,15 +5146,15 @@
         </td>
       </tr>
       <tr id="sym-138" class="external-row">
-        <td class="external-num"><a href="symbols/variable-expression.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/name-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/variable-expression.html" class="sym-link">Name</a></div>
-                <div class="formula-latex">\(\href{symbols/variable-expression.html}{\mathsf{Name}}\)</div>
+                <div class="formula-unicode"><a href="symbols/name-sort.html" class="sym-link">Name</a></div>
+                <div class="formula-latex">\(\href{symbols/name-sort.html}{\mathsf{Name}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5148,11 +5163,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variable-expression.html" class="sym-link">Variable Name syntactic sort (Name)</a> &mdash; <code>symbols/variable-expression.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/name-sort.html" class="sym-link">Syntactic variable-name sort (Name)</a> &mdash; <code>symbols/name-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Variable Name syntactic sort (Name) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variable-expression.html" class="sym-link"><code>symbols/variable-expression.html</code></a>.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Syntactic variable-name sort (Name) &mdash; see linked <a href="symbols/name-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5163,15 +5178,15 @@
         </td>
       </tr>
       <tr id="sym-139" class="external-row">
-        <td class="external-num"><a href="symbols/prop-bool.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/bool-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">Bool</a></div>
-                <div class="formula-latex">\(\href{symbols/prop-bool.html}{\mathsf{Bool}}\)</div>
+                <div class="formula-unicode"><a href="symbols/bool-sort.html" class="sym-link">Bool</a></div>
+                <div class="formula-latex">\(\href{symbols/bool-sort.html}{\mathsf{Bool}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5180,7 +5195,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/prop-bool.html" class="sym-link">Kernel Boolean truth-value sort (Bool)</a> &mdash; <code>symbols/prop-bool.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/bool-sort.html" class="sym-link">Semantic Boolean truth-value type (Bool)</a> &mdash; <code>symbols/bool-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5195,15 +5210,15 @@
         </td>
       </tr>
       <tr id="sym-140" class="external-row">
-        <td class="external-num"><a href="symbols/prop-bool.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/prop-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/prop-bool.html" class="sym-link">Prop</a></div>
-                <div class="formula-latex">\(\href{symbols/prop-bool.html}{\mathsf{Prop}}\)</div>
+                <div class="formula-unicode"><a href="symbols/prop-sort.html" class="sym-link">Prop</a></div>
+                <div class="formula-latex">\(\href{symbols/prop-sort.html}{\mathsf{Prop}}\)</div>
               </td>
             </tr>
             <tr>
@@ -5212,7 +5227,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/prop-bool.html" class="sym-link">Curry-Howard Universe of Propositions (Prop)</a> &mdash; <code>symbols/prop-bool.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/prop-sort.html" class="sym-link">Curry-Howard Universe of Propositions (Prop)</a> &mdash; <code>symbols/prop-sort.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -5244,11 +5259,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class, Proposition, or Type variable A</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable or type variable A</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class, Proposition, or Type variable A &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable or type variable A &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5276,11 +5291,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class, Proposition, or Family variable B</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable or family variable B</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class, Proposition, or Family variable B &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable or family variable B &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5308,11 +5323,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class or Cardinal variable C</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable C</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class or Cardinal variable C &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable C &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5340,11 +5355,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Proposition or Class variable D</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable D</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Proposition or Class variable D &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable D &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5372,11 +5387,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Relation, Family, or Class-function variable F</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable F (relation / family / class-function)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Relation, Family, or Class-function variable F &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable F (relation / family / class-function) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5387,15 +5402,15 @@
         </td>
       </tr>
       <tr id="sym-146" class="external-row">
-        <td class="external-num"><a href="symbols/ctx-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/ctx-sort.html" class="sym-link">G</a></div>
-                <div class="formula-latex">\(\href{symbols/ctx-sort.html}{G}\)</div>
+                <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">G</a></div>
+                <div class="formula-latex">\(\href{symbols/variables.html}{G}\)</div>
               </td>
             </tr>
             <tr>
@@ -5404,11 +5419,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/ctx-sort.html" class="sym-link">Ctx.Expression context metavariable G</a> &mdash; <code>symbols/ctx-sort.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Context expression variable G (G : Ctx.Expression)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Ctx.Expression context metavariable G &mdash; see linked <a href="symbols/ctx-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Context expression variable G (G : Ctx.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5468,11 +5483,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Dunaev class-list variable L</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable L (Dunaev class-list)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Dunaev class-list variable L &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable L (Dunaev class-list) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5500,11 +5515,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Successor-inductive Class variable Q</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable Q (successor-inductive class)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Successor-inductive Class variable Q &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable Q (successor-inductive class) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5532,11 +5547,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Type / dependent type family variable Tₑ</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Type-family variable Tₑ</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Type / dependent type family variable Tₑ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Type-family variable Tₑ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5564,11 +5579,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Type / dependent type family variable T_e</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Type-family variable T_e</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Type / dependent type family variable T_e &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Type-family variable T_e &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5596,11 +5611,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Universe candidate Class variable U</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable U (Grothendieck/Tarski universe)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Universe candidate Class variable U &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable U (Grothendieck/Tarski universe) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5628,11 +5643,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class or Theory variable W</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable W</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class or Theory variable W &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable W &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5660,11 +5675,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class or Type variable X</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable or type variable X</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class or Type variable X &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable or type variable X &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5756,11 +5771,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class variable a</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable a</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class variable a &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable a &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5788,11 +5803,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class / Bool variable b</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable or boolean variable b</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class / Bool variable b &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable or boolean variable b &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5820,11 +5835,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class variable c</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable c</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class variable c &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable c &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5852,11 +5867,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free function / family Class variable f</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable f (function / family)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free function / family Class variable f &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable f (function / family) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5884,11 +5899,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free function Class variable g</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable g (function)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free function Class variable g &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable g (function) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5916,11 +5931,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class.Expression term metavariable k</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class expression variable k (k : Class.Expression)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class.Expression term metavariable k &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class expression variable k (k : Class.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5948,11 +5963,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Natural number / Class variable m</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable m (natural number)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Natural number / Class variable m &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable m (natural number) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -5980,11 +5995,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Natural number / tag index Class variable n</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable n (natural number / tag index)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Natural number / tag index Class variable n &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable n (natural number / tag index) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6012,11 +6027,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Proposition / pair variable p</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Proposition or pair variable p</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Proposition / pair variable p &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Proposition or pair variable p &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6044,11 +6059,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound Class variable q</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable q</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound Class variable q &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable q &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6076,11 +6091,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound Class variable s</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable s</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound Class variable s &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable s &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6108,11 +6123,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Term / Expression metavariable t</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Term expression variable t (t : X.Expression)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Term / Expression metavariable t &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Term expression variable t (t : X.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6140,11 +6155,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">First branch term variable t₁</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Branch term variable t₁</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> First branch term variable t₁ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Branch term variable t₁ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6172,11 +6187,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Second branch term variable t₂</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Branch term variable t₂</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Second branch term variable t₂ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Branch term variable t₂ &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6204,11 +6219,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">First branch term variable t1</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Branch term variable t1</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> First branch term variable t1 &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Branch term variable t1 &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6236,11 +6251,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Second branch term variable t2</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Branch term variable t2</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Second branch term variable t2 &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Branch term variable t2 &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6268,11 +6283,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Universe / Class variable u</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable u</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Universe / Class variable u &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable u &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6283,15 +6298,15 @@
         </td>
       </tr>
       <tr id="sym-174" class="external-row">
-        <td class="external-num"><a href="symbols/variable-expression.html" class="num-anchor">SYM</a></td>
+        <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
             <tr>
               <th class="field-name">Symbol / Identifier</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/variable-expression.html" class="sym-link">v</a></div>
-                <div class="formula-latex">\(\href{symbols/variable-expression.html}{v}\)</div>
+                <div class="formula-unicode"><a href="symbols/variables.html" class="sym-link">v</a></div>
+                <div class="formula-latex">\(\href{symbols/variables.html}{v}\)</div>
               </td>
             </tr>
             <tr>
@@ -6300,11 +6315,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variable-expression.html" class="sym-link">Syntactic Variable metavariable v (Variable)</a> &mdash; <code>symbols/variable-expression.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Variable-name variable v (v : Variable) or class variable v</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Syntactic Variable metavariable v (Variable) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variable-expression.html" class="sym-link"><code>symbols/variable-expression.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Variable-name variable v (v : Variable) or class variable v &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6332,11 +6347,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound ordinal Class variable w</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable w</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound ordinal Class variable w &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable w &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6364,11 +6379,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class / Variable x</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable x (or variable-name variable x : Name)</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class / Variable x &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable x (or variable-name variable x : Name) &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6396,11 +6411,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class variable y</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable y</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class variable y &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable y &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>
@@ -6428,11 +6443,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Bound or free Class variable z</a> &mdash; <code>symbols/variables.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/variables.html" class="sym-link">Class variable z</a> &mdash; <code>symbols/variables.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Bound or free Class variable z &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
+              <td class="field-value"><strong>[Typed Variable / Metavariable] Natural-Language Definition:</strong> Class variable z &mdash; bound or free schematic variable governed by capture-avoiding substitution (<code>FFI</code>) and free-variable hygiene (<code>FV</code>); see <a href="symbols/variables.html" class="sym-link"><code>symbols/variables.html</code></a>.</td>
             </tr>
             <tr>
               <th class="field-name">LaTeX Macro</th>

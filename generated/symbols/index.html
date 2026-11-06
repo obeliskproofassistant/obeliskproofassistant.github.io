@@ -318,6 +318,21 @@
     body.mode-unicode .formula-latex { display: none; }
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .metalevel-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: #fde047;
+      background: rgba(250, 204, 21, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 4px;
+      padding: 0.05rem 0.32rem;
+      margin-right: 0.45rem;
+      vertical-align: middle;
+      line-height: 1.2;
+      cursor: help;
+    }
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -355,7 +370,7 @@
   <main>
   <section class="manual-section" id="personal-symbols-index">
     <div class="section-header">
-      <h2>Personal Symbol Reference Directory (96 Dedicated Pages)</h2>
+      <h2>Personal Symbol Reference Directory (123 Dedicated Pages)</h2>
       <p class="section-desc">Every metatheoretic, reflection, type, binder, and structural symbol in <strong>MKTD1</strong> and <strong>MKTD2</strong> links directly to its corresponding personal page below rather than to an unrelated theorem.</p>
     </div>
     <div class="table-container">
@@ -1109,15 +1124,15 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="variables.html" class="sym-link"><strong>Bound &amp; Free Object-Class, Function, Proof, and Type-Family Variables</strong> (<code>symbols/variables.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="variables.html" class="sym-link"><strong>Class Variables, Variable-Name Variables, Class Expression Variables &amp; Type Variables</strong> (<code>symbols/variables.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Variables &amp; Metavariables</span> &nbsp; <code>Class | Prop | Type | (A → B)</code></td>
+              <td class="field-value"><span class="badge badge-def">Variables &amp; Metavariables</span> &nbsp; <code>Class | Variable | Class.Expression | Prop | Type | (A → B)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Bound and free variables ranging over classes (<code>x, y, z, A, B, C, X, Y : Class</code>), functions/relations (<code>f, g, R : Class</code>), propositions/types (<code>A, B : Prop</code> or <code>Type</code>), dependent type families (<code>Tₑ : Bool → Type</code>), and branch terms (<code>t₁, t₂</code>).</td>
+              <td class="field-value">Alphabet variables ranging over classes (<strong>class variables</strong> <code>x, y, z, A, B, C, X, Y : Class</code>), variable identifiers (<strong>variable-name variables</strong> <code>v : Variable</code>, <code>x : Name</code>), syntactic class terms (<strong>class expression variables</strong> <code>k, t : Class.Expression</code>), functions/relations (<code>f, g, R : Class</code>), propositions/types (<strong>type variables</strong> <code>A, B, X : Type</code> or <code>Prop</code>), dependent type families (<code>Tₑ : Bool → Type</code>), and branch terms (<code>t₁, t₂</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -3050,6 +3065,762 @@
             <tr>
               <th class="field-name">Summary</th>
               <td class="field-value">Ternary metatheoretic derivability predicate <code>(𝘞, Γ ⊢ 𝛗)</code> asserting that syntactic formula <code>𝛗 : Fm</code> is formally derivable in object theory <code>𝘞 : Theory</code> from hypothesis context <code>Γ : Ctx</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-97" class="external-row">
+        <td class="external-num"><a href="fv-op.html" class="num-anchor">97</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="fv-op.html" class="sym-link">FV</a></div>
+                <div class="formula-latex">\(\href{fv-op.html}{\mathrm{FV}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="fv-op.html" class="sym-link"><strong>Free-Variables Metatheoretic Operator (FV, AST Constructor: CpFV)</strong> (<code>symbols/fv-op.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (Metatheoretic Hygiene Operator)</span> &nbsp; <code>A.Expression → Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Primitive metatheoretic operator <code>FV(e)</code> returning the class of encoded variable names occurring free in a syntactic expression <code>e : A.Expression</code> (such as <code>Fm</code> or <code>Class.Expression</code>) in the +1 meta-theory.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-98" class="external-row">
+        <td class="external-num"><a href="ffi-pred.html" class="num-anchor">98</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="ffi-pred.html" class="sym-link">FFI</a></div>
+                <div class="formula-latex">\(\href{ffi-pred.html}{\mathrm{FFI}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="ffi-pred.html" class="sym-link"><strong>Free-For-Instantiation Hygiene Predicate (FFI, AST Constructor: TpFFI)</strong> (<code>symbols/ffi-pred.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Predicate Symbol (Metatheoretic Side-Condition Predicate)</span> &nbsp; <code>X.Expression × Variable × Fm → Bool</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Metalevel-1 syntactic hygiene predicate <code>FFI((t:X.Expression), x, (𝛗:Fm))</code> asserting that no free variable of term expression <code>t</code> becomes captured when substituted for free occurrences of variable <code>x</code> in formula <code>𝛗 : Fm</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-99" class="external-row">
+        <td class="external-num"><a href="nfv-pred.html" class="num-anchor">99</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="nfv-pred.html" class="sym-link">NFV</a></div>
+                <div class="formula-latex">\(\href{nfv-pred.html}{\mathrm{NFV}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="nfv-pred.html" class="sym-link"><strong>Non-Free-Variable Hygiene Predicate (NFV, AST Constructor: TpNFV)</strong> (<code>symbols/nfv-pred.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Predicate Symbol (Metatheoretic Side-Condition Predicate)</span> &nbsp; <code>Type × Variable × Fm → Bool</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Metalevel-1 syntactic hygiene predicate <code>NFV(X, x, (𝛃:Fm))</code> asserting that variable <code>x</code> of sort <code>X</code> does not occur free in formula <code>𝛃 : Fm</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-100" class="external-row">
+        <td class="external-num"><a href="fresh-pred.html" class="num-anchor">100</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="fresh-pred.html" class="sym-link">Fresh</a></div>
+                <div class="formula-latex">\(\href{fresh-pred.html}{\mathrm{Fresh}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="fresh-pred.html" class="sym-link"><strong>Variable Freshness Hygiene Predicate (Fresh)</strong> (<code>symbols/fresh-pred.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Predicate Symbol (Metatheoretic Side-Condition Predicate)</span> &nbsp; <code>Variable × A.Expression → Bool</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Metalevel-1 syntactic hygiene predicate asserting that a variable name does not occur in a given syntactic expression or context.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-101" class="external-row">
+        <td class="external-num"><a href="variable-sort.html" class="num-anchor">101</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="variable-sort.html" class="sym-link">Variable</a></div>
+                <div class="formula-latex">\(\href{variable-sort.html}{\mathsf{Variable}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="variable-sort.html" class="sym-link"><strong>Syntactic Variable Identifier Sort (Variable, Constructor: UVariable)</strong> (<code>symbols/variable-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Syntactic Sort (Variable Identifiers)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The syntactic sort <code>Variable</code> of variable identifiers in the kernel AST. Distinct from <code>Class</code> (semantic collections) and <code>Class.Expression</code> (syntactic class terms).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-102" class="external-row">
+        <td class="external-num"><a href="expression-sort.html" class="num-anchor">102</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="expression-sort.html" class="sym-link">Expression</a></div>
+                <div class="formula-latex">\(\href{expression-sort.html}{\mathsf{Expression}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="expression-sort.html" class="sym-link"><strong>Syntactic AST Expression Sort Constructor (.Expression)</strong> (<code>symbols/expression-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Sort Constructor (A → A.Expression)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Postfix sort constructor <code>A.Expression</code> mapping any semantic sort <code>A</code> (such as <code>Class</code>, <code>Bool</code>, <code>Ctx</code>) to the syntactic sort of its AST expressions (e.g., <code>Class.Expression</code>, <code>Bool.Expression = Fm</code>).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-103" class="external-row">
+        <td class="external-num"><a href="name-sort.html" class="num-anchor">103</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="name-sort.html" class="sym-link">Name</a></div>
+                <div class="formula-latex">\(\href{name-sort.html}{\mathsf{Name}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="name-sort.html" class="sym-link"><strong>Syntactic Variable-Name Sort (Name)</strong> (<code>symbols/name-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Syntactic Sort (Raw Variable Names)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The underlying syntactic sort <code>Name</code> of variable name tokens lifted into <code>Variable</code> via <code>IVariable_t</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-104" class="external-row">
+        <td class="external-num"><a href="bool-sort.html" class="num-anchor">104</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="bool-sort.html" class="sym-link">Bool</a></div>
+                <div class="formula-latex">\(\href{bool-sort.html}{\mathsf{Bool}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="bool-sort.html" class="sym-link"><strong>Semantic Truth-Value Type (Bool, Constructor: UTruth)</strong> (<code>symbols/bool-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Conglomerate Types &amp; Sorts</span> &nbsp; <code>Semantic Type (2-Element Truth-Value Conglomerate)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The semantic truth-value type <code>Bool</code> inhabited by truth values (<code>⊤</code>, <code>⊥</code>), distinct from the syntactic formula sort <code>Fm = Bool.Expression</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-105" class="external-row">
+        <td class="external-num"><a href="prop-sort.html" class="num-anchor">105</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="prop-sort.html" class="sym-link">Prop</a></div>
+                <div class="formula-latex">\(\href{prop-sort.html}{\mathsf{Prop}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="prop-sort.html" class="sym-link"><strong>Propositions-as-Types Universe (Prop, MKTD2)</strong> (<code>symbols/prop-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Conglomerate Types &amp; Sorts</span> &nbsp; <code>Type Universe (Variant 2 Propositions-as-Types)</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The propositions-as-types universe <code>Prop</code> in Variant 2 (MKTD2), where each proposition <code>A : Prop</code> is a type whose inhabitants are constructive proof terms <code>p : A</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-106" class="external-row">
+        <td class="external-num"><a href="lcewip-sort.html" class="num-anchor">106</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="lcewip-sort.html" class="sym-link">LCEWIP</a></div>
+                <div class="formula-latex">\(\href{lcewip-sort.html}{\mathsf{LCEWIP}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="lcewip-sort.html" class="sym-link"><strong>Large Conglomerate Expression Sort Placeholder (LCEWIP)</strong> (<code>symbols/lcewip-sort.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Internal Kernel Sort Marker</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Internal kernel sort marker <code>LCEWIP</code> for large conglomerate/type expressions in <code>newchecker.ML</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-107" class="external-row">
+        <td class="external-num"><a href="empty-list-const.html" class="num-anchor">107</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="empty-list-const.html" class="sym-link">[]</a></div>
+                <div class="formula-latex">\(\href{empty-list-const.html}{[\,]}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="empty-list-const.html" class="sym-link"><strong>Empty Hypothesis Context / Empty Class List Constant ([])</strong> (<code>symbols/empty-list-const.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic &amp; Structural Constant</span> &nbsp; <code>Ctx   |   Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Denotes the empty hypothesis context <code>[] : Ctx</code> in sequent judgments <code>(𝘞, [] ⊢ 𝛗)</code> or the empty Dunaev class list <code>[] = ∅</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-108" class="external-row">
+        <td class="external-num"><a href="comma-delim.html" class="num-anchor">108</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="comma-delim.html" class="sym-link">,</a></div>
+                <div class="formula-latex">\(\href{comma-delim.html}{,}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="comma-delim.html" class="sym-link"><strong>Tuple, Argument, Context &amp; Quantifier Separator Comma (,)</strong> (<code>symbols/comma-delim.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Structural Delimiter</span> &nbsp; <code>Syntactic Separator Token</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Separates arguments in functional/predicate applications <code>FFI(t, x, 𝛗)</code>, components in Dunaev ordered pairs <code>(A, B)</code>, and sequent components <code>(𝘞, Γ ⊢ 𝛗)</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-109" class="external-row">
+        <td class="external-num"><a href="dot-delim.html" class="num-anchor">109</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="dot-delim.html" class="sym-link">.</a></div>
+                <div class="formula-latex">\(\href{dot-delim.html}{.}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="dot-delim.html" class="sym-link"><strong>Binder Scope &amp; Sort Projection Dot (.)</strong> (<code>symbols/dot-delim.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Structural Delimiter</span> &nbsp; <code>Binder Body Separator / Sort Qualification Dot</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Separates the bound variable from the body in descriptor/lambda binders (<code>ιx. 𝛗</code>, <code>εx. 𝛗</code>, <code>λx. t</code>) and qualifies syntactic expression sorts (<code>Class.Expression</code>, <code>Fm.Expression</code>).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-110" class="external-row">
+        <td class="external-num"><a href="subst-slash.html" class="num-anchor">110</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="subst-slash.html" class="sym-link">/</a></div>
+                <div class="formula-latex">\(\href{subst-slash.html}{/}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="subst-slash.html" class="sym-link"><strong>Syntactic Substitution Slash (/)</strong> (<code>symbols/subst-slash.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Structural Delimiter (Substitution Notation)</span> &nbsp; <code>(Term / Variable) Substitution Separator</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Separates the replacement term from the target variable in substitution notation <code>𝛗[t/x]</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-111" class="external-row">
+        <td class="external-num"><a href="model-const.html" class="num-anchor">111</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="model-const.html" class="sym-link">Model</a></div>
+                <div class="formula-latex">\(\href{model-const.html}{\mathsf{Model}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="model-const.html" class="sym-link"><strong>Inner Set Model Constant (Model)</strong> (<code>symbols/model-const.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Class/Model Constant)</span> &nbsp; <code>Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Constant denoting a set model of the base theory constructed in metatheoretic consistency and reflection theorems.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-112" class="external-row">
+        <td class="external-num"><a href="numeral-0.html" class="num-anchor">112</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="numeral-0.html" class="sym-link">0</a></div>
+                <div class="formula-latex">\(\href{numeral-0.html}{0}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="numeral-0.html" class="sym-link"><strong>Von Neumann Ordinal Numeral Zero (0 = ∅)</strong> (<code>symbols/numeral-0.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Ordinal Numeral Constant)</span> &nbsp; <code>Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The von Neumann ordinal zero <code>0 = ∅</code>, base element of <code>ω</code> and initial index in Dunaev class-list marking (Entry DefNaturalNumberModels (3.50)).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-113" class="external-row">
+        <td class="external-num"><a href="numeral-1.html" class="num-anchor">113</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="numeral-1.html" class="sym-link">1</a></div>
+                <div class="formula-latex">\(\href{numeral-1.html}{1}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="numeral-1.html" class="sym-link"><strong>Von Neumann Ordinal Numeral One (1 = 0 ∪ {0})</strong> (<code>symbols/numeral-1.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Ordinal Numeral Constant)</span> &nbsp; <code>Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The von Neumann ordinal one <code>1 = 0 ∪ {0} = {∅}</code>, used as the first-component tag index in Dunaev ordered pairs <code>pr1</code> (Entries DefNaturalNumberModels (3.50), DefDunaevOrderedPair (3.76)).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-114" class="external-row">
+        <td class="external-num"><a href="numeral-2.html" class="num-anchor">114</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="numeral-2.html" class="sym-link">2</a></div>
+                <div class="formula-latex">\(\href{numeral-2.html}{2}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="numeral-2.html" class="sym-link"><strong>Von Neumann Ordinal Numeral Two (2 = 1 ∪ {1})</strong> (<code>symbols/numeral-2.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Ordinal Numeral Constant)</span> &nbsp; <code>Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The von Neumann ordinal two <code>2 = 1 ∪ {1} = {0, 1}</code>, used as the second-component tag index in Dunaev ordered pairs <code>pr2</code> (Entries DefNaturalNumberModels (3.50), DefDunaevOrderedPair (3.76)).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-115" class="external-row">
+        <td class="external-num"><a href="numeral-3.html" class="num-anchor">115</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="numeral-3.html" class="sym-link">3</a></div>
+                <div class="formula-latex">\(\href{numeral-3.html}{3}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="numeral-3.html" class="sym-link"><strong>Von Neumann Ordinal Numeral Three (3 = 2 ∪ {2})</strong> (<code>symbols/numeral-3.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Ordinal Numeral Constant)</span> &nbsp; <code>Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">The von Neumann ordinal three <code>3 = 2 ∪ {2} = {0, 1, 2}</code> (Entry DefNaturalNumberModels (3.50)).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-116" class="external-row">
+        <td class="external-num"><a href="theory-tau.html" class="num-anchor">116</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="theory-tau.html" class="sym-link">𝘫</a></div>
+                <div class="formula-latex">\(\href{theory-tau.html}{\mathcal{T}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="theory-tau.html" class="sym-link"><strong>Recursively Enumerable Base Object Theory Constant (𝘫, Tau)</strong> (<code>symbols/theory-tau.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Theory Constant</span> &nbsp; <code>Theory</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Constant <code>𝘫 : Theory</code> denoting the recursively enumerable base object theory, subtheory of the full Henkin completion <code>𝘍</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-117" class="external-row">
+        <td class="external-num"><a href="theory-fau.html" class="num-anchor">117</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="theory-fau.html" class="sym-link">𝘍</a></div>
+                <div class="formula-latex">\(\href{theory-fau.html}{\mathcal{F}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="theory-fau.html" class="sym-link"><strong>Full Sound Henkin-Completed Object Theory Constant (𝘍, Fau)</strong> (<code>symbols/theory-fau.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Theory Constant</span> &nbsp; <code>Theory</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Constant <code>𝘍 : Theory</code> denoting the sound (non-r.e.) Henkin-completed full object theory satisfying reflection <code>(𝘍, [] ⊢ 𝛙) → ⟦𝛙⟧</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-118" class="external-row">
+        <td class="external-num"><a href="theory-eau.html" class="num-anchor">118</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="theory-eau.html" class="sym-link">𝘌</a></div>
+                <div class="formula-latex">\(\href{theory-eau.html}{\mathcal{E}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="theory-eau.html" class="sym-link"><strong>Unspecified Elementary Metatheory Constant (𝘌, Eau)</strong> (<code>symbols/theory-eau.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Theory Constant</span> &nbsp; <code>Theory</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Constant <code>𝘌 : Theory</code> denoting the unspecified elementary metatheory ranging over <code>{IΣ₁, PA, 𝘫, NBG, MK}</code> in Löb's theorem and Gödel's Second Incompleteness Theorem.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-119" class="external-row">
+        <td class="external-num"><a href="theory-qau.html" class="num-anchor">119</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="theory-qau.html" class="sym-link">𝘘</a></div>
+                <div class="formula-latex">\(\href{theory-qau.html}{\mathcal{Q}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="theory-qau.html" class="sym-link"><strong>Auxiliary Formal Theory Constant (𝘘, Qau)</strong> (<code>symbols/theory-qau.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Theory Constant</span> &nbsp; <code>Theory</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Constant <code>𝘘 : Theory</code> denoting an auxiliary formal theory in metatheoretic derivations.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-120" class="external-row">
+        <td class="external-num"><a href="theory-wau.html" class="num-anchor">120</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="theory-wau.html" class="sym-link">𝘞</a></div>
+                <div class="formula-latex">\(\href{theory-wau.html}{\mathcal{W}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="theory-wau.html" class="sym-link"><strong>Schematic Formal Theory Variable (𝘞, Wau)</strong> (<code>symbols/theory-wau.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Theory Variable</span> &nbsp; <code>Theory</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Schematic variable <code>𝘞 : Theory</code> ranging over formal theories in metatheoretic inference rules and sequent judgments <code>(𝘞, G ⊢ 𝛗)</code>.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-121" class="external-row">
+        <td class="external-num"><a href="values-pred.html" class="num-anchor">121</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="values-pred.html" class="sym-link">values</a></div>
+                <div class="formula-latex">\(\href{values-pred.html}{\text{values}}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="values-pred.html" class="sym-link"><strong>Fiber Values Keyword in Concentrated / Flat Predicates (values)</strong> (<code>symbols/values-pred.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Predicate Phrase Token</span> &nbsp; <code>Class → Bool</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Keyword token <code>values</code> in the unary predicate phrases <code>(F has concentrated set values)</code> (Entry DefHasConcentratedValues (3.29)) and <code>(F has flat proper values)</code> (Entry DefFlatValues (3.30)).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-122" class="external-row">
+        <td class="external-num"><a href="tau-binder.html" class="num-anchor">122</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="tau-binder.html" class="sym-link">τ</a></div>
+                <div class="formula-latex">\(\href{tau-binder.html}{\tau}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="tau-binder.html" class="sym-link"><strong>Bourbaki / Unspecified Choice Descriptor Binder (τ)</strong> (<code>symbols/tau-binder.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Binder (Choice Descriptor Operator)</span> &nbsp; <code>(Variable × Fm) → Class</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Variable-binding choice descriptor <code>τx. 𝛗(x)</code> selecting a witness of <code>𝛗(x)</code> when one exists.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="psym-123" class="external-row">
+        <td class="external-num"><a href="definitional-eq.html" class="num-anchor">123</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Symbol</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="definitional-eq.html" class="sym-link">≡</a></div>
+                <div class="formula-latex">\(\href{definitional-eq.html}{\equiv}\)</div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Personal Reference Page</th>
+              <td class="field-value entry-title-cell"><a href="definitional-eq.html" class="sym-link"><strong>Definitional / Syntactic Identity Symbol (≡)</strong> (<code>symbols/definitional-eq.html</code>)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Category &amp; Signature</th>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic Relation Symbol</span> &nbsp; <code>Syntactic / Definitional Equivalence</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Summary</th>
+              <td class="field-value">Denotes definitional identity or syntactic abbreviation <code>M ≡ N</code>, distinct from first-order extensional equality <code>X = Y</code> (<a href="eq-pred.html" class="sym-link"><code>symbols/eq-pred.html</code></a>).</td>
             </tr>
             </tbody>
           </table>

@@ -318,6 +318,21 @@
     body.mode-unicode .formula-latex { display: none; }
     body.mode-latex .formula-unicode { display: none; }
     body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .metalevel-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      color: #fde047;
+      background: rgba(250, 204, 21, 0.14);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      border-radius: 4px;
+      padding: 0.05rem 0.32rem;
+      margin-right: 0.45rem;
+      vertical-align: middle;
+      line-height: 1.2;
+      cursor: help;
+    }
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -383,13 +398,17 @@
             <tr>
               <th class="field-name">Formula</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><span class="ansi-bold-blue"><a href="../symbols/ind-pred.html" class="sym-link" title="Is successor-inductive (Peano-inductive) unary predicate symbol (Constructor: HP (TpInd ...))">Ind</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/on-const.html" class="sym-link" title="Class of all ordinal sets On constant (Constructor: HC CpOn)">On</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
-                <div class="formula-latex">\(\href{../symbols/ind-pred.html}{\mathrm{Ind}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/on-const.html}{\mathbf{On}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+                <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><span class="ansi-bold-blue"><a href="../symbols/ind-pred.html" class="sym-link" title="Is successor-inductive (Peano-inductive) unary predicate symbol (Constructor: HP (TpInd ...))">Ind</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/on-const.html" class="sym-link" title="Class of all ordinal sets On constant (Constructor: HC CpOn)">On</a></span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/ind-pred.html}{\mathrm{Ind}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/on-const.html}{\mathbf{On}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
             </tr>
             <tr>
               <th class="field-name">SML Kernel AST</th>
-              <td class="field-value proof-cell"><code>Ind(On)</code></td>
+              <td class="field-value proof-cell"><code>TpInd</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Scheme of Types</th>
+              <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>Ind(On)</code></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
