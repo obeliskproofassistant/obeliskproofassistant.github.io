@@ -76,7 +76,7 @@
       "num": "NBG-008",
       "name": "thm_A08",
       "kind": "Derived",
-      "statement_unicode": "∀(A:Prop), ∀(B:Prop), ∀(C:Prop), ((A → C) → ((B → C) → (∀(D:Prop), ((A → D) → ((B → D) → D)) → C)))",
+      "statement_unicode": "∀(A:Prop), ∀(B:Prop), ∀(C:Prop), ((A → C) → ((B → C) → ((∀(D:Prop), ((A → D) → ((B → D) → D))) → C)))",
       "proof_unicode": "(λ(A:Prop). (λ(B:Prop). (λ(C:Prop). (λ(fa:(A → C)). (λ(fb:(B → C)). (λ(disj:∀(D:Prop), ((A → D) → ((B → D) → D))). (((disj C) fa) fb)))))))",
       "statement_ast": "(Pi (A : Prop) -> (Pi (B : Prop) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : A) -> C)) -> (Pi (_ : (Pi (_ : B) -> C)) -> (Pi (_ : (Pi (D : Prop) -> (Pi (_ : (Pi (_ : A) -> D)) -> (Pi (_ : (Pi (_ : B) -> D)) -> D)))) -> C))))))"
     },
@@ -166,7 +166,7 @@
       "num": "NBG-018",
       "name": "thm_D01",
       "kind": "Derived",
-      "statement_unicode": "∀(A:Prop), ∀(B:(Class → Prop)), (∀(x:Class), (A → (B x)) → (A → ∀(x:Class), (B x)))",
+      "statement_unicode": "∀(A:Prop), ∀(B:(Class → Prop)), ((∀(x:Class), (A → (B x))) → (A → ∀(x:Class), (B x)))",
       "proof_unicode": "(λ(A:Prop). (λ(B:(Class → Prop)). (λ(h:∀(x:Class), (A → (B x))). (λ(a:A). (λ(x:Class). ((h x) a))))))",
       "statement_ast": "(Pi (A : Prop) -> (Pi (B : (Pi (_ : Class) -> Prop)) -> (Pi (_ : (Pi (x : Class) -> (Pi (_ : A) -> (B x)))) -> (Pi (_ : A) -> (Pi (x : Class) -> (B x))))))"
     },
@@ -175,7 +175,7 @@
       "num": "NBG-019",
       "name": "thm_forall_inst",
       "kind": "Derived",
-      "statement_unicode": "∀(B:(Class → Prop)), ∀(c:Class), (∀(x:Class), (B x) → (B c))",
+      "statement_unicode": "∀(B:(Class → Prop)), ∀(c:Class), ((∀(x:Class), (B x)) → (B c))",
       "proof_unicode": "(λ(B:(Class → Prop)). (λ(c:Class). (λ(h:∀(x:Class), (B x)). (h c))))",
       "statement_ast": "(Pi (B : (Pi (_ : Class) -> Prop)) -> (Pi (c : Class) -> (Pi (_ : (Pi (x : Class) -> (B x))) -> (B c))))"
     },
@@ -193,7 +193,7 @@
       "num": "NBG-021",
       "name": "def_isSet",
       "kind": "Definitional",
-      "statement_unicode": "∀(X:Class), ((set(X) → ∃(Y:Class), (X ∈ Y)) ∧ (∃(Y:Class), (X ∈ Y) → set(X)))",
+      "statement_unicode": "∀(X:Class), ((set(X) → ∃(Y:Class), (X ∈ Y)) ∧ ((∃(Y:Class), (X ∈ Y)) → set(X)))",
       "proof_unicode": "plan_isSet_def",
       "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Prop (Set X) true)) -> (Sigma (Y : Class) * (Id Prop ((In X) Y) true)))) * (Pi (_ : (Sigma (Y : Class) * (Id Prop ((In X) Y) true))) -> (Id Prop (Set X) true))))"
     },
@@ -211,7 +211,7 @@
       "num": "NBG-023",
       "name": "def_empty_set",
       "kind": "Definitional",
-      "statement_unicode": "∀(X:Class), (((X = ∅) → ∀(z:Class), ¬(z ∈ X)) ∧ (∀(z:Class), ¬(z ∈ X) → (X = ∅)))",
+      "statement_unicode": "∀(X:Class), (((X = ∅) → ∀(z:Class), ¬(z ∈ X)) ∧ ((∀(z:Class), ¬(z ∈ X)) → (X = ∅)))",
       "proof_unicode": "plan_empty_set_def",
       "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Class X EmptySet)) -> (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> False)))) * (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> False))) -> (Id Class X EmptySet))))"
     },
@@ -220,7 +220,7 @@
       "num": "NBG-024",
       "name": "def_universal_class",
       "kind": "Definitional",
-      "statement_unicode": "∀(X:Class), (((X = V) → ∀(z:Class), (((z ∈ X) → set(z)) ∧ (set(z) → (z ∈ X)))) ∧ (∀(z:Class), (((z ∈ X) → set(z)) ∧ (set(z) → (z ∈ X))) → (X = V)))",
+      "statement_unicode": "∀(X:Class), (((X = V) → ∀(z:Class), (((z ∈ X) → set(z)) ∧ (set(z) → (z ∈ X)))) ∧ ((∀(z:Class), (((z ∈ X) → set(z)) ∧ (set(z) → (z ∈ X)))) → (X = V)))",
       "proof_unicode": "plan_universal_class_def",
       "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Class X V)) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop (Set z) true))) * (Pi (_ : (Id Prop (Set z) true)) -> (Id Prop ((In z) X) true)))))) * (Pi (_ : (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop (Set z) true))) * (Pi (_ : (Id Prop (Set z) true)) -> (Id Prop ((In z) X) true))))) -> (Id Class X V))))"
     },
@@ -229,7 +229,7 @@
       "num": "NBG-025",
       "name": "def_subclass",
       "kind": "Definitional",
-      "statement_unicode": "∀(X:Class), ∀(Y:Class), (((X ⊆ Y) → ∀(z:Class), ((z ∈ X) → (z ∈ Y))) ∧ (∀(z:Class), ((z ∈ X) → (z ∈ Y)) → (X ⊆ Y)))",
+      "statement_unicode": "∀(X:Class), ∀(Y:Class), (((X ⊆ Y) → ∀(z:Class), ((z ∈ X) → (z ∈ Y))) ∧ ((∀(z:Class), ((z ∈ X) → (z ∈ Y))) → (X ⊆ Y)))",
       "proof_unicode": "plan_subclass_def",
       "statement_ast": "(Pi (X : Class) -> (Pi (Y : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((Subset X) Y) true)) -> (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop ((In z) Y) true))))) * (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop ((In z) Y) true)))) -> (Id Prop ((Subset X) Y) true)))))"
     },
@@ -247,7 +247,7 @@
       "num": "NBG-027",
       "name": "ax_extensionality",
       "kind": "Axiomatic",
-      "statement_unicode": "∀(X:Class), ∀(Y:Class), (∀(z:Class), (((z ∈ X) → (z ∈ Y)) ∧ ((z ∈ Y) → (z ∈ X))) → (X = Y))",
+      "statement_unicode": "∀(X:Class), ∀(Y:Class), ((∀(z:Class), (((z ∈ X) → (z ∈ Y)) ∧ ((z ∈ Y) → (z ∈ X)))) → (X = Y))",
       "proof_unicode": "plan_extensionality",
       "statement_ast": "(Pi (X : Class) -> (Pi (Y : Class) -> (Pi (_ : (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop ((In z) Y) true))) * (Pi (_ : (Id Prop ((In z) Y) true)) -> (Id Prop ((In z) X) true))))) -> (Id Class X Y))))"
     },
@@ -283,7 +283,7 @@
       "num": "NBG-031",
       "name": "def_ord",
       "kind": "Definitional",
-      "statement_unicode": "∀(A:Class), ((Ord(A) → (Tr(A) ∧ ∀(B:Class), ((B ∈ A) → Tr(B)))) ∧ ((Tr(A) ∧ ∀(B:Class), ((B ∈ A) → Tr(B))) → Ord(A)))",
+      "statement_unicode": "∀(A:Class), ((Ord(A) → (Tr(A) ∧ (∀(B:Class), ((B ∈ A) → Tr(B))))) ∧ ((Tr(A) ∧ (∀(B:Class), ((B ∈ A) → Tr(B)))) → Ord(A)))",
       "proof_unicode": "plan_ord_def",
       "statement_ast": "(Pi (A : Class) -> (Sigma (_ : (Pi (_ : (Id Prop (Ord A) true)) -> (Sigma (_ : (Id Prop (Trans A) true)) * (Pi (B : Class) -> (Pi (_ : (Id Prop ((In B) A) true)) -> (Id Prop (Trans B) true)))))) * (Pi (_ : (Sigma (_ : (Id Prop (Trans A) true)) * (Pi (B : Class) -> (Pi (_ : (Id Prop ((In B) A) true)) -> (Id Prop (Trans B) true))))) -> (Id Prop (Ord A) true))))"
     },
@@ -292,7 +292,7 @@
       "num": "NBG-032",
       "name": "ax_global_choice",
       "kind": "Axiomatic",
-      "statement_unicode": "∀(A:Class), (∃(x:Class), (x ∈ A) → (choice(A) ∈ A))",
+      "statement_unicode": "∀(A:Class), ((∃(x:Class), (x ∈ A)) → (choice(A) ∈ A))",
       "proof_unicode": "plan_global_choice",
       "statement_ast": "(Pi (A : Class) -> (Pi (_ : (Sigma (x : Class) * (Id Prop ((In x) A) true))) -> (Id Prop ((In (choice A)) A) true)))"
     },
@@ -310,7 +310,7 @@
       "num": "NBG-034",
       "name": "thm_subset_trans",
       "kind": "Derived",
-      "statement_unicode": "∀(X:Class), ∀(Y:Class), ∀(Z:Class), (∀(z:Class), ((z ∈ X) → (z ∈ Y)) → (∀(z:Class), ((z ∈ Y) → (z ∈ Z)) → ∀(z:Class), ((z ∈ X) → (z ∈ Z))))",
+      "statement_unicode": "∀(X:Class), ∀(Y:Class), ∀(Z:Class), ((∀(z:Class), ((z ∈ X) → (z ∈ Y))) → ((∀(z:Class), ((z ∈ Y) → (z ∈ Z))) → ∀(z:Class), ((z ∈ X) → (z ∈ Z))))",
       "proof_unicode": "(λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h1:∀(z:Class), ((z ∈ X) → (z ∈ Y))). (λ(h2:∀(z:Class), ((z ∈ Y) → (z ∈ Z))). (λ(z:Class). (λ(hz:(z ∈ X)). ((h2 z) ((h1 z) hz)))))))))",
       "statement_ast": "(Pi (X : Class) -> (Pi (Y : Class) -> (Pi (Z : Class) -> (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop ((In z) Y) true)))) -> (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) Y) true)) -> (Id Prop ((In z) Z) true)))) -> (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> (Id Prop ((In z) Z) true))))))))"
     },
@@ -328,7 +328,7 @@
       "num": "NBG-036",
       "name": "def_relational_func",
       "kind": "Definitional",
-      "statement_unicode": "∀(F:Class), ((function(F) → ∀(x:Class), ∀(y:Class), ∀(z:Class), ((((x, y) ∈ F) ∧ ((x, z) ∈ F)) → (y = z))) ∧ (∀(x:Class), ∀(y:Class), ∀(z:Class), ((((x, y) ∈ F) ∧ ((x, z) ∈ F)) → (y = z)) → function(F)))",
+      "statement_unicode": "∀(F:Class), ((function(F) → ∀(x:Class), ∀(y:Class), ∀(z:Class), ((((x, y) ∈ F) ∧ ((x, z) ∈ F)) → (y = z))) ∧ ((∀(x:Class), ∀(y:Class), ∀(z:Class), ((((x, y) ∈ F) ∧ ((x, z) ∈ F)) → (y = z))) → function(F)))",
       "proof_unicode": "plan_relational_func_def",
       "statement_ast": "(Pi (F : Class) -> (Sigma (_ : (Pi (_ : (Id Prop (Func F) true)) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) F) true)) * (Id Prop ((In ((DunaevPair x) z)) F) true))) -> (Id Class y z))))))) * (Pi (_ : (Pi (x : Class) -> (Pi (y : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) F) true)) * (Id Prop ((In ((DunaevPair x) z)) F) true))) -> (Id Class y z)))))) -> (Id Prop (Func F) true))))"
     },
@@ -400,7 +400,7 @@
       "num": "NBG-044",
       "name": "thm_omega_def",
       "kind": "Definitional",
-      "statement_unicode": "∀(x:Class), (((x ∈ ω) → ∀(Q:Class), (Ind(Q) → (x ∈ Q))) ∧ (∀(Q:Class), (Ind(Q) → (x ∈ Q)) → (x ∈ ω)))",
+      "statement_unicode": "∀(x:Class), (((x ∈ ω) → ∀(Q:Class), (Ind(Q) → (x ∈ Q))) ∧ ((∀(Q:Class), (Ind(Q) → (x ∈ Q))) → (x ∈ ω)))",
       "proof_unicode": "plan_omega_def",
       "statement_ast": "(Pi (x : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In x) omega) true)) -> (Pi (Q : Class) -> (Pi (_ : (Id Prop (Ind Q) true)) -> (Id Prop ((In x) Q) true))))) * (Pi (_ : (Pi (Q : Class) -> (Pi (_ : (Id Prop (Ind Q) true)) -> (Id Prop ((In x) Q) true)))) -> (Id Prop ((In x) omega) true))))"
     },
@@ -454,7 +454,7 @@
       "num": "NBG-050",
       "name": "thm_on_ind",
       "kind": "Derived",
-      "statement_unicode": "((∅ ∈ On) ∧ ∀(a:Class), ((a ∈ On) → (SuccOrd(a) ∈ On)))",
+      "statement_unicode": "((∅ ∈ On) ∧ (∀(a:Class), ((a ∈ On) → (SuccOrd(a) ∈ On))))",
       "proof_unicode": "⟨((ax_on_intro ∅) ⟨ax_empty_set, ax_empty_ord⟩), (λ(a:Class). (λ(hIn:(a ∈ On)). ((ax_on_intro SuccOrd(a)) ⟨((ax_ord_succ_set a) fst(((ax_on_elim a) hIn))), ((ax_ord_succ_ord a) ((ax_on_elim a) hIn))⟩)))⟩",
       "statement_ast": "(Sigma (_ : (Id Prop ((In EmptySet) On) true)) * (Pi (a : Class) -> (Pi (_ : (Id Prop ((In a) On) true)) -> (Id Prop ((In (SuccOrd a)) On) true))))"
     },
@@ -463,7 +463,7 @@
       "num": "NBG-051",
       "name": "def_isCard",
       "kind": "Definitional",
-      "statement_unicode": "∀(C:Class), ((Card(C) → ∃(K:Class), (CardOf(K) = C)) ∧ (∃(K:Class), (CardOf(K) = C) → Card(C)))",
+      "statement_unicode": "∀(C:Class), ((Card(C) → ∃(K:Class), (CardOf(K) = C)) ∧ ((∃(K:Class), (CardOf(K) = C)) → Card(C)))",
       "proof_unicode": "plan_card_def",
       "statement_ast": "(Pi (C : Class) -> (Sigma (_ : (Pi (_ : (Card C)) -> (Sigma (K : Class) * (Id Class (CardOf K) C)))) * (Pi (_ : (Sigma (K : Class) * (Id Class (CardOf K) C))) -> (Card C))))"
     },
@@ -508,7 +508,7 @@
       "num": "NBG-056",
       "name": "def_binary_union",
       "kind": "Definitional",
-      "statement_unicode": "∀(A:Class), ∀(B:Class), ∀(z:Class), (((z ∈ (A ∪ B)) → ∀(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))) ∧ (∀(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) → (z ∈ (A ∪ B))))",
+      "statement_unicode": "∀(A:Class), ∀(B:Class), ∀(z:Class), (((z ∈ (A ∪ B)) → ∀(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))) ∧ ((∀(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))) → (z ∈ (A ∪ B))))",
       "proof_unicode": "plan_bin_union",
       "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) ((BinUnion A) B)) true)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In z) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In z) B) true)) -> C)) -> C))))) * (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In z) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In z) B) true)) -> C)) -> C)))) -> (Id Prop ((In z) ((BinUnion A) B)) true))))))"
     },
@@ -526,7 +526,7 @@
       "num": "NBG-058",
       "name": "def_unary_union",
       "kind": "Definitional",
-      "statement_unicode": "∀(A:Class), ∀(z:Class), (((z ∈ ⋃(A)) → ∃(y:Class), ((y ∈ A) ∧ (z ∈ y))) ∧ (∃(y:Class), ((y ∈ A) ∧ (z ∈ y)) → (z ∈ ⋃(A))))",
+      "statement_unicode": "∀(A:Class), ∀(z:Class), (((z ∈ ⋃(A)) → ∃(y:Class), ((y ∈ A) ∧ (z ∈ y))) ∧ ((∃(y:Class), ((y ∈ A) ∧ (z ∈ y))) → (z ∈ ⋃(A))))",
       "proof_unicode": "plan_unary_union",
       "statement_ast": "(Pi (A : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) (Union A)) true)) -> (Sigma (y : Class) * (Sigma (_ : (Id Prop ((In y) A) true)) * (Id Prop ((In z) y) true))))) * (Pi (_ : (Sigma (y : Class) * (Sigma (_ : (Id Prop ((In y) A) true)) * (Id Prop ((In z) y) true)))) -> (Id Prop ((In z) (Union A)) true)))))"
     },
@@ -535,7 +535,7 @@
       "num": "NBG-059",
       "name": "def_unary_inter",
       "kind": "Definitional",
-      "statement_unicode": "∀(A:Class), ∀(z:Class), (((z ∈ ⋂(A)) → ∀(y:Class), ((y ∈ A) → (z ∈ y))) ∧ (∀(y:Class), ((y ∈ A) → (z ∈ y)) → (z ∈ ⋂(A))))",
+      "statement_unicode": "∀(A:Class), ∀(z:Class), (((z ∈ ⋂(A)) → ∀(y:Class), ((y ∈ A) → (z ∈ y))) ∧ ((∀(y:Class), ((y ∈ A) → (z ∈ y))) → (z ∈ ⋂(A))))",
       "proof_unicode": "plan_unary_inter",
       "statement_ast": "(Pi (A : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) (Inter A)) true)) -> (Pi (y : Class) -> (Pi (_ : (Id Prop ((In y) A) true)) -> (Id Prop ((In z) y) true))))) * (Pi (_ : (Pi (y : Class) -> (Pi (_ : (Id Prop ((In y) A) true)) -> (Id Prop ((In z) y) true)))) -> (Id Prop ((In z) (Inter A)) true)))))"
     },
@@ -544,16 +544,16 @@
       "num": "NBG-060",
       "name": "def_singleton",
       "kind": "Definitional",
-      "statement_unicode": "∀(a:Class), ∀(z:Class), (((z ∈ {a}) → (z = a)) ∧ ((z = a) → (z ∈ {a})))",
+      "statement_unicode": "∀(a:Class), ∀(z:Class), (((z ∈ {a}) → (set(a) ∧ (z = a))) ∧ ((set(a) ∧ (z = a)) → (z ∈ {a})))",
       "proof_unicode": "plan_singleton",
-      "statement_ast": "(Pi (a : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) (Singleton a)) true)) -> (Id Class z a))) * (Pi (_ : (Id Class z a)) -> (Id Prop ((In z) (Singleton a)) true)))))"
+      "statement_ast": "(Pi (a : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) (Singleton a)) true)) -> (Sigma (_ : (Id Prop (Set a) true)) * (Id Class z a)))) * (Pi (_ : (Sigma (_ : (Id Prop (Set a) true)) * (Id Class z a))) -> (Id Prop ((In z) (Singleton a)) true)))))"
     },
     {
       "id": 61,
       "num": "NBG-061",
       "name": "def_upair",
       "kind": "Definitional",
-      "statement_unicode": "∀(a:Class), ∀(b:Class), ∀(z:Class), (((z ∈ {a, b}) → ∀(C:Prop), (((z = a) → C) → (((z = b) → C) → C))) ∧ (∀(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) → (z ∈ {a, b})))",
+      "statement_unicode": "∀(a:Class), ∀(b:Class), ∀(z:Class), (((z ∈ {a, b}) → ∀(C:Prop), (((z = a) → C) → (((z = b) → C) → C))) ∧ ((∀(C:Prop), (((z = a) → C) → (((z = b) → C) → C))) → (z ∈ {a, b})))",
       "proof_unicode": "plan_upair",
       "statement_ast": "(Pi (a : Class) -> (Pi (b : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) ((UPair a) b)) true)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Class z a)) -> C)) -> (Pi (_ : (Pi (_ : (Id Class z b)) -> C)) -> C))))) * (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Class z a)) -> C)) -> (Pi (_ : (Pi (_ : (Id Class z b)) -> C)) -> C)))) -> (Id Prop ((In z) ((UPair a) b)) true))))))"
     },
@@ -562,8 +562,8 @@
       "num": "NBG-062",
       "name": "thm_russell_class_not_set",
       "kind": "Derived",
-      "statement_unicode": "¬∃(R:Class), (set(R) ∧ ∀(x:Class), (((x ∈ R) → (set(x) ∧ ¬(x ∈ x))) ∧ ((set(x) ∧ ¬(x ∈ x)) → (x ∈ R))))",
-      "proof_unicode": "(λ(hExists:∃(R:Class), (set(R) ∧ ∀(x:Class), (((x ∈ R) → (set(x) ∧ ¬(x ∈ x))) ∧ ((set(x) ∧ ¬(x ∈ x)) → (x ∈ R))))). ((λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn)) (snd((snd(snd(hExists)) fst(hExists))) ⟨fst(snd(hExists)), (λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn))⟩)))",
+      "statement_unicode": "¬(∃(R:Class), (set(R) ∧ (∀(x:Class), (((x ∈ R) → (set(x) ∧ ¬(x ∈ x))) ∧ ((set(x) ∧ ¬(x ∈ x)) → (x ∈ R))))))",
+      "proof_unicode": "(λ(hExists:∃(R:Class), (set(R) ∧ (∀(x:Class), (((x ∈ R) → (set(x) ∧ ¬(x ∈ x))) ∧ ((set(x) ∧ ¬(x ∈ x)) → (x ∈ R)))))). ((λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn)) (snd((snd(snd(hExists)) fst(hExists))) ⟨fst(snd(hExists)), (λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn))⟩)))",
       "statement_ast": "(Pi (_ : (Sigma (R : Class) * (Sigma (_ : (Id Prop (Set R) true)) * (Pi (x : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In x) R) true)) -> (Sigma (_ : (Id Prop (Set x) true)) * (Pi (_ : (Id Prop ((In x) x) true)) -> False)))) * (Pi (_ : (Sigma (_ : (Id Prop (Set x) true)) * (Pi (_ : (Id Prop ((In x) x) true)) -> False))) -> (Id Prop ((In x) R) true))))))) -> False)"
     },
     {
@@ -589,7 +589,7 @@
       "num": "NBG-065",
       "name": "thm_empty_set_elim",
       "kind": "Derived",
-      "statement_unicode": "∀(X:Class), (∀(z:Class), ¬(z ∈ X) → (X = ∅))",
+      "statement_unicode": "∀(X:Class), ((∀(z:Class), ¬(z ∈ X)) → (X = ∅))",
       "proof_unicode": "(λ(X:Class). (λ(h:∀(z:Class), ¬(z ∈ X)). (((plan_extensionality X) ∅) (λ(z:Class). ⟨(λ(hz:(z ∈ X)). ((ax_false_elim (z ∈ ∅)) ((h z) hz))), (λ(hz:(z ∈ ∅)). ((ax_false_elim (z ∈ X)) ((ax_empty_no_elements z) hz)))⟩))))",
       "statement_ast": "(Pi (X : Class) -> (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) X) true)) -> False))) -> (Id Class X EmptySet)))"
     },
@@ -643,9 +643,9 @@
       "num": "NBG-071",
       "name": "thm_singleton_self_in",
       "kind": "Derived",
-      "statement_unicode": "∀(a:Class), (a ∈ {a})",
-      "proof_unicode": "(λ(a:Class). (snd(((plan_singleton a) a)) refl(a)))",
-      "statement_ast": "(Pi (a : Class) -> (Id Prop ((In a) (Singleton a)) true))"
+      "statement_unicode": "∀(a:Class), (set(a) → (a ∈ {a}))",
+      "proof_unicode": "(λ(a:Class). (λ(hSetA:set(a)). (snd(((plan_singleton a) a)) ⟨hSetA, refl(a)⟩)))",
+      "statement_ast": "(Pi (a : Class) -> (Pi (_ : (Id Prop (Set a) true)) -> (Id Prop ((In a) (Singleton a)) true)))"
     },
     {
       "id": 72,
@@ -733,8 +733,8 @@
       "num": "NBG-081",
       "name": "thm_semi_singleton_sub_char",
       "kind": "Derived",
-      "statement_unicode": "∀(s:Class), ∀(A:Class), ∀(x:Class), ∀(y:Class), (((s ⊆ A) ∧ ∀(u:Class), ∀(v:Class), (((u ∈ s) ∧ (v ∈ s)) → (u = v))) → (((x ∈ s) ∧ (y ∈ s)) → ((x ∈ A) ∧ (x = y))))",
-      "proof_unicode": "(λ(s:Class). (λ(A:Class). (λ(x:Class). (λ(y:Class). (λ(hSSS:((s ⊆ A) ∧ ∀(u:Class), ∀(v:Class), (((u ∈ s) ∧ (v ∈ s)) → (u = v)))). (λ(hXY:((x ∈ s) ∧ (y ∈ s))). ⟨(((fst(((plan_subclass_def s) A)) fst(hSSS)) x) fst(hXY)), (((snd(hSSS) x) y) hXY)⟩))))))",
+      "statement_unicode": "∀(s:Class), ∀(A:Class), ∀(x:Class), ∀(y:Class), (((s ⊆ A) ∧ (∀(u:Class), ∀(v:Class), (((u ∈ s) ∧ (v ∈ s)) → (u = v)))) → (((x ∈ s) ∧ (y ∈ s)) → ((x ∈ A) ∧ (x = y))))",
+      "proof_unicode": "(λ(s:Class). (λ(A:Class). (λ(x:Class). (λ(y:Class). (λ(hSSS:((s ⊆ A) ∧ (∀(u:Class), ∀(v:Class), (((u ∈ s) ∧ (v ∈ s)) → (u = v))))). (λ(hXY:((x ∈ s) ∧ (y ∈ s))). ⟨(((fst(((plan_subclass_def s) A)) fst(hSSS)) x) fst(hXY)), (((snd(hSSS) x) y) hXY)⟩))))))",
       "statement_ast": "(Pi (s : Class) -> (Pi (A : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset s) A) true)) * (Pi (u : Class) -> (Pi (v : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In u) s) true)) * (Id Prop ((In v) s) true))) -> (Id Class u v)))))) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) s) true)) * (Id Prop ((In y) s) true))) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Class x y))))))))"
     },
     {
@@ -760,8 +760,8 @@
       "num": "NBG-084",
       "name": "thm_pi_model_elim",
       "kind": "Derived",
-      "statement_unicode": "∀(B:Class), ∀(f:Class), ∀(x:Class), ((∀(u:Class), ((u ∈ (Dom B)) → (((ValOf f) u) ∈ ((ValOf B) u))) ∧ (x ∈ (Dom B))) → (((ValOf f) x) ∈ ((ValOf B) x)))",
-      "proof_unicode": "(λ(B:Class). (λ(f:Class). (λ(x:Class). (λ(hPi:(∀(u:Class), ((u ∈ (Dom B)) → (((ValOf f) u) ∈ ((ValOf B) u))) ∧ (x ∈ (Dom B)))). ((fst(hPi) x) snd(hPi))))))",
+      "statement_unicode": "∀(B:Class), ∀(f:Class), ∀(x:Class), (((∀(u:Class), ((u ∈ (Dom B)) → (((ValOf f) u) ∈ ((ValOf B) u)))) ∧ (x ∈ (Dom B))) → (((ValOf f) x) ∈ ((ValOf B) x)))",
+      "proof_unicode": "(λ(B:Class). (λ(f:Class). (λ(x:Class). (λ(hPi:((∀(u:Class), ((u ∈ (Dom B)) → (((ValOf f) u) ∈ ((ValOf B) u)))) ∧ (x ∈ (Dom B)))). ((fst(hPi) x) snd(hPi))))))",
       "statement_ast": "(Pi (B : Class) -> (Pi (f : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (u : Class) -> (Pi (_ : (Id Prop ((In u) (Dom B)) true)) -> (Id Prop ((In ((ValOf f) u)) ((ValOf B) u)) true)))) * (Id Prop ((In x) (Dom B)) true))) -> (Id Prop ((In ((ValOf f) x)) ((ValOf B) x)) true)))))"
     },
     {
@@ -769,8 +769,8 @@
       "num": "NBG-085",
       "name": "thm_if_dep_true_branch",
       "kind": "Derived",
-      "statement_unicode": "∀(Phi:Prop), ∀(T1:(Phi → Prop)), ∀(T2:(¬Phi → Prop)), ((∀(h:Phi), (T1 h) ∧ ∀(nh:¬Phi), (T2 nh)) → ∀(h:Phi), (T1 h))",
-      "proof_unicode": "(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:(¬Phi → Prop)). (λ(branches:(∀(h:Phi), (T1 h) ∧ ∀(nh:¬Phi), (T2 nh))). (λ(h:Phi). (fst(branches) h))))))",
+      "statement_unicode": "∀(Phi:Prop), ∀(T1:(Phi → Prop)), ∀(T2:(¬Phi → Prop)), (((∀(h:Phi), (T1 h)) ∧ (∀(nh:¬Phi), (T2 nh))) → ∀(h:Phi), (T1 h))",
+      "proof_unicode": "(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:(¬Phi → Prop)). (λ(branches:((∀(h:Phi), (T1 h)) ∧ (∀(nh:¬Phi), (T2 nh)))). (λ(h:Phi). (fst(branches) h))))))",
       "statement_ast": "(Pi (Phi : Prop) -> (Pi (T1 : (Pi (_ : Phi) -> Prop)) -> (Pi (T2 : (Pi (_ : (Pi (_ : Phi) -> False)) -> Prop)) -> (Pi (_ : (Sigma (_ : (Pi (h : Phi) -> (T1 h))) * (Pi (nh : (Pi (_ : Phi) -> False)) -> (T2 nh)))) -> (Pi (h : Phi) -> (T1 h))))))"
     },
     {
@@ -778,8 +778,8 @@
       "num": "NBG-086",
       "name": "thm_if_dep_false_branch",
       "kind": "Derived",
-      "statement_unicode": "∀(Phi:Prop), ∀(T1:(Phi → Prop)), ∀(T2:(¬Phi → Prop)), ((∀(h:Phi), (T1 h) ∧ ∀(nh:¬Phi), (T2 nh)) → ∀(nh:¬Phi), (T2 nh))",
-      "proof_unicode": "(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:(¬Phi → Prop)). (λ(branches:(∀(h:Phi), (T1 h) ∧ ∀(nh:¬Phi), (T2 nh))). (λ(nh:¬Phi). (snd(branches) nh))))))",
+      "statement_unicode": "∀(Phi:Prop), ∀(T1:(Phi → Prop)), ∀(T2:(¬Phi → Prop)), (((∀(h:Phi), (T1 h)) ∧ (∀(nh:¬Phi), (T2 nh))) → ∀(nh:¬Phi), (T2 nh))",
+      "proof_unicode": "(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:(¬Phi → Prop)). (λ(branches:((∀(h:Phi), (T1 h)) ∧ (∀(nh:¬Phi), (T2 nh)))). (λ(nh:¬Phi). (snd(branches) nh))))))",
       "statement_ast": "(Pi (Phi : Prop) -> (Pi (T1 : (Pi (_ : Phi) -> Prop)) -> (Pi (T2 : (Pi (_ : (Pi (_ : Phi) -> False)) -> Prop)) -> (Pi (_ : (Sigma (_ : (Pi (h : Phi) -> (T1 h))) * (Pi (nh : (Pi (_ : Phi) -> False)) -> (T2 nh)))) -> (Pi (nh : (Pi (_ : Phi) -> False)) -> (T2 nh))))))"
     },
     {
@@ -815,7 +815,7 @@
       "name": "thm_singleton_elem_eq",
       "kind": "Derived",
       "statement_unicode": "∀(a:Class), ∀(z:Class), ((z ∈ {a}) → (z = a))",
-      "proof_unicode": "(λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). (fst(((plan_singleton a) z)) hz))))",
+      "proof_unicode": "(λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst(((plan_singleton a) z)) hz)))))",
       "statement_ast": "(Pi (a : Class) -> (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) (Singleton a)) true)) -> (Id Class z a))))"
     },
     {
@@ -824,7 +824,7 @@
       "name": "thm_singleton_subset_upair_left",
       "kind": "Derived",
       "statement_unicode": "∀(a:Class), ∀(b:Class), ({a} ⊆ {a, b})",
-      "proof_unicode": "(λ(a:Class). (λ(b:Class). (snd(((plan_subclass_def {a}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {a})). (snd((((plan_upair a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fa ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). (fst(((plan_singleton a) z)) hz)))) a) z) hz)))))))))))",
+      "proof_unicode": "(λ(a:Class). (λ(b:Class). (snd(((plan_subclass_def {a}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {a})). (snd((((plan_upair a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fa ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst(((plan_singleton a) z)) hz))))) a) z) hz)))))))))))",
       "statement_ast": "(Pi (a : Class) -> (Pi (b : Class) -> (Id Prop ((Subset (Singleton a)) ((UPair a) b)) true)))"
     },
     {
@@ -833,7 +833,7 @@
       "name": "thm_singleton_subset_upair_right",
       "kind": "Derived",
       "statement_unicode": "∀(a:Class), ∀(b:Class), ({b} ⊆ {a, b})",
-      "proof_unicode": "(λ(a:Class). (λ(b:Class). (snd(((plan_subclass_def {b}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {b})). (snd((((plan_upair a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fb ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). (fst(((plan_singleton a) z)) hz)))) b) z) hz)))))))))))",
+      "proof_unicode": "(λ(a:Class). (λ(b:Class). (snd(((plan_subclass_def {b}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {b})). (snd((((plan_upair a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fb ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst(((plan_singleton a) z)) hz))))) b) z) hz)))))))))))",
       "statement_ast": "(Pi (a : Class) -> (Pi (b : Class) -> (Id Prop ((Subset (Singleton b)) ((UPair a) b)) true)))"
     },
     {
@@ -877,7 +877,7 @@
       "num": "NBG-097",
       "name": "thm_every_set_subset_v",
       "kind": "Derived",
-      "statement_unicode": "∀(A:Class), (∀(z:Class), ((z ∈ A) → set(z)) → (A ⊆ V))",
+      "statement_unicode": "∀(A:Class), ((∀(z:Class), ((z ∈ A) → set(z))) → (A ⊆ V))",
       "proof_unicode": "(λ(A:Class). (λ(hElemSet:∀(z:Class), ((z ∈ A) → set(z))). (snd(((plan_subclass_def A) V)) (λ(z:Class). (λ(hz:(z ∈ A)). (((λ(x:Class). snd(((fst((plan_universal_class_def V)) refl(V)) x))) z) ((hElemSet z) hz)))))))",
       "statement_ast": "(Pi (A : Class) -> (Pi (_ : (Pi (z : Class) -> (Pi (_ : (Id Prop ((In z) A) true)) -> (Id Prop (Set z) true)))) -> (Id Prop ((Subset A) V) true)))"
     },

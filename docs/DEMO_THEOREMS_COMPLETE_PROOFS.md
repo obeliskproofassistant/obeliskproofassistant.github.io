@@ -294,7 +294,7 @@ Every theorem listed above is mapped to an exact, type-checked proof term in Pol
 | `thm_57_binary_inter_def` | `Forall A B z. z in (A inter B) <-> z in A /\ z in B` | `Const "plan_bin_inter"` |
 | `thm_58_unary_union_def` | `Forall A z. z in Union(A) <-> exists y. y in A /\ z in y` | `Const "plan_unary_union"` |
 | `thm_59_unary_inter_def` | `Forall A z. z in Inter(A) <-> forall y. y in A -> z in y` | `Const "plan_unary_inter"` |
-| `thm_60_singleton_def` | `Forall a z. z in {a} <-> z = a` | `Const "plan_singleton"` |
+| `thm_60_singleton_def` | `Forall a z. z in {a} <-> (Set(a) /\ z = a)` | `Const "plan_singleton"` |
 | `thm_61_upair_def` | `Forall a b z. z in {a, b} <-> z = a \/ z = b` | `Const "plan_upair"` |
 | `thm_62_russell_not_set`| `~ exists R. Set(R) /\ (forall x. x in R <-> Set(x) /\ ~ x in x)` | `Lam ("hExists", ..., App (App (App (ax_russell_diagonal, R), hSet), hDefInst))` |
 
