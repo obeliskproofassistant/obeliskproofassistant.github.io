@@ -371,7 +371,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2><span class="formula-unicode">⟨ ... ⟩</span> <span class="formula-latex">\(\langle \dots \rangle\)</span> &mdash; Explicit Syntactic Antiquotation / Splicing Brackets &amp; Tuple Delimiters</h2>
-      <p class="section-desc">Splices an evaluated meta-expression or class code into a quoted syntactic template <code>‹ ... ›</code>; also used as structural angle brackets for pairs/tuples.</p>
+      <p class="section-desc">Splices a meta-level syntactic expression <code>u : A.Expression</code> (such as <code>Dec_A(c)</code> for a valid code <code>c ∈ Code_A</code>) into a quoted syntactic template <code>‹ ... ›</code>; kept distinct from semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -403,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Expression (inside ‹...›) | Dependent Pair Constructor</code></td>
+            <td class="external-entity"><code>A.Expression → A.Expression (inside ‹...›; or Class → A.Expression via Dec_A) | Pair Constructor</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -419,7 +419,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p>In <strong>MKTD1</strong> and <strong>MKTD2</strong>, the angle brackets <code>⟨ ... ⟩</code> serve two closely documented roles:</p><ol><li><strong>Explicit Antiquotation (Unquotation / Splicing) inside <code>‹ ... ›</code></strong>: When writing a quoted formula <code>‹ ∀x:Class. ⟨𝛂(x)⟩ ›</code>, the sub-expression inside <code>⟨ ... ⟩</code> is evaluated at the outer level and spliced into the AST being constructed. Specifically, <code>‹ ⟨Dec(c)⟩ ›</code> reconstructs the syntax tree coded by <code>c</code>.</li><li><strong>Ordered Tuple / Pair Construction</strong>: Outside quotation contexts, <code>⟨a, b⟩</code> or <code>(x, y)</code> denotes ordered pairing (Entry DefEmptySet (3.04) / dependent pair in Entry DefIsSetValued (3.28)).</li></ol></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p>In <strong>MKTD1</strong> and <strong>MKTD2</strong>, the angle brackets <code>⟨ ... ⟩</code> serve two documented syntactic roles and must not be conflated with semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>:</p><ol><li><strong>Explicit Syntactic Antiquotation (Splicing) inside <code>‹ ... ›</code></strong>: When writing a quoted formula <code>‹ ∀x:Class. ⟨Dec_Fm(c)⟩ ›</code>, the sub-expression inside <code>⟨ ... ⟩</code> is evaluated at the meta-level to an AST in <code>A.Expression</code> and spliced into the surrounding syntax tree. For any valid code <code>c ∈ Code_A</code>, <code>‹ ⟨Dec_A(c)⟩ › = Enc_A(Dec_A(c)) = c</code>. (By contrast, semantic valuation in a model under assignment <code>ρ</code> is written with double white square brackets <code>⟦e⟧_ρ = Val_ρ(e)</code>; see <a href="binder-brackets.html"><code>symbols/binder-brackets.html</code></a>.)</li><li><strong>Ordered Tuple / Pair Construction</strong>: Outside quotation contexts, <code>⟨a, b⟩</code> or <code>(x, y)</code> denotes ordered pairing (Entry DefDunaevOrderedPair (3.76) / dependent pair in Entry DefSigmaModel (3.38)).</li></ol></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -429,6 +429,7 @@
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="quotation.html" class="sym-link">Explicit Quotation ‹ ... ›</a></li>
+<li><a href="binder-brackets.html" class="sym-link">Semantic Valuation &amp; Scope Brackets ⟦ ... ⟧</a></li>
 <li><a href="enc.html" class="sym-link">Syntactic Encoding Enc</a></li>
 <li><a href="dec.html" class="sym-link">Syntactic Decoding Dec</a></li>
 <li><a href="../manual.html#DefDunaevOrderedPair" class="sym-link">Definition DefDunaevOrderedPair (3.76): Ordered pair(Dunaev's tagged class pair)</a></li>

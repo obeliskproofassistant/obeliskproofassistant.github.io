@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((a, b), AST Constructor: CpOPair)</title>
+  <title>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((a, b), AST Constructor: CpOPair)</h1>
+      <h1>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">(a, b)</span> <span class="formula-latex">\((a, b)\)</span> &mdash; Ordered Class-Pair Functional Symbol ((a, b), AST Constructor: CpOPair)</h2>
-      <p class="section-desc">Binary Dunaev ordered class-pair functional symbol <code>(A, B) = mark(A, 1) ∪ mark(B, 2)</code> supporting arbitrary proper classes (Entry DefDunaevOrderedPair (3.76)).</p>
+      <h2><span class="formula-unicode">(a, b)</span> <span class="formula-latex">\((a, b)\)</span> &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</h2>
+      <p class="section-desc">Binary ordered pair notation: in Entry <code>DefDunaevOrderedPair</code> (3.76, <code>CpOPair</code>), denotes the 3-layer marker-tagged Dunaev class pair <code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)</code> supporting arbitrary proper classes; in Entry <code>DefKuratowskiPair</code> (3.52, <code>CpKuratowskiPair</code>), denotes the classical Kuratowski set pair <code>K(a, b) = {{a, a}, {a, b}}</code> (injective only when <code>Set(a) ∧ Set(b)</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -419,18 +419,19 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HC (CpOPair of ('Class_EXP * 'Class_EXP))</code> in <code>Class_p</code> (<code>typetheory.ML:565</code>). Takes two class arguments <code>(A : Class, B : Class)</code>.</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Distinguishing the Three Ordered-Pair Constructors in Obelisk:</strong></p><ul><li><strong>1. 3-Layer Marker-Tagged Dunaev Class Pair (<code>CpOPair</code>, Entry DefDunaevOrderedPair (3.76) <code>3.76</code>)</strong>: Defined for arbitrary classes <code>A, B : Class</code> using purely unordered set braces (<code>CpSingleton</code>, <code>CpUPair</code>) via <code>S_3(a) = {{{a}}}</code>, <code>M_3(A, n) = {{0, n}} ∪ {{S_3(a), n} | a ∈ A}</code>, and <code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)</code>. Its empty-pair value is nonempty: <code>D_mark(0, 0) = {{0, 1}, {0, 2}} ≠ ∅</code>, and for proper class <code>V</code> and <code>∅</code>, <code>pr1(D_mark(V, ∅)) = V</code> and <code>pr2(D_mark(V, ∅)) = ∅</code> (Entries ThmDunaevFirstProjection (3.77), ThmDunaevSecondProjection (3.78)). Used as the pair constructor in binary relations, <code>Dom</code>, <code>valOf</code>, and <code>Σ/Π</code> models.</li><li><strong>2. Kuratowski Set Pair (<code>CpKuratowskiPair</code>, Entry DefKuratowskiPair (3.52) <code>3.52</code>)</strong>: Defined by <code>K(a, b) = {{a, a}, {a, b}}</code>. Requires explicit sethood guards <code>Set(a) ∧ Set(b)</code> to recover components injectively (collapses on proper classes since <code>{V} = ∅</code>), and satisfies <code>K(0, 0) = {{0}} = {1} ≠ ∅</code>.</li><li><strong>3. Book Recursive Class Pair (<code>070_ordered_pair.tex</code>, <code>P_rec</code>)</strong>: Satisfies <code>P_rec(A, B) = {P_rec(0, a) | a ∈ A} ∪ {P_rec(1, b) | b ∈ B}</code> with empty-pair value <code>P_rec(0, 0) = ∅</code>.</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>(A, B) = mark(A, 1) ∪ mark(B, 2)</code></td>
+            <td class="external-entity formula-cell"><code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)  (with D_mark(0,0) = {{0,1},{0,2}}, P_rec(0,0) = ∅, K(0,0) = {{0}})</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="../manual.html#DefDunaevOrderedPair" class="sym-link">Definition DefDunaevOrderedPair (3.76): Ordered pair(Dunaev's tagged class pair)</a></li>
-<li><a href="mark-op.html" class="sym-link">List Tagging mark (Entry DefNaturalNumberModels (3.50))</a></li>
-<li><a href="pr1-op.html" class="sym-link">First Projection pr1 (Entry DefDunaevOrderedPair (3.76))</a></li>
+<li><a href="../manual.html#DefKuratowskiPair" class="sym-link">Definition DefKuratowskiPair (3.52): Ordered pair(Kuratowsky's)</a></li>
+<li><a href="mark-op.html" class="sym-link">List Tagging mark (Entries 3.51 &amp; 3.76)</a></li>
+<li><a href="pr1-op.html" class="sym-link">First Projection pr1 (Entry ThmDunaevFirstProjection (3.77))</a></li>
 </ul></td>
           </tr>
         </tbody>

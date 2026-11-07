@@ -396,15 +396,15 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="quotation.html" class="sym-link"><strong>Explicit Syntactic Quotation Brackets (Syntax Reflection)</strong> (<code>symbols/quotation.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="quotation.html" class="sym-link"><strong>Explicit Syntactic Quotation Brackets (Syntax Coding: A.Expression → Class)</strong> (<code>symbols/quotation.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>Expression → Class (or Fm → Class)</code></td>
+              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>A.Expression → Class (or Fm → Class)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Reifies a syntactic formula or expression <code>e</code> into its canonical class-level AST / Gödel representation inside <strong>MKTD1</strong> and <strong>MKTD2</strong>.</td>
+              <td class="field-value">Encodes an already formed finite syntactic formula or expression <code>e : A.Expression</code> into its canonical hereditary set code <code>Enc_A(e) ∈ Code_A ⊆ V</code> inside <strong>MKTD1</strong> and <strong>MKTD2</strong> (does not reify arbitrary unnameable semantic classes into syntax).</td>
             </tr>
             </tbody>
           </table>
@@ -428,11 +428,11 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>Class → Expression (inside ‹...›) | Dependent Pair Constructor</code></td>
+              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>A.Expression → A.Expression (inside ‹...›; or Class → A.Expression via Dec_A) | Pair Constructor</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Splices an evaluated meta-expression or class code into a quoted syntactic template <code>‹ ... ›</code>; also used as structural angle brackets for pairs/tuples.</td>
+              <td class="field-value">Splices a meta-level syntactic expression <code>u : A.Expression</code> (such as <code>Dec_A(c)</code> for a valid code <code>c ∈ Code_A</code>) into a quoted syntactic template <code>‹ ... ›</code>; kept distinct from semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -452,15 +452,15 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="binder-brackets.html" class="sym-link"><strong>White Square Brackets (Binder Scope, Denotation &amp; Explicit Substitution)</strong> (<code>symbols/binder-brackets.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="binder-brackets.html" class="sym-link"><strong>White Square Brackets (Binder Scope, Explicit Substitution &amp; Semantic Valuation Val_ρ)</strong> (<code>symbols/binder-brackets.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Binders, Scopes &amp; Substitution</span> &nbsp; <code>Binder Scope / Explicit Substitution / Semantic Denotation Bracket</code></td>
+              <td class="field-value"><span class="badge badge-def">Binders, Scopes &amp; Substitution</span> &nbsp; <code>Binder Scope / Explicit Substitution / Semantic Valuation (A.Expression → A)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Delimits bound variable scopes in class comprehension and binders (<code>⟦x:Class | 𝛂(x)⟧</code>), explicit substitution <code>𝛂⟦x ↤ t⟧</code>, and semantic evaluation.</td>
+              <td class="field-value">Delimits bound variable scopes in class comprehension and binders (<code>⟦x:Class | 𝛂(x)⟧</code>), explicit substitution <code>𝛂⟦x ↤ t⟧</code>, and semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code> under assignment <code>ρ</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -508,15 +508,15 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="enc.html" class="sym-link"><strong>Syntactic Encoding Operator (AST → Class Code)</strong> (<code>symbols/enc.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="enc.html" class="sym-link"><strong>Syntactic Encoding Operator (A.Expression → Code_A ⊆ Class)</strong> (<code>symbols/enc.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Encoding, Decoding &amp; Reflection</span> &nbsp; <code>Expression → Class  (and Fm → Class, Prf → Class)</code></td>
+              <td class="field-value"><span class="badge badge-def">Encoding, Decoding &amp; Reflection</span> &nbsp; <code>A.Expression → Class  (and Fm → Class, Prf → Class)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Injectively encodes any syntactic expression, formula, context, or proof tree into a first-order set/class code in <strong>MKTD1</strong> / <strong>MKTD2</strong>.</td>
+              <td class="field-value">Injectively encodes any finite syntactic expression, formula, context, or proof tree into its valid-code domain <code>Code_A ⊆ V ⊆ Class</code> in <strong>MKTD1</strong> / <strong>MKTD2</strong>.</td>
             </tr>
             </tbody>
           </table>
@@ -536,15 +536,15 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="dec.html" class="sym-link"><strong>Syntactic Decoding / Reflection Operator (Class Code → AST)</strong> (<code>symbols/dec.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="dec.html" class="sym-link"><strong>Syntactic Decoding / Reflection Operator (Class → A.Expression on Valid Codes Code_A)</strong> (<code>symbols/dec.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Encoding, Decoding &amp; Reflection</span> &nbsp; <code>Class → Expression  (or Class → Fm)</code></td>
+              <td class="field-value"><span class="badge badge-def">Encoding, Decoding &amp; Reflection</span> &nbsp; <code>Class → A.Expression  (or Class → Fm)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Decodes a class-level syntactic code back into the corresponding syntactic expression or formula in the reflection layer.</td>
+              <td class="field-value">Decodes a class-level syntactic code <code>c ∈ Code_A ⊆ V</code> back into the corresponding syntactic expression or formula in <code>A.Expression</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -600,7 +600,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Canonically embeds a semantic class or lower-level object into the syntactic expression layer (numeral/constant injection) or embeds a sub-conglomerate into a larger domain.</td>
+              <td class="field-value">Canonically embeds a named or parameterized class into the syntactic expression layer or embeds a sub-conglomerate into a larger domain.</td>
             </tr>
             </tbody>
           </table>
@@ -614,21 +614,21 @@
             <tr>
               <th class="field-name">Symbol</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="mu-interpretation.html" class="sym-link">μ_A</a></div>
-                <div class="formula-latex">\(\href{mu-interpretation.html}{\mu_{A}}\)</div>
+                <div class="formula-unicode"><a href="mu-interpretation.html" class="sym-link">μ_A  /  μ_ρ</a></div>
+                <div class="formula-latex">\(\href{mu-interpretation.html}{\mu_{A} \; / \; \mu^{\mathrm{val}}_{\rho}}\)</div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="mu-interpretation.html" class="sym-link"><strong>Explicit Term Interpretation / Semantic Valuation Map</strong> (<code>symbols/mu-interpretation.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="mu-interpretation.html" class="sym-link"><strong>Type-Indexed Expression Translation (μ_A) &amp; Assignment-Indexed Valuation (μ_ρ)</strong> (<code>symbols/mu-interpretation.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Embedding &amp; Interpretation</span> &nbsp; <code>(Variable → Class) → Expression → Class</code></td>
+              <td class="field-value"><span class="badge badge-def">Embedding &amp; Interpretation</span> &nbsp; <code>μ_A : A.Expression → Class.Expression  |  μ_ρ : A.Expression → Class</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Evaluates a syntactic expression <code>e : Expression</code> into the semantic class it denotes under variable assignment <code>A : Variable → Class</code>.</td>
+              <td class="field-value">Distinguishes the type-indexed syntactic translation <code>μ_A : A.Expression → Class.Expression</code> (Entry <code>DefMetaGeneralisation</code> 4.02 &amp; <code>130_classes_as_types.tex</code>) from the assignment-indexed semantic valuation shorthand <code>μ_ρ(e) = Val_ρ(μ_A(e)) : Class</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -642,21 +642,21 @@
             <tr>
               <th class="field-name">Symbol</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="eval.html" class="sym-link">eval</a></div>
-                <div class="formula-latex">\(\href{eval.html}{\mathsf{eval}}\)</div>
+                <div class="formula-unicode"><a href="eval.html" class="sym-link">eval  /  Eval_(A,ρ)</a></div>
+                <div class="formula-latex">\(\href{eval.html}{\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}}\)</div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="eval.html" class="sym-link"><strong>Semantic Evaluation &amp; Reflection Unquoting Operator</strong> (<code>symbols/eval.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="eval.html" class="sym-link"><strong>Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</strong> (<code>symbols/eval.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Embedding &amp; Interpretation</span> &nbsp; <code>Class → Class  (or Fm → Prop)</code></td>
+              <td class="field-value"><span class="badge badge-def">Embedding &amp; Interpretation</span> &nbsp; <code>Class → Class  (or Class → Bool for Fm codes)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Composes syntactic decoding <code>Dec</code> with semantic valuation <code>μ_A</code>: evaluates a class-encoded syntactic expression or formula into its semantic denotation.</td>
+              <td class="field-value">Composes syntactic decoding <code>Dec_A : Class → A.Expression</code>, type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code>, and semantic valuation <code>Val_ρ : Class.Expression → Class</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -2216,7 +2216,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="opair-op.html" class="sym-link"><strong>Ordered Class-Pair Functional Symbol ((a, b), AST Constructor: CpOPair)</strong> (<code>symbols/opair-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="opair-op.html" class="sym-link"><strong>Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</strong> (<code>symbols/opair-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2224,7 +2224,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary Dunaev ordered class-pair functional symbol <code>(A, B) = mark(A, 1) ∪ mark(B, 2)</code> supporting arbitrary proper classes (Entry DefDunaevOrderedPair (3.76)).</td>
+              <td class="field-value">Binary ordered pair notation: in Entry <code>DefDunaevOrderedPair</code> (3.76, <code>CpOPair</code>), denotes the 3-layer marker-tagged Dunaev class pair <code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)</code> supporting arbitrary proper classes; in Entry <code>DefKuratowskiPair</code> (3.52, <code>CpKuratowskiPair</code>), denotes the classical Kuratowski set pair <code>K(a, b) = {{a, a}, {a, b}}</code> (injective only when <code>Set(a) ∧ Set(b)</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -2748,7 +2748,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="mark-op.html" class="sym-link"><strong>Dunaev Class-List Tagging Functional Symbol (mark, Entry DefNaturalNumberModels (3.50))</strong> (<code>symbols/mark-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="mark-op.html" class="sym-link"><strong>Dunaev Class-List Tagging Functional Symbol (mark, Entries DefClassLists (3.51) &amp; DefDunaevOrderedPair (3.76))</strong> (<code>symbols/mark-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2756,7 +2756,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Binary functional symbol <code>mark(A, n) = ({{0, n}} ∪ {({{{a}}, n}:Class) | a ∈ A})</code> tagging elements of arbitrary class <code>A</code> with index <code>n</code> so proper classes can be paired (Entry DefNaturalNumberModels (3.50)).</td>
+              <td class="field-value">Binary tagging operator tagging elements of an arbitrary class <code>A</code> with index <code>n</code> so proper classes can be paired: in canonical 3-layer unordered-set form (Entry DefDunaevOrderedPair (3.76) <code>3.76</code>), <code>M_3(A, n) = {{0, n}} ∪ {{{{{a}}}, n} | a ∈ A}</code>; in schematic 2-layer list form (Entry DefClassLists (3.51) <code>3.51</code>), <code>mark(A, n) = {{0, n}} ∪ {({{{a}}, n}:Class) | a ∈ A}</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -2776,7 +2776,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="pr1-op.html" class="sym-link"><strong>First Class-Pair Projection Functional Symbol (pr1, Entry DefDunaevOrderedPair (3.76))</strong> (<code>symbols/pr1-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="pr1-op.html" class="sym-link"><strong>First Class-Pair Projection Functional Symbol (pr1, Entries DefDunaevOrderedPair (3.76) &amp; ThmDunaevFirstProjection (3.77))</strong> (<code>symbols/pr1-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2784,7 +2784,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>pr1(L) = {a | ({{{a}}, 1} ∈ L)}</code> extracting the first component of a Dunaev class-pair (Entries DefDunaevOrderedPair (3.76), RulClassComprehension (3.01)).</td>
+              <td class="field-value">Unary functional symbol <code>pr1(L) = {a | {{{{a}}}, 1} ∈ L}</code> extracting the first component of a 3-layer marker-tagged Dunaev class-pair (Entries DefDunaevOrderedPair (3.76) <code>3.76</code>, ThmDunaevFirstProjection (3.77) <code>3.77</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -2804,7 +2804,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="pr2-op.html" class="sym-link"><strong>Second Class-Pair Projection Functional Symbol (pr2, Entry ThmDunaevFirstProjection (3.77))</strong> (<code>symbols/pr2-op.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="pr2-op.html" class="sym-link"><strong>Second Class-Pair Projection Functional Symbol (pr2, Entries DefDunaevOrderedPair (3.76) &amp; ThmDunaevSecondProjection (3.78))</strong> (<code>symbols/pr2-op.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -2812,7 +2812,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Unary functional symbol <code>pr2(L) = {b | ({{{b}}, 2} ∈ L)}</code> extracting the second component of a Dunaev class-pair (Entries ThmDunaevFirstProjection (3.77), RulClassComprehension (3.01)).</td>
+              <td class="field-value">Unary functional symbol <code>pr2(L) = {b | {{{{b}}}, 2} ∈ L}</code> extracting the second component of a 3-layer marker-tagged Dunaev class-pair (Entries DefDunaevOrderedPair (3.76) <code>3.76</code>, ThmDunaevSecondProjection (3.78) <code>3.78</code>).</td>
             </tr>
             </tbody>
           </table>

@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: eval &mdash; Semantic Evaluation &amp; Reflection Unquoting Operator</title>
+  <title>Symbol Reference: eval  /  Eval_(A,ρ) &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: eval &mdash; Semantic Evaluation &amp; Reflection Unquoting Operator</h1>
+      <h1>Symbol Reference: eval  /  Eval_(A,ρ) &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">eval</span> <span class="formula-latex">\(\mathsf{eval}\)</span> &mdash; Semantic Evaluation &amp; Reflection Unquoting Operator</h2>
-      <p class="section-desc">Composes syntactic decoding <code>Dec</code> with semantic valuation <code>μ_A</code>: evaluates a class-encoded syntactic expression or formula into its semantic denotation.</p>
+      <h2><span class="formula-unicode">eval  /  Eval_(A,ρ)</span> <span class="formula-latex">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\)</span> &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h2>
+      <p class="section-desc">Composes syntactic decoding <code>Dec_A : Class → A.Expression</code>, type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code>, and semantic valuation <code>Val_ρ : Class.Expression → Class</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -385,8 +385,8 @@
           <tr class="external-row">
             <td class="external-num">Symbol</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">eval</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval}\)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">eval  /  Eval_(A,ρ)</div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\)</div>
             </td>
           </tr>
           <tr class="external-row">
@@ -403,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Class  (or Fm → Prop)</code></td>
+            <td class="external-entity"><code>Class → Class  (or Class → Bool for Fm codes)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -415,20 +415,20 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mathsf{eval}</code></td>
+            <td class="external-entity"><code>\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>eval</code>:</strong></p><p><code>eval</code> is the composite reflection map <code>eval_A(c) = μ_A(Dec(c))</code>:</p><ul><li>Given the code <code>c = Enc(e) : Class</code> of an expression <code>e</code>, <code>eval_A(c)</code> decodes <code>c</code> back to <code>e</code> and interprets it under assignment <code>A</code>.</li><li>By Tarski's Undefinability of Truth, a total truth/evaluation predicate for arbitrary formulas over the entire universe cannot exist within the same universe level; in <strong>MKTD1 / MKTD2</strong>, Tarski's Axiom of Universes (Entry AxmTarskiUniverses (3.70) <code> Grothendieck / Tarski Universe U</code>) provides the hierarchy of set-sized universes enabling stratified truth and evaluation maps.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>eval</code> / <code>Eval_(A,ρ)</code>:</strong></p><p>With the type-indexed translation <code>μ_A</code> and assignment-indexed valuation <code>Val_ρ</code> kept explicitly distinct, the semantic evaluation of a class code <code>c ∈ Code_A ⊆ V</code> is the three-stage composite:</p><p><code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))) = μ^val_ρ(Dec_A(c))</code></p><ul><li><strong>Well-Typed Round-Trip on Coded Expressions</strong>: For any syntactic expression <code>e : A.Expression</code>, <code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e)) = μ^val_ρ(e)</code> because <code>Dec_A(Enc_A(e)) = e</code>.</li><li><strong>Stratification via Tarski Universes</strong>: By Tarski's Undefinability of Truth, a single unstratified truth/evaluation predicate for all formulas over the entire universe cannot be internal to the same level; in <strong>MKTD1 / MKTD2</strong>, Tarski's Axiom of Universes (Entry AxmTarskiUniverses (3.70)) provides set-sized universes supporting internal model valuations.</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>eval_A(Enc(e)) = μ_A(e)</code></td>
+            <td class="external-entity formula-cell"><code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e))</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="mu-interpretation.html" class="sym-link">Term Interpretation / Valuation μ_A</a></li>
+<li><a href="mu-interpretation.html" class="sym-link">Expression Translation μ_A &amp; Valuation μ_ρ</a></li>
 <li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
 <li><a href="dec.html" class="sym-link">Syntactic Decoding Operator Dec</a></li>
 <li><a href="../manual.html#AxmTarskiUniverses" class="sym-link">Axiom AxmTarskiUniverses (3.70): “Tarski's axiom”</a></li>

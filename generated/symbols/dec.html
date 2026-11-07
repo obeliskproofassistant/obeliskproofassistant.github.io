@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: Dec &mdash; Syntactic Decoding / Reflection Operator (Class Code → AST)</title>
+  <title>Symbol Reference: Dec &mdash; Syntactic Decoding / Reflection Operator (Class → A.Expression on Valid Codes Code_A)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: Dec &mdash; Syntactic Decoding / Reflection Operator (Class Code → AST)</h1>
+      <h1>Symbol Reference: Dec &mdash; Syntactic Decoding / Reflection Operator (Class → A.Expression on Valid Codes Code_A)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">Dec</span> <span class="formula-latex">\(\mathsf{Dec}\)</span> &mdash; Syntactic Decoding / Reflection Operator (Class Code → AST)</h2>
-      <p class="section-desc">Decodes a class-level syntactic code back into the corresponding syntactic expression or formula in the reflection layer.</p>
+      <h2><span class="formula-unicode">Dec</span> <span class="formula-latex">\(\mathsf{Dec}\)</span> &mdash; Syntactic Decoding / Reflection Operator (Class → A.Expression on Valid Codes Code_A)</h2>
+      <p class="section-desc">Decodes a class-level syntactic code <code>c ∈ Code_A ⊆ V</code> back into the corresponding syntactic expression or formula in <code>A.Expression</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -403,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Expression  (or Class → Fm)</code></td>
+            <td class="external-entity"><code>Class → A.Expression  (or Class → Fm)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -419,7 +419,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>Dec</code>:</strong></p><p><code>Dec</code> is the left-inverse of <code>Enc</code>. Given a class <code>c : Class</code> that encodes a syntactic expression or formula, <code>Dec(c)</code> recovers the syntactic AST object so that it can participate in meta-rules (such as Entry DefMetaInstantiation (4.01) Class Comprehension Schema and Entry DefMetaGeneralisation (4.02) Generalisation) or be interpreted via <code>μ_A(Dec(c))</code>:</p><ul><li><strong>Cancellation Law</strong>: <code>Dec(Enc(e)) = e</code> for every syntactic object <code>e</code>.</li><li><strong>Semantic Bridge</strong>: Combining <code>Dec</code> with valuation <code>μ_A</code> yields truth/denotation of coded syntax: <code>μ_A(Dec(c))</code> evaluates the class-coded expression <code>c</code> under assignment <code>A</code>.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>Dec</code> (<code>Dec_A</code>):</strong></p><p><code>Dec_A : Class → A.Expression</code> is the left-inverse of <code>Enc_A</code>. Given a class <code>c ∈ Code_A</code> that encodes a syntactic expression or formula of sort <code>A</code>, <code>Dec_A(c)</code> recovers the syntactic AST object so that it can participate in meta-rules (such as Entry DefMetaInstantiation (4.01) Class Comprehension Schema and Entry DefMetaGeneralisation (4.02) Generalisation) or be translated and evaluated via <code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c)))</code>:</p><ul><li><strong>Syntax Round-Trip Law</strong>: <code>Dec_A(Enc_A(e)) = e</code> for every syntactic object <code>e : A.Expression</code>, and <code>c ∈ Code_A ⇒ Enc_A(Dec_A(c)) = c</code> (with a fixed fallback default expression for <code>c ∉ Code_A</code>).</li><li><strong>Semantic Bridge</strong>: Combining <code>Dec_A</code> with type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code> and semantic valuation <code>Val_ρ : Class.Expression → Class</code> yields <code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c)))</code>.</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
@@ -429,7 +429,7 @@
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
-<li><a href="mu-interpretation.html" class="sym-link">Term Interpretation / Valuation μ_A</a></li>
+<li><a href="mu-interpretation.html" class="sym-link">Expression Translation μ_A &amp; Valuation μ_ρ</a></li>
 <li><a href="../manual.html#AxmMetaClassComprehension" class="sym-link">Axiom AxmMetaClassComprehension (4.06): Class comprehension axiom schema(meta,WIP)</a></li>
 <li><a href="../manual.html#DefMetaGeneralisation" class="sym-link">Axiom DefMetaGeneralisation (4.02): Generalisation(meta,WIP)</a></li>
 </ul></td>

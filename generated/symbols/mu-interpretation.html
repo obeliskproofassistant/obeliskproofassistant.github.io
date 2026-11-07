@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: μ_A &mdash; Explicit Term Interpretation / Semantic Valuation Map</title>
+  <title>Symbol Reference: μ_A  /  μ_ρ &mdash; Type-Indexed Expression Translation (μ_A) &amp; Assignment-Indexed Valuation (μ_ρ)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: μ_A &mdash; Explicit Term Interpretation / Semantic Valuation Map</h1>
+      <h1>Symbol Reference: μ_A  /  μ_ρ &mdash; Type-Indexed Expression Translation (μ_A) &amp; Assignment-Indexed Valuation (μ_ρ)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">μ_A</span> <span class="formula-latex">\(\mu_{A}\)</span> &mdash; Explicit Term Interpretation / Semantic Valuation Map</h2>
-      <p class="section-desc">Evaluates a syntactic expression <code>e : Expression</code> into the semantic class it denotes under variable assignment <code>A : Variable → Class</code>.</p>
+      <h2><span class="formula-unicode">μ_A  /  μ_ρ</span> <span class="formula-latex">\(\mu_{A} \; / \; \mu^{\mathrm{val}}_{\rho}\)</span> &mdash; Type-Indexed Expression Translation (μ_A) &amp; Assignment-Indexed Valuation (μ_ρ)</h2>
+      <p class="section-desc">Distinguishes the type-indexed syntactic translation <code>μ_A : A.Expression → Class.Expression</code> (Entry <code>DefMetaGeneralisation</code> 4.02 &amp; <code>130_classes_as_types.tex</code>) from the assignment-indexed semantic valuation shorthand <code>μ_ρ(e) = Val_ρ(μ_A(e)) : Class</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -385,8 +385,8 @@
           <tr class="external-row">
             <td class="external-num">Symbol</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">μ_A</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mu_{A}\)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">μ_A  /  μ_ρ</div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mu_{A} \; / \; \mu^{\mathrm{val}}_{\rho}\)</div>
             </td>
           </tr>
           <tr class="external-row">
@@ -403,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>(Variable → Class) → Expression → Class</code></td>
+            <td class="external-entity"><code>μ_A : A.Expression → Class.Expression  |  μ_ρ : A.Expression → Class</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -415,24 +415,25 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mu_{A}</code></td>
+            <td class="external-entity"><code>\mu_{A} \; / \; \mu^{\mathrm{val}}_{\rho}</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>μ_A</code> (Semantic Interpretation / Valuation):</strong></p><p>In <strong>MKTD1</strong> (specifically Entry DefMetaInstantiation (4.01) Class Comprehension Schema and Entry DefMetaGeneralisation (4.02) Generalisation), syntactic expressions <code>e : Expression</code> are carefully distinguished from the semantic classes they denote. Given a variable assignment <code>A</code> mapping syntactic variables to classes:</p><ul><li><strong>Variable Lookup</strong>: For a syntactic variable <code>v : Variable</code>, <code>μ_A(v) = A(v) : Class</code>.</li><li><strong>Compositional Tarski Semantics</strong>: <code>μ_A</code> commutes with syntactic constructors and class comprehension so that <code>x ∈ μ_A(⟦v | 𝛂⟧)</code> holds iff <code>𝛂</code> holds when <code>v</code> is assigned <code>x</code> (provided hygiene condition <code>NFV(e, x)</code> holds).</li><li><strong>Bridge Between Syntax and Semantics</strong>: While <code>Enc</code> and <code>Dec</code> translate between ASTs and their class codes, <code>μ_A</code> computes the <em>meaning</em> (denotation as a class) of an AST.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Reconciling the Two Signatures of <code>μ</code> in Obelisk:</strong></p><p>Across the book (<code>130_classes_as_types.tex</code>) and the catalog (Entries AxmMetaClassComprehension (4.06) and DefMetaGeneralisation (4.02)), the symbol <code>μ</code> is used in two distinct, compatible ways depending on whether the subscript is a <strong>type/conglomerate</strong> <code>A : Type</code> or a <strong>variable assignment</strong> <code>ρ : Variable → Class</code>:</p><ul><li><strong>1. Type-Indexed Expression Translation (<code>μ_A : A.Expression → Class.Expression</code>)</strong>: In <code>130_classes_as_types.tex</code> and Entry DefMetaGeneralisation (4.02) (<code>4.02</code>, where <code>μ_Variable : Variable.Expression → Class.Expression</code>), <code>μ_A</code> is a syntactic translation mapping expressions of sort <code>A</code> into class expressions.</li><li><strong>2. Assignment-Indexed Semantic Valuation (<code>μ_ρ : A.Expression → Class</code>, often written <code>μ_A</code> when <code>A = ρ</code> is an assignment)</strong>: Composing <code>μ_A</code> with Tarski semantic valuation <code>Val_ρ : Class.Expression → Class</code> yields the semantic denotation <code>μ^val_ρ(e) = Val_ρ(μ_A(e)) : Class</code> (so that in Entry AxmMetaClassComprehension (4.06), <code>x ∈ μ_ρ(Dec_A(e)) ⇔ (Set(x) ∧ 𝛂(x))</code> under hygiene condition <code>NFV(e, x)</code>).</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>∀x:Class. ((x ∈ μ_A(Dec(e))) ⇔ (Set(x) ∧ 𝛂(x)))</code></td>
+            <td class="external-entity formula-cell"><code>∀x:Class. ((x ∈ Val_ρ(μ_A(Dec_A(e)))) ⇔ (Set(x) ∧ 𝛂(x)))</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="eval.html" class="sym-link">Computational / Semantic Evaluator eval</a></li>
+<li><a href="eval.html" class="sym-link">Composite Code Evaluator Eval_(A,ρ) / eval</a></li>
 <li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
 <li><a href="dec.html" class="sym-link">Syntactic Decoding Operator Dec</a></li>
 <li><a href="hygiene-ffi-fv.html" class="sym-link">Syntactic Hygiene Predicates FFI, FV, NFV</a></li>
 <li><a href="../manual.html#AxmMetaClassComprehension" class="sym-link">Axiom AxmMetaClassComprehension (4.06): Class comprehension axiom schema(meta,WIP)</a></li>
+<li><a href="../manual.html#DefMetaGeneralisation" class="sym-link">Axiom DefMetaGeneralisation (4.02): Generalisation(meta,WIP)</a></li>
 </ul></td>
           </tr>
         </tbody>

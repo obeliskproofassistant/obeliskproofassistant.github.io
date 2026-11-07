@@ -371,7 +371,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2><span class="formula-unicode">Emb  /  ↪</span> <span class="formula-latex">\(\mathsf{Emb} \; / \; \hookrightarrow\)</span> &mdash; Canonical Embedding Operator (Deep-to-Shallow / Subsort / Universe Embedding)</h2>
-      <p class="section-desc">Canonically embeds a semantic class or lower-level object into the syntactic expression layer (numeral/constant injection) or embeds a sub-conglomerate into a larger domain.</p>
+      <p class="section-desc">Canonically embeds a named or parameterized class into the syntactic expression layer or embeds a sub-conglomerate into a larger domain.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -419,18 +419,18 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand Embedding (<code>Emb</code> / <code>↪</code>) in MKTD1 &amp; MKTD2:</strong></p><p>Whereas <code>Enc : Expression → Class</code> maps a syntactic expression to its code, <strong>Embedding</strong> <code>Emb : Class → Expression</code> (written symbolically with the hook arrow <code>↪</code>) maps an object-level class <code>X : Class</code> to the canonical syntactic expression denoting <code>X</code> (analogous to Feferman's dot/numeral operator <code>x ↦ ‹x›</code> in modal/provability logic):</p><ul><li><strong>Semantic Evaluation Law</strong>: Evaluating the embedded expression <code>Emb(X)</code> under any valuation <code>A</code> returns the class <code>X</code> itself: <code>μ_A(Emb(X)) = X</code>.</li><li><strong>Substitution into Quoted Formulas</strong>: Allows parameterizing quoted formulas by actual classes via <code>‹ 𝛂(⟨Emb(X)⟩) ›</code>.</li><li><strong>Variant 1 ↪ Variant 2 Bridge</strong>: Also denotes the structure-preserving embedding of Variant 1 first-order derivations into Variant 2 higher-order proof terms.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand Embedding (<code>Emb</code> / <code>↪</code>) in MKTD1 &amp; MKTD2:</strong></p><p>Whereas <code>Enc : A.Expression → Class</code> maps a syntactic expression to its set code, <strong>Embedding</strong> <code>Emb</code> (written symbolically with the hook arrow <code>↪</code>) injects a lower-level syntactic sort or named parameter into a target expression sort:</p><ul><li><strong>Semantic Evaluation Law</strong>: Evaluating an embedded constant/parameter expression under any assignment <code>ρ</code> returns the corresponding semantic object: <code>Val_ρ(Emb(X)) = X</code>.</li><li><strong>Substitution into Quoted Formulas</strong>: Allows parameterizing quoted formulas by represented expressions via <code>‹ 𝛂(⟨Emb(X)⟩) ›</code>.</li><li><strong>Variant 1 ↪ Variant 2 Bridge</strong>: Also denotes the structure-preserving embedding of Variant 1 first-order derivations into Variant 2 higher-order proof terms.</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>∀(X:Class). (μ_A(Emb(X)) = X)</code></td>
+            <td class="external-entity formula-cell"><code>∀(X:Class). (Val_ρ(Emb(X)) = X)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
 <li><a href="dec.html" class="sym-link">Syntactic Decoding Operator Dec</a></li>
-<li><a href="mu-interpretation.html" class="sym-link">Term Interpretation / Valuation μ_A</a></li>
+<li><a href="mu-interpretation.html" class="sym-link">Expression Translation μ_A &amp; Valuation μ_ρ</a></li>
 <li><a href="quotation.html" class="sym-link">Explicit Quotation ‹ ... ›</a></li>
 </ul></td>
           </tr>
