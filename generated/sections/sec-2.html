@@ -603,6 +603,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Axiom schema of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L179" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 179"><code>entries.ML:L179</code></a></td>
             </tr>
@@ -709,6 +713,10 @@
               <td class="field-value">
                 <div class="formula-ansii side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/ffi-pred.html" class="sym-link" title="Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))">FFI</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free term expression variable t">t</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free type variable X">X</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free variable-name variable x">x</a></span><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛗">phi</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Axiom schema of Existential Introduction (phi[t/x] -&gt; exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -819,6 +827,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Inference rule of Universal Abstraction: from B -&gt; A infer B -&gt; forall x. A, with side condition NFV(x, B) (x not free in B).</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L201" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 201"><code>entries.ML:L201</code></a></td>
             </tr>
@@ -927,6 +939,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Inference rule of Existential Elimination: from A -&gt; B infer (exists x. A) -&gt; B, with side condition NFV(x, B) (x not free in B).</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L212" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 212"><code>entries.ML:L212</code></a></td>
             </tr>
@@ -1033,6 +1049,10 @@
               <td class="field-value">
                 <div class="formula-ansii side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>

@@ -112,6 +112,104 @@ title: "Georgy Dunaev"
 Georgy Dunaev | Programmer &amp; Mathematician
 -->
 
+    <div class="section" id="theory-at-a-glance" style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+      <h2 style="color: #38bdf8; margin-top: 0;">Theory at a Glance: MKTD (Morse-Kelley with Tagged Ordered Pairs)</h2>
+      <p>
+        The Obelisk Proof Assistant formalizes <strong>Morse-Kelley class theory with Dunaev tagged ordered pairs and Grothendieck universes (MKTD)</strong>.
+      </p>
+      
+      <table style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 0.92rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.2); text-align: left;">
+            <th style="padding: 8px 12px; color: #38bdf8;">Dimension</th>
+            <th style="padding: 8px 12px; color: #38bdf8;">Specification in Obelisk (MKTD)</th>
+            <th style="padding: 8px 12px; color: #94a3b8;">Comparison / Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <td style="padding: 8px 12px; font-weight: bold; color: #f1f5f9;">Formal Theory</td>
+            <td style="padding: 8px 12px; color: #e2e8f0;"><strong>MKTD</strong> (Morse&ndash;Kelley + Tagged Ordered Pairs + Universes)</td>
+            <td style="padding: 8px 12px; color: #94a3b8;">Impredicative class comprehension over proper classes.</td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <td style="padding: 8px 12px; font-weight: bold; color: #f1f5f9;">Comprehension Bounds</td>
+            <td style="padding: 8px 12px; color: #e2e8f0;">
+              <code>{x | &phi;(x)}</code>: Rule 3.01 admits formulas &phi; quantifying over <em>all classes</em> (including proper classes).
+            </td>
+            <td style="padding: 8px 12px; color: #94a3b8;">
+              Strictly stronger than NBG, which restricts &phi; to quantify only over sets (&Delta;<sub>0</sub>-comprehension).
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <td style="padding: 8px 12px; font-weight: bold; color: #f1f5f9;">Consistency Strength</td>
+            <td style="padding: 8px 12px; color: #e2e8f0;">
+              Equiconsistent with <strong>ZFC + &exist; &kappa; (strongly inaccessible cardinal)</strong>.
+            </td>
+            <td style="padding: 8px 12px; color: #94a3b8;">
+              Proves Con(ZFC) and Con(NBG). Stronger than second-order arithmetic.
+            </td>
+          </tr>
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+            <td style="padding: 8px 12px; font-weight: bold; color: #f1f5f9;">Class Pairing</td>
+            <td style="padding: 8px 12px; color: #e2e8f0;">
+              <strong>Dunaev Tagged Ordered Pairs</strong>: <code>(A, B)<sub>D</sub> &equiv; ({1} &times; A) &cup; ({2} &times; B)</code>.
+            </td>
+            <td style="padding: 8px 12px; color: #94a3b8;">
+              Sound for proper classes (Kuratowski pairs <code>{{a},{a,b}}</code> collapse on proper classes).
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 8px 12px; font-weight: bold; color: #f1f5f9;">Two Assistant Variants</td>
+            <td style="padding: 8px 12px; color: #e2e8f0;">
+              <strong>MKTD1 (1st-Order / Sequent)</strong> co-exists with <strong>MKTD2 (Higher-Order / Propositions-as-Types)</strong>.
+            </td>
+            <td style="padding: 8px 12px; color: #94a3b8;">
+              User Directive #15: Both variants are actively maintained and tested side by side.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="color: #38bdf8; margin-top: 20px;">Kernel Metatheory &amp; Precise Soundness Guarantee</h3>
+      <p style="font-size: 0.92rem; line-height: 1.6;">
+        The kernel guarantee &ldquo;Can a false statement pass? Never&rdquo; is made formally precise by the following metatheorems:
+      </p>
+      <ul style="font-size: 0.92rem; line-height: 1.6;">
+        <li>
+          <strong>Relative Soundness:</strong> Assuming consistency of the MKTD axioms, there is no closed proof term <code>e</code> such that <code>&empty; &vdash; e : &bot;</code>. Every constructor in the kernel is checked; untrusted placeholders (<code>PCheat_prf</code>) are strictly rejected.
+        </li>
+        <li>
+          <strong>Subject Reduction:</strong> If <code>&Gamma; &vdash; e : T</code> and <code>e &rarr;<sub>&beta;&delta;</sub> e'</code>, then <code>&Gamma; &vdash; e' : T</code>. Typing is invariant under term evaluation and definition unrolling.
+        </li>
+        <li>
+          <strong>Decidability of Definitional (&alpha;/&beta;/&delta;) Equality:</strong> Term normalization is deterministic and terminating for all definitions registered in the opaque <code>KernelDefinitions</code> store.
+        </li>
+        <li>
+          <strong>Conservativity of Definitions:</strong> All new definitions are verified by <code>KernelDefinitions :&gt; KERNEL_DEFINITIONS</code> to contain no free RHS variables, no circularity, and matching parameters, guaranteeing conservative extension.
+        </li>
+        <li>
+          <strong>Trusted Computing Base (TCB):</strong> Strictly confined to the Standard ML checker (<code>newchecker.ML</code> / <code>nbg_compiler.ML</code>), primitive rules (Modus Ponens, Generalisation), propositional axioms (<code>A01</code>&ndash;<code>A13</code>), and the primitive set-theoretic axioms (Extensionality, Heredity, Regularity, Exponent, Global Choice, and Universes).
+        </li>
+      </ul>
+
+      <h3 style="color: #38bdf8; margin-top: 20px;">Propositions-as-Types Alongside Classical Axioms</h3>
+      <p style="font-size: 0.92rem; line-height: 1.6;">
+        In the higher-order variant (MKTD2 / RoqC), propositions are treated as types (implications as function spaces <code>P &rarr; Q</code>, universal quantifiers as dependent products <code>&Pi;(x:X), P(x)</code>):
+      </p>
+      <ul style="font-size: 0.92rem; line-height: 1.6;">
+        <li>
+          <strong>Postulated Axioms as Constant Proof Constructors:</strong> Classical axioms such as Excluded Middle (<code>A12</code>) and Global Choice appear in proof terms as uninterpreted constants (axiom witnesses) in the signature &Delta;.
+        </li>
+        <li>
+          <strong>Classical Inhabitation:</strong> Inhabiting a proposition <code>P</code> means exhibiting a well-typed term <code>&Delta;; &Gamma; &vdash; e : P</code> constructed from constructive &lambda;-calculus rules and these classical axiom constants.
+        </li>
+        <li>
+          <strong>Proof Irrelevance:</strong> Once a proof term is successfully typed by the kernel, any two proofs of the same proposition <code>P</code> are epistemically equivalent truth certificates.
+        </li>
+      </ul>
+    </div>
+
     <div class="section">
         <h2>Resources</h2>
         <ul>

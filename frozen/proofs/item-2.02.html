@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RulForallInstantiation (2.02, Inference Rule): Forall Instantiation</title>
+  <title>RulForallInstantiation (2.02, Inference Rule): Forall Instantiation (Axiom Schema / Elimination)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -399,7 +399,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>RulForallInstantiation (2.02, Inference Rule): Forall Instantiation</h1>
+      <h1>RulForallInstantiation (2.02, Inference Rule): Forall Instantiation (Axiom Schema / Elimination)</h1>
       <p class="subtitle">Standalone kernel entity record from 2. Predicate Logic (2.01&ndash;2.06) &mdash; <a href="../manual.html#RulForallInstantiation" style="color: #38bdf8;">View in Complete Entity Database (<code>#RulForallInstantiation</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -420,7 +420,7 @@
   <main>
   <section class="manual-section" id="sec-2">
     <div class="section-header">
-      <h2>RulForallInstantiation (2.02) &mdash; Forall Instantiation</h2>
+      <h2>RulForallInstantiation (2.02) &mdash; Forall Instantiation (Axiom Schema / Elimination)</h2>
       <p class="section-desc">First-order quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes.</p>
     </div>
     <div class="table-container">
@@ -437,11 +437,11 @@
             <tbody>
             <tr>
               <th class="field-name">Num</th>
-              <td class="field-value entry-num-cell"><span id="item-2.02"></span><span id="label-forall-instantiation"></span><span id="label-forall-instantiation-2-02"></span><a href="../manual.html#RulForallInstantiation" class="num-anchor" title="RulForallInstantiation">2.02</a></td>
+              <td class="field-value entry-num-cell"><span id="item-2.02"></span><span id="label-forall-instantiation-axiom-schema-elimination"></span><span id="label-forall-instantiation-axiom-schema-elimination-2-02"></span><a href="../manual.html#RulForallInstantiation" class="num-anchor" title="RulForallInstantiation">2.02</a></td>
             </tr>
             <tr>
               <th class="field-name">Title</th>
-              <td class="field-value entry-title-cell">Forall Instantiation <a href="../manual.html#RulForallInstantiation" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#RulForallInstantiation</code></a> <a href="../manual.html#label-forall-instantiation" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-forall-instantiation</code></a></td>
+              <td class="field-value entry-title-cell">Forall Instantiation (Axiom Schema / Elimination) <a href="../manual.html#RulForallInstantiation" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#RulForallInstantiation</code></a> <a href="../manual.html#label-forall-instantiation-axiom-schema-elimination" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-forall-instantiation-axiom-schema-elimination</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Classification</th>
@@ -522,6 +522,10 @@
               <td class="field-value">
                 <div class="formula-ansii side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/ffi-pred.html" class="sym-link" title="Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))">FFI</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free term expression variable t">t</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free type variable X">X</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/variables.html" class="sym-link" title="Free variable-name variable x">x</a></span><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛗">phi</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Axiom schema of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>

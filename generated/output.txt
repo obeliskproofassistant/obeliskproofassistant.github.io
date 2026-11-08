@@ -131,6 +131,7 @@
   Scheme of Types: ((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)
   Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
+  Kernel Note:     Axiom schema of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.
   Verification:    Primitive / Derived Rule (Kernel)
 
 [2.03 / RulExistsInstantiation] Exists Instantiation (Inference Rule)
@@ -140,6 +141,7 @@
   Scheme of Types: (⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)
   Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
+  Kernel Note:     Axiom schema of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.
   Verification:    Primitive / Derived Rule (Kernel)
 
 [2.04 / RulForallAbstraction] Forall Abstraction (Inference Rule)
@@ -149,6 +151,7 @@
   Scheme of Types: ((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
   Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Cond [1]:   NFV(X,x,(𝛃:Fm))
+  Kernel Note:     Inference rule of Universal Abstraction: from B -> A infer B -> forall x. A, with side condition NFV(x, B) (x not free in B).
   Verification:    Primitive / Derived Rule (Kernel)
 
 [2.05 / RulExistsAbstraction] Exists Abstraction (Inference Rule)
@@ -158,6 +161,7 @@
   Scheme of Types: ((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))
   Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Cond [1]:   NFV(X,x,(𝛃:Fm))
+  Kernel Note:     Inference rule of Existential Elimination: from A -> B infer (exists x. A) -> B, with side condition NFV(x, B) (x not free in B).
   Verification:    Primitive / Derived Rule (Kernel)
 
 [2.06 / RulGeneralisation] Generalisation (admissible rule) (Inference Rule)
@@ -167,6 +171,7 @@
   Scheme of Types: (⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
   Judgements [1]:  [(x:Name), (X:Type), (𝛂:Fm)]
   Side Cond [1]:   ⊤
+  Kernel Note:     Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.
   Verification:    Primitive / Derived Rule (Kernel)
 
 [3.01 / RulClassComprehension] Class comprehension (Inference Rule)
@@ -183,6 +188,7 @@
   Formula [0]:     (∀(X:Class)((X set)⟷(∃(Y:Class)(X∈Y))))
   SML Kernel AST:  PSetDef_prf
   Scheme of Types: (∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)⟷(∃([Y@Variable]:[Class@Type])([X@Class.Expression]∈[Y@Class.Expression]))))
+  Kernel Note:     Standard conservative definition defining predicate set(B)  exists x:Class. B in x. By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional yields a conservative extension.
   Verification:    Definitional (Kernel AST)
 
 [3.03 / DefIsProperClass] “Is a proper class” predicate (Definition)
@@ -218,16 +224,17 @@
   Formula [0]:     (∀(X:Class)(∅⊆X))
   SML Kernel AST:  PSubDef_prf
   Scheme of Types: (∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))
+  Kernel Note:     Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
   Verification:    Verified (Kernel)
 
-[3.08 / AxmLeftInSound] “Membership respects equality from the left” (Axiom)
+[3.08 / AxmLeftInSound] “Membership respects equality in right argument (container class: X = Y -> (Z in X  Z in Y))” (Axiom)
   Name:            AxmLeftInSound
   Formula [0]:     (∀(X:Class)∀(Y:Class)((X=Y)—→∀(z:Class)((z∈X)⟷(z∈Y))))
   SML Kernel AST:  PLeftInSoundAx_prf
   Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])—→∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])⟷([z@Class.Expression]∈[Y@Class.Expression]))))
   Verification:    Postulated (Kernel Axiom)
 
-[3.09 / AxmRightInSound] “Membership respects equality from the right” (Axiom)
+[3.09 / AxmRightInSound] “Membership respects equality in left argument (element: X = Y -> (X in W  Y in W))” (Axiom)
   Name:            AxmRightInSound
   Formula [0]:     (∀(X:Class)∀(Y:Class)((X=Y)—→∀(W:Class)((X∈W)⟷(Y∈W))))
   SML Kernel AST:  PRightInSoundAx_prf
