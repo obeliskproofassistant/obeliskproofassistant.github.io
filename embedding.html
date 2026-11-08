@@ -529,6 +529,8 @@
         <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
     </div>
     <div class="toolbar-nav">
+        <a class="toolbar-btn obelisk-portal-link" id="portal-entry-link" href="index.html">&larr; Obelisk Demonstration</a>
+        <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
         <button class="toolbar-btn" id="tbtn-sec-1" onclick="scrollToText('1. Propositional Logic')">1. Propositional Logic</button>
         <button class="toolbar-btn" id="tbtn-sec-2" onclick="scrollToText('2. Predicate Logic')">2. Predicate Logic</button>
         <button class="toolbar-btn active" id="tbtn-sec-3" onclick="scrollToText('3. Set/Class Foundations')">3. Set/Class Foundations</button>
@@ -540,58 +542,23 @@
         <button id="btn-top-hide-ansii" class="toolbar-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         <button id="btn-top-hide-schemata" class="toolbar-btn" onclick="toggleSchemataHide()">Hide Schemata</button>
         <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
-        <a class="toolbar-btn" href="generated/manual.html" target="_blank">📖 Open Full Manual</a>
+        <button class="toolbar-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand Proofs</button>
+        <button class="toolbar-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse Proofs</button>
+        <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
+        <a class="toolbar-btn" href="generated/manual_the_rest.html" target="_blank">📖 Full Manual (The Rest)</a>
+        <a class="toolbar-btn" href="generated/manual_top.html" target="_blank">📋 Manual Index</a>
         <a class="toolbar-btn" href="generated/theory_db.json" target="_blank">🗄️ JSON DB</a>
+        <a class="toolbar-btn" href="repl.html" target="_top">⚡ REPL</a>
     </div>
 </div>
 
 <div id="content-container">
     <div id="myhtmloutput">
-        <header class="demo-header">
-            <div class="header-inner">
-                <nav class="nav-bar">
-                    <a class="nav-link obelisk-portal-link" id="portal-entry-link" href="index.html">&larr; Obelisk Demonstration</a>
-                    <a class="nav-link" href="generated/manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-                    <a class="nav-link" href="generated/variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
-                    <a class="nav-link" href="generated/variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
-                    <a class="nav-link" href="generated/proofs.html">Verified Theorems &amp; Rules</a>
-                    <a class="nav-link" href="generated/symbols.html">Symbol &amp; Type Index</a>
-                    <a class="nav-link" href="generated/dependent_types.html">Dependent Types</a>
-                    <a class="nav-link" href="generated/metatheory.html">Metatheory</a>
-                    <a class="nav-link" href="generated/theory_db.json">JSON DB</a>
-                    <a class="nav-link" href="repl.html">Interactive REPL</a>
-                </nav>
-                <h1 class="demo-title">Obelisk Proof Assistant &mdash; Algorithmically Generated Entity Database (Variant 1: MKTD1)</h1>
-                <p class="subtitle">Complete 106-entry formalization of Morse-Kelley class theory with Tarski-Grothendieck universes. (Generated directly from <code>newchecker.ML</code> via <code>html_generator.ML</code>).</p>
-                <div class="controls-bar">
-                    <div class="control-group">
-                        <span class="control-label">Formula Display:</span>
-                        <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
-                        <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-                        <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
-                        <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
-                    </div>
-                    <div class="control-group">
-                        <span class="control-label">Proof Trees:</span>
-                        <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
-                        <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
-                    </div>
-                </div>
-                <nav class="toc-nav">
-                    <a class="toc-link" id="toc-sec-1" onclick="navigateToSection(1, event)">1. Propositional Logic (1.01&ndash;1.14)</a>
-                    <a class="toc-link" id="toc-sec-2" onclick="navigateToSection(2, event)">2. Predicate Logic (2.01&ndash;2.06)</a>
-                    <a class="toc-link" id="toc-sec-3" onclick="navigateToSection(3, event)" style="color: #38bdf8; font-weight:700;">3. Set/Class Foundations (3.01&ndash;3.78) ★ Initial Focus</a>
-                    <a class="toc-link" id="toc-sec-4" onclick="navigateToSection(4, event)">4. Metalogical Laws (4.01&ndash;4.06)</a>
-                    <a class="toc-link" id="toc-sec-5" onclick="navigateToSection(5, event)">5. Incompleteness Statements (5.01&ndash;5.02)</a>
-                </nav>
-            </div>
-        </header>
-
         <main id="chapters-main">
             <!-- Sections rendered in natural order 1..5; Section 3 loaded first as initial focus -->
             <div id="sec-slot-1" class="section-slot" data-sec="1"></div>
             <div id="sec-slot-2" class="section-slot" data-sec="2"></div>
-            <div id="sec-slot-3" class="section-slot" data-sec="3"></div>
+            <div id="sec-slot-3" class="section-slot" data-sec="3"><span id="DefIsProperClass" style="display:none;"></span></div>
             <div id="sec-slot-4" class="section-slot" data-sec="4"></div>
             <div id="sec-slot-5" class="section-slot" data-sec="5"></div>
         </main>
@@ -960,11 +927,26 @@ async function init() {
     renderPlaceholders();
     setupEmbeddedNav();
 
-    // Priority Chapter Load: Start with Section 3 ("3. Set/Class-Theoretic Foundations")
-    await loadSection(3, true);
+    // Determine target anchor from URL hash, defaulting specifically to DefIsProperClass
+    const targetHash = (window.location.hash ? window.location.hash.slice(1) : "DefIsProperClass") || "DefIsProperClass";
+    const targetSec = findSectionForTargetId(targetHash) || 3;
 
-    // After Section 3 is loaded and displayed to the user, load the remaining chapters sequentially in the background
-    queueBackgroundLoading([1, 2, 4, 5]);
+    // Priority Chapter Load: Load the section containing the target (Section 3 for DefIsProperClass)
+    await loadSection(targetSec, false);
+    updateToolbarActiveButton(targetSec);
+
+    // Focus specifically on the target entry (DefIsProperClass)
+    const targetEl = document.getElementById(targetHash);
+    if (targetEl) {
+        scrollTargetIntoContainer(targetEl);
+    } else {
+        const secNode = document.getElementById("sec-" + targetSec);
+        if (secNode) scrollTargetIntoContainer(secNode);
+    }
+
+    // Load remaining chapters in the background
+    const remainingSections = [1, 2, 3, 4, 5].filter(s => s !== targetSec);
+    queueBackgroundLoading(remainingSections);
 }
 
 if (document.readyState === 'loading') {

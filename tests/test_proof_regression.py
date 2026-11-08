@@ -63,6 +63,8 @@ class TestProofRegression(unittest.TestCase):
         """All subpages in generated/ must exist and carry the ML provenance header and Unicode default."""
         expected_pages = [
             "manual.html",
+            "manual_top.html",
+            "manual_the_rest.html",
             "output.html",
             "variant1.html",
             "variant2.html",
@@ -85,7 +87,8 @@ class TestProofRegression(unittest.TestCase):
             self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", html, f"Missing ML provenance header in {rel}")
             self.assertIn('class="mode-unicode"', html, f"Unicode default missing in {rel}")
             self.assertNotIn("mode-membership", html, f"Forbidden CSS hack mode-membership in {rel}")
-            self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")
+            if rel != "manual_top.html":
+                self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")
         nbg_json_path = os.path.join(SITE_DIR, "generated", "nbg_library.json")
         self.assertTrue(os.path.isfile(nbg_json_path))
         with open(nbg_json_path, "r", encoding="utf-8") as f:

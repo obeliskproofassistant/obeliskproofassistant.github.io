@@ -301,7 +301,7 @@
     .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
     .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
     /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
-    a.sym-link, .formula-latex a, mjx-container a {
+    a.sym-link {
       all: unset;
       cursor: pointer;
       color: inherit !important;
@@ -312,10 +312,27 @@
       border-radius: 3px;
       transition: background 0.12s ease, text-decoration-color 0.12s ease;
     }
-    a.sym-link:hover, .formula-latex a:hover, mjx-container a:hover {
+    a.sym-link:hover {
       background: rgba(56, 189, 248, 0.22);
       text-decoration-style: solid;
       text-decoration-color: #38bdf8;
+    }
+    .formula-latex a, mjx-container a {
+      all: unset;
+      cursor: pointer;
+      color: #60a5fa !important;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease, color 0.12s ease;
+    }
+    .formula-latex a:hover, mjx-container a:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+      color: #93c5fd !important;
     }
     /* ANSI Syntax Highlighting Classes */
     .ansi-bold-red { color: #f87171; font-weight: 700; }
@@ -385,7 +402,7 @@
   <main>
   <section class="manual-section" id="generated-index">
     <div class="section-header">
-      <h2>ML-Generated Output Registry (18 Primary Artifacts + 106 Standalone Entry Pages + 134 Personal Symbol Pages)</h2>
+      <h2>ML-Generated Output Registry (20 Primary Artifacts + 106 Standalone Entry Pages + 134 Personal Symbol Pages)</h2>
       <p class="section-desc">AI processes are strictly forbidden to edit any file inside <code>generated/</code> directly; all outputs are produced by running <code>poly -q --use html_generator.ML</code> and <code>poly -q --use nbg_html_generator.ML</code>.</p>
     </div>
     <div class="table-container">
@@ -417,6 +434,56 @@
             <tr>
               <th class="field-name">Description</th>
               <td class="field-value">All 106 1st-order kernel axioms, inference rules, definitions, and theorems with clickable Unicode &amp; LaTeX formulas.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="gen-01a" class="external-row">
+        <td class="external-num"><a href="manual_top.html" class="num-anchor">01a</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Artifact</th>
+              <td class="field-value entry-title-cell"><a href="manual_top.html" class="sym-link"><code>generated/manual_top.html</code> &mdash; Decoupled Entity Database Top Navigation &amp; Header Component</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Format</th>
+              <td class="field-value"><span class="badge badge-def">HTML Component</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">ML Provenance</th>
+              <td class="field-value proof-cell"><code>html_generator.ML &lt;- newchecker.ML</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Description</th>
+              <td class="field-value">Top header component of the manual (title, subtitle, quick navigation, formula display controls, and TOC).</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="gen-01b" class="external-row">
+        <td class="external-num"><a href="manual_the_rest.html" class="num-anchor">01b</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Artifact</th>
+              <td class="field-value entry-title-cell"><a href="manual_the_rest.html" class="sym-link"><code>generated/manual_the_rest.html</code> &mdash; Decoupled Entity Database Body (Sections 1-5 Without Header)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Format</th>
+              <td class="field-value"><span class="badge badge-def">HTML Component</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">ML Provenance</th>
+              <td class="field-value proof-cell"><code>html_generator.ML &lt;- newchecker.ML</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Description</th>
+              <td class="field-value">Decoupled body component of the manual containing all 106 kernel entities without duplicate top header, tailored for portal embedding.</td>
             </tr>
             </tbody>
           </table>
