@@ -9,7 +9,7 @@
         tex: {
           inlineMath: [['\\(', '\\)']],
           displayMath: [['\\[', '\\]']],
-          packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+          packages: {'[+]': ['ams', 'color', 'noerrors', 'noundefined']}
         },
         startup: { typeset: true }
       };
@@ -95,6 +95,23 @@
             font-family: 'JetBrains Mono', monospace !important;
             overflow-x: auto;
         }
+        /* Ensure links in both Unicode and MathJax LaTeX mode inherit syntax-highlighting colors */
+        a.sym-link, .formula-latex a, mjx-container a {
+            all: unset;
+            cursor: pointer;
+            color: inherit !important;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            text-decoration-color: rgba(56, 189, 248, 0.55);
+            text-underline-offset: 3px;
+            border-radius: 3px;
+            transition: background 0.12s ease, text-decoration-color 0.12s ease;
+        }
+        a.sym-link:hover, .formula-latex a:hover, mjx-container a:hover {
+            background: rgba(56, 189, 248, 0.22);
+            text-decoration-style: solid;
+            text-decoration-color: #38bdf8;
+        }
     </style>
 </head>
 <body class="mode-unicode">
@@ -131,6 +148,34 @@ try {
     sessionStorage.clear();
 } catch (e) {}
 
+function rewriteRelativeAnchors(rootEl) {
+    if (!rootEl) return;
+    const anchors = rootEl.querySelectorAll("a[href]");
+    for (const a of anchors) {
+        const href = a.getAttribute("href");
+        if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
+            continue;
+        }
+        if (href.startsWith("../")) {
+            a.setAttribute("href", href.slice(3));
+        } else {
+            a.setAttribute("href", "generated/" + href);
+        }
+    }
+}
+
+function rewriteLatexHrefs(htmlStr) {
+    return htmlStr.replace(/\\href\{([^}]+)\}/g, function(match, href) {
+        if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
+            return match;
+        }
+        if (href.startsWith("../")) {
+            return "\\href{" + href.slice(3) + "}";
+        }
+        return "\\href{generated/" + href + "}";
+    });
+}
+
 function setFormatMode(mode) {
     document.body.classList.remove('mode-unicode', 'mode-latex');
     document.body.classList.add('mode-' + mode);
@@ -140,7 +185,9 @@ function setFormatMode(mode) {
     if (btnLtx) btnLtx.classList.toggle('active', mode === 'latex');
     if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
         const target = document.getElementById("myhtmloutput");
-        window.MathJax.typesetPromise(target ? [target] : undefined);
+        window.MathJax.typesetPromise(target ? [target] : undefined).then(() => {
+            rewriteRelativeAnchors(target);
+        }).catch(err => console.warn("MathJax typeset warning:", err));
     }
 }
 window.setFormatMode = setFormatMode;
@@ -219,28 +266,21 @@ async function renderOutput() {
     try {
         const rawHtml = await getText();
         const target = document.getElementById("myhtmloutput");
-        target.innerHTML = rawHtml;
+        target.innerHTML = rewriteLatexHrefs(rawHtml);
         // Rewrite relative links originating from generated/output.html so they resolve from root embedding.html
-        const anchors = target.querySelectorAll("a[href]");
-        for (const a of anchors) {
-            const href = a.getAttribute("href");
-            if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
-                continue;
-            }
-            if (href.startsWith("../")) {
-                a.setAttribute("href", href.slice(3));
-            } else {
-                a.setAttribute("href", "generated/" + href);
-            }
-        }
+        rewriteRelativeAnchors(target);
         if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([target]).catch(err => console.warn("MathJax typeset warning:", err));
+            window.MathJax.typesetPromise([target]).then(() => {
+                rewriteRelativeAnchors(target);
+            }).catch(err => console.warn("MathJax typeset warning:", err));
         } else {
             const mjScript = document.getElementById("MathJax-script");
             if (mjScript) {
                 mjScript.addEventListener("load", () => {
                     if (window.MathJax && window.MathJax.typesetPromise) {
-                        window.MathJax.typesetPromise([target]).catch(err => console.warn("MathJax typeset warning:", err));
+                        window.MathJax.typesetPromise([target]).then(() => {
+                            rewriteRelativeAnchors(target);
+                        }).catch(err => console.warn("MathJax typeset warning:", err));
                     }
                 });
             }

@@ -17,7 +17,7 @@
       tex: {
         inlineMath: [['\\(', '\\)']],
         displayMath: [['\\[', '\\]']],
-        packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+        packages: {'[+]': ['ams', 'color', 'noerrors', 'noundefined']}
       },
       startup: { typeset: true }
     };
@@ -278,8 +278,10 @@
     .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
     .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
     /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
-    a.sym-link {
-      color: inherit;
+    a.sym-link, .formula-latex a, mjx-container a {
+      all: unset;
+      cursor: pointer;
+      color: inherit !important;
       text-decoration: underline;
       text-decoration-style: dotted;
       text-decoration-color: rgba(56, 189, 248, 0.55);
@@ -287,7 +289,7 @@
       border-radius: 3px;
       transition: background 0.12s ease, text-decoration-color 0.12s ease;
     }
-    a.sym-link:hover {
+    a.sym-link:hover, .formula-latex a:hover, mjx-container a:hover {
       background: rgba(56, 189, 248, 0.22);
       text-decoration-style: solid;
       text-decoration-color: #38bdf8;
@@ -371,7 +373,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2><span class="formula-unicode">→  /  -&gt;</span> <span class="formula-latex">\(\rightarrow\)</span> &mdash; Function Space / Non-Dependent Type Arrow (→ / ->, AST Constructor: TArrow / Pi)</h2>
-      <p class="section-desc">Function space / non-dependent arrow type constructor in Variant 2 and type signatures (Unicode: <code>A → B</code>, LaTeX: <code>\rightarrow</code>, Plain-text ASCII: <code>-&gt;</code>), distinct from Variant 1's formula implication <code>⟶</code> (<code>\longrightarrow</code> / <code>--&gt;</code>).</p>
+      <p class="section-desc">Function space / non-dependent arrow type constructor in Variant 2 and type signatures (Unicode: <code>A → B</code>, LaTeX: <code>\rightarrow</code>, Plain-text ASCII: <code>-&gt;</code>), distinct from Variant 1's formula implication <code>-→</code> (<code>\longrightarrow</code> / <code>--&gt;</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -428,7 +430,7 @@
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="impl-conn.html" class="sym-link">Formula Implication ⟶ / --> (Variant 1)</a></li>
+<li><a href="impl-conn.html" class="sym-link">Formula Implication -→ / --> (Variant 1)</a></li>
 <li><a href="pi-binder.html" class="sym-link">Dependent Product Π (Pi)</a></li>
 <li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): ifᵈₑₚ (dependent conditional over (Bool → Type))</a></li>
 </ul></td>

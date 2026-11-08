@@ -17,7 +17,7 @@
       tex: {
         inlineMath: [['\\(', '\\)']],
         displayMath: [['\\[', '\\]']],
-        packages: {'[+]': ['ams', 'noerrors', 'noundefined']}
+        packages: {'[+]': ['ams', 'color', 'noerrors', 'noundefined']}
       },
       startup: { typeset: true }
     };
@@ -278,8 +278,10 @@
     .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
     .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
     /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
-    a.sym-link {
-      color: inherit;
+    a.sym-link, .formula-latex a, mjx-container a {
+      all: unset;
+      cursor: pointer;
+      color: inherit !important;
       text-decoration: underline;
       text-decoration-style: dotted;
       text-decoration-color: rgba(56, 189, 248, 0.55);
@@ -287,7 +289,7 @@
       border-radius: 3px;
       transition: background 0.12s ease, text-decoration-color 0.12s ease;
     }
-    a.sym-link:hover {
+    a.sym-link:hover, .formula-latex a:hover, mjx-container a:hover {
       background: rgba(56, 189, 248, 0.22);
       text-decoration-style: solid;
       text-decoration-color: #38bdf8;
@@ -1174,13 +1176,13 @@
             <tr>
               <th class="field-name">Symbol</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="impl-conn.html" class="sym-link">⟶  /  --&gt;</a></div>
+                <div class="formula-unicode"><a href="impl-conn.html" class="sym-link">-→  /  --&gt;</a></div>
                 <div class="formula-latex">\(\href{impl-conn.html}{\longrightarrow}\)</div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="impl-conn.html" class="sym-link"><strong>Material Implication Connective on Formulas (⟶ / -->, AST Constructor: TpImpl)</strong> (<code>symbols/impl-conn.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="impl-conn.html" class="sym-link"><strong>Material Implication Connective on Formulas (-→ / -->, AST Constructor: TpImpl)</strong> (<code>symbols/impl-conn.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -1188,7 +1190,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Primitive binary logical connective of material implication on formulas in Variant 1 (Unicode: <code>𝛂 ⟶ 𝛃</code>, LaTeX: <code>\longrightarrow</code>, Plain-text ASCII: <code>--&gt;</code>), governed by Hilbert axioms A01, A02 and Modus Ponens (Rule RulModusPonens (1.14)).</td>
+              <td class="field-value">Primitive binary logical connective of material implication on formulas in Variant 1 (Unicode: <code>𝛂 -→ 𝛃</code>, LaTeX: <code>\longrightarrow</code>, Plain-text ASCII: <code>--&gt;</code>), governed by Hilbert axioms A01, A02 and Modus Ponens (Rule RulModusPonens (1.14)).</td>
             </tr>
             </tbody>
           </table>
@@ -1216,7 +1218,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Function space / non-dependent arrow type constructor in Variant 2 and type signatures (Unicode: <code>A → B</code>, LaTeX: <code>\rightarrow</code>, Plain-text ASCII: <code>-&gt;</code>), distinct from Variant 1's formula implication <code>⟶</code> (<code>\longrightarrow</code> / <code>--&gt;</code>).</td>
+              <td class="field-value">Function space / non-dependent arrow type constructor in Variant 2 and type signatures (Unicode: <code>A → B</code>, LaTeX: <code>\rightarrow</code>, Plain-text ASCII: <code>-&gt;</code>), distinct from Variant 1's formula implication <code>-→</code> (<code>\longrightarrow</code> / <code>--&gt;</code>).</td>
             </tr>
             </tbody>
           </table>
