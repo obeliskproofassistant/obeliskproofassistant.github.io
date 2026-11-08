@@ -294,6 +294,9 @@ class TestProofRegression(unittest.TestCase):
             "conditionals-if-dep.html",
             "formula-metavariables.html",
             "delimiters-brackets.html",
+            "parentheses.html",
+            "stored-type-brackets.html",
+            "square-brackets.html",
             "variables.html",
         ]
         for page in expected_pages:
@@ -305,6 +308,8 @@ class TestProofRegression(unittest.TestCase):
         gen_symbols = os.path.join(SITE_DIR, "generated", "symbols.html")
         with open(gen_symbols, "r", encoding="utf-8") as f:
             sym_html = f.read()
+        self.assertIn('href="symbols/parentheses.html"', gen_html)
+        self.assertIn('href="symbols/stored-type-brackets.html"', gen_html)
         self.assertIn('href="symbols/quotation.html"', gen_html)
         self.assertIn('href="symbols/ifv-pred.html"', gen_html)
         self.assertIn('href="symbols/enc.html"', sym_html)
