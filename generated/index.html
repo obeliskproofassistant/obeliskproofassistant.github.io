@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -361,6 +362,7 @@
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -849,6 +851,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

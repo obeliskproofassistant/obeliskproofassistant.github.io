@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</h1>
-      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (191 entries) + <a href="symbols/index.html" style="color: #38bdf8;">131 Personal Symbol Reference Pages &rarr;</a>.</p>
+      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (191 entries) + <a href="symbols/index.html" style="color: #38bdf8;">131 Personal Symbol Reference Pages</a>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -396,7 +398,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Connective &amp; Function Arrow (Primitive)</span></td>
             <td class="external-entity"><code>Fm × Fm → Fm  |  Type × Type → Type</code></td>
-            <td class="external-entity"><strong>[Primitive / Undefinable] Natural-Language Definition:</strong> In Variant 1 (MKTD1), material implication on formulas <code>𝛂 —→ 𝛃</code> (LaTeX <code>\longrightarrow</code>, ASCII <code>--&gt;</code>); in Variant 2 (MKTD2), the non-dependent function type constructor <code>A → B ≡ Π(_:A), B</code> (LaTeX <code>\rightarrow</code>, ASCII <code>-&gt;</code>). Characterized axiomatically by A01 (Weakening), A02 (Frege's distribution), and Rule RulModusPonens (1.14) (Modus Ponens). (<a href="symbols/impl-conn.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Undefinable] Natural-Language Definition:</strong> In Variant 1 (MKTD1), material implication on formulas <code>𝛂 —→ 𝛃</code> (LaTeX <code>\longrightarrow</code>, ASCII <code>--&gt;</code>); in Variant 2 (MKTD2), the non-dependent function type constructor <code>A → B ≡ Π(_:A), B</code> (LaTeX <code>\rightarrow</code>, ASCII <code>-&gt;</code>). Characterized axiomatically by A01 (Weakening), A02 (Frege's distribution), and Rule RulModusPonens (1.14) (Modus Ponens). (<a href="symbols/impl-conn.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropWeakening" class="sym-link">AxmPropWeakening (1.01: A01 Weakening)</a> &middot; <a href="manual.html#AxmPropFrege" class="sym-link">AxmPropFrege (1.02: A02 Frege)</a> &middot; <a href="manual.html#RulModusPonens" class="sym-link">RulModusPonens (1.14: Modus Ponens)</a></td>
           </tr>
           <tr id="sym-iff" class="external-row">
@@ -407,7 +409,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Connective (Defined / Axiomatic)</span></td>
             <td class="external-entity"><code>Fm × Fm → Fm  |  Bool × Bool → Bool</code></td>
-            <td class="external-entity"><strong>[Defined] Formal &amp; Natural-Language Definition:</strong> Logical bi-implication (equivalence, “𝛂 if and only if 𝛃”), formally defined as mutual implication: <code>(𝛂 ⟷ 𝛃) ≡ ((𝛂 → 𝛃) ∧ (𝛃 → 𝛂))</code>. (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Defined] Formal &amp; Natural-Language Definition:</strong> Logical bi-implication (equivalence, “𝛂 if and only if 𝛃”), formally defined as mutual implication: <code>(𝛂 ⟷ 𝛃) ≡ ((𝛂 → 𝛃) ∧ (𝛃 → 𝛂))</code>. (<a href="symbols/prop-bool.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropConjLeft" class="sym-link">AxmPropConjLeft (1.03: ∧ Rules)</a> &middot; <a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Extensionality ⟷)</a></td>
           </tr>
           <tr id="sym-and" class="external-row">
@@ -418,7 +420,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Connective (Axiomatic)</span></td>
             <td class="external-entity"><code>Fm × Fm → Fm  |  Bool × Bool → Bool</code></td>
-            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language Definition:</strong> Logical conjunction (“both 𝛂 and 𝛃 hold simultaneously”); in Variant 2 (MKTD2), the non-dependent product proposition <code>A × B</code>. Characterized by A03 (left projection), A04 (right projection), and A05 (pairing introduction). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language Definition:</strong> Logical conjunction (“both 𝛂 and 𝛃 hold simultaneously”); in Variant 2 (MKTD2), the non-dependent product proposition <code>A × B</code>. Characterized by A03 (left projection), A04 (right projection), and A05 (pairing introduction). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropConjLeft" class="sym-link">AxmPropConjLeft (1.03: A03 ∧-Elim 1)</a> &middot; <a href="manual.html#AxmPropConjRight" class="sym-link">AxmPropConjRight (1.04: A04 ∧-Elim 2)</a> &middot; <a href="manual.html#AxmPropConjIntro" class="sym-link">AxmPropConjIntro (1.05: A05 ∧-Intro)</a></td>
           </tr>
           <tr id="sym-or" class="external-row">
@@ -429,7 +431,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Connective (Axiomatic)</span></td>
             <td class="external-entity"><code>Fm × Fm → Fm  |  Bool × Bool → Bool</code></td>
-            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language Definition:</strong> Inclusive logical disjunction (“at least one of 𝛂 or 𝛃 holds”); in Variant 2 (MKTD2), the sum / coproduct proposition. Characterized by A06 (left injection), A07 (right injection), and A08 (case analysis). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language Definition:</strong> Inclusive logical disjunction (“at least one of 𝛂 or 𝛃 holds”); in Variant 2 (MKTD2), the sum / coproduct proposition. Characterized by A06 (left injection), A07 (right injection), and A08 (case analysis). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropDisjLeft" class="sym-link">AxmPropDisjLeft (1.06: A06 ∨-Intro 1)</a> &middot; <a href="manual.html#AxmPropDisjRight" class="sym-link">AxmPropDisjRight (1.07: A07 ∨-Intro 2)</a> &middot; <a href="manual.html#AxmPropDisjElim" class="sym-link">AxmPropDisjElim (1.08: A08 ∨-Elim)</a></td>
           </tr>
           <tr id="sym-neg" class="external-row">
@@ -440,7 +442,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Connective (Axiomatic / Defined)</span></td>
             <td class="external-entity"><code>Fm → Fm  |  Bool → Bool</code></td>
-            <td class="external-entity"><strong>[Axiomatic / Defined] Formal &amp; Natural-Language Definition:</strong> Logical negation (“it is not the case that 𝛂 holds”), characterized by A09 <code>(¬𝛂) → (𝛂 → ⊥)</code>, A10 <code>(𝛂 → 𝛃) → ((𝛂 → ¬𝛃) → ¬𝛂)</code>, and A12 <code>𝛂 ∨ (¬𝛂)</code> (equivalent to <code>¬𝛂 ⟷ (𝛂 → ⊥)</code>). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Axiomatic / Defined] Formal &amp; Natural-Language Definition:</strong> Logical negation (“it is not the case that 𝛂 holds”), characterized by A09 <code>(¬𝛂) → (𝛂 → ⊥)</code>, A10 <code>(𝛂 → 𝛃) → ((𝛂 → ¬𝛃) → ¬𝛂)</code>, and A12 <code>𝛂 ∨ (¬𝛂)</code> (equivalent to <code>¬𝛂 ⟷ (𝛂 → ⊥)</code>). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropNegElim" class="sym-link">AxmPropNegElim (1.09: A09)</a> &middot; <a href="manual.html#AxmPropNegIntro" class="sym-link">AxmPropNegIntro (1.10: A10)</a> &middot; <a href="manual.html#AxmPropExcludedMiddle" class="sym-link">AxmPropExcludedMiddle (1.12: A12 LEM)</a></td>
           </tr>
           <tr id="sym-top-bot" class="external-row">
@@ -451,7 +453,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Logical Constants (0-ary)</span></td>
             <td class="external-entity"><code>Bool  |  Fm (when quoted ‹⊤›, ‹⊥›)</code></td>
-            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition:</strong> Verum <code>⊤</code> is the unconditionally true proposition / canonical true value of <code>Bool</code>, postulated unconditionally by Axiom A13 (<code>AxmPropVerum (1.13): ⊤</code>). Falsum <code>⊥</code> is the absurd / unconditionally false proposition, governed by Axiom A11 (<code>AxmPropExFalso (1.11): ⊥ → 𝛂</code>, Ex Falso Quodlibet). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition:</strong> Verum <code>⊤</code> is the unconditionally true proposition / canonical true value of <code>Bool</code>, postulated unconditionally by Axiom A13 (<code>AxmPropVerum (1.13): ⊤</code>). Falsum <code>⊥</code> is the absurd / unconditionally false proposition, governed by Axiom A11 (<code>AxmPropExFalso (1.11): ⊥ → 𝛂</code>, Ex Falso Quodlibet). (<a href="symbols/prop-bool.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropExFalso" class="sym-link">AxmPropExFalso (1.11: A11 ⊥ → 𝛂)</a> &middot; <a href="manual.html#AxmPropVerum" class="sym-link">AxmPropVerum (1.13: A13 ⊤ Verum Axiom)</a> &middot; <a href="manual.html#AxmDiscourseNonEmpty" class="sym-link">AxmDiscourseNonEmpty (2.01: (∃(K:Class)⊤)</a> &middot; <a href="manual.html#DefUniversalClass" class="sym-link">DefUniversalClass (3.05: 𝒱 = {x|⊤})</a></td>
           </tr>
           <tr id="sym-in" class="external-row">
@@ -462,7 +464,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Binary Predicate Symbol (Kernel Primitive)</span></td>
             <td class="external-entity"><code>Class × Class → Bool  |  Class.Expression × Class.Expression → Fm</code></td>
-            <td class="external-entity"><strong>[Primitive / Undefinable] Natural-Language Definition:</strong> The fundamental undefinable binary relation of class theory, read “class <code>x</code> is a member (element) of class <code>Y</code>”. Because it is the primitive membership relation at the root of the ontology, it is not defined in terms of prior notions; instead, it is governed by Class Comprehension (RulClassComprehension (3.01) / AxmMetaClassComprehension (4.06)), Sethood (DefIsSet (3.02): <code>x set ⟷ ∃(Y:Class)(x ∈ Y)</code>, i.e., only sets can be members of classes), and Extensionality (AxmExtensionality (3.10)). Never used for typing (use <code>:</code>). (<a href="symbols/typing-colon.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Undefinable] Natural-Language Definition:</strong> The fundamental undefinable binary relation of class theory, read “class <code>x</code> is a member (element) of class <code>Y</code>”. Because it is the primitive membership relation at the root of the ontology, it is not defined in terms of prior notions; instead, it is governed by Class Comprehension (RulClassComprehension (3.01) / AxmMetaClassComprehension (4.06)), Sethood (DefIsSet (3.02): <code>x set ⟷ ∃(Y:Class)(x ∈ Y)</code>, i.e., only sets can be members of classes), and Extensionality (AxmExtensionality (3.10)). Never used for typing (use <code>:</code>). (<a href="symbols/typing-colon.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Comprehension Rule)</a> &middot; <a href="manual.html#DefIsSet" class="sym-link">DefIsSet (3.02: Sethood Def)</a> &middot; <a href="manual.html#AxmExtensionality" class="sym-link">AxmExtensionality (3.10: Extensionality)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Comprehension Schema)</a></td>
           </tr>
           <tr id="sym-eq" class="external-row">
@@ -473,7 +475,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Binary Predicate Symbol (Primitive / Extensional)</span></td>
             <td class="external-entity"><code>Π(A:Type). A × A → Bool</code></td>
-            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition:</strong> Identity / equality of objects of the same type (“<code>X</code> and <code>Y</code> denote the exact same mathematical entity”). On classes, characterized by Left/Right Soundness of Membership (RulClassComprehension (3.01): equal classes have the same elements and belong to the same classes), Class Extensionality (AxmExtensionality (3.10): <code>(∀(z:Class)((z∈X)⟷(z∈Y))) → (X=Y)</code>), and Intensionality (AxmIntensionality (3.11)). (<a href="symbols/delimiters-brackets.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition:</strong> Identity / equality of objects of the same type (“<code>X</code> and <code>Y</code> denote the exact same mathematical entity”). On classes, characterized by Left/Right Soundness of Membership (RulClassComprehension (3.01): equal classes have the same elements and belong to the same classes), Class Extensionality (AxmExtensionality (3.10): <code>(∀(z:Class)((z∈X)⟷(z∈Y))) → (X=Y)</code>), and Intensionality (AxmIntensionality (3.11)). (<a href="symbols/delimiters-brackets.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmLeftInSound" class="sym-link">AxmLeftInSound (3.08: Left ∈-Soundness)</a> &middot; <a href="manual.html#AxmRightInSound" class="sym-link">AxmRightInSound (3.09: Right ∈-Soundness)</a> &middot; <a href="manual.html#AxmExtensionality" class="sym-link">AxmExtensionality (3.10: Extensionality)</a> &middot; <a href="manual.html#AxmIntensionality" class="sym-link">AxmIntensionality (3.11: Intensionality)</a></td>
           </tr>
           <tr id="sym-set-pred" class="external-row">
@@ -484,7 +486,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Unary Predicate Symbols (Defined)</span></td>
             <td class="external-entity"><code>Class → Bool</code></td>
-            <td class="external-entity"><strong>[Defined] Formal Definition:</strong> <code>∀(X:Class)((X set) ⟷ (∃(Y:Class)(X ∈ Y)))</code> (DefIsSet (3.02): a class is a set iff it belongs to some class) and <code>∀(K:Class)((K proper) ⟷ (¬(K set)))</code> (DefIsProperClass (3.03): a class is a proper class iff it is not a set). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Defined] Formal Definition:</strong> <code>∀(X:Class)((X set) ⟷ (∃(Y:Class)(X ∈ Y)))</code> (DefIsSet (3.02): a class is a set iff it belongs to some class) and <code>∀(K:Class)((K proper) ⟷ (¬(K set)))</code> (DefIsProperClass (3.03): a class is a proper class iff it is not a set). (<a href="symbols/class-type.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefIsSet" class="sym-link">DefIsSet (3.02: Set Predicate Def)</a> &middot; <a href="manual.html#DefIsProperClass" class="sym-link">DefIsProperClass (3.03: Proper Class Def)</a></td>
           </tr>
           <tr id="sym-emptyset-v" class="external-row">
@@ -495,7 +497,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Class Constants (Defined 0-ary)</span></td>
             <td class="external-entity"><code>Class</code></td>
-            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Empty set <code>∅ = {x | ⊥}</code> (DefEmptySet (3.04)); Universal class of all sets <code>𝒱 = {x | ⊤}</code> (DefUniversalClass (3.05)); Class of all ordinals <code>On = {x | Ord(x)}</code> (DefClassOfOrdinals (3.17)); Smallest successor-inductive class/ordinal <code>∀(x:Class)((x ∈ ω) ⟷ (∀(Q:Class)(Ind(Q) → (x ∈ Q))))</code> (DefInductiveClass (3.55)). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Empty set <code>∅ = {x | ⊥}</code> (DefEmptySet (3.04)); Universal class of all sets <code>𝒱 = {x | ⊤}</code> (DefUniversalClass (3.05)); Class of all ordinals <code>On = {x | Ord(x)}</code> (DefClassOfOrdinals (3.17)); Smallest successor-inductive class/ordinal <code>∀(x:Class)((x ∈ ω) ⟷ (∀(Q:Class)(Ind(Q) → (x ∈ Q))))</code> (DefInductiveClass (3.55)). (<a href="symbols/class-type.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefEmptySet" class="sym-link">DefEmptySet (3.04: ∅ Def)</a> &middot; <a href="manual.html#DefUniversalClass" class="sym-link">DefUniversalClass (3.05: 𝒱 Def)</a> &middot; <a href="manual.html#DefClassOfOrdinals" class="sym-link">DefClassOfOrdinals (3.17: On Def)</a> &middot; <a href="manual.html#DefInductiveClass" class="sym-link">DefInductiveClass (3.55: ω Def)</a></td>
           </tr>
           <tr id="sym-class-ops" class="external-row">
@@ -506,19 +508,19 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Class Functional &amp; Relational Symbols (Defined)</span></td>
             <td class="external-entity"><code>Class → Class  |  Class × Class → Bool/Class</code></td>
-            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Subclass <code>(X ⊆ Y) ⟷ ∀(z:Class)((z∈X)→(z∈Y))</code> (DefSubclass (3.06)); Unary union <code>⋃X = {z | ∃(y:Class)((z∈y)∧(y∈X))}</code> (DefUnaryUnion (3.19)); Unary intersection <code>⋂X = {z | ∀(y:Class)((y∈X)→(z∈y))}</code> (DefUnaryIntersection (3.20)); Binary union <code>A ∪ B = {x | (x∈A)∨(x∈B)}</code> (DefBinaryUnion (3.53)); Binary intersection <code>A ∩ B = {x | (x∈A)∧(x∈B)}</code> (DefBinaryIntersection (3.54)); Powerclass <code>𝒫(X) = {y | y ⊆ X}</code> (AxmExponent (3.13)). (<a href="symbols/class-type.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Subclass <code>(X ⊆ Y) ⟷ ∀(z:Class)((z∈X)→(z∈Y))</code> (DefSubclass (3.06)); Unary union <code>⋃X = {z | ∃(y:Class)((z∈y)∧(y∈X))}</code> (DefUnaryUnion (3.19)); Unary intersection <code>⋂X = {z | ∀(y:Class)((y∈X)→(z∈y))}</code> (DefUnaryIntersection (3.20)); Binary union <code>A ∪ B = {x | (x∈A)∨(x∈B)}</code> (DefBinaryUnion (3.53)); Binary intersection <code>A ∩ B = {x | (x∈A)∧(x∈B)}</code> (DefBinaryIntersection (3.54)); Powerclass <code>𝒫(X) = {y | y ⊆ X}</code> (AxmExponent (3.13)). (<a href="symbols/class-type.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefSubclass" class="sym-link">DefSubclass (3.06: ⊆ Def)</a> &middot; <a href="manual.html#AxmExponent" class="sym-link">AxmExponent (3.13: 𝒫 Axiom)</a> &middot; <a href="manual.html#DefUnaryUnion" class="sym-link">DefUnaryUnion (3.19: ⋃ Def)</a> &middot; <a href="manual.html#DefUnaryIntersection" class="sym-link">DefUnaryIntersection (3.20: ⋂ Def)</a> &middot; <a href="manual.html#DefBinaryUnion" class="sym-link">DefBinaryUnion (3.53: ∪ Def)</a> &middot; <a href="manual.html#DefBinaryIntersection" class="sym-link">DefBinaryIntersection (3.54: ∩ Def)</a></td>
           </tr>
           <tr id="sym-conditionals" class="external-row">
             <td class="external-num formula-cell">
-              <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">IF..FI / simple_if / ifᵈₑₚ</a></div>
+              <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">IF..FI / simple_if / if_dep</a></div>
               <div class="formula-latex">\(\href{symbols/conditionals-if-dep.html}{\mathbf{IF..FI} / \mathsf{simple\_if} / \mathsf{if}_{\mathsf{dep}}}\)</div>
               <div class="formula-ansii"><a href="symbols/conditionals-if-dep.html" class="sym-link"><code>IF..FI / simple_if / if_dep</code></a></div>
             </td>
             <td class="external-entity"><span class="badge badge-def">Conditional Functional Symbols (Defined)</span></td>
             <td class="external-entity"><code>Fm × Class × Class → Class  |  Π(b:Bool). T(b)</code></td>
-            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Class conditional <code>⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧ = {⦃v⦄ | (⟦𝛙⟧ ∧ (⦃v⦄∈A)) ∨ ((¬⟦𝛙⟧) ∧ (⦃v⦄∈B))}</code> where <code>¬(Enc(⦃v⦄) ∈ FV(𝛙:Fm))</code> (DefClassConditional (3.22)); polymorphic <code>simple_if(Tₑ,⊤,t₁,t₂)=t₁ ∧ simple_if(Tₑ,⊥,t₁,t₂)=t₂</code> (DefSimpleConditional (3.23)); dependent <code>ifᵈₑₚ(⊤,t₁,t₂)=t₁ ∧ ifᵈₑₚ(⊥,t₁,t₂)=t₂</code> (DefDependentConditional (3.24)). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Personal Page &rarr;</a>)</td>
-            <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: IF-THEN-ELSE-FI)</a> &middot; <a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: ifᵈₑₚ)</a></td>
+            <td class="external-entity"><strong>[Defined] Formal Definitions:</strong> Class conditional <code>⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧ = {⦃v⦄ | (⟦𝛙⟧ ∧ (⦃v⦄∈A)) ∨ ((¬⟦𝛙⟧) ∧ (⦃v⦄∈B))}</code> where <code>¬(Enc(⦃v⦄) ∈ FV(𝛙:Fm))</code> (DefClassConditional (3.22)); polymorphic <code>simple_if(Tₑ,⊤,t₁,t₂)=t₁ ∧ simple_if(Tₑ,⊥,t₁,t₂)=t₂</code> (DefSimpleConditional (3.23)); dependent <code>if_dep(⊤,t₁,t₂)=t₁ ∧ if_dep(⊥,t₁,t₂)=t₂</code> (DefDependentConditional (3.24)). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Personal Page</a>)</td>
+            <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: IF-THEN-ELSE-FI)</a> &middot; <a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: if_dep)</a></td>
           </tr>
           <tr id="sym-quote-anti" class="external-row">
             <td class="external-num formula-cell">
@@ -528,7 +530,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Kernel Quotation &amp; Antiquotation Operators (Primitive)</span></td>
             <td class="external-entity"><code>A → A.Expression  |  A.Expression → A</code></td>
-            <td class="external-entity"><strong>[Primitive / Undefinable Reflection Operators] Natural-Language Definition:</strong> Explicit syntax quotation <code>‹e›</code> suspends evaluation of an expression <code>e:A</code> and returns its syntactic AST object of type <code>A.Expression</code> (e.g., <code>‹𝛗› : Fm = Bool.Expression</code>). Antiquotation / evaluation <code>⟦u⟧</code> splices or evaluates a syntactic expression <code>u:A.Expression</code> back into semantic level <code>A</code>. Binder-variable splice <code>⦃v⦄</code> injects a metavariable <code>v:Variable</code> into a binding site. (<a href="symbols/quotation.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Undefinable Reflection Operators] Natural-Language Definition:</strong> Explicit syntax quotation <code>‹e›</code> suspends evaluation of an expression <code>e:A</code> and returns its syntactic AST object of type <code>A.Expression</code> (e.g., <code>‹𝛗› : Fm = Bool.Expression</code>). Antiquotation / evaluation <code>⟦u⟧</code> splices or evaluates a syntactic expression <code>u:A.Expression</code> back into semantic level <code>A</code>. Binder-variable splice <code>⦃v⦄</code> injects a metavariable <code>v:Variable</code> into a binding site. (<a href="symbols/quotation.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: Quotation in Class Conditional)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Meta-Instantiation)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Comprehension Schema)</a> &middot; <a href="manual.html#ThmLoeb" class="sym-link">ThmLoeb (5.01: Löb's Theorem)</a></td>
           </tr>
           <tr id="sym-enc-dec" class="external-row">
@@ -539,7 +541,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Kernel Reflection &amp; Coding Symbols (Primitive)</span></td>
             <td class="external-entity"><code>A.Expression → Class  |  Type.Expression → Type</code></td>
-            <td class="external-entity"><strong>[Primitive / Undefinable Metatheoretic Operators] Natural-Language Definition:</strong> <code>Enc</code> is the injective Gödel-Dunaev coding mapping syntactic AST objects into first-order classes; <code>Dec</code> is its partial inverse decoding class codes back into syntax; <code>Emb</code> embeds lower-level objects into higher sorts; <code>μ_A</code> / <code>eval</code> interprets syntactic expressions into their semantic denotation in model/conglomerate <code>A</code>. (<a href="symbols/enc.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive / Undefinable Metatheoretic Operators] Natural-Language Definition:</strong> <code>Enc</code> is the injective Gödel-Dunaev coding mapping syntactic AST objects into first-order classes; <code>Dec</code> is its partial inverse decoding class codes back into syntax; <code>Emb</code> embeds lower-level objects into higher sorts; <code>μ_A</code> / <code>eval</code> interprets syntactic expressions into their semantic denotation in model/conglomerate <code>A</code>. (<a href="symbols/enc.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: Enc in FV guard)</a> &middot; <a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Soundness of 𝘛)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: eval(A).Expression)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: Generalisation)</a></td>
           </tr>
           <tr id="sym-fv-ffi" class="external-row">
@@ -550,7 +552,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Kernel Syntactic Hygiene Symbols (Primitive)</span></td>
             <td class="external-entity"><code>A.Expression → Class  |  A.Expression × Variable × Fm → Bool</code></td>
-            <td class="external-entity"><strong>[Primitive Syntactic Hygiene Operators] Natural-Language Definition:</strong> <code>FV(e:A.Expression)</code> returns the class of encoded free variables occurring unbound in syntactic expression <code>e</code> (strictly requiring <code>.Expression</code> sort such as <code>Fm</code> or <code>Class.Expression</code>, never semantic <code>Bool</code>). <code>FFI((t:X.Expression),x,(𝛗:Fm))</code> holds iff no free variable of <code>t</code> becomes captured when substituted for free occurrences of <code>x</code> in <code>𝛗</code>. <code>NFV(X,x,(𝛃:Fm))</code> asserts that <code>x:X</code> does not occur free in <code>𝛃:Fm</code>. (<a href="symbols/hygiene-ffi-fv.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive Syntactic Hygiene Operators] Natural-Language Definition:</strong> <code>FV(e:A.Expression)</code> returns the class of encoded free variables occurring unbound in syntactic expression <code>e</code> (strictly requiring <code>.Expression</code> sort such as <code>Fm</code> or <code>Class.Expression</code>, never semantic <code>Bool</code>). <code>FFI((t:X.Expression),x,(𝛗:Fm))</code> holds iff no free variable of <code>t</code> becomes captured when substituted for free occurrences of <code>x</code> in <code>𝛗</code>. <code>NFV(X,x,(𝛃:Fm))</code> asserts that <code>x:X</code> does not occur free in <code>𝛃:Fm</code>. (<a href="symbols/hygiene-ffi-fv.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#RulForallInstantiation" class="sym-link">RulForallInstantiation (2.02: Forall Instantiation)</a> &middot; <a href="manual.html#RulForallAbstraction" class="sym-link">RulForallAbstraction (2.04: Forall Abstraction)</a> &middot; <a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: FV(𝛙:Fm)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: Ctx.FV(Γ)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: FFI((k:Class.Expression),‹x›,(𝛗:Fm))</a></td>
           </tr>
           <tr id="sym-binders" class="external-row">
@@ -561,7 +563,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-def">Variable-Binding Operators (Binders)</span></td>
             <td class="external-entity"><code>(Variable : Type) × Body → Term/Fm</code></td>
-            <td class="external-entity"><strong>[Primitive &amp; Defined Binders] Formal &amp; Natural-Language Definitions:</strong> Universal <code>∀(x:A),𝛗</code> and Existential <code>∃(x:A),𝛗</code> are primitive quantifiers governed by FI/FA/EI/EA (RulClassComprehension (3.01)); Bounded quantifiers are defined macros: <code>∀(x∈Y),𝛗 ≡ ∀(x:Class),((x∈Y)→𝛗)</code> and <code>∃(x∈Y),𝛗 ≡ ∃(x:Class),((x∈Y)∧𝛗)</code>; At-most-one <code>!(x:A),𝛗</code> (DefAtMostOneBinder (4.04)) and Unique existence <code>∃!(x:A),𝛗 ⟷ (∃(x:A),𝛗)∧(!(x:A),𝛗)</code> (DefExistsUniqueBinder (4.05)) are defined; Class comprehension <code>{x|𝛗}</code> (κ-binder) is the primitive class-forming binder governed by RulClassComprehension (3.01) / AxmMetaClassComprehension (4.06); <code>Σ</code> (DefSigmaModel (3.38)) and <code>Π / λ</code> (DefSigmaModel (3.38)) are defined over set-valued families. (<a href="symbols/binders.html" class="sym-link">Personal Page &rarr;</a>)</td>
+            <td class="external-entity"><strong>[Primitive &amp; Defined Binders] Formal &amp; Natural-Language Definitions:</strong> Universal <code>∀(x:A),𝛗</code> and Existential <code>∃(x:A),𝛗</code> are primitive quantifiers governed by FI/FA/EI/EA (RulClassComprehension (3.01)); Bounded quantifiers are defined macros: <code>∀(x∈Y),𝛗 ≡ ∀(x:Class),((x∈Y)→𝛗)</code> and <code>∃(x∈Y),𝛗 ≡ ∃(x:Class),((x∈Y)∧𝛗)</code>; At-most-one <code>!(x:A),𝛗</code> (DefAtMostOneBinder (4.04)) and Unique existence <code>∃!(x:A),𝛗 ⟷ (∃(x:A),𝛗)∧(!(x:A),𝛗)</code> (DefExistsUniqueBinder (4.05)) are defined; Class comprehension <code>{x|𝛗}</code> (κ-binder) is the primitive class-forming binder governed by RulClassComprehension (3.01) / AxmMetaClassComprehension (4.06); <code>Σ</code> (DefSigmaModel (3.38)) and <code>Π / λ</code> (DefSigmaModel (3.38)) are defined over set-valued families. (<a href="symbols/binders.html" class="sym-link">Personal Page</a>)</td>
             <td class="external-entity"><a href="manual.html#RulForallInstantiation" class="sym-link">RulForallInstantiation (2.02: ∀ Rules)</a> &middot; <a href="manual.html#RulExistsInstantiation" class="sym-link">RulExistsInstantiation (2.03: ∃ Rules)</a> &middot; <a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Σ Type)</a> &middot; <a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Π &amp; λ)</a> &middot; <a href="manual.html#DefAtMostOneBinder" class="sym-link">DefAtMostOneBinder (4.04: ! Def)</a> &middot; <a href="manual.html#DefExistsUniqueBinder" class="sym-link">DefExistsUniqueBinder (4.05: ∃! Def)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: {x|𝛗} Schema)</a></td>
           </tr>
         </tbody>
@@ -593,7 +595,7 @@
               <div class="formula-latex">\(\href{symbols/class-type.html}{\mathsf{Class}}\)</div>
               <div class="formula-ansii"><a href="symbols/class-type.html" class="sym-link"><code>Class</code></a></div>
             </td>
-            <td class="external-entity"><code>Huge_Col (Default Object Type; Constant-True Conglomerate λ(C:Class). ⊤)</code> (<a href="symbols/class-type.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Huge_Col (Default Object Type; Constant-True Conglomerate λ(C:Class). ⊤)</code> (<a href="symbols/class-type.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmDiscourseNonEmpty" class="sym-link">AxmDiscourseNonEmpty (2.01: Non-emptiness)</a> &middot; <a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Class Equality)</a></td>
             <td class="external-entity"><a href="manual.html#DefEmptySet" class="sym-link">DefEmptySet (3.04: ∅)</a> &middot; <a href="manual.html#DefUniversalClass" class="sym-link">DefUniversalClass (3.05: V)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Comprehension {x|𝛗})</a></td>
             <td class="external-entity"><a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Membership x ∈ Y)</a> &middot; <a href="manual.html#AxmSizeLimitation" class="sym-link">AxmSizeLimitation (3.43: Global Choice)</a></td>
@@ -606,11 +608,11 @@
               <div class="formula-latex">\(\href{symbols/prop-bool.html}{\mathsf{Bool}}\)</div>
               <div class="formula-ansii"><a href="symbols/prop-bool.html" class="sym-link"><code>Bool  (Truth)</code></a></div>
             </td>
-            <td class="external-entity"><code>Small_Col / Huge_Col (Two-Element Truth Value Type)</code> (<a href="symbols/prop-bool.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Small_Col / Huge_Col (Two-Element Truth Value Type)</code> (<a href="symbols/prop-bool.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropWeakening" class="sym-link">AxmPropWeakening (1.01: Propositional Basis)</a> &middot; <a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: Bool Formation)</a></td>
             <td class="external-entity"><a href="manual.html#AxmPropExFalso" class="sym-link">AxmPropExFalso (1.11: ⊤ / true)</a> &middot; <a href="manual.html#AxmPropNegIntro" class="sym-link">AxmPropNegIntro (1.10: ⊥ / false)</a></td>
-            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: ifᵈₑₚ Dependent Elim)</a></td>
-            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if(⊤)=t₁, simple_if(⊥)=t₂)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24) (ifᵈₑₚ(⊤)=t₁, ifᵈₑₚ(⊥)=t₂)</a></td>
+            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: if_dep Dependent Elim)</a></td>
+            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if(⊤)=t₁, simple_if(⊥)=t₂)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24) (if_dep(⊤)=t₁, if_dep(⊥)=t₂)</a></td>
             <td class="external-entity"><a href="manual.html#AxmPropNegIntro" class="sym-link">AxmPropNegIntro (1.10: Two-Valued Exhaustiveness / DNE)</a></td>
           </tr>
           <tr id="type-fm" class="external-row">
@@ -619,7 +621,7 @@
               <div class="formula-latex">\(\href{symbols/fm-sort.html}{\mathsf{Fm}}\)</div>
               <div class="formula-ansii"><a href="symbols/fm-sort.html" class="sym-link"><code>Fm  (= Bool.Expression)</code></a></div>
             </td>
-            <td class="external-entity"><code>Huge_Col (Syntactic Formula Expression Type; UExpression TTruth)</code> (<a href="symbols/fm-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Huge_Col (Syntactic Formula Expression Type; UExpression TTruth)</code> (<a href="symbols/fm-sort.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Syntactic Formula Sort)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Fm Quantification)</a></td>
             <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Quotation ‹...› : Fm)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: ‹∀(v:A)⟦𝛗⟧›)</a></td>
             <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Antiquotation ⟦𝛙⟧ &amp; FV(𝛙:Fm)</a> &middot; <a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.73: Soundness ⟦ψ⟧)</a></td>
@@ -632,7 +634,7 @@
               <div class="formula-latex">\(\href{symbols/binders.html}{\Sigma(a:A), B(a)}\)</div>
               <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Sigma (a:A), B(a)</code></a></div>
             </td>
-            <td class="external-entity"><code>Dependent Sum Conglomerate / Pair Type (DefSigmaModel (3.38))</code> (<a href="symbols/binders.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Dependent Sum Conglomerate / Pair Type (DefSigmaModel (3.38))</code> (<a href="symbols/binders.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Σ Formation over Family B)</a></td>
             <td class="external-entity"><a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Dependent Pair ⟨a, b⟩ : Σ(a:A), B(a)</a></td>
             <td class="external-entity"><a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Projections fst(p) : A, snd(p) : B(fst(p))</a></td>
@@ -645,7 +647,7 @@
               <div class="formula-latex">\(\href{symbols/binders.html}{\Pi(a:A), B(a)}\)</div>
               <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Pi (a:A), B(a)</code></a></div>
             </td>
-            <td class="external-entity"><code>Dependent Product Conglomerate / Function Type (DefPiPredicateModel (3.39))</code> (<a href="symbols/binders.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Dependent Product Conglomerate / Function Type (DefPiPredicateModel (3.39))</code> (<a href="symbols/binders.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefPiPredicateModel" class="sym-link">DefPiPredicateModel (3.39: Π Formation over Family B)</a></td>
             <td class="external-entity"><a href="manual.html#DefPiPredicateModel" class="sym-link">DefPiPredicateModel (3.39: Lambda λ(a:A). t(a) : Π(a:A), B(a)</a></td>
             <td class="external-entity"><a href="manual.html#DefValueAtArg" class="sym-link">DefValueAtArg (3.25: Evaluation valOf(f, a)</a> &middot; <a href="manual.html#DefPiPredicateModel" class="sym-link">DefPiPredicateModel (3.39: Application f(a) : B(a)</a></td>
@@ -658,7 +660,7 @@
               <div class="formula-latex">\(\href{symbols/class-type.html}{\mathsf{Nat} / \omega}\)</div>
               <div class="formula-ansii"><a href="symbols/class-type.html" class="sym-link"><code>Nat  /  omega</code></a></div>
             </td>
-            <td class="external-entity"><code>Peano Natural Numbers / Smallest Successor-Inductive Ordinal (DefNaturalNumberModels (3.50), DefOmega (3.56))</code> (<a href="symbols/class-type.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Peano Natural Numbers / Smallest Successor-Inductive Ordinal (DefNaturalNumberModels (3.50), DefOmega (3.56))</code> (<a href="symbols/class-type.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefInductiveClass" class="sym-link">DefInductiveClass (3.55: Ind Predicate)</a> &middot; <a href="manual.html#DefOmega" class="sym-link">DefOmega (3.56: ω Def)</a> &middot; <a href="manual.html#AxmOmegaIsSet" class="sym-link">AxmOmegaIsSet (3.57: Axiom of Infinity: ω set)</a></td>
             <td class="external-entity"><a href="manual.html#DefNaturalNumberModels" class="sym-link">DefNaturalNumberModels (3.50: 0 = ∅, n+1 = n ∪ {n})</a> &middot; <a href="manual.html#ThmOmegaInductive" class="sym-link">ThmOmegaInductive (3.59: Ind(ω)</a></td>
             <td class="external-entity"><a href="manual.html#DefOmega" class="sym-link">DefOmega (3.56: ⊆-Minimality / Peano Induction: Ind(Q) → ω ⊆ Q)</a></td>
@@ -671,7 +673,7 @@
               <div class="formula-latex">\(\href{symbols/theory-sort.html}{\mathsf{Ctx}, \mathsf{Theory}, \mathsf{Stmt}, \mathsf{Prf}, \mathsf{Variable}, \mathsf{Type}}\)</div>
               <div class="formula-ansii"><a href="symbols/theory-sort.html" class="sym-link"><code>Ctx / Theory / Stmt / Prf / Variable / Type</code></a></div>
             </td>
-            <td class="external-entity"><code>Kernel Metatheoretic &amp;amp; Reflection Sorts</code> (<a href="symbols/theory-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity"><code>Kernel Metatheoretic &amp;amp; Reflection Sorts</code> (<a href="symbols/theory-sort.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Sequent &amp; Theory Sorts)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Type, Ctx, Variable Sorts)</a></td>
             <td class="external-entity"><a href="manual.html#AxmBaseSubtheoryOfFull" class="sym-link">AxmBaseSubtheoryOfFull (3.75: Sequent (𝘞, Γ ⊢ 𝛗)</a></td>
             <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.73: Soundness of 𝘍)</a> &middot; <a href="manual.html#DefMetaConecessitation" class="sym-link">DefMetaConecessitation (4.03: CoNecessitation)</a></td>
@@ -707,7 +709,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Syntactic Formula Variables (Greek Letters)</span></td>
             <td class="external-entity"><code>Fm  (= Bool.Expression)</code></td>
-            <td class="external-entity">Greek letters are strictly reserved for syntactic formulas of type Fm (= Bool.Expression), NEVER semantic Bool. Because they have type Fm, free-variable operators FV(𝛙:Fm) and substitution guards FFI((t:X.Expression), x, (𝛗:Fm)) are well-typed on them. (<a href="symbols/formula-metavariables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Greek letters are strictly reserved for syntactic formulas of type Fm (= Bool.Expression), NEVER semantic Bool. Because they have type Fm, free-variable operators FV(𝛙:Fm) and substitution guards FFI((t:X.Expression), x, (𝛗:Fm)) are well-typed on them. (<a href="symbols/formula-metavariables.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmPropWeakening" class="sym-link">AxmPropWeakening (1.01: 𝛂, 𝛃)</a> &middot; <a href="manual.html#RulForallInstantiation" class="sym-link">RulForallInstantiation (2.02: 𝛗:Fm)</a> &middot; <a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: 𝛙:Fm in FV(𝛙:Fm)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: 𝛗:Fm in FFI)</a></td>
           </tr>
           <tr id="var-set-lowercase" class="external-row">
@@ -718,7 +720,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Lowercase Class Variables (Set-Intended Class Variables)</span></td>
             <td class="external-entity"><code>Class  (or Class.Expression when quoted)</code></td>
-            <td class="external-entity">Class variables (having binder, bound, or free occurrences; note that a Class itself cannot be free or bound) of default type Class that typically range over elements of classes (and hence sets by DefIsSet (3.02)). Always typed as ': Class', never ': Set'. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Class variables (having binder, bound, or free occurrences; note that a Class itself cannot be free or bound) of default type Class that typically range over elements of classes (and hence sets by DefIsSet (3.02)). Always typed as ': Class', never ': Set'. (<a href="symbols/variables.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#RulClassComprehension" class="sym-link">RulClassComprehension (3.01: Extensionality)</a> &middot; <a href="manual.html#DefIsSet" class="sym-link">DefIsSet (3.02: Sethood)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Comprehension Bound Variable)</a></td>
           </tr>
           <tr id="var-class-uppercase" class="external-row">
@@ -729,7 +731,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Uppercase Object Variables (General Class / Conglomerate Variables)</span></td>
             <td class="external-entity"><code>Class  |  Type  |  Prop</code></td>
-            <td class="external-entity">Variables ranging over arbitrary classes (including proper classes such as V, On), successor-inductive classes Q (DefOmega (3.56)), or conglomerate types A : Type (DefMetaInstantiation (4.01)). (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Variables ranging over arbitrary classes (including proper classes such as V, On), successor-inductive classes Q (DefOmega (3.56)), or conglomerate types A : Type (DefMetaInstantiation (4.01)). (<a href="symbols/variables.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefSubclass" class="sym-link">DefSubclass (3.06: Subclass A ⊆ B)</a> &middot; <a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Branches A, B : Class)</a> &middot; <a href="manual.html#DefOmega" class="sym-link">DefOmega (3.56: Ind(Q)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: A : Type)</a></td>
           </tr>
           <tr id="var-func-family" class="external-row">
@@ -740,7 +742,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Relation, Family &amp; Class-Function Variables</span></td>
             <td class="external-entity"><code>Class  |  Family  |  Π(a:A), B(a)</code></td>
-            <td class="external-entity">Variables denoting relations, set-valued families, class-functions, or dependent functions. (<a href="symbols/variables.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Variables denoting relations, set-valued families, class-functions, or dependent functions. (<a href="symbols/variables.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefValueAtArg" class="sym-link">DefValueAtArg (3.25: valOf(F, x)</a> &middot; <a href="manual.html#DefClassFunction" class="sym-link">DefClassFunction (3.32: family(F)</a> &middot; <a href="manual.html#DefInjectiveFunction" class="sym-link">DefInjectiveFunction (3.33: class-function(F)</a></td>
           </tr>
           <tr id="var-meta-syntax" class="external-row">
@@ -751,7 +753,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Syntactic Variable-Name &amp; Term-Expression Variables</span></td>
             <td class="external-entity"><code>Variable  |  Name  |  Class.Expression  |  eval(A).Expression</code></td>
-            <td class="external-entity">Metatheoretic variables ranging over syntactic variable identifiers (v : Variable, x : Name) and object-language term expressions (k : Class.Expression, t : eval(A).Expression). (<a href="symbols/variable-expression.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Metatheoretic variables ranging over syntactic variable identifiers (v : Variable, x : Name) and object-language term expressions (k : Class.Expression, t : eval(A).Expression). (<a href="symbols/variable-expression.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: v : Variable)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: t : eval(A).Expression)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: k : Class.Expression)</a></td>
           </tr>
           <tr id="var-dep-branches" class="external-row">
@@ -762,8 +764,8 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Subscripted Type-Family &amp; Conditional Branch Variables</span></td>
             <td class="external-entity"><code>Type  |  (Bool → Type)  |  ⟦Tₑ⟧</code></td>
-            <td class="external-entity">Type-expression / family parameter Tₑ and true/false branch witnesses t₁, t₂ in simple_if (DefDependentConditional (3.24)) and ifᵈₑₚ (DefDependentConditional (3.24)). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Page &rarr;</a>)</td>
-            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: ifᵈₑₚ)</a></td>
+            <td class="external-entity">Type-expression / family parameter Tₑ and true/false branch witnesses t₁, t₂ in simple_if (DefDependentConditional (3.24)) and if_dep (DefDependentConditional (3.24)). (<a href="symbols/conditionals-if-dep.html" class="sym-link">Symbol Page</a>)</td>
+            <td class="external-entity"><a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: simple_if)</a> &middot; <a href="manual.html#DefDependentConditional" class="sym-link">DefDependentConditional (3.24: if_dep)</a></td>
           </tr>
           <tr id="var-ctx-theory" class="external-row">
             <td class="external-num formula-cell">
@@ -773,7 +775,7 @@
             </td>
             <td class="external-entity"><span class="badge badge-thm">Sequent Context &amp; Formal Theory Variables/Constants</span></td>
             <td class="external-entity"><code>Ctx  |  Ctx.Expression  |  Theory</code></td>
-            <td class="external-entity">Context variables (Γ : Ctx, G : Ctx.Expression) and formal theories: r.e. base theory 𝘫, non-r.e. sound Henkin completion 𝘍, unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘫, NBG, MK}, and arbitrary theory 𝘞. (<a href="symbols/theory-sort.html" class="sym-link">Page &rarr;</a>)</td>
+            <td class="external-entity">Context variables (Γ : Ctx, G : Ctx.Expression) and formal theories: r.e. base theory 𝘫, non-r.e. sound Henkin completion 𝘍, unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘫, NBG, MK}, and arbitrary theory 𝘞. (<a href="symbols/theory-sort.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: 𝘫, 𝘍)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: 𝘞, G:Ctx.Expression)</a> &middot; <a href="manual.html#ThmLoeb" class="sym-link">ThmLoeb (5.01: 𝘌, 𝘫 in Löb)</a> &middot; <a href="manual.html#ThmSecondIncompleteness" class="sym-link">ThmSecondIncompleteness (5.02: 2nd Incompleteness)</a></td>
           </tr>
         </tbody>
@@ -1759,7 +1761,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/quotation.html" class="sym-link">Left object-language syntactic quotation bracket &lt;phi&gt; (Constructor: HQuote)</a> &mdash; <code>symbols/quotation.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/quotation.html" class="sym-link">Left object-language syntactic quotation bracket &amp;lt;phi&amp;gt; (Constructor: HQuote)</a> &mdash; <code>symbols/quotation.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -1798,7 +1800,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/quotation.html" class="sym-link">Right object-language syntactic quotation bracket &lt;phi&gt; (Constructor: HQuote)</a> &mdash; <code>symbols/quotation.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/quotation.html" class="sym-link">Right object-language syntactic quotation bracket &amp;lt;phi&amp;gt; (Constructor: HQuote)</a> &mdash; <code>symbols/quotation.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -1954,11 +1956,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/unit-type.html" class="sym-link">Unit / Top type in Variant 2 (ASCII: Unit, LaTeX: \mathbf{1} / \top, Constructor: UUnit / TTop)</a> &mdash; <code>symbols/unit-type.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/unit-type.html" class="sym-link">Unit / Top type in Variant 2 (ASCII: Unit, LaTeX: 1 / top, Constructor: UUnit / TTop)</a> &mdash; <code>symbols/unit-type.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Unit / Top type in Variant 2 (ASCII: Unit, LaTeX: \mathbf{1} / \top, Constructor: UUnit / TTop) &mdash; see linked <a href="symbols/unit-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Unit / Top type in Variant 2 (ASCII: Unit, LaTeX: 1 / top, Constructor: UUnit / TTop) &mdash; see linked <a href="symbols/unit-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -1993,11 +1995,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/void-type.html" class="sym-link">Void / Empty / Bottom type in Variant 2 (ASCII: Void, LaTeX: \mathbf{0} / \bot, Constructor: UVoid / TBottom)</a> &mdash; <code>symbols/void-type.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/void-type.html" class="sym-link">Void / Empty / Bottom type in Variant 2 (ASCII: Void, LaTeX: 0 / bottom, Constructor: UVoid / TBottom)</a> &mdash; <code>symbols/void-type.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Void / Empty / Bottom type in Variant 2 (ASCII: Void, LaTeX: \mathbf{0} / \bot, Constructor: UVoid / TBottom) &mdash; see linked <a href="symbols/void-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Void / Empty / Bottom type in Variant 2 (ASCII: Void, LaTeX: 0 / bottom, Constructor: UVoid / TBottom) &mdash; see linked <a href="symbols/void-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -2032,7 +2034,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/iff-conn.html" class="sym-link">Logical bi-implication / equivalence connective on formulas (Variant 1: &lt;--&gt; / \longleftrightarrow, Constructor: HP (TpIff ...))</a> &mdash; <code>symbols/iff-conn.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/iff-conn.html" class="sym-link">Logical bi-implication / equivalence connective on formulas (Variant 1: &amp;lt;--&amp;gt; / longleftrightarrow, Constructor: HP (TpIff ...))</a> &mdash; <code>symbols/iff-conn.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -2071,11 +2073,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -2110,11 +2112,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -2149,11 +2151,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/impl-conn.html" class="sym-link">Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...))</a> &mdash; <code>symbols/impl-conn.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&gt; / \longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Material implication connective on formulas (Variant 1: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked <a href="symbols/impl-conn.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -2188,11 +2190,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/type-iff.html" class="sym-link">Type-level equivalence / bi-arrow (Variant 2: &lt;-&gt; / \leftrightarrow, Constructor: TIff)</a> &mdash; <code>symbols/type-iff.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/type-iff.html" class="sym-link">Type-level equivalence / bi-arrow (Variant 2: &amp;lt;-&amp;gt; / leftrightarrow, Constructor: TIff)</a> &mdash; <code>symbols/type-iff.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Type-level equivalence / bi-arrow (Variant 2: &lt;-&gt; / \leftrightarrow, Constructor: TIff) &mdash; see linked <a href="symbols/type-iff.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Type-level equivalence / bi-arrow (Variant 2: &amp;lt;-&amp;gt; / leftrightarrow, Constructor: TIff) &mdash; see linked <a href="symbols/type-iff.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -2227,7 +2229,7 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/func-arrow.html" class="sym-link">Function space / type arrow (Variant 2: -&gt; / \rightarrow, Constructor: TArrow / Pi)</a> &mdash; <code>symbols/func-arrow.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/func-arrow.html" class="sym-link">Function space / type arrow (Variant 2: -&amp;gt; / rightarrow, Constructor: TArrow / Pi)</a> &mdash; <code>symbols/func-arrow.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
@@ -2266,11 +2268,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/prod-type.html" class="sym-link">Binary Cartesian product type in Variant 2 (ASCII: *, LaTeX: \times, Constructor: UBinaryProduct / TProd)</a> &mdash; <code>symbols/prod-type.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/prod-type.html" class="sym-link">Binary Cartesian product type in Variant 2 (ASCII: *, LaTeX: times, Constructor: UBinaryProduct / TProd)</a> &mdash; <code>symbols/prod-type.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Binary Cartesian product type in Variant 2 (ASCII: *, LaTeX: \times, Constructor: UBinaryProduct / TProd) &mdash; see linked <a href="symbols/prod-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Binary Cartesian product type in Variant 2 (ASCII: *, LaTeX: times, Constructor: UBinaryProduct / TProd) &mdash; see linked <a href="symbols/prod-type.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -4702,7 +4704,7 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">ifᵈₑₚ</a></div>
+                <div class="formula-unicode"><a href="symbols/conditionals-if-dep.html" class="sym-link">if_dep</a></div>
               </td>
             </tr>
             <tr class="row-latex">
@@ -4723,11 +4725,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/conditionals-if-dep.html" class="sym-link">Dependent conditional functional symbol (ifᵈₑₚ)</a> &mdash; <code>symbols/conditionals-if-dep.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/conditionals-if-dep.html" class="sym-link">Dependent conditional functional symbol (if_dep)</a> &mdash; <code>symbols/conditionals-if-dep.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Defined Operator] Formal Definition (DefDependentConditional (3.24)):</strong> Dependent conditional over type family <code>Tₑ:Bool→Type</code>: <code>(ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (ifᵈₑₚ(⊤,t₁,t₂)=t₁) ∧ (ifᵈₑₚ(⊥,t₁,t₂)=t₂)</code>.</td>
+              <td class="field-value"><strong>[Defined Operator] Formal Definition (DefDependentConditional (3.24)):</strong> Dependent conditional over type family <code>Tₑ:Bool→Type</code>: <code>(if_dep(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (if_dep(⊤,t₁,t₂)=t₁) ∧ (if_dep(⊥,t₁,t₂)=t₂)</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -4762,11 +4764,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/conditionals-if-dep.html" class="sym-link">Dependent conditional functional symbol (ifᵈₑₚ)</a> &mdash; <code>symbols/conditionals-if-dep.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/conditionals-if-dep.html" class="sym-link">Dependent conditional functional symbol (if_dep)</a> &mdash; <code>symbols/conditionals-if-dep.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Defined Operator] Formal Definition (DefDependentConditional (3.24)):</strong> Dependent conditional over type family <code>Tₑ:Bool→Type</code>: <code>(ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (ifᵈₑₚ(⊤,t₁,t₂)=t₁) ∧ (ifᵈₑₚ(⊥,t₁,t₂)=t₂)</code>.</td>
+              <td class="field-value"><strong>[Defined Operator] Formal Definition (DefDependentConditional (3.24)):</strong> Dependent conditional over type family <code>Tₑ:Bool→Type</code>: <code>(if_dep(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (if_dep(⊤,t₁,t₂)=t₁) ∧ (if_dep(⊥,t₁,t₂)=t₂)</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -6560,7 +6562,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive Semantic Type] Natural-Language Definition:</strong> The 2-element semantic truth-value conglomerate inhabited by truth values (<code>⊤/true</code>, <code>⊥/false</code>) and eliminated by <code>simple_if</code> (DefSimpleConditional (3.23)) and <code>ifᵈₑₚ</code> (DefDependentConditional (3.24)).</td>
+              <td class="field-value"><strong>[Primitive Semantic Type] Natural-Language Definition:</strong> The 2-element semantic truth-value conglomerate inhabited by truth values (<code>⊤/true</code>, <code>⊥/false</code>) and eliminated by <code>simple_if</code> (DefSimpleConditional (3.23)) and <code>if_dep</code> (DefDependentConditional (3.24)).</td>
             </tr>
             </tbody>
           </table>
@@ -6595,11 +6597,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/bool-true.html" class="sym-link">Boolean truth value (true : Bool, distinct from formula Verum T / \top and Unit type)</a> &mdash; <code>symbols/bool-true.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/bool-true.html" class="sym-link">Boolean truth value (true : Bool, distinct from formula Verum T / top and Unit type)</a> &mdash; <code>symbols/bool-true.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Boolean truth value (true : Bool, distinct from formula Verum T / \top and Unit type) &mdash; see linked <a href="symbols/bool-true.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Boolean truth value (true : Bool, distinct from formula Verum T / top and Unit type) &mdash; see linked <a href="symbols/bool-true.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -6634,11 +6636,11 @@
             </tr>
             <tr>
               <th class="field-name">Canonical Target / Personal Page</th>
-              <td class="field-value entry-title-cell"><a href="symbols/bool-false.html" class="sym-link">Boolean falsity value (false : Bool, distinct from formula Falsum F / \bot and Void type)</a> &mdash; <code>symbols/bool-false.html</code></td>
+              <td class="field-value entry-title-cell"><a href="symbols/bool-false.html" class="sym-link">Boolean falsity value (false : Bool, distinct from formula Falsum F / bottom and Void type)</a> &mdash; <code>symbols/bool-false.html</code></td>
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Boolean falsity value (false : Bool, distinct from formula Falsum F / \bot and Void type) &mdash; see linked <a href="symbols/bool-false.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Boolean falsity value (false : Bool, distinct from formula Falsum F / bottom and Void type) &mdash; see linked <a href="symbols/bool-false.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
             </tr>
             </tbody>
           </table>
@@ -8257,6 +8259,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: false &mdash; Boolean Falsity Value (false : Bool)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -429,7 +431,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p>Used as the second branch selector in polymorphic conditional <code>simple_if(T_e, false, t_1, t_2) = t_2</code> (Entry DefSimpleConditional (3.23)) and dependent conditional <code>ifᵈₑₚ(false, t_1, t_2) = t_2</code> over <code>T_e : Bool → Type</code> (Entry DefDependentConditional (3.24)). Strictly distinct from Variant 1's formula Falsum <code>⊥ : Fm</code> (ASCII <code>F</code>) and Variant 2's type <code>Void</code> (<code>𝟘</code>).</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p>Used as the second branch selector in polymorphic conditional <code>simple_if(T_e, false, t_1, t_2) = t_2</code> (Entry DefSimpleConditional (3.23)) and dependent conditional <code>if_dep(false, t_1, t_2) = t_2</code> over <code>T_e : Bool → Type</code> (Entry DefDependentConditional (3.24)). Strictly distinct from Variant 1's formula Falsum <code>⊥ : Fm</code> (ASCII <code>F</code>) and Variant 2's type <code>Void</code> (<code>𝟘</code>).</p></td>
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Canonical Law (Unicode)</td>
@@ -437,7 +439,7 @@
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/simple-if.html}{\mathsf{simple\_if}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{T_e} \href{../symbols/comma-delim.html}{,}  \href{../symbols/bool-false.html}{\mathsf{false}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{t_2} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/simple-if.html}{\mathsf{simple\_if}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{T_e} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/bool-false.html}{\mathsf{false}} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/eq-pred.html}{=} ~\href{../symbols/variables.html}{t_2} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
@@ -448,9 +450,9 @@
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="bool-true.html" class="sym-link">Boolean Value true : Bool</a></li>
 <li><a href="prop-bool.html" class="sym-link">Boolean Type Bool</a></li>
-<li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional ifᵈₑₚ</a></li>
+<li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional if_dep</a></li>
 <li><a href="../manual.html#DefSimpleConditional" class="sym-link">Definition DefSimpleConditional (3.23): simple_if (polymorphic non-dependent conditional over Type)</a></li>
-<li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): ifᵈₑₚ (dependent conditional over (Bool → Type))</a></li>
+<li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): if_dep (dependent conditional over (Bool → Type))</a></li>
 </ul></td>
           </tr>
         </tbody>
@@ -467,6 +469,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

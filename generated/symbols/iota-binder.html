@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: ι &mdash; Definite Description Binder</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -437,7 +439,7 @@
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/exists-uniq-binder.html}{\exists!} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/func-arrow.html}{\rightarrow}  \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/iota-binder.html}{\iota} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/exists-uniq-binder.html}{\exists!} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/func-arrow.html}{\rightarrow} ~\href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/iota-binder.html}{\iota} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/formula-metavariables.html}{\boldsymbol{\varphi}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
@@ -464,6 +466,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

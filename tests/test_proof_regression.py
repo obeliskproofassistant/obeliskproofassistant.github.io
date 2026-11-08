@@ -95,8 +95,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(nbg_lib["definitional_count"], 16)
         self.assertEqual(nbg_lib["axiomatic_count"], 7)
         thm_a03 = next(t for t in nbg_lib["theorems"] if t["name"] == "thm_A03")
-        self.assertIn("(λ(A:Prop). (λ(B:Prop). (λ(p:(A ∧ B)). fst(p)))) ≡ (λ(A:Prop). (λ(B:Prop). fst))", thm_a03["proof_unicode"])
-        self.assertIn("∀(A:Prop), ∀(B:Prop), ((A ∧ B) → A)", thm_a03["statement_unicode"])
+        self.assertIn("(λ(A:Prop). (λ(B:Prop). (λ(p:(A × B)). fst(p)))) ≡ (λ(A:Prop). (λ(B:Prop). fst))", thm_a03["proof_unicode"])
+        self.assertIn("Π(A:Prop), Π(B:Prop), ((A × B) → A)", thm_a03["statement_unicode"])
         self.assertNotIn("rel-in\">∈", self.gen_manual_html)
 
     def test_database_entries_count(self):
@@ -178,26 +178,26 @@ class TestProofRegression(unittest.TestCase):
         eccr = by_name["RulClassComprehension"]
         self.assertEqual(eccr["judgements_unicode"], "[(x:Name), (𝛗:Fm)]")
         self.assertEqual(eccr["side_condition_unicode"], "⊤")
-        self.assertIn('<th class="field-name">Judgements</th>', self.gen_manual_html)
+        self.assertIn('<th class="field-name">Judgements (Unicode)</th>', self.gen_manual_html)
 
-        # RulExistsAbstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
+        # RulExistsAbstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
         eea = by_name["RulExistsAbstraction"]
         self.assertEqual(eea["title"], "Exists Abstraction")
-        self.assertEqual(eea["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)→⟦𝛃⟧))")
+        self.assertEqual(eea["formula_unicode"], "((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))")
         self.assertNotIn("∃(x : Class) (φ → ψ)", self.gen_manual_html)
 
         # AxmPropNegElim is Negation Elimination; AxmPropNegIntro is Negation Introduction (Reductio Ad Absurdum)
         eneg_elim = by_name["AxmPropNegElim"]
-        self.assertEqual(eneg_elim["formula_unicode"], "((¬⟦𝛂⟧)→(⟦𝛂⟧→⊥))")
+        self.assertEqual(eneg_elim["formula_unicode"], "((¬⟦𝛂⟧)—→(⟦𝛂⟧—→⊥))")
         self.assertIn("Negation Elimination", eneg_elim["comment"])
         self.assertNotIn("Negation Introduction", eneg_elim["comment"])
         eneg_intro = by_name["AxmPropNegIntro"]
-        self.assertEqual(eneg_intro["formula_unicode"], "((⟦𝛂⟧→⟦𝛃⟧)→((⟦𝛂⟧→¬⟦𝛃⟧)→¬⟦𝛂⟧))")
+        self.assertEqual(eneg_intro["formula_unicode"], "((⟦𝛂⟧—→⟦𝛃⟧)—→((⟦𝛂⟧—→¬⟦𝛃⟧)—→¬⟦𝛂⟧))")
         self.assertIn("Negation Introduction", eneg_intro["comment"])
 
         # AxmRegularity shows exact kernel formula and labels both Kernel Form and textbook equivalent form
         ereg = by_name["AxmRegularity"]
-        self.assertEqual(ereg["formula_unicode"], "(∀(X:Class)((𝒫(X)⊆X)→(V⊆X)))")
+        self.assertEqual(ereg["formula_unicode"], "(∀(X:Class)((𝒫(X)⊆X)—→(V⊆X)))")
         self.assertIn("Kernel Form", ereg["comment"])
         self.assertIn("textbook", ereg["comment"].lower())
 
@@ -254,12 +254,13 @@ class TestProofRegression(unittest.TestCase):
             self.assertNotIn("PCheat_prf", cert_content, f"Entry {num} uses cheating axiom PCheat_prf!")
 
     def test_if_dep_unicode_and_latex_no_raw_if_dep(self):
-        """Directive 13: Entry 3.24 must render as Unicode subscript ifᵈₑₚ and LaTeX \\mathsf{if}_{\\mathsf{dep}}, never raw if_{dep}."""
+        """Entry 3.24 renders as if_dep in Unicode/ASCII and \\mathsf{if}_{\\mathsf{dep}} in LaTeX, without awkward modifier-superscript d or unescaped math."""
         gen_manual = os.path.join(SITE_DIR, "generated", "manual.html")
         with open(gen_manual, "r", encoding="utf-8") as f:
             gen_html = f.read()
-        self.assertIn("if\u1d48\u2091\u209a", gen_html)
+        self.assertIn("if_dep", gen_html)
         self.assertIn("\\mathsf{if}_{\\mathsf{dep}}", gen_html)
+        self.assertNotIn("if\u1d48\u2091\u209a", gen_html)
         self.assertNotIn("if_{dep}", gen_html)
 
     def test_personal_symbol_pages_and_links(self):
@@ -351,27 +352,26 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(by_name["RulForallInstantiation"]["side_condition_unicode"], "Fm.FFI((t:X.Expression),x,𝛗)")
 
     def test_example_b_sml_kernel_ast_and_scheme_of_types(self):
-        """Example B: SML Kernel AST contains only the Prf_p constructor name (e.g. PA1_prf); Scheme of Types holds the typed formula."""
+        """Example B: SML Kernel AST contains only the Prf_p constructor name (e.g. PA1_prf); Scheme of Types holds the typed formula across 3 notations."""
         self.assertEqual(
-            self.gen_manual_html.count('<th class="field-name">Scheme of Types</th>'),
+            self.gen_manual_html.count('<th class="field-name">Scheme of Types (Unicode)</th>'),
             len(self.gen_db["entries"]),
         )
         idx = self.gen_manual_html.find('id="AxmPropWeakening"')
         self.assertGreaterEqual(idx, 0)
-        a01_block = self.gen_manual_html[idx:idx + 6000]
+        a01_block = self.gen_manual_html[idx:idx + 35000]
         self.assertIn(
             '<th class="field-name">SML Kernel AST</th>\n              <td class="field-value proof-cell"><code>PA1_prf</code></td>',
             a01_block,
         )
-        self.assertIn(
-            '<th class="field-name">Scheme of Types</th>\n              <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>(⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))</code></td>',
-            a01_block,
-        )
+        self.assertIn('<th class="field-name">Scheme of Types (Unicode)</th>', a01_block)
+        self.assertIn('<th class="field-name">Scheme of Types (LaTeX)</th>', a01_block)
+        self.assertIn('<th class="field-name">Scheme of Types (ANSII)</th>', a01_block)
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
         self.assertEqual(by_name["AxmPropWeakening"]["prf_constructor"], "PA1_prf")
         self.assertEqual(
             by_name["AxmPropWeakening"]["scheme_of_types_unicode"],
-            "(⟦[𝛂@Fm.Expression]⟧→(⟦[𝛃@Fm.Expression]⟧→⟦[𝛂@Fm.Expression]⟧))",
+            "(⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧))",
         )
 
     def test_thm_universal_class_is_universe_3_69_proven(self):
@@ -388,7 +388,7 @@ class TestProofRegression(unittest.TestCase):
 
         idx = self.gen_manual_html.find('id="ThmUniversalClassIsUniverse"')
         self.assertGreaterEqual(idx, 0)
-        block_369 = self.gen_manual_html[idx:idx + 60000]
+        block_369 = self.gen_manual_html[idx:idx + 150000]
         self.assertIn('<th class="field-name">Formal Kernel Proof</th>', block_369)
         self.assertIn("Step 1 (ω ∈ V", block_369)
         self.assertIn("Step 2 (V transitive", block_369)

@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: ifᵈₑₚ  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</title>
+  <title>Symbol Reference: if_dep  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (if_dep) &amp; Simple Conditional</title>
   <script>
     window.MathJax = {
       tex: {
@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -353,14 +354,15 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: ifᵈₑₚ  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <h1>Symbol Reference: if_dep  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (if_dep) &amp; Simple Conditional</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -373,7 +375,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</h2>
+      <h2>Dependent Conditional Branching (if_dep) &amp; Simple Conditional</h2>
       <p class="section-desc">Eliminates a Boolean condition <code>b : Bool</code> into a dependent type family <code>Tₑ : Bool → Type</code> (Entry DefDependentConditional (3.24)), where the true branch has type <code>Tₑ(true)</code> and the false branch has type <code>Tₑ(false)</code>.</p>
     </div>
     <div class="table-container">
@@ -388,7 +390,7 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">ifᵈₑₚ  /  simple_if  /  IF..FI</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">if_dep  /  simple_if  /  IF..FI</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
@@ -429,15 +431,15 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Notation &amp; Semantics of <code>ifᵈₑₚ</code> (Directive 13 &amp; Entries DefSimpleConditional (3.23)&ndash;DefDependentConditional (3.24)):</strong></p><ul><li><strong>Unicode Subscript Rendering</strong>: In Unicode formula mode, the dependent conditional is rendered with true Unicode subscript/modifier letters as <code>ifᵈₑₚ</code>, and its branch parameters use Unicode subscripts <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>.</li><li><strong>LaTeX Rendering</strong>: In LaTeX mode, it renders via MathJax as <code>\mathsf{if}_{\mathsf{dep}}</code> with branch parameters <code>T_e, t_1, t_2</code> and boolean values <code>\mathsf{true}, \mathsf{false}</code>.</li><li><strong>Dependent Typing Rule (Entry DefDependentConditional (3.24))</strong>: Given a family of types <code>Tₑ : Bool → Type</code>, a Boolean <code>b : Bool</code>, a true-branch witness <code>t₁ : Tₑ(true)</code>, and a false-branch witness <code>t₂ : Tₑ(false)</code>, the term <code>ifᵈₑₚ(b, t₁, t₂)</code> has type <code>Tₑ(b)</code> and satisfies the beta-reduction laws <code>ifᵈₑₚ(true, t₁, t₂) = t₁</code> and <code>ifᵈₑₚ(false, t₁, t₂) = t₂</code> (verified in Variant 2 as <code>thm_85_if_dep_true_branch</code> and <code>thm_86_if_dep_false_branch</code>).</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Notation &amp; Semantics of <code>if_dep</code> (Directive 13 &amp; Entries DefSimpleConditional (3.23)&ndash;DefDependentConditional (3.24)):</strong></p><ul><li><strong>Unicode Subscript Rendering</strong>: In Unicode formula mode, the dependent conditional is rendered with true Unicode subscript/modifier letters as <code>if_dep</code>, and its branch parameters use Unicode subscripts <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>.</li><li><strong>LaTeX Rendering</strong>: In LaTeX mode, it renders via MathJax as <code>\mathsf{if}_{\mathsf{dep}}</code> with branch parameters <code>T_e, t_1, t_2</code> and boolean values <code>\mathsf{true}, \mathsf{false}</code>.</li><li><strong>Dependent Typing Rule (Entry DefDependentConditional (3.24))</strong>: Given a family of types <code>Tₑ : Bool → Type</code>, a Boolean <code>b : Bool</code>, a true-branch witness <code>t₁ : Tₑ(true)</code>, and a false-branch witness <code>t₂ : Tₑ(false)</code>, the term <code>if_dep(b, t₁, t₂)</code> has type <code>Tₑ(b)</code> and satisfies the beta-reduction laws <code>if_dep(true, t₁, t₂) = t₁</code> and <code>if_dep(false, t₁, t₂) = t₂</code> (verified in Variant 2 as <code>thm_85_if_dep_true_branch</code> and <code>thm_86_if_dep_false_branch</code>).</li></ul></td>
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Canonical Law (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(ifᵈₑₚ(true, t₁, t₂) = t₁) ∧ (ifᵈₑₚ(false, t₁, t₂) = t₂)</code></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(if_dep(true, t₁, t₂) = t₁) ∧ (if_dep(false, t₁, t₂) = t₂)</code></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-true.html}{\mathsf{true}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{t_1} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-false.html}{\mathsf{false}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-true.html}{\mathsf{true}} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/eq-pred.html}{=} ~\href{../symbols/variables.html}{t_1} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-false.html}{\mathsf{false}} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/eq-pred.html}{=} ~\href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
@@ -450,7 +452,7 @@
 <li><a href="bool-true.html" class="sym-link">Boolean Value true : Bool</a></li>
 <li><a href="bool-false.html" class="sym-link">Boolean Value false : Bool</a></li>
 <li><a href="../manual.html#DefSimpleConditional" class="sym-link">Definition DefSimpleConditional (3.23): simple_if (polymorphic non-dependent conditional over Type)</a></li>
-<li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): ifᵈₑₚ (dependent conditional over (Bool → Type))</a></li>
+<li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): if_dep (dependent conditional over (Bool → Type))</a></li>
 </ul></td>
           </tr>
         </tbody>
@@ -467,6 +469,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

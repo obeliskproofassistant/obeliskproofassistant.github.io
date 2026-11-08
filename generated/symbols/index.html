@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Personal Symbol Reference Pages (<code>generated/symbols/</code>)</h1>
-      <p class="subtitle">Dedicated reference pages explaining quotation/antiquotation (<code>‹...›</code>, <code>⟨...⟩</code>), encoding/decoding (<code>Enc</code>, <code>Dec</code>), embedding (<code>Emb</code>), valuation (<code>μ_A</code>), conglomerate types (<code>Class</code>, <code>Type</code>), binders, and dependent conditionals (<code>ifᵈₑₚ</code>) in <strong>MKTD1 (Variant 1)</strong> and <strong>MKTD2 (Variant 2)</strong>.</p>
+      <p class="subtitle">Dedicated reference pages explaining quotation/antiquotation (<code>‹...›</code>, <code>⟨...⟩</code>), encoding/decoding (<code>Enc</code>, <code>Dec</code>), embedding (<code>Emb</code>), valuation (<code>μ_A</code>), conglomerate types (<code>Class</code>, <code>Type</code>), binders, and dependent conditionals (<code>if_dep</code>) in <strong>MKTD1 (Variant 1)</strong> and <strong>MKTD2 (Variant 2)</strong>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -1290,7 +1292,7 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="conditionals-if-dep.html" class="sym-link">ifᵈₑₚ  /  simple_if  /  IF..FI</a></div>
+                <div class="formula-unicode"><a href="conditionals-if-dep.html" class="sym-link">if_dep  /  simple_if  /  IF..FI</a></div>
               </td>
             </tr>
             <tr class="row-latex">
@@ -1307,7 +1309,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="conditionals-if-dep.html" class="sym-link"><strong>Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</strong> (<code>symbols/conditionals-if-dep.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="conditionals-if-dep.html" class="sym-link"><strong>Dependent Conditional Branching (if_dep) &amp; Simple Conditional</strong> (<code>symbols/conditionals-if-dep.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -5508,6 +5510,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

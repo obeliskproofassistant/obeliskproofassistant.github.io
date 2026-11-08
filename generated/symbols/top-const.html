@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: ⊤ &mdash; Verum (Logical Truth Formula)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1: 1st-Order Proof Assistant) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1: 1st-Order Proof Assistant) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -505,9 +507,23 @@
               <th class="field-name">SML Kernel AST</th>
               <td class="field-value proof-cell"><code>PA13_prf</code></td>
             </tr>
-            <tr>
-              <th class="field-name">Scheme of Types</th>
-              <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>⊤</code></td>
+            <tr class="row-scheme row-unicode">
+              <th class="field-name">Scheme of Types (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></span></div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-latex">
+              <th class="field-name">Scheme of Types (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span>\({\color[RGB]{96,165,250}\href{../symbols/top-const.html}{\color[RGB]{96,165,250}\top}} \)</div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-ansii">
+              <th class="field-name">Scheme of Types (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></span></div>
+              </td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
@@ -515,7 +531,11 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Postulated (Kernel Axiom) &middot; <a href="../proofs/AxmPropVerum.html" class="sym-link">Standalone Entry (<code>AxmPropVerum</code>) &rarr;</a> &middot; <a href="../proofs/item-1.13.html" class="sym-link" style="font-size:0.78rem;">(1.13)</a> &middot; <a href="../manual.html#AxmPropVerum" class="sym-link"><code>#AxmPropVerum</code></a></td>
+              <td class="field-value proof-cell">Postulated (Kernel Axiom)</td>
+            </tr>
+            <tr>
+              <th class="field-name">Standalone Page</th>
+              <td class="field-value"><a href="../proofs/AxmPropVerum.html" class="sym-link"><code>AxmPropVerum</code> (1.13)</a></td>
             </tr>
             </tbody>
           </table>
@@ -535,6 +555,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

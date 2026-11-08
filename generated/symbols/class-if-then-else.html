@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: IF 𝛙 THEN A ELSE B FI &mdash; Class Conditional Functional Symbol</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -437,7 +439,7 @@
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/antiquotation.html}{[\![ } \href{../symbols/class-if-then-else.html}{\mathbf{IF}}  \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]}  \href{../symbols/class-if-then-else.html}{\mathbf{THEN}}  \href{../symbols/variables.html}{A}  \href{../symbols/class-if-then-else.html}{\mathbf{ELSE}}  \href{../symbols/variables.html}{B}  \href{../symbols/class-if-then-else.html}{\mathbf{FI}} \href{../symbols/antiquotation.html}{ ]\!]}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/class-comprehension.html}{\{} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}}  \href{../symbols/class-comprehension.html}{ \mid }  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{A} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/or-conn.html}{\lor}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/neg-conn.html}{\neg} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{B} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/class-comprehension.html}{\}} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/antiquotation.html}{[\![ } \href{../symbols/class-if-then-else.html}{\mathbf{IF}} ~\href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]} ~\href{../symbols/class-if-then-else.html}{\mathbf{THEN}} ~\href{../symbols/variables.html}{A} ~\href{../symbols/class-if-then-else.html}{\mathbf{ELSE}} ~\href{../symbols/variables.html}{B} ~\href{../symbols/class-if-then-else.html}{\mathbf{FI}} \href{../symbols/antiquotation.html}{ ]\!]} ~\href{../symbols/eq-pred.html}{=} ~\href{../symbols/class-comprehension.html}{\{} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}} ~\href{../symbols/class-comprehension.html}{ \mid } ~\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{A} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/or-conn.html}{\lor} ~\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/neg-conn.html}{\neg} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\psi}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/binder-brackets.html}{\{\!\lvert } \href{../symbols/variables.html}{v} \href{../symbols/binder-brackets.html}{\rvert\!\}} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{B} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/class-comprehension.html}{\}} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
@@ -448,7 +450,7 @@
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="../manual.html#DefClassConditional" class="sym-link">Definition DefClassConditional (3.22): IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</a></li>
 <li><a href="simple-if.html" class="sym-link">Polymorphic Conditional simple_if (Entry DefSimpleConditional (3.23))</a></li>
-<li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional ifᵈₑₚ (Entry DefDependentConditional (3.24))</a></li>
+<li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional if_dep (Entry DefDependentConditional (3.24))</a></li>
 </ul></td>
           </tr>
         </tbody>
@@ -465,6 +467,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>

@@ -115,6 +115,7 @@
         body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
         body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
         body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+        body.hide-schemata .row-scheme { display: none !important; }
     </style>
 </head>
 <body>
@@ -192,6 +193,13 @@ function toggleFormatHide(fmt) {
     }
 }
 window.toggleFormatHide = toggleFormatHide;
+
+function toggleSchemataHide() {
+    const isHidden = document.body.classList.toggle('hide-schemata');
+    const btn = document.getElementById('btn-hide-schemata');
+    if (btn) btn.classList.toggle('active', isHidden);
+}
+window.toggleSchemataHide = toggleSchemataHide;
 
 function setFormatMode(mode) {
     document.body.classList.remove('mode-unicode', 'mode-latex');

@@ -214,7 +214,7 @@ Answer:   YES — a separate notation for boolean values (b : Bool) is strictly
 Bool                              (Two-element Boolean computation type, UBool)
 ¬ᵦ, ∧ᵦ, ∨ᵦ                        (Boolean negation, conjunction, disjunction on Bool)
 simple_if(Tₑ, b, t₁, t₂)          (Polymorphic conditional: simple_if(Tₑ, true, t₁, t₂) = t₁, simple_if(Tₑ, false, t₁, t₂) = t₂)
-ifᵈₑₚ(Tₑ, b, t₁, t₂)              (Dependent conditional over Tₑ : Bool → Type: Tₑ(true) → Tₑ(false) → Tₑ(b))
+if_dep(Tₑ, b, t₁, t₂)             (Dependent conditional over Tₑ : Bool → Type: Tₑ(true) → Tₑ(false) → Tₑ(b))
 
 
 1.3 Unambiguous syntax (Plain-text ASCII-only textual concrete syntax)
@@ -241,7 +241,7 @@ False                | Unicode  | ⊥ (U+22A5)               | 𝟘 (U+1D7D8)   
                      | ASCII    | F                        | Void                    | false
 ---------------------+----------+--------------------------+-------------------------+----------------------
 Implication /        | LaTeX    | \longrightarrow          | \rightarrow             | \mathsf{if}_{\mathsf{dep}}
-Function Space       | Unicode  | —→ (U+2014 U+2192, 2ch)  | → (U+2192, 1ch)         | ifᵈₑₚ
+Function Space       | Unicode  | —→ (U+2014 U+2192, 2ch)  | → (U+2192, 1ch)         | if_dep
                      | ASCII    | -->                      | ->                      | if_dep
 ---------------------+----------+--------------------------+-------------------------+----------------------
 Equivalence /        | LaTeX    | \longleftrightarrow      | \leftrightarrow         | =_{\mathsf{b}}

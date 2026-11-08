@@ -333,11 +333,11 @@
   Scheme of Types: ∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))
   Verification:    Definitional (Kernel AST)
 
-[3.24 / DefDependentConditional] ifᵈₑₚ (dependent conditional over (Bool → Type)) (Definition)
+[3.24 / DefDependentConditional] if_dep (dependent conditional over (Bool → Type)) (Definition)
   Name:            DefDependentConditional
-  Formula [0]:     ∀(Tₑ:Bool→Type), ((ifᵈₑₚ:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧)∧((ifᵈₑₚ(true,t₁,t₂)=t₁)∧(ifᵈₑₚ(false,t₁,t₂)=t₂))))
+  Formula [0]:     ∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))
   SML Kernel AST:  EIfDep
-  Scheme of Types: ∀(Tₑ:Bool→Type), ((ifᵈₑₚ:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((ifᵈₑₚ(b,t₁,t₂):⟦Tₑ(b)⟧)∧((ifᵈₑₚ(true,t₁,t₂)=t₁)∧(ifᵈₑₚ(false,t₁,t₂)=t₂))))
+  Scheme of Types: ∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))
   Verification:    Definitional (Kernel AST)
 
 [3.25 / DefValueAtArg] Evaluation of a [function|class-function|family] (Definition)

@@ -320,6 +320,7 @@
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,7 +339,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body>
+<body class="mode-unicode">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -354,13 +355,14 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>AxmOmegaIsSet (3.57, Axiom): “Infinity”(ω is a set)</h1>
-      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.78) &mdash; <a href="../manual.html#AxmOmegaIsSet" style="color: #38bdf8;">View in Complete Entity Database (<code>#AxmOmegaIsSet</code>) &rarr;</a></p>
+      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.78) &mdash; <a href="../manual.html#AxmOmegaIsSet" style="color: #38bdf8;">View in Complete Entity Database (<code>#AxmOmegaIsSet</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
           <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -407,7 +409,7 @@
             <tr class="row-latex">
               <th class="field-name">Formula (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} {\color[RGB]{251,191,36}\href{../symbols/omega-const.html}{\color[RGB]{251,191,36}\omega}}  \href{../symbols/set-pred.html}{\mathsf{set}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} {\color[RGB]{251,191,36}\href{../symbols/omega-const.html}{\color[RGB]{251,191,36}\omega}} ~\href{../symbols/set-pred.html}{\mathsf{set}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
             </tr>
             <tr class="row-ansii">
@@ -420,9 +422,23 @@
               <th class="field-name">SML Kernel AST</th>
               <td class="field-value proof-cell"><code>POmegaSetAx_prf</code></td>
             </tr>
-            <tr>
-              <th class="field-name">Scheme of Types</th>
-              <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>(ω set)</code></td>
+            <tr class="row-scheme row-unicode">
+              <th class="field-name">Scheme of Types (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/omega-const.html" class="sym-link" title="Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)">ω</a></span> <a href="../symbols/set-pred.html" class="sym-link" title="Is a set unary predicate symbol (Constructor: HP (TpSet ...))">set</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-latex">
+              <th class="field-name">Scheme of Types (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} {\color[RGB]{251,191,36}\href{../symbols/omega-const.html}{\color[RGB]{251,191,36}\omega}} ~\href{../symbols/set-pred.html}{\mathsf{set}} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-ansii">
+              <th class="field-name">Scheme of Types (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/omega-const.html" class="sym-link" title="Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)">omega</a></span> <a href="../symbols/set-pred.html" class="sym-link" title="Is a set unary predicate symbol (Constructor: HP (TpSet ...))">set</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
@@ -430,7 +446,11 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Postulated (Kernel Axiom) &middot; <a href="../proofs/AxmOmegaIsSet.html" class="sym-link">Standalone Entry (<code>AxmOmegaIsSet</code>) &rarr;</a> &middot; <a href="../proofs/item-3.57.html" class="sym-link" style="font-size:0.78rem;">(3.57)</a> &middot; <a href="../manual.html#AxmOmegaIsSet" class="sym-link"><code>#AxmOmegaIsSet</code></a></td>
+              <td class="field-value proof-cell">Postulated (Kernel Axiom)</td>
+            </tr>
+            <tr>
+              <th class="field-name">Standalone Page</th>
+              <td class="field-value"><a href="../proofs/AxmOmegaIsSet.html" class="sym-link"><code>AxmOmegaIsSet</code> (3.57)</a></td>
             </tr>
             </tbody>
           </table>
@@ -450,6 +470,11 @@
       if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
     }
   </script>
 </body>
