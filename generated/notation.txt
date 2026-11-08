@@ -268,3 +268,72 @@ Existential Quant.   | LaTeX    | \exists (x : A), \varphi | \Sigma (x : A), B(x
 / Dependent Sum      | Unicode  | ∃(x:A), φ (U+2203)       | Σ(x:A), B(x) (U+03A3)   | -
                      | ASCII    | exists (x:A), phi        | Sigma (x : A) * B(x)    | -
 ================================================================================
+
+================================================================================
+5) DISAMBIGUATION OF OVERLOADED DELIMITERS, CONSTRUCTS & CONTEXTS (T6)
+================================================================================
+
+5.1 Disambiguation Matrix for Overloaded Delimiters
+--------------------------------------------------------------------------------
+Glyph      | Syntactic Role A             | Syntactic Role B             | Disambiguation Rule
+-----------+------------------------------+------------------------------+---------------------------------------
+⟦ ... ⟧    | Antiquotation term bracket   | External semantic evaluation | Antiquotation ⟦e⟧ (ASCII [|e|]) is an
+(U+27E6 /  | (Constructor: EAnti / EEval) | ⟦φ⟧_M in model M with        | object-level AST expression constructor;
+ U+27E7)   | in explicit substitution.    | valuation assignment μ.      | semantic evaluation ⟦φ⟧_M takes model
+           |                              |                              | subscript or evaluation environment.
+-----------+------------------------------+------------------------------+---------------------------------------
+[ ... ]    | Relational Image f[A]        | Dunaev Class-List [X₁, ...,  | f[A] has a preceding relation term f;
+(U+005B /  | ≡ {y | ∃x ∈ A, ⟨x,y⟩ ∈ f}    | X_n] / Sequent Judgements    | class-lists enclose comma-separated
+ U+005D)   | (DefRelationalImage, 3.26)   | [J₁, ..., J_k] ⊢ φ           | classes; judgement lists contain sequents.
+-----------+------------------------------+------------------------------+---------------------------------------
+⟨ ... ⟩    | Ordered pair ⟨a, b⟩          | Syntactic quotation ⟨φ⟩ / ‹φ›| ⟨a, b⟩ encloses 2 comma-separated
+(U+27E8 /  | (Pair / EPair, PairType)     | (Constructor: HQuote,        | terms; ⟨φ⟩ / ‹φ› encloses a single
+ U+27E9)   |                              |  Fm -> Fm.Expression)        | formula expression.
+-----------+------------------------------+------------------------------+---------------------------------------
+Set(X) vs  | Set(X): ASCII surface token  | isSet(X) / X set: object     | Set(X) is the .nbg parser keyword;
+isSet(X)   | in .nbg grammar.             | sethood predicate ∃Y(X ∈ Y)  | isSet(X) is the mathematical predicate
+           |                              | (DefIsSet, 3.02 : Class->Prop)| (rendered to avoid confusion with sort Set).
+
+
+5.2 Context Environments: Δ (Signature/Sorts) vs Γ (Proof Hypotheses)
+--------------------------------------------------------------------------------
+In judgements Δ; Γ ⊢ e : T:
+  • Context Δ (Signature / Variable Sort Environment):
+    Tracks declared object-level class/type variable identifiers and their sorts.
+    Example: Δ = { z : Class, A : Type, F : Class }.
+    Variables in Δ are introduced by universal / parametric binders:
+      ELam: (Δ, z : Class; Γ ⊢ e : T) ==> (Δ; Γ ⊢ Lam (z:Class) => e : ∀(z:Class), T).
+
+  • Context Γ (Proof Hypothesis Environment):
+    Tracks active antecedent propositions / hypotheses available for logical deduction.
+    Example: Γ = { hIn : z ∈ {x | ⊥}, hSub : A ⊆ B }.
+    Hypotheses in Γ are introduced by implication binders:
+      EFn:  (Δ; Γ, h : P ⊢ e : Q) ==> (Δ; Γ ⊢ fn (h:P) => e : P → Q).
+
+
+5.3 Glossary of Specific Class-Theoretic Structures
+--------------------------------------------------------------------------------
+1. Dunaev Pair (Dunaev Tagged Ordered Pair):
+   • Notation:   (A, B)_D  ≡  mark(A, 1) ∪ mark(B, 2)  =  ({1} × A) ∪ ({2} × B)
+   • Definition: In Morse-Kelley class theory, proper classes cannot be elements
+     of sets or classes. Standard Kuratowski pairing ⟨a, b⟩_K = {{a}, {{a, b}}} fails
+     when either a or b is a proper class (such as V or On), because {{V}} requires
+     V ∈ {V}, which is false in MK. Dunaev tagged ordered pairing solves this by
+     disjoint union tagging.
+   • Properties: Satisfies projection axioms π₁((A, B)_D) = A and π₂((A, B)_D) = B,
+     and pair injectivity (A, B)_D = (C, D)_D <==> (A = C ∧ B = D) for arbitrary
+     classes (both sets and proper classes).
+   • Source:     Georgy Dunaev, "Morse-Kelley Class Theory with Tagged Ordered Pairs
+                 and Tarski-Grothendieck Universes", program/types/foundations.ML,
+                 entries 3.76 (DefDunaevOrderedPair), 3.77 (ThmDunaevFirstProjection),
+                 and 3.78 (ThmDunaevSecondProjection).
+
+2. Dunaev Class-List:
+   • Notation:   [] (empty list), [X₁, ..., X_n] (finite sequence of classes).
+   • Definition: Inductively generated sequence of classes defined via iterated
+     Dunaev tagged pairing: [X] = (X, [])_D, [X₁, X₂] = (X₁, (X₂, [])_D)_D.
+   • Purpose:    Enables class-level multi-argument function domains, explicit
+     substitution environments, and sequent hypothesis contexts without ascending
+     to conglomerates.
+   • Source:     program/types/foundations.ML (entry 3.39: DefClassLists).
+================================================================================

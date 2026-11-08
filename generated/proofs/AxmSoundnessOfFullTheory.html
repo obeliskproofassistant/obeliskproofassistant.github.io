@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AxmSoundnessOfFullTheory (3.73, Axiom): Soundness of the theory 𝘍</title>
+  <title>AxmSoundnessOfFullTheory (3.72, Axiom): Soundness of the theory 𝘍</title>
   <script>
     window.MathJax = {
       tex: {
@@ -363,6 +363,24 @@
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge { display: none !important; }
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+    footer a:hover {
+      color: #93c5fd;
+      text-decoration-style: solid;
+    }
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -381,7 +399,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>AxmSoundnessOfFullTheory (3.73, Axiom): Soundness of the theory 𝘍</h1>
+      <h1>AxmSoundnessOfFullTheory (3.72, Axiom): Soundness of the theory 𝘍</h1>
       <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.78) &mdash; <a href="../manual.html#AxmSoundnessOfFullTheory" style="color: #38bdf8;">View in Complete Entity Database (<code>#AxmSoundnessOfFullTheory</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -402,7 +420,7 @@
   <main>
   <section class="manual-section" id="sec-3">
     <div class="section-header">
-      <h2>AxmSoundnessOfFullTheory (3.73) &mdash; Soundness of the theory 𝘍</h2>
+      <h2>AxmSoundnessOfFullTheory (3.72) &mdash; Soundness of the theory 𝘍</h2>
       <p class="section-desc">Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.</p>
     </div>
     <div class="table-container">
@@ -419,7 +437,7 @@
             <tbody>
             <tr>
               <th class="field-name">Num</th>
-              <td class="field-value entry-num-cell"><span id="item-3.73"></span><span id="label-soundness-of-the-theory"></span><span id="label-soundness-of-the-theory-3-73"></span><a href="../manual.html#AxmSoundnessOfFullTheory" class="num-anchor" title="AxmSoundnessOfFullTheory">3.73</a></td>
+              <td class="field-value entry-num-cell"><span id="item-3.72"></span><span id="label-soundness-of-the-theory"></span><span id="label-soundness-of-the-theory-3-72"></span><span id="AxmSoundnessOfBaseTheory"></span><a href="../manual.html#AxmSoundnessOfFullTheory" class="num-anchor" title="AxmSoundnessOfFullTheory">3.72</a></td>
             </tr>
             <tr>
               <th class="field-name">Title</th>
@@ -471,7 +489,11 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell"><span class="ansi-light-magenta">𝘍</span> is a non-recursively-enumerable (non-r.e.), Henkin-complete extension of the r.e. base theory <span class="ansi-light-magenta">𝘛</span> (<span class="ansi-light-magenta">𝘛</span> ⊆ <span class="ansi-light-magenta">𝘍</span>). Because <span class="ansi-light-magenta">𝘍</span> is non-r.e., Gödel's incompleteness theorems do not apply to <span class="ansi-light-magenta">𝘍</span> itself, and <span class="ansi-light-magenta">𝘍</span> is postulated with full soundness (<span class="ansi-light-magenta">𝘍</span>, [] ⊢ φ) —→ ⟦φ⟧.</td>
+              <td class="field-value proof-cell">Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion <span class="ansi-light-magenta">𝘍</span>: if (<span class="ansi-light-magenta">𝘍</span>, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Why this avoids Tarski and Löb inconsistency: While the r.e. base theory <span class="ansi-light-magenta">𝘛</span> cannot assert its own soundness without violating Gödel's second incompleteness theorem and Löb's theorem (hence soundness of <span class="ansi-light-magenta">𝘛</span> is not postulated in <span class="ansi-light-magenta">𝘛</span>), the full theory <span class="ansi-light-magenta">𝘍</span> is non-r.e. and Henkin-complete (Th(M)). The evaluation operator ⟦φ⟧ lives in the +1 metalogic on the base formula sublanguage Fm₀ without self-referential truth predicate internalisation, avoiding Tarski undefinability.</td>
+            </tr>
+            <tr>
+              <th class="field-name">Source Line</th>
+              <td class="field-value proof-cell"><a href="https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L1189" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1189"><code>entries.ML:L1189</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -479,7 +501,7 @@
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
-              <td class="field-value"><a href="../proofs/AxmSoundnessOfFullTheory.html" class="sym-link"><code>AxmSoundnessOfFullTheory</code> (3.73)</a></td>
+              <td class="field-value"><a href="../proofs/AxmSoundnessOfFullTheory.html" class="sym-link"><code>AxmSoundnessOfFullTheory</code> (3.72)</a></td>
             </tr>
             </tbody>
           </table>
@@ -490,6 +512,12 @@
     </div>
   </section>
   </main>
+  <footer>
+    <div class="footer-inner">
+      <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">918ea9f</code> &bull; Built on: <time datetime="2026-11-08T20:10:00Z">2026-11-08 20:10:00 UTC</time> &bull; <a href="../changelog.html">Changelog</a> &bull; <a href="../symbols.html">Notation Registry</a> &bull; <a href="../glossary.html">Glossary</a></p>
+    </div>
+  </footer>
   <script>
     function toggleFormatHide(fmt) {
       var cls = 'hide-' + fmt;

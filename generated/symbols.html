@@ -363,6 +363,24 @@
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     body.hide-schemata .row-scheme { display: none !important; }
     .metalevel-badge { display: none !important; }
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+    footer a:hover {
+      color: #93c5fd;
+      text-decoration-style: solid;
+    }
   </style>
   <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -569,7 +587,7 @@
             <td class="external-entity"><span class="badge badge-def">Kernel Reflection &amp; Coding Symbols (Primitive)</span></td>
             <td class="external-entity"><code>A.Expression → Class  |  Type.Expression → Type</code></td>
             <td class="external-entity"><strong>[Primitive / Undefinable Metatheoretic Operators] Natural-Language Definition:</strong> <code>Enc</code> is the injective Gödel-Dunaev coding mapping syntactic AST objects into first-order classes; <code>Dec</code> is its partial inverse decoding class codes back into syntax; <code>Emb</code> embeds lower-level objects into higher sorts; <code>μ_A</code> / <code>eval</code> interprets syntactic expressions into their semantic denotation in model/conglomerate <code>A</code>. (<a href="symbols/enc.html" class="sym-link">Personal Page</a>)</td>
-            <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: Enc in FV guard)</a> &middot; <a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Soundness of 𝘛)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: eval(A).Expression)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: Generalisation)</a></td>
+            <td class="external-entity"><a href="manual.html#DefClassConditional" class="sym-link">DefClassConditional (3.22: Enc in FV guard)</a> &middot; <a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: Soundness of 𝘍)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: eval(A).Expression)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: Generalisation)</a></td>
           </tr>
           <tr id="sym-fv-ffi" class="external-row">
             <td class="external-num formula-cell">
@@ -649,11 +667,11 @@
               <div class="formula-ansii"><a href="symbols/fm-sort.html" class="sym-link"><code>Fm  (= Bool.Expression)</code></a></div>
             </td>
             <td class="external-entity"><code>Huge_Col (Syntactic Formula Expression Type; UExpression TTruth)</code> (<a href="symbols/fm-sort.html" class="sym-link">Symbol Page</a>)</td>
-            <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Syntactic Formula Sort)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Fm Quantification)</a></td>
+            <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: Syntactic Formula Sort)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Fm Quantification)</a></td>
             <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Quotation ‹...› : Fm)</a> &middot; <a href="manual.html#DefMetaGeneralisation" class="sym-link">DefMetaGeneralisation (4.02: ‹∀(v:A)⟦𝛗⟧›)</a></td>
-            <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Antiquotation ⟦𝛙⟧ &amp; FV(𝛙:Fm)</a> &middot; <a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.73: Soundness ⟦ψ⟧)</a></td>
+            <td class="external-entity"><a href="manual.html#DefSimpleConditional" class="sym-link">DefSimpleConditional (3.23: Antiquotation ⟦𝛙⟧ &amp; FV(𝛙:Fm)</a> &middot; <a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: Soundness ⟦ψ⟧)</a></td>
             <td class="external-entity"><a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: let v = t in ⟦𝛗⟧)</a> &middot; <a href="manual.html#AxmMetaClassComprehension" class="sym-link">AxmMetaClassComprehension (4.06: Substitution under FFI)</a></td>
-            <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Injectivity of Enc on Fm)</a></td>
+            <td class="external-entity"><a href="manual.html#AxmBaseSubtheoryOfFull" class="sym-link">AxmBaseSubtheoryOfFull (3.75: Injectivity of Enc on Fm)</a></td>
           </tr>
           <tr id="type-sigma" class="external-row">
             <td class="external-num formula-cell">
@@ -701,9 +719,9 @@
               <div class="formula-ansii"><a href="symbols/theory-sort.html" class="sym-link"><code>Ctx / Theory / Stmt / Prf / Variable / Type</code></a></div>
             </td>
             <td class="external-entity"><code>Kernel Metatheoretic &amp;amp; Reflection Sorts</code> (<a href="symbols/theory-sort.html" class="sym-link">Symbol Page</a>)</td>
-            <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: Sequent &amp; Theory Sorts)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Type, Ctx, Variable Sorts)</a></td>
+            <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: Sequent &amp; Theory Sorts)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: Type, Ctx, Variable Sorts)</a></td>
             <td class="external-entity"><a href="manual.html#AxmBaseSubtheoryOfFull" class="sym-link">AxmBaseSubtheoryOfFull (3.75: Sequent (𝘞, Γ ⊢ 𝛗)</a></td>
-            <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.73: Soundness of 𝘍)</a> &middot; <a href="manual.html#DefMetaConecessitation" class="sym-link">DefMetaConecessitation (4.03: CoNecessitation)</a></td>
+            <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: Soundness of 𝘍)</a> &middot; <a href="manual.html#DefMetaConecessitation" class="sym-link">DefMetaConecessitation (4.03: CoNecessitation)</a></td>
             <td class="external-entity"><a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: eval(A) Type Evaluation)</a></td>
             <td class="external-entity"><a href="manual.html#ThmLoeb" class="sym-link">ThmLoeb (5.01: Löb)</a> &middot; <a href="manual.html#ThmSecondIncompleteness" class="sym-link">ThmSecondIncompleteness (5.02: Gödel 2nd Incompleteness)</a></td>
           </tr>
@@ -803,7 +821,7 @@
             <td class="external-entity"><span class="badge badge-thm">Sequent Context &amp; Formal Theory Variables/Constants</span></td>
             <td class="external-entity"><code>Ctx  |  Ctx.Expression  |  Theory</code></td>
             <td class="external-entity">Context variables (Γ : Ctx, G : Ctx.Expression) and formal theories: r.e. base theory 𝘫, non-r.e. sound Henkin completion 𝘍, unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘫, NBG, MK}, and arbitrary theory 𝘞. (<a href="symbols/theory-sort.html" class="sym-link">Symbol Page</a>)</td>
-            <td class="external-entity"><a href="manual.html#AxmSoundnessOfBaseTheory" class="sym-link">AxmSoundnessOfBaseTheory (3.72: 𝘫, 𝘍)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: 𝘞, G:Ctx.Expression)</a> &middot; <a href="manual.html#ThmLoeb" class="sym-link">ThmLoeb (5.01: 𝘌, 𝘫 in Löb)</a> &middot; <a href="manual.html#ThmSecondIncompleteness" class="sym-link">ThmSecondIncompleteness (5.02: 2nd Incompleteness)</a></td>
+            <td class="external-entity"><a href="manual.html#AxmSoundnessOfFullTheory" class="sym-link">AxmSoundnessOfFullTheory (3.72: 𝘫, 𝘍)</a> &middot; <a href="manual.html#DefMetaInstantiation" class="sym-link">DefMetaInstantiation (4.01: 𝘞, G:Ctx.Expression)</a> &middot; <a href="manual.html#ThmLoeb" class="sym-link">ThmLoeb (5.01: 𝘌, 𝘫 in Löb)</a> &middot; <a href="manual.html#ThmSecondIncompleteness" class="sym-link">ThmSecondIncompleteness (5.02: 2nd Incompleteness)</a></td>
           </tr>
         </tbody>
       </table>
@@ -8238,6 +8256,12 @@
     </div>
   </section>
   </main>
+  <footer>
+    <div class="footer-inner">
+      <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">918ea9f</code> &bull; Built on: <time datetime="2026-11-08T20:10:00Z">2026-11-08 20:10:00 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+    </div>
+  </footer>
   <script>
     function toggleFormatHide(fmt) {
       var cls = 'hide-' + fmt;

@@ -417,5 +417,102 @@ class TestProofRegression(unittest.TestCase):
         ]:
             self.assertEqual(by_name[kdef_name]["prf_constructor"], "PKernelDef_prf")
 
+    def test_tickets_t6_t7_w6_verification(self):
+        """Verify complete implementation of tickets T6, T7, and W6."""
+        # W6: Build hash and date in page footers
+        self.assertIn("Build Hash:", self.gen_manual_html)
+        self.assertIn("Built on:", self.gen_manual_html)
+        self.assertIn("entries.ML:L", self.gen_manual_html)
+        self.assertIn("https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L", self.gen_manual_html)
+
+        # W6: Changelog artifact and page
+        changelog_md = os.path.join(SITE_DIR, "CHANGELOG.md")
+        self.assertTrue(os.path.isfile(changelog_md), "Missing CHANGELOG.md")
+        changelog_html = os.path.join(SITE_DIR, "generated", "changelog.html")
+        self.assertTrue(os.path.isfile(changelog_html), "Missing generated/changelog.html")
+        with open(changelog_html, "r", encoding="utf-8") as f:
+            c_html = f.read()
+        self.assertIn("1.2.0", c_html)
+        self.assertIn("DefDunaevOrderedPair", c_html)
+
+        # T6: Glossary artifact and page
+        glossary_md = os.path.join(SITE_DIR, "docs", "glossary.md")
+        self.assertTrue(os.path.isfile(glossary_md), "Missing docs/glossary.md")
+        glossary_html = os.path.join(SITE_DIR, "generated", "glossary.html")
+        self.assertTrue(os.path.isfile(glossary_html), "Missing generated/glossary.html")
+        with open(glossary_html, "r", encoding="utf-8") as f:
+            g_html = f.read()
+        self.assertIn("Dunaev Tagged Ordered Pair", g_html)
+        self.assertIn("Dunaev Class-List", g_html)
+        self.assertIn("Context Environments", g_html)
+
+        # T6 & T7: index.html definitions, typing rules, and 2nd worked example without bot
+        index_path = os.path.join(SITE_DIR, "index.html")
+        with open(index_path, "r", encoding="utf-8") as f:
+            idx_html = f.read()
+        # T6: Context Delta and Gamma defined at first use
+        self.assertIn("Context &Delta; (Variable Signature)", idx_html)
+        self.assertIn("Context &Gamma; (Proof Hypotheses)", idx_html)
+        self.assertIn("Set(X) vs isSet(X)", idx_html)
+        # T7: Typing rules for constructors
+        self.assertIn("ELam", idx_html)
+        self.assertIn("EFn", idx_html)
+        self.assertIn("ECompr", idx_html)
+        self.assertIn("EFst", idx_html)
+        self.assertIn("EApp", idx_html)
+        self.assertIn("ESnd", idx_html)
+        # T7: Second worked example without bot
+        self.assertIn("Worked Example 2", idx_html)
+        self.assertIn("thm_inter_subset_left", idx_html)
+        self.assertIn("fst(hIn)", idx_html)
+
+    def test_tickets_t1_t2_verification(self):
+        """Verify resolution of Ticket T1 (Tarski/Loeb soundness of F) and Ticket T2 (Completeness decoupling)."""
+        db = self.gen_db["entries"]
+        by_name = {e["name"]: e for e in db}
+
+        # T1: Soundness of Full Theory F (3.72) is an Axiom and notes Tarski/Loeb
+        self.assertIn("AxmSoundnessOfFullTheory", by_name)
+        soundness_f = by_name["AxmSoundnessOfFullTheory"]
+        self.assertEqual(soundness_f["num"], "3.72")
+        self.assertEqual(soundness_f["kind"], "Axiom")
+        self.assertEqual(soundness_f["status"], "Postulated (Kernel Axiom)")
+        self.assertIn("Tarski", soundness_f["comment"])
+        self.assertIn("Löb", soundness_f["comment"])
+        self.assertIn("non-recursively-enumerable", soundness_f["comment"])
+
+        # T2: Semantic Completeness of F (3.73) is an Axiom (NOT a Definition)
+        self.assertIn("AxmSemanticCompletenessOfFullTheory", by_name)
+        sem_comp_f = by_name["AxmSemanticCompletenessOfFullTheory"]
+        self.assertEqual(sem_comp_f["num"], "3.73")
+        self.assertEqual(sem_comp_f["kind"], "Axiom")
+        self.assertEqual(sem_comp_f["status"], "Postulated (Kernel Axiom)")
+        self.assertIn("Semantic completeness", sem_comp_f["comment"])
+        self.assertIn("eval", sem_comp_f["formula_unicode"])
+
+        # T2: Negation-Completeness of F (3.74) is an Axiom (NOT a Definition)
+        self.assertIn("AxmNegationCompletenessOfFullTheory", by_name)
+        neg_comp_f = by_name["AxmNegationCompletenessOfFullTheory"]
+        self.assertEqual(neg_comp_f["num"], "3.74")
+        self.assertEqual(neg_comp_f["kind"], "Axiom")
+        self.assertEqual(neg_comp_f["status"], "Postulated (Kernel Axiom)")
+        self.assertIn("negation-completeness", neg_comp_f["comment"])
+
+        # Ensure total entry count is preserved at 106
+        self.assertEqual(len(db), 106)
+
+        # In manual.html, verify verification cell is Postulated (Kernel Axiom), not Definitional
+        self.assertIn('id="AxmSemanticCompletenessOfFullTheory"', self.gen_manual_html)
+        self.assertIn('id="AxmNegationCompletenessOfFullTheory"', self.gen_manual_html)
+        self.assertIn('id="AxmSoundnessOfFullTheory"', self.gen_manual_html)
+
+        # Verify changelog mentions v1.3.0 and tickets T1 & T2
+        changelog_html = os.path.join(SITE_DIR, "generated", "changelog.html")
+        with open(changelog_html, "r", encoding="utf-8") as f:
+            c_html = f.read()
+        self.assertIn("1.3.0", c_html)
+        self.assertIn("Ticket T1", c_html)
+        self.assertIn("Ticket T2", c_html)
+
 if __name__ == "__main__":
     unittest.main()

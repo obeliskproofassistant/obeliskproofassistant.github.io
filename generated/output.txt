@@ -680,29 +680,29 @@
   Kernel Note:     Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
   Verification:    Verified (Kernel)
 
-[3.72 / AxmSoundnessOfBaseTheory] Soundness of the theory 𝘛 (Axiom)
-  Name:            AxmSoundnessOfBaseTheory
-  Formula [0]:     (∀(𝛗:Fm)((𝘛,[]⊢𝛗)—→eval(𝛗)))
-  SML Kernel AST:  TpHolds
-  Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((𝘛,[]⊢[𝛗@Fm.Expression])—→eval([𝛗@Fm.Expression])))
-  Kernel Note:     Local reflection / soundness schema for the recursively enumerable (r.e.) base theory of classes 𝘛: if (𝘛, [] ⊢ φ), then the explicit formula valuation ⟦φ⟧ holds in the fixed background model.
-  Verification:    Postulated (Kernel Axiom)
-
-[3.73 / AxmSoundnessOfFullTheory] Soundness of the theory 𝘍 (Axiom)
+[3.72 / AxmSoundnessOfFullTheory] Soundness of the theory 𝘍 (Axiom)
   Name:            AxmSoundnessOfFullTheory
   Formula [0]:     (∀(𝛗:Fm)((𝘍,[]⊢𝛗)—→eval(𝛗)))
   SML Kernel AST:  PCredo_prf
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢[𝛗@Fm.Expression])—→eval([𝛗@Fm.Expression])))
-  Kernel Note:     𝘍 is a non-recursively-enumerable (non-r.e.), Henkin-complete extension of the r.e. base theory 𝘛 (𝘛 ⊆ 𝘍). Because 𝘍 is non-r.e., Gödel's incompleteness theorems do not apply to 𝘍 itself, and 𝘍 is postulated with full soundness (𝘍, [] ⊢ φ) —→ ⟦φ⟧.
+  Kernel Note:     Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Why this avoids Tarski and Löb inconsistency: While the r.e. base theory 𝘛 cannot assert its own soundness without violating Gödel's second incompleteness theorem and Löb's theorem (hence soundness of 𝘛 is not postulated in 𝘛), the full theory 𝘍 is non-r.e. and Henkin-complete (Th(M)). The evaluation operator ⟦φ⟧ lives in the +1 metalogic on the base formula sublanguage Fm₀ without self-referential truth predicate internalisation, avoiding Tarski undefinability.
   Verification:    Postulated (Kernel Axiom)
 
-[3.74 / AxmCompletenessOfFullTheory] Completeness of the theory 𝘍 (Definition)
-  Name:            AxmCompletenessOfFullTheory
+[3.73 / AxmSemanticCompletenessOfFullTheory] Semantic Completeness of the theory 𝘍 (Axiom)
+  Name:            AxmSemanticCompletenessOfFullTheory
   Formula [0]:     (∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))
   SML Kernel AST:  POmnis_prf
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))
-  Kernel Note:     Negation-completeness of the non-r.e. Henkin extension 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍, then φ is derivable in 𝘍.
-  Verification:    Definitional (Kernel AST)
+  Kernel Note:     Semantic completeness of the non-r.e. Henkin completion 𝘍: for every sentence φ, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). Together with Soundness of 𝘍 (3.72), this establishes (𝘍, [] ⊢ φ) ⇔ ⟦φ⟧, identifying 𝘍 as the complete true theory Th(M).
+  Verification:    Postulated (Kernel Axiom)
+
+[3.74 / AxmNegationCompletenessOfFullTheory] Negation-Completeness of the theory 𝘍 (Axiom)
+  Name:            AxmNegationCompletenessOfFullTheory
+  Formula [0]:     (∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))
+  SML Kernel AST:  POmnis_prf
+  Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))
+  Kernel Note:     Syntactic negation-completeness of the non-r.e. Henkin completion 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). In classical logic, this is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ). In the bivalent semantics of the background model M (⟦φ⟧ ∨ ⟦¬φ⟧), negation-completeness follows directly from semantic completeness and soundness.
+  Verification:    Postulated (Kernel Axiom)
 
 [3.75 / AxmBaseSubtheoryOfFull] If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
   Name:            AxmBaseSubtheoryOfFull
