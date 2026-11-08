@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: ⟷ &mdash; Logical Equivalence Connective (⟷, AST Constructor: TpIff)</title>
+  <title>Symbol Reference: ⟷  /  &lt;--&gt; &mdash; Logical Bi-Implication Connective on Formulas (⟷ / <-->, AST Constructor: TpIff)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -351,7 +351,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: ⟷ &mdash; Logical Equivalence Connective (⟷, AST Constructor: TpIff)</h1>
+      <h1>Symbol Reference: ⟷  /  &lt;--&gt; &mdash; Logical Bi-Implication Connective on Formulas (⟷ / <-->, AST Constructor: TpIff)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -370,8 +370,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">⟷</span> <span class="formula-latex">\(\leftrightarrow\)</span> &mdash; Logical Equivalence Connective (⟷, AST Constructor: TpIff)</h2>
-      <p class="section-desc">Binary bi-implication connective <code>𝛂 ⟷ 𝛃</code> asserting logical equivalence of two propositions.</p>
+      <h2><span class="formula-unicode">⟷  /  &lt;--&gt;</span> <span class="formula-latex">\(\longleftrightarrow\)</span> &mdash; Logical Bi-Implication Connective on Formulas (⟷ / <-->, AST Constructor: TpIff)</h2>
+      <p class="section-desc">Binary bi-implication connective on formulas in Variant 1 (Unicode: <code>𝛂 ⟷ 𝛃</code>, LaTeX: <code>\longleftrightarrow</code>, Plain-text ASCII: <code>&lt;--&gt;</code>), asserting logical equivalence of two formulas.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -385,13 +385,13 @@
           <tr class="external-row">
             <td class="external-num">Symbol</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">⟷</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\leftrightarrow\)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">⟷  /  &lt;--&gt;</div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\longleftrightarrow\)</div>
             </td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Category</td>
-            <td class="external-entity"><span class="badge badge-def">Logical Connective (Binary Truth-Functional Symbol)</span></td>
+            <td class="external-entity"><span class="badge badge-def">Logical Connective (Variant 1 Formula Equivalence)</span></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">SML AST Constructor</td>
@@ -403,7 +403,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Fm × Fm → Fm   |   Bool × Bool → Bool</code></td>
+            <td class="external-entity"><code>Fm × Fm → Fm</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -415,22 +415,22 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\leftrightarrow</code></td>
+            <td class="external-entity"><code>\longleftrightarrow</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpIff of ('Truth_EXP * 'Truth_EXP))</code> in <code>Truth_p</code> (<code>typetheory.ML:652</code>). Semantically equivalent to <code>(𝛂 → 𝛃) ∧ (𝛃 → 𝛂)</code>.</p></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpIff of ('Truth_EXP * 'Truth_EXP))</code> in <code>Truth_p</code> (<code>typetheory.ML:652</code>). Semantically equivalent to <code>(𝛂 ⟶ 𝛃) ∧ (𝛃 ⟶ 𝛂)</code>. Distinguished from Variant 2's type equivalence <code>↔</code> (<code>\leftrightarrow</code> / <code>&lt;-&gt;</code>).</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>(𝛂 ⟷ 𝛃) ⟷ ((𝛂 → 𝛃) ∧ (𝛃 → 𝛂))</code></td>
+            <td class="external-entity formula-cell"><code>(𝛂 ⟷ 𝛃) ⟷ ((𝛂 ⟶ 𝛃) ∧ (𝛃 ⟶ 𝛂))</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="../manual.html#AxmExtensionality" class="sym-link">Axiom AxmExtensionality (3.10): “Extensionality”</a></li>
-<li><a href="impl-conn.html" class="sym-link">Implication → (TpImpl)</a></li>
-<li><a href="and-conn.html" class="sym-link">Conjunction ∧ (TpAnd)</a></li>
+<li><a href="impl-conn.html" class="sym-link">Implication ⟶ (TpImpl)</a></li>
+<li><a href="type-iff.html" class="sym-link">Type Equivalence ↔ / <-> (Variant 2)</a></li>
 </ul></td>
           </tr>
         </tbody>

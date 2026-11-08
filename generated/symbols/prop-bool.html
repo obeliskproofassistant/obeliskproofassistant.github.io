@@ -371,7 +371,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2><span class="formula-unicode">Prop  /  Bool</span> <span class="formula-latex">\(\mathsf{Prop} \; / \; \mathsf{Bool}\)</span> &mdash; Propositions-as-Types Sort (Prop) &amp; Two-Point Boolean Type (Bool)</h2>
-      <p class="section-desc"><code>Prop</code> is the Curry-Howard sort of logical propositions in Variant 2 (<strong>MKTD2</strong>); <code>Bool</code> is the two-element Boolean type with canonical inhabitants <code>⊤</code> (True) and <code>⊥</code> (False) used in conditional branching (Entries DefClassConditional (3.22)&ndash;DefDependentConditional (3.24)).</p>
+      <p class="section-desc"><code>Prop</code> is the Curry-Howard sort of logical propositions in Variant 2 (<strong>MKTD2</strong>); <code>Bool</code> is the two-element Boolean data type with canonical inhabitants <code>true</code> (<code>\mathsf{true}</code>) and <code>false</code> (<code>\mathsf{false}</code>) used in conditional branching (Entries DefClassConditional (3.22)&ndash;DefDependentConditional (3.24)).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -419,16 +419,18 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>Prop</code> and <code>Bool</code>:</strong></p><ul><li><strong><code>Prop</code> (Formulas-as-Types in MKTD2)</strong>: In Variant 2, every logical formula <code>𝛂</code> is a type of kind <code>Prop</code>, and a proof of <code>𝛂</code> is a constructive lambda term <code>p : 𝛂</code> checked by the bidirectional kernel <code>nbg_typechecker.ML</code>.</li><li><strong><code>Bool</code> (Two-Point Type in Entries DefClassConditional (3.22)&ndash;DefDependentConditional (3.24))</strong>: Inhabited by <code>⊤ : Bool</code> and <code>⊥ : Bool</code>, supporting both simple conditional branching (Entry DefDependentConditional (3.24)) and dependent conditional branching <code>ifᵈₑₚ</code> over type families <code>T : Bool → Type</code> (Entry DefDependentConditional (3.24)).</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>Prop</code> and <code>Bool</code> (Unambiguous 3-Layer Distinction):</strong></p><ul><li><strong><code>Fm</code> (Syntactic Formulas in Variant 1 / MKTD1)</strong>: Logical truth and falsity formulas are <code>⊤ : Fm</code> (LaTeX <code>\top</code>, ASCII <code>T</code>) and <code>⊥ : Fm</code> (LaTeX <code>\bot</code>, ASCII <code>F</code>), connected by formula implication <code>⟶</code> (LaTeX <code>\longrightarrow</code>, ASCII <code>--&gt;</code>) and bi-implication <code>⟷</code> (LaTeX <code>\longleftrightarrow</code>, ASCII <code>&lt;--&gt;</code>).</li><li><strong><code>Prop</code> / <code>Type</code> (Constructive Types in Variant 2 / MKTD2)</strong>: Unit and Void types are <code>𝟙</code> (LaTeX <code>\mathbf{1}</code> / <code>\top</code>, ASCII <code>Unit</code>) and <code>𝟘</code> (LaTeX <code>\mathbf{0}</code> / <code>\bot</code>, ASCII <code>Void</code>), connected by function space arrow <code>→</code> (LaTeX <code>\rightarrow</code>, ASCII <code>-&gt;</code>) and type equivalence <code>↔</code> (LaTeX <code>\leftrightarrow</code>, ASCII <code>&lt;-&gt;</code>).</li><li><strong><code>Bool</code> (Two-Point Computation Type in Entries DefClassConditional (3.22)&ndash;DefDependentConditional (3.24))</strong>: Inhabited by distinct boolean values <code>true : Bool</code> (LaTeX <code>\mathsf{true}</code>) and <code>false : Bool</code> (LaTeX <code>\mathsf{false}</code>), supporting both simple conditional branching (Entry DefSimpleConditional (3.23)) and dependent conditional branching <code>ifᵈₑₚ</code> over type families <code>T_e : Bool → Type</code> (Entry DefDependentConditional (3.24)).</li></ul></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>∀(b:Bool). ((b = ⊤) ∨ (b = ⊥))</code></td>
+            <td class="external-entity formula-cell"><code>∀(b:Bool). ((b = true) ∨ (b = false))</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
 <li><a href="conditionals-if-dep.html" class="sym-link">Dependent Conditional ifᵈₑₚ</a></li>
+<li><a href="bool-true.html" class="sym-link">Boolean Value true : Bool</a></li>
+<li><a href="bool-false.html" class="sym-link">Boolean Value false : Bool</a></li>
 <li><a href="../manual.html#DefClassConditional" class="sym-link">Definition DefClassConditional (3.22): IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)</a></li>
 <li><a href="../manual.html#DefDependentConditional" class="sym-link">Definition DefDependentConditional (3.24): ifᵈₑₚ (dependent conditional over (Bool → Type))</a></li>
 </ul></td>
