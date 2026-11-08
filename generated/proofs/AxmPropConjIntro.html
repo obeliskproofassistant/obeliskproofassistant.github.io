@@ -168,11 +168,15 @@
       background: var(--bg-secondary);
       border: 1px solid var(--border-color);
       border-radius: 0.75rem;
-      overflow-x: auto;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
     }
     /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
     .section-external-table {
       width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       text-align: left;
     }
@@ -231,6 +235,8 @@
     /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
     .internal-entity-table {
       width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
     }
     .internal-entity-table tr {
@@ -240,7 +246,10 @@
       border-bottom: none;
     }
     .internal-entity-table th.field-name {
-      width: 165px;
+      width: 150px;
+      min-width: 150px;
+      max-width: 150px;
+      word-break: normal;
       padding: 0.6rem 1rem;
       background: rgba(30, 41, 59, 0.45);
       color: var(--text-secondary);
@@ -252,6 +261,11 @@
       vertical-align: middle;
     }
     .internal-entity-table td.field-value {
+      width: calc(100% - 150px);
+      max-width: calc(100% - 150px);
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
       padding: 0.65rem 1rem;
       vertical-align: middle;
     }
@@ -263,7 +277,10 @@
     .formula-cell {
       font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
       font-size: 0.96rem;
-      overflow-x: auto;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+      white-space: normal !important;
+      max-width: 100% !important;
     }
     .proof-cell {
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
@@ -320,28 +337,15 @@
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
     /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
-    .formula-unicode { display: block; }
-    .formula-latex { display: block; font-size: 1.05rem; }
-    .formula-ansii { display: block; }
+    .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     body.hide-schemata .row-scheme { display: none !important; }
-    .metalevel-badge {
-      display: inline-block;
-      font-size: 0.68rem;
-      font-weight: 700;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      color: #fde047;
-      background: rgba(250, 204, 21, 0.14);
-      border: 1px solid rgba(250, 204, 21, 0.45);
-      border-radius: 4px;
-      padding: 0.05rem 0.32rem;
-      margin-right: 0.45rem;
-      vertical-align: middle;
-      line-height: 1.2;
-      cursor: help;
-    }
+    .metalevel-badge { display: none !important; }
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
@@ -417,7 +421,7 @@
             <tr class="row-latex">
               <th class="field-name">Formula (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/and-conn.html}{\land} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/and-conn.html}{\land} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
             </tr>
             <tr class="row-ansii">
@@ -439,7 +443,7 @@
             <tr class="row-scheme row-latex">
               <th class="field-name">Scheme of Types (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/delimiters-brackets.html}{[} \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/typing-colon.html}{@} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/delimiters-brackets.html}{[} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{@} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/delimiters-brackets.html}{[} \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/typing-colon.html}{@} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/and-conn.html}{\land} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/delimiters-brackets.html}{[} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{@} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/delimiters-brackets.html}{]} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#60a5fa}\href{../symbols/image-op.html}{[}} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}}} {\color{#60a5fa}\href{../symbols/typing-colon.html}{@}} {\color{#86efac}\href{../symbols/fm-sort.html}{\mathsf{Fm}}} \href{../symbols/dot-delim.html}{.} {\color{#86efac}\href{../symbols/expression-sort.html}{\mathsf{Expression}}} {\color{#60a5fa}\href{../symbols/image-op.html}{]}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#60a5fa}\href{../symbols/image-op.html}{[}} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}}} {\color{#60a5fa}\href{../symbols/typing-colon.html}{@}} {\color{#86efac}\href{../symbols/fm-sort.html}{\mathsf{Fm}}} \href{../symbols/dot-delim.html}{.} {\color{#86efac}\href{../symbols/expression-sort.html}{\mathsf{Expression}}} {\color{#60a5fa}\href{../symbols/image-op.html}{]}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#60a5fa}\href{../symbols/image-op.html}{[}} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}}} {\color{#60a5fa}\href{../symbols/typing-colon.html}{@}} {\color{#86efac}\href{../symbols/fm-sort.html}{\mathsf{Fm}}} \href{../symbols/dot-delim.html}{.} {\color{#86efac}\href{../symbols/expression-sort.html}{\mathsf{Expression}}} {\color{#60a5fa}\href{../symbols/image-op.html}{]}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/and-conn.html}{\land} \href{../symbols/antiquotation.html}{[\![ } {\color{#60a5fa}\href{../symbols/image-op.html}{[}} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}}} {\color{#60a5fa}\href{../symbols/typing-colon.html}{@}} {\color{#86efac}\href{../symbols/fm-sort.html}{\mathsf{Fm}}} \href{../symbols/dot-delim.html}{.} {\color{#86efac}\href{../symbols/expression-sort.html}{\mathsf{Expression}}} {\color{#60a5fa}\href{../symbols/image-op.html}{]}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
               </td>
             </tr>
             <tr class="row-scheme row-ansii">

@@ -253,10 +253,14 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
-            overflow-x: auto;
+            overflow-x: hidden;
+            max-width: 100%;
+            width: 100%;
         }
         .section-external-table {
             width: 100%;
+            max-width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
             text-align: left;
         }
@@ -314,6 +318,8 @@
         }
         .internal-entity-table {
             width: 100%;
+            max-width: 100%;
+            table-layout: fixed;
             border-collapse: collapse;
         }
         .internal-entity-table tr {
@@ -323,7 +329,10 @@
             border-bottom: none;
         }
         .internal-entity-table th.field-name {
-            width: 165px;
+            width: 150px;
+            min-width: 150px;
+            max-width: 150px;
+            word-break: normal;
             padding: 0.6rem 1rem;
             background: rgba(30, 41, 59, 0.45);
             color: var(--text-secondary);
@@ -335,6 +344,11 @@
             vertical-align: middle;
         }
         .internal-entity-table td.field-value {
+            width: calc(100% - 150px);
+            max-width: calc(100% - 150px);
+            word-break: break-word;
+            overflow-wrap: anywhere;
+            white-space: normal;
             padding: 0.65rem 1rem;
             vertical-align: middle;
         }
@@ -346,7 +360,10 @@
         .formula-cell {
             font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
             font-size: 0.96rem;
-            overflow-x: auto;
+            overflow-wrap: anywhere !important;
+            word-break: break-word !important;
+            white-space: normal !important;
+            max-width: 100% !important;
         }
         .proof-cell {
             font-family: 'JetBrains Mono', 'Fira Code', monospace;
@@ -406,13 +423,15 @@
         .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
 
         /* Formula Display Toggles */
-        .formula-unicode { display: block; }
-        .formula-latex { display: block; font-size: 1.05rem; }
-        .formula-ansii { display: block; }
+        .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+        .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+        .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+        .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
         body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
         body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
         body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
         body.hide-schemata .row-scheme { display: none !important; }
+        .metalevel-badge { display: none !important; }
 
         /* Placeholder Cards for On-Demand & Background Chapter Loading */
         .sec-placeholder-card {
