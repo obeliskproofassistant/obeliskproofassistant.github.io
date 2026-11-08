@@ -255,7 +255,7 @@
                     <th style="padding: 6px 8px;">Kernel AST Role</th>
                     <th style="padding: 6px 8px;">Example in <code>.nbg</code> Surface Syntax</th>
                     <th style="padding: 6px 8px;">Verification Action in <code>NBGCompiler.typeCheck</code></th>
-                    <th style="padding: 6px 8px;">Can a False MK Statement Pass?</th>
+                    <th style="padding: 6px 8px;">Epistemic Meaning (Soundness Guarantee)</th>
                 </tr>
             </thead>
             <tbody>
@@ -264,14 +264,14 @@
                     <td style="padding: 6px 8px;"><strong>Type Definition</strong> (<code>NBGCompiler.Type</code> / <code>Fm</code>)</td>
                     <td style="padding: 6px 8px;"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="color:#94a3b8;font-size:11px;">(<code>.nbg</code> ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
                     <td style="padding: 6px 8px;">Checks syntactic sort well-formedness &amp; Stage I/II comprehension bounds</td>
-                    <td style="padding: 6px 8px; color: #fbbf24;"><strong>Yes as an uninhabited Type</strong> (defining a proposition never proves it!)</td>
+                    <td style="padding: 6px 8px; color: #fbbf24;"><strong>Uninhabited Type</strong> (defining a formula creates a proposition type; it never asserts or proves it!)</td>
                 </tr>
                 <tr>
                     <td style="padding: 6px 8px;"><code>theorem T : F = e;</code></td>
                     <td style="padding: 6px 8px;"><strong>Proof Term Witness</strong> (<code>NBGCompiler.Expr</code>)</td>
                     <td style="padding: 6px 8px;"><code>theorem empty_class_no_elements : (forall (z:Class). ((z in {x | Bot}) -&gt; Bot)) = Lam (z:Class) =&gt; ...;</code><br><span style="color:#94a3b8;font-size:11px;">(and <code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = ...;</code>)</span></td>
                     <td style="padding: 6px 8px;">Bidirectionally synthesizes type of proof term <code>e</code> via <code>NBGCompiler.typeCheck</code> and checks definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
-                    <td style="padding: 6px 8px; color: #34d399;"><strong>Never</strong> (relative to MK/NBG consistency) — every candidate term for an uninhabited type is deterministically rejected</td>
+                    <td style="padding: 6px 8px; color: #34d399;"><strong>Soundness Invariant: Uninhabited Type Cannot Pass</strong> (relative to MK consistency) &mdash; every candidate proof term for a false statement is deterministically rejected</td>
                 </tr>
             </tbody>
         </table>

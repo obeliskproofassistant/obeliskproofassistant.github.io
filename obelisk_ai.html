@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Proof Assistant — Rigorous Foundations & Zero Implicit Computation</title>
-  <meta name="description" content="Obelisk: A new proof assistant for Morse-Kelley class theory with zero implicit computation, declarative syntax, and an ultra-small trusted LCF kernel. Audited and verified in Lean 4.">
+  <title>Obelisk Proof Assistant — Rigorous Foundations &amp; Explicit Proof Verification</title>
+  <meta name="description" content="Obelisk: A new proof assistant for Morse-Kelley class theory with explicit proof terms, declarative syntax, and an ultra-small trusted LCF kernel.">
   
   <!-- Fonts & Math -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -791,7 +791,7 @@
           <h4 style="color: #c084fc;"><span>🏷️</span> Dunaev Tagged Ordered Pairs</h4>
           <p>
             Standard Kuratowski pairs \((\langle A, B \rangle = \{\{A\}, \{A, B\}\})\) fail for proper classes because proper classes cannot be elements of sets. 
-            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), allowing proper classes and infinite families to form pairs and lists with minimal rank growth and full algebraic projection injectivity.
+            Obelisk solves this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), allowing proper classes and infinite families to form pairs and lists without requiring higher-universe class elevation, with full machine-checked projection injectivity (<code>proofDunaevPairInjectivity</code>).
           </p>
         </div>
 
@@ -862,7 +862,7 @@
         <div class="card" style="padding: 1.2rem 1.3rem; border: 1px solid rgba(244, 114, 182, 0.35);">
           <h3 style="font-size: 1.05rem; color: #f472b6; margin-bottom: 0.5rem;">🗂️ Deprecated Static Snapshots &rarr; Canonical ML Generators</h3>
           <p style="font-size: 0.88rem; color: var(--text-muted);">
-            Legacy hand-authored pages (<code>embedding_anti.html</code>, <code>archive/*.html</code>) are preserved with explicit <code>(deprecated)</code> banners pointing to their live Poly/ML-generated replacements in <a href="generated/index.html" style="color: var(--primary);"><code>generated/</code></a> and the interactive split-view portal <a href="embedding.html" style="color: var(--primary);"><code>embedding.html</code></a>.
+            Legacy hand-authored pages (<code>embedding_anti.html</code>, <code>archive/*.html</code>) are preserved with explicit <code>(deprecated)</code> banners pointing to their live Poly/ML-generated replacements in <a href="generated/index.html" style="color: var(--primary);">Generated Catalog Index</a> and the interactive split-view portal <a href="embedding.html" style="color: var(--primary);">Interactive Theory Outline (embedding.html)</a>.
           </p>
           <a href="archive/index.html" style="color: var(--primary); font-size: 0.84rem; font-weight: 600; text-decoration: none;">View deprecated archive index &rarr;</a>
         </div>
@@ -995,7 +995,7 @@
           <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--card-border); border-radius: 8px; padding: 1.25rem;">
             <h4 style="color: #fbbf24; font-size: 0.95rem; margin-bottom: 0.5rem;">Lightweight Offline Proof Checking (&lt;50 MB RAM)</h4>
             <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.5;">
-              Validates all 69 core catalog entries, 90 verified higher-order theorems, and 30 NBG standard library theorems in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
+              Validates all 106 verified kernel catalog entries (1.01&ndash;5.02 in Variant 1) and 100 machine-checked theorem records (77 derived, 16 definitional, 7 axiomatic in Variant 2) in <strong>&lt;50 MB RAM</strong> under Poly/ML &amp; CakeML or zero-install browser JS, contrasting with multi-gigabyte JVM/LSP heaps.
             </p>
           </div>
         </div>
@@ -1058,7 +1058,7 @@
             <tr>
               <td><strong>Obelisk</strong></td>
               <td>Morse–Kelley Class Theory + Tarski Universes</td>
-              <td><span class="badge-highlight">Zero Implicit Computation</span> (Syntactic Trees)</td>
+              <td><span class="badge-highlight">Explicit Verification</span> (Syntactic Trees &amp; Bounded &alpha;&beta;&delta;)</td>
               <td>Small LCF Kernel (~20k LOC SML)</td>
               <td>Declarative, human-readable, stable under definition updates</td>
             </tr>
@@ -1078,7 +1078,7 @@
             </tr>
             <tr>
               <td><strong>Isabelle/ZF</strong></td>
-              <td>ZFC over Higher-Order Logic (Isabelle/Pure)</td>
+              <td>ZFC over First-Order Logic (Isabelle/FOL on Pure meta-logic)</td>
               <td>Term rewriting, tableau provers, Sledgehammer</td>
               <td>Standard ML LCF kernel</td>
               <td>Isar declarative proofs, Isabelle framework</td>
@@ -1212,7 +1212,7 @@
              (AStmt Tau (Var "Gamma") (Var "psi")))`,
         sideConditions: [
           "Context unification: Theory Tau and context Gamma match syntactically in LCF kernel.",
-          "Zero implicit computation: No hidden βδι reductions; proof object is an explicit tree node.",
+          "Explicit syntactic verification: No hidden unbounded βδι computation; proof object is an explicit tree node.",
           "Checked in < 250 LOC Standard ML kernel targeting CakeML."
         ]
       },
