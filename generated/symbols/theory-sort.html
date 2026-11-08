@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2 &mdash; Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (Default: MKTD1 &amp; MKTD2)</title>
+  <title>Symbol Reference: Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2 &mdash; Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (MKTD1 as Variant 1, MKTD2 as Variant 2)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -353,13 +353,14 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2 &mdash; Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (Default: MKTD1 &amp; MKTD2)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <h1>Symbol Reference: Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2 &mdash; Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (MKTD1 as Variant 1, MKTD2 as Variant 2)</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,23 +373,34 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2</span> <span class="formula-latex">\(\mathsf{Theory} \; / \; \mathcal{T} \; / \; \mathcal{E} \; / \; \mathsf{MKTD1} \; / \; \mathsf{MKTD2}\)</span> &mdash; Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (Default: MKTD1 &amp; MKTD2)</h2>
-      <p class="section-desc">Represents an axiomatic theory <code>𝒯 : Theory</code> (including unspecified theories <code>ℰ</code> extending <code>IΣ₁</code> such as PA, NBG, or MK, and the canonical default theories <strong>MKTD1</strong> and <strong>MKTD2</strong>).</p>
+      <h2>Formal Axiomatic Theory Sort &amp; The 12+6 Canonical Theory Variants (MKTD1 as Variant 1, MKTD2 as Variant 2)</h2>
+      <p class="section-desc">Represents an axiomatic theory <code>𝒯 : Theory</code> (including unspecified theories <code>ℰ</code> extending <code>IΣ₁</code> such as PA, NBG, or MK, and the canonical default theories <strong>MKTD1 (Variant 1)</strong> and <strong>MKTD2 (Variant 2)</strong>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
               <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">Theory  /  𝒯  /  ℰ  /  MKTD1  /  MKTD2</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{Theory} \; / \; \mathcal{T} \; / \; \mathcal{E} \; / \; \mathsf{MKTD1} \; / \; \mathsf{MKTD2}\)</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{Theory} \; / \; \mathcal{T} \; / \; \mathcal{E} \; / \; \mathsf{MKTD1} \; / \; \mathsf{MKTD2}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{Theory} \; / \; \mathcal{T} \; / \; \mathcal{E} \; / \; \mathsf{MKTD1} \; / \; \mathsf{MKTD2}</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>Theory  /  Tau  /  Eau  /  MKTD1  /  MKTD2</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mathsf{Theory} \; / \; \mathcal{T} \; / \; \mathcal{E} \; / \; \mathsf{MKTD1} \; / \; \mathsf{MKTD2}</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>The 12+6 Canonical Theory &amp; Proof Assistant Variants (Directive 12):</strong></p><p>Every <code>.nbg</code> file and formal development specifies its target theory and proof assistant variant at the top of the file. The default theory is <strong>MKTD</strong> = <strong>Morse-Kelley + Tarski + Dunaev</strong> (Morse-Kelley impredicative class theory + Tarski's Axiom of Universes + Dunaev's refined axioms and explicit quotation/antiquotation, encoding/decoding, embedding, and conglomerate types):</p><ul><li><strong>Variant 1 (1st-Order Syntactical Proof Assistant, suffix <code>1</code>)</strong>: <code>NBG1</code>, <code>NBGT1</code>, <code>NBGTD1</code>, <code>MK1</code>, <code>MKT1</code>, <strong><code>MKTD1</code> (Default Variant 1)</strong>.</li><li><strong>Variant 2 (Higher-Order Formulas-as-Types Proof Assistant, suffix <code>2</code>)</strong>: <code>NBG2</code>, <code>NBGT2</code>, <code>NBGTD2</code>, <code>MK2</code>, <code>MKT2</code>, <strong><code>MKTD2</code> (Default Variant 2)</strong>.</li><li><strong>Shared / Dual-Variant Reserved Identifiers (suffix <code>*</code>)</strong>: <code>NBG*</code>, <code>NBGT*</code>, <code>NBGTD*</code>, <code>MK*</code>, <code>MKT*</code>, <code>MKTD*</code>.</li><li><strong>Metatheoretic Theory Variables (<code>𝒯, ℱ, ℰ, 𝒲</code>)</strong>: In Section 5 (Entries ThmLoeb (5.01)&ndash;ThmSecondIncompleteness (5.02)), <code>ℰ</code> ranges over any sufficiently strong formal theory extending <code>IΣ₁</code> (such as PA, NBG, MK, or MKTD).</li></ul></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>(IΣ₁ ⊆ ℰ) ⇒ (Consistent(ℰ) ⇒ ¬(ℰ ⊢ ‹Consistent(ℰ)›))</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(IΣ₁ ⊆ ℰ) ⇒ (Consistent(ℰ) ⇒ ¬(ℰ ⊢ ‹Consistent(ℰ)›))</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{IΣ₁}}  \href{../symbols/sub-pred.html}{\subseteq}  ℰ\href{../symbols/delimiters-brackets.html}{)}  ⇒ \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{Consistent}} \href{../symbols/delimiters-brackets.html}{(} ℰ\href{../symbols/delimiters-brackets.html}{)}  ⇒ \href{../symbols/neg-conn.html}{\neg} \href{../symbols/delimiters-brackets.html}{(} ℰ \href{../symbols/turnstile-derivability.html}{\vdash}  \href{../symbols/quotation.html}{\langle } \href{../symbols/variables.html}{\mathrm{Consistent}} \href{../symbols/delimiters-brackets.html}{(} ℰ\href{../symbols/delimiters-brackets.html}{)} \href{../symbols/quotation.html}{\rangle } \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>(ISigma_1 c= Eau) --&gt; (Consistent(Eau) --&gt; ~(Eau |- &lt;| Consistent(Eau) |&gt;))</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -441,12 +457,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

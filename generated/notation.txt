@@ -1,9 +1,14 @@
+# AUTO-GENERATED MIRROR OF set_theory_prover/NOTATION.txt -- DO NOT EDIT DIRECTLY.
+# Source: set_theory_prover/NOTATION.txt
+# Generator: set_theory_prover/program/html_generator.ML
+# Regenerate: cd /ramdisk/set_theory_prover/program && poly -q --use html_generator.ML
+
 ================================================================================
 OBELISK SET THEORY PROVER — CANONICAL UNAMBIGUOUS NOTATION SPECIFICATION
 ================================================================================
-Repository: set_theory_prover (Variant 1 & Variant 2)
-Purpose:    Unambiguous distinction between logical formulas (Variant 1),
-            constructive types/functions (Variant 2), and computation-level
+Repository: set_theory_prover (Variant 1 = MKTD1 & Variant 2 = MKTD2)
+Purpose:    Unambiguous distinction between logical formulas in Variant 1 (MKTD1),
+            constructive types/functions in Variant 2 (MKTD2), and computation-level
             boolean truth values (Bool), across all three printing strategies:
               (x.1) LaTeX
               (x.2) Unicode
@@ -13,9 +18,9 @@ Purpose:    Unambiguous distinction between logical formulas (Variant 1),
 2 different notations:
 
 ================================================================================
-1) Prover, Variant 1: ("for formulas" — 1st-Order NBG/MK Proof Assistant)
+1) Prover, Variant 1 (MKTD1): ("for formulas" — 1st-Order NBG/MK Proof Assistant)
    Sort of Formulas: Fm (= Truth.Expression in newchecker.ML / typetheory.ML)
-   Default Theory:   MKTD1 (Morse-Kelley + Tarski + Dunaev, 1st-Order Kernel)
+   Theory Name:      MKTD1 (Morse-Kelley + Tarski + Dunaev, Variant 1)
 ================================================================================
 
 1.1 Latex
@@ -100,9 +105,9 @@ let x = t in phi                  (Explicit capture-avoiding substitution in for
 
 
 ================================================================================
-2) Variant 2: ("for types" — Higher-Order Dependent-Type / RoqC Proof Assistant)
+2) Variant 2 (MKTD2): ("for types" — Higher-Order Dependent-Type / RoqC Proof Assistant)
    Sort of Types:  Type / Prop (dependent_syntax.ML, nbg_compiler.ML)
-   Default Theory: MKTD2 (Morse-Kelley + Tarski + Dunaev, Formulas-as-Types)
+   Theory Name:    MKTD2 (Morse-Kelley + Tarski + Dunaev, Variant 2)
 ================================================================================
 
 1.1 Latex
@@ -225,7 +230,7 @@ if_dep(T_e, b, t1, t2)            (Dependent conditional over T_e : Bool -> Type
 ================================================================================
 4) MASTER DISAMBIGUATION MATRIX (ALL 3 STRATEGIES x ALL 3 LAYERS)
 ================================================================================
-Concept              | Printing | Variant 1: Formulas (Fm) | Variant 2: Types (Type) | Boolean Values (Bool)
+Concept              | Printing | Variant 1 (MKTD1): Fm    | Variant 2 (MKTD2): Type | Boolean Values (Bool)
 ---------------------+----------+--------------------------+-------------------------+----------------------
 Truth / Unit / True  | LaTeX    | \top                     | \mathbf{1} (\top)       | \mathsf{true}
                      | Unicode  | ⊤ (U+22A4)               | 𝟙 (U+1D7D9)             | true (𝘁𝗿𝘂𝗲)

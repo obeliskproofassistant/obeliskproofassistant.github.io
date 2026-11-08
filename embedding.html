@@ -112,9 +112,12 @@
             text-decoration-style: solid;
             text-decoration-color: #38bdf8;
         }
+        body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+        body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+        body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     </style>
 </head>
-<body class="mode-unicode">
+<body>
 
 <div id="nav-toolbar">
     <div class="toolbar-title">
@@ -175,6 +178,20 @@ function rewriteLatexHrefs(htmlStr) {
         return "\\href{generated/" + href + "}";
     });
 }
+
+function toggleFormatHide(fmt) {
+    const cls = 'hide-' + fmt;
+    const isHidden = document.body.classList.toggle(cls);
+    const btn = document.getElementById('btn-hide-' + fmt);
+    if (btn) btn.classList.toggle('active', isHidden);
+    if (!isHidden && fmt === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+        const target = document.getElementById("myhtmloutput");
+        window.MathJax.typesetPromise(target ? [target] : undefined).then(() => {
+            rewriteRelativeAnchors(target);
+        }).catch(err => console.warn("MathJax typeset warning:", err));
+    }
+}
+window.toggleFormatHide = toggleFormatHide;
 
 function setFormatMode(mode) {
     document.body.classList.remove('mode-unicode', 'mode-latex');

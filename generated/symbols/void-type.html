@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: 𝟘  /  Void &mdash; Void / Empty Bottom Type (𝟘 / Void, AST Constructor: UVoid / TBottom)</title>
+  <title>Symbol Reference: 𝟘 &mdash; Void Type (Empty Bottom Type)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -353,13 +353,14 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: 𝟘  /  Void &mdash; Void / Empty Bottom Type (𝟘 / Void, AST Constructor: UVoid / TBottom)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <h1>Symbol Reference: 𝟘 &mdash; Void Type (Empty Bottom Type)</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD2</strong> (Variant 2: Higher-Order Proof Assistant) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,7 +373,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">𝟘  /  Void</span> <span class="formula-latex">\(\mathbf{0} \; (\mathsf{Void} \;/\; \bot)\)</span> &mdash; Void / Empty Bottom Type (𝟘 / Void, AST Constructor: UVoid / TBottom)</h2>
+      <h2>Void Type (Empty Bottom Type)</h2>
       <p class="section-desc">Uninhabited empty / bottom type in Variant 2 (Unicode: <code>𝟘</code>, LaTeX: <code>\mathbf{0}</code> or <code>\mathsf{Void}</code> / <code>\bot</code>, Plain-text ASCII: <code>Void</code>) with empty eliminator <code>abort</code>.</p>
     </div>
     <div class="table-container">
@@ -380,15 +381,26 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">𝟘  /  Void</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathbf{0} \; (\mathsf{Void} \;/\; \bot)\)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">𝟘</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathbf{0} \; (\mathsf{Void} \;/\; \bot)\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathbf{0} \; (\mathsf{Void} \;/\; \bot)</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>Void</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,22 +428,26 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mathbf{0} \; (\mathsf{Void} \;/\; \bot)</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>UVoid</code> in <code>typetheory.ML</code> and <code>TBottom</code> / <code>Const "False"</code> in Variant 2. Distinguished from Variant 1's formula Falsum <code>⊥ : Fm</code> (ASCII <code>F</code>) and from the Boolean value <code>false : Bool</code>.</p></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>Π(A:Prop), (𝟘 → A)</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>Π(A:Prop), (𝟘 → A)</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/pi-binder.html}{\Pi} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/typing-colon.html}{:} \href{../symbols/prop-sort.html}{\mathsf{Prop}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/void-type.html}{\mathbf{0}}  \href{../symbols/func-arrow.html}{\rightarrow}  \href{../symbols/variables.html}{A} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>Pi (A:Prop), (Void -&gt; A)</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="unit-type.html" class="sym-link">Unit Type 𝟙 / Unit (Variant 2)</a></li>
-<li><a href="bot-const.html" class="sym-link">Formula Falsum ⊥ / F (Variant 1)</a></li>
+<li><a href="unit-type.html" class="sym-link">Unit Type 𝟙 (Variant 2)</a></li>
+<li><a href="bot-const.html" class="sym-link">Formula Falsum ⊥ (Variant 1)</a></li>
 <li><a href="bool-false.html" class="sym-link">Boolean Value false : Bool</a></li>
 </ul></td>
           </tr>
@@ -441,12 +457,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

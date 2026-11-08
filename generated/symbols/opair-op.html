@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</title>
+  <title>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol</title>
   <script>
     window.MathJax = {
       tex: {
@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -353,13 +353,14 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <h1>Symbol Reference: (a, b) &mdash; Ordered Class-Pair Functional Symbol</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,7 +373,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">(a, b)</span> <span class="formula-latex">\((a, b)\)</span> &mdash; Ordered Class-Pair Functional Symbol ((A, B), AST Constructors: CpOPair in 3.76 vs. CpKuratowskiPair in 3.52)</h2>
+      <h2>Ordered Class-Pair Functional Symbol</h2>
       <p class="section-desc">Binary ordered pair notation: in Entry <code>DefDunaevOrderedPair</code> (3.76, <code>CpOPair</code>), denotes the 3-layer marker-tagged Dunaev class pair <code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)</code> supporting arbitrary proper classes; in Entry <code>DefKuratowskiPair</code> (3.52, <code>CpKuratowskiPair</code>), denotes the classical Kuratowski set pair <code>K(a, b) = {{a, a}, {a, b}}</code> (injective only when <code>Set(a) ∧ Set(b)</code>).</p>
     </div>
     <div class="table-container">
@@ -380,15 +381,26 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
               <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">(a, b)</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\((a, b)\)</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\((a, b)\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">(a, b)</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>(a, b)</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>(a, b)</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Distinguishing the Three Ordered-Pair Constructors in Obelisk:</strong></p><ul><li><strong>1. 3-Layer Marker-Tagged Dunaev Class Pair (<code>CpOPair</code>, Entry DefDunaevOrderedPair (3.76) <code>3.76</code>)</strong>: Defined for arbitrary classes <code>A, B : Class</code> using purely unordered set braces (<code>CpSingleton</code>, <code>CpUPair</code>) via <code>S_3(a) = {{{a}}}</code>, <code>M_3(A, n) = {{0, n}} ∪ {{S_3(a), n} | a ∈ A}</code>, and <code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)</code>. Its empty-pair value is nonempty: <code>D_mark(0, 0) = {{0, 1}, {0, 2}} ≠ ∅</code>, and for proper class <code>V</code> and <code>∅</code>, <code>pr1(D_mark(V, ∅)) = V</code> and <code>pr2(D_mark(V, ∅)) = ∅</code> (Entries ThmDunaevFirstProjection (3.77), ThmDunaevSecondProjection (3.78)). Used as the pair constructor in binary relations, <code>Dom</code>, <code>valOf</code>, and <code>Σ/Π</code> models.</li><li><strong>2. Kuratowski Set Pair (<code>CpKuratowskiPair</code>, Entry DefKuratowskiPair (3.52) <code>3.52</code>)</strong>: Defined by <code>K(a, b) = {{a, a}, {a, b}}</code>. Requires explicit sethood guards <code>Set(a) ∧ Set(b)</code> to recover components injectively (collapses on proper classes since <code>{V} = ∅</code>), and satisfies <code>K(0, 0) = {{0}} = {1} ≠ ∅</code>.</li><li><strong>3. Book Recursive Class Pair (<code>070_ordered_pair.tex</code>, <code>P_rec</code>)</strong>: Satisfies <code>P_rec(A, B) = {P_rec(0, a) | a ∈ A} ∪ {P_rec(1, b) | b ∈ B}</code> with empty-pair value <code>P_rec(0, 0) = ∅</code>.</li></ul></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)  (with D_mark(0,0) = {{0,1},{0,2}}, P_rec(0,0) = ∅, K(0,0) = {{0}})</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>D_mark(A, B) = M_3(A, 1) ∪ M_3(B, 2)  (with D_mark(0,0) = {{0,1},{0,2}}, P_rec(0,0) = ∅, K(0,0) = {{0}})</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/variables.html}{\mathrm{D\_mark}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{B} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{\mathrm{M\_3}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/comma-delim.html}{,}  \href{../symbols/numeral-1.html}{1} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/binunion-op.html}{\cup}  \href{../symbols/variables.html}{\mathrm{M\_3}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{B} \href{../symbols/comma-delim.html}{,}  \href{../symbols/numeral-2.html}{2} \href{../symbols/delimiters-brackets.html}{)}   \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{with}}  \href{../symbols/variables.html}{\mathrm{D\_mark}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/numeral-0.html}{0} \href{../symbols/comma-delim.html}{,} \href{../symbols/numeral-0.html}{0} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/upair-op.html}{\{} \href{../symbols/upair-op.html}{\{} \href{../symbols/numeral-0.html}{0} \href{../symbols/comma-delim.html}{,} \href{../symbols/numeral-1.html}{1} \href{../symbols/upair-op.html}{\}} \href{../symbols/comma-delim.html}{,} \href{../symbols/upair-op.html}{\{} \href{../symbols/numeral-0.html}{0} \href{../symbols/comma-delim.html}{,} \href{../symbols/numeral-2.html}{2} \href{../symbols/upair-op.html}{\}} \href{../symbols/upair-op.html}{\}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{\mathrm{P\_rec}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/numeral-0.html}{0} \href{../symbols/comma-delim.html}{,} \href{../symbols/numeral-0.html}{0} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/emptyset-const.html}{\emptyset} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{K} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/numeral-0.html}{0} \href{../symbols/comma-delim.html}{,} \href{../symbols/numeral-0.html}{0} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/singleton-op.html}{\{} \href{../symbols/singleton-op.html}{\{} \href{../symbols/numeral-0.html}{0} \href{../symbols/singleton-op.html}{\}} \href{../symbols/singleton-op.html}{\}} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>D_mark(A, B) = M_3(A, 1) u+ M_3(B, 2)  (with D_mark(0,0) = {{0,1},{0,2}}, P_rec(0,0) = EmptySet, K(0,0) = {{0}})</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -442,12 +458,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

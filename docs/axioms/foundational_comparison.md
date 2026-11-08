@@ -7,7 +7,7 @@
 | **NBG + Global Choice (von Neumann NBG)** | Sets & Classes | Predicative (quantifiers over sets only) | Global Choice ($\tau$) $\equiv$ Class-Map Limitation of Size ($K \sim V$ for proper $K$, `Tight(V)` `3.47`) | Conservative over ZFC (by Easton / forcing) |
 | **Morse–Kelley ($\mathrm{MK}_{\mathrm{set}}$)** | Sets & Classes | **Impredicative** (`RulClassComprehension`, `3.01`) | Set Choice ($\mathrm{AC}_{\mathrm{set}}$) only | **Strictly stronger than ZFC** (proves $\mathrm{Con}(\mathrm{ZFC})$); Global Choice remains independent |
 | **Morse–Kelley + Global Choice ($\mathrm{MK} + \mathrm{GC}$)** | Sets & Classes | **Impredicative** (`3.01`) | Global Choice / Class-Map Limitation of Size (`Tight(V)` `3.47`, `ax_limitation_of_size`) | **Strictly stronger than ZFC**; $V \sim \mathrm{On}$ |
-| **Obelisk Core (MKTD1 / MKTD2)** | Sets & Classes | **Impredicative (`3.01`)** | Cardinal-Default Size (`AxmSizeLimitation`, `3.43`) + Class-Map Tightness (`DefTightClass`, `3.47` / `ThmUniversalClassIsUniverse`, `3.69` / `ax_limitation_of_size`) | $\ge \mathrm{MK} + \mathrm{GC}$ |
+| **Obelisk Core (`MKTD1` as Variant 1, `MKTD2` as Variant 2)** | Sets & Classes | **Impredicative (`3.01`)** | Cardinal-Default Size (`AxmSizeLimitation`, `3.43`) + Class-Map Tightness (`DefTightClass`, `3.47` / `ThmUniversalClassIsUniverse`, `3.69` / `ax_limitation_of_size`) | $\ge \mathrm{MK} + \mathrm{GC}$ |
 | **Obelisk + Tarski (`AxmTarskiUniverses`, `3.74`)** | Sets, Classes, Universes | Impredicative (`3.01`) | Global Choice + Tarski Universe Hierarchy ($\forall X \in V,\;\exists U \in V\text{ universe with }X \in U$) | ZFC / MK + unboundedly many strongly inaccessible cardinals |
 
 ---

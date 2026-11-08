@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -354,12 +354,13 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: ∀  ∃  ∃!  κ  ι  τ  λ  Π  Σ &mdash; Unified Variable-Binding Operators (Quantifiers, Class Comprehension &amp; Selection Operators)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,23 +373,34 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">∀  ∃  ∃!  κ  ι  τ  λ  Π  Σ</span> <span class="formula-latex">\(\forall, \exists, \exists!, \kappa, \iota, \tau, \lambda, \Pi, \Sigma\)</span> &mdash; Unified Variable-Binding Operators (Quantifiers, Class Comprehension &amp; Selection Operators)</h2>
-      <p class="section-desc">All quantifier-like variable-binding structures in <strong>MKTD1</strong> and <strong>MKTD2</strong>: universal (<code>∀</code>), existential (<code>∃</code>), unique existential (<code>∃!</code>), class comprehension (<code>κ</code>), definite description (<code>ι</code>), Hilbert choice (<code>τ</code> / <code>ε</code>), lambda abstraction (<code>λ</code>), dependent product (<code>Π</code>), and dependent sum (<code>Σ</code>).</p>
+      <h2>Unified Variable-Binding Operators (Quantifiers, Class Comprehension &amp; Selection Operators)</h2>
+      <p class="section-desc">All quantifier-like variable-binding structures in <strong>MKTD1 (Variant 1)</strong> and <strong>MKTD2 (Variant 2)</strong>: universal (<code>∀</code>), existential (<code>∃</code>), unique existential (<code>∃!</code>), class comprehension (<code>κ</code>), definite description (<code>ι</code>), Hilbert choice (<code>τ</code> / <code>ε</code>), lambda abstraction (<code>λ</code>), dependent product (<code>Π</code>), and dependent sum (<code>Σ</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
               <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">∀  ∃  ∃!  κ  ι  τ  λ  Π  Σ</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\forall, \exists, \exists!, \kappa, \iota, \tau, \lambda, \Pi, \Sigma\)</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\forall, \exists, \exists!, \kappa, \iota, \tau, \lambda, \Pi, \Sigma\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\forall, \exists, \exists!, \kappa, \iota, \tau, \lambda, \Pi, \Sigma</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>forall   exists   exists!   kappa   iota   tau   fn   Pi   Sigma</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\forall, \exists, \exists!, \kappa, \iota, \tau, \lambda, \Pi, \Sigma</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Unified Binder Architecture (Directives 1, 2, 8 &amp; 10):</strong></p><p>In Obelisk, quantifiers are one specialization of the general family of <strong>variable-binding operators (binders)</strong>:</p><ul><li><strong>Universal &amp; Existential Quantifiers (<code>∀(x:Class). 𝛂</code>, <code>∃(x:Class). 𝛂</code>, <code>∃!(x:Class). 𝛂</code>)</strong>: Logical binders over classes (Entries AxmDiscourseNonEmpty (2.01)&ndash;RulGeneralisation (2.06), AxmExtensionality (3.10)).</li><li><strong>Bound Quantifiers</strong>: <code>∀(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∀(x:Class). ((x ∈ Y) ⇒ 𝛂)</code>, and <code>∃(x ∈ Y), 𝛂</code> is syntactic sugar for <code>∃(x:Class). ((x ∈ Y) ∧ 𝛂)</code>.</li><li><strong>Class Comprehension Binder (<code>κ(x:Class). 𝛂(x)</code> / <code>{x:Class | 𝛂(x)}</code>)</strong>: Forms the class of all sets <code>x : Class</code> satisfying <code>𝛂(x)</code> (Entry DefIsSet (3.02)). Always binds a <code>Class</code> variable!</li><li><strong>Definite Description (<code>ι(x:Class). 𝛂(x)</code>, Iota-Operator)</strong>: Selects the unique class satisfying <code>𝛂(x)</code> (or the default empty class when uniqueness fails).</li><li><strong>Hilbert Epsilon / Bourbaki Tau Operator (<code>τ(x:Class). 𝛂(x)</code> / <code>ε(x:Class). 𝛂(x)</code>)</strong>: Canonical global choice binder selecting a witness if one exists.</li><li><strong>Type-Theoretic Binders (<code>λ</code>, <code>Π</code>, <code>Σ</code>)</strong>: Constructive function abstraction, dependent product, and dependent sum binders (Entries DefRelationalImage (3.26)&ndash;DefTightClass (3.47)).</li></ul></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>∀(x:Class). ((x ∈ (κ(y:Class). 𝛂(y))) ⇔ (Set(x) ∧ 𝛂(x)))</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>∀(x:Class). ((x ∈ (κ(y:Class). 𝛂(y))) ⇔ (Set(x) ∧ 𝛂(x)))</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/forall-binder.html}{\forall} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/dot-delim.html}{.}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x}  \href{../symbols/in-pred.html}{\in}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/class-comprehension.html}{\kappa} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{y} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/dot-delim.html}{.}  \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{y} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)}  ⇔ \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/set-pred.html}{\mathsf{Set}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{x} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>forall (x:Class). ((x in (kappa (y:Class). alpha(y))) &lt;--&gt; (Set(x) /\ alpha(x)))</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -444,12 +460,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

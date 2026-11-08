@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: -→  /  --&gt; &mdash; Material Implication Connective on Formulas (-→ / -->, AST Constructor: TpImpl)</title>
+  <title>Symbol Reference: -→ &mdash; Material Implication Connective</title>
   <script>
     window.MathJax = {
       tex: {
@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -353,13 +353,14 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: -→  /  --&gt; &mdash; Material Implication Connective on Formulas (-→ / -->, AST Constructor: TpImpl)</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <h1>Symbol Reference: -→ &mdash; Material Implication Connective</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1: 1st-Order Proof Assistant) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,7 +373,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">-→  /  --&gt;</span> <span class="formula-latex">\(\longrightarrow\)</span> &mdash; Material Implication Connective on Formulas (-→ / -->, AST Constructor: TpImpl)</h2>
+      <h2>Material Implication Connective</h2>
       <p class="section-desc">Primitive binary logical connective of material implication on formulas in Variant 1 (Unicode: <code>𝛂 -→ 𝛃</code>, LaTeX: <code>\longrightarrow</code>, Plain-text ASCII: <code>--&gt;</code>), governed by Hilbert axioms A01, A02 and Modus Ponens (Rule RulModusPonens (1.14)).</p>
     </div>
     <div class="table-container">
@@ -380,15 +381,26 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">-→  /  --&gt;</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\longrightarrow\)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">-→</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\longrightarrow\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\longrightarrow</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>--&gt;</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><a href="../manual.html#AxmPropWeakening" class="sym-link"><strong>Axiom AxmPropWeakening (1.01): A01</strong> (<code>#AxmPropWeakening</code> / <code>#label-a01</code>)</a> &middot; <a href="../manual.html#AxmPropFrege" class="sym-link"><strong>Axiom AxmPropFrege (1.02): A02</strong> (<code>#AxmPropFrege</code> / <code>#label-a02</code>)</a> &middot; <a href="../manual.html#RulModusPonens" class="sym-link"><strong>Inference Rule RulModusPonens (1.14): Modus Ponens</strong> (<code>#RulModusPonens</code> / <code>#label-modus-ponens</code>)</a></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\longrightarrow</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>SML AST Constructor:</strong> <code>HP (TpImpl of ('Truth_EXP * 'Truth_EXP))</code> in <code>Truth_p</code> (<code>typetheory.ML:651</code>). Takes two formula arguments <code>(𝛂 : Fm, 𝛃 : Fm)</code>. Distinguished across all three printing strategies (using a minus in front of the arrow in Unicode <code>-→</code> so it is twice as long in monospace fonts) from Variant 2's function space / type arrow <code>→</code> (LaTeX <code>\rightarrow</code>, ASCII <code>-&gt;</code>).</p></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>𝛂 -→ (𝛃 -→ 𝛂)</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>𝛂 -→ (𝛃 -→ 𝛂)</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}}  \href{../symbols/impl-conn.html}{\longrightarrow}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}}  \href{../symbols/impl-conn.html}{\longrightarrow}  \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>alpha --&gt; (beta --&gt; alpha)</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -433,7 +449,7 @@
 <li><a href="../manual.html#AxmPropWeakening" class="sym-link">Axiom AxmPropWeakening (1.01): A01</a></li>
 <li><a href="../manual.html#AxmPropFrege" class="sym-link">Axiom AxmPropFrege (1.02): A02</a></li>
 <li><a href="../manual.html#RulModusPonens" class="sym-link">Inference Rule RulModusPonens (1.14): Modus Ponens</a></li>
-<li><a href="func-arrow.html" class="sym-link">Function Type Arrow → / -> (Variant 2)</a></li>
+<li><a href="func-arrow.html" class="sym-link">Function Space Arrow → (Variant 2)</a></li>
 </ul></td>
           </tr>
         </tbody>
@@ -467,11 +483,22 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-axiom">Axiom</span></td>
             </tr>
-            <tr>
-              <th class="field-name">Formula</th>
+            <tr class="row-unicode">
+              <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
                 <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Formula (LaTeX)</th>
+              <td class="field-value formula-cell">
                 <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Formula (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
             </tr>
             <tr>
@@ -482,11 +509,22 @@
               <th class="field-name">Scheme of Types</th>
               <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>(⟦[𝛂@Fm.Expression]⟧-→(⟦[𝛃@Fm.Expression]⟧-→⟦[𝛂@Fm.Expression]⟧))</code></td>
             </tr>
-            <tr>
-              <th class="field-name">Judgements</th>
+            <tr class="row-unicode">
+              <th class="field-name">Judgements (Unicode)</th>
               <td class="field-value">
                 <div class="formula-unicode judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Judgements (LaTeX)</th>
+              <td class="field-value">
                 <div class="formula-latex judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span>\(\href{../symbols/image-op.html}{[} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/image-op.html}{]} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Judgements (ANSII)</th>
+              <td class="field-value">
+                <div class="formula-ansii judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
               </td>
             </tr>
             <tr>
@@ -510,11 +548,22 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-axiom">Axiom</span></td>
             </tr>
-            <tr>
-              <th class="field-name">Formula</th>
+            <tr class="row-unicode">
+              <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
                 <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">𝛄</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">𝛄</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Formula (LaTeX)</th>
+              <td class="field-value formula-cell">
                 <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\gamma}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\gamma}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Formula (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">gamma</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">gamma</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
             </tr>
             <tr>
@@ -525,11 +574,22 @@
               <th class="field-name">Scheme of Types</th>
               <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>((⟦[𝛂@Fm.Expression]⟧-→(⟦[𝛃@Fm.Expression]⟧-→⟦[𝛄@Fm.Expression]⟧))-→((⟦[𝛂@Fm.Expression]⟧-→⟦[𝛃@Fm.Expression]⟧)-→(⟦[𝛂@Fm.Expression]⟧-→⟦[𝛄@Fm.Expression]⟧)))</code></td>
             </tr>
-            <tr>
-              <th class="field-name">Judgements</th>
+            <tr class="row-unicode">
+              <th class="field-name">Judgements (Unicode)</th>
               <td class="field-value">
                 <div class="formula-unicode judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">𝛄</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Judgements (LaTeX)</th>
+              <td class="field-value">
                 <div class="formula-latex judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span>\(\href{../symbols/image-op.html}{[} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\alpha}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\beta}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/formula-metavariables.html}{\boldsymbol{\gamma}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/image-op.html}{]} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Judgements (ANSII)</th>
+              <td class="field-value">
+                <div class="formula-ansii judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛄">gamma</a><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
               </td>
             </tr>
             <tr>
@@ -553,11 +613,22 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-rule">Inference Rule</span></td>
             </tr>
-            <tr>
-              <th class="field-name">Formula</th>
+            <tr class="row-unicode">
+              <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
                 <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">-→</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">⊢</a> <a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Formula (LaTeX)</th>
+              <td class="field-value formula-cell">
                 <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/turnstile-derivability.html}{\vdash}  \href{../symbols/antiquotation.html}{[\![ } {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/antiquotation.html}{ ]\!]} \href{../symbols/delimiters-brackets.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Formula (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --> / \longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/turnstile-derivability.html" class="sym-link" title="Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...)))">|-</a> <a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
             </tr>
             <tr>
@@ -568,18 +639,40 @@
               <th class="field-name">Scheme of Types</th>
               <td class="field-value proof-cell"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><code>(⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧-→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)</code></td>
             </tr>
-            <tr>
-              <th class="field-name">Judgements</th>
+            <tr class="row-unicode">
+              <th class="field-name">Judgements (Unicode)</th>
               <td class="field-value">
                 <div class="formula-unicode judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">𝛂</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">𝛃</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Judgements (LaTeX)</th>
+              <td class="field-value">
                 <div class="formula-latex judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span>\(\href{../symbols/image-op.html}{[} \href{../symbols/delimiters-brackets.html}{(} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\alpha}}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/comma-delim.html}{,}  \href{../symbols/delimiters-brackets.html}{(} {\color{#fca5a5}\href{../symbols/formula-metavariables.html}{\color{#fca5a5}\boldsymbol{\beta}}} \href{../symbols/typing-colon.html}{:} \href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/image-op.html}{]} \)</div>
               </td>
             </tr>
-            <tr>
-              <th class="field-name">Side Condition</th>
+            <tr class="row-ansii">
+              <th class="field-name">Judgements (ANSII)</th>
+              <td class="field-value">
+                <div class="formula-ansii judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="../symbols/image-op.html" class="sym-link" title="Left relational image f[A] (CpImage) / Dunaev class-list bracket">[</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛂">alpha</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/delimiters-brackets.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="../symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛃">beta</a></span><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/delimiters-brackets.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/image-op.html" class="sym-link" title="Right relational image f[A] (CpImage) / Dunaev class-list bracket">]</a></div>
+              </td>
+            </tr>
+            <tr class="row-unicode">
+              <th class="field-name">Side Condition (Unicode)</th>
               <td class="field-value">
                 <div class="formula-unicode side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Side Condition (LaTeX)</th>
+              <td class="field-value">
                 <div class="formula-latex side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span>\(\href{../symbols/top-const.html}{\top} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Side Condition (ANSII)</th>
+              <td class="field-value">
+                <div class="formula-ansii side-cond"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: side condition)">1</span><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></div>
               </td>
             </tr>
             <tr>
@@ -596,12 +689,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

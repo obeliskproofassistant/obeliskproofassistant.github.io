@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -354,12 +354,13 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: ifᵈₑₚ  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,7 +373,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">ifᵈₑₚ  /  simple_if  /  IF..FI</span> <span class="formula-latex">\(\mathsf{if}_{\mathsf{dep}} \; / \; \mathsf{if}\)</span> &mdash; Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</h2>
+      <h2>Dependent Conditional Branching (ifᵈₑₚ) &amp; Simple Conditional</h2>
       <p class="section-desc">Eliminates a Boolean condition <code>b : Bool</code> into a dependent type family <code>Tₑ : Bool → Type</code> (Entry DefDependentConditional (3.24)), where the true branch has type <code>Tₑ(true)</code> and the false branch has type <code>Tₑ(false)</code>.</p>
     </div>
     <div class="table-container">
@@ -380,15 +381,26 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
               <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">ifᵈₑₚ  /  simple_if  /  IF..FI</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{if}_{\mathsf{dep}} \; / \; \mathsf{if}\)</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{if}_{\mathsf{dep}} \; / \; \mathsf{if}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{if}_{\mathsf{dep}} \; / \; \mathsf{if}</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>if_dep  /  simple_if  /  IF..FI</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mathsf{if}_{\mathsf{dep}} \; / \; \mathsf{if}</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Notation &amp; Semantics of <code>ifᵈₑₚ</code> (Directive 13 &amp; Entries DefSimpleConditional (3.23)&ndash;DefDependentConditional (3.24)):</strong></p><ul><li><strong>Unicode Subscript Rendering</strong>: In Unicode formula mode, the dependent conditional is rendered with true Unicode subscript/modifier letters as <code>ifᵈₑₚ</code>, and its branch parameters use Unicode subscripts <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>.</li><li><strong>LaTeX Rendering</strong>: In LaTeX mode, it renders via MathJax as <code>\mathsf{if}_{\mathsf{dep}}</code> with branch parameters <code>T_e, t_1, t_2</code> and boolean values <code>\mathsf{true}, \mathsf{false}</code>.</li><li><strong>Dependent Typing Rule (Entry DefDependentConditional (3.24))</strong>: Given a family of types <code>Tₑ : Bool → Type</code>, a Boolean <code>b : Bool</code>, a true-branch witness <code>t₁ : Tₑ(true)</code>, and a false-branch witness <code>t₂ : Tₑ(false)</code>, the term <code>ifᵈₑₚ(b, t₁, t₂)</code> has type <code>Tₑ(b)</code> and satisfies the beta-reduction laws <code>ifᵈₑₚ(true, t₁, t₂) = t₁</code> and <code>ifᵈₑₚ(false, t₁, t₂) = t₂</code> (verified in Variant 2 as <code>thm_85_if_dep_true_branch</code> and <code>thm_86_if_dep_false_branch</code>).</li></ul></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>(ifᵈₑₚ(true, t₁, t₂) = t₁) ∧ (ifᵈₑₚ(false, t₁, t₂) = t₂)</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(ifᵈₑₚ(true, t₁, t₂) = t₁) ∧ (ifᵈₑₚ(false, t₁, t₂) = t₂)</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-true.html}{\mathsf{true}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{t_1} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/and-conn.html}{\land}  \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/conditionals-if-dep.html}{\mathsf{if}_{\mathsf{dep}}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/bool-false.html}{\mathsf{false}} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_1} \href{../symbols/comma-delim.html}{,}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{t_2} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>(if_dep(true, t_1, t_2) = t_1) /\ (if_dep(false, t_1, t_2) = t_2)</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -443,12 +459,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }

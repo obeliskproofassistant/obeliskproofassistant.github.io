@@ -313,13 +313,13 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display Format Toggle: Unicode vs LaTeX (all formula content emitted directly by ML) */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; }
-    .formula-latex { display: none; }
-    body.mode-unicode .formula-unicode { display: block; }
-    body.mode-unicode .formula-latex { display: none; }
-    body.mode-latex .formula-unicode { display: none; }
-    body.mode-latex .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-latex { display: block; font-size: 1.05rem; }
+    .formula-ansii { display: block; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     .metalevel-badge {
       display: inline-block;
       font-size: 0.68rem;
@@ -338,14 +338,14 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body>
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
         <a class="nav-link" href="../../index.html">&larr; Obelisk Portal</a>
         <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="../variant1.html">Variant 1 (1st-Order Kernel)</a>
-        <a class="nav-link" href="../variant2.html">Variant 2 (Higher-Order NBG)</a>
+        <a class="nav-link" href="../variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+        <a class="nav-link" href="../variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
         <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
         <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
         <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
@@ -354,12 +354,13 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: eval  /  Eval_(A,ρ) &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> &amp; <strong>MKTD2</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages &rarr;</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry &rarr;</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
-          <button id="btn-unicode" class="toggle-btn active" onclick="setFormatMode('unicode')">Unicode (Default)</button>
-          <button id="btn-latex" class="toggle-btn" onclick="setFormatMode('latex')">LaTeX (MathJax)</button>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
         </div>
         <div class="control-group">
           <span class="control-label">Proof Trees:</span>
@@ -372,7 +373,7 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2><span class="formula-unicode">eval  /  Eval_(A,ρ)</span> <span class="formula-latex">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\)</span> &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h2>
+      <h2>Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h2>
       <p class="section-desc">Composes syntactic decoding <code>Dec_A : Class → A.Expression</code>, type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code>, and semantic valuation <code>Val_ρ : Class.Expression → Class</code>.</p>
     </div>
     <div class="table-container">
@@ -380,15 +381,26 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification (MKTD1 / MKTD2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="external-row">
-            <td class="external-num">Symbol</td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
               <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">eval  /  Eval_(A,ρ)</div>
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\)</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>eval  /  Eval_(A,rho)</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -416,16 +428,20 @@
             <td class="external-entity"><em>See Related Symbols &amp; Kernel Entries below.</em></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">LaTeX Form</td>
-            <td class="external-entity"><code>\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}</code></td>
-          </tr>
-          <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>eval</code> / <code>Eval_(A,ρ)</code>:</strong></p><p>With the type-indexed translation <code>μ_A</code> and assignment-indexed valuation <code>Val_ρ</code> kept explicitly distinct, the semantic evaluation of a class code <code>c ∈ Code_A ⊆ V</code> is the three-stage composite:</p><p><code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))) = μ^val_ρ(Dec_A(c))</code></p><ul><li><strong>Well-Typed Round-Trip on Coded Expressions</strong>: For any syntactic expression <code>e : A.Expression</code>, <code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e)) = μ^val_ρ(e)</code> because <code>Dec_A(Enc_A(e)) = e</code>.</li><li><strong>Stratification via Tarski Universes</strong>: By Tarski's Undefinability of Truth, a single unstratified truth/evaluation predicate for all formulas over the entire universe cannot be internal to the same level; in <strong>MKTD1 / MKTD2</strong>, Tarski's Axiom of Universes (Entry AxmTarskiUniverses (3.70)) provides set-sized universes supporting internal model valuations.</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>How to Understand <code>eval</code> / <code>Eval_(A,ρ)</code>:</strong></p><p>With the type-indexed translation <code>μ_A</code> and assignment-indexed valuation <code>Val_ρ</code> kept explicitly distinct, the semantic evaluation of a class code <code>c ∈ Code_A ⊆ V</code> is the three-stage composite:</p><p><code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))) = μ^val_ρ(Dec_A(c))</code></p><ul><li><strong>Well-Typed Round-Trip on Coded Expressions</strong>: For any syntactic expression <code>e : A.Expression</code>, <code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e)) = μ^val_ρ(e)</code> because <code>Dec_A(Enc_A(e)) = e</code>.</li><li><strong>Stratification via Tarski Universes</strong>: By Tarski's Undefinability of Truth, a single unstratified truth/evaluation predicate for all formulas over the entire universe cannot be internal to the same level; in <strong>MKTD1 (Variant 1)</strong> and <strong>MKTD2 (Variant 2)</strong>, Tarski's Axiom of Universes (Entry AxmTarskiUniverses (3.70)) provides set-sized universes supporting internal model valuations.</li></ul></td>
           </tr>
-          <tr class="external-row">
-            <td class="external-num">Canonical Law / Usage</td>
-            <td class="external-entity formula-cell"><code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e))</code></td>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e))</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/variables.html}{\mathrm{Eval\_}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/comma-delim.html}{,} ρ\href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{Enc\_A}} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{e}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)}  \href{../symbols/eq-pred.html}{=}  \href{../symbols/variables.html}{\mathrm{Val\_}} ρ\href{../symbols/delimiters-brackets.html}{(} \href{../symbols/mu-interpretation.html}{\mu_A} \href{../symbols/delimiters-brackets.html}{(} \href{../symbols/variables.html}{\mathrm{e}} \href{../symbols/delimiters-brackets.html}{)} \href{../symbols/delimiters-brackets.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>Eval_(A,rho)(Enc_A(e)) = Val_rho(mu_A(e))</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -442,12 +458,12 @@
   </section>
   </main>
   <script>
-    function setFormatMode(mode) {
-      document.body.classList.remove('mode-unicode', 'mode-latex');
-      document.body.classList.add('mode-' + mode);
-      document.getElementById('btn-unicode').classList.toggle('active', mode === 'unicode');
-      document.getElementById('btn-latex').classList.toggle('active', mode === 'latex');
-      if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
         window.MathJax.typesetPromise();
       }
     }
