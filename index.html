@@ -21,6 +21,17 @@
     OPA
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      // Anti-recursion guard: Obelisk Portal must never recursively nest inside an iframe
+      if (window.self !== window.top) {
+        try {
+          window.top.location.href = window.location.href;
+        } catch (e) {
+          // If cross-origin prevented direct top location access, avoid framing
+          console.warn("Obelisk portal detected nested framing:", e);
+        }
+      }
+    </script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body.indexbody {

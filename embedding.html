@@ -15,7 +15,19 @@
       };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="js/proof_tree_collapse.js" defer></script>
     <style>
+        :root {
+          --bg-primary: #0b0f19;
+          --bg-secondary: #111827;
+          --bg-card: #1e293b;
+          --bg-row-hover: #263349;
+          --text-primary: #f8fafc;
+          --text-secondary: #94a3b8;
+          --accent-blue: #38bdf8;
+          --accent-purple: #a855f7;
+          --border-color: #334155;
+        }
         * { box-sizing: border-box; }
         body {
             margin: 0;
@@ -24,13 +36,14 @@
             min-height: 100vh;
             color: #f8fafc;
             background-color: #030712;
-            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
         }
 
         #nav-toolbar {
             position: sticky;
             top: 0;
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.96);
             backdrop-filter: blur(8px);
             border-bottom: 1px solid rgba(56, 189, 248, 0.25);
             padding: 8px 16px;
@@ -53,26 +66,43 @@
 
         .toolbar-nav {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .toolbar-btn {
             background: rgba(56, 189, 248, 0.12);
             border: 1px solid rgba(56, 189, 248, 0.3);
             color: #e2e8f0;
-            padding: 3px 8px;
+            padding: 4px 10px;
             border-radius: 4px;
             cursor: pointer;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 11.5px;
+            font-weight: 600;
             transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .toolbar-btn:hover {
             background: rgba(56, 189, 248, 0.25);
             border-color: #38bdf8;
             color: #fff;
+        }
+
+        .toolbar-btn.active {
+            background: rgba(56, 189, 248, 0.28);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .toolbar-btn.badge-active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
         }
 
         #content-container {
@@ -85,17 +115,253 @@
             max-width: 100%;
             width: 100%;
             margin: 0 auto;
-            overflow-x: auto;
         }
 
-        /* Adjust pre formatting inside output */
-        #myhtmloutput pre {
-            font-size: 13.5px !important;
-            line-height: 1.5 !important;
-            font-family: 'JetBrains Mono', monospace !important;
+        header.demo-header {
+            background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem 1.75rem;
+            margin-bottom: 2rem;
+        }
+        .header-inner {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .nav-bar {
+            display: flex;
+            gap: 0.65rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        .nav-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-size: 0.86rem;
+            font-weight: 600;
+            padding: 0.35rem 0.75rem;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 6px;
+            background: rgba(56, 189, 248, 0.08);
+            transition: all 0.15s ease;
+        }
+        .nav-link:hover {
+            background: rgba(56, 189, 248, 0.22);
+            color: #fff;
+        }
+        h1.demo-title {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.75rem;
+            color: #f8fafc;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            margin: 0 0 1.25rem 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .controls-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            align-items: center;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.85rem 1.25rem;
+            border-radius: 0.75rem;
+        }
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .control-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-right: 0.25rem;
+        }
+        .toggle-btn {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.4rem 0.85rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.15s ease;
+        }
+        .toggle-btn:hover {
+            color: var(--text-primary);
+            border-color: var(--accent-blue);
+        }
+        .toggle-btn.active {
+            background: rgba(56, 189, 248, 0.18);
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        .toc-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .toc-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 0.35rem 0.75rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.4rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+        .toc-link:hover {
+            color: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        /* Chapter Slots & Placeholders */
+        main#chapters-main {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .section-slot {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 64px;
+        }
+        .manual-section {
+            margin-bottom: 2.5rem;
+            scroll-margin-top: 64px;
+        }
+        .section-header h2 {
+            font-size: 1.45rem;
+            margin: 0 0 0.25rem 0;
+            color: var(--accent-blue);
+        }
+        .section-desc {
+            color: var(--text-secondary);
+            margin: 0 0 1rem 0;
+            font-size: 0.92rem;
+        }
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
             overflow-x: auto;
         }
-        /* Ensure links in both Unicode and MathJax LaTeX mode inherit syntax-highlighting colors */
+        .section-external-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        .section-external-table > thead > tr > th {
+            background: var(--bg-card);
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.85rem 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+        .col-num { width: 90px; text-align: center; }
+        .external-row {
+            border-bottom: 2px solid var(--border-color);
+            transition: background 0.15s ease;
+            scroll-margin-top: 64px;
+        }
+        .external-row:target {
+            background: rgba(56, 189, 248, 0.14);
+            outline: 2px solid var(--accent-blue);
+        }
+        .external-num {
+            width: 90px;
+            vertical-align: top;
+            text-align: center;
+            padding: 1rem 0.75rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-right: 1px solid var(--border-color);
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        .num-anchor {
+            color: var(--accent-blue);
+            text-decoration: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+        }
+        .num-anchor:hover {
+            background: rgba(56, 189, 248, 0.25);
+        }
+        .external-entity {
+            padding: 0;
+            vertical-align: top;
+        }
+        .internal-entity-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .internal-entity-table tr {
+            border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+        }
+        .internal-entity-table tr:last-child {
+            border-bottom: none;
+        }
+        .internal-entity-table th.field-name {
+            width: 165px;
+            padding: 0.6rem 1rem;
+            background: rgba(30, 41, 59, 0.45);
+            color: var(--text-secondary);
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            border-right: 1px solid rgba(51, 65, 85, 0.6);
+            vertical-align: middle;
+        }
+        .internal-entity-table td.field-value {
+            padding: 0.65rem 1rem;
+            vertical-align: middle;
+        }
+        .entry-title-cell {
+            font-weight: 600;
+            color: #f8fafc;
+            font-size: 0.98rem;
+        }
+        .formula-cell {
+            font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
+            font-size: 0.96rem;
+            overflow-x: auto;
+        }
+        .proof-cell {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 0.85rem;
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+        .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+        .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+        .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+        .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+
+        /* Algorithmic Clickable Symbol Links */
         a.sym-link, .formula-latex a, mjx-container a {
             all: unset;
             cursor: pointer;
@@ -112,10 +378,122 @@
             text-decoration-style: solid;
             text-decoration-color: #38bdf8;
         }
+
+        /* ANSI Syntax Highlighting Classes */
+        .ansi-bold-red { color: #f87171; font-weight: 700; }
+        .ansi-bold-green { color: #4ade80; font-weight: 700; }
+        .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
+        .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
+        .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
+        .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
+        .ansi-yellow { color: #fde047; }
+        .ansi-cyan { color: #67e8f9; }
+        .ansi-gray { color: #94a3b8; }
+        .ansi-light-red { color: #fca5a5; }
+        .ansi-light-green { color: #86efac; }
+        .ansi-light-yellow { color: #fef08a; }
+        .ansi-light-blue { color: #93c5fd; }
+        .ansi-light-magenta { color: #f0abfc; }
+        .ansi-light-cyan { color: #a5f3fc; }
+        .ansi-white { color: #f8fafc; }
+        .ansi-bold-white { color: #ffffff; font-weight: 700; }
+        .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
+
+        /* Formula Display Toggles */
+        .formula-unicode { display: block; }
+        .formula-latex { display: block; font-size: 1.05rem; }
+        .formula-ansii { display: block; }
         body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
         body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
         body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
         body.hide-schemata .row-scheme { display: none !important; }
+
+        /* Placeholder Cards for On-Demand & Background Chapter Loading */
+        .sec-placeholder-card {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.35rem 1.65rem;
+            transition: all 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .sec-placeholder-card.priority-loading {
+            border: 1px solid var(--accent-blue);
+            box-shadow: 0 0 16px rgba(56, 189, 248, 0.16);
+            background: rgba(15, 23, 42, 0.75);
+        }
+        .sec-placeholder-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .sec-placeholder-header h3 {
+            margin: 0;
+            font-size: 1.22rem;
+            color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .sec-placeholder-desc {
+            color: var(--text-secondary);
+            margin: 0;
+            font-size: 0.91rem;
+            line-height: 1.5;
+        }
+        .sec-status-badge {
+            font-size: 0.74rem;
+            padding: 0.2rem 0.65rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+        }
+        .sec-status-badge.queued {
+            background: rgba(148, 163, 184, 0.15);
+            color: #94a3b8;
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+        .sec-status-badge.loading {
+            background: rgba(56, 189, 248, 0.15);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            animation: sec-pulse 1.4s infinite ease-in-out;
+        }
+        .sec-status-badge.priority {
+            background: rgba(16, 185, 129, 0.18);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+        }
+        .sec-status-badge.loaded {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.35);
+        }
+        .btn-load-now {
+            align-self: flex-start;
+            background: rgba(56, 189, 248, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            color: #e2e8f0;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+        .btn-load-now:hover {
+            background: rgba(56, 189, 248, 0.28);
+            border-color: #38bdf8;
+            color: #fff;
+        }
+        @keyframes sec-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.45; }
+        }
     </style>
 </head>
 <body>
@@ -126,11 +504,17 @@
         <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
     </div>
     <div class="toolbar-nav">
-        <button class="toolbar-btn" onclick="scrollToText('1. Propositional Logic')">1. Propositional Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('2. Predicate Logic')">2. Predicate Logic</button>
-        <button class="toolbar-btn" onclick="scrollToText('3. Set/Class Foundations')">3. Set/Class Foundations</button>
-        <button class="toolbar-btn" onclick="scrollToText('4. Metalogical Laws')">4. Metalogical Laws</button>
-        <button class="toolbar-btn" onclick="scrollToText('5. Incompleteness')">5. Incompleteness</button>
+        <button class="toolbar-btn" id="tbtn-sec-1" onclick="scrollToText('1. Propositional Logic')">1. Propositional Logic</button>
+        <button class="toolbar-btn" id="tbtn-sec-2" onclick="scrollToText('2. Predicate Logic')">2. Predicate Logic</button>
+        <button class="toolbar-btn active" id="tbtn-sec-3" onclick="scrollToText('3. Set/Class Foundations')">3. Set/Class Foundations</button>
+        <button class="toolbar-btn" id="tbtn-sec-4" onclick="scrollToText('4. Metalogical Laws')">4. Metalogical Laws</button>
+        <button class="toolbar-btn" id="tbtn-sec-5" onclick="scrollToText('5. Incompleteness')">5. Incompleteness</button>
+        <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
+        <button id="btn-top-hide-latex" class="toolbar-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+        <button id="btn-top-hide-unicode" class="toolbar-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+        <button id="btn-top-hide-ansii" class="toolbar-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+        <button id="btn-top-hide-schemata" class="toolbar-btn" onclick="toggleSchemataHide()">Hide Schemata</button>
+        <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
         <a class="toolbar-btn" href="generated/manual.html" target="_blank">📖 Open Full Manual</a>
         <a class="toolbar-btn" href="generated/theory_db.json" target="_blank">🗄️ JSON DB</a>
     </div>
@@ -138,30 +522,150 @@
 
 <div id="content-container">
     <div id="myhtmloutput">
-        <div style="padding: 30px; text-align: center; color: #94a3b8;">
-            Loading verified mathematical output...
-        </div>
+        <header class="demo-header">
+            <div class="header-inner">
+                <nav class="nav-bar">
+                    <a class="nav-link obelisk-portal-link" id="portal-entry-link" href="index.html">&larr; Obelisk Demonstration</a>
+                    <a class="nav-link" href="generated/manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
+                    <a class="nav-link" href="generated/variant1.html">Variant 1 (MKTD1: 1st-Order Kernel)</a>
+                    <a class="nav-link" href="generated/variant2.html">Variant 2 (MKTD2: Higher-Order)</a>
+                    <a class="nav-link" href="generated/proofs.html">Verified Theorems &amp; Rules</a>
+                    <a class="nav-link" href="generated/symbols.html">Symbol &amp; Type Index</a>
+                    <a class="nav-link" href="generated/dependent_types.html">Dependent Types</a>
+                    <a class="nav-link" href="generated/metatheory.html">Metatheory</a>
+                    <a class="nav-link" href="generated/theory_db.json">JSON DB</a>
+                    <a class="nav-link" href="repl.html">Interactive REPL</a>
+                </nav>
+                <h1 class="demo-title">Obelisk Proof Assistant &mdash; Algorithmically Generated Entity Database (Variant 1: MKTD1)</h1>
+                <p class="subtitle">Complete 106-entry formalization of Morse-Kelley class theory with Tarski-Grothendieck universes. (Generated directly from <code>newchecker.ML</code> via <code>html_generator.ML</code>).</p>
+                <div class="controls-bar">
+                    <div class="control-group">
+                        <span class="control-label">Formula Display:</span>
+                        <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+                        <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+                        <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+                        <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
+                    </div>
+                    <div class="control-group">
+                        <span class="control-label">Proof Trees:</span>
+                        <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+                        <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+                    </div>
+                </div>
+                <nav class="toc-nav">
+                    <a class="toc-link" id="toc-sec-1" onclick="navigateToSection(1, event)">1. Propositional Logic (1.01&ndash;1.14)</a>
+                    <a class="toc-link" id="toc-sec-2" onclick="navigateToSection(2, event)">2. Predicate Logic (2.01&ndash;2.06)</a>
+                    <a class="toc-link" id="toc-sec-3" onclick="navigateToSection(3, event)" style="color: #38bdf8; font-weight:700;">3. Set/Class Foundations (3.01&ndash;3.78) ★ Initial Focus</a>
+                    <a class="toc-link" id="toc-sec-4" onclick="navigateToSection(4, event)">4. Metalogical Laws (4.01&ndash;4.06)</a>
+                    <a class="toc-link" id="toc-sec-5" onclick="navigateToSection(5, event)">5. Incompleteness Statements (5.01&ndash;5.02)</a>
+                </nav>
+            </div>
+        </header>
+
+        <main id="chapters-main">
+            <!-- Sections rendered in natural order 1..5; Section 3 loaded first as initial focus -->
+            <div id="sec-slot-1" class="section-slot" data-sec="1"></div>
+            <div id="sec-slot-2" class="section-slot" data-sec="2"></div>
+            <div id="sec-slot-3" class="section-slot" data-sec="3"></div>
+            <div id="sec-slot-4" class="section-slot" data-sec="4"></div>
+            <div id="sec-slot-5" class="section-slot" data-sec="5"></div>
+        </main>
     </div>
 </div>
 
 <script>
-const localAddr = "generated/output.html?v=20261105a";
-const remoteAddr = "generated/manual.html";
+const SECTIONS_META = [
+    { id: 1, range: "1.01–1.14", title: "1. Propositional Logic", desc: "Classical propositional calculus axiom schemas (A01–A13) and Modus Ponens." },
+    { id: 2, range: "2.01–2.06", title: "2. Predicate Logic", desc: "First-order quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes." },
+    { id: 3, range: "3.01–3.78", title: "3. Set/Class-Theoretic Foundations", desc: "Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection." },
+    { id: 4, range: "4.01–4.06", title: "4. Metalogical Laws", desc: "Explicit substitution, context encoding, co-necessitation, uniqueness quantifiers, and reflected comprehension." },
+    { id: 5, range: "5.01–5.02", title: "5. Incompleteness Statements", desc: "Formalized Löb's theorem and Gödel's second incompleteness theorem." }
+];
 
-try {
-    sessionStorage.clear();
-} catch (e) {}
+const sectionStatus = { 1: "idle", 2: "idle", 3: "idle", 4: "idle", 5: "idle" };
+const sectionPromises = {};
+
+function isEmbeddedContext() {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+}
+
+function setupEmbeddedNav() {
+    const portalLink = document.getElementById("portal-entry-link");
+    if (!portalLink) return;
+    if (isEmbeddedContext()) {
+        portalLink.textContent = "← Obelisk Demonstration";
+        portalLink.setAttribute("href", "#");
+        portalLink.setAttribute("title", "Reset demonstration view");
+        portalLink.addEventListener("click", function(e) {
+            e.preventDefault();
+            navigateToSection(3);
+        });
+    } else {
+        portalLink.textContent = "← Obelisk Portal";
+        portalLink.setAttribute("href", "index.html");
+        portalLink.setAttribute("title", "Back to Obelisk Portal");
+    }
+}
+
+function renderPlaceholders() {
+    for (const meta of SECTIONS_META) {
+        const slot = document.getElementById("sec-slot-" + meta.id);
+        if (!slot) continue;
+        const isPriority = (meta.id === 3);
+        slot.innerHTML = `
+            <div class="sec-placeholder-card ${isPriority ? 'priority-loading' : ''}" id="placeholder-sec-${meta.id}">
+                <div class="sec-placeholder-header">
+                    <h3><span>Chapter ${meta.id}.</span> ${meta.title} (${meta.range})</h3>
+                    <span class="sec-status-badge ${isPriority ? 'loading' : 'queued'}" id="status-badge-${meta.id}">
+                        ${isPriority ? '⚡ Priority Loading...' : 'Background Queued'}
+                    </span>
+                </div>
+                <p class="sec-placeholder-desc">${meta.desc}</p>
+                ${!isPriority ? `<button class="btn-load-now" onclick="loadSection(${meta.id}, true)">⚡ Load Section ${meta.id} Now</button>` : ''}
+            </div>
+        `;
+    }
+}
 
 function rewriteRelativeAnchors(rootEl) {
     if (!rootEl) return;
+    const isEmbedded = isEmbeddedContext();
     const anchors = rootEl.querySelectorAll("a[href]");
     for (const a of anchors) {
         const href = a.getAttribute("href");
-        if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
+        if (!href) continue;
+
+        // Check for Obelisk Portal link in embedded context
+        if (isEmbedded && (href.includes("index.html") || (a.textContent || "").includes("Obelisk Portal"))) {
+            a.setAttribute("href", "#");
+            a.textContent = "← Obelisk Demonstration";
+            a.onclick = function(e) {
+                e.preventDefault();
+                navigateToSection(3);
+            };
             continue;
         }
-        if (href.startsWith("../")) {
-            a.setAttribute("href", href.slice(3));
+
+        if (href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
+            continue;
+        }
+
+        if (href.startsWith("../../index.html")) {
+            a.setAttribute("href", isEmbedded ? "embedding.html" : "index.html");
+        } else if (href.startsWith("../../repl.html") || href.startsWith("../repl.html")) {
+            a.setAttribute("href", "repl.html");
+        } else if (href.startsWith("../manual.html#")) {
+            a.setAttribute("href", href.slice(href.indexOf("#")));
+        } else if (href.startsWith("../manual.html")) {
+            a.setAttribute("href", "generated/manual.html");
+        } else if (href.startsWith("../../")) {
+            a.setAttribute("href", href.slice(6));
+        } else if (href.startsWith("../")) {
+            a.setAttribute("href", "generated/" + href.slice(3));
         } else {
             a.setAttribute("href", "generated/" + href);
         }
@@ -169,22 +673,178 @@ function rewriteRelativeAnchors(rootEl) {
 }
 
 function rewriteLatexHrefs(htmlStr) {
+    const isEmbedded = isEmbeddedContext();
     return htmlStr.replace(/\\href\{([^}]+)\}/g, function(match, href) {
         if (!href || href.startsWith("#") || href.startsWith("http:") || href.startsWith("https:") || href.startsWith("mailto:") || href.startsWith("generated/")) {
             return match;
         }
+        if (isEmbedded && href.includes("index.html")) {
+            return "\\href{#}";
+        }
+        if (href.startsWith("../../")) {
+            return "\\href{" + href.slice(6) + "}";
+        }
         if (href.startsWith("../")) {
-            return "\\href{" + href.slice(3) + "}";
+            return "\\href{generated/" + href.slice(3) + "}";
         }
         return "\\href{generated/" + href + "}";
     });
 }
 
+function scrollTargetIntoContainer(targetEl) {
+    if (!targetEl) return;
+    targetEl.style.scrollMarginTop = '64px';
+    const toolbar = document.getElementById("nav-toolbar");
+    const toolbarHeight = toolbar ? toolbar.offsetHeight : 44;
+    const rect = targetEl.getBoundingClientRect();
+    const targetTop = Math.max(0, window.pageYOffset + rect.top - toolbarHeight - 14);
+    window.scrollTo({ top: targetTop, behavior: 'smooth' });
+    targetEl.style.outline = '2px solid #38bdf8';
+    targetEl.style.backgroundColor = 'rgba(56, 189, 248, 0.16)';
+    setTimeout(() => {
+        targetEl.style.outline = 'none';
+        targetEl.style.backgroundColor = '';
+    }, 2200);
+}
+
+function updateToolbarActiveButton(secId) {
+    for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById("tbtn-sec-" + i);
+        if (btn) btn.classList.toggle("active", i === secId);
+    }
+}
+
+async function loadSection(secId, scrollAfter) {
+    if (sectionStatus[secId] === "loaded") {
+        if (scrollAfter) {
+            const secEl = document.getElementById("sec-" + secId);
+            if (secEl) scrollTargetIntoContainer(secEl);
+            updateToolbarActiveButton(secId);
+        }
+        return Promise.resolve();
+    }
+    if (sectionPromises[secId]) {
+        return sectionPromises[secId].then(() => {
+            if (scrollAfter) {
+                const secEl = document.getElementById("sec-" + secId);
+                if (secEl) scrollTargetIntoContainer(secEl);
+                updateToolbarActiveButton(secId);
+            }
+        });
+    }
+
+    sectionStatus[secId] = "loading";
+    const badge = document.getElementById("status-badge-" + secId);
+    if (badge) {
+        badge.className = "sec-status-badge loading";
+        badge.textContent = "⚡ Loading...";
+    }
+
+    const loadPromise = (async () => {
+        try {
+            const fetchUrl = `generated/sections/sec-${secId}.html?v=20261108`;
+            const res = await fetch(fetchUrl);
+            if (!res.ok) throw new Error("HTTP error " + res.status);
+            const rawHtml = await res.text();
+
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(rawHtml, "text/html");
+            const sectionNode = doc.querySelector(`section#sec-${secId}`) || doc.querySelector("section.manual-section");
+            if (!sectionNode) throw new Error("Section element not found in response");
+
+            const slot = document.getElementById("sec-slot-" + secId);
+            if (!slot) return;
+
+            const rewrittenHtml = rewriteLatexHrefs(sectionNode.outerHTML);
+            slot.innerHTML = rewrittenHtml;
+            rewriteRelativeAnchors(slot);
+
+            if (window.ProofTreeCollapse && ProofTreeCollapse.decorateProofPanes) {
+                ProofTreeCollapse.decorateProofPanes(slot);
+            }
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                await window.MathJax.typesetPromise([slot]).catch(e => console.warn("MathJax section typeset warning:", e));
+                rewriteRelativeAnchors(slot);
+            }
+
+            sectionStatus[secId] = "loaded";
+            const navBtn = document.getElementById("tbtn-sec-" + secId);
+            if (navBtn) navBtn.classList.add("badge-active");
+
+            if (scrollAfter) {
+                const secEl = document.getElementById("sec-" + secId);
+                if (secEl) scrollTargetIntoContainer(secEl);
+                updateToolbarActiveButton(secId);
+            }
+        } catch (err) {
+            console.error(`Failed to load section ${secId}:`, err);
+            sectionStatus[secId] = "error";
+            const slot = document.getElementById("sec-slot-" + secId);
+            if (slot) {
+                slot.innerHTML = `
+                    <div class="sec-placeholder-card" style="border-color: #ef4444;">
+                        <h3 style="color:#ef4444;">Section ${secId} failed to load</h3>
+                        <p class="sec-placeholder-desc">${err.message}</p>
+                        <button class="btn-load-now" onclick="loadSection(${secId}, true)">↺ Retry Section ${secId}</button>
+                    </div>
+                `;
+            }
+        }
+    })();
+
+    sectionPromises[secId] = loadPromise;
+    return loadPromise;
+}
+
+function findSectionForTargetId(idStr) {
+    if (!idStr) return null;
+    const cleanId = idStr.replace(/^#/, '');
+    const numMatch = /(?:item-)?([1-5])\./.exec(cleanId);
+    if (numMatch) return parseInt(numMatch[1], 10);
+    if (cleanId.startsWith("AxmProp")) return 1;
+    if (cleanId.startsWith("AxmPred") || cleanId.startsWith("RulGen") || cleanId.startsWith("AxmEq")) return 2;
+    if (cleanId.startsWith("Axm") || cleanId.startsWith("Def") || cleanId.startsWith("Thm") || cleanId.startsWith("Rul")) return 3;
+    if (cleanId.startsWith("CoNec") || cleanId.startsWith("Subst")) return 4;
+    if (cleanId.startsWith("Incomp") || cleanId.startsWith("Loeb")) return 5;
+    return null;
+}
+
+async function navigateToSection(secId, ev) {
+    if (ev) ev.preventDefault();
+    updateToolbarActiveButton(secId);
+    await loadSection(secId, true);
+}
+window.navigateToSection = navigateToSection;
+
+function scrollToText(searchText) {
+    const secMatch = /^\s*([1-5])\s*[.)]/.exec(searchText);
+    if (secMatch) {
+        const secId = parseInt(secMatch[1], 10);
+        navigateToSection(secId);
+        return;
+    }
+    const el = document.getElementById("myhtmloutput");
+    if (!el) return;
+    const needle = searchText.toLowerCase();
+    const nodes = el.querySelectorAll("h1, h2, h3, section, span, p, pre, td, a");
+    for (const s of nodes) {
+        if ((s.textContent || '').toLowerCase().includes(needle)) {
+            scrollTargetIntoContainer(s);
+            return;
+        }
+    }
+}
+window.scrollToText = scrollToText;
+
 function toggleFormatHide(fmt) {
     const cls = 'hide-' + fmt;
     const isHidden = document.body.classList.toggle(cls);
-    const btn = document.getElementById('btn-hide-' + fmt);
-    if (btn) btn.classList.toggle('active', isHidden);
+    const btnContent = document.getElementById('btn-hide-' + fmt);
+    const btnTop = document.getElementById('btn-top-hide-' + fmt);
+    if (btnContent) btnContent.classList.toggle('active', isHidden);
+    if (btnTop) btnTop.classList.toggle('active', isHidden);
+
     if (!isHidden && fmt === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
         const target = document.getElementById("myhtmloutput");
         window.MathJax.typesetPromise(target ? [target] : undefined).then(() => {
@@ -196,18 +856,16 @@ window.toggleFormatHide = toggleFormatHide;
 
 function toggleSchemataHide() {
     const isHidden = document.body.classList.toggle('hide-schemata');
-    const btn = document.getElementById('btn-hide-schemata');
-    if (btn) btn.classList.toggle('active', isHidden);
+    const btnContent = document.getElementById('btn-hide-schemata');
+    const btnTop = document.getElementById('btn-top-hide-schemata');
+    if (btnContent) btnContent.classList.toggle('active', isHidden);
+    if (btnTop) btnTop.classList.toggle('active', isHidden);
 }
 window.toggleSchemataHide = toggleSchemataHide;
 
 function setFormatMode(mode) {
     document.body.classList.remove('mode-unicode', 'mode-latex');
     document.body.classList.add('mode-' + mode);
-    const btnUni = document.getElementById('btn-unicode');
-    const btnLtx = document.getElementById('btn-latex');
-    if (btnUni) btnUni.classList.toggle('active', mode === 'unicode');
-    if (btnLtx) btnLtx.classList.toggle('active', mode === 'latex');
     if (mode === 'latex' && window.MathJax && window.MathJax.typesetPromise) {
         const target = document.getElementById("myhtmloutput");
         window.MathJax.typesetPromise(target ? [target] : undefined).then(() => {
@@ -217,121 +875,78 @@ function setFormatMode(mode) {
 }
 window.setFormatMode = setFormatMode;
 
-async function getText() {
-    try {
-        const res = await fetch(localAddr, { cache: "no-store" });
-        if (res.ok) {
-            return await res.text();
+function queueBackgroundLoading(sectionsQueue) {
+    let index = 0;
+    function loadNext() {
+        if (index >= sectionsQueue.length) return;
+        const nextSec = sectionsQueue[index++];
+        if (sectionStatus[nextSec] === "idle" || sectionStatus[nextSec] === "queued") {
+            loadSection(nextSec, false).then(() => {
+                setTimeout(loadNext, 250);
+            }).catch(() => {
+                setTimeout(loadNext, 250);
+            });
+        } else {
+            setTimeout(loadNext, 50);
         }
-        throw new Error("Local fetch failed: " + res.status);
-    } catch (err) {
-        console.warn("Falling back to manual URL due to:", err);
-        const remoteRes = await fetch(remoteAddr, { cache: "no-store" });
-        return await remoteRes.text();
+    }
+    if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => setTimeout(loadNext, 300));
+    } else {
+        setTimeout(loadNext, 400);
     }
 }
 
-function scrollTargetIntoContainer(targetEl) {
-    if (!targetEl) return;
-    targetEl.style.scrollMarginTop = '64px';
-    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const toolbar = document.getElementById("nav-toolbar");
-    const toolbarHeight = toolbar ? toolbar.offsetHeight : 44;
-    const rect = targetEl.getBoundingClientRect();
-    const targetTop = Math.max(0, window.pageYOffset + rect.top - toolbarHeight - 14);
-    window.scrollTo({ top: targetTop, behavior: 'smooth' });
-    targetEl.style.outline = '2px solid #38bdf8';
-    targetEl.style.backgroundColor = 'rgba(56, 189, 248, 0.22)';
-    setTimeout(() => {
-        targetEl.style.outline = 'none';
-        targetEl.style.backgroundColor = '';
-    }, 2000);
-}
+document.addEventListener("click", async function(ev) {
+    const link = ev.target.closest ? ev.target.closest('a[href*="#"]') : null;
+    if (!link) return;
+    const href = link.getAttribute("href") || "";
+    const hashIdx = href.indexOf("#");
+    if (hashIdx === -1) return;
+    const hashId = href.slice(hashIdx + 1);
+    if (!hashId) return;
 
-function scrollToText(searchText) {
-    const el = document.getElementById("myhtmloutput");
-    if (!el) return;
-    const secMatch = /^\s*([1-6])\s*[.)]/.exec(searchText);
-    if (secMatch) {
-        const byId = el.querySelector("#sec-" + secMatch[1]);
-        if (byId) {
-            scrollTargetIntoContainer(byId);
-            return;
-        }
-    }
-    const needle = searchText.toLowerCase();
-    const nodes = el.querySelectorAll("h1, h2, h3, section, span, p, pre, td, a");
-    let best = null;
-    let bestLen = Infinity;
-    for (let s of nodes) {
-        const text = (s.textContent || '').toLowerCase();
-        if (text.includes(needle) && text.length < bestLen) {
-            best = s;
-            bestLen = text.length;
-        }
-    }
-    if (!best) {
-        const words = needle.split(/\s+/);
-        for (let s of nodes) {
-            const hay = (s.textContent || '').toLowerCase();
-            if (words.length && words.every(w => hay.includes(w)) && hay.length < bestLen) {
-                best = s;
-                bestLen = hay.length;
-            }
-        }
-    }
-    if (best) {
-        scrollTargetIntoContainer(best);
+    const existingDest = document.getElementById(hashId);
+    if (existingDest) {
+        ev.preventDefault();
+        scrollTargetIntoContainer(existingDest);
         return;
     }
-    console.warn("scrollToText: no match for", searchText);
-}
 
-async function renderOutput() {
-    try {
-        const rawHtml = await getText();
-        const target = document.getElementById("myhtmloutput");
-        target.innerHTML = rewriteLatexHrefs(rawHtml);
-        // Rewrite relative links originating from generated/output.html so they resolve from root embedding.html
-        rewriteRelativeAnchors(target);
-        if (window.MathJax && window.MathJax.typesetPromise) {
-            window.MathJax.typesetPromise([target]).then(() => {
-                rewriteRelativeAnchors(target);
-            }).catch(err => console.warn("MathJax typeset warning:", err));
+    const targetSec = findSectionForTargetId(hashId);
+    if (targetSec) {
+        ev.preventDefault();
+        await loadSection(targetSec, false);
+        const lateDest = document.getElementById(hashId);
+        if (lateDest) {
+            scrollTargetIntoContainer(lateDest);
         } else {
-            const mjScript = document.getElementById("MathJax-script");
-            if (mjScript) {
-                mjScript.addEventListener("load", () => {
-                    if (window.MathJax && window.MathJax.typesetPromise) {
-                        window.MathJax.typesetPromise([target]).then(() => {
-                            rewriteRelativeAnchors(target);
-                        }).catch(err => console.warn("MathJax typeset warning:", err));
-                    }
-                });
-            }
+            const secNode = document.getElementById("sec-" + targetSec);
+            if (secNode) scrollTargetIntoContainer(secNode);
         }
-        target.addEventListener("click", function(ev) {
-            const link = ev.target.closest ? ev.target.closest('a[href*="#item-"], a[href*="#sec-"]') : null;
-            if (link) {
-                const href = link.getAttribute("href") || "";
-                const hashIdx = href.indexOf("#");
-                if (hashIdx !== -1) {
-                    const idStr = href.slice(hashIdx + 1);
-                    const dest = document.getElementById(idStr);
-                    if (dest && target.contains(dest)) {
-                        ev.preventDefault();
-                        scrollTargetIntoContainer(dest);
-                    }
-                }
-            }
-        });
-    } catch (e) {
-        document.getElementById("myhtmloutput").innerHTML = 
-            "<div style='color:#ef4444; padding:20px;'>Failed to load output: " + e.message + "</div>";
     }
+});
+
+async function init() {
+    try {
+        sessionStorage.clear();
+    } catch (e) {}
+
+    renderPlaceholders();
+    setupEmbeddedNav();
+
+    // Priority Chapter Load: Start with Section 3 ("3. Set/Class-Theoretic Foundations")
+    await loadSection(3, true);
+
+    // After Section 3 is loaded and displayed to the user, load the remaining chapters sequentially in the background
+    queueBackgroundLoading([1, 2, 4, 5]);
 }
 
-renderOutput();
+if (document.readyState === 'loading') {
+    document.addEventListener("DOMContentLoaded", init);
+} else {
+    init();
+}
 </script>
 
 </body>

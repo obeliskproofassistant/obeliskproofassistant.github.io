@@ -165,9 +165,33 @@
     });
   }
 
+  // Handle embedded frame navigation: when embedded, redirect Portal links to interactive demo embedding.html
+  function handleEmbeddedNav() {
+    if (typeof window === 'undefined') return;
+    const isEmbedded = window.self !== window.top;
+    if (!isEmbedded) return;
+    const links = document.querySelectorAll('a[href*="index.html"]');
+    for (const a of links) {
+      const text = (a.textContent || '').trim();
+      if (text.includes('Obelisk Portal') || text.includes('Portal')) {
+        const href = a.getAttribute('href') || '';
+        if (href.includes('../../index.html')) {
+          a.setAttribute('href', '../../embedding.html');
+        } else if (href.includes('../index.html')) {
+          a.setAttribute('href', '../embedding.html');
+        } else if (href === 'index.html') {
+          a.setAttribute('href', 'embedding.html');
+        }
+        a.textContent = '← Obelisk Demonstration';
+        a.title = 'Return to Obelisk Interactive Demonstration';
+      }
+    }
+  }
+
   if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     window.addEventListener('DOMContentLoaded', function () {
       decorateProofPanes(document);
+      handleEmbeddedNav();
     });
   }
 
