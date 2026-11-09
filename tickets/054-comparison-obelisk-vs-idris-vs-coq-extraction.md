@@ -1,4 +1,4 @@
-# Ticket 054: Comparison: Obelisk vs Idris vs Coq Extraction
+# Ticket 054: Comparison: Obelisk vs Idris vs Rocq Extraction
 
 **Project:** `obeliskproofassistant.github.io`  
 **Category:** CakeML & Polymorphism  

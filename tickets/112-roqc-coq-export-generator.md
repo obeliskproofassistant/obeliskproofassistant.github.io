@@ -1,4 +1,4 @@
-# Ticket 112: Obelisk to Rocq (Coq) Automated Proof Exporter
+# Ticket 112: Obelisk to Rocq Automated Proof Exporter
 
 **Project:** `obeliskproofassistant.github.io`  
 **Category:** Interoperability  
@@ -10,7 +10,7 @@
 ---
 
 ## 1. Description & Rationale
-Python module generating Rocq / Coq Vernacular proof scripts from Obelisk proof derivations.
+Python module generating Rocq Vernacular proof scripts from Obelisk proof derivations.
 
 This ticket is an essential component of the `obeliskproofassistant.github.io` engineering and presentation roadmap. It establishes rigorous standards, elevates production quality, and directly advances the mission of creating publication-ready, mathematically sound software and career assets.
 

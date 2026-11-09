@@ -57,7 +57,7 @@
 | **051** | Soundness Proof Outline for Code Generator | CakeML & Polymorphism | `docs/codegen_soundness.md` | `COMPLETED` |
 | **052** | Hardware Target Capabilities (x86_64, ARM, RISC-V) | CakeML & Polymorphism | `docs/hardware_targets.md` | `COMPLETED` |
 | **053** | Interactive Compiler Pipeline Diagram | CakeML & Polymorphism | `images/diagrams/compiler_pipeline.svg` | `COMPLETED` |
-| **054** | Comparison: Obelisk vs Idris vs Coq Extraction | CakeML & Polymorphism | `docs/extraction_comparison.md` | `COMPLETED` |
+| **054** | Comparison: Obelisk vs Idris vs Rocq Extraction | CakeML & Polymorphism | `docs/extraction_comparison.md` | `COMPLETED` |
 | **055** | Benchmark Suite for Generated Executables | CakeML & Polymorphism | `benchmarks/run_benchmarks.py` | `COMPLETED` |
 | **056** | Foreign Function Interface (FFI) Guide | CakeML & Polymorphism | `docs/ffi_guide.md` | `COMPLETED` |
 | **057** | Memory Model & Garbage Collection Notes | CakeML & Polymorphism | `docs/gc_memory_model.md` | `COMPLETED` |

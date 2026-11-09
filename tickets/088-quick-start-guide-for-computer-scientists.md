@@ -9,7 +9,7 @@
 ---
 
 ## 1. Description & Rationale
-Comparison guide for engineers familiar with Coq or Lean.
+Comparison guide for engineers familiar with Rocq or Lean.
 
 This ticket is an essential component of the `obeliskproofassistant.github.io` engineering and presentation roadmap. It establishes rigorous standards, elevates production quality, and directly advances the mission of creating publication-ready, mathematically sound software and career assets.
 

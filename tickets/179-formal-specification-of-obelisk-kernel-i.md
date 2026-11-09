@@ -1,4 +1,4 @@
-# Ticket 179: Formal specification of Obelisk kernel in Coq/Rocq
+# Ticket 179: Formal specification of Obelisk kernel in Rocq
 
 **Project:** `obeliskproofassistant.github.io`  
 **Category:** FormalSpec  
@@ -10,7 +10,7 @@
 ---
 
 ## 1. Description & Technical Rationale
-Formal specification of Obelisk kernel in Coq/Rocq.
+Formal specification of Obelisk kernel in Rocq.
 
 This ticket is part of the high-assurance verification roadmap. It establishes sound formal specifications, robust test gates, and deterministic build artifacts conforming to Dijkstra's principles of machine-checked correctness.
 
