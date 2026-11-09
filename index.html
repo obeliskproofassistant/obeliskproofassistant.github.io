@@ -56,6 +56,20 @@
             z-index: 10;
         }
 
+        .portal-brand-row {
+            display: flex;
+            align-items: center;
+        }
+        .mobile-header-toggle {
+            display: none;
+        }
+        .top-nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .portal-brand {
             font-weight: 700;
             font-size: 13.5px;
@@ -144,11 +158,48 @@
                 height: auto;
                 min-height: 40px;
                 padding: 8px 12px;
-                flex-wrap: wrap;
-                gap: 8px;
+                display: flex;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
             }
-            #portal-switch-banner > div {
-                flex-wrap: wrap;
+            .portal-brand-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+            }
+            .mobile-header-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                background: rgba(56, 189, 248, 0.15);
+                border: 1px solid rgba(56, 189, 248, 0.45);
+                color: #38bdf8;
+                padding: 4px 10px;
+                border-radius: 12px;
+                font-size: 11.5px;
+                font-weight: 700;
+                cursor: pointer;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+                transition: all 0.2s ease;
+            }
+            .mobile-header-toggle:hover, .mobile-header-toggle:active {
+                background: rgba(56, 189, 248, 0.3);
+            }
+            .top-nav-actions {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px;
+                padding-top: 10px;
+                margin-top: 8px;
+                border-top: 1px solid rgba(255, 255, 255, 0.12);
+            }
+            .top-nav-actions.is-open {
+                display: flex;
             }
             .split-container {
                 flex-direction: column;
@@ -215,11 +266,16 @@
 </head>
 <body class="indexbody">
     <header id="portal-switch-banner">
-        <div class="portal-brand">
-            <span>Obelisk Proof Assistant</span>
-            <span class="portal-tag">🏛 Classic 2-Pane View</span>
+        <div class="portal-brand-row">
+            <div class="portal-brand">
+                <span>Obelisk Proof Assistant</span>
+                <span class="portal-tag">🏛 Classic 2-Pane View</span>
+            </div>
+            <button type="button" id="mobile-header-toggle-btn" class="mobile-header-toggle" onclick="toggleMobileHeaderMenu()" aria-expanded="false" aria-label="Toggle navigation buttons">
+                ☰ Buttons &darr;
+            </button>
         </div>
-        <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <div id="portal-nav-actions" class="top-nav-actions">
             <button type="button" id="left-theme-toggle-btn" class="switch-link" style="cursor: pointer; font-family: inherit; color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12);" onclick="toggleLeftPaneTheme()" title="Switch left pane to Light Mode">
                 ☀️ Left: Light Mode
             </button>
@@ -591,6 +647,16 @@ window.addEventListener('message', function(event) {
     window.addEventListener('scroll', updateMobileNavState, { passive: true });
     window.addEventListener('resize', updateMobileNavState);
     document.addEventListener('DOMContentLoaded', updateMobileNavState);
+
+    function toggleMobileHeaderMenu() {
+        var nav = document.getElementById('portal-nav-actions');
+        var btn = document.getElementById('mobile-header-toggle-btn');
+        if (nav && btn) {
+            var isOpen = nav.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+            btn.innerHTML = isOpen ? '✕ Buttons &uarr;' : '☰ Buttons &darr;';
+        }
+    }
 
     function toggleLeftPaneTheme() {
         var leftIframe = document.querySelector('#left-pane iframe');
