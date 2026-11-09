@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Proof Assistant — Dual-Theory Architecture (MKTD1 & MKTD2)</title>
-  <meta name="description" content="Obelisk: An interactive proof assistant for Morse-Kelley class theory with dual foundational variants (MKTD1 first-order sequent calculus and MKTD2 constructive dependent type theory), explicit proof terms, and an ultra-small trusted LCF kernel.">
+  <title>Obelisk Proof Assistant — Two Systems: Syntactic &amp; Type-Theoretic Provers</title>
+  <meta name="description" content="Obelisk: An interactive proof assistant featuring two systems: a syntactic first-order prover (formulas, terms, proof trees) and a type-theoretic prover (propositions-as-types, programs, type checking), grounded in Morse-Kelley class theory with Dunaev pairs.">
   
   <!-- Fonts & Math -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -770,44 +770,41 @@
     <section id="overview" class="exec-overview">
       <div class="exec-header">
         <div>
-          <div class="exec-tag">Dual-Theory Architecture &middot; MKTD1 &amp; MKTD2</div>
-          <h2 class="exec-title" style="margin-top: 0.4rem;">Dual Foundations: Two Proof Assistant Variants &amp; Distinct Theories</h2>
+          <div class="exec-tag">Two Provers &middot; Two Systems</div>
+          <h2 class="exec-title" style="margin-top: 0.4rem;">Two Systems: The Syntactic Prover &amp; The Type-Theoretic Prover</h2>
         </div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--primary);">
-          Morse&ndash;Kelley + Tarski + Dunaev &middot; FACTBOOK Fact 14
+          Two Sides of Curry&ndash;Howard: Syntactic Logic vs. Type Semantics
         </div>
       </div>
 
       <div class="exec-grid">
         <div class="exec-card">
-          <h4 style="color: #38bdf8;">MKTD1 &middot; 1st-Order Sequent Calculus</h4>
+          <h4 style="color: #38bdf8;">Prover 1 &middot; Syntactic System (Formulas &amp; Proofs)</h4>
           <p>
-            The classical axiomatic sequent calculus theory of Morse-Kelley + Tarski + Dunaev. Primitive judgment is classical sequent derivability <code>&Gamma; &vdash; &phi;</code> (<code>Stmt = Ctx &vdash; Fm</code>), with distinct stratified sorts (<code>Class.Expression</code>, <code>Truth.Expression</code>, <code>Stmt.Expression</code>, <code>Prf</code>). Verified by an ultra-small trusted LCF kernel in Standard ML (<code>newchecker.ML</code>, <code>foundations.ML</code>) with 106 verified entries.
+            Formulated from the syntactical perspective of proof theory (the left side of the Curry&ndash;Howard correspondence). It speaks in terms of formulas, variables, terms, sequents (<code>&Gamma; &vdash; &phi;</code>), and explicit derivation trees, checked by an ultra-small trusted LCF kernel in Standard ML (<code>newchecker.ML</code>, <code>foundations.ML</code>) with 106 verified entries.
           </p>
         </div>
 
         <div class="exec-card">
-          <h4 style="color: #c084fc;">MKTD2 &middot; Formulas-as-Types Dependent Type Theory</h4>
+          <h4 style="color: #c084fc;">Prover 2 &middot; Type-Theoretic System (Types &amp; Programs)</h4>
           <p>
-            The constructive dependent type theory / propositions-as-types variant. Primitive judgment is typing inhabitation <code>p : A</code>; formulas are types (<code>Fm : Type</code>) and proofs are constructive &lambda;-terms with definitional (&alpha;&beta;&delta;) conversion. Deterministically typechecked by <code>NBGCompiler.typeCheck</code> (<code>nbg_compiler.ML</code>), verifying all 100 machine-checked records in <code>generated/nbg_library.html</code>.
+            Formulated from the semantical perspective of types (the right side of the Curry&ndash;Howard correspondence). It speaks in terms of types, proof terms / programs, and typing judgments (<code>p : A</code>). Proof terms are constructive &lambda;-terms verified by <code>NBGCompiler.typeCheck</code> (<code>nbg_compiler.ML</code>), verifying all 100 machine-checked standard library records in <code>generated/nbg_library.html</code>.
+          </p>
+        </div>
+
+        <div class="exec-card">
+          <h4 style="color: #fbbf24;">Why the Two Theories Differ</h4>
+          <p>
+            While guided by the Curry&ndash;Howard correspondence, the two systems are not merely a cosmetic renaming of each other. Their underlying mathematical theories differ: Prover 1 is a classical first-order sequent calculus over Morse&ndash;Kelley class theory, whereas Prover 2 is a constructive dependent type theory with computational conversion (&alpha;&beta;&delta;). Each prover explores the foundational domain through its own distinct logical nature.
           </p>
         </div>
 
         <div class="exec-card">
           <h4 style="color: #10b981;">Dunaev Tagged Ordered Pairs</h4>
           <p>
-            Standard Kuratowski pairs \((\langle A, B 
-angle = \{\{A\}, \{A, B\}\})\) fail for proper classes because proper classes cannot be elements of sets. 
-            Obelisk resolves this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), enabling arbitrary proper classes to form pairs and lists without universe elevation, with machine-checked projection injectivity (<code>proofDunaevPairInjectivity</code>).
-          </p>
-        </div>
-
-        <div class="exec-card">
-          <h4 style="color: #fbbf24;">Zero Implicit Computation</h4>
-          <p>
-            Type-theoretic proof assistants suffer from fragile unbounded computational reduction (\(eta\delta\iota\)): definition updates break proof scripts invisibly. 
-            Obelisk separates syntax from semantics through the explicit valuation bracket \(\llbracket \cdot 
-rbracket\). Every deduction is a checkable syntactic tree; inference rules have explicit side conditions with no hidden normalization noise.
+            Standard Kuratowski pairs \((\langle A, B angle = \{\{A\}, \{A, B\}\})\) fail for proper classes because proper classes cannot be elements of sets. 
+            Both provers solve this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), enabling arbitrary proper classes to form pairs and lists without universe elevation, with machine-checked projection injectivity (<code>proofDunaevPairInjectivity</code>).
           </p>
         </div>
       </div>
