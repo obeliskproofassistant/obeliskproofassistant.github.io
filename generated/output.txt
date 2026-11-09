@@ -224,14 +224,14 @@
   Kernel Note:     Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
   Verification:    Verified (Kernel)
 
-[3.08 / AxmLeftInSound] “Membership respects equality in right argument (container class: X = Y -> (Z in X  Z in Y))” (Axiom)
+[3.08 / AxmLeftInSound] “Membership respects equality in right argument (container class)” (Axiom)
   Name:            AxmLeftInSound
   Formula [0]:     (∀(X:Class)∀(Y:Class)((X=Y)—→∀(z:Class)((z∈X)←→(z∈Y))))
   SML Kernel AST:  PLeftInSoundAx_prf
   Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])—→∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])←→([z@Class.Expression]∈[Y@Class.Expression]))))
   Verification:    Postulated (Kernel Axiom)
 
-[3.09 / AxmRightInSound] “Membership respects equality in left argument (element: X = Y -> (X in W  Y in W))” (Axiom)
+[3.09 / AxmRightInSound] “Membership respects equality in left argument (element)” (Axiom)
   Name:            AxmRightInSound
   Formula [0]:     (∀(X:Class)∀(Y:Class)((X=Y)—→∀(W:Class)((X∈W)←→(Y∈W))))
   SML Kernel AST:  PRightInSoundAx_prf
@@ -521,12 +521,12 @@
   Scheme of Types: (∀([a@Variable]:[Class@Type])∀([b@Variable]:[Class@Type])({[a@Class.Expression],[b@Class.Expression]}={[x@Class.Expression]|([x@Class.Expression]=[a@Class.Expression])∨([x@Class.Expression]=[b@Class.Expression])}))
   Verification:    Definitional (Kernel AST)
 
-[3.50 / DefNaturalNumberModels] Set-theoretic models of natural numbers(TBI) (Definition)
+[3.50 / DefNaturalNumberModels] Set-theoretic models of natural numbers (Definition)
   Name:            DefNaturalNumberModels
-  Formula [0]:     ((0:Class) = ∅) ∧ (((1:Class) = {∅}) ∧ (((2:Class) = {∅,{∅}}) ∧ ((3:Class) = {∅,{∅},{∅,{∅}}})))
-  SML Kernel AST:  CpNatModel
-  Scheme of Types: ((0:Class) = ∅) ∧ (((1:Class) = {∅}) ∧ (((2:Class) = {∅,{∅}}) ∧ ((3:Class) = {∅,{∅},{∅,{∅}}})))
-  Kernel Note:     Explicit typed term interpretation / valuation (μ_Nat : Nat.Expression → Class.Expression) mapping numeral terms 0, 1, 2, 3 into their von Neumann ordinal classes in the fixed background model.
+  Formula [0]:     (∀(M:Class)(NatModel(M)←→((∅∈M)∧∀(n:Class)((n∈M)—→((n∪{n})∈M)))))
+  SML Kernel AST:  PKernelDef_prf
+  Scheme of Types: (∀([M@Variable]:[Class@Type])(NatModel([M@Class.Expression])←→((∅∈[M@Class.Expression])∧∀([n@Variable]:[Class@Type])(([n@Class.Expression]∈[M@Class.Expression])—→(([n@Class.Expression]∪{[n@Class.Expression]})∈[M@Class.Expression])))))
+  Kernel Note:     Formal conservative definition of a set-theoretic model of natural numbers (Peano-Dedekind inductive structure under von Neumann successor): a class M is a model of natural numbers iff it contains the empty set (0) and is closed under the successor operation n ∪ {n}.
   Verification:    Definitional (Kernel AST)
 
 [3.51 / DefClassLists] General definition of lists of classes which applicable not only for sets, but for proper classes too(TBI) (Definition)
@@ -619,7 +619,7 @@
   Scheme of Types: Ord(ω)
   Verification:    Verified (Kernel)
 
-[3.63 / ThmOmegaInOrdinals] ω is in the class of all ordinal numbers(=sets) (Theorem)
+[3.63 / ThmOmegaInOrdinals] ω is in the class of all ordinal numbers (sets) (Theorem)
   Name:            ThmOmegaInOrdinals
   Formula [0]:     (ω∈On)
   SML Kernel AST:  CpOn

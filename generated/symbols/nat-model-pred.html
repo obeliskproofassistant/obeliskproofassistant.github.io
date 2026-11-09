@@ -1,0 +1,623 @@
+<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+     Source files: set_theory_prover/program/newchecker.ML,
+                   set_theory_prover/program/types/typetheory.ML,
+                   set_theory_prover/program/types/foundations.ML,
+                   set_theory_prover/program/types/entries.ML
+     Generator:    set_theory_prover/program/html_generator.ML
+     Regenerate:   cd /ramdisk/set_theory_prover/program && poly -q --use html_generator.ML
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symbol Reference: NatModel &mdash; Set-Theoretic Natural Number Model Predicate (NatModel, AST Constructor: TpSymbol ("NatModel", false, ...))</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        packages: {'[+]': ['ams', 'color', 'noerrors', 'noundefined']}
+      },
+      startup: { typeset: true }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-secondary: #111827;
+      --bg-card: #1e293b;
+      --bg-row-hover: #263349;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --accent-blue: #38bdf8;
+      --accent-purple: #a855f7;
+      --border-color: #334155;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.75rem 2rem;
+    }
+    .header-inner {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .nav-bar {
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .nav-link {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      padding: 0.35rem 0.75rem;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 6px;
+      background: rgba(56, 189, 248, 0.08);
+    }
+    .nav-link:hover {
+      background: rgba(56, 189, 248, 0.2);
+    }
+    h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.85rem;
+      color: #f8fafc;
+    }
+    .subtitle {
+      color: var(--text-secondary);
+      margin: 0 0 1.25rem 0;
+      font-size: 0.98rem;
+    }
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.9rem 1.25rem;
+      border-radius: 0.75rem;
+    }
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .control-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      margin-right: 0.25rem;
+    }
+    .toggle-btn {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-color);
+      padding: 0.45rem 0.9rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+    .toggle-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--accent-blue);
+    }
+    .toggle-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    .toc-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .toc-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.4rem;
+    }
+    .toc-link:hover {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+    main {
+      max-width: 100%;
+      margin: 1.5rem auto;
+      padding: 0 2rem;
+    }
+    .manual-section {
+      margin-bottom: 3rem;
+      scroll-margin-top: 64px;
+    }
+    .section-header h2 {
+      font-size: 1.45rem;
+      margin: 0 0 0.25rem 0;
+      color: var(--accent-blue);
+    }
+    .section-desc {
+      color: var(--text-secondary);
+      margin: 0 0 1rem 0;
+      font-size: 0.92rem;
+    }
+    .table-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
+    }
+    /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
+    .section-external-table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .section-external-table > thead > tr > th {
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.85rem 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+    .col-num { width: 90px; text-align: center; }
+    .col-entity { width: 100%; }
+    .external-row {
+      border-bottom: 6px solid #475569;
+      transition: background 0.15s ease;
+      scroll-margin-top: 64px;
+    }
+    .external-row:target {
+      background: rgba(56, 189, 248, 0.14);
+      outline: 2px solid var(--accent-blue);
+    }
+    .entry-num-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .external-num {
+      width: 90px;
+      vertical-align: top;
+      text-align: center;
+      padding: 1rem 0.75rem;
+      background: rgba(15, 23, 42, 0.6);
+      border-right: 1px solid var(--border-color);
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .num-anchor {
+      color: var(--accent-blue);
+      text-decoration: none;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .num-anchor:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+    .external-entity {
+      padding: 0;
+      vertical-align: top;
+    }
+    /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
+    .internal-entity-table {
+      width: 100%;
+      max-width: 100%;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+    .internal-entity-table tr {
+      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
+    }
+    .internal-entity-table tr:last-child {
+      border-bottom: none;
+    }
+    .internal-entity-table th.field-name {
+      width: 150px;
+      min-width: 150px;
+      max-width: 150px;
+      word-break: normal;
+      padding: 0.6rem 1rem;
+      background: rgba(30, 41, 59, 0.45);
+      color: var(--text-secondary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-right: 1px solid rgba(51, 65, 85, 0.6);
+      vertical-align: middle;
+    }
+    .internal-entity-table td.field-value {
+      width: calc(100% - 150px);
+      max-width: calc(100% - 150px);
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      white-space: normal;
+      padding: 0.65rem 1rem;
+      vertical-align: middle;
+    }
+    .entry-title-cell {
+      font-weight: 600;
+      color: #f8fafc;
+      font-size: 0.98rem;
+    }
+    .formula-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
+      font-size: 0.96rem;
+      overflow-wrap: anywhere !important;
+      word-break: break-word !important;
+      white-space: normal !important;
+      max-width: 100% !important;
+    }
+    .proof-cell {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
+    .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+    /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
+    a.sym-link {
+      all: unset;
+      cursor: pointer;
+      color: inherit !important;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease;
+    }
+    a.sym-link:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+    }
+    .formula-latex a, mjx-container a {
+      all: unset;
+      cursor: pointer;
+      color: #60a5fa !important;
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-decoration-color: rgba(56, 189, 248, 0.55);
+      text-underline-offset: 3px;
+      border-radius: 3px;
+      transition: background 0.12s ease, text-decoration-color 0.12s ease, color 0.12s ease;
+    }
+    .formula-latex a:hover, mjx-container a:hover {
+      background: rgba(56, 189, 248, 0.22);
+      text-decoration-style: solid;
+      text-decoration-color: #38bdf8;
+      color: #93c5fd !important;
+    }
+    /* ANSI Syntax Highlighting Classes */
+    .ansi-bold-red { color: #f87171; font-weight: 700; }
+    .ansi-bold-green { color: #4ade80; font-weight: 700; }
+    .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
+    .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
+    .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
+    .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
+    .ansi-yellow { color: #fde047; }
+    .ansi-cyan { color: #67e8f9; }
+    .ansi-gray { color: #94a3b8; }
+    .ansi-light-red { color: #fca5a5; }
+    .ansi-light-green { color: #86efac; }
+    .ansi-light-yellow { color: #fef08a; }
+    .ansi-light-blue { color: #93c5fd; }
+    .ansi-light-magenta { color: #f0abfc; }
+    .ansi-light-cyan { color: #a5f3fc; }
+    .ansi-white { color: #f8fafc; }
+    .ansi-bold-white { color: #ffffff; font-weight: 700; }
+    .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
+    .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
+    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
+    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
+    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
+    body.hide-schemata .row-scheme { display: none !important; }
+    .metalevel-badge { display: none !important; }
+    footer {
+      margin-top: 3rem;
+      padding: 1.5rem 2rem;
+      border-top: 1px solid var(--border-color);
+      background: var(--bg-secondary);
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-align: center;
+    }
+    footer a {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      text-decoration-style: dotted;
+    }
+    footer a:hover {
+      color: #93c5fd;
+      text-decoration-style: solid;
+    }
+  </style>
+  <script src="../../js/proof_tree_collapse.js" defer></script>
+</head>
+<body class="mode-unicode">
+  <header>
+    <div class="header-inner">
+      <nav class="nav-bar">
+        <a class="nav-link obelisk-portal-link" href="../../index.html">Obelisk Portal</a>
+        <a class="nav-link" href="../manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
+        <a class="nav-link" href="../variant1.html">MKTD1</a>
+        <a class="nav-link" href="../variant2.html">MKTD2</a>
+        <a class="nav-link" href="../proofs.html">Verified Theorems &amp; Rules</a>
+        <a class="nav-link" href="../symbols.html">Symbol &amp; Type Index</a>
+        <a class="nav-link" href="../dependent_types.html">Dependent Types</a>
+        <a class="nav-link" href="../metatheory.html">Metatheory</a>
+        <a class="nav-link" href="../theory_db.json">JSON DB</a>
+        <a class="nav-link" href="../../repl.html">Interactive REPL</a>
+      </nav>
+      <h1>Symbol Reference: NatModel &mdash; Set-Theoretic Natural Number Model Predicate (NatModel, AST Constructor: TpSymbol ("NatModel", false, ...))</h1>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
+      <div class="controls-bar">
+        <div class="control-group">
+          <span class="control-label">Formula Display:</span>
+          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
+          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
+          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Proof Trees:</span>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
+          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main>
+  <section class="manual-section" id="symbol-personal-page">
+    <div class="section-header">
+      <h2>Set-Theoretic Natural Number Model Predicate (NatModel, AST Constructor: TpSymbol ("NatModel", false, ...))</h2>
+      <p class="section-desc">Unary predicate <code>NatModel(M) ⟷ ((∅∈M) ∧ ∀(n:Class)((n∈M)→((n∪{n})∈M)))</code> characterizing a set-theoretic model of natural numbers (Entry DefNaturalNumberModels (3.50)).</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">Field</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Symbol (Unicode)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">NatModel</div>
+            </td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Symbol (LaTeX)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{NatModel}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{NatModel}</code></div>
+            </td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-entity formula-cell">
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>NatModel</code></div>
+            </td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Category</td>
+            <td class="external-entity"><span class="badge badge-def">Predicate Symbol (Unary Class Predicate)</span></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">SML AST Constructor</td>
+            <td class="external-entity"><code>HP (TpSymbol (&quot;NatModel&quot;, false, [EInject (HLO (VClass M))]))  [registered via KernelDefinitions in universe_definitions.ML]</code></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Constructor Arguments</td>
+            <td class="external-entity">1. Class M : Class</td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Metatype / Signature</td>
+            <td class="external-entity"><code>Class → Bool</code></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Binder Status</td>
+            <td class="external-entity"><strong>No — Unary Predicate Symbol (Set-Theoretic Model of Natural Numbers)</strong></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Defining Kernel Entries (ML Labels)</td>
+            <td class="external-entity"><a href="../manual.html#DefNaturalNumberModels" class="sym-link"><strong>Definition DefNaturalNumberModels (3.50): Set-theoretic models of natural numbers</strong> (<code>#DefNaturalNumberModels</code> / <code>#label-set-theoretic-models-of-natural-numbers</code>)</a></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">How to Understand It</td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Formal Conservative Definition (DefNaturalNumberModels (3.50)):</strong> <code>NatModel(M) ⟷ ((∅∈M) ∧ ∀(n:Class)((n∈M)→((n∪{n})∈M)))</code>. Registered via <code>KernelDefinitions</code>.</p></td>
+          </tr>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Canonical Law (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>NatModel(M) ⟷ ((∅ ∈ M) ∧ ∀(n:Class)((n ∈ M) → ((n ∪ {n}) ∈ M)))</code></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Canonical Law (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/nat-model-pred.html}{\mathsf{NatModel}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/iff-conn.html}{\longleftrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/emptyset-const.html}{\emptyset} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/func-arrow.html}{\rightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} ~\href{../symbols/binunion-op.html}{\cup} ~\href{../symbols/singleton-op.html}{\{} \href{../symbols/variables.html}{n} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Canonical Law (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>NatModel(M) &lt;--&gt; ((EmptySet in M) /\ forall(n:Class)((n in M) -&gt; ((n u+ {n}) in M)))</code></div></td>
+          </tr>
+          <tr class="external-row">
+            <td class="external-num">Related Symbols &amp; Kernel Entries</td>
+            <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
+<li><a href="../manual.html#DefNaturalNumberModels" class="sym-link">Definition DefNaturalNumberModels (3.50): Set-theoretic models of natural numbers</a></li>
+<li><a href="ind-pred.html" class="sym-link">Inductive Predicate Ind (TpInd)</a></li>
+<li><a href="omega-const.html" class="sym-link">Smallest Inductive Ordinal ω (CpOmega)</a></li>
+</ul></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section class="manual-section" id="symbol-defining-axioms">
+    <div class="section-header">
+      <h2>Defining Axioms, Rules &amp; Formal Definitions (Rendered Directly from Kernel Entries)</h2>
+      <p class="section-desc">Generated without code duplication by invoking <code>render_entry_row_base "../manual.html"</code> on the corresponding kernel <code>Entry</code> records.</p>
+    </div>
+    <div class="table-container">
+      <table class="section-external-table">
+        <thead>
+          <tr>
+            <th class="col-num">#</th>
+            <th class="col-entity">Formal Entity Specification</th>
+          </tr>
+        </thead>
+        <tbody>
+      <tr id="DefNaturalNumberModels" class="external-row">
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr>
+              <th class="field-name">Num</th>
+              <td class="field-value entry-num-cell"><span id="item-3.50"></span><span id="label-set-theoretic-models-of-natural-numbers"></span><span id="label-set-theoretic-models-of-natural-numbers-3-50"></span><a href="../manual.html#DefNaturalNumberModels" class="num-anchor" title="DefNaturalNumberModels">3.50</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Title</th>
+              <td class="field-value entry-title-cell">Set-theoretic models of natural numbers <a href="../manual.html#DefNaturalNumberModels" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#DefNaturalNumberModels</code></a> <a href="../manual.html#label-set-theoretic-models-of-natural-numbers" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-set-theoretic-models-of-natural-numbers</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Classification</th>
+              <td class="field-value"><span class="badge badge-def">Definition</span></td>
+            </tr>
+            <tr class="row-unicode">
+              <th class="field-name">Formula (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M (binder)">M</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/nat-model-pred.html" class="sym-link" title="Set-theoretic model of natural numbers unary predicate symbol (NatModel)">NatModel</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/iff-conn.html" class="sym-link" title="Logical bi-implication / equivalence connective on formulas (Variant 1: &lt;--&gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...))">←→</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/emptyset-const.html" class="sym-link" title="Empty set / empty class constant (Constructor: HC CpEmptySet)">∅</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">∧</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n (binder)">n</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --&gt; / longrightarrow, Constructor: HP (TpImpl ...))">—→</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><a href="../symbols/binunion-op.html" class="sym-link" title="Binary union functional symbol (Constructor: HC (CpBinUnion ...))">∪</a><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">{</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">}</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Formula (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span>\(\href{../symbols/parentheses.html}{(} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/nat-model-pred.html}{\mathsf{NatModel}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} \href{../symbols/iff-conn.html}{\longleftrightarrow} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/emptyset-const.html}{\emptyset} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} \href{../symbols/and-conn.html}{\land} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} \href{../symbols/binunion-op.html}{\cup} \href{../symbols/singleton-op.html}{\{} \href{../symbols/variables.html}{n} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} \href{../symbols/in-pred.html}{\in} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Formula (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">forall</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M (binder)">M</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/nat-model-pred.html" class="sym-link" title="Set-theoretic model of natural numbers unary predicate symbol (NatModel)">NatModel</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/iff-conn.html" class="sym-link" title="Logical bi-implication / equivalence connective on formulas (Variant 1: &lt;--&gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...))">&lt;--&gt;</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/emptyset-const.html" class="sym-link" title="Empty set / empty class constant (Constructor: HC CpEmptySet)">EmptySet</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">/\</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">forall</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n (binder)">n</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --&gt; / longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><a href="../symbols/binunion-op.html" class="sym-link" title="Binary union functional symbol (Constructor: HC (CpBinUnion ...))">u+</a><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">{</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">}</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">SML Kernel AST</th>
+              <td class="field-value proof-cell"><code>PKernelDef_prf</code></td>
+            </tr>
+            <tr class="row-scheme row-unicode">
+              <th class="field-name">Scheme of Types (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/variable-sort.html" class="sym-link" title="Syntactic variable identifier sort (Variable)">Variable</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/nat-model-pred.html" class="sym-link" title="Set-theoretic model of natural numbers unary predicate symbol (NatModel)">NatModel</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/iff-conn.html" class="sym-link" title="Logical bi-implication / equivalence connective on formulas (Variant 1: &lt;--&gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...))">←→</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/emptyset-const.html" class="sym-link" title="Empty set / empty class constant (Constructor: HC CpEmptySet)">∅</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">∧</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">∀</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/variable-sort.html" class="sym-link" title="Syntactic variable identifier sort (Variable)">Variable</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --&gt; / longrightarrow, Constructor: HP (TpImpl ...))">—→</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/binunion-op.html" class="sym-link" title="Binary union functional symbol (Constructor: HC (CpBinUnion ...))">∪</a><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">{</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">}</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))">∈</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-latex">
+              <th class="field-name">Scheme of Types (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span>\(\href{../symbols/parentheses.html}{(} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{@} \href{../symbols/variable-sort.html}{\mathsf{Variable}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/typing-colon.html}{:} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/typing-colon.html}{@} \href{../symbols/type-sort.html}{\mathsf{Type}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/nat-model-pred.html}{\mathsf{NatModel}} \href{../symbols/parentheses.html}{(} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/iff-conn.html}{\longleftrightarrow} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/emptyset-const.html}{\emptyset} \href{../symbols/in-pred.html}{\in} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/and-conn.html}{\land} \href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{@} \href{../symbols/variable-sort.html}{\mathsf{Variable}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/typing-colon.html}{:} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/typing-colon.html}{@} \href{../symbols/type-sort.html}{\mathsf{Type}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/in-pred.html}{\in} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/impl-conn.html}{\longrightarrow} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/binunion-op.html}{\cup} \href{../symbols/singleton-op.html}{\{} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{n} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} \href{../symbols/in-pred.html}{\in} \href{../symbols/stored-type-brackets.html}{[} \href{../symbols/variables.html}{\mathrm{M}} \href{../symbols/typing-colon.html}{@} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/stored-type-brackets.html}{]} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div>
+              </td>
+            </tr>
+            <tr class="row-scheme row-ansii">
+              <th class="field-name">Scheme of Types (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">forall</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/variable-sort.html" class="sym-link" title="Syntactic variable identifier sort (Variable)">Variable</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/nat-model-pred.html" class="sym-link" title="Set-theoretic model of natural numbers unary predicate symbol (NatModel)">NatModel</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/iff-conn.html" class="sym-link" title="Logical bi-implication / equivalence connective on formulas (Variant 1: &lt;--&gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...))">&lt;--&gt;</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/emptyset-const.html" class="sym-link" title="Empty set / empty class constant (Constructor: HC CpEmptySet)">EmptySet</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/and-conn.html" class="sym-link" title="Logical conjunction connective (Constructor: HP (TpAnd ...))">/\</a><a href="../symbols/forall-binder.html" class="sym-link" title="Universal quantifier binder (Constructor: HP (TpFora ...))">forall</a><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/variable-sort.html" class="sym-link" title="Syntactic variable identifier sort (Variable)">Variable</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-light-green"><a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-cyan"><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/impl-conn.html" class="sym-link" title="Material implication connective on formulas (Variant 1: --&gt; / longrightarrow, Constructor: HP (TpImpl ...))">--&gt;</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/binunion-op.html" class="sym-link" title="Binary union functional symbol (Constructor: HC (CpBinUnion ...))">u+</a><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">{</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable n">n</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><span class="ansi-light-green"><a href="../symbols/singleton-op.html" class="sym-link" title="Singleton set {a} (AST constructor: CpSingleton, functional symbol)">}</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Left stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">[</a></span><span class="ansi-light-yellow"><a href="../symbols/variables.html" class="sym-link" title="Bound class variable M">M</a></span><span class="ansi-bold-blue"><a href="../symbols/typing-colon.html" class="sym-link" title="Stored-type annotation operator (@ in [x@T], analogous to : in x:T)">@</a></span><span class="ansi-bold-green"><a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a></span><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><span class="ansi-light-green"><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a></span><span class="ansi-bold-blue"><a href="../symbols/stored-type-brackets.html" class="sym-link" title="Right stored-type annotation bracket [ ... @ ... ] (TyVariable / Stored AST Type)">]</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Formal conservative definition of a set-theoretic model of natural numbers (Peano-Dedekind inductive structure under von Neumann successor): a class M is a model of natural numbers iff it contains the empty set (0) and is closed under the successor operation n ∪ {n}.</td>
+            </tr>
+            <tr>
+              <th class="field-name">Source Line</th>
+              <td class="field-value proof-cell"><a href="https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L850" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 850"><code>entries.ML:L850</code></a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Verification</th>
+              <td class="field-value proof-cell">Definitional (Kernel AST)</td>
+            </tr>
+            <tr>
+              <th class="field-name">Standalone Page</th>
+              <td class="field-value"><a href="../proofs/DefNaturalNumberModels.html" class="sym-link"><code>DefNaturalNumberModels</code> (3.50)</a></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">918ea9f</code> &bull; Built on: <time datetime="2026-11-08T20:10:00Z">2026-11-08 20:10:00 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+    </div>
+  </footer>
+  <script>
+    function toggleFormatHide(fmt) {
+      var cls = 'hide-' + fmt;
+      var isHidden = document.body.classList.toggle(cls);
+      var btn = document.getElementById('btn-hide-' + fmt);
+      if (btn) btn.classList.toggle('active', isHidden);
+      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
+        window.MathJax.typesetPromise();
+      }
+    }
+    function toggleSchemataHide() {
+      var isHidden = document.body.classList.toggle('hide-schemata');
+      var btn = document.getElementById('btn-hide-schemata');
+      if (btn) btn.classList.toggle('active', isHidden);
+    }
+  </script>
+</body>
+</html>
