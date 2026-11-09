@@ -65,12 +65,30 @@
         a:hover {
             text-decoration: underline;
         }
-        .section {
+        .section, details.section {
             margin-bottom: 30px;
             background-color: #DEDEDE;  
             border-radius: 25px;
-            padding: 10px;
+            padding: 10px 15px;
             padding-top: 0px;
+        }
+        details.section summary {
+            cursor: pointer;
+            outline: none;
+            padding: 10px 0;
+            user-select: none;
+        }
+        details.section summary h2 {
+            display: inline;
+            vertical-align: middle;
+            margin: 0;
+            padding: 0;
+        }
+        details.section[open] summary {
+            margin-bottom: 8px;
+        }
+        details.section summary:hover {
+            opacity: 0.85;
         }
         .footer {
             margin-top: 50px;
