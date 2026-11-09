@@ -3,6 +3,49 @@
 /* Import from Google Fonts (or self-host for reliability) */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap');
 
+html {
+    background-color: #fafafa;
+}
+
+html.dark-mode {
+    filter: invert(1);
+    background-color: #fafafa;
+}
+
+/* Image duplication support for light and dark modes */
+.img-dark-mode {
+    display: none !important;
+}
+.img-light-mode {
+    display: inline-block !important;
+}
+
+html.dark-mode .img-dark-mode {
+    display: inline-block !important;
+}
+html.dark-mode .img-light-mode {
+    display: none !important;
+}
+
+.theme-toggle-btn {
+    background: #e2e8f0;
+    color: #1e293b;
+    border: 1px solid #94a3b8;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+.theme-toggle-btn:hover {
+    background: #cbd5e1;
+}
+
         *, *::before, *::after {
             box-sizing: border-box;
         }

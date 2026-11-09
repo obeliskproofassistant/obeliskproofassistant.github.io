@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark-mode">
 <!--
 position: absolute; top: 0; left:0; 
 
@@ -18,6 +18,58 @@ position: absolute; top: 0; left:0;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <!--max-width: 800px; -->
     <link rel="stylesheet" href="styles.css">
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('opa_left_theme');
+          if (saved === 'light') {
+            document.documentElement.classList.remove('dark-mode');
+          } else {
+            document.documentElement.classList.add('dark-mode');
+          }
+        } catch (e) {
+          document.documentElement.classList.add('dark-mode');
+        }
+      })();
+      function toggleTheme() {
+        var isDark = document.documentElement.classList.toggle('dark-mode');
+        try {
+          localStorage.setItem('opa_left_theme', isDark ? 'dark' : 'light');
+        } catch (e) {}
+        updateThemeUI(isDark);
+        try {
+          window.parent.postMessage({ type: 'LEFT_THEME_CHANGED', isDark: isDark }, '*');
+        } catch (e) {}
+      }
+      function updateThemeUI(isDark) {
+        var btn = document.getElementById('theme-toggle-btn');
+        if (btn) {
+          btn.innerHTML = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+          btn.title = isDark ? 'Switch left pane to Light Mode' : 'Switch left pane to Dark Mode';
+          btn.setAttribute('aria-label', isDark ? 'Switch left pane to Light Mode' : 'Switch left pane to Dark Mode');
+        }
+      }
+      window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'SET_LEFT_THEME') {
+          if (e.data.mode === 'toggle') {
+            toggleTheme();
+          } else {
+            var wantDark = (e.data.mode === 'dark');
+            if (wantDark) {
+              document.documentElement.classList.add('dark-mode');
+            } else {
+              document.documentElement.classList.remove('dark-mode');
+            }
+            try { localStorage.setItem('opa_left_theme', wantDark ? 'dark' : 'light'); } catch (e) {}
+            updateThemeUI(wantDark);
+          }
+        }
+      });
+      document.addEventListener('DOMContentLoaded', function() {
+        var isDark = document.documentElement.classList.contains('dark-mode');
+        updateThemeUI(isDark);
+      });
+    </script>
 
 
     <!--
@@ -33,7 +85,7 @@ position: absolute; top: 0; left:0;
   border-right: 0px
 -->
 <div class="container">
-<header class="projectaboutheader">
+<header class="projectaboutheader" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
   <!--
   <img src="https://cdn6.hexlet.io/1P6tmafZTIy5.png" alt="Логотип">
   -->
@@ -41,20 +93,15 @@ position: absolute; top: 0; left:0;
   Логотип сайта
   -->
   <h2 style="border-right: 0px; padding: 0; margin: 0;">
-  <img src="images/logo.png" style="width: 64px; height: 64px; display: inline-block; vertical-align: middle">
+  <img src="images/logo.png" class="img-light-mode" alt="Obelisk Logo (Light)" style="width: 64px; height: 64px; vertical-align: middle;">
+  <img src="images/logo_dark.png" class="img-dark-mode" alt="Obelisk Logo (Dark)" style="width: 64px; height: 64px; vertical-align: middle;">
   <span class="title-text" style="display:inline-block; background-color: #fafafa; text-align: center; border-radius: 25px; padding: 10px;"><!--Georgy Dunaev | --><span style="color: red;">O</span>belisk <span style="color: red;">P</span>roof <span style="color: red;">A</span>ssistant</span>
   </h2>  
-  <!-- Меню -->
-  <!--
-<mark class="red"></mark>
-  <div id="menu"> 
-    <ul>
-      <li><a href="/">Главная</a></li>
-      <li><a href="/about">О нас</a></li>
-      <li><a href="/contacts">Контакты</a></li>
-    </ul>
+  <div style="display: flex; align-items: center; gap: 8px;">
+    <button id="theme-toggle-btn" type="button" onclick="toggleTheme()" class="theme-toggle-btn" title="Switch left pane to Light Mode" aria-label="Switch left pane to Light Mode">
+      ☀️ Light Mode
+    </button>
   </div>
-  -->
 </header>
     <div style="background: #e0f2fe; border: 1px solid #38bdf8; border-radius: 12px; padding: 12px 18px; margin: 15px 0; display: flex; align-items: center; justify-content: space-between; font-size: 13.5px;">
       <span style="color: #0369a1; font-weight: 600;">✨ Explore the new Interactive Theorem & Rule Inspector (Unicode / ASCII syntax toggle & explicit side conditions)</span>
@@ -783,7 +830,8 @@ Message:
     <details class="section" open>
       <summary><h2>Acknowledgements</h2></summary>
       <div class="section-content">
-        <img src="images/Thanks.jpg" style="width: 200px; border-radius: 10px;">
+        <img src="images/Thanks.jpg" class="img-light-mode" alt="Acknowledgements (Light)" style="width: 200px; border-radius: 10px;">
+        <img src="images/Thanks_dark.jpg" class="img-dark-mode" alt="Acknowledgements (Dark)" style="width: 200px; border-radius: 10px;">
 
 <!--
 width="100" height="100" 

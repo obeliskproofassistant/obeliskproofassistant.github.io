@@ -117,6 +117,7 @@
         .split-container .left {
             width: 50%;
             height: 100%;
+            background-color: #050505;
         }
         .split-container .right {
             width: 50%;
@@ -214,6 +215,9 @@
             <span class="portal-tag">🏛 Classic 2-Pane View</span>
         </div>
         <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="left-theme-toggle-btn" class="switch-link" style="cursor: pointer; font-family: inherit; color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12);" onclick="toggleLeftPaneTheme()" title="Switch left pane to Light Mode">
+                ☀️ Left: Light Mode
+            </button>
             <button type="button" id="btn-scroll-to-theory" class="switch-link btn-scroll-theory" onclick="scrollToTheoryOutline()" title="Scroll down to Theory Outline">
                 📜 Theory Outline &darr;
             </button>
@@ -480,6 +484,34 @@ window.addEventListener('message', function(event) {
     window.addEventListener('scroll', updateMobileNavState, { passive: true });
     window.addEventListener('resize', updateMobileNavState);
     document.addEventListener('DOMContentLoaded', updateMobileNavState);
+
+    function toggleLeftPaneTheme() {
+        var leftIframe = document.querySelector('#left-pane iframe');
+        if (leftIframe && leftIframe.contentWindow) {
+            leftIframe.contentWindow.postMessage({ type: 'SET_LEFT_THEME', mode: 'toggle' }, '*');
+        }
+    }
+
+    function updateLeftThemeBtn(isDark) {
+        var btn = document.getElementById('left-theme-toggle-btn');
+        if (btn) {
+            btn.innerHTML = isDark ? '☀️ Left: Light Mode' : '🌙 Left: Dark Mode';
+            btn.title = isDark ? 'Switch left pane to Light Mode' : 'Switch left pane to Dark Mode';
+        }
+    }
+
+    window.addEventListener('message', function(e) {
+        if (e.data && e.data.type === 'LEFT_THEME_CHANGED') {
+            updateLeftThemeBtn(e.data.isDark);
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        try {
+            var saved = localStorage.getItem('opa_left_theme');
+            updateLeftThemeBtn(saved !== 'light');
+        } catch(e) {}
+    });
     </script>
 </body>
 </html>
