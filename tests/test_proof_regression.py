@@ -223,8 +223,14 @@ class TestProofRegression(unittest.TestCase):
             self.assertIn(link_pattern, self.gen_manual_html, f"manual.html missing link for {eid}")
 
     def test_manual_sml_kernel_ast_rows_exist(self):
-        """generated/manual.html must include an SML Kernel AST row for every item."""
-        self.assertEqual(self.gen_manual_html.count('<th class="field-name">SML Kernel AST</th>'), len(self.gen_db["entries"]))
+        """Proof terms must not be shown on lists (manual.html), but must be present on individual personal pages."""
+        self.assertEqual(self.gen_manual_html.count('<th class="field-name">Proof Term</th>'), 0)
+        self.assertEqual(self.gen_manual_html.count('<th class="field-name">SML Kernel AST</th>'), 0)
+        # Verify that personal pages DO have Proof Term
+        a01_page = os.path.join(SITE_DIR, "generated", "proofs", "AxmPropWeakening.html")
+        with open(a01_page, "r", encoding="utf-8") as f:
+            a01_content = f.read()
+        self.assertIn('<th class="field-name">Proof Term</th>', a01_content)
 
     def test_proofs_gallery_has_all_theorems_and_rules(self):
         """generated/proofs.html and frozen/proofs.html must contain all theorems and inference rules."""
@@ -369,22 +375,27 @@ class TestProofRegression(unittest.TestCase):
         idx = self.gen_manual_html.find('id="AxmPropWeakening"')
         self.assertGreaterEqual(idx, 0)
         a01_block = self.gen_manual_html[idx:idx + 35000]
-        self.assertIn(
-            '<th class="field-name">SML Kernel AST</th>\n              <td class="field-value proof-cell"><code>PA1_prf</code></td>',
-            a01_block,
-        )
+        # List pages (manual.html) do not show Proof Term
+        self.assertNotIn('<th class="field-name">Proof Term</th>', a01_block)
+        self.assertNotIn('<th class="field-name">SML Kernel AST</th>', a01_block)
+        # Standalone personal page DOES show Proof Term with full functional symbol and arguments
+        a01_page = os.path.join(SITE_DIR, "generated", "proofs", "AxmPropWeakening.html")
+        with open(a01_page, "r", encoding="utf-8") as f:
+            a01_content = f.read()
+        self.assertIn('<th class="field-name">Proof Term</th>', a01_content)
+        self.assertIn('PA1_prf (Γ, A, B)', a01_content)
         self.assertIn('<th class="field-name">Scheme of Types (Unicode)</th>', a01_block)
         self.assertIn('<th class="field-name">Scheme of Types (LaTeX)</th>', a01_block)
         self.assertIn('<th class="field-name">Scheme of Types (ANSII)</th>', a01_block)
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
-        self.assertEqual(by_name["AxmPropWeakening"]["prf_constructor"], "PA1_prf")
+        self.assertEqual(by_name["AxmPropWeakening"]["prf_constructor"], "PA1_prf (Γ, A, B)")
         self.assertEqual(
             by_name["AxmPropWeakening"]["scheme_of_types_unicode"],
             "(⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧))",
         )
 
     def test_thm_universal_class_is_universe_3_69_proven(self):
-        """3.69 #ThmUniversalClassIsUniverse ('The class of all sets is a universe') is proven from other axioms and rendered with Formal Kernel Proof."""
+        """3.69 #ThmUniversalClassIsUniverse ('The class of all sets is a universe') is proven and rendered with formal proof term on its personal page, not list."""
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
         self.assertIn("ThmUniversalClassIsUniverse", by_name)
         e369 = by_name["ThmUniversalClassIsUniverse"]
@@ -395,28 +406,33 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("v_universe_thm_proof", e369["comment"])
         self.assertIn("PVUniverseAx_prf", e369["comment"])
 
+        # In list (manual.html), no proof steps or proof terms are shown
         idx = self.gen_manual_html.find('id="ThmUniversalClassIsUniverse"')
         self.assertGreaterEqual(idx, 0)
         block_369 = self.gen_manual_html[idx:idx + 150000]
-        self.assertIn('<th class="field-name">Formal Kernel Proof</th>', block_369)
-        self.assertIn("Step 1 (ω ∈ V", block_369)
-        self.assertIn("Step 2 (V transitive", block_369)
-        self.assertIn("Step 3 (V Hereditary", block_369)
-        self.assertIn("Step 4 (V Powerful", block_369)
-        self.assertIn("Step 5 (V Tight", block_369)
-        self.assertIn("Step 6 (V Pairful", block_369)
-        self.assertIn("Step 8 (Conclusion via PAndR_prf + def_to_intro", block_369)
+        self.assertNotIn('<th class="field-name">Formal Kernel Proof</th>', block_369)
+        self.assertNotIn("Step 1 (ω ∈ V", block_369)
 
-        for kdef_name in [
-            "DefUniversalClass",
-            "DefTransitiveClass",
-            "DefHereditaryClass",
-            "DefPowerfulClass",
-            "DefPairfulClass",
-            "DefTightClass",
-            "DefGrothendieckUniverse",
-        ]:
-            self.assertEqual(by_name[kdef_name]["prf_constructor"], "PKernelDef_prf")
+        # On personal page proofs/ThmUniversalClassIsUniverse.html, Proof Term is displayed as a proof term, not prose steps
+        p369_path = os.path.join(SITE_DIR, "generated", "proofs", "ThmUniversalClassIsUniverse.html")
+        with open(p369_path, "r", encoding="utf-8") as f:
+            p369_content = f.read()
+        self.assertIn('<th class="field-name">Proof Term</th>', p369_content)
+        self.assertIn("PMP_prf (", p369_content)
+        self.assertIn("PUniverseDef_prf (V)", p369_content)
+        self.assertNotIn("Step 1 (", p369_content)
+
+        expected_ctors = {
+            "DefUniversalClass": "PUnivClassDef_prf (x)",
+            "DefTransitiveClass": "PTransDef_prf (A, B)",
+            "DefHereditaryClass": "PHereditaryDef_prf (A, B, X)",
+            "DefPowerfulClass": "PPowerfulDef_prf (U, B)",
+            "DefPairfulClass": "PPairfulDef_prf (U, A, B)",
+            "DefTightClass": "PTightDef_prf (U, B)",
+            "DefGrothendieckUniverse": "PUniverseDef_prf (U)",
+        }
+        for kdef_name, expected_ctor in expected_ctors.items():
+            self.assertEqual(by_name[kdef_name]["prf_constructor"], expected_ctor)
 
     def test_tickets_t6_t7_w6_verification(self):
         """Verify complete implementation of tickets T6, T7, and W6."""
