@@ -272,36 +272,33 @@
         <div class="portal-brand-row">
             <div class="portal-brand">
                 <span>Obelisk</span>
-                <span class="portal-tag">🏛 Classic</span>
+                <span class="portal-tag">Classic</span>
             </div>
             <button type="button" id="mobile-header-toggle-btn" class="mobile-header-toggle" onclick="toggleMobileHeaderMenu()" aria-expanded="false" aria-label="Toggle navigation buttons">
-                ☰ Buttons
+                Buttons
             </button>
         </div>
         <div id="portal-nav-actions" class="top-nav-actions">
-            <button type="button" id="left-theme-toggle-btn" class="switch-link" style="cursor: pointer; font-family: inherit; color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12);" onclick="toggleLeftPaneTheme()" title="Switch left pane to Light Mode">
-                ☀️ Left: Light
-            </button>
             <button type="button" id="btn-scroll-to-theory" class="switch-link btn-scroll-theory" onclick="scrollToTheoryOutline()" title="Scroll to Theory Outline">
-                📜 Theory
+                Theory
             </button>
             <button type="button" id="toggle-derivation-walkthrough" class="switch-link" style="cursor: pointer; font-family: inherit;" onclick="var p=document.getElementById('formula-vs-theorem-walkthrough'); p.style.display=(p.style.display==='none'?'block':'none');">
-                🔍 Walkthrough
+                Walkthrough
             </button>
             <a href="generated/manual.html" target="_top" class="switch-link" style="color: #38bdf8; border-color: rgba(56,189,248,0.5); background: rgba(56,189,248,0.18);">
-                📖 Manual
+                Manual
             </a>
             <a href="generated/theory_db.json" target="_top" class="switch-link" style="color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.12);">
-                🗄️ Database
+                Database
             </a>
             <a href="repl.html" target="_top" class="switch-link">
-                ⚡ REPL
+                REPL
             </a>
             <a href="frozen/index.html" target="_top" class="switch-link" style="color: #fbbf24; border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.12);">
-                📦 Archive
+                Archive
             </a>
             <a href="obelisk_ai.html" target="_top" class="switch-link">
-                ✨ Modern Portal
+                Modern Portal
             </a>
         </div>
     </header>
@@ -312,8 +309,8 @@
                 <span style="color: #94a3b8; margin-left: 8px;">Checked deterministically by <code>NBGCompiler.typeCheck</code></span>
             </div>
             <div style="display: flex; gap: 8px; align-items: center;">
-                <a href="repl.html" target="_top" class="switch-link">⚡ Open Interactive Compiler in repl.html</a>
-                <button type="button" onclick="document.getElementById('formula-vs-theorem-walkthrough').style.display='none';" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; border-radius: 4px; padding: 2px 8px; cursor: pointer;">✕ Close</button>
+                <a href="repl.html" target="_top" class="switch-link">Open Interactive Compiler in repl.html</a>
+                <button type="button" onclick="document.getElementById('formula-vs-theorem-walkthrough').style.display='none';" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #94a3b8; border-radius: 4px; padding: 2px 8px; cursor: pointer;">Close</button>
             </div>
         </div>
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 12px;">
@@ -657,37 +654,9 @@ window.addEventListener('message', function(event) {
         if (nav && btn) {
             var isOpen = nav.classList.toggle('is-open');
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.innerHTML = isOpen ? '✕ Buttons' : '☰ Buttons';
+            btn.innerHTML = isOpen ? 'Close' : 'Buttons';
         }
     }
-
-    function toggleLeftPaneTheme() {
-        var leftIframe = document.querySelector('#left-pane iframe');
-        if (leftIframe && leftIframe.contentWindow) {
-            leftIframe.contentWindow.postMessage({ type: 'SET_LEFT_THEME', mode: 'toggle' }, '*');
-        }
-    }
-
-    function updateLeftThemeBtn(isDark) {
-        var btn = document.getElementById('left-theme-toggle-btn');
-        if (btn) {
-            btn.innerHTML = isDark ? '☀️ Left: Light' : '🌙 Left: Dark';
-            btn.title = isDark ? 'Switch left pane to Light Mode' : 'Switch left pane to Dark Mode';
-        }
-    }
-
-    window.addEventListener('message', function(e) {
-        if (e.data && e.data.type === 'LEFT_THEME_CHANGED') {
-            updateLeftThemeBtn(e.data.isDark);
-        }
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        try {
-            var saved = localStorage.getItem('opa_left_theme');
-            updateLeftThemeBtn(saved !== 'light');
-        } catch(e) {}
-    });
     </script>
 </body>
 </html>

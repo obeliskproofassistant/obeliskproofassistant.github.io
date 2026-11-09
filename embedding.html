@@ -525,7 +525,7 @@
 
 <div id="nav-toolbar">
     <div class="toolbar-title">
-        <span>⚡ Obelisk Kernel Output</span>
+        <span>Obelisk Kernel Output</span>
         <span style="font-size: 10px; color: #10b981; background: rgba(16, 185, 129, 0.15); padding: 1px 6px; border-radius: 4px;">Verified High-Assurance</span>
     </div>
     <div class="toolbar-nav">
@@ -545,9 +545,9 @@
         <button class="toolbar-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand Proofs</button>
         <button class="toolbar-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse Proofs</button>
         <span style="color: rgba(56, 189, 248, 0.35); margin: 0 2px;">|</span>
-        <a class="toolbar-btn" href="generated/manual.html" target="_blank">📖 Manual (Full-Screen)</a>
-        <a class="toolbar-btn" href="generated/theory_db.json" target="_blank">🗄️ JSON DB</a>
-        <a class="toolbar-btn" href="repl.html" target="_top">⚡ REPL</a>
+        <a class="toolbar-btn" href="generated/manual.html" target="_blank">Manual (Full-Screen)</a>
+        <a class="toolbar-btn" href="generated/theory_db.json" target="_blank">JSON DB</a>
+        <a class="toolbar-btn" href="repl.html" target="_top">REPL</a>
     </div>
 </div>
 
@@ -628,11 +628,11 @@ function renderPlaceholders() {
                 <div class="sec-placeholder-header">
                     <h3><span>Chapter ${meta.id}.</span> ${meta.title} (${meta.range})</h3>
                     <span class="sec-status-badge ${isPriority ? 'loading' : 'queued'}" id="status-badge-${meta.id}">
-                        ${isPriority ? '⚡ Priority Loading...' : 'Background Queued'}
+                        ${isPriority ? 'Priority Loading...' : 'Background Queued'}
                     </span>
                 </div>
                 <p class="sec-placeholder-desc">${meta.desc}</p>
-                ${!isPriority ? `<button class="btn-load-now" onclick="loadSection(${meta.id}, true)">⚡ Load Section ${meta.id} Now</button>` : ''}
+                ${!isPriority ? `<button class="btn-load-now" onclick="loadSection(${meta.id}, true)">Load Section ${meta.id} Now</button>` : ''}
             </div>
         `;
     }
@@ -747,7 +747,7 @@ async function loadSection(secId, scrollAfter, instant = false) {
     const badge = document.getElementById("status-badge-" + secId);
     if (badge) {
         badge.className = "sec-status-badge loading";
-        badge.textContent = "⚡ Loading...";
+        badge.textContent = "Loading...";
     }
 
     const loadPromise = (async () => {

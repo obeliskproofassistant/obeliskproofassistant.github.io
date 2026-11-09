@@ -37,7 +37,7 @@ class TestShortcutsModalAndEditorComponent(unittest.TestCase):
         self.assertIn("?", self.modal_js)
 
     def test_repl_html_integrates_shortcuts_button_and_custom_editor(self):
-        self.assertIn("⌨️ Shortcuts", self.repl_html)
+        self.assertIn("Shortcuts", self.repl_html)
         self.assertIn("js/shortcuts_modal.js", self.repl_html)
         self.assertIn("<obelisk-code-editor", self.repl_html)
         self.assertIn("ObeliskCodeEditorElement", self.repl_js)
