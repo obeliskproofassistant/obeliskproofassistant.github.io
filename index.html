@@ -45,14 +45,16 @@
         }
         
         #portal-switch-banner {
-            height: 40px;
+            min-height: 48px;
             background: #0f172a;
             border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 16px;
+            padding: 8px 18px;
             flex-shrink: 0;
+            gap: 12px;
+            flex-wrap: wrap;
             z-index: 10;
         }
 
@@ -91,7 +93,7 @@
             background: rgba(56, 189, 248, 0.12);
             border: 1px solid rgba(56, 189, 248, 0.35);
             border-radius: 16px;
-            padding: 4px 12px;
+            padding: 5px 13px;
             font-size: 12px;
             font-weight: 600;
             text-decoration: none;
@@ -124,9 +126,10 @@
 
         .split-container {
             display: flex;
-            flex: 1;
+            flex: 1 1 0%;
+            min-height: 0;
             width: 100%;
-            height: calc(100vh - 40px);
+            height: calc(100vh - 48px);
         }
         .split-container .left {
             width: 50%;
@@ -156,8 +159,8 @@
             }
             #portal-switch-banner {
                 height: auto;
-                min-height: 40px;
-                padding: 8px 12px;
+                min-height: 48px;
+                padding: 10px 14px;
                 display: flex;
                 flex-direction: column;
                 align-items: stretch;
@@ -268,37 +271,37 @@
     <header id="portal-switch-banner">
         <div class="portal-brand-row">
             <div class="portal-brand">
-                <span>Obelisk Proof Assistant</span>
-                <span class="portal-tag">🏛 Classic 2-Pane View</span>
+                <span>Obelisk</span>
+                <span class="portal-tag">🏛 Classic</span>
             </div>
             <button type="button" id="mobile-header-toggle-btn" class="mobile-header-toggle" onclick="toggleMobileHeaderMenu()" aria-expanded="false" aria-label="Toggle navigation buttons">
-                ☰ Buttons &darr;
+                ☰ Buttons
             </button>
         </div>
         <div id="portal-nav-actions" class="top-nav-actions">
             <button type="button" id="left-theme-toggle-btn" class="switch-link" style="cursor: pointer; font-family: inherit; color: #f59e0b; border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.12);" onclick="toggleLeftPaneTheme()" title="Switch left pane to Light Mode">
-                ☀️ Left: Light Mode
+                ☀️ Left: Light
             </button>
-            <button type="button" id="btn-scroll-to-theory" class="switch-link btn-scroll-theory" onclick="scrollToTheoryOutline()" title="Scroll down to Theory Outline">
-                📜 Theory Outline &darr;
+            <button type="button" id="btn-scroll-to-theory" class="switch-link btn-scroll-theory" onclick="scrollToTheoryOutline()" title="Scroll to Theory Outline">
+                📜 Theory
             </button>
             <button type="button" id="toggle-derivation-walkthrough" class="switch-link" style="cursor: pointer; font-family: inherit;" onclick="var p=document.getElementById('formula-vs-theorem-walkthrough'); p.style.display=(p.style.display==='none'?'block':'none');">
-                🔍 Formula vs. Theorem Walkthrough
+                🔍 Walkthrough
             </button>
             <a href="generated/manual.html" target="_top" class="switch-link" style="color: #38bdf8; border-color: rgba(56,189,248,0.5); background: rgba(56,189,248,0.18);">
-                📖 Generated Manual (ML)
+                📖 Manual
             </a>
             <a href="generated/theory_db.json" target="_top" class="switch-link" style="color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.12);">
-                🗄️ Generated DB (JSON)
+                🗄️ Database
             </a>
             <a href="repl.html" target="_top" class="switch-link">
-                ⚡ Web REPL Compiler &rarr;
+                ⚡ REPL
             </a>
             <a href="frozen/index.html" target="_top" class="switch-link" style="color: #fbbf24; border-color: rgba(251,191,36,0.4); background: rgba(251,191,36,0.12);">
-                📦 Frozen Archive &rarr;
+                📦 Archive
             </a>
             <a href="obelisk_ai.html" target="_top" class="switch-link">
-                ✨ Switch to Modern AI Portal &rarr;
+                ✨ Modern Portal
             </a>
         </div>
     </header>
@@ -654,7 +657,7 @@ window.addEventListener('message', function(event) {
         if (nav && btn) {
             var isOpen = nav.classList.toggle('is-open');
             btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-            btn.innerHTML = isOpen ? '✕ Buttons &uarr;' : '☰ Buttons &darr;';
+            btn.innerHTML = isOpen ? '✕ Buttons' : '☰ Buttons';
         }
     }
 
@@ -668,7 +671,7 @@ window.addEventListener('message', function(event) {
     function updateLeftThemeBtn(isDark) {
         var btn = document.getElementById('left-theme-toggle-btn');
         if (btn) {
-            btn.innerHTML = isDark ? '☀️ Left: Light Mode' : '🌙 Left: Dark Mode';
+            btn.innerHTML = isDark ? '☀️ Left: Light' : '🌙 Left: Dark';
             btn.title = isDark ? 'Switch left pane to Light Mode' : 'Switch left pane to Dark Mode';
         }
     }
