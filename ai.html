@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Proof Assistant — Rigorous Foundations &amp; Explicit Proof Verification</title>
+  <title>Obelisk Proof Assistant — WIP</title>
   <meta name="description" content="Obelisk: A new proof assistant for Morse-Kelley class theory with explicit proof terms, declarative syntax, and an ultra-small trusted LCF kernel.">
   
   <!-- Fonts & Math -->
@@ -679,17 +679,17 @@
     <div class="container header-inner">
       <a href="index.html" class="logo-container">
         <img src="images/logo.png" alt="Obelisk Logo" class="logo-img">
-        <div class="logo-title">Obelisk <span>Proof Assistant</span></div>
+        <div class="logo-title">Obelisk <span>WIP</span></div>
       </a>
       <nav class="main-nav">
-        <a href="classic.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 5px;">Classic Author Portal</a>
-        <a href="generated/manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.85rem; padding: 0.4rem 0.85rem; border-radius: 6px; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 5px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);">ML-Generated Manual</a>
-        <a href="generated/variant1.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.15); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Variant 1 (ML-Generated)</a>
-        <a href="generated/variant2.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Variant 2 (ML-Generated)</a>
-        <a href="generated/nbg_library.html" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.75rem; border-radius: 6px; font-weight: 600; text-decoration: none;">NBG Library (ML-Generated)</a>
-        <a href="repl.html">Web REPL</a>
-        <a href="#demo">Live Demo</a>
-        <a href="https://georgydunaev.github.io" target="_blank">Author: Georgy Dunaev ↗</a>
+        <a href="index.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Classic View</a>
+        <a href="#demo" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Theory</a>
+        <a href="#walkthrough" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Walkthrough</a>
+        <a href="repl.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">REPL</a>
+        <a href="frozen/index.html" style="border: 1px solid rgba(251, 191, 36, 0.5); color: #fbbf24; background: rgba(251, 191, 36, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Archive</a>
+        <a href="generated/manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 700; text-decoration: none;">Manual</a>
+        <a href="generated/theory_db.json" target="_top" style="color: #34d399; font-size: 0.82rem; font-weight: 600; text-decoration: none;">Database</a>
+        <a href="https://georgydunaev.github.io" target="_blank" style="color: var(--text-muted); font-size: 0.82rem; text-decoration: none;">Author</a>
       </nav>
     </div>
   </header>
@@ -1092,6 +1092,147 @@
             </tr>
           </tbody>
         </table>
+      </div>
+    </section>
+
+    <!-- PROPOSITIONS-AS-TYPES WALKTHROUGH -->
+    <section id="walkthrough" class="card" style="background: rgba(15, 23, 42, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 1.8rem 2rem; margin-bottom: 4rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); scroll-margin-top: 80px;">
+      <div id="formula-vs-theorem-walkthrough">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+            <div>
+                <strong style="color: #38bdf8; font-size: 1.15rem;">Propositions-as-Types Walkthrough: Separating <code>formula</code> (Type Definition) from <code>theorem</code> (Kernel-Checked Proof Term)</strong>
+                <div style="color: #94a3b8; font-size: 0.88rem; margin-top: 4px;">Checked deterministically by <code>NBGCompiler.typeCheck</code></div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                <a href="repl.html" target="_top" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.35rem 0.8rem;">Open Interactive Compiler in repl.html</a>
+            </div>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 0.85rem;">
+            <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.15); text-align: left; color: #38bdf8;">
+                    <th style="padding: 8px 10px;">Declaration Construct</th>
+                    <th style="padding: 8px 10px;">Kernel AST Role</th>
+                    <th style="padding: 8px 10px;">Example in <code>.nbg</code> Surface Syntax</th>
+                    <th style="padding: 8px 10px;">Verification Action in <code>NBGCompiler.typeCheck</code></th>
+                    <th style="padding: 8px 10px;">Epistemic Meaning (Soundness Guarantee)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+                    <td style="padding: 8px 10px;"><code>formula F = ...;</code></td>
+                    <td style="padding: 8px 10px;"><strong>Type Definition</strong> (<code>NBGCompiler.Type</code> / <code>Fm</code>)</td>
+                    <td style="padding: 8px 10px;"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="color:#94a3b8;font-size:0.75rem;">(<code>.nbg</code> ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
+                    <td style="padding: 8px 10px;">Checks syntactic sort well-formedness &amp; Stage I/II comprehension bounds</td>
+                    <td style="padding: 8px 10px; color: #fbbf24;"><strong>Uninhabited Type</strong> (defining a formula creates a proposition type; it never asserts or proves it!)</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 10px;"><code>theorem T : F = e;</code></td>
+                    <td style="padding: 8px 10px;"><strong>Proof Term Witness</strong> (<code>NBGCompiler.Expr</code>)</td>
+                    <td style="padding: 8px 10px;"><code>theorem empty_class_no_elements : (forall (z:Class). ((z in {x | Bot}) -&gt; Bot)) = Lam (z:Class) =&gt; ...;</code><br><span style="color:#94a3b8;font-size:0.75rem;">(and <code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = ...;</code>)</span></td>
+                    <td style="padding: 8px 10px;">Bidirectionally synthesizes type of proof term <code>e</code> via <code>NBGCompiler.typeCheck</code> and checks definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
+                    <td style="padding: 8px 10px; color: #34d399;"><strong>Soundness Invariant: Uninhabited Type Cannot Pass</strong> (relative to MK consistency) &mdash; every candidate proof term for a false statement is deterministically rejected</td>
+                </tr>
+            </tbody>
+        </table>
+        <!-- Notation Disambiguation & Context Environments (T6) -->
+        <div style="background: rgba(15,23,42,0.75); border: 1px solid rgba(56,189,248,0.3); border-radius: 8px; padding: 14px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 8px;">
+                <strong style="color: #38bdf8; font-size: 0.95rem;">Notation Disambiguation &amp; Kernel Contexts (&Delta; vs &Gamma;)</strong>
+                <span style="font-size: 0.8rem; color: #94a3b8;">See <a href="docs/glossary.md" target="_blank" style="color: #38bdf8; text-decoration: underline;">docs/glossary.md</a> &bull; <a href="generated/symbols.html" target="_blank" style="color: #38bdf8; text-decoration: underline;">symbols.html</a></span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; font-size: 0.82rem; line-height: 1.55;">
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Context &Delta; (Variable Signature):</strong><br>
+                    Maps free class/set variables to sorts: <code>&Delta; = {x : Class, y : Class, ...}</code>.<br>
+                    Governs binder typing: <code>ELam(x, sort, body) : &forall;(x:sort) T</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Context &Gamma; (Proof Hypotheses):</strong><br>
+                    Maps hypothesis labels to proposition types: <code>&Gamma; = {h₁ : A, h₂ : B, ...}</code>.<br>
+                    Governs implication intro/elim: <code>EFn(h, A, body) : A &rarr; B</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Set(X) vs isSet(X):</strong><br>
+                    Surface <code>.nbg</code> syntax writes <code>Set(X)</code> as a concise ASCII synonym for the formal catalog predicate <code>isSet(X) &equiv; &exist;y (X &isin; y)</code>. Never confused with the type <code>Class</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Soundness of Tagged Class Structures:</strong><br>
+                    &bull; <strong>Dunaev Pair (⟨A, B⟩<sub>D</sub>):</strong> Tagged ordered pair <code>(mark(A, 1) &cup; mark(B, 2))</code> sound for arbitrary proper classes (unlike Kuratowski pairs <code>{{a}, {a, b}}</code> which require <code>a, b &isin; V</code>). Source: <code>foundations.ML</code> (entries 3.76&ndash;3.78).<br>
+                    &bull; <strong>Dunaev Class-List:</strong> Iterated tagged pairing <code>[X₁, ..., X_n]</code> with empty list <code>[]</code> (entry 3.39: <code>DefClassLists</code>) representing class tuples without conglomerates.
+                </div>
+            </div>
+        </div>
+
+        <!-- Worked Proof-Term Walkthroughs (T7) -->
+        <div style="margin-bottom: 14px;">
+            <div style="font-size: 0.9rem; color: #f8fafc; font-weight: 700; margin-bottom: 8px;">
+                Worked Example 1 &middot; Proof-Term Walkthrough (with Constructor Typing Rules &amp; Derived Types):<br>
+                <code style="color: #38bdf8; font-size: 0.85rem;">empty_class_no_elements : &forall;(z : Class) ((z &isin; {x | &perp;}) &rarr; &perp;) = Lam (z:Class) =&gt; fn (hIn : (z in {x | Bot})) =&gt; snd(fst(compr(x. Bot, z)) hIn)</code>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 0.82rem; line-height: 1.5;">
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 1 &middot; Universal Intro (<code>ELam</code>)</strong><br>
+                    <em>Rule:</em> <code>(&Delta;, z:Class; &Gamma; &vdash; e : T) / (&Delta;; &Gamma; &vdash; Lam (z:Class) =&gt; e : &forall;(z:Class) T)</code><br>
+                    Introduces variable <code>z : Class</code> into variable signature &Delta;.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 2 &middot; Implication Intro (<code>EFn</code>)</strong><br>
+                    <em>Rule:</em> <code>(&Delta;; &Gamma;, h:A &vdash; e : B) / (&Delta;; &Gamma; &vdash; fn (h:A) =&gt; e : A &rarr; B)</code><br>
+                    Adds antecedent hypothesis <code>hIn : (z &isin; {x | &perp;})</code> to proof context &Gamma;.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 3 &middot; Comprehension Axiom (<code>ECompr</code>)</strong><br>
+                    <em>Rule:</em> <code>compr(x.&phi;, z) : (z &isin; {x | &phi;}) &hArr; (isSet(z) &and; &phi;[z])</code><br>
+                    Synthesizes bi-implication <code>(z &isin; {x | &perp;}) &hArr; (isSet(z) &and; &perp;)</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 4 &middot; Forward Projection (<code>EFst</code>)</strong><br>
+                    <em>Rule:</em> <code>(&Delta;; &Gamma; &vdash; e : A &and; B) / (&Delta;; &Gamma; &vdash; fst(e) : A)</code><br>
+                    Bi-implication <code>P &hArr; Q</code> is product <code>(P &rarr; Q) &times; (Q &rarr; P)</code>. <code>fst(compr(...))</code> yields forward direction <code>(z &isin; {x | &perp;}) &rarr; (isSet(z) &and; &perp;)</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 5 &middot; Modus Ponens (<code>EApp</code>)</strong><br>
+                    <em>Rule:</em> <code>(&Delta;; &Gamma; &vdash; e₁:A&rarr;B, e₂:A) / (&Delta;; &Gamma; &vdash; e₁ e₂ : B)</code><br>
+                    Applies forward implication to hypothesis <code>hIn</code>: <code>fst(compr(x. Bot, z)) hIn : isSet(z) &and; &perp;</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(16,185,129,0.35); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #34d399;">Step 6 &middot; Conjunction Projection (<code>ESnd</code>)</strong><br>
+                    <em>Rule:</em> <code>(&Delta;; &Gamma; &vdash; e : A &and; B) / (&Delta;; &Gamma; &vdash; snd(e) : B)</code><br>
+                    Projects second component: <code>snd(fst(compr(x. Bot, z)) hIn) : &perp;</code>. Closed derivation tree verified!
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-bottom: 14px;">
+            <div style="font-size: 0.9rem; color: #f8fafc; font-weight: 700; margin-bottom: 8px;">
+                Worked Example 2 &middot; Non-Absurdity Proof-Term Walkthrough (without &perp;):<br>
+                <code style="color: #34d399; font-size: 0.85rem;">thm_inter_subset_left : &forall;(A:Class) &forall;(B:Class) &forall;(x:Class) ((x &isin; (A &cap; B)) &rarr; x &isin; A) = Lam (A:Class) =&gt; Lam (B:Class) =&gt; Lam (x:Class) =&gt; fn (hIn : (x in (A /\ B))) =&gt; fst(hIn)</code>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; font-size: 0.82rem; line-height: 1.5;">
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 1 &middot; Triple Universal Intro (<code>ELam</code> &times; 3)</strong><br>
+                    Introduces variables <code>A, B, x : Class</code> into variable signature &Delta;.<br>
+                    Context: <code>&Delta; = {A:Class, B:Class, x:Class}; &Gamma; = &empty;</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(56,189,248,0.25); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #38bdf8;">Step 2 &middot; Implication Intro (<code>EFn</code>)</strong><br>
+                    Assumes hypothesis <code>hIn : (x &isin; (A &cap; B))</code> into proof context &Gamma;.<br>
+                    By intersection definition <code>DefBinaryIntersection</code> (3.41), <code>x &isin; (A &cap; B) &equiv; (x &isin; A &and; x &isin; B)</code>.
+                </div>
+                <div style="background: rgba(15,23,42,0.9); border: 1px solid rgba(16,185,129,0.35); border-radius: 6px; padding: 10px;">
+                    <strong style="color: #34d399;">Step 3 &middot; Conjunction Left Projection (<code>EFst</code>)</strong><br>
+                    <em>Rule:</em> <code>fst(hIn) : x &isin; A</code>.<br>
+                    Completes proof of <code>x &isin; A</code> constructively without invoking falsum (&perp;) or contradiction!
+                </div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 260px; background: rgba(15,23,42,0.9); border: 1px solid rgba(192,132,252,0.4); border-radius: 6px; padding: 10px; font-size: 0.8rem;">
+                <strong style="color: #d8b4fe;">ML-Generated Database, Changelog &amp; Frozen Archive</strong><br>
+                <a href="generated/manual.html" target="_top" style="color: #38bdf8; font-weight: 600;">Generated Manual (HTML)</a> &bull; <a href="generated/theory_db.json" target="_top" style="color: #34d399; font-weight: 600;">Generated DB (JSON)</a> &bull; <a href="CHANGELOG.md" target="_blank" style="color: #a78bfa; font-weight: 600;">Changelog</a> &bull; <a href="docs/glossary.md" target="_blank" style="color: #38bdf8; font-weight: 600;">Glossary</a> &bull; <a href="frozen/index.html" target="_top" style="color: #c084fc; font-weight: 600;">Frozen Legacy Archive</a>
+            </div>
+        </div>
       </div>
     </section>
 

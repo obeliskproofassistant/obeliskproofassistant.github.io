@@ -40,13 +40,13 @@ class TestWebLinksAndAnchors(unittest.TestCase):
         self.assertGreater(self.report["checked_local_references"], 20)
         self.assertGreater(self.report["checked_anchors"], 40)
 
-    def test_index_and_ai_portal_contain_formula_vs_theorem_walkthrough(self):
+    def test_ai_portal_contains_formula_vs_theorem_walkthrough(self):
         index_html = (REPO_DIR / "index.html").read_text(encoding="utf-8")
         ai_html = (REPO_DIR / "obelisk_ai.html").read_text(encoding="utf-8")
-        for page_name, html_text in [("index.html", index_html), ("obelisk_ai.html", ai_html)]:
-            self.assertIn("NBGCompiler.typeCheck", html_text, f"{page_name} missing NBGCompiler.typeCheck")
-            self.assertIn("False_RussellIsSet", html_text, f"{page_name} missing False_RussellIsSet example")
-            self.assertIn("repl.html", html_text, f"{page_name} missing link to repl.html")
+        self.assertIn("obelisk_ai.html", index_html, "index.html missing link to obelisk_ai.html")
+        self.assertIn("NBGCompiler.typeCheck", ai_html, "obelisk_ai.html missing NBGCompiler.typeCheck")
+        self.assertIn("False_RussellIsSet", ai_html, "obelisk_ai.html missing False_RussellIsSet example")
+        self.assertIn("repl.html", ai_html, "obelisk_ai.html missing link to repl.html")
 
     def test_output_html_section_and_item_anchors_exist(self):
         output_html = (REPO_DIR / "generated" / "output.html").read_text(encoding="utf-8")

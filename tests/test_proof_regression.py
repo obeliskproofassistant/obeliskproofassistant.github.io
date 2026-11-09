@@ -445,25 +445,25 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("Dunaev Class-List", g_html)
         self.assertIn("Context Environments", g_html)
 
-        # T6 & T7: index.html definitions, typing rules, and 2nd worked example without bot
-        index_path = os.path.join(SITE_DIR, "index.html")
-        with open(index_path, "r", encoding="utf-8") as f:
-            idx_html = f.read()
+        # T6 & T7: obelisk_ai.html definitions, typing rules, and 2nd worked example without bot (moved from index.html per user request)
+        ai_path = os.path.join(SITE_DIR, "obelisk_ai.html")
+        with open(ai_path, "r", encoding="utf-8") as f:
+            ai_html = f.read()
         # T6: Context Delta and Gamma defined at first use
-        self.assertIn("Context &Delta; (Variable Signature)", idx_html)
-        self.assertIn("Context &Gamma; (Proof Hypotheses)", idx_html)
-        self.assertIn("Set(X) vs isSet(X)", idx_html)
+        self.assertIn("Context &Delta; (Variable Signature)", ai_html)
+        self.assertIn("Context &Gamma; (Proof Hypotheses)", ai_html)
+        self.assertIn("Set(X) vs isSet(X)", ai_html)
         # T7: Typing rules for constructors
-        self.assertIn("ELam", idx_html)
-        self.assertIn("EFn", idx_html)
-        self.assertIn("ECompr", idx_html)
-        self.assertIn("EFst", idx_html)
-        self.assertIn("EApp", idx_html)
-        self.assertIn("ESnd", idx_html)
+        self.assertIn("ELam", ai_html)
+        self.assertIn("EFn", ai_html)
+        self.assertIn("ECompr", ai_html)
+        self.assertIn("EFst", ai_html)
+        self.assertIn("EApp", ai_html)
+        self.assertIn("ESnd", ai_html)
         # T7: Second worked example without bot
-        self.assertIn("Worked Example 2", idx_html)
-        self.assertIn("thm_inter_subset_left", idx_html)
-        self.assertIn("fst(hIn)", idx_html)
+        self.assertIn("Worked Example 2", ai_html)
+        self.assertIn("thm_inter_subset_left", ai_html)
+        self.assertIn("fst(hIn)", ai_html)
 
     def test_tickets_t1_t2_verification(self):
         """Verify resolution of Ticket T1 (Tarski/Loeb soundness of F) and Ticket T2 (Completeness decoupling)."""

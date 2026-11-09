@@ -7,8 +7,8 @@ Ticket 699 — Unit Tests for js/obelisk_engine.js Preset Library Parity
 Runs the actual browser-side Obelisk NBG compiler (via Node.js) against every
 preset in OBELISK_PRESETS and verifies the propositions-as-types contract:
 
-  * 6/6 TRUE MK/NBG presets must compile (`status == "COMPILED"`).
-  * 6/6 FALSE MK/NBG presets must be rejected (`status == "REJECTED"`), and
+  * 6/6 theorem presets must compile (`status == "COMPILED"`).
+  * 6/6 unprovable presets must be rejected (`status == "REJECTED"`), and
     they must be rejected by the *type checker*, not by a parser accident
     (`error` must not start with `ParseError`).
 

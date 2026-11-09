@@ -194,7 +194,7 @@ class ObeliskREPL {
       return [
         'Obelisk Propositions-as-Types Compiler Commands:',
         '  compile                      - Compile & typecheck the .nbg source in the editor above',
-        '  load <preset_key>            - Load a True or False MK/NBG preset into the editor and compile',
+        '  load <preset_key>            - Load a theorem or unprovable proposition preset into editor and compile',
         '  formula <Name> = <Formula>;  - Parse & check a formula definition (Type)',
         '  theorem <Name> : <F> = <E>;  - Compile a single theorem proof term directly',
         '  primitives                   - List all closed kernel proof-term primitives'
