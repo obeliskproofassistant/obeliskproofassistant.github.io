@@ -105,12 +105,17 @@
     el.innerHTML = svgParts.join('');
   }
 
+  var ObeliskDAG = {
+    CATEGORY_COLORS: CATEGORY_COLORS,
+    computeAncestors: computeAncestors,
+    hasCycle: hasCycle,
+    renderDependencyDAG: renderDependencyDAG
+  };
+
+  if (typeof module === 'object' && module.exports) {
+    module.exports = ObeliskDAG;
+  }
   if (typeof window !== 'undefined') {
-    window.ObeliskDAG = {
-      CATEGORY_COLORS: CATEGORY_COLORS,
-      computeAncestors: computeAncestors,
-      hasCycle: hasCycle,
-      renderDependencyDAG: renderDependencyDAG
-    };
+    window.ObeliskDAG = ObeliskDAG;
   }
 })();

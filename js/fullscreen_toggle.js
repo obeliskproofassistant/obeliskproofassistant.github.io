@@ -66,10 +66,18 @@
     },
 
     requestFullscreen: function(element) {
-      try {
-        this.request.call(document.element || document, element);
-      } catch (e) {
-        // Fullscreen not supported or blocked; ignore
+      const el = element || (typeof document !== 'undefined' ? document.documentElement : null);
+      if (!el) return;
+      const fn = el.requestFullscreen ||
+                 el.webkitRequestFullscreen ||
+                 el.mozRequestFullScreen ||
+                 el.msRequestFullscreen;
+      if (fn) {
+        try {
+          return fn.call(el);
+        } catch (e) {
+          // Fullscreen not supported or blocked; ignore
+        }
       }
     }
   };
@@ -117,7 +125,7 @@
 
   function enterFullscreen() {
     try {
-      fullscreenAPI.requestFullscreen.call(targetContainer);
+      fullscreenAPI.requestFullscreen(targetContainer);
     } catch (e) {
       console.error('fullscreen_toggle: Failed to request fullscreen:', e);
     }

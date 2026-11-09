@@ -1252,7 +1252,7 @@ theorem thm_mk_impredicative_compr : ImpredicativeClassFormula =
 
   false_formula_as_proof: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #1] Confusing a Formula Definition with a Proof Term',
+    title: '[REJECTED #1] Confusing a Formula Definition with a Proof Term',
     summary: 'Defines a false formula False_RussellIsSet = Set(R) (legal Type!) and tries to use its name as a proof term.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #1 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
@@ -1272,7 +1272,7 @@ theorem bad_claim_russell_is_set : Set({ x | x in x -> Bot }) =
 
   false_pack_russell_as_set: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #2] Packing Russell Proper Class into exists (y:Set)',
+    title: '[REJECTED #2] Packing Russell Proper Class into exists (y:Set)',
     summary: 'Tries to prove exists (y:Set). y = {x | x in x -> Bot} by packing the Russell class into a SetSort existential.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #2 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
@@ -1293,7 +1293,7 @@ theorem bad_pack_russell_as_set : exists (y:Set). y = { x | x in x -> Bot } =
 
   false_every_class_is_set: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #3] Instantiating forall (x:Set) with a Proper Class X',
+    title: '[REJECTED #3] Instantiating forall (x:Set) with a Proper Class X',
     summary: 'Tries to deduce forall (X:Class). P(X) from forall (x:Set). P(x) via tapp(h, X) without Set(X).',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #3 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
@@ -1313,7 +1313,7 @@ theorem bad_class_instantiation :
 
   false_univ_in_univ: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #4] Claiming V in V ({x | Top} in {x | Top})',
+    title: '[REJECTED #4] Claiming V in V ({x | Top} in {x | Top})',
     summary: 'Tries to prove V in V via class comprehension without a proof of Set({x | Top}).',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #4 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
@@ -1331,7 +1331,7 @@ theorem bad_univ_in_univ : { x | Top } in { x | Top } =
 
   false_membership_sym: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #5] Claiming Membership is Symmetric (A in B -> B in A)',
+    title: '[REJECTED #5] Claiming Membership is Symmetric (A in B -> B in A)',
     summary: 'Defines the false formula A in B -> B in A and shows that returning h : A in B is rejected by type conversion.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #5 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
@@ -1353,7 +1353,7 @@ theorem bad_membership_sym : False_MembershipSym =
 
   false_impredicative_in_nbg: {
     category: 'FALSE_REJECTED',
-    title: '🛑 [REJECTED #6] Impredicative Class Quantifier in Stage I NBG',
+    title: '[REJECTED #6] Impredicative Class Quantifier in Stage I NBG',
     summary: 'Tries to use bound Class quantification inside { x | ... } while in theory NBG_Predicative;.',
     source: `(* ===================================================================== *)
 (* FALSE IN STAGE I NBG (DETERMINISTICALLY REJECTED BY COMPILER):        *)

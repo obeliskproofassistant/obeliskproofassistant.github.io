@@ -5,7 +5,7 @@
  * Solves Ticket 007: Web REPL Keyboard Shortcuts Cheat Sheet Modal
  *
  * Features:
- * - Triggered by clicking the "⌨️ Shortcuts" button or pressing `?`
+ * - Triggered by clicking the "Shortcuts" button or pressing `?`
  * - Accessible modal dialog (`role="dialog"`, `aria-modal="true"`, `aria-labelledby`)
  * - Focus trapping (Tab / Shift+Tab cycle within focusable modal controls)
  * - `Escape` key and backdrop click close listeners
@@ -52,7 +52,7 @@
              tabindex="-1">
           <div class="shortcuts-modal-header">
             <div>
-              <h2 id="shortcuts-modal-title" class="shortcuts-modal-title">⌨️ Web REPL Keyboard Shortcuts</h2>
+              <h2 id="shortcuts-modal-title" class="shortcuts-modal-title">Web REPL Keyboard Shortcuts</h2>
               <p id="shortcuts-modal-desc" class="shortcuts-modal-subtitle">
                 Obelisk Propositions-as-Types Compiler Workbench quick navigation &amp; evaluation keys
               </p>

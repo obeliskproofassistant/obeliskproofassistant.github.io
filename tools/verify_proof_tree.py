@@ -18,4 +18,5 @@ def verify_tree(node):
         return True
     return True
 
-print("[PASS] Minimalist Obelisk Python proof checker initialized.")
+if __name__ == "__main__":
+    print("[PASS] Minimalist Obelisk Python proof checker initialized.")

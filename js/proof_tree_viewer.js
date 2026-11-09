@@ -226,7 +226,7 @@
       <div class="proof-tree-wrapper" style="position: relative; overflow: auto; border: 1px solid var(--border-color, #2b2a38); border-radius: 8px; background: #0f0e13; padding: 16px;">
         <div class="proof-tree-toolbar" style="display: flex; gap: 8px; margin-bottom: 12px; align-items: center; justify-content: space-between;">
           <div style="display: flex; gap: 8px; align-items: center;">
-            <span style="font-size: 0.8rem; font-weight: 600; color: #a78bfa;">🌳 Proof Tree Explorer</span>
+            <span style="font-size: 0.8rem; font-weight: 600; color: #a78bfa;">Proof Tree Explorer</span>
             <button type="button" class="btn btn-secondary btn-sm" onclick="ProofTreeViewer.expandAll('${this.container.id}')" style="font-size: 0.75rem; padding: 2px 8px; cursor: pointer;">Expand All</button>
             <button type="button" class="btn btn-secondary btn-sm" onclick="ProofTreeViewer.resetZoom('${this.container.id}')" style="font-size: 0.75rem; padding: 2px 8px; cursor: pointer;">Reset View</button>
           </div>

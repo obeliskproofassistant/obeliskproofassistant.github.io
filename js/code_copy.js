@@ -130,9 +130,11 @@
     _handleClick(event) {
       const codeText = this.codeElement.textContent || this.codeElement.innerText || '';
       const cleanText = codeText
-        .replace(/&/g, '&')
-        .replace(/</g, '<')
-        .replace(/>/g, '>');
+        .replace(/&amp;/g, '&')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
 
       copyToClipboard(cleanText).then(() => {
         this._showCopiedFeedback();

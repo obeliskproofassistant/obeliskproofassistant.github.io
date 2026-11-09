@@ -603,7 +603,7 @@ function setupEmbeddedNav() {
     const portalLink = document.getElementById("portal-entry-link");
     if (!portalLink) return;
     if (isEmbeddedContext()) {
-        portalLink.textContent = "← Obelisk Demonstration";
+        portalLink.textContent = "Obelisk Demonstration";
         portalLink.setAttribute("href", "#");
         portalLink.setAttribute("title", "Reset demonstration view");
         portalLink.addEventListener("click", function(e) {
@@ -611,7 +611,7 @@ function setupEmbeddedNav() {
             navigateToSection(3);
         });
     } else {
-        portalLink.textContent = "← Obelisk Portal";
+        portalLink.textContent = "Obelisk Portal";
         portalLink.setAttribute("href", "index.html");
         portalLink.setAttribute("title", "Back to Obelisk Portal");
     }
@@ -649,7 +649,7 @@ function rewriteRelativeAnchors(rootEl) {
         // Check for Obelisk Portal link in embedded context
         if (isEmbedded && (href.includes("index.html") || (a.textContent || "").includes("Obelisk Portal"))) {
             a.setAttribute("href", "#");
-            a.textContent = "← Obelisk Demonstration";
+            a.textContent = "Obelisk Demonstration";
             a.onclick = function(e) {
                 e.preventDefault();
                 navigateToSection(3);

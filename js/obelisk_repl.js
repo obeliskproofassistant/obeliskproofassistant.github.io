@@ -125,11 +125,11 @@ class ObeliskREPL {
       } else {
         lines.push(`  (0 theorem declarations — only formula type definitions were checked)`);
       }
-      lines.push(`\n✅ COMPILATION SUCCEEDED: All proof terms deterministically type-checked.`);
+      lines.push(`\n[OK] COMPILATION SUCCEEDED: All proof terms deterministically type-checked.`);
     } else {
       lines.push(`\n[2] KERNEL TYPE-CHECKER REJECTION (DETERMINISTIC REFUSAL):`);
-      lines.push(`  🛑 ${r.error}`);
-      lines.push(`\n❌ COMPILATION REJECTED: The candidate term does not inhabit the claimed MK/NBG formula type.`);
+      lines.push(`  [ERROR] ${r.error}`);
+      lines.push(`\n[REJECTED] COMPILATION REJECTED: The candidate term does not inhabit the claimed MK/NBG formula type.`);
     }
 
     if (this.outputEl) {
@@ -155,7 +155,7 @@ class ObeliskREPL {
         .map(t => `<div style="margin-top:4px;color:#10b981;"><code>✔ ${this.escapeHtml(t.name)}</code> <span style="color:#94a3b8;">(${t.proof_size} nodes)</span></div>`)
         .join('');
       this.goalBoxEl.innerHTML =
-        `<div style="color:#10b981;font-weight:700;margin-bottom:6px;">✅ COMPILED &amp; VERIFIED</div>` +
+        `<div style="color:#10b981;font-weight:700;margin-bottom:6px;">[COMPILED &amp; VERIFIED]</div>` +
         `<div><strong>Engine:</strong> ${this.escapeHtml(r.engine)}</div>` +
         `<div><strong>Theory:</strong> <code>${this.escapeHtml(r.theory)}</code></div>` +
         `<div style="margin-top:8px;"><strong>Formula Types Defined:</strong> ${fCount}</div>` +
@@ -164,7 +164,7 @@ class ObeliskREPL {
         tList;
     } else {
       this.goalBoxEl.innerHTML =
-        `<div style="color:#ef4444;font-weight:700;margin-bottom:6px;">🛑 REJECTED BY KERNEL</div>` +
+        `<div style="color:#ef4444;font-weight:700;margin-bottom:6px;">[REJECTED BY KERNEL]</div>` +
         `<div><strong>Engine:</strong> ${this.escapeHtml(r.engine)}</div>` +
         `<div style="margin-top:8px;color:#fca5a5;white-space:pre-wrap;">${this.escapeHtml(r.error)}</div>`;
     }

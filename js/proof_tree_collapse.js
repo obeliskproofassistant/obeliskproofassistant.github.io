@@ -182,7 +182,7 @@
         } else if (href === 'index.html') {
           a.setAttribute('href', 'embedding.html');
         }
-        a.textContent = '← Obelisk Demonstration';
+        a.textContent = 'Obelisk Demonstration';
         a.title = 'Return to Obelisk Interactive Demonstration';
       }
     }
