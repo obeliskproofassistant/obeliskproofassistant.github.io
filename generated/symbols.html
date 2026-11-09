@@ -384,7 +384,7 @@
   </style>
   <script src="../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body class="mode-unicode hide-ansii">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -406,7 +406,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -604,7 +604,7 @@
             <td class="external-num formula-cell">
               <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">∀ / ∃ / ∃! / ! / {x|𝛗} / λ / Π / Σ</a></div>
               <div class="formula-latex">\(\href{symbols/binders.html}{\forall / \exists / \exists! / ! / \{x\mid\varphi\} / \lambda / \Pi / \Sigma}\)</div>
-              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>forall / exists  / exists!  / ! / {x|phi} / fn  / Pi  / Sigma</code></a></div>
+              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>forall/ exists/ exists!/ ! / {x|phi} / fn/ Pi/ Sigma</code></a></div>
             </td>
             <td class="external-entity"><span class="badge badge-def">Variable-Binding Operators (Binders)</span></td>
             <td class="external-entity"><code>(Variable : Type) × Body → Term/Fm</code></td>
@@ -677,7 +677,7 @@
             <td class="external-num formula-cell">
               <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">Σ(a:A), B(a)</a></div>
               <div class="formula-latex">\(\href{symbols/binders.html}{\Sigma(a:A), B(a)}\)</div>
-              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Sigma (a:A), B(a)</code></a></div>
+              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Sigma(a:A), B(a)</code></a></div>
             </td>
             <td class="external-entity"><code>Dependent Sum Conglomerate / Pair Type (DefSigmaModel (3.38))</code> (<a href="symbols/binders.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefSigmaModel" class="sym-link">DefSigmaModel (3.38: Σ Formation over Family B)</a></td>
@@ -690,7 +690,7 @@
             <td class="external-num formula-cell">
               <div class="formula-unicode"><a href="symbols/binders.html" class="sym-link">Π(a:A), B(a)</a></div>
               <div class="formula-latex">\(\href{symbols/binders.html}{\Pi(a:A), B(a)}\)</div>
-              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Pi (a:A), B(a)</code></a></div>
+              <div class="formula-ansii"><a href="symbols/binders.html" class="sym-link"><code>Pi(a:A), B(a)</code></a></div>
             </td>
             <td class="external-entity"><code>Dependent Product Conglomerate / Function Type (DefPiPredicateModel (3.39))</code> (<a href="symbols/binders.html" class="sym-link">Symbol Page</a>)</td>
             <td class="external-entity"><a href="manual.html#DefPiPredicateModel" class="sym-link">DefPiPredicateModel (3.39: Π Formation over Family B)</a></td>
@@ -5320,7 +5320,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Defined Relation] Formal Definition (DefSemiSingletonSubclass (3.36)):</strong> Semi-singleton subclass relation used to encode families: <code>(s sss t) ⟷ (((t set) ∧ (s={t})) ∨ ((t proper) ∧ (s⊆t) ∧ (s is a semi-singleton)))</code>.</td>
+              <td class="field-value"><strong>[Defined Relation] Formal Definition (DefSemiSingletonSubclass (3.36)):</strong> Semi-singleton subclass relation: <code>(s sss A) ⟷ ((s semi-singleton) ∧ (s ⊆ A))</code>.</td>
             </tr>
             </tbody>
           </table>

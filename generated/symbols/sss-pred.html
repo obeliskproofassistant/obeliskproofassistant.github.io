@@ -384,7 +384,7 @@
   </style>
   <script src="../../js/proof_tree_collapse.js" defer></script>
 </head>
-<body class="mode-unicode">
+<body class="mode-unicode hide-ansii">
   <header>
     <div class="header-inner">
       <nav class="nav-bar">
@@ -406,7 +406,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -480,20 +480,20 @@
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Canonical Law (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(s sss t) ⟷ (((t set) ∧ (s={t})) ∨ ((t proper) ∧ (s⊆t) ∧ (s is a semi-singleton)))</code></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>(s sss A) ⟷ ((s semi-singleton) ∧ (s ⊆ A))</code></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} ~\href{../symbols/sss-pred.html}{\mathsf{sss}} ~\href{../symbols/variables.html}{t} \href{../symbols/parentheses.html}{)} ~\href{../symbols/iff-conn.html}{\longleftrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{t} ~\href{../symbols/set-pred.html}{\mathsf{set}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} \href{../symbols/eq-pred.html}{=} \href{../symbols/singleton-op.html}{\{} \href{../symbols/variables.html}{t} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} ~\href{../symbols/or-conn.html}{\lor} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{t} ~\href{../symbols/proper-pred.html}{\mathsf{proper}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} \href{../symbols/sub-pred.html}{\subseteq} \href{../symbols/variables.html}{t} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} ~\href{../symbols/variables.html}{\mathrm{is}} ~\href{../symbols/variables.html}{a} ~\href{../symbols/semi-singleton-pred.html}{\mathsf{semi\text{-}singleton}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} ~\href{../symbols/sss-pred.html}{\mathsf{sss}} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/iff-conn.html}{\longleftrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} ~\href{../symbols/semi-singleton-pred.html}{\mathsf{semi\text{-}singleton}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{s} ~\href{../symbols/sub-pred.html}{\subseteq} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><code>(s sss t) &lt;--&gt; (((t set) /\ (s={t})) \/ ((t proper) /\ (sc=t) /\ (s is a semi-singleton)))</code></div></td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>(s sss A) &lt;--&gt; ((s semi-singleton) /\ (s c= A))</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="../manual.html#DefSemiSingletonSubclass" class="sym-link">Definition DefSemiSingletonSubclass (3.36): “Semi-singleton subset” relation (s sss A)</a></li>
+<li><a href="../manual.html#DefSemiSingletonSubclass" class="sym-link">Definition DefSemiSingletonSubclass (3.36): “Semi-singleton subset” relation</a></li>
 <li><a href="../manual.html#ThmFamilyEvaluation" class="sym-link">Theorem ThmFamilyEvaluation (3.37): Evaluation of “Family Value” via semi-singleton subsets</a></li>
 </ul></td>
           </tr>

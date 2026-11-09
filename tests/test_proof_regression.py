@@ -42,7 +42,8 @@ class TestProofRegression(unittest.TestCase):
     def test_ml_generated_manual_and_db_policy(self):
         """generated/manual.html and generated/theory_db.json must be ML-generated with Unicode default, table-inside-a-table, and algorithmic links for all tokens."""
         self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", self.gen_manual_html)
-        self.assertIn('class="mode-unicode"', self.gen_manual_html)
+        self.assertIn("mode-unicode", self.gen_manual_html)
+        self.assertIn("hide-ansii", self.gen_manual_html)
         self.assertNotIn("mode-membership", self.gen_manual_html)
         self.assertNotIn("Explicit Term Interpretation", self.gen_manual_html)
         self.assertIn('class="external-row"', self.gen_manual_html)
@@ -85,7 +86,8 @@ class TestProofRegression(unittest.TestCase):
             with open(path, "r", encoding="utf-8") as f:
                 html = f.read()
             self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", html, f"Missing ML provenance header in {rel}")
-            self.assertIn('class="mode-unicode"', html, f"Unicode default missing in {rel}")
+            self.assertIn("mode-unicode", html, f"Unicode default missing in {rel}")
+            self.assertIn("hide-ansii", html, f"Hide ANSII default missing in {rel}")
             self.assertNotIn("mode-membership", html, f"Forbidden CSS hack mode-membership in {rel}")
             if rel != "manual_top.html":
                 self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")

@@ -416,16 +416,16 @@
 
 [3.35 / DefSemiSingleton] “Semi-singleton” predicate (Definition)
   Name:            DefSemiSingleton
-  Formula [0]:     (∀(s:Class)∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))—→(x=y)))
-  SML Kernel AST:  TpSemiSingleton
-  Scheme of Types: (∀([s@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))—→([x@Class.Expression]=[y@Class.Expression])))
+  Formula [0]:     (∀(s:Class)((s semi-singleton)←→(∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))—→(x=y)))))
+  SML Kernel AST:  PKernelDef_prf
+  Scheme of Types: (∀([s@Variable]:[Class@Type])(([s@Class.Expression] semi-singleton)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))—→([x@Class.Expression]=[y@Class.Expression])))))
   Verification:    Definitional (Kernel AST)
 
-[3.36 / DefSemiSingletonSubclass] “Semi-singleton subset” relation (s sss A) (Definition)
+[3.36 / DefSemiSingletonSubclass] “Semi-singleton subset” relation (Definition)
   Name:            DefSemiSingletonSubclass
-  Formula [0]:     (∀(s:Class)∀(A:Class)((s⊆A)∧∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))—→(x=y))))
-  SML Kernel AST:  TpSss
-  Scheme of Types: (∀([s@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(([s@Class.Expression]⊆[A@Class.Expression])∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))—→([x@Class.Expression]=[y@Class.Expression]))))
+  Formula [0]:     (∀(s:Class)∀(A:Class)((s sss A)←→((s semi-singleton)∧(s⊆A))))
+  SML Kernel AST:  PKernelDef_prf
+  Scheme of Types: (∀([s@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(([s@Class.Expression] sss [A@Class.Expression])←→(([s@Class.Expression] semi-singleton)∧([s@Class.Expression]⊆[A@Class.Expression]))))
   Verification:    Definitional (Kernel AST)
 
 [3.37 / ThmFamilyEvaluation] Evaluation of “Family Value” via semi-singleton subsets (Theorem)
