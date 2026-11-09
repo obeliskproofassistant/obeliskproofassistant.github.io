@@ -561,6 +561,21 @@
             <div id="sec-slot-4" class="section-slot" data-sec="4"></div>
             <div id="sec-slot-5" class="section-slot" data-sec="5"></div>
         </main>
+        <script>
+        // Early instant positioning: scroll immediately on initial HTML parse before any paint
+        (function() {
+            try {
+                var rawHash = window.location.hash ? window.location.hash.slice(1) : "DefIsProperClass";
+                var targetId = rawHash || "DefIsProperClass";
+                var slot = (targetId === "DefIsProperClass" || targetId.indexOf("3.") !== -1) ? document.getElementById("sec-slot-3") : document.getElementById(targetId);
+                if (slot) {
+                    var toolbarH = 48;
+                    var pos = Math.max(0, slot.offsetTop - toolbarH - 14);
+                    window.scrollTo(0, pos);
+                }
+            } catch(e) {}
+        })();
+        </script>
     </div>
 </div>
 
@@ -609,6 +624,7 @@ function renderPlaceholders() {
         const isPriority = (meta.id === 3);
         slot.innerHTML = `
             <div class="sec-placeholder-card ${isPriority ? 'priority-loading' : ''}" id="placeholder-sec-${meta.id}">
+                ${isPriority ? '<span id="DefIsProperClass" style="display:none;"></span>' : ''}
                 <div class="sec-placeholder-header">
                     <h3><span>Chapter ${meta.id}.</span> ${meta.title} (${meta.range})</h3>
                     <span class="sec-status-badge ${isPriority ? 'loading' : 'queued'}" id="status-badge-${meta.id}">
@@ -682,20 +698,23 @@ function rewriteLatexHrefs(htmlStr) {
     });
 }
 
-function scrollTargetIntoContainer(targetEl) {
+function scrollTargetIntoContainer(targetEl, instant = false) {
     if (!targetEl) return;
     targetEl.style.scrollMarginTop = '64px';
     const toolbar = document.getElementById("nav-toolbar");
     const toolbarHeight = toolbar ? toolbar.offsetHeight : 44;
     const rect = targetEl.getBoundingClientRect();
-    const targetTop = Math.max(0, window.pageYOffset + rect.top - toolbarHeight - 14);
-    window.scrollTo({ top: targetTop, behavior: 'smooth' });
-    targetEl.style.outline = '2px solid #38bdf8';
-    targetEl.style.backgroundColor = 'rgba(56, 189, 248, 0.16)';
-    setTimeout(() => {
-        targetEl.style.outline = 'none';
-        targetEl.style.backgroundColor = '';
-    }, 2200);
+    const currentScroll = window.scrollY !== undefined ? window.scrollY : (window.pageYOffset || document.documentElement.scrollTop || 0);
+    const targetTop = Math.max(0, currentScroll + rect.top - toolbarHeight - 14);
+    window.scrollTo({ top: targetTop, behavior: instant ? 'auto' : 'smooth' });
+    if (!instant) {
+        targetEl.style.outline = '2px solid #38bdf8';
+        targetEl.style.backgroundColor = 'rgba(56, 189, 248, 0.16)';
+        setTimeout(() => {
+            targetEl.style.outline = 'none';
+            targetEl.style.backgroundColor = '';
+        }, 2200);
+    }
 }
 
 function updateToolbarActiveButton(secId) {
@@ -705,11 +724,11 @@ function updateToolbarActiveButton(secId) {
     }
 }
 
-async function loadSection(secId, scrollAfter) {
+async function loadSection(secId, scrollAfter, instant = false) {
     if (sectionStatus[secId] === "loaded") {
         if (scrollAfter) {
             const secEl = document.getElementById("sec-" + secId);
-            if (secEl) scrollTargetIntoContainer(secEl);
+            if (secEl) scrollTargetIntoContainer(secEl, instant);
             updateToolbarActiveButton(secId);
         }
         return Promise.resolve();
@@ -718,7 +737,7 @@ async function loadSection(secId, scrollAfter) {
         return sectionPromises[secId].then(() => {
             if (scrollAfter) {
                 const secEl = document.getElementById("sec-" + secId);
-                if (secEl) scrollTargetIntoContainer(secEl);
+                if (secEl) scrollTargetIntoContainer(secEl, instant);
                 updateToolbarActiveButton(secId);
             }
         });
@@ -746,9 +765,28 @@ async function loadSection(secId, scrollAfter) {
             const slot = document.getElementById("sec-slot-" + secId);
             if (!slot) return;
 
+            // Anchor tracking to prevent shifts when loading background content above visible viewport
+            const targetHash = (window.location.hash ? window.location.hash.slice(1) : "DefIsProperClass") || "DefIsProperClass";
+            const currentAnchor = document.getElementById(targetHash) || document.getElementById("sec-3");
+            const anchorBefore = currentAnchor ? currentAnchor.getBoundingClientRect().top : null;
+
             const rewrittenHtml = rewriteLatexHrefs(sectionNode.outerHTML);
             slot.innerHTML = rewrittenHtml;
             rewriteRelativeAnchors(slot);
+
+            // Early instant positioning: scroll immediately upon HTML insertion before MathJax
+            if (secId === 3 || scrollAfter) {
+                const earlyTarget = document.getElementById(targetHash) || document.getElementById("sec-" + secId);
+                if (earlyTarget) {
+                    scrollTargetIntoContainer(earlyTarget, instant || !scrollAfter);
+                }
+            } else if (anchorBefore !== null && currentAnchor) {
+                const anchorAfter = currentAnchor.getBoundingClientRect().top;
+                const delta = anchorAfter - anchorBefore;
+                if (Math.abs(delta) > 1) {
+                    window.scrollBy({ top: delta, behavior: 'auto' });
+                }
+            }
 
             if (window.ProofTreeCollapse && ProofTreeCollapse.decorateProofPanes) {
                 ProofTreeCollapse.decorateProofPanes(slot);
@@ -765,8 +803,19 @@ async function loadSection(secId, scrollAfter) {
 
             if (scrollAfter) {
                 const secEl = document.getElementById("sec-" + secId);
-                if (secEl) scrollTargetIntoContainer(secEl);
+                if (secEl) scrollTargetIntoContainer(secEl, instant);
                 updateToolbarActiveButton(secId);
+            } else if (secId === 3) {
+                const targetNow = document.getElementById(targetHash) || document.getElementById("sec-" + secId);
+                if (targetNow) {
+                    scrollTargetIntoContainer(targetNow, true);
+                }
+            } else if (anchorBefore !== null && currentAnchor) {
+                const anchorAfter = currentAnchor.getBoundingClientRect().top;
+                const delta = anchorAfter - anchorBefore;
+                if (Math.abs(delta) > 1) {
+                    window.scrollBy({ top: delta, behavior: 'auto' });
+                }
             }
         } catch (err) {
             console.error(`Failed to load section ${secId}:`, err);
@@ -930,21 +979,27 @@ async function init() {
     const targetHash = (window.location.hash ? window.location.hash.slice(1) : "DefIsProperClass") || "DefIsProperClass";
     const targetSec = findSectionForTargetId(targetHash) || 3;
 
-    // Priority Chapter Load: Load the section containing the target (Section 3 for DefIsProperClass)
-    await loadSection(targetSec, false);
-    updateToolbarActiveButton(targetSec);
-
-    // Focus specifically on the target entry (DefIsProperClass)
-    const targetEl = document.getElementById(targetHash);
-    if (targetEl) {
-        scrollTargetIntoContainer(targetEl);
-    } else {
-        const secNode = document.getElementById("sec-" + targetSec);
-        if (secNode) scrollTargetIntoContainer(secNode);
+    // Early instant positioning at initial placeholder before network fetch completes
+    const initialSlot = document.getElementById(targetHash) || document.getElementById("sec-slot-" + targetSec);
+    if (initialSlot) {
+        scrollTargetIntoContainer(initialSlot, true);
     }
 
-    // Load remaining chapters in the background
-    const remainingSections = [1, 2, 3, 4, 5].filter(s => s !== targetSec);
+    // Priority Chapter Load: Load the section containing the target (Section 3 for DefIsProperClass)
+    await loadSection(targetSec, false, true);
+    updateToolbarActiveButton(targetSec);
+
+    // Final exact alignment with zero smooth motion
+    const targetEl = document.getElementById(targetHash);
+    if (targetEl) {
+        scrollTargetIntoContainer(targetEl, true);
+    } else {
+        const secNode = document.getElementById("sec-" + targetSec);
+        if (secNode) scrollTargetIntoContainer(secNode, true);
+    }
+
+    // Load remaining chapters in the background: chapters below (4, 5) first, then above (2, 1)
+    const remainingSections = [4, 5, 2, 1].filter(s => s !== targetSec);
     queueBackgroundLoading(remainingSections);
 }
 
