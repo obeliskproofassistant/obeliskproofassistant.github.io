@@ -10332,7 +10332,7 @@ end;
   Dual Semantics of typetheory.ML, Decoupled Brackets (Enc / Dec / Emb vs <|...|> / [|...|]),
   and Bidirectional Translation Bridge between:
     - Variant 1: 1st-Order NBG/MK Proof Assistant (Fm, Ctx, Theory, Stmt, Prf, ProofsOf, Theorems)
-    - Variant 2: Higher-Order Formulas-as-Types Proof Assistant (RoqC / NBGCompiler Curry-Howard)
+    - Variant 2: Higher-Order Formulas-as-Types Proof Assistant (Rocq / NBGCompiler Curry-Howard)
 
   PORTABILITY INVARIANT (User Directive #16):
     Written in strict portable Standard ML (SML'97) compatible with both
@@ -10361,7 +10361,7 @@ struct
   (* Toggle 3: Presentation / Assistant Variant Mode *)
   datatype AssistantVariantMode =
       Variant1_FirstOrder     (* 1st-Order NBG: Stmt, Enc, Dec, Emb, ProofsOf, Theorems *)
-    | Variant2_HigherOrder    (* Higher-Order RoqC: Formulas-as-Types (Propositions-as-Types) *)
+    | Variant2_HigherOrder    (* Higher-Order Rocq: Formulas-as-Types (Propositions-as-Types) *)
 
   type GlobalDisplayConfig = {
     terminology: TerminologyMode,
