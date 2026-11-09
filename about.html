@@ -24,8 +24,19 @@ position: absolute; top: 0; left:0;
           var saved = localStorage.getItem('opa_left_theme');
           if (saved === 'light') {
             document.documentElement.classList.remove('dark-mode');
-          } else {
+            document.documentElement.classList.add('light-mode');
+          } else if (saved === 'dark') {
             document.documentElement.classList.add('dark-mode');
+            document.documentElement.classList.remove('light-mode');
+          } else {
+            var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            if (prefersLight) {
+              document.documentElement.classList.remove('dark-mode');
+              document.documentElement.classList.add('light-mode');
+            } else {
+              document.documentElement.classList.add('dark-mode');
+              document.documentElement.classList.remove('light-mode');
+            }
           }
         } catch (e) {
           document.documentElement.classList.add('dark-mode');
@@ -33,6 +44,11 @@ position: absolute; top: 0; left:0;
       })();
       function toggleTheme() {
         var isDark = document.documentElement.classList.toggle('dark-mode');
+        if (isDark) {
+          document.documentElement.classList.remove('light-mode');
+        } else {
+          document.documentElement.classList.add('light-mode');
+        }
         try {
           localStorage.setItem('opa_left_theme', isDark ? 'dark' : 'light');
         } catch (e) {}
@@ -57,17 +73,25 @@ position: absolute; top: 0; left:0;
             var wantDark = (e.data.mode === 'dark');
             if (wantDark) {
               document.documentElement.classList.add('dark-mode');
+              document.documentElement.classList.remove('light-mode');
             } else {
               document.documentElement.classList.remove('dark-mode');
+              document.documentElement.classList.add('light-mode');
             }
             try { localStorage.setItem('opa_left_theme', wantDark ? 'dark' : 'light'); } catch (e) {}
             updateThemeUI(wantDark);
+            try {
+              window.parent.postMessage({ type: 'LEFT_THEME_CHANGED', isDark: wantDark }, '*');
+            } catch (err) {}
           }
         }
       });
       document.addEventListener('DOMContentLoaded', function() {
         var isDark = document.documentElement.classList.contains('dark-mode');
         updateThemeUI(isDark);
+        try {
+          window.parent.postMessage({ type: 'LEFT_THEME_CHANGED', isDark: isDark }, '*');
+        } catch (e) {}
 
         // Allow selecting headline text without triggering section fold/unfold.
         // Only the changing fold-icon symbol toggles the section.

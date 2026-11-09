@@ -21,6 +21,31 @@
     OPA
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+      function applyObeliskTheme(theme) {
+        var isDark = (theme !== 'light');
+        if (isDark) {
+          document.documentElement.classList.add('dark-mode');
+          document.documentElement.classList.remove('light-mode');
+        } else {
+          document.documentElement.classList.remove('dark-mode');
+          document.documentElement.classList.add('light-mode');
+        }
+      }
+      try {
+        var savedTheme = localStorage.getItem('opa_left_theme');
+        if (savedTheme === 'light') {
+          applyObeliskTheme('light');
+        } else if (savedTheme === 'dark') {
+          applyObeliskTheme('dark');
+        } else {
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          applyObeliskTheme(prefersLight ? 'light' : 'dark');
+        }
+      } catch (e) {
+        applyObeliskTheme('dark');
+      }
+    </script>
     <link rel="stylesheet" href="styles.css">
 <!--
     <style>
@@ -29,8 +54,8 @@
 -->
             <!-- overflow: scroll; -->
     <!-- not "assets/vendor/silktide-consent-manager/..." because submodules not working -->
-    <link rel="stylesheet" href="assets/silktide-consent-manager.css">
-    <script src="assets/silktide-consent-manager.js"></script>
+    <link rel="stylesheet" href="assets/silktide-consent-manager.css?v=galleta2_5">
+    <script src="assets/silktide-consent-manager.js?v=galleta2_5"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/images/myfavicon.ico"/>
 </head>
 <body class="indexbody">
@@ -79,10 +104,9 @@
 
     <script>
 window.addEventListener('message', function(event) {
-    // Optional: Verify origin for security
-    // if (event.origin !== "https://trusted-site.com") return;
-    
-    if (event.data.type === 'CHANGE_TITLE') {
+    if (event.data && event.data.type === 'LEFT_THEME_CHANGED') {
+        applyObeliskTheme(event.data.isDark ? 'dark' : 'light');
+    } else if (event.data && event.data.type === 'CHANGE_TITLE') {
         document.title = event.data.title;
     }
 });

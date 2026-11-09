@@ -31,6 +31,30 @@
           console.warn("Obelisk portal detected nested framing:", e);
         }
       }
+
+      function applyObeliskTheme(theme) {
+        var isDark = (theme !== 'light');
+        if (isDark) {
+          document.documentElement.classList.add('dark-mode');
+          document.documentElement.classList.remove('light-mode');
+        } else {
+          document.documentElement.classList.remove('dark-mode');
+          document.documentElement.classList.add('light-mode');
+        }
+      }
+      try {
+        var savedTheme = localStorage.getItem('opa_left_theme');
+        if (savedTheme === 'light') {
+          applyObeliskTheme('light');
+        } else if (savedTheme === 'dark') {
+          applyObeliskTheme('dark');
+        } else {
+          var prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+          applyObeliskTheme(prefersLight ? 'light' : 'dark');
+        }
+      } catch (e) {
+        applyObeliskTheme('dark');
+      }
     </script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -230,41 +254,51 @@
             .mobile-only-bar {
                 display: flex;
                 position: fixed;
-                bottom: 20px;
-                left: 18px;
+                bottom: 16px;
+                left: 16px;
                 right: auto;
                 z-index: 1000;
                 pointer-events: auto;
             }
-            .mobile-jump-btn, .maria-biscuit-btn {
-                width: 76px;
-                height: 76px;
-                border-radius: 50%;
-                padding: 0;
-                border: none;
-                background: transparent;
+            .mobile-jump-btn {
+                background: rgba(15, 23, 42, 0.94);
+                border: 1px solid #38bdf8;
+                color: #38bdf8;
+                font-size: 12px;
+                font-weight: 700;
+                padding: 8px 14px;
+                border-radius: 20px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 10px rgba(56, 189, 248, 0.35);
                 cursor: pointer;
-                filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.55));
-                transition: transform 0.15s ease, filter 0.15s ease;
-                user-select: none;
-                -webkit-tap-highlight-color: transparent;
                 display: inline-flex;
                 align-items: center;
-                justify-content: center;
+                gap: 6px;
+                backdrop-filter: blur(8px);
+                transition: all 0.2s ease;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
             }
-            .mobile-jump-btn:hover, .maria-biscuit-btn:hover {
-                transform: scale(1.05);
-                filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.65));
+            .mobile-jump-btn:hover {
+                background: rgba(56, 189, 248, 0.2);
             }
-            .mobile-jump-btn:active, .maria-biscuit-btn:active {
-                transform: scale(0.94);
-                filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+            .mobile-jump-btn:active {
+                transform: scale(0.96);
+                background: rgba(56, 189, 248, 0.25);
+            }
+            html.light-mode .mobile-jump-btn {
+                background: rgba(255, 255, 255, 0.94);
+                border: 1px solid #0284c7;
+                color: #0284c7;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15), 0 0 10px rgba(2, 132, 199, 0.25);
+            }
+            html.light-mode .mobile-jump-btn:hover {
+                background: rgba(2, 132, 199, 0.12);
             }
         }
     </style>
     <!-- not "assets/vendor/silktide-consent-manager/..." because submodules not working -->
-    <link rel="stylesheet" href="assets/silktide-consent-manager.css">
-    <script src="assets/silktide-consent-manager.js"></script>
+    <link rel="stylesheet" href="assets/silktide-consent-manager.css?v=galleta2_5">
+    <script src="assets/silktide-consent-manager.js?v=galleta2_5"></script>
     <link rel="shortcut icon" type="image/x-icon" href="/images/myfavicon.ico"/>
 </head>
 <body class="indexbody">
@@ -327,10 +361,9 @@
 
     <script>
 window.addEventListener('message', function(event) {
-    // Optional: Verify origin for security
-    // if (event.origin !== "https://trusted-site.com") return;
-    
-    if (event.data.type === 'CHANGE_TITLE') {
+    if (event.data && event.data.type === 'LEFT_THEME_CHANGED') {
+        applyObeliskTheme(event.data.isDark ? 'dark' : 'light');
+    } else if (event.data && event.data.type === 'CHANGE_TITLE') {
         document.title = event.data.title;
     }
 });
@@ -345,115 +378,13 @@ window.addEventListener('message', function(event) {
         </div>
     </div>
 
-    <!-- Floating Quick Navigation Maria Biscuit for Mobile Viewport -->
+    <!-- Floating Quick Navigation Pill for Mobile Viewport -->
     <div id="mobile-nav-bar" class="mobile-only-bar">
-        <button type="button" id="mobile-jump-theory-btn" class="mobile-jump-btn maria-biscuit-btn" onclick="scrollToTheoryOutline()" title="Scroll down to Theory Outline" aria-label="Scroll down to Theory Outline">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="76" height="76" style="display:block;">
-              <defs>
-                <radialGradient id="biscuitBake1" cx="44%" cy="42%" r="54%">
-                  <stop offset="0%" stop-color="#fae3a8"/>
-                  <stop offset="55%" stop-color="#ebb96c"/>
-                  <stop offset="85%" stop-color="#cb8a34"/>
-                  <stop offset="100%" stop-color="#945212"/>
-                </radialGradient>
-                <linearGradient id="rimHighlight1" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="rgba(255,255,255,0.65)"/>
-                  <stop offset="100%" stop-color="rgba(75,30,0,0.55)"/>
-                </linearGradient>
-                <filter id="embossShadow1" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="0.8" stdDeviation="0.2" flood-color="#ffeab3" flood-opacity="0.95"/>
-                </filter>
-              </defs>
-              <circle cx="40" cy="40" r="38" fill="url(#biscuitBake1)" stroke="#783c0a" stroke-width="1.4"/>
-              <circle cx="40" cy="40" r="37.2" fill="none" stroke="url(#rimHighlight1)" stroke-width="0.8"/>
-              <circle cx="40" cy="40" r="35" fill="none" stroke="#874712" stroke-width="1.8" stroke-dasharray="1.4 1.4" opacity="0.85"/>
-              <circle cx="40" cy="40" r="33.2" fill="none" stroke="#693208" stroke-width="0.6"/>
-              <circle cx="40" cy="40" r="31.2" fill="none" stroke="#9e5c1e" stroke-width="1.1" stroke-dasharray="1.0 1.6" opacity="0.75"/>
-              <circle cx="40" cy="40" r="29.5" fill="none" stroke="#693208" stroke-width="0.5"/>
-              <circle cx="65.5" cy="40.0" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="63.56" cy="49.76" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="58.03" cy="58.03" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="49.76" cy="63.56" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="40.0" cy="65.5" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="30.24" cy="63.56" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="21.97" cy="58.03" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="16.44" cy="49.76" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="14.5" cy="40.0" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="16.44" cy="30.24" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="21.97" cy="21.97" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="30.24" cy="16.44" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="40.0" cy="14.5" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="49.76" cy="16.44" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="58.03" cy="21.97" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="63.56" cy="30.24" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="55.16" cy="48.75" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="48.75" cy="55.16" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="31.25" cy="55.16" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="24.84" cy="48.75" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="24.84" cy="31.25" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="31.25" cy="24.84" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="48.75" cy="24.84" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="55.16" cy="31.25" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <rect x="13" y="28" width="54" height="24" rx="12" ry="12" fill="none" stroke="#8a4911" stroke-width="0.9" stroke-dasharray="2 1" opacity="0.7"/>
-              <g filter="url(#embossShadow1)" fill="#4e2203" font-family="Impact, 'Arial Black', -apple-system, sans-serif" text-anchor="middle" font-weight="900" letter-spacing="0.6">
-                <text x="40" y="38" font-size="7.5">THEORY</text>
-                <text x="40" y="47" font-size="7.2">OUTLINE</text>
-              </g>
-            </svg>
+        <button type="button" id="mobile-jump-theory-btn" class="mobile-jump-btn" onclick="scrollToTheoryOutline()" title="Scroll down to Theory Outline">
+            Theory Outline
         </button>
-        <button type="button" id="mobile-jump-top-btn" class="mobile-jump-btn maria-biscuit-btn" style="display: none;" onclick="scrollToTop()" title="Scroll up to About & Intro" aria-label="Scroll up to About & Intro">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="76" height="76" style="display:block;">
-              <defs>
-                <radialGradient id="biscuitBake2" cx="44%" cy="42%" r="54%">
-                  <stop offset="0%" stop-color="#fae3a8"/>
-                  <stop offset="55%" stop-color="#ebb96c"/>
-                  <stop offset="85%" stop-color="#cb8a34"/>
-                  <stop offset="100%" stop-color="#945212"/>
-                </radialGradient>
-                <linearGradient id="rimHighlight2" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="rgba(255,255,255,0.65)"/>
-                  <stop offset="100%" stop-color="rgba(75,30,0,0.55)"/>
-                </linearGradient>
-                <filter id="embossShadow2" x="-10%" y="-10%" width="120%" height="120%">
-                  <feDropShadow dx="0" dy="0.8" stdDeviation="0.2" flood-color="#ffeab3" flood-opacity="0.95"/>
-                </filter>
-              </defs>
-              <circle cx="40" cy="40" r="38" fill="url(#biscuitBake2)" stroke="#783c0a" stroke-width="1.4"/>
-              <circle cx="40" cy="40" r="37.2" fill="none" stroke="url(#rimHighlight2)" stroke-width="0.8"/>
-              <circle cx="40" cy="40" r="35" fill="none" stroke="#874712" stroke-width="1.8" stroke-dasharray="1.4 1.4" opacity="0.85"/>
-              <circle cx="40" cy="40" r="33.2" fill="none" stroke="#693208" stroke-width="0.6"/>
-              <circle cx="40" cy="40" r="31.2" fill="none" stroke="#9e5c1e" stroke-width="1.1" stroke-dasharray="1.0 1.6" opacity="0.75"/>
-              <circle cx="40" cy="40" r="29.5" fill="none" stroke="#693208" stroke-width="0.5"/>
-              <circle cx="65.5" cy="40.0" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="63.56" cy="49.76" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="58.03" cy="58.03" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="49.76" cy="63.56" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="40.0" cy="65.5" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="30.24" cy="63.56" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="21.97" cy="58.03" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="16.44" cy="49.76" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="14.5" cy="40.0" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="16.44" cy="30.24" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="21.97" cy="21.97" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="30.24" cy="16.44" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="40.0" cy="14.5" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="49.76" cy="16.44" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="58.03" cy="21.97" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="63.56" cy="30.24" r="1.3" fill="#6d380f" stroke="#fce5a9" stroke-width="0.5"/>
-              <circle cx="55.16" cy="48.75" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="48.75" cy="55.16" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="31.25" cy="55.16" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="24.84" cy="48.75" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="24.84" cy="31.25" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="31.25" cy="24.84" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="48.75" cy="24.84" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <circle cx="55.16" cy="31.25" r="1.2" fill="#6d380f" stroke="#fce5a9" stroke-width="0.4"/>
-              <rect x="13" y="28" width="54" height="24" rx="12" ry="12" fill="none" stroke="#8a4911" stroke-width="0.9" stroke-dasharray="2 1" opacity="0.7"/>
-              <g filter="url(#embossShadow2)" fill="#4e2203" font-family="Impact, 'Arial Black', -apple-system, sans-serif" text-anchor="middle" font-weight="900" letter-spacing="0.6">
-                <text x="40" y="38" font-size="8">ABOUT</text>
-                <text x="40" y="47" font-size="7.2">INTRO</text>
-              </g>
-            </svg>
+        <button type="button" id="mobile-jump-top-btn" class="mobile-jump-btn" style="display: none;" onclick="scrollToTop()" title="Scroll up to About and Intro">
+            About and Intro
         </button>
     </div>
 
