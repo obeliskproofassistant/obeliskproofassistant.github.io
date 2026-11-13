@@ -118,7 +118,7 @@ class ObeliskREPL {
       lines.push(`\n[2] VERIFIED THEOREMS (PROOF TERMS INHABITING TARGET FORMULA TYPES):`);
       if (r.verified_theorems && r.verified_theorems.length > 0) {
         for (const t of r.verified_theorems) {
-          lines.push(`  ✔ theorem ${t.name}`);
+          lines.push(`  [OK] theorem ${t.name}`);
           lines.push(`      Inhabited Type (Formula): ${t.formula}`);
           lines.push(`      Proof Term AST Nodes:     ${t.proof_size} (beta-normalized: ${t.normalized_size})`);
         }
@@ -152,7 +152,7 @@ class ObeliskREPL {
         .map(f => `<div style="margin-top:4px;color:#38bdf8;"><code>formula ${this.escapeHtml(f.name)}</code> <span style="color:#94a3b8;">(Type)</span></div>`)
         .join('');
       const tList = (r.verified_theorems || [])
-        .map(t => `<div style="margin-top:4px;color:#10b981;"><code>✔ ${this.escapeHtml(t.name)}</code> <span style="color:#94a3b8;">(${t.proof_size} nodes)</span></div>`)
+        .map(t => `<div style="margin-top:4px;color:#10b981;"><code>[OK] ${this.escapeHtml(t.name)}</code> <span style="color:#94a3b8;">(${t.proof_size} nodes)</span></div>`)
         .join('');
       this.goalBoxEl.innerHTML =
         `<div style="color:#10b981;font-weight:700;margin-bottom:6px;">[COMPILED &amp; VERIFIED]</div>` +

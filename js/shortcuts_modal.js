@@ -60,7 +60,7 @@
             <button type="button"
                     id="obelisk-shortcuts-close-btn"
                     class="shortcuts-close-btn"
-                    aria-label="Close Keyboard Shortcuts Modal">✕</button>
+                    aria-label="Close Keyboard Shortcuts Modal">&times;</button>
           </div>
           <div class="shortcuts-modal-body">
             <table class="shortcuts-table" aria-label="Keyboard Shortcuts List">

@@ -155,7 +155,7 @@
 
       const toast = document.createElement('div');
       toast.className = 'code-copy-toast';
-      toast.innerHTML = '✓ Copied';
+      toast.innerHTML = 'Copied to clipboard';
       toast.style.cssText = `
         position: fixed;
         top: 20px;
@@ -184,7 +184,7 @@
 
       const toast = document.createElement('div');
       toast.className = 'code-copy-toast';
-      toast.innerHTML = '✗ Copy failed';
+      toast.innerHTML = 'Copy failed';
       toast.style.cssText = `
         position: fixed;
         top: 20px;

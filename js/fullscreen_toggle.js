@@ -92,7 +92,7 @@
     btn.type = 'button';
     btn.ariaLabel = 'Toggle full-screen mode';
     btn.className = 'fullscreen-toggle-btn';
-    btn.innerHTML = '⛶';
+    btn.innerHTML = '[FS]';
 
     // Click handler
     btn.addEventListener('click', toggleFullscreen);
@@ -148,9 +148,9 @@
         toggleButton.setAttribute('aria-pressed', isFullscreen);
         // Update icon or label based on state
         if (isFullscreen) {
-          toggleButton.innerHTML = '⛶';
+          toggleButton.innerHTML = '[Exit FS]';
         } else {
-          toggleButton.innerHTML = '⛶';
+          toggleButton.innerHTML = '[FS]';
         }
       }
     }
