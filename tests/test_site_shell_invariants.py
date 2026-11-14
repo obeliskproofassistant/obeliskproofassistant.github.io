@@ -203,10 +203,13 @@ class TestSiteShellInvariants(unittest.TestCase):
             "MKTD2-prover",
             "MKTD2-theory",
         )
-        for page_name in ("about.html", "ai.html", "ai_version.html", "obelisk_ai.html"):
+        for page_name in ("about.html", "obelisk_ai.html"):
             content = (REPO_DIR / page_name).read_text(encoding="utf-8")
             for term in required_terms:
                 self.assertIn(term, content, f"{page_name} missing required taxonomy term {term!r}")
+        for redirect_name in ("ai.html", "ai_version.html"):
+            redirect_content = (REPO_DIR / redirect_name).read_text(encoding="utf-8")
+            self.assertIn("url=obelisk_ai.html", redirect_content, f"{redirect_name} must redirect to obelisk_ai.html")
 
     def test_zero_emojis_in_site_shell_and_tests(self) -> None:
         offenders = []
