@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-tools/mk_nbg_transpiler.py — Dual Translation Layer between Morse-Kelley Class Logic and NBG First-Order Proofs (Ticket 194).
+tools/mk_nbg_transpiler.py — Dual Translation Layer between Morse-Kelley Class Logic (MKTD1-theory / MKTD2-theory) and Predicative NBG Proofs (Ticket 194).
 
 Classifies class comprehension formulas `{x | phi}` into:
   - `NBG_Predicative`: `phi` quantifies only over set variables (`x, y in V` / `isSet(x)`),

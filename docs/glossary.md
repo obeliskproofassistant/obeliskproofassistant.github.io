@@ -161,9 +161,9 @@ The overarching term **binder** (or **variable-binding operator**) encompasses q
 
 Deductive verification requires clean separation between the background metatheory and the formalized object theories:
 
-| Dimension | Elementary Metatheory $\mathcal{E}$ | Object Theory 1: `MKTD1` | Object Theory 2: `MKTD2` |
+| Dimension | Elementary Metatheory $\mathcal{E}$ | Object Theory 1: `MKTD1-theory` | Object Theory 2: `MKTD2-theory` |
 |---|---|---|---|
-| **Architectural Role** | Background computational / proof-theoretic environment | First-order axiomatic sequent calculus object theory | Constructive dependent type theory / formulas-as-types object theory |
+| **Architectural Role** | Background computational / proof-theoretic environment | Axiomatic classical sequent calculus object theory (`MKTD1-framework` / `MKTD1-system`) | Constructive dependent type theory / formulas-as-types object theory (`MKTD2-framework` / `MKTD2-system`) |
 | **Formal Systems** | $\mathcal{E} \in \{\mathrm{I}\Sigma_1, \mathrm{PA}, \mathcal{T}, \mathrm{NBG}, \mathrm{MK}\}$ | Morse-Kelley + Tarski + Dunaev (Classical Sequent Calculus) | Morse-Kelley + Tarski + Dunaev (Dependent Type Calculus) |
 | **Stratification** | Metalevel 1 computation (AST algorithms, substitution, side conditions) | Stratified sorts: `Class.Expression`, `Truth.Expression` (`Fm`), `Stmt.Expression` | Propositions as types (`Prop`), proofs as constructive $\lambda$-terms |
 | **Side Conditions** | Computable boolean predicates in SML: `FFI`, `NFV`, `Variable.eq` | Checked as side-condition premises before admitting sequent derivations | Inhabited by proof terms or type synthesis judgments |

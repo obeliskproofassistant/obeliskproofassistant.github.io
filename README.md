@@ -15,11 +15,12 @@ Visiting `/botworkspace/catalog/` first prevents context decay and ensures all m
 ## Core Invariants for `obeliskproofassistant.github.io`
 
 1. **Pure ML Generation of `generated/` (No Hand-Editing or CSS Tricks)**:
-   - Every file in `generated/` (`manual.html`, `variant1.html`, `variant2.html`, `nbg_library.html`, `symbols.html`, `proofs.html`, `dependent_types.html`, `metatheory.html`, `sections/*.html`, `proofs/item-*.html`, `symbols/*.html`, `theory_db.json`, `nbg_library.json`, `output.txt`) is emitted exclusively by Standard ML scripts in `/ramdisk/set_theory_prover/program/` (`html_generator.ML` and `nbg_html_generator.ML`).
+   - Every file in `generated/` (`manual.html`, `variant1.html`, `variant2.html`, `nbg_library.html`, `symbols.html`, `proofs.html`, `dependent_types.html`, `metatheory.html`, `sections/*.html`, `proofs/item-*.html`, `symbols/*.html`, `theory_db.json`, `nbg_library.json`, `output.txt`) is emitted exclusively by Standard ML scripts in `/hostramdisk/set_theory_prover/program/` (`html_generator.ML` and `nbg_html_generator.ML`).
+   - Legacy files in `frozen/` remain strictly frozen, isolated, and unlinked from site navigation.
    - Never use CSS or JS hacks to hide or alter `:` vs `∈`. All formula structure and notation (`:` for typing, `∈` for object-level membership, Unicode subscripts like `ifᵈₑₚ` vs LaTeX `\mathsf{if}_{\mathsf{dep}}`) must be computed in ML.
 2. **100% Clickable Formula Symbols & Personal Symbol Pages**:
-   - Every variable, constant, operator, Greek metavariable (`𝛂`, `𝛃`, `𝛄`, `𝛗`, `𝛙`, `chi`), quotation/antiquotation bracket (`⟨`, `⟩`, `⟦`, `⟧`, `⦃`, `⦄`, `⟪`, `⟫`), encoding/decoding/embedding operator (`Enc`, `Dec`, `Emb`, `μ_A`, `ᶜᵒᵈᵉ`, `eval`), binder, and parenthesis must be clickable and link to its exact canonical definition and personal symbol explanation page.
-3. **Default Theory Variants (`MKTD1` & `MKTD2`)**:
-   - Out of the 12+6 theory/assistant variants (`NBG1`, `NBGT1`, `NBGTD1`, `MK1`, `MKT1`, `MKTD1`; `NBG2`, `NBGT2`, `NBGTD2`, `MK2`, `MKT2`, `MKTD2`; plus shared `*` variants `NBG*`..`MKTD*`), active development concentrates on **`MKTD1`** (Morse–Kelley + Tarski + Dunaev, Variant 1) and **`MKTD2`** (Morse–Kelley + Tarski + Dunaev, Variant 2).
-4. **Automatic 15-Minute Checkpointing & Sync**:
-   - Commit generated files to `obeliskproofassistant.github.io` and synchronize `/ramdisk` <-> Local GitLab (`http://127.0.0.1:8929`) <-> `/botworkspace` via `/botworkspace/scripts/ramdisk_workspace.sh`.
+   - Every variable, constant, operator, Greek metavariable (`𝛂`, `𝛃`, `𝛄`, `𝛗`, `𝛙`, `𝛘`), quotation/antiquotation bracket (`⟨`, `⟩`, `⟦`, `⟧`, `⦃`, `⦄`, `⦇`, `⦈`), encoding/decoding/embedding operator (`Enc`, `Dec`, `Emb`, `μ_A`, `ᶜᵒᵈᵉ`, `eval`), binder, and parenthesis must be clickable and link to its exact canonical definition and personal symbol explanation page.
+3. **Strict `MKTD1` & `MKTD2` Taxonomy**:
+   - Out of the 12+6 theory/assistant variants (`NBG1`, `NBGT1`, `NBGTD1`, `MK1`, `MKT1`, `MKTD1`; `NBG2`, `NBGT2`, `NBGTD2`, `MK2`, `MKT2`, `MKTD2`; plus shared `*` variants `NBG*`..`MKTD*`), active development concentrates on **`MKTD1`** (`MKTD1-framework` / `MKTD1-system` / `MKTD1-prover` / `MKTD1-theory`) and **`MKTD2`** (`MKTD2-framework` / `MKTD2-system` / `MKTD2-prover` / `MKTD2-theory`).
+4. **Host RAMDisk Synchronization**:
+   - Commit changes in `/hostramdisk/obeliskproofassistant.github.io` via `/botworkspace/scripts/hostramdisk_workspace.sh` to synchronize with Local GitLab (`http://127.0.0.1:8929`) and `/botworkspace/obeliskproofassistant.github.io`.

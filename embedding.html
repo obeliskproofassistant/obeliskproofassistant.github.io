@@ -582,7 +582,7 @@
 <script>
 const SECTIONS_META = [
     { id: 1, range: "1.01–1.14", title: "1. Propositional Logic", desc: "Classical propositional calculus axiom schemas (A01–A13) and Modus Ponens." },
-    { id: 2, range: "2.01–2.06", title: "2. Predicate Logic", desc: "First-order quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes." },
+    { id: 2, range: "2.01–2.06", title: "2. Predicate Logic", desc: "Quantifier instantiation, abstraction rules, and non-empty discourse domain over Classes in MKTD1-theory." },
     { id: 3, range: "3.01–3.78", title: "3. Set/Class-Theoretic Foundations", desc: "Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection." },
     { id: 4, range: "4.01–4.06", title: "4. Metalogical Laws", desc: "Explicit substitution, context encoding, co-necessitation, uniqueness quantifiers, and reflected comprehension." },
     { id: 5, range: "5.01–5.02", title: "5. Incompleteness Statements", desc: "Formalized Löb's theorem and Gödel's second incompleteness theorem." }
@@ -826,7 +826,7 @@ async function loadSection(secId, scrollAfter, instant = false) {
                     <div class="sec-placeholder-card" style="border-color: #ef4444;">
                         <h3 style="color:#ef4444;">Section ${secId} failed to load</h3>
                         <p class="sec-placeholder-desc">${err.message}</p>
-                        <button class="btn-load-now" onclick="loadSection(${secId}, true)">↺ Retry Section ${secId}</button>
+                        <button class="btn-load-now" onclick="loadSection(${secId}, true)">Retry Section ${secId}</button>
                     </div>
                 `;
             }
