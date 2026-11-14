@@ -1174,17 +1174,17 @@ end;
 
   PIPELINE:
     Source Code (SML-like syntax with dependent types)
-       │
-       ▼
+       |
+       v
     DependentLexer  (Token stream)
-       │
-       ▼
+       |
+       v
     DependentParser (AST Declarations)
-       │
-       ▼
+       |
+       v
     DependentTypeChecker (Type checks types depending on values via conversion)
-       │
-       ▼
+       |
+       v
     Compilation Report: Checked Declarations with Certified Dependent Types
     (Static verification only: bytecode is never produced!)
 **)
@@ -1263,7 +1263,7 @@ end;
   set_theory_prover/program/demo_types.ML
   Axioms, Definitions, and Theorems from the Obelisk Demonstration as Types.
 
-  Source: Demonstration of the “Obelisk” proof assistant
+  Source: Demonstration of the "Obelisk" proof assistant
           Variant: higher-order logic
           Author: Georgy Dunaev
           Date: Tue Sep 29 10:46:56 2026
@@ -1500,7 +1500,7 @@ struct
   (* ========================================================================= *)
   (* 4. SYNTACTIC CONDITIONAL CONSTRUCTORS & SEMANTIC VALUATION                *)
   (* ========================================================================= *)
-  (* Separates syntax from semantics via special functional symbol Sem (⟦ · ⟧).
+  (* Separates syntax from semantics via special functional symbol Sem ([[ . ]]).
      CIf and FIf are pure syntactic term constructors whose denotation is given
      by semantic valuation over Morse-Kelley class comprehension.
   *)
@@ -1515,11 +1515,11 @@ struct
   (* Syntactic conditional formula constructor: FIf(cond, thenProp, elseProp) *)
   fun mkFIf cond thn els = App3 (Const "FIf") cond thn els
 
-  (* Semantic valuation functional symbol: Sem(t) represents ⟦ t ⟧ *)
+  (* Semantic valuation functional symbol: Sem(t) represents [[ t ]] *)
   fun Sem t = App (Const "Sem", t)
 
   (* Definition of Semantics for Conditional Class Terms:
-     ⟦ CIf(P, A, B) ⟧ = { x in V | (⟦ P ⟧ /\ x in A) \/ (¬⟦ P ⟧ /\ x in B) }
+     [[ CIf(P, A, B) ]] = { x in V | ([[ P ]] /\ x in A) \/ (~[[ P ]] /\ x in B) }
   *)
   val type_cif_semantics_def : Term =
     Forall "P" TProp (
@@ -1533,7 +1533,7 @@ struct
     )
 
   (* Definition of Semantics for Conditional Propositions:
-     ⟦ FIf(P, Q, R) ⟧ <-> (⟦ P ⟧ -> ⟦ Q ⟧) /\ (¬⟦ P ⟧ -> ⟦ R ⟧)
+     [[ FIf(P, Q, R) ]] <-> ([[ P ]] -> [[ Q ]]) /\ (~[[ P ]] -> [[ R ]])
   *)
   val type_fif_semantics_def : Term =
     Forall "P" TProp (
@@ -2727,7 +2727,7 @@ struct
       end
   }
 
-  (* 43. Universal Class is Inductive: Ind(V) — Derived by Argon from UnivV char + ax_empty_set + ax_ord_succ_set *)
+  (* 43. Universal Class is Inductive: Ind(V) -- Derived by Argon from UnivV char + ax_empty_set + ax_ord_succ_set *)
   val thm_43_v_ind : TheoremRecord = {
     id = 43,
     name = "thm_v_ind",
@@ -2768,7 +2768,7 @@ struct
     proofProgram = Const "plan_omega_set"
   }
 
-  (* 46. Omega is Inductive: Ind(Omega) — Constructively derived by Argon from thm_44_omega_def + ax_ind_elim + ax_ind_intro *)
+  (* 46. Omega is Inductive: Ind(Omega) -- Constructively derived by Argon from thm_44_omega_def + ax_ind_elim + ax_ind_intro *)
   val thm_46_omega_ind : TheoremRecord = {
     id = 46,
     name = "thm_omega_ind",
@@ -2798,7 +2798,7 @@ struct
       end
   }
 
-  (* 47. Transitivity of Omega: Trans(Omega) — Constructively derived by Argon from thm_46_omega_ind + ax_omega_elements_trans *)
+  (* 47. Transitivity of Omega: Trans(Omega) -- Constructively derived by Argon from thm_46_omega_ind + ax_omega_elements_trans *)
   val thm_47_tr_omega : TheoremRecord = {
     id = 47,
     name = "thm_tr_omega",
@@ -2808,7 +2808,7 @@ struct
         Const "ax_omega_elements_trans")
   }
 
-  (* 48. Omega is an Ordinal: Ord(Omega) — Derived by Argon from def_ord + Trans(Omega) + elements transitive *)
+  (* 48. Omega is an Ordinal: Ord(Omega) -- Derived by Argon from def_ord + Trans(Omega) + elements transitive *)
   val thm_48_ord_omega : TheoremRecord = {
     id = 48,
     name = "thm_ord_omega",
@@ -2818,7 +2818,7 @@ struct
         Pair (#proofProgram thm_47_tr_omega, Const "ax_omega_elements_trans"))
   }
 
-  (* 49. Omega in On: Omega in On — Derived from Set(Omega) and Ord(Omega) *)
+  (* 49. Omega in On: Omega in On -- Derived from Set(Omega) and Ord(Omega) *)
   val thm_49_omega_in_on : TheoremRecord = {
     id = 49,
     name = "thm_omega_in_on",
@@ -2866,7 +2866,7 @@ struct
     proofProgram = Const "plan_card_def"
   }
 
-  (* 52. Omega is Cardinal: Card(Omega) — Derived by Argon from def_isCard + ax_cardof_omega *)
+  (* 52. Omega is Cardinal: Card(Omega) -- Derived by Argon from def_isCard + ax_cardof_omega *)
   val thm_52_omega_card : TheoremRecord = {
     id = 52,
     name = "thm_omega_card",
@@ -2876,7 +2876,7 @@ struct
         Pair (Omega, Const "ax_cardof_omega"))
   }
 
-  (* 53. On is Cardinal Class: Card(On) — Derived by Argon from def_isCard + ax_cardof_on *)
+  (* 53. On is Cardinal Class: Card(On) -- Derived by Argon from def_isCard + ax_cardof_on *)
   val thm_53_on_card : TheoremRecord = {
     id = 53,
     name = "thm_on_card",
@@ -2886,7 +2886,7 @@ struct
         Pair (Const "On", Const "ax_cardof_on"))
   }
 
-  (* 54. Universal Class Not Cardinal: ~Card(V) — Derived by Argon from def_isCard + ax_cardof_never_v *)
+  (* 54. Universal Class Not Cardinal: ~Card(V) -- Derived by Argon from def_isCard + ax_cardof_never_v *)
   val thm_54_v_not_card : TheoremRecord = {
     id = 54,
     name = "thm_v_not_card",
@@ -2958,7 +2958,7 @@ struct
     proofProgram = Const "plan_upair"
   }
 
-  (* 62. Russell Class Non-Sethood Contradiction — Pure Constructive Proof by Argon (Zero ax_russell_diagonal) *)
+  (* 62. Russell Class Non-Sethood Contradiction -- Pure Constructive Proof by Argon (Zero ax_russell_diagonal) *)
   val thm_62_russell_class_not_set : TheoremRecord = {
     id = 62,
     name = "thm_russell_class_not_set",
@@ -3959,7 +3959,7 @@ struct
   (*                                                                         *)
   (* `proofProgram = Const "plan_*"` records are NOT derived proofs. They    *)
   (* are either conservative definitions of the language (e.g. Set, Ord,     *)
-  (* EmptySet, union, power) or irreducible Morse–Kelley axioms (e.g.        *)
+  (* EmptySet, union, power) or irreducible Morse-Kelley axioms (e.g.        *)
   (* Extensionality, Heredity, Global Choice, Infinity, Tarski universes).   *)
   (* Keeping them in the catalog as a single undifferentiated "verified"     *)
   (* count would overstate the kernel's actual derivations.                  *)
@@ -4115,7 +4115,7 @@ end;
         derived from Class Regularity (AxmRegularity 3.14) and O5 (Heredity) without O9/O10.
     O9: Strict subclass between ordinal classes implies membership:
         Ord(a) /\ Ord(b) /\ (a ssub b) -> a in b
-        (proved from Class Regularity 3.14, O5, and L1; acyclic — does NOT depend on O10)
+        (proved from Class Regularity 3.14, O5, and L1; acyclic -- does NOT depend on O10)
     O10: Trichotomy of set ordinals:
          isSet(a) /\ isSet(b) /\ Ord(a) /\ Ord(b) -> (a in b \/ a = b \/ b in a)
          (proved from O8, O9, and O6)
@@ -4421,7 +4421,7 @@ struct
   }
 
   (* -------------------------------------------------------------------------
-     Theorem O12: Burali-Forti Paradox — On is a Proper Class (ThmOrdinalsProperClass 3.21)
+     Theorem O12: Burali-Forti Paradox -- On is a Proper Class (ThmOrdinalsProperClass 3.21)
      Proof: ~ isSet(On) /\ isProper(On), derived from O11 and O6.
      ------------------------------------------------------------------------- *)
   val thm_O12_burali_forti : TheoremRecord = {
@@ -13073,19 +13073,19 @@ end;
 (**
   set_theory_prover/program/nbg_quat_stage3.ML
   Stage III of the Obelisk Architecture:
-  2-Stage Stabilized Quotation (‹...›) & Antiquotation (⟦...⟧) with Tarski Metalevel Stratification.
+  2-Stage Stabilized Quotation (<<...>>) & Antiquotation ([[...]]) with Tarski Metalevel Stratification.
   Architected & Implemented by Gemini 4 Argon.
 
   MATHEMATICAL DESIGN (Georgy Dunaev's Quat Stabilization + Tarski Hierarchy):
   1. Why 2 Stages (`Term`/`Type` at Stage 1 and `QTerm`/`QFm` at Stage 2) Suffice:
      In SML, naive infinite tower types require polymorphic recursion and cannot be
      compiled. In Dunaev's Quat calculus, quotation stabilizes at Stage 2 (`TermTerm` /
-     `QTerm` & `QFm`) because nested quotations ‹‹φ›› encode as syntactic constructor
-     terms inside Stage 2, and antiquotations ⟦...⟧ splice Stage 1 terms/formulas into
+     `QTerm` & `QFm`) because nested quotations <<<<phi>>>> encode as syntactic constructor
+     terms inside Stage 2, and antiquotations [[...]] splice Stage 1 terms/formulas into
      Stage 2 templates with capture-avoiding binder renaming.
   2. Tarski Metalevel Stratification (`Tau < Fau < Qau < Wau`):
-     Unstratified truth/reflection `Holds(Tau, ‹φ›)` inside `Tau` produces the Liar
-     contradiction `L <-> ~Holds(Tau, ‹L›)`.
+     Unstratified truth/reflection `Holds(Tau, <<phi>>)` inside `Tau` produces the Liar
+     contradiction `L <-> ~Holds(Tau, <<L>>)`.
      `ensureStratified ambientTh qfm` enforces `level(targetTh) < level(ambientTh)` on
      every `QHolds(targetTh, innerQFm)`, statically blocking self-referential paradoxes
      while allowing `Fau` (meta-theory, level 1) to state and verify schemas over `Tau`
@@ -13125,8 +13125,8 @@ struct
   datatype QTerm =
       QConst of string
     | QVar of string
-    | QAntiTerm of string                    (* ⟦name⟧_term: antiquoted term hole *)
-    | QDirectTerm of Term                    (* ⟦t⟧: direct splice of Stage 1 Term *)
+    | QAntiTerm of string                    (* [[name]]_term: antiquoted term hole *)
+    | QDirectTerm of Term                    (* [[t]]: direct splice of Stage 1 Term *)
     | QEmpty
     | QUniv
     | QSingleton of QTerm
@@ -13138,9 +13138,9 @@ struct
     | QBinInter of QTerm * QTerm
     | QPower of QTerm
     | QSucc of QTerm
-    | QKappa of string * QFm                 (* ‹{ x | φ(x) }› *)
-    | QEps of string * QFm                   (* ‹ε x. φ(x)› *)
-    | QQuoteFm of QFm                        (* Nested quote ‹‹φ›› stabilized at Stage 2 *)
+    | QKappa of string * QFm                 (* <<{ x | phi(x) }>> *)
+    | QEps of string * QFm                   (* <<eps x. phi(x)>> *)
+    | QQuoteFm of QFm                        (* Nested quote <<<<phi>>>> stabilized at Stage 2 *)
 
   and QFm =
       QIn of QTerm * QTerm
@@ -13157,9 +13157,9 @@ struct
     | QIff of QFm * QFm
     | QPi of string * Sort * QFm
     | QSigma of string * Sort * QFm
-    | QAntiFm of string                      (* ⟦name⟧_fm: antiquoted formula hole *)
-    | QDirectFm of Type                      (* ⟦φ⟧: direct splice of Stage 1 Type *)
-    | QHolds of TheoryId * QFm               (* Holds(th, ‹φ›): stratified truth predicate *)
+    | QAntiFm of string                      (* [[name]]_fm: antiquoted formula hole *)
+    | QDirectFm of Type                      (* [[phi]]: direct splice of Stage 1 Type *)
+    | QHolds of TheoryId * QFm               (* Holds(th, <<phi>>): stratified truth predicate *)
 
   type MetaEnv = {
     termEnv: (string * Term) list,
@@ -13235,7 +13235,7 @@ struct
   (* 2-Stage Stabilized Quotation Reflection & Antiquotation Splicing          *)
   (* ========================================================================= *)
 
-  (* Reflects a Stage 1 Term into its Gödel/syntactic representation in Stage 1 *)
+  (* Reflects a Stage 1 Term into its Goedel/syntactic representation in Stage 1 *)
   fun reflectStage1Term (t: Term) : Term =
     case t of
       Const c => Fn ("QuoteConst", [Const c])
@@ -13433,8 +13433,8 @@ struct
   (* ========================================================================= *)
 
   (* 1. Quoted Schema for Separation / Generalized Russell Subclass Theorem:   *)
-  (*    For any class ⟦A⟧, let R_A = ‹{ x | x in ⟦A⟧ /\ (x in x -> _|_) }›.    *)
-  (*    Then ‹(Set(R_A) /\ R_A in ⟦A⟧) -> _|_›!                                *)
+  (*    For any class [[A]], let R_A = <<{ x | x in [[A]] /\ (x in x -> _|_) }>>. *)
+  (*    Then <<(Set(R_A) /\ R_A in [[A]]) -> _|_>>!                             *)
   fun quotedSeparationRussellFormula (holeA: string) : QFm =
     let
       val qBody = QProd (QIn (QVar "x", QAntiTerm holeA), QArrow (QIn (QVar "x", QVar "x"), QBottom))
@@ -13477,7 +13477,7 @@ struct
                                  typeToString checkedTy)
     end
 
-  (* 2. Quoted Schema for Law of Excluded Middle over any Antiquoted Formula ⟦P⟧ *)
+  (* 2. Quoted Schema for Law of Excluded Middle over any Antiquoted Formula [[P]] *)
   val quotedLEMSchema : QFm =
     QSum (QAntiFm "P", QArrow (QAntiFm "P", QBottom))
 
@@ -13492,7 +13492,7 @@ struct
       else raise QuotationError "LEM schema instantiation mismatch"
     end
 
-  (* 3. Quoted Schema for Contraposition over Antiquoted Formulas ⟦A⟧, ⟦B⟧ *)
+  (* 3. Quoted Schema for Contraposition over Antiquoted Formulas [[A]], [[B]] *)
   val quotedContrapositionSchema : QFm =
     QArrow (
       QArrow (QAntiFm "A", QAntiFm "B"),
@@ -13514,7 +13514,7 @@ struct
       else raise QuotationError "Contraposition schema instantiation mismatch"
     end
 
-  (* 4. Quoted Schema for Binary Intersection Commutativity over ⟦A⟧, ⟦B⟧, ⟦z⟧ *)
+  (* 4. Quoted Schema for Binary Intersection Commutativity over [[A]], [[B]], [[z]] *)
   val quotedBinaryInterSchema : QFm =
     QArrow (
       QIn (QAntiTerm "z", QKappa ("x", QProd (QIn (QVar "x", QAntiTerm "A"), QIn (QVar "x", QAntiTerm "B")))),

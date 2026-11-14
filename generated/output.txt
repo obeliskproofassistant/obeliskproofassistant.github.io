@@ -381,37 +381,37 @@
 
 [3.30 / DefFlatValues] “Has flat proper values” predicate (Definition)
   Name:            DefFlatValues
-  Formula [0]:     (∀(A:Class)((A flat proper values)←→(∀(x:Class)((x∈A)—→(x set)))))
+  Formula [0]:     (∀(F:Class)((F flat proper values)←→(∀(x:Class)((x∈Dom(F))—→((F(x) proper)—→∀(b:Class)(((x,b)∈F)—→(b singleton)))))))
   SML Kernel AST:  TpFlat (F)
-  Scheme of Types: (∀([A@Variable]:[Class@Type])(([A@Class.Expression] flat proper values)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[A@Class.Expression])—→([x@Class.Expression] set)))))
+  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] flat proper values)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))—→(([F@Class.Expression]([x@Class.Expression]) proper)—→∀([b@Variable]:[Class@Type])((([x@Class.Expression],[b@Class.Expression])∈[F@Class.Expression])—→([b@Class.Expression] singleton)))))))
   Verification:    Definitional (Kernel AST)
 
 [3.31 / DefFamily] “Is a family” predicate (Definition)
   Name:            DefFamily
-  Formula [0]:     (∀(A:Class)((A family)←→(∀(x:Class)((x∈A)—→∃(y:Class)(x∈y)))))
+  Formula [0]:     (∀(F:Class)((F family)←→((F concentrated set values)∧(F flat proper values))))
   SML Kernel AST:  TpFamily (F)
-  Scheme of Types: (∀([A@Variable]:[Class@Type])(([A@Class.Expression] family)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[A@Class.Expression])—→∃([y@Variable]:[Class@Type])([x@Class.Expression]∈[y@Class.Expression])))))
+  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] family)←→(([F@Class.Expression] concentrated set values)∧([F@Class.Expression] flat proper values))))
   Verification:    Definitional (Kernel AST)
 
 [3.32 / DefClassFunction] “Is a class-function” predicate (Definition)
   Name:            DefClassFunction
-  Formula [0]:     (∀(F:Class)((F class-function)←→(∀(x:Class)∀(y:Class)∀(z:Class)((((x,y)∈F)∧((x,z)∈F))—→(y=z)))))
+  Formula [0]:     (∀(F:Class)((F class-function)←→((F family)∧(F set-valued))))
   SML Kernel AST:  TpClassFunc (F)
-  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] class-function)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])∀([z@Variable]:[Class@Type])(((([x@Class.Expression],[y@Class.Expression])∈[F@Class.Expression])∧(([x@Class.Expression],[z@Class.Expression])∈[F@Class.Expression]))—→([y@Class.Expression]=[z@Class.Expression])))))
+  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] class-function)←→(([F@Class.Expression] family)∧([F@Class.Expression] set-valued))))
   Verification:    Definitional (Kernel AST)
 
 [3.33 / DefInjectiveFunction] “Is injective” predicate (Definition)
   Name:            DefInjectiveFunction
-  Formula [0]:     (∀(F:Class)((F injective)←→(∀(x:Class)∀(y:Class)∀(z:Class)((((x,z)∈F)∧((y,z)∈F))—→(x=y)))))
+  Formula [0]:     (∀(F:Class)((F injective)←→(((F family)∧(F set-valued))∧∀(x:Class)∀(y:Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))—→(x=y)))))
   SML Kernel AST:  TpInjective (F)
-  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])∀([z@Variable]:[Class@Type])(((([x@Class.Expression],[z@Class.Expression])∈[F@Class.Expression])∧(([y@Class.Expression],[z@Class.Expression])∈[F@Class.Expression]))—→([x@Class.Expression]=[y@Class.Expression])))))
+  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)←→((([F@Class.Expression] family)∧([F@Class.Expression] set-valued))∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(((([x@Class.Expression]∈Dom([F@Class.Expression]))∧([y@Class.Expression]∈Dom([F@Class.Expression])))∧([F@Class.Expression]([x@Class.Expression])=[F@Class.Expression]([y@Class.Expression])))—→([x@Class.Expression]=[y@Class.Expression])))))
   Verification:    Definitional (Kernel AST)
 
 [3.34 / DefSetFunction] “Is a function” predicate (Definition)
   Name:            DefSetFunction
-  Formula [0]:     (∀(F:Class)((F function)←→((F class-function)∧(F set))))
+  Formula [0]:     (∀(f:Class)((f function)←→((f class-function)∧(f set))))
   SML Kernel AST:  TpFunc (f)
-  Scheme of Types: (∀([F@Variable]:[Class@Type])(([F@Class.Expression] function)←→(([F@Class.Expression] class-function)∧([F@Class.Expression] set))))
+  Scheme of Types: (∀([f@Variable]:[Class@Type])(([f@Class.Expression] function)←→(([f@Class.Expression] class-function)∧([f@Class.Expression] set))))
   Verification:    Definitional (Kernel AST)
 
 [3.35 / DefSemiSingleton] “Semi-singleton” predicate (Definition)
@@ -666,7 +666,7 @@
   Formula [0]:     (V universe)
   SML Kernel AST:  PVUniverseAx_prf
   Scheme of Types: (V universe)
-  Kernel Note:     Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PSetDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf), and 3.41/3.42 #DefCardinality/#DefCardLess (PCardLessOrderAx_prf); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood (PPairSetAx_prf). Backup axiom constructor PVUniverseAx_prf (v_universe_axm_backup_entry) is also retained in the kernel just in case.
+  Kernel Note:     Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf), and 3.41/3.42 #DefCardinality/#DefCardLess (PCardLessOrderAx_prf); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood (PPairSetAx_prf). Backup axiom constructor PVUniverseAx_prf (v_universe_axm_backup_entry) is also retained in the kernel just in case.
   Verification:    Verified (Kernel)
 
 [3.70 / AxmTarskiUniverses] “Tarski's axiom” (Axiom)
