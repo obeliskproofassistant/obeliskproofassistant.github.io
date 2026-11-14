@@ -400,7 +400,7 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Symbol Reference: if_dep  /  simple_if  /  IF..FI &mdash; Dependent Conditional Branching (if_dep) &amp; Simple Conditional</h1>
-      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1</strong> (Variant 1) &amp; <strong>MKTD2</strong> (Variant 2) (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
+      <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -428,7 +428,7 @@
         <thead>
           <tr>
             <th class="col-num">Field</th>
-            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1 (Variant 1) &amp; MKTD2 (Variant 2)</th>
+            <th class="col-entity">Mathematical &amp; Kernel Specification &mdash; MKTD1-system &amp; MKTD2-system</th>
           </tr>
         </thead>
         <tbody>
@@ -476,7 +476,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Notation &amp; Semantics of <code>if_dep</code> (Directive 13 &amp; Entries DefSimpleConditional (3.23)&ndash;DefDependentConditional (3.24)):</strong></p><ul><li><strong>Unicode Subscript Rendering</strong>: In Unicode formula mode, the dependent conditional is rendered with true Unicode subscript/modifier letters as <code>if_dep</code>, and its branch parameters use Unicode subscripts <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>.</li><li><strong>LaTeX Rendering</strong>: In LaTeX mode, it renders via MathJax as <code>\mathsf{if}_{\mathsf{dep}}</code> with branch parameters <code>T_e, t_1, t_2</code> and boolean values <code>\mathsf{true}, \mathsf{false}</code>.</li><li><strong>Dependent Typing Rule (Entry DefDependentConditional (3.24))</strong>: Given a family of types <code>Tₑ : Bool → Type</code>, a Boolean <code>b : Bool</code>, a true-branch witness <code>t₁ : Tₑ(true)</code>, and a false-branch witness <code>t₂ : Tₑ(false)</code>, the term <code>if_dep(b, t₁, t₂)</code> has type <code>Tₑ(b)</code> and satisfies the beta-reduction laws <code>if_dep(true, t₁, t₂) = t₁</code> and <code>if_dep(false, t₁, t₂) = t₂</code> (verified in Variant 2 as <code>thm_85_if_dep_true_branch</code> and <code>thm_86_if_dep_false_branch</code>).</li></ul></td>
+            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Notation &amp; Semantics of <code>if_dep</code> (Directive 13 &amp; Entries DefSimpleConditional (3.23)&ndash;DefDependentConditional (3.24)):</strong></p><ul><li><strong>Unicode Subscript Rendering</strong>: In Unicode formula mode, the dependent conditional is rendered with true Unicode subscript/modifier letters as <code>if_dep</code>, and its branch parameters use Unicode subscripts <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>.</li><li><strong>LaTeX Rendering</strong>: In LaTeX mode, it renders via MathJax as <code>\mathsf{if}_{\mathsf{dep}}</code> with branch parameters <code>T_e, t_1, t_2</code> and boolean values <code>\mathsf{true}, \mathsf{false}</code>.</li><li><strong>Dependent Typing Rule (Entry DefDependentConditional (3.24))</strong>: Given a family of types <code>Tₑ : Bool → Type</code>, a Boolean <code>b : Bool</code>, a true-branch witness <code>t₁ : Tₑ(true)</code>, and a false-branch witness <code>t₂ : Tₑ(false)</code>, the term <code>if_dep(b, t₁, t₂)</code> has type <code>Tₑ(b)</code> and satisfies the beta-reduction laws <code>if_dep(true, t₁, t₂) = t₁</code> and <code>if_dep(false, t₁, t₂) = t₂</code> (verified in MKTD2-system as <code>thm_85_if_dep_true_branch</code> and <code>thm_86_if_dep_false_branch</code>).</li></ul></td>
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Canonical Law (Unicode)</td>
