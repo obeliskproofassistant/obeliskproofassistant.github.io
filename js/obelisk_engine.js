@@ -546,7 +546,11 @@ class ObeliskNBGCompiler {
         next();
         const thName = expectIdent();
         expect('SEMI');
-        if (!['NBG_Predicative', 'MK_Impredicative', 'MK_TarskiUniverses'].includes(thName)) {
+        const validTheories = [
+          'NBG_Predicative', 'MK_Impredicative', 'MK_TarskiUniverses',
+          'MKTD1', 'MKTD2', 'MKTD', 'NBG1', 'NBG2', 'MK1', 'MK2'
+        ];
+        if (!validTheories.includes(thName)) {
           throw new Error(`ParseError: Unknown theory level: ${thName}`);
         }
         decls.push({ kind: 'Theory', level: thName });
@@ -664,7 +668,7 @@ class ObeliskNBGCompiler {
       return {
         tag: 'TPi',
         v: z,
-        sort: 'Set',
+        sort: 'Class',
         body: { tag: 'TArrow', a: { tag: 'TIn', a: vz, b: ty.a }, b: { tag: 'TIn', a: vz, b: ty.b } }
       };
     }
@@ -957,7 +961,7 @@ class ObeliskNBGCompiler {
         const z = { tag: 'FVar', name: 'z' };
         return {
           tag: 'TArrow',
-          a: { tag: 'TPi', v: 'z', sort: 'Set', body: { tag: 'TIff', a: { tag: 'TIn', a: z, b: expr.a }, b: { tag: 'TIn', a: z, b: expr.b } } },
+          a: { tag: 'TPi', v: 'z', sort: 'Class', body: { tag: 'TIff', a: { tag: 'TIn', a: z, b: expr.a }, b: { tag: 'TIn', a: z, b: expr.b } } },
           b: { tag: 'TEq', a: expr.a, b: expr.b }
         };
       }
@@ -977,6 +981,68 @@ class ObeliskNBGCompiler {
       }
       default:
         throw new Error(`TypeError: Unsupported proof expression tag '${expr.tag}'`);
+    }
+  }
+
+  freeTermVarsInTerm(bound, tm) {
+    if (!tm) return [];
+    switch (tm.tag) {
+      case 'FVar':
+        return bound.has(tm.name) ? [] : [tm.name];
+      case 'CEmpty':
+      case 'CV':
+      case 'COmega':
+        return [];
+      case 'CSingleton':
+      case 'CPower':
+      case 'CUnion':
+      case 'CComplement':
+      case 'CSucc':
+      case 'CPr1':
+      case 'CPr2':
+        return this.freeTermVarsInTerm(bound, tm.a);
+      case 'CUPair':
+      case 'CDunaevPair':
+      case 'CBinUnion':
+      case 'CBinInter':
+        return [...this.freeTermVarsInTerm(bound, tm.a), ...this.freeTermVarsInTerm(bound, tm.b)];
+      case 'CKappa': {
+        const nextBound = new Set(bound);
+        nextBound.add(tm.x);
+        return this.freeTermVarsInType(nextBound, tm.phi);
+      }
+      default:
+        return [];
+    }
+  }
+
+  freeTermVarsInType(bound, ty) {
+    if (!ty) return [];
+    switch (ty.tag) {
+      case 'TTop':
+      case 'TBottom':
+      case 'TAlias':
+        return [];
+      case 'TIn':
+      case 'TEq':
+      case 'TSub':
+        return [...this.freeTermVarsInTerm(bound, ty.a), ...this.freeTermVarsInTerm(bound, ty.b)];
+      case 'TSet':
+      case 'TProper':
+        return this.freeTermVarsInTerm(bound, ty.a);
+      case 'TArrow':
+      case 'TProd':
+      case 'TSum':
+      case 'TIff':
+        return [...this.freeTermVarsInType(bound, ty.a), ...this.freeTermVarsInType(bound, ty.b)];
+      case 'TPi':
+      case 'TSigma': {
+        const nextBound = new Set(bound);
+        nextBound.add(ty.v);
+        return this.freeTermVarsInType(nextBound, ty.body);
+      }
+      default:
+        return [];
     }
   }
 
@@ -1021,6 +1087,12 @@ class ObeliskNBGCompiler {
               `  Proved:  ${this.typeToString(actual)}`
             );
           }
+          const freeVars = Array.from(new Set(this.freeTermVarsInType(new Set(), expected)));
+          if (freeVars.length > 0) {
+            throw new Error(
+              `TypeError: Theorem '${d.name}' statement contains unbound free class variables: ${freeVars.join(', ')}`
+            );
+          }
           ctx.unshift([d.name, expected]);
           const sz = this.exprSize(d.proofTerm);
           verifiedTheorems.push({
@@ -1033,7 +1105,7 @@ class ObeliskNBGCompiler {
       }
       return {
         status: 'COMPILED',
-        engine: 'Obelisk Bidirectional Kernel Type-Checker',
+        engine: 'Obelisk Bidirectional Kernel Type-Checker (MKTD2-system)',
         elapsed_ms: Math.round((performance.now() - t0) * 10) / 10,
         theory: curTheory,
         defined_formulas: definedFormulas,
@@ -1043,7 +1115,7 @@ class ObeliskNBGCompiler {
     } catch (err) {
       return {
         status: 'REJECTED',
-        engine: 'Obelisk Bidirectional Kernel Type-Checker',
+        engine: 'Obelisk Bidirectional Kernel Type-Checker (MKTD2-system)',
         elapsed_ms: Math.round((performance.now() - t0) * 10) / 10,
         theory: 'NBG_Predicative',
         defined_formulas: [],
@@ -1057,7 +1129,7 @@ class ObeliskNBGCompiler {
 const OBELISK_PRESETS = {
   true_empty_no_elements: {
     category: 'TRUE_MK_NBG',
-    title: '1. Empty Class Has No Elements & Subclass Theorem',
+    title: '1. Empty Class Non-Membership and Subclass Theorem',
     summary: 'Defines a Formula (Type) and constructs explicit proof terms from compr, fst, snd, tapp, and abort.',
     source: `(* ===================================================================== *)
 (* TRUE NBG/MK THEOREM #1: Empty Class Has No Elements & Subclass        *)
@@ -1083,8 +1155,8 @@ theorem thm_empty_subclass : forall (X:Class). forall (z:Class). z in { x | Bot 
 
   true_russell_not_set: {
     category: 'TRUE_MK_NBG',
-    title: "2. Russell's Class R = {x | x in x -> Bot} is NOT a Set",
-    summary: 'Shows that False_RussellIsSet = Set(R) is a valid Type definition, while only its negation ~Set(R) has a valid proof term!',
+    title: '2. Russell Proper Class Non-Sethood Theorem',
+    summary: 'Shows that False_RussellIsSet is a valid Type definition, while only its negation has a valid proof term.',
     source: `(* ===================================================================== *)
 (* TRUE NBG/MK THEOREM #2: Russell's Paradox (~Set(R))                   *)
 (* Notice that defining the FALSE formula \`False_RussellIsSet\` below     *)
@@ -1109,8 +1181,8 @@ theorem thm_russell_not_set : Set({ x | x in x -> Bot }) -> Bot =
 
   true_univ_and_inter: {
     category: 'TRUE_MK_NBG',
-    title: '3. Universal Class V = {x | Top} & Intersection Algebra (Comm, Assoc, Distrib)',
-    summary: 'Proves z in {x | Top} <-> Set(z), binary intersection symmetry, associativity, and distributivity over union.',
+    title: '3. Universal Class Characterization and Intersection Algebra',
+    summary: 'Proves universal class membership equivalence, binary intersection symmetry, associativity, and distributivity.',
     source: `(* ===================================================================== *)
 (* TRUE NBG/MK THEOREM #3: Universal Class V & Intersection Algebra      *)
 (* ===================================================================== *)
@@ -1157,8 +1229,8 @@ theorem thm_inter_distrib_union : forall (A:Class). forall (B:Class). forall (C:
 
   true_succ_and_dunaev: {
     category: 'TRUE_MK_NBG',
-    title: '4. Ordinal Successor Inclusion (Heredity) & Dunaev Pairs [A, B]_D',
-    summary: 'Proves x c= Succ(x) via the Heredity axiom and verifies Dunaev Tagged Ordered Pair projections for proper classes.',
+    title: '4. Ordinal Successor Inclusion and Dunaev Tagged Pair Projections',
+    summary: 'Proves ordinal successor inclusion via the Heredity axiom and verifies Dunaev Tagged Ordered Pair projections for proper classes.',
     source: `(* ===================================================================== *)
 (* TRUE NBG/MK THEOREM #4: Successor Inclusion & Dunaev Tagged Pairs     *)
 (* Dunaev Tagged Pairs [A, B]_D work for all classes (unlike Kuratowski  *)
@@ -1200,8 +1272,8 @@ theorem thm_sub_succ :
 
   true_cantor_diagonal: {
     category: 'TRUE_MK_NBG',
-    title: "5. Cantor's Diagonal Theorem (Choice-Free Constructive Core)",
-    summary: 'Constructs the diagonal class D = {x | ~([x, x]_D in R)} and proves the no-surjection core step.',
+    title: '5. Cantor Diagonal Theorem (Choice-Free Constructive Core)',
+    summary: 'Constructs the diagonal class via Dunaev tagged pairs and proves the no-surjection core step.',
     source: `(* ===================================================================== *)
 (* TRUE NBG/MK THEOREM #5: Cantor's Diagonal Core                        *)
 (* ===================================================================== *)
@@ -1231,7 +1303,7 @@ theorem thm_cantor_diagonal_core :
   true_mk_impredicative: {
     category: 'TRUE_MK_NBG',
     title: '6. Stage II Morse-Kelley Impredicative Comprehension',
-    summary: 'Switches to theory MK_Impredicative; to verify class comprehension containing bound Class quantifiers.',
+    summary: 'Switches to theory MK_Impredicative to verify class comprehension containing bound Class quantifiers.',
     source: `(* ===================================================================== *)
 (* TRUE MK THEOREM #6: Stage II Morse-Kelley Impredicative Comprehension *)
 (* In MK_Impredicative mode, comprehension formulas { x | phi(x) } may   *)
@@ -1252,8 +1324,8 @@ theorem thm_mk_impredicative_compr : ImpredicativeClassFormula =
 
   false_formula_as_proof: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #1] Confusing a Formula Definition with a Proof Term',
-    summary: 'Defines a false formula False_RussellIsSet = Set(R) (legal Type!) and tries to use its name as a proof term.',
+    title: '[REJECTED 1] Formula Definition Used as Proof Term',
+    summary: 'Defines a false formula False_RussellIsSet (legal Type) and tries to use its name as a proof term.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #1 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
 (* Defining \`formula False_RussellIsSet = Set({ x | x in x -> Bot });\`   *)
@@ -1272,8 +1344,8 @@ theorem bad_claim_russell_is_set : Set({ x | x in x -> Bot }) =
 
   false_pack_russell_as_set: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #2] Packing Russell Proper Class into exists (y:Set)',
-    summary: 'Tries to prove exists (y:Set). y = {x | x in x -> Bot} by packing the Russell class into a SetSort existential.',
+    title: '[REJECTED 2] Packing Russell Proper Class as Set Witness',
+    summary: 'Tries to pack the Russell proper class into a SetSort existential without Set witness verification.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #2 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
 (* Attempting to prove that Russell's Proper Class R = {x | x in x -> Bot}*)
@@ -1293,8 +1365,8 @@ theorem bad_pack_russell_as_set : exists (y:Set). y = { x | x in x -> Bot } =
 
   false_every_class_is_set: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #3] Instantiating forall (x:Set) with a Proper Class X',
-    summary: 'Tries to deduce forall (X:Class). P(X) from forall (x:Set). P(x) via tapp(h, X) without Set(X).',
+    title: '[REJECTED 3] Set-Sorted Quantifier Instantiated with Proper Class',
+    summary: 'Tries to instantiate a Set-sorted universal quantifier with an arbitrary Class variable without Set(X).',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #3 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
 (* Attempting to instantiate a Set-sorted quantifier \`forall (x:Set)\`    *)
@@ -1313,8 +1385,8 @@ theorem bad_class_instantiation :
 
   false_univ_in_univ: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #4] Claiming V in V ({x | Top} in {x | Top})',
-    summary: 'Tries to prove V in V via class comprehension without a proof of Set({x | Top}).',
+    title: '[REJECTED 4] Universal Class Self-Membership Claim',
+    summary: 'Tries to prove universal class self-membership via comprehension without a proof of Sethood.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #4 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
 (* In NBG/MK, \`z in { x | Top }\` requires BOTH \`Set(z)\` AND \`Top\`.       *)
@@ -1331,8 +1403,8 @@ theorem bad_univ_in_univ : { x | Top } in { x | Top } =
 
   false_membership_sym: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #5] Claiming Membership is Symmetric (A in B -> B in A)',
-    summary: 'Defines the false formula A in B -> B in A and shows that returning h : A in B is rejected by type conversion.',
+    title: '[REJECTED 5] Symmetric Membership Claim',
+    summary: 'Defines a symmetric membership formula and shows that returning the antecedent hypothesis is rejected by type conversion.',
     source: `(* ===================================================================== *)
 (* FALSE STATEMENT #5 (DETERMINISTICALLY REJECTED BY COMPILER):          *)
 (* \`formula False_MembershipSym\` is a syntactically well-formed Type,    *)
@@ -1353,8 +1425,8 @@ theorem bad_membership_sym : False_MembershipSym =
 
   false_impredicative_in_nbg: {
     category: 'FALSE_REJECTED',
-    title: '[REJECTED #6] Impredicative Class Quantifier in Stage I NBG',
-    summary: 'Tries to use bound Class quantification inside { x | ... } while in theory NBG_Predicative;.',
+    title: '[REJECTED 6] Impredicative Class Quantifier in Predicative NBG',
+    summary: 'Tries to use bound Class quantification inside class comprehension while in theory NBG_Predicative.',
     source: `(* ===================================================================== *)
 (* FALSE IN STAGE I NBG (DETERMINISTICALLY REJECTED BY COMPILER):        *)
 (* Stage I \`NBG_Predicative\` forbids bound Class quantifiers             *)

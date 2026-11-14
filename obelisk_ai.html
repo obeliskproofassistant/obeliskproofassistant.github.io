@@ -1259,11 +1259,11 @@
     const THEOREMS = {
       russell: {
         title: "Russell's Proper Class Theorem",
-        math: `(⊢ Proper({ (y ∈ V) | (y ∉ y) }))`,
+        math: `(⊢ Proper({ (y : Class) | (y ∉ y) }))`,
         ascii: `formula False_RussellIsSet = Set({ x | ((x in x) -> Bot) });\ntheorem thm_russell_not_set : (Set(R) -> Bot) =\n  fn (hSet : Set(R)) => ...;`,
         sideConditions: [
           "Condensed form (0 assumptions): Unconditionally proves the Russell collection is a proper class.",
-          "Detaches intermediate lemma: (⊢ ¬(∃(x ∈ V) (x = R))) via Modus Ponens with (Proper(K) ⟺ ¬Set(K)).",
+          "Detaches intermediate lemma: (⊢ ¬(∃(x : Class) ((x ∈ V) ∧ (x = R)))) via Modus Ponens with (Proper(K) ⟺ ¬Set(K)).",
           "Universal class (V ≝ { x | (x = x) }); (Set(x) ⟺ (x ∈ V)).",
           "Derived without Kuratowski rank elevation; directly resolves Russell's paradox in MK class theory."
         ]
@@ -1292,7 +1292,7 @@
       },
       conditional_term: {
         title: "Syntactic Conditional Term Constructor (CIf)",
-        math: `(⟦ CIf(P, A, B) ⟧ = { (x ∈ V) | ((⟦ P ⟧ ∧ (x ∈ A)) ∨ (⟦ ¬ P ⟧ ∧ (x ∈ B))) })`,
+        math: `(⟦ CIf(P, A, B) ⟧ = { (x : Class) | ((⟦ P ⟧ ∧ (x ∈ A)) ∨ (⟦ ¬ P ⟧ ∧ (x ∈ B))) })`,
         ascii: `CIf(P, A, B) : ClassTerm with denotation mediated strictly by valuation operator [[ . ]]`,
         sideConditions: [
           "Syntax/Semantics separation: CIf is a pure syntactic constructor (not an opaque Value).",
