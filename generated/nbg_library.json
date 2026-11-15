@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 135,
-  "verified_count": 135,
-  "derived_count": 112,
+  "total_count": 140,
+  "verified_count": 140,
+  "derived_count": 117,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1223,6 +1223,51 @@
       "statement_unicode": "Π(A:Class), Π(B:Class), ((Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))) → ((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A)))))",
       "proof_unicode": "(λ(A:Class). (λ(B:Class). (λ(hIff:Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))). ⟨(λ(X:Class). fst((hIff X))), (λ(X:Class). snd((hIff X)))⟩)))",
       "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true))) * (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true))))) -> (Sigma (_ : (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true)))) * (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true)))))))"
+    },
+    {
+      "id": 136,
+      "num": "NBG-136",
+      "name": "thm_conjunction_of_forall_to_forall_biconditional",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(B:Class), (((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A)))) → Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A))))",
+      "proof_unicode": "(λ(A:Class). (λ(B:Class). (λ(hConj:((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A))))). (λ(X:Class). ⟨(fst(hConj) X), (snd(hConj) X)⟩))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true)))) * (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true))))) -> (Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true))) * (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true)))))))"
+    },
+    {
+      "id": 137,
+      "num": "NBG-137",
+      "name": "thm_relational_composition_witness_monotonicity_left",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(y:Class), Π(R:Class), Π(R2:Class), Π(S:Class), ((((x ∈ R) × (y ∈ S)) × ((x ∈ R) → (x ∈ R2))) → ((x ∈ R2) × (y ∈ S)))",
+      "proof_unicode": "(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(R2:Class). (λ(S:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((x ∈ R) → (x ∈ R2)))). ⟨(snd(h) fst(fst(h))), snd(fst(h))⟩))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (y : Class) -> (Pi (R : Class) -> (Pi (R2 : Class) -> (Pi (S : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) R) true)) * (Id Prop ((In y) S) true))) * (Pi (_ : (Id Prop ((In x) R) true)) -> (Id Prop ((In x) R2) true)))) -> (Sigma (_ : (Id Prop ((In x) R2) true)) * (Id Prop ((In y) S) true))))))))"
+    },
+    {
+      "id": 138,
+      "num": "NBG-138",
+      "name": "thm_relational_composition_witness_monotonicity_right",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(y:Class), Π(R:Class), Π(S:Class), Π(S2:Class), ((((x ∈ R) × (y ∈ S)) × ((y ∈ S) → (y ∈ S2))) → ((x ∈ R) × (y ∈ S2)))",
+      "proof_unicode": "(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(S:Class). (λ(S2:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((y ∈ S) → (y ∈ S2)))). ⟨fst(fst(h)), (snd(h) snd(fst(h)))⟩))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (y : Class) -> (Pi (R : Class) -> (Pi (S : Class) -> (Pi (S2 : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) R) true)) * (Id Prop ((In y) S) true))) * (Pi (_ : (Id Prop ((In y) S) true)) -> (Id Prop ((In y) S2) true)))) -> (Sigma (_ : (Id Prop ((In x) R) true)) * (Id Prop ((In y) S2) true))))))))"
+    },
+    {
+      "id": 139,
+      "num": "NBG-139",
+      "name": "thm_class_symmetric_difference_left_elimination",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), (((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ A) → 𝟘)) → ((x ∈ B) × ((x ∈ A) → 𝟘)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ A) → 𝟘))). ⟨(((fst(h) (x ∈ B)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). ((ax_false_elim (x ∈ B)) (snd(h) fst(hL))))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). fst(hR))), snd(h)⟩))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Pi (_ : (Id Prop ((In x) B) true)) -> False))) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) B) true)) * (Pi (_ : (Id Prop ((In x) A) true)) -> False))) -> C)) -> C)))) * (Pi (_ : (Id Prop ((In x) A) true)) -> False))) -> (Sigma (_ : (Id Prop ((In x) B) true)) * (Pi (_ : (Id Prop ((In x) A) true)) -> False))))))"
+    },
+    {
+      "id": 140,
+      "num": "NBG-140",
+      "name": "thm_class_symmetric_difference_right_elimination",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), (((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ B) → 𝟘)) → ((x ∈ A) × ((x ∈ B) → 𝟘)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ B) → 𝟘))). ⟨(((fst(h) (x ∈ A)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hL))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). ((ax_false_elim (x ∈ A)) (snd(h) fst(hR))))), snd(h)⟩))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Pi (_ : (Id Prop ((In x) B) true)) -> False))) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) B) true)) * (Pi (_ : (Id Prop ((In x) A) true)) -> False))) -> C)) -> C)))) * (Pi (_ : (Id Prop ((In x) B) true)) -> False))) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Pi (_ : (Id Prop ((In x) B) true)) -> False))))))"
     }
   ]
 }
