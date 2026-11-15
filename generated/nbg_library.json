@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 130,
-  "verified_count": 130,
-  "derived_count": 107,
+  "total_count": 135,
+  "verified_count": 135,
+  "derived_count": 112,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1178,6 +1178,51 @@
       "statement_unicode": "Π(Lip:Class), Π(F:Class), Π(G:Class), ((((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip)))) → ((F, G) ∈ Lip))",
       "proof_unicode": "(λ(Lip:Class). (λ(F:Class). (λ(G:Class). (λ(hLip:(((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip))))). (((snd(hLip) F) G) fst(hLip))))))",
       "statement_ast": "(Pi (Lip : Class) -> (Pi (F : Class) -> (Pi (G : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In F) Lip) true)) * (Id Prop ((In G) Lip) true))) * (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In A) Lip) true)) * (Id Prop ((In B) Lip) true))) -> (Id Prop ((In ((DunaevPair A) B)) Lip) true)))))) -> (Id Prop ((In ((DunaevPair F) G)) Lip) true)))))"
+    },
+    {
+      "id": 131,
+      "num": "NBG-131",
+      "name": "thm_dunaev_pair_union_left_distributivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(y:Class), Π(X:Class), Π(Y:Class), Π(Z:Class), (((Π(C:Prop), (((x ∈ X) → C) → (((x ∈ Y) → C) → C))) × (y ∈ Z)) → Π(C:Prop), ((((x ∈ X) × (y ∈ Z)) → C) → ((((x ∈ Y) × (y ∈ Z)) → C) → C)))",
+      "proof_unicode": "(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((Π(C:Prop), (((x ∈ X) → C) → (((x ∈ Y) → C) → C))) × (y ∈ Z))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Z)) → C)). (λ(fR:(((x ∈ Y) × (y ∈ Z)) → C)). (((fst(h) C) (λ(hxX:(x ∈ X)). (fL ⟨hxX, snd(h)⟩))) (λ(hxY:(x ∈ Y)). (fR ⟨hxY, snd(h)⟩))))))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (y : Class) -> (Pi (X : Class) -> (Pi (Y : Class) -> (Pi (Z : Class) -> (Pi (_ : (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) X) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) Y) true)) -> C)) -> C)))) * (Id Prop ((In y) Z) true))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) X) true)) * (Id Prop ((In y) Z) true))) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) Y) true)) * (Id Prop ((In y) Z) true))) -> C)) -> C)))))))))"
+    },
+    {
+      "id": 132,
+      "num": "NBG-132",
+      "name": "thm_dunaev_pair_union_right_distributivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(y:Class), Π(X:Class), Π(Y:Class), Π(Z:Class), (((x ∈ X) × (Π(C:Prop), (((y ∈ Y) → C) → (((y ∈ Z) → C) → C)))) → Π(C:Prop), ((((x ∈ X) × (y ∈ Y)) → C) → ((((x ∈ X) × (y ∈ Z)) → C) → C)))",
+      "proof_unicode": "(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((x ∈ X) × (Π(C:Prop), (((y ∈ Y) → C) → (((y ∈ Z) → C) → C))))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Y)) → C)). (λ(fR:(((x ∈ X) × (y ∈ Z)) → C)). (((snd(h) C) (λ(hyY:(y ∈ Y)). (fL ⟨fst(h), hyY⟩))) (λ(hyZ:(y ∈ Z)). (fR ⟨fst(h), hyZ⟩))))))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (y : Class) -> (Pi (X : Class) -> (Pi (Y : Class) -> (Pi (Z : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) X) true)) * (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) Y) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) Z) true)) -> C)) -> C))))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) X) true)) * (Id Prop ((In y) Y) true))) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) X) true)) * (Id Prop ((In y) Z) true))) -> C)) -> C)))))))))"
+    },
+    {
+      "id": 133,
+      "num": "NBG-133",
+      "name": "thm_dunaev_pair_intersection_factoring",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(y:Class), Π(A:Class), Π(B:Class), Π(C:Class), Π(D:Class), ((((x ∈ A) × (y ∈ C)) × ((x ∈ B) × (y ∈ D))) → (((x ∈ A) × (x ∈ B)) × ((y ∈ C) × (y ∈ D))))",
+      "proof_unicode": "(λ(x:Class). (λ(y:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(h:(((x ∈ A) × (y ∈ C)) × ((x ∈ B) × (y ∈ D)))). ⟨⟨fst(fst(h)), fst(snd(h))⟩, ⟨snd(fst(h)), snd(snd(h))⟩⟩)))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (y : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (C : Class) -> (Pi (D : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In y) C) true))) * (Sigma (_ : (Id Prop ((In x) B) true)) * (Id Prop ((In y) D) true)))) -> (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) B) true))) * (Sigma (_ : (Id Prop ((In y) C) true)) * (Id Prop ((In y) D) true))))))))))"
+    },
+    {
+      "id": 134,
+      "num": "NBG-134",
+      "name": "thm_class_difference_union_absorption",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), ((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ A) × (x ∈ B)) → C) → C))) → (x ∈ A))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(hOr:Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ A) × (x ∈ B)) → C) → C))). (((hOr (x ∈ A)) (λ(hDiff:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hDiff))) (λ(hInter:((x ∈ A) × (x ∈ B))). fst(hInter)))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Pi (_ : (Id Prop ((In x) B) true)) -> False))) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) B) true))) -> C)) -> C)))) -> (Id Prop ((In x) A) true)))))"
+    },
+    {
+      "id": 135,
+      "num": "NBG-135",
+      "name": "thm_forall_biconditional_to_conjunction_of_forall",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(B:Class), ((Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))) → ((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A)))))",
+      "proof_unicode": "(λ(A:Class). (λ(B:Class). (λ(hIff:Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))). ⟨(λ(X:Class). fst((hIff X))), (λ(X:Class). snd((hIff X)))⟩)))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true))) * (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true))))) -> (Sigma (_ : (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) A) true)) -> (Id Prop ((In X) B) true)))) * (Pi (X : Class) -> (Pi (_ : (Id Prop ((In X) B) true)) -> (Id Prop ((In X) A) true)))))))"
     }
   ]
 }
