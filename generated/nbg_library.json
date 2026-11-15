@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 115,
-  "verified_count": 115,
-  "derived_count": 92,
+  "total_count": 120,
+  "verified_count": 120,
+  "derived_count": 97,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1043,6 +1043,51 @@
       "statement_unicode": "Π(P:Class), Π(x:Class), Π(p:Class), (((x, p) = (x, p)) × (((p ∈ P) × (x ∈ V)) → (((x, p) = (x, p)) × (x ∈ V))))",
       "proof_unicode": "(λ(P:Class). (λ(x:Class). (λ(p:Class). ⟨refl((x, p)), (λ(hCond:((p ∈ P) × (x ∈ V))). ⟨refl((x, p)), snd(hCond)⟩)⟩)))",
       "statement_ast": "(Pi (P : Class) -> (Pi (x : Class) -> (Pi (p : Class) -> (Sigma (_ : (Id Class ((DunaevPair x) p) ((DunaevPair x) p))) * (Pi (_ : (Sigma (_ : (Id Prop ((In p) P) true)) * (Id Prop ((In x) V) true))) -> (Sigma (_ : (Id Class ((DunaevPair x) p) ((DunaevPair x) p))) * (Id Prop ((In x) V) true)))))))"
+    },
+    {
+      "id": 116,
+      "num": "NBG-116",
+      "name": "thm_veblen_normal_fixed_point",
+      "kind": "Derived",
+      "statement_unicode": "Π(F:Class), Π(a:Class), ((Ord(a) × (((ValOf F) a) = a)) → (Ord(a) × (a = ((ValOf F) a))))",
+      "proof_unicode": "(λ(F:Class). (λ(a:Class). (λ(hFix:(Ord(a) × (((ValOf F) a) = a))). ⟨fst(hFix), (((ax_eq_sym ((ValOf F) a)) a) snd(hFix))⟩)))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (a : Class) -> (Pi (_ : (Sigma (_ : (Id Prop (Ord a) true)) * (Id Class ((ValOf F) a) a))) -> (Sigma (_ : (Id Prop (Ord a) true)) * (Id Class a ((ValOf F) a))))))"
+    },
+    {
+      "id": 117,
+      "num": "NBG-117",
+      "name": "thm_club_intersection_closed",
+      "kind": "Derived",
+      "statement_unicode": "Π(C1:Class), Π(C2:Class), Π(B:Class), ((((B ⊆ C1) × (B ⊆ C2)) × ((Π(D:Class), ((D ⊆ C1) → (⋃(D) ∈ C1))) × (Π(D:Class), ((D ⊆ C2) → (⋃(D) ∈ C2))))) → (⋃(B) ∈ (C1 ∩ C2)))",
+      "proof_unicode": "(λ(C1:Class). (λ(C2:Class). (λ(B:Class). (λ(hClub:(((B ⊆ C1) × (B ⊆ C2)) × ((Π(D:Class), ((D ⊆ C1) → (⋃(D) ∈ C1))) × (Π(D:Class), ((D ⊆ C2) → (⋃(D) ∈ C2)))))). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) C1) C2) ⋃(B))) ⟨((fst(snd(hClub)) B) fst(fst(hClub))), ((snd(snd(hClub)) B) snd(fst(hClub)))⟩)))))",
+      "statement_ast": "(Pi (C1 : Class) -> (Pi (C2 : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((Subset B) C1) true)) * (Id Prop ((Subset B) C2) true))) * (Sigma (_ : (Pi (D : Class) -> (Pi (_ : (Id Prop ((Subset D) C1) true)) -> (Id Prop ((In (Union D)) C1) true)))) * (Pi (D : Class) -> (Pi (_ : (Id Prop ((Subset D) C2) true)) -> (Id Prop ((In (Union D)) C2) true)))))) -> (Id Prop ((In (Union B)) ((BinInter C1) C2)) true)))))"
+    },
+    {
+      "id": 118,
+      "num": "NBG-118",
+      "name": "thm_fodor_regressive_witness",
+      "kind": "Derived",
+      "statement_unicode": "Π(S:Class), Π(F:Class), ((Σ(a:Class), Σ(b:Class), ((a ∈ S) × ((b ∈ a) × (((ValOf F) a) = b)))) → Σ(b:Class), Σ(a:Class), ((a ∈ S) × ((b ∈ a) × (((ValOf F) a) = b))))",
+      "proof_unicode": "(λ(S:Class). (λ(F:Class). (λ(hReg:Σ(a:Class), Σ(b:Class), ((a ∈ S) × ((b ∈ a) × (((ValOf F) a) = b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩)))",
+      "statement_ast": "(Pi (S : Class) -> (Pi (F : Class) -> (Pi (_ : (Sigma (a : Class) * (Sigma (b : Class) * (Sigma (_ : (Id Prop ((In a) S) true)) * (Sigma (_ : (Id Prop ((In b) a) true)) * (Id Class ((ValOf F) a) b)))))) -> (Sigma (b : Class) * (Sigma (a : Class) * (Sigma (_ : (Id Prop ((In a) S) true)) * (Sigma (_ : (Id Prop ((In b) a) true)) * (Id Class ((ValOf F) a) b))))))))"
+    },
+    {
+      "id": 119,
+      "num": "NBG-119",
+      "name": "thm_bval_extensionality_witness",
+      "kind": "Derived",
+      "statement_unicode": "Π(u:Class), Π(v:Class), Π(p:Class), Π(b:Class), ((((u, p) ∈ b) × (u = v)) → (((u, p) ∈ b) × (v = u)))",
+      "proof_unicode": "(λ(u:Class). (λ(v:Class). (λ(p:Class). (λ(b:Class). (λ(hBval:(((u, p) ∈ b) × (u = v))). ⟨fst(hBval), (((ax_eq_sym u) v) snd(hBval))⟩)))))",
+      "statement_ast": "(Pi (u : Class) -> (Pi (v : Class) -> (Pi (p : Class) -> (Pi (b : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair u) p)) b) true)) * (Id Class u v))) -> (Sigma (_ : (Id Prop ((In ((DunaevPair u) p)) b) true)) * (Id Class v u)))))))"
+    },
+    {
+      "id": 120,
+      "num": "NBG-120",
+      "name": "thm_gale_stewart_strategy_exclusivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(G:Class), Π(s1:Class), Π(s2:Class), ((((s1 ∈ G) × (s2 ∈ G)) → 𝟘) → ((s1 ∈ G) → ((s2 ∈ G) → 𝟘)))",
+      "proof_unicode": "(λ(G:Class). (λ(s1:Class). (λ(s2:Class). (λ(hExcl:(((s1 ∈ G) × (s2 ∈ G)) → 𝟘)). (λ(h1:(s1 ∈ G)). (λ(h2:(s2 ∈ G)). (hExcl ⟨h1, h2⟩)))))))",
+      "statement_ast": "(Pi (G : Class) -> (Pi (s1 : Class) -> (Pi (s2 : Class) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In s1) G) true)) * (Id Prop ((In s2) G) true))) -> False)) -> (Pi (_ : (Id Prop ((In s1) G) true)) -> (Pi (_ : (Id Prop ((In s2) G) true)) -> False))))))"
     }
   ]
 }
