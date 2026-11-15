@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 210,
-  "verified_count": 210,
-  "derived_count": 187,
+  "total_count": 215,
+  "verified_count": 215,
+  "derived_count": 192,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1898,6 +1898,51 @@
       "statement_unicode": "Π(CoendWedge:Class), Π(WedgeMed:Class), Π(EqNat:Class), Π(w:Class), Π(factorDay:Class), Π(uniqMap:Class), ((((w ∈ CoendWedge) → ((w, factorDay) ∈ WedgeMed)) × (((w, factorDay) ∈ WedgeMed) → ((factorDay, uniqMap) ∈ EqNat))) → ((w ∈ CoendWedge) → ((factorDay, uniqMap) ∈ EqNat)))",
       "proof_unicode": "(λ(CoendWedge:Class). (λ(WedgeMed:Class). (λ(EqNat:Class). (λ(w:Class). (λ(factorDay:Class). (λ(uniqMap:Class). (λ(h:(((w ∈ CoendWedge) → ((w, factorDay) ∈ WedgeMed)) × (((w, factorDay) ∈ WedgeMed) → ((factorDay, uniqMap) ∈ EqNat)))). (λ(hwWedge:(w ∈ CoendWedge)). (snd(h) (fst(h) hwWedge))))))))))",
       "statement_ast": "(Pi (CoendWedge : Class) -> (Pi (WedgeMed : Class) -> (Pi (EqNat : Class) -> (Pi (w : Class) -> (Pi (factorDay : Class) -> (Pi (uniqMap : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In w) CoendWedge) true)) -> (Id Prop ((In ((DunaevPair w) factorDay)) WedgeMed) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair w) factorDay)) WedgeMed) true)) -> (Id Prop ((In ((DunaevPair factorDay) uniqMap)) EqNat) true)))) -> (Pi (_ : (Id Prop ((In w) CoendWedge) true)) -> (Id Prop ((In ((DunaevPair factorDay) uniqMap)) EqNat) true)))))))))"
+    },
+    {
+      "id": 211,
+      "num": "NBG-211",
+      "name": "thm_extranatural_wedge_dinaturality_square",
+      "kind": "Derived",
+      "statement_unicode": "Π(HomAB:Class), Π(DinatPair:Class), Π(EqTarget:Class), Π(f:Class), Π(Paf_wc:Class), Π(Pbf_wb:Class), ((((f ∈ HomAB) → ((Paf_wc, Pbf_wb) ∈ DinatPair)) × (((Paf_wc, Pbf_wb) ∈ DinatPair) → ((Paf_wc, Pbf_wb) ∈ EqTarget))) → ((f ∈ HomAB) → ((Paf_wc, Pbf_wb) ∈ EqTarget)))",
+      "proof_unicode": "(λ(HomAB:Class). (λ(DinatPair:Class). (λ(EqTarget:Class). (λ(f:Class). (λ(Paf_wc:Class). (λ(Pbf_wb:Class). (λ(h:(((f ∈ HomAB) → ((Paf_wc, Pbf_wb) ∈ DinatPair)) × (((Paf_wc, Pbf_wb) ∈ DinatPair) → ((Paf_wc, Pbf_wb) ∈ EqTarget)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom))))))))))",
+      "statement_ast": "(Pi (HomAB : Class) -> (Pi (DinatPair : Class) -> (Pi (EqTarget : Class) -> (Pi (f : Class) -> (Pi (Paf_wc : Class) -> (Pi (Pbf_wb : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Paf_wc) Pbf_wb)) DinatPair) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair Paf_wc) Pbf_wb)) DinatPair) true)) -> (Id Prop ((In ((DunaevPair Paf_wc) Pbf_wb)) EqTarget) true)))) -> (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Paf_wc) Pbf_wb)) EqTarget) true)))))))))"
+    },
+    {
+      "id": 212,
+      "num": "NBG-212",
+      "name": "thm_categorical_end_universal_wedge_factorization",
+      "kind": "Derived",
+      "statement_unicode": "Π(WedgeP:Class), Π(EndMed:Class), Π(EqApex:Class), Π(w:Class), Π(factorEnd:Class), Π(uniqEnd:Class), ((((w ∈ WedgeP) → ((w, factorEnd) ∈ EndMed)) × (((w, factorEnd) ∈ EndMed) → ((factorEnd, uniqEnd) ∈ EqApex))) → ((w ∈ WedgeP) → ((factorEnd, uniqEnd) ∈ EqApex)))",
+      "proof_unicode": "(λ(WedgeP:Class). (λ(EndMed:Class). (λ(EqApex:Class). (λ(w:Class). (λ(factorEnd:Class). (λ(uniqEnd:Class). (λ(h:(((w ∈ WedgeP) → ((w, factorEnd) ∈ EndMed)) × (((w, factorEnd) ∈ EndMed) → ((factorEnd, uniqEnd) ∈ EqApex)))). (λ(hwWedge:(w ∈ WedgeP)). (snd(h) (fst(h) hwWedge))))))))))",
+      "statement_ast": "(Pi (WedgeP : Class) -> (Pi (EndMed : Class) -> (Pi (EqApex : Class) -> (Pi (w : Class) -> (Pi (factorEnd : Class) -> (Pi (uniqEnd : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In w) WedgeP) true)) -> (Id Prop ((In ((DunaevPair w) factorEnd)) EndMed) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair w) factorEnd)) EndMed) true)) -> (Id Prop ((In ((DunaevPair factorEnd) uniqEnd)) EqApex) true)))) -> (Pi (_ : (Id Prop ((In w) WedgeP) true)) -> (Id Prop ((In ((DunaevPair factorEnd) uniqEnd)) EqApex) true)))))))))"
+    },
+    {
+      "id": 213,
+      "num": "NBG-213",
+      "name": "thm_categorical_coend_universal_cowedge_factorization",
+      "kind": "Derived",
+      "statement_unicode": "Π(CowedgeP:Class), Π(CoendMed:Class), Π(EqNadir:Class), Π(cw:Class), Π(factorCoend:Class), Π(uniqCoend:Class), ((((cw ∈ CowedgeP) → ((cw, factorCoend) ∈ CoendMed)) × (((cw, factorCoend) ∈ CoendMed) → ((factorCoend, uniqCoend) ∈ EqNadir))) → ((cw ∈ CowedgeP) → ((factorCoend, uniqCoend) ∈ EqNadir)))",
+      "proof_unicode": "(λ(CowedgeP:Class). (λ(CoendMed:Class). (λ(EqNadir:Class). (λ(cw:Class). (λ(factorCoend:Class). (λ(uniqCoend:Class). (λ(h:(((cw ∈ CowedgeP) → ((cw, factorCoend) ∈ CoendMed)) × (((cw, factorCoend) ∈ CoendMed) → ((factorCoend, uniqCoend) ∈ EqNadir)))). (λ(hcwCow:(cw ∈ CowedgeP)). (snd(h) (fst(h) hcwCow))))))))))",
+      "statement_ast": "(Pi (CowedgeP : Class) -> (Pi (CoendMed : Class) -> (Pi (EqNadir : Class) -> (Pi (cw : Class) -> (Pi (factorCoend : Class) -> (Pi (uniqCoend : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In cw) CowedgeP) true)) -> (Id Prop ((In ((DunaevPair cw) factorCoend)) CoendMed) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair cw) factorCoend)) CoendMed) true)) -> (Id Prop ((In ((DunaevPair factorCoend) uniqCoend)) EqNadir) true)))) -> (Pi (_ : (Id Prop ((In cw) CowedgeP) true)) -> (Id Prop ((In ((DunaevPair factorCoend) uniqCoend)) EqNadir) true)))))))))"
+    },
+    {
+      "id": 214,
+      "num": "NBG-214",
+      "name": "thm_fubini_iterated_end_interchange_isomorphism",
+      "kind": "Derived",
+      "statement_unicode": "Π(EndAB:Class), Π(IsoBA:Class), Π(EqEndAB:Class), Π(x:Class), Π(fubABx:Class), Π(y:Class), Π(fubBAy:Class), ((((x ∈ EndAB) → ((fubABx, y) ∈ IsoBA)) × (((fubABx, y) ∈ IsoBA) → ((fubBAy, x) ∈ EqEndAB))) → ((x ∈ EndAB) → ((fubBAy, x) ∈ EqEndAB)))",
+      "proof_unicode": "(λ(EndAB:Class). (λ(IsoBA:Class). (λ(EqEndAB:Class). (λ(x:Class). (λ(fubABx:Class). (λ(y:Class). (λ(fubBAy:Class). (λ(h:(((x ∈ EndAB) → ((fubABx, y) ∈ IsoBA)) × (((fubABx, y) ∈ IsoBA) → ((fubBAy, x) ∈ EqEndAB)))). (λ(hxEnd:(x ∈ EndAB)). (snd(h) (fst(h) hxEnd)))))))))))",
+      "statement_ast": "(Pi (EndAB : Class) -> (Pi (IsoBA : Class) -> (Pi (EqEndAB : Class) -> (Pi (x : Class) -> (Pi (fubABx : Class) -> (Pi (y : Class) -> (Pi (fubBAy : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) EndAB) true)) -> (Id Prop ((In ((DunaevPair fubABx) y)) IsoBA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair fubABx) y)) IsoBA) true)) -> (Id Prop ((In ((DunaevPair fubBAy) x)) EqEndAB) true)))) -> (Pi (_ : (Id Prop ((In x) EndAB) true)) -> (Id Prop ((In ((DunaevPair fubBAy) x)) EqEndAB) true))))))))))"
+    },
+    {
+      "id": 215,
+      "num": "NBG-215",
+      "name": "thm_weighted_limit_enriched_end_representation",
+      "kind": "Derived",
+      "statement_unicode": "Π(WLimWD:Class), Π(IsoEndHom:Class), Π(EqWLim:Class), Π(u:Class), Π(repEndu:Class), Π(v:Class), Π(invEndv:Class), ((((u ∈ WLimWD) → ((repEndu, v) ∈ IsoEndHom)) × (((repEndu, v) ∈ IsoEndHom) → ((invEndv, u) ∈ EqWLim))) → ((u ∈ WLimWD) → ((invEndv, u) ∈ EqWLim)))",
+      "proof_unicode": "(λ(WLimWD:Class). (λ(IsoEndHom:Class). (λ(EqWLim:Class). (λ(u:Class). (λ(repEndu:Class). (λ(v:Class). (λ(invEndv:Class). (λ(h:(((u ∈ WLimWD) → ((repEndu, v) ∈ IsoEndHom)) × (((repEndu, v) ∈ IsoEndHom) → ((invEndv, u) ∈ EqWLim)))). (λ(huWLim:(u ∈ WLimWD)). (snd(h) (fst(h) huWLim)))))))))))",
+      "statement_ast": "(Pi (WLimWD : Class) -> (Pi (IsoEndHom : Class) -> (Pi (EqWLim : Class) -> (Pi (u : Class) -> (Pi (repEndu : Class) -> (Pi (v : Class) -> (Pi (invEndv : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) WLimWD) true)) -> (Id Prop ((In ((DunaevPair repEndu) v)) IsoEndHom) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair repEndu) v)) IsoEndHom) true)) -> (Id Prop ((In ((DunaevPair invEndv) u)) EqWLim) true)))) -> (Pi (_ : (Id Prop ((In u) WLimWD) true)) -> (Id Prop ((In ((DunaevPair invEndv) u)) EqWLim) true))))))))))"
     }
   ]
 }
