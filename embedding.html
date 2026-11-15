@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="obk-embed-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="js/proof_tree_collapse.js" defer></script>
     <style>
-        :root {
+        .obk-embed-root, .obk-embed-body {
           --bg-primary: #0b0f19;
           --bg-secondary: #111827;
           --bg-card: #1e293b;
@@ -28,8 +28,8 @@
           --accent-purple: #a855f7;
           --border-color: #334155;
         }
-        * { box-sizing: border-box; }
-        body {
+        .obk-embed-body, #nav-toolbar, .toolbar-title, .toolbar-nav, .toolbar-btn, #content-container, #myhtmloutput, #chapters-main, .section-slot, .manual-section, .table-container, .section-external-table, .internal-entity-table, .field-name, .field-value, .sec-placeholder-card { box-sizing: border-box; }
+        .obk-embed-body {
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -117,7 +117,7 @@
             margin: 0 auto;
         }
 
-        header.demo-header {
+        .demo-header {
             background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
@@ -149,7 +149,7 @@
             background: rgba(56, 189, 248, 0.22);
             color: #fff;
         }
-        h1.demo-title {
+        .demo-title {
             margin: 0 0 0.5rem 0;
             font-size: 1.75rem;
             color: #f8fafc;
@@ -227,7 +227,7 @@
         }
 
         /* Chapter Slots & Placeholders */
-        main#chapters-main {
+        #chapters-main {
             max-width: 100%;
             margin: 0 auto;
         }
@@ -239,7 +239,7 @@
             margin-bottom: 2.5rem;
             scroll-margin-top: 64px;
         }
-        .section-header h2 {
+        .section-header .obk-section-h2 {
             font-size: 1.45rem;
             margin: 0 0 0.25rem 0;
             color: var(--accent-blue);
@@ -264,7 +264,8 @@
             border-collapse: collapse;
             text-align: left;
         }
-        .section-external-table > thead > tr > th {
+        .section-external-table .col-entity,
+        .section-external-table .col-num {
             background: var(--bg-card);
             color: var(--text-secondary);
             font-weight: 700;
@@ -322,13 +323,13 @@
             table-layout: fixed;
             border-collapse: collapse;
         }
-        .internal-entity-table tr {
+        .internal-entity-table .obk-internal-row {
             border-bottom: 1px solid rgba(51, 65, 85, 0.6);
         }
-        .internal-entity-table tr:last-child {
+        .internal-entity-table .obk-internal-row:last-child {
             border-bottom: none;
         }
-        .internal-entity-table th.field-name {
+        .internal-entity-table .field-name {
             width: 150px;
             min-width: 150px;
             max-width: 150px;
@@ -343,7 +344,7 @@
             border-right: 1px solid rgba(51, 65, 85, 0.6);
             vertical-align: middle;
         }
-        .internal-entity-table td.field-value {
+        .internal-entity-table .field-value {
             width: calc(100% - 150px);
             max-width: calc(100% - 150px);
             word-break: break-word;
@@ -385,7 +386,7 @@
         .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
 
         /* Algorithmic Clickable Symbol Links */
-        a.sym-link, .formula-latex a, mjx-container a {
+        .sym-link, .obk-mjx-link {
             all: unset;
             cursor: pointer;
             color: inherit !important;
@@ -396,7 +397,7 @@
             border-radius: 3px;
             transition: background 0.12s ease, text-decoration-color 0.12s ease;
         }
-        a.sym-link:hover, .formula-latex a:hover, mjx-container a:hover {
+        .sym-link:hover, .obk-mjx-link:hover {
             background: rgba(56, 189, 248, 0.22);
             text-decoration-style: solid;
             text-decoration-color: #38bdf8;
@@ -427,10 +428,10 @@
         .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
         .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
         .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
-        body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
-        body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
-        body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
-        body.hide-schemata .row-scheme { display: none !important; }
+        .hide-latex .row-latex, .hide-latex .formula-latex { display: none !important; }
+        .hide-unicode .row-unicode, .hide-unicode .formula-unicode { display: none !important; }
+        .hide-ansii .row-ansii, .hide-ansii .formula-ansii { display: none !important; }
+        .hide-schemata .row-scheme { display: none !important; }
         .metalevel-badge { display: none !important; }
 
         /* Placeholder Cards for On-Demand & Background Chapter Loading */
@@ -456,7 +457,7 @@
             flex-wrap: wrap;
             gap: 0.75rem;
         }
-        .sec-placeholder-header h3 {
+        .sec-placeholder-header .obk-placeholder-h3 {
             margin: 0;
             font-size: 1.22rem;
             color: var(--accent-blue);
@@ -521,7 +522,7 @@
         }
     </style>
 </head>
-<body class="hide-latex hide-ansii hide-schemata">
+<body class="obk-embed-body hide-latex hide-ansii hide-schemata">
 
 <div id="nav-toolbar">
     <div class="toolbar-title">
@@ -626,7 +627,7 @@ function renderPlaceholders() {
             <div class="sec-placeholder-card ${isPriority ? 'priority-loading' : ''}" id="placeholder-sec-${meta.id}">
                 ${isPriority ? '<span id="DefIsProperClass" style="display:none;"></span>' : ''}
                 <div class="sec-placeholder-header">
-                    <h3><span>Chapter ${meta.id}.</span> ${meta.title} (${meta.range})</h3>
+                    <h3 class="obk-placeholder-h3"><span>Chapter ${meta.id}.</span> ${meta.title} (${meta.range})</h3>
                     <span class="sec-status-badge ${isPriority ? 'loading' : 'queued'}" id="status-badge-${meta.id}">
                         ${isPriority ? 'Priority Loading...' : 'Background Queued'}
                     </span>
@@ -640,6 +641,9 @@ function renderPlaceholders() {
 
 function rewriteRelativeAnchors(rootEl) {
     if (!rootEl) return;
+    rootEl.querySelectorAll('.section-header h2').forEach(el => el.classList.add('obk-section-h2'));
+    rootEl.querySelectorAll('.internal-entity-table tr').forEach(el => el.classList.add('obk-internal-row'));
+    rootEl.querySelectorAll('.formula-latex a, mjx-container a').forEach(el => el.classList.add('obk-mjx-link'));
     const isEmbedded = isEmbeddedContext();
     const anchors = rootEl.querySelectorAll("a[href]");
     for (const a of anchors) {

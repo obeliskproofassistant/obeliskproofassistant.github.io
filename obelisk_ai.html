@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="dark-mode">
+<html lang="en" class="dark-mode obk-ai-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,7 +40,7 @@
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
   <style>
-    :root {
+    .obk-ai-root, .obk-ai-body {
       --bg: #090d16;
       --card-bg: rgba(15, 23, 42, 0.75);
       --card-border: rgba(255, 255, 255, 0.08);
@@ -58,13 +58,13 @@
       --side-border: rgba(16, 185, 129, 0.3);
     }
 
-    * {
+    .obk-ai-body, .container, .site-header, .header-inner, .logo-container, .logo-img, .logo-title, .main-nav, .btn, .hero, .hero-badge, .obk-hero-h1, .hero-desc, .hero-actions, .exec-overview, .exec-header, .exec-title, .exec-tag, .exec-grid, .exec-card, .obk-exec-h4, .obk-exec-p, .inspector-section, .inspector-card, .inspector-nav, .thm-btn, .inspector-toolbar, .syntax-toggle-btn, .copy-btn, .syntax-display-frame, .obk-syntax-pre, .side-conditions-box, .side-conditions-header, .side-conditions-list, .section-title-wrap, .section-subtitle, .section-title, .triad-grid, .triad-card, .triad-title, .triad-text, .comp-table-container, .comp-table, .obk-comp-th, .obk-comp-td, .audit-box, .demo-section, .demo-frame-container, .demo-iframe, .obk-ai-footer {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    body {
+    .obk-ai-body {
       background-color: var(--bg);
       color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -90,7 +90,7 @@
     }
 
     /* Navbar */
-    header.site-header {
+    .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
@@ -126,17 +126,17 @@
       letter-spacing: -0.02em;
     }
 
-    .logo-title span {
+    .logo-title .obk-logo-sub {
       color: var(--primary);
     }
 
-    nav.main-nav {
+    .main-nav {
       display: flex;
       gap: 1.1rem;
       align-items: center;
     }
 
-    nav.main-nav a {
+    .main-nav .obk-ai-nav-link {
       color: var(--text-muted);
       text-decoration: none;
       font-size: 0.88rem;
@@ -144,7 +144,7 @@
       transition: color 0.2s;
     }
 
-    nav.main-nav a:hover {
+    .main-nav .obk-ai-nav-link:hover {
       color: var(--primary);
     }
 
@@ -205,7 +205,7 @@
       margin-bottom: 1.5rem;
     }
 
-    .hero h1 {
+    .hero .obk-hero-h1 {
       font-size: 3.2rem;
       font-weight: 800;
       line-height: 1.15;
@@ -213,7 +213,7 @@
       margin-bottom: 1.25rem;
     }
 
-    .hero h1 .gradient-text {
+    .hero .obk-hero-h1 .gradient-text {
       background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -288,7 +288,7 @@
       flex-direction: column;
     }
 
-    .exec-card h4 {
+    .exec-card .obk-exec-h4 {
       font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 0.6rem;
@@ -297,7 +297,7 @@
       gap: 0.5rem;
     }
 
-    .exec-card p {
+    .exec-card .obk-exec-p {
       font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
@@ -408,7 +408,7 @@
       position: relative;
     }
 
-    .syntax-display-frame pre {
+    .syntax-display-frame .obk-syntax-pre {
       font-family: 'JetBrains Mono', monospace;
       font-size: 1.05rem;
       line-height: 1.7;
@@ -517,19 +517,19 @@
       margin-bottom: 4rem;
     }
 
-    table.comp-table {
+    .comp-table {
       width: 100%;
       border-collapse: collapse;
       text-align: left;
       font-size: 0.9rem;
     }
 
-    table.comp-table th, table.comp-table td {
+    .comp-table .obk-comp-th, .comp-table .obk-comp-td {
       padding: 1rem 1.25rem;
       border-bottom: 1px solid var(--card-border);
     }
 
-    table.comp-table th {
+    .comp-table .obk-comp-th {
       background: rgba(15, 23, 42, 0.9);
       color: var(--primary);
       font-weight: 700;
@@ -538,7 +538,7 @@
       letter-spacing: 0.05em;
     }
 
-    table.comp-table tr:hover {
+    .comp-table .obk-comp-tr:hover {
       background: rgba(255, 255, 255, 0.02);
     }
 
@@ -565,14 +565,14 @@
       align-items: center;
     }
 
-    .audit-info h3 {
+    .audit-info .obk-audit-h3 {
       font-size: 1.45rem;
       font-weight: 800;
       margin-bottom: 0.75rem;
       color: #fff;
     }
 
-    .audit-info p {
+    .audit-info .obk-audit-p {
       font-size: 0.95rem;
       color: var(--text-muted);
       line-height: 1.6;
@@ -625,7 +625,7 @@
     }
 
     /* Footer */
-    footer {
+    .obk-ai-footer {
       border-top: 1px solid var(--card-border);
       padding: 3rem 0;
       text-align: center;
@@ -633,12 +633,12 @@
       font-size: 0.88rem;
     }
 
-    footer a {
+    .obk-ai-footer .obk-footer-link {
       color: var(--primary);
       text-decoration: none;
     }
 
-    footer a:hover {
+    .obk-ai-footer .obk-footer-link:hover {
       text-decoration: underline;
     }
 
@@ -650,14 +650,14 @@
         flex-wrap: wrap;
         gap: 0.6rem;
       }
-      .hero h1 {
+      .hero .obk-hero-h1 {
         font-size: 2.1rem;
       }
       .audit-box {
         grid-template-columns: 1fr;
         padding: 1.5rem;
       }
-      nav.main-nav {
+      .main-nav {
         display: flex;
         flex-wrap: wrap;
         gap: 0.45rem;
@@ -672,24 +672,24 @@
     }
   </style>
 </head>
-<body>
+<body class="obk-ai-body">
 
   <!-- Header -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="index.html" class="logo-container">
         <img src="images/logo.png" alt="Obelisk Logo" class="logo-img">
-        <div class="logo-title">Obelisk <span>WIP</span></div>
+        <div class="logo-title">Obelisk <span class="obk-logo-sub">WIP</span></div>
       </a>
       <nav class="main-nav">
-        <a href="index.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Classic View</a>
-        <a href="#demo" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Theory</a>
-        <a href="#walkthrough" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Walkthrough</a>
-        <a href="repl.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">REPL</a>
+        <a class="obk-ai-nav-link" href="index.html" style="border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; background: rgba(56, 189, 248, 0.08); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Classic View</a>
+        <a class="obk-ai-nav-link" href="#demo" style="border: 1px solid rgba(52, 211, 153, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Theory</a>
+        <a class="obk-ai-nav-link" href="#walkthrough" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #38bdf8; background: rgba(56, 189, 248, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">Walkthrough</a>
+        <a class="obk-ai-nav-link" href="repl.html" style="border: 1px solid rgba(192, 132, 252, 0.5); color: #d8b4fe; background: rgba(168, 85, 247, 0.12); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none;">REPL</a>
         
-        <a href="generated/manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 700; text-decoration: none;">Manual</a>
-        <a href="generated/theory_db.json" target="_top" style="color: #34d399; font-size: 0.82rem; font-weight: 600; text-decoration: none;">Database</a>
-        <a href="https://georgydunaev.github.io" target="_blank" style="color: var(--text-muted); font-size: 0.82rem; text-decoration: none;">Author</a>
+        <a class="obk-ai-nav-link" href="generated/manual.html" style="border: 1px solid rgba(56, 189, 248, 0.5); color: #fff; background: rgba(2, 132, 199, 0.35); font-size: 0.82rem; padding: 0.4rem 0.8rem; border-radius: 6px; font-weight: 700; text-decoration: none;">Manual</a>
+        <a class="obk-ai-nav-link" href="generated/theory_db.json" target="_top" style="color: #34d399; font-size: 0.82rem; font-weight: 600; text-decoration: none;">Database</a>
+        <a class="obk-ai-nav-link" href="https://georgydunaev.github.io" target="_blank" style="color: var(--text-muted); font-size: 0.82rem; text-decoration: none;">Author</a>
       </nav>
     </div>
   </header>
@@ -699,7 +699,7 @@
     <!-- HERO -->
     <section class="hero">
       <div class="hero-badge">LCF Architecture · Standard ML · Morse–Kelley Class Theory</div>
-      <h1>
+      <h1 class="obk-hero-h1">
         Next-Generation Proof Assistant<br>
         <span class="gradient-text">Zero Implicit Computation</span>
       </h1>
@@ -780,29 +780,29 @@
 
       <div class="exec-grid">
         <div class="exec-card">
-          <h4 style="color: #38bdf8;">MKTD1-prover &middot; MKTD1-system (MKTD1-framework &amp; MKTD1-theory)</h4>
-          <p>
+          <h4 class="obk-exec-h4" style="color: #38bdf8;">MKTD1-prover &middot; MKTD1-system (MKTD1-framework &amp; MKTD1-theory)</h4>
+          <p class="obk-exec-p">
             Formulated in <code>MKTD1-framework</code> for <code>MKTD1-theory</code> (the syntactic sequent calculus side of Curry&ndash;Howard). <code>MKTD1-prover</code> operates over formulas, variables, class expressions, sequents (<code>&Gamma; &vdash; &phi;</code>), and explicit derivation trees, checked by an ultra-small trusted LCF kernel in Standard ML (<code>newchecker.ML</code>, <code>foundations.ML</code>) with 106 verified entries.
           </p>
         </div>
 
         <div class="exec-card">
-          <h4 style="color: #c084fc;">MKTD2-prover &middot; MKTD2-system (MKTD2-framework &amp; MKTD2-theory)</h4>
-          <p>
+          <h4 class="obk-exec-h4" style="color: #c084fc;">MKTD2-prover &middot; MKTD2-system (MKTD2-framework &amp; MKTD2-theory)</h4>
+          <p class="obk-exec-p">
             Formulated in <code>MKTD2-framework</code> for <code>MKTD2-theory</code> (the Curry&ndash;Howard propositions-as-types side). <code>MKTD2-prover</code> operates over types, proof terms / programs, and typing judgments (<code>p : A</code>). Proof terms are constructive &lambda;-terms verified by <code>NBGCompiler.typeCheck</code> (<code>nbg_compiler.ML</code>), verifying all 100 machine-checked standard library records in <code>generated/nbg_library.html</code>.
           </p>
         </div>
 
         <div class="exec-card">
-          <h4 style="color: #fbbf24;">Why MKTD1-theory and MKTD2-theory Differ</h4>
-          <p>
+          <h4 class="obk-exec-h4" style="color: #fbbf24;">Why MKTD1-theory and MKTD2-theory Differ</h4>
+          <p class="obk-exec-p">
             While guided by the Curry&ndash;Howard correspondence, <code>MKTD1-system</code> and <code>MKTD2-system</code> are not merely a cosmetic renaming of each other. Their underlying mathematical theories differ: <code>MKTD1-theory</code> is an axiomatic classical sequent calculus over Morse&ndash;Kelley class theory, whereas <code>MKTD2-theory</code> is an intensional constructive dependent type theory with computational conversion (&alpha;&beta;&delta;). Each system explores the MKTD foundational domain through its own distinct logical nature.
           </p>
         </div>
 
         <div class="exec-card">
-          <h4 style="color: #10b981;">Dunaev Tagged Ordered Pairs</h4>
-          <p>
+          <h4 class="obk-exec-h4" style="color: #10b981;">Dunaev Tagged Ordered Pairs</h4>
+          <p class="obk-exec-p">
             Standard Kuratowski pairs \((\langle A, B \rangle = \{\{A\}, \{A, B\}\})\) fail for proper classes because proper classes cannot be elements of sets. 
             Both provers solve this via <strong>Dunaev Tagged Pairs</strong> \(([A, B]_D = (\mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)))\), enabling arbitrary proper classes to form pairs and lists without universe elevation, with machine-checked projection injectivity (<code>proofDunaevPairInjectivity</code>).
           </p>
@@ -912,7 +912,7 @@
 
         <!-- Syntax Display Frame -->
         <div class="syntax-display-frame">
-          <pre id="theorem-code-display"></pre>
+          <pre id="theorem-code-display" class="obk-syntax-pre"></pre>
         </div>
 
         <!-- Prominent Side Conditions Box -->
@@ -1008,28 +1008,28 @@
         <div class="comp-table-container" style="margin-bottom: 1.5rem;">
           <table class="comp-table">
             <thead>
-              <tr>
-                <th>Surface Declaration</th>
-                <th>Kernel AST Category</th>
-                <th>Example in <code>.nbg</code> Surface Language</th>
-                <th>Checked by <code>NBGCompiler.typeCheck</code></th>
-                <th>Epistemic Meaning</th>
+              <tr class="obk-comp-tr">
+                <th class="obk-comp-th">Surface Declaration</th>
+                <th class="obk-comp-th">Kernel AST Category</th>
+                <th class="obk-comp-th">Example in <code>.nbg</code> Surface Language</th>
+                <th class="obk-comp-th">Checked by <code>NBGCompiler.typeCheck</code></th>
+                <th class="obk-comp-th">Epistemic Meaning</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><code>formula F = ...;</code></td>
-                <td><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
-                <td><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="font-size:0.78rem;color:#94a3b8;">(ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
-                <td>Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
-                <td>Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
+              <tr class="obk-comp-tr">
+                <td class="obk-comp-td"><code>formula F = ...;</code></td>
+                <td class="obk-comp-td"><strong>Type Definition</strong> (<code>Fm</code> / <code>NBGCompiler.Type</code>)</td>
+                <td class="obk-comp-td"><code>formula False_RussellIsSet = Set({ x | ((x in x) -&gt; Bot) });</code><br><span style="font-size:0.78rem;color:#94a3b8;">(ASCII <code>Set(X)</code> compiles to catalog <code>isSet(X)</code>)</span></td>
+                <td class="obk-comp-td">Verifies syntactic well-formedness &amp; Stage I/II quantifier bounds</td>
+                <td class="obk-comp-td">Defines a proposition (Type) — <strong>even a false/uninhabited one</strong>. Never proves a theorem!</td>
               </tr>
-              <tr>
-                <td><code>theorem T : F = e;</code></td>
-                <td><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
-                <td><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
-                <td>Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
-                <td>Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected (relative to MK/NBG consistency).</td>
+              <tr class="obk-comp-tr">
+                <td class="obk-comp-td"><code>theorem T : F = e;</code></td>
+                <td class="obk-comp-td"><strong>Proof Term</strong> (<code>NBGCompiler.Expr</code>)</td>
+                <td class="obk-comp-td"><code>theorem thm_russell_not_set : (Set(R) -&gt; Bot) = fn (hSet : Set(R)) =&gt; ...;</code></td>
+                <td class="obk-comp-td">Synthesizes exact type of term <code>e</code> via <code>NBGCompiler.typeCheck</code> and verifies definitional (&alpha;/&beta;/&delta;) equivalence with <code>F</code></td>
+                <td class="obk-comp-td">Constructive witness inhabiting type <code>F</code>. Uninhabited/false formulas are deterministically rejected (relative to MK/NBG consistency).</td>
               </tr>
             </tbody>
           </table>
@@ -1051,49 +1051,49 @@
       <div class="comp-table-container">
         <table class="comp-table">
           <thead>
-            <tr>
-              <th>System</th>
-              <th>Logical Foundation</th>
-              <th>Proof Execution</th>
-              <th>Trusted Kernel</th>
-              <th>Mathematical Workflow</th>
+            <tr class="obk-comp-tr">
+              <th class="obk-comp-th">System</th>
+              <th class="obk-comp-th">Logical Foundation</th>
+              <th class="obk-comp-th">Proof Execution</th>
+              <th class="obk-comp-th">Trusted Kernel</th>
+              <th class="obk-comp-th">Mathematical Workflow</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><strong>Obelisk</strong></td>
-              <td>Morse–Kelley Class Theory + Tarski Universes</td>
-              <td><span class="badge-highlight">Explicit Verification</span> (Syntactic Trees &amp; Bounded &alpha;&beta;&delta;)</td>
-              <td>Small Trusted LCF Kernel (&lt;2k LOC SML core)</td>
-              <td>Declarative, human-readable, stable under definition updates</td>
+            <tr class="obk-comp-tr">
+              <td class="obk-comp-td"><strong>Obelisk</strong></td>
+              <td class="obk-comp-td">Morse–Kelley Class Theory + Tarski Universes</td>
+              <td class="obk-comp-td"><span class="badge-highlight">Explicit Verification</span> (Syntactic Trees &amp; Bounded &alpha;&beta;&delta;)</td>
+              <td class="obk-comp-td">Small Trusted LCF Kernel (&lt;2k LOC SML core)</td>
+              <td class="obk-comp-td">Declarative, human-readable, stable under definition updates</td>
             </tr>
-            <tr>
-              <td><strong>Lean 4</strong></td>
-              <td>Calculus of Inductive Constructions (CIC)</td>
-              <td>Type reduction, unification, tactic elaboration</td>
-              <td>Complex C++ kernel + elaborator</td>
-              <td>Tactic-heavy, dependent types, steep learning curve</td>
+            <tr class="obk-comp-tr">
+              <td class="obk-comp-td"><strong>Lean 4</strong></td>
+              <td class="obk-comp-td">Calculus of Inductive Constructions (CIC)</td>
+              <td class="obk-comp-td">Type reduction, unification, tactic elaboration</td>
+              <td class="obk-comp-td">Complex C++ kernel + elaborator</td>
+              <td class="obk-comp-td">Tactic-heavy, dependent types, steep learning curve</td>
             </tr>
-            <tr>
-              <td><strong>Rocq</strong></td>
-              <td>Calculus of Inductive Constructions (CIC)</td>
-              <td>Computational reduction (&beta;, &iota;, &delta;)</td>
-              <td>OCaml kernel (~30k LOC)</td>
-              <td>Constructive type theory, Ltac scripting</td>
+            <tr class="obk-comp-tr">
+              <td class="obk-comp-td"><strong>Rocq</strong></td>
+              <td class="obk-comp-td">Calculus of Inductive Constructions (CIC)</td>
+              <td class="obk-comp-td">Computational reduction (&beta;, &iota;, &delta;)</td>
+              <td class="obk-comp-td">OCaml kernel (~30k LOC)</td>
+              <td class="obk-comp-td">Constructive type theory, Ltac scripting</td>
             </tr>
-            <tr>
-              <td><strong>Isabelle/ZF</strong></td>
-              <td>ZFC over Predicate Logic (Isabelle/FOL on Pure meta-logic)</td>
-              <td>Term rewriting, tableau provers, Sledgehammer</td>
-              <td>Standard ML LCF kernel</td>
-              <td>Isar declarative proofs, Isabelle framework</td>
+            <tr class="obk-comp-tr">
+              <td class="obk-comp-td"><strong>Isabelle/ZF</strong></td>
+              <td class="obk-comp-td">ZFC over Predicate Logic (Isabelle/FOL on Pure meta-logic)</td>
+              <td class="obk-comp-td">Term rewriting, tableau provers, Sledgehammer</td>
+              <td class="obk-comp-td">Standard ML LCF kernel</td>
+              <td class="obk-comp-td">Isar declarative proofs, Isabelle framework</td>
             </tr>
-            <tr>
-              <td><strong>Metamath</strong></td>
-              <td>Predicate Logic + Set Theory (ZFC)</td>
-              <td>Pure syntactic replacement &amp; verification</td>
-              <td>Minimalist (~1k LOC)</td>
-              <td>Very low-level, lacks higher polymorphism &amp; reflection</td>
+            <tr class="obk-comp-tr">
+              <td class="obk-comp-td"><strong>Metamath</strong></td>
+              <td class="obk-comp-td">Predicate Logic + Set Theory (ZFC)</td>
+              <td class="obk-comp-td">Pure syntactic replacement &amp; verification</td>
+              <td class="obk-comp-td">Minimalist (~1k LOC)</td>
+              <td class="obk-comp-td">Very low-level, lacks higher polymorphism &amp; reflection</td>
             </tr>
           </tbody>
         </table>
@@ -1235,18 +1235,18 @@
   </div>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="obk-ai-footer">
     <div class="container">
       <p>
         <strong>Obelisk Proof Assistant</strong> · Designed and Developed by 
-        <a href="https://georgydunaev.github.io" target="_blank">Georgy Dunaev</a> · 
-        <a href="classic.html" style="color: var(--primary); font-weight: 600;">Classic Author Portal</a>
+        <a class="obk-footer-link" href="https://georgydunaev.github.io" target="_blank">Georgy Dunaev</a> · 
+        <a class="obk-footer-link" href="classic.html" style="color: var(--primary); font-weight: 600;">Classic Author Portal</a>
       </p>
       <p style="margin-top: 0.5rem; font-size: 0.82rem;">
-        <a href="generated/manual.html" style="color: var(--primary); font-weight: 600;">ML-Generated Manual</a> · 
-        <a href="generated/nbg_library.html" style="color: var(--primary); font-weight: 600;">ML-Generated NBG Library</a> · 
-        <a href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
-        <a href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
+        <a class="obk-footer-link" href="generated/manual.html" style="color: var(--primary); font-weight: 600;">ML-Generated Manual</a> · 
+        <a class="obk-footer-link" href="generated/nbg_library.html" style="color: var(--primary); font-weight: 600;">ML-Generated NBG Library</a> · 
+        <a class="obk-footer-link" href="https://github.com/georgydunaev/antivibecoding" target="_blank">Anti-Vibe Coding</a> · 
+        <a class="obk-footer-link" href="https://georgydunaev.github.io/business_card.html" target="_blank">Business Card</a>
       </p>
       <p style="margin-top: 0.5rem; font-size: 0.78rem; color: var(--text-muted);">
         Kernel, manual, and NBG library re-verified 2026-10-30 · Prover suite: 115 tests · Web suite: 36 tests

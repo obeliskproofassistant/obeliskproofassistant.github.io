@@ -164,8 +164,8 @@ class ObeliskREPL {
           const badgeKind = (e.kind || 'entry').toUpperCase();
           itemsHtml.push(
             `<button type="button" class="preset-btn catalog-entry-btn" data-lookup-id="${this.escapeHtml(e.id)}">` +
-            `<strong>[${this.escapeHtml(e.code)}] ${this.escapeHtml(e.id)}</strong>` +
-            `<small>${this.escapeHtml(badgeKind)} | ${this.escapeHtml(e.title)}</small>` +
+            `<strong class="obk-preset-title">[${this.escapeHtml(e.code)}] ${this.escapeHtml(e.id)}</strong>` +
+            `<small class="obk-preset-desc">${this.escapeHtml(badgeKind)} | ${this.escapeHtml(e.title)}</small>` +
             `</button>`
           );
         }
@@ -189,8 +189,8 @@ class ObeliskREPL {
         for (const e of filtered2) {
           itemsHtml.push(
             `<button type="button" class="preset-btn catalog-entry-btn" data-lookup-id="${this.escapeHtml(e.id)}">` +
-            `<strong>[${this.escapeHtml(e.id)}] ${this.escapeHtml(e.title)}</strong>` +
-            `<small>MKTD2 | ${this.escapeHtml(e.category || 'Theorem')} (${e.proof_size || 1} AST nodes)</small>` +
+            `<strong class="obk-preset-title">[${this.escapeHtml(e.id)}] ${this.escapeHtml(e.title)}</strong>` +
+            `<small class="obk-preset-desc">MKTD2 | ${this.escapeHtml(e.category || 'Theorem')} (${e.proof_size || 1} AST nodes)</small>` +
             `</button>`
           );
         }

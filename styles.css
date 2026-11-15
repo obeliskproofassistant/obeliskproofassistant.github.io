@@ -1,21 +1,21 @@
 
 
 /* Base Stylesheet for Obelisk Proof Assistant */
-html {
+.obk-html-root, .light-mode, .dark-mode {
     background-color: #fafafa;
 }
 
-html.map-page, html:has(body.forthemapbody) {
+.map-page, .obk-html-root:has(.forthemapbody) {
     background: transparent !important;
     background-color: transparent !important;
 }
 
-html.dark-mode {
+.dark-mode {
     filter: invert(1);
     background-color: #fafafa;
 }
 
-html.dark-mode.map-page, html.dark-mode:has(body.forthemapbody) {
+.dark-mode.map-page, .dark-mode:has(.forthemapbody) {
     background: transparent !important;
     background-color: transparent !important;
 }
@@ -28,10 +28,10 @@ html.dark-mode.map-page, html.dark-mode:has(body.forthemapbody) {
     display: inline-block !important;
 }
 
-html.dark-mode .img-dark-mode {
+.dark-mode .img-dark-mode {
     display: inline-block !important;
 }
-html.dark-mode .img-light-mode {
+.dark-mode .img-light-mode {
     display: none !important;
 }
 
@@ -54,7 +54,7 @@ html.dark-mode .img-light-mode {
     background: #cbd5e1;
 }
 
-        *, *::before, *::after {
+        .projectaboutbody, .projectaboutheader, .container, .section, .footer, .tableList, .indexbody, .left, .right, .completeiframe, .fortheframe, .forthemapbody, .forthemapiframe, .table-scroll-wrap {
             box-sizing: border-box;
         }
         /*
@@ -84,10 +84,10 @@ html.dark-mode .img-light-mode {
         .container {
             padding: 25px;
         }
-        img {
+        .obk-img, .img-dark-mode, .img-light-mode {
             max-width: 100%;
         }
-        iframe {
+        .obk-iframe, .hmmiframe, .completeiframe, .fortheframe, .forthemapiframe {
             max-width: 100%;
         }
         .qqqtable {
@@ -98,7 +98,7 @@ html.dark-mode .img-light-mode {
   text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
   border-right: 0px; padding: 0; margin: 0;
         }
-        h1, h2 {
+        .obk-heading, .obk-h1, .obk-h2 {
             border-bottom: 2px solid #ddd;
             border-bottom: 0px;
             padding-bottom: 0px;
@@ -109,21 +109,21 @@ html.dark-mode .img-light-mode {
         red {
             color: #FF0000;
         }
-        a {
+        .obk-link, .myA, .sym-def-chip, .sym-inline-link {
             color: #003366;
             text-decoration: none;
         }
-        a:hover {
+        .obk-link:hover {
             text-decoration: underline;
         }
-        .section, details.section {
+        .section {
             margin-bottom: 30px;
             background-color: #DEDEDE;  
             border-radius: 25px;
             padding: 10px 15px;
             padding-top: 0px;
         }
-        details.section summary {
+        .section .obk-section-summary {
             list-style: none;
             cursor: default;
             outline: none;
@@ -134,8 +134,8 @@ html.dark-mode .img-light-mode {
             align-items: center;
             gap: 8px;
         }
-        details.section summary::-webkit-details-marker,
-        details.section summary::marker {
+        .section .obk-section-summary::-webkit-details-marker,
+        .section .obk-section-summary::marker {
             display: none;
         }
         .fold-icon {
@@ -167,10 +167,10 @@ html.dark-mode .img-light-mode {
             border-left: 7px solid currentColor;
             transition: transform 0.2s ease;
         }
-        details.section[open] > summary > .fold-icon::before {
+        .section[open] > .obk-section-summary > .fold-icon::before {
             transform: rotate(90deg);
         }
-        details.section summary h2 {
+        .section .obk-section-summary .obk-section-h2 {
             display: inline;
             vertical-align: middle;
             margin: 0;
@@ -179,10 +179,10 @@ html.dark-mode .img-light-mode {
             user-select: text;
             -webkit-user-select: text;
         }
-        details.section[open] summary {
+        .section[open] .obk-section-summary {
             margin-bottom: 8px;
         }
-        details.section summary:hover {
+        .section .obk-section-summary:hover {
             opacity: 0.85;
         }
         .footer {
@@ -204,20 +204,20 @@ html.dark-mode .img-light-mode {
             .container {
                 padding: 12px;
             }
-            header h2 {
+            .projectaboutheader .obk-header-h2, .obk-header .obk-header-h2 {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
                 gap: 10px;
             }
-            header h2 .title-text {
+            .projectaboutheader .obk-header-h2 .title-text, .obk-header .obk-header-h2 .title-text {
                 font-size: 1.15em;
                 max-width: 100%;
             }
             .section {
                 border-radius: 15px;
             }
-            ul {
+            .obk-ul {
                 padding-left: 20px;
             }
             .hmmiframe {
@@ -230,7 +230,7 @@ html.dark-mode .img-light-mode {
             }
         }
 
-  .tableList td, .tableList th {
+  .tableList .obk-td, .tableList .obk-th {
     border: 1px solid #ccc;
     /* padding: 10px; */
   }
@@ -253,14 +253,14 @@ html.dark-mode .img-light-mode {
 
 
 .tableList { width: 100%; }
-.tableList td {
+.tableList .obk-td {
 width: 1px;
 vertical-align: top;
 } 
-.tableList td:last-child {
+.tableList .obk-td:last-child {
 width: 100%;
 }
-.tableList th {
+.tableList .obk-th {
 text-align: right;
 min-width: 80px;
 max-width: 80px;
@@ -358,17 +358,17 @@ horizontal-align: right;
             height: 450px;
 */
 
-details.comment-toggle {
+.comment-toggle {
   display: inline-block;
   margin-left: 8px;
   vertical-align: middle;
 }
-details.comment-toggle[open] {
+.comment-toggle[open] {
   display: block;
   margin-left: 0;
   margin-top: 4px;
 }
-summary.comment-link {
+.comment-link {
   cursor: pointer;
   font-size: 0.72rem;
   color: #64748b;
@@ -376,10 +376,10 @@ summary.comment-link {
   list-style: none;
   user-select: none;
 }
-summary.comment-link::-webkit-details-marker {
+.comment-link::-webkit-details-marker {
   display: none;
 }
-summary.comment-link:hover {
+.comment-link:hover {
   color: #38bdf8;
 }
 .sym-def-bar {
@@ -405,7 +405,7 @@ summary.comment-link:hover {
   color: #fff;
   border-color: #38bdf8;
 }
-a.sym-inline-link:hover {
+.sym-inline-link:hover {
   background: rgba(56, 189, 248, 0.2);
   border-radius: 2px;
 }

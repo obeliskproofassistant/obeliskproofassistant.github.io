@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="obk-repl-root">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="icon" type="image/x-icon" href="myfavicon.ico">
   <style>
-    :root {
+    .obk-repl-root, .obk-repl-body {
       --bg: #090d16;
       --panel-bg: #0f172a;
       --border: rgba(255, 255, 255, 0.12);
@@ -21,8 +21,8 @@
       --green: #10b981;
       --red: #ef4444;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
+    .obk-repl-body, .obk-repl-header, .top-control-bar, .control-group, .mode-pill, .cmd-pill, .status-badge, .main-layout, .sidebar-left, .sidebar-right, .repl-center, .catalog-search, .cat-chip, .preset-btn, .editor-toolbar, .compile-btn, .source-editor, .symbol-palette, .sym-chip, .terminal-output, .terminal-input-bar, .terminal-input, .run-btn, .panel-box { box-sizing: border-box; margin: 0; padding: 0; }
+    .obk-repl-body {
       background-color: var(--bg);
       color: var(--text);
       font-family: 'Inter', -apple-system, sans-serif;
@@ -33,7 +33,7 @@
       flex-direction: column;
       overflow: hidden;
     }
-    header {
+    .obk-repl-header {
       background: var(--panel-bg);
       border-bottom: 1px solid var(--border);
       max-width: 100%;
@@ -45,10 +45,10 @@
       gap: 1rem;
     }
     .brand { font-size: 1.04rem; font-weight: 800; color: #fff; text-decoration: none; }
-    .brand span { color: var(--primary); }
+    .brand .obk-brand-sub { color: var(--primary); }
     .nav-links { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 0.84rem; }
-    .nav-links a:hover { color: var(--primary); }
+    .nav-links .obk-nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.84rem; }
+    .nav-links .obk-nav-link:hover { color: var(--primary); }
 
     /* Top Control Bar (Full-Width) */
     .top-control-bar {
@@ -203,10 +203,10 @@
       line-height: 1.32;
       display: block;
     }
-    .preset-btn strong { display: block; font-size: 0.77rem; color: #f8fafc; }
-    .preset-btn small { display: block; font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
+    .preset-btn .obk-preset-title { display: block; font-size: 0.77rem; color: #f8fafc; }
+    .preset-btn .obk-preset-desc { display: block; font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
     .preset-btn:hover { background: var(--accent); border-color: var(--primary); color: #fff; }
-    .preset-btn:hover small { color: #e2e8f0; }
+    .preset-btn:hover .obk-preset-desc { color: #e2e8f0; }
     .preset-btn.reject-btn {
       border-color: rgba(239, 68, 68, 0.35);
       background: rgba(69, 10, 10, 0.35);
@@ -237,7 +237,7 @@
       font-size: 0.76rem;
       color: #cbd5e1;
     }
-    .principle-banner code {
+    .principle-banner .obk-banner-code {
       color: var(--primary);
       font-family: 'JetBrains Mono', monospace;
       background: rgba(56, 189, 248, 0.12);
@@ -369,13 +369,13 @@
       font-size: 0.75rem;
       line-height: 1.48;
     }
-    .clickable-formula-box a.sym-link {
+    .clickable-formula-box .sym-link {
       color: #e2e8f0;
       text-decoration: none;
       padding: 0 1px;
       border-radius: 2px;
     }
-    .clickable-formula-box a.sym-link:hover {
+    .clickable-formula-box .sym-link:hover {
       background: rgba(56, 189, 248, 0.25);
       color: #38bdf8;
     }
@@ -391,24 +391,24 @@
     }
 
     @media (max-width: 1080px) {
-      body { height: auto; min-height: 100vh; overflow: auto; }
-      header, .top-control-bar { padding: 0.6rem 16px; }
+      .obk-repl-body { height: auto; min-height: 100vh; overflow: auto; }
+      .obk-repl-header, .top-control-bar { padding: 0.6rem 16px; }
       .main-layout { display: flex; flex-direction: column; padding: 0 16px; overflow: visible; }
       .sidebar-left, .sidebar-right { border-bottom: 1px solid var(--border); max-height: 340px; }
       .repl-center { min-height: 560px; }
     }
   </style>
 </head>
-<body>
+<body class="obk-repl-body">
 
-  <header>
-    <a href="index.html" class="brand">Obelisk <span>MKTD1-system &amp; MKTD2-system Kernel Workbench</span></a>
+  <header class="obk-repl-header">
+    <a href="index.html" class="brand">Obelisk <span class="obk-brand-sub">MKTD1-system &amp; MKTD2-system Kernel Workbench</span></a>
     <div class="nav-links">
-      <a href="generated/manual.html">MKTD1 Manual</a>
-      <a href="generated/nbg_library.html">MKTD2 Library</a>
-      <a href="generated/theory_db.json">MKTD1 DB (JSON)</a>
-      <a href="generated/nbg_library.json">MKTD2 DB (JSON)</a>
-      <a href="https://georgydunaev.github.io" target="_blank">Author Portfolio</a>
+      <a class="obk-nav-link" href="generated/manual.html">MKTD1 Manual</a>
+      <a class="obk-nav-link" href="generated/nbg_library.html">MKTD2 Library</a>
+      <a class="obk-nav-link" href="generated/theory_db.json">MKTD1 DB (JSON)</a>
+      <a class="obk-nav-link" href="generated/nbg_library.json">MKTD2 DB (JSON)</a>
+      <a class="obk-nav-link" href="https://georgydunaev.github.io" target="_blank">Author Portfolio</a>
     </div>
   </header>
 
@@ -453,54 +453,54 @@
       <div id="presetsContainer">
         <div class="preset-group-title">MKTD2-system Verified Presets (6)</div>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_empty_no_elements')">
-          <strong>1. Empty Class Non-Membership &amp; Subclass</strong>
-          <small>Proves thm_empty_no_elements &amp; thm_empty_subclass</small>
+          <strong class="obk-preset-title">1. Empty Class Non-Membership &amp; Subclass</strong>
+          <small class="obk-preset-desc">Proves thm_empty_no_elements &amp; thm_empty_subclass</small>
         </button>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_russell_not_set')">
-          <strong>2. Russell Proper Class Non-Sethood</strong>
-          <small>Proves thm_russell_not_set vs uninhabited Formula Type</small>
+          <strong class="obk-preset-title">2. Russell Proper Class Non-Sethood</strong>
+          <small class="obk-preset-desc">Proves thm_russell_not_set vs uninhabited Formula Type</small>
         </button>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_univ_and_inter')">
-          <strong>3. Universal Class &amp; Intersection Algebra</strong>
-          <small>Proves thm_univ_iff_set, comm, assoc, and distributivity</small>
+          <strong class="obk-preset-title">3. Universal Class &amp; Intersection Algebra</strong>
+          <small class="obk-preset-desc">Proves thm_univ_iff_set, comm, assoc, and distributivity</small>
         </button>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_succ_and_dunaev')">
-          <strong>4. Successor Inclusion &amp; Dunaev Tagged Pairs</strong>
-          <small>Proves Dunaev pair projections &amp; ordinal successor inclusion</small>
+          <strong class="obk-preset-title">4. Successor Inclusion &amp; Dunaev Tagged Pairs</strong>
+          <small class="obk-preset-desc">Proves Dunaev pair projections &amp; ordinal successor inclusion</small>
         </button>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_cantor_diagonal')">
-          <strong>5. Cantor Diagonal Theorem (Choice-Free Core)</strong>
-          <small>Constructs diagonal class with Dunaev tagged pairs</small>
+          <strong class="obk-preset-title">5. Cantor Diagonal Theorem (Choice-Free Core)</strong>
+          <small class="obk-preset-desc">Constructs diagonal class with Dunaev tagged pairs</small>
         </button>
         <button type="button" class="preset-btn" onclick="repl.loadPreset('true_mk_impredicative')">
-          <strong>6. Stage II Morse-Kelley Impredicative Comprehension</strong>
-          <small>Verifies class comprehension with bound Class quantifier</small>
+          <strong class="obk-preset-title">6. Stage II Morse-Kelley Impredicative Comprehension</strong>
+          <small class="obk-preset-desc">Verifies class comprehension with bound Class quantifier</small>
         </button>
 
         <div class="sidebar-title danger" style="margin-top: 0.65rem;">Uninhabited / Refutable Presets (Rejected)</div>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_formula_as_proof')">
-          <strong>1. Formula Definition Used as Proof Term</strong>
-          <small>Rejected: False_RussellIsSet is a Type, not a Proof Term</small>
+          <strong class="obk-preset-title">1. Formula Definition Used as Proof Term</strong>
+          <small class="obk-preset-desc">Rejected: False_RussellIsSet is a Type, not a Proof Term</small>
         </button>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_pack_russell_as_set')">
-          <strong>2. Packing Russell Proper Class as Set Witness</strong>
-          <small>Rejected: SetSort existential guard refuses proper class</small>
+          <strong class="obk-preset-title">2. Packing Russell Proper Class as Set Witness</strong>
+          <small class="obk-preset-desc">Rejected: SetSort existential guard refuses proper class</small>
         </button>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_every_class_is_set')">
-          <strong>3. Set Quantifier Instantiated with Proper Class</strong>
-          <small>Rejected: tapp SetSort guard requires Set(X) in context</small>
+          <strong class="obk-preset-title">3. Set Quantifier Instantiated with Proper Class</strong>
+          <small class="obk-preset-desc">Rejected: tapp SetSort guard requires Set(X) in context</small>
         </button>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_univ_in_univ')">
-          <strong>4. Universal Class Self-Membership Claim</strong>
-          <small>Rejected: Comprehension introduction requires Set(V)</small>
+          <strong class="obk-preset-title">4. Universal Class Self-Membership Claim</strong>
+          <small class="obk-preset-desc">Rejected: Comprehension introduction requires Set(V)</small>
         </button>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_membership_sym')">
-          <strong>5. Symmetric Membership Claim</strong>
-          <small>Rejected: Bidirectional type conversion mismatch</small>
+          <strong class="obk-preset-title">5. Symmetric Membership Claim</strong>
+          <small class="obk-preset-desc">Rejected: Bidirectional type conversion mismatch</small>
         </button>
         <button type="button" class="preset-btn reject-btn" onclick="repl.loadPreset('false_impredicative_in_nbg')">
-          <strong>6. Impredicative Quantifier in Predicative NBG</strong>
-          <small>Rejected: Bound Class quantifier forbidden in Stage I NBG</small>
+          <strong class="obk-preset-title">6. Impredicative Quantifier in Predicative NBG</strong>
+          <small class="obk-preset-desc">Rejected: Bound Class quantifier forbidden in Stage I NBG</small>
         </button>
       </div>
 
@@ -512,10 +512,10 @@
       <div class="editor-toolbar">
         <div class="principle-banner">
           <strong>Kernel Discipline:</strong>
-          Class Variables Default to <code>Class</code> ·
-          Dunaev Tagged Pairs <code>[A, B]_D</code> ·
-          Formulas = Types (<code>Fm_Expre</code>) ·
-          Proofs = Terms (<code>Prf</code>)
+          Class Variables Default to <code class="obk-banner-code">Class</code> ·
+          Dunaev Tagged Pairs <code class="obk-banner-code">[A, B]_D</code> ·
+          Formulas = Types (<code class="obk-banner-code">Fm_Expre</code>) ·
+          Proofs = Terms (<code class="obk-banner-code">Prf</code>)
         </div>
         <div style="display: flex; align-items: center; gap: 0.5rem;">
           <button type="button" id="btn-open-shortcuts" class="compile-btn" style="background: rgba(123, 88, 207, 0.28); border: 1px solid rgba(168, 85, 247, 0.5);" onclick="if(window.ObeliskShortcutsModal) ObeliskShortcutsModal.open()" title="Open Keyboard Shortcuts Cheat Sheet (?)">

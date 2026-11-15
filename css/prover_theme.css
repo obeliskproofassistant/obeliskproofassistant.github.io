@@ -6,7 +6,8 @@
    ------------------------------------------------------- */
 
 /* --- Color Palette (Catppuccin Mocha + Monokai accents) --- */
-:root {
+.prover-theme,
+.obk-prover-root {
   /* Catppuccin Mocha base */
   --prover-bg: #1e1e2e;
   --prover-bg-subtle: #313244;
@@ -40,7 +41,7 @@
 }
 
 /* --- Base Page Body --- */
-body.prover-theme {
+.prover-theme {
   font-family: "DejaVu Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: var(--prover-bg);
   color: var(--prover-fg);
@@ -50,7 +51,7 @@ body.prover-theme {
 }
 
 /* --- Code Blocks --- */
-pre.prover-code {
+.prover-code {
   background-color: var(--prover-bg-code);
   color: var(--prover-fg);
   padding: 1rem;
@@ -60,45 +61,45 @@ pre.prover-code {
   margin: 1rem 0;
 }
 
-pre.prover-code::selection {
+.prover-code::selection {
   background-color: var(--prover-line-highlight);
   color: var(--prover-fg);
 }
 
-pre.prover-code ::selection {
+.prover-code ::selection {
   background-color: var(--prover-line-highlight);
   color: var(--prover-fg);
 }
 
 /* --- Syntax Highlighting --- */
-span.prover-comment {
+.prover-comment {
   color: var(--prover-comment);
   font-style: italic;
 }
 
-span.prover-constant {
+.prover-constant {
   color: var(--prover-constant);
 }
 
-span.prover-variable {
+.prover-variable {
   color: var(--prover-variable);
 }
 
-span.prover-function {
+.prover-function {
   color: var(--prover-function);
   font-weight: bold;
 }
 
-span.prover-operator {
+.prover-operator {
   color: var(--prover-operator);
 }
 
-span.prover-keyword {
+.prover-keyword {
   color: var(--prover-keyword);
   font-weight: bold;
 }
 
-span.prover-delimiter {
+.prover-delimiter {
   color: var(--prover-delimiter);
 }
 
@@ -185,13 +186,15 @@ span.prover-delimiter {
   border: 1px solid var(--prover-border);
 }
 
-.prover-nav a {
+.prover-nav .prover-nav-link,
+.prover-nav-link {
   color: var(--prover-accent);
   text-decoration: none;
   margin-right: 1rem;
 }
 
-.prover-nav a:hover {
+.prover-nav .prover-nav-link:hover,
+.prover-nav-link:hover {
   text-decoration: underline;
 }
 
@@ -212,7 +215,9 @@ span.prover-delimiter {
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  .prover-theme,
+  .prover-code,
+  .prover-nav-link {
     transition: none !important;
     animation: none !important;
   }
