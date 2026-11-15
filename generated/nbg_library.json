@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 120,
-  "verified_count": 120,
-  "derived_count": 97,
+  "total_count": 125,
+  "verified_count": 125,
+  "derived_count": 102,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1088,6 +1088,51 @@
       "statement_unicode": "Π(G:Class), Π(s1:Class), Π(s2:Class), ((((s1 ∈ G) × (s2 ∈ G)) → 𝟘) → ((s1 ∈ G) → ((s2 ∈ G) → 𝟘)))",
       "proof_unicode": "(λ(G:Class). (λ(s1:Class). (λ(s2:Class). (λ(hExcl:(((s1 ∈ G) × (s2 ∈ G)) → 𝟘)). (λ(h1:(s1 ∈ G)). (λ(h2:(s2 ∈ G)). (hExcl ⟨h1, h2⟩)))))))",
       "statement_ast": "(Pi (G : Class) -> (Pi (s1 : Class) -> (Pi (s2 : Class) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In s1) G) true)) * (Id Prop ((In s2) G) true))) -> False)) -> (Pi (_ : (Id Prop ((In s1) G) true)) -> (Pi (_ : (Id Prop ((In s2) G) true)) -> False))))))"
+    },
+    {
+      "id": 121,
+      "num": "NBG-121",
+      "name": "thm_gale_stewart_closed_det_proj",
+      "kind": "Derived",
+      "statement_unicode": "Π(G:Class), Π(C:Class), Π(W1:Class), (((G ∈ C) × ((G ∈ C) → Σ(s:Class), ((G, s) ∈ W1))) → Σ(s:Class), ((G, s) ∈ W1))",
+      "proof_unicode": "(λ(G:Class). (λ(C:Class). (λ(W1:Class). (λ(hClosedDet:((G ∈ C) × ((G ∈ C) → Σ(s:Class), ((G, s) ∈ W1)))). (snd(hClosedDet) fst(hClosedDet))))))",
+      "statement_ast": "(Pi (G : Class) -> (Pi (C : Class) -> (Pi (W1 : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In G) C) true)) * (Pi (_ : (Id Prop ((In G) C) true)) -> (Sigma (s : Class) * (Id Prop ((In ((DunaevPair G) s)) W1) true))))) -> (Sigma (s : Class) * (Id Prop ((In ((DunaevPair G) s)) W1) true))))))"
+    },
+    {
+      "id": 122,
+      "num": "NBG-122",
+      "name": "thm_borel_determinacy_modus_ponens",
+      "kind": "Derived",
+      "statement_unicode": "Π(B:Class), Π(Det:Class), Π(g:Class), (((Π(x:Class), ((x ∈ B) → (x ∈ Det))) × (g ∈ B)) → (g ∈ Det))",
+      "proof_unicode": "(λ(B:Class). (λ(Det:Class). (λ(g:Class). (λ(hBorel:((Π(x:Class), ((x ∈ B) → (x ∈ Det))) × (g ∈ B))). ((fst(hBorel) g) snd(hBorel))))))",
+      "statement_ast": "(Pi (B : Class) -> (Pi (Det : Class) -> (Pi (g : Class) -> (Pi (_ : (Sigma (_ : (Pi (x : Class) -> (Pi (_ : (Id Prop ((In x) B) true)) -> (Id Prop ((In x) Det) true)))) * (Id Prop ((In g) B) true))) -> (Id Prop ((In g) Det) true)))))"
+    },
+    {
+      "id": 123,
+      "num": "NBG-123",
+      "name": "thm_semigroup_dyson_phillips_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(S:Class), Π(T0:Class), Π(P:Class), ((((T0 ∈ S) × (P ∈ S)) × (Π(A:Class), Π(B:Class), (((A ∈ S) × (B ∈ S)) → ((A, B) ∈ S)))) → ((T0, P) ∈ S))",
+      "proof_unicode": "(λ(S:Class). (λ(T0:Class). (λ(P:Class). (λ(hDP:(((T0 ∈ S) × (P ∈ S)) × (Π(A:Class), Π(B:Class), (((A ∈ S) × (B ∈ S)) → ((A, B) ∈ S))))). (((snd(hDP) T0) P) fst(hDP))))))",
+      "statement_ast": "(Pi (S : Class) -> (Pi (T0 : Class) -> (Pi (P : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In T0) S) true)) * (Id Prop ((In P) S) true))) * (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In A) S) true)) * (Id Prop ((In B) S) true))) -> (Id Prop ((In ((DunaevPair A) B)) S) true)))))) -> (Id Prop ((In ((DunaevPair T0) P)) S) true)))))"
+    },
+    {
+      "id": 124,
+      "num": "NBG-124",
+      "name": "thm_dunaev_list_append_nil_right",
+      "kind": "Derived",
+      "statement_unicode": "Π(L:Class), ((L ⊆ (L ∪ ∅)) × (∅ ⊆ L))",
+      "proof_unicode": "(λ(L:Class). ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz)))))))))) L) ∅), ((λ(X:Class). (λ(z:Class). (λ(h:(z ∈ ∅)). ((ax_false_elim (z ∈ X)) ((ax_empty_no_elements z) h))))) L)⟩)",
+      "statement_ast": "(Pi (L : Class) -> (Sigma (_ : (Id Prop ((Subset L) ((BinUnion L) EmptySet)) true)) * (Id Prop ((Subset EmptySet) L) true)))"
+    },
+    {
+      "id": 125,
+      "num": "NBG-125",
+      "name": "thm_family_canonical_record_proj",
+      "kind": "Derived",
+      "statement_unicode": "Π(F:Class), Π(B:Class), Π(x:Class), Π(y:Class), (((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F))) → ((x ∈ B) × ((x, y) ∈ B)))",
+      "proof_unicode": "(λ(F:Class). (λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(hFam:((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F)))). ⟨fst(snd(hFam)), (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) F) B)) fst(hFam)) (x, y)) snd(snd(hFam)))⟩)))))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (B : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset F) B) true)) * (Sigma (_ : (Id Prop ((In x) B) true)) * (Id Prop ((In ((DunaevPair x) y)) F) true)))) -> (Sigma (_ : (Id Prop ((In x) B) true)) * (Id Prop ((In ((DunaevPair x) y)) B) true)))))))"
     }
   ]
 }
