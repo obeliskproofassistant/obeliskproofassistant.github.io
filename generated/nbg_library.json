@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 150,
-  "verified_count": 150,
-  "derived_count": 127,
+  "total_count": 155,
+  "verified_count": 155,
+  "derived_count": 132,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1358,6 +1358,51 @@
       "statement_unicode": "Π(R:Class), Π(A:Class), (((Π(x:Class), Π(y:Class), (((x ∈ A) × ((x, y) ∈ R)) → (y ∈ A))) × (Π(x:Class), ((x, x) ∈ R))) → Π(x:Class), ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ R))))",
       "proof_unicode": "(λ(R:Class). (λ(A:Class). (λ(hSatRefl:((Π(x:Class), Π(y:Class), (((x ∈ A) × ((x, y) ∈ R)) → (y ∈ A))) × (Π(x:Class), ((x, x) ∈ R)))). (λ(x:Class). (λ(hxA:(x ∈ A)). ⟨(((fst(hSatRefl) x) x) ⟨hxA, (snd(hSatRefl) x)⟩), (snd(hSatRefl) x)⟩)))))",
       "statement_ast": "(Pi (R : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair x) y)) R) true))) -> (Id Prop ((In y) A) true))))) * (Pi (x : Class) -> (Id Prop ((In ((DunaevPair x) x)) R) true)))) -> (Pi (x : Class) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair x) x)) R) true)))))))"
+    },
+    {
+      "id": 151,
+      "num": "NBG-151",
+      "name": "thm_dunaev_pair_diagonal_subclass_product",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(DiagA:Class), Π(x:Class), ((((x ∈ A) → ((x, x) ∈ DiagA)) × (((x, x) ∈ DiagA) → ((x ∈ A) × (x ∈ A)))) → ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ DiagA))))",
+      "proof_unicode": "(λ(A:Class). (λ(DiagA:Class). (λ(x:Class). (λ(hDiag:(((x ∈ A) → ((x, x) ∈ DiagA)) × (((x, x) ∈ DiagA) → ((x ∈ A) × (x ∈ A))))). (λ(hxA:(x ∈ A)). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩)))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (DiagA : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) x)) DiagA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) x)) DiagA) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) A) true))))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair x) x)) DiagA) true)))))))"
+    },
+    {
+      "id": 152,
+      "num": "NBG-152",
+      "name": "thm_preorder_upper_bound_transitivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(R:Class), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))) → (((((a, b) ∈ R) × ((c, b) ∈ R)) × ((b, d) ∈ R)) → (((a, d) ∈ R) × ((c, d) ∈ R))))",
+      "proof_unicode": "(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hUB:((((a, b) ∈ R) × ((c, b) ∈ R)) × ((b, d) ∈ R))). ⟨((((hTrans a) b) d) ⟨fst(fst(hUB)), snd(hUB)⟩), ((((hTrans c) b) d) ⟨snd(fst(hUB)), snd(hUB)⟩)⟩)))))))",
+      "statement_ast": "(Pi (R : Class) -> (Pi (a : Class) -> (Pi (b : Class) -> (Pi (c : Class) -> (Pi (d : Class) -> (Pi (_ : (Pi (x : Class) -> (Pi (y : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) * (Id Prop ((In ((DunaevPair y) z)) R) true))) -> (Id Prop ((In ((DunaevPair x) z)) R) true)))))) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair a) b)) R) true)) * (Id Prop ((In ((DunaevPair c) b)) R) true))) * (Id Prop ((In ((DunaevPair b) d)) R) true))) -> (Sigma (_ : (Id Prop ((In ((DunaevPair a) d)) R) true)) * (Id Prop ((In ((DunaevPair c) d)) R) true)))))))))"
+    },
+    {
+      "id": 153,
+      "num": "NBG-153",
+      "name": "thm_preorder_lower_bound_transitivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(R:Class), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))) → ((((d, b) ∈ R) × (((b, a) ∈ R) × ((b, c) ∈ R))) → (((d, a) ∈ R) × ((d, c) ∈ R))))",
+      "proof_unicode": "(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hLB:(((d, b) ∈ R) × (((b, a) ∈ R) × ((b, c) ∈ R)))). ⟨((((hTrans d) b) a) ⟨fst(hLB), fst(snd(hLB))⟩), ((((hTrans d) b) c) ⟨fst(hLB), snd(snd(hLB))⟩)⟩)))))))",
+      "statement_ast": "(Pi (R : Class) -> (Pi (a : Class) -> (Pi (b : Class) -> (Pi (c : Class) -> (Pi (d : Class) -> (Pi (_ : (Pi (x : Class) -> (Pi (y : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) * (Id Prop ((In ((DunaevPair y) z)) R) true))) -> (Id Prop ((In ((DunaevPair x) z)) R) true)))))) -> (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair d) b)) R) true)) * (Sigma (_ : (Id Prop ((In ((DunaevPair b) a)) R) true)) * (Id Prop ((In ((DunaevPair b) c)) R) true)))) -> (Sigma (_ : (Id Prop ((In ((DunaevPair d) a)) R) true)) * (Id Prop ((In ((DunaevPair d) c)) R) true)))))))))"
+    },
+    {
+      "id": 154,
+      "num": "NBG-154",
+      "name": "thm_functional_graph_uniqueness_contraposition",
+      "kind": "Derived",
+      "statement_unicode": "Π(F:Class), Π(x:Class), Π(y1:Class), Π(y2:Class), ((((((x, y1) ∈ F) × ((x, y2) ∈ F)) → (y1 = y2)) × ((y1 = y2) → 𝟘)) → (((x, y1) ∈ F) → (((x, y2) ∈ F) → 𝟘)))",
+      "proof_unicode": "(λ(F:Class). (λ(x:Class). (λ(y1:Class). (λ(y2:Class). (λ(h:(((((x, y1) ∈ F) × ((x, y2) ∈ F)) → (y1 = y2)) × ((y1 = y2) → 𝟘))). (λ(h1:((x, y1) ∈ F)). (λ(h2:((x, y2) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (x : Class) -> (Pi (y1 : Class) -> (Pi (y2 : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y1)) F) true)) * (Id Prop ((In ((DunaevPair x) y2)) F) true))) -> (Id Class y1 y2))) * (Pi (_ : (Id Class y1 y2)) -> False))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) y1)) F) true)) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) y2)) F) true)) -> False)))))))"
+    },
+    {
+      "id": 155,
+      "num": "NBG-155",
+      "name": "thm_injective_graph_uniqueness_contraposition",
+      "kind": "Derived",
+      "statement_unicode": "Π(F:Class), Π(x1:Class), Π(x2:Class), Π(y:Class), ((((((x1, y) ∈ F) × ((x2, y) ∈ F)) → (x1 = x2)) × ((x1 = x2) → 𝟘)) → (((x1, y) ∈ F) → (((x2, y) ∈ F) → 𝟘)))",
+      "proof_unicode": "(λ(F:Class). (λ(x1:Class). (λ(x2:Class). (λ(y:Class). (λ(h:(((((x1, y) ∈ F) × ((x2, y) ∈ F)) → (x1 = x2)) × ((x1 = x2) → 𝟘))). (λ(h1:((x1, y) ∈ F)). (λ(h2:((x2, y) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (x1 : Class) -> (Pi (x2 : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x1) y)) F) true)) * (Id Prop ((In ((DunaevPair x2) y)) F) true))) -> (Id Class x1 x2))) * (Pi (_ : (Id Class x1 x2)) -> False))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x1) y)) F) true)) -> (Pi (_ : (Id Prop ((In ((DunaevPair x2) y)) F) true)) -> False)))))))"
     }
   ]
 }
