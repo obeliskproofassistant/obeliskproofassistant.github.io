@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 205,
-  "verified_count": 205,
-  "derived_count": 182,
+  "total_count": 210,
+  "verified_count": 210,
+  "derived_count": 187,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1853,6 +1853,51 @@
       "statement_unicode": "Π(PageEr:Class), Π(DiffPair:Class), Π(KerDr:Class), Π(x:Class), Π(drx:Class), Π(drdrx:Class), ((((x ∈ PageEr) → ((drx, drdrx) ∈ DiffPair)) × (((drx, drdrx) ∈ DiffPair) → (drx ∈ KerDr))) → ((x ∈ PageEr) → (drx ∈ KerDr)))",
       "proof_unicode": "(λ(PageEr:Class). (λ(DiffPair:Class). (λ(KerDr:Class). (λ(x:Class). (λ(drx:Class). (λ(drdrx:Class). (λ(h:(((x ∈ PageEr) → ((drx, drdrx) ∈ DiffPair)) × (((drx, drdrx) ∈ DiffPair) → (drx ∈ KerDr)))). (λ(hxPage:(x ∈ PageEr)). (snd(h) (fst(h) hxPage))))))))))",
       "statement_ast": "(Pi (PageEr : Class) -> (Pi (DiffPair : Class) -> (Pi (KerDr : Class) -> (Pi (x : Class) -> (Pi (drx : Class) -> (Pi (drdrx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) PageEr) true)) -> (Id Prop ((In ((DunaevPair drx) drdrx)) DiffPair) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair drx) drdrx)) DiffPair) true)) -> (Id Prop ((In drx) KerDr) true)))) -> (Pi (_ : (Id Prop ((In x) PageEr) true)) -> (Id Prop ((In drx) KerDr) true)))))))))"
+    },
+    {
+      "id": 206,
+      "num": "NBG-206",
+      "name": "thm_monoidal_pentagon_associator_coherence_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(Obj4:Class), Π(EqMor:Class), Π(w:Class), Π(assocL:Class), Π(midStep:Class), Π(assocR:Class), ((((w ∈ Obj4) → ((assocL, midStep) ∈ EqMor)) × (((assocL, midStep) ∈ EqMor) → ((assocL, assocR) ∈ EqMor))) → ((w ∈ Obj4) → ((assocL, assocR) ∈ EqMor)))",
+      "proof_unicode": "(λ(Obj4:Class). (λ(EqMor:Class). (λ(w:Class). (λ(assocL:Class). (λ(midStep:Class). (λ(assocR:Class). (λ(h:(((w ∈ Obj4) → ((assocL, midStep) ∈ EqMor)) × (((assocL, midStep) ∈ EqMor) → ((assocL, assocR) ∈ EqMor)))). (λ(hwObj:(w ∈ Obj4)). (snd(h) (fst(h) hwObj))))))))))",
+      "statement_ast": "(Pi (Obj4 : Class) -> (Pi (EqMor : Class) -> (Pi (w : Class) -> (Pi (assocL : Class) -> (Pi (midStep : Class) -> (Pi (assocR : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In w) Obj4) true)) -> (Id Prop ((In ((DunaevPair assocL) midStep)) EqMor) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair assocL) midStep)) EqMor) true)) -> (Id Prop ((In ((DunaevPair assocL) assocR)) EqMor) true)))) -> (Pi (_ : (Id Prop ((In w) Obj4) true)) -> (Id Prop ((In ((DunaevPair assocL) assocR)) EqMor) true)))))))))"
+    },
+    {
+      "id": 207,
+      "num": "NBG-207",
+      "name": "thm_monoidal_triangle_unitor_coherence_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(Obj2:Class), Π(EqMor:Class), Π(u:Class), Π(assocUnit:Class), Π(idTensorRho:Class), Π(lamTensorId:Class), ((((u ∈ Obj2) → ((assocUnit, idTensorRho) ∈ EqMor)) × (((assocUnit, idTensorRho) ∈ EqMor) → ((lamTensorId, idTensorRho) ∈ EqMor))) → ((u ∈ Obj2) → ((lamTensorId, idTensorRho) ∈ EqMor)))",
+      "proof_unicode": "(λ(Obj2:Class). (λ(EqMor:Class). (λ(u:Class). (λ(assocUnit:Class). (λ(idTensorRho:Class). (λ(lamTensorId:Class). (λ(h:(((u ∈ Obj2) → ((assocUnit, idTensorRho) ∈ EqMor)) × (((assocUnit, idTensorRho) ∈ EqMor) → ((lamTensorId, idTensorRho) ∈ EqMor)))). (λ(huObj:(u ∈ Obj2)). (snd(h) (fst(h) huObj))))))))))",
+      "statement_ast": "(Pi (Obj2 : Class) -> (Pi (EqMor : Class) -> (Pi (u : Class) -> (Pi (assocUnit : Class) -> (Pi (idTensorRho : Class) -> (Pi (lamTensorId : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) Obj2) true)) -> (Id Prop ((In ((DunaevPair assocUnit) idTensorRho)) EqMor) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair assocUnit) idTensorRho)) EqMor) true)) -> (Id Prop ((In ((DunaevPair lamTensorId) idTensorRho)) EqMor) true)))) -> (Pi (_ : (Id Prop ((In u) Obj2) true)) -> (Id Prop ((In ((DunaevPair lamTensorId) idTensorRho)) EqMor) true)))))))))"
+    },
+    {
+      "id": 208,
+      "num": "NBG-208",
+      "name": "thm_symmetric_braiding_involutive_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(Obj2:Class), Π(CompBraid:Class), Π(EqMor:Class), Π(u:Class), Π(braidAB:Class), Π(braidBA:Class), Π(compBraid:Class), Π(idAB:Class), ((((u ∈ Obj2) → ((braidAB, braidBA) ∈ CompBraid)) × (((braidAB, braidBA) ∈ CompBraid) → ((compBraid, idAB) ∈ EqMor))) → ((u ∈ Obj2) → ((compBraid, idAB) ∈ EqMor)))",
+      "proof_unicode": "(λ(Obj2:Class). (λ(CompBraid:Class). (λ(EqMor:Class). (λ(u:Class). (λ(braidAB:Class). (λ(braidBA:Class). (λ(compBraid:Class). (λ(idAB:Class). (λ(h:(((u ∈ Obj2) → ((braidAB, braidBA) ∈ CompBraid)) × (((braidAB, braidBA) ∈ CompBraid) → ((compBraid, idAB) ∈ EqMor)))). (λ(huObj:(u ∈ Obj2)). (snd(h) (fst(h) huObj))))))))))))",
+      "statement_ast": "(Pi (Obj2 : Class) -> (Pi (CompBraid : Class) -> (Pi (EqMor : Class) -> (Pi (u : Class) -> (Pi (braidAB : Class) -> (Pi (braidBA : Class) -> (Pi (compBraid : Class) -> (Pi (idAB : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) Obj2) true)) -> (Id Prop ((In ((DunaevPair braidAB) braidBA)) CompBraid) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair braidAB) braidBA)) CompBraid) true)) -> (Id Prop ((In ((DunaevPair compBraid) idAB)) EqMor) true)))) -> (Pi (_ : (Id Prop ((In u) Obj2) true)) -> (Id Prop ((In ((DunaevPair compBraid) idAB)) EqMor) true)))))))))))"
+    },
+    {
+      "id": 209,
+      "num": "NBG-209",
+      "name": "thm_tensor_internal_hom_currying_adjunction_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(HomTensorBC:Class), Π(EqHomAInt:Class), Π(EqHomTensor:Class), Π(f:Class), Π(curf:Class), Π(g:Class), Π(uncurg:Class), ((((f ∈ HomTensorBC) → ((curf, g) ∈ EqHomAInt)) × (((curf, g) ∈ EqHomAInt) → ((uncurg, f) ∈ EqHomTensor))) → ((f ∈ HomTensorBC) → ((uncurg, f) ∈ EqHomTensor)))",
+      "proof_unicode": "(λ(HomTensorBC:Class). (λ(EqHomAInt:Class). (λ(EqHomTensor:Class). (λ(f:Class). (λ(curf:Class). (λ(g:Class). (λ(uncurg:Class). (λ(h:(((f ∈ HomTensorBC) → ((curf, g) ∈ EqHomAInt)) × (((curf, g) ∈ EqHomAInt) → ((uncurg, f) ∈ EqHomTensor)))). (λ(hfHom:(f ∈ HomTensorBC)). (snd(h) (fst(h) hfHom)))))))))))",
+      "statement_ast": "(Pi (HomTensorBC : Class) -> (Pi (EqHomAInt : Class) -> (Pi (EqHomTensor : Class) -> (Pi (f : Class) -> (Pi (curf : Class) -> (Pi (g : Class) -> (Pi (uncurg : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In f) HomTensorBC) true)) -> (Id Prop ((In ((DunaevPair curf) g)) EqHomAInt) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair curf) g)) EqHomAInt) true)) -> (Id Prop ((In ((DunaevPair uncurg) f)) EqHomTensor) true)))) -> (Pi (_ : (Id Prop ((In f) HomTensorBC) true)) -> (Id Prop ((In ((DunaevPair uncurg) f)) EqHomTensor) true))))))))))"
+    },
+    {
+      "id": 210,
+      "num": "NBG-210",
+      "name": "thm_day_convolution_coend_wedge_factorization",
+      "kind": "Derived",
+      "statement_unicode": "Π(CoendWedge:Class), Π(WedgeMed:Class), Π(EqNat:Class), Π(w:Class), Π(factorDay:Class), Π(uniqMap:Class), ((((w ∈ CoendWedge) → ((w, factorDay) ∈ WedgeMed)) × (((w, factorDay) ∈ WedgeMed) → ((factorDay, uniqMap) ∈ EqNat))) → ((w ∈ CoendWedge) → ((factorDay, uniqMap) ∈ EqNat)))",
+      "proof_unicode": "(λ(CoendWedge:Class). (λ(WedgeMed:Class). (λ(EqNat:Class). (λ(w:Class). (λ(factorDay:Class). (λ(uniqMap:Class). (λ(h:(((w ∈ CoendWedge) → ((w, factorDay) ∈ WedgeMed)) × (((w, factorDay) ∈ WedgeMed) → ((factorDay, uniqMap) ∈ EqNat)))). (λ(hwWedge:(w ∈ CoendWedge)). (snd(h) (fst(h) hwWedge))))))))))",
+      "statement_ast": "(Pi (CoendWedge : Class) -> (Pi (WedgeMed : Class) -> (Pi (EqNat : Class) -> (Pi (w : Class) -> (Pi (factorDay : Class) -> (Pi (uniqMap : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In w) CoendWedge) true)) -> (Id Prop ((In ((DunaevPair w) factorDay)) WedgeMed) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair w) factorDay)) WedgeMed) true)) -> (Id Prop ((In ((DunaevPair factorDay) uniqMap)) EqNat) true)))) -> (Pi (_ : (Id Prop ((In w) CoendWedge) true)) -> (Id Prop ((In ((DunaevPair factorDay) uniqMap)) EqNat) true)))))))))"
     }
   ]
 }
