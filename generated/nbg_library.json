@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 175,
-  "verified_count": 175,
-  "derived_count": 152,
+  "total_count": 180,
+  "verified_count": 180,
+  "derived_count": 157,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1583,6 +1583,51 @@
       "statement_unicode": "Π(Leq:Class), Π(C2:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((z ∈ C2) × ((x, z) ∈ Leq)))) → ((z ∈ C2) × ((x, z) ∈ Leq)))",
       "proof_unicode": "(λ(Leq:Class). (λ(C2:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((z ∈ C2) × ((x, z) ∈ Leq))))). (snd(h) fst(h))))))))",
       "statement_ast": "(Pi (Leq : Class) -> (Pi (C2 : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) Leq) true)) * (Id Prop ((In ((DunaevPair y) z)) Leq) true))) * (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) y)) Leq) true)) * (Id Prop ((In ((DunaevPair y) z)) Leq) true))) -> (Sigma (_ : (Id Prop ((In z) C2) true)) * (Id Prop ((In ((DunaevPair x) z)) Leq) true))))) -> (Sigma (_ : (Id Prop ((In z) C2) true)) * (Id Prop ((In ((DunaevPair x) z)) Leq) true))))))))"
+    },
+    {
+      "id": 176,
+      "num": "NBG-176",
+      "name": "thm_boolean_algebra_complement_uniqueness_forward",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B1:Class), Π(B2:Class), ((((x ∈ B1) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B2) → C) → C))) × (((x ∈ B1) × (x ∈ A)) → 𝟘)) → ((x ∈ B1) → (x ∈ B2)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B1) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B2) → C) → C))) × (((x ∈ B1) × (x ∈ A)) → 𝟘))). (λ(hxB1:(x ∈ B1)). ((((fst(h) hxB1) (x ∈ B2)) (λ(hxA:(x ∈ A)). ((ax_false_elim (x ∈ B2)) (snd(h) ⟨hxB1, hxA⟩)))) (λ(hxB2:(x ∈ B2)). hxB2))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B1 : Class) -> (Pi (B2 : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) B1) true)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) B2) true)) -> C)) -> C))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In x) B1) true)) * (Id Prop ((In x) A) true))) -> False))) -> (Pi (_ : (Id Prop ((In x) B1) true)) -> (Id Prop ((In x) B2) true)))))))"
+    },
+    {
+      "id": 177,
+      "num": "NBG-177",
+      "name": "thm_boolean_algebra_complement_uniqueness_backward",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B1:Class), Π(B2:Class), ((((x ∈ B2) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B1) → C) → C))) × (((x ∈ B2) × (x ∈ A)) → 𝟘)) → ((x ∈ B2) → (x ∈ B1)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B2) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B1) → C) → C))) × (((x ∈ B2) × (x ∈ A)) → 𝟘))). (λ(hxB2:(x ∈ B2)). ((((fst(h) hxB2) (x ∈ B1)) (λ(hxA:(x ∈ A)). ((ax_false_elim (x ∈ B1)) (snd(h) ⟨hxB2, hxA⟩)))) (λ(hxB1:(x ∈ B1)). hxB1))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B1 : Class) -> (Pi (B2 : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) B2) true)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) B1) true)) -> C)) -> C))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In x) B2) true)) * (Id Prop ((In x) A) true))) -> False))) -> (Pi (_ : (Id Prop ((In x) B2) true)) -> (Id Prop ((In x) B1) true)))))))"
+    },
+    {
+      "id": 178,
+      "num": "NBG-178",
+      "name": "thm_dunaev_pair_pullback_fiber_product_projection_left",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(B:Class), Π(EqC:Class), Π(x:Class), Π(y:Class), Π(fx:Class), Π(gy:Class), ((((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC)) → ((x ∈ A) × ((fx, gy) ∈ EqC)))",
+      "proof_unicode": "(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(x:Class). (λ(y:Class). (λ(fx:Class). (λ(gy:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC))). ⟨fst(fst(h)), snd(h)⟩))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (EqC : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (fx : Class) -> (Pi (gy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In y) B) true))) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true))) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true))))))))))"
+    },
+    {
+      "id": 179,
+      "num": "NBG-179",
+      "name": "thm_dunaev_pair_pullback_fiber_product_projection_right",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(B:Class), Π(EqC:Class), Π(x:Class), Π(y:Class), Π(fx:Class), Π(gy:Class), ((((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC)) → ((y ∈ B) × ((fx, gy) ∈ EqC)))",
+      "proof_unicode": "(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(x:Class). (λ(y:Class). (λ(fx:Class). (λ(gy:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC))). ⟨snd(fst(h)), snd(h)⟩))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (B : Class) -> (Pi (EqC : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (fx : Class) -> (Pi (gy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In y) B) true))) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true))) -> (Sigma (_ : (Id Prop ((In y) B) true)) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true))))))))))"
+    },
+    {
+      "id": 180,
+      "num": "NBG-180",
+      "name": "thm_dunaev_pair_pullback_universal_mediating_pair",
+      "kind": "Derived",
+      "statement_unicode": "Π(P:Class), Π(A:Class), Π(B:Class), Π(EqC:Class), Π(u:Class), Π(x:Class), Π(y:Class), Π(fx:Class), Π(gy:Class), (((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((fx, gy) ∈ EqC))) → ((u ∈ P) → (((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC))))",
+      "proof_unicode": "(λ(P:Class). (λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(u:Class). (λ(x:Class). (λ(y:Class). (λ(fx:Class). (λ(gy:Class). (λ(h:((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((fx, gy) ∈ EqC)))). (λ(huP:(u ∈ P)). ⟨⟨(fst(fst(h)) huP), (snd(fst(h)) huP)⟩, (snd(h) huP)⟩)))))))))))",
+      "statement_ast": "(Pi (P : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (EqC : Class) -> (Pi (u : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (fx : Class) -> (Pi (gy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In x) A) true))) * (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In y) B) true)))) * (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In ((DunaevPair fx) gy)) EqC) true)))) -> (Pi (_ : (Id Prop ((In u) P) true)) -> (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In y) B) true))) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true)))))))))))))"
     }
   ]
 }
