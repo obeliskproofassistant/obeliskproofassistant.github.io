@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 195,
-  "verified_count": 195,
-  "derived_count": 172,
+  "total_count": 200,
+  "verified_count": 200,
+  "derived_count": 177,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1763,6 +1763,51 @@
       "statement_unicode": "Π(A:Class), Π(AssocPair:Class), Π(EqTA:Class), Π(x:Class), Π(muT3x:Class), Π(Tmux:Class), Π(mumuT3x:Class), Π(muTmux:Class), ((((x ∈ A) → ((muT3x, Tmux) ∈ AssocPair)) × (((muT3x, Tmux) ∈ AssocPair) → ((mumuT3x, muTmux) ∈ EqTA))) → ((x ∈ A) → ((mumuT3x, muTmux) ∈ EqTA)))",
       "proof_unicode": "(λ(A:Class). (λ(AssocPair:Class). (λ(EqTA:Class). (λ(x:Class). (λ(muT3x:Class). (λ(Tmux:Class). (λ(mumuT3x:Class). (λ(muTmux:Class). (λ(h:(((x ∈ A) → ((muT3x, Tmux) ∈ AssocPair)) × (((muT3x, Tmux) ∈ AssocPair) → ((mumuT3x, muTmux) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))))",
       "statement_ast": "(Pi (A : Class) -> (Pi (AssocPair : Class) -> (Pi (EqTA : Class) -> (Pi (x : Class) -> (Pi (muT3x : Class) -> (Pi (Tmux : Class) -> (Pi (mumuT3x : Class) -> (Pi (muTmux : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair muT3x) Tmux)) AssocPair) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair muT3x) Tmux)) AssocPair) true)) -> (Id Prop ((In ((DunaevPair mumuT3x) muTmux)) EqTA) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair mumuT3x) muTmux)) EqTA) true)))))))))))"
+    },
+    {
+      "id": 196,
+      "num": "NBG-196",
+      "name": "thm_eilenberg_moore_algebra_unit_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(EtaA:Class), Π(EqA:Class), Π(x:Class), Π(etax:Class), Π(alphaetax:Class), ((((x ∈ A) → ((x, etax) ∈ EtaA)) × (((x, etax) ∈ EtaA) → ((alphaetax, x) ∈ EqA))) → ((x ∈ A) → ((alphaetax, x) ∈ EqA)))",
+      "proof_unicode": "(λ(A:Class). (λ(EtaA:Class). (λ(EqA:Class). (λ(x:Class). (λ(etax:Class). (λ(alphaetax:Class). (λ(h:(((x ∈ A) → ((x, etax) ∈ EtaA)) × (((x, etax) ∈ EtaA) → ((alphaetax, x) ∈ EqA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (EtaA : Class) -> (Pi (EqA : Class) -> (Pi (x : Class) -> (Pi (etax : Class) -> (Pi (alphaetax : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) etax)) EtaA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) etax)) EtaA) true)) -> (Id Prop ((In ((DunaevPair alphaetax) x)) EqA) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair alphaetax) x)) EqA) true)))))))))"
+    },
+    {
+      "id": 197,
+      "num": "NBG-197",
+      "name": "thm_eilenberg_moore_algebra_multiplication_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(TTA:Class), Π(EqA:Class), Π(z:Class), Π(alphamuz:Class), Π(alphaTalphaz:Class), ((((z ∈ TTA) → ((alphamuz, alphaTalphaz) ∈ EqA)) × (z ∈ TTA)) → ((alphamuz, alphaTalphaz) ∈ EqA))",
+      "proof_unicode": "(λ(TTA:Class). (λ(EqA:Class). (λ(z:Class). (λ(alphamuz:Class). (λ(alphaTalphaz:Class). (λ(h:(((z ∈ TTA) → ((alphamuz, alphaTalphaz) ∈ EqA)) × (z ∈ TTA))). (fst(h) snd(h))))))))",
+      "statement_ast": "(Pi (TTA : Class) -> (Pi (EqA : Class) -> (Pi (z : Class) -> (Pi (alphamuz : Class) -> (Pi (alphaTalphaz : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In z) TTA) true)) -> (Id Prop ((In ((DunaevPair alphamuz) alphaTalphaz)) EqA) true))) * (Id Prop ((In z) TTA) true))) -> (Id Prop ((In ((DunaevPair alphamuz) alphaTalphaz)) EqA) true)))))))"
+    },
+    {
+      "id": 198,
+      "num": "NBG-198",
+      "name": "thm_kleisli_category_identity_left_composition",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(KleisliAB:Class), Π(EqTB:Class), Π(x:Class), Π(f_x:Class), Π(muTf_etax:Class), ((((x ∈ A) → ((x, f_x) ∈ KleisliAB)) × (((x, f_x) ∈ KleisliAB) → ((muTf_etax, f_x) ∈ EqTB))) → ((x ∈ A) → ((muTf_etax, f_x) ∈ EqTB)))",
+      "proof_unicode": "(λ(A:Class). (λ(KleisliAB:Class). (λ(EqTB:Class). (λ(x:Class). (λ(f_x:Class). (λ(muTf_etax:Class). (λ(h:(((x ∈ A) → ((x, f_x) ∈ KleisliAB)) × (((x, f_x) ∈ KleisliAB) → ((muTf_etax, f_x) ∈ EqTB)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (KleisliAB : Class) -> (Pi (EqTB : Class) -> (Pi (x : Class) -> (Pi (f_x : Class) -> (Pi (muTf_etax : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) f_x)) KleisliAB) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) f_x)) KleisliAB) true)) -> (Id Prop ((In ((DunaevPair muTf_etax) f_x)) EqTB) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair muTf_etax) f_x)) EqTB) true)))))))))"
+    },
+    {
+      "id": 199,
+      "num": "NBG-199",
+      "name": "thm_yoneda_natural_transformation_evaluation_bijection",
+      "kind": "Derived",
+      "statement_unicode": "Π(NatHomF:Class), Π(EqFA:Class), Π(EqNat:Class), Π(phi:Class), Π(phi_idA:Class), Π(u:Class), Π(psi_u:Class), ((((phi ∈ NatHomF) → ((phi_idA, u) ∈ EqFA)) × (((phi_idA, u) ∈ EqFA) → ((psi_u, phi) ∈ EqNat))) → ((phi ∈ NatHomF) → ((psi_u, phi) ∈ EqNat)))",
+      "proof_unicode": "(λ(NatHomF:Class). (λ(EqFA:Class). (λ(EqNat:Class). (λ(phi:Class). (λ(phi_idA:Class). (λ(u:Class). (λ(psi_u:Class). (λ(h:(((phi ∈ NatHomF) → ((phi_idA, u) ∈ EqFA)) × (((phi_idA, u) ∈ EqFA) → ((psi_u, phi) ∈ EqNat)))). (λ(hPhi:(phi ∈ NatHomF)). (snd(h) (fst(h) hPhi)))))))))))",
+      "statement_ast": "(Pi (NatHomF : Class) -> (Pi (EqFA : Class) -> (Pi (EqNat : Class) -> (Pi (phi : Class) -> (Pi (phi_idA : Class) -> (Pi (u : Class) -> (Pi (psi_u : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In phi) NatHomF) true)) -> (Id Prop ((In ((DunaevPair phi_idA) u)) EqFA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair phi_idA) u)) EqFA) true)) -> (Id Prop ((In ((DunaevPair psi_u) phi)) EqNat) true)))) -> (Pi (_ : (Id Prop ((In phi) NatHomF) true)) -> (Id Prop ((In ((DunaevPair psi_u) phi)) EqNat) true))))))))))"
+    },
+    {
+      "id": 200,
+      "num": "NBG-200",
+      "name": "thm_yoneda_embedding_full_faithfulness_isomorphism",
+      "kind": "Derived",
+      "statement_unicode": "Π(HomAB:Class), Π(EqNatHom:Class), Π(EqHomAB:Class), Π(f:Class), Π(Yonf:Class), Π(Phi:Class), Π(Phi_idA:Class), ((((f ∈ HomAB) → ((Yonf, Phi) ∈ EqNatHom)) × (((Yonf, Phi) ∈ EqNatHom) → ((Phi_idA, f) ∈ EqHomAB))) → ((f ∈ HomAB) → ((Phi_idA, f) ∈ EqHomAB)))",
+      "proof_unicode": "(λ(HomAB:Class). (λ(EqNatHom:Class). (λ(EqHomAB:Class). (λ(f:Class). (λ(Yonf:Class). (λ(Phi:Class). (λ(Phi_idA:Class). (λ(h:(((f ∈ HomAB) → ((Yonf, Phi) ∈ EqNatHom)) × (((Yonf, Phi) ∈ EqNatHom) → ((Phi_idA, f) ∈ EqHomAB)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom)))))))))))",
+      "statement_ast": "(Pi (HomAB : Class) -> (Pi (EqNatHom : Class) -> (Pi (EqHomAB : Class) -> (Pi (f : Class) -> (Pi (Yonf : Class) -> (Pi (Phi : Class) -> (Pi (Phi_idA : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Yonf) Phi)) EqNatHom) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair Yonf) Phi)) EqNatHom) true)) -> (Id Prop ((In ((DunaevPair Phi_idA) f)) EqHomAB) true)))) -> (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Phi_idA) f)) EqHomAB) true))))))))))"
     }
   ]
 }
