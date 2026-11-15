@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 190,
-  "verified_count": 190,
-  "derived_count": 167,
+  "total_count": 195,
+  "verified_count": 195,
+  "derived_count": 172,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1718,6 +1718,51 @@
       "statement_unicode": "Π(SubA:Class), Π(EqOmega:Class), Π(x:Class), Π(chix:Class), Π(trueVal:Class), ((((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA))) → (((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA))))",
       "proof_unicode": "(λ(SubA:Class). (λ(EqOmega:Class). (λ(x:Class). (λ(chix:Class). (λ(trueVal:Class). (λ(h:(((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA)))). ⟨fst(h), snd(h)⟩))))))",
       "statement_ast": "(Pi (SubA : Class) -> (Pi (EqOmega : Class) -> (Pi (x : Class) -> (Pi (chix : Class) -> (Pi (trueVal : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) SubA) true)) -> (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true)) -> (Id Prop ((In x) SubA) true)))) -> (Sigma (_ : (Pi (_ : (Id Prop ((In x) SubA) true)) -> (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true)) -> (Id Prop ((In x) SubA) true)))))))))"
+    },
+    {
+      "id": 191,
+      "num": "NBG-191",
+      "name": "thm_lawvere_tierney_topology_idempotence_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(Omega:Class), Π(LeqOmega:Class), Π(EqOmega:Class), Π(p:Class), Π(jp:Class), Π(jjp:Class), (((((p ∈ Omega) → ((jp, p) ∈ LeqOmega)) × ((p ∈ Omega) → ((p, jjp) ∈ LeqOmega))) × ((((jp, p) ∈ LeqOmega) × ((p, jjp) ∈ LeqOmega)) → ((jjp, jp) ∈ EqOmega))) → ((p ∈ Omega) → ((jjp, jp) ∈ EqOmega)))",
+      "proof_unicode": "(λ(Omega:Class). (λ(LeqOmega:Class). (λ(EqOmega:Class). (λ(p:Class). (λ(jp:Class). (λ(jjp:Class). (λ(h:((((p ∈ Omega) → ((jp, p) ∈ LeqOmega)) × ((p ∈ Omega) → ((p, jjp) ∈ LeqOmega))) × ((((jp, p) ∈ LeqOmega) × ((p, jjp) ∈ LeqOmega)) → ((jjp, jp) ∈ EqOmega)))). (λ(hpOm:(p ∈ Omega)). (snd(h) ⟨(fst(fst(h)) hpOm), (snd(fst(h)) hpOm)⟩)))))))))",
+      "statement_ast": "(Pi (Omega : Class) -> (Pi (LeqOmega : Class) -> (Pi (EqOmega : Class) -> (Pi (p : Class) -> (Pi (jp : Class) -> (Pi (jjp : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In p) Omega) true)) -> (Id Prop ((In ((DunaevPair jp) p)) LeqOmega) true))) * (Pi (_ : (Id Prop ((In p) Omega) true)) -> (Id Prop ((In ((DunaevPair p) jjp)) LeqOmega) true)))) * (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair jp) p)) LeqOmega) true)) * (Id Prop ((In ((DunaevPair p) jjp)) LeqOmega) true))) -> (Id Prop ((In ((DunaevPair jjp) jp)) EqOmega) true)))) -> (Pi (_ : (Id Prop ((In p) Omega) true)) -> (Id Prop ((In ((DunaevPair jjp) jp)) EqOmega) true)))))))))"
+    },
+    {
+      "id": 192,
+      "num": "NBG-192",
+      "name": "thm_lawvere_tierney_topology_meet_preservation_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(Omega:Class), Π(EqOmega:Class), Π(p:Class), Π(q:Class), Π(jmeetpq:Class), Π(meetjpjq:Class), (((((p ∈ Omega) × (q ∈ Omega)) → ((jmeetpq, meetjpjq) ∈ EqOmega)) × ((p ∈ Omega) × (q ∈ Omega))) → ((jmeetpq, meetjpjq) ∈ EqOmega))",
+      "proof_unicode": "(λ(Omega:Class). (λ(EqOmega:Class). (λ(p:Class). (λ(q:Class). (λ(jmeetpq:Class). (λ(meetjpjq:Class). (λ(h:((((p ∈ Omega) × (q ∈ Omega)) → ((jmeetpq, meetjpjq) ∈ EqOmega)) × ((p ∈ Omega) × (q ∈ Omega)))). (fst(h) snd(h)))))))))",
+      "statement_ast": "(Pi (Omega : Class) -> (Pi (EqOmega : Class) -> (Pi (p : Class) -> (Pi (q : Class) -> (Pi (jmeetpq : Class) -> (Pi (meetjpjq : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In p) Omega) true)) * (Id Prop ((In q) Omega) true))) -> (Id Prop ((In ((DunaevPair jmeetpq) meetjpjq)) EqOmega) true))) * (Sigma (_ : (Id Prop ((In p) Omega) true)) * (Id Prop ((In q) Omega) true)))) -> (Id Prop ((In ((DunaevPair jmeetpq) meetjpjq)) EqOmega) true))))))))"
+    },
+    {
+      "id": 193,
+      "num": "NBG-193",
+      "name": "thm_monad_left_unit_law_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(EtaMap:Class), Π(EqTA:Class), Π(x:Class), Π(etax:Class), Π(muTetax:Class), Π(idTx:Class), ((((x ∈ A) → ((x, etax) ∈ EtaMap)) × (((x, etax) ∈ EtaMap) → ((muTetax, idTx) ∈ EqTA))) → ((x ∈ A) → ((muTetax, idTx) ∈ EqTA)))",
+      "proof_unicode": "(λ(A:Class). (λ(EtaMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(etax:Class). (λ(muTetax:Class). (λ(idTx:Class). (λ(h:(((x ∈ A) → ((x, etax) ∈ EtaMap)) × (((x, etax) ∈ EtaMap) → ((muTetax, idTx) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (EtaMap : Class) -> (Pi (EqTA : Class) -> (Pi (x : Class) -> (Pi (etax : Class) -> (Pi (muTetax : Class) -> (Pi (idTx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) etax)) EtaMap) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) etax)) EtaMap) true)) -> (Id Prop ((In ((DunaevPair muTetax) idTx)) EqTA) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair muTetax) idTx)) EqTA) true))))))))))"
+    },
+    {
+      "id": 194,
+      "num": "NBG-194",
+      "name": "thm_monad_right_unit_law_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(EtaTMap:Class), Π(EqTA:Class), Π(x:Class), Π(Tx:Class), Π(etaTx:Class), Π(muetaTx:Class), Π(idTx:Class), ((((x ∈ A) → ((Tx, etaTx) ∈ EtaTMap)) × (((Tx, etaTx) ∈ EtaTMap) → ((muetaTx, idTx) ∈ EqTA))) → ((x ∈ A) → ((muetaTx, idTx) ∈ EqTA)))",
+      "proof_unicode": "(λ(A:Class). (λ(EtaTMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(Tx:Class). (λ(etaTx:Class). (λ(muetaTx:Class). (λ(idTx:Class). (λ(h:(((x ∈ A) → ((Tx, etaTx) ∈ EtaTMap)) × (((Tx, etaTx) ∈ EtaTMap) → ((muetaTx, idTx) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (EtaTMap : Class) -> (Pi (EqTA : Class) -> (Pi (x : Class) -> (Pi (Tx : Class) -> (Pi (etaTx : Class) -> (Pi (muetaTx : Class) -> (Pi (idTx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair Tx) etaTx)) EtaTMap) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair Tx) etaTx)) EtaTMap) true)) -> (Id Prop ((In ((DunaevPair muetaTx) idTx)) EqTA) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair muetaTx) idTx)) EqTA) true)))))))))))"
+    },
+    {
+      "id": 195,
+      "num": "NBG-195",
+      "name": "thm_monad_associativity_square_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(AssocPair:Class), Π(EqTA:Class), Π(x:Class), Π(muT3x:Class), Π(Tmux:Class), Π(mumuT3x:Class), Π(muTmux:Class), ((((x ∈ A) → ((muT3x, Tmux) ∈ AssocPair)) × (((muT3x, Tmux) ∈ AssocPair) → ((mumuT3x, muTmux) ∈ EqTA))) → ((x ∈ A) → ((mumuT3x, muTmux) ∈ EqTA)))",
+      "proof_unicode": "(λ(A:Class). (λ(AssocPair:Class). (λ(EqTA:Class). (λ(x:Class). (λ(muT3x:Class). (λ(Tmux:Class). (λ(mumuT3x:Class). (λ(muTmux:Class). (λ(h:(((x ∈ A) → ((muT3x, Tmux) ∈ AssocPair)) × (((muT3x, Tmux) ∈ AssocPair) → ((mumuT3x, muTmux) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (AssocPair : Class) -> (Pi (EqTA : Class) -> (Pi (x : Class) -> (Pi (muT3x : Class) -> (Pi (Tmux : Class) -> (Pi (mumuT3x : Class) -> (Pi (muTmux : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair muT3x) Tmux)) AssocPair) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair muT3x) Tmux)) AssocPair) true)) -> (Id Prop ((In ((DunaevPair mumuT3x) muTmux)) EqTA) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair mumuT3x) muTmux)) EqTA) true)))))))))))"
     }
   ]
 }
