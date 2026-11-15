@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 185,
-  "verified_count": 185,
-  "derived_count": 162,
+  "total_count": 190,
+  "verified_count": 190,
+  "derived_count": 167,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1673,6 +1673,51 @@
       "statement_unicode": "Π(C:Class), Π(PushoutABC:Class), Π(tag0:Class), Π(tag1:Class), Π(z:Class), Π(fz:Class), Π(gz:Class), ((((z ∈ C) → ((tag0, fz) ∈ PushoutABC)) × ((z ∈ C) → ((tag1, gz) ∈ PushoutABC))) → ((z ∈ C) → (((tag0, fz) ∈ PushoutABC) × ((tag1, gz) ∈ PushoutABC))))",
       "proof_unicode": "(λ(C:Class). (λ(PushoutABC:Class). (λ(tag0:Class). (λ(tag1:Class). (λ(z:Class). (λ(fz:Class). (λ(gz:Class). (λ(h:(((z ∈ C) → ((tag0, fz) ∈ PushoutABC)) × ((z ∈ C) → ((tag1, gz) ∈ PushoutABC)))). (λ(hzC:(z ∈ C)). ⟨(fst(h) hzC), (snd(h) hzC)⟩)))))))))",
       "statement_ast": "(Pi (C : Class) -> (Pi (PushoutABC : Class) -> (Pi (tag0 : Class) -> (Pi (tag1 : Class) -> (Pi (z : Class) -> (Pi (fz : Class) -> (Pi (gz : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In z) C) true)) -> (Id Prop ((In ((DunaevPair tag0) fz)) PushoutABC) true))) * (Pi (_ : (Id Prop ((In z) C) true)) -> (Id Prop ((In ((DunaevPair tag1) gz)) PushoutABC) true)))) -> (Pi (_ : (Id Prop ((In z) C) true)) -> (Sigma (_ : (Id Prop ((In ((DunaevPair tag0) fz)) PushoutABC) true)) * (Id Prop ((In ((DunaevPair tag1) gz)) PushoutABC) true)))))))))))"
+    },
+    {
+      "id": 186,
+      "num": "NBG-186",
+      "name": "thm_coequalizer_quotient_fork_commutativity",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(KerQ:Class), Π(DiagC:Class), Π(x:Class), Π(fx:Class), Π(gx:Class), Π(qfx:Class), Π(qgx:Class), ((((x ∈ A) → ((fx, gx) ∈ KerQ)) × (((fx, gx) ∈ KerQ) → ((qfx, qgx) ∈ DiagC))) → ((x ∈ A) → ((qfx, qgx) ∈ DiagC)))",
+      "proof_unicode": "(λ(A:Class). (λ(KerQ:Class). (λ(DiagC:Class). (λ(x:Class). (λ(fx:Class). (λ(gx:Class). (λ(qfx:Class). (λ(qgx:Class). (λ(h:(((x ∈ A) → ((fx, gx) ∈ KerQ)) × (((fx, gx) ∈ KerQ) → ((qfx, qgx) ∈ DiagC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (KerQ : Class) -> (Pi (DiagC : Class) -> (Pi (x : Class) -> (Pi (fx : Class) -> (Pi (gx : Class) -> (Pi (qfx : Class) -> (Pi (qgx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair fx) gx)) KerQ) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair fx) gx)) KerQ) true)) -> (Id Prop ((In ((DunaevPair qfx) qgx)) DiagC) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair qfx) qgx)) DiagC) true)))))))))))"
+    },
+    {
+      "id": 187,
+      "num": "NBG-187",
+      "name": "thm_coequalizer_universal_mediating_uniqueness",
+      "kind": "Derived",
+      "statement_unicode": "Π(B:Class), Π(DiagZ:Class), Π(y:Class), Π(uy:Class), Π(vy:Class), (((((y ∈ B) → ((uy, vy) ∈ DiagZ)) × (((uy, vy) ∈ DiagZ) → (uy = vy))) × (y ∈ B)) → (uy = vy))",
+      "proof_unicode": "(λ(B:Class). (λ(DiagZ:Class). (λ(y:Class). (λ(uy:Class). (λ(vy:Class). (λ(h:((((y ∈ B) → ((uy, vy) ∈ DiagZ)) × (((uy, vy) ∈ DiagZ) → (uy = vy))) × (y ∈ B))). (snd(fst(h)) (fst(fst(h)) snd(h)))))))))",
+      "statement_ast": "(Pi (B : Class) -> (Pi (DiagZ : Class) -> (Pi (y : Class) -> (Pi (uy : Class) -> (Pi (vy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In y) B) true)) -> (Id Prop ((In ((DunaevPair uy) vy)) DiagZ) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair uy) vy)) DiagZ) true)) -> (Id Class uy vy)))) * (Id Prop ((In y) B) true))) -> (Id Class uy vy)))))))"
+    },
+    {
+      "id": 188,
+      "num": "NBG-188",
+      "name": "thm_exponential_evaluation_beta_reduction_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(DomEv:Class), Π(GraphLam:Class), Π(EqC:Class), Π(f:Class), Π(x:Class), Π(evfx:Class), Π(bodyx:Class), (((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) × ((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) → ((evfx, bodyx) ∈ EqC))) → ((evfx, bodyx) ∈ EqC))",
+      "proof_unicode": "(λ(DomEv:Class). (λ(GraphLam:Class). (λ(EqC:Class). (λ(f:Class). (λ(x:Class). (λ(evfx:Class). (λ(bodyx:Class). (λ(h:((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) × ((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) → ((evfx, bodyx) ∈ EqC)))). (snd(h) fst(h))))))))))",
+      "statement_ast": "(Pi (DomEv : Class) -> (Pi (GraphLam : Class) -> (Pi (EqC : Class) -> (Pi (f : Class) -> (Pi (x : Class) -> (Pi (evfx : Class) -> (Pi (bodyx : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair f) x)) DomEv) true)) * (Id Prop ((In ((DunaevPair f) x)) GraphLam) true))) * (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair f) x)) DomEv) true)) * (Id Prop ((In ((DunaevPair f) x)) GraphLam) true))) -> (Id Prop ((In ((DunaevPair evfx) bodyx)) EqC) true)))) -> (Id Prop ((In ((DunaevPair evfx) bodyx)) EqC) true)))))))))"
+    },
+    {
+      "id": 189,
+      "num": "NBG-189",
+      "name": "thm_exponential_transpose_eta_uniqueness_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(HomAB:Class), Π(EqHom:Class), Π(EqExp:Class), Π(f:Class), Π(g:Class), Π(evf:Class), Π(curg:Class), ((((f ∈ HomAB) × ((evf, g) ∈ EqHom)) × (((evf, g) ∈ EqHom) → ((f, curg) ∈ EqExp))) → ((f ∈ HomAB) → ((f, curg) ∈ EqExp)))",
+      "proof_unicode": "(λ(HomAB:Class). (λ(EqHom:Class). (λ(EqExp:Class). (λ(f:Class). (λ(g:Class). (λ(evf:Class). (λ(curg:Class). (λ(h:(((f ∈ HomAB) × ((evf, g) ∈ EqHom)) × (((evf, g) ∈ EqHom) → ((f, curg) ∈ EqExp)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) snd(fst(h))))))))))))",
+      "statement_ast": "(Pi (HomAB : Class) -> (Pi (EqHom : Class) -> (Pi (EqExp : Class) -> (Pi (f : Class) -> (Pi (g : Class) -> (Pi (evf : Class) -> (Pi (curg : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In f) HomAB) true)) * (Id Prop ((In ((DunaevPair evf) g)) EqHom) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair evf) g)) EqHom) true)) -> (Id Prop ((In ((DunaevPair f) curg)) EqExp) true)))) -> (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair f) curg)) EqExp) true))))))))))"
+    },
+    {
+      "id": 190,
+      "num": "NBG-190",
+      "name": "thm_subobject_classifier_characteristic_pullback_iff",
+      "kind": "Derived",
+      "statement_unicode": "Π(SubA:Class), Π(EqOmega:Class), Π(x:Class), Π(chix:Class), Π(trueVal:Class), ((((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA))) → (((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA))))",
+      "proof_unicode": "(λ(SubA:Class). (λ(EqOmega:Class). (λ(x:Class). (λ(chix:Class). (λ(trueVal:Class). (λ(h:(((x ∈ SubA) → ((chix, trueVal) ∈ EqOmega)) × (((chix, trueVal) ∈ EqOmega) → (x ∈ SubA)))). ⟨fst(h), snd(h)⟩))))))",
+      "statement_ast": "(Pi (SubA : Class) -> (Pi (EqOmega : Class) -> (Pi (x : Class) -> (Pi (chix : Class) -> (Pi (trueVal : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) SubA) true)) -> (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true)) -> (Id Prop ((In x) SubA) true)))) -> (Sigma (_ : (Pi (_ : (Id Prop ((In x) SubA) true)) -> (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair chix) trueVal)) EqOmega) true)) -> (Id Prop ((In x) SubA) true)))))))))"
     }
   ]
 }
