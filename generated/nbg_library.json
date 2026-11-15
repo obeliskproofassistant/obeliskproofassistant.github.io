@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 180,
-  "verified_count": 180,
-  "derived_count": 157,
+  "total_count": 185,
+  "verified_count": 185,
+  "derived_count": 162,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1628,6 +1628,51 @@
       "statement_unicode": "Π(P:Class), Π(A:Class), Π(B:Class), Π(EqC:Class), Π(u:Class), Π(x:Class), Π(y:Class), Π(fx:Class), Π(gy:Class), (((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((fx, gy) ∈ EqC))) → ((u ∈ P) → (((x ∈ A) × (y ∈ B)) × ((fx, gy) ∈ EqC))))",
       "proof_unicode": "(λ(P:Class). (λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(u:Class). (λ(x:Class). (λ(y:Class). (λ(fx:Class). (λ(gy:Class). (λ(h:((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((fx, gy) ∈ EqC)))). (λ(huP:(u ∈ P)). ⟨⟨(fst(fst(h)) huP), (snd(fst(h)) huP)⟩, (snd(h) huP)⟩)))))))))))",
       "statement_ast": "(Pi (P : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (EqC : Class) -> (Pi (u : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (fx : Class) -> (Pi (gy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In x) A) true))) * (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In y) B) true)))) * (Pi (_ : (Id Prop ((In u) P) true)) -> (Id Prop ((In ((DunaevPair fx) gy)) EqC) true)))) -> (Pi (_ : (Id Prop ((In u) P) true)) -> (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In y) B) true))) * (Id Prop ((In ((DunaevPair fx) gy)) EqC) true)))))))))))))"
+    },
+    {
+      "id": 181,
+      "num": "NBG-181",
+      "name": "thm_equalizer_inclusion_fork_commutativity",
+      "kind": "Derived",
+      "statement_unicode": "Π(EqFG:Class), Π(A:Class), Π(DiagB:Class), Π(x:Class), Π(fx:Class), Π(gx:Class), (((x ∈ EqFG) → ((x ∈ A) × ((fx, gx) ∈ DiagB))) → ((x ∈ EqFG) → ((fx, gx) ∈ DiagB)))",
+      "proof_unicode": "(λ(EqFG:Class). (λ(A:Class). (λ(DiagB:Class). (λ(x:Class). (λ(fx:Class). (λ(gx:Class). (λ(h:((x ∈ EqFG) → ((x ∈ A) × ((fx, gx) ∈ DiagB)))). (λ(hxEq:(x ∈ EqFG)). snd((h hxEq))))))))))",
+      "statement_ast": "(Pi (EqFG : Class) -> (Pi (A : Class) -> (Pi (DiagB : Class) -> (Pi (x : Class) -> (Pi (fx : Class) -> (Pi (gx : Class) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) EqFG) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair fx) gx)) DiagB) true)))) -> (Pi (_ : (Id Prop ((In x) EqFG) true)) -> (Id Prop ((In ((DunaevPair fx) gx)) DiagB) true)))))))))"
+    },
+    {
+      "id": 182,
+      "num": "NBG-182",
+      "name": "thm_equalizer_universal_factorization_uniqueness",
+      "kind": "Derived",
+      "statement_unicode": "Π(X:Class), Π(DiagA:Class), Π(u:Class), Π(hu:Class), Π(ku:Class), (((((u ∈ X) → ((hu, hu) ∈ DiagA)) × (((hu, ku) ∈ DiagA) → (hu = ku))) × ((u ∈ X) → ((hu, ku) ∈ DiagA))) → ((u ∈ X) → (hu = ku)))",
+      "proof_unicode": "(λ(X:Class). (λ(DiagA:Class). (λ(u:Class). (λ(hu:Class). (λ(ku:Class). (λ(h:((((u ∈ X) → ((hu, hu) ∈ DiagA)) × (((hu, ku) ∈ DiagA) → (hu = ku))) × ((u ∈ X) → ((hu, ku) ∈ DiagA)))). (λ(huX:(u ∈ X)). (snd(fst(h)) (snd(h) huX)))))))))",
+      "statement_ast": "(Pi (X : Class) -> (Pi (DiagA : Class) -> (Pi (u : Class) -> (Pi (hu : Class) -> (Pi (ku : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) X) true)) -> (Id Prop ((In ((DunaevPair hu) hu)) DiagA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair hu) ku)) DiagA) true)) -> (Id Class hu ku)))) * (Pi (_ : (Id Prop ((In u) X) true)) -> (Id Prop ((In ((DunaevPair hu) ku)) DiagA) true)))) -> (Pi (_ : (Id Prop ((In u) X) true)) -> (Id Class hu ku))))))))"
+    },
+    {
+      "id": 183,
+      "num": "NBG-183",
+      "name": "thm_pushout_amalgamated_sum_left_injection",
+      "kind": "Derived",
+      "statement_unicode": "Π(A:Class), Π(CoprodAB:Class), Π(PushoutABC:Class), Π(tag0:Class), Π(x:Class), ((((x ∈ A) → ((tag0, x) ∈ CoprodAB)) × (((tag0, x) ∈ CoprodAB) → ((tag0, x) ∈ PushoutABC))) → ((x ∈ A) → ((tag0, x) ∈ PushoutABC)))",
+      "proof_unicode": "(λ(A:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(tag0:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((tag0, x) ∈ CoprodAB)) × (((tag0, x) ∈ CoprodAB) → ((tag0, x) ∈ PushoutABC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (CoprodAB : Class) -> (Pi (PushoutABC : Class) -> (Pi (tag0 : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair tag0) x)) CoprodAB) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair tag0) x)) CoprodAB) true)) -> (Id Prop ((In ((DunaevPair tag0) x)) PushoutABC) true)))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair tag0) x)) PushoutABC) true))))))))"
+    },
+    {
+      "id": 184,
+      "num": "NBG-184",
+      "name": "thm_pushout_amalgamated_sum_right_injection",
+      "kind": "Derived",
+      "statement_unicode": "Π(B:Class), Π(CoprodAB:Class), Π(PushoutABC:Class), Π(tag1:Class), Π(y:Class), ((((y ∈ B) → ((tag1, y) ∈ CoprodAB)) × (((tag1, y) ∈ CoprodAB) → ((tag1, y) ∈ PushoutABC))) → ((y ∈ B) → ((tag1, y) ∈ PushoutABC)))",
+      "proof_unicode": "(λ(B:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(tag1:Class). (λ(y:Class). (λ(h:(((y ∈ B) → ((tag1, y) ∈ CoprodAB)) × (((tag1, y) ∈ CoprodAB) → ((tag1, y) ∈ PushoutABC)))). (λ(hyB:(y ∈ B)). (snd(h) (fst(h) hyB)))))))))",
+      "statement_ast": "(Pi (B : Class) -> (Pi (CoprodAB : Class) -> (Pi (PushoutABC : Class) -> (Pi (tag1 : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In y) B) true)) -> (Id Prop ((In ((DunaevPair tag1) y)) CoprodAB) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair tag1) y)) CoprodAB) true)) -> (Id Prop ((In ((DunaevPair tag1) y)) PushoutABC) true)))) -> (Pi (_ : (Id Prop ((In y) B) true)) -> (Id Prop ((In ((DunaevPair tag1) y)) PushoutABC) true))))))))"
+    },
+    {
+      "id": 185,
+      "num": "NBG-185",
+      "name": "thm_pushout_cocone_glueing_compatibility",
+      "kind": "Derived",
+      "statement_unicode": "Π(C:Class), Π(PushoutABC:Class), Π(tag0:Class), Π(tag1:Class), Π(z:Class), Π(fz:Class), Π(gz:Class), ((((z ∈ C) → ((tag0, fz) ∈ PushoutABC)) × ((z ∈ C) → ((tag1, gz) ∈ PushoutABC))) → ((z ∈ C) → (((tag0, fz) ∈ PushoutABC) × ((tag1, gz) ∈ PushoutABC))))",
+      "proof_unicode": "(λ(C:Class). (λ(PushoutABC:Class). (λ(tag0:Class). (λ(tag1:Class). (λ(z:Class). (λ(fz:Class). (λ(gz:Class). (λ(h:(((z ∈ C) → ((tag0, fz) ∈ PushoutABC)) × ((z ∈ C) → ((tag1, gz) ∈ PushoutABC)))). (λ(hzC:(z ∈ C)). ⟨(fst(h) hzC), (snd(h) hzC)⟩)))))))))",
+      "statement_ast": "(Pi (C : Class) -> (Pi (PushoutABC : Class) -> (Pi (tag0 : Class) -> (Pi (tag1 : Class) -> (Pi (z : Class) -> (Pi (fz : Class) -> (Pi (gz : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In z) C) true)) -> (Id Prop ((In ((DunaevPair tag0) fz)) PushoutABC) true))) * (Pi (_ : (Id Prop ((In z) C) true)) -> (Id Prop ((In ((DunaevPair tag1) gz)) PushoutABC) true)))) -> (Pi (_ : (Id Prop ((In z) C) true)) -> (Sigma (_ : (Id Prop ((In ((DunaevPair tag0) fz)) PushoutABC) true)) * (Id Prop ((In ((DunaevPair tag1) gz)) PushoutABC) true)))))))))))"
     }
   ]
 }
