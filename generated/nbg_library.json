@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 125,
-  "verified_count": 125,
-  "derived_count": 102,
+  "total_count": 130,
+  "verified_count": 130,
+  "derived_count": 107,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1133,6 +1133,51 @@
       "statement_unicode": "Π(F:Class), Π(B:Class), Π(x:Class), Π(y:Class), (((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F))) → ((x ∈ B) × ((x, y) ∈ B)))",
       "proof_unicode": "(λ(F:Class). (λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(hFam:((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F)))). ⟨fst(snd(hFam)), (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) F) B)) fst(hFam)) (x, y)) snd(snd(hFam)))⟩)))))",
       "statement_ast": "(Pi (F : Class) -> (Pi (B : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset F) B) true)) * (Sigma (_ : (Id Prop ((In x) B) true)) * (Id Prop ((In ((DunaevPair x) y)) F) true)))) -> (Sigma (_ : (Id Prop ((In x) B) true)) * (Id Prop ((In ((DunaevPair x) y)) B) true)))))))"
+    },
+    {
+      "id": 126,
+      "num": "NBG-126",
+      "name": "thm_yoneda_identity_eval",
+      "kind": "Derived",
+      "statement_unicode": "Π(F:Class), Π(eta:Class), Π(A:Class), Π(idA:Class), (((idA ∈ A) × ((idA ∈ A) → (((ValOf eta) idA) ∈ ((ValOf F) A)))) → (((ValOf eta) idA) ∈ ((ValOf F) A)))",
+      "proof_unicode": "(λ(F:Class). (λ(eta:Class). (λ(A:Class). (λ(idA:Class). (λ(hYon:((idA ∈ A) × ((idA ∈ A) → (((ValOf eta) idA) ∈ ((ValOf F) A))))). (snd(hYon) fst(hYon)))))))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (eta : Class) -> (Pi (A : Class) -> (Pi (idA : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In idA) A) true)) * (Pi (_ : (Id Prop ((In idA) A) true)) -> (Id Prop ((In ((ValOf eta) idA)) ((ValOf F) A)) true)))) -> (Id Prop ((In ((ValOf eta) idA)) ((ValOf F) A)) true))))))"
+    },
+    {
+      "id": 127,
+      "num": "NBG-127",
+      "name": "thm_yoneda_roundtrip_id",
+      "kind": "Derived",
+      "statement_unicode": "Π(Phi:Class), Π(Psi:Class), Π(u:Class), (((((ValOf Phi) ((ValOf Psi) u)) = u) × (((ValOf Psi) ((ValOf Phi) u)) = u)) → ((u = ((ValOf Phi) ((ValOf Psi) u))) × (u = ((ValOf Psi) ((ValOf Phi) u)))))",
+      "proof_unicode": "(λ(Phi:Class). (λ(Psi:Class). (λ(u:Class). (λ(hRT:((((ValOf Phi) ((ValOf Psi) u)) = u) × (((ValOf Psi) ((ValOf Phi) u)) = u))). ⟨(((ax_eq_sym ((ValOf Phi) ((ValOf Psi) u))) u) fst(hRT)), (((ax_eq_sym ((ValOf Psi) ((ValOf Phi) u))) u) snd(hRT))⟩))))",
+      "statement_ast": "(Pi (Phi : Class) -> (Pi (Psi : Class) -> (Pi (u : Class) -> (Pi (_ : (Sigma (_ : (Id Class ((ValOf Phi) ((ValOf Psi) u)) u)) * (Id Class ((ValOf Psi) ((ValOf Phi) u)) u))) -> (Sigma (_ : (Id Class u ((ValOf Phi) ((ValOf Psi) u)))) * (Id Class u ((ValOf Psi) ((ValOf Phi) u))))))))"
+    },
+    {
+      "id": 128,
+      "num": "NBG-128",
+      "name": "thm_kan_extension_adjunction_unit",
+      "kind": "Derived",
+      "statement_unicode": "Π(K:Class), Π(F:Class), Π(G:Class), Π(Lan:Class), (((F ⊆ (K, Lan)) × ((F ⊆ (K, G)) → (Lan ⊆ G))) → ((F ⊆ (K, G)) → ((F ⊆ (K, Lan)) × (Lan ⊆ G))))",
+      "proof_unicode": "(λ(K:Class). (λ(F:Class). (λ(G:Class). (λ(Lan:Class). (λ(hKan:((F ⊆ (K, Lan)) × ((F ⊆ (K, G)) → (Lan ⊆ G)))). (λ(hSubG:(F ⊆ (K, G))). ⟨fst(hKan), (snd(hKan) hSubG)⟩))))))",
+      "statement_ast": "(Pi (K : Class) -> (Pi (F : Class) -> (Pi (G : Class) -> (Pi (Lan : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((Subset F) ((DunaevPair K) Lan)) true)) * (Pi (_ : (Id Prop ((Subset F) ((DunaevPair K) G)) true)) -> (Id Prop ((Subset Lan) G) true)))) -> (Pi (_ : (Id Prop ((Subset F) ((DunaevPair K) G)) true)) -> (Sigma (_ : (Id Prop ((Subset F) ((DunaevPair K) Lan)) true)) * (Id Prop ((Subset Lan) G) true))))))))"
+    },
+    {
+      "id": 129,
+      "num": "NBG-129",
+      "name": "thm_schrodinger_feynman_kac_positivity",
+      "kind": "Derived",
+      "statement_unicode": "Π(Pos:Class), Π(Pt:Class), Π(Vpot:Class), Π(u:Class), (((Π(f:Class), ((f ∈ Pos) → (((ValOf Pt) f) ∈ Pos))) × ((Π(f:Class), ((f ∈ Pos) → (((ValOf Vpot) f) ∈ Pos))) × (u ∈ Pos))) → (((ValOf Pt) ((ValOf Vpot) u)) ∈ Pos))",
+      "proof_unicode": "(λ(Pos:Class). (λ(Pt:Class). (λ(Vpot:Class). (λ(u:Class). (λ(hFK:((Π(f:Class), ((f ∈ Pos) → (((ValOf Pt) f) ∈ Pos))) × ((Π(f:Class), ((f ∈ Pos) → (((ValOf Vpot) f) ∈ Pos))) × (u ∈ Pos)))). ((fst(hFK) ((ValOf Vpot) u)) ((fst(snd(hFK)) u) snd(snd(hFK)))))))))",
+      "statement_ast": "(Pi (Pos : Class) -> (Pi (Pt : Class) -> (Pi (Vpot : Class) -> (Pi (u : Class) -> (Pi (_ : (Sigma (_ : (Pi (f : Class) -> (Pi (_ : (Id Prop ((In f) Pos) true)) -> (Id Prop ((In ((ValOf Pt) f)) Pos) true)))) * (Sigma (_ : (Pi (f : Class) -> (Pi (_ : (Id Prop ((In f) Pos) true)) -> (Id Prop ((In ((ValOf Vpot) f)) Pos) true)))) * (Id Prop ((In u) Pos) true)))) -> (Id Prop ((In ((ValOf Pt) ((ValOf Vpot) u))) Pos) true))))))"
+    },
+    {
+      "id": 130,
+      "num": "NBG-130",
+      "name": "thm_lipschitz_regularity_composition",
+      "kind": "Derived",
+      "statement_unicode": "Π(Lip:Class), Π(F:Class), Π(G:Class), ((((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip)))) → ((F, G) ∈ Lip))",
+      "proof_unicode": "(λ(Lip:Class). (λ(F:Class). (λ(G:Class). (λ(hLip:(((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip))))). (((snd(hLip) F) G) fst(hLip))))))",
+      "statement_ast": "(Pi (Lip : Class) -> (Pi (F : Class) -> (Pi (G : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In F) Lip) true)) * (Id Prop ((In G) Lip) true))) * (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In A) Lip) true)) * (Id Prop ((In B) Lip) true))) -> (Id Prop ((In ((DunaevPair A) B)) Lip) true)))))) -> (Id Prop ((In ((DunaevPair F) G)) Lip) true)))))"
     }
   ]
 }
