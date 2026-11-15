@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 165,
-  "verified_count": 165,
-  "derived_count": 142,
+  "total_count": 170,
+  "verified_count": 170,
+  "derived_count": 147,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1493,6 +1493,51 @@
       "statement_unicode": "Π(Eq:Class), Π(ClX:Class), Π(ClY:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ Eq) → ((x ∈ ClY) × (y ∈ ClX))) × ((x, y) ∈ Eq)) → ((y ∈ ClX) × (x ∈ ClY)))",
       "proof_unicode": "(λ(Eq:Class). (λ(ClX:Class). (λ(ClY:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ Eq) → ((x ∈ ClY) × (y ∈ ClX))) × ((x, y) ∈ Eq))). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))))",
       "statement_ast": "(Pi (Eq : Class) -> (Pi (ClX : Class) -> (Pi (ClY : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) Eq) true)) -> (Sigma (_ : (Id Prop ((In x) ClY) true)) * (Id Prop ((In y) ClX) true)))) * (Id Prop ((In ((DunaevPair x) y)) Eq) true))) -> (Sigma (_ : (Id Prop ((In y) ClX) true)) * (Id Prop ((In x) ClY) true))))))))"
+    },
+    {
+      "id": 166,
+      "num": "NBG-166",
+      "name": "thm_heyting_implication_modus_ponens_internal",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), ((((x ∈ A) × ((x ∈ A) → (x ∈ B))) × ((x ∈ B) → (x ∈ C))) → ((x ∈ A) × (x ∈ C)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × ((x ∈ A) → (x ∈ B))) × ((x ∈ B) → (x ∈ C)))). ⟨fst(fst(h)), (snd(h) (snd(fst(h)) fst(fst(h))))⟩)))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (C : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In x) B) true)))) * (Pi (_ : (Id Prop ((In x) B) true)) -> (Id Prop ((In x) C) true)))) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) C) true)))))))"
+    },
+    {
+      "id": 167,
+      "num": "NBG-167",
+      "name": "thm_heyting_implication_exportation_witness",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), ((((x ∈ A) × (x ∈ B)) → (x ∈ C)) → ((x ∈ A) → ((x ∈ B) → (x ∈ C))))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × (x ∈ B)) → (x ∈ C))). (λ(hxA:(x ∈ A)). (λ(hxB:(x ∈ B)). (h ⟨hxA, hxB⟩))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (C : Class) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) B) true))) -> (Id Prop ((In x) C) true))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Pi (_ : (Id Prop ((In x) B) true)) -> (Id Prop ((In x) C) true))))))))"
+    },
+    {
+      "id": 168,
+      "num": "NBG-168",
+      "name": "thm_heyting_implication_importation_witness",
+      "kind": "Derived",
+      "statement_unicode": "Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), (((x ∈ A) → ((x ∈ B) → (x ∈ C))) → (((x ∈ A) × (x ∈ B)) → (x ∈ C)))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:((x ∈ A) → ((x ∈ B) → (x ∈ C)))). (λ(hAB:((x ∈ A) × (x ∈ B))). ((h fst(hAB)) snd(hAB))))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (C : Class) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Pi (_ : (Id Prop ((In x) B) true)) -> (Id Prop ((In x) C) true)))) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) B) true))) -> (Id Prop ((In x) C) true)))))))"
+    },
+    {
+      "id": 169,
+      "num": "NBG-169",
+      "name": "thm_dunaev_pair_lexicographic_order_first_branch",
+      "kind": "Derived",
+      "statement_unicode": "Π(LtA:Class), Π(LtB:Class), Π(x1:Class), Π(x2:Class), Π(y1:Class), Π(y2:Class), (((x1, x2) ∈ LtA) → Π(C:Prop), ((((x1, x2) ∈ LtA) → C) → ((((x1 = x2) × ((y1, y2) ∈ LtB)) → C) → C)))",
+      "proof_unicode": "(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hLtX:((x1, x2) ∈ LtA)). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fL hLtX)))))))))))",
+      "statement_ast": "(Pi (LtA : Class) -> (Pi (LtB : Class) -> (Pi (x1 : Class) -> (Pi (x2 : Class) -> (Pi (y1 : Class) -> (Pi (y2 : Class) -> (Pi (_ : (Id Prop ((In ((DunaevPair x1) x2)) LtA) true)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x1) x2)) LtA) true)) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Class x1 x2)) * (Id Prop ((In ((DunaevPair y1) y2)) LtB) true))) -> C)) -> C))))))))))"
+    },
+    {
+      "id": 170,
+      "num": "NBG-170",
+      "name": "thm_dunaev_pair_lexicographic_order_second_branch",
+      "kind": "Derived",
+      "statement_unicode": "Π(LtA:Class), Π(LtB:Class), Π(x1:Class), Π(x2:Class), Π(y1:Class), Π(y2:Class), (((x1 = x2) × ((y1, y2) ∈ LtB)) → Π(C:Prop), ((((x1, x2) ∈ LtA) → C) → ((((x1 = x2) × ((y1, y2) ∈ LtB)) → C) → C)))",
+      "proof_unicode": "(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hR:((x1 = x2) × ((y1, y2) ∈ LtB))). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fR hR)))))))))))",
+      "statement_ast": "(Pi (LtA : Class) -> (Pi (LtB : Class) -> (Pi (x1 : Class) -> (Pi (x2 : Class) -> (Pi (y1 : Class) -> (Pi (y2 : Class) -> (Pi (_ : (Sigma (_ : (Id Class x1 x2)) * (Id Prop ((In ((DunaevPair y1) y2)) LtB) true))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x1) x2)) LtA) true)) -> C)) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Class x1 x2)) * (Id Prop ((In ((DunaevPair y1) y2)) LtB) true))) -> C)) -> C))))))))))"
     }
   ]
 }
