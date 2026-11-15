@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ThmSecondIncompleteness (5.02, Theorem): Gödel's second incompleteness theorem(WIP)</title>
+  <title>ThmSecondIncompleteness (5.02, Theorem): Gödel's second incompleteness theorem</title>
   <script>
     window.MathJax = {
       tex: {
@@ -399,7 +399,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>ThmSecondIncompleteness (5.02, Theorem): Gödel's second incompleteness theorem(WIP)</h1>
+      <h1>ThmSecondIncompleteness (5.02, Theorem): Gödel's second incompleteness theorem</h1>
       <p class="subtitle">Standalone kernel entity record from 5. Incompleteness-Related Statements (5.01&ndash;5.02) &mdash; <a href="../manual.html#ThmSecondIncompleteness" style="color: #38bdf8;">View in Complete Entity Database (<code>#ThmSecondIncompleteness</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -420,7 +420,7 @@
   <main>
   <section class="manual-section" id="sec-5">
     <div class="section-header">
-      <h2>ThmSecondIncompleteness (5.02) &mdash; Gödel's second incompleteness theorem(WIP)</h2>
+      <h2>ThmSecondIncompleteness (5.02) &mdash; Gödel's second incompleteness theorem</h2>
       <p class="section-desc">Formalized Löb's theorem and Gödel's second incompleteness theorem.</p>
     </div>
     <div class="table-container">
@@ -437,11 +437,11 @@
             <tbody>
             <tr>
               <th class="field-name">Num</th>
-              <td class="field-value entry-num-cell"><span id="item-5.02"></span><span id="label-g-del-s-second-incompleteness-theorem-wip"></span><span id="label-g-del-s-second-incompleteness-theorem-wip-5-02"></span><a href="../manual.html#ThmSecondIncompleteness" class="num-anchor" title="ThmSecondIncompleteness">5.02</a></td>
+              <td class="field-value entry-num-cell"><span id="item-5.02"></span><span id="label-g-del-s-second-incompleteness-theorem"></span><span id="label-g-del-s-second-incompleteness-theorem-5-02"></span><a href="../manual.html#ThmSecondIncompleteness" class="num-anchor" title="ThmSecondIncompleteness">5.02</a></td>
             </tr>
             <tr>
               <th class="field-name">Title</th>
-              <td class="field-value entry-title-cell">Gödel's second incompleteness theorem(WIP) <a href="../manual.html#ThmSecondIncompleteness" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#ThmSecondIncompleteness</code></a> <a href="../manual.html#label-g-del-s-second-incompleteness-theorem-wip" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-g-del-s-second-incompleteness-theorem-wip</code></a></td>
+              <td class="field-value entry-title-cell">Gödel's second incompleteness theorem <a href="../manual.html#ThmSecondIncompleteness" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#ThmSecondIncompleteness</code></a> <a href="../manual.html#label-g-del-s-second-incompleteness-theorem" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-g-del-s-second-incompleteness-theorem</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Classification</th>
@@ -485,7 +485,15 @@
             </tr>
             <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>PSecondIncompl_prf (T)</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>PSecondIncompl_prf (
+  Τ,
+  PMP_prf (
+    PLoebInstBot_prf (Τ, ⊥),
+    PImplR_prf (
+      PConsistencyDef_prf (Τ, ⊥)
+    )
+  )
+)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>

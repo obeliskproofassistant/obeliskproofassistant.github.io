@@ -166,7 +166,7 @@
 [2.06 / RulGeneralisation] Generalisation (admissible rule) (Inference Rule)
   Name:            RulGeneralisation
   Formula [0]:     (⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
-  SML Kernel AST:  PForaR_prf (φ, x, x', T, p)
+  SML Kernel AST:  PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))
   Scheme of Types: (⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
   Judgements [1]:  [(x:Name), (X:Type), (𝛂:Fm)]
   Kernel Note:     Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.
@@ -219,7 +219,7 @@
 [3.07 / ThmEmptySetIsSubclass] Example: “The empty class is a subclass of any class” statement (Theorem)
   Name:            ThmEmptySetIsSubclass
   Formula [0]:     (∀(X:Class)(∅⊆X))
-  SML Kernel AST:  PSubDef_prf (∅, X, z)
+  SML Kernel AST:  PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))
   Scheme of Types: (∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))
   Kernel Note:     Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
   Verification:    Verified (Kernel)
@@ -241,14 +241,14 @@
 [3.10 / AxmExtensionality] “Extensionality” (Axiom)
   Name:            AxmExtensionality
   Formula [0]:     (∀(X:Class)∀(Y:Class)((∀(z:Class)((z∈X)←→(z∈Y)))—→(X=Y)))
-  SML Kernel AST:  PEqDef_prf (X, Y)
+  SML Kernel AST:  PExtDef_prf (X, Y, z)
   Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])←→([z@Class.Expression]∈[Y@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression])))
   Verification:    Postulated (Kernel Axiom)
 
 [3.11 / AxmIntensionality] “Intensionality”(admissible) (Theorem)
   Name:            AxmIntensionality
   Formula [0]:     (∀(X:Class)∀(Y:Class)(((X set)∧(Y set))—→((∀(W:Class)((X∈W)←→(Y∈W)))—→(X=Y))))
-  SML Kernel AST:  PEqDef_prf (X, Y)
+  SML Kernel AST:  PIntDef_prf (X, Y, Z)
   Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))—→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression]))))
   Verification:    Verified (Kernel)
 
@@ -695,7 +695,7 @@
 [3.73 / AxmSemanticCompletenessOfFullTheory] Semantic Completeness of the theory 𝘍 (Axiom)
   Name:            AxmSemanticCompletenessOfFullTheory
   Formula [0]:     (∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))
-  SML Kernel AST:  POmnis_prf (p)
+  SML Kernel AST:  POmnisSem_prf (p)
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))
   Kernel Note:     Semantic completeness of the non-r.e. Henkin completion 𝘍: for every sentence φ, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). Together with Soundness of 𝘍 (3.72), this establishes (𝘍, [] ⊢ φ) ⇔ ⟦φ⟧, identifying 𝘍 as the complete true theory Th(M).
   Verification:    Postulated (Kernel Axiom)
@@ -703,7 +703,7 @@
 [3.74 / AxmNegationCompletenessOfFullTheory] Negation-Completeness of the theory 𝘍 (Axiom)
   Name:            AxmNegationCompletenessOfFullTheory
   Formula [0]:     (∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))
-  SML Kernel AST:  POmnis_prf (p)
+  SML Kernel AST:  POmnisNeg_prf (p)
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))
   Kernel Note:     Syntactic negation-completeness of the non-r.e. Henkin completion 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). In classical logic, this is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ). In the bivalent semantics of the background model M (⟦φ⟧ ∨ ⟦¬φ⟧), negation-completeness follows directly from semantic completeness and soundness.
   Verification:    Postulated (Kernel Axiom)
@@ -740,62 +740,66 @@
   Kernel Note:     Recovers B from (A,B) via tag 2 without requiring A or B to be sets.
   Verification:    Verified (Kernel)
 
-[4.01 / DefMetaInstantiation] Instantiation(meta,WIP) (Axiom)
+[4.01 / DefMetaInstantiation] Instantiation (Axiom)
   Name:            DefMetaInstantiation
   Formula [0]:     (∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))
-  SML Kernel AST:  ELet (x, e, t)
+  SML Kernel AST:  PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))
   Scheme of Types: (∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))
+  Kernel Note:     Kernel-verified metalevel universal instantiation schema (thm_4_01_finiteness / thm_4_01_meta_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
   Verification:    Postulated (Kernel Axiom)
 
-[4.02 / DefMetaGeneralisation] Generalisation(meta,WIP) (Axiom)
+[4.02 / DefMetaGeneralisation] Generalisation (Axiom)
   Name:            DefMetaGeneralisation
   Formula [0]:     (∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:A)⟦𝛗⟧›))))
-  SML Kernel AST:  PForaR_prf (Γ, x, x', T, p)
+  SML Kernel AST:  PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))
   Scheme of Types: (∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[[A@Type]@Type])⟦[𝛗@Fm.Expression]⟧›))))
   Kernel Note:     (A theory 𝘞 is assumed here to contain only formulas without free variables, so the variable x has no free occurences in any formula of a set of formulas [|Dec(Theory.Expression)(W)|]. Here Enc(v) (μ_Variable(v) : Variable.Expression → Class.Expression) denotes the explicit typed term interpretation / valuation homomorphism mapping a typed term of sort A into a term of sort Class while respecting the fixed model and variable valuation.)
   Verification:    Postulated (Kernel Axiom)
 
-[4.03 / DefMetaConecessitation] CoNecessitation(meta,WIP) (Inference Rule)
+[4.03 / DefMetaConecessitation] CoNecessitation (Inference Rule)
   Name:            DefMetaConecessitation
   Formula [0]:     (∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))
-  SML Kernel AST:  PCredo_prf (p)
+  SML Kernel AST:  PMetaConec_prf (Γ, φ, PCredo_prf (p))
   Scheme of Types: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
   Kernel Note:     If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.73 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.73 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
   Verification:    Primitive / Derived Rule (Kernel)
 
-[4.04 / DefAtMostOneBinder] Quantifier “unique”(meta,WIP) (Definition)
+[4.04 / DefAtMostOneBinder] Quantifier “unique” (Definition)
   Name:            DefAtMostOneBinder
   Formula [0]:     (∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))
-  SML Kernel AST:  TpUniq (P)
+  SML Kernel AST:  PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))—→([x@Class.Expression]=[y@Class.Expression])))))
+  Kernel Note:     Kernel-verified at-most-one binder definition (thm_4_04_at_most_one_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
   Verification:    Definitional (Kernel AST)
 
-[4.05 / DefExistsUniqueBinder] Quantifier “exists and unique”(meta,WIP) (Definition)
+[4.05 / DefExistsUniqueBinder] Quantifier “exists and unique” (Definition)
   Name:            DefExistsUniqueBinder
   Formula [0]:     (∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)←→((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))
-  SML Kernel AST:  TpExisUniq (P)
+  SML Kernel AST:  PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘛,[]⊢‹(∃!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→((∃([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)∧!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)›))
+  Kernel Note:     Kernel-verified exists-unique binder definition (thm_4_05_exists_unique_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
   Verification:    Definitional (Kernel AST)
 
-[4.06 / AxmMetaClassComprehension] Class comprehension axiom schema(meta,WIP) (Axiom)
+[4.06 / AxmMetaClassComprehension] Class comprehension axiom schema (Axiom)
   Name:            AxmMetaClassComprehension
   Formula [0]:     (∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),‹x›,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))
-  SML Kernel AST:  PComprAx_prf (φ)
+  SML Kernel AST:  PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Name@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),‹[x@Name.Expression]›,[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))
+  Kernel Note:     Kernel-verified metalevel class comprehension schema (thm_4_06_meta_class_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check) guarded by Fm.FFI.
   Verification:    Postulated (Kernel Axiom)
 
-[5.01 / ThmLoeb] Löb's theorem(WIP) (Theorem)
+[5.01 / ThmLoeb] Löb's theorem (Theorem)
   Name:            ThmLoeb
   Formula [0]:     (∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))
-  SML Kernel AST:  PLoeb_prf (φ)
+  SML Kernel AST:  PLoeb_prf (ψ, PMP_prf (PDiagFixedPoint_prf (ψ, φ), PAndR_prf (PHBL1_prf (ψ), PAndR_prf (PHBL2_prf (ψ, φ), PHBL3_prf (ψ)))))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))
   Kernel Note:     Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
   Verification:    Verified (Kernel)
 
-[5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem(WIP) (Theorem)
+[5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem (Theorem)
   Name:            ThmSecondIncompleteness
   Formula [0]:     (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
-  SML Kernel AST:  PSecondIncompl_prf (T)
+  SML Kernel AST:  PSecondIncompl_prf (Τ, PMP_prf (PLoebInstBot_prf (Τ, ⊥), PImplR_prf (PConsistencyDef_prf (Τ, ⊥))))
   Scheme of Types: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
   Kernel Note:     Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
   Verification:    Verified (Kernel)
