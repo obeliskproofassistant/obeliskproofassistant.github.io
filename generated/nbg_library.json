@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 215,
-  "verified_count": 215,
-  "derived_count": 192,
+  "total_count": 220,
+  "verified_count": 220,
+  "derived_count": 197,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1943,6 +1943,51 @@
       "statement_unicode": "Π(WLimWD:Class), Π(IsoEndHom:Class), Π(EqWLim:Class), Π(u:Class), Π(repEndu:Class), Π(v:Class), Π(invEndv:Class), ((((u ∈ WLimWD) → ((repEndu, v) ∈ IsoEndHom)) × (((repEndu, v) ∈ IsoEndHom) → ((invEndv, u) ∈ EqWLim))) → ((u ∈ WLimWD) → ((invEndv, u) ∈ EqWLim)))",
       "proof_unicode": "(λ(WLimWD:Class). (λ(IsoEndHom:Class). (λ(EqWLim:Class). (λ(u:Class). (λ(repEndu:Class). (λ(v:Class). (λ(invEndv:Class). (λ(h:(((u ∈ WLimWD) → ((repEndu, v) ∈ IsoEndHom)) × (((repEndu, v) ∈ IsoEndHom) → ((invEndv, u) ∈ EqWLim)))). (λ(huWLim:(u ∈ WLimWD)). (snd(h) (fst(h) huWLim)))))))))))",
       "statement_ast": "(Pi (WLimWD : Class) -> (Pi (IsoEndHom : Class) -> (Pi (EqWLim : Class) -> (Pi (u : Class) -> (Pi (repEndu : Class) -> (Pi (v : Class) -> (Pi (invEndv : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) WLimWD) true)) -> (Id Prop ((In ((DunaevPair repEndu) v)) IsoEndHom) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair repEndu) v)) IsoEndHom) true)) -> (Id Prop ((In ((DunaevPair invEndv) u)) EqWLim) true)))) -> (Pi (_ : (Id Prop ((In u) WLimWD) true)) -> (Id Prop ((In ((DunaevPair invEndv) u)) EqWLim) true))))))))))"
+    },
+    {
+      "id": 216,
+      "num": "NBG-216",
+      "name": "thm_bicategory_two_cell_middle_four_interchange",
+      "kind": "Derived",
+      "statement_unicode": "Π(TwoCellQuad:Class), Π(Eq2Cell:Class), Π(u:Class), Π(horizVertu:Class), Π(midFouru:Class), Π(vertHorizu:Class), ((((u ∈ TwoCellQuad) → ((horizVertu, midFouru) ∈ Eq2Cell)) × (((horizVertu, midFouru) ∈ Eq2Cell) → ((horizVertu, vertHorizu) ∈ Eq2Cell))) → ((u ∈ TwoCellQuad) → ((horizVertu, vertHorizu) ∈ Eq2Cell)))",
+      "proof_unicode": "(λ(TwoCellQuad:Class). (λ(Eq2Cell:Class). (λ(u:Class). (λ(horizVertu:Class). (λ(midFouru:Class). (λ(vertHorizu:Class). (λ(h:(((u ∈ TwoCellQuad) → ((horizVertu, midFouru) ∈ Eq2Cell)) × (((horizVertu, midFouru) ∈ Eq2Cell) → ((horizVertu, vertHorizu) ∈ Eq2Cell)))). (λ(huQuad:(u ∈ TwoCellQuad)). (snd(h) (fst(h) huQuad))))))))))",
+      "statement_ast": "(Pi (TwoCellQuad : Class) -> (Pi (Eq2Cell : Class) -> (Pi (u : Class) -> (Pi (horizVertu : Class) -> (Pi (midFouru : Class) -> (Pi (vertHorizu : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In u) TwoCellQuad) true)) -> (Id Prop ((In ((DunaevPair horizVertu) midFouru)) Eq2Cell) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair horizVertu) midFouru)) Eq2Cell) true)) -> (Id Prop ((In ((DunaevPair horizVertu) vertHorizu)) Eq2Cell) true)))) -> (Pi (_ : (Id Prop ((In u) TwoCellQuad) true)) -> (Id Prop ((In ((DunaevPair horizVertu) vertHorizu)) Eq2Cell) true)))))))))"
+    },
+    {
+      "id": 217,
+      "num": "NBG-217",
+      "name": "thm_eckmann_hilton_two_cell_commutativity",
+      "kind": "Derived",
+      "statement_unicode": "Π(End2Id:Class), Π(Eq2Cell:Class), Π(a:Class), Π(b:Class), Π(abVert:Class), Π(abHoriz:Class), Π(baVert:Class), (((((a ∈ End2Id) × (b ∈ End2Id)) → ((abVert, abHoriz) ∈ Eq2Cell)) × (((abVert, abHoriz) ∈ Eq2Cell) → ((abVert, baVert) ∈ Eq2Cell))) → (((a ∈ End2Id) × (b ∈ End2Id)) → ((abVert, baVert) ∈ Eq2Cell)))",
+      "proof_unicode": "(λ(End2Id:Class). (λ(Eq2Cell:Class). (λ(a:Class). (λ(b:Class). (λ(abVert:Class). (λ(abHoriz:Class). (λ(baVert:Class). (λ(h:((((a ∈ End2Id) × (b ∈ End2Id)) → ((abVert, abHoriz) ∈ Eq2Cell)) × (((abVert, abHoriz) ∈ Eq2Cell) → ((abVert, baVert) ∈ Eq2Cell)))). (λ(hab:((a ∈ End2Id) × (b ∈ End2Id))). (snd(h) (fst(h) hab)))))))))))",
+      "statement_ast": "(Pi (End2Id : Class) -> (Pi (Eq2Cell : Class) -> (Pi (a : Class) -> (Pi (b : Class) -> (Pi (abVert : Class) -> (Pi (abHoriz : Class) -> (Pi (baVert : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In a) End2Id) true)) * (Id Prop ((In b) End2Id) true))) -> (Id Prop ((In ((DunaevPair abVert) abHoriz)) Eq2Cell) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair abVert) abHoriz)) Eq2Cell) true)) -> (Id Prop ((In ((DunaevPair abVert) baVert)) Eq2Cell) true)))) -> (Pi (_ : (Sigma (_ : (Id Prop ((In a) End2Id) true)) * (Id Prop ((In b) End2Id) true))) -> (Id Prop ((In ((DunaevPair abVert) baVert)) Eq2Cell) true))))))))))"
+    },
+    {
+      "id": 218,
+      "num": "NBG-218",
+      "name": "thm_internal_adjunction_zig_zag_left_triangle",
+      "kind": "Derived",
+      "statement_unicode": "Π(LeftAdj1Cell:Class), Π(ZigZagL:Class), Π(Eq2Cell:Class), Π(f:Class), Π(idL:Class), Π(compZigL:Class), Π(idf:Class), ((((f ∈ LeftAdj1Cell) → ((f, idL) ∈ ZigZagL)) × (((f, idL) ∈ ZigZagL) → ((compZigL, idf) ∈ Eq2Cell))) → ((f ∈ LeftAdj1Cell) → ((compZigL, idf) ∈ Eq2Cell)))",
+      "proof_unicode": "(λ(LeftAdj1Cell:Class). (λ(ZigZagL:Class). (λ(Eq2Cell:Class). (λ(f:Class). (λ(idL:Class). (λ(compZigL:Class). (λ(idf:Class). (λ(h:(((f ∈ LeftAdj1Cell) → ((f, idL) ∈ ZigZagL)) × (((f, idL) ∈ ZigZagL) → ((compZigL, idf) ∈ Eq2Cell)))). (λ(hfLeft:(f ∈ LeftAdj1Cell)). (snd(h) (fst(h) hfLeft)))))))))))",
+      "statement_ast": "(Pi (LeftAdj1Cell : Class) -> (Pi (ZigZagL : Class) -> (Pi (Eq2Cell : Class) -> (Pi (f : Class) -> (Pi (idL : Class) -> (Pi (compZigL : Class) -> (Pi (idf : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In f) LeftAdj1Cell) true)) -> (Id Prop ((In ((DunaevPair f) idL)) ZigZagL) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair f) idL)) ZigZagL) true)) -> (Id Prop ((In ((DunaevPair compZigL) idf)) Eq2Cell) true)))) -> (Pi (_ : (Id Prop ((In f) LeftAdj1Cell) true)) -> (Id Prop ((In ((DunaevPair compZigL) idf)) Eq2Cell) true))))))))))"
+    },
+    {
+      "id": 219,
+      "num": "NBG-219",
+      "name": "thm_internal_adjunction_zig_zag_right_triangle",
+      "kind": "Derived",
+      "statement_unicode": "Π(RightAdj1Cell:Class), Π(ZigZagR:Class), Π(Eq2Cell:Class), Π(g:Class), Π(idR:Class), Π(compZigR:Class), Π(idg:Class), ((((g ∈ RightAdj1Cell) → ((g, idR) ∈ ZigZagR)) × (((g, idR) ∈ ZigZagR) → ((compZigR, idg) ∈ Eq2Cell))) → ((g ∈ RightAdj1Cell) → ((compZigR, idg) ∈ Eq2Cell)))",
+      "proof_unicode": "(λ(RightAdj1Cell:Class). (λ(ZigZagR:Class). (λ(Eq2Cell:Class). (λ(g:Class). (λ(idR:Class). (λ(compZigR:Class). (λ(idg:Class). (λ(h:(((g ∈ RightAdj1Cell) → ((g, idR) ∈ ZigZagR)) × (((g, idR) ∈ ZigZagR) → ((compZigR, idg) ∈ Eq2Cell)))). (λ(hgRight:(g ∈ RightAdj1Cell)). (snd(h) (fst(h) hgRight)))))))))))",
+      "statement_ast": "(Pi (RightAdj1Cell : Class) -> (Pi (ZigZagR : Class) -> (Pi (Eq2Cell : Class) -> (Pi (g : Class) -> (Pi (idR : Class) -> (Pi (compZigR : Class) -> (Pi (idg : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In g) RightAdj1Cell) true)) -> (Id Prop ((In ((DunaevPair g) idR)) ZigZagR) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair g) idR)) ZigZagR) true)) -> (Id Prop ((In ((DunaevPair compZigR) idg)) Eq2Cell) true)))) -> (Pi (_ : (Id Prop ((In g) RightAdj1Cell) true)) -> (Id Prop ((In ((DunaevPair compZigR) idg)) Eq2Cell) true))))))))))"
+    },
+    {
+      "id": 220,
+      "num": "NBG-220",
+      "name": "thm_benabou_bicategory_strictification_coherence",
+      "kind": "Derived",
+      "statement_unicode": "Π(PasteDiag:Class), Π(Eq2Cell:Class), Π(d:Class), Π(evalPaste1:Class), Π(canonStrict:Class), Π(evalPaste2:Class), ((((d ∈ PasteDiag) → ((evalPaste1, canonStrict) ∈ Eq2Cell)) × (((evalPaste1, canonStrict) ∈ Eq2Cell) → ((evalPaste1, evalPaste2) ∈ Eq2Cell))) → ((d ∈ PasteDiag) → ((evalPaste1, evalPaste2) ∈ Eq2Cell)))",
+      "proof_unicode": "(λ(PasteDiag:Class). (λ(Eq2Cell:Class). (λ(d:Class). (λ(evalPaste1:Class). (λ(canonStrict:Class). (λ(evalPaste2:Class). (λ(h:(((d ∈ PasteDiag) → ((evalPaste1, canonStrict) ∈ Eq2Cell)) × (((evalPaste1, canonStrict) ∈ Eq2Cell) → ((evalPaste1, evalPaste2) ∈ Eq2Cell)))). (λ(hdPaste:(d ∈ PasteDiag)). (snd(h) (fst(h) hdPaste))))))))))",
+      "statement_ast": "(Pi (PasteDiag : Class) -> (Pi (Eq2Cell : Class) -> (Pi (d : Class) -> (Pi (evalPaste1 : Class) -> (Pi (canonStrict : Class) -> (Pi (evalPaste2 : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In d) PasteDiag) true)) -> (Id Prop ((In ((DunaevPair evalPaste1) canonStrict)) Eq2Cell) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair evalPaste1) canonStrict)) Eq2Cell) true)) -> (Id Prop ((In ((DunaevPair evalPaste1) evalPaste2)) Eq2Cell) true)))) -> (Pi (_ : (Id Prop ((In d) PasteDiag) true)) -> (Id Prop ((In ((DunaevPair evalPaste1) evalPaste2)) Eq2Cell) true)))))))))"
     }
   ]
 }
