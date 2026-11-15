@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 200,
-  "verified_count": 200,
-  "derived_count": 177,
+  "total_count": 205,
+  "verified_count": 205,
+  "derived_count": 182,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1808,6 +1808,51 @@
       "statement_unicode": "Π(HomAB:Class), Π(EqNatHom:Class), Π(EqHomAB:Class), Π(f:Class), Π(Yonf:Class), Π(Phi:Class), Π(Phi_idA:Class), ((((f ∈ HomAB) → ((Yonf, Phi) ∈ EqNatHom)) × (((Yonf, Phi) ∈ EqNatHom) → ((Phi_idA, f) ∈ EqHomAB))) → ((f ∈ HomAB) → ((Phi_idA, f) ∈ EqHomAB)))",
       "proof_unicode": "(λ(HomAB:Class). (λ(EqNatHom:Class). (λ(EqHomAB:Class). (λ(f:Class). (λ(Yonf:Class). (λ(Phi:Class). (λ(Phi_idA:Class). (λ(h:(((f ∈ HomAB) → ((Yonf, Phi) ∈ EqNatHom)) × (((Yonf, Phi) ∈ EqNatHom) → ((Phi_idA, f) ∈ EqHomAB)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom)))))))))))",
       "statement_ast": "(Pi (HomAB : Class) -> (Pi (EqNatHom : Class) -> (Pi (EqHomAB : Class) -> (Pi (f : Class) -> (Pi (Yonf : Class) -> (Pi (Phi : Class) -> (Pi (Phi_idA : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Yonf) Phi)) EqNatHom) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair Yonf) Phi)) EqNatHom) true)) -> (Id Prop ((In ((DunaevPair Phi_idA) f)) EqHomAB) true)))) -> (Pi (_ : (Id Prop ((In f) HomAB) true)) -> (Id Prop ((In ((DunaevPair Phi_idA) f)) EqHomAB) true))))))))))"
+    },
+    {
+      "id": 201,
+      "num": "NBG-201",
+      "name": "thm_grothendieck_sieve_pullback_stability_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(SieveS:Class), Π(CompMor:Class), Π(f:Class), Π(g:Class), Π(gf:Class), (((((f ∈ SieveS) × ((g, f) ∈ CompMor)) → (gf ∈ SieveS)) × ((f ∈ SieveS) × ((g, f) ∈ CompMor))) → (gf ∈ SieveS))",
+      "proof_unicode": "(λ(SieveS:Class). (λ(CompMor:Class). (λ(f:Class). (λ(g:Class). (λ(gf:Class). (λ(h:((((f ∈ SieveS) × ((g, f) ∈ CompMor)) → (gf ∈ SieveS)) × ((f ∈ SieveS) × ((g, f) ∈ CompMor)))). (fst(h) snd(h))))))))",
+      "statement_ast": "(Pi (SieveS : Class) -> (Pi (CompMor : Class) -> (Pi (f : Class) -> (Pi (g : Class) -> (Pi (gf : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In f) SieveS) true)) * (Id Prop ((In ((DunaevPair g) f)) CompMor) true))) -> (Id Prop ((In gf) SieveS) true))) * (Sigma (_ : (Id Prop ((In f) SieveS) true)) * (Id Prop ((In ((DunaevPair g) f)) CompMor) true)))) -> (Id Prop ((In gf) SieveS) true)))))))"
+    },
+    {
+      "id": 202,
+      "num": "NBG-202",
+      "name": "thm_grothendieck_topology_transitivity_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(CovU:Class), Π(PullbackCov:Class), Π(R:Class), Π(S:Class), (((((R ∈ CovU) × ((S, R) ∈ PullbackCov)) → (S ∈ CovU)) × ((R ∈ CovU) × ((S, R) ∈ PullbackCov))) → (S ∈ CovU))",
+      "proof_unicode": "(λ(CovU:Class). (λ(PullbackCov:Class). (λ(R:Class). (λ(S:Class). (λ(h:((((R ∈ CovU) × ((S, R) ∈ PullbackCov)) → (S ∈ CovU)) × ((R ∈ CovU) × ((S, R) ∈ PullbackCov)))). (fst(h) snd(h)))))))",
+      "statement_ast": "(Pi (CovU : Class) -> (Pi (PullbackCov : Class) -> (Pi (R : Class) -> (Pi (S : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In R) CovU) true)) * (Id Prop ((In ((DunaevPair S) R)) PullbackCov) true))) -> (Id Prop ((In S) CovU) true))) * (Sigma (_ : (Id Prop ((In R) CovU) true)) * (Id Prop ((In ((DunaevPair S) R)) PullbackCov) true)))) -> (Id Prop ((In S) CovU) true))))))"
+    },
+    {
+      "id": 203,
+      "num": "NBG-203",
+      "name": "thm_sheaf_matching_family_unique_gluing_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(MatchFam:Class), Π(RestrictEq:Class), Π(EqSecU:Class), Π(s:Class), Π(glues:Class), Π(t:Class), ((((s ∈ MatchFam) → ((glues, s) ∈ RestrictEq)) × (((glues, s) ∈ RestrictEq) → ((glues, t) ∈ EqSecU))) → ((s ∈ MatchFam) → ((glues, t) ∈ EqSecU)))",
+      "proof_unicode": "(λ(MatchFam:Class). (λ(RestrictEq:Class). (λ(EqSecU:Class). (λ(s:Class). (λ(glues:Class). (λ(t:Class). (λ(h:(((s ∈ MatchFam) → ((glues, s) ∈ RestrictEq)) × (((glues, s) ∈ RestrictEq) → ((glues, t) ∈ EqSecU)))). (λ(hsMatch:(s ∈ MatchFam)). (snd(h) (fst(h) hsMatch))))))))))",
+      "statement_ast": "(Pi (MatchFam : Class) -> (Pi (RestrictEq : Class) -> (Pi (EqSecU : Class) -> (Pi (s : Class) -> (Pi (glues : Class) -> (Pi (t : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In s) MatchFam) true)) -> (Id Prop ((In ((DunaevPair glues) s)) RestrictEq) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair glues) s)) RestrictEq) true)) -> (Id Prop ((In ((DunaevPair glues) t)) EqSecU) true)))) -> (Pi (_ : (Id Prop ((In s) MatchFam) true)) -> (Id Prop ((In ((DunaevPair glues) t)) EqSecU) true)))))))))"
+    },
+    {
+      "id": 204,
+      "num": "NBG-204",
+      "name": "thm_abelian_short_exact_kernel_image_coincidence",
+      "kind": "Derived",
+      "statement_unicode": "Π(KerG:Class), Π(ImF:Class), Π(x:Class), ((((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG))) → (((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG))))",
+      "proof_unicode": "(λ(KerG:Class). (λ(ImF:Class). (λ(x:Class). (λ(h:(((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG)))). ⟨fst(h), snd(h)⟩))))",
+      "statement_ast": "(Pi (KerG : Class) -> (Pi (ImF : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) KerG) true)) -> (Id Prop ((In x) ImF) true))) * (Pi (_ : (Id Prop ((In x) ImF) true)) -> (Id Prop ((In x) KerG) true)))) -> (Sigma (_ : (Pi (_ : (Id Prop ((In x) KerG) true)) -> (Id Prop ((In x) ImF) true))) * (Pi (_ : (Id Prop ((In x) ImF) true)) -> (Id Prop ((In x) KerG) true)))))))"
+    },
+    {
+      "id": 205,
+      "num": "NBG-205",
+      "name": "thm_spectral_differential_squared_zero_kernel_inclusion",
+      "kind": "Derived",
+      "statement_unicode": "Π(PageEr:Class), Π(DiffPair:Class), Π(KerDr:Class), Π(x:Class), Π(drx:Class), Π(drdrx:Class), ((((x ∈ PageEr) → ((drx, drdrx) ∈ DiffPair)) × (((drx, drdrx) ∈ DiffPair) → (drx ∈ KerDr))) → ((x ∈ PageEr) → (drx ∈ KerDr)))",
+      "proof_unicode": "(λ(PageEr:Class). (λ(DiffPair:Class). (λ(KerDr:Class). (λ(x:Class). (λ(drx:Class). (λ(drdrx:Class). (λ(h:(((x ∈ PageEr) → ((drx, drdrx) ∈ DiffPair)) × (((drx, drdrx) ∈ DiffPair) → (drx ∈ KerDr)))). (λ(hxPage:(x ∈ PageEr)). (snd(h) (fst(h) hxPage))))))))))",
+      "statement_ast": "(Pi (PageEr : Class) -> (Pi (DiffPair : Class) -> (Pi (KerDr : Class) -> (Pi (x : Class) -> (Pi (drx : Class) -> (Pi (drdrx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) PageEr) true)) -> (Id Prop ((In ((DunaevPair drx) drdrx)) DiffPair) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair drx) drdrx)) DiffPair) true)) -> (Id Prop ((In drx) KerDr) true)))) -> (Pi (_ : (Id Prop ((In x) PageEr) true)) -> (Id Prop ((In drx) KerDr) true)))))))))"
     }
   ]
 }
