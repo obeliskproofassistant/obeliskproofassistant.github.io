@@ -440,7 +440,7 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("Build Hash:", self.gen_manual_html)
         self.assertIn("Built on:", self.gen_manual_html)
         self.assertIn("entries.ML:L", self.gen_manual_html)
-        self.assertIn("https://github.com/obeliskproofassistant/set_theory_prover/blob/main/program/types/entries.ML#L", self.gen_manual_html)
+        self.assertIn("https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L", self.gen_manual_html)
 
         # W6: Changelog artifact and page
         changelog_md = os.path.join(SITE_DIR, "CHANGELOG.md")
