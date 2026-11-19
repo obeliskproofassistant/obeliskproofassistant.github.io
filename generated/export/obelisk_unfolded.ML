@@ -9222,7 +9222,214 @@ struct
             end)))
   }
 
-  (* Complete Table of All 220 Theorem Records *)
+  (* 221. Limit Ordinal Membership and Successor Closure Projection (MKTD2-theory mirror of Entry 3.79):
+          forall kap b.
+            ((Ord(kap) /\ (EmptySet in kap /\ (forall a. a in kap -> SuccOrd(a) in kap))) /\ b in kap) ->
+            (Ord(kap) /\ (EmptySet in kap /\ SuccOrd(b) in kap)) *)
+  val thm_221_limit_ordinal_successor_closure_proj : TheoremRecord = {
+    id = 221,
+    name = "thm_limit_ordinal_successor_closure_proj",
+    statement =
+      Forall "kap" TClass (
+        Forall "b" TClass (
+          let
+            val succClose = Forall "a" TClass (Impl (In (Var "a") (Var "kap")) (In (App (Const "SuccOrd", Var "a")) (Var "kap")))
+            val limKap = And (Ord (Var "kap")) (And (In EmptySet (Var "kap")) succClose)
+            val bInKap = In (Var "b") (Var "kap")
+            val succBInKap = In (App (Const "SuccOrd", Var "b")) (Var "kap")
+          in
+            Impl (And limKap bInKap)
+                 (And (Ord (Var "kap")) (And (In EmptySet (Var "kap")) succBInKap))
+          end)),
+    proofProgram =
+      Lam ("kap", TClass,
+        Lam ("b", TClass,
+          let
+            val succClose = Forall "a" TClass (Impl (In (Var "a") (Var "kap")) (In (App (Const "SuccOrd", Var "a")) (Var "kap")))
+            val limKap = And (Ord (Var "kap")) (And (In EmptySet (Var "kap")) succClose)
+            val bInKap = In (Var "b") (Var "kap")
+          in
+            Lam ("h", And limKap bInKap,
+              Pair (
+                Fst (Fst (Var "h")),
+                Pair (
+                  Fst (Snd (Fst (Var "h"))),
+                  App (App (Snd (Snd (Fst (Var "h"))), Var "b"), Snd (Var "h")))))
+          end))
+  }
+
+  (* 222. Universe Indexed Union Closure Identity-Map Union Step (MKTD2-theory mirror of Entry 3.86):
+          forall U x.
+            ((x in U -> [x, IdMor(x)]_D in U) /\
+             ([x, IdMor(x)]_D in U -> Union(x) in U)) ->
+            (x in U -> Union(x) in U) *)
+  val thm_222_universe_indexed_union_identity_union_step : TheoremRecord = {
+    id = 222,
+    name = "thm_universe_indexed_union_identity_union_step",
+    statement =
+      Forall "U" TClass (
+        Forall "x" TClass (
+          let
+            val xU = In (Var "x") (Var "U")
+            val idPair = In (App (App (Const "DunaevPair", Var "x"), App (Const "IdMor", Var "x"))) (Var "U")
+            val uxU = In (App (Const "Union", Var "x")) (Var "U")
+          in
+            Impl (And (Impl xU idPair) (Impl idPair uxU))
+                 (Impl xU uxU)
+          end)),
+    proofProgram =
+      Lam ("U", TClass,
+        Lam ("x", TClass,
+          let
+            val xU = In (Var "x") (Var "U")
+            val idPair = In (App (App (Const "DunaevPair", Var "x"), App (Const "IdMor", Var "x"))) (Var "U")
+            val uxU = In (App (Const "Union", Var "x")) (Var "U")
+          in
+            Lam ("h", And (Impl xU idPair) (Impl idPair uxU),
+              Lam ("hxU", xU,
+                App (Snd (Var "h"), App (Fst (Var "h"), Var "hxU"))))
+          end))
+  }
+
+  (* 223. Universe Intersection with Ordinals Limit Irreflexivity Contradiction Step (MKTD2-theory mirror of Entry 3.87):
+          forall U kap a.
+            (((a in kap -> SuccOrd(a) in U) /\
+              (SuccOrd(a) in U -> kap in kap)) /\
+             ((kap in kap -> False) /\ a in kap)) ->
+            False *)
+  val thm_223_universe_inter_on_limit_irreflexivity_step : TheoremRecord = {
+    id = 223,
+    name = "thm_universe_inter_on_limit_irreflexivity_step",
+    statement =
+      Forall "U" TClass (
+        Forall "kap" TClass (
+          Forall "a" TClass (
+            let
+              val aInKap = In (Var "a") (Var "kap")
+              val succInU = In (App (Const "SuccOrd", Var "a")) (Var "U")
+              val kapInKap = In (Var "kap") (Var "kap")
+            in
+              Impl (And (And (Impl aInKap succInU) (Impl succInU kapInKap))
+                        (And (Impl kapInKap (Const "False")) aInKap))
+                   (Const "False")
+            end))),
+    proofProgram =
+      Lam ("U", TClass,
+        Lam ("kap", TClass,
+          Lam ("a", TClass,
+            let
+              val aInKap = In (Var "a") (Var "kap")
+              val succInU = In (App (Const "SuccOrd", Var "a")) (Var "U")
+              val kapInKap = In (Var "kap") (Var "kap")
+            in
+              Lam ("h", And (And (Impl aInKap succInU) (Impl succInU kapInKap))
+                            (And (Impl kapInKap (Const "False")) aInKap),
+                App (Fst (Snd (Var "h")),
+                     App (Snd (Fst (Var "h")),
+                          App (Fst (Fst (Var "h")), Snd (Snd (Var "h"))))))
+            end)))
+  }
+
+  (* 224. Von Neumann Cumulative Stage Subclass Inclusion in a Transitive Universe (MKTD2-theory mirror of Entry 3.88):
+          forall U Vstage kap a x.
+            (((a in kap -> ValOf(Vstage, a) in U) /\
+              (ValOf(Vstage, a) in U -> (x in ValOf(Vstage, a) -> x in U))) /\
+             (a in kap /\ x in ValOf(Vstage, a))) ->
+            x in U *)
+  val thm_224_von_neumann_stage_sub_universe_step : TheoremRecord = {
+    id = 224,
+    name = "thm_von_neumann_stage_sub_universe_step",
+    statement =
+      Forall "U" TClass (
+        Forall "Vstage" TClass (
+          Forall "kap" TClass (
+            Forall "a" TClass (
+              Forall "x" TClass (
+                let
+                  val va = App (App (Const "ValOf", Var "Vstage"), Var "a")
+                  val aKap = In (Var "a") (Var "kap")
+                  val vaU = In va (Var "U")
+                  val xVa = In (Var "x") va
+                  val xU = In (Var "x") (Var "U")
+                in
+                  Impl (And (And (Impl aKap vaU) (Impl vaU (Impl xVa xU)))
+                            (And aKap xVa))
+                       xU
+                end))))),
+    proofProgram =
+      Lam ("U", TClass,
+        Lam ("Vstage", TClass,
+          Lam ("kap", TClass,
+            Lam ("a", TClass,
+              Lam ("x", TClass,
+                let
+                  val va = App (App (Const "ValOf", Var "Vstage"), Var "a")
+                  val aKap = In (Var "a") (Var "kap")
+                  val vaU = In va (Var "U")
+                  val xVa = In (Var "x") va
+                  val xU = In (Var "x") (Var "U")
+                in
+                  Lam ("h", And (And (Impl aKap vaU) (Impl vaU (Impl xVa xU)))
+                                (And aKap xVa),
+                    App (App (Snd (Fst (Var "h")),
+                              App (Fst (Fst (Var "h")), Fst (Snd (Var "h")))),
+                         Snd (Snd (Var "h"))))
+                end)))))
+  }
+
+  (* 225. Set Rank Bounding and Universe Inclusion in V_kappa (MKTD2-theory mirror of Entry 3.89 & 3.90):
+          forall U Vstage RankOp kap x.
+            (((x in U -> SuccOrd(ValOf(RankOp, x)) in kap) /\
+              (x in U -> x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) /\
+             ((SuccOrd(ValOf(RankOp, x)) in kap /\ x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))) -> x in ValOf(Vstage, kap))) ->
+            (x in U -> x in ValOf(Vstage, kap)) *)
+  val thm_225_universe_sub_von_neumann_stage_rank_step : TheoremRecord = {
+    id = 225,
+    name = "thm_universe_sub_von_neumann_stage_rank_step",
+    statement =
+      Forall "U" TClass (
+        Forall "Vstage" TClass (
+          Forall "RankOp" TClass (
+            Forall "kap" TClass (
+              Forall "x" TClass (
+                let
+                  val srkx = App (Const "SuccOrd", App (App (Const "ValOf", Var "RankOp"), Var "x"))
+                  val vsrk = App (App (Const "ValOf", Var "Vstage"), srkx)
+                  val vkap = App (App (Const "ValOf", Var "Vstage"), Var "kap")
+                  val xU = In (Var "x") (Var "U")
+                  val srkKap = In srkx (Var "kap")
+                  val xVsrk = In (Var "x") vsrk
+                  val xVkap = In (Var "x") vkap
+                in
+                  Impl (And (And (Impl xU srkKap) (Impl xU xVsrk))
+                            (Impl (And srkKap xVsrk) xVkap))
+                       (Impl xU xVkap)
+                end))))),
+    proofProgram =
+      Lam ("U", TClass,
+        Lam ("Vstage", TClass,
+          Lam ("RankOp", TClass,
+            Lam ("kap", TClass,
+              Lam ("x", TClass,
+                let
+                  val srkx = App (Const "SuccOrd", App (App (Const "ValOf", Var "RankOp"), Var "x"))
+                  val vsrk = App (App (Const "ValOf", Var "Vstage"), srkx)
+                  val vkap = App (App (Const "ValOf", Var "Vstage"), Var "kap")
+                  val xU = In (Var "x") (Var "U")
+                  val srkKap = In srkx (Var "kap")
+                  val xVsrk = In (Var "x") vsrk
+                  val xVkap = In (Var "x") vkap
+                in
+                  Lam ("h", And (And (Impl xU srkKap) (Impl xU xVsrk))
+                                (Impl (And srkKap xVsrk) xVkap),
+                    Lam ("hxU", xU,
+                      App (Snd (Var "h"),
+                           Pair (App (Fst (Fst (Var "h")), Var "hxU"),
+                                 App (Snd (Fst (Var "h")), Var "hxU")))))
+                end)))))
+  }
+
+  (* Complete Table of All 225 Theorem Records *)
   val allTheorems : TheoremRecord list = [
     thm_01_A01,
     thm_02_A02,
@@ -9443,7 +9650,12 @@ struct
     thm_217_eckmann_hilton_two_cell_commutativity,
     thm_218_internal_adjunction_zig_zag_left_triangle,
     thm_219_internal_adjunction_zig_zag_right_triangle,
-    thm_220_benabou_bicategory_strictification_coherence
+    thm_220_benabou_bicategory_strictification_coherence,
+    thm_221_limit_ordinal_successor_closure_proj,
+    thm_222_universe_indexed_union_identity_union_step,
+    thm_223_universe_inter_on_limit_irreflexivity_step,
+    thm_224_von_neumann_stage_sub_universe_step,
+    thm_225_universe_sub_von_neumann_stage_rank_step
   ]
 
   (* Verification Result Datatype *)
@@ -19882,6 +20094,13 @@ struct
     | TTrans a => CDunaevPair (Const "Q_Trans", encodeQuotedTerm a)
     | TOrd a => CDunaevPair (Const "Q_Ord", encodeQuotedTerm a)
     | TInd a => CDunaevPair (Const "Q_Ind", encodeQuotedTerm a)
+    | THereditary a => CDunaevPair (Const "Q_Hereditary", encodeQuotedTerm a)
+    | TPowerful a => CDunaevPair (Const "Q_Powerful", encodeQuotedTerm a)
+    | TPairful a => CDunaevPair (Const "Q_Pairful", encodeQuotedTerm a)
+    | TTight a => CDunaevPair (Const "Q_Tight", encodeQuotedTerm a)
+    | TCardLess (a, b) => CDunaevPair (Const "Q_CardLess", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | TCardLessEq (a, b) => CDunaevPair (Const "Q_CardLessEq", CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b))
+    | TUniverse a => CDunaevPair (Const "Q_Universe", encodeQuotedTerm a)
     | TFunc (f, a, b) => CDunaevPair (Const "Q_Func", CDunaevPair (encodeQuotedTerm f, CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b)))
     | TInjective (f, a, b) => CDunaevPair (Const "Q_Injective", CDunaevPair (encodeQuotedTerm f, CDunaevPair (encodeQuotedTerm a, encodeQuotedTerm b)))
     | TArrow (a, b) => CDunaevPair (Const "Q_Impl", CDunaevPair (encodeQuotedFormula a, encodeQuotedFormula b))
@@ -21034,6 +21253,13 @@ struct
     | TTrans a => "(trans_fm " ^ termToLP a ^ ")"
     | TOrd a => "(ord_fm " ^ termToLP a ^ ")"
     | TInd a => "(ind_fm " ^ termToLP a ^ ")"
+    | THereditary a => "(hereditary_fm " ^ termToLP a ^ ")"
+    | TPowerful a => "(powerful_fm " ^ termToLP a ^ ")"
+    | TPairful a => "(pairful_fm " ^ termToLP a ^ ")"
+    | TTight a => "(tight_fm " ^ termToLP a ^ ")"
+    | TCardLess (a, b) => "(card_lt_fm " ^ termToLP a ^ " " ^ termToLP b ^ ")"
+    | TCardLessEq (a, b) => "(card_leq_fm " ^ termToLP a ^ " " ^ termToLP b ^ ")"
+    | TUniverse a => "(universe_fm " ^ termToLP a ^ ")"
     | TFunc (f, a, b) => "(func_fm " ^ termToLP f ^ " " ^ termToLP a ^ " " ^ termToLP b ^ ")"
     | TInjective (f, a, b) => "(inj_fm " ^ termToLP f ^ " " ^ termToLP a ^ " " ^ termToLP b ^ ")"
     | TArrow (a, b) => "(imp_fm " ^ typeToLP a ^ " " ^ typeToLP b ^ ")"
@@ -22160,10 +22386,103 @@ struct
     | TSigma (x, ClassSort, body) => V1FExists (x, V1TyClass, translateTypeV2ToV1Fm body)
 
   (* 6.3 Translate Variant 1 ClassTerm -> Variant 2 Term *)
-  fun translateTermV1ToV2 (c: V1ClassTerm) : Term =
+  and translateTermV1ToV2 (c: V1ClassTerm) : Term =
     case c of
       V1CVar x => FVar x
-    | V1CConst k => Const k
+    | V1CConst k =>
+        let
+          val len = String.size k
+        in
+          if len >= 3 andalso String.sub (k, len - 1) = #")" then
+            let
+              fun findOpen i =
+                if i >= len then NONE
+                else if String.sub (k, i) = #"(" then SOME i
+                else findOpen (i + 1)
+            in
+              case findOpen 0 of
+                NONE => Const k
+              | SOME idx =>
+                  let
+                    val fname = String.substring (k, 0, idx)
+                    val inside = String.substring (k, idx + 1, len - idx - 2)
+                    fun splitArgs (i: int) (depth: int) (start: int) (acc: string list) : string list =
+                      if i >= String.size inside then
+                        List.rev (String.substring (inside, start, i - start) :: acc)
+                      else
+                        let
+                          val ch = String.sub (inside, i)
+                        in
+                          if ch = #"(" orelse ch = #"[" orelse ch = #"{" then
+                            splitArgs (i + 1) (depth + 1) start acc
+                          else if ch = #")" orelse ch = #"]" orelse ch = #"}" then
+                            splitArgs (i + 1) (depth - 1) start acc
+                          else if ch = #"," andalso depth = 0 then
+                            let
+                              val rawArg = String.substring (inside, start, i - start)
+                              val nextStart =
+                                if i + 1 < String.size inside andalso String.sub (inside, i + 1) = #" "
+                                then i + 2
+                                else i + 1
+                            in
+                              splitArgs nextStart 0 nextStart (rawArg :: acc)
+                            end
+                          else
+                            splitArgs (i + 1) depth start acc
+                        end
+                    fun parseArg (s: string) : Term =
+                      if s = "" then Const ""
+                      else if String.size s >= 4 andalso String.isPrefix "[" s andalso String.isSuffix "]_D" s then
+                        let
+                          val pairBody = String.substring (s, 1, String.size s - 4)
+                          fun splitPair (i: int) (d: int) : (string * string) option =
+                            if i >= String.size pairBody then NONE
+                            else
+                              let val ch = String.sub (pairBody, i) in
+                                if ch = #"(" orelse ch = #"[" orelse ch = #"{" then splitPair (i + 1) (d + 1)
+                                else if ch = #")" orelse ch = #"]" orelse ch = #"}" then splitPair (i + 1) (d - 1)
+                                else if ch = #"," andalso d = 0 then
+                                  let
+                                    val l = String.substring (pairBody, 0, i)
+                                    val rStart = if i + 1 < String.size pairBody andalso String.sub (pairBody, i + 1) = #" " then i + 2 else i + 1
+                                    val r = String.substring (pairBody, rStart, String.size pairBody - rStart)
+                                  in
+                                    SOME (l, r)
+                                  end
+                                else splitPair (i + 1) d
+                              end
+                        in
+                          case splitPair 0 0 of
+                            SOME (l, r) => CDunaevPair (parseArg l, parseArg r)
+                          | NONE => FVar s
+                        end
+                      else if String.size s >= 9 andalso String.isPrefix "(" s andalso String.isSuffix ")" s andalso String.isSubstring " \\cap " s then
+                        let
+                          val body = String.substring (s, 1, String.size s - 2)
+                          fun findCap i =
+                            if i + 6 > String.size body then NONE
+                            else if String.substring (body, i, 6) = " \\cap " then
+                              SOME (String.substring (body, 0, i), String.substring (body, i + 6, String.size body - i - 6))
+                            else findCap (i + 1)
+                        in
+                          case findCap 0 of
+                            SOME (l, r) => CBinInter (parseArg l, parseArg r)
+                          | NONE => FVar s
+                        end
+                      else if String.size s >= 7 andalso String.isPrefix "Succ(" s andalso String.isSuffix ")" s then
+                        CSucc (parseArg (String.substring (s, 5, String.size s - 6)))
+                      else if String.isSubstring "(" s andalso String.sub (s, String.size s - 1) = #")" then
+                        translateTermV1ToV2 (V1CConst s)
+                      else
+                        FVar s
+                  in
+                    if fname = "Enc" orelse fname = "ClassOf" then Const k
+                    else Fn (fname, List.map parseArg (splitArgs 0 0 0 []))
+                  end
+            end
+          else
+            Const k
+        end
     | V1CAnti x => FVar x
     | V1CEnc s => Fn ("Enc", [Const (v1SynObjToString s)])
     | V1CDec (t, ty) => Fn ("Dec", [translateTermV1ToV2 t, Const (v1TypeToString ty)])
@@ -22972,34 +23291,36 @@ struct
             end))))
 
   (* Evaluation of Natural Transformation Component at Identity Morphism (thm_126):
-     forall (FA:Class) (eta:Class) (A:Class) (idA:Class) (v:Class),
-       (idA in A /\ (idA in A -> ([idA, v]_D in eta /\ v in FA))) ->
-       ([idA, v]_D in eta /\ v in FA) *)
+     forall (FA:Class) (eta:Class) (A:Class) (v:Class),
+       (IdMor(A) in A /\ (IdMor(A) in A -> ([IdMor(A), v]_D in eta /\ v in FA))) ->
+       ([IdMor(A), v]_D in eta /\ v in FA) *)
   val proofYonedaIdentityEval : Expr =
     ETLam ("FA", ClassSort,
       ETLam ("eta", ClassSort,
         ETLam ("A", ClassSort,
-          ETLam ("idA", ClassSort,
-            ETLam ("v", ClassSort,
-              let
-                val idInA = TIn (FVar "idA", FVar "A")
-                val evalGoal = TProd (TIn (CDunaevPair (FVar "idA", FVar "v"), FVar "eta"), TIn (FVar "v", FVar "FA"))
-              in
-                ELam ("hYon", TProd (idInA, TArrow (idInA, evalGoal)),
-                  EApp (ESnd (EVar "hYon"), EFst (EVar "hYon")))
-              end)))))
+          ETLam ("v", ClassSort,
+            let
+              val idA = Fn ("IdMor", [FVar "A"])
+              val idInA = TIn (idA, FVar "A")
+              val evalGoal = TProd (TIn (CDunaevPair (idA, FVar "v"), FVar "eta"), TIn (FVar "v", FVar "FA"))
+            in
+              ELam ("hYon", TProd (idInA, TArrow (idInA, evalGoal)),
+                EApp (ESnd (EVar "hYon"), EFst (EVar "hYon")))
+            end))))
 
   (* Constructive Round-Trip Identity Witness for the Yoneda Bijection (thm_127):
-     forall (phiPsiU:Class) (psiPhiU:Class) (u:Class),
-       (phiPsiU = u /\ psiPhiU = u) ->
-       (u = phiPsiU /\ u = psiPhiU) *)
+     forall (Phi:Class) (Psi:Class) (u:Class),
+       (ValOf(Phi, ValOf(Psi, u)) = u /\ ValOf(Psi, ValOf(Phi, u)) = u) ->
+       (u = ValOf(Phi, ValOf(Psi, u)) /\ u = ValOf(Psi, ValOf(Phi, u))) *)
   val proofYonedaRoundtripId : Expr =
-    ETLam ("phiPsiU", ClassSort,
-      ETLam ("psiPhiU", ClassSort,
+    ETLam ("Phi", ClassSort,
+      ETLam ("Psi", ClassSort,
         ETLam ("u", ClassSort,
           let
-            val eq1 = TEq (FVar "phiPsiU", FVar "u")
-            val eq2 = TEq (FVar "psiPhiU", FVar "u")
+            val phiPsiU = Fn ("ValOf", [FVar "Phi", Fn ("ValOf", [FVar "Psi", FVar "u"])])
+            val psiPhiU = Fn ("ValOf", [FVar "Psi", Fn ("ValOf", [FVar "Phi", FVar "u"])])
+            val eq1 = TEq (phiPsiU, FVar "u")
+            val eq2 = TEq (psiPhiU, FVar "u")
           in
             ELam ("hRT", TProd (eq1, eq2),
               EPair (ESym (EFst (EVar "hRT")), ESym (ESnd (EVar "hRT"))))
@@ -23025,18 +23346,20 @@ struct
             end))))
 
   (* Positivity Preservation for Feynman-Kac Path Integral Semigroup Operators (thm_129):
-     forall (Pos:Class) (u:Class) (vu:Class) (ptvu:Class),
-       ((u in Pos -> vu in Pos) /\ ((vu in Pos -> ptvu in Pos) /\ u in Pos)) ->
-       ptvu in Pos *)
+     forall (Pos:Class) (Pt:Class) (Vpot:Class) (u:Class),
+       ((u in Pos -> ValOf(Vpot, u) in Pos) /\ ((ValOf(Vpot, u) in Pos -> ValOf(Pt, ValOf(Vpot, u)) in Pos) /\ u in Pos)) ->
+       ValOf(Pt, ValOf(Vpot, u)) in Pos *)
   val proofSchrodingerFeynmanKacPositivity : Expr =
     ETLam ("Pos", ClassSort,
-      ETLam ("u", ClassSort,
-        ETLam ("vu", ClassSort,
-          ETLam ("ptvu", ClassSort,
+      ETLam ("Pt", ClassSort,
+        ETLam ("Vpot", ClassSort,
+          ETLam ("u", ClassSort,
             let
+              val vu = Fn ("ValOf", [FVar "Vpot", FVar "u"])
+              val ptvu = Fn ("ValOf", [FVar "Pt", vu])
               val uPos = TIn (FVar "u", FVar "Pos")
-              val vuPos = TIn (FVar "vu", FVar "Pos")
-              val ptvuPos = TIn (FVar "ptvu", FVar "Pos")
+              val vuPos = TIn (vu, FVar "Pos")
+              val ptvuPos = TIn (ptvu, FVar "Pos")
             in
               ELam ("hFK", TProd (TArrow (uPos, vuPos), TProd (TArrow (vuPos, ptvuPos), uPos)),
                 EApp (EFst (ESnd (EVar "hFK")),
@@ -23636,22 +23959,24 @@ struct
             end))))
 
   (* Galois Connection Adjunction Modus Ponens over Dunaev Pairs (thm_156):
-     forall (LeqA:Class) (LeqB:Class) (x:Class) (y:Class) (fx:Class) (gy:Class),
-       ((([x, y]_D in LeqA -> [fx, y]_D in LeqB) /\
-         ([fx, y]_D in LeqB -> [x, gy]_D in LeqA)) /\
+     forall (LeqA:Class) (LeqB:Class) (F:Class) (G:Class) (x:Class) (y:Class),
+       ((([x, y]_D in LeqA -> [ValOf(F, x), y]_D in LeqB) /\
+         ([ValOf(F, x), y]_D in LeqB -> [x, ValOf(G, y)]_D in LeqA)) /\
         [x, y]_D in LeqA) ->
-       [x, gy]_D in LeqA *)
+       [x, ValOf(G, y)]_D in LeqA *)
   val proofGaloisConnectionAdjunctionModusPonens : Expr =
     ETLam ("LeqA", ClassSort,
       ETLam ("LeqB", ClassSort,
-        ETLam ("x", ClassSort,
-          ETLam ("y", ClassSort,
-            ETLam ("fx", ClassSort,
-              ETLam ("gy", ClassSort,
+        ETLam ("F", ClassSort,
+          ETLam ("G", ClassSort,
+            ETLam ("x", ClassSort,
+              ETLam ("y", ClassSort,
                 let
+                  val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                  val gy = Fn ("ValOf", [FVar "G", FVar "y"])
                   val xyA = TIn (CDunaevPair (FVar "x", FVar "y"), FVar "LeqA")
-                  val fxyB = TIn (CDunaevPair (FVar "fx", FVar "y"), FVar "LeqB")
-                  val xgyA = TIn (CDunaevPair (FVar "x", FVar "gy"), FVar "LeqA")
+                  val fxyB = TIn (CDunaevPair (fx, FVar "y"), FVar "LeqB")
+                  val xgyA = TIn (CDunaevPair (FVar "x", gy), FVar "LeqA")
                 in
                   ELam ("h", TProd (TProd (TArrow (xyA, fxyB), TArrow (fxyB, xgyA)), xyA),
                     EApp (ESnd (EFst (EVar "h")),
@@ -23659,45 +23984,47 @@ struct
                 end))))))
 
   (* Closure Operator Extensivity and Idempotence Step (thm_157):
-     forall (x:Class) (A:Class) (ClA:Class) (ClClA:Class),
-       ((x in A -> x in ClA) /\ (x in ClClA -> x in ClA)) ->
-       ((x in A \/ x in ClClA) -> x in ClA) *)
+     forall (ClOp:Class) (A:Class) (x:Class),
+       ((x in A -> x in ValOf(ClOp, A)) /\ (x in ValOf(ClOp, ValOf(ClOp, A)) -> x in ValOf(ClOp, A))) ->
+       ((x in A \/ x in ValOf(ClOp, ValOf(ClOp, A))) -> x in ValOf(ClOp, A)) *)
   val proofClosureOperatorExtensivityIdempotenceStep : Expr =
-    ETLam ("x", ClassSort,
+    ETLam ("ClOp", ClassSort,
       ETLam ("A", ClassSort,
-        ETLam ("ClA", ClassSort,
-          ETLam ("ClClA", ClassSort,
-            let
-              val xA = TIn (FVar "x", FVar "A")
-              val xClA = TIn (FVar "x", FVar "ClA")
-              val xClClA = TIn (FVar "x", FVar "ClClA")
-            in
-              ELam ("h", TProd (TArrow (xA, xClA), TArrow (xClClA, xClA)),
-                ELam ("hOr", TSum (xA, xClClA),
-                  ECase (EVar "hOr",
-                    "hxA", EApp (EFst (EVar "h"), EVar "hxA"),
-                    "hxClClA", EApp (ESnd (EVar "h"), EVar "hxClClA"))))
-            end))))
+        ETLam ("x", ClassSort,
+          let
+            val clA = Fn ("ValOf", [FVar "ClOp", FVar "A"])
+            val clClA = Fn ("ValOf", [FVar "ClOp", clA])
+            val xA = TIn (FVar "x", FVar "A")
+            val xClA = TIn (FVar "x", clA)
+            val xClClA = TIn (FVar "x", clClA)
+          in
+            ELam ("h", TProd (TArrow (xA, xClA), TArrow (xClClA, xClA)),
+              ELam ("hOr", TSum (xA, xClClA),
+                ECase (EVar "hOr",
+                  "hxA", EApp (EFst (EVar "h"), EVar "hxA"),
+                  "hxClClA", EApp (ESnd (EVar "h"), EVar "hxClClA"))))
+          end)))
 
   (* Interior Operator Contraction and Idempotence Step (thm_158):
-     forall (x:Class) (A:Class) (IntA:Class) (IntIntA:Class),
-       ((x in IntA -> x in A) /\ (x in IntA -> x in IntIntA)) ->
-       (x in IntA -> (x in A /\ x in IntIntA)) *)
+     forall (IntOp:Class) (A:Class) (x:Class),
+       ((x in ValOf(IntOp, A) -> x in A) /\ (x in ValOf(IntOp, A) -> x in ValOf(IntOp, ValOf(IntOp, A)))) ->
+       (x in ValOf(IntOp, A) -> (x in A /\ x in ValOf(IntOp, ValOf(IntOp, A)))) *)
   val proofInteriorOperatorContractionIdempotenceStep : Expr =
-    ETLam ("x", ClassSort,
+    ETLam ("IntOp", ClassSort,
       ETLam ("A", ClassSort,
-        ETLam ("IntA", ClassSort,
-          ETLam ("IntIntA", ClassSort,
-            let
-              val xIntA = TIn (FVar "x", FVar "IntA")
-              val xA = TIn (FVar "x", FVar "A")
-              val xIntIntA = TIn (FVar "x", FVar "IntIntA")
-            in
-              ELam ("h", TProd (TArrow (xIntA, xA), TArrow (xIntA, xIntIntA)),
-                ELam ("hx", xIntA,
-                  EPair (EApp (EFst (EVar "h"), EVar "hx"),
-                         EApp (ESnd (EVar "h"), EVar "hx"))))
-            end))))
+        ETLam ("x", ClassSort,
+          let
+            val intA = Fn ("ValOf", [FVar "IntOp", FVar "A"])
+            val intIntA = Fn ("ValOf", [FVar "IntOp", intA])
+            val xIntA = TIn (FVar "x", intA)
+            val xA = TIn (FVar "x", FVar "A")
+            val xIntIntA = TIn (FVar "x", intIntA)
+          in
+            ELam ("h", TProd (TArrow (xIntA, xA), TArrow (xIntA, xIntIntA)),
+              ELam ("hx", xIntA,
+                EPair (EApp (EFst (EVar "h"), EVar "hx"),
+                       EApp (ESnd (EVar "h"), EVar "hx"))))
+          end)))
 
   (* Dunaev Pair Filter Upward Closure Intersection Step (thm_159):
      forall (F:Class) (Sub:Class) (x:Class) (y:Class) (z:Class) (w:Class),
@@ -23752,65 +24079,70 @@ struct
                 end))))))
 
   (* Complete Lattice Supremum Least Upper Bound over Dunaev Pairs (thm_161):
-     forall (UB:Class) (Leq:Class) (supA:Class) (x:Class),
-       (x in UB /\ (forall (Z:Class), Z in UB -> [supA, Z]_D in Leq)) ->
-       [supA, x]_D in Leq *)
+     forall (SupOp:Class) (A:Class) (UB:Class) (Leq:Class) (x:Class),
+       (x in UB /\ (forall (Z:Class), Z in UB -> [ValOf(SupOp, A), Z]_D in Leq)) ->
+       [ValOf(SupOp, A), x]_D in Leq *)
   val proofCompleteLatticeSupremumLeastUpperBound : Expr =
-    ETLam ("UB", ClassSort,
-      ETLam ("Leq", ClassSort,
-        ETLam ("supA", ClassSort,
-          ETLam ("x", ClassSort,
-            let
-              val xUB = TIn (FVar "x", FVar "UB")
-              val lub =
-                TPi ("Z", ClassSort,
-                  TArrow (TIn (FVar "Z", FVar "UB"),
-                          TIn (CDunaevPair (FVar "supA", FVar "Z"), FVar "Leq")))
-            in
-              ELam ("h", TProd (xUB, lub),
-                EApp (ETApp (ESnd (EVar "h"), FVar "x"), EFst (EVar "h")))
-            end))))
+    ETLam ("SupOp", ClassSort,
+      ETLam ("A", ClassSort,
+        ETLam ("UB", ClassSort,
+          ETLam ("Leq", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val supA = Fn ("ValOf", [FVar "SupOp", FVar "A"])
+                val xUB = TIn (FVar "x", FVar "UB")
+                val lub =
+                  TPi ("Z", ClassSort,
+                    TArrow (TIn (FVar "Z", FVar "UB"),
+                            TIn (CDunaevPair (supA, FVar "Z"), FVar "Leq")))
+              in
+                ELam ("h", TProd (xUB, lub),
+                  EApp (ETApp (ESnd (EVar "h"), FVar "x"), EFst (EVar "h")))
+              end)))))
 
   (* Complete Lattice Infimum Greatest Lower Bound over Dunaev Pairs (thm_162):
-     forall (LB:Class) (Leq:Class) (infA:Class) (x:Class),
-       (x in LB /\ (forall (Z:Class), Z in LB -> [Z, infA]_D in Leq)) ->
-       [x, infA]_D in Leq *)
+     forall (InfOp:Class) (A:Class) (LB:Class) (Leq:Class) (x:Class),
+       (x in LB /\ (forall (Z:Class), Z in LB -> [Z, ValOf(InfOp, A)]_D in Leq)) ->
+       [x, ValOf(InfOp, A)]_D in Leq *)
   val proofCompleteLatticeInfimumGreatestLowerBound : Expr =
-    ETLam ("LB", ClassSort,
-      ETLam ("Leq", ClassSort,
-        ETLam ("infA", ClassSort,
-          ETLam ("x", ClassSort,
-            let
-              val xLB = TIn (FVar "x", FVar "LB")
-              val glb =
-                TPi ("Z", ClassSort,
-                  TArrow (TIn (FVar "Z", FVar "LB"),
-                          TIn (CDunaevPair (FVar "Z", FVar "infA"), FVar "Leq")))
-            in
-              ELam ("h", TProd (xLB, glb),
-                EApp (ETApp (ESnd (EVar "h"), FVar "x"), EFst (EVar "h")))
-            end))))
+    ETLam ("InfOp", ClassSort,
+      ETLam ("A", ClassSort,
+        ETLam ("LB", ClassSort,
+          ETLam ("Leq", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val infA = Fn ("ValOf", [FVar "InfOp", FVar "A"])
+                val xLB = TIn (FVar "x", FVar "LB")
+                val glb =
+                  TPi ("Z", ClassSort,
+                    TArrow (TIn (FVar "Z", FVar "LB"),
+                            TIn (CDunaevPair (FVar "Z", infA), FVar "Leq")))
+              in
+                ELam ("h", TProd (xLB, glb),
+                  EApp (ETApp (ESnd (EVar "h"), FVar "x"), EFst (EVar "h")))
+              end)))))
 
   (* Monotone Operator Post-Fixed Point Closure over Dunaev Pairs (thm_163):
-     forall (Leq:Class) (x:Class) (fx:Class) (ffx:Class),
-       (([x, fx]_D in Leq -> [fx, ffx]_D in Leq) /\
-        (([x, fx]_D in Leq /\ [fx, ffx]_D in Leq) -> [x, ffx]_D in Leq)) ->
-       ([x, fx]_D in Leq -> [x, ffx]_D in Leq) *)
+     forall (Leq:Class) (F:Class) (x:Class),
+       (([x, ValOf(F, x)]_D in Leq -> [ValOf(F, x), ValOf(F, ValOf(F, x))]_D in Leq) /\
+        (([x, ValOf(F, x)]_D in Leq /\ [ValOf(F, x), ValOf(F, ValOf(F, x))]_D in Leq) -> [x, ValOf(F, ValOf(F, x))]_D in Leq)) ->
+       ([x, ValOf(F, x)]_D in Leq -> [x, ValOf(F, ValOf(F, x))]_D in Leq) *)
   val proofMonotoneOperatorPostFixedPointClosure : Expr =
     ETLam ("Leq", ClassSort,
-      ETLam ("x", ClassSort,
-        ETLam ("fx", ClassSort,
-          ETLam ("ffx", ClassSort,
-            let
-              val xfx = TIn (CDunaevPair (FVar "x", FVar "fx"), FVar "Leq")
-              val fxffx = TIn (CDunaevPair (FVar "fx", FVar "ffx"), FVar "Leq")
-              val xffx = TIn (CDunaevPair (FVar "x", FVar "ffx"), FVar "Leq")
-            in
-              ELam ("h", TProd (TArrow (xfx, fxffx), TArrow (TProd (xfx, fxffx), xffx)),
-                ELam ("hxfx", xfx,
-                  EApp (ESnd (EVar "h"),
-                        EPair (EVar "hxfx", EApp (EFst (EVar "h"), EVar "hxfx")))))
-            end))))
+      ETLam ("F", ClassSort,
+        ETLam ("x", ClassSort,
+          let
+            val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+            val ffx = Fn ("ValOf", [FVar "F", fx])
+            val xfx = TIn (CDunaevPair (FVar "x", fx), FVar "Leq")
+            val fxffx = TIn (CDunaevPair (fx, ffx), FVar "Leq")
+            val xffx = TIn (CDunaevPair (FVar "x", ffx), FVar "Leq")
+          in
+            ELam ("h", TProd (TArrow (xfx, fxffx), TArrow (TProd (xfx, fxffx), xffx)),
+              ELam ("hxfx", xfx,
+                EApp (ESnd (EVar "h"),
+                      EPair (EVar "hxfx", EApp (EFst (EVar "h"), EVar "hxfx")))))
+          end)))
 
   (* Well-Founded Inductive Heredity Step over Dunaev Pairs (thm_164):
      forall (R:Class) (P:Class) (x:Class),
@@ -24112,67 +24444,73 @@ struct
             end))))
 
   (* Dunaev Pair Pullback Fiber Product Left Projection (thm_178):
-     forall (A:Class) (B:Class) (EqC:Class) (x:Class) (y:Class) (fx:Class) (gy:Class),
-       ((x in A /\ y in B) /\ [fx, gy]_D in EqC) ->
-       (x in A /\ [fx, gy]_D in EqC) *)
+     forall (A:Class) (B:Class) (EqC:Class) (F:Class) (G:Class) (x:Class) (y:Class),
+       ((x in A /\ y in B) /\ [ValOf(F, x), ValOf(G, y)]_D in EqC) ->
+       (x in A /\ [ValOf(F, x), ValOf(G, y)]_D in EqC) *)
   val proofDunaevPairPullbackFiberProductProjectionLeft : Expr =
     ETLam ("A", ClassSort,
       ETLam ("B", ClassSort,
         ETLam ("EqC", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("y", ClassSort,
-              ETLam ("fx", ClassSort,
-                ETLam ("gy", ClassSort,
+          ETLam ("F", ClassSort,
+            ETLam ("G", ClassSort,
+              ETLam ("x", ClassSort,
+                ETLam ("y", ClassSort,
                   let
+                    val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                    val gy = Fn ("ValOf", [FVar "G", FVar "y"])
                     val xA = TIn (FVar "x", FVar "A")
                     val yB = TIn (FVar "y", FVar "B")
-                    val eqFG = TIn (CDunaevPair (FVar "fx", FVar "gy"), FVar "EqC")
+                    val eqFG = TIn (CDunaevPair (fx, gy), FVar "EqC")
                   in
                     ELam ("h", TProd (TProd (xA, yB), eqFG),
                       EPair (EFst (EFst (EVar "h")), ESnd (EVar "h")))
                   end)))))))
 
   (* Dunaev Pair Pullback Fiber Product Right Projection (thm_179):
-     forall (A:Class) (B:Class) (EqC:Class) (x:Class) (y:Class) (fx:Class) (gy:Class),
-       ((x in A /\ y in B) /\ [fx, gy]_D in EqC) ->
-       (y in B /\ [fx, gy]_D in EqC) *)
+     forall (A:Class) (B:Class) (EqC:Class) (F:Class) (G:Class) (x:Class) (y:Class),
+       ((x in A /\ y in B) /\ [ValOf(F, x), ValOf(G, y)]_D in EqC) ->
+       (y in B /\ [ValOf(F, x), ValOf(G, y)]_D in EqC) *)
   val proofDunaevPairPullbackFiberProductProjectionRight : Expr =
     ETLam ("A", ClassSort,
       ETLam ("B", ClassSort,
         ETLam ("EqC", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("y", ClassSort,
-              ETLam ("fx", ClassSort,
-                ETLam ("gy", ClassSort,
+          ETLam ("F", ClassSort,
+            ETLam ("G", ClassSort,
+              ETLam ("x", ClassSort,
+                ETLam ("y", ClassSort,
                   let
+                    val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                    val gy = Fn ("ValOf", [FVar "G", FVar "y"])
                     val xA = TIn (FVar "x", FVar "A")
                     val yB = TIn (FVar "y", FVar "B")
-                    val eqFG = TIn (CDunaevPair (FVar "fx", FVar "gy"), FVar "EqC")
+                    val eqFG = TIn (CDunaevPair (fx, gy), FVar "EqC")
                   in
                     ELam ("h", TProd (TProd (xA, yB), eqFG),
                       EPair (ESnd (EFst (EVar "h")), ESnd (EVar "h")))
                   end)))))))
 
   (* Dunaev Pair Pullback Universal Mediating Pair Witness (thm_180):
-     forall (P:Class) (A:Class) (B:Class) (EqC:Class) (u:Class) (x:Class) (y:Class) (fx:Class) (gy:Class),
+     forall (P:Class) (A:Class) (B:Class) (EqC:Class) (F:Class) (G:Class) (u:Class) (x:Class) (y:Class),
        (((u in P -> x in A) /\ (u in P -> y in B)) /\
-        (u in P -> [fx, gy]_D in EqC)) ->
-       (u in P -> ((x in A /\ y in B) /\ [fx, gy]_D in EqC)) *)
+        (u in P -> [ValOf(F, x), ValOf(G, y)]_D in EqC)) ->
+       (u in P -> ((x in A /\ y in B) /\ [ValOf(F, x), ValOf(G, y)]_D in EqC)) *)
   val proofDunaevPairPullbackUniversalMediatingPair : Expr =
     ETLam ("P", ClassSort,
       ETLam ("A", ClassSort,
         ETLam ("B", ClassSort,
           ETLam ("EqC", ClassSort,
-            ETLam ("u", ClassSort,
-              ETLam ("x", ClassSort,
-                ETLam ("y", ClassSort,
-                  ETLam ("fx", ClassSort,
-                    ETLam ("gy", ClassSort,
+            ETLam ("F", ClassSort,
+              ETLam ("G", ClassSort,
+                ETLam ("u", ClassSort,
+                  ETLam ("x", ClassSort,
+                    ETLam ("y", ClassSort,
                       let
+                        val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                        val gy = Fn ("ValOf", [FVar "G", FVar "y"])
                         val uP = TIn (FVar "u", FVar "P")
                         val xA = TIn (FVar "x", FVar "A")
                         val yB = TIn (FVar "y", FVar "B")
-                        val eqFG = TIn (CDunaevPair (FVar "fx", FVar "gy"), FVar "EqC")
+                        val eqFG = TIn (CDunaevPair (fx, gy), FVar "EqC")
                       in
                         ELam ("h", TProd (TProd (TArrow (uP, xA), TArrow (uP, yB)), TArrow (uP, eqFG)),
                           ELam ("huP", uP,
@@ -24184,20 +24522,22 @@ struct
                       end)))))))))
 
   (* Equalizer Inclusion Fork Commutativity over Dunaev Pairs (thm_181):
-     forall (EqFG:Class) (A:Class) (DiagB:Class) (x:Class) (fx:Class) (gx:Class),
-       (x in EqFG -> (x in A /\ [fx, gx]_D in DiagB)) ->
-       (x in EqFG -> [fx, gx]_D in DiagB) *)
+     forall (EqFG:Class) (A:Class) (DiagB:Class) (F:Class) (G:Class) (x:Class),
+       (x in EqFG -> (x in A /\ [ValOf(F, x), ValOf(G, x)]_D in DiagB)) ->
+       (x in EqFG -> [ValOf(F, x), ValOf(G, x)]_D in DiagB) *)
   val proofEqualizerInclusionForkCommutativity : Expr =
     ETLam ("EqFG", ClassSort,
       ETLam ("A", ClassSort,
         ETLam ("DiagB", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("fx", ClassSort,
-              ETLam ("gx", ClassSort,
+          ETLam ("F", ClassSort,
+            ETLam ("G", ClassSort,
+              ETLam ("x", ClassSort,
                 let
+                  val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                  val gx = Fn ("ValOf", [FVar "G", FVar "x"])
                   val xEq = TIn (FVar "x", FVar "EqFG")
                   val xA = TIn (FVar "x", FVar "A")
-                  val fxgx = TIn (CDunaevPair (FVar "fx", FVar "gx"), FVar "DiagB")
+                  val fxgx = TIn (CDunaevPair (fx, gx), FVar "DiagB")
                 in
                   ELam ("h", TArrow (xEq, TProd (xA, fxgx)),
                     ELam ("hxEq", xEq,
@@ -24205,21 +24545,23 @@ struct
                 end))))))
 
   (* Equalizer Universal Factorization Uniqueness over Dunaev Pairs (thm_182):
-     forall (X:Class) (DiagA:Class) (u:Class) (hu:Class) (ku:Class),
-       (((u in X -> [hu, hu]_D in DiagA) /\ ([hu, ku]_D in DiagA -> hu = ku)) /\
-        (u in X -> [hu, ku]_D in DiagA)) ->
-       (u in X -> hu = ku) *)
+     forall (X:Class) (DiagA:Class) (H:Class) (K:Class) (u:Class),
+       (((u in X -> [ValOf(H, u), ValOf(H, u)]_D in DiagA) /\ ([ValOf(H, u), ValOf(K, u)]_D in DiagA -> ValOf(H, u) = ValOf(K, u))) /\
+        (u in X -> [ValOf(H, u), ValOf(K, u)]_D in DiagA)) ->
+       (u in X -> ValOf(H, u) = ValOf(K, u)) *)
   val proofEqualizerUniversalFactorizationUniqueness : Expr =
     ETLam ("X", ClassSort,
       ETLam ("DiagA", ClassSort,
-        ETLam ("u", ClassSort,
-          ETLam ("hu", ClassSort,
-            ETLam ("ku", ClassSort,
+        ETLam ("H", ClassSort,
+          ETLam ("K", ClassSort,
+            ETLam ("u", ClassSort,
               let
+                val hu = Fn ("ValOf", [FVar "H", FVar "u"])
+                val ku = Fn ("ValOf", [FVar "K", FVar "u"])
                 val uX = TIn (FVar "u", FVar "X")
-                val huhu = TIn (CDunaevPair (FVar "hu", FVar "hu"), FVar "DiagA")
-                val huku = TIn (CDunaevPair (FVar "hu", FVar "ku"), FVar "DiagA")
-                val eqHK = TEq (FVar "hu", FVar "ku")
+                val huhu = TIn (CDunaevPair (hu, hu), FVar "DiagA")
+                val huku = TIn (CDunaevPair (hu, ku), FVar "DiagA")
+                val eqHK = TEq (hu, ku)
               in
                 ELam ("h", TProd (TProd (TArrow (uX, huhu), TArrow (huku, eqHK)),
                                   TArrow (uX, huku)),
@@ -24229,112 +24571,119 @@ struct
               end)))))
 
   (* Pushout Amalgamated Sum Left Injection over Dunaev Pairs (thm_183):
-     forall (A:Class) (CoprodAB:Class) (PushoutABC:Class) (tag0:Class) (x:Class),
-       ((x in A -> [tag0, x]_D in CoprodAB) /\
-        ([tag0, x]_D in CoprodAB -> [tag0, x]_D in PushoutABC)) ->
-       (x in A -> [tag0, x]_D in PushoutABC) *)
+     forall (A:Class) (CoprodAB:Class) (PushoutABC:Class) (x:Class),
+       ((x in A -> [CoprodTag0, x]_D in CoprodAB) /\
+        ([CoprodTag0, x]_D in CoprodAB -> [CoprodTag0, x]_D in PushoutABC)) ->
+       (x in A -> [CoprodTag0, x]_D in PushoutABC) *)
   val proofPushoutAmalgamatedSumLeftInjection : Expr =
     ETLam ("A", ClassSort,
       ETLam ("CoprodAB", ClassSort,
         ETLam ("PushoutABC", ClassSort,
-          ETLam ("tag0", ClassSort,
-            ETLam ("x", ClassSort,
-              let
-                val xA = TIn (FVar "x", FVar "A")
-                val t0xCoprod = TIn (CDunaevPair (FVar "tag0", FVar "x"), FVar "CoprodAB")
-                val t0xPush = TIn (CDunaevPair (FVar "tag0", FVar "x"), FVar "PushoutABC")
-              in
-                ELam ("h", TProd (TArrow (xA, t0xCoprod), TArrow (t0xCoprod, t0xPush)),
-                  ELam ("hxA", xA,
-                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-              end)))))
+          ETLam ("x", ClassSort,
+            let
+              val tag0 = Const "CoprodTag0"
+              val xA = TIn (FVar "x", FVar "A")
+              val t0xCoprod = TIn (CDunaevPair (tag0, FVar "x"), FVar "CoprodAB")
+              val t0xPush = TIn (CDunaevPair (tag0, FVar "x"), FVar "PushoutABC")
+            in
+              ELam ("h", TProd (TArrow (xA, t0xCoprod), TArrow (t0xCoprod, t0xPush)),
+                ELam ("hxA", xA,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+            end))))
 
   (* Pushout Amalgamated Sum Right Injection over Dunaev Pairs (thm_184):
-     forall (B:Class) (CoprodAB:Class) (PushoutABC:Class) (tag1:Class) (y:Class),
-       ((y in B -> [tag1, y]_D in CoprodAB) /\
-        ([tag1, y]_D in CoprodAB -> [tag1, y]_D in PushoutABC)) ->
-       (y in B -> [tag1, y]_D in PushoutABC) *)
+     forall (B:Class) (CoprodAB:Class) (PushoutABC:Class) (y:Class),
+       ((y in B -> [CoprodTag1, y]_D in CoprodAB) /\
+        ([CoprodTag1, y]_D in CoprodAB -> [CoprodTag1, y]_D in PushoutABC)) ->
+       (y in B -> [CoprodTag1, y]_D in PushoutABC) *)
   val proofPushoutAmalgamatedSumRightInjection : Expr =
     ETLam ("B", ClassSort,
       ETLam ("CoprodAB", ClassSort,
         ETLam ("PushoutABC", ClassSort,
-          ETLam ("tag1", ClassSort,
-            ETLam ("y", ClassSort,
-              let
-                val yB = TIn (FVar "y", FVar "B")
-                val t1yCoprod = TIn (CDunaevPair (FVar "tag1", FVar "y"), FVar "CoprodAB")
-                val t1yPush = TIn (CDunaevPair (FVar "tag1", FVar "y"), FVar "PushoutABC")
-              in
-                ELam ("h", TProd (TArrow (yB, t1yCoprod), TArrow (t1yCoprod, t1yPush)),
-                  ELam ("hyB", yB,
-                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hyB"))))
-              end)))))
+          ETLam ("y", ClassSort,
+            let
+              val tag1 = Const "CoprodTag1"
+              val yB = TIn (FVar "y", FVar "B")
+              val t1yCoprod = TIn (CDunaevPair (tag1, FVar "y"), FVar "CoprodAB")
+              val t1yPush = TIn (CDunaevPair (tag1, FVar "y"), FVar "PushoutABC")
+            in
+              ELam ("h", TProd (TArrow (yB, t1yCoprod), TArrow (t1yCoprod, t1yPush)),
+                ELam ("hyB", yB,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hyB"))))
+            end))))
 
   (* Pushout Cocone Glueing Compatibility over Dunaev Pairs (thm_185):
-     forall (C:Class) (PushoutABC:Class) (tag0:Class) (tag1:Class) (z:Class) (fz:Class) (gz:Class),
-       ((z in C -> [tag0, fz]_D in PushoutABC) /\
-        (z in C -> [tag1, gz]_D in PushoutABC)) ->
-       (z in C -> ([tag0, fz]_D in PushoutABC /\ [tag1, gz]_D in PushoutABC)) *)
+     forall (C:Class) (PushoutABC:Class) (F:Class) (G:Class) (z:Class),
+       ((z in C -> [CoprodTag0, ValOf(F, z)]_D in PushoutABC) /\
+        (z in C -> [CoprodTag1, ValOf(G, z)]_D in PushoutABC)) ->
+       (z in C -> ([CoprodTag0, ValOf(F, z)]_D in PushoutABC /\ [CoprodTag1, ValOf(G, z)]_D in PushoutABC)) *)
   val proofPushoutCoconeGlueingCompatibility : Expr =
     ETLam ("C", ClassSort,
       ETLam ("PushoutABC", ClassSort,
-        ETLam ("tag0", ClassSort,
-          ETLam ("tag1", ClassSort,
+        ETLam ("F", ClassSort,
+          ETLam ("G", ClassSort,
             ETLam ("z", ClassSort,
-              ETLam ("fz", ClassSort,
-                ETLam ("gz", ClassSort,
-                  let
-                    val zC = TIn (FVar "z", FVar "C")
-                    val t0fz = TIn (CDunaevPair (FVar "tag0", FVar "fz"), FVar "PushoutABC")
-                    val t1gz = TIn (CDunaevPair (FVar "tag1", FVar "gz"), FVar "PushoutABC")
-                  in
-                    ELam ("h", TProd (TArrow (zC, t0fz), TArrow (zC, t1gz)),
-                      ELam ("hzC", zC,
-                        EPair (
-                          EApp (EFst (EVar "h"), EVar "hzC"),
-                          EApp (ESnd (EVar "h"), EVar "hzC"))))
-                  end)))))))
+              let
+                val tag0 = Const "CoprodTag0"
+                val tag1 = Const "CoprodTag1"
+                val fz = Fn ("ValOf", [FVar "F", FVar "z"])
+                val gz = Fn ("ValOf", [FVar "G", FVar "z"])
+                val zC = TIn (FVar "z", FVar "C")
+                val t0fz = TIn (CDunaevPair (tag0, fz), FVar "PushoutABC")
+                val t1gz = TIn (CDunaevPair (tag1, gz), FVar "PushoutABC")
+              in
+                ELam ("h", TProd (TArrow (zC, t0fz), TArrow (zC, t1gz)),
+                  ELam ("hzC", zC,
+                    EPair (
+                      EApp (EFst (EVar "h"), EVar "hzC"),
+                      EApp (ESnd (EVar "h"), EVar "hzC"))))
+              end)))))
 
   (* Coequalizer Quotient Fork Commutativity over Dunaev Pairs (thm_186):
-     forall (A:Class) (KerQ:Class) (DiagC:Class) (x:Class) (fx:Class) (gx:Class) (qfx:Class) (qgx:Class),
-       ((x in A -> [fx, gx]_D in KerQ) /\
-        ([fx, gx]_D in KerQ -> [qfx, qgx]_D in DiagC)) ->
-       (x in A -> [qfx, qgx]_D in DiagC) *)
+     forall (A:Class) (KerQ:Class) (DiagC:Class) (Q:Class) (F:Class) (G:Class) (x:Class),
+       ((x in A -> [ValOf(F, x), ValOf(G, x)]_D in KerQ) /\
+        ([ValOf(F, x), ValOf(G, x)]_D in KerQ -> [ValOf(Q, ValOf(F, x)), ValOf(Q, ValOf(G, x))]_D in DiagC)) ->
+       (x in A -> [ValOf(Q, ValOf(F, x)), ValOf(Q, ValOf(G, x))]_D in DiagC) *)
   val proofCoequalizerQuotientForkCommutativity : Expr =
     ETLam ("A", ClassSort,
       ETLam ("KerQ", ClassSort,
         ETLam ("DiagC", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("fx", ClassSort,
-              ETLam ("gx", ClassSort,
-                ETLam ("qfx", ClassSort,
-                  ETLam ("qgx", ClassSort,
-                    let
-                      val xA = TIn (FVar "x", FVar "A")
-                      val fxgxKer = TIn (CDunaevPair (FVar "fx", FVar "gx"), FVar "KerQ")
-                      val qfxgxDiag = TIn (CDunaevPair (FVar "qfx", FVar "qgx"), FVar "DiagC")
-                    in
-                      ELam ("h", TProd (TArrow (xA, fxgxKer), TArrow (fxgxKer, qfxgxDiag)),
-                        ELam ("hxA", xA,
-                          EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                    end))))))))
+          ETLam ("Q", ClassSort,
+            ETLam ("F", ClassSort,
+              ETLam ("G", ClassSort,
+                ETLam ("x", ClassSort,
+                  let
+                    val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                    val gx = Fn ("ValOf", [FVar "G", FVar "x"])
+                    val qfx = Fn ("ValOf", [FVar "Q", fx])
+                    val qgx = Fn ("ValOf", [FVar "Q", gx])
+                    val xA = TIn (FVar "x", FVar "A")
+                    val fxgxKer = TIn (CDunaevPair (fx, gx), FVar "KerQ")
+                    val qfxgxDiag = TIn (CDunaevPair (qfx, qgx), FVar "DiagC")
+                  in
+                    ELam ("h", TProd (TArrow (xA, fxgxKer), TArrow (fxgxKer, qfxgxDiag)),
+                      ELam ("hxA", xA,
+                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+                  end)))))))
 
   (* Coequalizer Universal Mediating Uniqueness over Dunaev Pairs (thm_187):
-     forall (B:Class) (DiagZ:Class) (y:Class) (uy:Class) (vy:Class),
-       (((y in B -> [uy, vy]_D in DiagZ) /\
-         ([uy, vy]_D in DiagZ -> uy = vy)) /\
+     forall (B:Class) (DiagZ:Class) (U:Class) (Vmap:Class) (y:Class),
+       (((y in B -> [ValOf(U, y), ValOf(Vmap, y)]_D in DiagZ) /\
+         ([ValOf(U, y), ValOf(Vmap, y)]_D in DiagZ -> ValOf(U, y) = ValOf(Vmap, y))) /\
         y in B) ->
-       uy = vy *)
+       ValOf(U, y) = ValOf(Vmap, y) *)
   val proofCoequalizerUniversalMediatingUniqueness : Expr =
     ETLam ("B", ClassSort,
       ETLam ("DiagZ", ClassSort,
-        ETLam ("y", ClassSort,
-          ETLam ("uy", ClassSort,
-            ETLam ("vy", ClassSort,
+        ETLam ("U", ClassSort,
+          ETLam ("Vmap", ClassSort,
+            ETLam ("y", ClassSort,
               let
+                val uy = Fn ("ValOf", [FVar "U", FVar "y"])
+                val vy = Fn ("ValOf", [FVar "Vmap", FVar "y"])
                 val yB = TIn (FVar "y", FVar "B")
-                val uyvyDiag = TIn (CDunaevPair (FVar "uy", FVar "vy"), FVar "DiagZ")
-                val eqUV = TEq (FVar "uy", FVar "vy")
+                val uyvyDiag = TIn (CDunaevPair (uy, vy), FVar "DiagZ")
+                val eqUV = TEq (uy, vy)
               in
                 ELam ("h", TProd (TProd (TArrow (yB, uyvyDiag), TArrow (uyvyDiag, eqUV)), yB),
                   EApp (ESnd (EFst (EVar "h")),
@@ -24342,269 +24691,279 @@ struct
               end)))))
 
   (* Exponential Evaluation Beta-Reduction Step over Dunaev Pairs (thm_188):
-     forall (DomEv:Class) (GraphLam:Class) (EqC:Class) (f:Class) (x:Class) (evfx:Class) (bodyx:Class),
+     forall (DomEv:Class) (GraphLam:Class) (EqC:Class) (BodyOp:Class) (f:Class) (x:Class),
        (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) /\
-        (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) -> [evfx, bodyx]_D in EqC)) ->
-       [evfx, bodyx]_D in EqC *)
+        (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) -> [ExpEval(f, x), ValOf(BodyOp, x)]_D in EqC)) ->
+       [ExpEval(f, x), ValOf(BodyOp, x)]_D in EqC *)
   val proofExponentialEvaluationBetaReductionStep : Expr =
     ETLam ("DomEv", ClassSort,
       ETLam ("GraphLam", ClassSort,
         ETLam ("EqC", ClassSort,
-          ETLam ("f", ClassSort,
-            ETLam ("x", ClassSort,
-              ETLam ("evfx", ClassSort,
-                ETLam ("bodyx", ClassSort,
-                  let
-                    val fxDom = TIn (CDunaevPair (FVar "f", FVar "x"), FVar "DomEv")
-                    val fxGraph = TIn (CDunaevPair (FVar "f", FVar "x"), FVar "GraphLam")
-                    val evBodyEq = TIn (CDunaevPair (FVar "evfx", FVar "bodyx"), FVar "EqC")
-                  in
-                    ELam ("h", TProd (TProd (fxDom, fxGraph),
-                                      TArrow (TProd (fxDom, fxGraph), evBodyEq)),
-                      EApp (ESnd (EVar "h"), EFst (EVar "h")))
-                  end)))))))
+          ETLam ("BodyOp", ClassSort,
+            ETLam ("f", ClassSort,
+              ETLam ("x", ClassSort,
+                let
+                  val evfx = Fn ("ExpEval", [FVar "f", FVar "x"])
+                  val bodyx = Fn ("ValOf", [FVar "BodyOp", FVar "x"])
+                  val fxDom = TIn (CDunaevPair (FVar "f", FVar "x"), FVar "DomEv")
+                  val fxGraph = TIn (CDunaevPair (FVar "f", FVar "x"), FVar "GraphLam")
+                  val evBodyEq = TIn (CDunaevPair (evfx, bodyx), FVar "EqC")
+                in
+                  ELam ("h", TProd (TProd (fxDom, fxGraph),
+                                    TArrow (TProd (fxDom, fxGraph), evBodyEq)),
+                    EApp (ESnd (EVar "h"), EFst (EVar "h")))
+                end))))))
 
   (* Exponential Transpose Eta-Uniqueness Step over Dunaev Pairs (thm_189):
-     forall (HomAB:Class) (EqHom:Class) (EqExp:Class) (f:Class) (g:Class) (evf:Class) (curg:Class),
-       ((f in HomAB /\ [evf, g]_D in EqHom) /\
-        ([evf, g]_D in EqHom -> [f, curg]_D in EqExp)) ->
-       (f in HomAB -> [f, curg]_D in EqExp) *)
+     forall (HomAB:Class) (EqHom:Class) (EqExp:Class) (f:Class) (g:Class),
+       ((f in HomAB /\ [ExpEval(f, g), g]_D in EqHom) /\
+        ([ExpEval(f, g), g]_D in EqHom -> [f, CurryOp(g)]_D in EqExp)) ->
+       (f in HomAB -> [f, CurryOp(g)]_D in EqExp) *)
   val proofExponentialTransposeEtaUniquenessStep : Expr =
     ETLam ("HomAB", ClassSort,
       ETLam ("EqHom", ClassSort,
         ETLam ("EqExp", ClassSort,
           ETLam ("f", ClassSort,
             ETLam ("g", ClassSort,
-              ETLam ("evf", ClassSort,
-                ETLam ("curg", ClassSort,
-                  let
-                    val fHom = TIn (FVar "f", FVar "HomAB")
-                    val evfgEq = TIn (CDunaevPair (FVar "evf", FVar "g"), FVar "EqHom")
-                    val fcurgEq = TIn (CDunaevPair (FVar "f", FVar "curg"), FVar "EqExp")
-                  in
-                    ELam ("h", TProd (TProd (fHom, evfgEq), TArrow (evfgEq, fcurgEq)),
-                      ELam ("hfHom", fHom,
-                        EApp (ESnd (EVar "h"), ESnd (EFst (EVar "h")))))
-                  end)))))))
+              let
+                val evf = Fn ("ExpEval", [FVar "f", FVar "g"])
+                val curg = Fn ("CurryOp", [FVar "g"])
+                val fHom = TIn (FVar "f", FVar "HomAB")
+                val evfgEq = TIn (CDunaevPair (evf, FVar "g"), FVar "EqHom")
+                val fcurgEq = TIn (CDunaevPair (FVar "f", curg), FVar "EqExp")
+              in
+                ELam ("h", TProd (TProd (fHom, evfgEq), TArrow (evfgEq, fcurgEq)),
+                  ELam ("hfHom", fHom,
+                    EApp (ESnd (EVar "h"), ESnd (EFst (EVar "h")))))
+              end)))))
 
   (* Subobject Classifier Characteristic Pullback Equivalence over Dunaev Pairs (thm_190):
-     forall (SubA:Class) (EqOmega:Class) (x:Class) (chix:Class) (trueVal:Class),
-       ((x in SubA -> [chix, trueVal]_D in EqOmega) /\
-        ([chix, trueVal]_D in EqOmega -> x in SubA)) ->
-       ((x in SubA -> [chix, trueVal]_D in EqOmega) /\
-        ([chix, trueVal]_D in EqOmega -> x in SubA)) *)
+     forall (SubA:Class) (EqOmega:Class) (Chi:Class) (x:Class),
+       ((x in SubA -> [ValOf(Chi, x), TrueVal]_D in EqOmega) /\
+        ([ValOf(Chi, x), TrueVal]_D in EqOmega -> x in SubA)) ->
+       ((x in SubA -> [ValOf(Chi, x), TrueVal]_D in EqOmega) /\
+        ([ValOf(Chi, x), TrueVal]_D in EqOmega -> x in SubA)) *)
   val proofSubobjectClassifierCharacteristicPullbackIff : Expr =
     ETLam ("SubA", ClassSort,
       ETLam ("EqOmega", ClassSort,
-        ETLam ("x", ClassSort,
-          ETLam ("chix", ClassSort,
-            ETLam ("trueVal", ClassSort,
-              let
-                val xSub = TIn (FVar "x", FVar "SubA")
-                val chiTrueEq = TIn (CDunaevPair (FVar "chix", FVar "trueVal"), FVar "EqOmega")
-              in
-                ELam ("h", TProd (TArrow (xSub, chiTrueEq), TArrow (chiTrueEq, xSub)),
-                  EPair (EFst (EVar "h"), ESnd (EVar "h")))
-              end)))))
+        ETLam ("Chi", ClassSort,
+          ETLam ("x", ClassSort,
+            let
+              val chix = Fn ("ValOf", [FVar "Chi", FVar "x"])
+              val trueVal = Const "TrueVal"
+              val xSub = TIn (FVar "x", FVar "SubA")
+              val chiTrueEq = TIn (CDunaevPair (chix, trueVal), FVar "EqOmega")
+            in
+              ELam ("h", TProd (TArrow (xSub, chiTrueEq), TArrow (chiTrueEq, xSub)),
+                EPair (EFst (EVar "h"), ESnd (EVar "h")))
+            end))))
 
   (* Lawvere-Tierney Topology Idempotence Step over Dunaev Pairs (thm_191):
-     forall (Omega:Class) (LeqOmega:Class) (EqOmega:Class) (p:Class) (jp:Class) (jjp:Class),
-       (((p in Omega -> [jp, p]_D in LeqOmega) /\
-         (p in Omega -> [p, jjp]_D in LeqOmega)) /\
-        (([jp, p]_D in LeqOmega /\ [p, jjp]_D in LeqOmega) -> [jjp, jp]_D in EqOmega)) ->
-       (p in Omega -> [jjp, jp]_D in EqOmega) *)
+     forall (Omega:Class) (LeqOmega:Class) (EqOmega:Class) (Jop:Class) (p:Class),
+       (((p in Omega -> [ValOf(Jop, p), p]_D in LeqOmega) /\
+         (p in Omega -> [p, ValOf(Jop, ValOf(Jop, p))]_D in LeqOmega)) /\
+        (([ValOf(Jop, p), p]_D in LeqOmega /\ [p, ValOf(Jop, ValOf(Jop, p))]_D in LeqOmega) -> [ValOf(Jop, ValOf(Jop, p)), ValOf(Jop, p)]_D in EqOmega)) ->
+       (p in Omega -> [ValOf(Jop, ValOf(Jop, p)), ValOf(Jop, p)]_D in EqOmega) *)
   val proofLawvereTierneyTopologyIdempotenceStep : Expr =
     ETLam ("Omega", ClassSort,
       ETLam ("LeqOmega", ClassSort,
         ETLam ("EqOmega", ClassSort,
-          ETLam ("p", ClassSort,
-            ETLam ("jp", ClassSort,
-              ETLam ("jjp", ClassSort,
-                let
-                  val pOm = TIn (FVar "p", FVar "Omega")
-                  val jppLeq = TIn (CDunaevPair (FVar "jp", FVar "p"), FVar "LeqOmega")
-                  val pjjpLeq = TIn (CDunaevPair (FVar "p", FVar "jjp"), FVar "LeqOmega")
-                  val jjpjpEq = TIn (CDunaevPair (FVar "jjp", FVar "jp"), FVar "EqOmega")
-                in
-                  ELam ("h", TProd (TProd (TArrow (pOm, jppLeq), TArrow (pOm, pjjpLeq)),
-                                    TArrow (TProd (jppLeq, pjjpLeq), jjpjpEq)),
-                    ELam ("hpOm", pOm,
-                      EApp (ESnd (EVar "h"),
-                            EPair (EApp (EFst (EFst (EVar "h")), EVar "hpOm"),
-                                   EApp (ESnd (EFst (EVar "h")), EVar "hpOm")))))
-                end))))))
+          ETLam ("Jop", ClassSort,
+            ETLam ("p", ClassSort,
+              let
+                val jp = Fn ("ValOf", [FVar "Jop", FVar "p"])
+                val jjp = Fn ("ValOf", [FVar "Jop", jp])
+                val pOm = TIn (FVar "p", FVar "Omega")
+                val jppLeq = TIn (CDunaevPair (jp, FVar "p"), FVar "LeqOmega")
+                val pjjpLeq = TIn (CDunaevPair (FVar "p", jjp), FVar "LeqOmega")
+                val jjpjpEq = TIn (CDunaevPair (jjp, jp), FVar "EqOmega")
+              in
+                ELam ("h", TProd (TProd (TArrow (pOm, jppLeq), TArrow (pOm, pjjpLeq)),
+                                  TArrow (TProd (jppLeq, pjjpLeq), jjpjpEq)),
+                  ELam ("hpOm", pOm,
+                    EApp (ESnd (EVar "h"),
+                          EPair (EApp (EFst (EFst (EVar "h")), EVar "hpOm"),
+                                 EApp (ESnd (EFst (EVar "h")), EVar "hpOm")))))
+              end)))))
 
   (* Lawvere-Tierney Topology Meet Preservation Step over Dunaev Pairs (thm_192):
-     forall (Omega:Class) (EqOmega:Class) (p:Class) (q:Class) (jmeetpq:Class) (meetjpjq:Class),
-       (((p in Omega /\ q in Omega) -> [jmeetpq, meetjpjq]_D in EqOmega) /\
+     forall (Omega:Class) (EqOmega:Class) (Jop:Class) (p:Class) (q:Class),
+       (((p in Omega /\ q in Omega) -> [ValOf(Jop, (p \cap q)), (ValOf(Jop, p) \cap ValOf(Jop, q))]_D in EqOmega) /\
         (p in Omega /\ q in Omega)) ->
-       [jmeetpq, meetjpjq]_D in EqOmega *)
+       [ValOf(Jop, (p \cap q)), (ValOf(Jop, p) \cap ValOf(Jop, q))]_D in EqOmega *)
   val proofLawvereTierneyTopologyMeetPreservationStep : Expr =
     ETLam ("Omega", ClassSort,
       ETLam ("EqOmega", ClassSort,
-        ETLam ("p", ClassSort,
-          ETLam ("q", ClassSort,
-            ETLam ("jmeetpq", ClassSort,
-              ETLam ("meetjpjq", ClassSort,
-                let
-                  val pOm = TIn (FVar "p", FVar "Omega")
-                  val qOm = TIn (FVar "q", FVar "Omega")
-                  val meetEq = TIn (CDunaevPair (FVar "jmeetpq", FVar "meetjpjq"), FVar "EqOmega")
-                in
-                  ELam ("h", TProd (TArrow (TProd (pOm, qOm), meetEq), TProd (pOm, qOm)),
-                    EApp (EFst (EVar "h"), ESnd (EVar "h")))
-                end))))))
+        ETLam ("Jop", ClassSort,
+          ETLam ("p", ClassSort,
+            ETLam ("q", ClassSort,
+              let
+                val jmeetpq = Fn ("ValOf", [FVar "Jop", CBinInter (FVar "p", FVar "q")])
+                val meetjpjq = CBinInter (Fn ("ValOf", [FVar "Jop", FVar "p"]), Fn ("ValOf", [FVar "Jop", FVar "q"]))
+                val pOm = TIn (FVar "p", FVar "Omega")
+                val qOm = TIn (FVar "q", FVar "Omega")
+                val meetEq = TIn (CDunaevPair (jmeetpq, meetjpjq), FVar "EqOmega")
+              in
+                ELam ("h", TProd (TArrow (TProd (pOm, qOm), meetEq), TProd (pOm, qOm)),
+                  EApp (EFst (EVar "h"), ESnd (EVar "h")))
+              end)))))
 
   (* Monad Left Unit Law Coherence over Dunaev Pairs (thm_193):
-     forall (A:Class) (EtaMap:Class) (EqTA:Class) (x:Class) (etax:Class) (muTetax:Class) (idTx:Class),
-       ((x in A -> [x, etax]_D in EtaMap) /\
-        ([x, etax]_D in EtaMap -> [muTetax, idTx]_D in EqTA)) ->
-       (x in A -> [muTetax, idTx]_D in EqTA) *)
+     forall (A:Class) (EtaMap:Class) (EqTA:Class) (x:Class),
+       ((x in A -> [x, MonadEta(x)]_D in EtaMap) /\
+        ([x, MonadEta(x)]_D in EtaMap -> [MonadMu(MonadT(MonadEta(x))), IdMor(MonadT(x))]_D in EqTA)) ->
+       (x in A -> [MonadMu(MonadT(MonadEta(x))), IdMor(MonadT(x))]_D in EqTA) *)
   val proofMonadLeftUnitLawCoherence : Expr =
     ETLam ("A", ClassSort,
       ETLam ("EtaMap", ClassSort,
         ETLam ("EqTA", ClassSort,
           ETLam ("x", ClassSort,
-            ETLam ("etax", ClassSort,
-              ETLam ("muTetax", ClassSort,
-                ETLam ("idTx", ClassSort,
-                  let
-                    val xA = TIn (FVar "x", FVar "A")
-                    val xEta = TIn (CDunaevPair (FVar "x", FVar "etax"), FVar "EtaMap")
-                    val unitEq = TIn (CDunaevPair (FVar "muTetax", FVar "idTx"), FVar "EqTA")
-                  in
-                    ELam ("h", TProd (TArrow (xA, xEta), TArrow (xEta, unitEq)),
-                      ELam ("hxA", xA,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                  end)))))))
+            let
+              val etax = Fn ("MonadEta", [FVar "x"])
+              val muTetax = Fn ("MonadMu", [Fn ("MonadT", [etax])])
+              val idTx = Fn ("IdMor", [Fn ("MonadT", [FVar "x"])])
+              val xA = TIn (FVar "x", FVar "A")
+              val xEta = TIn (CDunaevPair (FVar "x", etax), FVar "EtaMap")
+              val unitEq = TIn (CDunaevPair (muTetax, idTx), FVar "EqTA")
+            in
+              ELam ("h", TProd (TArrow (xA, xEta), TArrow (xEta, unitEq)),
+                ELam ("hxA", xA,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+            end))))
 
   (* Monad Right Unit Law Coherence over Dunaev Pairs (thm_194):
-     forall (A:Class) (EtaTMap:Class) (EqTA:Class) (x:Class) (Tx:Class) (etaTx:Class) (muetaTx:Class) (idTx:Class),
-       ((x in A -> [Tx, etaTx]_D in EtaTMap) /\
-        ([Tx, etaTx]_D in EtaTMap -> [muetaTx, idTx]_D in EqTA)) ->
-       (x in A -> [muetaTx, idTx]_D in EqTA) *)
+     forall (A:Class) (EtaTMap:Class) (EqTA:Class) (x:Class),
+       ((x in A -> [MonadT(x), MonadEta(MonadT(x))]_D in EtaTMap) /\
+        ([MonadT(x), MonadEta(MonadT(x))]_D in EtaTMap -> [MonadMu(MonadEta(MonadT(x))), IdMor(MonadT(x))]_D in EqTA)) ->
+       (x in A -> [MonadMu(MonadEta(MonadT(x))), IdMor(MonadT(x))]_D in EqTA) *)
   val proofMonadRightUnitLawCoherence : Expr =
     ETLam ("A", ClassSort,
       ETLam ("EtaTMap", ClassSort,
         ETLam ("EqTA", ClassSort,
           ETLam ("x", ClassSort,
-            ETLam ("Tx", ClassSort,
-              ETLam ("etaTx", ClassSort,
-                ETLam ("muetaTx", ClassSort,
-                  ETLam ("idTx", ClassSort,
-                    let
-                      val xA = TIn (FVar "x", FVar "A")
-                      val txEta = TIn (CDunaevPair (FVar "Tx", FVar "etaTx"), FVar "EtaTMap")
-                      val rUnitEq = TIn (CDunaevPair (FVar "muetaTx", FVar "idTx"), FVar "EqTA")
-                    in
-                      ELam ("h", TProd (TArrow (xA, txEta), TArrow (txEta, rUnitEq)),
-                        ELam ("hxA", xA,
-                          EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                    end))))))))
+            let
+              val tx = Fn ("MonadT", [FVar "x"])
+              val etaTx = Fn ("MonadEta", [tx])
+              val muetaTx = Fn ("MonadMu", [etaTx])
+              val idTx = Fn ("IdMor", [tx])
+              val xA = TIn (FVar "x", FVar "A")
+              val txEta = TIn (CDunaevPair (tx, etaTx), FVar "EtaTMap")
+              val rUnitEq = TIn (CDunaevPair (muetaTx, idTx), FVar "EqTA")
+            in
+              ELam ("h", TProd (TArrow (xA, txEta), TArrow (txEta, rUnitEq)),
+                ELam ("hxA", xA,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+            end))))
 
   (* Monad Associativity Square Coherence over Dunaev Pairs (thm_195):
-     forall (A:Class) (AssocPair:Class) (EqTA:Class) (x:Class) (muT3x:Class) (Tmux:Class) (mumuT3x:Class) (muTmux:Class),
-       ((x in A -> [muT3x, Tmux]_D in AssocPair) /\
-        ([muT3x, Tmux]_D in AssocPair -> [mumuT3x, muTmux]_D in EqTA)) ->
-       (x in A -> [mumuT3x, muTmux]_D in EqTA) *)
+     forall (A:Class) (AssocPair:Class) (EqTA:Class) (x:Class),
+       ((x in A -> [MonadMu(MonadT(MonadT(MonadT(x)))), MonadT(MonadMu(x))]_D in AssocPair) /\
+        ([MonadMu(MonadT(MonadT(MonadT(x)))), MonadT(MonadMu(x))]_D in AssocPair -> [MonadMu(MonadMu(MonadT(MonadT(MonadT(x))))), MonadMu(MonadT(MonadMu(x)))]_D in EqTA)) ->
+       (x in A -> [MonadMu(MonadMu(MonadT(MonadT(MonadT(x))))), MonadMu(MonadT(MonadMu(x)))]_D in EqTA) *)
   val proofMonadAssociativitySquareCoherence : Expr =
     ETLam ("A", ClassSort,
       ETLam ("AssocPair", ClassSort,
         ETLam ("EqTA", ClassSort,
           ETLam ("x", ClassSort,
-            ETLam ("muT3x", ClassSort,
-              ETLam ("Tmux", ClassSort,
-                ETLam ("mumuT3x", ClassSort,
-                  ETLam ("muTmux", ClassSort,
-                    let
-                      val xA = TIn (FVar "x", FVar "A")
-                      val assocIn = TIn (CDunaevPair (FVar "muT3x", FVar "Tmux"), FVar "AssocPair")
-                      val assocEq = TIn (CDunaevPair (FVar "mumuT3x", FVar "muTmux"), FVar "EqTA")
-                    in
-                      ELam ("h", TProd (TArrow (xA, assocIn), TArrow (assocIn, assocEq)),
-                        ELam ("hxA", xA,
-                          EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                    end))))))))
+            let
+              val t3x = Fn ("MonadT", [Fn ("MonadT", [Fn ("MonadT", [FVar "x"])])])
+              val muT3x = Fn ("MonadMu", [t3x])
+              val Tmux = Fn ("MonadT", [Fn ("MonadMu", [FVar "x"])])
+              val mumuT3x = Fn ("MonadMu", [muT3x])
+              val muTmux = Fn ("MonadMu", [Tmux])
+              val xA = TIn (FVar "x", FVar "A")
+              val assocIn = TIn (CDunaevPair (muT3x, Tmux), FVar "AssocPair")
+              val assocEq = TIn (CDunaevPair (mumuT3x, muTmux), FVar "EqTA")
+            in
+              ELam ("h", TProd (TArrow (xA, assocIn), TArrow (assocIn, assocEq)),
+                ELam ("hxA", xA,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+            end))))
 
   (* Eilenberg-Moore Algebra Unit Coherence over Dunaev Pairs (thm_196):
-     forall (A:Class) (EtaA:Class) (EqA:Class) (x:Class) (etax:Class) (alphaetax:Class),
-       ((x in A -> [x, etax]_D in EtaA) /\
-        ([x, etax]_D in EtaA -> [alphaetax, x]_D in EqA)) ->
-       (x in A -> [alphaetax, x]_D in EqA) *)
+     forall (A:Class) (EtaA:Class) (EqA:Class) (Alpha:Class) (x:Class),
+       ((x in A -> [x, MonadEta(x)]_D in EtaA) /\
+        ([x, MonadEta(x)]_D in EtaA -> [ValOf(Alpha, MonadEta(x)), x]_D in EqA)) ->
+       (x in A -> [ValOf(Alpha, MonadEta(x)), x]_D in EqA) *)
   val proofEilenbergMooreAlgebraUnitCoherence : Expr =
     ETLam ("A", ClassSort,
       ETLam ("EtaA", ClassSort,
         ETLam ("EqA", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("etax", ClassSort,
-              ETLam ("alphaetax", ClassSort,
-                let
-                  val xA = TIn (FVar "x", FVar "A")
-                  val xEta = TIn (CDunaevPair (FVar "x", FVar "etax"), FVar "EtaA")
-                  val algUnitEq = TIn (CDunaevPair (FVar "alphaetax", FVar "x"), FVar "EqA")
-                in
-                  ELam ("h", TProd (TArrow (xA, xEta), TArrow (xEta, algUnitEq)),
-                    ELam ("hxA", xA,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                end))))))
+          ETLam ("Alpha", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val etax = Fn ("MonadEta", [FVar "x"])
+                val alphaetax = Fn ("ValOf", [FVar "Alpha", etax])
+                val xA = TIn (FVar "x", FVar "A")
+                val xEta = TIn (CDunaevPair (FVar "x", etax), FVar "EtaA")
+                val algUnitEq = TIn (CDunaevPair (alphaetax, FVar "x"), FVar "EqA")
+              in
+                ELam ("h", TProd (TArrow (xA, xEta), TArrow (xEta, algUnitEq)),
+                  ELam ("hxA", xA,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+              end)))))
 
   (* Eilenberg-Moore Algebra Multiplication Coherence over Dunaev Pairs (thm_197):
-     forall (TTA:Class) (EqA:Class) (z:Class) (alphamuz:Class) (alphaTalphaz:Class),
-       ((z in TTA -> [alphamuz, alphaTalphaz]_D in EqA) /\ z in TTA) ->
-       [alphamuz, alphaTalphaz]_D in EqA *)
+     forall (TTA:Class) (EqA:Class) (Alpha:Class) (z:Class),
+       ((z in TTA -> [ValOf(Alpha, MonadMu(z)), ValOf(Alpha, MonadT(ValOf(Alpha, z)))]_D in EqA) /\ z in TTA) ->
+       [ValOf(Alpha, MonadMu(z)), ValOf(Alpha, MonadT(ValOf(Alpha, z)))]_D in EqA *)
   val proofEilenbergMooreAlgebraMultiplicationCoherence : Expr =
     ETLam ("TTA", ClassSort,
       ETLam ("EqA", ClassSort,
-        ETLam ("z", ClassSort,
-          ETLam ("alphamuz", ClassSort,
-            ETLam ("alphaTalphaz", ClassSort,
-              let
-                val zTTA = TIn (FVar "z", FVar "TTA")
-                val multEq = TIn (CDunaevPair (FVar "alphamuz", FVar "alphaTalphaz"), FVar "EqA")
-              in
-                ELam ("h", TProd (TArrow (zTTA, multEq), zTTA),
-                  EApp (EFst (EVar "h"), ESnd (EVar "h")))
-              end)))))
+        ETLam ("Alpha", ClassSort,
+          ETLam ("z", ClassSort,
+            let
+              val alphamuz = Fn ("ValOf", [FVar "Alpha", Fn ("MonadMu", [FVar "z"])])
+              val alphaTalphaz = Fn ("ValOf", [FVar "Alpha", Fn ("MonadT", [Fn ("ValOf", [FVar "Alpha", FVar "z"])])])
+              val zTTA = TIn (FVar "z", FVar "TTA")
+              val multEq = TIn (CDunaevPair (alphamuz, alphaTalphaz), FVar "EqA")
+            in
+              ELam ("h", TProd (TArrow (zTTA, multEq), zTTA),
+                EApp (EFst (EVar "h"), ESnd (EVar "h")))
+            end))))
 
   (* Kleisli Category Identity Left Composition over Dunaev Pairs (thm_198):
-     forall (A:Class) (KleisliAB:Class) (EqTB:Class) (x:Class) (f_x:Class) (muTf_etax:Class),
-       ((x in A -> [x, f_x]_D in KleisliAB) /\
-        ([x, f_x]_D in KleisliAB -> [muTf_etax, f_x]_D in EqTB)) ->
-       (x in A -> [muTf_etax, f_x]_D in EqTB) *)
+     forall (A:Class) (KleisliAB:Class) (EqTB:Class) (F:Class) (x:Class),
+       ((x in A -> [x, ValOf(F, x)]_D in KleisliAB) /\
+        ([x, ValOf(F, x)]_D in KleisliAB -> [MonadMu(MonadT(ValOf(F, MonadEta(x)))), ValOf(F, x)]_D in EqTB)) ->
+       (x in A -> [MonadMu(MonadT(ValOf(F, MonadEta(x)))), ValOf(F, x)]_D in EqTB) *)
   val proofKleisliCategoryIdentityLeftComposition : Expr =
     ETLam ("A", ClassSort,
       ETLam ("KleisliAB", ClassSort,
         ETLam ("EqTB", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("f_x", ClassSort,
-              ETLam ("muTf_etax", ClassSort,
-                let
-                  val xA = TIn (FVar "x", FVar "A")
-                  val xfxKl = TIn (CDunaevPair (FVar "x", FVar "f_x"), FVar "KleisliAB")
-                  val klEq = TIn (CDunaevPair (FVar "muTf_etax", FVar "f_x"), FVar "EqTB")
-                in
-                  ELam ("h", TProd (TArrow (xA, xfxKl), TArrow (xfxKl, klEq)),
-                    ELam ("hxA", xA,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
-                end))))))
+          ETLam ("F", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val fx = Fn ("ValOf", [FVar "F", FVar "x"])
+                val muTf_etax = Fn ("MonadMu", [Fn ("MonadT", [Fn ("ValOf", [FVar "F", Fn ("MonadEta", [FVar "x"])])])])
+                val xA = TIn (FVar "x", FVar "A")
+                val xfxKl = TIn (CDunaevPair (FVar "x", fx), FVar "KleisliAB")
+                val klEq = TIn (CDunaevPair (muTf_etax, fx), FVar "EqTB")
+              in
+                ELam ("h", TProd (TArrow (xA, xfxKl), TArrow (xfxKl, klEq)),
+                  ELam ("hxA", xA,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxA"))))
+              end)))))
 
   (* Yoneda Natural Transformation Evaluation Bijection over Dunaev Pairs (thm_199):
-     forall (NatHomF:Class) (EqFA:Class) (EqNat:Class) (phi:Class) (phi_idA:Class) (u:Class) (psi_u:Class),
-       ((phi in NatHomF -> [phi_idA, u]_D in EqFA) /\
-        ([phi_idA, u]_D in EqFA -> [psi_u, phi]_D in EqNat)) ->
-       (phi in NatHomF -> [psi_u, phi]_D in EqNat) *)
+     forall (NatHomF:Class) (EqFA:Class) (EqNat:Class) (Psi:Class) (A:Class) (phi:Class) (u:Class),
+       ((phi in NatHomF -> [ValOf(phi, IdMor(A)), u]_D in EqFA) /\
+        ([ValOf(phi, IdMor(A)), u]_D in EqFA -> [ValOf(Psi, u), phi]_D in EqNat)) ->
+       (phi in NatHomF -> [ValOf(Psi, u), phi]_D in EqNat) *)
   val proofYonedaNaturalTransformationEvaluationBijection : Expr =
     ETLam ("NatHomF", ClassSort,
       ETLam ("EqFA", ClassSort,
         ETLam ("EqNat", ClassSort,
-          ETLam ("phi", ClassSort,
-            ETLam ("phi_idA", ClassSort,
-              ETLam ("u", ClassSort,
-                ETLam ("psi_u", ClassSort,
+          ETLam ("Psi", ClassSort,
+            ETLam ("A", ClassSort,
+              ETLam ("phi", ClassSort,
+                ETLam ("u", ClassSort,
                   let
+                    val phi_idA = Fn ("ValOf", [FVar "phi", Fn ("IdMor", [FVar "A"])])
+                    val psi_u = Fn ("ValOf", [FVar "Psi", FVar "u"])
                     val phiNat = TIn (FVar "phi", FVar "NatHomF")
-                    val evalEq = TIn (CDunaevPair (FVar "phi_idA", FVar "u"), FVar "EqFA")
-                    val natEq = TIn (CDunaevPair (FVar "psi_u", FVar "phi"), FVar "EqNat")
+                    val evalEq = TIn (CDunaevPair (phi_idA, FVar "u"), FVar "EqFA")
+                    val natEq = TIn (CDunaevPair (psi_u, FVar "phi"), FVar "EqNat")
                   in
                     ELam ("h", TProd (TArrow (phiNat, evalEq), TArrow (evalEq, natEq)),
                       ELam ("hPhi", phiNat,
@@ -24612,48 +24971,49 @@ struct
                   end)))))))
 
   (* Yoneda Embedding Full Faithfulness Isomorphism over Dunaev Pairs (thm_200):
-     forall (HomAB:Class) (EqNatHom:Class) (EqHomAB:Class) (f:Class) (Yonf:Class) (Phi:Class) (Phi_idA:Class),
-       ((f in HomAB -> [Yonf, Phi]_D in EqNatHom) /\
-        ([Yonf, Phi]_D in EqNatHom -> [Phi_idA, f]_D in EqHomAB)) ->
-       (f in HomAB -> [Phi_idA, f]_D in EqHomAB) *)
+     forall (HomAB:Class) (EqNatHom:Class) (EqHomAB:Class) (A:Class) (Phi:Class) (f:Class),
+       ((f in HomAB -> [YonedaMap(f), Phi]_D in EqNatHom) /\
+        ([YonedaMap(f), Phi]_D in EqNatHom -> [ValOf(Phi, IdMor(A)), f]_D in EqHomAB)) ->
+       (f in HomAB -> [ValOf(Phi, IdMor(A)), f]_D in EqHomAB) *)
   val proofYonedaEmbeddingFullFaithfulnessIsomorphism : Expr =
     ETLam ("HomAB", ClassSort,
       ETLam ("EqNatHom", ClassSort,
         ETLam ("EqHomAB", ClassSort,
-          ETLam ("f", ClassSort,
-            ETLam ("Yonf", ClassSort,
-              ETLam ("Phi", ClassSort,
-                ETLam ("Phi_idA", ClassSort,
-                  let
-                    val fHom = TIn (FVar "f", FVar "HomAB")
-                    val yonEq = TIn (CDunaevPair (FVar "Yonf", FVar "Phi"), FVar "EqNatHom")
-                    val homEq = TIn (CDunaevPair (FVar "Phi_idA", FVar "f"), FVar "EqHomAB")
-                  in
-                    ELam ("h", TProd (TArrow (fHom, yonEq), TArrow (yonEq, homEq)),
-                      ELam ("hfHom", fHom,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfHom"))))
-                  end)))))))
+          ETLam ("A", ClassSort,
+            ETLam ("Phi", ClassSort,
+              ETLam ("f", ClassSort,
+                let
+                  val yonf = Fn ("YonedaMap", [FVar "f"])
+                  val phi_idA = Fn ("ValOf", [FVar "Phi", Fn ("IdMor", [FVar "A"])])
+                  val fHom = TIn (FVar "f", FVar "HomAB")
+                  val yonEq = TIn (CDunaevPair (yonf, FVar "Phi"), FVar "EqNatHom")
+                  val homEq = TIn (CDunaevPair (phi_idA, FVar "f"), FVar "EqHomAB")
+                in
+                  ELam ("h", TProd (TArrow (fHom, yonEq), TArrow (yonEq, homEq)),
+                    ELam ("hfHom", fHom,
+                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfHom"))))
+                end))))))
 
   (* Grothendieck Sieve Pullback Stability Step over Dunaev Pairs (thm_201):
-     forall (SieveS:Class) (CompMor:Class) (f:Class) (g:Class) (gf:Class),
-       (((f in SieveS /\ [g, f]_D in CompMor) -> gf in SieveS) /\
+     forall (SieveS:Class) (CompMor:Class) (f:Class) (g:Class),
+       (((f in SieveS /\ [g, f]_D in CompMor) -> CompMorOp(g, f) in SieveS) /\
         (f in SieveS /\ [g, f]_D in CompMor)) ->
-       gf in SieveS *)
+       CompMorOp(g, f) in SieveS *)
   val proofGrothendieckSievePullbackStabilityStep : Expr =
     ETLam ("SieveS", ClassSort,
       ETLam ("CompMor", ClassSort,
         ETLam ("f", ClassSort,
           ETLam ("g", ClassSort,
-            ETLam ("gf", ClassSort,
-              let
-                val fSieve = TIn (FVar "f", FVar "SieveS")
-                val gfComp = TIn (CDunaevPair (FVar "g", FVar "f"), FVar "CompMor")
-                val gfSieve = TIn (FVar "gf", FVar "SieveS")
-              in
-                ELam ("h", TProd (TArrow (TProd (fSieve, gfComp), gfSieve),
-                                  TProd (fSieve, gfComp)),
-                  EApp (EFst (EVar "h"), ESnd (EVar "h")))
-              end)))))
+            let
+              val gf = Fn ("CompMorOp", [FVar "g", FVar "f"])
+              val fSieve = TIn (FVar "f", FVar "SieveS")
+              val gfComp = TIn (CDunaevPair (FVar "g", FVar "f"), FVar "CompMor")
+              val gfSieve = TIn (gf, FVar "SieveS")
+            in
+              ELam ("h", TProd (TArrow (TProd (fSieve, gfComp), gfSieve),
+                                TProd (fSieve, gfComp)),
+                EApp (EFst (EVar "h"), ESnd (EVar "h")))
+            end))))
 
   (* Grothendieck Topology Transitivity Step over Dunaev Pairs (thm_202):
      forall (CovU:Class) (PullbackCov:Class) (R:Class) (S:Class),
@@ -24676,21 +25036,22 @@ struct
             end))))
 
   (* Sheaf Matching Family Unique Gluing Step over Dunaev Pairs (thm_203):
-     forall (MatchFam:Class) (RestrictEq:Class) (EqSecU:Class) (s:Class) (glues:Class) (t:Class),
-       ((s in MatchFam -> [glues, s]_D in RestrictEq) /\
-        ([glues, s]_D in RestrictEq -> [glues, t]_D in EqSecU)) ->
-       (s in MatchFam -> [glues, t]_D in EqSecU) *)
+     forall (MatchFam:Class) (RestrictEq:Class) (EqSecU:Class) (GlueOp:Class) (s:Class) (t:Class),
+       ((s in MatchFam -> [ValOf(GlueOp, s), s]_D in RestrictEq) /\
+        ([ValOf(GlueOp, s), s]_D in RestrictEq -> [ValOf(GlueOp, s), t]_D in EqSecU)) ->
+       (s in MatchFam -> [ValOf(GlueOp, s), t]_D in EqSecU) *)
   val proofSheafMatchingFamilyUniqueGluingStep : Expr =
     ETLam ("MatchFam", ClassSort,
       ETLam ("RestrictEq", ClassSort,
         ETLam ("EqSecU", ClassSort,
-          ETLam ("s", ClassSort,
-            ETLam ("glues", ClassSort,
+          ETLam ("GlueOp", ClassSort,
+            ETLam ("s", ClassSort,
               ETLam ("t", ClassSort,
                 let
+                  val glues = Fn ("ValOf", [FVar "GlueOp", FVar "s"])
                   val sMatch = TIn (FVar "s", FVar "MatchFam")
-                  val glueRes = TIn (CDunaevPair (FVar "glues", FVar "s"), FVar "RestrictEq")
-                  val glueEq = TIn (CDunaevPair (FVar "glues", FVar "t"), FVar "EqSecU")
+                  val glueRes = TIn (CDunaevPair (glues, FVar "s"), FVar "RestrictEq")
+                  val glueEq = TIn (CDunaevPair (glues, FVar "t"), FVar "EqSecU")
                 in
                   ELam ("h", TProd (TArrow (sMatch, glueRes), TArrow (glueRes, glueEq)),
                     ELam ("hsMatch", sMatch,
@@ -24714,156 +25075,164 @@ struct
           end)))
 
   (* Spectral Sequence Differential Squared Zero Kernel Inclusion over Dunaev Pairs (thm_205):
-     forall (PageEr:Class) (DiffPair:Class) (KerDr:Class) (x:Class) (drx:Class) (drdrx:Class),
-       ((x in PageEr -> [drx, drdrx]_D in DiffPair) /\
-        ([drx, drdrx]_D in DiffPair -> drx in KerDr)) ->
-       (x in PageEr -> drx in KerDr) *)
+     forall (PageEr:Class) (DiffPair:Class) (KerDr:Class) (Dr:Class) (x:Class),
+       ((x in PageEr -> [ValOf(Dr, x), ValOf(Dr, ValOf(Dr, x))]_D in DiffPair) /\
+        ([ValOf(Dr, x), ValOf(Dr, ValOf(Dr, x))]_D in DiffPair -> ValOf(Dr, x) in KerDr)) ->
+       (x in PageEr -> ValOf(Dr, x) in KerDr) *)
   val proofSpectralDifferentialSquaredZeroKernelInclusion : Expr =
     ETLam ("PageEr", ClassSort,
       ETLam ("DiffPair", ClassSort,
         ETLam ("KerDr", ClassSort,
-          ETLam ("x", ClassSort,
-            ETLam ("drx", ClassSort,
-              ETLam ("drdrx", ClassSort,
-                let
-                  val xPage = TIn (FVar "x", FVar "PageEr")
-                  val diffIn = TIn (CDunaevPair (FVar "drx", FVar "drdrx"), FVar "DiffPair")
-                  val drxKer = TIn (FVar "drx", FVar "KerDr")
-                in
-                  ELam ("h", TProd (TArrow (xPage, diffIn), TArrow (diffIn, drxKer)),
-                    ELam ("hxPage", xPage,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxPage"))))
-                end))))))
+          ETLam ("Dr", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val drx = Fn ("ValOf", [FVar "Dr", FVar "x"])
+                val drdrx = Fn ("ValOf", [FVar "Dr", drx])
+                val xPage = TIn (FVar "x", FVar "PageEr")
+                val diffIn = TIn (CDunaevPair (drx, drdrx), FVar "DiffPair")
+                val drxKer = TIn (drx, FVar "KerDr")
+              in
+                ELam ("h", TProd (TArrow (xPage, diffIn), TArrow (diffIn, drxKer)),
+                  ELam ("hxPage", xPage,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxPage"))))
+              end)))))
 
   (* Monoidal Pentagon Associator Coherence Step over Dunaev Pairs (thm_206):
-     forall (Obj4:Class) (EqMor:Class) (w:Class) (assocL:Class) (midStep:Class) (assocR:Class),
-       ((w in Obj4 -> [assocL, midStep]_D in EqMor) /\
-        ([assocL, midStep]_D in EqMor -> [assocL, assocR]_D in EqMor)) ->
-       (w in Obj4 -> [assocL, assocR]_D in EqMor) *)
+     forall (Obj4:Class) (EqMor:Class) (MidOp:Class) (w:Class),
+       ((w in Obj4 -> [AssocMorL(w), ValOf(MidOp, w)]_D in EqMor) /\
+        ([AssocMorL(w), ValOf(MidOp, w)]_D in EqMor -> [AssocMorL(w), AssocMorR(w)]_D in EqMor)) ->
+       (w in Obj4 -> [AssocMorL(w), AssocMorR(w)]_D in EqMor) *)
   val proofMonoidalPentagonAssociatorCoherenceStep : Expr =
     ETLam ("Obj4", ClassSort,
       ETLam ("EqMor", ClassSort,
-        ETLam ("w", ClassSort,
-          ETLam ("assocL", ClassSort,
-            ETLam ("midStep", ClassSort,
-              ETLam ("assocR", ClassSort,
-                let
-                  val wObj = TIn (FVar "w", FVar "Obj4")
-                  val eqMid = TIn (CDunaevPair (FVar "assocL", FVar "midStep"), FVar "EqMor")
-                  val eqEnd = TIn (CDunaevPair (FVar "assocL", FVar "assocR"), FVar "EqMor")
-                in
-                  ELam ("h", TProd (TArrow (wObj, eqMid), TArrow (eqMid, eqEnd)),
-                    ELam ("hwObj", wObj,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwObj"))))
-                end))))))
+        ETLam ("MidOp", ClassSort,
+          ETLam ("w", ClassSort,
+            let
+              val assocL = Fn ("AssocMorL", [FVar "w"])
+              val midStep = Fn ("ValOf", [FVar "MidOp", FVar "w"])
+              val assocR = Fn ("AssocMorR", [FVar "w"])
+              val wObj = TIn (FVar "w", FVar "Obj4")
+              val eqMid = TIn (CDunaevPair (assocL, midStep), FVar "EqMor")
+              val eqEnd = TIn (CDunaevPair (assocL, assocR), FVar "EqMor")
+            in
+              ELam ("h", TProd (TArrow (wObj, eqMid), TArrow (eqMid, eqEnd)),
+                ELam ("hwObj", wObj,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwObj"))))
+            end))))
 
   (* Monoidal Triangle Unitor Coherence Step over Dunaev Pairs (thm_207):
-     forall (Obj2:Class) (EqMor:Class) (u:Class) (assocUnit:Class) (idTensorRho:Class) (lamTensorId:Class),
-       ((u in Obj2 -> [assocUnit, idTensorRho]_D in EqMor) /\
-        ([assocUnit, idTensorRho]_D in EqMor -> [lamTensorId, idTensorRho]_D in EqMor)) ->
-       (u in Obj2 -> [lamTensorId, idTensorRho]_D in EqMor) *)
+     forall (Obj2:Class) (EqMor:Class) (RhoOp:Class) (LamOp:Class) (u:Class),
+       ((u in Obj2 -> [AssocMorL(u), ValOf(RhoOp, u)]_D in EqMor) /\
+        ([AssocMorL(u), ValOf(RhoOp, u)]_D in EqMor -> [ValOf(LamOp, u), ValOf(RhoOp, u)]_D in EqMor)) ->
+       (u in Obj2 -> [ValOf(LamOp, u), ValOf(RhoOp, u)]_D in EqMor) *)
   val proofMonoidalTriangleUnitorCoherenceStep : Expr =
     ETLam ("Obj2", ClassSort,
       ETLam ("EqMor", ClassSort,
-        ETLam ("u", ClassSort,
-          ETLam ("assocUnit", ClassSort,
-            ETLam ("idTensorRho", ClassSort,
-              ETLam ("lamTensorId", ClassSort,
-                let
-                  val uObj = TIn (FVar "u", FVar "Obj2")
-                  val eqStep1 = TIn (CDunaevPair (FVar "assocUnit", FVar "idTensorRho"), FVar "EqMor")
-                  val eqStep2 = TIn (CDunaevPair (FVar "lamTensorId", FVar "idTensorRho"), FVar "EqMor")
-                in
-                  ELam ("h", TProd (TArrow (uObj, eqStep1), TArrow (eqStep1, eqStep2)),
-                    ELam ("huObj", uObj,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huObj"))))
-                end))))))
+        ETLam ("RhoOp", ClassSort,
+          ETLam ("LamOp", ClassSort,
+            ETLam ("u", ClassSort,
+              let
+                val assocUnit = Fn ("AssocMorL", [FVar "u"])
+                val idTensorRho = Fn ("ValOf", [FVar "RhoOp", FVar "u"])
+                val lamTensorId = Fn ("ValOf", [FVar "LamOp", FVar "u"])
+                val uObj = TIn (FVar "u", FVar "Obj2")
+                val eqStep1 = TIn (CDunaevPair (assocUnit, idTensorRho), FVar "EqMor")
+                val eqStep2 = TIn (CDunaevPair (lamTensorId, idTensorRho), FVar "EqMor")
+              in
+                ELam ("h", TProd (TArrow (uObj, eqStep1), TArrow (eqStep1, eqStep2)),
+                  ELam ("huObj", uObj,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huObj"))))
+              end)))))
 
   (* Symmetric Monoidal Braiding Involutive Coherence over Dunaev Pairs (thm_208):
-     forall (Obj2:Class) (CompBraid:Class) (EqMor:Class) (u:Class) (braidAB:Class) (braidBA:Class) (compBraid:Class) (idAB:Class),
-       ((u in Obj2 -> [braidAB, braidBA]_D in CompBraid) /\
-        ([braidAB, braidBA]_D in CompBraid -> [compBraid, idAB]_D in EqMor)) ->
-       (u in Obj2 -> [compBraid, idAB]_D in EqMor) *)
+     forall (Obj2:Class) (CompBraid:Class) (EqMor:Class) (a:Class) (b:Class),
+       (([a, b]_D in Obj2 -> [BraidMor(a, b), BraidMor(b, a)]_D in CompBraid) /\
+        ([BraidMor(a, b), BraidMor(b, a)]_D in CompBraid -> [CompMorOp(BraidMor(b, a), BraidMor(a, b)), IdMor([a, b]_D)]_D in EqMor)) ->
+       ([a, b]_D in Obj2 -> [CompMorOp(BraidMor(b, a), BraidMor(a, b)), IdMor([a, b]_D)]_D in EqMor) *)
   val proofSymmetricBraidingInvolutiveCoherence : Expr =
     ETLam ("Obj2", ClassSort,
       ETLam ("CompBraid", ClassSort,
         ETLam ("EqMor", ClassSort,
-          ETLam ("u", ClassSort,
-            ETLam ("braidAB", ClassSort,
-              ETLam ("braidBA", ClassSort,
-                ETLam ("compBraid", ClassSort,
-                  ETLam ("idAB", ClassSort,
-                    let
-                      val uObj = TIn (FVar "u", FVar "Obj2")
-                      val braidIn = TIn (CDunaevPair (FVar "braidAB", FVar "braidBA"), FVar "CompBraid")
-                      val idEq = TIn (CDunaevPair (FVar "compBraid", FVar "idAB"), FVar "EqMor")
-                    in
-                      ELam ("h", TProd (TArrow (uObj, braidIn), TArrow (braidIn, idEq)),
-                        ELam ("huObj", uObj,
-                          EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huObj"))))
-                    end))))))))
+          ETLam ("a", ClassSort,
+            ETLam ("b", ClassSort,
+              let
+                val u = CDunaevPair (FVar "a", FVar "b")
+                val braidAB = Fn ("BraidMor", [FVar "a", FVar "b"])
+                val braidBA = Fn ("BraidMor", [FVar "b", FVar "a"])
+                val compBraid = Fn ("CompMorOp", [braidBA, braidAB])
+                val idAB = Fn ("IdMor", [u])
+                val uObj = TIn (u, FVar "Obj2")
+                val braidIn = TIn (CDunaevPair (braidAB, braidBA), FVar "CompBraid")
+                val idEq = TIn (CDunaevPair (compBraid, idAB), FVar "EqMor")
+              in
+                ELam ("h", TProd (TArrow (uObj, braidIn), TArrow (braidIn, idEq)),
+                  ELam ("huObj", uObj,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huObj"))))
+              end)))))
 
   (* Tensor-Internal-Hom Currying Adjunction Step over Dunaev Pairs (thm_209):
-     forall (HomTensorBC:Class) (EqHomAInt:Class) (EqHomTensor:Class) (f:Class) (curf:Class) (g:Class) (uncurg:Class),
-       ((f in HomTensorBC -> [curf, g]_D in EqHomAInt) /\
-        ([curf, g]_D in EqHomAInt -> [uncurg, f]_D in EqHomTensor)) ->
-       (f in HomTensorBC -> [uncurg, f]_D in EqHomTensor) *)
+     forall (HomTensorBC:Class) (EqHomAInt:Class) (EqHomTensor:Class) (f:Class) (g:Class),
+       ((f in HomTensorBC -> [CurryOp(f), g]_D in EqHomAInt) /\
+        ([CurryOp(f), g]_D in EqHomAInt -> [UncurryOp(g), f]_D in EqHomTensor)) ->
+       (f in HomTensorBC -> [UncurryOp(g), f]_D in EqHomTensor) *)
   val proofTensorInternalHomCurryingAdjunctionStep : Expr =
     ETLam ("HomTensorBC", ClassSort,
       ETLam ("EqHomAInt", ClassSort,
         ETLam ("EqHomTensor", ClassSort,
           ETLam ("f", ClassSort,
-            ETLam ("curf", ClassSort,
-              ETLam ("g", ClassSort,
-                ETLam ("uncurg", ClassSort,
-                  let
-                    val fHom = TIn (FVar "f", FVar "HomTensorBC")
-                    val curEq = TIn (CDunaevPair (FVar "curf", FVar "g"), FVar "EqHomAInt")
-                    val uncurEq = TIn (CDunaevPair (FVar "uncurg", FVar "f"), FVar "EqHomTensor")
-                  in
-                    ELam ("h", TProd (TArrow (fHom, curEq), TArrow (curEq, uncurEq)),
-                      ELam ("hfHom", fHom,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfHom"))))
-                  end)))))))
+            ETLam ("g", ClassSort,
+              let
+                val curf = Fn ("CurryOp", [FVar "f"])
+                val uncurg = Fn ("UncurryOp", [FVar "g"])
+                val fHom = TIn (FVar "f", FVar "HomTensorBC")
+                val curEq = TIn (CDunaevPair (curf, FVar "g"), FVar "EqHomAInt")
+                val uncurEq = TIn (CDunaevPair (uncurg, FVar "f"), FVar "EqHomTensor")
+              in
+                ELam ("h", TProd (TArrow (fHom, curEq), TArrow (curEq, uncurEq)),
+                  ELam ("hfHom", fHom,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfHom"))))
+              end)))))
 
   (* Day Convolution Coend Wedge Factorization over Dunaev Pairs (thm_210):
-     forall (CoendWedge:Class) (WedgeMed:Class) (EqNat:Class) (w:Class) (factorDay:Class) (uniqMap:Class),
-       ((w in CoendWedge -> [w, factorDay]_D in WedgeMed) /\
-        ([w, factorDay]_D in WedgeMed -> [factorDay, uniqMap]_D in EqNat)) ->
-       (w in CoendWedge -> [factorDay, uniqMap]_D in EqNat) *)
+     forall (CoendWedge:Class) (WedgeMed:Class) (EqNat:Class) (w:Class) (uniqMap:Class),
+       ((w in CoendWedge -> [w, DayFactor(w)]_D in WedgeMed) /\
+        ([w, DayFactor(w)]_D in WedgeMed -> [DayFactor(w), uniqMap]_D in EqNat)) ->
+       (w in CoendWedge -> [DayFactor(w), uniqMap]_D in EqNat) *)
   val proofDayConvolutionCoendWedgeFactorization : Expr =
     ETLam ("CoendWedge", ClassSort,
       ETLam ("WedgeMed", ClassSort,
         ETLam ("EqNat", ClassSort,
           ETLam ("w", ClassSort,
-            ETLam ("factorDay", ClassSort,
-              ETLam ("uniqMap", ClassSort,
-                let
-                  val wWedge = TIn (FVar "w", FVar "CoendWedge")
-                  val medIn = TIn (CDunaevPair (FVar "w", FVar "factorDay"), FVar "WedgeMed")
-                  val natEq = TIn (CDunaevPair (FVar "factorDay", FVar "uniqMap"), FVar "EqNat")
-                in
-                  ELam ("h", TProd (TArrow (wWedge, medIn), TArrow (medIn, natEq)),
-                    ELam ("hwWedge", wWedge,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwWedge"))))
-                end))))))
+            ETLam ("uniqMap", ClassSort,
+              let
+                val factorDay = Fn ("DayFactor", [FVar "w"])
+                val wWedge = TIn (FVar "w", FVar "CoendWedge")
+                val medIn = TIn (CDunaevPair (FVar "w", factorDay), FVar "WedgeMed")
+                val natEq = TIn (CDunaevPair (factorDay, FVar "uniqMap"), FVar "EqNat")
+              in
+                ELam ("h", TProd (TArrow (wWedge, medIn), TArrow (medIn, natEq)),
+                  ELam ("hwWedge", wWedge,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwWedge"))))
+              end)))))
 
   (* Extranatural Wedge Dinaturality Square over Dunaev Pairs (thm_211):
-     forall (HomAB:Class) (DinatPair:Class) (EqTarget:Class) (f:Class) (Paf_wc:Class) (Pbf_wb:Class),
-       ((f in HomAB -> [Paf_wc, Pbf_wb]_D in DinatPair) /\
-        ([Paf_wc, Pbf_wb]_D in DinatPair -> [Paf_wc, Pbf_wb]_D in EqTarget)) ->
-       (f in HomAB -> [Paf_wc, Pbf_wb]_D in EqTarget) *)
+     forall (HomAB:Class) (DinatPair:Class) (EqTarget:Class) (Pa:Class) (Pb:Class) (f:Class),
+       ((f in HomAB -> [ValOf(Pa, f), ValOf(Pb, f)]_D in DinatPair) /\
+        ([ValOf(Pa, f), ValOf(Pb, f)]_D in DinatPair -> [ValOf(Pa, f), ValOf(Pb, f)]_D in EqTarget)) ->
+       (f in HomAB -> [ValOf(Pa, f), ValOf(Pb, f)]_D in EqTarget) *)
   val proofExtranaturalWedgeDinaturalitySquare : Expr =
     ETLam ("HomAB", ClassSort,
       ETLam ("DinatPair", ClassSort,
         ETLam ("EqTarget", ClassSort,
-          ETLam ("f", ClassSort,
-            ETLam ("Paf_wc", ClassSort,
-              ETLam ("Pbf_wb", ClassSort,
+          ETLam ("Pa", ClassSort,
+            ETLam ("Pb", ClassSort,
+              ETLam ("f", ClassSort,
                 let
+                  val paf = Fn ("ValOf", [FVar "Pa", FVar "f"])
+                  val pbf = Fn ("ValOf", [FVar "Pb", FVar "f"])
                   val fHom = TIn (FVar "f", FVar "HomAB")
-                  val dinatIn = TIn (CDunaevPair (FVar "Paf_wc", FVar "Pbf_wb"), FVar "DinatPair")
-                  val dinatEq = TIn (CDunaevPair (FVar "Paf_wc", FVar "Pbf_wb"), FVar "EqTarget")
+                  val dinatIn = TIn (CDunaevPair (paf, pbf), FVar "DinatPair")
+                  val dinatEq = TIn (CDunaevPair (paf, pbf), FVar "EqTarget")
                 in
                   ELam ("h", TProd (TArrow (fHom, dinatIn), TArrow (dinatIn, dinatEq)),
                     ELam ("hfHom", fHom,
@@ -24871,208 +25240,326 @@ struct
                 end))))))
 
   (* Categorical End Universal Wedge Factorization over Dunaev Pairs (thm_212):
-     forall (WedgeP:Class) (EndMed:Class) (EqApex:Class) (w:Class) (factorEnd:Class) (uniqEnd:Class),
-       ((w in WedgeP -> [w, factorEnd]_D in EndMed) /\
-        ([w, factorEnd]_D in EndMed -> [factorEnd, uniqEnd]_D in EqApex)) ->
-       (w in WedgeP -> [factorEnd, uniqEnd]_D in EqApex) *)
+     forall (WedgeP:Class) (EndMed:Class) (EqApex:Class) (w:Class) (uniqEnd:Class),
+       ((w in WedgeP -> [w, EndFactor(w)]_D in EndMed) /\
+        ([w, EndFactor(w)]_D in EndMed -> [EndFactor(w), uniqEnd]_D in EqApex)) ->
+       (w in WedgeP -> [EndFactor(w), uniqEnd]_D in EqApex) *)
   val proofCategoricalEndUniversalWedgeFactorization : Expr =
     ETLam ("WedgeP", ClassSort,
       ETLam ("EndMed", ClassSort,
         ETLam ("EqApex", ClassSort,
           ETLam ("w", ClassSort,
-            ETLam ("factorEnd", ClassSort,
-              ETLam ("uniqEnd", ClassSort,
-                let
-                  val wWedge = TIn (FVar "w", FVar "WedgeP")
-                  val medIn = TIn (CDunaevPair (FVar "w", FVar "factorEnd"), FVar "EndMed")
-                  val apexEq = TIn (CDunaevPair (FVar "factorEnd", FVar "uniqEnd"), FVar "EqApex")
-                in
-                  ELam ("h", TProd (TArrow (wWedge, medIn), TArrow (medIn, apexEq)),
-                    ELam ("hwWedge", wWedge,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwWedge"))))
-                end))))))
+            ETLam ("uniqEnd", ClassSort,
+              let
+                val factorEnd = Fn ("EndFactor", [FVar "w"])
+                val wWedge = TIn (FVar "w", FVar "WedgeP")
+                val medIn = TIn (CDunaevPair (FVar "w", factorEnd), FVar "EndMed")
+                val apexEq = TIn (CDunaevPair (factorEnd, FVar "uniqEnd"), FVar "EqApex")
+              in
+                ELam ("h", TProd (TArrow (wWedge, medIn), TArrow (medIn, apexEq)),
+                  ELam ("hwWedge", wWedge,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hwWedge"))))
+              end)))))
 
   (* Categorical Coend Universal Cowedge Factorization over Dunaev Pairs (thm_213):
-     forall (CowedgeP:Class) (CoendMed:Class) (EqNadir:Class) (cw:Class) (factorCoend:Class) (uniqCoend:Class),
-       ((cw in CowedgeP -> [cw, factorCoend]_D in CoendMed) /\
-        ([cw, factorCoend]_D in CoendMed -> [factorCoend, uniqCoend]_D in EqNadir)) ->
-       (cw in CowedgeP -> [factorCoend, uniqCoend]_D in EqNadir) *)
+     forall (CowedgeP:Class) (CoendMed:Class) (EqNadir:Class) (cw:Class) (uniqCoend:Class),
+       ((cw in CowedgeP -> [cw, CoendFactor(cw)]_D in CoendMed) /\
+        ([cw, CoendFactor(cw)]_D in CoendMed -> [CoendFactor(cw), uniqCoend]_D in EqNadir)) ->
+       (cw in CowedgeP -> [CoendFactor(cw), uniqCoend]_D in EqNadir) *)
   val proofCategoricalCoendUniversalCowedgeFactorization : Expr =
     ETLam ("CowedgeP", ClassSort,
       ETLam ("CoendMed", ClassSort,
         ETLam ("EqNadir", ClassSort,
           ETLam ("cw", ClassSort,
-            ETLam ("factorCoend", ClassSort,
-              ETLam ("uniqCoend", ClassSort,
-                let
-                  val cwCow = TIn (FVar "cw", FVar "CowedgeP")
-                  val medIn = TIn (CDunaevPair (FVar "cw", FVar "factorCoend"), FVar "CoendMed")
-                  val nadirEq = TIn (CDunaevPair (FVar "factorCoend", FVar "uniqCoend"), FVar "EqNadir")
-                in
-                  ELam ("h", TProd (TArrow (cwCow, medIn), TArrow (medIn, nadirEq)),
-                    ELam ("hcwCow", cwCow,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hcwCow"))))
-                end))))))
+            ETLam ("uniqCoend", ClassSort,
+              let
+                val factorCoend = Fn ("CoendFactor", [FVar "cw"])
+                val cwCow = TIn (FVar "cw", FVar "CowedgeP")
+                val medIn = TIn (CDunaevPair (FVar "cw", factorCoend), FVar "CoendMed")
+                val nadirEq = TIn (CDunaevPair (factorCoend, FVar "uniqCoend"), FVar "EqNadir")
+              in
+                ELam ("h", TProd (TArrow (cwCow, medIn), TArrow (medIn, nadirEq)),
+                  ELam ("hcwCow", cwCow,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hcwCow"))))
+              end)))))
 
   (* Fubini Iterated End Interchange Isomorphism over Dunaev Pairs (thm_214):
-     forall (EndAB:Class) (IsoBA:Class) (EqEndAB:Class) (x:Class) (fubABx:Class) (y:Class) (fubBAy:Class),
-       ((x in EndAB -> [fubABx, y]_D in IsoBA) /\
-        ([fubABx, y]_D in IsoBA -> [fubBAy, x]_D in EqEndAB)) ->
-       (x in EndAB -> [fubBAy, x]_D in EqEndAB) *)
+     forall (EndAB:Class) (IsoBA:Class) (EqEndAB:Class) (x:Class) (y:Class),
+       ((x in EndAB -> [FubiniAB(x), y]_D in IsoBA) /\
+        ([FubiniAB(x), y]_D in IsoBA -> [FubiniBA(y), x]_D in EqEndAB)) ->
+       (x in EndAB -> [FubiniBA(y), x]_D in EqEndAB) *)
   val proofFubiniIteratedEndInterchangeIsomorphism : Expr =
     ETLam ("EndAB", ClassSort,
       ETLam ("IsoBA", ClassSort,
         ETLam ("EqEndAB", ClassSort,
           ETLam ("x", ClassSort,
-            ETLam ("fubABx", ClassSort,
-              ETLam ("y", ClassSort,
-                ETLam ("fubBAy", ClassSort,
-                  let
-                    val xEnd = TIn (FVar "x", FVar "EndAB")
-                    val isoIn = TIn (CDunaevPair (FVar "fubABx", FVar "y"), FVar "IsoBA")
-                    val endEq = TIn (CDunaevPair (FVar "fubBAy", FVar "x"), FVar "EqEndAB")
-                  in
-                    ELam ("h", TProd (TArrow (xEnd, isoIn), TArrow (isoIn, endEq)),
-                      ELam ("hxEnd", xEnd,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxEnd"))))
-                  end)))))))
+            ETLam ("y", ClassSort,
+              let
+                val fubABx = Fn ("FubiniAB", [FVar "x"])
+                val fubBAy = Fn ("FubiniBA", [FVar "y"])
+                val xEnd = TIn (FVar "x", FVar "EndAB")
+                val isoIn = TIn (CDunaevPair (fubABx, FVar "y"), FVar "IsoBA")
+                val endEq = TIn (CDunaevPair (fubBAy, FVar "x"), FVar "EqEndAB")
+              in
+                ELam ("h", TProd (TArrow (xEnd, isoIn), TArrow (isoIn, endEq)),
+                  ELam ("hxEnd", xEnd,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxEnd"))))
+              end)))))
 
   (* Weighted Limit Enriched End Representation over Dunaev Pairs (thm_215):
-     forall (WLimWD:Class) (IsoEndHom:Class) (EqWLim:Class) (u:Class) (repEndu:Class) (v:Class) (invEndv:Class),
-       ((u in WLimWD -> [repEndu, v]_D in IsoEndHom) /\
-        ([repEndu, v]_D in IsoEndHom -> [invEndv, u]_D in EqWLim)) ->
-       (u in WLimWD -> [invEndv, u]_D in EqWLim) *)
+     forall (WLimWD:Class) (IsoEndHom:Class) (EqWLim:Class) (u:Class) (v:Class),
+       ((u in WLimWD -> [WeightedRep(u), v]_D in IsoEndHom) /\
+        ([WeightedRep(u), v]_D in IsoEndHom -> [WeightedInv(v), u]_D in EqWLim)) ->
+       (u in WLimWD -> [WeightedInv(v), u]_D in EqWLim) *)
   val proofWeightedLimitEnrichedEndRepresentation : Expr =
     ETLam ("WLimWD", ClassSort,
       ETLam ("IsoEndHom", ClassSort,
         ETLam ("EqWLim", ClassSort,
           ETLam ("u", ClassSort,
-            ETLam ("repEndu", ClassSort,
-              ETLam ("v", ClassSort,
-                ETLam ("invEndv", ClassSort,
-                  let
-                    val uWLim = TIn (FVar "u", FVar "WLimWD")
-                    val repIn = TIn (CDunaevPair (FVar "repEndu", FVar "v"), FVar "IsoEndHom")
-                    val wlimEq = TIn (CDunaevPair (FVar "invEndv", FVar "u"), FVar "EqWLim")
-                  in
-                    ELam ("h", TProd (TArrow (uWLim, repIn), TArrow (repIn, wlimEq)),
-                      ELam ("huWLim", uWLim,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huWLim"))))
-                  end)))))))
+            ETLam ("v", ClassSort,
+              let
+                val repEndu = Fn ("WeightedRep", [FVar "u"])
+                val invEndv = Fn ("WeightedInv", [FVar "v"])
+                val uWLim = TIn (FVar "u", FVar "WLimWD")
+                val repIn = TIn (CDunaevPair (repEndu, FVar "v"), FVar "IsoEndHom")
+                val wlimEq = TIn (CDunaevPair (invEndv, FVar "u"), FVar "EqWLim")
+              in
+                ELam ("h", TProd (TArrow (uWLim, repIn), TArrow (repIn, wlimEq)),
+                  ELam ("huWLim", uWLim,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huWLim"))))
+              end)))))
 
   (* Bicategory Two-Cell Middle-Four Interchange over Dunaev Pairs (thm_216):
-     forall (TwoCellQuad:Class) (Eq2Cell:Class) (u:Class) (horizVertu:Class) (midFouru:Class) (vertHorizu:Class),
-       ((u in TwoCellQuad -> [horizVertu, midFouru]_D in Eq2Cell) /\
-        ([horizVertu, midFouru]_D in Eq2Cell -> [horizVertu, vertHorizu]_D in Eq2Cell)) ->
-       (u in TwoCellQuad -> [horizVertu, vertHorizu]_D in Eq2Cell) *)
+     forall (TwoCellQuad:Class) (Eq2Cell:Class) (Mid2Op:Class) (u:Class),
+       ((u in TwoCellQuad -> [TwoCellHV(u), ValOf(Mid2Op, u)]_D in Eq2Cell) /\
+        ([TwoCellHV(u), ValOf(Mid2Op, u)]_D in Eq2Cell -> [TwoCellHV(u), TwoCellVH(u)]_D in Eq2Cell)) ->
+       (u in TwoCellQuad -> [TwoCellHV(u), TwoCellVH(u)]_D in Eq2Cell) *)
   val proofBicategoryTwoCellMiddleFourInterchange : Expr =
     ETLam ("TwoCellQuad", ClassSort,
       ETLam ("Eq2Cell", ClassSort,
-        ETLam ("u", ClassSort,
-          ETLam ("horizVertu", ClassSort,
-            ETLam ("midFouru", ClassSort,
-              ETLam ("vertHorizu", ClassSort,
-                let
-                  val uQuad = TIn (FVar "u", FVar "TwoCellQuad")
-                  val eqMid = TIn (CDunaevPair (FVar "horizVertu", FVar "midFouru"), FVar "Eq2Cell")
-                  val eqEnd = TIn (CDunaevPair (FVar "horizVertu", FVar "vertHorizu"), FVar "Eq2Cell")
-                in
-                  ELam ("h", TProd (TArrow (uQuad, eqMid), TArrow (eqMid, eqEnd)),
-                    ELam ("huQuad", uQuad,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huQuad"))))
-                end))))))
+        ETLam ("Mid2Op", ClassSort,
+          ETLam ("u", ClassSort,
+            let
+              val horizVertu = Fn ("TwoCellHV", [FVar "u"])
+              val midFouru = Fn ("ValOf", [FVar "Mid2Op", FVar "u"])
+              val vertHorizu = Fn ("TwoCellVH", [FVar "u"])
+              val uQuad = TIn (FVar "u", FVar "TwoCellQuad")
+              val eqMid = TIn (CDunaevPair (horizVertu, midFouru), FVar "Eq2Cell")
+              val eqEnd = TIn (CDunaevPair (horizVertu, vertHorizu), FVar "Eq2Cell")
+            in
+              ELam ("h", TProd (TArrow (uQuad, eqMid), TArrow (eqMid, eqEnd)),
+                ELam ("huQuad", uQuad,
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "huQuad"))))
+            end))))
 
   (* Eckmann-Hilton Two-Cell Commutativity over Dunaev Pairs (thm_217):
-     forall (End2Id:Class) (Eq2Cell:Class) (a:Class) (b:Class) (abVert:Class) (abHoriz:Class) (baVert:Class),
-       (((a in End2Id /\ b in End2Id) -> [abVert, abHoriz]_D in Eq2Cell) /\
-        ([abVert, abHoriz]_D in Eq2Cell -> [abVert, baVert]_D in Eq2Cell)) ->
-       ((a in End2Id /\ b in End2Id) -> [abVert, baVert]_D in Eq2Cell) *)
+     forall (End2Id:Class) (Eq2Cell:Class) (a:Class) (b:Class),
+       (((a in End2Id /\ b in End2Id) -> [TwoCellVComp(a, b), TwoCellHComp(a, b)]_D in Eq2Cell) /\
+        ([TwoCellVComp(a, b), TwoCellHComp(a, b)]_D in Eq2Cell -> [TwoCellVComp(a, b), TwoCellVComp(b, a)]_D in Eq2Cell)) ->
+       ((a in End2Id /\ b in End2Id) -> [TwoCellVComp(a, b), TwoCellVComp(b, a)]_D in Eq2Cell) *)
   val proofEckmannHiltonTwoCellCommutativity : Expr =
     ETLam ("End2Id", ClassSort,
       ETLam ("Eq2Cell", ClassSort,
         ETLam ("a", ClassSort,
           ETLam ("b", ClassSort,
-            ETLam ("abVert", ClassSort,
-              ETLam ("abHoriz", ClassSort,
-                ETLam ("baVert", ClassSort,
-                  let
-                    val aEnd = TIn (FVar "a", FVar "End2Id")
-                    val bEnd = TIn (FVar "b", FVar "End2Id")
-                    val eqVH = TIn (CDunaevPair (FVar "abVert", FVar "abHoriz"), FVar "Eq2Cell")
-                    val eqComm = TIn (CDunaevPair (FVar "abVert", FVar "baVert"), FVar "Eq2Cell")
-                  in
-                    ELam ("h", TProd (TArrow (TProd (aEnd, bEnd), eqVH), TArrow (eqVH, eqComm)),
-                      ELam ("hab", TProd (aEnd, bEnd),
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hab"))))
-                  end)))))))
+            let
+              val abVert = Fn ("TwoCellVComp", [FVar "a", FVar "b"])
+              val abHoriz = Fn ("TwoCellHComp", [FVar "a", FVar "b"])
+              val baVert = Fn ("TwoCellVComp", [FVar "b", FVar "a"])
+              val aEnd = TIn (FVar "a", FVar "End2Id")
+              val bEnd = TIn (FVar "b", FVar "End2Id")
+              val eqVH = TIn (CDunaevPair (abVert, abHoriz), FVar "Eq2Cell")
+              val eqComm = TIn (CDunaevPair (abVert, baVert), FVar "Eq2Cell")
+            in
+              ELam ("h", TProd (TArrow (TProd (aEnd, bEnd), eqVH), TArrow (eqVH, eqComm)),
+                ELam ("hab", TProd (aEnd, bEnd),
+                  EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hab"))))
+            end))))
 
   (* Internal Adjunction Zig-Zag Left Triangle Identity over Dunaev Pairs (thm_218):
-     forall (LeftAdj1Cell:Class) (ZigZagL:Class) (Eq2Cell:Class) (f:Class) (idL:Class) (compZigL:Class) (idf:Class),
-       ((f in LeftAdj1Cell -> [f, idL]_D in ZigZagL) /\
-        ([f, idL]_D in ZigZagL -> [compZigL, idf]_D in Eq2Cell)) ->
-       (f in LeftAdj1Cell -> [compZigL, idf]_D in Eq2Cell) *)
+     forall (LeftAdj1Cell:Class) (ZigZagL:Class) (Eq2Cell:Class) (A:Class) (f:Class),
+       ((f in LeftAdj1Cell -> [f, IdMor(A)]_D in ZigZagL) /\
+        ([f, IdMor(A)]_D in ZigZagL -> [ZigZagCompL(f), IdMor(f)]_D in Eq2Cell)) ->
+       (f in LeftAdj1Cell -> [ZigZagCompL(f), IdMor(f)]_D in Eq2Cell) *)
   val proofInternalAdjunctionZigZagLeftTriangle : Expr =
     ETLam ("LeftAdj1Cell", ClassSort,
       ETLam ("ZigZagL", ClassSort,
         ETLam ("Eq2Cell", ClassSort,
-          ETLam ("f", ClassSort,
-            ETLam ("idL", ClassSort,
-              ETLam ("compZigL", ClassSort,
-                ETLam ("idf", ClassSort,
-                  let
-                    val fLeft = TIn (FVar "f", FVar "LeftAdj1Cell")
-                    val zigIn = TIn (CDunaevPair (FVar "f", FVar "idL"), FVar "ZigZagL")
-                    val zigEq = TIn (CDunaevPair (FVar "compZigL", FVar "idf"), FVar "Eq2Cell")
-                  in
-                    ELam ("h", TProd (TArrow (fLeft, zigIn), TArrow (zigIn, zigEq)),
-                      ELam ("hfLeft", fLeft,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfLeft"))))
-                  end)))))))
+          ETLam ("A", ClassSort,
+            ETLam ("f", ClassSort,
+              let
+                val idL = Fn ("IdMor", [FVar "A"])
+                val compZigL = Fn ("ZigZagCompL", [FVar "f"])
+                val idf = Fn ("IdMor", [FVar "f"])
+                val fLeft = TIn (FVar "f", FVar "LeftAdj1Cell")
+                val zigIn = TIn (CDunaevPair (FVar "f", idL), FVar "ZigZagL")
+                val zigEq = TIn (CDunaevPair (compZigL, idf), FVar "Eq2Cell")
+              in
+                ELam ("h", TProd (TArrow (fLeft, zigIn), TArrow (zigIn, zigEq)),
+                  ELam ("hfLeft", fLeft,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hfLeft"))))
+              end)))))
 
   (* Internal Adjunction Zig-Zag Right Triangle Identity over Dunaev Pairs (thm_219):
-     forall (RightAdj1Cell:Class) (ZigZagR:Class) (Eq2Cell:Class) (g:Class) (idR:Class) (compZigR:Class) (idg:Class),
-       ((g in RightAdj1Cell -> [g, idR]_D in ZigZagR) /\
-        ([g, idR]_D in ZigZagR -> [compZigR, idg]_D in Eq2Cell)) ->
-       (g in RightAdj1Cell -> [compZigR, idg]_D in Eq2Cell) *)
+     forall (RightAdj1Cell:Class) (ZigZagR:Class) (Eq2Cell:Class) (B:Class) (g:Class),
+       ((g in RightAdj1Cell -> [g, IdMor(B)]_D in ZigZagR) /\
+        ([g, IdMor(B)]_D in ZigZagR -> [ZigZagCompR(g), IdMor(g)]_D in Eq2Cell)) ->
+       (g in RightAdj1Cell -> [ZigZagCompR(g), IdMor(g)]_D in Eq2Cell) *)
   val proofInternalAdjunctionZigZagRightTriangle : Expr =
     ETLam ("RightAdj1Cell", ClassSort,
       ETLam ("ZigZagR", ClassSort,
         ETLam ("Eq2Cell", ClassSort,
-          ETLam ("g", ClassSort,
-            ETLam ("idR", ClassSort,
-              ETLam ("compZigR", ClassSort,
-                ETLam ("idg", ClassSort,
-                  let
-                    val gRight = TIn (FVar "g", FVar "RightAdj1Cell")
-                    val zigIn = TIn (CDunaevPair (FVar "g", FVar "idR"), FVar "ZigZagR")
-                    val zigEq = TIn (CDunaevPair (FVar "compZigR", FVar "idg"), FVar "Eq2Cell")
-                  in
-                    ELam ("h", TProd (TArrow (gRight, zigIn), TArrow (zigIn, zigEq)),
-                      ELam ("hgRight", gRight,
-                        EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hgRight"))))
-                  end)))))))
+          ETLam ("B", ClassSort,
+            ETLam ("g", ClassSort,
+              let
+                val idR = Fn ("IdMor", [FVar "B"])
+                val compZigR = Fn ("ZigZagCompR", [FVar "g"])
+                val idg = Fn ("IdMor", [FVar "g"])
+                val gRight = TIn (FVar "g", FVar "RightAdj1Cell")
+                val zigIn = TIn (CDunaevPair (FVar "g", idR), FVar "ZigZagR")
+                val zigEq = TIn (CDunaevPair (compZigR, idg), FVar "Eq2Cell")
+              in
+                ELam ("h", TProd (TArrow (gRight, zigIn), TArrow (zigIn, zigEq)),
+                  ELam ("hgRight", gRight,
+                    EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hgRight"))))
+              end)))))
 
   (* Benabou Bicategory Strictification Coherence over Dunaev Pairs (thm_220):
-     forall (PasteDiag:Class) (Eq2Cell:Class) (d:Class) (evalPaste1:Class) (canonStrict:Class) (evalPaste2:Class),
-       ((d in PasteDiag -> [evalPaste1, canonStrict]_D in Eq2Cell) /\
-        ([evalPaste1, canonStrict]_D in Eq2Cell -> [evalPaste1, evalPaste2]_D in Eq2Cell)) ->
-       (d in PasteDiag -> [evalPaste1, evalPaste2]_D in Eq2Cell) *)
+     forall (PasteDiag:Class) (Eq2Cell:Class) (d:Class),
+       ((d in PasteDiag -> [PasteEval1(d), PasteCanon(d)]_D in Eq2Cell) /\
+        ([PasteEval1(d), PasteCanon(d)]_D in Eq2Cell -> [PasteEval1(d), PasteEval2(d)]_D in Eq2Cell)) ->
+       (d in PasteDiag -> [PasteEval1(d), PasteEval2(d)]_D in Eq2Cell) *)
   val proofBenabouBicategoryStrictificationCoherence : Expr =
     ETLam ("PasteDiag", ClassSort,
       ETLam ("Eq2Cell", ClassSort,
         ETLam ("d", ClassSort,
-          ETLam ("evalPaste1", ClassSort,
-            ETLam ("canonStrict", ClassSort,
-              ETLam ("evalPaste2", ClassSort,
-                let
-                  val dPaste = TIn (FVar "d", FVar "PasteDiag")
-                  val eqCanon = TIn (CDunaevPair (FVar "evalPaste1", FVar "canonStrict"), FVar "Eq2Cell")
-                  val eqPaste = TIn (CDunaevPair (FVar "evalPaste1", FVar "evalPaste2"), FVar "Eq2Cell")
-                in
-                  ELam ("h", TProd (TArrow (dPaste, eqCanon), TArrow (eqCanon, eqPaste)),
-                    ELam ("hdPaste", dPaste,
-                      EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hdPaste"))))
-                end))))))
+          let
+            val evalPaste1 = Fn ("PasteEval1", [FVar "d"])
+            val canonStrict = Fn ("PasteCanon", [FVar "d"])
+            val evalPaste2 = Fn ("PasteEval2", [FVar "d"])
+            val dPaste = TIn (FVar "d", FVar "PasteDiag")
+            val eqCanon = TIn (CDunaevPair (evalPaste1, canonStrict), FVar "Eq2Cell")
+            val eqPaste = TIn (CDunaevPair (evalPaste1, evalPaste2), FVar "Eq2Cell")
+          in
+            ELam ("h", TProd (TArrow (dPaste, eqCanon), TArrow (eqCanon, eqPaste)),
+              ELam ("hdPaste", dPaste,
+                EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hdPaste"))))
+          end)))
+
+  (* Limit Ordinal Membership and Successor Closure Projection (thm_221, Entry 3.79):
+     forall (kap:Class) (b:Class),
+       ((Ord(kap) /\ (0 in kap /\ (forall (a:Class), a in kap -> Succ(a) in kap))) /\ b in kap) ->
+       (Ord(kap) /\ (0 in kap /\ Succ(b) in kap)) *)
+  val proofLimitOrdinalSuccessorClosureProj : Expr =
+    ETLam ("kap", ClassSort,
+      ETLam ("b", ClassSort,
+        let
+          val succClose = TPi ("a", ClassSort, TArrow (TIn (FVar "a", FVar "kap"), TIn (CSucc (FVar "a"), FVar "kap")))
+          val limKap = TProd (TOrd (FVar "kap"), TProd (TIn (CEmpty, FVar "kap"), succClose))
+          val bInKap = TIn (FVar "b", FVar "kap")
+        in
+          ELam ("h", TProd (limKap, bInKap),
+            EPair (
+              EFst (EFst (EVar "h")),
+              EPair (
+                EFst (ESnd (EFst (EVar "h"))),
+                EApp (ETApp (ESnd (ESnd (EFst (EVar "h"))), FVar "b"), ESnd (EVar "h")))))
+        end))
+
+  (* Universe Indexed Union Closure Identity-Map Union Step (thm_222, Entry 3.86):
+     forall (U:Class) (x:Class),
+       ((x in U -> [x, IdMor(x)]_D in U) /\
+        ([x, IdMor(x)]_D in U -> U(x) in U)) ->
+       (x in U -> U(x) in U) *)
+  val proofUniverseIndexedUnionIdentityUnionStep : Expr =
+    ETLam ("U", ClassSort,
+      ETLam ("x", ClassSort,
+        let
+          val xU = TIn (FVar "x", FVar "U")
+          val idPair = TIn (CDunaevPair (FVar "x", Fn ("IdMor", [FVar "x"])), FVar "U")
+          val uxU = TIn (CUnion (FVar "x"), FVar "U")
+        in
+          ELam ("h", TProd (TArrow (xU, idPair), TArrow (idPair, uxU)),
+            ELam ("hxU", xU,
+              EApp (ESnd (EVar "h"), EApp (EFst (EVar "h"), EVar "hxU"))))
+        end))
+
+  (* Universe Intersection with Ordinals Limit Irreflexivity Contradiction Step (thm_223, Entry 3.87):
+     forall (U:Class) (kap:Class) (a:Class),
+       (((a in kap -> Succ(a) in U) /\
+         (Succ(a) in U -> kap in kap)) /\
+        ((kap in kap -> Bot) /\ a in kap)) ->
+       Bot *)
+  val proofUniverseInterOnLimitIrreflexivityStep : Expr =
+    ETLam ("U", ClassSort,
+      ETLam ("kap", ClassSort,
+        ETLam ("a", ClassSort,
+          let
+            val aInKap = TIn (FVar "a", FVar "kap")
+            val succInU = TIn (CSucc (FVar "a"), FVar "U")
+            val kapInKap = TIn (FVar "kap", FVar "kap")
+          in
+            ELam ("h", TProd (TProd (TArrow (aInKap, succInU), TArrow (succInU, kapInKap)),
+                              TProd (TArrow (kapInKap, TBottom), aInKap)),
+              EApp (EFst (ESnd (EVar "h")),
+                    EApp (ESnd (EFst (EVar "h")),
+                          EApp (EFst (EFst (EVar "h")), ESnd (ESnd (EVar "h"))))))
+          end)))
+
+  (* Von Neumann Cumulative Stage Subclass Inclusion in a Transitive Universe (thm_224, Entry 3.88):
+     forall (U:Class) (Vstage:Class) (kap:Class) (a:Class) (x:Class),
+       (((a in kap -> ValOf(Vstage, a) in U) /\
+         (ValOf(Vstage, a) in U -> (x in ValOf(Vstage, a) -> x in U))) /\
+        (a in kap /\ x in ValOf(Vstage, a))) ->
+       x in U *)
+  val proofVonNeumannStageSubUniverseStep : Expr =
+    ETLam ("U", ClassSort,
+      ETLam ("Vstage", ClassSort,
+        ETLam ("kap", ClassSort,
+          ETLam ("a", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val va = Fn ("ValOf", [FVar "Vstage", FVar "a"])
+                val aKap = TIn (FVar "a", FVar "kap")
+                val vaU = TIn (va, FVar "U")
+                val xVa = TIn (FVar "x", va)
+                val xU = TIn (FVar "x", FVar "U")
+              in
+                ELam ("h", TProd (TProd (TArrow (aKap, vaU), TArrow (vaU, TArrow (xVa, xU))),
+                                  TProd (aKap, xVa)),
+                  EApp (EApp (ESnd (EFst (EVar "h")),
+                              EApp (EFst (EFst (EVar "h")), EFst (ESnd (EVar "h")))),
+                        ESnd (ESnd (EVar "h"))))
+              end)))))
+
+  (* Set Rank Bounding and Universe Inclusion in V_kappa (thm_225, Entry 3.89 & 3.90):
+     forall (U:Class) (Vstage:Class) (RankOp:Class) (kap:Class) (x:Class),
+       (((x in U -> Succ(ValOf(RankOp, x)) in kap) /\
+         (x in U -> x in ValOf(Vstage, Succ(ValOf(RankOp, x))))) /\
+        ((Succ(ValOf(RankOp, x)) in kap /\ x in ValOf(Vstage, Succ(ValOf(RankOp, x)))) -> x in ValOf(Vstage, kap))) ->
+       (x in U -> x in ValOf(Vstage, kap)) *)
+  val proofUniverseSubVonNeumannStageRankStep : Expr =
+    ETLam ("U", ClassSort,
+      ETLam ("Vstage", ClassSort,
+        ETLam ("RankOp", ClassSort,
+          ETLam ("kap", ClassSort,
+            ETLam ("x", ClassSort,
+              let
+                val srkx = CSucc (Fn ("ValOf", [FVar "RankOp", FVar "x"]))
+                val vsrk = Fn ("ValOf", [FVar "Vstage", srkx])
+                val vkap = Fn ("ValOf", [FVar "Vstage", FVar "kap"])
+                val xU = TIn (FVar "x", FVar "U")
+                val srkKap = TIn (srkx, FVar "kap")
+                val xVsrk = TIn (FVar "x", vsrk)
+                val xVkap = TIn (FVar "x", vkap)
+              in
+                ELam ("h", TProd (TProd (TArrow (xU, srkKap), TArrow (xU, xVsrk)),
+                                  TArrow (TProd (srkKap, xVsrk), xVkap)),
+                  ELam ("hxU", xU,
+                    EApp (ESnd (EVar "h"),
+                          EPair (EApp (EFst (EFst (EVar "h")), EVar "hxU"),
+                                 EApp (ESnd (EFst (EVar "h")), EVar "hxU")))))
+              end)))))
 
   (* All 140 Constructive NBG/MK Theorems Bridged Automatically from MKTD2-system to MKTD1-system *)
   fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
@@ -25216,7 +25703,12 @@ struct
       translateExprV2ToV1Anatomy "eckmann_hilton_two_cell_commutativity" NBG_Predicative [] proofEckmannHiltonTwoCellCommutativity,
       translateExprV2ToV1Anatomy "internal_adjunction_zig_zag_left_triangle" NBG_Predicative [] proofInternalAdjunctionZigZagLeftTriangle,
       translateExprV2ToV1Anatomy "internal_adjunction_zig_zag_right_triangle" NBG_Predicative [] proofInternalAdjunctionZigZagRightTriangle,
-      translateExprV2ToV1Anatomy "benabou_bicategory_strictification_coherence" NBG_Predicative [] proofBenabouBicategoryStrictificationCoherence
+      translateExprV2ToV1Anatomy "benabou_bicategory_strictification_coherence" NBG_Predicative [] proofBenabouBicategoryStrictificationCoherence,
+      translateExprV2ToV1Anatomy "limit_ordinal_successor_closure_proj" MK_Impredicative [] proofLimitOrdinalSuccessorClosureProj,
+      translateExprV2ToV1Anatomy "universe_indexed_union_identity_union_step" NBG_Predicative [] proofUniverseIndexedUnionIdentityUnionStep,
+      translateExprV2ToV1Anatomy "universe_inter_on_limit_irreflexivity_step" NBG_Predicative [] proofUniverseInterOnLimitIrreflexivityStep,
+      translateExprV2ToV1Anatomy "von_neumann_stage_sub_universe_step" NBG_Predicative [] proofVonNeumannStageSubUniverseStep,
+      translateExprV2ToV1Anatomy "universe_sub_von_neumann_stage_rank_step" NBG_Predicative [] proofUniverseSubVonNeumannStageRankStep
     ]
 
   (* ========================================================================= *)
@@ -25609,6 +26101,87 @@ struct
             V1CConst "OrdExpGraph",
             V1CInter (V1CKappa (f, V1FOrd (V1CVar f)))
           )
+      | ("DefLimitOrdinal", [a, b]) =>
+          V1FForall (a, V1TyClass,
+            V1FIff (
+              V1FAnd (
+                V1FIn (V1CVar a, V1COn),
+                V1FAnd (
+                  V1FIn (V1CEmpty, V1CVar a),
+                  V1FForall (b, V1TyClass,
+                    V1FImp (V1FIn (V1CVar b, V1CVar a), V1FIn (V1CSucc (V1CVar b), V1CVar a))
+                  )
+                )
+              ),
+              V1FAnd (
+                V1FIn (V1CVar a, V1COn),
+                V1FAnd (
+                  V1FIn (V1CEmpty, V1CVar a),
+                  V1FForall (b, V1TyClass,
+                    V1FImp (V1FIn (V1CVar b, V1CVar a), V1FIn (V1CSucc (V1CVar b), V1CVar a))
+                  )
+                )
+              )
+            )
+          )
+      | ("DefIndexedUnionClosed", [u, i, f]) =>
+          V1FForall (u, V1TyClass,
+            V1FForall (i, V1TyClass,
+              V1FForall (f, V1TyClass,
+                V1FImp (
+                  V1FAnd (
+                    V1FIn (V1CVar i, V1CVar u),
+                    V1FAnd (
+                      V1FFunc (V1CVar f, V1CVar i, V1CVar u),
+                      V1FIn (V1CVar i, V1CUniv)
+                    )
+                  ),
+                  V1FIn (V1CUnion (V1CVar f), V1CVar u)
+                )
+              )
+            )
+          )
+      | ("DefVonNeumannStageLaws", [g, a, b]) =>
+          V1FForall (g, V1TyClass,
+            V1FAnd (
+              V1FIn (V1CDunaevPair (V1CEmpty, V1CEmpty), V1CVar g),
+              V1FAnd (
+                V1FForall (a, V1TyClass,
+                  V1FImp (
+                    V1FIn (V1CVar a, V1COn),
+                    V1FIn (V1CDunaevPair (V1CSucc (V1CVar a), V1CPower (V1CVar a)), V1CVar g)
+                  )
+                ),
+                V1FForall (b, V1TyClass,
+                  V1FImp (
+                    V1FIn (V1CVar b, V1COn),
+                    V1FIn (V1CDunaevPair (V1CVar b, V1CUnion (V1CVar b)), V1CVar g)
+                  )
+                )
+              )
+            )
+          )
+      | ("DefVonNeumannStageGraph", [g]) =>
+          V1FEq (
+            V1CConst "VonNeumannStageGraph",
+            V1CInter (V1CKappa (g, V1FOrd (V1CVar g)))
+          )
+      | ("DefSetRankLaws", [r, x, y]) =>
+          V1FForall (r, V1TyClass,
+            V1FForall (x, V1TyClass,
+              V1FForall (y, V1TyClass,
+                V1FImp (
+                  V1FAnd (V1FIn (V1CVar x, V1CUniv), V1FIn (V1CVar y, V1CVar x)),
+                  V1FIn (V1CSucc (V1CVar y), V1CVar r)
+                )
+              )
+            )
+          )
+      | ("DefSetRankGraph", [r]) =>
+          V1FEq (
+            V1CConst "SetRankGraph",
+            V1CInter (V1CKappa (r, V1FOrd (V1CVar r)))
+          )
       | _ =>
           raise KernelDefBridgeError ("Unknown or arity-mismatched PKernelDef_prf: " ^ name)
 
@@ -25874,7 +26447,13 @@ struct
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefDunaevTaggedOPair", ["A", "B"])) NONE,
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefOrdAddGraph", ["P"])) NONE,
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefOrdMulGraph", ["M"])) NONE,
-      translatePKernelDefToAnatomy (PKernelDef_prf ("DefOrdExpGraph", ["F"])) NONE
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefOrdExpGraph", ["F"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefLimitOrdinal", ["a", "b"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefIndexedUnionClosed", ["U", "I", "F"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefVonNeumannStageLaws", ["G", "a", "b"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefVonNeumannStageGraph", ["G"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefSetRankLaws", ["R", "x", "y"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefSetRankGraph", ["R"])) NONE
     ]
 
   fun verifyOrdinalBridge () : (int * int * bool) =

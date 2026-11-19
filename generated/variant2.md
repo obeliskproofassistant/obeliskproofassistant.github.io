@@ -11,7 +11,7 @@
 
 Agent-friendly Markdown edition generated directly from `set_theory_prover/program/verified_theorems.ML` via `nbg_html_generator.ML` for **MKTD2-system / MKTD2-prover (MKTD2-framework, MKTD2-theory)**.
 
-- **Live Kernel Audit:** 220/220 Mechanically Type-Checked Records (197 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+- **Live Kernel Audit:** 225/225 Mechanically Type-Checked Records (202 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 - **Machine-Readable JSON Database:** [nbg_library.json](nbg_library.json)
 - **MKTD1-system Complete Entity Database (Markdown):** [manual.md](manual.md)
 
@@ -1554,4 +1554,39 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (Unicode):** `Π(PasteDiag:Class), Π(Eq2Cell:Class), Π(d:Class), ((((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell))) → ((d ∈ PasteDiag) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))`
 - **Statement (ANSII):** `Pi(PasteDiag:Class), Pi(Eq2Cell:Class), Pi(d:Class), ((((d in PasteDiag) -> ((PasteEval1(d), PasteCanon(d)) in Eq2Cell)) * (((PasteEval1(d), PasteCanon(d)) in Eq2Cell) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell))) -> ((d in PasteDiag) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell)))`
 - **Constructive Proof Term:** `(λ(PasteDiag:Class). (λ(Eq2Cell:Class). (λ(d:Class). (λ(h:(((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))). (λ(hdPaste:(d ∈ PasteDiag)). (snd(h) (fst(h) hdPaste)))))))`
+
+### NBG-221 `thm_limit_ordinal_successor_closure_proj` (Derived)
+
+- **Identifier:** `thm_limit_ordinal_successor_closure_proj` (`NBG-221`, kind: `Derived`)
+- **Statement (Unicode):** `Π(kap:Class), Π(b:Class), (((Ord(kap) × ((∅ ∈ kap) × (Π(a:Class), ((a ∈ kap) → (SuccOrd(a) ∈ kap))))) × (b ∈ kap)) → (Ord(kap) × ((∅ ∈ kap) × (SuccOrd(b) ∈ kap))))`
+- **Statement (ANSII):** `Pi(kap:Class), Pi(b:Class), (((Ord(kap) * ((EmptySet in kap) * (Pi(a:Class), ((a in kap) -> (SuccOrd(a) in kap))))) * (b in kap)) -> (Ord(kap) * ((EmptySet in kap) * (SuccOrd(b) in kap))))`
+- **Constructive Proof Term:** `(λ(kap:Class). (λ(b:Class). (λ(h:((Ord(kap) × ((∅ ∈ kap) × (Π(a:Class), ((a ∈ kap) → (SuccOrd(a) ∈ kap))))) × (b ∈ kap))). ⟨fst(fst(h)), ⟨fst(snd(fst(h))), ((snd(snd(fst(h))) b) snd(h))⟩⟩)))`
+
+### NBG-222 `thm_universe_indexed_union_identity_union_step` (Derived)
+
+- **Identifier:** `thm_universe_indexed_union_identity_union_step` (`NBG-222`, kind: `Derived`)
+- **Statement (Unicode):** `Π(U:Class), Π(x:Class), ((((x ∈ U) → ((x, IdMor(x)) ∈ U)) × (((x, IdMor(x)) ∈ U) → (⋃(x) ∈ U))) → ((x ∈ U) → (⋃(x) ∈ U)))`
+- **Statement (ANSII):** `Pi(U:Class), Pi(x:Class), ((((x in U) -> ((x, IdMor(x)) in U)) * (((x, IdMor(x)) in U) -> (Union(x) in U))) -> ((x in U) -> (Union(x) in U)))`
+- **Constructive Proof Term:** `(λ(U:Class). (λ(x:Class). (λ(h:(((x ∈ U) → ((x, IdMor(x)) ∈ U)) × (((x, IdMor(x)) ∈ U) → (⋃(x) ∈ U)))). (λ(hxU:(x ∈ U)). (snd(h) (fst(h) hxU))))))`
+
+### NBG-223 `thm_universe_inter_on_limit_irreflexivity_step` (Derived)
+
+- **Identifier:** `thm_universe_inter_on_limit_irreflexivity_step` (`NBG-223`, kind: `Derived`)
+- **Statement (Unicode):** `Π(U:Class), Π(kap:Class), Π(a:Class), (((((a ∈ kap) → (SuccOrd(a) ∈ U)) × ((SuccOrd(a) ∈ U) → (kap ∈ kap))) × (((kap ∈ kap) → 𝟘) × (a ∈ kap))) → 𝟘)`
+- **Statement (ANSII):** `Pi(U:Class), Pi(kap:Class), Pi(a:Class), (((((a in kap) -> (SuccOrd(a) in U)) * ((SuccOrd(a) in U) -> (kap in kap))) * (((kap in kap) -> Void) * (a in kap))) -> Void)`
+- **Constructive Proof Term:** `(λ(U:Class). (λ(kap:Class). (λ(a:Class). (λ(h:((((a ∈ kap) → (SuccOrd(a) ∈ U)) × ((SuccOrd(a) ∈ U) → (kap ∈ kap))) × (((kap ∈ kap) → 𝟘) × (a ∈ kap)))). (fst(snd(h)) (snd(fst(h)) (fst(fst(h)) snd(snd(h)))))))))`
+
+### NBG-224 `thm_von_neumann_stage_sub_universe_step` (Derived)
+
+- **Identifier:** `thm_von_neumann_stage_sub_universe_step` (`NBG-224`, kind: `Derived`)
+- **Statement (Unicode):** `Π(U:Class), Π(Vstage:Class), Π(kap:Class), Π(a:Class), Π(x:Class), (((((a ∈ kap) → (ValOf(Vstage, a) ∈ U)) × ((ValOf(Vstage, a) ∈ U) → ((x ∈ ValOf(Vstage, a)) → (x ∈ U)))) × ((a ∈ kap) × (x ∈ ValOf(Vstage, a)))) → (x ∈ U))`
+- **Statement (ANSII):** `Pi(U:Class), Pi(Vstage:Class), Pi(kap:Class), Pi(a:Class), Pi(x:Class), (((((a in kap) -> (ValOf(Vstage, a) in U)) * ((ValOf(Vstage, a) in U) -> ((x in ValOf(Vstage, a)) -> (x in U)))) * ((a in kap) * (x in ValOf(Vstage, a)))) -> (x in U))`
+- **Constructive Proof Term:** `(λ(U:Class). (λ(Vstage:Class). (λ(kap:Class). (λ(a:Class). (λ(x:Class). (λ(h:((((a ∈ kap) → (ValOf(Vstage, a) ∈ U)) × ((ValOf(Vstage, a) ∈ U) → ((x ∈ ValOf(Vstage, a)) → (x ∈ U)))) × ((a ∈ kap) × (x ∈ ValOf(Vstage, a))))). ((snd(fst(h)) (fst(fst(h)) fst(snd(h)))) snd(snd(h)))))))))`
+
+### NBG-225 `thm_universe_sub_von_neumann_stage_rank_step` (Derived)
+
+- **Identifier:** `thm_universe_sub_von_neumann_stage_rank_step` (`NBG-225`, kind: `Derived`)
+- **Statement (Unicode):** `Π(U:Class), Π(Vstage:Class), Π(RankOp:Class), Π(kap:Class), Π(x:Class), (((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap)))) → ((x ∈ U) → (x ∈ ValOf(Vstage, kap))))`
+- **Statement (ANSII):** `Pi(U:Class), Pi(Vstage:Class), Pi(RankOp:Class), Pi(kap:Class), Pi(x:Class), (((((x in U) -> (SuccOrd(ValOf(RankOp, x)) in kap)) * ((x in U) -> (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) * (((SuccOrd(ValOf(RankOp, x)) in kap) * (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) -> (x in ValOf(Vstage, kap)))) -> ((x in U) -> (x in ValOf(Vstage, kap))))`
+- **Constructive Proof Term:** `(λ(U:Class). (λ(Vstage:Class). (λ(RankOp:Class). (λ(kap:Class). (λ(x:Class). (λ(h:((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap))))). (λ(hxU:(x ∈ U)). (snd(h) ⟨(fst(fst(h)) hxU), (snd(fst(h)) hxU)⟩))))))))`
 

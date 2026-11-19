@@ -95,8 +95,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertTrue(os.path.isfile(nbg_json_path))
         with open(nbg_json_path, "r", encoding="utf-8") as f:
             nbg_lib = json.load(f)
-        self.assertEqual(nbg_lib["total_count"], 220)
-        self.assertEqual(nbg_lib["derived_count"], 197)
+        self.assertEqual(nbg_lib["total_count"], 225)
+        self.assertEqual(nbg_lib["derived_count"], 202)
         self.assertEqual(nbg_lib["definitional_count"], 16)
         self.assertEqual(nbg_lib["axiomatic_count"], 7)
         for md_rel in ("manual.md", "variant1.md", "proofs.md", "nbg_library.md", "variant2.md"):

@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 220,
-  "verified_count": 220,
-  "derived_count": 197,
+  "total_count": 225,
+  "verified_count": 225,
+  "derived_count": 202,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -1988,6 +1988,51 @@
       "statement_unicode": "Π(PasteDiag:Class), Π(Eq2Cell:Class), Π(d:Class), ((((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell))) → ((d ∈ PasteDiag) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))",
       "proof_unicode": "(λ(PasteDiag:Class). (λ(Eq2Cell:Class). (λ(d:Class). (λ(h:(((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))). (λ(hdPaste:(d ∈ PasteDiag)). (snd(h) (fst(h) hdPaste)))))))",
       "statement_ast": "(Pi (PasteDiag : Class) -> (Pi (Eq2Cell : Class) -> (Pi (d : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In d) PasteDiag) true)) -> (Id Prop ((In ((DunaevPair (PasteEval1 d)) (PasteCanon d))) Eq2Cell) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair (PasteEval1 d)) (PasteCanon d))) Eq2Cell) true)) -> (Id Prop ((In ((DunaevPair (PasteEval1 d)) (PasteEval2 d))) Eq2Cell) true)))) -> (Pi (_ : (Id Prop ((In d) PasteDiag) true)) -> (Id Prop ((In ((DunaevPair (PasteEval1 d)) (PasteEval2 d))) Eq2Cell) true))))))"
+    },
+    {
+      "id": 221,
+      "num": "NBG-221",
+      "name": "thm_limit_ordinal_successor_closure_proj",
+      "kind": "Derived",
+      "statement_unicode": "Π(kap:Class), Π(b:Class), (((Ord(kap) × ((∅ ∈ kap) × (Π(a:Class), ((a ∈ kap) → (SuccOrd(a) ∈ kap))))) × (b ∈ kap)) → (Ord(kap) × ((∅ ∈ kap) × (SuccOrd(b) ∈ kap))))",
+      "proof_unicode": "(λ(kap:Class). (λ(b:Class). (λ(h:((Ord(kap) × ((∅ ∈ kap) × (Π(a:Class), ((a ∈ kap) → (SuccOrd(a) ∈ kap))))) × (b ∈ kap))). ⟨fst(fst(h)), ⟨fst(snd(fst(h))), ((snd(snd(fst(h))) b) snd(h))⟩⟩)))",
+      "statement_ast": "(Pi (kap : Class) -> (Pi (b : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Prop (Ord kap) true)) * (Sigma (_ : (Id Prop ((In EmptySet) kap) true)) * (Pi (a : Class) -> (Pi (_ : (Id Prop ((In a) kap) true)) -> (Id Prop ((In (SuccOrd a)) kap) true)))))) * (Id Prop ((In b) kap) true))) -> (Sigma (_ : (Id Prop (Ord kap) true)) * (Sigma (_ : (Id Prop ((In EmptySet) kap) true)) * (Id Prop ((In (SuccOrd b)) kap) true))))))"
+    },
+    {
+      "id": 222,
+      "num": "NBG-222",
+      "name": "thm_universe_indexed_union_identity_union_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(U:Class), Π(x:Class), ((((x ∈ U) → ((x, IdMor(x)) ∈ U)) × (((x, IdMor(x)) ∈ U) → (⋃(x) ∈ U))) → ((x ∈ U) → (⋃(x) ∈ U)))",
+      "proof_unicode": "(λ(U:Class). (λ(x:Class). (λ(h:(((x ∈ U) → ((x, IdMor(x)) ∈ U)) × (((x, IdMor(x)) ∈ U) → (⋃(x) ∈ U)))). (λ(hxU:(x ∈ U)). (snd(h) (fst(h) hxU))))))",
+      "statement_ast": "(Pi (U : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) U) true)) -> (Id Prop ((In ((DunaevPair x) (IdMor x))) U) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) (IdMor x))) U) true)) -> (Id Prop ((In (Union x)) U) true)))) -> (Pi (_ : (Id Prop ((In x) U) true)) -> (Id Prop ((In (Union x)) U) true)))))"
+    },
+    {
+      "id": 223,
+      "num": "NBG-223",
+      "name": "thm_universe_inter_on_limit_irreflexivity_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(U:Class), Π(kap:Class), Π(a:Class), (((((a ∈ kap) → (SuccOrd(a) ∈ U)) × ((SuccOrd(a) ∈ U) → (kap ∈ kap))) × (((kap ∈ kap) → 𝟘) × (a ∈ kap))) → 𝟘)",
+      "proof_unicode": "(λ(U:Class). (λ(kap:Class). (λ(a:Class). (λ(h:((((a ∈ kap) → (SuccOrd(a) ∈ U)) × ((SuccOrd(a) ∈ U) → (kap ∈ kap))) × (((kap ∈ kap) → 𝟘) × (a ∈ kap)))). (fst(snd(h)) (snd(fst(h)) (fst(fst(h)) snd(snd(h)))))))))",
+      "statement_ast": "(Pi (U : Class) -> (Pi (kap : Class) -> (Pi (a : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In a) kap) true)) -> (Id Prop ((In (SuccOrd a)) U) true))) * (Pi (_ : (Id Prop ((In (SuccOrd a)) U) true)) -> (Id Prop ((In kap) kap) true)))) * (Sigma (_ : (Pi (_ : (Id Prop ((In kap) kap) true)) -> False)) * (Id Prop ((In a) kap) true)))) -> False))))"
+    },
+    {
+      "id": 224,
+      "num": "NBG-224",
+      "name": "thm_von_neumann_stage_sub_universe_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(U:Class), Π(Vstage:Class), Π(kap:Class), Π(a:Class), Π(x:Class), (((((a ∈ kap) → (ValOf(Vstage, a) ∈ U)) × ((ValOf(Vstage, a) ∈ U) → ((x ∈ ValOf(Vstage, a)) → (x ∈ U)))) × ((a ∈ kap) × (x ∈ ValOf(Vstage, a)))) → (x ∈ U))",
+      "proof_unicode": "(λ(U:Class). (λ(Vstage:Class). (λ(kap:Class). (λ(a:Class). (λ(x:Class). (λ(h:((((a ∈ kap) → (ValOf(Vstage, a) ∈ U)) × ((ValOf(Vstage, a) ∈ U) → ((x ∈ ValOf(Vstage, a)) → (x ∈ U)))) × ((a ∈ kap) × (x ∈ ValOf(Vstage, a))))). ((snd(fst(h)) (fst(fst(h)) fst(snd(h)))) snd(snd(h)))))))))",
+      "statement_ast": "(Pi (U : Class) -> (Pi (Vstage : Class) -> (Pi (kap : Class) -> (Pi (a : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In a) kap) true)) -> (Id Prop ((In ((ValOf Vstage) a)) U) true))) * (Pi (_ : (Id Prop ((In ((ValOf Vstage) a)) U) true)) -> (Pi (_ : (Id Prop ((In x) ((ValOf Vstage) a)) true)) -> (Id Prop ((In x) U) true))))) * (Sigma (_ : (Id Prop ((In a) kap) true)) * (Id Prop ((In x) ((ValOf Vstage) a)) true)))) -> (Id Prop ((In x) U) true)))))))"
+    },
+    {
+      "id": 225,
+      "num": "NBG-225",
+      "name": "thm_universe_sub_von_neumann_stage_rank_step",
+      "kind": "Derived",
+      "statement_unicode": "Π(U:Class), Π(Vstage:Class), Π(RankOp:Class), Π(kap:Class), Π(x:Class), (((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap)))) → ((x ∈ U) → (x ∈ ValOf(Vstage, kap))))",
+      "proof_unicode": "(λ(U:Class). (λ(Vstage:Class). (λ(RankOp:Class). (λ(kap:Class). (λ(x:Class). (λ(h:((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap))))). (λ(hxU:(x ∈ U)). (snd(h) ⟨(fst(fst(h)) hxU), (snd(fst(h)) hxU)⟩))))))))",
+      "statement_ast": "(Pi (U : Class) -> (Pi (Vstage : Class) -> (Pi (RankOp : Class) -> (Pi (kap : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) U) true)) -> (Id Prop ((In (SuccOrd ((ValOf RankOp) x))) kap) true))) * (Pi (_ : (Id Prop ((In x) U) true)) -> (Id Prop ((In x) ((ValOf Vstage) (SuccOrd ((ValOf RankOp) x)))) true)))) * (Pi (_ : (Sigma (_ : (Id Prop ((In (SuccOrd ((ValOf RankOp) x))) kap) true)) * (Id Prop ((In x) ((ValOf Vstage) (SuccOrd ((ValOf RankOp) x)))) true))) -> (Id Prop ((In x) ((ValOf Vstage) kap)) true)))) -> (Pi (_ : (Id Prop ((In x) U) true)) -> (Id Prop ((In x) ((ValOf Vstage) kap)) true))))))))"
     }
   ]
 }
