@@ -959,9 +959,9 @@
       "num": "NBG-106",
       "name": "thm_dunaev_rel_inverse_involutive",
       "kind": "Derived",
-      "statement_unicode": "Π(R:Class), Π(InvR:Class), Π(InvInvR:Class), Π(x:Class), Π(y:Class), ((Π(u:Class), Π(v:Class), ((((u, v) ∈ InvR) → ((v, u) ∈ R)) × (((v, u) ∈ R) → ((u, v) ∈ InvR)))) → ((Π(u:Class), Π(v:Class), ((((u, v) ∈ InvInvR) → ((v, u) ∈ InvR)) × (((v, u) ∈ InvR) → ((u, v) ∈ InvInvR)))) → ((((x, y) ∈ R) → ((x, y) ∈ InvInvR)) × (((x, y) ∈ InvInvR) → ((x, y) ∈ R)))))",
-      "proof_unicode": "(λ(R:Class). (λ(InvR:Class). (λ(InvInvR:Class). (λ(x:Class). (λ(y:Class). (λ(hInv1:Π(u:Class), Π(v:Class), ((((u, v) ∈ InvR) → ((v, u) ∈ R)) × (((v, u) ∈ R) → ((u, v) ∈ InvR)))). (λ(hInv2:Π(u:Class), Π(v:Class), ((((u, v) ∈ InvInvR) → ((v, u) ∈ InvR)) × (((v, u) ∈ InvR) → ((u, v) ∈ InvInvR)))). ⟨(λ(hInR:((x, y) ∈ R)). (snd(((hInv2 x) y)) (snd(((hInv1 y) x)) hInR))), (λ(hInInv2:((x, y) ∈ InvInvR)). (fst(((hInv1 y) x)) (fst(((hInv2 x) y)) hInInv2)))⟩)))))))",
-      "statement_ast": "(Pi (R : Class) -> (Pi (InvR : Class) -> (Pi (InvInvR : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Pi (u : Class) -> (Pi (v : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair u) v)) InvR) true)) -> (Id Prop ((In ((DunaevPair v) u)) R) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair v) u)) R) true)) -> (Id Prop ((In ((DunaevPair u) v)) InvR) true)))))) -> (Pi (_ : (Pi (u : Class) -> (Pi (v : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair u) v)) InvInvR) true)) -> (Id Prop ((In ((DunaevPair v) u)) InvR) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair v) u)) InvR) true)) -> (Id Prop ((In ((DunaevPair u) v)) InvInvR) true)))))) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair x) y)) InvInvR) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) InvInvR) true)) -> (Id Prop ((In ((DunaevPair x) y)) R) true))))))))))"
+      "statement_unicode": "Π(R:Class), Π(x:Class), Π(y:Class), ((Π(u:Class), Π(v:Class), ((((u, v) ∈ (RelConverse R)) → ((v, u) ∈ R)) × (((v, u) ∈ R) → ((u, v) ∈ (RelConverse R))))) → ((Π(u:Class), Π(v:Class), ((((u, v) ∈ (RelConverse (RelConverse R))) → ((v, u) ∈ (RelConverse R))) × (((v, u) ∈ (RelConverse R)) → ((u, v) ∈ (RelConverse (RelConverse R)))))) → ((((x, y) ∈ R) → ((x, y) ∈ (RelConverse (RelConverse R)))) × (((x, y) ∈ (RelConverse (RelConverse R))) → ((x, y) ∈ R)))))",
+      "proof_unicode": "(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(hInv1:Π(u:Class), Π(v:Class), ((((u, v) ∈ (RelConverse R)) → ((v, u) ∈ R)) × (((v, u) ∈ R) → ((u, v) ∈ (RelConverse R))))). (λ(hInv2:Π(u:Class), Π(v:Class), ((((u, v) ∈ (RelConverse (RelConverse R))) → ((v, u) ∈ (RelConverse R))) × (((v, u) ∈ (RelConverse R)) → ((u, v) ∈ (RelConverse (RelConverse R)))))). ⟨(λ(hInR:((x, y) ∈ R)). (snd(((hInv2 x) y)) (snd(((hInv1 y) x)) hInR))), (λ(hInInv2:((x, y) ∈ (RelConverse (RelConverse R)))). (fst(((hInv1 y) x)) (fst(((hInv2 x) y)) hInInv2)))⟩)))))",
+      "statement_ast": "(Pi (R : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Pi (u : Class) -> (Pi (v : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair u) v)) (RelConverse R)) true)) -> (Id Prop ((In ((DunaevPair v) u)) R) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair v) u)) R) true)) -> (Id Prop ((In ((DunaevPair u) v)) (RelConverse R)) true)))))) -> (Pi (_ : (Pi (u : Class) -> (Pi (v : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair u) v)) (RelConverse (RelConverse R))) true)) -> (Id Prop ((In ((DunaevPair v) u)) (RelConverse R)) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair v) u)) (RelConverse R)) true)) -> (Id Prop ((In ((DunaevPair u) v)) (RelConverse (RelConverse R))) true)))))) -> (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair x) y)) (RelConverse (RelConverse R))) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) (RelConverse (RelConverse R))) true)) -> (Id Prop ((In ((DunaevPair x) y)) R) true))))))))"
     },
     {
       "id": 107,
@@ -1328,9 +1328,9 @@
       "num": "NBG-147",
       "name": "thm_dunaev_pair_converse_involutive_equivalence",
       "kind": "Derived",
-      "statement_unicode": "Π(R:Class), Π(Rconv:Class), Π(Rconv2:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((y, x) ∈ Rconv)) × (((y, x) ∈ Rconv) → ((x, y) ∈ Rconv2))) → (((x, y) ∈ R) → ((x, y) ∈ Rconv2)))",
-      "proof_unicode": "(λ(R:Class). (λ(Rconv:Class). (λ(Rconv2:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((y, x) ∈ Rconv)) × (((y, x) ∈ Rconv) → ((x, y) ∈ Rconv2)))). (λ(hxy:((x, y) ∈ R)). (snd(h) (fst(h) hxy)))))))))",
-      "statement_ast": "(Pi (R : Class) -> (Pi (Rconv : Class) -> (Pi (Rconv2 : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair y) x)) Rconv) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair y) x)) Rconv) true)) -> (Id Prop ((In ((DunaevPair x) y)) Rconv2) true)))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair x) y)) Rconv2) true))))))))"
+      "statement_unicode": "Π(R:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((y, x) ∈ (RelConverse R))) × (((y, x) ∈ (RelConverse R)) → ((x, y) ∈ (RelConverse (RelConverse R))))) → (((x, y) ∈ R) → ((x, y) ∈ (RelConverse (RelConverse R)))))",
+      "proof_unicode": "(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((y, x) ∈ (RelConverse R))) × (((y, x) ∈ (RelConverse R)) → ((x, y) ∈ (RelConverse (RelConverse R)))))). (λ(hxy:((x, y) ∈ R)). (snd(h) (fst(h) hxy)))))))",
+      "statement_ast": "(Pi (R : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair y) x)) (RelConverse R)) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair y) x)) (RelConverse R)) true)) -> (Id Prop ((In ((DunaevPair x) y)) (RelConverse (RelConverse R))) true)))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Id Prop ((In ((DunaevPair x) y)) (RelConverse (RelConverse R))) true))))))"
     },
     {
       "id": 148,
@@ -1346,9 +1346,9 @@
       "num": "NBG-149",
       "name": "thm_binary_relation_field_membership_introduction",
       "kind": "Derived",
-      "statement_unicode": "Π(R:Class), Π(DomR:Class), Π(RanR:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((x ∈ DomR) × (y ∈ RanR))) × ((x, y) ∈ R)) → ((Π(C:Prop), (((x ∈ DomR) → C) → (((x ∈ RanR) → C) → C))) × (Π(C:Prop), (((y ∈ DomR) → C) → (((y ∈ RanR) → C) → C)))))",
-      "proof_unicode": "(λ(R:Class). (λ(DomR:Class). (λ(RanR:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((x ∈ DomR) × (y ∈ RanR))) × ((x, y) ∈ R))). ⟨(λ(C:Prop). (λ(fL:((x ∈ DomR) → C)). (λ(fR:((x ∈ RanR) → C)). (fL fst((fst(h) snd(h))))))), (λ(C:Prop). (λ(gL:((y ∈ DomR) → C)). (λ(gR:((y ∈ RanR) → C)). (gR snd((fst(h) snd(h)))))))⟩))))))",
-      "statement_ast": "(Pi (R : Class) -> (Pi (DomR : Class) -> (Pi (RanR : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Sigma (_ : (Id Prop ((In x) DomR) true)) * (Id Prop ((In y) RanR) true)))) * (Id Prop ((In ((DunaevPair x) y)) R) true))) -> (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) DomR) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) RanR) true)) -> C)) -> C)))) * (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) DomR) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) RanR) true)) -> C)) -> C))))))))))"
+      "statement_unicode": "Π(R:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((x ∈ (Dom R)) × (y ∈ (Ran R)))) × ((x, y) ∈ R)) → ((Π(C:Prop), (((x ∈ (Dom R)) → C) → (((x ∈ (Ran R)) → C) → C))) × (Π(C:Prop), (((y ∈ (Dom R)) → C) → (((y ∈ (Ran R)) → C) → C)))))",
+      "proof_unicode": "(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((x ∈ (Dom R)) × (y ∈ (Ran R)))) × ((x, y) ∈ R))). ⟨(λ(C:Prop). (λ(fL:((x ∈ (Dom R)) → C)). (λ(fR:((x ∈ (Ran R)) → C)). (fL fst((fst(h) snd(h))))))), (λ(C:Prop). (λ(gL:((y ∈ (Dom R)) → C)). (λ(gR:((y ∈ (Ran R)) → C)). (gR snd((fst(h) snd(h)))))))⟩))))",
+      "statement_ast": "(Pi (R : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) R) true)) -> (Sigma (_ : (Id Prop ((In x) (Dom R)) true)) * (Id Prop ((In y) (Ran R)) true)))) * (Id Prop ((In ((DunaevPair x) y)) R) true))) -> (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) (Dom R)) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) (Ran R)) true)) -> C)) -> C)))) * (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) (Dom R)) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In y) (Ran R)) true)) -> C)) -> C))))))))"
     },
     {
       "id": 150,
@@ -1364,9 +1364,9 @@
       "num": "NBG-151",
       "name": "thm_dunaev_pair_diagonal_subclass_product",
       "kind": "Derived",
-      "statement_unicode": "Π(A:Class), Π(DiagA:Class), Π(x:Class), ((((x ∈ A) → ((x, x) ∈ DiagA)) × (((x, x) ∈ DiagA) → ((x ∈ A) × (x ∈ A)))) → ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ DiagA))))",
-      "proof_unicode": "(λ(A:Class). (λ(DiagA:Class). (λ(x:Class). (λ(hDiag:(((x ∈ A) → ((x, x) ∈ DiagA)) × (((x, x) ∈ DiagA) → ((x ∈ A) × (x ∈ A))))). (λ(hxA:(x ∈ A)). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩)))))",
-      "statement_ast": "(Pi (A : Class) -> (Pi (DiagA : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) x)) DiagA) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) x)) DiagA) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) A) true))))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair x) x)) DiagA) true)))))))"
+      "statement_unicode": "Π(A:Class), Π(x:Class), ((((x ∈ A) → ((x, x) ∈ (DiagClass A))) × (((x, x) ∈ (DiagClass A)) → ((x ∈ A) × (x ∈ A)))) → ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ (DiagClass A)))))",
+      "proof_unicode": "(λ(A:Class). (λ(x:Class). (λ(hDiag:(((x ∈ A) → ((x, x) ∈ (DiagClass A))) × (((x, x) ∈ (DiagClass A)) → ((x ∈ A) × (x ∈ A))))). (λ(hxA:(x ∈ A)). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩))))",
+      "statement_ast": "(Pi (A : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In ((DunaevPair x) x)) (DiagClass A)) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair x) x)) (DiagClass A)) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) A) true))))) -> (Pi (_ : (Id Prop ((In x) A) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In ((DunaevPair x) x)) (DiagClass A)) true))))))"
     },
     {
       "id": 152,
@@ -1409,27 +1409,27 @@
       "num": "NBG-156",
       "name": "thm_galois_connection_adjunction_modus_ponens",
       "kind": "Derived",
-      "statement_unicode": "Π(LeqA:Class), Π(LeqB:Class), Π(x:Class), Π(y:Class), Π(fx:Class), Π(gy:Class), ((((((x, y) ∈ LeqA) → ((fx, y) ∈ LeqB)) × (((fx, y) ∈ LeqB) → ((x, gy) ∈ LeqA))) × ((x, y) ∈ LeqA)) → ((x, gy) ∈ LeqA))",
-      "proof_unicode": "(λ(LeqA:Class). (λ(LeqB:Class). (λ(x:Class). (λ(y:Class). (λ(fx:Class). (λ(gy:Class). (λ(h:(((((x, y) ∈ LeqA) → ((fx, y) ∈ LeqB)) × (((fx, y) ∈ LeqB) → ((x, gy) ∈ LeqA))) × ((x, y) ∈ LeqA))). (snd(fst(h)) (fst(fst(h)) snd(h))))))))))",
-      "statement_ast": "(Pi (LeqA : Class) -> (Pi (LeqB : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (fx : Class) -> (Pi (gy : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) LeqA) true)) -> (Id Prop ((In ((DunaevPair fx) y)) LeqB) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair fx) y)) LeqB) true)) -> (Id Prop ((In ((DunaevPair x) gy)) LeqA) true)))) * (Id Prop ((In ((DunaevPair x) y)) LeqA) true))) -> (Id Prop ((In ((DunaevPair x) gy)) LeqA) true))))))))"
+      "statement_unicode": "Π(LeqA:Class), Π(LeqB:Class), Π(F:Class), Π(G:Class), Π(x:Class), Π(y:Class), ((((((x, y) ∈ LeqA) → ((((ValOf F) x), y) ∈ LeqB)) × (((((ValOf F) x), y) ∈ LeqB) → ((x, ((ValOf G) y)) ∈ LeqA))) × ((x, y) ∈ LeqA)) → ((x, ((ValOf G) y)) ∈ LeqA))",
+      "proof_unicode": "(λ(LeqA:Class). (λ(LeqB:Class). (λ(F:Class). (λ(G:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((((x, y) ∈ LeqA) → ((((ValOf F) x), y) ∈ LeqB)) × (((((ValOf F) x), y) ∈ LeqB) → ((x, ((ValOf G) y)) ∈ LeqA))) × ((x, y) ∈ LeqA))). (snd(fst(h)) (fst(fst(h)) snd(h))))))))))",
+      "statement_ast": "(Pi (LeqA : Class) -> (Pi (LeqB : Class) -> (Pi (F : Class) -> (Pi (G : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) LeqA) true)) -> (Id Prop ((In ((DunaevPair ((ValOf F) x)) y)) LeqB) true))) * (Pi (_ : (Id Prop ((In ((DunaevPair ((ValOf F) x)) y)) LeqB) true)) -> (Id Prop ((In ((DunaevPair x) ((ValOf G) y))) LeqA) true)))) * (Id Prop ((In ((DunaevPair x) y)) LeqA) true))) -> (Id Prop ((In ((DunaevPair x) ((ValOf G) y))) LeqA) true))))))))"
     },
     {
       "id": 157,
       "num": "NBG-157",
       "name": "thm_closure_operator_extensivity_idempotence_step",
       "kind": "Derived",
-      "statement_unicode": "Π(x:Class), Π(A:Class), Π(ClA:Class), Π(ClClA:Class), ((((x ∈ A) → (x ∈ ClA)) × ((x ∈ ClClA) → (x ∈ ClA))) → ((Π(C:Prop), (((x ∈ A) → C) → (((x ∈ ClClA) → C) → C))) → (x ∈ ClA)))",
-      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(ClA:Class). (λ(ClClA:Class). (λ(h:(((x ∈ A) → (x ∈ ClA)) × ((x ∈ ClClA) → (x ∈ ClA)))). (λ(hOr:Π(C:Prop), (((x ∈ A) → C) → (((x ∈ ClClA) → C) → C))). (((hOr (x ∈ ClA)) fst(h)) snd(h))))))))",
-      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (ClA : Class) -> (Pi (ClClA : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In x) ClA) true))) * (Pi (_ : (Id Prop ((In x) ClClA) true)) -> (Id Prop ((In x) ClA) true)))) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) ClClA) true)) -> C)) -> C)))) -> (Id Prop ((In x) ClA) true)))))))"
+      "statement_unicode": "Π(x:Class), Π(A:Class), ((((x ∈ A) → (x ∈ (ClosureOp A))) × ((x ∈ (ClosureOp (ClosureOp A))) → (x ∈ (ClosureOp A)))) → ((Π(C:Prop), (((x ∈ A) → C) → (((x ∈ (ClosureOp (ClosureOp A))) → C) → C))) → (x ∈ (ClosureOp A))))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ A) → (x ∈ (ClosureOp A))) × ((x ∈ (ClosureOp (ClosureOp A))) → (x ∈ (ClosureOp A))))). (λ(hOr:Π(C:Prop), (((x ∈ A) → C) → (((x ∈ (ClosureOp (ClosureOp A))) → C) → C))). (((hOr (x ∈ (ClosureOp A))) fst(h)) snd(h))))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> (Id Prop ((In x) (ClosureOp A)) true))) * (Pi (_ : (Id Prop ((In x) (ClosureOp (ClosureOp A))) true)) -> (Id Prop ((In x) (ClosureOp A)) true)))) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) A) true)) -> C)) -> (Pi (_ : (Pi (_ : (Id Prop ((In x) (ClosureOp (ClosureOp A))) true)) -> C)) -> C)))) -> (Id Prop ((In x) (ClosureOp A)) true)))))"
     },
     {
       "id": 158,
       "num": "NBG-158",
       "name": "thm_interior_operator_contraction_idempotence_step",
       "kind": "Derived",
-      "statement_unicode": "Π(x:Class), Π(A:Class), Π(IntA:Class), Π(IntIntA:Class), ((((x ∈ IntA) → (x ∈ A)) × ((x ∈ IntA) → (x ∈ IntIntA))) → ((x ∈ IntA) → ((x ∈ A) × (x ∈ IntIntA))))",
-      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(IntA:Class). (λ(IntIntA:Class). (λ(h:(((x ∈ IntA) → (x ∈ A)) × ((x ∈ IntA) → (x ∈ IntIntA)))). (λ(hx:(x ∈ IntA)). ⟨(fst(h) hx), (snd(h) hx)⟩))))))",
-      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (IntA : Class) -> (Pi (IntIntA : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) IntA) true)) -> (Id Prop ((In x) A) true))) * (Pi (_ : (Id Prop ((In x) IntA) true)) -> (Id Prop ((In x) IntIntA) true)))) -> (Pi (_ : (Id Prop ((In x) IntA) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) IntIntA) true))))))))"
+      "statement_unicode": "Π(x:Class), Π(A:Class), ((((x ∈ (InteriorOp A)) → (x ∈ A)) × ((x ∈ (InteriorOp A)) → (x ∈ (InteriorOp (InteriorOp A))))) → ((x ∈ (InteriorOp A)) → ((x ∈ A) × (x ∈ (InteriorOp (InteriorOp A))))))",
+      "proof_unicode": "(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ (InteriorOp A)) → (x ∈ A)) × ((x ∈ (InteriorOp A)) → (x ∈ (InteriorOp (InteriorOp A)))))). (λ(hx:(x ∈ (InteriorOp A))). ⟨(fst(h) hx), (snd(h) hx)⟩))))",
+      "statement_ast": "(Pi (x : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In x) (InteriorOp A)) true)) -> (Id Prop ((In x) A) true))) * (Pi (_ : (Id Prop ((In x) (InteriorOp A)) true)) -> (Id Prop ((In x) (InteriorOp (InteriorOp A))) true)))) -> (Pi (_ : (Id Prop ((In x) (InteriorOp A)) true)) -> (Sigma (_ : (Id Prop ((In x) A) true)) * (Id Prop ((In x) (InteriorOp (InteriorOp A))) true))))))"
     },
     {
       "id": 159,
@@ -1454,27 +1454,27 @@
       "num": "NBG-161",
       "name": "thm_complete_lattice_supremum_least_upper_bound",
       "kind": "Derived",
-      "statement_unicode": "Π(UB:Class), Π(Leq:Class), Π(supA:Class), Π(x:Class), (((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((supA, Z) ∈ Leq)))) → ((supA, x) ∈ Leq))",
-      "proof_unicode": "(λ(UB:Class). (λ(Leq:Class). (λ(supA:Class). (λ(x:Class). (λ(h:((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((supA, Z) ∈ Leq))))). ((snd(h) x) fst(h)))))))",
-      "statement_ast": "(Pi (UB : Class) -> (Pi (Leq : Class) -> (Pi (supA : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) UB) true)) * (Pi (Z : Class) -> (Pi (_ : (Id Prop ((In Z) UB) true)) -> (Id Prop ((In ((DunaevPair supA) Z)) Leq) true))))) -> (Id Prop ((In ((DunaevPair supA) x)) Leq) true))))))"
+      "statement_unicode": "Π(UB:Class), Π(Leq:Class), Π(A:Class), Π(x:Class), (((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((((LatticeSup Leq) A), Z) ∈ Leq)))) → ((((LatticeSup Leq) A), x) ∈ Leq))",
+      "proof_unicode": "(λ(UB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((((LatticeSup Leq) A), Z) ∈ Leq))))). ((snd(h) x) fst(h)))))))",
+      "statement_ast": "(Pi (UB : Class) -> (Pi (Leq : Class) -> (Pi (A : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) UB) true)) * (Pi (Z : Class) -> (Pi (_ : (Id Prop ((In Z) UB) true)) -> (Id Prop ((In ((DunaevPair ((LatticeSup Leq) A)) Z)) Leq) true))))) -> (Id Prop ((In ((DunaevPair ((LatticeSup Leq) A)) x)) Leq) true))))))"
     },
     {
       "id": 162,
       "num": "NBG-162",
       "name": "thm_complete_lattice_infimum_greatest_lower_bound",
       "kind": "Derived",
-      "statement_unicode": "Π(LB:Class), Π(Leq:Class), Π(infA:Class), Π(x:Class), (((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, infA) ∈ Leq)))) → ((x, infA) ∈ Leq))",
-      "proof_unicode": "(λ(LB:Class). (λ(Leq:Class). (λ(infA:Class). (λ(x:Class). (λ(h:((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, infA) ∈ Leq))))). ((snd(h) x) fst(h)))))))",
-      "statement_ast": "(Pi (LB : Class) -> (Pi (Leq : Class) -> (Pi (infA : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) LB) true)) * (Pi (Z : Class) -> (Pi (_ : (Id Prop ((In Z) LB) true)) -> (Id Prop ((In ((DunaevPair Z) infA)) Leq) true))))) -> (Id Prop ((In ((DunaevPair x) infA)) Leq) true))))))"
+      "statement_unicode": "Π(LB:Class), Π(Leq:Class), Π(A:Class), Π(x:Class), (((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, ((LatticeInf Leq) A)) ∈ Leq)))) → ((x, ((LatticeInf Leq) A)) ∈ Leq))",
+      "proof_unicode": "(λ(LB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, ((LatticeInf Leq) A)) ∈ Leq))))). ((snd(h) x) fst(h)))))))",
+      "statement_ast": "(Pi (LB : Class) -> (Pi (Leq : Class) -> (Pi (A : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In x) LB) true)) * (Pi (Z : Class) -> (Pi (_ : (Id Prop ((In Z) LB) true)) -> (Id Prop ((In ((DunaevPair Z) ((LatticeInf Leq) A))) Leq) true))))) -> (Id Prop ((In ((DunaevPair x) ((LatticeInf Leq) A))) Leq) true))))))"
     },
     {
       "id": 163,
       "num": "NBG-163",
       "name": "thm_monotone_operator_post_fixed_point_closure",
       "kind": "Derived",
-      "statement_unicode": "Π(Leq:Class), Π(x:Class), Π(fx:Class), Π(ffx:Class), (((((x, fx) ∈ Leq) → ((fx, ffx) ∈ Leq)) × ((((x, fx) ∈ Leq) × ((fx, ffx) ∈ Leq)) → ((x, ffx) ∈ Leq))) → (((x, fx) ∈ Leq) → ((x, ffx) ∈ Leq)))",
-      "proof_unicode": "(λ(Leq:Class). (λ(x:Class). (λ(fx:Class). (λ(ffx:Class). (λ(h:((((x, fx) ∈ Leq) → ((fx, ffx) ∈ Leq)) × ((((x, fx) ∈ Leq) × ((fx, ffx) ∈ Leq)) → ((x, ffx) ∈ Leq)))). (λ(hxfx:((x, fx) ∈ Leq)). (snd(h) ⟨hxfx, (fst(h) hxfx)⟩)))))))",
-      "statement_ast": "(Pi (Leq : Class) -> (Pi (x : Class) -> (Pi (fx : Class) -> (Pi (ffx : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) fx)) Leq) true)) -> (Id Prop ((In ((DunaevPair fx) ffx)) Leq) true))) * (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) fx)) Leq) true)) * (Id Prop ((In ((DunaevPair fx) ffx)) Leq) true))) -> (Id Prop ((In ((DunaevPair x) ffx)) Leq) true)))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) fx)) Leq) true)) -> (Id Prop ((In ((DunaevPair x) ffx)) Leq) true)))))))"
+      "statement_unicode": "Π(Leq:Class), Π(F:Class), Π(x:Class), (((((x, ((ValOf F) x)) ∈ Leq) → ((((ValOf F) x), ((ValOf F) ((ValOf F) x))) ∈ Leq)) × ((((x, ((ValOf F) x)) ∈ Leq) × ((((ValOf F) x), ((ValOf F) ((ValOf F) x))) ∈ Leq)) → ((x, ((ValOf F) ((ValOf F) x))) ∈ Leq))) → (((x, ((ValOf F) x)) ∈ Leq) → ((x, ((ValOf F) ((ValOf F) x))) ∈ Leq)))",
+      "proof_unicode": "(λ(Leq:Class). (λ(F:Class). (λ(x:Class). (λ(h:((((x, ((ValOf F) x)) ∈ Leq) → ((((ValOf F) x), ((ValOf F) ((ValOf F) x))) ∈ Leq)) × ((((x, ((ValOf F) x)) ∈ Leq) × ((((ValOf F) x), ((ValOf F) ((ValOf F) x))) ∈ Leq)) → ((x, ((ValOf F) ((ValOf F) x))) ∈ Leq)))). (λ(hxfx:((x, ((ValOf F) x)) ∈ Leq)). (snd(h) ⟨hxfx, (fst(h) hxfx)⟩))))))",
+      "statement_ast": "(Pi (Leq : Class) -> (Pi (F : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) ((ValOf F) x))) Leq) true)) -> (Id Prop ((In ((DunaevPair ((ValOf F) x)) ((ValOf F) ((ValOf F) x)))) Leq) true))) * (Pi (_ : (Sigma (_ : (Id Prop ((In ((DunaevPair x) ((ValOf F) x))) Leq) true)) * (Id Prop ((In ((DunaevPair ((ValOf F) x)) ((ValOf F) ((ValOf F) x)))) Leq) true))) -> (Id Prop ((In ((DunaevPair x) ((ValOf F) ((ValOf F) x)))) Leq) true)))) -> (Pi (_ : (Id Prop ((In ((DunaevPair x) ((ValOf F) x))) Leq) true)) -> (Id Prop ((In ((DunaevPair x) ((ValOf F) ((ValOf F) x)))) Leq) true))))))"
     },
     {
       "id": 164,
@@ -1490,9 +1490,9 @@
       "num": "NBG-165",
       "name": "thm_dunaev_pair_equivalence_quotient_canonical_map",
       "kind": "Derived",
-      "statement_unicode": "Π(Eq:Class), Π(ClX:Class), Π(ClY:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ Eq) → ((x ∈ ClY) × (y ∈ ClX))) × ((x, y) ∈ Eq)) → ((y ∈ ClX) × (x ∈ ClY)))",
-      "proof_unicode": "(λ(Eq:Class). (λ(ClX:Class). (λ(ClY:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ Eq) → ((x ∈ ClY) × (y ∈ ClX))) × ((x, y) ∈ Eq))). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))))",
-      "statement_ast": "(Pi (Eq : Class) -> (Pi (ClX : Class) -> (Pi (ClY : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) Eq) true)) -> (Sigma (_ : (Id Prop ((In x) ClY) true)) * (Id Prop ((In y) ClX) true)))) * (Id Prop ((In ((DunaevPair x) y)) Eq) true))) -> (Sigma (_ : (Id Prop ((In y) ClX) true)) * (Id Prop ((In x) ClY) true))))))))"
+      "statement_unicode": "Π(Eq:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ Eq) → ((x ∈ ((EquivClass Eq) y)) × (y ∈ ((EquivClass Eq) x)))) × ((x, y) ∈ Eq)) → ((y ∈ ((EquivClass Eq) x)) × (x ∈ ((EquivClass Eq) y))))",
+      "proof_unicode": "(λ(Eq:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ Eq) → ((x ∈ ((EquivClass Eq) y)) × (y ∈ ((EquivClass Eq) x)))) × ((x, y) ∈ Eq))). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))",
+      "statement_ast": "(Pi (Eq : Class) -> (Pi (x : Class) -> (Pi (y : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In ((DunaevPair x) y)) Eq) true)) -> (Sigma (_ : (Id Prop ((In x) ((EquivClass Eq) y)) true)) * (Id Prop ((In y) ((EquivClass Eq) x)) true)))) * (Id Prop ((In ((DunaevPair x) y)) Eq) true))) -> (Sigma (_ : (Id Prop ((In y) ((EquivClass Eq) x)) true)) * (Id Prop ((In x) ((EquivClass Eq) y)) true))))))"
     },
     {
       "id": 166,
