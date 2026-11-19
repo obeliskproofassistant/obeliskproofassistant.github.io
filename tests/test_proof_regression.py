@@ -95,10 +95,13 @@ class TestProofRegression(unittest.TestCase):
         self.assertTrue(os.path.isfile(nbg_json_path))
         with open(nbg_json_path, "r", encoding="utf-8") as f:
             nbg_lib = json.load(f)
-        self.assertEqual(nbg_lib["total_count"], 100)
-        self.assertEqual(nbg_lib["derived_count"], 77)
+        self.assertEqual(nbg_lib["total_count"], 220)
+        self.assertEqual(nbg_lib["derived_count"], 197)
         self.assertEqual(nbg_lib["definitional_count"], 16)
         self.assertEqual(nbg_lib["axiomatic_count"], 7)
+        for md_rel in ("manual.md", "variant1.md", "proofs.md", "nbg_library.md", "variant2.md"):
+            md_path = os.path.join(SITE_DIR, "generated", md_rel)
+            self.assertTrue(os.path.isfile(md_path), f"Missing ML-generated Markdown file: {md_path}")
         thm_a03 = next(t for t in nbg_lib["theorems"] if t["name"] == "thm_A03")
         self.assertIn("(λ(A:Prop). (λ(B:Prop). (λ(p:(A × B)). fst(p)))) ≡ (λ(A:Prop). (λ(B:Prop). fst))", thm_a03["proof_unicode"])
         self.assertIn("Π(A:Prop), Π(B:Prop), ((A × B) → A)", thm_a03["statement_unicode"])
@@ -108,7 +111,7 @@ class TestProofRegression(unittest.TestCase):
         """Database sections and entry order must derive directly from set_theory_prover/program/types/order_sec*.txt."""
         types_dir = os.path.abspath(os.path.join(SITE_DIR, "..", "set_theory_prover", "program", "types"))
         sec_orders = {}
-        for idx, sid in enumerate(s["id"] for s in self.db["sections"]):
+        for idx, sid in enumerate(s["id"] for s in self.gen_db["sections"]):
             sec_idx = idx + 1
             order_path = os.path.join(types_dir, f"order_sec{sec_idx}.txt")
             self.assertTrue(os.path.isfile(order_path), f"Missing section order file: {order_path}")
@@ -119,10 +122,10 @@ class TestProofRegression(unittest.TestCase):
             sec_orders[sid] = names
 
         expected_total = sum(len(v) for v in sec_orders.values())
-        total_entries = sum(len(s["entries"]) for s in self.db["sections"])
+        total_entries = sum(len(s["entries"]) for s in self.gen_db["sections"])
         self.assertEqual(total_entries, expected_total)
-        self.assertEqual(self.db["entry_count"], expected_total)
-        for sec in self.db["sections"]:
+        self.assertEqual(self.gen_db["entry_count"], expected_total)
+        for sec in self.gen_db["sections"]:
             sid = sec["id"]
             actual_names = [e["name"] for e in sec["entries"]]
             self.assertEqual(actual_names, sec_orders[sid], f"Section {sid} order does not match order_{sid.replace('-', '')}.txt")
@@ -210,10 +213,14 @@ class TestProofRegression(unittest.TestCase):
         """Every entry in generated/ and frozen/ must have a corresponding standalone certificate page."""
         for e in self.gen_db["entries"]:
             eid = e["id"]
-            for base_dir in (os.path.join(SITE_DIR, "generated"), FROZEN_DIR):
-                page_path = os.path.join(base_dir, "proofs", f"{eid}.html")
-                self.assertTrue(os.path.isfile(page_path), f"Certificate missing: {page_path}")
-                self.assertGreater(os.path.getsize(page_path), 500, f"Certificate empty or truncated: {page_path}")
+            page_path = os.path.join(SITE_DIR, "generated", "proofs", f"{eid}.html")
+            self.assertTrue(os.path.isfile(page_path), f"Certificate missing: {page_path}")
+            self.assertGreater(os.path.getsize(page_path), 500, f"Certificate empty or truncated: {page_path}")
+        for e in self.db["entries"]:
+            eid = e["id"]
+            page_path = os.path.join(FROZEN_DIR, "proofs", f"{eid}.html")
+            self.assertTrue(os.path.isfile(page_path), f"Frozen certificate missing: {page_path}")
+            self.assertGreater(os.path.getsize(page_path), 500, f"Frozen certificate empty or truncated: {page_path}")
 
     def test_manual_links_to_all_proof_certificates(self):
         """generated/manual.html must link to every standalone entry page."""
@@ -234,17 +241,30 @@ class TestProofRegression(unittest.TestCase):
 
     def test_proofs_gallery_has_all_theorems_and_rules(self):
         """generated/proofs.html and frozen/proofs.html must contain all theorems and inference rules."""
+        gen_proofs_path = os.path.join(SITE_DIR, "generated", "proofs.html")
+        with open(gen_proofs_path, "r", encoding="utf-8") as f:
+            gen_proofs_html = f.read()
         for e in self.gen_db["entries"]:
             if e["kind"] in ("Theorem", "Inference Rule"):
                 row_id = f'id="{e["id"]}"'
-                self.assertIn(row_id, self.proofs_html, f"proofs.html missing row: {row_id}")
+                self.assertIn(row_id, gen_proofs_html, f"generated/proofs.html missing row: {row_id}")
+        for e in self.db["entries"]:
+            if e["kind"] in ("Theorem", "Inference Rule"):
+                row_id = f'id="{e["id"]}"'
+                self.assertIn(row_id, self.proofs_html, f"frozen/proofs.html missing row: {row_id}")
 
     def test_proofs_index_integrity(self):
-        """proofs/index.html must exist and include all 107 kernel entries."""
+        """generated/proofs/index.html and frozen/proofs/index.html must exist and include all their entries."""
+        gen_index_path = os.path.join(SITE_DIR, "generated", "proofs", "index.html")
+        self.assertTrue(os.path.isfile(gen_index_path))
+        with open(gen_index_path, "r", encoding="utf-8") as f:
+            gen_index_content = f.read()
+        for e in self.gen_db["entries"]:
+            self.assertIn(f'id="{e["id"]}"', gen_index_content)
         self.assertTrue(os.path.isfile(PROOFS_INDEX_PATH))
         with open(PROOFS_INDEX_PATH, "r", encoding="utf-8") as f:
             index_content = f.read()
-        for e in self.gen_db["entries"]:
+        for e in self.db["entries"]:
             self.assertIn(f'id="{e["id"]}"', index_content)
 
     def test_nbg_library_json_mirror_is_present(self):
@@ -515,8 +535,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(neg_comp_f["status"], "Postulated (Kernel Axiom)")
         self.assertIn("negation-completeness", neg_comp_f["comment"])
 
-        # Ensure total entry count is preserved at 106
-        self.assertEqual(len(db), 106)
+        # Ensure total entry count is 118 (106 + 12 new universe/cumulative hierarchy entries 3.79-3.90)
+        self.assertEqual(len(db), 118)
 
         # In manual.html, verify verification cell is Postulated (Kernel Axiom), not Definitional
         self.assertIn('id="AxmSemanticCompletenessOfFullTheory"', self.gen_manual_html)

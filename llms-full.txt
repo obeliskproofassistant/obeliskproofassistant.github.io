@@ -1,0 +1,60 @@
+# Obelisk Proof Assistant — Complete Agent Reference (`llms-full.txt`)
+
+> Canonical URL: https://obeliskproofassistant.github.io/llms-full.txt
+> Index URL: https://obeliskproofassistant.github.io/llms.txt
+> Author: Georgy Dunaev (https://georgydunaev.github.io)
+> Source Repository: https://github.com/georgydunaev/set_theory_prover
+
+## 1. Taxonomy & Architectural Overview
+
+Obelisk Proof Assistant strictly separates two co-existing formal approaches across three conceptual levels:
+
+1. **Logical Frameworks**:
+   - `MKTD1-framework`: Sequent-style Hilbert/natural-deduction logical framework over typed expressions (`Class.Expression`, `Fm.Expression`, `Stmt.Expression`, `Ctx.Expression`, `Theory.Expression`, `Prf.Expression`).
+   - `MKTD2-framework`: Constructive dependent type framework (propositions-as-types, Curry-Howard isomorphism with `Π`, `Σ`, `λ`, dependent projections `fst`/`snd`, and intensional/propositional equality).
+2. **Proof Assistant Systems / Provers**:
+   - `MKTD1-prover` / `MKTD1-system`: Implemented in `program/newchecker.ML`, `program/types/typetheory.ML`, `program/types/foundations.ML`, `program/types/universe_definitions.ML`, and `program/types/entries.ML`.
+   - `MKTD2-prover` / `MKTD2-system`: Implemented in `program/lcf.ML`, `program/dependent_eval.ML`, `program/nbg_compiler.ML`, `program/nbg_surface_compiler.ML`, and `program/verified_theorems.ML`.
+3. **Formal Theories**:
+   - `MKTD1-theory`: Morse-Kelley (MK) and von Neumann-Bernays-Goedel (NBG) class theory formulated in `MKTD1-framework` (118 entries across 5 sections).
+   - `MKTD2-theory`: Constructive and classical NBG/MK class theory, ordinal arithmetic, category theory, and 2-category theory formulated in `MKTD2-framework` (220 verified theorem records).
+
+### Core Semantic Invariants
+
+- **Default Type `Class` (Never `Set` as a Primitive Type)**: All object-variables range over classes (`x : Class`). Being a set (an element of the universal class $V$) is a predicate `isSet(x) <=> (x in V)` (`DefUniversalClass`, Entry `3.19`), never a separate syntactic sort that restricts class comprehension `{x | phi(x)}`.
+- **Off-by-One Metalevel Invariant**: Standard ML (CakeML / Poly/ML) stores syntactic *expressions* (`Class_Expre`, `Fm_Expre`, `Theory_Expre`), whereas semantic classes belong to the unstored model domain (`type Class = Nonstored.t`).
+- **Dunaev Tagged Ordered Pairs `(A, B)_D`**: Because Kuratowski ordered pairs `{{A}, {A, B}}` collapse to the empty set when `A` or `B` is a proper class (`A notin V`), Obelisk uses Dunaev Tagged Ordered Pairs (`DefDunaevOrderedPair`, Entry `3.75`):
+  `(A, B)_D := {0 x x | x in A} U {1 x y | y in B}`
+  which works uniformly for arbitrary proper classes and sets without requiring `A, B in V`.
+- **Kleene Star `X*` and Tuple Length Disjointness**: Iterated right-nested Dunaev $n$-tuples with empty-set termination tag enjoy strict length disjointness (`X^{x_D m} cap X^{x_D k} = empty` for `0 <= m < k`), enabling unambiguous union `X* = U_{n in omega} X^{x_D n}`.
+- **Decoupled Equality Characterizations**:
+  - Unrestricted Class Extensionality (elements on the right of `in`): `forall A, forall B, (A = B <=> forall X, (X in A <=> X in B))`.
+  - Set-Restricted Leibniz Membership-Profile Equality (classes on the left of `in`): `forall A in V, forall B in V, (A = B <=> forall Y, (A in Y <=> B in Y))`.
+- **Decoupled Completeness Axioms for the Full Theory `F`**:
+  - `AxmSoundnessOfFullTheory` (`3.72`, `PSound_prf`): `forall(phi:Fm), (F, [] |- phi) => eval_M(phi)` (postulated at the metalevel due to Tarski undefinability and Loeb's theorem).
+  - `AxmSemanticCompletenessOfFullTheory` (`3.73`, `POmnisSem_prf`): `forall(phi:Fm), eval_M(phi) => (F, [] |- phi)` (semantic adequacy / model-theoretic omniscience).
+  - `AxmNegationCompletenessOfFullTheory` (`3.74`, `POmnisNeg_prf`): `forall(phi:Fm), not(F, [] |- not phi) => (F, [] |- phi)` (syntactic negation-completeness / Lindenbaum maximality).
+
+## 2. Formal Proof of $U = V_{U \cap \mathrm{On}}$ in `MKTD1-system` (Entries `3.79`–`3.90`)
+
+In `program/types/universe_definitions.ML` (Section 11, 45 machine-verified theorems) and catalog entries `3.79`–`3.90`, `MKTD1-system` proves that for every Grothendieck-Tarski universe $U$, setting $\kappa = U \cap \mathrm{On}$ yields $U = V_\kappa = V_{U \cap \mathrm{On}}$:
+
+- **Entry `3.79` (`DefLimitOrdinal`)**: `(alpha limitOrdinal) <=> ((alpha in On) /\ ((emptyset in alpha) /\ (forall(beta:Class) ((beta in alpha) -> (suc(beta) in alpha)))))`.
+- **Entry `3.80` (`DefIndexedUnionClosed`)**: `(U indexedUnionClosed) <=> (forall(I:Class) ((I in U) -> (forall(F:Class) (((F : (I -> U)) /\ (I in V)) -> (U_{i in I} F(i) in U)))))`.
+- **Entry `3.81` (`DefVonNeumannStageLaws`) & Entry `3.82` (`DefVonNeumannStageGraph`)**: Transfinite recursion specification and functional graph for the von Neumann cumulative hierarchy stages $V_\alpha$ (`V_0 = emptyset`, `V_{suc(alpha)} = P(V_alpha) cap V`, `V_lambda = U_{beta < lambda} V_beta`).
+- **Entry `3.83` (`DefSetRankLaws`) & Entry `3.84` (`DefSetRankGraph`)**: Set rank functional `rank(x) = U_{y in x} suc(rank(y))` and fundamental bounding laws (`rank(x) in On`, `x subset V_{rank(x)}`, `x in V_{suc(rank(x))}`).
+- **Entry `3.85` (`ThmUniverseInterOnIsOrdinal`)**: `(U universe) |- ((U cap On) in On)` (Step 0: $\kappa = U \cap \mathrm{On}$ is a transitive set of ordinals, hence an ordinal, and $\emptyset \in U$).
+- **Entry `3.86` (`ThmUniverseUnionClosedFromIndexedUnion`)**: `((U trans) /\ (U indexedUnionClosed)) |- (U tight)` (Step 1a: closure under $\bigcup x$ derived from indexed union over the identity map $\mathrm{id}_x : x \to U$).
+- **Entry `3.87` (`ThmUniverseInterOnIsLimitOrdinal`)**: `(U universe) |- ((U cap On) limitOrdinal)` (Step 1b-c: closure under ordinal successor $\alpha \mapsto \alpha \cup \{\alpha\}$ and proof by irreflexivity $\kappa \notin \kappa$ that $\kappa = U \cap \mathrm{On}$ is a nonzero limit ordinal).
+- **Entry `3.88` (`ThmVonNeumannStageSubUniverse`)**: `(U universe) |- (V_{U cap On} subset U)` (Step 2: transfinite induction showing $\forall \alpha \in U \cap \mathrm{On},\ V_\alpha \in U$, hence $V_\kappa = \bigcup_{\alpha < \kappa} V_\alpha \subseteq U$).
+- **Entry `3.89` (`ThmUniverseSubVonNeumannStage`)**: `(U universe) |- (U subset V_{U cap On})` (Step 3: $\in$-induction showing $\forall x \in U,\ \mathrm{rank}(x) \in U \cap \mathrm{On}$, so $\mathrm{suc}(\mathrm{rank}(x)) \in \kappa$ and $x \in V_{\mathrm{suc}(\mathrm{rank}(x))} \subseteq V_\kappa$).
+- **Entry `3.90` (`ThmUniverseEqVonNeumannStageInterOn`)**: `(U universe) |- (U = V_{U cap On})` (Conclusion combining `ThmUniverseSubVonNeumannStage` and `ThmVonNeumannStageSubUniverse` via `subset_antisym_thm`).
+
+## 3. Direct Markdown & JSON Links for Automated Agents
+
+- `https://obeliskproofassistant.github.io/generated/manual.md` — Full 118-entry `MKTD1-system` manual in pure Markdown.
+- `https://obeliskproofassistant.github.io/generated/proofs.md` — `MKTD1-system` inference rules and verified theorems in pure Markdown.
+- `https://obeliskproofassistant.github.io/generated/nbg_library.md` — Full 220-record `MKTD2-system` constructive theorem library in pure Markdown.
+- `https://obeliskproofassistant.github.io/generated/theory_db.json` — Complete JSON database for `MKTD1-system`.
+- `https://obeliskproofassistant.github.io/generated/nbg_library.json` — Complete JSON database for `MKTD2-system`.
+- `https://obeliskproofassistant.github.io/foundations.pdf` — 424-page mathematical monograph (PDF).

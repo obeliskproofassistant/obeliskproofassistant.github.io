@@ -1,0 +1,1054 @@
+<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+     Source files: set_theory_prover/program/newchecker.ML,
+                   set_theory_prover/program/types/typetheory.ML,
+                   set_theory_prover/program/types/foundations.ML,
+                   set_theory_prover/program/types/entries.ML
+     Generator:    set_theory_prover/program/html_generator.ML
+     Regenerate:   cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML
+-->
+
+# Obelisk Proof Assistant — Algorithmically Generated Entity Database (MKTD1-system / MKTD1-theory)
+
+Agent-friendly Markdown edition generated directly from `set_theory_prover/program/newchecker.ML` and `types/entries.ML` via `html_generator.ML` for **MKTD1-system (MKTD1-prover, MKTD1-theory, MKTD1-framework)** without HTML UI clutter.
+
+- **Machine-Readable JSON Database:** [theory_db.json](theory_db.json)
+- **MKTD2-system Formulas-as-Types Markdown:** [nbg_library.md](nbg_library.md)
+- **MKTD2-system JSON Database:** [nbg_library.json](nbg_library.json)
+- **Plain-Text Specification:** [output.txt](output.txt)
+
+## 1. Propositional Logic (1.01-1.14) (1.01-1.14)
+
+Classical propositional calculus axiom schemas (A01-A13) and Modus Ponens.
+
+### 1.01 `AxmPropWeakening` — A01 (Axiom)
+
+- **Identifier:** `AxmPropWeakening` (entry `1.01`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⟦𝛂⟧—→(⟦𝛃⟧—→⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧))`
+- **Proof Constructor:** `PA1_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropWeakening.html](proofs/AxmPropWeakening.html)
+
+### 1.02 `AxmPropFrege` — A02 (Axiom)
+
+- **Identifier:** `AxmPropFrege` (entry `1.02`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((⟦𝛂⟧—→(⟦𝛃⟧—→⟦𝛄⟧))—→((⟦𝛂⟧—→⟦𝛃⟧)—→(⟦𝛂⟧—→⟦𝛄⟧)))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛄@Fm.Expression]⟧))—→((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧)—→(⟦[𝛂@Fm.Expression]⟧—→⟦[𝛄@Fm.Expression]⟧)))`
+- **Proof Constructor:** `PA2_prf (Γ, A, B, C)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm), (𝛄:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropFrege.html](proofs/AxmPropFrege.html)
+
+### 1.03 `AxmPropConjLeft` — A03 (Axiom)
+
+- **Identifier:** `AxmPropConjLeft` (entry `1.03`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((⟦𝛂⟧∧⟦𝛃⟧)—→⟦𝛂⟧)`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)—→⟦[𝛂@Fm.Expression]⟧)`
+- **Proof Constructor:** `PA3_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropConjLeft.html](proofs/AxmPropConjLeft.html)
+
+### 1.04 `AxmPropConjRight` — A04 (Axiom)
+
+- **Identifier:** `AxmPropConjRight` (entry `1.04`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((⟦𝛂⟧∧⟦𝛃⟧)—→⟦𝛃⟧)`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧)`
+- **Proof Constructor:** `PA4_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropConjRight.html](proofs/AxmPropConjRight.html)
+
+### 1.05 `AxmPropConjIntro` — A05 (Axiom)
+
+- **Identifier:** `AxmPropConjIntro` (entry `1.05`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⟦𝛂⟧—→(⟦𝛃⟧—→(⟦𝛂⟧∧⟦𝛃⟧)))`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛃@Fm.Expression]⟧—→(⟦[𝛂@Fm.Expression]⟧∧⟦[𝛃@Fm.Expression]⟧)))`
+- **Proof Constructor:** `PA5_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropConjIntro.html](proofs/AxmPropConjIntro.html)
+
+### 1.06 `AxmPropDisjLeft` — A06 (Axiom)
+
+- **Identifier:** `AxmPropDisjLeft` (entry `1.06`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⟦𝛂⟧—→(⟦𝛂⟧∨⟦𝛃⟧))`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧—→(⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧))`
+- **Proof Constructor:** `PA6_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropDisjLeft.html](proofs/AxmPropDisjLeft.html)
+
+### 1.07 `AxmPropDisjRight` — A07 (Axiom)
+
+- **Identifier:** `AxmPropDisjRight` (entry `1.07`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⟦𝛃⟧—→(⟦𝛂⟧∨⟦𝛃⟧))`
+- **Scheme of Types (Unicode):** `(⟦[𝛃@Fm.Expression]⟧—→(⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧))`
+- **Proof Constructor:** `PA7_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropDisjRight.html](proofs/AxmPropDisjRight.html)
+
+### 1.08 `AxmPropDisjElim` — A08 (Axiom)
+
+- **Identifier:** `AxmPropDisjElim` (entry `1.08`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛄⟧)—→((⟦𝛃⟧—→⟦𝛄⟧)—→((⟦𝛂⟧∨⟦𝛃⟧)—→⟦𝛄⟧)))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛄@Fm.Expression]⟧)—→((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛄@Fm.Expression]⟧)—→((⟦[𝛂@Fm.Expression]⟧∨⟦[𝛃@Fm.Expression]⟧)—→⟦[𝛄@Fm.Expression]⟧)))`
+- **Proof Constructor:** `PA8_prf (Γ, A, B, C)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm), (𝛄:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropDisjElim.html](proofs/AxmPropDisjElim.html)
+
+### 1.09 `AxmPropNegElim` — A09 (Axiom)
+
+- **Identifier:** `AxmPropNegElim` (entry `1.09`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((¬⟦𝛂⟧)—→(⟦𝛂⟧—→⊥))`
+- **Scheme of Types (Unicode):** `((¬⟦[𝛂@Fm.Expression]⟧)—→(⟦[𝛂@Fm.Expression]⟧—→⊥))`
+- **Proof Constructor:** `PA9_prf (Γ, A)`
+- **Judgements:** `[(𝛂:Fm)]`
+- **Kernel Note:** Negation Elimination (Contradiction to Bottom): (¬⟦𝛂⟧) —→ (⟦𝛂⟧ —→ ⊥).
+- **Standalone Certificate:** [proofs/AxmPropNegElim.html](proofs/AxmPropNegElim.html)
+
+### 1.10 `AxmPropNegIntro` — A10 (Axiom)
+
+- **Identifier:** `AxmPropNegIntro` (entry `1.10`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛃⟧)—→((⟦𝛂⟧—→¬⟦𝛃⟧)—→¬⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧)—→((⟦[𝛂@Fm.Expression]⟧—→¬⟦[𝛃@Fm.Expression]⟧)—→¬⟦[𝛂@Fm.Expression]⟧))`
+- **Proof Constructor:** `PA10_prf (Γ, A, B)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Kernel Note:** Negation Introduction (Reductio Ad Absurdum): (⟦𝛂⟧ —→ ⟦𝛃⟧) —→ ((⟦𝛂⟧ —→ ¬⟦𝛃⟧) —→ ¬⟦𝛂⟧).
+- **Standalone Certificate:** [proofs/AxmPropNegIntro.html](proofs/AxmPropNegIntro.html)
+
+### 1.11 `AxmPropExFalso` — A11 (Axiom)
+
+- **Identifier:** `AxmPropExFalso` (entry `1.11`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⊥—→⟦𝛂⟧)`
+- **Scheme of Types (Unicode):** `(⊥—→⟦[𝛂@Fm.Expression]⟧)`
+- **Proof Constructor:** `PA11_prf (Γ, A)`
+- **Judgements:** `[(𝛂:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropExFalso.html](proofs/AxmPropExFalso.html)
+
+### 1.12 `AxmPropExcludedMiddle` — A12 (Axiom)
+
+- **Identifier:** `AxmPropExcludedMiddle` (entry `1.12`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(⟦𝛂⟧∨¬⟦𝛂⟧)`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧∨¬⟦[𝛂@Fm.Expression]⟧)`
+- **Proof Constructor:** `PA12_prf (Γ, A)`
+- **Judgements:** `[(𝛂:Fm)]`
+- **Standalone Certificate:** [proofs/AxmPropExcludedMiddle.html](proofs/AxmPropExcludedMiddle.html)
+
+### 1.13 `AxmPropVerum` — A13 (Axiom)
+
+- **Identifier:** `AxmPropVerum` (entry `1.13`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `⊤`
+- **Scheme of Types (Unicode):** `⊤`
+- **Proof Constructor:** `PA13_prf (Γ)`
+- **Kernel Note:** Verum / Truth Introduction Axiom (⊢ ⊤).
+- **Standalone Certificate:** [proofs/AxmPropVerum.html](proofs/AxmPropVerum.html)
+
+### 1.14 `RulModusPonens` — Modus Ponens (Inference Rule)
+
+- **Identifier:** `RulModusPonens` (entry `1.14`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `(⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ⊢ ⟦𝛃⟧)`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)`
+- **Proof Constructor:** `PMP_prf (p, q)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Standalone Certificate:** [proofs/RulModusPonens.html](proofs/RulModusPonens.html)
+
+## 2. Predicate Logic (2.01-2.06) (2.01-2.06)
+
+Quantifier instantiation, variable-binding abstraction rules, and non-empty discourse domain over Classes in MKTD1-theory.
+
+### 2.01 `AxmDiscourseNonEmpty` — Discourse domain is non-empty (Axiom)
+
+- **Identifier:** `AxmDiscourseNonEmpty` (entry `2.01`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∃(K:Class)⊤)`
+- **Scheme of Types (Unicode):** `(∃([K@Variable]:[Class@Type])⊤)`
+- **Proof Constructor:** `PA0_prf (x)`
+- **Standalone Certificate:** [proofs/AxmDiscourseNonEmpty.html](proofs/AxmDiscourseNonEmpty.html)
+
+### 2.02 `RulForallInstantiation` — Forall Instantiation (Inference Rule)
+
+- **Identifier:** `RulForallInstantiation` (entry `2.02`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)—→⟦𝛗[t/x]⟧)`
+- **Scheme of Types (Unicode):** `((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)`
+- **Proof Constructor:** `PForaL_prf (φ, T, x, p)`
+- **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
+- **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
+- **Kernel Note:** Axiom schema of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.
+- **Standalone Certificate:** [proofs/RulForallInstantiation.html](proofs/RulForallInstantiation.html)
+
+### 2.03 `RulExistsInstantiation` — Exists Instantiation (Inference Rule)
+
+- **Identifier:** `RulExistsInstantiation` (entry `2.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `(⟦𝛗[t/x]⟧—→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)`
+- **Scheme of Types (Unicode):** `(⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)`
+- **Proof Constructor:** `PExisR_prf (φ, T, x, p)`
+- **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
+- **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
+- **Kernel Note:** Axiom schema of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.
+- **Standalone Certificate:** [proofs/RulExistsInstantiation.html](proofs/RulExistsInstantiation.html)
+
+### 2.04 `RulForallAbstraction` — Forall Abstraction (Inference Rule)
+
+- **Identifier:** `RulForallAbstraction` (entry `2.04`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `((⟦𝛃⟧—→⟦𝛂⟧) ⊢ (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
+- **Proof Constructor:** `PForaR_prf (φ, x, x', T, p)`
+- **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
+- **Side Condition:** `NFV(X,x,(𝛃:Fm))`
+- **Kernel Note:** Inference rule of Universal Abstraction: from B -> A infer B -> forall x. A, with side condition NFV(x, B) (x not free in B).
+- **Standalone Certificate:** [proofs/RulForallAbstraction.html](proofs/RulForallAbstraction.html)
+
+### 2.05 `RulExistsAbstraction` — Exists Abstraction (Inference Rule)
+
+- **Identifier:** `RulExistsAbstraction` (entry `2.05`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))`
+- **Proof Constructor:** `PExisL_prf (φ, x, x', T, p)`
+- **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
+- **Side Condition:** `NFV(X,x,(𝛃:Fm))`
+- **Kernel Note:** Inference rule of Existential Elimination: from A -> B infer (exists x. A) -> B, with side condition NFV(x, B) (x not free in B).
+- **Standalone Certificate:** [proofs/RulExistsAbstraction.html](proofs/RulExistsAbstraction.html)
+
+### 2.06 `RulGeneralisation` — Generalisation (admissible rule) (Inference Rule)
+
+- **Identifier:** `RulGeneralisation` (entry `2.06`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `(⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
+- **Proof Constructor:** `PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))`
+- **Judgements:** `[(x:Name), (X:Type), (𝛂:Fm)]`
+- **Kernel Note:** Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.
+- **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
+
+## 3. Set/Class-Theoretic Foundations (3.01-3.90) (3.01-3.90)
+
+Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
+
+### 3.01 `RulClassComprehension` — Class comprehension (Inference Rule)
+
+- **Identifier:** `RulClassComprehension` (entry `3.01`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})←→((⦃x⦄ set)∧⟦𝛗⟧))`
+- **Scheme of Types (Unicode):** `(([⦃[x@Variable.Expression]⦄@Class.Expression]∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→(([⦃[x@Variable.Expression]⦄@Class.Expression] set)∧⟦[𝛗@Fm.Expression]⟧))`
+- **Proof Constructor:** `PComprAx_prf (φ)`
+- **Judgements:** `[(x:Name), (𝛗:Fm)]`
+- **Standalone Certificate:** [proofs/RulClassComprehension.html](proofs/RulClassComprehension.html)
+
+### 3.02 `DefIsSet` — “Is a set” predicate (Definition)
+
+- **Identifier:** `DefIsSet` (entry `3.02`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(X:Class)((X set)←→(∃(Y:Class)(X∈Y))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)←→(∃([Y@Variable]:[Class@Type])([X@Class.Expression]∈[Y@Class.Expression]))))`
+- **Proof Constructor:** `PSetDef_prf (B, x)`
+- **Kernel Note:** Standard conservative definition defining predicate set(B)  exists x:Class. B in x. By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional yields a conservative extension.
+- **Standalone Certificate:** [proofs/DefIsSet.html](proofs/DefIsSet.html)
+
+### 3.03 `DefIsProperClass` — “Is a proper class” predicate (Definition)
+
+- **Identifier:** `DefIsProperClass` (entry `3.03`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(K:Class)((K proper)←→(¬(K set))))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(([K@Class.Expression] proper)←→(¬([K@Class.Expression] set))))`
+- **Proof Constructor:** `TpProper (X)`
+- **Standalone Certificate:** [proofs/DefIsProperClass.html](proofs/DefIsProperClass.html)
+
+### 3.04 `DefEmptySet` — Empty set (Definition)
+
+- **Identifier:** `DefEmptySet` (entry `3.04`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∅={x|⊥})`
+- **Scheme of Types (Unicode):** `(∅={[x@Class.Expression]|⊥})`
+- **Proof Constructor:** `CpEmptySet`
+- **Standalone Certificate:** [proofs/DefEmptySet.html](proofs/DefEmptySet.html)
+
+### 3.05 `DefUniversalClass` — Universal class (Definition)
+
+- **Identifier:** `DefUniversalClass` (entry `3.05`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(V={x|⊤})`
+- **Scheme of Types (Unicode):** `(V={[x@Class.Expression]|⊤})`
+- **Proof Constructor:** `PUnivClassDef_prf (x)`
+- **Standalone Certificate:** [proofs/DefUniversalClass.html](proofs/DefUniversalClass.html)
+
+### 3.06 `DefSubclass` — Subclass relation (Definition)
+
+- **Identifier:** `DefSubclass` (entry `3.06`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)((X⊆Y)←→(∀(a:Class)((a∈X)—→(a∈Y)))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]⊆[Y@Class.Expression])←→(∀([a@Variable]:[Class@Type])(([a@Class.Expression]∈[X@Class.Expression])—→([a@Class.Expression]∈[Y@Class.Expression])))))`
+- **Proof Constructor:** `PSubDef_prf (A, B, x)`
+- **Standalone Certificate:** [proofs/DefSubclass.html](proofs/DefSubclass.html)
+
+### 3.07 `ThmEmptySetIsSubclass` — Example: “The empty class is a subclass of any class” statement (Theorem)
+
+- **Identifier:** `ThmEmptySetIsSubclass` (entry `3.07`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(X:Class)(∅⊆X))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))`
+- **Proof Constructor:** `PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))`
+- **Kernel Note:** Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
+- **Standalone Certificate:** [proofs/ThmEmptySetIsSubclass.html](proofs/ThmEmptySetIsSubclass.html)
+
+### 3.08 `AxmLeftInSound` — “Membership respects equality in right argument (container class)” (Axiom)
+
+- **Identifier:** `AxmLeftInSound` (entry `3.08`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)((X=Y)—→∀(z:Class)((z∈X)←→(z∈Y))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])—→∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])←→([z@Class.Expression]∈[Y@Class.Expression]))))`
+- **Proof Constructor:** `PLeftInSoundAx_prf (X, Y, Z)`
+- **Standalone Certificate:** [proofs/AxmLeftInSound.html](proofs/AxmLeftInSound.html)
+
+### 3.09 `AxmRightInSound` — “Membership respects equality in left argument (element)” (Axiom)
+
+- **Identifier:** `AxmRightInSound` (entry `3.09`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)((X=Y)—→∀(W:Class)((X∈W)←→(Y∈W))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])(([X@Class.Expression]=[Y@Class.Expression])—→∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression]))))`
+- **Proof Constructor:** `PRightInSoundAx_prf (X, Y, W)`
+- **Standalone Certificate:** [proofs/AxmRightInSound.html](proofs/AxmRightInSound.html)
+
+### 3.10 `AxmExtensionality` — “Extensionality” (Axiom)
+
+- **Identifier:** `AxmExtensionality` (entry `3.10`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)((∀(z:Class)((z∈X)←→(z∈Y)))—→(X=Y)))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((∀([z@Variable]:[Class@Type])(([z@Class.Expression]∈[X@Class.Expression])←→([z@Class.Expression]∈[Y@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression])))`
+- **Proof Constructor:** `PExtDef_prf (X, Y, z)`
+- **Standalone Certificate:** [proofs/AxmExtensionality.html](proofs/AxmExtensionality.html)
+
+### 3.11 `AxmIntensionality` — “Intensionality”(admissible) (Theorem)
+
+- **Identifier:** `AxmIntensionality` (entry `3.11`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)(((X set)∧(Y set))—→((∀(W:Class)((X∈W)←→(Y∈W)))—→(X=Y))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))—→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression]))))`
+- **Proof Constructor:** `PIntDef_prf (X, Y, Z)`
+- **Standalone Certificate:** [proofs/AxmIntensionality.html](proofs/AxmIntensionality.html)
+
+### 3.12 `AxmHeredity` — “Heredity”(a subclass of a set is also a set) (Axiom)
+
+- **Identifier:** `AxmHeredity` (entry `3.12`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)(((A⊆B)∧(B set))—→(A set)))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((([A@Class.Expression]⊆[B@Class.Expression])∧([B@Class.Expression] set))—→([A@Class.Expression] set)))`
+- **Proof Constructor:** `PHeredityAx_prf (A, B)`
+- **Standalone Certificate:** [proofs/AxmHeredity.html](proofs/AxmHeredity.html)
+
+### 3.13 `AxmExponent` — “Exponent”(powerclass of a set is also a set) (Axiom)
+
+- **Identifier:** `AxmExponent` (entry `3.13`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)((X set)—→(𝒫(X) set)))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)—→(𝒫([X@Class.Expression]) set)))`
+- **Proof Constructor:** `PPowSetAx_prf (X)`
+- **Standalone Certificate:** [proofs/AxmExponent.html](proofs/AxmExponent.html)
+
+### 3.14 `AxmRegularity` — “Regularity”(only universal class is equal to its powerclass) (Axiom)
+
+- **Identifier:** `AxmRegularity` (entry `3.14`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)((𝒫(X)⊆X)—→(V⊆X)))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])((𝒫([X@Class.Expression])⊆[X@Class.Expression])—→(V⊆[X@Class.Expression])))`
+- **Proof Constructor:** `PEpsIndAx_prf (X)`
+- **Kernel Note:** Kernel Form (Cumulative 𝒫-Induction): ∀(X:Class)((𝒫(X) ⊆ X) —→ (V ⊆ X)). Classically equivalent (via X = V \ A) to the textbook ∈-minimal-element Regularity / Foundation formulation ∀(A:Class)((A ≠ ∅) —→ ∃(x:Class)((x ∈ A) ∧ ((x ∩ A) = ∅))).
+- **Standalone Certificate:** [proofs/AxmRegularity.html](proofs/AxmRegularity.html)
+
+### 3.15 `DefTransitiveClass` — Transitivity predicate (Definition)
+
+- **Identifier:** `DefTransitiveClass` (entry `3.15`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)(Tr(A)←→(∀(B:Class)((B∈A)—→(B⊆A)))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])(Tr([A@Class.Expression])←→(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→([B@Class.Expression]⊆[A@Class.Expression])))))`
+- **Proof Constructor:** `PTransDef_prf (A, B)`
+- **Standalone Certificate:** [proofs/DefTransitiveClass.html](proofs/DefTransitiveClass.html)
+
+### 3.16 `DefOrdinalClass` — Ordinality predicate (Definition)
+
+- **Identifier:** `DefOrdinalClass` (entry `3.16`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)(Ord(A)←→(Tr(A)∧∀(B:Class)((B∈A)—→Tr(B)))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])←→(Tr([A@Class.Expression])∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→Tr([B@Class.Expression])))))`
+- **Proof Constructor:** `TpOrd (X)`
+- **Standalone Certificate:** [proofs/DefOrdinalClass.html](proofs/DefOrdinalClass.html)
+
+### 3.17 `DefClassOfOrdinals` — Class of all ordinal sets(ordinal numbers) (Definition)
+
+- **Identifier:** `DefClassOfOrdinals` (entry `3.17`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(On={w|Ord(w)})`
+- **Scheme of Types (Unicode):** `(On={[w@Class.Expression]|Ord([w@Class.Expression])})`
+- **Proof Constructor:** `CpOn`
+- **Standalone Certificate:** [proofs/DefClassOfOrdinals.html](proofs/DefClassOfOrdinals.html)
+
+### 3.18 `ThmOrdinalsIsOrdinal` — The class of all ordinals is an ordinal class (Theorem)
+
+- **Identifier:** `ThmOrdinalsIsOrdinal` (entry `3.18`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Ord(On)`
+- **Scheme of Types (Unicode):** `Ord(On)`
+- **Proof Constructor:** `TpOrd (On)`
+- **Standalone Certificate:** [proofs/ThmOrdinalsIsOrdinal.html](proofs/ThmOrdinalsIsOrdinal.html)
+
+### 3.19 `DefUnaryUnion` — Union of the elements of a class (Definition)
+
+- **Identifier:** `DefUnaryUnion` (entry `3.19`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(K:Class)(⋃K={x|∃(y:Class)((y∈K)∧(x∈y))}))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(⋃[K@Class.Expression]={[x@Class.Expression]|∃([y@Variable]:[Class@Type])(([y@Class.Expression]∈[K@Class.Expression])∧([x@Class.Expression]∈[y@Class.Expression]))}))`
+- **Proof Constructor:** `CpUnion (A)`
+- **Standalone Certificate:** [proofs/DefUnaryUnion.html](proofs/DefUnaryUnion.html)
+
+### 3.20 `DefUnaryIntersection` — Intersection of the elements of a class (Definition)
+
+- **Identifier:** `DefUnaryIntersection` (entry `3.20`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(K:Class)(⋂K={x|∀(y:Class)((y∈K)—→(x∈y))}))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(⋂[K@Class.Expression]={[x@Class.Expression]|∀([y@Variable]:[Class@Type])(([y@Class.Expression]∈[K@Class.Expression])—→([x@Class.Expression]∈[y@Class.Expression]))}))`
+- **Proof Constructor:** `CpInter (A)`
+- **Standalone Certificate:** [proofs/DefUnaryIntersection.html](proofs/DefUnaryIntersection.html)
+
+### 3.21 `DefBigDomain` — Domain (includes arguments with proper class values) (Definition)
+
+- **Identifier:** `DefBigDomain` (entry `3.21`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)(Dom(F)={x|∃(b:Class)((x,b)∈F)}))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(Dom([F@Class.Expression])={[x@Class.Expression]|∃([b@Variable]:[Class@Type])(([x@Class.Expression],[b@Class.Expression])∈[F@Class.Expression])}))`
+- **Proof Constructor:** `CpDom (R)`
+- **Standalone Certificate:** [proofs/DefBigDomain.html](proofs/DefBigDomain.html)
+
+### 3.22 `DefClassConditional` — IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
+
+- **Identifier:** `DefClassConditional` (entry `3.22`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬Fm.IFV(v,𝛙))—→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))`
+- **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([v@Variable]:[Variable@Type])∀([𝛙@Variable]:[Fm@Type])∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((¬Fm.IFV([v@Variable.Expression],[𝛙@Fm.Expression]))—→(𝘞,[Γ@Ctx.Expression]⊢‹⟦IF ⟦[𝛙@Fm.Expression]⟧ THEN [A@Class.Expression] ELSE [B@Class.Expression] FI⟧={[⦃[v@Variable.Expression]⦄@Class.Expression]|(⟦[𝛙@Fm.Expression]⟧∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[A@Class.Expression]))∨((¬⟦[𝛙@Fm.Expression]⟧)∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[B@Class.Expression]))}›)))`
+- **Proof Constructor:** `CpIf (φ, A, B)`
+- **Standalone Certificate:** [proofs/DefClassConditional.html](proofs/DefClassConditional.html)
+
+### 3.23 `DefSimpleConditional` — simple_if (polymorphic non-dependent conditional over Type) (Definition)
+
+- **Identifier:** `DefSimpleConditional` (entry `3.23`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))`
+- **Scheme of Types (Unicode):** `∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))`
+- **Proof Constructor:** `EIf (φ, a, b)`
+- **Standalone Certificate:** [proofs/DefSimpleConditional.html](proofs/DefSimpleConditional.html)
+
+### 3.24 `DefDependentConditional` — if_dep (dependent conditional over (Bool → Type)) (Definition)
+
+- **Identifier:** `DefDependentConditional` (entry `3.24`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))`
+- **Scheme of Types (Unicode):** `∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))`
+- **Proof Constructor:** `EIfDep (φ, a, b)`
+- **Standalone Certificate:** [proofs/DefDependentConditional.html](proofs/DefDependentConditional.html)
+
+### 3.25 `DefValueAtArg` — Evaluation of a [function|class-function|family] (Definition)
+
+- **Identifier:** `DefValueAtArg` (entry `3.25`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)∀(a:Class)(F(a)=⟦IF (∃(s:Class)((a,s)∈F)) THEN ⋃{s|(a,s)∈F} ELSE V FI⟧))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([a@Variable]:[Class@Type])([F@Class.Expression]([a@Class.Expression])=⟦IF (∃([s@Variable]:[Class@Type])(([a@Class.Expression],[s@Class.Expression])∈[F@Class.Expression])) THEN ⋃{[s@Class.Expression]|([a@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]} ELSE V FI⟧))`
+- **Proof Constructor:** `CpValOf (F, X)`
+- **Standalone Certificate:** [proofs/DefValueAtArg.html](proofs/DefValueAtArg.html)
+
+### 3.26 `DefRelationalImage` — Image class (Definition)
+
+- **Identifier:** `DefRelationalImage` (entry `3.26`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(f:Class)∀(A:Class)(f[A]={b|∃(a:Class)((a∈A)∧(f(a)=b))}))`
+- **Scheme of Types (Unicode):** `(∀([f@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])([f@Class.Expression][[A@Class.Expression]]={[b@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[A@Class.Expression])∧([f@Class.Expression]([a@Class.Expression])=[b@Class.Expression]))}))`
+- **Proof Constructor:** `CpImage (R, X)`
+- **Standalone Certificate:** [proofs/DefRelationalImage.html](proofs/DefRelationalImage.html)
+
+### 3.27 `DefIsSingleton` — “Has exactly one element” predicate (Definition)
+
+- **Identifier:** `DefIsSingleton` (entry `3.27`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(s:Class)((s singleton)←→(∃!(x:Class)(x∈s))))`
+- **Scheme of Types (Unicode):** `(∀([s@Variable]:[Class@Type])(([s@Class.Expression] singleton)←→(∃!([x@Variable]:[Class@Type])([x@Class.Expression]∈[s@Class.Expression]))))`
+- **Proof Constructor:** `TpSingleton (X)`
+- **Standalone Certificate:** [proofs/DefIsSingleton.html](proofs/DefIsSingleton.html)
+
+### 3.28 `DefIsSetValued` — “Is set-valued” predicate (Definition)
+
+- **Identifier:** `DefIsSetValued` (entry `3.28`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F set-valued)←→(∀(x:Class)((x∈Dom(F))—→(F(x) set)))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] set-valued)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))—→([F@Class.Expression]([x@Class.Expression]) set)))))`
+- **Proof Constructor:** `TpSetValued (F)`
+- **Standalone Certificate:** [proofs/DefIsSetValued.html](proofs/DefIsSetValued.html)
+
+### 3.29 `DefHasConcentratedValues` — “Has concentrated set values” predicate (Definition)
+
+- **Identifier:** `DefHasConcentratedValues` (entry `3.29`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F concentrated set values)←→(∀(x:Class)((x∈Dom(F))—→((F(x) set)—→∃!(y:Class)((x,y)∈F))))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] concentrated set values)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))—→(([F@Class.Expression]([x@Class.Expression]) set)—→∃!([y@Variable]:[Class@Type])(([x@Class.Expression],[y@Class.Expression])∈[F@Class.Expression]))))))`
+- **Proof Constructor:** `TpConcentrated (F)`
+- **Standalone Certificate:** [proofs/DefHasConcentratedValues.html](proofs/DefHasConcentratedValues.html)
+
+### 3.30 `DefFlatValues` — “Has flat proper values” predicate (Definition)
+
+- **Identifier:** `DefFlatValues` (entry `3.30`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F flat proper values)←→(∀(x:Class)((x∈Dom(F))—→((F(x) proper)—→∀(b:Class)(((x,b)∈F)—→(b singleton)))))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] flat proper values)←→(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([F@Class.Expression]))—→(([F@Class.Expression]([x@Class.Expression]) proper)—→∀([b@Variable]:[Class@Type])((([x@Class.Expression],[b@Class.Expression])∈[F@Class.Expression])—→([b@Class.Expression] singleton)))))))`
+- **Proof Constructor:** `TpFlat (F)`
+- **Standalone Certificate:** [proofs/DefFlatValues.html](proofs/DefFlatValues.html)
+
+### 3.31 `DefFamily` — “Is a family” predicate (Definition)
+
+- **Identifier:** `DefFamily` (entry `3.31`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F family)←→((F concentrated set values)∧(F flat proper values))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] family)←→(([F@Class.Expression] concentrated set values)∧([F@Class.Expression] flat proper values))))`
+- **Proof Constructor:** `TpFamily (F)`
+- **Standalone Certificate:** [proofs/DefFamily.html](proofs/DefFamily.html)
+
+### 3.32 `DefClassFunction` — “Is a class-function” predicate (Definition)
+
+- **Identifier:** `DefClassFunction` (entry `3.32`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F class-function)←→((F family)∧(F set-valued))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] class-function)←→(([F@Class.Expression] family)∧([F@Class.Expression] set-valued))))`
+- **Proof Constructor:** `TpClassFunc (F)`
+- **Standalone Certificate:** [proofs/DefClassFunction.html](proofs/DefClassFunction.html)
+
+### 3.33 `DefInjectiveFunction` — “Is injective” predicate (Definition)
+
+- **Identifier:** `DefInjectiveFunction` (entry `3.33`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F injective)←→(((F family)∧(F set-valued))∧∀(x:Class)∀(y:Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))—→(x=y)))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)←→((([F@Class.Expression] family)∧([F@Class.Expression] set-valued))∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(((([x@Class.Expression]∈Dom([F@Class.Expression]))∧([y@Class.Expression]∈Dom([F@Class.Expression])))∧([F@Class.Expression]([x@Class.Expression])=[F@Class.Expression]([y@Class.Expression])))—→([x@Class.Expression]=[y@Class.Expression])))))`
+- **Proof Constructor:** `TpInjective (F)`
+- **Standalone Certificate:** [proofs/DefInjectiveFunction.html](proofs/DefInjectiveFunction.html)
+
+### 3.34 `DefSetFunction` — “Is a function” predicate (Definition)
+
+- **Identifier:** `DefSetFunction` (entry `3.34`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(f:Class)((f function)←→((f class-function)∧(f set))))`
+- **Scheme of Types (Unicode):** `(∀([f@Variable]:[Class@Type])(([f@Class.Expression] function)←→(([f@Class.Expression] class-function)∧([f@Class.Expression] set))))`
+- **Proof Constructor:** `TpFunc (f)`
+- **Standalone Certificate:** [proofs/DefSetFunction.html](proofs/DefSetFunction.html)
+
+### 3.35 `DefSemiSingleton` — “Semi-singleton” predicate (Definition)
+
+- **Identifier:** `DefSemiSingleton` (entry `3.35`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(s:Class)((s semi-singleton)←→(∀(x:Class)∀(y:Class)(((x∈s)∧(y∈s))—→(x=y)))))`
+- **Scheme of Types (Unicode):** `(∀([s@Variable]:[Class@Type])(([s@Class.Expression] semi-singleton)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((([x@Class.Expression]∈[s@Class.Expression])∧([y@Class.Expression]∈[s@Class.Expression]))—→([x@Class.Expression]=[y@Class.Expression])))))`
+- **Proof Constructor:** `PSemiSingletonDef_prf (s, x, y)`
+- **Standalone Certificate:** [proofs/DefSemiSingleton.html](proofs/DefSemiSingleton.html)
+
+### 3.36 `DefSemiSingletonSubclass` — “Semi-singleton subset” relation (Definition)
+
+- **Identifier:** `DefSemiSingletonSubclass` (entry `3.36`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(s:Class)∀(A:Class)((s sss A)←→((s semi-singleton)∧(s⊆A))))`
+- **Scheme of Types (Unicode):** `(∀([s@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(([s@Class.Expression] sss [A@Class.Expression])←→(([s@Class.Expression] semi-singleton)∧([s@Class.Expression]⊆[A@Class.Expression]))))`
+- **Proof Constructor:** `PSemiSingletonSubclassDef_prf (s, A)`
+- **Standalone Certificate:** [proofs/DefSemiSingletonSubclass.html](proofs/DefSemiSingletonSubclass.html)
+
+### 3.37 `ThmFamilyEvaluation` — Evaluation of “Family Value” via semi-singleton subsets (Theorem)
+
+- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))`
+- **Proof Constructor:** `CpValOf (F, x)`
+- **Standalone Certificate:** [proofs/ThmFamilyEvaluation.html](proofs/ThmFamilyEvaluation.html)
+
+### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Definition)
+
+- **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
+- **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
+- **Proof Constructor:** `CpSigma (X, Y)`
+- **Kernel Note:** Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of the dependent sum Σ(x:Dom(F)) over a family F in the fixed background model.
+- **Standalone Certificate:** [proofs/DefSigmaModel.html](proofs/DefSigmaModel.html)
+
+### 3.39 `DefPiPredicateModel` — “Dependent Product (Pi-Type)” predicate and section model (Theorem)
+
+- **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))`
+- **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))`
+- **Proof Constructor:** `CpPi (X, P)`
+- **Kernel Note:** Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
+- **Standalone Certificate:** [proofs/DefPiPredicateModel.html](proofs/DefPiPredicateModel.html)
+
+### 3.40 `DefCardLessEq` — “Is not strictly larger than” binary relation (Definition)
+
+- **Identifier:** `DefCardLessEq` (entry `3.40`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)((A≼B)←→(∃(f:Class)((((f class-function)∧(A⊆Dom(f)))∧(f[A]⊆B))∧(f injective)))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]≼[B@Class.Expression])←→(∃([f@Variable]:[Class@Type])(((([f@Class.Expression] class-function)∧([A@Class.Expression]⊆Dom([f@Class.Expression])))∧([f@Class.Expression][[A@Class.Expression]]⊆[B@Class.Expression]))∧([f@Class.Expression] injective)))))`
+- **Proof Constructor:** `TpLessEq (A, B)`
+- **Standalone Certificate:** [proofs/DefCardLessEq.html](proofs/DefCardLessEq.html)
+
+### 3.41 `DefCardinality` — Class cardinality (Definition)
+
+- **Identifier:** `DefCardinality` (entry `3.41`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(K:Class)(|K|=(On∩⋂{a|(a∈On)∧(K≼a)})))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(|[K@Class.Expression]|=(On∩⋂{[a@Class.Expression]|([a@Class.Expression]∈On)∧([K@Class.Expression]≼[a@Class.Expression])})))`
+- **Proof Constructor:** `CpCard (X)`
+- **Standalone Certificate:** [proofs/DefCardinality.html](proofs/DefCardinality.html)
+
+### 3.42 `DefCardLess` — “Is strictly smaller than” binary relation (Definition)
+
+- **Identifier:** `DefCardLess` (entry `3.42`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)((A≺B)←→(¬(B≼A))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]≺[B@Class.Expression])←→(¬([B@Class.Expression]≼[A@Class.Expression]))))`
+- **Proof Constructor:** `TpLess (A, B)`
+- **Standalone Certificate:** [proofs/DefCardLess.html](proofs/DefCardLess.html)
+
+### 3.43 `AxmSizeLimitation` — Size limitation axiom related statement (Axiom)
+
+- **Identifier:** `AxmSizeLimitation` (entry `3.43`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(X:Class)((X∈V)←→(|X|≺|V|)))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(([X@Class.Expression]∈V)←→(|[X@Class.Expression]|≺|V|)))`
+- **Proof Constructor:** `PSizeLimAx_prf (X)`
+- **Standalone Certificate:** [proofs/AxmSizeLimitation.html](proofs/AxmSizeLimitation.html)
+
+### 3.44 `DefHereditaryClass` — “Is hereditary” predicate (Definition)
+
+- **Identifier:** `DefHereditaryClass` (entry `3.44`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)(Hereditary(A)←→(∀(B:Class)((B∈A)—→∀(X:Class)((X⊆B)—→(X∈A))))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])(Hereditary([A@Class.Expression])←→(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→∀([X@Variable]:[Class@Type])(([X@Class.Expression]⊆[B@Class.Expression])—→([X@Class.Expression]∈[A@Class.Expression]))))))`
+- **Proof Constructor:** `PHereditaryDef_prf (A, B, X)`
+- **Standalone Certificate:** [proofs/DefHereditaryClass.html](proofs/DefHereditaryClass.html)
+
+### 3.45 `DefPowerfulClass` — “Is powerful” predicate (Definition)
+
+- **Identifier:** `DefPowerfulClass` (entry `3.45`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(U:Class)(Powerful(U)←→(∀(B:Class)((B∈U)—→(𝒫(B)∈U)))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(Powerful([U@Class.Expression])←→(∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[U@Class.Expression])—→(𝒫([B@Class.Expression])∈[U@Class.Expression])))))`
+- **Proof Constructor:** `PPowerfulDef_prf (U, B)`
+- **Standalone Certificate:** [proofs/DefPowerfulClass.html](proofs/DefPowerfulClass.html)
+
+### 3.46 `DefPairfulClass` — “Is pairful” predicate (Definition)
+
+- **Identifier:** `DefPairfulClass` (entry `3.46`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(U:Class)(Pairful(U)←→(∀(A:Class)∀(B:Class)(((A∈U)∧(B∈U))—→({A,B}∈U)))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(Pairful([U@Class.Expression])←→(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((([A@Class.Expression]∈[U@Class.Expression])∧([B@Class.Expression]∈[U@Class.Expression]))—→({[A@Class.Expression],[B@Class.Expression]}∈[U@Class.Expression])))))`
+- **Proof Constructor:** `PPairfulDef_prf (U, A, B)`
+- **Standalone Certificate:** [proofs/DefPairfulClass.html](proofs/DefPairfulClass.html)
+
+### 3.47 `DefTightClass` — “Is tight” predicate (Definition)
+
+- **Identifier:** `DefTightClass` (entry `3.47`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(U:Class)(Tight(U)←→(∀(B:Class)((B⊆U)—→((B≺U)←→(B∈U))))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(Tight([U@Class.Expression])←→(∀([B@Variable]:[Class@Type])(([B@Class.Expression]⊆[U@Class.Expression])—→(([B@Class.Expression]≺[U@Class.Expression])←→([B@Class.Expression]∈[U@Class.Expression]))))))`
+- **Proof Constructor:** `PTightDef_prf (U, B)`
+- **Standalone Certificate:** [proofs/DefTightClass.html](proofs/DefTightClass.html)
+
+### 3.48 `DefSingletonSet` — Singleton set (Definition)
+
+- **Identifier:** `DefSingletonSet` (entry `3.48`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(a:Class)({a}={x|x=a}))`
+- **Scheme of Types (Unicode):** `(∀([a@Variable]:[Class@Type])({[a@Class.Expression]}={[x@Class.Expression]|[x@Class.Expression]=[a@Class.Expression]}))`
+- **Proof Constructor:** `CpSingleton (x)`
+- **Standalone Certificate:** [proofs/DefSingletonSet.html](proofs/DefSingletonSet.html)
+
+### 3.49 `DefUnorderedPair` — Unordered pair (Definition)
+
+- **Identifier:** `DefUnorderedPair` (entry `3.49`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(a:Class)∀(b:Class)({a,b}={x|(x=a)∨(x=b)}))`
+- **Scheme of Types (Unicode):** `(∀([a@Variable]:[Class@Type])∀([b@Variable]:[Class@Type])({[a@Class.Expression],[b@Class.Expression]}={[x@Class.Expression]|([x@Class.Expression]=[a@Class.Expression])∨([x@Class.Expression]=[b@Class.Expression])}))`
+- **Proof Constructor:** `CpUPair (x, y)`
+- **Standalone Certificate:** [proofs/DefUnorderedPair.html](proofs/DefUnorderedPair.html)
+
+### 3.50 `DefNaturalNumberModels` — Set-theoretic models of natural numbers (Definition)
+
+- **Identifier:** `DefNaturalNumberModels` (entry `3.50`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(M:Class)(NatModel(M)←→((∅∈M)∧∀(n:Class)((n∈M)—→((n∪{n})∈M)))))`
+- **Scheme of Types (Unicode):** `(∀([M@Variable]:[Class@Type])(NatModel([M@Class.Expression])←→((∅∈[M@Class.Expression])∧∀([n@Variable]:[Class@Type])(([n@Class.Expression]∈[M@Class.Expression])—→(([n@Class.Expression]∪{[n@Class.Expression]})∈[M@Class.Expression])))))`
+- **Proof Constructor:** `PNatModelDef_prf (M, n)`
+- **Kernel Note:** Formal conservative definition of a set-theoretic model of natural numbers (Peano-Dedekind inductive structure under von Neumann successor): a class M is a model of natural numbers iff it contains the empty set (0) and is closed under the successor operation n ∪ {n}.
+- **Standalone Certificate:** [proofs/DefNaturalNumberModels.html](proofs/DefNaturalNumberModels.html)
+
+### 3.51 `DefClassLists` — General definition of lists of classes which applicable not only for sets, but for proper classes too (Definition)
+
+- **Identifier:** `DefClassLists` (entry `3.51`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(mark(A,n) = ({{0,n}} ∪ {({{{a}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{a}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{b}},2} ∈ L)}))))))`
+- **Scheme of Types (Unicode):** `(mark(A,n) = ({{0,n}} ∪ {({{{a}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{a}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{b}},2} ∈ L)}))))))`
+- **Proof Constructor:** `CpOPair (A, B)`
+- **Judgements:** `[(A:Class), (B:Class), (L:Class), (n:Class)]`
+- **Standalone Certificate:** [proofs/DefClassLists.html](proofs/DefClassLists.html)
+
+### 3.52 `DefKuratowskiPair` — Ordered pair(Kuratowsky's) (Definition)
+
+- **Identifier:** `DefKuratowskiPair` (entry `3.52`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(a:Class)∀(b:Class)((a,b)={{a,a},{a,b}}))`
+- **Scheme of Types (Unicode):** `(∀([a@Variable]:[Class@Type])∀([b@Variable]:[Class@Type])(([a@Class.Expression],[b@Class.Expression])={{[a@Class.Expression],[a@Class.Expression]},{[a@Class.Expression],[b@Class.Expression]}}))`
+- **Proof Constructor:** `CpKuratowskiPair (x, y)`
+- **Standalone Certificate:** [proofs/DefKuratowskiPair.html](proofs/DefKuratowskiPair.html)
+
+### 3.53 `DefBinaryUnion` — Binary union (Definition)
+
+- **Identifier:** `DefBinaryUnion` (entry `3.53`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)((A∪B)={x|(x∈A)∨(x∈B)}))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]∪[B@Class.Expression])={[x@Class.Expression]|([x@Class.Expression]∈[A@Class.Expression])∨([x@Class.Expression]∈[B@Class.Expression])}))`
+- **Proof Constructor:** `CpBinUnion (A, B)`
+- **Kernel Note:** Special Def.: (x ∪ y) = ⋃{x,y} (set-restricted); General Def.: (A ∪ B) = {z | (z ∈ A) ∨ (z ∈ B)} (general class definition).
+- **Standalone Certificate:** [proofs/DefBinaryUnion.html](proofs/DefBinaryUnion.html)
+
+### 3.54 `DefBinaryIntersection` — Binary intersection (Definition)
+
+- **Identifier:** `DefBinaryIntersection` (entry `3.54`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)((A∩B)={x|(x∈A)∧(x∈B)}))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression]∩[B@Class.Expression])={[x@Class.Expression]|([x@Class.Expression]∈[A@Class.Expression])∧([x@Class.Expression]∈[B@Class.Expression])}))`
+- **Proof Constructor:** `CpBinInter (A, B)`
+- **Standalone Certificate:** [proofs/DefBinaryIntersection.html](proofs/DefBinaryIntersection.html)
+
+### 3.55 `DefInductiveClass` — “Is successor-inductive (Peano-inductive)” predicate (Definition)
+
+- **Identifier:** `DefInductiveClass` (entry `3.55`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(X:Class)(Ind(X)←→((∅∈X)∧∀(a:Class)((a∈X)—→((a∪{a})∈X)))))`
+- **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(Ind([X@Class.Expression])←→((∅∈[X@Class.Expression])∧∀([a@Variable]:[Class@Type])(([a@Class.Expression]∈[X@Class.Expression])—→(([a@Class.Expression]∪{[a@Class.Expression]})∈[X@Class.Expression])))))`
+- **Proof Constructor:** `TpInd (X)`
+- **Kernel Note:** Successor-inductive (Peano 0-successor-inductive) in the narrowest sense: closed under 0 = ∅ and ordinal successor a |-> a ∪ {a}, as distinguished from transfinite ∈-induction (3.70) or 𝒫-induction.
+- **Standalone Certificate:** [proofs/DefInductiveClass.html](proofs/DefInductiveClass.html)
+
+### 3.56 `DefOmega` — The intersection class of all successor-inductive (Peano-inductive) classes is called omega (⊆-minimal successor-inductive class and smallest successor-inductive ordinal) (Definition)
+
+- **Identifier:** `DefOmega` (entry `3.56`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(x:Class)((x∈ω)←→(∀(Q:Class)(Ind(Q)—→(x∈Q)))))`
+- **Scheme of Types (Unicode):** `(∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈ω)←→(∀([Q@Variable]:[Class@Type])(Ind([Q@Class.Expression])—→([x@Class.Expression]∈[Q@Class.Expression])))))`
+- **Proof Constructor:** `CpOmega`
+- **Kernel Note:** By definition, ω is not only the smallest successor-inductive ordinal, but also the ⊆-minimal (least) element among all successor-inductive (Peano-inductive) classes in the subclass (⊆) order (Ind(ω) ∧ ∀(Q:Class), Ind(Q) —→ (ω ⊆ Q)), directly expressing simple countable mathematical (Peano) induction up to ω. | Special Def.: ω = ⋂{q | Ind(q)}; General Def.: ∀(x:Class), (x ∈ ω) ⟷ (∀(Q:Class), Ind(Q) —→ (x ∈ Q)).
+- **Standalone Certificate:** [proofs/DefOmega.html](proofs/DefOmega.html)
+
+### 3.57 `AxmOmegaIsSet` — “Infinity”(ω is a set) (Axiom)
+
+- **Identifier:** `AxmOmegaIsSet` (entry `3.57`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(ω set)`
+- **Scheme of Types (Unicode):** `(ω set)`
+- **Proof Constructor:** `POmegaSetAx_prf`
+- **Kernel Note:** Asserts that the ⊆-minimal successor-inductive (Peano-inductive) class ω is a set.
+- **Standalone Certificate:** [proofs/AxmOmegaIsSet.html](proofs/AxmOmegaIsSet.html)
+
+### 3.58 `ThmUniversalClassInductive` — Class of all sets is successor-inductive (Peano-inductive) (Theorem)
+
+- **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Ind(V)`
+- **Scheme of Types (Unicode):** `Ind(V)`
+- **Proof Constructor:** `TpInd (V)`
+- **Standalone Certificate:** [proofs/ThmUniversalClassInductive.html](proofs/ThmUniversalClassInductive.html)
+
+### 3.59 `ThmOmegaInductive` — Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
+
+- **Identifier:** `ThmOmegaInductive` (entry `3.59`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Ind(ω)`
+- **Scheme of Types (Unicode):** `Ind(ω)`
+- **Proof Constructor:** `TpInd (ω)`
+- **Kernel Note:** Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
+- **Standalone Certificate:** [proofs/ThmOmegaInductive.html](proofs/ThmOmegaInductive.html)
+
+### 3.60 `ThmOrdinalsInductive` — Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
+
+- **Identifier:** `ThmOrdinalsInductive` (entry `3.60`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Ind(On)`
+- **Scheme of Types (Unicode):** `Ind(On)`
+- **Proof Constructor:** `TpInd (On)`
+- **Standalone Certificate:** [proofs/ThmOrdinalsInductive.html](proofs/ThmOrdinalsInductive.html)
+
+### 3.61 `ThmOmegaTransitive` — ω is transitive (Theorem)
+
+- **Identifier:** `ThmOmegaTransitive` (entry `3.61`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Tr(ω)`
+- **Scheme of Types (Unicode):** `Tr(ω)`
+- **Proof Constructor:** `PTransDef_prf (ω, x)`
+- **Standalone Certificate:** [proofs/ThmOmegaTransitive.html](proofs/ThmOmegaTransitive.html)
+
+### 3.62 `ThmOmegaOrdinal` — ω is ordinal (Theorem)
+
+- **Identifier:** `ThmOmegaOrdinal` (entry `3.62`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Ord(ω)`
+- **Scheme of Types (Unicode):** `Ord(ω)`
+- **Proof Constructor:** `TpOrd (ω)`
+- **Standalone Certificate:** [proofs/ThmOmegaOrdinal.html](proofs/ThmOmegaOrdinal.html)
+
+### 3.63 `ThmOmegaInOrdinals` — ω is in the class of all ordinal numbers (sets) (Theorem)
+
+- **Identifier:** `ThmOmegaInOrdinals` (entry `3.63`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(ω∈On)`
+- **Scheme of Types (Unicode):** `(ω∈On)`
+- **Proof Constructor:** `CpOn`
+- **Standalone Certificate:** [proofs/ThmOmegaInOrdinals.html](proofs/ThmOmegaInOrdinals.html)
+
+### 3.64 `DefIsCardinal` — “Is cardinal” predicate (Theorem)
+
+- **Identifier:** `DefIsCardinal` (entry `3.64`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(C:Class)(Card(C)←→(∃(K:Class)(|K|=C))))`
+- **Scheme of Types (Unicode):** `(∀([C@Variable]:[Class@Type])(Card([C@Class.Expression])←→(∃([K@Variable]:[Class@Type])(|[K@Class.Expression]|=[C@Class.Expression]))))`
+- **Proof Constructor:** `TpCard (K)`
+- **Standalone Certificate:** [proofs/DefIsCardinal.html](proofs/DefIsCardinal.html)
+
+### 3.65 `ThmOmegaCardinal` — ω is cardinal (Theorem)
+
+- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Card(ω)`
+- **Scheme of Types (Unicode):** `Card(ω)`
+- **Proof Constructor:** `TpCard (ω)`
+- **Standalone Certificate:** [proofs/ThmOmegaCardinal.html](proofs/ThmOmegaCardinal.html)
+
+### 3.66 `ThmOrdinalsCardinal` — On is a cardinal class (Theorem)
+
+- **Identifier:** `ThmOrdinalsCardinal` (entry `3.66`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `Card(On)`
+- **Scheme of Types (Unicode):** `Card(On)`
+- **Proof Constructor:** `TpCard (On)`
+- **Standalone Certificate:** [proofs/ThmOrdinalsCardinal.html](proofs/ThmOrdinalsCardinal.html)
+
+### 3.67 `ThmUniversalClassNotCardinal` — Class of all sets is not a cardinal class (Theorem)
+
+- **Identifier:** `ThmUniversalClassNotCardinal` (entry `3.67`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(¬Card(V))`
+- **Scheme of Types (Unicode):** `(¬Card(V))`
+- **Proof Constructor:** `TpCard (V)`
+- **Standalone Certificate:** [proofs/ThmUniversalClassNotCardinal.html](proofs/ThmUniversalClassNotCardinal.html)
+
+### 3.68 `DefGrothendieckUniverse` — “Is a universe” predicate (Definition)
+
+- **Identifier:** `DefGrothendieckUniverse` (entry `3.68`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(U:Class)((U universe)←→(((ω∈U)∧((Tr(U)∧Hereditary(U))∧(Powerful(U)∧Tight(U))))∧Pairful(U))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)←→(((ω∈[U@Class.Expression])∧((Tr([U@Class.Expression])∧Hereditary([U@Class.Expression]))∧(Powerful([U@Class.Expression])∧Tight([U@Class.Expression]))))∧Pairful([U@Class.Expression]))))`
+- **Proof Constructor:** `PUniverseDef_prf (U)`
+- **Standalone Certificate:** [proofs/DefGrothendieckUniverse.html](proofs/DefGrothendieckUniverse.html)
+
+### 3.69 `ThmUniversalClassIsUniverse` — The class of all sets is a universe (Theorem)
+
+- **Identifier:** `ThmUniversalClassIsUniverse` (entry `3.69`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(V universe)`
+- **Scheme of Types (Unicode):** `(V universe)`
+- **Proof Constructor:** `PVUniverseAx_prf`
+- **Kernel Note:** Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf), and 3.41/3.42 #DefCardinality/#DefCardLess (PCardLessOrderAx_prf); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood (PPairSetAx_prf). Backup axiom constructor PVUniverseAx_prf (v_universe_axm_backup_entry) is also retained in the kernel just in case.
+- **Standalone Certificate:** [proofs/ThmUniversalClassIsUniverse.html](proofs/ThmUniversalClassIsUniverse.html)
+
+### 3.70 `AxmTarskiUniverses` — “Tarski's axiom” (Axiom)
+
+- **Identifier:** `AxmTarskiUniverses` (entry `3.70`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(x:Class)((x set)—→∃(u:Class)(((u universe)∧(x∈u))∧(u set))))`
+- **Scheme of Types (Unicode):** `(∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→∃([u@Variable]:[Class@Type])((([u@Class.Expression] universe)∧([x@Class.Expression]∈[u@Class.Expression]))∧([u@Class.Expression] set))))`
+- **Proof Constructor:** `PUniverseAx_prf (U)`
+- **Standalone Certificate:** [proofs/AxmTarskiUniverses.html](proofs/AxmTarskiUniverses.html)
+
+### 3.71 `ThmTransitiveClassInduction` — General form of the transfinite ∈-induction principle on a transitive class (Theorem)
+
+- **Identifier:** `ThmTransitiveClassInduction` (entry `3.71`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))`
+- **Proof Constructor:** `PEpsIndAx_prf (X)`
+- **Kernel Note:** Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
+- **Standalone Certificate:** [proofs/ThmTransitiveClassInduction.html](proofs/ThmTransitiveClassInduction.html)
+
+### 3.72 `AxmSoundnessOfFullTheory` — Soundness of the theory 𝘍 (Axiom)
+
+- **Identifier:** `AxmSoundnessOfFullTheory` (entry `3.72`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)((𝘍,[]⊢𝛗)—→eval(𝛗)))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢[𝛗@Fm.Expression])—→eval([𝛗@Fm.Expression])))`
+- **Proof Constructor:** `PCredo_prf (p)`
+- **Kernel Note:** Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Why this avoids Tarski and Löb inconsistency: While the r.e. base theory 𝘛 cannot assert its own soundness without violating Gödel's second incompleteness theorem and Löb's theorem (hence soundness of 𝘛 is not postulated in 𝘛), the full theory 𝘍 is non-r.e. and Henkin-complete (Th(M)). The evaluation operator ⟦φ⟧ lives in the +1 metalogic on the base formula sublanguage Fm₀ without self-referential truth predicate internalisation, avoiding Tarski undefinability.
+- **Standalone Certificate:** [proofs/AxmSoundnessOfFullTheory.html](proofs/AxmSoundnessOfFullTheory.html)
+
+### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Axiom)
+
+- **Identifier:** `AxmSemanticCompletenessOfFullTheory` (entry `3.73`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
+- **Proof Constructor:** `POmnisSem_prf (p)`
+- **Kernel Note:** Semantic completeness (omniscience, 3.73, POmnisSem_prf) of the non-r.e. Henkin completion 𝘍: for every sentence φ, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). Strictly decoupled from syntactic negation-completeness (3.74 AxmNegationCompletenessOfFullTheory). Together with Soundness of 𝘍 (3.72), this establishes (𝘍, [] ⊢ φ) ⇔ ⟦φ⟧, identifying 𝘍 as the complete true theory Th(M).
+- **Standalone Certificate:** [proofs/AxmSemanticCompletenessOfFullTheory.html](proofs/AxmSemanticCompletenessOfFullTheory.html)
+
+### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Axiom)
+
+- **Identifier:** `AxmNegationCompletenessOfFullTheory` (entry `3.74`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
+- **Proof Constructor:** `POmnisNeg_prf (p)`
+- **Kernel Note:** Syntactic negation-completeness (3.74, POmnisNeg_prf) of the non-r.e. Henkin completion 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). Strictly decoupled from semantic completeness / omniscience (3.73 AxmSemanticCompletenessOfFullTheory). In classical logic, this is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ). In the bivalent semantics of the background model M (⟦φ⟧ ∨ ⟦¬φ⟧), negation-completeness follows from semantic completeness (3.73), and conversely implies semantic completeness (3.73) given Soundness of 𝘍 (3.72).
+- **Standalone Certificate:** [proofs/AxmNegationCompletenessOfFullTheory.html](proofs/AxmNegationCompletenessOfFullTheory.html)
+
+### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+
+- **Identifier:** `AxmBaseSubtheoryOfFull` (entry `3.75`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘛,Γ⊢𝛗)—→(𝘍,Γ⊢𝛗)))`
+- **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘛,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
+- **Proof Constructor:** `TpHolds (s)`
+- **Kernel Note:** Theory extension monotonicity (𝘛 ⊆ 𝘍): every theorem of the r.e. base theory 𝘛 is also a theorem of its non-r.e. Henkin completion 𝘍.
+- **Standalone Certificate:** [proofs/AxmBaseSubtheoryOfFull.html](proofs/AxmBaseSubtheoryOfFull.html)
+
+### 3.76 `DefDunaevOrderedPair` — Ordered pair(Dunaev's tagged class pair) (Definition)
+
+- **Identifier:** `DefDunaevOrderedPair` (entry `3.76`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)((A,B)=(({{∅,{∅}}}∪{x|∃(a:Class)((a∈A)∧(x={{{{a}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{x|∃(a:Class)((a∈B)∧(x={{{{a}}},{∅,{∅}}}))}))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])(([A@Class.Expression],[B@Class.Expression])=(({{∅,{∅}}}∪{[x@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[A@Class.Expression])∧([x@Class.Expression]={{{{[a@Class.Expression]}}},{∅}}))})∪({{∅,{∅,{∅}}}}∪{[x@Class.Expression]|∃([a@Variable]:[Class@Type])(([a@Class.Expression]∈[B@Class.Expression])∧([x@Class.Expression]={{{{[a@Class.Expression]}}},{∅,{∅}}}))}))))`
+- **Proof Constructor:** `CpOPair (A, B)`
+- **Kernel Note:** Dunaev tagged class ordered pair (A,B) = mark(A,1) ∪ mark(B,2), sound for arbitrary proper classes.
+- **Standalone Certificate:** [proofs/DefDunaevOrderedPair.html](proofs/DefDunaevOrderedPair.html)
+
+### 3.77 `ThmDunaevFirstProjection` — First projection of Dunaev's tagged ordered pair (Theorem)
+
+- **Identifier:** `ThmDunaevFirstProjection` (entry `3.77`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))`
+- **Proof Constructor:** `CpPr1 (p)`
+- **Kernel Note:** Recovers A from (A,B) via tag 1 without requiring A or B to be sets.
+- **Standalone Certificate:** [proofs/ThmDunaevFirstProjection.html](proofs/ThmDunaevFirstProjection.html)
+
+### 3.78 `ThmDunaevSecondProjection` — Second projection of Dunaev's tagged ordered pair (Theorem)
+
+- **Identifier:** `ThmDunaevSecondProjection` (entry `3.78`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))`
+- **Proof Constructor:** `CpPr2 (p)`
+- **Kernel Note:** Recovers B from (A,B) via tag 2 without requiring A or B to be sets.
+- **Standalone Certificate:** [proofs/ThmDunaevSecondProjection.html](proofs/ThmDunaevSecondProjection.html)
+
+### 3.79 `DefLimitOrdinal` — Nonzero limit ordinal predicate (Definition)
+
+- **Identifier:** `DefLimitOrdinal` (entry `3.79`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(A:Class)(LimitOrd(A)←→(Ord(A)∧((¬(A=∅))∧∀(B:Class)((B∈A)—→((B∪{B})∈A))))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])←→(Ord([A@Class.Expression])∧((¬([A@Class.Expression]=∅))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→(([B@Class.Expression]∪{[B@Class.Expression]})∈[A@Class.Expression]))))))`
+- **Proof Constructor:** `PKernelDef_prf (def_limit_ord_cert, [A, B])`
+- **Kernel Note:** Conservative definition (DefLimitOrd, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): a class A is a nonzero limit ordinal (LimitOrd(A)) iff A is an ordinal, A is non-empty, and for every B in A, the von Neumann successor B u {B} also belongs to A.
+- **Standalone Certificate:** [proofs/DefLimitOrdinal.html](proofs/DefLimitOrdinal.html)
+
+### 3.80 `DefIndexedUnionClosed` — Indexed-union closure predicate (Definition)
+
+- **Identifier:** `DefIndexedUnionClosed` (entry `3.80`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(U:Class)(IndexedUnionClosed(U)←→(∀(I:Class)∀(f:Class)(((I∈U)∧((f class-function)∧((I⊆Dom(f))∧(f[I]⊆U))))—→(⋃f[I]∈U)))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(IndexedUnionClosed([U@Class.Expression])←→(∀([I@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([I@Class.Expression]∈[U@Class.Expression])∧(([f@Class.Expression] class-function)∧(([I@Class.Expression]⊆Dom([f@Class.Expression]))∧([f@Class.Expression][[I@Class.Expression]]⊆[U@Class.Expression]))))—→(⋃[f@Class.Expression][[I@Class.Expression]]∈[U@Class.Expression])))))`
+- **Proof Constructor:** `PKernelDef_prf (def_indexed_union_closed_cert, [U, I, f])`
+- **Kernel Note:** Conservative definition (DefIndexedUnionClosed, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): a class U is closed under indexed unions (IndexedUnionClosed(U)) iff for every index set I in U and every class-function f with I c Dom(f) and relational image f[I] c U, the union U(f[I]) belongs to U.
+- **Standalone Certificate:** [proofs/DefIndexedUnionClosed.html](proofs/DefIndexedUnionClosed.html)
+
+### 3.81 `DefVonNeumannStageLaws` — Von Neumann cumulative hierarchy recursion laws (Definition)
+
+- **Identifier:** `DefVonNeumannStageLaws` (entry `3.81`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(V:Class)(VStageLaws(V)←→((V(∅)=∅)∧((∀(A:Class)(Ord(A)—→(V((A∪{A}))=𝒫(V(A)))))∧((∀(A:Class)(LimitOrd(A)—→(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=V(B)))})))∧∀(A:Class)(Ord(A)—→((A=∅)∨((∃(B:Class)((B∈A)∧(A=(B∪{B}))))∨LimitOrd(A)))))))))`
+- **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])(VStageLaws([V@Class.Expression])←→(([V@Class.Expression](∅)=∅)∧((∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→([V@Class.Expression](([A@Class.Expression]∪{[A@Class.Expression]}))=𝒫([V@Class.Expression]([A@Class.Expression])))))∧((∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])—→([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=[V@Class.Expression]([B@Class.Expression])))})))∧∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→(([A@Class.Expression]=∅)∨((∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([A@Class.Expression]=([B@Class.Expression]∪{[B@Class.Expression]}))))∨LimitOrd([A@Class.Expression])))))))))`
+- **Proof Constructor:** `PKernelDef_prf (def_v_stage_laws_cert, [V, A, B, Y])`
+- **Kernel Note:** Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit).
+- **Standalone Certificate:** [proofs/DefVonNeumannStageLaws.html](proofs/DefVonNeumannStageLaws.html)
+
+### 3.82 `DefVonNeumannStageGraph` — Canonical von Neumann cumulative hierarchy graph (Definition)
+
+- **Identifier:** `DefVonNeumannStageGraph` (entry `3.82`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(VStageGraph=⋂{V|VStageLaws(V)})`
+- **Scheme of Types (Unicode):** `(VStageGraph=⋂{[V@Class.Expression]|VStageLaws([V@Class.Expression])})`
+- **Proof Constructor:** `PKernelDef_prf (def_v_stage_graph_cert, [V])`
+- **Kernel Note:** Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class graphs satisfying VStageLaws(V).
+- **Standalone Certificate:** [proofs/DefVonNeumannStageGraph.html](proofs/DefVonNeumannStageGraph.html)
+
+### 3.83 `DefSetRankLaws` — Mirimanoff-von Neumann set rank recursion laws (Definition)
+
+- **Identifier:** `DefSetRankLaws` (entry `3.83`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(R:Class)∀(V:Class)(SetRankLaws(R,V)←→((∀(x:Class)((x set)—→Ord(R(x))))∧((∀(x:Class)((x set)—→(R(x)=⋃{z|∃(y:Class)((y∈x)∧(z=(R(y)∪{R(y)})))})))∧∀(x:Class)((x set)—→(x∈V((R(x)∪{R(x)}))))))))`
+- **Scheme of Types (Unicode):** `(∀([R@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])(SetRankLaws([R@Class.Expression],[V@Class.Expression])←→((∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→Ord([R@Class.Expression]([x@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→([R@Class.Expression]([x@Class.Expression])=⋃{[z@Class.Expression]|∃([y@Variable]:[Class@Type])(([y@Class.Expression]∈[x@Class.Expression])∧([z@Class.Expression]=([R@Class.Expression]([y@Class.Expression])∪{[R@Class.Expression]([y@Class.Expression])})))})))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→([x@Class.Expression]∈[V@Class.Expression](([R@Class.Expression]([x@Class.Expression])∪{[R@Class.Expression]([x@Class.Expression])}))))))))`
+- **Proof Constructor:** `PKernelDef_prf (def_rank_laws_cert, [R, V, x, y, z])`
+- **Kernel Note:** Conservative definition (DefSetRankLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankLaws(R, V) characterizes the set rank operator valOf(R, x) and its cumulative-stage bounding law x in valOf(V, valOf(R, x) u {valOf(R, x)}) for every set x.
+- **Standalone Certificate:** [proofs/DefSetRankLaws.html](proofs/DefSetRankLaws.html)
+
+### 3.84 `DefSetRankGraph` — Canonical Mirimanoff-von Neumann set rank graph (Definition)
+
+- **Identifier:** `DefSetRankGraph` (entry `3.84`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(SetRankGraph=⋂{R|SetRankLaws(R,VStageGraph)})`
+- **Scheme of Types (Unicode):** `(SetRankGraph=⋂{[R@Class.Expression]|SetRankLaws([R@Class.Expression],VStageGraph)})`
+- **Proof Constructor:** `PKernelDef_prf (def_rank_graph_cert, [R])`
+- **Kernel Note:** Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class graphs R satisfying SetRankLaws(R, VStageGraph).
+- **Standalone Certificate:** [proofs/DefSetRankGraph.html](proofs/DefSetRankGraph.html)
+
+### 3.85 `ThmUniverseInterOnIsOrdinal` — Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal, and the empty set belongs to any non-empty universe (Theorem)
+
+- **Identifier:** `ThmUniverseInterOnIsOrdinal` (entry `3.85`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(U:Class)((U universe)—→Ord((U∩On))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)—→Ord(([U@Class.Expression]∩On))))`
+- **Proof Constructor:** `thm_step0_universe_inter_on_is_ordinal (PForaR_prf / POrdDef_prf / PBinInterDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step0_universe_inter_on_is_ordinal and thm_step0_universe_emptyset_in_u : Thm, verified by Thm.checkPipeline and Thm.slow_check): if U is a universe, then U is transitive and On is an ordinal, so their binary intersection kappa = U n On is a transitive class of ordinals and hence an ordinal; moreover by Regularity (Foundation), if U is non-empty then the empty set belongs to U.
+- **Standalone Certificate:** [proofs/ThmUniverseInterOnIsOrdinal.html](proofs/ThmUniverseInterOnIsOrdinal.html)
+
+### 3.86 `ThmUniverseUnionClosedFromIndexedUnion` — Step 1a of U = V_(U n On): a transitive class closed under indexed unions is closed under unary union (Theorem)
+
+- **Identifier:** `ThmUniverseUnionClosedFromIndexedUnion` (entry `3.86`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(U:Class)∀(f:Class)(((Tr(U)∧IndexedUnionClosed(U))∧((f class-function)∧((V⊆Dom(f))∧∀(a:Class)(f(a)=a))))—→∀(x:Class)((x∈U)—→(⋃x∈U))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])(((Tr([U@Class.Expression])∧IndexedUnionClosed([U@Class.Expression]))∧(([f@Class.Expression] class-function)∧((V⊆Dom([f@Class.Expression]))∧∀([a@Variable]:[Class@Type])([f@Class.Expression]([a@Class.Expression])=[a@Class.Expression]))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression]))))`
+- **Proof Constructor:** `thm_step1a_union_closed_from_indexed_union (PForaR_prf / PKernelDef_prf / PImageDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step1a_union_closed_from_indexed_union : Thm, verified by Thm.checkPipeline and Thm.slow_check): instantiating IndexedUnionClosed(U) with I = x in U and the universal diagonal identity class-function id_V yields id_V[x] = x c U and hence U(x) in U.
+- **Standalone Certificate:** [proofs/ThmUniverseUnionClosedFromIndexedUnion.html](proofs/ThmUniverseUnionClosedFromIndexedUnion.html)
+
+### 3.87 `ThmUniverseInterOnIsLimitOrdinal` — Step 1c of U = V_(U n On): the ordinal trace U n On of an union-closed universe is a nonzero limit ordinal (Theorem)
+
+- **Identifier:** `ThmUniverseInterOnIsLimitOrdinal` (entry `3.87`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(U:Class)(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))—→LimitOrd((U∩On))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))—→LimitOrd(([U@Class.Expression]∩On))))`
+- **Proof Constructor:** `thm_step1c_kappa_is_limit_ord (PForaR_prf / PKernelDef_prf / PEpsIndAx_prf / PPairfulDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step1c_kappa_is_limit_ord : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any universe U closed under unary union, kappa = U n On is an ordinal, contains 0 (since omega in U is non-empty and Foundation yields 0 in U), and is closed under ordinal successor B |-> B u {B} = U({B, {B}}) by pairing and union closure; therefore LimitOrd(U n On) holds.
+- **Standalone Certificate:** [proofs/ThmUniverseInterOnIsLimitOrdinal.html](proofs/ThmUniverseInterOnIsLimitOrdinal.html)
+
+### 3.88 `ThmVonNeumannStageSubUniverse` — Step 2 of U = V_(U n On): the cumulative stage V_(U n On) is a subclass of U (Theorem)
+
+- **Identifier:** `ThmVonNeumannStageSubUniverse` (entry `3.88`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(V:Class)∀(U:Class)((VStageLaws(V)∧(Tr(U)∧(LimitOrd((U∩On))∧∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))))—→(V((U∩On))⊆U)))`
+- **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(Tr([U@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))))—→([V@Class.Expression](([U@Class.Expression]∩On))⊆[U@Class.Expression])))`
+- **Proof Constructor:** `thm_step2_v_kappa_sub_u (PForaR_prf / PEpsIndAx_prf / PPowerfulDef_prf / PSubDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step2_v_kappa_sub_u : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (AxmRegularity) on A in kappa = U n On using the base stage V_0 = 0 in U, power-set closure V_(B u {B}) = P(V_B) in U, and indexed-union closure at limit ordinals, concluding V_A in U for all A in kappa and hence V_kappa = U_{A in kappa} V_A c U by transitivity of U.
+- **Standalone Certificate:** [proofs/ThmVonNeumannStageSubUniverse.html](proofs/ThmVonNeumannStageSubUniverse.html)
+
+### 3.89 `ThmUniverseSubVonNeumannStage` — Step 3 of U = V_(U n On): every universe U is a subclass of V_(U n On) (Theorem)
+
+- **Identifier:** `ThmUniverseSubVonNeumannStage` (entry `3.89`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(V:Class)∀(R:Class)∀(U:Class)((VStageLaws(V)∧(SetRankLaws(R,V)∧(LimitOrd((U∩On))∧((∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))∧∀(x:Class)((x∈U)—→(R(x)∈U))))))—→(U⊆V((U∩On)))))`
+- **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])∀([R@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(SetRankLaws([R@Class.Expression],[V@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→([R@Class.Expression]([x@Class.Expression])∈[U@Class.Expression]))))))—→([U@Class.Expression]⊆[V@Class.Expression](([U@Class.Expression]∩On)))))`
+- **Proof Constructor:** `thm_step3_u_sub_v_kappa (PForaR_prf / PEpsIndAx_prf / PKernelDef_prf / PSubDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step3_u_sub_v_kappa : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (AxmRegularity) on x in U showing rank(x) = U_{y in x} (rank(y) u {rank(y)}) in U via indexed-union closure, whence rank(x) in U n On = kappa, rank(x) + 1 in kappa by limit closure, and x in V_(rank(x) + 1) c V_kappa.
+- **Standalone Certificate:** [proofs/ThmUniverseSubVonNeumannStage.html](proofs/ThmUniverseSubVonNeumannStage.html)
+
+### 3.90 `ThmUniverseEqVonNeumannStageInterOn` — Conclusion: if U is a universe, then U = V_(U n On) (Theorem)
+
+- **Identifier:** `ThmUniverseEqVonNeumannStageInterOn` (entry `3.90`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(U:Class)((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))∧((∀(B:Class)((B∈(U∩On))—→(VStageGraph(B)∈U)))∧∀(x:Class)((x∈U)—→(SetRankGraph(x)∈U))))))—→(LimitOrd((U∩On))∧(U=VStageGraph((U∩On))))))`
+- **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→(VStageGraph([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(SetRankGraph([x@Class.Expression])∈[U@Class.Expression]))))))—→(LimitOrd(([U@Class.Expression]∩On))∧([U@Class.Expression]=VStageGraph(([U@Class.Expression]∩On))))))`
+- **Proof Constructor:** `thm_universe_eq_canonical_v_inter_on (PForaR_prf / PEqDef_prf / PAndR_prf)`
+- **Kernel Note:** Complete machine-checked MKTD1-system formalization (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm, verified by Thm.checkPipeline and Thm.slow_check across 45 constituent lemmas with zero cheating axioms): combining Step 2 (V_(U n On) c U) and Step 3 (U c V_(U n On)) via class equality antisymmetry yields U = valOf(VStageGraph, U n On).
+- **Standalone Certificate:** [proofs/ThmUniverseEqVonNeumannStageInterOn.html](proofs/ThmUniverseEqVonNeumannStageInterOn.html)
+
+## 4. Metalogical Laws (4.01-4.06) (4.01-4.06)
+
+Explicit substitution, context encoding, co-necessitation, uniqueness quantifiers, and reflected comprehension.
+
+### 4.01 `DefMetaInstantiation` — Instantiation (Axiom)
+
+- **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))`
+- **Proof Constructor:** `PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))`
+- **Kernel Note:** Kernel-verified metalevel universal instantiation schema (thm_4_01_finiteness / thm_4_01_meta_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
+- **Standalone Certificate:** [proofs/DefMetaInstantiation.html](proofs/DefMetaInstantiation.html)
+
+### 4.02 `DefMetaGeneralisation` — Generalisation (Axiom)
+
+- **Identifier:** `DefMetaGeneralisation` (entry `4.02`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:A)⟦𝛗⟧›))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[[A@Type]@Type])⟦[𝛗@Fm.Expression]⟧›))))`
+- **Proof Constructor:** `PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))`
+- **Kernel Note:** (A theory 𝘞 is assumed here to contain only formulas without free variables, so the variable x has no free occurences in any formula of a set of formulas [|Dec(Theory.Expression)(W)|]. Here Enc(v) (μ_Variable(v) : Variable.Expression → Class.Expression) denotes the explicit typed term interpretation / valuation homomorphism mapping a typed term of sort A into a term of sort Class while respecting the fixed model and variable valuation.)
+- **Standalone Certificate:** [proofs/DefMetaGeneralisation.html](proofs/DefMetaGeneralisation.html)
+
+### 4.03 `DefMetaConecessitation` — CoNecessitation (Inference Rule)
+
+- **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))`
+- **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
+- **Proof Constructor:** `PMetaConec_prf (Γ, φ, PCredo_prf (p))`
+- **Kernel Note:** If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
+- **Standalone Certificate:** [proofs/DefMetaConecessitation.html](proofs/DefMetaConecessitation.html)
+
+### 4.04 `DefAtMostOneBinder` — Quantifier “unique” (Definition)
+
+- **Identifier:** `DefAtMostOneBinder` (entry `4.04`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))—→([x@Class.Expression]=[y@Class.Expression])))))`
+- **Proof Constructor:** `PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))`
+- **Kernel Note:** Kernel-verified at-most-one binder definition (thm_4_04_at_most_one_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
+- **Standalone Certificate:** [proofs/DefAtMostOneBinder.html](proofs/DefAtMostOneBinder.html)
+
+### 4.05 `DefExistsUniqueBinder` — Quantifier “exists and unique” (Definition)
+
+- **Identifier:** `DefExistsUniqueBinder` (entry `4.05`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)←→((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘛,[]⊢‹(∃!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→((∃([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)∧!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)›))`
+- **Proof Constructor:** `PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))`
+- **Kernel Note:** Kernel-verified exists-unique binder definition (thm_4_05_exists_unique_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
+- **Standalone Certificate:** [proofs/DefExistsUniqueBinder.html](proofs/DefExistsUniqueBinder.html)
+
+### 4.06 `AxmMetaClassComprehension` — Class comprehension axiom schema (Axiom)
+
+- **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),‹x›,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Name@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),‹[x@Name.Expression]›,[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))`
+- **Proof Constructor:** `PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))`
+- **Kernel Note:** Kernel-verified metalevel class comprehension schema (thm_4_06_meta_class_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check) guarded by Fm.FFI.
+- **Standalone Certificate:** [proofs/AxmMetaClassComprehension.html](proofs/AxmMetaClassComprehension.html)
+
+## 5. Incompleteness-Related Statements (5.01-5.02) (5.01-5.02)
+
+Formalized Löb's theorem and Gödel's second incompleteness theorem.
+
+### 5.01 `ThmLoeb` — Löb's theorem (Theorem)
+
+- **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
+- **Proof Constructor:** `PLoeb_prf (ψ, PMP_prf (PDiagFixedPoint_prf (ψ, φ), PAndR_prf (PHBL1_prf (ψ), PAndR_prf (PHBL2_prf (ψ, φ), PHBL3_prf (ψ)))))`
+- **Kernel Note:** Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
+- **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
+
+### 5.02 `ThmSecondIncompleteness` — Gödel's second incompleteness theorem (Theorem)
+
+- **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
+- **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
+- **Proof Constructor:** `PSecondIncompl_prf (Τ, PMP_prf (PLoebInstBot_prf (Τ, ⊥), PImplR_prf (PConsistencyDef_prf (Τ, ⊥))))`
+- **Kernel Note:** Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
+- **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
+
