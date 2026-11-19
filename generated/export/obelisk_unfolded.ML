@@ -2157,6 +2157,37 @@ struct
     ("LatticeSup", Pi ("_", TClass, Pi ("_", TClass, TClass))),
     ("LatticeInf", Pi ("_", TClass, Pi ("_", TClass, TClass))),
     ("EquivClass", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("CoprodTag0", TClass),
+    ("CoprodTag1", TClass),
+    ("TrueVal", TClass),
+    ("IdMor", Pi ("_", TClass, TClass)),
+    ("CompMorOp", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("ExpEval", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("CurryOp", Pi ("_", TClass, TClass)),
+    ("UncurryOp", Pi ("_", TClass, TClass)),
+    ("MonadT", Pi ("_", TClass, TClass)),
+    ("MonadEta", Pi ("_", TClass, TClass)),
+    ("MonadMu", Pi ("_", TClass, TClass)),
+    ("YonedaMap", Pi ("_", TClass, TClass)),
+    ("BraidMor", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("AssocMorL", Pi ("_", TClass, TClass)),
+    ("AssocMorR", Pi ("_", TClass, TClass)),
+    ("DayFactor", Pi ("_", TClass, TClass)),
+    ("EndFactor", Pi ("_", TClass, TClass)),
+    ("CoendFactor", Pi ("_", TClass, TClass)),
+    ("FubiniAB", Pi ("_", TClass, TClass)),
+    ("FubiniBA", Pi ("_", TClass, TClass)),
+    ("WeightedRep", Pi ("_", TClass, TClass)),
+    ("WeightedInv", Pi ("_", TClass, TClass)),
+    ("TwoCellHV", Pi ("_", TClass, TClass)),
+    ("TwoCellVH", Pi ("_", TClass, TClass)),
+    ("TwoCellVComp", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("TwoCellHComp", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("ZigZagCompL", Pi ("_", TClass, TClass)),
+    ("ZigZagCompR", Pi ("_", TClass, TClass)),
+    ("PasteEval1", Pi ("_", TClass, TClass)),
+    ("PasteEval2", Pi ("_", TClass, TClass)),
+    ("PasteCanon", Pi ("_", TClass, TClass)),
     ("ax_extensionality", Forall "X" TClass (Forall "Y" TClass (Impl (Forall "z" TClass (And (Impl (In (Var "z") (Var "X")) (In (Var "z") (Var "Y")))
                                                                                              (Impl (In (Var "z") (Var "Y")) (In (Var "z") (Var "X")))))
                                                                      (Eq (Var "X") (Var "Y"))))),
@@ -4976,9 +5007,9 @@ struct
   }
 
   (* 126. Evaluation of Natural Transformation Component at Identity Morphism in MKTD2-theory:
-          forall F eta A idA.
-            (idA in A /\ (idA in A -> ValOf(eta, idA) in ValOf(F, A))) ->
-            ValOf(eta, idA) in ValOf(F, A) *)
+          forall F eta A.
+            (IdMor(A) in A /\ (IdMor(A) in A -> ValOf(eta, IdMor(A)) in ValOf(F, A))) ->
+            ValOf(eta, IdMor(A)) in ValOf(F, A) *)
   val thm_126_yoneda_identity_eval : TheoremRecord = {
     id = 126,
     name = "thm_yoneda_identity_eval",
@@ -4986,29 +5017,29 @@ struct
       Forall "F" TClass (
         Forall "eta" TClass (
           Forall "A" TClass (
-            Forall "idA" TClass (
-              let
-                val etaId = App (App (Const "ValOf", Var "eta"), Var "idA")
-                val fA = App (App (Const "ValOf", Var "F"), Var "A")
-              in
-                Impl (And (In (Var "idA") (Var "A"))
-                          (Impl (In (Var "idA") (Var "A")) (In etaId fA)))
-                     (In etaId fA)
-              end)))),
+            let
+              val idA = App (Const "IdMor", Var "A")
+              val etaId = App (App (Const "ValOf", Var "eta"), idA)
+              val fA = App (App (Const "ValOf", Var "F"), Var "A")
+            in
+              Impl (And (In idA (Var "A"))
+                        (Impl (In idA (Var "A")) (In etaId fA)))
+                   (In etaId fA)
+            end))),
     proofProgram =
       Lam ("F", TClass,
         Lam ("eta", TClass,
           Lam ("A", TClass,
-            Lam ("idA", TClass,
-              let
-                val etaId = App (App (Const "ValOf", Var "eta"), Var "idA")
-                val fA = App (App (Const "ValOf", Var "F"), Var "A")
-              in
-                Lam ("hYon",
-                  And (In (Var "idA") (Var "A"))
-                      (Impl (In (Var "idA") (Var "A")) (In etaId fA)),
-                  App (Snd (Var "hYon"), Fst (Var "hYon")))
-              end))))
+            let
+              val idA = App (Const "IdMor", Var "A")
+              val etaId = App (App (Const "ValOf", Var "eta"), idA)
+              val fA = App (App (Const "ValOf", Var "F"), Var "A")
+            in
+              Lam ("hYon",
+                And (In idA (Var "A"))
+                    (Impl (In idA (Var "A")) (In etaId fA)),
+                App (Snd (Var "hYon"), Fst (Var "hYon")))
+            end)))
   }
 
   (* 127. Constructive Round-Trip Identity Witness for the Yoneda Bijection in MKTD2-theory:
@@ -6365,10 +6396,10 @@ struct
   }
 
   (* 159. Dunaev Pair Filter Upward Closure Intersection Step:
-          forall F Sub x y z w.
-            (((x in F /\ y in F) -> z in F) /\
-             ((z in F /\ [z, w]_D in Sub) -> w in F)) ->
-            (((x in F /\ y in F) /\ [z, w]_D in Sub) -> w in F) *)
+          forall F Sub x y w.
+            (((x in F /\ y in F) -> BinInter(x, y) in F) /\
+             ((BinInter(x, y) in F /\ [BinInter(x, y), w]_D in Sub) -> w in F)) ->
+            (((x in F /\ y in F) /\ [BinInter(x, y), w]_D in Sub) -> w in F) *)
   val thm_159_dunaev_pair_filter_upward_closure_intersection : TheoremRecord = {
     id = 159,
     name = "thm_dunaev_pair_filter_upward_closure_intersection",
@@ -6377,47 +6408,47 @@ struct
         Forall "Sub" TClass (
           Forall "x" TClass (
             Forall "y" TClass (
-              Forall "z" TClass (
-                Forall "w" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xF = In (Var "x") (Var "F")
-                    val yF = In (Var "y") (Var "F")
-                    val zF = In (Var "z") (Var "F")
-                    val wF = In (Var "w") (Var "F")
-                    val zwSub = In (dp (Var "z") (Var "w")) (Var "Sub")
-                  in
-                    Impl (And (Impl (And xF yF) zF) (Impl (And zF zwSub) wF))
-                         (Impl (And (And xF yF) zwSub) wF)
-                  end)))))),
+              Forall "w" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val xyInter = App (App (Const "BinInter", Var "x"), Var "y")
+                  val xF = In (Var "x") (Var "F")
+                  val yF = In (Var "y") (Var "F")
+                  val zF = In xyInter (Var "F")
+                  val wF = In (Var "w") (Var "F")
+                  val zwSub = In (dp xyInter (Var "w")) (Var "Sub")
+                in
+                  Impl (And (Impl (And xF yF) zF) (Impl (And zF zwSub) wF))
+                       (Impl (And (And xF yF) zwSub) wF)
+                end))))),
     proofProgram =
       Lam ("F", TClass,
         Lam ("Sub", TClass,
           Lam ("x", TClass,
             Lam ("y", TClass,
-              Lam ("z", TClass,
-                Lam ("w", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xF = In (Var "x") (Var "F")
-                    val yF = In (Var "y") (Var "F")
-                    val zF = In (Var "z") (Var "F")
-                    val wF = In (Var "w") (Var "F")
-                    val zwSub = In (dp (Var "z") (Var "w")) (Var "Sub")
-                  in
-                    Lam ("h", And (Impl (And xF yF) zF) (Impl (And zF zwSub) wF),
-                      Lam ("hIn", And (And xF yF) zwSub,
-                        App (Snd (Var "h"),
-                             Pair (App (Fst (Var "h"), Fst (Var "hIn")),
-                                   Snd (Var "hIn")))))
-                  end))))))
+              Lam ("w", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val xyInter = App (App (Const "BinInter", Var "x"), Var "y")
+                  val xF = In (Var "x") (Var "F")
+                  val yF = In (Var "y") (Var "F")
+                  val zF = In xyInter (Var "F")
+                  val wF = In (Var "w") (Var "F")
+                  val zwSub = In (dp xyInter (Var "w")) (Var "Sub")
+                in
+                  Lam ("h", And (Impl (And xF yF) zF) (Impl (And zF zwSub) wF),
+                    Lam ("hIn", And (And xF yF) zwSub,
+                      App (Snd (Var "h"),
+                           Pair (App (Fst (Var "h"), Fst (Var "hIn")),
+                                 Snd (Var "hIn")))))
+                end)))))
   }
 
   (* 160. Ideal Downward Closure Union Step over Dunaev Pairs:
-          forall I Sub x y u v.
-            (((x in I /\ y in I) -> u in I) /\
-             (([v, u]_D in Sub /\ u in I) -> v in I)) ->
-            (((x in I /\ y in I) /\ [v, u]_D in Sub) -> v in I) *)
+          forall I Sub x y v.
+            (((x in I /\ y in I) -> BinUnion(x, y) in I) /\
+             (([v, BinUnion(x, y)]_D in Sub /\ BinUnion(x, y) in I) -> v in I)) ->
+            (((x in I /\ y in I) /\ [v, BinUnion(x, y)]_D in Sub) -> v in I) *)
   val thm_160_ideal_downward_closure_union : TheoremRecord = {
     id = 160,
     name = "thm_ideal_downward_closure_union",
@@ -6426,40 +6457,40 @@ struct
         Forall "Sub" TClass (
           Forall "x" TClass (
             Forall "y" TClass (
-              Forall "u" TClass (
-                Forall "v" TClass (
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val xI = In (Var "x") (Var "I")
-                    val yI = In (Var "y") (Var "I")
-                    val uI = In (Var "u") (Var "I")
-                    val vI = In (Var "v") (Var "I")
-                    val vuSub = In (dp (Var "v") (Var "u")) (Var "Sub")
-                  in
-                    Impl (And (Impl (And xI yI) uI) (Impl (And vuSub uI) vI))
-                         (Impl (And (And xI yI) vuSub) vI)
-                  end)))))),
+              Forall "v" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val xyUnion = App (App (Const "BinUnion", Var "x"), Var "y")
+                  val xI = In (Var "x") (Var "I")
+                  val yI = In (Var "y") (Var "I")
+                  val uI = In xyUnion (Var "I")
+                  val vI = In (Var "v") (Var "I")
+                  val vuSub = In (dp (Var "v") xyUnion) (Var "Sub")
+                in
+                  Impl (And (Impl (And xI yI) uI) (Impl (And vuSub uI) vI))
+                       (Impl (And (And xI yI) vuSub) vI)
+                end))))),
     proofProgram =
       Lam ("I", TClass,
         Lam ("Sub", TClass,
           Lam ("x", TClass,
             Lam ("y", TClass,
-              Lam ("u", TClass,
-                Lam ("v", TClass,
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val xI = In (Var "x") (Var "I")
-                    val yI = In (Var "y") (Var "I")
-                    val uI = In (Var "u") (Var "I")
-                    val vI = In (Var "v") (Var "I")
-                    val vuSub = In (dp (Var "v") (Var "u")) (Var "Sub")
-                  in
-                    Lam ("h", And (Impl (And xI yI) uI) (Impl (And vuSub uI) vI),
-                      Lam ("hIn", And (And xI yI) vuSub,
-                        App (Snd (Var "h"),
-                             Pair (Snd (Var "hIn"),
-                                   App (Fst (Var "h"), Fst (Var "hIn"))))))
-                  end))))))
+              Lam ("v", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val xyUnion = App (App (Const "BinUnion", Var "x"), Var "y")
+                  val xI = In (Var "x") (Var "I")
+                  val yI = In (Var "y") (Var "I")
+                  val uI = In xyUnion (Var "I")
+                  val vI = In (Var "v") (Var "I")
+                  val vuSub = In (dp (Var "v") xyUnion) (Var "Sub")
+                in
+                  Lam ("h", And (Impl (And xI yI) uI) (Impl (And vuSub uI) vI),
+                    Lam ("hIn", And (And xI yI) vuSub,
+                      App (Snd (Var "h"),
+                           Pair (Snd (Var "hIn"),
+                                 App (Fst (Var "h"), Fst (Var "hIn"))))))
+                end)))))
   }
 
   (* 161. Complete Lattice Supremum Least Upper Bound over Dunaev Pairs:
@@ -7178,9 +7209,9 @@ struct
   }
 
   (* 178. Dunaev Pair Pullback Fiber Product Left Projection:
-          forall A B EqC x y fx gy.
-            ((x in A /\ y in B) /\ [fx, gy]_D in EqC) ->
-            (x in A /\ [fx, gy]_D in EqC) *)
+          forall A B EqC f g x y.
+            ((x in A /\ y in B) /\ [ValOf(f, x), ValOf(g, y)]_D in EqC) ->
+            (x in A /\ [ValOf(f, x), ValOf(g, y)]_D in EqC) *)
   val thm_178_dunaev_pair_pullback_fiber_product_projection_left : TheoremRecord = {
     id = 178,
     name = "thm_dunaev_pair_pullback_fiber_product_projection_left",
@@ -7188,15 +7219,18 @@ struct
       Forall "A" TClass (
         Forall "B" TClass (
           Forall "EqC" TClass (
-            Forall "x" TClass (
-              Forall "y" TClass (
-                Forall "fx" TClass (
-                  Forall "gy" TClass (
+            Forall "f" TClass (
+              Forall "g" TClass (
+                Forall "x" TClass (
+                  Forall "y" TClass (
                     let
                       fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gy = valOf (Var "g") (Var "y")
                       val xA = In (Var "x") (Var "A")
                       val yB = In (Var "y") (Var "B")
-                      val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                      val eqFG = In (dp fx gy) (Var "EqC")
                     in
                       Impl (And (And xA yB) eqFG)
                            (And xA eqFG)
@@ -7205,15 +7239,18 @@ struct
       Lam ("A", TClass,
         Lam ("B", TClass,
           Lam ("EqC", TClass,
-            Lam ("x", TClass,
-              Lam ("y", TClass,
-                Lam ("fx", TClass,
-                  Lam ("gy", TClass,
+            Lam ("f", TClass,
+              Lam ("g", TClass,
+                Lam ("x", TClass,
+                  Lam ("y", TClass,
                     let
                       fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gy = valOf (Var "g") (Var "y")
                       val xA = In (Var "x") (Var "A")
                       val yB = In (Var "y") (Var "B")
-                      val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                      val eqFG = In (dp fx gy) (Var "EqC")
                     in
                       Lam ("h", And (And xA yB) eqFG,
                         Pair (Fst (Fst (Var "h")), Snd (Var "h")))
@@ -7221,9 +7258,9 @@ struct
   }
 
   (* 179. Dunaev Pair Pullback Fiber Product Right Projection:
-          forall A B EqC x y fx gy.
-            ((x in A /\ y in B) /\ [fx, gy]_D in EqC) ->
-            (y in B /\ [fx, gy]_D in EqC) *)
+          forall A B EqC f g x y.
+            ((x in A /\ y in B) /\ [ValOf(f, x), ValOf(g, y)]_D in EqC) ->
+            (y in B /\ [ValOf(f, x), ValOf(g, y)]_D in EqC) *)
   val thm_179_dunaev_pair_pullback_fiber_product_projection_right : TheoremRecord = {
     id = 179,
     name = "thm_dunaev_pair_pullback_fiber_product_projection_right",
@@ -7231,15 +7268,18 @@ struct
       Forall "A" TClass (
         Forall "B" TClass (
           Forall "EqC" TClass (
-            Forall "x" TClass (
-              Forall "y" TClass (
-                Forall "fx" TClass (
-                  Forall "gy" TClass (
+            Forall "f" TClass (
+              Forall "g" TClass (
+                Forall "x" TClass (
+                  Forall "y" TClass (
                     let
                       fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gy = valOf (Var "g") (Var "y")
                       val xA = In (Var "x") (Var "A")
                       val yB = In (Var "y") (Var "B")
-                      val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                      val eqFG = In (dp fx gy) (Var "EqC")
                     in
                       Impl (And (And xA yB) eqFG)
                            (And yB eqFG)
@@ -7248,15 +7288,18 @@ struct
       Lam ("A", TClass,
         Lam ("B", TClass,
           Lam ("EqC", TClass,
-            Lam ("x", TClass,
-              Lam ("y", TClass,
-                Lam ("fx", TClass,
-                  Lam ("gy", TClass,
+            Lam ("f", TClass,
+              Lam ("g", TClass,
+                Lam ("x", TClass,
+                  Lam ("y", TClass,
                     let
                       fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gy = valOf (Var "g") (Var "y")
                       val xA = In (Var "x") (Var "A")
                       val yB = In (Var "y") (Var "B")
-                      val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                      val eqFG = In (dp fx gy) (Var "EqC")
                     in
                       Lam ("h", And (And xA yB) eqFG,
                         Pair (Snd (Fst (Var "h")), Snd (Var "h")))
@@ -7264,10 +7307,10 @@ struct
   }
 
   (* 180. Dunaev Pair Pullback Universal Mediating Pair Witness:
-          forall P A B EqC u x y fx gy.
+          forall P A B EqC f g u x y.
             (((u in P -> x in A) /\ (u in P -> y in B)) /\
-             (u in P -> [fx, gy]_D in EqC)) ->
-            (u in P -> ((x in A /\ y in B) /\ [fx, gy]_D in EqC)) *)
+             (u in P -> [ValOf(f, x), ValOf(g, y)]_D in EqC)) ->
+            (u in P -> ((x in A /\ y in B) /\ [ValOf(f, x), ValOf(g, y)]_D in EqC)) *)
   val thm_180_dunaev_pair_pullback_universal_mediating_pair : TheoremRecord = {
     id = 180,
     name = "thm_dunaev_pair_pullback_universal_mediating_pair",
@@ -7276,17 +7319,20 @@ struct
         Forall "A" TClass (
           Forall "B" TClass (
             Forall "EqC" TClass (
-              Forall "u" TClass (
-                Forall "x" TClass (
-                  Forall "y" TClass (
-                    Forall "fx" TClass (
-                      Forall "gy" TClass (
+              Forall "f" TClass (
+                Forall "g" TClass (
+                  Forall "u" TClass (
+                    Forall "x" TClass (
+                      Forall "y" TClass (
                         let
                           fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                          fun valOf u0 v0 = App (App (Const "ValOf", u0), v0)
+                          val fx = valOf (Var "f") (Var "x")
+                          val gy = valOf (Var "g") (Var "y")
                           val uP = In (Var "u") (Var "P")
                           val xA = In (Var "x") (Var "A")
                           val yB = In (Var "y") (Var "B")
-                          val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                          val eqFG = In (dp fx gy) (Var "EqC")
                         in
                           Impl (And (And (Impl uP xA) (Impl uP yB)) (Impl uP eqFG))
                                (Impl uP (And (And xA yB) eqFG))
@@ -7296,17 +7342,20 @@ struct
         Lam ("A", TClass,
           Lam ("B", TClass,
             Lam ("EqC", TClass,
-              Lam ("u", TClass,
-                Lam ("x", TClass,
-                  Lam ("y", TClass,
-                    Lam ("fx", TClass,
-                      Lam ("gy", TClass,
+              Lam ("f", TClass,
+                Lam ("g", TClass,
+                  Lam ("u", TClass,
+                    Lam ("x", TClass,
+                      Lam ("y", TClass,
                         let
                           fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                          fun valOf u0 v0 = App (App (Const "ValOf", u0), v0)
+                          val fx = valOf (Var "f") (Var "x")
+                          val gy = valOf (Var "g") (Var "y")
                           val uP = In (Var "u") (Var "P")
                           val xA = In (Var "x") (Var "A")
                           val yB = In (Var "y") (Var "B")
-                          val eqFG = In (dp (Var "fx") (Var "gy")) (Var "EqC")
+                          val eqFG = In (dp fx gy) (Var "EqC")
                         in
                           Lam ("h", And (And (Impl uP xA) (Impl uP yB)) (Impl uP eqFG),
                             Lam ("huP", uP,
@@ -7319,9 +7368,9 @@ struct
   }
 
   (* 181. Equalizer Inclusion Fork Commutativity over Dunaev Pairs:
-          forall EqFG A DiagB x fx gx.
-            (x in EqFG -> (x in A /\ [fx, gx]_D in DiagB)) ->
-            (x in EqFG -> [fx, gx]_D in DiagB) *)
+          forall EqFG A DiagB f g x.
+            (x in EqFG -> (x in A /\ [ValOf(f, x), ValOf(g, x)]_D in DiagB)) ->
+            (x in EqFG -> [ValOf(f, x), ValOf(g, x)]_D in DiagB) *)
   val thm_181_equalizer_inclusion_fork_commutativity : TheoremRecord = {
     id = 181,
     name = "thm_equalizer_inclusion_fork_commutativity",
@@ -7329,14 +7378,17 @@ struct
       Forall "EqFG" TClass (
         Forall "A" TClass (
           Forall "DiagB" TClass (
-            Forall "x" TClass (
-              Forall "fx" TClass (
-                Forall "gx" TClass (
+            Forall "f" TClass (
+              Forall "g" TClass (
+                Forall "x" TClass (
                   let
                     fun dp u v = App (App (Const "DunaevPair", u), v)
+                    fun valOf u v = App (App (Const "ValOf", u), v)
+                    val fx = valOf (Var "f") (Var "x")
+                    val gx = valOf (Var "g") (Var "x")
                     val xEq = In (Var "x") (Var "EqFG")
                     val xA = In (Var "x") (Var "A")
-                    val fxgx = In (dp (Var "fx") (Var "gx")) (Var "DiagB")
+                    val fxgx = In (dp fx gx) (Var "DiagB")
                   in
                     Impl (Impl xEq (And xA fxgx))
                          (Impl xEq fxgx)
@@ -7345,14 +7397,17 @@ struct
       Lam ("EqFG", TClass,
         Lam ("A", TClass,
           Lam ("DiagB", TClass,
-            Lam ("x", TClass,
-              Lam ("fx", TClass,
-                Lam ("gx", TClass,
+            Lam ("f", TClass,
+              Lam ("g", TClass,
+                Lam ("x", TClass,
                   let
                     fun dp u v = App (App (Const "DunaevPair", u), v)
+                    fun valOf u v = App (App (Const "ValOf", u), v)
+                    val fx = valOf (Var "f") (Var "x")
+                    val gx = valOf (Var "g") (Var "x")
                     val xEq = In (Var "x") (Var "EqFG")
                     val xA = In (Var "x") (Var "A")
-                    val fxgx = In (dp (Var "fx") (Var "gx")) (Var "DiagB")
+                    val fxgx = In (dp fx gx) (Var "DiagB")
                   in
                     Lam ("h", Impl xEq (And xA fxgx),
                       Lam ("hxEq", xEq,
@@ -7361,25 +7416,29 @@ struct
   }
 
   (* 182. Equalizer Universal Factorization Uniqueness over Dunaev Pairs:
-          forall X DiagA u hu ku.
-            (((u in X -> [hu, hu]_D in DiagA) /\ ([hu, ku]_D in DiagA -> hu = ku)) /\
-             (u in X -> [hu, ku]_D in DiagA)) ->
-            (u in X -> hu = ku) *)
+          forall X DiagA h_fn k_fn u.
+            (((u in X -> [ValOf(h_fn, u), ValOf(h_fn, u)]_D in DiagA) /\
+              ([ValOf(h_fn, u), ValOf(k_fn, u)]_D in DiagA -> ValOf(h_fn, u) = ValOf(k_fn, u))) /\
+             (u in X -> [ValOf(h_fn, u), ValOf(k_fn, u)]_D in DiagA)) ->
+            (u in X -> ValOf(h_fn, u) = ValOf(k_fn, u)) *)
   val thm_182_equalizer_universal_factorization_uniqueness : TheoremRecord = {
     id = 182,
     name = "thm_equalizer_universal_factorization_uniqueness",
     statement =
       Forall "X" TClass (
         Forall "DiagA" TClass (
-          Forall "u" TClass (
-            Forall "hu" TClass (
-              Forall "ku" TClass (
+          Forall "h_fn" TClass (
+            Forall "k_fn" TClass (
+              Forall "u" TClass (
                 let
                   fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  fun valOf u0 v0 = App (App (Const "ValOf", u0), v0)
+                  val hu = valOf (Var "h_fn") (Var "u")
+                  val ku = valOf (Var "k_fn") (Var "u")
                   val uX = In (Var "u") (Var "X")
-                  val huhu = In (dp (Var "hu") (Var "hu")) (Var "DiagA")
-                  val huku = In (dp (Var "hu") (Var "ku")) (Var "DiagA")
-                  val eqHK = Eq (Var "hu") (Var "ku")
+                  val huhu = In (dp hu hu) (Var "DiagA")
+                  val huku = In (dp hu ku) (Var "DiagA")
+                  val eqHK = Eq hu ku
                 in
                   Impl (And (And (Impl uX huhu) (Impl huku eqHK)) (Impl uX huku))
                        (Impl uX eqHK)
@@ -7387,15 +7446,18 @@ struct
     proofProgram =
       Lam ("X", TClass,
         Lam ("DiagA", TClass,
-          Lam ("u", TClass,
-            Lam ("hu", TClass,
-              Lam ("ku", TClass,
+          Lam ("h_fn", TClass,
+            Lam ("k_fn", TClass,
+              Lam ("u", TClass,
                 let
                   fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  fun valOf u0 v0 = App (App (Const "ValOf", u0), v0)
+                  val hu = valOf (Var "h_fn") (Var "u")
+                  val ku = valOf (Var "k_fn") (Var "u")
                   val uX = In (Var "u") (Var "X")
-                  val huhu = In (dp (Var "hu") (Var "hu")) (Var "DiagA")
-                  val huku = In (dp (Var "hu") (Var "ku")) (Var "DiagA")
-                  val eqHK = Eq (Var "hu") (Var "ku")
+                  val huhu = In (dp hu hu) (Var "DiagA")
+                  val huku = In (dp hu ku) (Var "DiagA")
+                  val eqHK = Eq hu ku
                 in
                   Lam ("h", And (And (Impl uX huhu) (Impl huku eqHK)) (Impl uX huku),
                     Lam ("huX", uX,
@@ -7405,10 +7467,10 @@ struct
   }
 
   (* 183. Pushout Amalgamated Sum Left Injection over Dunaev Pairs:
-          forall A CoprodAB PushoutABC tag0 x.
-            ((x in A -> [tag0, x]_D in CoprodAB) /\
-             ([tag0, x]_D in CoprodAB -> [tag0, x]_D in PushoutABC)) ->
-            (x in A -> [tag0, x]_D in PushoutABC) *)
+          forall A CoprodAB PushoutABC x.
+            ((x in A -> [CoprodTag0, x]_D in CoprodAB) /\
+             ([CoprodTag0, x]_D in CoprodAB -> [CoprodTag0, x]_D in PushoutABC)) ->
+            (x in A -> [CoprodTag0, x]_D in PushoutABC) *)
   val thm_183_pushout_amalgamated_sum_left_injection : TheoremRecord = {
     id = 183,
     name = "thm_pushout_amalgamated_sum_left_injection",
@@ -7416,40 +7478,40 @@ struct
       Forall "A" TClass (
         Forall "CoprodAB" TClass (
           Forall "PushoutABC" TClass (
-            Forall "tag0" TClass (
-              Forall "x" TClass (
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val xA = In (Var "x") (Var "A")
-                  val t0xCoprod = In (dp (Var "tag0") (Var "x")) (Var "CoprodAB")
-                  val t0xPush = In (dp (Var "tag0") (Var "x")) (Var "PushoutABC")
-                in
-                  Impl (And (Impl xA t0xCoprod) (Impl t0xCoprod t0xPush))
-                       (Impl xA t0xPush)
-                end))))),
+            Forall "x" TClass (
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val tag0 = Const "CoprodTag0"
+                val xA = In (Var "x") (Var "A")
+                val t0xCoprod = In (dp tag0 (Var "x")) (Var "CoprodAB")
+                val t0xPush = In (dp tag0 (Var "x")) (Var "PushoutABC")
+              in
+                Impl (And (Impl xA t0xCoprod) (Impl t0xCoprod t0xPush))
+                     (Impl xA t0xPush)
+              end)))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("CoprodAB", TClass,
           Lam ("PushoutABC", TClass,
-            Lam ("tag0", TClass,
-              Lam ("x", TClass,
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val xA = In (Var "x") (Var "A")
-                  val t0xCoprod = In (dp (Var "tag0") (Var "x")) (Var "CoprodAB")
-                  val t0xPush = In (dp (Var "tag0") (Var "x")) (Var "PushoutABC")
-                in
-                  Lam ("h", And (Impl xA t0xCoprod) (Impl t0xCoprod t0xPush),
-                    Lam ("hxA", xA,
-                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                end)))))
+            Lam ("x", TClass,
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val tag0 = Const "CoprodTag0"
+                val xA = In (Var "x") (Var "A")
+                val t0xCoprod = In (dp tag0 (Var "x")) (Var "CoprodAB")
+                val t0xPush = In (dp tag0 (Var "x")) (Var "PushoutABC")
+              in
+                Lam ("h", And (Impl xA t0xCoprod) (Impl t0xCoprod t0xPush),
+                  Lam ("hxA", xA,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+              end))))
   }
 
   (* 184. Pushout Amalgamated Sum Right Injection over Dunaev Pairs:
-          forall B CoprodAB PushoutABC tag1 y.
-            ((y in B -> [tag1, y]_D in CoprodAB) /\
-             ([tag1, y]_D in CoprodAB -> [tag1, y]_D in PushoutABC)) ->
-            (y in B -> [tag1, y]_D in PushoutABC) *)
+          forall B CoprodAB PushoutABC y.
+            ((y in B -> [CoprodTag1, y]_D in CoprodAB) /\
+             ([CoprodTag1, y]_D in CoprodAB -> [CoprodTag1, y]_D in PushoutABC)) ->
+            (y in B -> [CoprodTag1, y]_D in PushoutABC) *)
   val thm_184_pushout_amalgamated_sum_right_injection : TheoremRecord = {
     id = 184,
     name = "thm_pushout_amalgamated_sum_right_injection",
@@ -7457,87 +7519,95 @@ struct
       Forall "B" TClass (
         Forall "CoprodAB" TClass (
           Forall "PushoutABC" TClass (
-            Forall "tag1" TClass (
-              Forall "y" TClass (
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val yB = In (Var "y") (Var "B")
-                  val t1yCoprod = In (dp (Var "tag1") (Var "y")) (Var "CoprodAB")
-                  val t1yPush = In (dp (Var "tag1") (Var "y")) (Var "PushoutABC")
-                in
-                  Impl (And (Impl yB t1yCoprod) (Impl t1yCoprod t1yPush))
-                       (Impl yB t1yPush)
-                end))))),
+            Forall "y" TClass (
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val tag1 = Const "CoprodTag1"
+                val yB = In (Var "y") (Var "B")
+                val t1yCoprod = In (dp tag1 (Var "y")) (Var "CoprodAB")
+                val t1yPush = In (dp tag1 (Var "y")) (Var "PushoutABC")
+              in
+                Impl (And (Impl yB t1yCoprod) (Impl t1yCoprod t1yPush))
+                     (Impl yB t1yPush)
+              end)))),
     proofProgram =
       Lam ("B", TClass,
         Lam ("CoprodAB", TClass,
           Lam ("PushoutABC", TClass,
-            Lam ("tag1", TClass,
-              Lam ("y", TClass,
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val yB = In (Var "y") (Var "B")
-                  val t1yCoprod = In (dp (Var "tag1") (Var "y")) (Var "CoprodAB")
-                  val t1yPush = In (dp (Var "tag1") (Var "y")) (Var "PushoutABC")
-                in
-                  Lam ("h", And (Impl yB t1yCoprod) (Impl t1yCoprod t1yPush),
-                    Lam ("hyB", yB,
-                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hyB"))))
-                end)))))
+            Lam ("y", TClass,
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val tag1 = Const "CoprodTag1"
+                val yB = In (Var "y") (Var "B")
+                val t1yCoprod = In (dp tag1 (Var "y")) (Var "CoprodAB")
+                val t1yPush = In (dp tag1 (Var "y")) (Var "PushoutABC")
+              in
+                Lam ("h", And (Impl yB t1yCoprod) (Impl t1yCoprod t1yPush),
+                  Lam ("hyB", yB,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hyB"))))
+              end))))
   }
 
   (* 185. Pushout Cocone Glueing Compatibility over Dunaev Pairs:
-          forall C PushoutABC tag0 tag1 z fz gz.
-            ((z in C -> [tag0, fz]_D in PushoutABC) /\
-             (z in C -> [tag1, gz]_D in PushoutABC)) ->
-            (z in C -> ([tag0, fz]_D in PushoutABC /\ [tag1, gz]_D in PushoutABC)) *)
+          forall C PushoutABC f g z.
+            ((z in C -> [CoprodTag0, ValOf(f, z)]_D in PushoutABC) /\
+             (z in C -> [CoprodTag1, ValOf(g, z)]_D in PushoutABC)) ->
+            (z in C -> ([CoprodTag0, ValOf(f, z)]_D in PushoutABC /\
+                        [CoprodTag1, ValOf(g, z)]_D in PushoutABC)) *)
   val thm_185_pushout_cocone_glueing_compatibility : TheoremRecord = {
     id = 185,
     name = "thm_pushout_cocone_glueing_compatibility",
     statement =
       Forall "C" TClass (
         Forall "PushoutABC" TClass (
-          Forall "tag0" TClass (
-            Forall "tag1" TClass (
+          Forall "f" TClass (
+            Forall "g" TClass (
               Forall "z" TClass (
-                Forall "fz" TClass (
-                  Forall "gz" TClass (
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val zC = In (Var "z") (Var "C")
-                      val t0fz = In (dp (Var "tag0") (Var "fz")) (Var "PushoutABC")
-                      val t1gz = In (dp (Var "tag1") (Var "gz")) (Var "PushoutABC")
-                    in
-                      Impl (And (Impl zC t0fz) (Impl zC t1gz))
-                           (Impl zC (And t0fz t1gz))
-                    end))))))),
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val tag0 = Const "CoprodTag0"
+                  val tag1 = Const "CoprodTag1"
+                  val fz = valOf (Var "f") (Var "z")
+                  val gz = valOf (Var "g") (Var "z")
+                  val zC = In (Var "z") (Var "C")
+                  val t0fz = In (dp tag0 fz) (Var "PushoutABC")
+                  val t1gz = In (dp tag1 gz) (Var "PushoutABC")
+                in
+                  Impl (And (Impl zC t0fz) (Impl zC t1gz))
+                       (Impl zC (And t0fz t1gz))
+                end))))),
     proofProgram =
       Lam ("C", TClass,
         Lam ("PushoutABC", TClass,
-          Lam ("tag0", TClass,
-            Lam ("tag1", TClass,
+          Lam ("f", TClass,
+            Lam ("g", TClass,
               Lam ("z", TClass,
-                Lam ("fz", TClass,
-                  Lam ("gz", TClass,
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val zC = In (Var "z") (Var "C")
-                      val t0fz = In (dp (Var "tag0") (Var "fz")) (Var "PushoutABC")
-                      val t1gz = In (dp (Var "tag1") (Var "gz")) (Var "PushoutABC")
-                    in
-                      Lam ("h", And (Impl zC t0fz) (Impl zC t1gz),
-                        Lam ("hzC", zC,
-                          Pair (
-                            App (Fst (Var "h"), Var "hzC"),
-                            App (Snd (Var "h"), Var "hzC"))))
-                    end)))))))
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val tag0 = Const "CoprodTag0"
+                  val tag1 = Const "CoprodTag1"
+                  val fz = valOf (Var "f") (Var "z")
+                  val gz = valOf (Var "g") (Var "z")
+                  val zC = In (Var "z") (Var "C")
+                  val t0fz = In (dp tag0 fz) (Var "PushoutABC")
+                  val t1gz = In (dp tag1 gz) (Var "PushoutABC")
+                in
+                  Lam ("h", And (Impl zC t0fz) (Impl zC t1gz),
+                    Lam ("hzC", zC,
+                      Pair (
+                        App (Fst (Var "h"), Var "hzC"),
+                        App (Snd (Var "h"), Var "hzC"))))
+                end)))))
   }
 
   (* 186. Coequalizer Quotient Fork Commutativity over Dunaev Pairs:
-          forall A KerQ DiagC x fx gx qfx qgx.
-            ((x in A -> [fx, gx]_D in KerQ) /\
-             ([fx, gx]_D in KerQ -> [qfx, qgx]_D in DiagC)) ->
-            (x in A -> [qfx, qgx]_D in DiagC) *)
+          forall A KerQ DiagC f g q_fn x.
+            ((x in A -> [ValOf(f, x), ValOf(g, x)]_D in KerQ) /\
+             ([ValOf(f, x), ValOf(g, x)]_D in KerQ ->
+              [ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))]_D in DiagC)) ->
+            (x in A -> [ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))]_D in DiagC) *)
   val thm_186_coequalizer_quotient_fork_commutativity : TheoremRecord = {
     id = 186,
     name = "thm_coequalizer_quotient_fork_commutativity",
@@ -7545,61 +7615,72 @@ struct
       Forall "A" TClass (
         Forall "KerQ" TClass (
           Forall "DiagC" TClass (
-            Forall "x" TClass (
-              Forall "fx" TClass (
-                Forall "gx" TClass (
-                  Forall "qfx" TClass (
-                    Forall "qgx" TClass (
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val fxgxKer = In (dp (Var "fx") (Var "gx")) (Var "KerQ")
-                        val qfxgxDiag = In (dp (Var "qfx") (Var "qgx")) (Var "DiagC")
-                      in
-                        Impl (And (Impl xA fxgxKer) (Impl fxgxKer qfxgxDiag))
-                             (Impl xA qfxgxDiag)
-                      end)))))))),
+            Forall "f" TClass (
+              Forall "g" TClass (
+                Forall "q_fn" TClass (
+                  Forall "x" TClass (
+                    let
+                      fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gx = valOf (Var "g") (Var "x")
+                      val qfx = valOf (Var "q_fn") fx
+                      val qgx = valOf (Var "q_fn") gx
+                      val xA = In (Var "x") (Var "A")
+                      val fxgxKer = In (dp fx gx) (Var "KerQ")
+                      val qfxgxDiag = In (dp qfx qgx) (Var "DiagC")
+                    in
+                      Impl (And (Impl xA fxgxKer) (Impl fxgxKer qfxgxDiag))
+                           (Impl xA qfxgxDiag)
+                    end))))))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("KerQ", TClass,
           Lam ("DiagC", TClass,
-            Lam ("x", TClass,
-              Lam ("fx", TClass,
-                Lam ("gx", TClass,
-                  Lam ("qfx", TClass,
-                    Lam ("qgx", TClass,
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val fxgxKer = In (dp (Var "fx") (Var "gx")) (Var "KerQ")
-                        val qfxgxDiag = In (dp (Var "qfx") (Var "qgx")) (Var "DiagC")
-                      in
-                        Lam ("h", And (Impl xA fxgxKer) (Impl fxgxKer qfxgxDiag),
-                          Lam ("hxA", xA,
-                            App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                      end))))))))
+            Lam ("f", TClass,
+              Lam ("g", TClass,
+                Lam ("q_fn", TClass,
+                  Lam ("x", TClass,
+                    let
+                      fun dp u v = App (App (Const "DunaevPair", u), v)
+                      fun valOf u v = App (App (Const "ValOf", u), v)
+                      val fx = valOf (Var "f") (Var "x")
+                      val gx = valOf (Var "g") (Var "x")
+                      val qfx = valOf (Var "q_fn") fx
+                      val qgx = valOf (Var "q_fn") gx
+                      val xA = In (Var "x") (Var "A")
+                      val fxgxKer = In (dp fx gx) (Var "KerQ")
+                      val qfxgxDiag = In (dp qfx qgx) (Var "DiagC")
+                    in
+                      Lam ("h", And (Impl xA fxgxKer) (Impl fxgxKer qfxgxDiag),
+                        Lam ("hxA", xA,
+                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+                    end)))))))
   }
 
   (* 187. Coequalizer Universal Mediating Uniqueness over Dunaev Pairs:
-          forall B DiagZ y uy vy.
-            (((y in B -> [uy, vy]_D in DiagZ) /\
-              ([uy, vy]_D in DiagZ -> uy = vy)) /\
+          forall B DiagZ u_fn v_fn y.
+            (((y in B -> [ValOf(u_fn, y), ValOf(v_fn, y)]_D in DiagZ) /\
+              ([ValOf(u_fn, y), ValOf(v_fn, y)]_D in DiagZ -> ValOf(u_fn, y) = ValOf(v_fn, y))) /\
              y in B) ->
-            uy = vy *)
+            ValOf(u_fn, y) = ValOf(v_fn, y) *)
   val thm_187_coequalizer_universal_mediating_uniqueness : TheoremRecord = {
     id = 187,
     name = "thm_coequalizer_universal_mediating_uniqueness",
     statement =
       Forall "B" TClass (
         Forall "DiagZ" TClass (
-          Forall "y" TClass (
-            Forall "uy" TClass (
-              Forall "vy" TClass (
+          Forall "u_fn" TClass (
+            Forall "v_fn" TClass (
+              Forall "y" TClass (
                 let
                   fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val uy = valOf (Var "u_fn") (Var "y")
+                  val vy = valOf (Var "v_fn") (Var "y")
                   val yB = In (Var "y") (Var "B")
-                  val uyvyDiag = In (dp (Var "uy") (Var "vy")) (Var "DiagZ")
-                  val eqUV = Eq (Var "uy") (Var "vy")
+                  val uyvyDiag = In (dp uy vy) (Var "DiagZ")
+                  val eqUV = Eq uy vy
                 in
                   Impl (And (And (Impl yB uyvyDiag) (Impl uyvyDiag eqUV)) yB)
                        eqUV
@@ -7607,14 +7688,17 @@ struct
     proofProgram =
       Lam ("B", TClass,
         Lam ("DiagZ", TClass,
-          Lam ("y", TClass,
-            Lam ("uy", TClass,
-              Lam ("vy", TClass,
+          Lam ("u_fn", TClass,
+            Lam ("v_fn", TClass,
+              Lam ("y", TClass,
                 let
                   fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val uy = valOf (Var "u_fn") (Var "y")
+                  val vy = valOf (Var "v_fn") (Var "y")
                   val yB = In (Var "y") (Var "B")
-                  val uyvyDiag = In (dp (Var "uy") (Var "vy")) (Var "DiagZ")
-                  val eqUV = Eq (Var "uy") (Var "vy")
+                  val uyvyDiag = In (dp uy vy) (Var "DiagZ")
+                  val eqUV = Eq uy vy
                 in
                   Lam ("h", And (And (Impl yB uyvyDiag) (Impl uyvyDiag eqUV)) yB,
                     App (Snd (Fst (Var "h")),
@@ -7623,10 +7707,11 @@ struct
   }
 
   (* 188. Exponential Evaluation Beta-Reduction Step over Dunaev Pairs:
-          forall DomEv GraphLam EqC f x evfx bodyx.
+          forall DomEv GraphLam EqC body_fn f x.
             (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) /\
-             (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) -> [evfx, bodyx]_D in EqC)) ->
-            [evfx, bodyx]_D in EqC *)
+             (([f, x]_D in DomEv /\ [f, x]_D in GraphLam) ->
+              [ExpEval(f, x), ValOf(body_fn, x)]_D in EqC)) ->
+            [ExpEval(f, x), ValOf(body_fn, x)]_D in EqC *)
   val thm_188_exponential_evaluation_beta_reduction_step : TheoremRecord = {
     id = 188,
     name = "thm_exponential_evaluation_beta_reduction_step",
@@ -7634,43 +7719,45 @@ struct
       Forall "DomEv" TClass (
         Forall "GraphLam" TClass (
           Forall "EqC" TClass (
-            Forall "f" TClass (
-              Forall "x" TClass (
-                Forall "evfx" TClass (
-                  Forall "bodyx" TClass (
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val fxDom = In (dp (Var "f") (Var "x")) (Var "DomEv")
-                      val fxGraph = In (dp (Var "f") (Var "x")) (Var "GraphLam")
-                      val evBodyEq = In (dp (Var "evfx") (Var "bodyx")) (Var "EqC")
-                    in
-                      Impl (And (And fxDom fxGraph) (Impl (And fxDom fxGraph) evBodyEq))
-                           evBodyEq
-                    end))))))),
+            Forall "body_fn" TClass (
+              Forall "f" TClass (
+                Forall "x" TClass (
+                  let
+                    fun dp u v = App (App (Const "DunaevPair", u), v)
+                    val evfx = App (App (Const "ExpEval", Var "f"), Var "x")
+                    val bodyx = App (App (Const "ValOf", Var "body_fn"), Var "x")
+                    val fxDom = In (dp (Var "f") (Var "x")) (Var "DomEv")
+                    val fxGraph = In (dp (Var "f") (Var "x")) (Var "GraphLam")
+                    val evBodyEq = In (dp evfx bodyx) (Var "EqC")
+                  in
+                    Impl (And (And fxDom fxGraph) (Impl (And fxDom fxGraph) evBodyEq))
+                         evBodyEq
+                  end)))))),
     proofProgram =
       Lam ("DomEv", TClass,
         Lam ("GraphLam", TClass,
           Lam ("EqC", TClass,
-            Lam ("f", TClass,
-              Lam ("x", TClass,
-                Lam ("evfx", TClass,
-                  Lam ("bodyx", TClass,
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val fxDom = In (dp (Var "f") (Var "x")) (Var "DomEv")
-                      val fxGraph = In (dp (Var "f") (Var "x")) (Var "GraphLam")
-                      val evBodyEq = In (dp (Var "evfx") (Var "bodyx")) (Var "EqC")
-                    in
-                      Lam ("h", And (And fxDom fxGraph) (Impl (And fxDom fxGraph) evBodyEq),
-                        App (Snd (Var "h"), Fst (Var "h")))
-                    end)))))))
+            Lam ("body_fn", TClass,
+              Lam ("f", TClass,
+                Lam ("x", TClass,
+                  let
+                    fun dp u v = App (App (Const "DunaevPair", u), v)
+                    val evfx = App (App (Const "ExpEval", Var "f"), Var "x")
+                    val bodyx = App (App (Const "ValOf", Var "body_fn"), Var "x")
+                    val fxDom = In (dp (Var "f") (Var "x")) (Var "DomEv")
+                    val fxGraph = In (dp (Var "f") (Var "x")) (Var "GraphLam")
+                    val evBodyEq = In (dp evfx bodyx) (Var "EqC")
+                  in
+                    Lam ("h", And (And fxDom fxGraph) (Impl (And fxDom fxGraph) evBodyEq),
+                      App (Snd (Var "h"), Fst (Var "h")))
+                  end))))))
   }
 
   (* 189. Exponential Transpose Eta-Uniqueness Step over Dunaev Pairs:
-          forall HomAB EqHom EqExp f g evf curg.
-            (((f in HomAB /\ [evf, g]_D in EqHom) /\
-              ([evf, g]_D in EqHom -> [f, curg]_D in EqExp)) ->
-             (f in HomAB -> [f, curg]_D in EqExp)) *)
+          forall HomAB EqHom EqExp f g.
+            (((f in HomAB /\ [UncurryOp(f), g]_D in EqHom) /\
+              ([UncurryOp(f), g]_D in EqHom -> [f, CurryOp(g)]_D in EqExp)) ->
+             (f in HomAB -> [f, CurryOp(g)]_D in EqExp)) *)
   val thm_189_exponential_transpose_eta_uniqueness_step : TheoremRecord = {
     id = 189,
     name = "thm_exponential_transpose_eta_uniqueness_step",
@@ -7680,82 +7767,86 @@ struct
           Forall "EqExp" TClass (
             Forall "f" TClass (
               Forall "g" TClass (
-                Forall "evf" TClass (
-                  Forall "curg" TClass (
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val fHom = In (Var "f") (Var "HomAB")
-                      val evfgEq = In (dp (Var "evf") (Var "g")) (Var "EqHom")
-                      val fcurgEq = In (dp (Var "f") (Var "curg")) (Var "EqExp")
-                    in
-                      Impl (And (And fHom evfgEq) (Impl evfgEq fcurgEq))
-                           (Impl fHom fcurgEq)
-                    end))))))),
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val evf = App (Const "UncurryOp", Var "f")
+                  val curg = App (Const "CurryOp", Var "g")
+                  val fHom = In (Var "f") (Var "HomAB")
+                  val evfgEq = In (dp evf (Var "g")) (Var "EqHom")
+                  val fcurgEq = In (dp (Var "f") curg) (Var "EqExp")
+                in
+                  Impl (And (And fHom evfgEq) (Impl evfgEq fcurgEq))
+                       (Impl fHom fcurgEq)
+                end))))),
     proofProgram =
       Lam ("HomAB", TClass,
         Lam ("EqHom", TClass,
           Lam ("EqExp", TClass,
             Lam ("f", TClass,
               Lam ("g", TClass,
-                Lam ("evf", TClass,
-                  Lam ("curg", TClass,
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val fHom = In (Var "f") (Var "HomAB")
-                      val evfgEq = In (dp (Var "evf") (Var "g")) (Var "EqHom")
-                      val fcurgEq = In (dp (Var "f") (Var "curg")) (Var "EqExp")
-                    in
-                      Lam ("h", And (And fHom evfgEq) (Impl evfgEq fcurgEq),
-                        Lam ("hfHom", fHom,
-                          App (Snd (Var "h"), Snd (Fst (Var "h")))))
-                    end)))))))
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val evf = App (Const "UncurryOp", Var "f")
+                  val curg = App (Const "CurryOp", Var "g")
+                  val fHom = In (Var "f") (Var "HomAB")
+                  val evfgEq = In (dp evf (Var "g")) (Var "EqHom")
+                  val fcurgEq = In (dp (Var "f") curg) (Var "EqExp")
+                in
+                  Lam ("h", And (And fHom evfgEq) (Impl evfgEq fcurgEq),
+                    Lam ("hfHom", fHom,
+                      App (Snd (Var "h"), Snd (Fst (Var "h")))))
+                end)))))
   }
 
   (* 190. Subobject Classifier Characteristic Pullback Equivalence over Dunaev Pairs:
-          forall SubA EqOmega x chix trueVal.
-            ((x in SubA -> [chix, trueVal]_D in EqOmega) /\
-             ([chix, trueVal]_D in EqOmega -> x in SubA)) ->
-            ((x in SubA -> [chix, trueVal]_D in EqOmega) /\
-             ([chix, trueVal]_D in EqOmega -> x in SubA)) *)
+          forall SubA EqOmega chi_fn x.
+            ((x in SubA -> [ValOf(chi_fn, x), TrueVal]_D in EqOmega) /\
+             ([ValOf(chi_fn, x), TrueVal]_D in EqOmega -> x in SubA)) ->
+            ((x in SubA -> [ValOf(chi_fn, x), TrueVal]_D in EqOmega) /\
+             ([ValOf(chi_fn, x), TrueVal]_D in EqOmega -> x in SubA)) *)
   val thm_190_subobject_classifier_characteristic_pullback_iff : TheoremRecord = {
     id = 190,
     name = "thm_subobject_classifier_characteristic_pullback_iff",
     statement =
       Forall "SubA" TClass (
         Forall "EqOmega" TClass (
-          Forall "x" TClass (
-            Forall "chix" TClass (
-              Forall "trueVal" TClass (
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val xSub = In (Var "x") (Var "SubA")
-                  val chiTrueEq = In (dp (Var "chix") (Var "trueVal")) (Var "EqOmega")
-                in
-                  Impl (And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub))
-                       (And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub))
-                end))))),
+          Forall "chi_fn" TClass (
+            Forall "x" TClass (
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val chix = App (App (Const "ValOf", Var "chi_fn"), Var "x")
+                val trueVal = Const "TrueVal"
+                val xSub = In (Var "x") (Var "SubA")
+                val chiTrueEq = In (dp chix trueVal) (Var "EqOmega")
+              in
+                Impl (And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub))
+                     (And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub))
+              end)))),
     proofProgram =
       Lam ("SubA", TClass,
         Lam ("EqOmega", TClass,
-          Lam ("x", TClass,
-            Lam ("chix", TClass,
-              Lam ("trueVal", TClass,
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val xSub = In (Var "x") (Var "SubA")
-                  val chiTrueEq = In (dp (Var "chix") (Var "trueVal")) (Var "EqOmega")
-                in
-                  Lam ("h", And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub),
-                    Pair (Fst (Var "h"), Snd (Var "h")))
-                end)))))
+          Lam ("chi_fn", TClass,
+            Lam ("x", TClass,
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val chix = App (App (Const "ValOf", Var "chi_fn"), Var "x")
+                val trueVal = Const "TrueVal"
+                val xSub = In (Var "x") (Var "SubA")
+                val chiTrueEq = In (dp chix trueVal) (Var "EqOmega")
+              in
+                Lam ("h", And (Impl xSub chiTrueEq) (Impl chiTrueEq xSub),
+                  Pair (Fst (Var "h"), Snd (Var "h")))
+              end))))
   }
 
   (* 191. Lawvere-Tierney Topology Idempotence Step over Dunaev Pairs:
-          forall Omega LeqOmega EqOmega p jp jjp.
-            (((p in Omega -> [jp, p]_D in LeqOmega) /\
-              (p in Omega -> [p, jjp]_D in LeqOmega)) /\
-             (([jp, p]_D in LeqOmega /\ [p, jjp]_D in LeqOmega) -> [jjp, jp]_D in EqOmega)) ->
-            (p in Omega -> [jjp, jp]_D in EqOmega) *)
+          forall Omega LeqOmega EqOmega j_fn p.
+            (((p in Omega -> [ValOf(j_fn, p), p]_D in LeqOmega) /\
+              (p in Omega -> [p, ValOf(j_fn, ValOf(j_fn, p))]_D in LeqOmega)) /\
+             (([ValOf(j_fn, p), p]_D in LeqOmega /\
+               [p, ValOf(j_fn, ValOf(j_fn, p))]_D in LeqOmega) ->
+              [ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)]_D in EqOmega)) ->
+            (p in Omega -> [ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)]_D in EqOmega) *)
   val thm_191_lawvere_tierney_topology_idempotence_step : TheoremRecord = {
     id = 191,
     name = "thm_lawvere_tierney_topology_idempotence_step",
@@ -7763,90 +7854,102 @@ struct
       Forall "Omega" TClass (
         Forall "LeqOmega" TClass (
           Forall "EqOmega" TClass (
-            Forall "p" TClass (
-              Forall "jp" TClass (
-                Forall "jjp" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val pOm = In (Var "p") (Var "Omega")
-                    val jppLeq = In (dp (Var "jp") (Var "p")) (Var "LeqOmega")
-                    val pjjpLeq = In (dp (Var "p") (Var "jjp")) (Var "LeqOmega")
-                    val jjpjpEq = In (dp (Var "jjp") (Var "jp")) (Var "EqOmega")
-                  in
-                    Impl (And (And (Impl pOm jppLeq) (Impl pOm pjjpLeq))
-                              (Impl (And jppLeq pjjpLeq) jjpjpEq))
-                         (Impl pOm jjpjpEq)
-                  end)))))),
+            Forall "j_fn" TClass (
+              Forall "p" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val jp = valOf (Var "j_fn") (Var "p")
+                  val jjp = valOf (Var "j_fn") jp
+                  val pOm = In (Var "p") (Var "Omega")
+                  val jppLeq = In (dp jp (Var "p")) (Var "LeqOmega")
+                  val pjjpLeq = In (dp (Var "p") jjp) (Var "LeqOmega")
+                  val jjpjpEq = In (dp jjp jp) (Var "EqOmega")
+                in
+                  Impl (And (And (Impl pOm jppLeq) (Impl pOm pjjpLeq))
+                            (Impl (And jppLeq pjjpLeq) jjpjpEq))
+                       (Impl pOm jjpjpEq)
+                end))))),
     proofProgram =
       Lam ("Omega", TClass,
         Lam ("LeqOmega", TClass,
           Lam ("EqOmega", TClass,
-            Lam ("p", TClass,
-              Lam ("jp", TClass,
-                Lam ("jjp", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val pOm = In (Var "p") (Var "Omega")
-                    val jppLeq = In (dp (Var "jp") (Var "p")) (Var "LeqOmega")
-                    val pjjpLeq = In (dp (Var "p") (Var "jjp")) (Var "LeqOmega")
-                    val jjpjpEq = In (dp (Var "jjp") (Var "jp")) (Var "EqOmega")
-                  in
-                    Lam ("h", And (And (Impl pOm jppLeq) (Impl pOm pjjpLeq))
-                                  (Impl (And jppLeq pjjpLeq) jjpjpEq),
-                      Lam ("hpOm", pOm,
-                        App (Snd (Var "h"),
-                             Pair (App (Fst (Fst (Var "h")), Var "hpOm"),
-                                   App (Snd (Fst (Var "h")), Var "hpOm")))))
-                  end))))))
+            Lam ("j_fn", TClass,
+              Lam ("p", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val jp = valOf (Var "j_fn") (Var "p")
+                  val jjp = valOf (Var "j_fn") jp
+                  val pOm = In (Var "p") (Var "Omega")
+                  val jppLeq = In (dp jp (Var "p")) (Var "LeqOmega")
+                  val pjjpLeq = In (dp (Var "p") jjp) (Var "LeqOmega")
+                  val jjpjpEq = In (dp jjp jp) (Var "EqOmega")
+                in
+                  Lam ("h", And (And (Impl pOm jppLeq) (Impl pOm pjjpLeq))
+                                (Impl (And jppLeq pjjpLeq) jjpjpEq),
+                    Lam ("hpOm", pOm,
+                      App (Snd (Var "h"),
+                           Pair (App (Fst (Fst (Var "h")), Var "hpOm"),
+                                 App (Snd (Fst (Var "h")), Var "hpOm")))))
+                end)))))
   }
 
   (* 192. Lawvere-Tierney Topology Meet Preservation Step over Dunaev Pairs:
-          forall Omega EqOmega p q jmeetpq meetjpjq.
-            (((p in Omega /\ q in Omega) -> [jmeetpq, meetjpjq]_D in EqOmega) /\
+          forall Omega EqOmega j_fn p q.
+            (((p in Omega /\ q in Omega) ->
+              [ValOf(j_fn, BinInter(p, q)), BinInter(ValOf(j_fn, p), ValOf(j_fn, q))]_D in EqOmega) /\
              (p in Omega /\ q in Omega)) ->
-            [jmeetpq, meetjpjq]_D in EqOmega *)
+            [ValOf(j_fn, BinInter(p, q)), BinInter(ValOf(j_fn, p), ValOf(j_fn, q))]_D in EqOmega *)
   val thm_192_lawvere_tierney_topology_meet_preservation_step : TheoremRecord = {
     id = 192,
     name = "thm_lawvere_tierney_topology_meet_preservation_step",
     statement =
       Forall "Omega" TClass (
         Forall "EqOmega" TClass (
-          Forall "p" TClass (
-            Forall "q" TClass (
-              Forall "jmeetpq" TClass (
-                Forall "meetjpjq" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val pOm = In (Var "p") (Var "Omega")
-                    val qOm = In (Var "q") (Var "Omega")
-                    val meetEq = In (dp (Var "jmeetpq") (Var "meetjpjq")) (Var "EqOmega")
-                  in
-                    Impl (And (Impl (And pOm qOm) meetEq) (And pOm qOm))
-                         meetEq
-                  end)))))),
+          Forall "j_fn" TClass (
+            Forall "p" TClass (
+              Forall "q" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  fun meet u v = App (App (Const "BinInter", u), v)
+                  val jmeetpq = valOf (Var "j_fn") (meet (Var "p") (Var "q"))
+                  val meetjpjq = meet (valOf (Var "j_fn") (Var "p")) (valOf (Var "j_fn") (Var "q"))
+                  val pOm = In (Var "p") (Var "Omega")
+                  val qOm = In (Var "q") (Var "Omega")
+                  val meetEq = In (dp jmeetpq meetjpjq) (Var "EqOmega")
+                in
+                  Impl (And (Impl (And pOm qOm) meetEq) (And pOm qOm))
+                       meetEq
+                end))))),
     proofProgram =
       Lam ("Omega", TClass,
         Lam ("EqOmega", TClass,
-          Lam ("p", TClass,
-            Lam ("q", TClass,
-              Lam ("jmeetpq", TClass,
-                Lam ("meetjpjq", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val pOm = In (Var "p") (Var "Omega")
-                    val qOm = In (Var "q") (Var "Omega")
-                    val meetEq = In (dp (Var "jmeetpq") (Var "meetjpjq")) (Var "EqOmega")
-                  in
-                    Lam ("h", And (Impl (And pOm qOm) meetEq) (And pOm qOm),
-                      App (Fst (Var "h"), Snd (Var "h")))
-                  end))))))
+          Lam ("j_fn" , TClass,
+            Lam ("p", TClass,
+              Lam ("q", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  fun meet u v = App (App (Const "BinInter", u), v)
+                  val jmeetpq = valOf (Var "j_fn") (meet (Var "p") (Var "q"))
+                  val meetjpjq = meet (valOf (Var "j_fn") (Var "p")) (valOf (Var "j_fn") (Var "q"))
+                  val pOm = In (Var "p") (Var "Omega")
+                  val qOm = In (Var "q") (Var "Omega")
+                  val meetEq = In (dp jmeetpq meetjpjq) (Var "EqOmega")
+                in
+                  Lam ("h", And (Impl (And pOm qOm) meetEq) (And pOm qOm),
+                    App (Fst (Var "h"), Snd (Var "h")))
+                end)))))
   }
 
   (* 193. Monad Left Unit Law Coherence over Dunaev Pairs:
-          forall A EtaMap EqTA x etax muTetax idTx.
-            ((x in A -> [x, etax]_D in EtaMap) /\
-             ([x, etax]_D in EtaMap -> [muTetax, idTx]_D in EqTA)) ->
-            (x in A -> [muTetax, idTx]_D in EqTA) *)
+          forall A EtaMap EqTA x.
+            ((x in A -> [x, MonadEta(x)]_D in EtaMap) /\
+             ([x, MonadEta(x)]_D in EtaMap ->
+              [MonadMu(MonadT(MonadEta(x))), MonadT(x)]_D in EqTA)) ->
+            (x in A -> [MonadMu(MonadT(MonadEta(x))), MonadT(x)]_D in EqTA) *)
   val thm_193_monad_left_unit_law_coherence : TheoremRecord = {
     id = 193,
     name = "thm_monad_left_unit_law_coherence",
@@ -7855,43 +7958,44 @@ struct
         Forall "EtaMap" TClass (
           Forall "EqTA" TClass (
             Forall "x" TClass (
-              Forall "etax" TClass (
-                Forall "muTetax" TClass (
-                  Forall "idTx" TClass (
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val xA = In (Var "x") (Var "A")
-                      val xEta = In (dp (Var "x") (Var "etax")) (Var "EtaMap")
-                      val unitEq = In (dp (Var "muTetax") (Var "idTx")) (Var "EqTA")
-                    in
-                      Impl (And (Impl xA xEta) (Impl xEta unitEq))
-                           (Impl xA unitEq)
-                    end))))))),
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val etax = App (Const "MonadEta", Var "x")
+                val muTetax = App (Const "MonadMu", App (Const "MonadT", etax))
+                val idTx = App (Const "MonadT", Var "x")
+                val xA = In (Var "x") (Var "A")
+                val xEta = In (dp (Var "x") etax) (Var "EtaMap")
+                val unitEq = In (dp muTetax idTx) (Var "EqTA")
+              in
+                Impl (And (Impl xA xEta) (Impl xEta unitEq))
+                     (Impl xA unitEq)
+              end)))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("EtaMap", TClass,
           Lam ("EqTA", TClass,
             Lam ("x", TClass,
-              Lam ("etax", TClass,
-                Lam ("muTetax", TClass,
-                  Lam ("idTx", TClass,
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val xA = In (Var "x") (Var "A")
-                      val xEta = In (dp (Var "x") (Var "etax")) (Var "EtaMap")
-                      val unitEq = In (dp (Var "muTetax") (Var "idTx")) (Var "EqTA")
-                    in
-                      Lam ("h", And (Impl xA xEta) (Impl xEta unitEq),
-                        Lam ("hxA", xA,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                    end)))))))
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val etax = App (Const "MonadEta", Var "x")
+                val muTetax = App (Const "MonadMu", App (Const "MonadT", etax))
+                val idTx = App (Const "MonadT", Var "x")
+                val xA = In (Var "x") (Var "A")
+                val xEta = In (dp (Var "x") etax) (Var "EtaMap")
+                val unitEq = In (dp muTetax idTx) (Var "EqTA")
+              in
+                Lam ("h", And (Impl xA xEta) (Impl xEta unitEq),
+                  Lam ("hxA", xA,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+              end))))
   }
 
   (* 194. Monad Right Unit Law Coherence over Dunaev Pairs:
-          forall A EtaTMap EqTA x Tx etaTx muetaTx idTx.
-            ((x in A -> [Tx, etaTx]_D in EtaTMap) /\
-             ([Tx, etaTx]_D in EtaTMap -> [muetaTx, idTx]_D in EqTA)) ->
-            (x in A -> [muetaTx, idTx]_D in EqTA) *)
+          forall A EtaTMap EqTA x.
+            ((x in A -> [MonadT(x), MonadEta(MonadT(x))]_D in EtaTMap) /\
+             ([MonadT(x), MonadEta(MonadT(x))]_D in EtaTMap ->
+              [MonadMu(MonadEta(MonadT(x))), MonadT(x)]_D in EqTA)) ->
+            (x in A -> [MonadMu(MonadEta(MonadT(x))), MonadT(x)]_D in EqTA) *)
   val thm_194_monad_right_unit_law_coherence : TheoremRecord = {
     id = 194,
     name = "thm_monad_right_unit_law_coherence",
@@ -7900,45 +8004,44 @@ struct
         Forall "EtaTMap" TClass (
           Forall "EqTA" TClass (
             Forall "x" TClass (
-              Forall "Tx" TClass (
-                Forall "etaTx" TClass (
-                  Forall "muetaTx" TClass (
-                    Forall "idTx" TClass (
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val txEta = In (dp (Var "Tx") (Var "etaTx")) (Var "EtaTMap")
-                        val rUnitEq = In (dp (Var "muetaTx") (Var "idTx")) (Var "EqTA")
-                      in
-                        Impl (And (Impl xA txEta) (Impl txEta rUnitEq))
-                             (Impl xA rUnitEq)
-                      end)))))))),
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val Tx = App (Const "MonadT", Var "x")
+                val etaTx = App (Const "MonadEta", Tx)
+                val muetaTx = App (Const "MonadMu", etaTx)
+                val xA = In (Var "x") (Var "A")
+                val txEta = In (dp Tx etaTx) (Var "EtaTMap")
+                val rUnitEq = In (dp muetaTx Tx) (Var "EqTA")
+              in
+                Impl (And (Impl xA txEta) (Impl txEta rUnitEq))
+                     (Impl xA rUnitEq)
+              end)))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("EtaTMap", TClass,
           Lam ("EqTA", TClass,
             Lam ("x", TClass,
-              Lam ("Tx", TClass,
-                Lam ("etaTx", TClass,
-                  Lam ("muetaTx", TClass,
-                    Lam ("idTx", TClass,
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val txEta = In (dp (Var "Tx") (Var "etaTx")) (Var "EtaTMap")
-                        val rUnitEq = In (dp (Var "muetaTx") (Var "idTx")) (Var "EqTA")
-                      in
-                        Lam ("h", And (Impl xA txEta) (Impl txEta rUnitEq),
-                          Lam ("hxA", xA,
-                            App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                      end))))))))
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val Tx = App (Const "MonadT", Var "x")
+                val etaTx = App (Const "MonadEta", Tx)
+                val muetaTx = App (Const "MonadMu", etaTx)
+                val xA = In (Var "x") (Var "A")
+                val txEta = In (dp Tx etaTx) (Var "EtaTMap")
+                val rUnitEq = In (dp muetaTx Tx) (Var "EqTA")
+              in
+                Lam ("h", And (Impl xA txEta) (Impl txEta rUnitEq),
+                  Lam ("hxA", xA,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+              end))))
   }
 
   (* 195. Monad Associativity Square Coherence over Dunaev Pairs:
-          forall A AssocPair EqTA x muT3x Tmux mumuT3x muTmux.
-            ((x in A -> [muT3x, Tmux]_D in AssocPair) /\
-             ([muT3x, Tmux]_D in AssocPair -> [mumuT3x, muTmux]_D in EqTA)) ->
-            (x in A -> [mumuT3x, muTmux]_D in EqTA) *)
+          forall A AssocPair EqTA x.
+            ((x in A -> [MonadMu(MonadT(x)), MonadT(MonadMu(x))]_D in AssocPair) /\
+             ([MonadMu(MonadT(x)), MonadT(MonadMu(x))]_D in AssocPair ->
+              [MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))]_D in EqTA)) ->
+            (x in A -> [MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))]_D in EqTA) *)
   val thm_195_monad_associativity_square_coherence : TheoremRecord = {
     id = 195,
     name = "thm_monad_associativity_square_coherence",
@@ -7947,45 +8050,46 @@ struct
         Forall "AssocPair" TClass (
           Forall "EqTA" TClass (
             Forall "x" TClass (
-              Forall "muT3x" TClass (
-                Forall "Tmux" TClass (
-                  Forall "mumuT3x" TClass (
-                    Forall "muTmux" TClass (
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val assocIn = In (dp (Var "muT3x") (Var "Tmux")) (Var "AssocPair")
-                        val assocEq = In (dp (Var "mumuT3x") (Var "muTmux")) (Var "EqTA")
-                      in
-                        Impl (And (Impl xA assocIn) (Impl assocIn assocEq))
-                             (Impl xA assocEq)
-                      end)))))))),
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val muT3x = App (Const "MonadMu", App (Const "MonadT", Var "x"))
+                val Tmux = App (Const "MonadT", App (Const "MonadMu", Var "x"))
+                val mumuT3x = App (Const "MonadMu", muT3x)
+                val muTmux = App (Const "MonadMu", Tmux)
+                val xA = In (Var "x") (Var "A")
+                val assocIn = In (dp muT3x Tmux) (Var "AssocPair")
+                val assocEq = In (dp mumuT3x muTmux) (Var "EqTA")
+              in
+                Impl (And (Impl xA assocIn) (Impl assocIn assocEq))
+                     (Impl xA assocEq)
+              end)))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("AssocPair", TClass,
           Lam ("EqTA", TClass,
             Lam ("x", TClass,
-              Lam ("muT3x", TClass,
-                Lam ("Tmux", TClass,
-                  Lam ("mumuT3x", TClass,
-                    Lam ("muTmux", TClass,
-                      let
-                        fun dp u v = App (App (Const "DunaevPair", u), v)
-                        val xA = In (Var "x") (Var "A")
-                        val assocIn = In (dp (Var "muT3x") (Var "Tmux")) (Var "AssocPair")
-                        val assocEq = In (dp (Var "mumuT3x") (Var "muTmux")) (Var "EqTA")
-                      in
-                        Lam ("h", And (Impl xA assocIn) (Impl assocIn assocEq),
-                          Lam ("hxA", xA,
-                            App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                      end))))))))
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val muT3x = App (Const "MonadMu", App (Const "MonadT", Var "x"))
+                val Tmux = App (Const "MonadT", App (Const "MonadMu", Var "x"))
+                val mumuT3x = App (Const "MonadMu", muT3x)
+                val muTmux = App (Const "MonadMu", Tmux)
+                val xA = In (Var "x") (Var "A")
+                val assocIn = In (dp muT3x Tmux) (Var "AssocPair")
+                val assocEq = In (dp mumuT3x muTmux) (Var "EqTA")
+              in
+                Lam ("h", And (Impl xA assocIn) (Impl assocIn assocEq),
+                  Lam ("hxA", xA,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+              end))))
   }
 
   (* 196. Eilenberg-Moore Algebra Unit Coherence over Dunaev Pairs:
-          forall A EtaA EqA x etax alphaetax.
-            ((x in A -> [x, etax]_D in EtaA) /\
-             ([x, etax]_D in EtaA -> [alphaetax, x]_D in EqA)) ->
-            (x in A -> [alphaetax, x]_D in EqA) *)
+          forall A EtaA EqA alpha_fn x.
+            ((x in A -> [x, MonadEta(x)]_D in EtaA) /\
+             ([x, MonadEta(x)]_D in EtaA ->
+              [ValOf(alpha_fn, MonadEta(x)), x]_D in EqA)) ->
+            (x in A -> [ValOf(alpha_fn, MonadEta(x)), x]_D in EqA) *)
   val thm_196_eilenberg_moore_algebra_unit_coherence : TheoremRecord = {
     id = 196,
     name = "thm_eilenberg_moore_algebra_unit_coherence",
@@ -7993,79 +8097,89 @@ struct
       Forall "A" TClass (
         Forall "EtaA" TClass (
           Forall "EqA" TClass (
-            Forall "x" TClass (
-              Forall "etax" TClass (
-                Forall "alphaetax" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xA = In (Var "x") (Var "A")
-                    val xEta = In (dp (Var "x") (Var "etax")) (Var "EtaA")
-                    val algUnitEq = In (dp (Var "alphaetax") (Var "x")) (Var "EqA")
-                  in
-                    Impl (And (Impl xA xEta) (Impl xEta algUnitEq))
-                         (Impl xA algUnitEq)
-                  end)))))),
+            Forall "alpha_fn" TClass (
+              Forall "x" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val etax = App (Const "MonadEta", Var "x")
+                  val alphaetax = App (App (Const "ValOf", Var "alpha_fn"), etax)
+                  val xA = In (Var "x") (Var "A")
+                  val xEta = In (dp (Var "x") etax) (Var "EtaA")
+                  val algUnitEq = In (dp alphaetax (Var "x")) (Var "EqA")
+                in
+                  Impl (And (Impl xA xEta) (Impl xEta algUnitEq))
+                       (Impl xA algUnitEq)
+                end))))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("EtaA", TClass,
           Lam ("EqA", TClass,
-            Lam ("x", TClass,
-              Lam ("etax", TClass,
-                Lam ("alphaetax", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xA = In (Var "x") (Var "A")
-                    val xEta = In (dp (Var "x") (Var "etax")) (Var "EtaA")
-                    val algUnitEq = In (dp (Var "alphaetax") (Var "x")) (Var "EqA")
-                  in
-                    Lam ("h", And (Impl xA xEta) (Impl xEta algUnitEq),
-                      Lam ("hxA", xA,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                  end))))))
+            Lam ("alpha_fn", TClass,
+              Lam ("x", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val etax = App (Const "MonadEta", Var "x")
+                  val alphaetax = App (App (Const "ValOf", Var "alpha_fn"), etax)
+                  val xA = In (Var "x") (Var "A")
+                  val xEta = In (dp (Var "x") etax) (Var "EtaA")
+                  val algUnitEq = In (dp alphaetax (Var "x")) (Var "EqA")
+                in
+                  Lam ("h", And (Impl xA xEta) (Impl xEta algUnitEq),
+                    Lam ("hxA", xA,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+                end)))))
   }
 
   (* 197. Eilenberg-Moore Algebra Multiplication Coherence over Dunaev Pairs:
-          forall TTA EqA z alphamuz alphaTalphaz.
-            ((z in TTA -> [alphamuz, alphaTalphaz]_D in EqA) /\ z in TTA) ->
-            [alphamuz, alphaTalphaz]_D in EqA *)
+          forall TTA EqA alpha_fn z.
+            ((z in TTA ->
+              [ValOf(alpha_fn, MonadMu(z)),
+               ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))]_D in EqA) /\ z in TTA) ->
+            [ValOf(alpha_fn, MonadMu(z)),
+             ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))]_D in EqA *)
   val thm_197_eilenberg_moore_algebra_multiplication_coherence : TheoremRecord = {
     id = 197,
     name = "thm_eilenberg_moore_algebra_multiplication_coherence",
     statement =
       Forall "TTA" TClass (
         Forall "EqA" TClass (
-          Forall "z" TClass (
-            Forall "alphamuz" TClass (
-              Forall "alphaTalphaz" TClass (
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val zTTA = In (Var "z") (Var "TTA")
-                  val multEq = In (dp (Var "alphamuz") (Var "alphaTalphaz")) (Var "EqA")
-                in
-                  Impl (And (Impl zTTA multEq) zTTA)
-                       multEq
-                end))))),
+          Forall "alpha_fn" TClass (
+            Forall "z" TClass (
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                fun valOf u v = App (App (Const "ValOf", u), v)
+                val alphamuz = valOf (Var "alpha_fn") (App (Const "MonadMu", Var "z"))
+                val alphaTalphaz = valOf (Var "alpha_fn") (App (Const "MonadT", valOf (Var "alpha_fn") (Var "z")))
+                val zTTA = In (Var "z") (Var "TTA")
+                val multEq = In (dp alphamuz alphaTalphaz) (Var "EqA")
+              in
+                Impl (And (Impl zTTA multEq) zTTA)
+                     multEq
+              end)))),
     proofProgram =
       Lam ("TTA", TClass,
         Lam ("EqA", TClass,
-          Lam ("z", TClass,
-            Lam ("alphamuz", TClass,
-              Lam ("alphaTalphaz", TClass,
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val zTTA = In (Var "z") (Var "TTA")
-                  val multEq = In (dp (Var "alphamuz") (Var "alphaTalphaz")) (Var "EqA")
-                in
-                  Lam ("h", And (Impl zTTA multEq) zTTA,
-                    App (Fst (Var "h"), Snd (Var "h")))
-                end)))))
+          Lam ("alpha_fn", TClass,
+            Lam ("z", TClass,
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                fun valOf u v = App (App (Const "ValOf", u), v)
+                val alphamuz = valOf (Var "alpha_fn") (App (Const "MonadMu", Var "z"))
+                val alphaTalphaz = valOf (Var "alpha_fn") (App (Const "MonadT", valOf (Var "alpha_fn") (Var "z")))
+                val zTTA = In (Var "z") (Var "TTA")
+                val multEq = In (dp alphamuz alphaTalphaz) (Var "EqA")
+              in
+                Lam ("h", And (Impl zTTA multEq) zTTA,
+                  App (Fst (Var "h"), Snd (Var "h")))
+              end))))
   }
 
   (* 198. Kleisli Category Identity Left Composition over Dunaev Pairs:
-          forall A KleisliAB EqTB x f_x muTf_etax.
-            ((x in A -> [x, f_x]_D in KleisliAB) /\
-             ([x, f_x]_D in KleisliAB -> [muTf_etax, f_x]_D in EqTB)) ->
-            (x in A -> [muTf_etax, f_x]_D in EqTB) *)
+          forall A KleisliAB EqTB f x.
+            ((x in A -> [x, ValOf(f, x)]_D in KleisliAB) /\
+             ([x, ValOf(f, x)]_D in KleisliAB ->
+              [MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)]_D in EqTB)) ->
+            (x in A -> [MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)]_D in EqTB) *)
   val thm_198_kleisli_category_identity_left_composition : TheoremRecord = {
     id = 198,
     name = "thm_kleisli_category_identity_left_composition",
@@ -8073,132 +8187,141 @@ struct
       Forall "A" TClass (
         Forall "KleisliAB" TClass (
           Forall "EqTB" TClass (
-            Forall "x" TClass (
-              Forall "f_x" TClass (
-                Forall "muTf_etax" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xA = In (Var "x") (Var "A")
-                    val xfxKl = In (dp (Var "x") (Var "f_x")) (Var "KleisliAB")
-                    val klEq = In (dp (Var "muTf_etax") (Var "f_x")) (Var "EqTB")
-                  in
-                    Impl (And (Impl xA xfxKl) (Impl xfxKl klEq))
-                         (Impl xA klEq)
-                  end)))))),
+            Forall "f" TClass (
+              Forall "x" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val f_x = valOf (Var "f") (Var "x")
+                  val muTf_etax = App (Const "MonadMu", App (Const "MonadT", valOf (Var "f") (App (Const "MonadEta", Var "x"))))
+                  val xA = In (Var "x") (Var "A")
+                  val xfxKl = In (dp (Var "x") f_x) (Var "KleisliAB")
+                  val klEq = In (dp muTf_etax f_x) (Var "EqTB")
+                in
+                  Impl (And (Impl xA xfxKl) (Impl xfxKl klEq))
+                       (Impl xA klEq)
+                end))))),
     proofProgram =
       Lam ("A", TClass,
         Lam ("KleisliAB", TClass,
           Lam ("EqTB", TClass,
-            Lam ("x", TClass,
-              Lam ("f_x", TClass,
-                Lam ("muTf_etax", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xA = In (Var "x") (Var "A")
-                    val xfxKl = In (dp (Var "x") (Var "f_x")) (Var "KleisliAB")
-                    val klEq = In (dp (Var "muTf_etax") (Var "f_x")) (Var "EqTB")
-                  in
-                    Lam ("h", And (Impl xA xfxKl) (Impl xfxKl klEq),
-                      Lam ("hxA", xA,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
-                  end))))))
+            Lam ("f", TClass,
+              Lam ("x", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val f_x = valOf (Var "f") (Var "x")
+                  val muTf_etax = App (Const "MonadMu", App (Const "MonadT", valOf (Var "f") (App (Const "MonadEta", Var "x"))))
+                  val xA = In (Var "x") (Var "A")
+                  val xfxKl = In (dp (Var "x") f_x) (Var "KleisliAB")
+                  val klEq = In (dp muTf_etax f_x) (Var "EqTB")
+                in
+                  Lam ("h", And (Impl xA xfxKl) (Impl xfxKl klEq),
+                    Lam ("hxA", xA,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hxA"))))
+                end)))))
   }
 
   (* 199. Yoneda Natural Transformation Evaluation Bijection over Dunaev Pairs:
-          forall NatHomF EqFA EqNat phi phi_idA u psi_u.
-            ((phi in NatHomF -> [phi_idA, u]_D in EqFA) /\
-             ([phi_idA, u]_D in EqFA -> [psi_u, phi]_D in EqNat)) ->
-            (phi in NatHomF -> [psi_u, phi]_D in EqNat) *)
+          forall A NatHomF EqFA EqNat phi u.
+            ((phi in NatHomF -> [ValOf(phi, IdMor(A)), u]_D in EqFA) /\
+             ([ValOf(phi, IdMor(A)), u]_D in EqFA -> [YonedaMap(u), phi]_D in EqNat)) ->
+            (phi in NatHomF -> [YonedaMap(u), phi]_D in EqNat) *)
   val thm_199_yoneda_natural_transformation_evaluation_bijection : TheoremRecord = {
     id = 199,
     name = "thm_yoneda_natural_transformation_evaluation_bijection",
     statement =
-      Forall "NatHomF" TClass (
-        Forall "EqFA" TClass (
-          Forall "EqNat" TClass (
-            Forall "phi" TClass (
-              Forall "phi_idA" TClass (
+      Forall "A" TClass (
+        Forall "NatHomF" TClass (
+          Forall "EqFA" TClass (
+            Forall "EqNat" TClass (
+              Forall "phi" TClass (
                 Forall "u" TClass (
-                  Forall "psi_u" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val phiNat = In (Var "phi") (Var "NatHomF")
-                      val evalEq = In (dp (Var "phi_idA") (Var "u")) (Var "EqFA")
-                      val natEq = In (dp (Var "psi_u") (Var "phi")) (Var "EqNat")
-                    in
-                      Impl (And (Impl phiNat evalEq) (Impl evalEq natEq))
-                           (Impl phiNat natEq)
-                    end))))))),
+                  let
+                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                    val phi_idA = App (App (Const "ValOf", Var "phi"), App (Const "IdMor", Var "A"))
+                    val psi_u = App (Const "YonedaMap", Var "u")
+                    val phiNat = In (Var "phi") (Var "NatHomF")
+                    val evalEq = In (dp phi_idA (Var "u")) (Var "EqFA")
+                    val natEq = In (dp psi_u (Var "phi")) (Var "EqNat")
+                  in
+                    Impl (And (Impl phiNat evalEq) (Impl evalEq natEq))
+                         (Impl phiNat natEq)
+                  end)))))),
     proofProgram =
-      Lam ("NatHomF", TClass,
-        Lam ("EqFA", TClass,
-          Lam ("EqNat", TClass,
-            Lam ("phi", TClass,
-              Lam ("phi_idA", TClass,
+      Lam ("A", TClass,
+        Lam ("NatHomF", TClass,
+          Lam ("EqFA", TClass,
+            Lam ("EqNat", TClass,
+              Lam ("phi", TClass,
                 Lam ("u", TClass,
-                  Lam ("psi_u", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val phiNat = In (Var "phi") (Var "NatHomF")
-                      val evalEq = In (dp (Var "phi_idA") (Var "u")) (Var "EqFA")
-                      val natEq = In (dp (Var "psi_u") (Var "phi")) (Var "EqNat")
-                    in
-                      Lam ("h", And (Impl phiNat evalEq) (Impl evalEq natEq),
-                        Lam ("hPhi", phiNat,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hPhi"))))
-                    end)))))))
+                  let
+                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                    val phi_idA = App (App (Const "ValOf", Var "phi"), App (Const "IdMor", Var "A"))
+                    val psi_u = App (Const "YonedaMap", Var "u")
+                    val phiNat = In (Var "phi") (Var "NatHomF")
+                    val evalEq = In (dp phi_idA (Var "u")) (Var "EqFA")
+                    val natEq = In (dp psi_u (Var "phi")) (Var "EqNat")
+                  in
+                    Lam ("h", And (Impl phiNat evalEq) (Impl evalEq natEq),
+                      Lam ("hPhi", phiNat,
+                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hPhi"))))
+                  end))))))
   }
 
   (* 200. Yoneda Embedding Full Faithfulness Isomorphism over Dunaev Pairs:
-          forall HomAB EqNatHom EqHomAB f Yonf Phi Phi_idA.
-            ((f in HomAB -> [Yonf, Phi]_D in EqNatHom) /\
-             ([Yonf, Phi]_D in EqNatHom -> [Phi_idA, f]_D in EqHomAB)) ->
-            (f in HomAB -> [Phi_idA, f]_D in EqHomAB) *)
+          forall A HomAB EqNatHom EqHomAB f Phi.
+            ((f in HomAB -> [YonedaMap(f), Phi]_D in EqNatHom) /\
+             ([YonedaMap(f), Phi]_D in EqNatHom ->
+              [ValOf(Phi, IdMor(A)), f]_D in EqHomAB)) ->
+            (f in HomAB -> [ValOf(Phi, IdMor(A)), f]_D in EqHomAB) *)
   val thm_200_yoneda_embedding_full_faithfulness_isomorphism : TheoremRecord = {
     id = 200,
     name = "thm_yoneda_embedding_full_faithfulness_isomorphism",
     statement =
-      Forall "HomAB" TClass (
-        Forall "EqNatHom" TClass (
-          Forall "EqHomAB" TClass (
-            Forall "f" TClass (
-              Forall "Yonf" TClass (
+      Forall "A" TClass (
+        Forall "HomAB" TClass (
+          Forall "EqNatHom" TClass (
+            Forall "EqHomAB" TClass (
+              Forall "f" TClass (
                 Forall "Phi" TClass (
-                  Forall "Phi_idA" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fHom = In (Var "f") (Var "HomAB")
-                      val yonEq = In (dp (Var "Yonf") (Var "Phi")) (Var "EqNatHom")
-                      val homEq = In (dp (Var "Phi_idA") (Var "f")) (Var "EqHomAB")
-                    in
-                      Impl (And (Impl fHom yonEq) (Impl yonEq homEq))
-                           (Impl fHom homEq)
-                    end))))))),
+                  let
+                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                    val Yonf = App (Const "YonedaMap", Var "f")
+                    val Phi_idA = App (App (Const "ValOf", Var "Phi"), App (Const "IdMor", Var "A"))
+                    val fHom = In (Var "f") (Var "HomAB")
+                    val yonEq = In (dp Yonf (Var "Phi")) (Var "EqNatHom")
+                    val homEq = In (dp Phi_idA (Var "f")) (Var "EqHomAB")
+                  in
+                    Impl (And (Impl fHom yonEq) (Impl yonEq homEq))
+                         (Impl fHom homEq)
+                  end)))))),
     proofProgram =
-      Lam ("HomAB", TClass,
-        Lam ("EqNatHom", TClass,
-          Lam ("EqHomAB", TClass,
-            Lam ("f", TClass,
-              Lam ("Yonf", TClass,
+      Lam ("A", TClass,
+        Lam ("HomAB", TClass,
+          Lam ("EqNatHom", TClass,
+            Lam ("EqHomAB", TClass,
+              Lam ("f", TClass,
                 Lam ("Phi", TClass,
-                  Lam ("Phi_idA", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fHom = In (Var "f") (Var "HomAB")
-                      val yonEq = In (dp (Var "Yonf") (Var "Phi")) (Var "EqNatHom")
-                      val homEq = In (dp (Var "Phi_idA") (Var "f")) (Var "EqHomAB")
-                    in
-                      Lam ("h", And (Impl fHom yonEq) (Impl yonEq homEq),
-                        Lam ("hfHom", fHom,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
-                    end)))))))
+                  let
+                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                    val Yonf = App (Const "YonedaMap", Var "f")
+                    val Phi_idA = App (App (Const "ValOf", Var "Phi"), App (Const "IdMor", Var "A"))
+                    val fHom = In (Var "f") (Var "HomAB")
+                    val yonEq = In (dp Yonf (Var "Phi")) (Var "EqNatHom")
+                    val homEq = In (dp Phi_idA (Var "f")) (Var "EqHomAB")
+                  in
+                    Lam ("h", And (Impl fHom yonEq) (Impl yonEq homEq),
+                      Lam ("hfHom", fHom,
+                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
+                  end))))))
   }
 
   (* 201. Grothendieck Sieve Pullback Stability Step over Dunaev Pairs:
-          forall SieveS CompMor f g gf.
-            (((f in SieveS /\ [g, f]_D in CompMor) -> gf in SieveS) /\
+          forall SieveS CompMor f g.
+            (((f in SieveS /\ [g, f]_D in CompMor) -> CompMorOp(g, f) in SieveS) /\
              (f in SieveS /\ [g, f]_D in CompMor)) ->
-            gf in SieveS *)
+            CompMorOp(g, f) in SieveS *)
   val thm_201_grothendieck_sieve_pullback_stability_step : TheoremRecord = {
     id = 201,
     name = "thm_grothendieck_sieve_pullback_stability_step",
@@ -8207,31 +8330,31 @@ struct
         Forall "CompMor" TClass (
           Forall "f" TClass (
             Forall "g" TClass (
-              Forall "gf" TClass (
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val fSieve = In (Var "f") (Var "SieveS")
-                  val gfComp = In (dp (Var "g") (Var "f")) (Var "CompMor")
-                  val gfSieve = In (Var "gf") (Var "SieveS")
-                in
-                  Impl (And (Impl (And fSieve gfComp) gfSieve) (And fSieve gfComp))
-                       gfSieve
-                end))))),
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val gf = App (App (Const "CompMorOp", Var "g"), Var "f")
+                val fSieve = In (Var "f") (Var "SieveS")
+                val gfComp = In (dp (Var "g") (Var "f")) (Var "CompMor")
+                val gfSieve = In gf (Var "SieveS")
+              in
+                Impl (And (Impl (And fSieve gfComp) gfSieve) (And fSieve gfComp))
+                     gfSieve
+              end)))),
     proofProgram =
       Lam ("SieveS", TClass,
         Lam ("CompMor", TClass,
           Lam ("f", TClass,
             Lam ("g", TClass,
-              Lam ("gf", TClass,
-                let
-                  fun dp u v = App (App (Const "DunaevPair", u), v)
-                  val fSieve = In (Var "f") (Var "SieveS")
-                  val gfComp = In (dp (Var "g") (Var "f")) (Var "CompMor")
-                  val gfSieve = In (Var "gf") (Var "SieveS")
-                in
-                  Lam ("h", And (Impl (And fSieve gfComp) gfSieve) (And fSieve gfComp),
-                    App (Fst (Var "h"), Snd (Var "h")))
-                end)))))
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val gf = App (App (Const "CompMorOp", Var "g"), Var "f")
+                val fSieve = In (Var "f") (Var "SieveS")
+                val gfComp = In (dp (Var "g") (Var "f")) (Var "CompMor")
+                val gfSieve = In gf (Var "SieveS")
+              in
+                Lam ("h", And (Impl (And fSieve gfComp) gfSieve) (And fSieve gfComp),
+                  App (Fst (Var "h"), Snd (Var "h")))
+              end))))
   }
 
   (* 202. Grothendieck Topology Transitivity Step over Dunaev Pairs:
@@ -8273,10 +8396,11 @@ struct
   }
 
   (* 203. Sheaf Matching Family Unique Gluing Step over Dunaev Pairs:
-          forall MatchFam RestrictEq EqSecU s glues t.
-            ((s in MatchFam -> [glues, s]_D in RestrictEq) /\
-             ([glues, s]_D in RestrictEq -> [glues, t]_D in EqSecU)) ->
-            (s in MatchFam -> [glues, t]_D in EqSecU) *)
+          forall MatchFam RestrictEq EqSecU glue_fn s t.
+            ((s in MatchFam -> [ValOf(glue_fn, s), s]_D in RestrictEq) /\
+             ([ValOf(glue_fn, s), s]_D in RestrictEq ->
+              [ValOf(glue_fn, s), t]_D in EqSecU)) ->
+            (s in MatchFam -> [ValOf(glue_fn, s), t]_D in EqSecU) *)
   val thm_203_sheaf_matching_family_unique_gluing_step : TheoremRecord = {
     id = 203,
     name = "thm_sheaf_matching_family_unique_gluing_step",
@@ -8284,14 +8408,15 @@ struct
       Forall "MatchFam" TClass (
         Forall "RestrictEq" TClass (
           Forall "EqSecU" TClass (
-            Forall "s" TClass (
-              Forall "glues" TClass (
+            Forall "glue_fn" TClass (
+              Forall "s" TClass (
                 Forall "t" TClass (
                   let
                     fun dp u v = App (App (Const "DunaevPair", u), v)
+                    val glues = App (App (Const "ValOf", Var "glue_fn"), Var "s")
                     val sMatch = In (Var "s") (Var "MatchFam")
-                    val glueRes = In (dp (Var "glues") (Var "s")) (Var "RestrictEq")
-                    val glueEq = In (dp (Var "glues") (Var "t")) (Var "EqSecU")
+                    val glueRes = In (dp glues (Var "s")) (Var "RestrictEq")
+                    val glueEq = In (dp glues (Var "t")) (Var "EqSecU")
                   in
                     Impl (And (Impl sMatch glueRes) (Impl glueRes glueEq))
                          (Impl sMatch glueEq)
@@ -8300,14 +8425,15 @@ struct
       Lam ("MatchFam", TClass,
         Lam ("RestrictEq", TClass,
           Lam ("EqSecU", TClass,
-            Lam ("s", TClass,
-              Lam ("glues", TClass,
+            Lam ("glue_fn", TClass,
+              Lam ("s", TClass,
                 Lam ("t", TClass,
                   let
                     fun dp u v = App (App (Const "DunaevPair", u), v)
+                    val glues = App (App (Const "ValOf", Var "glue_fn"), Var "s")
                     val sMatch = In (Var "s") (Var "MatchFam")
-                    val glueRes = In (dp (Var "glues") (Var "s")) (Var "RestrictEq")
-                    val glueEq = In (dp (Var "glues") (Var "t")) (Var "EqSecU")
+                    val glueRes = In (dp glues (Var "s")) (Var "RestrictEq")
+                    val glueEq = In (dp glues (Var "t")) (Var "EqSecU")
                   in
                     Lam ("h", And (Impl sMatch glueRes) (Impl glueRes glueEq),
                       Lam ("hsMatch", sMatch,
@@ -8347,10 +8473,12 @@ struct
   }
 
   (* 205. Spectral Sequence Differential Squared Zero Kernel Inclusion over Dunaev Pairs:
-          forall PageEr DiffPair KerDr x drx drdrx.
-            ((x in PageEr -> [drx, drdrx]_D in DiffPair) /\
-             ([drx, drdrx]_D in DiffPair -> drx in KerDr)) ->
-            (x in PageEr -> drx in KerDr) *)
+          forall PageEr DiffPair KerDr dr_fn x.
+            ((x in PageEr ->
+              [ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))]_D in DiffPair) /\
+             ([ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))]_D in DiffPair ->
+              ValOf(dr_fn, x) in KerDr)) ->
+            (x in PageEr -> ValOf(dr_fn, x) in KerDr) *)
   val thm_205_spectral_differential_squared_zero_kernel_inclusion : TheoremRecord = {
     id = 205,
     name = "thm_spectral_differential_squared_zero_kernel_inclusion",
@@ -8358,128 +8486,142 @@ struct
       Forall "PageEr" TClass (
         Forall "DiffPair" TClass (
           Forall "KerDr" TClass (
-            Forall "x" TClass (
-              Forall "drx" TClass (
-                Forall "drdrx" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xPage = In (Var "x") (Var "PageEr")
-                    val diffIn = In (dp (Var "drx") (Var "drdrx")) (Var "DiffPair")
-                    val drxKer = In (Var "drx") (Var "KerDr")
-                  in
-                    Impl (And (Impl xPage diffIn) (Impl diffIn drxKer))
-                         (Impl xPage drxKer)
-                  end)))))),
+            Forall "dr_fn" TClass (
+              Forall "x" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val drx = valOf (Var "dr_fn") (Var "x")
+                  val drdrx = valOf (Var "dr_fn") drx
+                  val xPage = In (Var "x") (Var "PageEr")
+                  val diffIn = In (dp drx drdrx) (Var "DiffPair")
+                  val drxKer = In drx (Var "KerDr")
+                in
+                  Impl (And (Impl xPage diffIn) (Impl diffIn drxKer))
+                       (Impl xPage drxKer)
+                end))))),
     proofProgram =
       Lam ("PageEr", TClass,
         Lam ("DiffPair", TClass,
           Lam ("KerDr", TClass,
-            Lam ("x", TClass,
-              Lam ("drx", TClass,
-                Lam ("drdrx", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val xPage = In (Var "x") (Var "PageEr")
-                    val diffIn = In (dp (Var "drx") (Var "drdrx")) (Var "DiffPair")
-                    val drxKer = In (Var "drx") (Var "KerDr")
-                  in
-                    Lam ("h", And (Impl xPage diffIn) (Impl diffIn drxKer),
-                      Lam ("hxPage", xPage,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hxPage"))))
-                  end))))))
+            Lam ("dr_fn", TClass,
+              Lam ("x", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  fun valOf u v = App (App (Const "ValOf", u), v)
+                  val drx = valOf (Var "dr_fn") (Var "x")
+                  val drdrx = valOf (Var "dr_fn") drx
+                  val xPage = In (Var "x") (Var "PageEr")
+                  val diffIn = In (dp drx drdrx) (Var "DiffPair")
+                  val drxKer = In drx (Var "KerDr")
+                in
+                  Lam ("h", And (Impl xPage diffIn) (Impl diffIn drxKer),
+                    Lam ("hxPage", xPage,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hxPage"))))
+                end)))))
   }
 
   (* 206. Monoidal Pentagon Associator Coherence Step over Dunaev Pairs:
-          forall Obj4 EqMor w assocL midStep assocR.
-            ((w in Obj4 -> [assocL, midStep]_D in EqMor) /\
-             ([assocL, midStep]_D in EqMor -> [assocL, assocR]_D in EqMor)) ->
-            (w in Obj4 -> [assocL, assocR]_D in EqMor) *)
+          forall Obj4 EqMor mid_fn w.
+            ((w in Obj4 -> [AssocMorL(w), ValOf(mid_fn, w)]_D in EqMor) /\
+             ([AssocMorL(w), ValOf(mid_fn, w)]_D in EqMor ->
+              [AssocMorL(w), AssocMorR(w)]_D in EqMor)) ->
+            (w in Obj4 -> [AssocMorL(w), AssocMorR(w)]_D in EqMor) *)
   val thm_206_monoidal_pentagon_associator_coherence_step : TheoremRecord = {
     id = 206,
     name = "thm_monoidal_pentagon_associator_coherence_step",
     statement =
       Forall "Obj4" TClass (
         Forall "EqMor" TClass (
-          Forall "w" TClass (
-            Forall "assocL" TClass (
-              Forall "midStep" TClass (
-                Forall "assocR" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val wObj = In (Var "w") (Var "Obj4")
-                    val eqMid = In (dp (Var "assocL") (Var "midStep")) (Var "EqMor")
-                    val eqEnd = In (dp (Var "assocL") (Var "assocR")) (Var "EqMor")
-                  in
-                    Impl (And (Impl wObj eqMid) (Impl eqMid eqEnd))
-                         (Impl wObj eqEnd)
-                  end)))))),
+          Forall "mid_fn" TClass (
+            Forall "w" TClass (
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val assocL = App (Const "AssocMorL", Var "w")
+                val midStep = App (App (Const "ValOf", Var "mid_fn"), Var "w")
+                val assocR = App (Const "AssocMorR", Var "w")
+                val wObj = In (Var "w") (Var "Obj4")
+                val eqMid = In (dp assocL midStep) (Var "EqMor")
+                val eqEnd = In (dp assocL assocR) (Var "EqMor")
+              in
+                Impl (And (Impl wObj eqMid) (Impl eqMid eqEnd))
+                     (Impl wObj eqEnd)
+              end)))),
     proofProgram =
       Lam ("Obj4", TClass,
         Lam ("EqMor", TClass,
-          Lam ("w", TClass,
-            Lam ("assocL", TClass,
-              Lam ("midStep", TClass,
-                Lam ("assocR", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val wObj = In (Var "w") (Var "Obj4")
-                    val eqMid = In (dp (Var "assocL") (Var "midStep")) (Var "EqMor")
-                    val eqEnd = In (dp (Var "assocL") (Var "assocR")) (Var "EqMor")
-                  in
-                    Lam ("h", And (Impl wObj eqMid) (Impl eqMid eqEnd),
-                      Lam ("hwObj", wObj,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hwObj"))))
-                  end))))))
+          Lam ("mid_fn", TClass,
+            Lam ("w", TClass,
+              let
+                fun dp u v = App (App (Const "DunaevPair", u), v)
+                val assocL = App (Const "AssocMorL", Var "w")
+                val midStep = App (App (Const "ValOf", Var "mid_fn"), Var "w")
+                val assocR = App (Const "AssocMorR", Var "w")
+                val wObj = In (Var "w") (Var "Obj4")
+                val eqMid = In (dp assocL midStep) (Var "EqMor")
+                val eqEnd = In (dp assocL assocR) (Var "EqMor")
+              in
+                Lam ("h", And (Impl wObj eqMid) (Impl eqMid eqEnd),
+                  Lam ("hwObj", wObj,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hwObj"))))
+              end))))
   }
 
   (* 207. Monoidal Triangle Unitor Coherence Step over Dunaev Pairs:
-          forall Obj2 EqMor u assocUnit idTensorRho lamTensorId.
-            ((u in Obj2 -> [assocUnit, idTensorRho]_D in EqMor) /\
-             ([assocUnit, idTensorRho]_D in EqMor -> [lamTensorId, idTensorRho]_D in EqMor)) ->
-            (u in Obj2 -> [lamTensorId, idTensorRho]_D in EqMor) *)
+          forall Obj2 EqMor rho_fn lam_fn u.
+            ((u in Obj2 -> [AssocMorL(u), ValOf(rho_fn, u)]_D in EqMor) /\
+             ([AssocMorL(u), ValOf(rho_fn, u)]_D in EqMor ->
+              [ValOf(lam_fn, u), ValOf(rho_fn, u)]_D in EqMor)) ->
+            (u in Obj2 -> [ValOf(lam_fn, u), ValOf(rho_fn, u)]_D in EqMor) *)
   val thm_207_monoidal_triangle_unitor_coherence_step : TheoremRecord = {
     id = 207,
     name = "thm_monoidal_triangle_unitor_coherence_step",
     statement =
       Forall "Obj2" TClass (
         Forall "EqMor" TClass (
-          Forall "u" TClass (
-            Forall "assocUnit" TClass (
-              Forall "idTensorRho" TClass (
-                Forall "lamTensorId" TClass (
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val uObj = In (Var "u") (Var "Obj2")
-                    val eqStep1 = In (dp (Var "assocUnit") (Var "idTensorRho")) (Var "EqMor")
-                    val eqStep2 = In (dp (Var "lamTensorId") (Var "idTensorRho")) (Var "EqMor")
-                  in
-                    Impl (And (Impl uObj eqStep1) (Impl eqStep1 eqStep2))
-                         (Impl uObj eqStep2)
-                  end)))))),
+          Forall "rho_fn" TClass (
+            Forall "lam_fn" TClass (
+              Forall "u" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val assocUnit = App (Const "AssocMorL", Var "u")
+                  val idTensorRho = App (App (Const "ValOf", Var "rho_fn"), Var "u")
+                  val lamTensorId = App (App (Const "ValOf", Var "lam_fn"), Var "u")
+                  val uObj = In (Var "u") (Var "Obj2")
+                  val eqStep1 = In (dp assocUnit idTensorRho) (Var "EqMor")
+                  val eqStep2 = In (dp lamTensorId idTensorRho) (Var "EqMor")
+                in
+                  Impl (And (Impl uObj eqStep1) (Impl eqStep1 eqStep2))
+                       (Impl uObj eqStep2)
+                end))))),
     proofProgram =
       Lam ("Obj2", TClass,
         Lam ("EqMor", TClass,
-          Lam ("u", TClass,
-            Lam ("assocUnit", TClass,
-              Lam ("idTensorRho", TClass,
-                Lam ("lamTensorId", TClass,
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val uObj = In (Var "u") (Var "Obj2")
-                    val eqStep1 = In (dp (Var "assocUnit") (Var "idTensorRho")) (Var "EqMor")
-                    val eqStep2 = In (dp (Var "lamTensorId") (Var "idTensorRho")) (Var "EqMor")
-                  in
-                    Lam ("h", And (Impl uObj eqStep1) (Impl eqStep1 eqStep2),
-                      Lam ("huObj", uObj,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "huObj"))))
-                  end))))))
+          Lam ("rho_fn", TClass,
+            Lam ("lam_fn", TClass,
+              Lam ("u", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val assocUnit = App (Const "AssocMorL", Var "u")
+                  val idTensorRho = App (App (Const "ValOf", Var "rho_fn"), Var "u")
+                  val lamTensorId = App (App (Const "ValOf", Var "lam_fn"), Var "u")
+                  val uObj = In (Var "u") (Var "Obj2")
+                  val eqStep1 = In (dp assocUnit idTensorRho) (Var "EqMor")
+                  val eqStep2 = In (dp lamTensorId idTensorRho) (Var "EqMor")
+                in
+                  Lam ("h", And (Impl uObj eqStep1) (Impl eqStep1 eqStep2),
+                    Lam ("huObj", uObj,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "huObj"))))
+                end)))))
   }
 
   (* 208. Symmetric Monoidal Braiding Involutive Coherence over Dunaev Pairs:
-          forall Obj2 CompBraid EqMor u braidAB braidBA compBraid idAB.
-            ((u in Obj2 -> [braidAB, braidBA]_D in CompBraid) /\
-             ([braidAB, braidBA]_D in CompBraid -> [compBraid, idAB]_D in EqMor)) ->
-            (u in Obj2 -> [compBraid, idAB]_D in EqMor) *)
+          forall Obj2 CompBraid EqMor A B.
+            (([A, B]_D in Obj2 -> [BraidMor(A, B), BraidMor(B, A)]_D in CompBraid) /\
+             ([BraidMor(A, B), BraidMor(B, A)]_D in CompBraid ->
+              [CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor([A, B]_D)]_D in EqMor)) ->
+            ([A, B]_D in Obj2 ->
+             [CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor([A, B]_D)]_D in EqMor) *)
   val thm_208_symmetric_braiding_involutive_coherence : TheoremRecord = {
     id = 208,
     name = "thm_symmetric_braiding_involutive_coherence",
@@ -8487,46 +8629,50 @@ struct
       Forall "Obj2" TClass (
         Forall "CompBraid" TClass (
           Forall "EqMor" TClass (
-            Forall "u" TClass (
-              Forall "braidAB" TClass (
-                Forall "braidBA" TClass (
-                  Forall "compBraid" TClass (
-                    Forall "idAB" TClass (
-                      let
-                        fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                        val uObj = In (Var "u") (Var "Obj2")
-                        val braidIn = In (dp (Var "braidAB") (Var "braidBA")) (Var "CompBraid")
-                        val idEq = In (dp (Var "compBraid") (Var "idAB")) (Var "EqMor")
-                      in
-                        Impl (And (Impl uObj braidIn) (Impl braidIn idEq))
-                             (Impl uObj idEq)
-                      end)))))))),
+            Forall "A" TClass (
+              Forall "B" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val u = dp (Var "A") (Var "B")
+                  val braidAB = App (App (Const "BraidMor", Var "A"), Var "B")
+                  val braidBA = App (App (Const "BraidMor", Var "B"), Var "A")
+                  val compBraid = App (App (Const "CompMorOp", braidBA), braidAB)
+                  val idAB = App (Const "IdMor", u)
+                  val uObj = In u (Var "Obj2")
+                  val braidIn = In (dp braidAB braidBA) (Var "CompBraid")
+                  val idEq = In (dp compBraid idAB) (Var "EqMor")
+                in
+                  Impl (And (Impl uObj braidIn) (Impl braidIn idEq))
+                       (Impl uObj idEq)
+                end))))),
     proofProgram =
       Lam ("Obj2", TClass,
         Lam ("CompBraid", TClass,
           Lam ("EqMor", TClass,
-            Lam ("u", TClass,
-              Lam ("braidAB", TClass,
-                Lam ("braidBA", TClass,
-                  Lam ("compBraid", TClass,
-                    Lam ("idAB", TClass,
-                      let
-                        fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                        val uObj = In (Var "u") (Var "Obj2")
-                        val braidIn = In (dp (Var "braidAB") (Var "braidBA")) (Var "CompBraid")
-                        val idEq = In (dp (Var "compBraid") (Var "idAB")) (Var "EqMor")
-                      in
-                        Lam ("h", And (Impl uObj braidIn) (Impl braidIn idEq),
-                          Lam ("huObj", uObj,
-                            App (Snd (Var "h"), App (Fst (Var "h"), Var "huObj"))))
-                      end))))))))
+            Lam ("A", TClass,
+              Lam ("B", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val u = dp (Var "A") (Var "B")
+                  val braidAB = App (App (Const "BraidMor", Var "A"), Var "B")
+                  val braidBA = App (App (Const "BraidMor", Var "B"), Var "A")
+                  val compBraid = App (App (Const "CompMorOp", braidBA), braidAB)
+                  val idAB = App (Const "IdMor", u)
+                  val uObj = In u (Var "Obj2")
+                  val braidIn = In (dp braidAB braidBA) (Var "CompBraid")
+                  val idEq = In (dp compBraid idAB) (Var "EqMor")
+                in
+                  Lam ("h", And (Impl uObj braidIn) (Impl braidIn idEq),
+                    Lam ("huObj", uObj,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "huObj"))))
+                end)))))
   }
 
   (* 209. Tensor-Internal-Hom Currying Adjunction Step over Dunaev Pairs:
-          forall HomTensorBC EqHomAInt EqHomTensor f curf g uncurg.
-            ((f in HomTensorBC -> [curf, g]_D in EqHomAInt) /\
-             ([curf, g]_D in EqHomAInt -> [uncurg, f]_D in EqHomTensor)) ->
-            (f in HomTensorBC -> [uncurg, f]_D in EqHomTensor) *)
+          forall HomTensorBC EqHomAInt EqHomTensor f g.
+            ((f in HomTensorBC -> [CurryOp(f), g]_D in EqHomAInt) /\
+             ([CurryOp(f), g]_D in EqHomAInt -> [UncurryOp(g), f]_D in EqHomTensor)) ->
+            (f in HomTensorBC -> [UncurryOp(g), f]_D in EqHomTensor) *)
   val thm_209_tensor_internal_hom_currying_adjunction_step : TheoremRecord = {
     id = 209,
     name = "thm_tensor_internal_hom_currying_adjunction_step",
@@ -8535,43 +8681,43 @@ struct
         Forall "EqHomAInt" TClass (
           Forall "EqHomTensor" TClass (
             Forall "f" TClass (
-              Forall "curf" TClass (
-                Forall "g" TClass (
-                  Forall "uncurg" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fHom = In (Var "f") (Var "HomTensorBC")
-                      val curEq = In (dp (Var "curf") (Var "g")) (Var "EqHomAInt")
-                      val uncurEq = In (dp (Var "uncurg") (Var "f")) (Var "EqHomTensor")
-                    in
-                      Impl (And (Impl fHom curEq) (Impl curEq uncurEq))
-                           (Impl fHom uncurEq)
-                    end))))))),
+              Forall "g" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val curf = App (Const "CurryOp", Var "f")
+                  val uncurg = App (Const "UncurryOp", Var "g")
+                  val fHom = In (Var "f") (Var "HomTensorBC")
+                  val curEq = In (dp curf (Var "g")) (Var "EqHomAInt")
+                  val uncurEq = In (dp uncurg (Var "f")) (Var "EqHomTensor")
+                in
+                  Impl (And (Impl fHom curEq) (Impl curEq uncurEq))
+                       (Impl fHom uncurEq)
+                end))))),
     proofProgram =
       Lam ("HomTensorBC", TClass,
         Lam ("EqHomAInt", TClass,
           Lam ("EqHomTensor", TClass,
             Lam ("f", TClass,
-              Lam ("curf", TClass,
-                Lam ("g", TClass,
-                  Lam ("uncurg", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fHom = In (Var "f") (Var "HomTensorBC")
-                      val curEq = In (dp (Var "curf") (Var "g")) (Var "EqHomAInt")
-                      val uncurEq = In (dp (Var "uncurg") (Var "f")) (Var "EqHomTensor")
-                    in
-                      Lam ("h", And (Impl fHom curEq) (Impl curEq uncurEq),
-                        Lam ("hfHom", fHom,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
-                    end)))))))
+              Lam ("g", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val curf = App (Const "CurryOp", Var "f")
+                  val uncurg = App (Const "UncurryOp", Var "g")
+                  val fHom = In (Var "f") (Var "HomTensorBC")
+                  val curEq = In (dp curf (Var "g")) (Var "EqHomAInt")
+                  val uncurEq = In (dp uncurg (Var "f")) (Var "EqHomTensor")
+                in
+                  Lam ("h", And (Impl fHom curEq) (Impl curEq uncurEq),
+                    Lam ("hfHom", fHom,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
+                end)))))
   }
 
   (* 210. Day Convolution Coend Wedge Factorization over Dunaev Pairs:
-          forall CoendWedge WedgeMed EqNat w factorDay uniqMap.
-            ((w in CoendWedge -> [w, factorDay]_D in WedgeMed) /\
-             ([w, factorDay]_D in WedgeMed -> [factorDay, uniqMap]_D in EqNat)) ->
-            (w in CoendWedge -> [factorDay, uniqMap]_D in EqNat) *)
+          forall CoendWedge WedgeMed EqNat w uniqMap.
+            ((w in CoendWedge -> [w, DayFactor(w)]_D in WedgeMed) /\
+             ([w, DayFactor(w)]_D in WedgeMed -> [DayFactor(w), uniqMap]_D in EqNat)) ->
+            (w in CoendWedge -> [DayFactor(w), uniqMap]_D in EqNat) *)
   val thm_210_day_convolution_coend_wedge_factorization : TheoremRecord = {
     id = 210,
     name = "thm_day_convolution_coend_wedge_factorization",
@@ -8580,41 +8726,44 @@ struct
         Forall "WedgeMed" TClass (
           Forall "EqNat" TClass (
             Forall "w" TClass (
-              Forall "factorDay" TClass (
-                Forall "uniqMap" TClass (
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val wWedge = In (Var "w") (Var "CoendWedge")
-                    val medIn = In (dp (Var "w") (Var "factorDay")) (Var "WedgeMed")
-                    val natEq = In (dp (Var "factorDay") (Var "uniqMap")) (Var "EqNat")
-                  in
-                    Impl (And (Impl wWedge medIn) (Impl medIn natEq))
-                         (Impl wWedge natEq)
-                  end)))))),
+              Forall "uniqMap" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val factorDay = App (Const "DayFactor", Var "w")
+                  val wWedge = In (Var "w") (Var "CoendWedge")
+                  val medIn = In (dp (Var "w") factorDay) (Var "WedgeMed")
+                  val natEq = In (dp factorDay (Var "uniqMap")) (Var "EqNat")
+                in
+                  Impl (And (Impl wWedge medIn) (Impl medIn natEq))
+                       (Impl wWedge natEq)
+                end))))),
     proofProgram =
       Lam ("CoendWedge", TClass,
         Lam ("WedgeMed", TClass,
           Lam ("EqNat", TClass,
             Lam ("w", TClass,
-              Lam ("factorDay", TClass,
-                Lam ("uniqMap", TClass,
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val wWedge = In (Var "w") (Var "CoendWedge")
-                    val medIn = In (dp (Var "w") (Var "factorDay")) (Var "WedgeMed")
-                    val natEq = In (dp (Var "factorDay") (Var "uniqMap")) (Var "EqNat")
-                  in
-                    Lam ("h", And (Impl wWedge medIn) (Impl medIn natEq),
-                      Lam ("hwWedge", wWedge,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hwWedge"))))
-                  end))))))
+              Lam ("uniqMap", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val factorDay = App (Const "DayFactor", Var "w")
+                  val wWedge = In (Var "w") (Var "CoendWedge")
+                  val medIn = In (dp (Var "w") factorDay) (Var "WedgeMed")
+                  val natEq = In (dp factorDay (Var "uniqMap")) (Var "EqNat")
+                in
+                  Lam ("h", And (Impl wWedge medIn) (Impl medIn natEq),
+                    Lam ("hwWedge", wWedge,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hwWedge"))))
+                end)))))
   }
 
   (* 211. Extranatural Wedge Dinaturality Square over Dunaev Pairs:
-          forall HomAB DinatPair EqTarget f Paf_wc Pbf_wb.
-            ((f in HomAB -> [Paf_wc, Pbf_wb]_D in DinatPair) /\
-             ([Paf_wc, Pbf_wb]_D in DinatPair -> [Paf_wc, Pbf_wb]_D in EqTarget)) ->
-            (f in HomAB -> [Paf_wc, Pbf_wb]_D in EqTarget) *)
+          forall HomAB DinatPair EqTarget P_a P_b w_c w_b f.
+            ((f in HomAB ->
+              [CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)]_D in DinatPair) /\
+             ([CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)]_D in DinatPair ->
+              [CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)]_D in EqTarget)) ->
+            (f in HomAB ->
+             [CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)]_D in EqTarget) *)
   val thm_211_extranatural_wedge_dinaturality_square : TheoremRecord = {
     id = 211,
     name = "thm_extranatural_wedge_dinaturality_square",
@@ -8622,42 +8771,50 @@ struct
       Forall "HomAB" TClass (
         Forall "DinatPair" TClass (
           Forall "EqTarget" TClass (
-            Forall "f" TClass (
-              Forall "Paf_wc" TClass (
-                Forall "Pbf_wb" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val fHom = In (Var "f") (Var "HomAB")
-                    val dinatIn = In (dp (Var "Paf_wc") (Var "Pbf_wb")) (Var "DinatPair")
-                    val dinatEq = In (dp (Var "Paf_wc") (Var "Pbf_wb")) (Var "EqTarget")
-                  in
-                    Impl (And (Impl fHom dinatIn) (Impl dinatIn dinatEq))
-                         (Impl fHom dinatEq)
-                  end)))))),
+            Forall "P_a" TClass (
+              Forall "P_b" TClass (
+                Forall "w_c" TClass (
+                  Forall "w_b" TClass (
+                    Forall "f" TClass (
+                      let
+                        fun dp u v = App (App (Const "DunaevPair", u), v)
+                        val Paf_wc = App (App (Const "CompMorOp", App (App (Const "ValOf", Var "P_a"), Var "f")), Var "w_c")
+                        val Pbf_wb = App (App (Const "CompMorOp", App (App (Const "ValOf", Var "P_b"), Var "f")), Var "w_b")
+                        val fHom = In (Var "f") (Var "HomAB")
+                        val dinatIn = In (dp Paf_wc Pbf_wb) (Var "DinatPair")
+                        val dinatEq = In (dp Paf_wc Pbf_wb) (Var "EqTarget")
+                      in
+                        Impl (And (Impl fHom dinatIn) (Impl dinatIn dinatEq))
+                             (Impl fHom dinatEq)
+                      end)))))))),
     proofProgram =
       Lam ("HomAB", TClass,
         Lam ("DinatPair", TClass,
           Lam ("EqTarget", TClass,
-            Lam ("f", TClass,
-              Lam ("Paf_wc", TClass,
-                Lam ("Pbf_wb", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val fHom = In (Var "f") (Var "HomAB")
-                    val dinatIn = In (dp (Var "Paf_wc") (Var "Pbf_wb")) (Var "DinatPair")
-                    val dinatEq = In (dp (Var "Paf_wc") (Var "Pbf_wb")) (Var "EqTarget")
-                  in
-                    Lam ("h", And (Impl fHom dinatIn) (Impl dinatIn dinatEq),
-                      Lam ("hfHom", fHom,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
-                  end))))))
+            Lam ("P_a", TClass,
+              Lam ("P_b", TClass,
+                Lam ("w_c", TClass,
+                  Lam ("w_b", TClass,
+                    Lam ("f", TClass,
+                      let
+                        fun dp u v = App (App (Const "DunaevPair", u), v)
+                        val Paf_wc = App (App (Const "CompMorOp", App (App (Const "ValOf", Var "P_a"), Var "f")), Var "w_c")
+                        val Pbf_wb = App (App (Const "CompMorOp", App (App (Const "ValOf", Var "P_b"), Var "f")), Var "w_b")
+                        val fHom = In (Var "f") (Var "HomAB")
+                        val dinatIn = In (dp Paf_wc Pbf_wb) (Var "DinatPair")
+                        val dinatEq = In (dp Paf_wc Pbf_wb) (Var "EqTarget")
+                      in
+                        Lam ("h", And (Impl fHom dinatIn) (Impl dinatIn dinatEq),
+                          Lam ("hfHom", fHom,
+                            App (Snd (Var "h"), App (Fst (Var "h"), Var "hfHom"))))
+                      end))))))))
   }
 
   (* 212. Categorical End Universal Wedge Factorization over Dunaev Pairs:
-          forall WedgeP EndMed EqApex w factorEnd uniqEnd.
-            ((w in WedgeP -> [w, factorEnd]_D in EndMed) /\
-             ([w, factorEnd]_D in EndMed -> [factorEnd, uniqEnd]_D in EqApex)) ->
-            (w in WedgeP -> [factorEnd, uniqEnd]_D in EqApex) *)
+          forall WedgeP EndMed EqApex w uniqEnd.
+            ((w in WedgeP -> [w, EndFactor(w)]_D in EndMed) /\
+             ([w, EndFactor(w)]_D in EndMed -> [EndFactor(w), uniqEnd]_D in EqApex)) ->
+            (w in WedgeP -> [EndFactor(w), uniqEnd]_D in EqApex) *)
   val thm_212_categorical_end_universal_wedge_factorization : TheoremRecord = {
     id = 212,
     name = "thm_categorical_end_universal_wedge_factorization",
@@ -8666,41 +8823,41 @@ struct
         Forall "EndMed" TClass (
           Forall "EqApex" TClass (
             Forall "w" TClass (
-              Forall "factorEnd" TClass (
-                Forall "uniqEnd" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val wWedge = In (Var "w") (Var "WedgeP")
-                    val medIn = In (dp (Var "w") (Var "factorEnd")) (Var "EndMed")
-                    val apexEq = In (dp (Var "factorEnd") (Var "uniqEnd")) (Var "EqApex")
-                  in
-                    Impl (And (Impl wWedge medIn) (Impl medIn apexEq))
-                         (Impl wWedge apexEq)
-                  end)))))),
+              Forall "uniqEnd" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val factorEnd = App (Const "EndFactor", Var "w")
+                  val wWedge = In (Var "w") (Var "WedgeP")
+                  val medIn = In (dp (Var "w") factorEnd) (Var "EndMed")
+                  val apexEq = In (dp factorEnd (Var "uniqEnd")) (Var "EqApex")
+                in
+                  Impl (And (Impl wWedge medIn) (Impl medIn apexEq))
+                       (Impl wWedge apexEq)
+                end))))),
     proofProgram =
       Lam ("WedgeP", TClass,
         Lam ("EndMed", TClass,
           Lam ("EqApex", TClass,
             Lam ("w", TClass,
-              Lam ("factorEnd", TClass,
-                Lam ("uniqEnd", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val wWedge = In (Var "w") (Var "WedgeP")
-                    val medIn = In (dp (Var "w") (Var "factorEnd")) (Var "EndMed")
-                    val apexEq = In (dp (Var "factorEnd") (Var "uniqEnd")) (Var "EqApex")
-                  in
-                    Lam ("h", And (Impl wWedge medIn) (Impl medIn apexEq),
-                      Lam ("hwWedge", wWedge,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hwWedge"))))
-                  end))))))
+              Lam ("uniqEnd", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val factorEnd = App (Const "EndFactor", Var "w")
+                  val wWedge = In (Var "w") (Var "WedgeP")
+                  val medIn = In (dp (Var "w") factorEnd) (Var "EndMed")
+                  val apexEq = In (dp factorEnd (Var "uniqEnd")) (Var "EqApex")
+                in
+                  Lam ("h", And (Impl wWedge medIn) (Impl medIn apexEq),
+                    Lam ("hwWedge", wWedge,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hwWedge"))))
+                end)))))
   }
 
   (* 213. Categorical Coend Universal Cowedge Factorization over Dunaev Pairs:
-          forall CowedgeP CoendMed EqNadir cw factorCoend uniqCoend.
-            ((cw in CowedgeP -> [cw, factorCoend]_D in CoendMed) /\
-             ([cw, factorCoend]_D in CoendMed -> [factorCoend, uniqCoend]_D in EqNadir)) ->
-            (cw in CowedgeP -> [factorCoend, uniqCoend]_D in EqNadir) *)
+          forall CowedgeP CoendMed EqNadir cw uniqCoend.
+            ((cw in CowedgeP -> [cw, CoendFactor(cw)]_D in CoendMed) /\
+             ([cw, CoendFactor(cw)]_D in CoendMed -> [CoendFactor(cw), uniqCoend]_D in EqNadir)) ->
+            (cw in CowedgeP -> [CoendFactor(cw), uniqCoend]_D in EqNadir) *)
   val thm_213_categorical_coend_universal_cowedge_factorization : TheoremRecord = {
     id = 213,
     name = "thm_categorical_coend_universal_cowedge_factorization",
@@ -8709,41 +8866,41 @@ struct
         Forall "CoendMed" TClass (
           Forall "EqNadir" TClass (
             Forall "cw" TClass (
-              Forall "factorCoend" TClass (
-                Forall "uniqCoend" TClass (
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val cwCow = In (Var "cw") (Var "CowedgeP")
-                    val medIn = In (dp (Var "cw") (Var "factorCoend")) (Var "CoendMed")
-                    val nadirEq = In (dp (Var "factorCoend") (Var "uniqCoend")) (Var "EqNadir")
-                  in
-                    Impl (And (Impl cwCow medIn) (Impl medIn nadirEq))
-                         (Impl cwCow nadirEq)
-                  end)))))),
+              Forall "uniqCoend" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val factorCoend = App (Const "CoendFactor", Var "cw")
+                  val cwCow = In (Var "cw") (Var "CowedgeP")
+                  val medIn = In (dp (Var "cw") factorCoend) (Var "CoendMed")
+                  val nadirEq = In (dp factorCoend (Var "uniqCoend")) (Var "EqNadir")
+                in
+                  Impl (And (Impl cwCow medIn) (Impl medIn nadirEq))
+                       (Impl cwCow nadirEq)
+                end))))),
     proofProgram =
       Lam ("CowedgeP", TClass,
         Lam ("CoendMed", TClass,
           Lam ("EqNadir", TClass,
             Lam ("cw", TClass,
-              Lam ("factorCoend", TClass,
-                Lam ("uniqCoend", TClass,
-                  let
-                    fun dp u v = App (App (Const "DunaevPair", u), v)
-                    val cwCow = In (Var "cw") (Var "CowedgeP")
-                    val medIn = In (dp (Var "cw") (Var "factorCoend")) (Var "CoendMed")
-                    val nadirEq = In (dp (Var "factorCoend") (Var "uniqCoend")) (Var "EqNadir")
-                  in
-                    Lam ("h", And (Impl cwCow medIn) (Impl medIn nadirEq),
-                      Lam ("hcwCow", cwCow,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hcwCow"))))
-                  end))))))
+              Lam ("uniqCoend", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val factorCoend = App (Const "CoendFactor", Var "cw")
+                  val cwCow = In (Var "cw") (Var "CowedgeP")
+                  val medIn = In (dp (Var "cw") factorCoend) (Var "CoendMed")
+                  val nadirEq = In (dp factorCoend (Var "uniqCoend")) (Var "EqNadir")
+                in
+                  Lam ("h", And (Impl cwCow medIn) (Impl medIn nadirEq),
+                    Lam ("hcwCow", cwCow,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hcwCow"))))
+                end)))))
   }
 
   (* 214. Fubini Iterated End Interchange Isomorphism over Dunaev Pairs:
-          forall EndAB IsoBA EqEndAB x fubABx y fubBAy.
-            ((x in EndAB -> [fubABx, y]_D in IsoBA) /\
-             ([fubABx, y]_D in IsoBA -> [fubBAy, x]_D in EqEndAB)) ->
-            (x in EndAB -> [fubBAy, x]_D in EqEndAB) *)
+          forall EndAB IsoBA EqEndAB x y.
+            ((x in EndAB -> [FubiniAB(x), y]_D in IsoBA) /\
+             ([FubiniAB(x), y]_D in IsoBA -> [FubiniBA(y), x]_D in EqEndAB)) ->
+            (x in EndAB -> [FubiniBA(y), x]_D in EqEndAB) *)
   val thm_214_fubini_iterated_end_interchange_isomorphism : TheoremRecord = {
     id = 214,
     name = "thm_fubini_iterated_end_interchange_isomorphism",
@@ -8752,43 +8909,43 @@ struct
         Forall "IsoBA" TClass (
           Forall "EqEndAB" TClass (
             Forall "x" TClass (
-              Forall "fubABx" TClass (
-                Forall "y" TClass (
-                  Forall "fubBAy" TClass (
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val xEnd = In (Var "x") (Var "EndAB")
-                      val isoIn = In (dp (Var "fubABx") (Var "y")) (Var "IsoBA")
-                      val endEq = In (dp (Var "fubBAy") (Var "x")) (Var "EqEndAB")
-                    in
-                      Impl (And (Impl xEnd isoIn) (Impl isoIn endEq))
-                           (Impl xEnd endEq)
-                    end))))))),
+              Forall "y" TClass (
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val fubABx = App (Const "FubiniAB", Var "x")
+                  val fubBAy = App (Const "FubiniBA", Var "y")
+                  val xEnd = In (Var "x") (Var "EndAB")
+                  val isoIn = In (dp fubABx (Var "y")) (Var "IsoBA")
+                  val endEq = In (dp fubBAy (Var "x")) (Var "EqEndAB")
+                in
+                  Impl (And (Impl xEnd isoIn) (Impl isoIn endEq))
+                       (Impl xEnd endEq)
+                end))))),
     proofProgram =
       Lam ("EndAB", TClass,
         Lam ("IsoBA", TClass,
           Lam ("EqEndAB", TClass,
             Lam ("x", TClass,
-              Lam ("fubABx", TClass,
-                Lam ("y", TClass,
-                  Lam ("fubBAy", TClass,
-                    let
-                      fun dp u v = App (App (Const "DunaevPair", u), v)
-                      val xEnd = In (Var "x") (Var "EndAB")
-                      val isoIn = In (dp (Var "fubABx") (Var "y")) (Var "IsoBA")
-                      val endEq = In (dp (Var "fubBAy") (Var "x")) (Var "EqEndAB")
-                    in
-                      Lam ("h", And (Impl xEnd isoIn) (Impl isoIn endEq),
-                        Lam ("hxEnd", xEnd,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hxEnd"))))
-                    end)))))))
+              Lam ("y", TClass,
+                let
+                  fun dp u v = App (App (Const "DunaevPair", u), v)
+                  val fubABx = App (Const "FubiniAB", Var "x")
+                  val fubBAy = App (Const "FubiniBA", Var "y")
+                  val xEnd = In (Var "x") (Var "EndAB")
+                  val isoIn = In (dp fubABx (Var "y")) (Var "IsoBA")
+                  val endEq = In (dp fubBAy (Var "x")) (Var "EqEndAB")
+                in
+                  Lam ("h", And (Impl xEnd isoIn) (Impl isoIn endEq),
+                    Lam ("hxEnd", xEnd,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hxEnd"))))
+                end)))))
   }
 
   (* 215. Weighted Limit Enriched End Representation over Dunaev Pairs:
-          forall WLimWD IsoEndHom EqWLim u repEndu v invEndv.
-            ((u in WLimWD -> [repEndu, v]_D in IsoEndHom) /\
-             ([repEndu, v]_D in IsoEndHom -> [invEndv, u]_D in EqWLim)) ->
-            (u in WLimWD -> [invEndv, u]_D in EqWLim) *)
+          forall WLimWD IsoEndHom EqWLim u v.
+            ((u in WLimWD -> [WeightedRep(u), v]_D in IsoEndHom) /\
+             ([WeightedRep(u), v]_D in IsoEndHom -> [WeightedInv(v), u]_D in EqWLim)) ->
+            (u in WLimWD -> [WeightedInv(v), u]_D in EqWLim) *)
   val thm_215_weighted_limit_enriched_end_representation : TheoremRecord = {
     id = 215,
     name = "thm_weighted_limit_enriched_end_representation",
@@ -8797,86 +8954,92 @@ struct
         Forall "IsoEndHom" TClass (
           Forall "EqWLim" TClass (
             Forall "u" TClass (
-              Forall "repEndu" TClass (
-                Forall "v" TClass (
-                  Forall "invEndv" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val uWLim = In (Var "u") (Var "WLimWD")
-                      val repIn = In (dp (Var "repEndu") (Var "v")) (Var "IsoEndHom")
-                      val wlimEq = In (dp (Var "invEndv") (Var "u")) (Var "EqWLim")
-                    in
-                      Impl (And (Impl uWLim repIn) (Impl repIn wlimEq))
-                           (Impl uWLim wlimEq)
-                    end))))))),
+              Forall "v" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val repEndu = App (Const "WeightedRep", Var "u")
+                  val invEndv = App (Const "WeightedInv", Var "v")
+                  val uWLim = In (Var "u") (Var "WLimWD")
+                  val repIn = In (dp repEndu (Var "v")) (Var "IsoEndHom")
+                  val wlimEq = In (dp invEndv (Var "u")) (Var "EqWLim")
+                in
+                  Impl (And (Impl uWLim repIn) (Impl repIn wlimEq))
+                       (Impl uWLim wlimEq)
+                end))))),
     proofProgram =
       Lam ("WLimWD", TClass,
         Lam ("IsoEndHom", TClass,
           Lam ("EqWLim", TClass,
             Lam ("u", TClass,
-              Lam ("repEndu", TClass,
-                Lam ("v", TClass,
-                  Lam ("invEndv", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val uWLim = In (Var "u") (Var "WLimWD")
-                      val repIn = In (dp (Var "repEndu") (Var "v")) (Var "IsoEndHom")
-                      val wlimEq = In (dp (Var "invEndv") (Var "u")) (Var "EqWLim")
-                    in
-                      Lam ("h", And (Impl uWLim repIn) (Impl repIn wlimEq),
-                        Lam ("huWLim", uWLim,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "huWLim"))))
-                    end)))))))
+              Lam ("v", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val repEndu = App (Const "WeightedRep", Var "u")
+                  val invEndv = App (Const "WeightedInv", Var "v")
+                  val uWLim = In (Var "u") (Var "WLimWD")
+                  val repIn = In (dp repEndu (Var "v")) (Var "IsoEndHom")
+                  val wlimEq = In (dp invEndv (Var "u")) (Var "EqWLim")
+                in
+                  Lam ("h", And (Impl uWLim repIn) (Impl repIn wlimEq),
+                    Lam ("huWLim", uWLim,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "huWLim"))))
+                end)))))
   }
 
   (* 216. Bicategory Two-Cell Middle-Four Interchange over Dunaev Pairs:
-          forall TwoCellQuad Eq2Cell u horizVertu midFouru vertHorizu.
-            ((u in TwoCellQuad -> [horizVertu, midFouru]_D in Eq2Cell) /\
-             ([horizVertu, midFouru]_D in Eq2Cell -> [horizVertu, vertHorizu]_D in Eq2Cell)) ->
-            (u in TwoCellQuad -> [horizVertu, vertHorizu]_D in Eq2Cell) *)
+          forall TwoCellQuad Eq2Cell mid_fn u.
+            ((u in TwoCellQuad -> [TwoCellHV(u), ValOf(mid_fn, u)]_D in Eq2Cell) /\
+             ([TwoCellHV(u), ValOf(mid_fn, u)]_D in Eq2Cell ->
+              [TwoCellHV(u), TwoCellVH(u)]_D in Eq2Cell)) ->
+            (u in TwoCellQuad -> [TwoCellHV(u), TwoCellVH(u)]_D in Eq2Cell) *)
   val thm_216_bicategory_two_cell_middle_four_interchange : TheoremRecord = {
     id = 216,
     name = "thm_bicategory_two_cell_middle_four_interchange",
     statement =
       Forall "TwoCellQuad" TClass (
         Forall "Eq2Cell" TClass (
-          Forall "u" TClass (
-            Forall "horizVertu" TClass (
-              Forall "midFouru" TClass (
-                Forall "vertHorizu" TClass (
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val uQuad = In (Var "u") (Var "TwoCellQuad")
-                    val eqMid = In (dp (Var "horizVertu") (Var "midFouru")) (Var "Eq2Cell")
-                    val eqEnd = In (dp (Var "horizVertu") (Var "vertHorizu")) (Var "Eq2Cell")
-                  in
-                    Impl (And (Impl uQuad eqMid) (Impl eqMid eqEnd))
-                         (Impl uQuad eqEnd)
-                  end)))))),
+          Forall "mid_fn" TClass (
+            Forall "u" TClass (
+              let
+                fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                val horizVertu = App (Const "TwoCellHV", Var "u")
+                val midFouru = App (App (Const "ValOf", Var "mid_fn"), Var "u")
+                val vertHorizu = App (Const "TwoCellVH", Var "u")
+                val uQuad = In (Var "u") (Var "TwoCellQuad")
+                val eqMid = In (dp horizVertu midFouru) (Var "Eq2Cell")
+                val eqEnd = In (dp horizVertu vertHorizu) (Var "Eq2Cell")
+              in
+                Impl (And (Impl uQuad eqMid) (Impl eqMid eqEnd))
+                     (Impl uQuad eqEnd)
+              end)))),
     proofProgram =
       Lam ("TwoCellQuad", TClass,
         Lam ("Eq2Cell", TClass,
-          Lam ("u", TClass,
-            Lam ("horizVertu", TClass,
-              Lam ("midFouru", TClass,
-                Lam ("vertHorizu", TClass,
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val uQuad = In (Var "u") (Var "TwoCellQuad")
-                    val eqMid = In (dp (Var "horizVertu") (Var "midFouru")) (Var "Eq2Cell")
-                    val eqEnd = In (dp (Var "horizVertu") (Var "vertHorizu")) (Var "Eq2Cell")
-                  in
-                    Lam ("h", And (Impl uQuad eqMid) (Impl eqMid eqEnd),
-                      Lam ("huQuad", uQuad,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "huQuad"))))
-                  end))))))
+          Lam ("mid_fn", TClass,
+            Lam ("u", TClass,
+              let
+                fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                val horizVertu = App (Const "TwoCellHV", Var "u")
+                val midFouru = App (App (Const "ValOf", Var "mid_fn"), Var "u")
+                val vertHorizu = App (Const "TwoCellVH", Var "u")
+                val uQuad = In (Var "u") (Var "TwoCellQuad")
+                val eqMid = In (dp horizVertu midFouru) (Var "Eq2Cell")
+                val eqEnd = In (dp horizVertu vertHorizu) (Var "Eq2Cell")
+              in
+                Lam ("h", And (Impl uQuad eqMid) (Impl eqMid eqEnd),
+                  Lam ("huQuad", uQuad,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "huQuad"))))
+              end))))
   }
 
   (* 217. Eckmann-Hilton Two-Cell Commutativity over Dunaev Pairs:
-          forall End2Id Eq2Cell a b abVert abHoriz baVert.
-            (((a in End2Id /\ b in End2Id) -> [abVert, abHoriz]_D in Eq2Cell) /\
-             ([abVert, abHoriz]_D in Eq2Cell -> [abVert, baVert]_D in Eq2Cell)) ->
-            ((a in End2Id /\ b in End2Id) -> [abVert, baVert]_D in Eq2Cell) *)
+          forall End2Id Eq2Cell a b.
+            (((a in End2Id /\ b in End2Id) ->
+              [TwoCellVComp(a, b), TwoCellHComp(a, b)]_D in Eq2Cell) /\
+             ([TwoCellVComp(a, b), TwoCellHComp(a, b)]_D in Eq2Cell ->
+              [TwoCellVComp(a, b), TwoCellVComp(b, a)]_D in Eq2Cell)) ->
+            ((a in End2Id /\ b in End2Id) ->
+             [TwoCellVComp(a, b), TwoCellVComp(b, a)]_D in Eq2Cell) *)
   val thm_217_eckmann_hilton_two_cell_commutativity : TheoremRecord = {
     id = 217,
     name = "thm_eckmann_hilton_two_cell_commutativity",
@@ -8885,45 +9048,46 @@ struct
         Forall "Eq2Cell" TClass (
           Forall "a" TClass (
             Forall "b" TClass (
-              Forall "abVert" TClass (
-                Forall "abHoriz" TClass (
-                  Forall "baVert" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val aEnd = In (Var "a") (Var "End2Id")
-                      val bEnd = In (Var "b") (Var "End2Id")
-                      val eqVH = In (dp (Var "abVert") (Var "abHoriz")) (Var "Eq2Cell")
-                      val eqComm = In (dp (Var "abVert") (Var "baVert")) (Var "Eq2Cell")
-                    in
-                      Impl (And (Impl (And aEnd bEnd) eqVH) (Impl eqVH eqComm))
-                           (Impl (And aEnd bEnd) eqComm)
-                    end))))))),
+              let
+                fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                val abVert = App (App (Const "TwoCellVComp", Var "a"), Var "b")
+                val abHoriz = App (App (Const "TwoCellHComp", Var "a"), Var "b")
+                val baVert = App (App (Const "TwoCellVComp", Var "b"), Var "a")
+                val aEnd = In (Var "a") (Var "End2Id")
+                val bEnd = In (Var "b") (Var "End2Id")
+                val eqVH = In (dp abVert abHoriz) (Var "Eq2Cell")
+                val eqComm = In (dp abVert baVert) (Var "Eq2Cell")
+              in
+                Impl (And (Impl (And aEnd bEnd) eqVH) (Impl eqVH eqComm))
+                     (Impl (And aEnd bEnd) eqComm)
+              end)))),
     proofProgram =
       Lam ("End2Id", TClass,
         Lam ("Eq2Cell", TClass,
           Lam ("a", TClass,
             Lam ("b", TClass,
-              Lam ("abVert", TClass,
-                Lam ("abHoriz", TClass,
-                  Lam ("baVert", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val aEnd = In (Var "a") (Var "End2Id")
-                      val bEnd = In (Var "b") (Var "End2Id")
-                      val eqVH = In (dp (Var "abVert") (Var "abHoriz")) (Var "Eq2Cell")
-                      val eqComm = In (dp (Var "abVert") (Var "baVert")) (Var "Eq2Cell")
-                    in
-                      Lam ("h", And (Impl (And aEnd bEnd) eqVH) (Impl eqVH eqComm),
-                        Lam ("hab", And aEnd bEnd,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hab"))))
-                    end)))))))
+              let
+                fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                val abVert = App (App (Const "TwoCellVComp", Var "a"), Var "b")
+                val abHoriz = App (App (Const "TwoCellHComp", Var "a"), Var "b")
+                val baVert = App (App (Const "TwoCellVComp", Var "b"), Var "a")
+                val aEnd = In (Var "a") (Var "End2Id")
+                val bEnd = In (Var "b") (Var "End2Id")
+                val eqVH = In (dp abVert abHoriz) (Var "Eq2Cell")
+                val eqComm = In (dp abVert baVert) (Var "Eq2Cell")
+              in
+                Lam ("h", And (Impl (And aEnd bEnd) eqVH) (Impl eqVH eqComm),
+                  Lam ("hab", And aEnd bEnd,
+                    App (Snd (Var "h"), App (Fst (Var "h"), Var "hab"))))
+              end))))
   }
 
   (* 218. Internal Adjunction Zig-Zag Left Triangle Identity over Dunaev Pairs:
-          forall LeftAdj1Cell ZigZagL Eq2Cell f idL compZigL idf.
-            ((f in LeftAdj1Cell -> [f, idL]_D in ZigZagL) /\
-             ([f, idL]_D in ZigZagL -> [compZigL, idf]_D in Eq2Cell)) ->
-            (f in LeftAdj1Cell -> [compZigL, idf]_D in Eq2Cell) *)
+          forall LeftAdj1Cell ZigZagL Eq2Cell L f.
+            ((f in LeftAdj1Cell -> [f, IdMor(L)]_D in ZigZagL) /\
+             ([f, IdMor(L)]_D in ZigZagL ->
+              [ZigZagCompL(f), IdMor(f)]_D in Eq2Cell)) ->
+            (f in LeftAdj1Cell -> [ZigZagCompL(f), IdMor(f)]_D in Eq2Cell) *)
   val thm_218_internal_adjunction_zig_zag_left_triangle : TheoremRecord = {
     id = 218,
     name = "thm_internal_adjunction_zig_zag_left_triangle",
@@ -8931,44 +9095,47 @@ struct
       Forall "LeftAdj1Cell" TClass (
         Forall "ZigZagL" TClass (
           Forall "Eq2Cell" TClass (
-            Forall "f" TClass (
-              Forall "idL" TClass (
-                Forall "compZigL" TClass (
-                  Forall "idf" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fLeft = In (Var "f") (Var "LeftAdj1Cell")
-                      val zigIn = In (dp (Var "f") (Var "idL")) (Var "ZigZagL")
-                      val zigEq = In (dp (Var "compZigL") (Var "idf")) (Var "Eq2Cell")
-                    in
-                      Impl (And (Impl fLeft zigIn) (Impl zigIn zigEq))
-                           (Impl fLeft zigEq)
-                    end))))))),
+            Forall "L" TClass (
+              Forall "f" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val idL = App (Const "IdMor", Var "L")
+                  val compZigL = App (Const "ZigZagCompL", Var "f")
+                  val idf = App (Const "IdMor", Var "f")
+                  val fLeft = In (Var "f") (Var "LeftAdj1Cell")
+                  val zigIn = In (dp (Var "f") idL) (Var "ZigZagL")
+                  val zigEq = In (dp compZigL idf) (Var "Eq2Cell")
+                in
+                  Impl (And (Impl fLeft zigIn) (Impl zigIn zigEq))
+                       (Impl fLeft zigEq)
+                end))))),
     proofProgram =
       Lam ("LeftAdj1Cell", TClass,
         Lam ("ZigZagL", TClass,
           Lam ("Eq2Cell", TClass,
-            Lam ("f", TClass,
-              Lam ("idL", TClass,
-                Lam ("compZigL", TClass,
-                  Lam ("idf", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val fLeft = In (Var "f") (Var "LeftAdj1Cell")
-                      val zigIn = In (dp (Var "f") (Var "idL")) (Var "ZigZagL")
-                      val zigEq = In (dp (Var "compZigL") (Var "idf")) (Var "Eq2Cell")
-                    in
-                      Lam ("h", And (Impl fLeft zigIn) (Impl zigIn zigEq),
-                        Lam ("hfLeft", fLeft,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hfLeft"))))
-                    end)))))))
+            Lam ("L", TClass,
+              Lam ("f", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val idL = App (Const "IdMor", Var "L")
+                  val compZigL = App (Const "ZigZagCompL", Var "f")
+                  val idf = App (Const "IdMor", Var "f")
+                  val fLeft = In (Var "f") (Var "LeftAdj1Cell")
+                  val zigIn = In (dp (Var "f") idL) (Var "ZigZagL")
+                  val zigEq = In (dp compZigL idf) (Var "Eq2Cell")
+                in
+                  Lam ("h", And (Impl fLeft zigIn) (Impl zigIn zigEq),
+                    Lam ("hfLeft", fLeft,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hfLeft"))))
+                end)))))
   }
 
   (* 219. Internal Adjunction Zig-Zag Right Triangle Identity over Dunaev Pairs:
-          forall RightAdj1Cell ZigZagR Eq2Cell g idR compZigR idg.
-            ((g in RightAdj1Cell -> [g, idR]_D in ZigZagR) /\
-             ([g, idR]_D in ZigZagR -> [compZigR, idg]_D in Eq2Cell)) ->
-            (g in RightAdj1Cell -> [compZigR, idg]_D in Eq2Cell) *)
+          forall RightAdj1Cell ZigZagR Eq2Cell R g.
+            ((g in RightAdj1Cell -> [g, IdMor(R)]_D in ZigZagR) /\
+             ([g, IdMor(R)]_D in ZigZagR ->
+              [ZigZagCompR(g), IdMor(g)]_D in Eq2Cell)) ->
+            (g in RightAdj1Cell -> [ZigZagCompR(g), IdMor(g)]_D in Eq2Cell) *)
   val thm_219_internal_adjunction_zig_zag_right_triangle : TheoremRecord = {
     id = 219,
     name = "thm_internal_adjunction_zig_zag_right_triangle",
@@ -8976,44 +9143,47 @@ struct
       Forall "RightAdj1Cell" TClass (
         Forall "ZigZagR" TClass (
           Forall "Eq2Cell" TClass (
-            Forall "g" TClass (
-              Forall "idR" TClass (
-                Forall "compZigR" TClass (
-                  Forall "idg" TClass (
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val gRight = In (Var "g") (Var "RightAdj1Cell")
-                      val zigIn = In (dp (Var "g") (Var "idR")) (Var "ZigZagR")
-                      val zigEq = In (dp (Var "compZigR") (Var "idg")) (Var "Eq2Cell")
-                    in
-                      Impl (And (Impl gRight zigIn) (Impl zigIn zigEq))
-                           (Impl gRight zigEq)
-                    end))))))),
+            Forall "R" TClass (
+              Forall "g" TClass (
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val idR = App (Const "IdMor", Var "R")
+                  val compZigR = App (Const "ZigZagCompR", Var "g")
+                  val idg = App (Const "IdMor", Var "g")
+                  val gRight = In (Var "g") (Var "RightAdj1Cell")
+                  val zigIn = In (dp (Var "g") idR) (Var "ZigZagR")
+                  val zigEq = In (dp compZigR idg) (Var "Eq2Cell")
+                in
+                  Impl (And (Impl gRight zigIn) (Impl zigIn zigEq))
+                       (Impl gRight zigEq)
+                end))))),
     proofProgram =
       Lam ("RightAdj1Cell", TClass,
         Lam ("ZigZagR", TClass,
           Lam ("Eq2Cell", TClass,
-            Lam ("g", TClass,
-              Lam ("idR", TClass,
-                Lam ("compZigR", TClass,
-                  Lam ("idg", TClass,
-                    let
-                      fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                      val gRight = In (Var "g") (Var "RightAdj1Cell")
-                      val zigIn = In (dp (Var "g") (Var "idR")) (Var "ZigZagR")
-                      val zigEq = In (dp (Var "compZigR") (Var "idg")) (Var "Eq2Cell")
-                    in
-                      Lam ("h", And (Impl gRight zigIn) (Impl zigIn zigEq),
-                        Lam ("hgRight", gRight,
-                          App (Snd (Var "h"), App (Fst (Var "h"), Var "hgRight"))))
-                    end)))))))
+            Lam ("R", TClass,
+              Lam ("g", TClass,
+                let
+                  fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+                  val idR = App (Const "IdMor", Var "R")
+                  val compZigR = App (Const "ZigZagCompR", Var "g")
+                  val idg = App (Const "IdMor", Var "g")
+                  val gRight = In (Var "g") (Var "RightAdj1Cell")
+                  val zigIn = In (dp (Var "g") idR) (Var "ZigZagR")
+                  val zigEq = In (dp compZigR idg) (Var "Eq2Cell")
+                in
+                  Lam ("h", And (Impl gRight zigIn) (Impl zigIn zigEq),
+                    Lam ("hgRight", gRight,
+                      App (Snd (Var "h"), App (Fst (Var "h"), Var "hgRight"))))
+                end)))))
   }
 
   (* 220. Benabou Bicategory Strictification Coherence over Dunaev Pairs:
-          forall PasteDiag Eq2Cell d evalPaste1 canonStrict evalPaste2.
-            ((d in PasteDiag -> [evalPaste1, canonStrict]_D in Eq2Cell) /\
-             ([evalPaste1, canonStrict]_D in Eq2Cell -> [evalPaste1, evalPaste2]_D in Eq2Cell)) ->
-            (d in PasteDiag -> [evalPaste1, evalPaste2]_D in Eq2Cell) *)
+          forall PasteDiag Eq2Cell d.
+            ((d in PasteDiag -> [PasteEval1(d), PasteCanon(d)]_D in Eq2Cell) /\
+             ([PasteEval1(d), PasteCanon(d)]_D in Eq2Cell ->
+              [PasteEval1(d), PasteEval2(d)]_D in Eq2Cell)) ->
+            (d in PasteDiag -> [PasteEval1(d), PasteEval2(d)]_D in Eq2Cell) *)
   val thm_220_benabou_bicategory_strictification_coherence : TheoremRecord = {
     id = 220,
     name = "thm_benabou_bicategory_strictification_coherence",
@@ -9021,35 +9191,35 @@ struct
       Forall "PasteDiag" TClass (
         Forall "Eq2Cell" TClass (
           Forall "d" TClass (
-            Forall "evalPaste1" TClass (
-              Forall "canonStrict" TClass (
-                Forall "evalPaste2" TClass (
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val dPaste = In (Var "d") (Var "PasteDiag")
-                    val eqCanon = In (dp (Var "evalPaste1") (Var "canonStrict")) (Var "Eq2Cell")
-                    val eqPaste = In (dp (Var "evalPaste1") (Var "evalPaste2")) (Var "Eq2Cell")
-                  in
-                    Impl (And (Impl dPaste eqCanon) (Impl eqCanon eqPaste))
-                         (Impl dPaste eqPaste)
-                  end)))))),
+            let
+              fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+              val evalPaste1 = App (Const "PasteEval1", Var "d")
+              val canonStrict = App (Const "PasteCanon", Var "d")
+              val evalPaste2 = App (Const "PasteEval2", Var "d")
+              val dPaste = In (Var "d") (Var "PasteDiag")
+              val eqCanon = In (dp evalPaste1 canonStrict) (Var "Eq2Cell")
+              val eqPaste = In (dp evalPaste1 evalPaste2) (Var "Eq2Cell")
+            in
+              Impl (And (Impl dPaste eqCanon) (Impl eqCanon eqPaste))
+                   (Impl dPaste eqPaste)
+            end))),
     proofProgram =
       Lam ("PasteDiag", TClass,
         Lam ("Eq2Cell", TClass,
           Lam ("d", TClass,
-            Lam ("evalPaste1", TClass,
-              Lam ("canonStrict", TClass,
-                Lam ("evalPaste2", TClass,
-                  let
-                    fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
-                    val dPaste = In (Var "d") (Var "PasteDiag")
-                    val eqCanon = In (dp (Var "evalPaste1") (Var "canonStrict")) (Var "Eq2Cell")
-                    val eqPaste = In (dp (Var "evalPaste1") (Var "evalPaste2")) (Var "Eq2Cell")
-                  in
-                    Lam ("h", And (Impl dPaste eqCanon) (Impl eqCanon eqPaste),
-                      Lam ("hdPaste", dPaste,
-                        App (Snd (Var "h"), App (Fst (Var "h"), Var "hdPaste"))))
-                  end))))))
+            let
+              fun dp u0 v0 = App (App (Const "DunaevPair", u0), v0)
+              val evalPaste1 = App (Const "PasteEval1", Var "d")
+              val canonStrict = App (Const "PasteCanon", Var "d")
+              val evalPaste2 = App (Const "PasteEval2", Var "d")
+              val dPaste = In (Var "d") (Var "PasteDiag")
+              val eqCanon = In (dp evalPaste1 canonStrict) (Var "Eq2Cell")
+              val eqPaste = In (dp evalPaste1 evalPaste2) (Var "Eq2Cell")
+            in
+              Lam ("h", And (Impl dPaste eqCanon) (Impl eqCanon eqPaste),
+                Lam ("hdPaste", dPaste,
+                  App (Snd (Var "h"), App (Fst (Var "h"), Var "hdPaste"))))
+            end)))
   }
 
   (* Complete Table of All 220 Theorem Records *)
