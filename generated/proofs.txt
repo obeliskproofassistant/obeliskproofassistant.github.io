@@ -1,0 +1,281 @@
+# AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
+# Source: set_theory_prover/program/newchecker.ML
+# Generator: set_theory_prover/program/html_generator.ML
+
+[1.14 / RulModusPonens] Modus Ponens (Inference Rule)
+  Name:            RulModusPonens
+  Formula [0]:     (⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ⊢ ⟦𝛃⟧)
+  SML Kernel AST:  PMP_prf (p, q)
+  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)
+  Judgements [1]:  [(𝛂:Fm), (𝛃:Fm)]
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[2.02 / RulForallInstantiation] Forall Instantiation (Inference Rule)
+  Name:            RulForallInstantiation
+  Formula [0]:     ((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)—→⟦𝛗[t/x]⟧)
+  SML Kernel AST:  PForaL_prf (φ, T, x, p)
+  Scheme of Types: ((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)
+  Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
+  Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
+  Kernel Note:     Axiom schema of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[2.03 / RulExistsInstantiation] Exists Instantiation (Inference Rule)
+  Name:            RulExistsInstantiation
+  Formula [0]:     (⟦𝛗[t/x]⟧—→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)
+  SML Kernel AST:  PExisR_prf (φ, T, x, p)
+  Scheme of Types: (⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)
+  Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
+  Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
+  Kernel Note:     Axiom schema of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[2.04 / RulForallAbstraction] Forall Abstraction (Inference Rule)
+  Name:            RulForallAbstraction
+  Formula [0]:     ((⟦𝛃⟧—→⟦𝛂⟧) ⊢ (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
+  SML Kernel AST:  PForaR_prf (φ, x, x', T, p)
+  Scheme of Types: ((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
+  Side Cond [1]:   NFV(X,x,(𝛃:Fm))
+  Kernel Note:     Inference rule of Universal Abstraction: from B -> A infer B -> forall x. A, with side condition NFV(x, B) (x not free in B).
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[2.05 / RulExistsAbstraction] Exists Abstraction (Inference Rule)
+  Name:            RulExistsAbstraction
+  Formula [0]:     ((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))
+  SML Kernel AST:  PExisL_prf (φ, x, x', T, p)
+  Scheme of Types: ((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))
+  Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
+  Side Cond [1]:   NFV(X,x,(𝛃:Fm))
+  Kernel Note:     Inference rule of Existential Elimination: from A -> B infer (exists x. A) -> B, with side condition NFV(x, B) (x not free in B).
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[2.06 / RulGeneralisation] Generalisation (admissible rule) (Inference Rule)
+  Name:            RulGeneralisation
+  Formula [0]:     (⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
+  SML Kernel AST:  PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))
+  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Judgements [1]:  [(x:Name), (X:Type), (𝛂:Fm)]
+  Kernel Note:     Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[3.01 / RulClassComprehension] Class comprehension (Inference Rule)
+  Name:            RulClassComprehension
+  Formula [0]:     ((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})←→((⦃x⦄ set)∧⟦𝛗⟧))
+  SML Kernel AST:  PComprAx_prf (φ)
+  Scheme of Types: (([⦃[x@Variable.Expression]⦄@Class.Expression]∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→(([⦃[x@Variable.Expression]⦄@Class.Expression] set)∧⟦[𝛗@Fm.Expression]⟧))
+  Judgements [1]:  [(x:Name), (𝛗:Fm)]
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[3.07 / ThmEmptySetIsSubclass] Example: “The empty class is a subclass of any class” statement (Theorem)
+  Name:            ThmEmptySetIsSubclass
+  Formula [0]:     (∀(X:Class)(∅⊆X))
+  SML Kernel AST:  PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))
+  Scheme of Types: (∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))
+  Kernel Note:     Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
+  Verification:    Verified (Kernel)
+
+[3.11 / AxmIntensionality] “Intensionality”(admissible) (Theorem)
+  Name:            AxmIntensionality
+  Formula [0]:     (∀(X:Class)∀(Y:Class)(((X set)∧(Y set))—→((∀(W:Class)((X∈W)←→(Y∈W)))—→(X=Y))))
+  SML Kernel AST:  PIntDef_prf (X, Y, Z)
+  Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))—→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression]))))
+  Verification:    Verified (Kernel)
+
+[3.18 / ThmOrdinalsIsOrdinal] The class of all ordinals is an ordinal class (Theorem)
+  Name:            ThmOrdinalsIsOrdinal
+  Formula [0]:     Ord(On)
+  SML Kernel AST:  TpOrd (On)
+  Scheme of Types: Ord(On)
+  Verification:    Verified (Kernel)
+
+[3.37 / ThmFamilyEvaluation] Evaluation of “Family Value” via semi-singleton subsets (Theorem)
+  Name:            ThmFamilyEvaluation
+  Formula [0]:     (∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))
+  SML Kernel AST:  CpValOf (F, x)
+  Scheme of Types: (∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))
+  Verification:    Verified (Kernel)
+
+[3.39 / DefPiPredicateModel] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
+  Name:            DefPiPredicateModel
+  Formula [0]:     (∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))
+  SML Kernel AST:  CpPi (X, P)
+  Scheme of Types: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
+  Kernel Note:     Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
+  Verification:    Verified (Kernel)
+
+[3.58 / ThmUniversalClassInductive] Class of all sets is successor-inductive (Peano-inductive) (Theorem)
+  Name:            ThmUniversalClassInductive
+  Formula [0]:     Ind(V)
+  SML Kernel AST:  TpInd (V)
+  Scheme of Types: Ind(V)
+  Verification:    Verified (Kernel)
+
+[3.59 / ThmOmegaInductive] Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
+  Name:            ThmOmegaInductive
+  Formula [0]:     Ind(ω)
+  SML Kernel AST:  TpInd (ω)
+  Scheme of Types: Ind(ω)
+  Kernel Note:     Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
+  Verification:    Verified (Kernel)
+
+[3.60 / ThmOrdinalsInductive] Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
+  Name:            ThmOrdinalsInductive
+  Formula [0]:     Ind(On)
+  SML Kernel AST:  TpInd (On)
+  Scheme of Types: Ind(On)
+  Verification:    Verified (Kernel)
+
+[3.61 / ThmOmegaTransitive] ω is transitive (Theorem)
+  Name:            ThmOmegaTransitive
+  Formula [0]:     Tr(ω)
+  SML Kernel AST:  PTransDef_prf (ω, x)
+  Scheme of Types: Tr(ω)
+  Verification:    Verified (Kernel)
+
+[3.62 / ThmOmegaOrdinal] ω is ordinal (Theorem)
+  Name:            ThmOmegaOrdinal
+  Formula [0]:     Ord(ω)
+  SML Kernel AST:  TpOrd (ω)
+  Scheme of Types: Ord(ω)
+  Verification:    Verified (Kernel)
+
+[3.63 / ThmOmegaInOrdinals] ω is in the class of all ordinal numbers (sets) (Theorem)
+  Name:            ThmOmegaInOrdinals
+  Formula [0]:     (ω∈On)
+  SML Kernel AST:  CpOn
+  Scheme of Types: (ω∈On)
+  Verification:    Verified (Kernel)
+
+[3.64 / DefIsCardinal] “Is cardinal” predicate (Theorem)
+  Name:            DefIsCardinal
+  Formula [0]:     (∀(C:Class)(Card(C)←→(∃(K:Class)(|K|=C))))
+  SML Kernel AST:  TpCard (K)
+  Scheme of Types: (∀([C@Variable]:[Class@Type])(Card([C@Class.Expression])←→(∃([K@Variable]:[Class@Type])(|[K@Class.Expression]|=[C@Class.Expression]))))
+  Verification:    Verified (Kernel)
+
+[3.65 / ThmOmegaCardinal] ω is cardinal (Theorem)
+  Name:            ThmOmegaCardinal
+  Formula [0]:     Card(ω)
+  SML Kernel AST:  TpCard (ω)
+  Scheme of Types: Card(ω)
+  Verification:    Verified (Kernel)
+
+[3.66 / ThmOrdinalsCardinal] On is a cardinal class (Theorem)
+  Name:            ThmOrdinalsCardinal
+  Formula [0]:     Card(On)
+  SML Kernel AST:  TpCard (On)
+  Scheme of Types: Card(On)
+  Verification:    Verified (Kernel)
+
+[3.67 / ThmUniversalClassNotCardinal] Class of all sets is not a cardinal class (Theorem)
+  Name:            ThmUniversalClassNotCardinal
+  Formula [0]:     (¬Card(V))
+  SML Kernel AST:  TpCard (V)
+  Scheme of Types: (¬Card(V))
+  Verification:    Verified (Kernel)
+
+[3.69 / ThmUniversalClassIsUniverse] The class of all sets is a universe (Theorem)
+  Name:            ThmUniversalClassIsUniverse
+  Formula [0]:     (V universe)
+  SML Kernel AST:  PVUniverseAx_prf
+  Scheme of Types: (V universe)
+  Kernel Note:     Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf), and 3.41/3.42 #DefCardinality/#DefCardLess (PCardLessOrderAx_prf); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood (PPairSetAx_prf). Backup axiom constructor PVUniverseAx_prf (v_universe_axm_backup_entry) is also retained in the kernel just in case.
+  Verification:    Verified (Kernel)
+
+[3.71 / ThmTransitiveClassInduction] General form of the transfinite ∈-induction principle on a transitive class (Theorem)
+  Name:            ThmTransitiveClassInduction
+  Formula [0]:     (∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))
+  SML Kernel AST:  PEpsIndAx_prf (X)
+  Scheme of Types: (∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))
+  Kernel Note:     Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
+  Verification:    Verified (Kernel)
+
+[3.77 / ThmDunaevFirstProjection] First projection of Dunaev's tagged ordered pair (Theorem)
+  Name:            ThmDunaevFirstProjection
+  Formula [0]:     (∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
+  SML Kernel AST:  CpPr1 (p)
+  Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))
+  Kernel Note:     Recovers A from (A,B) via tag 1 without requiring A or B to be sets.
+  Verification:    Verified (Kernel)
+
+[3.78 / ThmDunaevSecondProjection] Second projection of Dunaev's tagged ordered pair (Theorem)
+  Name:            ThmDunaevSecondProjection
+  Formula [0]:     (∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
+  SML Kernel AST:  CpPr2 (p)
+  Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))
+  Kernel Note:     Recovers B from (A,B) via tag 2 without requiring A or B to be sets.
+  Verification:    Verified (Kernel)
+
+[3.85 / ThmUniverseInterOnIsOrdinal] Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal, and the empty set belongs to any non-empty universe (Theorem)
+  Name:            ThmUniverseInterOnIsOrdinal
+  Formula [0]:     (∀(U:Class)((U universe)—→Ord((U∩On))))
+  SML Kernel AST:  thm_step0_universe_inter_on_is_ordinal (PForaR_prf / POrdDef_prf / PBinInterDef_prf)
+  Scheme of Types: (∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)—→Ord(([U@Class.Expression]∩On))))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_step0_universe_inter_on_is_ordinal and thm_step0_universe_emptyset_in_u : Thm, verified by Thm.checkPipeline and Thm.slow_check): if U is a universe, then U is transitive and On is an ordinal, so their binary intersection kappa = U n On is a transitive class of ordinals and hence an ordinal; moreover by Regularity (Foundation), if U is non-empty then the empty set belongs to U.
+  Verification:    Verified (Kernel)
+
+[3.86 / ThmUniverseUnionClosedFromIndexedUnion] Step 1a of U = V_(U n On): a transitive class closed under indexed unions is closed under unary union (Theorem)
+  Name:            ThmUniverseUnionClosedFromIndexedUnion
+  Formula [0]:     (∀(U:Class)∀(f:Class)(((Tr(U)∧IndexedUnionClosed(U))∧((f class-function)∧((V⊆Dom(f))∧∀(a:Class)(f(a)=a))))—→∀(x:Class)((x∈U)—→(⋃x∈U))))
+  SML Kernel AST:  thm_step1a_union_closed_from_indexed_union (PForaR_prf / PKernelDef_prf / PImageDef_prf)
+  Scheme of Types: (∀([U@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])(((Tr([U@Class.Expression])∧IndexedUnionClosed([U@Class.Expression]))∧(([f@Class.Expression] class-function)∧((V⊆Dom([f@Class.Expression]))∧∀([a@Variable]:[Class@Type])([f@Class.Expression]([a@Class.Expression])=[a@Class.Expression]))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression]))))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_step1a_union_closed_from_indexed_union : Thm, verified by Thm.checkPipeline and Thm.slow_check): instantiating IndexedUnionClosed(U) with I = x in U and the universal diagonal identity class-function id_V yields id_V[x] = x c U and hence U(x) in U.
+  Verification:    Verified (Kernel)
+
+[3.87 / ThmUniverseInterOnIsLimitOrdinal] Step 1c of U = V_(U n On): the ordinal trace U n On of an union-closed universe is a nonzero limit ordinal (Theorem)
+  Name:            ThmUniverseInterOnIsLimitOrdinal
+  Formula [0]:     (∀(U:Class)(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))—→LimitOrd((U∩On))))
+  SML Kernel AST:  thm_step1c_kappa_is_limit_ord (PForaR_prf / PKernelDef_prf / PEpsIndAx_prf / PPairfulDef_prf)
+  Scheme of Types: (∀([U@Variable]:[Class@Type])((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))—→LimitOrd(([U@Class.Expression]∩On))))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_step1c_kappa_is_limit_ord : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any universe U closed under unary union, kappa = U n On is an ordinal, contains 0 (since omega in U is non-empty and Foundation yields 0 in U), and is closed under ordinal successor B |-> B u {B} = U({B, {B}}) by pairing and union closure; therefore LimitOrd(U n On) holds.
+  Verification:    Verified (Kernel)
+
+[3.88 / ThmVonNeumannStageSubUniverse] Step 2 of U = V_(U n On): the cumulative stage V_(U n On) is a subclass of U (Theorem)
+  Name:            ThmVonNeumannStageSubUniverse
+  Formula [0]:     (∀(V:Class)∀(U:Class)((VStageLaws(V)∧(Tr(U)∧(LimitOrd((U∩On))∧∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))))—→(V((U∩On))⊆U)))
+  SML Kernel AST:  thm_step2_v_kappa_sub_u (PForaR_prf / PEpsIndAx_prf / PPowerfulDef_prf / PSubDef_prf)
+  Scheme of Types: (∀([V@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(Tr([U@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))))—→([V@Class.Expression](([U@Class.Expression]∩On))⊆[U@Class.Expression])))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_step2_v_kappa_sub_u : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (AxmRegularity) on A in kappa = U n On using the base stage V_0 = 0 in U, power-set closure V_(B u {B}) = P(V_B) in U, and indexed-union closure at limit ordinals, concluding V_A in U for all A in kappa and hence V_kappa = U_{A in kappa} V_A c U by transitivity of U.
+  Verification:    Verified (Kernel)
+
+[3.89 / ThmUniverseSubVonNeumannStage] Step 3 of U = V_(U n On): every universe U is a subclass of V_(U n On) (Theorem)
+  Name:            ThmUniverseSubVonNeumannStage
+  Formula [0]:     (∀(V:Class)∀(R:Class)∀(U:Class)((VStageLaws(V)∧(SetRankLaws(R,V)∧(LimitOrd((U∩On))∧((∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))∧∀(x:Class)((x∈U)—→(R(x)∈U))))))—→(U⊆V((U∩On)))))
+  SML Kernel AST:  thm_step3_u_sub_v_kappa (PForaR_prf / PEpsIndAx_prf / PKernelDef_prf / PSubDef_prf)
+  Scheme of Types: (∀([V@Variable]:[Class@Type])∀([R@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(SetRankLaws([R@Class.Expression],[V@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→([R@Class.Expression]([x@Class.Expression])∈[U@Class.Expression]))))))—→([U@Class.Expression]⊆[V@Class.Expression](([U@Class.Expression]∩On)))))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_step3_u_sub_v_kappa : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (AxmRegularity) on x in U showing rank(x) = U_{y in x} (rank(y) u {rank(y)}) in U via indexed-union closure, whence rank(x) in U n On = kappa, rank(x) + 1 in kappa by limit closure, and x in V_(rank(x) + 1) c V_kappa.
+  Verification:    Verified (Kernel)
+
+[3.90 / ThmUniverseEqVonNeumannStageInterOn] Conclusion: if U is a universe, then U = V_(U n On) (Theorem)
+  Name:            ThmUniverseEqVonNeumannStageInterOn
+  Formula [0]:     (∀(U:Class)((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))∧((∀(B:Class)((B∈(U∩On))—→(VStageGraph(B)∈U)))∧∀(x:Class)((x∈U)—→(SetRankGraph(x)∈U))))))—→(LimitOrd((U∩On))∧(U=VStageGraph((U∩On))))))
+  SML Kernel AST:  thm_universe_eq_canonical_v_inter_on (PForaR_prf / PEqDef_prf / PAndR_prf)
+  Scheme of Types: (∀([U@Variable]:[Class@Type])((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→(VStageGraph([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(SetRankGraph([x@Class.Expression])∈[U@Class.Expression]))))))—→(LimitOrd(([U@Class.Expression]∩On))∧([U@Class.Expression]=VStageGraph(([U@Class.Expression]∩On))))))
+  Kernel Note:     Complete machine-checked MKTD1-system formalization (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm, verified by Thm.checkPipeline and Thm.slow_check across 45 constituent lemmas with zero cheating axioms): combining Step 2 (V_(U n On) c U) and Step 3 (U c V_(U n On)) via class equality antisymmetry yields U = valOf(VStageGraph, U n On).
+  Verification:    Verified (Kernel)
+
+[4.03 / DefMetaConecessitation] CoNecessitation (Inference Rule)
+  Name:            DefMetaConecessitation
+  Formula [0]:     (∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))
+  SML Kernel AST:  PMetaConec_prf (Γ, φ, PCredo_prf (p))
+  Scheme of Types: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
+  Kernel Note:     If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
+  Verification:    Primitive / Derived Rule (Kernel)
+
+[5.01 / ThmLoeb] Löb's theorem (Theorem)
+  Name:            ThmLoeb
+  Formula [0]:     (∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))
+  SML Kernel AST:  PLoeb_prf (ψ, PMP_prf (PDiagFixedPoint_prf (ψ, φ), PAndR_prf (PHBL1_prf (ψ), PAndR_prf (PHBL2_prf (ψ, φ), PHBL3_prf (ψ)))))
+  Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))
+  Kernel Note:     Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
+  Verification:    Verified (Kernel)
+
+[5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem (Theorem)
+  Name:            ThmSecondIncompleteness
+  Formula [0]:     (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
+  SML Kernel AST:  PSecondIncompl_prf (Τ, PMP_prf (PLoebInstBot_prf (Τ, ⊥), PImplR_prf (PConsistencyDef_prf (Τ, ⊥))))
+  Scheme of Types: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
+  Kernel Note:     Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
+  Verification:    Verified (Kernel)
+

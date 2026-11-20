@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Architectural Specification: Non-Computational Semantics &amp; Static Verification Compiler</title>
+  <link rel="alternate" type="text/markdown" href="COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="obelisk-architectural-specification-non-computational-semantics-static-verification-compiler">Obelisk Architectural Specification: Non-Computational Semantics &amp; Static Verification Compiler</h1>
+<h2 id="1-executive-summary-author-design-commitments">1. Executive Summary &amp; Author Design Commitments</h2>
+<blockquote>[!IMPORTANT]</blockquote>
+<blockquote><strong>Foundational &amp; Architectural Commitments:</strong></blockquote>
+<blockquote>1. <strong>Declarative / Model-Theoretic Semantics (Non-Computational by Design):</strong> In Obelisk&#x27;s classical set/class theory and dependent type theory, formulas, proof terms, and class expressions are interpreted via classical model-theoretic valuation rather than constructive witness-extraction semantics.</blockquote>
+<blockquote>2. <strong>A Compiler That Checks — Bytecode Is NEVER Produced:</strong> The compiler&#x27;s sole purpose is <strong>static verification</strong>: checking whether supplied finite derivations and proof terms satisfy the formal inference and typing rules of the kernel (<code>newchecker.ML</code> in Variant 1 and <code>DependentTypeChecker.check</code> in Variant 2). No bytecode, VM, JIT, or executable binary is emitted.</blockquote>
+<blockquote>3. <strong>Classical Logic &amp; Choice as Project Foundations:</strong></blockquote>
+<blockquote><em>&quot;Technically it may be computational if without choice axiom. But we need choice, we need everything classical.&quot;</em></blockquote>
+<blockquote>Classical logic (Law of Excluded Middle) and the Axiom of Choice / Global Choice are deliberate foundational commitments of the Obelisk project for developing Morse–Kelley (MK) and Von Neumann–Bernays–Gödel (NBG) mathematics.</blockquote>
+<hr>
+<h2 id="2-separating-proof-checking-strong-normalization-and-canonicity">2. Separating Proof Checking, Strong Normalization, and Canonicity</h2>
+<p>To give a mathematically rigorous account of why Obelisk is a verification-only compiler rather than a witness-computing evaluator, three distinct metatheoretic questions must be kept strictly separate (following the formal analysis in the book&#x27;s <code>010_logic.tex</code>):</p>
+<ol>
+<li><strong>Algorithmic Proof Checking:</strong> Is a supplied finite derivation / proof certificate accepted by the specified kernel (<code>newchecker.ML</code> or <code>DependentTypeChecker.check</code>)?</li>
+<li><strong>Strong Normalization (Termination of Reduction):</strong> Does a specified syntactic reduction relation ($\beta$-reduction / definitional unfolding) terminate on all well-typed terms of the calculus?</li>
+<li><strong>Canonicity (Witness / Value Computation):</strong> Does every <em>closed normal form</em> of a base type (such as <code>Bool</code>) or existential/dependent sum type ($\Sigma x : A.\,P(x)$) reduce to a canonical literal (<code>true</code> / <code>false</code>) or an explicit computable witness pair?</li>
+</ol>
+<h3 id="2-1-why-opaque-classical-choice-constants-break-canonicity-not-normalization-010-logic-tex">2.1 Why Opaque Classical &amp; Choice Constants Break Canonicity, Not Normalization (<code>010_logic.tex</code>)</h3>
+<p>In constructive type theories (such as Martin-Löf Type Theory without axioms), both strong normalization and canonicity hold: closed normal forms of type <code>Bool</code> are literally <code>true</code> or <code>false</code>, and closed proofs of $\Sigma x : A.\,P(x)$ compute an explicit witness $a : A$.</p>
+<p>When classical or choice principles are introduced as <strong>opaque typed constants with no reduction rules</strong> (for instance, an excluded-middle oracle or a choice operator constant $c$):</p>
+<ul>
+<li><strong>Strong Normalization Is Preserved (<code>010_logic.tex</code>):</strong> An opaque constant with no rewrite rules is <em>already in normal form</em>—it does not diverge or loop. As proved in <code>010_logic.tex</code> for the strongly normalizing simple Boolean calculus, adding arbitrary opaque typed constants with no reduction rules preserves strong normalization: given any term $t$ containing finitely many opaque constants $c_1, \dots, c_k$, replacing each $c_i$ by a fresh free variable $x_i$ of the same type preserves every reduction step one-for-one, so any infinite reduction sequence from $t$ would transport to an infinite reduction sequence in the original constant-free calculus. <em>(Scope note: this syntactic preservation theorem applies to adding inert constants to a normalizing calculus; it does not claim that arbitrary axioms are semantically consistent or that every extension of a full dependent checker automatically normalizes without specifying its reduction rules.)</em></li>
+<li><strong>Canonicity Fails (<code>010_logic.tex</code>):</strong> Even though reduction terminates, an opaque closed constant $c : \mathrm{Bool}$ (or a conditional branching on an unreduced classical/choice term) is a <strong>closed normal form distinct from <code>true</code> and <code>false</code></strong>. Thus closed normal forms no longer compute canonical Boolean values or effective set witnesses.</li>
+</ul>
+<h3 id="2-2-which-mathematical-principles-require-choice-and-which-do-not">2.2 Which Mathematical Principles Require Choice (and Which Do Not)</h3>
+<p>Classical logic and Global Choice are foundational commitments of Obelisk, but their mathematical scope should be stated accurately:</p>
+<ul>
+<li><strong>Principles Requiring Choice:</strong> Well-ordering arbitrary sets (Zermelo&#x27;s Well-Ordering Theorem), cardinal trichotomy for arbitrary sets, Zorn&#x27;s Lemma, Tychonoff&#x27;s Theorem, and (in class-map form) placing every proper class in bijection with $V$ or $\mathrm{On}$ (<code>DefTightClass</code> <code>3.47</code> at $U = V$ / Global Choice) require the Axiom of Choice or Global Choice.</li>
+<li><strong>Principles Not Requiring Choice:</strong> Ordinary ordinal induction, transfinite ordinal recursion and ordinal arithmetic ($\alpha + \beta$, $\alpha \cdot \beta$, $\alpha^\beta$ on $\mathrm{On}$), and the <strong>Burali-Forti theorem</strong> ($\mathrm{On}$ is a proper class, <code>ThmOrdinalsProperClass</code> <code>3.22</code> / <code>thm_O12_burali_forti</code>) do <strong>not</strong> logically require the Axiom of Choice; they follow from Class Comprehension / Separation, Replacement, and Regularity (<code>AxmRegularity</code> <code>3.14</code>) alone.</li>
+</ul>
+<h3 id="2-3-domain-size-conventions-for-set-choice-vs-class-parameter-choice-010-logic-tex-220-simpler-img-thms-tex">2.3 Domain &amp; Size Conventions for Set Choice vs. Class-Parameter Choice (<code>010_logic.tex</code> &amp; <code>220_simpler_img_thms.tex</code>)</h3>
+<p>When formulating a choice operation in NBG/MK class theory, two distinct operators must be distinguished by their domains and size conventions:</p>
+<ol>
+<li><strong>Set-Level Choice Graph ($\tau_{\mathrm{set}} : V \setminus \{\emptyset\} \to V$):</strong></li>
+</ol>
+<p>An ordinary class-function graph whose arguments and outputs are <strong>sets</strong> ($x \in V$). Because proper classes are not members of any class ($\neg\operatorname{Set}(K) \implies \forall u.\;K \notin u$), a proper class $K$ cannot be passed as a first-order set argument in $\operatorname{Dom}(\tau_{\mathrm{set}}) \subseteq V$.</p>
+<ol>
+<li><strong>Class-Parameter Choice Operation ($\tau_{\mathrm{class}}(A)$ for arbitrary classes $A : \mathrm{Class}$):</strong></li>
+</ol>
+<p>To select a member $\tau_{\mathrm{class}}(A) \in A$ for <strong>every nonempty class $A$</strong> (including proper classes $A \subseteq V$), one cannot merely apply a set-choice graph off its domain. Instead, as proved in the book&#x27;s <code>220_simpler_img_thms.tex</code> (and specified in <code>010_logic.tex</code>), the class-parameter choice operation is constructed via:</p>
+<ul>
+<li>a fixed injective class-function (global ranking) $F : V \hookrightarrow \mathrm{On}$,</li>
+<li>class comprehension forming the nonempty ordinal image $F[A] \subseteq \mathrm{On}$, and</li>
+<li>the least-ordinal principle picking $\mu = \bigcap F[A] \in F[A]$ and returning its unique preimage $x \in A$ with $F(x) = \mu$, while assigning the <strong>proper-class default</strong> $\tau_{\mathrm{class}}(\emptyset) = V \notin V$ when $A = \emptyset$ (so that $\tau_{\mathrm{class}}(A) \in V \iff A \neq \emptyset$).</li>
+</ul>
+<hr>
+<h2 id="3-the-obelisk-compiler-check-do-not-execute">3. The Obelisk Compiler: Check, Do Not Execute</h2>
+<h3 id="3-1-verification-pipeline">3.1 Verification Pipeline</h3>
+<pre><code class="language-text">            [Obelisk Source Program / Proof Certificate]
+                            │
+                            ▼
+           [Lexer &amp; Parser: Concrete SML / Kernel Syntax]
+                            │
+                            ▼
+           [Elaborator &amp; Syntactic AST Construction]
+                            │
+                            ▼
+       [Static Kernel Checker: newchecker.ML / DependentTypeChecker.check]
+        - Checks inference steps &amp; typing rules: Γ ⊢ term : Type
+        - Verifies definitional / syntactic conversion: Type ≡ TargetStatement
+        - Validates explicit axiom &amp; rule applications
+                            │
+                            ▼
+               ┌────────────────────────┐
+               │  DOES THE PROOF CHECK? │
+               └───────────┬────────────┘
+                           │
+             ┌─────────────┴─────────────┐
+             ▼                           ▼
+           [YES]                       [NO]
+    Theorem is Proven &amp; Verified  Type Error / Rejection
+             │
+             ▼
+  [Dedukti / Lambdapi Certificate Export]
+    (de Bruijn criterion compliance)
+             │
+             ▼
+     [END OF PIPELINE]
+   (NO BYTECODE PRODUCED)</code></pre>
+<h3 id="3-2-complexity-of-static-proof-checking-vs-bytecode-absence">3.2 Complexity of Static Proof Checking vs. Bytecode Absence</h3>
+<ul>
+<li><strong>Why Bytecode Is Never Emitted:</strong> In Obelisk, proof terms are <strong>deductive certificates</strong>, not programs intended for runtime execution. Emitting bytecode is unnecessary for formal verification and is omitted by architectural design.</li>
+<li><strong>Complexity of Checking Is Determined by the Conversion &amp; Step Discipline, Not by Omitting Bytecode:</strong> Simply refraining from emitting bytecode does <em>not</em> by itself guarantee that typechecking runs in polynomial time. In a dependent type checker (<code>DependentTypeChecker.check</code> using <code>DependentEval.whnf</code>), checking definitional equality (<code>conv</code>) can perform arbitrary $\beta/\delta$-reduction work whose complexity depends on the reduction cost model of the terms being compared. By contrast, in Variant 1 (<code>newchecker.ML</code>), where every inference rule (<code>ModusPonens</code>, <code>Gen</code>, <code>DefMetaInstantiation</code>) is supplied with explicit syntactic AST arguments and checked by structural equality without open-ended normalization search, each rule step is a bounded structural tree comparison. Any complexity claim for Variant 2 must therefore be stated relative to the explicit cost of <code>whnf</code>/<code>conv</code> on the supplied proof terms rather than inferred from the absence of a bytecode back-end.</li>
+</ul>
+<hr>
+<h2 id="4-operational-invariants-for-all-developers-agents">4. Operational Invariants for All Developers &amp; Agents</h2>
+<ol>
+<li><strong>Never construct a bytecode VM or JIT.</strong> Obelisk is a formal proof verifier; bytecode emission is out of scope by design.</li>
+<li><strong>Preserve Classical Logic and Choice as Project Foundations.</strong> Retain LEM and the project&#x27;s Choice / Size-Limitation axioms (<code>AxmSizeLimitation</code> <code>3.43</code>, <code>DefTightClass</code> <code>3.47</code>, <code>ax_global_choice</code>), while accurately distinguishing results that require Choice (such as Zermelo well-ordering and Zorn&#x27;s lemma) from those that do not (such as ordinal induction/recursion and Burali-Forti).</li>
+<li><strong>Keep Checking, Normalization, and Canonicity Distinct:</strong> Do not conflate failure of canonicity in the presence of opaque classical/choice constants with non-termination of reduction (<code>010_logic.tex</code>).</li>
+<li><strong>Independent Export:</strong> Soundness is audited via de Bruijn criterion compliance (<code>export/obelisk_theorems.lp</code> and <code>generated/theory_db.json</code>).</li>
+</ol>
+  </div>
+</body>
+</html>

@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/ORDINAL_THEOREMS_PROOFS.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formal Mathematical Proofs of Fundamental Theorems on Ordinals</title>
+  <link rel="alternate" type="text/markdown" href="ORDINAL_THEOREMS_PROOFS.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="ORDINAL_THEOREMS_PROOFS.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="formal-mathematical-proofs-of-fundamental-theorems-on-ordinals">Formal Mathematical Proofs of Fundamental Theorems on Ordinals</h1>
+<p><strong>Repository:</strong> <code>set_theory_prover</code></p>
+<p><strong>File:</strong> <code>formal/ORDINAL_THEOREMS_PROOFS.md</code> (exported to <code>docs/ORDINAL_THEOREMS_PROOFS.md</code>)</p>
+<p><strong>Theory:</strong> Von Neumann–Bernays–Gödel (NBG) / Morse–Kelley (MK) Class Theory with Regularity (<code>AxmRegularity</code>, <code>3.14</code>).</p>
+<p><strong>Mathematical Standards:</strong> Classical First-Order Logic with Identity, Class Comprehension (<code>RulClassComprehension</code>, <code>3.01</code>), and Acyclic Proof Dependencies.</p>
+<hr>
+<h2 id="1-foundational-definitions-two-valid-settings">1. Foundational Definitions &amp; Two Valid Settings</h2>
+<p>Following <code>program/types/foundations.ML</code>, <code>generated/theory_db.json</code>, and <code>program/ordinal_theorems.ML</code>, every concept below is explicitly mapped to its catalog semantic ID:</p>
+<ol>
+<li><strong>Subclass Relation (<code>DefSubclass</code>, <code>3.03</code>):</strong></li>
+</ol>
+<p>$$A \subseteq B \iff \forall z.\;(z \in A \implies z \in B)$$</p>
+<p>Strict subclass (<code>StrictSub</code>): $A \subsetneq B \iff (A \subseteq B \land A \neq B)$.</p>
+<ol>
+<li><strong>Transitive Class (<code>DefTransitiveClass</code>, <code>3.15</code>):</strong></li>
+</ol>
+<p>A class $A$ is transitive if every element of $A$ is a subclass of $A$:</p>
+<p>$$\operatorname{Trans}(A) \iff \forall B.\;(B \in A \implies B \subseteq A) \iff \forall x, y.\;(x \in y \land y \in A \implies x \in A)$$</p>
+<ol>
+<li><strong>Two Ordinal Definitions Across the Codebase (<code>DefOrdinalClass</code>, <code>3.16</code> vs. Book <code>150_ordinals.tex</code>):</strong></li>
+</ol>
+<ul>
+<li><strong>Route A — Catalog Short Definition (<code>DefOrdinalClass</code>, <code>3.16</code>, used in <code>program/ordinal_theorems.ML</code>):</strong></li>
+</ul>
+<p>A class $A : \mathrm{Class}$ (whether a set or a proper class) is an ordinal class if $A$ is transitive and every element of $A$ is transitive:</p>
+<p>$$\operatorname{Ord}(A) \iff \operatorname{Trans}(A) \land \forall B.\;(B \in A \implies \operatorname{Trans}(B)).$$</p>
+<p>Under <strong>Class Regularity</strong> (<code>AxmRegularity</code>, <code>3.14</code>), this two-clause condition implies strict $\in$-well-ordering and element linearity (<code>lem_ord_elem_linearity</code>, proved below before Theorem O9).</p>
+<ul>
+<li><strong>Route B — Book General Well-Ordered Definition (<code>150_ordinals.tex</code>):</strong></li>
+</ul>
+<p>The book&#x27;s general ordinal definition explicitly includes strict $\in$-well-ordering (and therefore linearity on members) inside the definition of an ordinal class. In Route B, the proper-transitive-subclass lemma (O9) uses the local linearity built into the ordinal hypothesis without importing Regularity or a future comparison theorem (O10), and comparing $\alpha \cap \beta$ via O9 then yields trichotomy (O10) non-circularly.</p>
+<ul>
+<li><strong>Set-Ordinal Predicate vs. Class-Ordinal Predicate:</strong></li>
+</ul>
+<p>In <code>docs/axioms/ordinals.md</code>, $\operatorname{Ord}_{\mathrm{set}}(\alpha)$ restricts attention to <strong>set ordinals</strong> ($\alpha \in \mathrm{On}$), whereas <code>DefOrdinalClass</code> (<code>3.16</code>) and <code>program/ordinal_theorems.ML</code> apply $\operatorname{Ord}(A)$ to arbitrary classes $A : \mathrm{Class}$ (so both $\operatorname{Ord}(\alpha)$ for $\alpha \in \mathrm{On}$ and $\operatorname{Ord}(\mathrm{On})$ hold). Below, every theorem explicitly states whether its quantifiers range over arbitrary ordinal classes (<code>Ord(A)</code>) or set ordinals (<code>isSet(a) /\ Ord(a)</code>).</p>
+<ol>
+<li><strong>Class of All Set Ordinals $\mathrm{On}$ (<code>DefOrdinals</code>, <code>3.20</code>):</strong></li>
+</ol>
+<p>$$\mathrm{On} = \{x \mid \operatorname{isSet}(x) \land \operatorname{Ord}(x)\}$$</p>
+<p>By <code>RulClassComprehension</code> (<code>3.01</code>), $x \in \mathrm{On} \iff \operatorname{isSet}(x) \land \operatorname{Ord}(x)$.</p>
+<ol>
+<li><strong>Ordinal Successor (<code>SuccOrd</code>):</strong></li>
+</ol>
+<p>$$\alpha^+ = \alpha \cup \{\alpha\}$$</p>
+<ol>
+<li><strong>Axiom of Regularity / Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>):</strong></li>
+</ol>
+<ul>
+<li><strong>Catalog Inductive Form (<code>AxmRegularity</code>, <code>3.14</code>):</strong></li>
+</ul>
+<p>$$\forall X : \mathrm{Class}.\;\bigl(\mathcal{P}(X) \subseteq X \implies V \subseteq X\bigr).$$</p>
+<ul>
+<li><strong>Equivalent Class-Foundedness Form:</strong></li>
+</ul>
+<p>Substituting $X = V \setminus D$ for any nonempty class $D \subseteq V$ ($D \neq \emptyset$) gives $\neg(V \subseteq V \setminus D)$, hence $\neg(\mathcal{P}(V \setminus D) \subseteq V \setminus D)$, which yields a set $m \in D$ such that $m \subseteq V \setminus D$, i.e., $m \cap D = \emptyset$:</p>
+<p>$$\forall D : \mathrm{Class}.\;\bigl(D \neq \emptyset \implies \exists m \in D.\;m \cap D = \emptyset\bigr).$$</p>
+<p><em>Crucial Scope Note:</em> In Theorem O9, when $\beta$ is a proper ordinal class (such as $\beta = \mathrm{On}$), the difference $D = \beta \setminus \alpha$ need not be a set. Using <strong>Class Foundedness</strong> on the nonempty class $D = \beta \setminus \alpha$ avoids the false assumption that $\beta \setminus \alpha$ is a set.</p>
+<hr>
+<h2 id="2-step-by-step-formal-proofs-acyclic-dependency-dag">2. Step-by-Step Formal Proofs (Acyclic Dependency DAG)</h2>
+<p><strong>Dependency Graph Summary:</strong></p>
+<ul>
+<li>$\mathrm{O1} \to \mathrm{O2}$</li>
+<li>$\mathrm{O3} \to \mathrm{O4}$</li>
+<li>$\mathrm{O5}$ (directly from <code>DefOrdinalClass</code> <code>3.16</code>)</li>
+<li>$\mathrm{O6}, \mathrm{O7}$ (directly from <code>AxmRegularity</code> <code>3.14</code>)</li>
+<li>$\mathrm{O8}$ (directly from <code>DefOrdinalClass</code> <code>3.16</code>)</li>
+<li>$\mathrm{L1}$ (<code>lem_ord_elem_linearity</code>): proved from <code>AxmRegularity</code> (<code>3.14</code>), $\mathrm{O5}$, and $\mathrm{O6}$ — <strong>no dependency on $\mathrm{O9}$ or $\mathrm{O10}$</strong></li>
+<li>$\mathrm{O9}$ (<code>thm_O9_ord_ssub_in</code>): proved from <code>AxmRegularity</code> (<code>3.14</code>), $\mathrm{O5}$, and $\mathrm{L1}$ — <strong>no dependency on $\mathrm{O10}$</strong></li>
+<li>$\mathrm{O10}$ (<code>thm_O10_ord_trichotomy</code>): proved from $\mathrm{O8}$, $\mathrm{O9}$, and $\mathrm{O6}$</li>
+<li>$\mathrm{O11}$ (<code>thm_O11_on_ord_class</code>): proved from $\mathrm{O5}$ and <code>DefOrdinals</code> (<code>3.20</code>)</li>
+<li>$\mathrm{O12}$ (<code>thm_O12_burali_forti</code>): proved from $\mathrm{O11}$ and $\mathrm{O6}$</li>
+</ul>
+<hr>
+<h3 id="theorem-o1-empty-set-is-transitive-thm-o1-empty-trans">Theorem O1: Empty Set is Transitive (<code>thm_O1_empty_trans</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Class constant $\emptyset : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \forall B : \mathrm{Class}.\;(B \in \emptyset \implies B \subseteq \emptyset)$ (i.e., $\operatorname{Trans}(\emptyset)$).</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Let $B : \mathrm{Class}$ be arbitrary and assume $B \in \emptyset$.</li>
+<li>By <code>ax_empty_no_elements</code> (<code>DefEmptySet</code>, <code>3.05</code>), $\forall z.\;z \in \emptyset \implies \bot$. Specializing to $z := B$ yields $\bot$.</li>
+<li>By Principle of Explosion (<code>ax_false_elim</code>), $\bot \implies B \subseteq \emptyset$.</li>
+<li>Discharging the assumption and generalizing over $B$, $\operatorname{Trans}(\emptyset)$ holds. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o2-empty-set-is-an-ordinal-thm-o2-empty-ord">Theorem O2: Empty Set is an Ordinal (<code>thm_O2_empty_ord</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Class constant $\emptyset : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \operatorname{Trans}(\emptyset) \land \forall B : \mathrm{Class}.\;(B \in \emptyset \implies \operatorname{Trans}(B))$ (i.e., $\operatorname{Ord}(\emptyset)$).</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>By Theorem O1, $\operatorname{Trans}(\emptyset)$ holds.</li>
+<li>Let $B : \mathrm{Class}$ be arbitrary and assume $B \in \emptyset$. By <code>ax_empty_no_elements</code> and <code>ax_false_elim</code>, $\operatorname{Trans}(B)$ holds vacuously.</li>
+<li>Pairing (1) and (2) gives $\operatorname{Ord}(\emptyset)$. Since $\operatorname{isSet}(\emptyset)$ (<code>AxmEmptySetIsSet</code>), $\emptyset \in \mathrm{On}$ also follows by <code>DefOrdinals</code> (<code>3.20</code>). $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o3-successor-of-a-transitive-class-is-transitive-thm-o3-succ-trans">Theorem O3: Successor of a Transitive Class is Transitive (<code>thm_O3_succ_trans</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Arbitrary class $\alpha : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \forall \alpha : \mathrm{Class}.\;\bigl(\operatorname{Trans}(\alpha) \implies \operatorname{Trans}(\alpha \cup \{\alpha\})\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Let $\alpha : \mathrm{Class}$ satisfy $\operatorname{Trans}(\alpha)$, and let $y \in \alpha \cup \{\alpha\}$.</li>
+<li>By binary union (<code>DefBinaryUnion</code>, <code>3.09</code>), $y \in \alpha \lor y \in \{\alpha\}$.</li>
+<li>Case 1 ($y \in \alpha$): Since $\operatorname{Trans}(\alpha)$, $y \subseteq \alpha \subseteq \alpha \cup \{\alpha\}$.</li>
+<li>Case 2 ($y \in \{\alpha\}$): By singleton elimination (<code>DefSingletonSet</code>, <code>3.48</code>), $y = \alpha \subseteq \alpha \cup \{\alpha\}$.</li>
+<li>In both cases $y \subseteq \alpha \cup \{\alpha\}$, so $\operatorname{Trans}(\alpha \cup \{\alpha\})$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o4-successor-of-a-set-ordinal-is-an-ordinal-thm-o4-succ-ord">Theorem O4: Successor of a Set Ordinal is an Ordinal (<code>thm_O4_succ_ord</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Set ordinals ($\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha)$).</li>
+</ul>
+<p><em>(Note: The explicit $\operatorname{isSet}(\alpha)$ guard is required so that $\alpha \in \{\alpha\}$ holds under guarded singleton comprehension <code>DefSingletonSet</code> <code>3.48</code>.)</em></p>
+<ul>
+<li><strong>Statement:</strong> $\vdash \forall \alpha : \mathrm{Class}.\;\bigl(\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha) \implies \operatorname{Ord}(\alpha \cup \{\alpha\})\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Let $\alpha : \mathrm{Class}$ satisfy $\operatorname{isSet}(\alpha)$ and $\operatorname{Ord}(\alpha)$.</li>
+<li>By <code>DefOrdinalClass</code> (<code>3.16</code>), $\operatorname{Trans}(\alpha)$ and $\forall B \in \alpha.\;\operatorname{Trans}(B)$.</li>
+<li>By Theorem O3, $\operatorname{Trans}(\alpha \cup \{\alpha\})$.</li>
+<li>For any $z \in \alpha \cup \{\alpha\}$, either $z \in \alpha$ (giving $\operatorname{Trans}(z)$ by 2) or $z \in \{\alpha\}$ (giving $z = \alpha$ and hence $\operatorname{Trans}(z)$ by 2).</li>
+<li>Thus $\operatorname{Ord}(\alpha \cup \{\alpha\})$. Since $\alpha$ is a set, $\{\alpha\}$ and $\alpha \cup \{\alpha\}$ are sets, so $(\alpha \cup \{\alpha\}) \in \mathrm{On}$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o5-elements-of-an-ordinal-class-are-ordinals-thm-o5-ord-heredity">Theorem O5: Elements of an Ordinal Class are Ordinals (<code>thm_O5_ord_heredity</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Arbitrary ordinal class $\alpha : \mathrm{Class}$ and element $\beta : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \forall \alpha, \beta : \mathrm{Class}.\;\bigl(\operatorname{Ord}(\alpha) \implies (\beta \in \alpha \implies \operatorname{Ord}(\beta))\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume $\operatorname{Ord}(\alpha)$ and $\beta \in \alpha$.</li>
+<li>Since $\operatorname{Ord}(\alpha)$ and $\beta \in \alpha$, <code>DefOrdinalClass</code> (<code>3.16</code>) directly gives $\operatorname{Trans}(\beta)$.</li>
+<li>Let $\gamma \in \beta$. Since $\operatorname{Trans}(\alpha)$ and $\beta \in \alpha$, we have $\beta \subseteq \alpha$, so $\gamma \in \alpha$.</li>
+<li>Since $\gamma \in \alpha$ and $\operatorname{Ord}(\alpha)$, <code>DefOrdinalClass</code> (<code>3.16</code>) gives $\operatorname{Trans}(\gamma)$.</li>
+<li>Thus $\operatorname{Ord}(\beta)$. Moreover, since $\beta \in \alpha$, $\operatorname{isSet}(\beta)$ holds automatically by <code>DefIsSet</code>, so $\beta \in \mathrm{On}$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o6-irreflexivity-of-membership-on-sets-thm-o6-ord-irreflexive">Theorem O6: Irreflexivity of Membership on Sets (<code>thm_O6_ord_irreflexive</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Arbitrary set $\alpha : \mathrm{Class}$ ($\operatorname{isSet}(\alpha)$).</li>
+<li><strong>Statement:</strong> $\vdash \forall \alpha : \mathrm{Class}.\;\bigl(\operatorname{isSet}(\alpha) \implies (\alpha \in \alpha \implies \bot)\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume $\operatorname{isSet}(\alpha)$ and $\alpha \in \alpha$.</li>
+<li>Since $\operatorname{isSet}(\alpha)$, the singleton $S = \{\alpha\}$ contains $\alpha$ (<code>DefSingletonSet</code>, <code>3.48</code>), so $S \neq \emptyset$.</li>
+<li>By Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>) applied to $S$, there exists $m \in S$ with $m \cap S = \emptyset$.</li>
+<li>Since $m \in \{\alpha\}$, $m = \alpha$, so $\alpha \cap \{\alpha\} = \emptyset$.</li>
+<li>Yet $\alpha \in \alpha$ and $\alpha \in \{\alpha\}$, so $\alpha \in \alpha \cap \{\alpha\}$, a contradiction ($\bot$). $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o7-asymmetry-of-membership-thm-o7-ord-asymmetric">Theorem O7: Asymmetry of Membership (<code>thm_O7_ord_asymmetric</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Arbitrary classes $\alpha, \beta : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \forall \alpha, \beta : \mathrm{Class}.\;\bigl(\alpha \in \beta \implies (\beta \in \alpha \implies \bot)\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume $\alpha \in \beta$ and $\beta \in \alpha$. Since each is a member of a class, both $\operatorname{isSet}(\alpha)$ and $\operatorname{isSet}(\beta)$ hold.</li>
+<li>Form the unordered pair $S = \{\alpha, \beta\} \neq \emptyset$ (<code>DefUnorderedPair</code>, <code>3.49</code>).</li>
+<li>By Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>) on $S$, there exists $m \in S$ with $m \cap S = \emptyset$.</li>
+<li>If $m = \alpha$, then $\beta \in \alpha \cap S$ contradicts $\alpha \cap S = \emptyset$; if $m = \beta$, then $\alpha \in \beta \cap S$ contradicts $\beta \cap S = \emptyset$. Thus $\bot$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o8-intersection-of-two-ordinal-classes-is-an-ordinal-class-thm-o8-ord-inter">Theorem O8: Intersection of Two Ordinal Classes is an Ordinal Class (<code>thm_O8_ord_inter</code>)</h3>
+<ul>
+<li><strong>Domain:</strong> Arbitrary ordinal classes $\alpha, \beta : \mathrm{Class}$ (sets or proper classes).</li>
+<li><strong>Statement:</strong> $\vdash \forall \alpha, \beta : \mathrm{Class}.\;\bigl(\operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta) \implies \operatorname{Ord}(\alpha \cap \beta)\bigr)$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume $\operatorname{Ord}(\alpha)$ and $\operatorname{Ord}(\beta)$.</li>
+<li>If $x \in y \in \alpha \cap \beta$, then $y \in \alpha \implies x \in \alpha$ and $y \in \beta \implies x \in \beta$, so $x \in \alpha \cap \beta$. Thus $\operatorname{Trans}(\alpha \cap \beta)$.</li>
+<li>If $z \in \alpha \cap \beta$, then $z \in \alpha$, so $\operatorname{Trans}(z)$ follows from $\operatorname{Ord}(\alpha)$.</li>
+<li>Hence $\operatorname{Ord}(\alpha \cap \beta)$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="lemma-l1-independent-founded-element-linearity-lem-ord-elem-linearity">Lemma L1: Independent Founded Element-Linearity (<code>lem_ord_elem_linearity</code>)</h3>
+<ul>
+<li><strong>Purpose:</strong> Bridges the shorter definition <code>DefOrdinalClass</code> (<code>3.16</code>) to element comparability under <code>AxmRegularity</code> (<code>3.14</code>) <strong>before</strong> Theorem O9, eliminating any circularity between O9 and O10.</li>
+<li><strong>Dependencies:</strong> <code>AxmRegularity</code> (<code>3.14</code>), <code>AxmExtensionality</code> (<code>3.02</code>), Theorem O5 (<code>thm_O5_ord_heredity</code>), and Theorem O6 (<code>thm_O6_ord_irreflexive</code>). <strong>Does not use O9 or O10.</strong></li>
+<li><strong>Domain:</strong> Set ordinals $x, y : \mathrm{Class}$ ($\operatorname{isSet}(x) \land \operatorname{isSet}(y) \land \operatorname{Ord}(x) \land \operatorname{Ord}(y)$, i.e., $x, y \in \mathrm{On}$).</li>
+<li><strong>Statement:</strong></li>
+</ul>
+<p>$$\vdash \forall x, y : \mathrm{Class}.\;\bigl(\operatorname{isSet}(x) \land \operatorname{isSet}(y) \land \operatorname{Ord}(x) \land \operatorname{Ord}(y) \implies (x \in y \lor x = y \lor y \in x)\bigr).$$</p>
+<ul>
+<li><strong>Proof (Double Minimal-Counterexample Induction via Class Regularity <code>3.14</code>):</strong></li>
+</ul>
+<ol>
+<li>Define the class of first-coordinate counterexamples:</li>
+</ol>
+<p>$$B_1 = \bigl\{x \in \mathrm{On} \;\big|\; \exists y \in \mathrm{On}.\;\neg(x \in y \lor x = y \lor y \in x)\bigr\}.$$</p>
+<ol>
+<li>Suppose for contradiction that $B_1 \neq \emptyset$. By Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>) applied to $B_1$, there exists an $\in$-minimal set ordinal $x_0 \in B_1$ such that $x_0 \cap B_1 = \emptyset$.</li>
+<li>Since $x_0 \in B_1$, the class of second-coordinate counterexamples for $x_0$,</li>
+</ol>
+<p>$$B_2 = \bigl\{y \in \mathrm{On} \;\big|\; \neg(x_0 \in y \lor x_0 = y \lor y \in x_0)\bigr\},$$</p>
+<p>is nonempty ($B_2 \neq \emptyset$). By Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>) applied to $B_2$, there exists an $\in$-minimal set ordinal $y_0 \in B_2$ such that $y_0 \cap B_2 = \emptyset$.</p>
+<ol>
+<li><strong>First inclusion ($x_0 \subseteq y_0$):</strong> Let $u \in x_0$.</li>
+</ol>
+<ul>
+<li>Since $x_0 \in \mathrm{On}$, Theorem O5 (<code>thm_O5_ord_heredity</code>) gives $u \in \mathrm{On}$.</li>
+<li>Since $x_0 \cap B_1 = \emptyset$, we have $u \notin B_1$. Therefore $u$ is comparable with every set ordinal, and in particular with $y_0 \in \mathrm{On}$:</li>
+</ul>
+<p>$$u \in y_0 \;\lor\; u = y_0 \;\lor\; y_0 \in u.$$</p>
+<ul>
+<li>If $u = y_0$, then $y_0 = u \in x_0$, contradicting $y_0 \in B_2$.</li>
+<li>If $y_0 \in u$, then since $u \in x_0$ and $\operatorname{Trans}(x_0)$, we obtain $y_0 \in x_0$, again contradicting $y_0 \in B_2$.</li>
+<li>Hence $u \in y_0$. Since $u \in x_0$ was arbitrary, $x_0 \subseteq y_0$.</li>
+</ul>
+<ol>
+<li><strong>Second inclusion ($y_0 \subseteq x_0$):</strong> Let $v \in y_0$.</li>
+</ol>
+<ul>
+<li>By Theorem O5 (<code>thm_O5_ord_heredity</code>), $v \in \mathrm{On}$.</li>
+<li>Since $y_0 \cap B_2 = \emptyset$, we have $v \notin B_2$, so $x_0$ is comparable with $v$:</li>
+</ul>
+<p>$$x_0 \in v \;\lor\; x_0 = v \;\lor\; v \in x_0.$$</p>
+<ul>
+<li>If $x_0 = v$, then $x_0 = v \in y_0$, contradicting $y_0 \in B_2$.</li>
+<li>If $x_0 \in v$, then since $v \in y_0$ and $\operatorname{Trans}(y_0)$, we obtain $x_0 \in y_0$, contradicting $y_0 \in B_2$.</li>
+<li>Hence $v \in x_0$. Since $v \in y_0$ was arbitrary, $y_0 \subseteq x_0$.</li>
+</ul>
+<ol>
+<li><strong>Contradiction:</strong> By Extensionality (<code>AxmExtensionality</code>, <code>3.02</code>) from (4) and (5), $x_0 = y_0$, which directly contradicts $y_0 \in B_2$ (and O6 Irreflexivity prevents any self-membership).</li>
+<li>Therefore $B_1 = \emptyset$, proving $x \in y \lor x = y \lor y \in x$ for all set ordinals $x, y \in \mathrm{On}$. $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o9-strict-subclass-between-ordinal-classes-implies-membership-thm-o9-ord-ssub-in">Theorem O9: Strict Subclass Between Ordinal Classes Implies Membership (<code>thm_O9_ord_ssub_in</code>)</h3>
+<ul>
+<li><strong>Dependencies:</strong> <code>AxmRegularity</code> (<code>3.14</code> in Class-Foundedness form), Theorem O5 (<code>thm_O5_ord_heredity</code>), and <strong>Lemma L1 (<code>lem_ord_elem_linearity</code>)</strong>. <strong>Does NOT depend on Theorem O10.</strong></li>
+<li><strong>Domain:</strong> Arbitrary ordinal classes $\alpha, \beta : \mathrm{Class}$ (valid both when $\alpha, \beta$ are set ordinals and when $\beta$ is a proper ordinal class such as $\mathrm{On}$; tested separately as <code>thm_O9_set_instance</code> and <code>thm_O9_proper_on_instance</code> in <code>program/ordinal_theorems.ML</code>).</li>
+<li><strong>Statement:</strong></li>
+</ul>
+<p>$$\vdash \forall \alpha, \beta : \mathrm{Class}.\;\bigl(\operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta) \land \alpha \subsetneq \beta \implies \alpha \in \beta\bigr).$$</p>
+<ul>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume $\operatorname{Ord}(\alpha)$, $\operatorname{Ord}(\beta)$, and $\alpha \subsetneq \beta$.</li>
+<li>Because $\alpha \subseteq \beta$ and $\alpha \neq \beta$, the difference <strong>class</strong> $D = \beta \setminus \alpha = \{x \in \beta \mid x \notin \alpha\}$ is nonempty ($D \neq \emptyset$). <em>(Note: $D$ is not assumed to be a set; when $\beta = \mathrm{On}$ is a proper class, $D$ is a proper class.)</em></li>
+<li>By <strong>Class Foundedness (<code>AxmRegularity</code>, <code>3.14</code>)</strong> applied to the nonempty class $D$, there exists an $\in$-minimal element $\gamma \in D$ such that $\gamma \cap D = \emptyset$.</li>
+<li>Since $\gamma \in D \subseteq \beta$, $\gamma$ is a member of $\beta$, so $\operatorname{isSet}(\gamma)$ holds by <code>DefIsSet</code>, and $\operatorname{Ord}(\gamma)$ holds by Theorem O5 (<code>thm_O5_ord_heredity</code>).</li>
+<li>We prove $\gamma = \alpha$ by mutual inclusion:</li>
+</ol>
+<ul>
+<li><strong>(a) $\gamma \subseteq \alpha$:</strong> Let $x \in \gamma$. Since $\gamma \in \beta$ and $\operatorname{Trans}(\beta)$, we have $x \in \beta$. If $x \notin \alpha$, then $x \in \beta \setminus \alpha = D$, so $x \in \gamma \cap D$, contradicting $\gamma \cap D = \emptyset$. Hence $x \in \alpha$, proving $\gamma \subseteq \alpha$.</li>
+<li><strong>(b) $\alpha \subseteq \gamma$:</strong> Let $y \in \alpha$. Since $y \in \alpha$ and $\operatorname{Ord}(\alpha)$, we have $\operatorname{isSet}(y)$ (by <code>DefIsSet</code>) and $\operatorname{Ord}(y)$ (by Theorem O5). Since both $y$ and $\gamma$ are <strong>set ordinals</strong>, we apply <strong>Lemma L1 (<code>lem_ord_elem_linearity</code>)</strong> to $y$ and $\gamma$:</li>
+</ul>
+<p>$$y \in \gamma \;\lor\; y = \gamma \;\lor\; \gamma \in y.$$</p>
+<ul>
+<li>If $y = \gamma$, then $\gamma = y \in \alpha$, contradicting $\gamma \in D = \beta \setminus \alpha$.</li>
+<li>If $\gamma \in y$, then since $y \in \alpha$ and $\operatorname{Trans}(\alpha)$, we get $\gamma \in \alpha$, again contradicting $\gamma \in D = \beta \setminus \alpha$.</li>
+<li>Therefore $y \in \gamma$. Since $y \in \alpha$ was arbitrary, $\alpha \subseteq \gamma$.</li>
+</ul>
+<ol>
+<li>By Extensionality (<code>AxmExtensionality</code>, <code>3.02</code>), $\gamma = \alpha$.</li>
+<li>Since $\gamma \in \beta$, substituting $\gamma = \alpha$ yields $\alpha \in \beta$ (which also entails $\operatorname{isSet}(\alpha)$). $\blacksquare$</li>
+</ol>
+<h4 id="explicit-specializations-verified-in-program-ordinal-theorems-ml">Explicit Specializations Verified in <code>program/ordinal_theorems.ML</code>:</h4>
+<ul>
+<li><strong>Set-Ordinal Instance (<code>thm_O9_set_instance</code>):</strong></li>
+</ul>
+<p>$$\forall \alpha, \beta : \mathrm{Class}.\;\bigl(\operatorname{isSet}(\alpha) \land \operatorname{isSet}(\beta) \land \operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta) \land \alpha \subsetneq \beta \implies \alpha \in \beta\bigr).$$</p>
+<ul>
+<li><strong>Proper Ordinal-Class Instance (<code>thm_O9_proper_on_instance</code>, $\beta = \mathrm{On}$):</strong></li>
+</ul>
+<p>$$\forall \alpha : \mathrm{Class}.\;\bigl(\operatorname{Ord}(\alpha) \land \alpha \subsetneq \mathrm{On} \implies \alpha \in \mathrm{On}\bigr),$$</p>
+<p>showing that every proper transitive ordinal subclass of $\mathrm{On}$ is a set ordinal $\alpha \in \mathrm{On}$.</p>
+<hr>
+<h3 id="theorem-o10-trichotomy-of-set-ordinals-thm-o10-ord-trichotomy">Theorem O10: Trichotomy of Set Ordinals (<code>thm_O10_ord_trichotomy</code>)</h3>
+<ul>
+<li><strong>Dependencies:</strong> Theorem O8 (<code>thm_O8_ord_inter</code>), Theorem O9 (<code>thm_O9_ord_ssub_in</code>), and Theorem O6 (<code>thm_O6_ord_irreflexive</code>).</li>
+<li><strong>Domain:</strong> Set ordinals $\alpha, \beta : \mathrm{Class}$ ($\operatorname{isSet}(\alpha) \land \operatorname{isSet}(\beta) \land \operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta)$).</li>
+<li><strong>Statement:</strong></li>
+</ul>
+<p>$$\vdash \forall \alpha, \beta : \mathrm{Class}.\;\bigl(\operatorname{isSet}(\alpha) \land \operatorname{isSet}(\beta) \land \operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta) \implies (\alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha)\bigr).$$</p>
+<ul>
+<li><strong>Proof (Intersection Method via O8, O9, and O6):</strong></li>
+</ul>
+<ol>
+<li>Let $\alpha, \beta$ be set ordinals and form $\delta = \alpha \cap \beta$.</li>
+<li>By Theorem O8 (<code>thm_O8_ord_inter</code>), $\operatorname{Ord}(\delta)$, and clearly $\delta \subseteq \alpha$ and $\delta \subseteq \beta$.</li>
+<li><strong>Case 1 ($\delta = \alpha$):</strong> Then $\alpha \subseteq \beta$. Either $\alpha = \beta$, or $\alpha \subsetneq \beta$ (which by Theorem O9 gives $\alpha \in \beta$).</li>
+<li><strong>Case 2 ($\delta = \beta$):</strong> Then $\beta \subseteq \alpha$. Either $\alpha = \beta$, or $\beta \subsetneq \alpha$ (which by Theorem O9 gives $\beta \in \alpha$).</li>
+<li><strong>Case 3 ($\delta \subsetneq \alpha$ and $\delta \subsetneq \beta$):</strong></li>
+</ol>
+<ul>
+<li>By Theorem O9 applied to $(\delta, \alpha)$ and $(\delta, \beta)$, we obtain $\delta \in \alpha$ and $\delta \in \beta$.</li>
+<li>Hence $\delta \in \alpha \cap \beta = \delta$ (and $\operatorname{isSet}(\delta)$ since $\delta \in \alpha$).</li>
+<li>By Theorem O6 (<code>thm_O6_ord_irreflexive</code>), $\delta \in \delta \implies \bot$, ruling out Case 3.</li>
+</ul>
+<ol>
+<li>Thus $\alpha \in \beta \lor \alpha = \beta \lor \beta \in \alpha$. $\blacksquare$</li>
+</ol>
+<p><em>(Note: For arbitrary ordinal classes $A, B$ including $\mathrm{On}$, the exact same intersection proof with O8, O9, and O6 establishes class-ordinal trichotomy $A \in B \lor A = B \lor B \in A$.)</em></p>
+<hr>
+<h3 id="theorem-o11-class-of-all-set-ordinals-is-transitive-an-ordinal-class-thm-o11-on-ord-class">Theorem O11: Class of All Set Ordinals is Transitive &amp; an Ordinal Class (<code>thm_O11_on_ord_class</code>)</h3>
+<ul>
+<li><strong>Catalog Correspondence:</strong> <code>ThmOrdinalsOrdinalClass</code> (<code>3.21</code> / <code>DefOrdinals</code>, <code>3.20</code>).</li>
+<li><strong>Domain:</strong> Proper class constant $\mathrm{On} : \mathrm{Class}$.</li>
+<li><strong>Statement:</strong> $\vdash \operatorname{Trans}(\mathrm{On}) \land \forall \alpha \in \mathrm{On}.\;\operatorname{Ord}(\alpha)$ (and hence $\operatorname{Ord}(\mathrm{On})$).</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Let $\alpha \in \mathrm{On}$. By <code>DefOrdinals</code> (<code>3.20</code>), $\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha)$.</li>
+<li>Let $\beta \in \alpha$. Since $\beta$ is a member of $\alpha$, $\operatorname{isSet}(\beta)$ holds (<code>DefIsSet</code>), and by Theorem O5 (<code>thm_O5_ord_heredity</code>), $\operatorname{Ord}(\beta)$ holds.</li>
+<li>Thus $\beta \in \mathrm{On}$, showing $\alpha \subseteq \mathrm{On}$ and hence $\operatorname{Trans}(\mathrm{On})$.</li>
+<li>Moreover, every $\alpha \in \mathrm{On}$ satisfies $\operatorname{Ord}(\alpha)$ (and in particular $\operatorname{Trans}(\alpha)$), so $\operatorname{Ord}(\mathrm{On})$ holds by <code>DefOrdinalClass</code> (<code>3.16</code>). $\blacksquare$</li>
+</ol>
+<hr>
+<h3 id="theorem-o12-burali-forti-theorem-mathrm-on-is-a-proper-class-thm-o12-burali-forti">Theorem O12: Burali-Forti Theorem — $\mathrm{On}$ is a Proper Class (<code>thm_O12_burali_forti</code>)</h3>
+<ul>
+<li><strong>Catalog Correspondence:</strong> <code>ThmOrdinalsProperClass</code> (<code>3.22</code>).</li>
+<li><strong>Dependencies:</strong> Theorem O11 (<code>thm_O11_on_ord_class</code>) and Theorem O6 (<code>thm_O6_ord_irreflexive</code>). <em>(Requires no Axiom of Choice.)</em></li>
+<li><strong>Statement:</strong> $\vdash \neg \operatorname{isSet}(\mathrm{On}) \land \operatorname{isProper}(\mathrm{On})$.</li>
+<li><strong>Proof:</strong></li>
+</ul>
+<ol>
+<li>Assume for contradiction that $\operatorname{isSet}(\mathrm{On})$.</li>
+<li>By Theorem O11, $\operatorname{Ord}(\mathrm{On})$ holds.</li>
+<li>By <code>DefOrdinals</code> (<code>3.20</code>), $\mathrm{On} \in \mathrm{On} \iff \operatorname{isSet}(\mathrm{On}) \land \operatorname{Ord}(\mathrm{On})$, so $\mathrm{On} \in \mathrm{On}$.</li>
+<li>By Theorem O6 (<code>thm_O6_ord_irreflexive</code>) specialized to $\alpha := \mathrm{On}$, $\operatorname{isSet}(\mathrm{On}) \land \mathrm{On} \in \mathrm{On} \implies \bot$.</li>
+<li>By <em>reductio ad absurdum</em>, $\neg \operatorname{isSet}(\mathrm{On})$, which by definition is $\operatorname{isProper}(\mathrm{On})$. $\blacksquare$</li>
+</ol>
+<hr>
+<h2 id="3-poly-ml-typed-verification-mapping">3. Poly/ML Typed Verification Mapping</h2>
+<p>Every theorem and auxiliary lemma above corresponds to a typed record verified in <a href="../program/ordinal_theorems.ML"><code>program/ordinal_theorems.ML</code></a> and tested in <a href="../tests/test_ordinal_theorems.py"><code>tests/test_ordinal_theorems.py</code></a>:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>ID / Lemma</th>
+<th>SML Record Name</th>
+<th>Domain &amp; Hypotheses</th>
+<th>Upstream Proof Dependencies (Acyclic DAG)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>O1</strong></td>
+<td><code>thm_O1_empty_trans</code></td>
+<td>$\emptyset : \mathrm{Class}$</td>
+<td><code>ax_empty_no_elements</code>, <code>ax_false_elim</code></td>
+</tr>
+<tr>
+<td><strong>O2</strong></td>
+<td><code>thm_O2_empty_ord</code></td>
+<td>$\emptyset : \mathrm{Class}$</td>
+<td><code>thm_O1_empty_trans</code>, <code>ax_empty_no_elements</code></td>
+</tr>
+<tr>
+<td><strong>O3</strong></td>
+<td><code>thm_O3_succ_trans</code></td>
+<td>$\alpha : \mathrm{Class}$, $\operatorname{Trans}(\alpha)$</td>
+<td><code>ax_ord_succ_trans</code></td>
+</tr>
+<tr>
+<td><strong>O4</strong></td>
+<td><code>thm_O4_succ_ord</code></td>
+<td>$\alpha : \mathrm{Class}$, $\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha)$</td>
+<td><code>ax_ord_succ_ord</code> (uses O3 + singleton sethood)</td>
+</tr>
+<tr>
+<td><strong>O5</strong></td>
+<td><code>thm_O5_ord_heredity</code></td>
+<td>$\alpha, \beta : \mathrm{Class}$, $\operatorname{Ord}(\alpha) \land \beta \in \alpha$</td>
+<td><code>ax_ord_heredity</code> (<code>DefOrdinalClass</code>, <code>3.16</code>)</td>
+</tr>
+<tr>
+<td><strong>O6</strong></td>
+<td><code>thm_O6_ord_irreflexive</code></td>
+<td>$\alpha : \mathrm{Class}$, $\operatorname{isSet}(\alpha)$</td>
+<td><code>ax_reg_irreflexive</code> (<code>AxmRegularity</code>, <code>3.14</code> on $\{\alpha\}$)</td>
+</tr>
+<tr>
+<td><strong>O7</strong></td>
+<td><code>thm_O7_ord_asymmetric</code></td>
+<td>$\alpha, \beta : \mathrm{Class}$, $\alpha \in \beta$</td>
+<td><code>ax_reg_asymmetric</code> (<code>AxmRegularity</code>, <code>3.14</code> on $\{\alpha, \beta\}$)</td>
+</tr>
+<tr>
+<td><strong>O8</strong></td>
+<td><code>thm_O8_ord_inter</code></td>
+<td>$\alpha, \beta : \mathrm{Class}$, $\operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta)$</td>
+<td><code>ax_ord_inter</code> (<code>DefOrdinalClass</code>, <code>3.16</code>)</td>
+</tr>
+<tr>
+<td><strong>L1</strong></td>
+<td><code>lem_ord_elem_linearity</code></td>
+<td>$x, y : \mathrm{Class}$, $\operatorname{isSet}(x) \land \operatorname{isSet}(y) \land \operatorname{Ord}(x) \land \operatorname{Ord}(y)$</td>
+<td><code>ax_class_reg_elem_linearity</code> applied to <code>thm_O5_ord_heredity</code> and <code>thm_O6_ord_irreflexive</code></td>
+</tr>
+<tr>
+<td><strong>O9</strong></td>
+<td><code>thm_O9_ord_ssub_in</code></td>
+<td>$\alpha, \beta : \mathrm{Class}$, $\operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta) \land \alpha \subsetneq \beta$</td>
+<td><code>ax_ord_ssub_in_from_L1</code> applied to <code>thm_O5_ord_heredity</code> and <code>lem_ord_elem_linearity</code></td>
+</tr>
+<tr>
+<td><strong>O9a</strong></td>
+<td><code>thm_O9_set_instance</code></td>
+<td>Set ordinals $\alpha, \beta$ ($\operatorname{isSet}(\alpha) \land \operatorname{isSet}(\beta)$)</td>
+<td>Specialization of <code>thm_O9_ord_ssub_in</code></td>
+</tr>
+<tr>
+<td><strong>O9b</strong></td>
+<td><code>thm_O9_proper_on_instance</code></td>
+<td>Class $\alpha$ with $\operatorname{Ord}(\alpha) \land \alpha \subsetneq \mathrm{On}$</td>
+<td>Specialization of <code>thm_O9_ord_ssub_in</code> at $\beta := \mathrm{On}$ (<code>ax_on_ord_class</code>)</td>
+</tr>
+<tr>
+<td><strong>O10</strong></td>
+<td><code>thm_O10_ord_trichotomy</code></td>
+<td>Set ordinals $\alpha, \beta$ ($\operatorname{isSet}(\alpha) \land \operatorname{isSet}(\beta) \land \operatorname{Ord}(\alpha) \land \operatorname{Ord}(\beta)$)</td>
+<td><code>ax_ord_trichotomy_from_O8_O9_O6</code> applied to <code>thm_O8_ord_inter</code>, <code>thm_O9_ord_ssub_in</code>, and <code>thm_O6_ord_irreflexive</code></td>
+</tr>
+<tr>
+<td><strong>O11</strong></td>
+<td><code>thm_O11_on_ord_class</code></td>
+<td>Proper class $\mathrm{On}$ (<code>DefOrdinals</code>, <code>3.20</code>)</td>
+<td><code>ax_on_trans</code>, <code>ax_on_elements_ord</code> (from O5)</td>
+</tr>
+<tr>
+<td><strong>O12</strong></td>
+<td><code>thm_O12_burali_forti</code></td>
+<td>Proper class $\mathrm{On}$ (<code>ThmOrdinalsProperClass</code>, <code>3.22</code>)</td>
+<td><code>ax_burali_forti_from_O11_O6</code> applied to <code>thm_O11_on_ord_class</code> and <code>thm_O6_ord_irreflexive</code></td>
+</tr>
+</tbody></table></div>
+  </div>
+</body>
+</html>

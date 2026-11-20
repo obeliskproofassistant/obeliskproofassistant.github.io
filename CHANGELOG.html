@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: CHANGELOG.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Changelog — Obelisk Proof Assistant &amp; Entity Database</title>
+  <link rel="alternate" type="text/markdown" href="CHANGELOG.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="./">[Home]</a> &middot; <a href="./about.html">[About]</a></div>
+      <div><a href="CHANGELOG.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="changelog-obelisk-proof-assistant-entity-database">Changelog — Obelisk Proof Assistant &amp; Entity Database</h1>
+<p>All notable changes to the formal kernel, entity database, proof compilers, and presentation catalogs of the Obelisk Proof Assistant (<code>MKTD1</code> and <code>MKTD2</code>) are documented in this file.</p>
+<hr>
+<h2 id="1-3-0-2026-11-08">[1.3.0] — 2026-11-08</h2>
+<h3 id="changed-refined">Changed &amp; Refined</h3>
+<ul>
+<li><strong>T1: Tarski/Löb Risk Resolution in Soundness Axioms:</strong></li>
+<li>Resolved Tarski undefinability and Gödel-Löb self-referential reflection risk by restricting soundness exclusively to the non-r.e. Henkin completion $\mathcal{F}$ (<code>AxmSoundnessOfFullTheory</code> 3.72: $(\mathcal{F}, [] \vdash \varphi) \rightarrow \mathrm{eval}(\varphi)$).</li>
+<li>Omitted the base theory $\mathcal{T}$ soundness axiom from the active theory sequence to prevent inconsistent reflection ($(\mathcal{T} \vdash \varphi) \rightarrow \varphi$) in an r.e. theory.</li>
+<li>Documented the stratification: evaluation operator $\mathrm{eval}$ lives in the $+1$ metalogic on the base formula sublanguage $\mathrm{Fm}_0$ without self-referential truth predicate internalization, escaping Tarski&#x27;s undefinability obstruction.</li>
+<li><strong>T2: Decoupled Semantic Completeness &amp; Negation-Completeness:</strong></li>
+<li>Split entry 3.74 into two distinct axiomatic entries:</li>
+<li><code>AxmSemanticCompletenessOfFullTheory</code> (3.73): $\forall \varphi:\mathrm{Fm}.\; \mathrm{eval}(\varphi) \rightarrow (\mathcal{F}, [] \vdash \varphi)$, establishing together with Soundness that $(\mathcal{F}, [] \vdash \varphi) \leftrightarrow \mathrm{eval}(\varphi)$ (so $\mathcal{F}$ coincides with $\mathrm{Th}(\mathcal{M})$).</li>
+<li><code>AxmNegationCompletenessOfFullTheory</code> (3.74): $\forall \varphi:\mathrm{Fm}.\; \neg(\mathcal{F}, [] \vdash \neg\varphi) \rightarrow (\mathcal{F}, [] \vdash \varphi)$, formalizing syntactic negation-completeness $(\mathcal{F} \vdash \varphi) \lor (\mathcal{F} \vdash \neg\varphi)$.</li>
+<li>Corrected entry classifications from <code>Definition</code> (<code>YDef</code>) to <code>Axiom</code> (<code>YAxm</code>), and verification tags to <code>Postulated (Kernel Axiom)</code>.</li>
+<li>Documented the semantic link: in the bivalent background model $\mathcal{M}$ ($\mathrm{eval}(\varphi) \lor \mathrm{eval}(\neg\varphi)$), negation-completeness is logically entailed by semantic completeness and soundness.</li>
+</ul>
+<hr>
+<h2 id="1-2-0-2026-11-08">[1.2.0] — 2026-11-08</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><strong>Build Provenance in Every Footer (W6):</strong> Every generated page footer now renders the build commit hash (<code>918ea9f</code>), timestamp (<code>2026-11-08 20:10:00 UTC</code>), generator script provenance, and links to source lines and changelog.</li>
+<li><strong>Source Line Linking (W6):</strong> Every kernel entry in <code>manual.html</code>, <code>output.html</code>, <code>variant1.html</code>, and <code>proofs/*.html</code> links directly to its source definition line in <code>set_theory_prover/program/types/entries.ML</code>.</li>
+<li><strong>Worked Proof-Term Examples (T7):</strong></li>
+<li>Expanded Step-by-Step Walkthrough with exact typing rules for each constructor (<code>ELam</code>, <code>EFn</code>, <code>ECompr</code>, <code>EFst</code>, <code>EApp</code>, <code>ESnd</code>).</li>
+<li>Added Worked Example 2: Intersection Left Inclusion <code>thm_inter_subset_left : ∀(A:Class) ∀(B:Class) ∀(x:Class) ((x ∈ (A ∩ B)) → x ∈ A)</code> without falsum ($\bot$).</li>
+<li><strong>Disambiguation Matrix &amp; Context Definitions (T6):</strong></li>
+<li>Added rigorous definitions of Signature Context $\Delta$ and Proof Hypothesis Context $\Gamma$ at first use.</li>
+<li>Added notation disambiguation matrix distinguishing <code>⟦ ⟧</code> (antiquotation vs model evaluation), <code>[ ]</code> (relational image vs Dunaev class-lists vs premise lists), and <code>Set(X)</code> vs <code>isSet(X)</code>.</li>
+<li>Added Glossary entries for <strong>Dunaev Pair</strong> (<code>(A, B)_D</code>) and <strong>Dunaev Class-List</strong> in <code>docs/glossary.md</code> and <code>NOTATION.txt</code>.</li>
+<li><strong>Decoupled Manual Components:</strong></li>
+<li><code>generated/manual_top.html</code>: Standalone header, formula toggles, and TOC component.</li>
+<li><code>generated/manual_the_rest.html</code>: Standalone body sections 1–5 without duplicate header.</li>
+<li><code>#DefIsProperClass</code> direct URL targeting inside embedded portal.</li>
+</ul>
+<h3 id="fixed">Fixed</h3>
+<ul>
+<li><strong>LaTeX Math Mode <code>#</code> Macro Parameter Error:</strong> Removed TeX <code>\color{#...}</code> commands from math mode; styled hyperlinked tokens natively via CSS <code>.formula-latex a, mjx-container a { color: #60a5fa !important; }</code>.</li>
+<li><strong>Portal Embedding Recursion:</strong> Replaced recursive &quot;Back to Obelisk Portal&quot; nesting in embedded iframes with smart parent-aware toolbar navigation.</li>
+</ul>
+<hr>
+<h2 id="1-1-0-2026-10-24">[1.1.0] — 2026-10-24</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li><strong>Dunaev Tagged Ordered Pairs (Section 3, 3.76–3.78):</strong></li>
+<li><code>DefDunaevOrderedPair</code> (3.76): Ordered pair for arbitrary classes $(A, B)_D = (\operatorname{mark}(A, 1) \cup \operatorname{mark}(B, 2))$.</li>
+<li><code>ThmDunaevFirstProjection</code> (3.77): First projection $\pi_1((A, B)_D) = A$.</li>
+<li><code>ThmDunaevSecondProjection</code> (3.78): Second projection $\pi_2((A, B)_D) = B$.</li>
+<li><strong>Dunaev Class-Lists (Section 3, 3.39):</strong></li>
+<li><code>DefClassLists</code> (3.39): Inductive sequence representation for classes using iterated tagged pairs.</li>
+<li><strong>Variant 2 (MKTD2 Formulas-as-Types):</strong></li>
+<li>100 mechanically type-checked constructive lambda-term records: 77 Derived Theorems + 16 Conservative Definitions + 7 Irreducible MK/NBG Axioms in <code>generated/nbg_library.html</code> and <code>generated/variant2.html</code>.</li>
+</ul>
+<h3 id="renumbered">Renumbered</h3>
+<ul>
+<li>Renumbered entries 3.76–3.78 to append Dunaev tagged ordered pairs cleanly after Tarski-Grothendieck Universes (3.66) and Metatheoretic Reflection (3.72–3.75).</li>
+<li>Shifted Metalogical Laws (Section 4) to 4.01–4.06 and Incompleteness Statements (Section 5) to 5.01–5.02.</li>
+</ul>
+<hr>
+<h2 id="1-0-0-2026-09-15">[1.0.0] — 2026-09-15</h2>
+<h3 id="initial-release">Initial Release</h3>
+<ul>
+<li><strong>Section 1: Propositional Logic (1.01–1.14):</strong> Axioms A01–A13 and Modus Ponens.</li>
+<li><strong>Section 2: Predicate Logic (2.01–2.06):</strong> Specialisation, Distribution, Existential/Universal Abstraction, and Generalisation.</li>
+<li><strong>Section 3: Set/Class Foundations (3.01–3.75):</strong> Extensionality, Impredicative Class Comprehension, Sethood, Subclass, Heredity, Exponents, Regularity, Limitation of Size, Ordinals, Cardinals, and Tarski Universes.</li>
+<li><strong>Section 4: Metalogical Reflection (4.01–4.06):</strong> Instantiation, Generalisation, Conecessitation, Uniqueness Binders, Meta-Class Comprehension.</li>
+<li><strong>Section 5: Incompleteness (5.01–5.02):</strong> Löb&#x27;s Theorem (<code>ThmLoeb</code>) and Gödel&#x27;s Second Incompleteness Theorem (<code>ThmSecondIncompleteness</code>).</li>
+</ul>
+  </div>
+</body>
+</html>

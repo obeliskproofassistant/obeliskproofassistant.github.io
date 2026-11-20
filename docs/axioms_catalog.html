@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/axioms_catalog.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant — Complete Morse–Kelley Axioms Catalog</title>
+  <link rel="alternate" type="text/markdown" href="axioms_catalog.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="axioms_catalog.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="obelisk-proof-assistant-complete-morse-kelley-axioms-catalog">Obelisk Proof Assistant — Complete Morse–Kelley Axioms Catalog</h1>
+<p>Based on the Obelisk Demonstration (Higher-Order Logic Variant) and audited in Lean 4.</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Item</th>
+<th>Name</th>
+<th>Formal Statement</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>3.01</strong></td>
+<td>Impredicative Comprehension</td>
+<td>$\exists C. \forall x. (x \in C \iff \mathrm{isSet}(x) \land \varphi(x))$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.02</strong></td>
+<td>Sethood Predicate</td>
+<td>$\mathrm{isSet}(X) \iff \exists Y. X \in Y$</td>
+<td>Core Definition</td>
+</tr>
+<tr>
+<td><strong>3.12</strong></td>
+<td>Heredity Axiom</td>
+<td>$A \subseteq B \land \mathrm{isSet}(B) \implies \mathrm{isSet}(A)$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.13</strong></td>
+<td>Exponent / Powerclass</td>
+<td>$\mathrm{isSet}(X) \implies \mathrm{isSet}(\mathcal{P}(X))$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.14</strong></td>
+<td>Regularity ($\in$-Induction)</td>
+<td>$\mathcal{P}(X) \subseteq X \implies V \subseteq X$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.34</strong></td>
+<td>Strict Order Relation (Repaired)</td>
+<td>Restored injectivity and domain conditions on $\preceq$</td>
+<td>Repaired</td>
+</tr>
+<tr>
+<td><strong>3.37</strong></td>
+<td>Limitation of Size</td>
+<td>$X \in V \iff</td>
+<td>X</td>
+<td>\prec</td>
+<td>V</td>
+<td>$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.45</strong></td>
+<td>Tagged Pair Existence</td>
+<td>$\mathrm{inj}_1(A) \cup \mathrm{inj}_2(B)$ for all classes $A, B$</td>
+<td>Independent Construction</td>
+</tr>
+<tr>
+<td><strong>3.46</strong></td>
+<td>Tagged Pair Left Projection</td>
+<td>$\pi_1(\langle A, B \rangle_{\mathrm{tag}}) = A$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.47</strong></td>
+<td>Tagged Pair Right Projection</td>
+<td>$\pi_2(\langle A, B \rangle_{\mathrm{tag}}) = B$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.53</strong></td>
+<td>Axiom of Infinity</td>
+<td>$\mathrm{isSet}(\omega)$</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><strong>3.66</strong></td>
+<td>Tarski-Grothendieck Universes</td>
+<td>$\forall X. \mathrm{isSet}(X) \implies \exists U. X \in U \land \mathrm{isUniverse}(U)$</td>
+<td>Verified</td>
+</tr>
+</tbody></table></div>
+  </div>
+</body>
+</html>

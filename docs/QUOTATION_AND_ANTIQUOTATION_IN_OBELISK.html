@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/QUOTATION_AND_ANTIQUOTATION_IN_OBELISK.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quotation, Antiquotation, and Semantic Valuation in the Obelisk Proof Assistant</title>
+  <link rel="alternate" type="text/markdown" href="QUOTATION_AND_ANTIQUOTATION_IN_OBELISK.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="QUOTATION_AND_ANTIQUOTATION_IN_OBELISK.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="quotation-antiquotation-and-semantic-valuation-in-the-obelisk-proof-assistant">Quotation, Antiquotation, and Semantic Valuation in the Obelisk Proof Assistant</h1>
+<h2 id="the-shift-to-term-principle-signature-reconciliation-and-classical-metatheory">The Shift-to-Term Principle, Signature Reconciliation, and Classical Metatheory</h2>
+<p><strong>Author:</strong> Georgy Dunaev</p>
+<p><strong>Project:</strong> Obelisk Proof Assistant (<code>set_theory_prover</code>)</p>
+<p><strong>Foundational Theory:</strong> Morse–Kelley (MK) &amp; Von Neumann–Bernays–Gödel (NBG) Class Theory</p>
+<p><strong>Implementation:</strong> Standard ML (Poly/ML), Variant 1 (<code>newchecker.ML</code>) &amp; Variant 2 (<code>DependentTypeChecker</code>)</p>
+<hr>
+<h2 id="1-executive-summary-foundational-distinctions">1. Executive Summary &amp; Foundational Distinctions</h2>
+<p>In metaprogramming and formal reflection, four conceptually distinct operations are often conflated if their domains and codomains are not written out explicitly. Following the book&#x27;s <code>010_logic.tex</code> and <code>130_classes_as_types.tex</code> together with the catalog (<code>generated/theory_db.json</code>) and <code>program/types/typetheory.ML</code>, the <strong>Obelisk Proof Assistant</strong> keeps these maps strictly separate:</p>
+<ol>
+<li><strong>Syntactic Quotation / Coding (<code>‹e›</code> / <code>Enc : A.Expression → Class</code>):</strong></li>
+</ol>
+<p>Takes an <em>already formed finite syntactic expression</em> $e : A.\mathrm{Expression}$ (or formula $\varphi : \mathrm{Fm}$) and maps it to its canonical hereditary set code $\operatorname{Enc}(e) \in \operatorname{Code}_A \subseteq V$ (<code>generated/symbols/quotation.html</code>, <code>generated/symbols/enc.html</code>). Quotation acts on <strong>syntax</strong>, not on arbitrary unnameable semantic classes.</p>
+<ol>
+<li><strong>Syntactic Decoding (<code>Dec_A : Class → A.Expression</code> on valid codes $\operatorname{Code}_A \subseteq V$):</strong></li>
+</ol>
+<p>Recovers the syntactic AST from a valid class code $c \in \operatorname{Code}_A$, satisfying the typed syntactic round-trip identity $\operatorname{Dec}_A(\operatorname{Enc}(e)) = e$ for every $e : A.\mathrm{Expression}$ (<code>generated/symbols/dec.html</code>).</p>
+<ol>
+<li><strong>Syntactic Antiquotation / Splicing (<code>⟨u⟩</code> inside <code>‹...›</code>) vs. Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>):</strong></li>
+</ol>
+<ul>
+<li><strong>Syntactic Splicing (<code>⟨u⟩</code>, U+27E8/U+27E9, <code>generated/symbols/antiquotation.html</code>):</strong> Inside a quotation template $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, evaluates the meta-level expression $u : A.\mathrm{Expression}$ (such as $\operatorname{Dec}_A(c)$) and splices the resulting syntax tree into the surrounding AST.</li>
+<li><strong>Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>, U+27E6/U+27E7, <code>generated/symbols/binder-brackets.html</code>):</strong> Evaluates a syntactic expression $e : A.\mathrm{Expression}$ to its semantic denotation in $A$ under a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.</li>
+</ul>
+<ol>
+<li><strong>Type-Indexed Expression Translation ($\mu_A$) vs. Assignment-Indexed Valuation ($\mu^{\mathrm{val}}_\rho$):</strong></li>
+</ol>
+<p>Reconciles the type-indexed translation $\mu_A : A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$ used in <code>130_classes_as_types.tex</code> and <code>DefMetaGeneralisation</code> (<code>4.02</code>) with the assignment-indexed valuation shorthand $\mu^{\mathrm{val}}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ used on the symbol pages (<code>generated/symbols/mu-interpretation.html</code>, <code>generated/symbols/eval.html</code>) via the explicit composite</p>
+<p>$$\operatorname{Eval}_{(A, \rho)}(c) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(\operatorname{Dec}_A(c))\bigr).$$</p>
+<hr>
+<h2 id="2-the-shift-to-term-architectural-principle">2. The &quot;Shift-to-Term&quot; Architectural Principle</h2>
+<h3 id="2-1-why-semantic-classes-are-distinguished-from-inductive-syntax-datatypes">2.1 Why Semantic Classes Are Distinguished from Inductive Syntax Datatypes</h3>
+<p>In guarded class theories such as NBG and Morse–Kelley (<code>RulClassComprehension</code>, <code>3.01</code>: $x \in \{z \mid \varphi(z)\} \iff \operatorname{Set}(x) \land \varphi(x)$):</p>
+<ul>
+<li><strong>The Russell Class Is a Legitimate Proper Class, Not a Contradiction:</strong> Forming $R = \{x \mid x \notin x\}$ under guarded comprehension yields $x \in R \iff \operatorname{Set}(x) \land x \notin x$. By Regularity (<code>AxmRegularity</code>, <code>3.14</code>), $R = V$, and the standard Russell argument simply proves the theorem $\neg\operatorname{Set}(R)$ ($\operatorname{Proper}(R)$), not a contradiction.</li>
+<li><strong>Why <code>Class</code> Cannot Be Replaced by a Naive Inductive Datatype:</strong> Finite syntax datatypes (<code>Fm</code>, <code>Class.Expression</code>) are inductively generated and perfectly compatible with a class-theoretic semantics. What would be unsound is asserting that every semantic class $X : \mathrm{Class}$ is the denotation of a finite syntax tree (surjectivity of valuation) or granting an unguarded sethood/comprehension elimination principle that omits $\operatorname{Set}(x)$:</li>
+</ul>
+<ol>
+<li><strong>Cardinal / Diagonal Obstruction (<code>130_classes_as_types.tex</code>):</strong> The inductive datatype of finite expressions is countable, whereas the conglomerate of semantic classes (even subclasses of $\omega$, corresponding to functions $\mathbb{N} \to \{0,1\}$) is uncountable. As proved by diagonalization in <code>130_classes_as_types.tex</code> (evaluating the $n$-th code at $n$ with a fixed default for non-codes and flipping the bit), no map from countable finite syntax can denote every semantic class in the fixed standard interpretation.</li>
+<li><strong>Non-Injectivity of Valuation on Syntax:</strong> Distinct syntactic expressions can have identical semantic values: for example, the arithmetic expressions $0 + 0$ and $0$ satisfy $\operatorname{Val}_\rho(\text{‹}0 + 0\text{›}) = \operatorname{Val}_\rho(\text{‹}0\text{›}) = \emptyset$, yet they are distinct ASTs with distinct codes $\operatorname{Enc}(\text{‹}0 + 0\text{›}) \neq \operatorname{Enc}(\text{‹}0\text{›})$.</li>
+</ol>
+<h3 id="2-2-the-shift-to-term-architecture-program-newchecker-ml-130-classes-as-types-tex">2.2 The Shift-to-Term Architecture (<code>program/newchecker.ML</code> &amp; <code>130_classes_as_types.tex</code>)</h3>
+<p>To maintain a rigorous separation between finite syntax in ML memory and arbitrary semantic classes in the model, Obelisk employs the <strong>Shift-to-Term</strong> principle:</p>
+<blockquote><em>&quot;If something has type <code>&#x27;a</code> in theory, then it should have type <code>&#x27;a expression</code> in the implementation.&quot;</em></blockquote>
+<p>Under this architecture:</p>
+<ul>
+<li><strong>In the implementation (<code>program/types/typetheory.ML</code>):</strong> Kernel functions manipulate finite syntactic expressions $\varphi : \mathrm{Truth}.\mathrm{Expression}$ (<code>Fm</code>) and $t : \mathrm{Class}.\mathrm{Expression}$.</li>
+<li><strong>In the semantics (<code>010_logic.tex</code>, <code>130_classes_as_types.tex</code>):</strong> Semantic valuation $\operatorname{Val}_\rho(\varphi) = \llbracket \varphi \rrbracket_\rho \in \mathrm{Bool}$ and $\operatorname{Val}_\rho(t) = \llbracket t \rrbracket_\rho : \mathrm{Class}$ interprets those finite expressions under an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.</li>
+</ul>
+<hr>
+<h2 id="3-exact-signatures-of-quotation-decoding-translation-and-valuation">3. Exact Signatures of Quotation, Decoding, Translation, and Valuation</h2>
+<p>To prevent any ambiguity between the book (<code>010_logic.tex</code>, <code>130_classes_as_types.tex</code>), the catalog (<code>DefMetaInstantiation</code> <code>4.01</code>, <code>DefMetaGeneralisation</code> <code>4.02</code>), and the symbol pages (<code>generated/symbols/*.html</code>), every reflection operator is equipped with its explicit domain, codomain, valid-code carrier, and parameters:</p>
+<h3 id="3-1-syntactic-coding-enc-e-and-decoding-dec-a">3.1 Syntactic Coding (<code>Enc</code> / <code>‹e›</code>) and Decoding (<code>Dec_A</code>)</h3>
+<p>For each syntactic category $A.\mathrm{Expression}$ (such as $\mathrm{Class}.\mathrm{Expression}$, $\mathrm{Variable}.\mathrm{Expression}$, or $\mathrm{Truth}.\mathrm{Expression} = \mathrm{Fm}$):</p>
+<ul>
+<li><strong>Syntactic Coding (<code>Enc_A</code> / Corner Quotation <code>‹e›</code>):</strong></li>
+</ul>
+<p>$$\operatorname{Enc}_A : A.\mathrm{Expression} \longrightarrow \operatorname{Code}_A \subseteq V \subseteq \mathrm{Class}.$$</p>
+<p><code>Enc_A</code> is injective on syntax: $\operatorname{Enc}_A(e_1) = \operatorname{Enc}_A(e_2) \implies e_1 = e_2$ as syntactic expressions. Because <code>Enc_A</code> takes an <em>already represented expression</em> $e : A.\mathrm{Expression}$ as input, quoting $e$ requires no universal naming theorem for arbitrary semantic classes.</p>
+<ul>
+<li><strong>Valid-Code Domain ($\operatorname{Code}_A$) and Decoding (<code>Dec_A</code>):</strong></li>
+</ul>
+<p>$$\operatorname{Dec}_A : \mathrm{Class} \longrightarrow A.\mathrm{Expression}.$$</p>
+<p>Let $\operatorname{Code}_A = \operatorname{im}(\operatorname{Enc}_A) \subseteq V$ be the set of valid syntactic codes for category $A$.</p>
+<ul>
+<li><strong>Syntax Round-Trip Identity (Unconditional on $A.\mathrm{Expression}$):</strong></li>
+</ul>
+<p>$$\forall e : A.\mathrm{Expression},\qquad \operatorname{Dec}_A(\operatorname{Enc}_A(e)) = e.$$</p>
+<ul>
+<li><strong>Code Round-Trip Identity (Guarded by Valid-Code Domain $\operatorname{Code}_A$):</strong></li>
+</ul>
+<p>$$\forall c : \mathrm{Class},\qquad c \in \operatorname{Code}_A \implies \operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c.$$</p>
+<p><em>(For $c \notin \operatorname{Code}_A$, $\operatorname{Dec}_A(c)$ returns a fixed default syntactic variable/constant $e^{\mathrm{def}}_A$, so $\operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c$ holds if and only if $c \in \operatorname{Code}_A$.)</em></p>
+<h3 id="3-2-syntactic-antiquotation-u-vs-semantic-valuation-e-rho">3.2 Syntactic Antiquotation (<code>⟨u⟩</code>) vs. Semantic Valuation (<code>⟦e⟧_rho</code>)</h3>
+<p>Two distinct bracket notations operate on expressions:</p>
+<ol>
+<li><strong>Syntactic Antiquotation / Splicing (<code>⟨u⟩</code>, <code>generated/symbols/antiquotation.html</code>):</strong></li>
+</ol>
+<p>Inside a quoted expression $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, the subterm $u : A.\mathrm{Expression}$ (for example, $u = \operatorname{Dec}_A(c)$ where $c : \mathrm{Class}$ is a code variable) is spliced directly into the quoted AST:</p>
+<p>$$\text{‹}\forall x : \mathrm{Class}.\;\langle \operatorname{Dec}_{\mathrm{Fm}}(c) \rangle\text{›} \;:\; \mathrm{Fm}.$$</p>
+<p>In particular, $\text{‹}\langle e \rangle\text{›} = \operatorname{Enc}_A(e)$ for $e : A.\mathrm{Expression}$, and $\text{‹}\langle \operatorname{Dec}_A(c) \rangle\text{›} = c$ for $c \in \operatorname{Code}_A$.</p>
+<ol>
+<li><strong>Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>, <code>generated/symbols/binder-brackets.html</code>):</strong></li>
+</ol>
+<p>Given a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$, semantic valuation interprets a class expression or formula in the model:</p>
+<p>$$\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \longrightarrow \mathrm{Class}, \qquad \operatorname{Val}_\rho : \mathrm{Truth}.\mathrm{Expression} \longrightarrow \mathrm{Bool},$$</p>
+<p>written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$. As noted in <code>program/libs/unicodedefs.ML</code>, when $\rho$ is the ambient unnamed assignment of the current context, $\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$.</p>
+<h3 id="3-3-reconciling-the-two-conventions-for-mu-and-operatorname-eval">3.3 Reconciling the Two Conventions for $\mu$ and $\operatorname{eval}$</h3>
+<p>Across the project documentation and symbol pages, the letter $\mu$ appears with two different subscript types. Both are mathematically sound once their signatures are distinguished:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Notation</th>
+<th>Subscript Parameter</th>
+<th>Exact Signature</th>
+<th>Role &amp; Where Used</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>$\mu_A$</strong> (Type-Indexed Translation)</td>
+<td>Type / Conglomerate $A : \mathrm{Type}$ (e.g. $A = \mathrm{Variable}$)</td>
+<td>$\mu_A : A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$</td>
+<td>Syntactic coercion/translation from $A$-expressions into class expressions (<code>130_classes_as_types.tex</code>; <code>DefMetaGeneralisation</code> <code>4.02</code>: $\mu_{\mathrm{Variable}} : \mathrm{Variable}.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$)</td>
+</tr>
+<tr>
+<td><strong>$\operatorname{Val}_\rho$</strong> (Semantic Valuation)</td>
+<td>Assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$</td>
+<td>$\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$</td>
+<td>Tarski semantic evaluation of a class expression under assignment $\rho$ (<code>010_logic.tex</code>, <code>130_classes_as_types.tex</code>)</td>
+</tr>
+<tr>
+<td><strong>$\mu^{\mathrm{val}}_\rho$</strong> (Written $\mu_A$ on symbol pages with $A = \rho$)</td>
+<td>Assignment $A = \rho : \mathrm{Variable} \to \mathrm{Class}$</td>
+<td>$\mu^{\mathrm{val}}_\rho : A.\mathrm{Expression} \to \mathrm{Class}$</td>
+<td>Combined valuation shorthand $\mu^{\mathrm{val}}_\rho(e) := \operatorname{Val}_\rho(\mu_A(e))$ (<code>generated/symbols/mu-interpretation.html</code>)</td>
+</tr>
+<tr>
+<td><strong>$\operatorname{Eval}_{(A,\rho)}(c)$</strong> (Written $\operatorname{eval}_A(c)$ on symbol pages)</td>
+<td>Type $A : \mathrm{Type}$ and assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$</td>
+<td>$\operatorname{Eval}_{(A,\rho)} : \mathrm{Class} \to \mathrm{Class}$</td>
+<td>Composite code evaluation: $\operatorname{Eval}_{(A,\rho)}(c) := \operatorname{Val}_\rho(\mu_A(\operatorname{Dec}_A(c))) = \mu^{\mathrm{val}}_\rho(\operatorname{Dec}_A(c))$ (<code>generated/symbols/eval.html</code>)</td>
+</tr>
+</tbody></table></div>
+<p>With this composite written explicitly:</p>
+<ul>
+<li>For any expression $e : A.\mathrm{Expression}$, the semantic evaluation of its code $\operatorname{Enc}_A(e)$ satisfies the well-typed round-trip law:</li>
+</ul>
+<p>$$\operatorname{Eval}_{(A,\rho)}\!\bigl(\operatorname{Enc}_A(e)\bigr) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(\operatorname{Dec}_A(\operatorname{Enc}_A(e)))\bigr) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(e)\bigr) \;=\; \mu^{\mathrm{val}}_\rho(e).$$</p>
+<ul>
+<li>Conversely, two distinct expressions $e_1 \neq e_2$ with $\operatorname{Eval}_{(A,\rho)}(\operatorname{Enc}_A(e_1)) = \operatorname{Eval}_{(A,\rho)}(\operatorname{Enc}_A(e_2))$ (such as $0+0$ and $0$) are <strong>not</strong> forced to have equal codes $\operatorname{Enc}_A(e_1)$ and $\operatorname{Enc}_A(e_2)$, because $\operatorname{Val}_\rho$ is not injective.</li>
+</ul>
+<hr>
+<h2 id="4-nested-quotation-sml-polymorphic-recursion-and-stratification">4. Nested Quotation, SML Polymorphic Recursion, and Stratification</h2>
+<h3 id="4-1-the-sml-polymorphic-recursion-barrier">4.1 The SML Polymorphic Recursion Barrier</h3>
+<p>In <code>program/types/typetheory.ML</code> and <code>program/types/small_explanation.txt</code>, if one attempts to parameterize expressions uniformly by a type variable <code>&#x27;a</code>:</p>
+<pre><code class="language-sml">datatype &#x27;a expression =
+    EyVar   of Variable
+  | EQuote  of &#x27;a
+  | EAnti   of &#x27;a expression expression</code></pre>
+<p>then a naive recursive evaluator <code>fun eval (EAnti ee) = eval (eval ee)</code> fails Damas–Milner type inference in Standard ML because the inner call requires type <code>&#x27;a expression expression -&gt; &#x27;a expression</code> while the outer call has type <code>&#x27;a expression -&gt; &#x27;a</code> (polymorphic recursion).</p>
+<h3 id="4-2-finite-type-stratification-vs-arbitrary-depth-code-trees">4.2 Finite Type Stratification vs. Arbitrary-Depth Code Trees</h3>
+<p>Obelisk resolves this in two complementary ways whose scopes should be clearly distinguished:</p>
+<ol>
+<li><strong>Finite ML Stratification for Bounded-Depth Meta-Reasoning (<code>small_explanation.txt</code>):</strong></li>
+</ol>
+<p>In <code>program/types/small_explanation.txt</code>, Georgy Dunaev observed that standard proof-assistant work operates across a fixed, bounded number of meta-levels:</p>
+<ul>
+<li><strong>Level 1 (<code>Term</code> / <code>A.Expression</code>):</strong> Object-language formulas and class expressions of MK/NBG.</li>
+<li><strong>Level 2 (<code>TermTerm</code>):</strong> Meta-level inference schemas (<code>DefMetaInstantiation</code> <code>4.01</code>, <code>DefMetaGeneralisation</code> <code>4.02</code>) and sequent rules.</li>
+<li><strong>Level 3 (<code>TermTermTerm</code>):</strong> Tactics and external certificate exporters.</li>
+</ul>
+<p>Fixing a finite ML stratification (<code>Term</code>, <code>TermTerm</code>) eliminates polymorphic recursion for the bounded-depth fragment ($k \le 2$) used in everyday kernel rules.</p>
+<ol>
+<li><strong>First-Order Set Coding (<code>Enc_A : A.Expression → Class</code>) for Arbitrary Finite Depth:</strong></li>
+</ol>
+<p>Finite depth of each individual syntax tree does <em>not</em> imply a single uniform depth bound for an open-ended grammar closed under arbitrary nested quotation. Whenever expressions of arbitrary finite nesting depth must be represented uniformly (as in Section 4–5 reflection and Gödel/Löb diagonalization, Entries <code>4.01</code>–<code>5.05</code>), Obelisk encodes syntax trees into the single first-order carrier <code>Class</code> via $\operatorname{Enc}_A : A.\mathrm{Expression} \to \operatorname{Code}_A \subseteq V_\omega \subseteq \mathrm{Class}$. Because hereditary sets in $V_\omega$ can have arbitrary finite rank while all inhabiting the same type <code>Class</code>, nested codes $\operatorname{Enc}(\text{‹}\dots\text{›}) : \mathrm{Class}$ require no infinite tower of ML type constructors.</p>
+<hr>
+<h2 id="5-non-computational-classical-semantics-normalization-and-checking">5. Non-Computational Classical Semantics, Normalization, and Checking</h2>
+<h3 id="5-1-separating-proof-checking-strong-normalization-and-canonicity-010-logic-tex">5.1 Separating Proof Checking, Strong Normalization, and Canonicity (<code>010_logic.tex</code>)</h3>
+<p>In Obelisk, the foundational theory includes classical logic (LEM), Impredicative Class Comprehension (<code>3.01</code>), and Choice / Size Limitation (<code>3.43</code>, <code>3.47</code>). As established in <a href="COMPILER_SEMANTICS_NON_COMPUTATIONAL.html"><code>docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md</code></a> and proved in the book&#x27;s <code>010_logic.tex</code>, three properties must be kept distinct:</p>
+<ol>
+<li><strong>Static Proof Checking:</strong> Both kernels (<code>newchecker.ML</code> in Variant 1 and <code>DependentTypeChecker.check</code> in Variant 2) statically verify finite derivations without emitting executable bytecode.</li>
+<li><strong>Strong Normalization:</strong> Adding opaque classical or choice constants with <em>no reduction rules</em> to a strongly normalizing calculus (such as the simple Boolean calculus in <code>010_logic.tex</code>) <strong>preserves strong normalization</strong> (replacing the finitely many constants in a term by fresh typed free variables transports any reduction step to the constant-free calculus).</li>
+<li><strong>Failure of Canonicity:</strong> Opaque classical/choice constants break <strong>canonicity</strong> (not normalization): a closed normal form of type <code>Bool</code> or $\Sigma x : A.\,P(x)$ containing an opaque constant is already normal, yet is neither <code>true</code> nor <code>false</code> (nor an explicit computable witness).</li>
+</ol>
+<h3 id="5-2-static-verification-without-unfounded-complexity-claims">5.2 Static Verification Without Unfounded Complexity Claims</h3>
+<p>Because Obelisk is a verification-only compiler, quotation (<code>Enc_A</code>), decoding (<code>Dec_A</code>), and rule instantiation (<code>DefMetaInstantiation</code>, <code>4.01</code>) are checked statically against explicit syntactic side conditions (<code>FFI</code>, <code>FV</code>, <code>NFV</code>). Note that omitting bytecode emission is an architectural design choice and does not by itself determine the asymptotic complexity of conversion checking: in Variant 1 (<code>newchecker.ML</code>), each primitive rule step is a bounded structural AST comparison, whereas in Variant 2 (<code>DependentTypeChecker.check</code>), the cost of definitional conversion (<code>conv</code> via <code>DependentEval.whnf</code>) depends on the reduction steps of the terms being compared.</p>
+<hr>
+<h2 id="6-concrete-example-of-level-explicit-verification">6. Concrete Example of Level-Explicit Verification</h2>
+<p>Consider Theorem O11 (<code>thm_O11_on_ord_class</code> in <code>program/ordinal_theorems.ML</code>: $\operatorname{Trans}(\mathrm{On}) \land \forall \alpha \in \mathrm{On}.\;\operatorname{Ord}(\alpha)$):</p>
+<pre><code class="language-sml">(* Level 1: Syntactic statement in Truth.Expression / Term *)
+val stmt_O11 =
+  And (Trans (Const &quot;On&quot;))
+      (Forall &quot;a&quot; TClass (Impl (In (Var &quot;a&quot;) (Const &quot;On&quot;)) (Ord (Var &quot;a&quot;))));
+
+(* Level 1: Proof term certificate *)
+val proof_O11 =
+  Pair (Const &quot;ax_on_trans&quot;, Const &quot;ax_on_elements_ord&quot;);
+
+(* Static kernel verification: checks proof_O11 : stmt_O11 *)
+val () = check ordinalContext proof_O11 stmt_O11;</code></pre>
+<ul>
+<li><strong>Syntactic level (<code>Level 1</code>):</strong> <code>stmt_O11</code> is a finite AST formula; its class code is $\operatorname{Enc}_{\mathrm{Fm}}(\mathtt{stmt\_O11}) \in \operatorname{Code}_{\mathrm{Fm}} \subseteq V$.</li>
+<li><strong>Semantic level (<code>Level 0</code>):</strong> Under any variable assignment $\rho$, its semantic valuation $\llbracket \mathtt{stmt\_O11} \rrbracket_\rho = \operatorname{Val}_\rho(\mathtt{stmt\_O11}) \in \mathrm{Bool}$ asserts that $\mathrm{On}$ is transitive and all its members are ordinals.</li>
+<li><strong>Verification:</strong> <code>check ordinalContext proof_O11 stmt_O11</code> verifies the derivation statically without emitting bytecode.</li>
+</ul>
+<hr>
+<h2 id="7-summary-table-of-reflection-interpretation-maps">7. Summary Table of Reflection &amp; Interpretation Maps</h2>
+<div class="table-wrap"><table><thead><tr>
+<th>Operation</th>
+<th>Notation</th>
+<th>Input $\to$ Output Signature</th>
+<th>Domain / Hygiene Condition</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Syntactic Quotation / Coding</strong></td>
+<td>$\text{‹}e\text{›}$ / $\operatorname{Enc}_A(e)$</td>
+<td>$A.\mathrm{Expression} \to \operatorname{Code}_A \subseteq \mathrm{Class}$</td>
+<td>Defined on all finite AST expressions $e : A.\mathrm{Expression}$; injective on syntax</td>
+</tr>
+<tr>
+<td><strong>Syntactic Decoding</strong></td>
+<td>$\operatorname{Dec}_A(c)$</td>
+<td>$\mathrm{Class} \to A.\mathrm{Expression}$</td>
+<td>Left-inverse on $\forall e,\;\operatorname{Dec}_A(\operatorname{Enc}_A(e)) = e$; right-inverse on valid codes $c \in \operatorname{Code}_A$</td>
+</tr>
+<tr>
+<td><strong>Syntactic Antiquotation (Splicing)</strong></td>
+<td>$\langle u \rangle$ (inside $\text{‹}\dots\text{›}$)</td>
+<td>$A.\mathrm{Expression} \to A.\mathrm{Expression}$</td>
+<td>Splices expression $u$ (e.g. $\operatorname{Dec}_A(c)$) into a surrounding quoted AST template</td>
+</tr>
+<tr>
+<td><strong>Type-Indexed Expression Translation</strong></td>
+<td>$\mu_A(e)$</td>
+<td>$A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$</td>
+<td>Translates typed $A$-expressions into class expressions (<code>130_classes_as_types.tex</code>, <code>4.02</code>)</td>
+</tr>
+<tr>
+<td><strong>Semantic Valuation</strong></td>
+<td>$\llbracket e \rrbracket_\rho = \operatorname{Val}_\rho(e)$</td>
+<td>$\mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ (or $\mathrm{Fm} \to \mathrm{Bool}$)</td>
+<td>Evaluates syntax in the model under assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$; not injective ($0+0 \neq 0$)</td>
+</tr>
+<tr>
+<td><strong>Assignment-Indexed Valuation</strong></td>
+<td>$\mu^{\mathrm{val}}_\rho(e)$ (written $\mu_A(e)$ with $A=\rho$)</td>
+<td>$A.\mathrm{Expression} \to \mathrm{Class}$</td>
+<td>Shorthand for $\operatorname{Val}_\rho(\mu_A(e))$ (<code>generated/symbols/mu-interpretation.html</code>)</td>
+</tr>
+<tr>
+<td><strong>Composite Code Evaluation</strong></td>
+<td>$\operatorname{Eval}_{(A,\rho)}(c)$ (written $\operatorname{eval}_A(c)$)</td>
+<td>$\mathrm{Class} \to \mathrm{Class}$</td>
+<td>$\operatorname{Val}_\rho(\mu_A(\operatorname{Dec}_A(c)))$; satisfies $\operatorname{Eval}_{(A,\rho)}(\operatorname{Enc}_A(e)) = \mu^{\mathrm{val}}_\rho(e)$ (<code>generated/symbols/eval.html</code>)</td>
+</tr>
+</tbody></table></div>
+  </div>
+</body>
+</html>

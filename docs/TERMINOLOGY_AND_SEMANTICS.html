@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/TERMINOLOGY_AND_SEMANTICS.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Obelisk Proof Assistant — Canonical Terminology &amp; Semantic Setting</title>
+  <link rel="alternate" type="text/markdown" href="TERMINOLOGY_AND_SEMANTICS.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="TERMINOLOGY_AND_SEMANTICS.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="obelisk-proof-assistant-canonical-terminology-semantic-setting">Obelisk Proof Assistant — Canonical Terminology &amp; Semantic Setting</h1>
+<p>This document records the authoritative semantic conventions and disambiguated terminology used across <code>set_theory_prover</code>, <code>obeliskproofassistant.github.io</code>, and <code>foundations</code>. Whenever an expression or prose description could be ambiguous, the verbose, explicit terminology below must be used.</p>
+<hr>
+<h2 id="1-bound-bounded-quantifiers-vs-quantifier-bound-variables">1. Bound (Bounded) Quantifiers vs. Quantifier-Bound Variables</h2>
+<h3 id="1-1-bound-bounded-quantifiers">1.1 Bound (Bounded) Quantifiers</h3>
+<p>In Obelisk, <strong>bound quantifiers</strong> (also called <strong>bounded quantifiers</strong>) are syntactic short forms for membership-restricted quantifiers whose bound variable implicitly has the default type <code>Class</code>:</p>
+<p>$$\forall (x \in Y),\ \varphi(x) \quad :\equiv \quad \forall (x:\mathsf{Class}),\ (x \in Y) \rightarrow \varphi(x)$$</p>
+<p>$$\exists (x \in Y),\ \varphi(x) \quad :\equiv \quad \exists (x:\mathsf{Class}),\ (x \in Y) \land \varphi(x)$$</p>
+<ul>
+<li><strong>SML Kernel Constructors (<code>program/newchecker.ML</code>)</strong>:</li>
+<li><code>Fora_in (v, Y) phi</code> expands to <code>Fora (TyVariable_id (v, TClass)) (Impl (In (EVar v) Y) phi)</code></li>
+<li><code>Exis_in (v, Y) phi</code> expands to <code>Exis (TyVariable_id (v, TClass)) (And (In (EVar v) Y) phi)</code></li>
+<li><strong>HOL Definitional Store (<code>program/hol_definitions.ML</code>)</strong>:</li>
+<li><code>HOLDefinitions.mk_bounded_forall (x, Y, phi)</code> expands to <code>PFForall (x, PFImp (PFIn (PVar x, Y), phi))</code></li>
+<li><code>HOLDefinitions.mk_bounded_exists (x, Y, phi)</code> expands to <code>PFExists (x, PFAnd (PFIn (PVar x, Y), phi))</code></li>
+</ul>
+<h3 id="1-2-disambiguation-rule">1.2 Disambiguation Rule</h3>
+<ul>
+<li><strong>Never</strong> use the phrase <em>&quot;bound quantifiers&quot;</em> to mean <em>&quot;variables bound by a quantifier&quot;</em> or <em>&quot;quantifier binders&quot;</em>.</li>
+<li>Use:</li>
+<li><strong>bound quantifier</strong> (or <strong>bounded quantifier</strong>) exclusively for $\forall (x \in Y),\ \varphi(x)$ and $\exists (x \in Y),\ \varphi(x)$.</li>
+<li><strong>typed quantifier</strong> for $\forall (x:T),\ \varphi(x)$ and $\exists (x:T),\ \varphi(x)$ (where <code>:</code> is the typing judgment, never $\in$).</li>
+<li><strong>quantified variable</strong> or <strong>quantifier-bound variable</strong> for the variable $x$ bound by a quantifier (e.g., when stating NBG predicativity or capture-avoiding substitution <code>FFI</code>).</li>
+</ul>
+<hr>
+<h2 id="2-class-is-the-default-type">2. <code>Class</code> is the Default Type</h2>
+<p><code>Class</code> (<code>OpClass</code> / <code>TClass</code> in <code>program/types/typetheory.ML</code>) is the <strong>default type</strong> in Obelisk. It is implicitly supplied whenever a binder omits an explicit type annotation:</p>
+<ol>
+<li><strong>Untyped Universal and Existential Quantifiers</strong>:</li>
+</ol>
+<p>$$\forall x,\ \varphi(x) \quad :\equiv \quad \forall (x:\mathsf{Class}),\ \varphi(x)$$</p>
+<p>$$\exists x,\ \varphi(x) \quad :\equiv \quad \exists (x:\mathsf{Class}),\ \varphi(x)$$</p>
+<p>(Implemented as <code>Fora_default</code> and <code>Exis_default</code> in <code>program/newchecker.ML</code> and <code>HOLDefinitions.mk_default_forall</code> / <code>mk_default_exists</code> in <code>program/hol_definitions.ML</code>.)</p>
+<ol>
+<li><strong>Bound (Bounded) Quantifiers</strong>:</li>
+</ol>
+<p>$$\forall (x \in Y),\ \varphi(x) \quad :\equiv \quad \forall (x:\mathsf{Class}),\ (x \in Y) \rightarrow \varphi(x)$$</p>
+<p>$$\exists (x \in Y),\ \varphi(x) \quad :\equiv \quad \exists (x:\mathsf{Class}),\ (x \in Y) \land \varphi(x)$$</p>
+<ol>
+<li><strong>Class Comprehension &amp; Descriptors</strong>:</li>
+</ol>
+<p>$$\{x \mid \varphi(x)\} \quad :\equiv \quad \{x:\mathsf{Class} \mid \varphi(x)\}$$</p>
+<hr>
+<h2 id="3-advanced-semantic-setting-terms-as-classes-conglomerates-predicates-on-classes-as-types">3. Advanced Semantic Setting: Terms as Classes, Conglomerates (= Predicates on Classes) as Types</h2>
+<p>Obelisk does <strong>not</strong> use the &quot;standard&quot; set-theoretic type-theory setting (where terms are interpreted as sets and classes are interpreted as types). Instead, Obelisk operates in a one-level-higher <strong>advanced semantic setting</strong>:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Syntactic Category</th>
+<th>Semantic Interpretation in Obelisk</th>
+<th>Kernel Representation (<code>typetheory.ML</code> / <code>CONTENT.ML</code>)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>Object Terms</strong> (<code>t</code>)</td>
+<td><strong>Classes</strong> (either sets $x \in \mathbf{V}$ or proper classes such as $\mathbf{V}$, $\mathbf{On}$)</td>
+<td><code>Class.Expression</code> (<code>CpEmptySet</code>, <code>CpSets</code>, <code>CpOn</code>, <code>CpOmega</code>, <code>CpKappa</code>, ...)</td>
+</tr>
+<tr>
+<td><strong>Types</strong> (<code>T</code> in <code>(t:T)</code>)</td>
+<td><strong>Conglomerates</strong> $\equiv$ <strong>Predicates on the conglomerate of all classes</strong> ($\mathsf{Class} \to \mathsf{Bool}$)</td>
+<td><code>Huge_Col</code> / <code>LPredicate</code> (<code>LTpDef of &#x27;Class_Truth_FUNEX</code>, <code>LTpEmb of &#x27;Huge_Col_EXPRESSION</code>)</td>
+</tr>
+<tr>
+<td><strong>Default Type <code>Class</code></strong></td>
+<td>Constant-true predicate on classes $\lambda (C:\mathsf{Class}).\ \top$ (the universal conglomerate of all classes)</td>
+<td><code>OpClass</code> / <code>TClass</code></td>
+</tr>
+<tr>
+<td><strong>Set Type <code>Set</code></strong></td>
+<td>Sethood predicate on classes $\lambda (C:\mathsf{Class}).\ (C\ \mathsf{set}) \equiv \lambda (C:\mathsf{Class}).\ \exists (Q:\mathsf{Class}),\ (C \in Q)$</td>
+<td><code>OpSet</code> / <code>TSet</code></td>
+</tr>
+</tbody></table></div>
+<h3 id="why-conglomerate-and-predicate-on-classes-are-used-interchangeably">Why &quot;Conglomerate&quot; and &quot;Predicate on Classes&quot; Are Used Interchangeably</h3>
+<p>In our meta-framework, a <strong>sub-conglomerate</strong> $\mathcal{C}$ of the conglomerate of all classes and its characteristic <strong>predicate on classes</strong> $P_{\mathcal{C}} : \mathsf{Class} \to \mathsf{Bool}$ (a &quot;conglomerate-function&quot; from the conglomerate of all classes to $\mathsf{Bool}$) are in canonical 1-to-1 correspondence:</p>
+<p>$$X \text{ belongs to conglomerate } \mathcal{C} \quad \Longleftrightarrow \quad P_{\mathcal{C}}(X) = \top.$$</p>
+<p>In <code>program/types/typetheory.ML</code> (lines 813–842), this exact isomorphism is reflected in <code>LPredicate_p</code>:</p>
+<ul>
+<li><code>LTpDef of &#x27;Class_Truth_FUNEX</code> represents a type directly as a syntactic predicate $\lambda (C:\mathsf{Class}).\ \varphi(C)$ (<code>Class -&gt; Truth</code>), and</li>
+<li><code>LTpEmb of &#x27;Huge_Col_EXPRESSION</code> embeds a named conglomerate (<code>OpClass</code>, <code>OpSet</code>, <code>OpFamily</code>, ...) as a predicate on classes.</li>
+</ul>
+<p>Therefore, using <strong>&quot;conglomerate&quot;</strong> and <strong>&quot;predicate on classes&quot;</strong> interchangeably for the semantic interpretation of a type is mathematically rigorous and unambiguous.</p>
+<hr>
+<h2 id="4-omega-and-successor-inductive-peano-inductive-classes">4. $\omega$ and Successor-Inductive (Peano-Inductive) Classes</h2>
+<h3 id="4-1-disambiguating-inductive-in-class-theory">4.1 Disambiguating &quot;Inductive&quot; in Class Theory</h3>
+<p>Several distinct induction principles exist in set and class theory:</p>
+<ol>
+<li><strong>Successor-Induction (Peano Induction / $0$-$\sigma$-Induction / Countable Mathematical Induction)</strong>:</li>
+</ol>
+<p>Closure under $0 = \emptyset$ and ordinal successor $\sigma(a) = a \cup \{a\}$.</p>
+<ol>
+<li><strong>Transfinite $\in$-Induction on a Well-Founded Transitive Class</strong> (Catalog Entry <strong>3.70</strong>):</li>
+</ol>
+<p>$$(\mathrm{Tr}(K) \land (\mathrm{E\ Fr\ }K)) \rightarrow (((K \cap \mathcal{P}A) \subseteq A) \rightarrow (K \subseteq A))$$</p>
+<ol>
+<li><strong>Powerclass / Subset $\mathcal{P}$-Induction</strong> (defining the class $\mathbf{W}$ of well-founded sets in <code>foundations/120_induction_recursion.tex</code>):</li>
+</ol>
+<p>$$\forall (Q:\mathsf{Class}),\ (\mathcal{P}Q \subseteq Q) \rightarrow (\mathbf{W} \subseteq Q)$$</p>
+<p>In Catalog Entry <strong>3.55</strong> ($\mathrm{Ind}(X)$), the word <em>&quot;inductive&quot;</em> is used in the <strong>smallest, narrowest possible sense</strong> — namely <strong>successor-inductive</strong> (or <strong>Peano-inductive</strong> / <strong>$0$-successor-closed</strong>):</p>
+<p>$$\mathrm{Ind}(X) \iff (\emptyset \in X) \land \left(\forall (a:\mathsf{Class}),\ (a \in X) \rightarrow ((a \cup \{a\}) \in X)\right).$$</p>
+<h3 id="4-2-omega-as-the-subseteq-minimal-successor-inductive-class-and-smallest-successor-inductive-ordinal">4.2 $\omega$ as the $\subseteq$-Minimal Successor-Inductive Class (and Smallest Successor-Inductive Ordinal)</h3>
+<p>In Catalog Entry <strong>3.56</strong>, $\omega$ is defined as the intersection of all successor-inductive classes:</p>
+<p>$$\forall (x:\mathsf{Class}),\ (x \in \omega) \iff \left(\forall (Q:\mathsf{Class}),\ \mathrm{Ind}(Q) \rightarrow (x \in Q)\right).$$</p>
+<p>Together with Catalog Entry <strong>3.59</strong> ($\vdash \mathrm{Ind}(\omega)$), this definition immediately establishes two fundamental characterizations of $\omega$:</p>
+<ol>
+<li><strong>$\subseteq$-Minimal (Least) Successor-Inductive Class</strong>:</li>
+</ol>
+<p>$\omega$ is the <strong>minimal (least) element among all successor-inductive (Peano-inductive) classes in the subclass ($\subseteq$) order</strong>:</p>
+<p>$$\mathrm{Ind}(\omega) \land \forall (Q:\mathsf{Class}),\ \mathrm{Ind}(Q) \rightarrow (\omega \subseteq Q).$$</p>
+<p>This universal property is the direct class-theoretic statement of <strong>simple countable mathematical (Peano) induction up to $\omega$</strong>: any class $Q$ (i.e., any property of sets) that contains $\emptyset$ and is closed under $a \mapsto a \cup \{a\}$ contains all of $\omega$ ($\omega \subseteq Q$).</p>
+<ol>
+<li><strong>Smallest Successor-Inductive Ordinal</strong>:</li>
+</ol>
+<p>Combined with the Axiom of Infinity <strong>3.57</strong> ($\omega\ \mathsf{set}$), $\mathrm{Tr}(\omega)$ (<strong>3.61</strong>), and $\mathrm{Ord}(\omega)$ (<strong>3.62</strong>), $\omega \in \mathbf{On}$ (<strong>3.63</strong>) is the smallest successor-inductive ordinal.</p>
+<hr>
+<h2 id="5-fiercely-avoid-type-set-class-variables-mandatory-in-comprehension-binders">5. Fiercely Avoid Type <code>Set</code> — Class Variables Mandatory in Comprehension &amp; Binders</h2>
+<ul>
+<li><strong>Rule</strong>: We <strong>fiercely avoid</strong> using the type <code>Set</code> (<code>SetSort</code> / <code>: Set</code>) for bound variables in binders, quantifiers, and comprehensions. Use the default type <code>Class</code> (<code>ClassSort</code> / <code>: Class</code>) everywhere.</li>
+<li><strong>Class Comprehension Invariant</strong>:</li>
+</ul>
+<blockquote><strong>ANY KIND OF CLASS COMPREHENSION <code>{ x | φ(x) }</code> MUST NOT BE ALTERED WITH NBG/SET-TYPE MOTIVATION. IT MUST USE <code>Class</code> VARIABLES (<code>{ x : Class | φ(x) }</code>).</strong></blockquote>
+<hr>
+<h2 id="6-generalizing-quantifier-to-binder-variable-binding-operator">6. Generalizing &quot;Quantifier&quot; to &quot;Binder&quot; (Variable-Binding Operator)</h2>
+<p>The language of Obelisk and <code>foundations</code> features multiple variable-binding structures beyond standard $\forall$ and $\exists$ (class comprehension $\kappa$-binder, definite description $\iota$-operator, choice $\tau$/$\epsilon$-operators, $\lambda$, $\Pi$, $\Sigma$, and $\mathsf{let}$). Always use the broader term <strong>binder</strong> (or <strong>variable-binding operator</strong>) when referring to variable-binding syntax and hygiene in general.</p>
+<hr>
+<h2 id="7-unspecified-elementary-metatheory-mathcal-e-in-mathrm-i-sigma-1-mathrm-pa-mathcal-t-mathrm-nbg-mathrm-mk">7. Unspecified Elementary Metatheory $\mathcal{E} \in \{\mathrm{I}\Sigma_1, \mathrm{PA}, \mathcal{T}, \mathrm{NBG}, \mathrm{MK}\}$</h2>
+<ul>
+<li>The script symbol $\mathcal{E}$ denotes an <strong>unspecified elementary metatheory</strong> chosen from $\{\mathrm{I}\Sigma_1,\ \mathrm{PA},\ \mathcal{T},\ \mathrm{NBG},\ \mathrm{MK}\}$, including both Peano Arithmetic ($\mathrm{PA}$) and Morse–Kelley class theory ($\mathrm{MK}$).</li>
+</ul>
+<hr>
+<h2 id="8-pure-ml-formula-generation-100-token-clickability-personal-symbol-pages-generated-symbols-html">8. Pure ML Formula Generation, 100% Token Clickability &amp; Personal Symbol Pages (<code>generated/symbols/*.html</code>)</h2>
+<ol>
+<li><strong>All Formula Information Must Come from ML Scripts</strong>:</li>
+</ol>
+<ul>
+<li>HTML renders formulas beautifully, and <strong>all information about a formula</strong> (whether Unicode or LaTeX) <strong>must be emitted directly by the ML scripts</strong> (<code>program/html_generator.ML</code>, <code>program/symbol_pages.ML</code>, <code>program/nbg_html_generator.ML</code>, <code>program/newchecker.ML</code>).</li>
+</ul>
+<ol>
+<li><strong>100% Clickable Formula Tokens &amp; Personal Symbol Pages</strong>:</li>
+</ol>
+<ul>
+<li>Every variable, constant, Greek metavariable, operator, and delimiter in both Unicode and LaTeX formulas is algorithmically wrapped in a clickable link.</li>
+<li>Metatheoretic, reflection, type, binder, and structural symbols link to their dedicated <strong>Personal Symbol Reference Pages</strong> (<code>../generated/symbols/*.html</code>, indexed at <a href="../generated/symbols/index.html"><code>../generated/symbols/index.html</code></a>), never to unrelated theorems.</li>
+</ul>
+<hr>
+<h2 id="9-nbg-file-headers-the-12-6-canonical-theory-proof-assistant-variants-mktd1-mktd2">9. <code>.nbg</code> File Headers &amp; The 12+6 Canonical Theory / Proof-Assistant Variants (<code>MKTD1</code> &amp; <code>MKTD2</code>)</h2>
+<ol>
+<li><strong>Keep <code>.nbg</code> Filenames with Explicit Theory Header</strong>:</li>
+</ol>
+<ul>
+<li>All <code>.nbg</code> files keep the <code>.nbg</code> extension and state at the very beginning of the file which theory and proof-assistant variant they target.</li>
+</ul>
+<ol>
+<li><strong>Default Theory (<code>MKTD</code> = Morse-Kelley + Tarski + Dunaev)</strong>:</li>
+</ol>
+<ul>
+<li><strong>12 Specific Variants</strong>: <code>&quot;NBG1&quot;</code>, <code>&quot;NBGT1&quot;</code>, <code>&quot;NBGTD1&quot;</code>, <code>&quot;MK1&quot;</code>, <code>&quot;MKT1&quot;</code>, <strong><code>&quot;MKTD1&quot;</code></strong> (Variant 1); <code>&quot;NBG2&quot;</code>, <code>&quot;NBGT2&quot;</code>, <code>&quot;NBGTD2&quot;</code>, <code>&quot;MK2&quot;</code>, <code>&quot;MKT2&quot;</code>, <strong><code>&quot;MKTD2&quot;</code></strong> (Variant 2).</li>
+<li>**6 Reserved Shared (<code>*</code>) Variants**: <code>&quot;NBG<em>&quot;</code>, <code>&quot;NBGT</em>&quot;</code>, <code>&quot;NBGTD<em>&quot;</code>, <code>&quot;MK</em>&quot;</code>, <code>&quot;MKT<em>&quot;</code>, <code>&quot;MKTD</em>&quot;</code>.</li>
+<li>Active development concentrates on <strong><code>MKTD1</code></strong> and <strong><code>MKTD2</code></strong>.</li>
+</ul>
+<hr>
+<h2 id="10-dependent-conditional-subscript-notation-if-vs-mathsf-if-mathsf-dep">10. Dependent Conditional Subscript Notation (<code>ifᵈₑₚ</code> vs. <code>$\mathsf{if}_{\mathsf{dep}}$</code>)</h2>
+<ul>
+<li>In Entry 3.24 and Variant 2 theorems (<code>thm_85_if_dep_true_branch</code>, <code>thm_86_if_dep_false_branch</code>), the dependent conditional renders as Unicode subscript <code>ifᵈₑₚ</code> (with <code>Tₑ</code>, <code>t₁</code>, <code>t₂</code>) in Unicode mode and <code>\mathsf{if}_{\mathsf{dep}}</code> in LaTeX mode. Raw ASCII <code>if_{dep}</code> is never displayed on rendered pages.</li>
+</ul>
+  </div>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<!--
+  AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
+  Source Markdown: docs/ARGON_ARCHITECTURAL_BLUEPRINT_AND_ROADMAP.md
+  Generator: /botworkspace/tools/render_site_markdown.py
+  Regenerate: python3 /botworkspace/tools/render_site_markdown.py
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OBELISK: Architectural Blueprint &amp; Staged Compiler Roadmap</title>
+  <link rel="alternate" type="text/markdown" href="ARGON_ARCHITECTURAL_BLUEPRINT_AND_ROADMAP.md">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --border: #334155;
+      --code-bg: #0b1120;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --text: #0f172a;
+        --muted: #475569;
+        --accent: #0284c7;
+        --border: #cbd5e1;
+        --code-bg: #f1f5f9;
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      margin: 0;
+      padding: 24px 16px 64px;
+    }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 28px 36px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    h1, h2, h3, h4 { color: var(--text); line-height: 1.3; margin-top: 1.5em; }
+    h1 { margin-top: 0.2em; font-size: 1.75rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+    h2 { font-size: 1.35rem; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      overflow-x: auto;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+    }
+    pre code { background: transparent; padding: 0; }
+    blockquote {
+      margin: 1em 0;
+      padding: 10px 16px;
+      border-left: 4px solid var(--accent);
+      background: var(--code-bg);
+      color: var(--muted);
+    }
+    .table-wrap { overflow-x: auto; margin: 1.2em 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { border: 1px solid var(--border); padding: 8px 12px; text-align: left; }
+    th { background: var(--code-bg); }
+    hr { border: none; border-top: 1px solid var(--border); margin: 2em 0; }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
+      <div><a href="ARGON_ARCHITECTURAL_BLUEPRINT_AND_ROADMAP.md">[Raw .md]</a></div>
+    </div>
+    <h1 id="obelisk-architectural-blueprint-staged-compiler-roadmap">OBELISK: Architectural Blueprint &amp; Staged Compiler Roadmap</h1>
+<h2 id="authored-by-gemini-4-argon-flagship-reasoning-architecture-model">Authored by Gemini 4 Argon (Flagship Reasoning &amp; Architecture Model)</h2>
+<h3 id="prepared-for-the-set-theory-prover-project-gemini-3-8-flash-small-brother">Prepared for the <code>set_theory_prover</code> Project &amp; Gemini 3.8 Flash (&quot;Small Brother&quot;)</h3>
+<hr>
+<h2 id="1-executive-vision-a-space-ship-grade-proof-assistant-propositions-as-types-programming-language">1. Executive Vision: A Space-Ship-Grade Proof Assistant &amp; Propositions-as-Types Programming Language</h2>
+<p><strong>Obelisk</strong> (<code>set_theory_prover</code>) is simultaneously:</p>
+<ol>
+<li><strong>A Machine-Checked Proof Assistant for Axiomatic Class-Set Theory</strong> (starting with von Neumann–Bernays–Gödel set theory <strong>NBG</strong>, then extending to Morse–Kelley <strong>MK</strong> + Tarski–Grothendieck Universes + Dunaev Tagged Pairs, and culminating in Staged Quotation/Antiquotation <strong>Quat</strong>); and</li>
+<li><strong>A Compiler for a Total Functional/Relational Programming Language</strong>, under the <strong>Curry–Howard–NBG Isomorphism</strong>:</li>
+</ol>
+<ul>
+<li><strong>Types of programming language objects are literally formulas of NBG ($\text{Fm}_{\text{NBG}}$)</strong> (at Stage I; extended NBG/MK formulas at Stage II; quoted/stratified meta-formulas at Stage III).</li>
+<li><strong>Source code terms (programs) of the programming language are literally formal proof objects of NBG theorems ($p : \varphi$)</strong>.</li>
+<li><strong>Program execution (normalization / cut-elimination)</strong> reduces proof redexes ($\beta$-reduction for $\to, \forall$; projection reduction for $\wedge$; case reduction for $\vee$; witness unpacking for $\exists$; comprehension $\beta$-reduction $z \in \{x \mid \varphi(x)\} \Longleftrightarrow \text{Set}(z) \wedge \varphi(z)$), guaranteeing that every well-typed program terminates and computes a verified witness or decision procedure.</li>
+</ul>
+<p>Because this system is built for the benefit of all sentients—where a single logical soundness bug is equivalent to a structural failure on a spacecraft—every inference rule in the trusted kernel must be <strong>mathematically airtight, total, capture-avoiding, and verified by real <code>Poly/ML 5.7.1</code> execution</strong>.</p>
+<hr>
+<h2 id="2-why-previous-prototypes-written-by-gemini-3-8-flash-struggled-root-cause-audit-by-gemini-4-argon">2. Why Previous Prototypes (Written by Gemini 3.8 Flash) Struggled: Root-Cause Audit by Gemini 4 Argon</h2>
+<p>Before designing the roadmap, <strong>Gemini 4 Argon</strong> conducted a deep formal audit of both Georgy Dunaev&#x27;s original SML prototypes (<code>program/newchecker.ML</code>, <code>program/types/*.ML</code>, <code>program/approaches/early_checker_prototype/checker.ML</code>) and the recent modules written by <strong>Gemini 3.8 Flash</strong> (<code>program/nbg_compiler.ML</code>, <code>program/verified_theorems.ML</code>, <code>program/dependent_typechecker.ML</code>).</p>
+<h3 id="2-1-critical-architectural-flaws-identified-in-flash-s-program-nbg-compiler-ml">2.1 Critical Architectural Flaws Identified in Flash&#x27;s <code>program/nbg_compiler.ML</code></h3>
+<ol>
+<li><strong>Uninhabited Quantifiers (<code>TPi</code> / <code>TSigma</code> Without Intro/Elim Rules):</strong></li>
+</ol>
+<ul>
+<li>Flash defined <code>TPi of string <em> Sort </em> Type</code> ($\forall x:\text{Sort}.\,\varphi(x)$) and <code>TSigma of string <em> Sort </em> Type</code> ($\exists x:\text{Sort}.\,\varphi(x)$) in <code>Type</code>, and wrote the NBG axioms (<code>axExtensionality</code>, <code>axPairing</code>, <code>axFoundation</code>) using <code>TPi</code> and <code>TSigma</code>.</li>
+<li><strong>However</strong>, <code>Expr</code> and <code>typeCheck</code> in Flash&#x27;s <code>nbg_compiler.ML</code> had <strong>zero constructors</strong> for introducing or eliminating $\forall$ (<code>TPi</code>) or $\exists$ (<code>TSigma</code>), <strong>zero capture-avoiding substitution</strong> $\varphi[x := t]$ on formulas, <strong>zero equality rules</strong> (<code>ERefl</code>, <code>ERewrite</code>), and <strong>zero class comprehension</strong> $\{x \mid \varphi(x)\}$!</li>
+<li>As a result, <code>nbg_compiler.ML</code> could only typecheck propositional tautologies (<code>id</code>, <code>fst</code>) and had to postulate <code>ax_russell_diagonal : (R in R &lt;-&gt; ~(R in R))</code> as an ad-hoc propositional hypothesis instead of deriving Russell&#x27;s theorem $\neg \text{Set}(\{x \mid x \notin x\})$ from the Comprehension Axiom Schema!</li>
+</ul>
+<ol>
+<li><strong>Broken Type Equality (<code>eqType</code> Ignoring Bound Variable Names):</strong></li>
+</ol>
+<ul>
+<li>In Flash&#x27;s <code>nbg_compiler.ML</code> (lines 95–96):</li>
+</ul>
+<pre><code class="language-sml">     | (TPi (x1, s1, b1), TPi (x2, s2, b2)) =&gt; s1 = s2 andalso eqType (b1, b2)</code></pre>
+<p>This ignored <code>x1</code> vs <code>x2</code> without alpha-renaming <code>b1</code> and <code>b2</code>! Under this buggy check, $\forall x.\,\forall y.\, x \in y$ was judged equal to $\forall y.\,\forall x.\, x \in y$, which is logically unsound!</p>
+<ol>
+<li><strong>Unsound <code>EAxiom</code> Backdoor:</strong></li>
+</ol>
+<ul>
+<li>In Flash&#x27;s <code>nbg_compiler.ML</code> (line 168):</li>
+</ul>
+<pre><code class="language-sml">     | EAxiom (name, ty) =&gt; ty</code></pre>
+<p>Any caller could write <code>EAxiom (&quot;anything&quot;, TBottom)</code> and the compiler accepted it as a valid proof of $\bot$ (<code>False</code>)!</p>
+<h3 id="2-2-critical-flaws-identified-in-flash-s-program-verified-theorems-ml">2.2 Critical Flaws Identified in Flash&#x27;s <code>program/verified_theorems.ML</code></h3>
+<ol>
+<li><strong>Conflation of Martin-Löf Type Theory with NBG Formulas-as-Types:</strong></li>
+</ol>
+<ul>
+<li>Flash encoded NBG formulas inside an MLTT checker (<code>dependent_typechecker.ML</code>) by wrapping boolean terms inside identity types <code>Id (TProp, App (App (Const &quot;In&quot;, x), y), Const &quot;true&quot;)</code>.</li>
+</ul>
+<ol>
+<li><strong><code>Const &quot;plan_&lt;name&gt;&quot;</code> Axiom-Lookup Shortcuts:</strong></li>
+</ol>
+<ul>
+<li>For over 25 theorems in <code>verified_theorems.ML</code> (<code>thm_21</code>–<code>thm_25</code>, <code>thm_27</code>–<code>thm_32</code>, <code>thm_35</code>–<code>thm_36</code>, <code>thm_43</code>–<code>thm_48</code>, <code>thm_51</code>–<code>thm_61</code>), Flash declared <code>(&quot;plan_&lt;name&gt;&quot;, &lt;theorem_statement&gt;)</code> in <code>globalTheoremContext</code> and set <code>proofProgram = Const &quot;plan_&lt;name&gt;&quot;</code>. That does not prove the theorem from NBG axioms—it assumes the theorem in the global environment and looks it up by name!</li>
+</ul>
+<ol>
+<li><strong>Unguarded Kuratowski Ordered Pairs on Proper Classes:</strong></li>
+</ol>
+<ul>
+<li><code>thm_35_def_kuratowski_opair</code> and <code>thm_36_def_relational_func</code> applied Kuratowski&#x27;s ordered pair $\langle A, B \rangle_K = \{\{A\}, \{A, B\}\}$ to arbitrary classes (<code>TClass</code>). In NBG/MK, if $A$ is a proper class ($\neg \text{Set}(A)$), then $\{A\} = \emptyset$, so $\langle A, B \rangle_K$ collapses and loses $A$! Georgy Dunaev explicitly solved this in <code>explanation1.txt</code> using <strong>Dunaev Tagged Pairs</strong> $[A, B]_D = \text{mark}(A, 1) \cup \text{mark}(B, 2)$ where $\text{mark}(X, k) = \{\langle u, k \rangle_K \mid u \in X\}$.</li>
+</ul>
+<hr>
+<h2 id="3-the-three-stage-architectural-plan">3. The Three-Stage Architectural Plan</h2>
+<p>To build Obelisk on rock-solid mathematical foundations without getting overwhelmed by attempting self-referential quotation at the same time as basic quantifier verification, <strong>Gemini 4 Argon</strong> establishes a strict <strong>Three-Stage Architecture</strong>:</p>
+<pre><code class="language-mermaid">flowchart LR
+    S1[&quot;Stage I: Pure NBG Compiler\n(Types = NBG Formulas\nTerms = NBG Proofs\nPredicative Comprehension)&quot;] --&gt; S2[&quot;Stage II: Extended Class Theory\n(MK Impredicative Comprehension\nDunaev Tagged Pairs [A,B]_D\nInjective Limitation of Size &amp; Global Choice)&quot;]
+    S2 --&gt; S3[&quot;Stage III: Staged Quotation &amp; Antiquotation\n(2-Stage Stabilized Term/TermTerm\n‹φ› Quote &amp; ⟦t⟧ Antiquote\nTarski Metalevel Stratification Tau &lt; Fau)&quot;]</code></pre>
+<hr>
+<h3 id="stage-i-pure-nbg-propositions-as-types-programming-language-compiler-program-nbg-compiler-ml">Stage I: Pure NBG Propositions-as-Types Programming Language &amp; Compiler (<code>program/nbg_compiler.ML</code>)</h3>
+<p>In <strong>Stage I</strong>, the compiler implements <strong>pure von Neumann–Bernays–Gödel (NBG) Set Theory</strong> as a typed programming language:</p>
+<h4 id="1-two-sorted-domain-of-discourse-sort-term">1. Two-Sorted Domain of Discourse (<code>Sort</code> &amp; <code>Term</code>)</h4>
+<p>Every object manipulated by quantifiers is a <strong>Class</strong> (<code>ClassSort</code>), with <strong>Sets</strong> (<code>SetSort</code>) acting as the sub-sort of classes $x$ that are elements of some class ($\text{Set}(x) \stackrel{\text{def}}{\Longleftrightarrow} \exists Y:\text{Class}.\, x \in Y$):</p>
+<ul>
+<li><strong>Variables &amp; Constants:</strong> <code>FVar of string</code>, <code>BVar of int</code>, <code>Const of string</code></li>
+<li><strong>Class Comprehension Term:</strong> <code>CKappa of string * Type</code> representing $\{x \mid \varphi(x)\}$</li>
+<li><strong>Hilbert Choice / Definite Description Terms:</strong> <code>CEps of string <em> Type</code> ($\varepsilon x.\,\varphi(x)$), <code>CIota of string </em> Type</code> ($\iota x.\,\varphi(x)$)</li>
+<li><strong>Built-in Set/Class Constructors:</strong></li>
+<li>$\emptyset = \{x \mid \bot\}$ (<code>CEmpty</code>)</li>
+<li>$V = \{x \mid \top\}$ (<code>CUniv</code>)</li>
+<li>$\{a\} = \{x \mid x = a\}$ (<code>CSingleton a</code>)</li>
+<li>$\{a, b\} = \{x \mid x = a \vee x = b\}$ (<code>CUPair (a, b)</code>)</li>
+<li>$\langle a, b \rangle_K = \{\{a\}, \{a, b\}\}$ (<code>COPair (a, b)</code>, valid for sets $a, b$)</li>
+<li>$A \cup B = \{x \mid x \in A \vee x \in B\}$ (<code>CBinUnion (A, B)</code>)</li>
+<li>$A \cap B = \{x \mid x \in A \wedge x \in B\}$ (<code>CBinInter (A, B)</code>)</li>
+<li>$\bigcup A = \{x \mid \exists y:\text{Set}.\, x \in y \wedge y \in A\}$ (<code>CUnion A</code>)</li>
+<li>$\bigcap A = \{x \mid \forall y:\text{Set}.\, y \in A \to x \in y\}$ (<code>CInter A</code>)</li>
+<li>$\mathcal{P}(A) = \{x \mid x \subseteq A\}$ (<code>CPower A</code>)</li>
+<li>$\text{Succ}(x) = x \cup \{x\}$ (<code>CSucc x</code>), $\omega$ (<code>COmega</code>), $\text{On}$ (<code>COn</code>).</li>
+</ul>
+<h4 id="2-formulas-of-nbg-types-of-the-programming-language-type">2. Formulas of NBG = Types of the Programming Language (<code>Type</code>)</h4>
+<p>Every type in the programming language is an NBG formula $\varphi \in \text{Fm}_{\text{NBG}}$:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>NBG Formula $\varphi$</th>
+<th>Compiler Type (<code>Type</code>)</th>
+<th>Programming Language Type Interpretation</th>
+</tr></thead><tbody>
+<tr>
+<td>$t_1 \in t_2$</td>
+<td><code>TIn (t1, t2)</code></td>
+<td>Membership witness type</td>
+</tr>
+<tr>
+<td>$t_1 = t_2$</td>
+<td><code>TEq (t1, t2)</code></td>
+<td>Identity / equality witness type</td>
+</tr>
+<tr>
+<td>$\text{Set}(t)$</td>
+<td><code>TSet t</code></td>
+<td>Smallness / set-hood certificate ($\exists Y.\, t \in Y$)</td>
+</tr>
+<tr>
+<td>$t_1 \subseteq t_2$</td>
+<td><code>TSub (t1, t2)</code></td>
+<td>Subclass transformer $\forall z.\, z \in t_1 \to z \in t_2$</td>
+</tr>
+<tr>
+<td>$\top$ / $\bot$</td>
+<td><code>TTop</code> / <code>TBottom</code></td>
+<td>Unit type <code>unit</code> / Empty type <code>void</code></td>
+</tr>
+<tr>
+<td>$\varphi \to \psi$</td>
+<td><code>TArrow (phi, psi)</code></td>
+<td>Function type $\varphi \to \psi$</td>
+</tr>
+<tr>
+<td>$\varphi \wedge \psi$</td>
+<td><code>TProd (phi, psi)</code></td>
+<td>Product / record type $\varphi \times \psi$</td>
+</tr>
+<tr>
+<td>$\varphi \vee \psi$</td>
+<td><code>TSum (phi, psi)</code></td>
+<td>Disjoint union / sum type $\varphi + \psi$</td>
+</tr>
+<tr>
+<td>$\neg \varphi$</td>
+<td><code>TNeg phi</code></td>
+<td>Continuation / refutation type $\varphi \to \bot$</td>
+</tr>
+<tr>
+<td>$\varphi \leftrightarrow \psi$</td>
+<td><code>TIff (phi, psi)</code></td>
+<td>Logical isomorphism $(\varphi \to \psi) \times (\psi \to \varphi)$</td>
+</tr>
+<tr>
+<td>$\forall x:S.\,\varphi(x)$</td>
+<td><code>TPi (x, S, phi)</code></td>
+<td>Dependent product over classes/sets $\prod_{x:S} \varphi(x)$</td>
+</tr>
+<tr>
+<td>$\exists x:S.\,\varphi(x)$</td>
+<td><code>TSigma (x, S, phi)</code></td>
+<td>Dependent sum (witness package) $\sum_{x:S} \varphi(x)$</td>
+</tr>
+</tbody></table></div>
+<h4 id="3-proof-terms-source-code-expressions-expr">3. Proof Terms = Source Code Expressions (<code>Expr</code>)</h4>
+<div class="table-wrap"><table><thead><tr>
+<th>Programming Construct</th>
+<th><code>Expr</code> Constructor</th>
+<th>Logical Inference Rule</th>
+</tr></thead><tbody>
+<tr>
+<td>Variable <code>x</code></td>
+<td><code>EVar x</code></td>
+<td>Hypothesis lookup $(x : \varphi) \in \Gamma$</td>
+</tr>
+<tr>
+<td>Function $\lambda (x:\varphi).\,e$</td>
+<td><code>ELam (x, phi, e)</code></td>
+<td>$\to$-Introduction</td>
+</tr>
+<tr>
+<td>Application $e_1\,e_2$</td>
+<td><code>EApp (e1, e2)</code></td>
+<td>$\to$-Elimination (Modus Ponens)</td>
+</tr>
+<tr>
+<td>Pair $\langle e_1, e_2 \rangle$</td>
+<td><code>EPair (e1, e2)</code></td>
+<td>$\wedge$-Introduction</td>
+</tr>
+<tr>
+<td>Projections $\pi_1(e), \pi_2(e)$</td>
+<td><code>EFst e</code>, <code>ESnd e</code></td>
+<td>$\wedge$-Elimination</td>
+</tr>
+<tr>
+<td>Injections $\text{inl}(e), \text{inr}(e)$</td>
+<td><code>EInl (e, psi)</code>, <code>EInr (phi, e)</code></td>
+<td>$\vee$-Introduction</td>
+</tr>
+<tr>
+<td>Pattern match <code>case</code></td>
+<td><code>ECase (e, x, e1, y, e2)</code></td>
+<td>$\vee$-Elimination</td>
+</tr>
+<tr>
+<td>Ex falso <code>abort</code></td>
+<td><code>EAbort (e, phi)</code></td>
+<td>$\bot$-Elimination</td>
+</tr>
+<tr>
+<td>Classical <code>dne</code> / <code>lem</code></td>
+<td><code>EDNE (e, phi)</code>, <code>ELEM phi</code></td>
+<td>Classical Double Negation / Excluded Middle</td>
+</tr>
+<tr>
+<td>Term abstraction $\Lambda (x:S).\,e$</td>
+<td><code>ETLam (x, S, e)</code></td>
+<td>$\forall$-Introduction (<strong>requires freshness $x \notin \text{FV}(\Gamma)$</strong>)</td>
+</tr>
+<tr>
+<td>Term application $e\,[t]$</td>
+<td><code>ETApp (e, t)</code></td>
+<td>$\forall$-Elimination (<strong>returns $\varphi[x := t]$ via capture-avoiding substitution</strong>)</td>
+</tr>
+<tr>
+<td>Existential package $\text{pack}\langle t, e \rangle$</td>
+<td><code>EPack (t, e, TSigma(x,S,phi))</code></td>
+<td>$\exists$-Introduction (<strong>checks $e : \varphi[x := t]$</strong>)</td>
+</tr>
+<tr>
+<td>Existential unpack <code>let ⟨x, h⟩ = e1 in e2</code></td>
+<td><code>EUnpack (e1, x, h, e2)</code></td>
+<td>$\exists$-Elimination (<strong>requires $x \notin \text{FV}(\psi) \cup \text{FV}(\Gamma)$</strong>)</td>
+</tr>
+<tr>
+<td>Reflexivity <code>refl(t)</code></td>
+<td><code>ERefl t</code></td>
+<td>$=$-Introduction ($t = t$)</td>
+</tr>
+<tr>
+<td>Leibniz rewrite <code>rewrite(eq, x.φ, p)</code></td>
+<td><code>ERewrite (eq, x, phi, p)</code></td>
+<td>$=$-Elimination ($t_1 = t_2 \to \varphi[x:=t_1] \to \varphi[x:=t_2]$)</td>
+</tr>
+<tr>
+<td>Definitional unfold/fold</td>
+<td><code>EUnfold (e, ty)</code> / <code>EFold (e, ty)</code></td>
+<td>Definitional conversion ($\text{convType}$)</td>
+</tr>
+<tr>
+<td>Comprehension schema</td>
+<td><code>EAxCompr (x, phi, z)</code></td>
+<td>Checks NBG predicativity of $\varphi$, yields $z \in \{x \mid \varphi(x)\} \leftrightarrow (\text{Set}(z) \wedge \varphi[x := z])$</td>
+</tr>
+</tbody></table></div>
+<h4 id="4-static-enforcement-of-nbg-predicative-comprehension">4. Static Enforcement of NBG Predicative Comprehension</h4>
+<p>In pure NBG (Stage I), Bernays–Gödel class comprehension $\{x \mid \varphi(x)\}$ is <strong>predicative</strong>: quantified variables inside $\varphi(x)$ must have type <strong>Set</strong> (<code>SetSort</code>), or the compiler must run in <code>MK_Impredicative</code> mode (Stage II) if $\varphi(x)$ quantifies over arbitrary classes (<code>ClassSort</code>, the default type). (Note: bound quantifiers $\forall(x \in Y), \psi(x)$ and $\exists(x \in Y), \psi(x)$ are short forms for $\forall(x:\mathsf{Class}), (x \in Y) \rightarrow \psi(x)$ and $\exists(x:\mathsf{Class}), (x \in Y) \land \psi(x)$.)</p>
+<ul>
+<li>The function <code>isPredicativeFormula : Type -&gt; bool</code> statically inspects the AST of $\varphi(x)$ and verifies that every <code>TPi (_, s, _)</code> and <code>TSigma (_, s, _)</code> inside $\varphi(x)$ has <code>s = SetSort</code>.</li>
+<li>In <code>NBG_Predicative</code> mode, <code>EAxCompr (x, phi, z)</code> rejects impredicative $\varphi$ with a clear <code>TypeError</code>.</li>
+</ul>
+<hr>
+<h3 id="stage-ii-extended-class-theory-mk-impredicative-comprehension-dunaev-tagged-pairs-universes-choice">Stage II: Extended Class Theory (MK Impredicative Comprehension, Dunaev Tagged Pairs, Universes &amp; Choice)</h3>
+<p>Once Stage I is solid, <strong>Stage II</strong> extends pure NBG along four orthogonal axes controlled by <code>TheoryLevel</code>:</p>
+<ol>
+<li><strong>Morse–Kelley Impredicative Comprehension (<code>MK_Impredicative</code>):</strong></li>
+</ol>
+<ul>
+<li>Lifts the <code>SetSort</code> restriction in <code>EAxCompr (x, phi, z)</code> so $\varphi(x)$ may quantify over arbitrary classes $\forall Y:\text{Class}$, enabling impredicative inductive definitions and truth classes on bounded sub-universes.</li>
+</ul>
+<ol>
+<li><strong>Dunaev Tagged Pairs (<code>CDunaevPair (A, B)</code>, <code>CPr1 P</code>, <code>CPr2 P</code>):</strong></li>
+</ol>
+<ul>
+<li>Replaces Kuratowski pairing for general classes with Georgy Dunaev&#x27;s disjointly tagged union:</li>
+</ul>
+<p>$$\text{mark}(X, k) = \{ \langle u, k \rangle_K \mid u \in X \}, \qquad [A, B]_D = \text{mark}(A, 1) \cup \text{mark}(B, 2)$$</p>
+<p>$$\text{pr}_1(P) = \{ u \mid \langle u, 1 \rangle_K \in P \}, \qquad \text{pr}_2(P) = \{ u \mid \langle u, 2 \rangle_K \in P \}$$</p>
+<ul>
+<li>Satisfies $\text{pr}_1([A, B]_D) = A$ and $\text{pr}_2([A, B]_D) = B$ unconditionally for <strong>all</strong> classes $A, B$ (both sets and proper classes!), because elements $u \in A$ are always sets by the Heredity Axiom ($u \in A \to \text{Set}(u)$), so $\langle u, 1 \rangle_K$ is always a set!</li>
+</ul>
+<ol>
+<li><strong>Corrected Injective Limitation of Size ($\preceq$ instead of $\subseteq$):</strong></li>
+</ol>
+<ul>
+<li>Fixes Dunaev&#x27;s original <code>newchecker.ML</code> line 5351 typo (<code>X ⊆ Y</code>) by stating Limitation of Size via <strong>injective mapping</strong>:</li>
+</ul>
+<p>$$\forall X:\text{Class}.\, \text{ProperClass}(X) \Longleftrightarrow \exists F:\text{Class}.\, \text{Injective}(F, V, X)$$</p>
+<ol>
+<li><strong>Extensional Global Choice ($\varepsilon$) &amp; Tarski–Grothendieck Universes (<code>MK_TarskiUniverses</code>):</strong></li>
+</ol>
+<ul>
+<li>Adds Both&#x27;s Extensionality Axiom for $\varepsilon$:</li>
+</ul>
+<p>$$\forall x.\,(\varphi(x) \leftrightarrow \psi(x)) \longrightarrow (\varepsilon x.\,\varphi(x)) = (\varepsilon x.\,\psi(x))$$</p>
+<ul>
+<li>Adds the Tarski Universe hierarchy ($\forall x:\text{Set}.\,\exists U:\text{Set}.\, x \in U \wedge \text{GrothendieckUniverse}(U)$) for categorical formalization.</li>
+</ul>
+<hr>
+<h3 id="stage-iii-staged-quotation-antiquotation-program-nbg-quat-stage3-ml">Stage III: Staged Quotation (<code>‹...›</code>) &amp; Antiquotation (<code>⟦...⟧</code>) (<code>program/nbg_quat_stage3.ML</code>)</h3>
+<p>Why did Georgy Dunaev write in <code>explanation1.txt</code>:</p>
+<blockquote><em>&quot;Why do we have <code>Term</code> and <code>TermTerm</code> and no further? Because the process stabilizes here, they start to express later adjustments without extra rules (it is proven in article about Quat).&quot;</em></blockquote>
+<p>Because unrestricted self-referential quotation in a single unstratified language either:</p>
+<ol>
+<li>Requires <strong>polymorphic recursion</strong> (<code>&#x27;a Term</code> calling <code>(&#x27;a Term) Term</code>), which Standard ML (<code>Poly/ML</code>) rejects at compile time; or</li>
+<li>Violates <strong>Tarski&#x27;s Undefinability of Truth Theorem</strong>, allowing the diagonal construction of the Liar sentence $L \leftrightarrow \neg \text{Holds}(\tau, \ulcorner L \urcorner)$.</li>
+</ol>
+<p><strong>Stage III</strong> (<code>program/nbg_quat_stage3.ML</code>) resolves both problems cleanly:</p>
+<ol>
+<li><strong>2-Stage Syntactic Stabilization (<code>Stage1</code> Object Syntax vs <code>Stage2</code> Quoted Meta-Syntax):</strong></li>
+</ol>
+<ul>
+<li><strong>Stage 1 (<code>NBGCompiler.Term</code> &amp; <code>NBGCompiler.Type</code>):</strong> Object-level NBG classes and formulas.</li>
+<li><strong>Stage 2 (<code>Stage2Term</code> &amp; <code>Stage2Fm</code>):</strong> Quoted syntactic templates containing holes (antiquotations <code>QAntiTerm</code> / <code>QAntiFm</code>, schematic meta-variables <code>QMetaVar</code>, and nested quotations <code>QQuote</code>). Because nested quotations of depth $\ge 2$ reduce via structural splicing into <code>Stage2</code>, the AST hierarchy stabilizes at exactly 2 stages with zero SML polymorphic recursion!</li>
+</ul>
+<ol>
+<li><strong>Static Valuation &amp; Splicing (<code>evalQuoteTerm</code> &amp; <code>evalQuoteFm</code>):</strong></li>
+</ol>
+<ul>
+<li>Given a meta-environment $\sigma$ binding antiquoted holes to Stage 1 <code>NBGCompiler.Term</code> and <code>NBGCompiler.Type</code> objects, <code>evalQuoteFm sigma qfm</code> splices all antiquotations <code>⟦...⟧</code> and produces a concrete Stage 1 <code>NBGCompiler.Type</code> (NBG formula) that can be directly typechecked by the Stage I/II kernel!</li>
+</ul>
+<ol>
+<li><strong>Tarski Metalevel Stratification Guard (<code>TheoryId = Tau | Fau | Qau | Wau</code>):</strong></li>
+</ol>
+<ul>
+<li>Each theory carries a strict Tarski level (<code>level(Tau) = 0 &lt; level(Fau) = 1 &lt; level(Qau) = 2 &lt; level(Wau) = 3</code>).</li>
+<li>A truth/provability predicate <code>Holds(targetTheory, quotedFm)</code> is well-formed in <code>ambientTheory</code> <strong>if and only if</strong> <code>level(targetTheory) &lt; level(ambientTheory)</code>.</li>
+<li>Any attempt to construct a self-referential <code>Holds(Tau, ‹... Holds(Tau, x) ...›)</code> inside <code>Tau</code> is statically rejected by <code>checkStratification</code>, blocking the Liar paradox while permitting <code>Fau</code> (the meta-theory) to prove schema theorems and soundness properties about <code>Tau</code> (object NBG)!</li>
+</ul>
+<hr>
+<h2 id="4-division-of-labor-gemini-4-argon-vs-gemini-3-8-flash-small-brother">4. Division of Labor: Gemini 4 Argon vs. Gemini 3.8 Flash (&quot;Small Brother&quot;)</h2>
+<h3 id="tasks-executed-directly-by-gemini-4-argon-high-complexity-kernel-soundness-deep-logic">Tasks Executed Directly by Gemini 4 Argon (High Complexity / Kernel Soundness / Deep Logic)</h3>
+<ul>
+<li><strong>TKT-610 (<code>argon-exec</code>):</strong> Architect the 3-Stage Obelisk Blueprint (<code>docs/ARGON_ARCHITECTURAL_BLUEPRINT_AND_ROADMAP.md</code>) and create the structured backlog for Argon and Flash.</li>
+<li><strong>TKT-611 (<code>argon-exec</code>):</strong> Complete Stage I/II NBG Propositions-as-Types Compiler in <code>program/nbg_compiler.ML</code> (capture-avoiding substitution, alpha-equivalence, definitional unfolding, $\forall$/$\exists$ intro/elim with eigenvariable freshness checks, Leibniz equality rewriting, predicativity checker, and genuine machine-checked NBG proofs including Russell&#x27;s theorem $\neg \text{Set}(\{x \mid x \notin x\})$ from pure comprehension).</li>
+<li><strong>TKT-612 (<code>argon-exec</code>):</strong> Replace <code>Const &quot;plan_...&quot;</code> shortcuts in <code>program/verified_theorems.ML</code> with real multi-step proof derivations, guard Kuratowski pairs with <code>IsSet</code>, add Dunaev tagged pairs, and regenerate <code>dist/obelisk_unfolded.ML</code>.</li>
+<li><strong>TKT-613 (<code>argon-exec</code>):</strong> Implement Stage III Staged Quotation &amp; Antiquotation Engine (<code>program/nbg_quat_stage3.ML</code>) with 2-stage stabilization (<code>Stage1</code>/<code>Stage2</code>), antiquotation splicing, and Tarski stratification guard (<code>Tau &lt; Fau</code>).</li>
+<li><strong>TKT-614 (<code>argon-exec</code>):</strong> Complete all 14 missing <code>checkPlus</code> proof-validator branches in <code>program/newchecker.ML</code> (<code>PMP_prf</code>, <code>PCut_prf</code>, <code>PImplL_prf</code>, <code>PWeakening_prf</code>, <code>PWeak_prf</code>, <code>PInCtx_prf</code>, <code>PComprAx_prf</code>, <code>PEpsIndAx_prf</code>, <code>PPowSetAx_prf</code>, <code>PEqDef_prf</code>, <code>PIffDef_prf</code>, <code>PSubDef_prf</code>, <code>PSetDef_prf</code>, <code>PPowDef_prf</code>).</li>
+<li><strong>TKT-615 (<code>argon-exec</code>):</strong> Fix malformed TPTP FOF export in <code>tools/export_tptp.py</code> &amp; <code>export/morse_kelley.p</code> (replacing unbound <code>phi(X)</code> with valid Gödel–Bernays finite axiomatization + comprehension instances) and fix non-terminating <code>FORALL_num_hlp</code> in <code>program/lcf.ML</code>.</li>
+</ul>
+<h3 id="tasks-planned-by-gemini-4-argon-for-gemini-3-8-flash-for-flash-fast-repeatable-well-scoped-workflows">Tasks Planned by Gemini 4 Argon for Gemini 3.8 Flash (<code>for-flash</code> — Fast, Repeatable, Well-Scoped Workflows)</h3>
+<p>Each <code>for-flash</code> ticket includes exact file paths, SML type signatures, step-by-step instructions, and verification commands so Flash can execute them reliably without getting stuck:</p>
+<ul>
+<li><strong>TKT-616 (<code>for-flash</code>):</strong> Standard Library Expansion in <code>NBGCompiler</code> — De Morgan Laws, Biconditional Commutativity/Transitivity, and Difference Class $A \setminus B = \{x \mid x \in A \wedge x \notin B\}$ Theorems.</li>
+<li><strong>TKT-617 (<code>for-flash</code>):</strong> Dunaev Tagged Pair Standard Library in <code>NBGCompiler</code> — Formalize Cartesian Product $A \times_D B$, Converse Relation $R^{-1}$, and Relation Composition $S \circ R$ using <code>CDunaevPair</code>.</li>
+<li><strong>TKT-618 (<code>for-flash</code>):</strong> Proof Term Normalization &amp; Pretty-Printer CLI (<code>tools/nbg_repl.py</code>) — Build an interactive CLI and batch runner that pretty-prints <code>NBGCompiler.Expr</code> proof terms and their normalized forms.</li>
+<li><strong>TKT-619 (<code>for-flash</code>):</strong> Automated First-Order Tactic Combinators (<code>program/nbg_tactics.ML</code>) — Build repeatable proof-search combinators (<code>introAll</code>, <code>splitConj</code>, <code>rewriteEq</code>, <code>unfoldDef</code>) on top of Argon&#x27;s kernel in <code>NBGCompiler</code>.</li>
+<li><strong>TKT-620 (<code>for-flash</code>):</strong> Ordinal Arithmetic Lemmas in <code>NBGCompiler</code> — Prove $\emptyset \in \text{Succ}(\emptyset)$, $\forall x.\, x \subseteq \text{Succ}(x)$, and transitivity of $\text{Succ}(\emptyset)$ in <code>NBGCompiler</code>.</li>
+<li><strong>TKT-621 (<code>for-flash</code>):</strong> Stage III Meta-Theorem Library in <code>NBGQuatStage3</code> — Add quoted schema templates for Law of Excluded Middle, Double Negation, and Comprehension Schema instances with Python regression tests.</li>
+</ul>
+  </div>
+</body>
+</html>
