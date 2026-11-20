@@ -16,7 +16,7 @@ Directly generated from `newchecker.ML` via `types/order_metatheory.txt`.
 - **MKTD2-system JSON Database:** [nbg_library.json](nbg_library.json)
 - **Plain-Text Specification:** [output.txt](output.txt)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.90) (3.01-3.90)
+## 3. Set/Class-Theoretic Foundations (3.01-3.98) (3.01-3.98)
 
 Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 

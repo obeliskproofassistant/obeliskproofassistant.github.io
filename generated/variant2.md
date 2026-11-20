@@ -11,7 +11,7 @@
 
 Agent-friendly Markdown edition generated directly from `set_theory_prover/program/verified_theorems.ML` via `nbg_html_generator.ML` for **MKTD2-system / MKTD2-prover (MKTD2-framework, MKTD2-theory)**.
 
-- **Live Kernel Audit:** 225/225 Mechanically Type-Checked Records (202 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+- **Live Kernel Audit:** 230/230 Mechanically Type-Checked Records (207 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 - **Machine-Readable JSON Database:** [nbg_library.json](nbg_library.json)
 - **MKTD1-system Complete Entity Database (Markdown):** [manual.md](manual.md)
 
@@ -1589,4 +1589,39 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (Unicode):** `Π(U:Class), Π(Vstage:Class), Π(RankOp:Class), Π(kap:Class), Π(x:Class), (((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap)))) → ((x ∈ U) → (x ∈ ValOf(Vstage, kap))))`
 - **Statement (ANSII):** `Pi(U:Class), Pi(Vstage:Class), Pi(RankOp:Class), Pi(kap:Class), Pi(x:Class), (((((x in U) -> (SuccOrd(ValOf(RankOp, x)) in kap)) * ((x in U) -> (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) * (((SuccOrd(ValOf(RankOp, x)) in kap) * (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) -> (x in ValOf(Vstage, kap)))) -> ((x in U) -> (x in ValOf(Vstage, kap))))`
 - **Constructive Proof Term:** `(λ(U:Class). (λ(Vstage:Class). (λ(RankOp:Class). (λ(kap:Class). (λ(x:Class). (λ(h:((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap))))). (λ(hxU:(x ∈ U)). (snd(h) ⟨(fst(fst(h)) hxU), (snd(fst(h)) hxU)⟩))))))))`
+
+### NBG-226 `thm_domain_restriction_elem_iff` (Derived)
+
+- **Identifier:** `thm_domain_restriction_elem_iff` (`NBG-226`, kind: `Derived`)
+- **Statement (Unicode):** `Π(F:Class), Π(A:Class), Π(z:Class), ((((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))) × (((z ∈ F) × (pr1(z) ∈ A)) → (z ∈ Restrict(F, A)))) → ((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))))`
+- **Statement (ANSII):** `Pi(F:Class), Pi(A:Class), Pi(z:Class), ((((z in Restrict(F, A)) -> ((z in F) * (pr1(z) in A))) * (((z in F) * (pr1(z) in A)) -> (z in Restrict(F, A)))) -> ((z in Restrict(F, A)) -> ((z in F) * (pr1(z) in A))))`
+- **Constructive Proof Term:** `(λ(F:Class). (λ(A:Class). (λ(z:Class). (λ(h:(((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))) × (((z ∈ F) × (pr1(z) ∈ A)) → (z ∈ Restrict(F, A))))). fst(h)))))`
+
+### NBG-227 `thm_transfinite_approx_coherence_step` (Derived)
+
+- **Identifier:** `thm_transfinite_approx_coherence_step` (`NBG-227`, kind: `Derived`)
+- **Statement (Unicode):** `Π(G:Class), Π(g:Class), Π(h:Class), Π(B:Class), (((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(G, Restrict(g, B)) = ValOf(h, B)))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B)))) → ((ValOf(g, B) = ValOf(G, Restrict(g, B))) × (ValOf(G, Restrict(g, B)) = ValOf(h, B))))`
+- **Statement (ANSII):** `Pi(G:Class), Pi(g:Class), Pi(h:Class), Pi(B:Class), (((((B in Dom(g)) -> (ValOf(g, B) = ValOf(G, Restrict(g, B)))) * (((B in Dom(h)) * (Restrict(g, B) = Restrict(h, B))) -> (ValOf(G, Restrict(g, B)) = ValOf(h, B)))) * (((B in Dom(g)) * (B in Dom(h))) * (Restrict(g, B) = Restrict(h, B)))) -> ((ValOf(g, B) = ValOf(G, Restrict(g, B))) * (ValOf(G, Restrict(g, B)) = ValOf(h, B))))`
+- **Constructive Proof Term:** `(λ(G:Class). (λ(g:Class). (λ(h:Class). (λ(B:Class). (λ(hyp:((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(G, Restrict(g, B)) = ValOf(h, B)))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B))))). ⟨(fst(fst(hyp)) fst(fst(snd(hyp)))), (snd(fst(hyp)) ⟨snd(fst(snd(hyp))), snd(snd(hyp))⟩)⟩)))))`
+
+### NBG-228 `thm_transfinite_recursion_equation_step` (Derived)
+
+- **Identifier:** `thm_transfinite_recursion_equation_step` (`NBG-228`, kind: `Derived`)
+- **Statement (Unicode):** `Π(G:Class), Π(F:Class), Π(g:Class), Π(A:Class), (((((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A)))) × (((ValOf(F, A) = ValOf(g, A)) × (ValOf(g, A) = ValOf(G, Restrict(F, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A))))) → (((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))))`
+- **Statement (ANSII):** `Pi(G:Class), Pi(F:Class), Pi(g:Class), Pi(A:Class), (((((A in Dom(g)) * (Restrict(F, A) = Restrict(g, A))) -> (ValOf(g, A) = ValOf(G, Restrict(F, A)))) * (((ValOf(F, A) = ValOf(g, A)) * (ValOf(g, A) = ValOf(G, Restrict(F, A)))) -> (ValOf(F, A) = ValOf(G, Restrict(F, A))))) -> (((ValOf(F, A) = ValOf(g, A)) * ((A in Dom(g)) * (Restrict(F, A) = Restrict(g, A)))) -> (ValOf(F, A) = ValOf(G, Restrict(F, A)))))`
+- **Constructive Proof Term:** `(λ(G:Class). (λ(F:Class). (λ(g:Class). (λ(A:Class). (λ(h:((((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A)))) × (((ValOf(F, A) = ValOf(g, A)) × (ValOf(g, A) = ValOf(G, Restrict(F, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))))). (λ(w:((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))))). (snd(h) ⟨fst(w), (fst(h) snd(w))⟩)))))))`
+
+### NBG-229 `thm_transfinite_recursion_uniqueness_step` (Derived)
+
+- **Identifier:** `thm_transfinite_recursion_uniqueness_step` (`NBG-229`, kind: `Derived`)
+- **Statement (Unicode):** `Π(G:Class), Π(F:Class), Π(H:Class), Π(A:Class), (((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(G, Restrict(F, A)) = ValOf(H, A)))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A)))) → ((ValOf(F, A) = ValOf(G, Restrict(F, A))) × (ValOf(G, Restrict(F, A)) = ValOf(H, A))))`
+- **Statement (ANSII):** `Pi(G:Class), Pi(F:Class), Pi(H:Class), Pi(A:Class), (((((A in On) -> (ValOf(F, A) = ValOf(G, Restrict(F, A)))) * (((A in On) * (Restrict(F, A) = Restrict(H, A))) -> (ValOf(G, Restrict(F, A)) = ValOf(H, A)))) * ((A in On) * (Restrict(F, A) = Restrict(H, A)))) -> ((ValOf(F, A) = ValOf(G, Restrict(F, A))) * (ValOf(G, Restrict(F, A)) = ValOf(H, A))))`
+- **Constructive Proof Term:** `(λ(G:Class). (λ(F:Class). (λ(H:Class). (λ(A:Class). (λ(hyp:((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(G, Restrict(F, A)) = ValOf(H, A)))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A))))). ⟨(fst(fst(hyp)) fst(snd(hyp))), (snd(fst(hyp)) snd(hyp))⟩)))))`
+
+### NBG-230 `thm_von_neumann_hierarchy_by_transfinite_recursion_step` (Derived)
+
+- **Identifier:** `thm_von_neumann_hierarchy_by_transfinite_recursion_step` (`NBG-230`, kind: `Derived`)
+- **Statement (Unicode):** `Π(V:Class), Π(A:Class), Π(Ufam:Class), ((((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) × (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) → (ValOf(V, A) = Ufam))) → (ValOf(V, A) = Ufam))`
+- **Statement (ANSII):** `Pi(V:Class), Pi(A:Class), Pi(Ufam:Class), ((((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) * (VonNeumannStepG(Restrict(V, A)) = Ufam)) * (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) * (VonNeumannStepG(Restrict(V, A)) = Ufam)) -> (ValOf(V, A) = Ufam))) -> (ValOf(V, A) = Ufam))`
+- **Constructive Proof Term:** `(λ(V:Class). (λ(A:Class). (λ(Ufam:Class). (λ(h:(((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) × (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) → (ValOf(V, A) = Ufam)))). (snd(h) fst(h))))))`
 

@@ -9,7 +9,7 @@
 
 # Obelisk Proof Assistant — Verified Theorems & Inference Rules Gallery (MKTD1-system)
 
-Agent-friendly Markdown edition of all 35 kernel theorems and inference rules in `MKTD1-system`.
+Agent-friendly Markdown edition of all 39 kernel theorems and inference rules in `MKTD1-system`.
 
 - **Machine-Readable JSON Database:** [theory_db.json](theory_db.json)
 - **MKTD2-system Formulas-as-Types Markdown:** [nbg_library.md](nbg_library.md)
@@ -87,7 +87,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Kernel Note:** Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.90) (3.01-3.90)
+## 3. Set/Class-Theoretic Foundations (3.01-3.98) (3.01-3.98)
 
 Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 
@@ -312,6 +312,42 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Proof Constructor:** `thm_universe_eq_canonical_v_inter_on (PForaR_prf / PEqDef_prf / PAndR_prf)`
 - **Kernel Note:** Complete machine-checked MKTD1-system formalization (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm, verified by Thm.checkPipeline and Thm.slow_check across 45 constituent lemmas with zero cheating axioms): combining Step 2 (V_(U n On) c U) and Step 3 (U c V_(U n On)) via class equality antisymmetry yields U = valOf(VStageGraph, U n On).
 - **Standalone Certificate:** [proofs/ThmUniverseEqVonNeumannStageInterOn.html](proofs/ThmUniverseEqVonNeumannStageInterOn.html)
+
+### 3.95 `ThmTransfiniteApproxCoherence` — Step 1 of Transfinite Recursion on On: coherence of approximations on common ordinal domains (Theorem)
+
+- **Identifier:** `ThmTransfiniteApproxCoherence` (entry `3.95`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(G:Class)∀(g:Class)∀(h:Class)∀(B:Class)((TransfiniteApprox(G,g)∧(TransfiniteApprox(G,h)∧((B∈(Dom(g)∩Dom(h)))∧(Restrict(g,B)=Restrict(h,B)))))—→((g(B)=G(Restrict(g,B)))∧(g(B)=h(B)))))`
+- **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([h@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])∧(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧(([B@Class.Expression]∈(Dom([g@Class.Expression])∩Dom([h@Class.Expression])))∧(Restrict([g@Class.Expression],[B@Class.Expression])=Restrict([h@Class.Expression],[B@Class.Expression])))))—→(([g@Class.Expression]([B@Class.Expression])=[G@Class.Expression](Restrict([g@Class.Expression],[B@Class.Expression])))∧([g@Class.Expression]([B@Class.Expression])=[h@Class.Expression]([B@Class.Expression])))))`
+- **Proof Constructor:** `thm_transfinite_approx_coherence (PForaR_prf / PKernelDef_prf / PBinInterDef_prf / PEqDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_approx_coherence : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any two G-approximations g and h and any ordinal B in Dom(g) n Dom(h), if their restrictions Restrict(g, B) and Restrict(h, B) agree below B (at the minimal ordinal of any hypothetical disagreement), then valOf(g, B) = valOf(G, Restrict(g, B)) = valOf(h, B).
+- **Standalone Certificate:** [proofs/ThmTransfiniteApproxCoherence.html](proofs/ThmTransfiniteApproxCoherence.html)
+
+### 3.96 `ThmTransfiniteRecursionEquation` — Steps 2 and 3 of Transfinite Recursion on On: approximation sethood, union inclusion, and global recursion equation F(A) = G(Restrict(F, A)) (Theorem)
+
+- **Identifier:** `ThmTransfiniteRecursionEquation` (entry `3.96`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(G:Class)∀(g:Class)∀(F:Class)∀(A:Class)((TransfiniteApprox(G,g)—→((g set)∧(g⊆TransfiniteRec(G))))∧(((∀(B:Class)((B∈On)—→∃(h:Class)(TransfiniteApprox(G,h)∧((B∈Dom(h))∧((F(B)=h(B))∧(Restrict(F,B)=Restrict(h,B)))))))∧(A∈On))—→(F(A)=G(Restrict(F,A))))))`
+- **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])—→(([g@Class.Expression] set)∧([g@Class.Expression]⊆TransfiniteRec([G@Class.Expression]))))∧(((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈On)—→∃([h@Variable]:[Class@Type])(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧(([B@Class.Expression]∈Dom([h@Class.Expression]))∧(([F@Class.Expression]([B@Class.Expression])=[h@Class.Expression]([B@Class.Expression]))∧(Restrict([F@Class.Expression],[B@Class.Expression])=Restrict([h@Class.Expression],[B@Class.Expression])))))))∧([A@Class.Expression]∈On))—→([F@Class.Expression]([A@Class.Expression])=[G@Class.Expression](Restrict([F@Class.Expression],[A@Class.Expression]))))))`
+- **Proof Constructor:** `thm_transfinite_recursion_equation (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf / PExisL_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_recursion_equation, thm_approx_is_set, thm_in_approx_class_iff, thm_approx_sub_transfinite_rec, and thm_restrict_agree_from_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check): every G-approximation g is a set and a subclass of TransfiniteRec(G) = U { g | TransfiniteApprox(G, g) }, and when F agrees at each ordinal A in On with its witnessing approximation h_A in A(G), valOf(F, A) = valOf(G, Restrict(F, A)).
+- **Standalone Certificate:** [proofs/ThmTransfiniteRecursionEquation.html](proofs/ThmTransfiniteRecursionEquation.html)
+
+### 3.97 `ThmTransfiniteRecursionUniqueness` — Step 4 of Transfinite Recursion on On: uniqueness of the transfinite recursion class-function (Theorem)
+
+- **Identifier:** `ThmTransfiniteRecursionUniqueness` (entry `3.97`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(G:Class)∀(F:Class)∀(H:Class)∀(A:Class)((((∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(F,B)))—→(F(B)=G(X))))∧∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(H,B)))—→(H(B)=G(X))))∧((A∈On)∧(Restrict(F,A)=Restrict(H,A))))—→(F(A)=H(A))))`
+- **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([H@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((((∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([F@Class.Expression],[B@Class.Expression])))—→([F@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([H@Class.Expression],[B@Class.Expression])))—→([H@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧(([A@Class.Expression]∈On)∧(Restrict([F@Class.Expression],[A@Class.Expression])=Restrict([H@Class.Expression],[A@Class.Expression]))))—→([F@Class.Expression]([A@Class.Expression])=[H@Class.Expression]([A@Class.Expression]))))`
+- **Proof Constructor:** `thm_transfinite_recursion_uniqueness (PForaR_prf / PEqDef_prf / PLeftInSoundAx_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_recursion_uniqueness : Thm, verified by Thm.checkPipeline and Thm.slow_check): if two class-functions F and H both satisfy the transfinite recursion equation on On and their restrictions Restrict(F, A) = Restrict(H, A) agree below A in On, then valOf(F, A) = valOf(H, A).
+- **Standalone Certificate:** [proofs/ThmTransfiniteRecursionUniqueness.html](proofs/ThmTransfiniteRecursionUniqueness.html)
+
+### 3.98 `ThmVonNeumannHierarchyByTransfiniteRecursion` — Application of Transfinite Recursion on On: construction of the von Neumann cumulative hierarchy V_A = U_(B in A) P(V_B) (Theorem)
+
+- **Identifier:** `ThmVonNeumannHierarchyByTransfiniteRecursion` (entry `3.98`, kind: `Theorem`, status: `Verified (Kernel)`)
+- **Formula (Unicode):** `(∀(f:Class)∀(V:Class)∀(A:Class)(((∀(B:Class)¬(B∈Dom(f)))—→(VonNeumannStepG(f)=∅))∧(((V(A)=VonNeumannStepG(Restrict(V,A)))∧(VonNeumannStepG(Restrict(V,A))=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))}))—→(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))}))))`
+- **Scheme of Types (Unicode):** `(∀([f@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(((∀([B@Variable]:[Class@Type])¬([B@Class.Expression]∈Dom([f@Class.Expression])))—→(VonNeumannStepG([f@Class.Expression])=∅))∧((([V@Class.Expression]([A@Class.Expression])=VonNeumannStepG(Restrict([V@Class.Expression],[A@Class.Expression])))∧(VonNeumannStepG(Restrict([V@Class.Expression],[A@Class.Expression]))=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))}))—→([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))}))))`
+- **Proof Constructor:** `thm_von_neumann_hierarchy_by_recursion (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_von_neumann_hierarchy_by_recursion and thm_von_neumann_step_g_empty : Thm, verified by Thm.checkPipeline and Thm.slow_check): instantiating transfinite recursion on On with generator VonNeumannStepG yields VonNeumannStepG(f) = 0 when Dom(f) is empty (so V_0 = 0) and valOf(V, A) = VonNeumannStepG(Restrict(V, A)) = U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
+- **Standalone Certificate:** [proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html](proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html)
 
 ## 4. Metalogical Laws (4.01-4.06) (4.01-4.06)
 
