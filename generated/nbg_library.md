@@ -11,7 +11,7 @@
 
 Agent-friendly Markdown edition generated directly from `set_theory_prover/program/verified_theorems.ML` via `nbg_html_generator.ML` for **MKTD2-system / MKTD2-prover (MKTD2-framework, MKTD2-theory)**.
 
-- **Live Kernel Audit:** 234/234 Mechanically Type-Checked Records (211 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+- **Live Kernel Audit:** 236/236 Mechanically Type-Checked Records (213 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 - **Machine-Readable JSON Database:** [nbg_library.json](nbg_library.json)
 - **MKTD1-system Complete Entity Database (Markdown):** [manual.md](manual.md)
 
@@ -1652,4 +1652,18 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (Unicode):** `Π(K:Class), Π(A:Class), Π(B:Class), (((A ∈ K) × (B ∈ K)) → (⋂(K) ⊆ (A ∩ B)))`
 - **Statement (ANSII):** `Pi(K:Class), Pi(A:Class), Pi(B:Class), (((A in K) * (B in K)) -> (Inter(K) c= (A n* B)))`
 - **Constructive Proof Term:** `(λ(K:Class). (λ(A:Class). (λ(B:Class). (λ(hAB:((A ∈ K) × (B ∈ K))). (λ(z:Class). (λ(hzInterK:(z ∈ ⋂(K))). let hAll:Π(y:Class), ((y ∈ K) → (z ∈ y)) = hzInterK in ⟨((hAll A) fst(hAB)), ((hAll B) snd(hAB))⟩))))))`
+
+### NBG-235 `thm_reduced_var_subst_diagonal_eval` (Derived)
+
+- **Identifier:** `thm_reduced_var_subst_diagonal_eval` (`NBG-235`, kind: `Derived`)
+- **Statement (Unicode):** `Π(t:Class), Π(x:Class), Π(u:Class), ((u ∈ t) → (u ∈ (SubstVar(t, x) x)))`
+- **Statement (ANSII):** `Pi(t:Class), Pi(x:Class), Pi(u:Class), ((u in t) -> (u in (SubstVar(t, x) x)))`
+- **Constructive Proof Term:** `(λ(t:Class). (λ(x:Class). (λ(u:Class). (λ(huT:(u ∈ t)). (λ(C:Prop). (λ(inL:(((x = x) × (u ∈ t)) → C)). (λ(_:((((x = x) → 𝟘) × (u ∈ x)) → C)). (inL ⟨refl(x), huT⟩))))))))`
+
+### NBG-236 `thm_reduced_var_subst_idempotent_self` (Derived)
+
+- **Identifier:** `thm_reduced_var_subst_idempotent_self` (`NBG-236`, kind: `Derived`)
+- **Statement (Unicode):** `Π(x:Class), Π(v:Class), Π(u:Class), (((Π(C:Prop), (((v = x) → C) → ((((v = x) → 𝟘) → C) → C))) × (u ∈ v)) → (u ∈ (SubstVar(x, x) v)))`
+- **Statement (ANSII):** `Pi(x:Class), Pi(v:Class), Pi(u:Class), (((Pi(C:Prop), (((v = x) -> C) -> ((((v = x) -> Void) -> C) -> C))) * (u in v)) -> (u in (SubstVar(x, x) v)))`
+- **Constructive Proof Term:** `(λ(x:Class). (λ(v:Class). (λ(u:Class). (λ(h:((Π(C:Prop), (((v = x) → C) → ((((v = x) → 𝟘) → C) → C))) × (u ∈ v))). (((fst(h) (u ∈ (SubstVar(x, x) v))) (λ(hEq:(v = x)). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ x)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL ⟨hEq, (((ax_eq_subst((λ(w:Class). (u ∈ w)), v) x) hEq) snd(h))⟩)))))) (λ(hNeq:((v = x) → 𝟘)). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ x)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR ⟨hNeq, snd(h)⟩))))))))))`
 

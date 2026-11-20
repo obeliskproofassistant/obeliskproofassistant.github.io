@@ -363,7 +363,7 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmOrdinalsIsOrdinal` (entry `3.18`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `Ord(On)`
 - **Scheme of Types (Unicode):** `Ord(On)`
-- **Proof Constructor:** `TpOrd (On)`
+- **Proof Constructor:** `thm_on_is_ordinal (POrdDef_prf / PTransDef_prf / PSubDef_prf / PComprAx_prf)`
 - **Standalone Certificate:** [proofs/ThmOrdinalsIsOrdinal.html](proofs/ThmOrdinalsIsOrdinal.html)
 
 ### 3.19 `DefUnaryUnion` — Union of the elements of a class (Definition)
@@ -523,7 +523,7 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Definition`, status: `Definitional (Kernel AST)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
-- **Proof Constructor:** `CpSigma (X, Y)`
+- **Proof Constructor:** `PKernelDef_prf (def_sigma_model_cert, [B, x, y, s, a, b])`
 - **Kernel Note:** Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of the dependent sum Σ(x:Dom(F)) over a family F in the fixed background model.
 - **Standalone Certificate:** [proofs/DefSigmaModel.html](proofs/DefSigmaModel.html)
 
@@ -532,8 +532,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))`
-- **Proof Constructor:** `CpPi (X, P)`
-- **Kernel Note:** Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
+- **Proof Constructor:** `thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check): explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
 - **Standalone Certificate:** [proofs/DefPiPredicateModel.html](proofs/DefPiPredicateModel.html)
 
 ### 3.40 `DefCardLessEq` — “Is not strictly larger than” binary relation (Definition)
@@ -699,8 +699,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaInductive` (entry `3.59`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `Ind(ω)`
 - **Scheme of Types (Unicode):** `Ind(ω)`
-- **Proof Constructor:** `TpInd (ω)`
-- **Kernel Note:** Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
+- **Proof Constructor:** `thm_3_59_omega_inductive (PKernelDef_prf / PAndR_prf / PForaR_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_59_omega_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
 - **Standalone Certificate:** [proofs/ThmOmegaInductive.html](proofs/ThmOmegaInductive.html)
 
 ### 3.60 `ThmOrdinalsInductive` — Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
@@ -716,7 +716,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaTransitive` (entry `3.61`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `Tr(ω)`
 - **Scheme of Types (Unicode):** `Tr(ω)`
-- **Proof Constructor:** `PTransDef_prf (ω, x)`
+- **Proof Constructor:** `thm_3_61_omega_transitive (PTransDef_prf / PSubDef_prf / PComprAx_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_61_omega_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.
 - **Standalone Certificate:** [proofs/ThmOmegaTransitive.html](proofs/ThmOmegaTransitive.html)
 
 ### 3.62 `ThmOmegaOrdinal` — ω is ordinal (Theorem)
@@ -724,7 +725,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaOrdinal` (entry `3.62`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `Ord(ω)`
 - **Scheme of Types (Unicode):** `Ord(ω)`
-- **Proof Constructor:** `TpOrd (ω)`
+- **Proof Constructor:** `thm_3_62_omega_ordinal (POrdDef_prf / PAndR_prf / PForaR_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_62_omega_ordinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.
 - **Standalone Certificate:** [proofs/ThmOmegaOrdinal.html](proofs/ThmOmegaOrdinal.html)
 
 ### 3.63 `ThmOmegaInOrdinals` — ω is in the class of all ordinal numbers (sets) (Theorem)
@@ -732,7 +734,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaInOrdinals` (entry `3.63`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `(ω∈On)`
 - **Scheme of Types (Unicode):** `(ω∈On)`
-- **Proof Constructor:** `CpOn`
+- **Proof Constructor:** `thm_3_63_omega_in_on (PMP_prf / POmegaSetAx_prf / PComprAx_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_63_omega_in_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.
 - **Standalone Certificate:** [proofs/ThmOmegaInOrdinals.html](proofs/ThmOmegaInOrdinals.html)
 
 ### 3.64 `DefIsCardinal` — “Is cardinal” predicate (Theorem)
@@ -797,8 +800,8 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Identifier:** `ThmTransitiveClassInduction` (entry `3.71`, kind: `Theorem`, status: `Verified (Kernel)`)
 - **Formula (Unicode):** `(∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))`
 - **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))`
-- **Proof Constructor:** `PEpsIndAx_prf (X)`
-- **Kernel Note:** Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
+- **Proof Constructor:** `thm_3_71_transitive_class_induction (PForaR_prf / PEpsIndAx_prf / PComprAx_prf / PSubDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_71_transitive_class_induction : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -> (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
 - **Standalone Certificate:** [proofs/ThmTransitiveClassInduction.html](proofs/ThmTransitiveClassInduction.html)
 
 ### 3.72 `AxmSoundnessOfFullTheory` — Soundness of the theory 𝘍 (Axiom)
@@ -1107,17 +1110,17 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Identifier:** `DefReducedVarSubst` (entry `4.07`, kind: `Definition`, status: `Definitional (Kernel AST)`)
 - **Formula (Unicode):** `(∀(t:Class)∀(x:Class)∀(v:Class)(SubstVar(t,x,v)={u|((v=x)∧(u∈t))∨((¬(v=x))∧(u∈v))}))`
 - **Scheme of Types (Unicode):** `(∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])={[u@Class.Expression]|(([v@Class.Expression]=[x@Class.Expression])∧([u@Class.Expression]∈[t@Class.Expression]))∨((¬([v@Class.Expression]=[x@Class.Expression]))∧([u@Class.Expression]∈[v@Class.Expression]))}))`
-- **Proof Constructor:** `DefReducedVarSubst`
+- **Proof Constructor:** `PKernelDef_prf (def_reduced_var_subst_cert, [t, x, v, u])`
 - **Kernel Note:** Conservative definition (DefReducedVarSubst, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): explicit 3-argument object-level substitution operator SubstVar(t, x, v) = { u : Class | (((v = x) /\ (u in t)) \/ ((~(v = x)) /\ (u in v))) } taking (1) what is being substituted (t), (2) instead of what (x), and (3) where (v), internalizing atomic variable substitution as a first-class object inside MKTD1-theory.
 - **Standalone Certificate:** [proofs/DefReducedVarSubst.html](proofs/DefReducedVarSubst.html)
 
-### 4.08 `ThmReducedVarSubstLaws` — Hit and miss laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
+### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
 
 - **Identifier:** `ThmReducedVarSubstLaws` (entry `4.08`, kind: `Theorem`, status: `Verified (Kernel)`)
-- **Formula (Unicode):** `(∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))`
-- **Scheme of Types (Unicode):** `(∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))`
-- **Proof Constructor:** `ThmReducedVarSubstLaws`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, and thm_reduced_var_subst_miss : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves constructively inside MKTD1-theory that (v = x) -> (SubstVar(t, x, v) = t) (hit law) and (~(v = x)) -> (SubstVar(t, x, v) = v) (miss law).
+- **Formula (Unicode):** `((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))`
+- **Scheme of Types (Unicode):** `((∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([x@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))∧∀([a@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(SubstVar([a@Class.Expression],[x@Class.Expression],[x@Class.Expression])=[a@Class.Expression])))`
+- **Proof Constructor:** `thm_reduced_var_subst_laws (PForaR_prf / PKernelDef_prf / PComprAx_prf / PEqDef_prf)`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
 - **Standalone Certificate:** [proofs/ThmReducedVarSubstLaws.html](proofs/ThmReducedVarSubstLaws.html)
 
 ## 5. Incompleteness-Related Statements (5.01-5.02) (5.01-5.02)

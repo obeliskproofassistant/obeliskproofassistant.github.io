@@ -3110,7 +3110,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.</td>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check): explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -4512,7 +4512,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.</td>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_59_omega_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -4651,6 +4651,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_61_omega_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1052" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1052"><code>entries.ML:L1052</code></a></td>
             </tr>
@@ -4719,6 +4723,10 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_62_omega_ordinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1064" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1064"><code>entries.ML:L1064</code></a></td>
             </tr>
@@ -4785,6 +4793,10 @@
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/omega-const.html" class="sym-link" title="Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)">omega</a></span><a href="../symbols/in-pred.html" class="sym-link" title="Class membership binary predicate symbol (Constructor: HP (TpIn ...))"> in </a><span class="ansi-bold-yellow"><a href="../symbols/on-const.html" class="sym-link" title="Class of all ordinal sets On constant (Constructor: HC CpOn)">On</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_63_omega_in_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -5336,7 +5348,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).</td>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_71_transitive_class_induction : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -&gt; (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>

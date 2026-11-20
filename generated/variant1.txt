@@ -298,7 +298,7 @@
 [3.18 / ThmOrdinalsIsOrdinal] The class of all ordinals is an ordinal class (Theorem)
   Name:            ThmOrdinalsIsOrdinal
   Formula [0]:     Ord(On)
-  SML Kernel AST:  TpOrd (On)
+  SML Kernel AST:  thm_on_is_ordinal (POrdDef_prf / PTransDef_prf / PSubDef_prf / PComprAx_prf)
   Scheme of Types: Ord(On)
   Verification:    Verified (Kernel)
 
@@ -438,7 +438,7 @@
 [3.38 / DefSigmaModel] “Dependent Sum (Sigma-Type)” model over a family (Definition)
   Name:            DefSigmaModel
   Formula [0]:     (∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))
-  SML Kernel AST:  CpSigma (X, Y)
+  SML Kernel AST:  PKernelDef_prf (def_sigma_model_cert, [B, x, y, s, a, b])
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:     Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of the dependent sum Σ(x:Dom(F)) over a family F in the fixed background model.
   Verification:    Definitional (Kernel AST)
@@ -446,9 +446,9 @@
 [3.39 / DefPiPredicateModel] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
   Name:            DefPiPredicateModel
   Formula [0]:     (∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))
-  SML Kernel AST:  CpPi (X, P)
+  SML Kernel AST:  thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
-  Kernel Note:     Explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check): explicit typed term interpretation / valuation (μ_A : A.Expression → Class.Expression) of dependent product sections Π(x:Dom(F)) over a family F in the fixed background model.
   Verification:    Verified (Kernel)
 
 [3.40 / DefCardLessEq] “Is not strictly larger than” binary relation (Definition)
@@ -593,9 +593,9 @@
 [3.59 / ThmOmegaInductive] Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
   Name:            ThmOmegaInductive
   Formula [0]:     Ind(ω)
-  SML Kernel AST:  TpInd (ω)
+  SML Kernel AST:  thm_3_59_omega_inductive (PKernelDef_prf / PAndR_prf / PForaR_prf)
   Scheme of Types: Ind(ω)
-  Kernel Note:     Establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_59_omega_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order.
   Verification:    Verified (Kernel)
 
 [3.60 / ThmOrdinalsInductive] Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
@@ -608,22 +608,25 @@
 [3.61 / ThmOmegaTransitive] ω is transitive (Theorem)
   Name:            ThmOmegaTransitive
   Formula [0]:     Tr(ω)
-  SML Kernel AST:  PTransDef_prf (ω, x)
+  SML Kernel AST:  thm_3_61_omega_transitive (PTransDef_prf / PSubDef_prf / PComprAx_prf)
   Scheme of Types: Tr(ω)
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_61_omega_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.
   Verification:    Verified (Kernel)
 
 [3.62 / ThmOmegaOrdinal] ω is ordinal (Theorem)
   Name:            ThmOmegaOrdinal
   Formula [0]:     Ord(ω)
-  SML Kernel AST:  TpOrd (ω)
+  SML Kernel AST:  thm_3_62_omega_ordinal (POrdDef_prf / PAndR_prf / PForaR_prf)
   Scheme of Types: Ord(ω)
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_62_omega_ordinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.
   Verification:    Verified (Kernel)
 
 [3.63 / ThmOmegaInOrdinals] ω is in the class of all ordinal numbers (sets) (Theorem)
   Name:            ThmOmegaInOrdinals
   Formula [0]:     (ω∈On)
-  SML Kernel AST:  CpOn
+  SML Kernel AST:  thm_3_63_omega_in_on (PMP_prf / POmegaSetAx_prf / PComprAx_prf)
   Scheme of Types: (ω∈On)
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_63_omega_in_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.
   Verification:    Verified (Kernel)
 
 [3.64 / DefIsCardinal] “Is cardinal” predicate (Theorem)
@@ -679,9 +682,9 @@
 [3.71 / ThmTransitiveClassInduction] General form of the transfinite ∈-induction principle on a transitive class (Theorem)
   Name:            ThmTransitiveClassInduction
   Formula [0]:     (∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))
-  SML Kernel AST:  PEpsIndAx_prf (X)
+  SML Kernel AST:  thm_3_71_transitive_class_induction (PForaR_prf / PEpsIndAx_prf / PComprAx_prf / PSubDef_prf)
   Scheme of Types: (∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))
-  Kernel Note:     Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_71_transitive_class_induction : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -> (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
   Verification:    Verified (Kernel)
 
 [3.72 / AxmSoundnessOfFullTheory] Soundness of the theory 𝘍 (Axiom)
@@ -951,17 +954,17 @@
 [4.07 / DefReducedVarSubst] Reduced object-level variable substitution operator SubstVar(t, x, v) (Definition)
   Name:            DefReducedVarSubst
   Formula [0]:     (∀(t:Class)∀(x:Class)∀(v:Class)(SubstVar(t,x,v)={u|((v=x)∧(u∈t))∨((¬(v=x))∧(u∈v))}))
-  SML Kernel AST:  DefReducedVarSubst
+  SML Kernel AST:  PKernelDef_prf (def_reduced_var_subst_cert, [t, x, v, u])
   Scheme of Types: (∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])={[u@Class.Expression]|(([v@Class.Expression]=[x@Class.Expression])∧([u@Class.Expression]∈[t@Class.Expression]))∨((¬([v@Class.Expression]=[x@Class.Expression]))∧([u@Class.Expression]∈[v@Class.Expression]))}))
   Kernel Note:     Conservative definition (DefReducedVarSubst, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): explicit 3-argument object-level substitution operator SubstVar(t, x, v) = { u : Class | (((v = x) /\ (u in t)) \/ ((~(v = x)) /\ (u in v))) } taking (1) what is being substituted (t), (2) instead of what (x), and (3) where (v), internalizing atomic variable substitution as a first-class object inside MKTD1-theory.
   Verification:    Definitional (Kernel AST)
 
-[4.08 / ThmReducedVarSubstLaws] Hit and miss laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
+[4.08 / ThmReducedVarSubstLaws] Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
   Name:            ThmReducedVarSubstLaws
-  Formula [0]:     (∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))
-  SML Kernel AST:  ThmReducedVarSubstLaws
-  Scheme of Types: (∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))
-  Kernel Note:     Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, and thm_reduced_var_subst_miss : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves constructively inside MKTD1-theory that (v = x) -> (SubstVar(t, x, v) = t) (hit law) and (~(v = x)) -> (SubstVar(t, x, v) = v) (miss law).
+  Formula [0]:     ((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))
+  SML Kernel AST:  thm_reduced_var_subst_laws (PForaR_prf / PKernelDef_prf / PComprAx_prf / PEqDef_prf)
+  Scheme of Types: ((∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([x@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))∧∀([a@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(SubstVar([a@Class.Expression],[x@Class.Expression],[x@Class.Expression])=[a@Class.Expression])))
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
   Verification:    Verified (Kernel)
 
 [5.01 / ThmLoeb] Löb's theorem (Theorem)
