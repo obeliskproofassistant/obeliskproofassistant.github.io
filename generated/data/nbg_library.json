@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 230,
-  "verified_count": 230,
-  "derived_count": 207,
+  "total_count": 233,
+  "verified_count": 233,
+  "derived_count": 210,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -2039,45 +2039,72 @@
       "num": "NBG-226",
       "name": "thm_domain_restriction_elem_iff",
       "kind": "Derived",
-      "statement_unicode": "Π(F:Class), Π(A:Class), Π(z:Class), ((((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))) × (((z ∈ F) × (pr1(z) ∈ A)) → (z ∈ Restrict(F, A)))) → ((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))))",
-      "proof_unicode": "(λ(F:Class). (λ(A:Class). (λ(z:Class). (λ(h:(((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))) × (((z ∈ F) × (pr1(z) ∈ A)) → (z ∈ Restrict(F, A))))). fst(h)))))",
-      "statement_ast": "(Pi (F : Class) -> (Pi (A : Class) -> (Pi (z : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In z) ((Restrict F) A)) true)) -> (Sigma (_ : (Id Prop ((In z) F) true)) * (Id Prop ((In (pr1 z)) A) true)))) * (Pi (_ : (Sigma (_ : (Id Prop ((In z) F) true)) * (Id Prop ((In (pr1 z)) A) true))) -> (Id Prop ((In z) ((Restrict F) A)) true)))) -> (Pi (_ : (Id Prop ((In z) ((Restrict F) A)) true)) -> (Sigma (_ : (Id Prop ((In z) F) true)) * (Id Prop ((In (pr1 z)) A) true)))))))"
+      "statement_unicode": "Π(F:Class), Π(A:Class), Π(z:Class), (((z ∈ Restrict(F, A)) → ((z ∈ F) × (pr1(z) ∈ A))) × (((z ∈ F) × (pr1(z) ∈ A)) → (z ∈ Restrict(F, A))))",
+      "proof_unicode": "(λ(F:Class). (λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ Restrict(F, A))). let res:((z ∈ F) × (pr1(z) ∈ A)) = h in res), (λ(h:((z ∈ F) × (pr1(z) ∈ A))). let res:(z ∈ Restrict(F, A)) = h in res)⟩)))",
+      "statement_ast": "(Pi (F : Class) -> (Pi (A : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : (Id Prop ((In z) ((Restrict F) A)) true)) -> (Sigma (_ : (Id Prop ((In z) F) true)) * (Id Prop ((In (pr1 z)) A) true)))) * (Pi (_ : (Sigma (_ : (Id Prop ((In z) F) true)) * (Id Prop ((In (pr1 z)) A) true))) -> (Id Prop ((In z) ((Restrict F) A)) true))))))"
     },
     {
       "id": 227,
       "num": "NBG-227",
       "name": "thm_transfinite_approx_coherence_step",
       "kind": "Derived",
-      "statement_unicode": "Π(G:Class), Π(g:Class), Π(h:Class), Π(B:Class), (((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(G, Restrict(g, B)) = ValOf(h, B)))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B)))) → ((ValOf(g, B) = ValOf(G, Restrict(g, B))) × (ValOf(G, Restrict(g, B)) = ValOf(h, B))))",
-      "proof_unicode": "(λ(G:Class). (λ(g:Class). (λ(h:Class). (λ(B:Class). (λ(hyp:((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(G, Restrict(g, B)) = ValOf(h, B)))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B))))). ⟨(fst(fst(hyp)) fst(fst(snd(hyp)))), (snd(fst(hyp)) ⟨snd(fst(snd(hyp))), snd(snd(hyp))⟩)⟩)))))",
-      "statement_ast": "(Pi (G : Class) -> (Pi (g : Class) -> (Pi (h : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In B) (Dom g)) true)) -> (Id Class ((ValOf g) B) ((ValOf G) ((Restrict g) B))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In B) (Dom h)) true)) * (Id Class ((Restrict g) B) ((Restrict h) B)))) -> (Id Class ((ValOf G) ((Restrict g) B)) ((ValOf h) B))))) * (Sigma (_ : (Sigma (_ : (Id Prop ((In B) (Dom g)) true)) * (Id Prop ((In B) (Dom h)) true))) * (Id Class ((Restrict g) B) ((Restrict h) B))))) -> (Sigma (_ : (Id Class ((ValOf g) B) ((ValOf G) ((Restrict g) B)))) * (Id Class ((ValOf G) ((Restrict g) B)) ((ValOf h) B))))))))"
+      "statement_unicode": "Π(G:Class), Π(g:Class), Π(h:Class), Π(B:Class), (((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(h, B) = ValOf(G, Restrict(g, B))))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B)))) → ((ValOf(g, B) = ValOf(G, Restrict(g, B))) × (ValOf(g, B) = ValOf(h, B))))",
+      "proof_unicode": "(λ(G:Class). (λ(g:Class). (λ(h:Class). (λ(B:Class). (λ(hyp:((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(h, B) = ValOf(G, Restrict(g, B))))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B))))). ⟨(fst(fst(hyp)) fst(fst(snd(hyp)))), (((ax_eq_trans(ValOf(g, B), ValOf(G, Restrict(g, B))) ValOf(h, B)) (fst(fst(hyp)) fst(fst(snd(hyp))))) (ax_eq_sym(ValOf(h, B), ValOf(G, Restrict(g, B))) (snd(fst(hyp)) ⟨snd(fst(snd(hyp))), snd(snd(hyp))⟩)))⟩)))))",
+      "statement_ast": "(Pi (G : Class) -> (Pi (g : Class) -> (Pi (h : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In B) (Dom g)) true)) -> (Id Class ((ValOf g) B) ((ValOf G) ((Restrict g) B))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In B) (Dom h)) true)) * (Id Class ((Restrict g) B) ((Restrict h) B)))) -> (Id Class ((ValOf h) B) ((ValOf G) ((Restrict g) B)))))) * (Sigma (_ : (Sigma (_ : (Id Prop ((In B) (Dom g)) true)) * (Id Prop ((In B) (Dom h)) true))) * (Id Class ((Restrict g) B) ((Restrict h) B))))) -> (Sigma (_ : (Id Class ((ValOf g) B) ((ValOf G) ((Restrict g) B)))) * (Id Class ((ValOf g) B) ((ValOf h) B))))))))"
     },
     {
       "id": 228,
       "num": "NBG-228",
       "name": "thm_transfinite_recursion_equation_step",
       "kind": "Derived",
-      "statement_unicode": "Π(G:Class), Π(F:Class), Π(g:Class), Π(A:Class), (((((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A)))) × (((ValOf(F, A) = ValOf(g, A)) × (ValOf(g, A) = ValOf(G, Restrict(F, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A))))) → (((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))))",
-      "proof_unicode": "(λ(G:Class). (λ(F:Class). (λ(g:Class). (λ(A:Class). (λ(h:((((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A)))) × (((ValOf(F, A) = ValOf(g, A)) × (ValOf(g, A) = ValOf(G, Restrict(F, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))))). (λ(w:((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))))). (snd(h) ⟨fst(w), (fst(h) snd(w))⟩)))))))",
-      "statement_ast": "(Pi (G : Class) -> (Pi (F : Class) -> (Pi (g : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In A) (Dom g)) true)) * (Id Class ((Restrict F) A) ((Restrict g) A)))) -> (Id Class ((ValOf g) A) ((ValOf G) ((Restrict F) A))))) * (Pi (_ : (Sigma (_ : (Id Class ((ValOf F) A) ((ValOf g) A))) * (Id Class ((ValOf g) A) ((ValOf G) ((Restrict F) A))))) -> (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A)))))) -> (Pi (_ : (Sigma (_ : (Id Class ((ValOf F) A) ((ValOf g) A))) * (Sigma (_ : (Id Prop ((In A) (Dom g)) true)) * (Id Class ((Restrict F) A) ((Restrict g) A))))) -> (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A)))))))))"
+      "statement_unicode": "Π(G:Class), Π(F:Class), Π(g:Class), Π(A:Class), ((((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A)))) → (((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A)))) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))))",
+      "proof_unicode": "(λ(G:Class). (λ(F:Class). (λ(g:Class). (λ(A:Class). (λ(hLaw:(((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A))))). (λ(w:((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))))). (((ax_eq_trans(ValOf(F, A), ValOf(g, A)) ValOf(G, Restrict(F, A))) fst(w)) (hLaw snd(w)))))))))",
+      "statement_ast": "(Pi (G : Class) -> (Pi (F : Class) -> (Pi (g : Class) -> (Pi (A : Class) -> (Pi (_ : (Pi (_ : (Sigma (_ : (Id Prop ((In A) (Dom g)) true)) * (Id Class ((Restrict F) A) ((Restrict g) A)))) -> (Id Class ((ValOf g) A) ((ValOf G) ((Restrict F) A))))) -> (Pi (_ : (Sigma (_ : (Id Class ((ValOf F) A) ((ValOf g) A))) * (Sigma (_ : (Id Prop ((In A) (Dom g)) true)) * (Id Class ((Restrict F) A) ((Restrict g) A))))) -> (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A)))))))))"
     },
     {
       "id": 229,
       "num": "NBG-229",
       "name": "thm_transfinite_recursion_uniqueness_step",
       "kind": "Derived",
-      "statement_unicode": "Π(G:Class), Π(F:Class), Π(H:Class), Π(A:Class), (((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(G, Restrict(F, A)) = ValOf(H, A)))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A)))) → ((ValOf(F, A) = ValOf(G, Restrict(F, A))) × (ValOf(G, Restrict(F, A)) = ValOf(H, A))))",
-      "proof_unicode": "(λ(G:Class). (λ(F:Class). (λ(H:Class). (λ(A:Class). (λ(hyp:((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(G, Restrict(F, A)) = ValOf(H, A)))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A))))). ⟨(fst(fst(hyp)) fst(snd(hyp))), (snd(fst(hyp)) snd(hyp))⟩)))))",
-      "statement_ast": "(Pi (G : Class) -> (Pi (F : Class) -> (Pi (H : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In A) On) true)) -> (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In A) On) true)) * (Id Class ((Restrict F) A) ((Restrict H) A)))) -> (Id Class ((ValOf G) ((Restrict F) A)) ((ValOf H) A))))) * (Sigma (_ : (Id Prop ((In A) On) true)) * (Id Class ((Restrict F) A) ((Restrict H) A))))) -> (Sigma (_ : (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A)))) * (Id Class ((ValOf G) ((Restrict F) A)) ((ValOf H) A))))))))"
+      "statement_unicode": "Π(G:Class), Π(F:Class), Π(H:Class), Π(A:Class), (((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(H, A) = ValOf(G, Restrict(F, A))))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A)))) → ((ValOf(F, A) = ValOf(G, Restrict(F, A))) × (ValOf(F, A) = ValOf(H, A))))",
+      "proof_unicode": "(λ(G:Class). (λ(F:Class). (λ(H:Class). (λ(A:Class). (λ(hyp:((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(H, A) = ValOf(G, Restrict(F, A))))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A))))). ⟨(fst(fst(hyp)) fst(snd(hyp))), (((ax_eq_trans(ValOf(F, A), ValOf(G, Restrict(F, A))) ValOf(H, A)) (fst(fst(hyp)) fst(snd(hyp)))) (ax_eq_sym(ValOf(H, A), ValOf(G, Restrict(F, A))) (snd(fst(hyp)) snd(hyp))))⟩)))))",
+      "statement_ast": "(Pi (G : Class) -> (Pi (F : Class) -> (Pi (H : Class) -> (Pi (A : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Pi (_ : (Id Prop ((In A) On) true)) -> (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A))))) * (Pi (_ : (Sigma (_ : (Id Prop ((In A) On) true)) * (Id Class ((Restrict F) A) ((Restrict H) A)))) -> (Id Class ((ValOf H) A) ((ValOf G) ((Restrict F) A)))))) * (Sigma (_ : (Id Prop ((In A) On) true)) * (Id Class ((Restrict F) A) ((Restrict H) A))))) -> (Sigma (_ : (Id Class ((ValOf F) A) ((ValOf G) ((Restrict F) A)))) * (Id Class ((ValOf F) A) ((ValOf H) A))))))))"
     },
     {
       "id": 230,
       "num": "NBG-230",
       "name": "thm_von_neumann_hierarchy_by_transfinite_recursion_step",
       "kind": "Derived",
-      "statement_unicode": "Π(V:Class), Π(A:Class), Π(Ufam:Class), ((((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) × (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) → (ValOf(V, A) = Ufam))) → (ValOf(V, A) = Ufam))",
-      "proof_unicode": "(λ(V:Class). (λ(A:Class). (λ(Ufam:Class). (λ(h:(((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) × (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) → (ValOf(V, A) = Ufam)))). (snd(h) fst(h))))))",
-      "statement_ast": "(Pi (V : Class) -> (Pi (A : Class) -> (Pi (Ufam : Class) -> (Pi (_ : (Sigma (_ : (Sigma (_ : (Id Class ((ValOf V) A) (VonNeumannStepG ((Restrict V) A)))) * (Id Class (VonNeumannStepG ((Restrict V) A)) Ufam))) * (Pi (_ : (Sigma (_ : (Id Class ((ValOf V) A) (VonNeumannStepG ((Restrict V) A)))) * (Id Class (VonNeumannStepG ((Restrict V) A)) Ufam))) -> (Id Class ((ValOf V) A) Ufam)))) -> (Id Class ((ValOf V) A) Ufam)))))"
+      "statement_unicode": "Π(V:Class), Π(A:Class), Π(Ufam:Class), (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam)) → (ValOf(V, A) = Ufam))",
+      "proof_unicode": "(λ(V:Class). (λ(A:Class). (λ(Ufam:Class). (λ(h:((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam))). (((ax_eq_trans(ValOf(V, A), VonNeumannStepG(Restrict(V, A))) Ufam) fst(h)) snd(h))))))",
+      "statement_ast": "(Pi (V : Class) -> (Pi (A : Class) -> (Pi (Ufam : Class) -> (Pi (_ : (Sigma (_ : (Id Class ((ValOf V) A) (VonNeumannStepG ((Restrict V) A)))) * (Id Class (VonNeumannStepG ((Restrict V) A)) Ufam))) -> (Id Class ((ValOf V) A) Ufam)))))"
+    },
+    {
+      "id": 231,
+      "num": "NBG-231",
+      "name": "thm_sigma_family_model_dependent_pair_bridge",
+      "kind": "Derived",
+      "statement_unicode": "Π(B:Class), (((Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))) → Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × ((Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) → Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))))",
+      "proof_unicode": "(λ(B:Class). ⟨(λ(w:Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩), (λ(w:Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩)⟩)",
+      "statement_ast": "(Pi (B : Class) -> (Sigma (_ : (Pi (_ : (Sigma (x : Class) * (Sigma (y : Class) * (Id Prop ((In ((OPair x) y)) (Sigma B)) true)))) -> (Sigma (x : Class) * (Sigma (y : Class) * (Sigma (_ : (Id Prop ((In x) (Dom B)) true)) * (Id Prop ((In y) ((ValOf B) x)) true)))))) * (Pi (_ : (Sigma (x : Class) * (Sigma (y : Class) * (Sigma (_ : (Id Prop ((In x) (Dom B)) true)) * (Id Prop ((In y) ((ValOf B) x)) true))))) -> (Sigma (x : Class) * (Sigma (y : Class) * (Id Prop ((In ((OPair x) y)) (Sigma B)) true))))))"
+    },
+    {
+      "id": 232,
+      "num": "NBG-232",
+      "name": "thm_pi_family_model_dependent_product_bridge",
+      "kind": "Derived",
+      "statement_unicode": "Π(B:Class), Π(f:Class), Π(x:Class), (((f ∈ PiModel(B)) × (x ∈ Dom(B))) → Σ(y:Class), ((y = ValOf(f, x)) × (y ∈ ValOf(B, x))))",
+      "proof_unicode": "(λ(B:Class). (λ(f:Class). (λ(x:Class). (λ(h:((f ∈ PiModel(B)) × (x ∈ Dom(B)))). let sec:Π(u:Class), ((u ∈ Dom(B)) → (ValOf(f, u) ∈ ValOf(B, u))) = fst(h) in ⟨ValOf(f, x), ⟨refl(ValOf(f, x)), ((sec x) snd(h))⟩⟩))))",
+      "statement_ast": "(Pi (B : Class) -> (Pi (f : Class) -> (Pi (x : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In f) (PiModel B)) true)) * (Id Prop ((In x) (Dom B)) true))) -> (Sigma (y : Class) * (Sigma (_ : (Id Class y ((ValOf f) x))) * (Id Prop ((In y) ((ValOf B) x)) true)))))))"
+    },
+    {
+      "id": 233,
+      "num": "NBG-233",
+      "name": "thm_reduced_var_subst_hit_and_miss",
+      "kind": "Derived",
+      "statement_unicode": "Π(t:Class), Π(x:Class), Π(v:Class), Π(u:Class), ((((v = x) × (u ∈ t)) → (u ∈ (SubstVar(t, x) v))) × ((((v = x) → 𝟘) × (u ∈ v)) → (u ∈ (SubstVar(t, x) v))))",
+      "proof_unicode": "(λ(t:Class). (λ(x:Class). (λ(v:Class). (λ(u:Class). ⟨(λ(hHit:((v = x) × (u ∈ t))). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ t)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL hHit))))), (λ(hMiss:(((v = x) → 𝟘) × (u ∈ v))). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ t)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR hMiss)))))⟩))))",
+      "statement_ast": "(Pi (t : Class) -> (Pi (x : Class) -> (Pi (v : Class) -> (Pi (u : Class) -> (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Class v x)) * (Id Prop ((In u) t) true))) -> (Id Prop ((In u) (((SubstVar t) x) v)) true))) * (Pi (_ : (Sigma (_ : (Pi (_ : (Id Class v x)) -> False)) * (Id Prop ((In u) v) true))) -> (Id Prop ((In u) (((SubstVar t) x) v)) true)))))))"
     }
   ]
 }

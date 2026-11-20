@@ -56,7 +56,7 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Kernel Note:** Theory extension monotonicity (𝘛 ⊆ 𝘍): every theorem of the r.e. base theory 𝘛 is also a theorem of its non-r.e. Henkin completion 𝘍.
 - **Standalone Certificate:** [proofs/AxmBaseSubtheoryOfFull.html](proofs/AxmBaseSubtheoryOfFull.html)
 
-## 4. Metalogical Laws (4.01-4.06) (4.01-4.06)
+## 4. Metalogical Laws (4.01-4.08) (4.01-4.08)
 
 Explicit substitution, context encoding, co-necessitation, uniqueness quantifiers, and reflected comprehension.
 
