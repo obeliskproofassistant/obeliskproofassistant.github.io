@@ -485,11 +485,45 @@
             </tr>
             <tr>
               <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><code>(none -- pure sequent / definitional)</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="../manual.html#DefInductiveClass" class="sym-link" title="DefInductiveClass (3.55)"><code>DefInductiveClass</code> (3.55)</a>, <code>DefIff</code>, <a href="../manual.html#DefOmega" class="sym-link" title="DefOmega (3.56)"><code>DefOmega</code> (3.56)</a></td>
+              <td class="field-value proof-cell"><code>(none -- pure sequent / definitional)</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="../manual.html#DefInductiveClass" class="sym-link" title="DefInductiveClass (3.55)"><code>DefInductiveClass</code> (3.55)</a>, <code>DefIff</code>, <a href="../manual.html#DefOmega" class="sym-link" title="DefOmega (3.56)"><code>DefOmega</code> (3.56)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>160</code></td>
             </tr>
             <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>thm_3_59_omega_inductive (PKernelDef_prf / PAndR_prf / PForaR_prf)</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 160 *)
+PMP_prf (
+  PAndR_prf (
+    PMP_prf (
+      PForaR_prf (
+        PImplR_prf (...)
+      ),
+      PMP_prf (
+        PMP_prf (..., ...),
+        PInCtx_prf (...)
+      )
+    ),
+    PForaR_prf (
+      PImplR_prf (
+        PMP_prf (..., ...)
+      )
+    )
+  ),
+  PMP_prf (
+    PMP_prf (
+      PMP_prf (
+        PKernelDef_prf (&quot;DefInductiveClass&quot;),
+        PWeak_prf (...)
+      ),
+      PWeak_prf (
+        PMP_prf (..., ...)
+      )
+    ),
+    PInCtx_prf (
+      PImplR_prf (
+        PAnd2L_prf (...)
+      )
+    )
+  )
+)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>

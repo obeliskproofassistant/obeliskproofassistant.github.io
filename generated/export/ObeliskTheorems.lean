@@ -4,7 +4,7 @@
 -- Regenerate: cd /hostramdisk/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
 --
 -- Obelisk Proof Assistant — Lean 4 Exported Theorem Library
--- Cross-checked against 225 verified kernel theorems in MKTD1-system & MKTD2-system.
+-- Cross-checked against 239 verified kernel theorems in MKTD1-system & MKTD2-system.
 
 namespace Obelisk.Export
 

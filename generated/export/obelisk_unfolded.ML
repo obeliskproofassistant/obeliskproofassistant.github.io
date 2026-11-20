@@ -933,6 +933,27 @@ struct
         let val cVar = fresh "C" (freeVars z @ freeVars a @ freeVars b) in
           unfoldDefs (Pi (cVar, TProp, Pi ("_", Pi ("_", Id (TClass, z, a), Var cVar), Pi ("_", Pi ("_", Id (TClass, z, b), Var cVar), Var cVar))))
         end
+    | Id (TProp, App (App (Const "In", z), App (App (Const "Restrict", f), a)), Const "true") =>
+        unfoldDefs (Sigma ("_", Id (TProp, App (App (Const "In", z), f), Const "true"),
+                                Id (TProp, App (App (Const "In", App (Const "pr1", z)), a), Const "true")))
+    | Id (TProp, App (App (Const "In", App (App (Const "OPair", x), y)), App (Const "Sigma", b)), Const "true") =>
+        unfoldDefs (Sigma ("_", Id (TProp, App (App (Const "In", x), App (Const "Dom", b)), Const "true"),
+                                Id (TProp, App (App (Const "In", y), App (App (Const "ValOf", b), x)), Const "true")))
+    | Id (TProp, App (App (Const "In", f), App (Const "PiModel", b)), Const "true") =>
+        let val uVar = fresh "u" (freeVars f @ freeVars b) in
+          unfoldDefs (Pi (uVar, TClass,
+            Pi ("_", Id (TProp, App (App (Const "In", Var uVar), App (Const "Dom", b)), Const "true"),
+                Id (TProp, App (App (Const "In", App (App (Const "ValOf", f), Var uVar)),
+                                App (App (Const "ValOf", b), Var uVar)), Const "true"))))
+        end
+    | Id (TProp, App (App (Const "In", u), App (App (App (Const "SubstVar", t), x), v)), Const "true") =>
+        let
+          val cVar = fresh "C" (freeVars u @ freeVars t @ freeVars x @ freeVars v)
+          val br1 = Sigma ("_", Id (TClass, v, x), Id (TProp, App (App (Const "In", u), t), Const "true"))
+          val br2 = Sigma ("_", Pi ("_", Id (TClass, v, x), Const "False"), Id (TProp, App (App (Const "In", u), v), Const "true"))
+        in
+          unfoldDefs (Pi (cVar, TProp, Pi ("_", Pi ("_", br1, Var cVar), Pi ("_", Pi ("_", br2, Var cVar), Var cVar))))
+        end
     | Succ n => Succ (unfoldDefs n)
     | Pi (x, a, b) => Pi (x, unfoldDefs a, unfoldDefs b)
     | Sigma (x, a, b) => Sigma (x, unfoldDefs a, unfoldDefs b)
@@ -1196,6 +1217,14 @@ struct
             else
               raise TypeError ("Refl cannot prove equality: " ^ termToString uNorm ^
                                " != " ^ termToString vNorm)
+          end
+
+      | (Let (x, ty, e1, e2), _) =>
+          let
+            val _ = infer ctx ty
+            val _ = check ctx e1 ty
+          in
+            check ((x, ty) :: ctx) e2 expectedNorm
           end
 
       | _ =>
@@ -2210,6 +2239,13 @@ struct
     ("ax_cardof_never_v", Forall "K" TClass (Impl (Eq (App (Const "CardOf", Var "K")) UnivV) (Const "False"))),
     ("ax_dunaev_pr1", Forall "A" TClass (Forall "B" TClass (Eq (App (Const "DunaevPr1", App (App (Const "DunaevPair", Var "A"), Var "B"))) (Var "A")))),
     ("ax_dunaev_pr2", Forall "A" TClass (Forall "B" TClass (Eq (App (Const "DunaevPr2", App (App (Const "DunaevPair", Var "A"), Var "B"))) (Var "B")))),
+    ("OPair", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("Sigma", Pi ("_", TClass, TClass)),
+    ("PiModel", Pi ("_", TClass, TClass)),
+    ("Restrict", Pi ("_", TClass, Pi ("_", TClass, TClass))),
+    ("pr1", Pi ("_", TClass, TClass)),
+    ("VonNeumannStepG", Pi ("_", TClass, TClass)),
+    ("SubstVar", Pi ("_", TClass, Pi ("_", TClass, Pi ("_", TClass, TClass)))),
     ("plan_tarski_axm", Forall "X" TClass (Impl (IsSet (Var "X")) (Exists "U" TClass (And (App (Const "Universe", Var "U")) (And (In (Var "X") (Var "U")) (IsSet (Var "U")))))))
   ]
 
@@ -9429,7 +9465,635 @@ struct
                 end)))))
   }
 
-  (* Complete Table of All 225 Theorem Records *)
+  (* 226. Domain Restriction Membership Biconditional (MKTD2-theory mirror of Entry DefDomainRestriction):
+          forall F A z.
+            (z in Restrict(F, A) -> (z in F /\ pr1(z) in A)) /\
+            ((z in F /\ pr1(z) in A) -> z in Restrict(F, A))
+          Proved directly by definitional conversion of Restrict(F, A) in DependentEval.unfoldDefs. *)
+  val thm_226_domain_restriction_elem_iff : TheoremRecord = {
+    id = 226,
+    name = "thm_domain_restriction_elem_iff",
+    statement =
+      Forall "F" TClass (
+        Forall "A" TClass (
+          Forall "z" TClass (
+            let
+              val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+              val pr1z = App (Const "pr1", Var "z")
+              val lhs = In (Var "z") rFA
+              val rhs = And (In (Var "z") (Var "F")) (In pr1z (Var "A"))
+            in
+              Iff lhs rhs
+            end))),
+    proofProgram =
+      Lam ("F", TClass,
+        Lam ("A", TClass,
+          Lam ("z", TClass,
+            let
+              val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+              val pr1z = App (Const "pr1", Var "z")
+              val lhs = In (Var "z") rFA
+              val rhs = And (In (Var "z") (Var "F")) (In pr1z (Var "A"))
+            in
+              DefIff lhs rhs
+            end)))
+  }
+
+  (* 227. Step 1 of Transfinite Recursion on On: Coherence of Approximations (MKTD2-theory mirror of Entry ThmTransfiniteApproxCoherence):
+          forall G g h B.
+            (((B in Dom(g) -> ValOf(g, B) = ValOf(G, Restrict(g, B))) /\
+              ((B in Dom(h) /\ Restrict(g, B) = Restrict(h, B)) ->
+               ValOf(h, B) = ValOf(G, Restrict(g, B)))) /\
+             ((B in Dom(g) /\ B in Dom(h)) /\ Restrict(g, B) = Restrict(h, B))) ->
+            (ValOf(g, B) = ValOf(G, Restrict(g, B)) /\
+             ValOf(g, B) = ValOf(h, B))
+          Proved constructively using ax_eq_sym and ax_eq_trans to deduce ValOf(g, B) = ValOf(h, B). *)
+  val thm_227_transfinite_approx_coherence_step : TheoremRecord = {
+    id = 227,
+    name = "thm_transfinite_approx_coherence_step",
+    statement =
+      Forall "G" TClass (
+        Forall "g" TClass (
+          Forall "h" TClass (
+            Forall "B" TClass (
+              let
+                val bDomg = In (Var "B") (App (Const "Dom", Var "g"))
+                val bDomh = In (Var "B") (App (Const "Dom", Var "h"))
+                val rgB = App (App (Const "Restrict", Var "g"), Var "B")
+                val rhB = App (App (Const "Restrict", Var "h"), Var "B")
+                val gB = App (App (Const "ValOf", Var "g"), Var "B")
+                val hB = App (App (Const "ValOf", Var "h"), Var "B")
+                val gRgB = App (App (Const "ValOf", Var "G"), rgB)
+                val eqR = Eq rgB rhB
+                val eqgG = Eq gB gRgB
+                val eqhG = Eq hB gRgB
+                val eqgh = Eq gB hB
+              in
+                Impl (And (And (Impl bDomg eqgG)
+                               (Impl (And bDomh eqR) eqhG))
+                          (And (And bDomg bDomh) eqR))
+                     (And eqgG eqgh)
+              end)))),
+    proofProgram =
+      Lam ("G", TClass,
+        Lam ("g", TClass,
+          Lam ("h", TClass,
+            Lam ("B", TClass,
+              let
+                val bDomg = In (Var "B") (App (Const "Dom", Var "g"))
+                val bDomh = In (Var "B") (App (Const "Dom", Var "h"))
+                val rgB = App (App (Const "Restrict", Var "g"), Var "B")
+                val rhB = App (App (Const "Restrict", Var "h"), Var "B")
+                val gB = App (App (Const "ValOf", Var "g"), Var "B")
+                val hB = App (App (Const "ValOf", Var "h"), Var "B")
+                val gRgB = App (App (Const "ValOf", Var "G"), rgB)
+                val eqR = Eq rgB rhB
+                val eqgG = Eq gB gRgB
+                val eqhG = Eq hB gRgB
+              in
+                Lam ("hyp", And (And (Impl bDomg eqgG)
+                                     (Impl (And bDomh eqR) eqhG))
+                                (And (And bDomg bDomh) eqR),
+                  let
+                    val hgG = App (Fst (Fst (Var "hyp")), Fst (Fst (Snd (Var "hyp"))))
+                    val hhG = App (Snd (Fst (Var "hyp")),
+                                   Pair (Snd (Fst (Snd (Var "hyp"))), Snd (Snd (Var "hyp"))))
+                    val hGh = App (App (App (Const "ax_eq_sym", hB), gRgB), hhG)
+                    val hgh = App (App (App (App (App (Const "ax_eq_trans", gB), gRgB), hB), hgG), hGh)
+                  in
+                    Pair (hgG, hgh)
+                  end)
+              end))))
+  }
+
+  (* 228. Steps 2 and 3 of Transfinite Recursion on On: Global Recursion Equation (MKTD2-theory mirror of Entry ThmTransfiniteRecursionEquation):
+          forall G F g A.
+            ((A in Dom(g) /\ Restrict(F, A) = Restrict(g, A)) ->
+             ValOf(g, A) = ValOf(G, Restrict(F, A))) ->
+            (((ValOf(F, A) = ValOf(g, A)) /\
+              (A in Dom(g) /\ Restrict(F, A) = Restrict(g, A))) ->
+             ValOf(F, A) = ValOf(G, Restrict(F, A)))
+          Proved via ax_eq_trans without assuming any tautological transitivity premise. *)
+  val thm_228_transfinite_recursion_equation_step : TheoremRecord = {
+    id = 228,
+    name = "thm_transfinite_recursion_equation_step",
+    statement =
+      Forall "G" TClass (
+        Forall "F" TClass (
+          Forall "g" TClass (
+            Forall "A" TClass (
+              let
+                val aDomg = In (Var "A") (App (Const "Dom", Var "g"))
+                val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+                val rgA = App (App (Const "Restrict", Var "g"), Var "A")
+                val fA = App (App (Const "ValOf", Var "F"), Var "A")
+                val gA = App (App (Const "ValOf", Var "g"), Var "A")
+                val gRFA = App (App (Const "ValOf", Var "G"), rFA)
+                val eqR = Eq rFA rgA
+                val eqFG = Eq fA gA
+                val eqGG = Eq gA gRFA
+                val eqConcl = Eq fA gRFA
+              in
+                Impl (Impl (And aDomg eqR) eqGG)
+                     (Impl (And eqFG (And aDomg eqR)) eqConcl)
+              end)))),
+    proofProgram =
+      Lam ("G", TClass,
+        Lam ("F", TClass,
+          Lam ("g", TClass,
+            Lam ("A", TClass,
+              let
+                val aDomg = In (Var "A") (App (Const "Dom", Var "g"))
+                val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+                val rgA = App (App (Const "Restrict", Var "g"), Var "A")
+                val fA = App (App (Const "ValOf", Var "F"), Var "A")
+                val gA = App (App (Const "ValOf", Var "g"), Var "A")
+                val gRFA = App (App (Const "ValOf", Var "G"), rFA)
+                val eqR = Eq rFA rgA
+                val eqFG = Eq fA gA
+                val eqGG = Eq gA gRFA
+              in
+                Lam ("hLaw", Impl (And aDomg eqR) eqGG,
+                  Lam ("w", And eqFG (And aDomg eqR),
+                    App (App (App (App (App (Const "ax_eq_trans", fA), gA), gRFA),
+                              Fst (Var "w")),
+                         App (Var "hLaw", Snd (Var "w")))))
+              end))))
+  }
+
+  (* 229. Step 4 of Transfinite Recursion on On: Uniqueness (MKTD2-theory mirror of Entry ThmTransfiniteRecursionUniqueness):
+          forall G F H A.
+            (((A in On -> ValOf(F, A) = ValOf(G, Restrict(F, A))) /\
+              ((A in On /\ Restrict(F, A) = Restrict(H, A)) ->
+               ValOf(H, A) = ValOf(G, Restrict(F, A)))) /\
+             (A in On /\ Restrict(F, A) = Restrict(H, A))) ->
+            (ValOf(F, A) = ValOf(G, Restrict(F, A)) /\
+             ValOf(F, A) = ValOf(H, A))
+          Proved via ax_eq_sym and ax_eq_trans. *)
+  val thm_229_transfinite_recursion_uniqueness_step : TheoremRecord = {
+    id = 229,
+    name = "thm_transfinite_recursion_uniqueness_step",
+    statement =
+      Forall "G" TClass (
+        Forall "F" TClass (
+          Forall "H" TClass (
+            Forall "A" TClass (
+              let
+                val aOn = In (Var "A") (Const "On")
+                val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+                val rHA = App (App (Const "Restrict", Var "H"), Var "A")
+                val fA = App (App (Const "ValOf", Var "F"), Var "A")
+                val hA = App (App (Const "ValOf", Var "H"), Var "A")
+                val gRFA = App (App (Const "ValOf", Var "G"), rFA)
+                val eqR = Eq rFA rHA
+                val eqFG = Eq fA gRFA
+                val eqHG = Eq hA gRFA
+                val eqFH = Eq fA hA
+              in
+                Impl (And (And (Impl aOn eqFG)
+                               (Impl (And aOn eqR) eqHG))
+                          (And aOn eqR))
+                     (And eqFG eqFH)
+              end)))),
+    proofProgram =
+      Lam ("G", TClass,
+        Lam ("F", TClass,
+          Lam ("H", TClass,
+            Lam ("A", TClass,
+              let
+                val aOn = In (Var "A") (Const "On")
+                val rFA = App (App (Const "Restrict", Var "F"), Var "A")
+                val rHA = App (App (Const "Restrict", Var "H"), Var "A")
+                val fA = App (App (Const "ValOf", Var "F"), Var "A")
+                val hA = App (App (Const "ValOf", Var "H"), Var "A")
+                val gRFA = App (App (Const "ValOf", Var "G"), rFA)
+                val eqR = Eq rFA rHA
+                val eqFG = Eq fA gRFA
+                val eqHG = Eq hA gRFA
+              in
+                Lam ("hyp", And (And (Impl aOn eqFG)
+                                     (Impl (And aOn eqR) eqHG))
+                                (And aOn eqR),
+                  let
+                    val hFG = App (Fst (Fst (Var "hyp")), Fst (Snd (Var "hyp")))
+                    val hHG = App (Snd (Fst (Var "hyp")), Snd (Var "hyp"))
+                    val hGH = App (App (App (Const "ax_eq_sym", hA), gRFA), hHG)
+                    val hFH = App (App (App (App (App (Const "ax_eq_trans", fA), gRFA), hA), hFG), hGH)
+                  in
+                    Pair (hFG, hFH)
+                  end)
+              end))))
+  }
+
+  (* 230. Application of Transfinite Recursion on On to the Von Neumann Hierarchy (MKTD2-theory mirror of Entry ThmVonNeumannHierarchyByTransfiniteRecursion):
+          forall V A Ufam.
+            (ValOf(V, A) = App(VonNeumannStepG, Restrict(V, A)) /\
+             App(VonNeumannStepG, Restrict(V, A)) = Ufam) ->
+            ValOf(V, A) = Ufam
+          Proved directly via ax_eq_trans without any tautological implication hypothesis. *)
+  val thm_230_von_neumann_hierarchy_by_transfinite_recursion_step : TheoremRecord = {
+    id = 230,
+    name = "thm_von_neumann_hierarchy_by_transfinite_recursion_step",
+    statement =
+      Forall "V" TClass (
+        Forall "A" TClass (
+          Forall "Ufam" TClass (
+            let
+              val vA = App (App (Const "ValOf", Var "V"), Var "A")
+              val stepRVA = App (Const "VonNeumannStepG", App (App (Const "Restrict", Var "V"), Var "A"))
+              val eq1 = Eq vA stepRVA
+              val eq2 = Eq stepRVA (Var "Ufam")
+              val eq3 = Eq vA (Var "Ufam")
+            in
+              Impl (And eq1 eq2) eq3
+            end))),
+    proofProgram =
+      Lam ("V", TClass,
+        Lam ("A", TClass,
+          Lam ("Ufam", TClass,
+            let
+              val vA = App (App (Const "ValOf", Var "V"), Var "A")
+              val stepRVA = App (Const "VonNeumannStepG", App (App (Const "Restrict", Var "V"), Var "A"))
+              val eq1 = Eq vA stepRVA
+              val eq2 = Eq stepRVA (Var "Ufam")
+            in
+              Lam ("h", And eq1 eq2,
+                App (App (App (App (App (Const "ax_eq_trans", vA), stepRVA), Var "Ufam"),
+                          Fst (Var "h")),
+                     Snd (Var "h")))
+            end)))
+  }
+
+  (* 231. Dependent Sum (Sigma-Type) Family Class Model Bridge (Foundations ch. 130, Entry DefSigmaModel):
+          forall B.
+            ((Sigma (x:Class). Sigma (y:Class). OPair(x, y) in Sigma(B)) ->
+             (Sigma (x:Class). Sigma (y:Class). (x in Dom(B) /\ y in ValOf(B, x)))) /\
+            ((Sigma (x:Class). Sigma (y:Class). (x in Dom(B) /\ y in ValOf(B, x))) ->
+             (Sigma (x:Class). Sigma (y:Class). OPair(x, y) in Sigma(B)))
+          Constructs a dependent Sigma-type proof object in MKTD2-system directly from a
+          class-membership proof OPair(x, y) in Sigma(B) (and vice versa) via definitional
+          unfolding of DefSigmaModel. *)
+  val thm_231_sigma_family_model_dependent_pair_bridge : TheoremRecord = {
+    id = 231,
+    name = "thm_sigma_family_model_dependent_pair_bridge",
+    statement =
+      Forall "B" TClass (
+        let
+          val domB = App (Const "Dom", Var "B")
+          val sigB = App (Const "Sigma", Var "B")
+          val classMemSigma =
+            Sigma ("x", TClass,
+              Sigma ("y", TClass,
+                In (App (App (Const "OPair", Var "x"), Var "y")) sigB))
+          val depSumType =
+            Sigma ("x", TClass,
+              Sigma ("y", TClass,
+                And (In (Var "x") domB)
+                    (In (Var "y") (App (App (Const "ValOf", Var "B"), Var "x")))))
+        in
+          Iff classMemSigma depSumType
+        end),
+    proofProgram =
+      Lam ("B", TClass,
+        let
+          val domB = App (Const "Dom", Var "B")
+          val sigB = App (Const "Sigma", Var "B")
+          val classMemSigma =
+            Sigma ("x", TClass,
+              Sigma ("y", TClass,
+                In (App (App (Const "OPair", Var "x"), Var "y")) sigB))
+          val depSumType =
+            Sigma ("x", TClass,
+              Sigma ("y", TClass,
+                And (In (Var "x") domB)
+                    (In (Var "y") (App (App (Const "ValOf", Var "B"), Var "x")))))
+        in
+          Pair (
+            Lam ("w", classMemSigma,
+              Pair (Fst (Var "w"),
+                    Pair (Fst (Snd (Var "w")), Snd (Snd (Var "w"))))),
+            Lam ("w", depSumType,
+              Pair (Fst (Var "w"),
+                    Pair (Fst (Snd (Var "w")), Snd (Snd (Var "w"))))))
+        end)
+  }
+
+  (* 232. Dependent Product (Pi-Type) Family Class Model Bridge (Foundations ch. 130, Entry DefPiPredicateModel):
+          forall B f x.
+            (f in PiModel(B) /\ x in Dom(B)) ->
+            Sigma (y:Class). (y = ValOf(f, x) /\ y in ValOf(B, x))
+          Constructs a dependent existence/fiber proof in MKTD2-system directly from the
+          class-membership proof f in PiModel(B) and x in Dom(B), interpreting f in PiModel(B)
+          as a dependent product section Pi (u:Class). (u in Dom(B) -> ValOf(f, u) in ValOf(B, u)). *)
+  val thm_232_pi_family_model_dependent_product_bridge : TheoremRecord = {
+    id = 232,
+    name = "thm_pi_family_model_dependent_product_bridge",
+    statement =
+      Forall "B" TClass (
+        Forall "f" TClass (
+          Forall "x" TClass (
+            let
+              val piB = App (Const "PiModel", Var "B")
+              val domB = App (Const "Dom", Var "B")
+              val fx = App (App (Const "ValOf", Var "f"), Var "x")
+              val bx = App (App (Const "ValOf", Var "B"), Var "x")
+            in
+              Impl (And (In (Var "f") piB) (In (Var "x") domB))
+                   (Sigma ("y", TClass, And (Eq (Var "y") fx) (In (Var "y") bx)))
+            end))),
+    proofProgram =
+      Lam ("B", TClass,
+        Lam ("f", TClass,
+          Lam ("x", TClass,
+            let
+              val piB = App (Const "PiModel", Var "B")
+              val domB = App (Const "Dom", Var "B")
+              val fx = App (App (Const "ValOf", Var "f"), Var "x")
+              val secType =
+                Pi ("u", TClass,
+                  Impl (In (Var "u") domB)
+                       (In (App (App (Const "ValOf", Var "f"), Var "u"))
+                           (App (App (Const "ValOf", Var "B"), Var "u"))))
+            in
+              Lam ("h", And (In (Var "f") piB) (In (Var "x") domB),
+                Let ("sec", secType, Fst (Var "h"),
+                  Pair (fx,
+                        Pair (Refl fx,
+                              App (App (Var "sec", Var "x"), Snd (Var "h"))))))
+            end)))
+  }
+
+  (* 233. Reduced Object-Level 3-Argument Variable Substitution Laws in MKTD2-theory (Mirror of Entry DefReducedVarSubst & ThmReducedVarSubstLaws):
+          forall t x v u.
+            (((v = x /\ u in t) -> u in SubstVar(t, x, v)) /\
+             (((v = x -> False) /\ u in v) -> u in SubstVar(t, x, v)))
+          Proved by definitional conversion of SubstVar(t, x, v) in DependentEval.unfoldDefs. *)
+  val thm_233_reduced_var_subst_hit_and_miss : TheoremRecord = {
+    id = 233,
+    name = "thm_reduced_var_subst_hit_and_miss",
+    statement =
+      Forall "t" TClass (
+        Forall "x" TClass (
+          Forall "v" TClass (
+            Forall "u" TClass (
+              let
+                val sv = App (App (App (Const "SubstVar", Var "t"), Var "x"), Var "v")
+                val uInSV = In (Var "u") sv
+                val hitHyp = And (Eq (Var "v") (Var "x")) (In (Var "u") (Var "t"))
+                val missHyp = And (Impl (Eq (Var "v") (Var "x")) (Const "False")) (In (Var "u") (Var "v"))
+              in
+                And (Impl hitHyp uInSV)
+                    (Impl missHyp uInSV)
+              end)))),
+    proofProgram =
+      Lam ("t", TClass,
+        Lam ("x", TClass,
+          Lam ("v", TClass,
+            Lam ("u", TClass,
+              let
+                val hitHyp = And (Eq (Var "v") (Var "x")) (In (Var "u") (Var "t"))
+                val missHyp = And (Impl (Eq (Var "v") (Var "x")) (Const "False")) (In (Var "u") (Var "v"))
+              in
+                Pair (
+                  Lam ("hHit", hitHyp,
+                    Lam ("C", TProp,
+                      Lam ("inL", Impl hitHyp (Var "C"),
+                        Lam ("_", Impl missHyp (Var "C"),
+                          App (Var "inL", Var "hHit"))))),
+                  Lam ("hMiss", missHyp,
+                    Lam ("C", TProp,
+                      Lam ("_", Impl hitHyp (Var "C"),
+                        Lam ("inR", Impl missHyp (Var "C"),
+                          App (Var "inR", Var "hMiss"))))))
+              end))))
+  }
+
+  (* 234. Unary Intersection is a Subclass of Binary Intersection of Any Two Members:
+          forall K A B.
+            (A in K /\ B in K) -> Subset(Inter(K), BinInter(A, B))
+          Proves constructively in MKTD2-system that the unary intersection Inter(K)
+          is smaller (a subclass) than the binary intersection BinInter(A, B) whenever
+          A and B belong to K. *)
+  val thm_234_unary_inter_subset_bin_inter : TheoremRecord = {
+    id = 234,
+    name = "thm_unary_inter_subset_bin_inter",
+    statement =
+      Forall "K" TClass (
+        Forall "A" TClass (
+          Forall "B" TClass (
+            Impl (And (In (Var "A") (Var "K")) (In (Var "B") (Var "K")))
+                 (Subset (App (Const "Inter", Var "K"))
+                         (App (App (Const "BinInter", Var "A"), Var "B")))))),
+    proofProgram =
+      Lam ("K", TClass,
+        Lam ("A", TClass,
+          Lam ("B", TClass,
+            Lam ("hAB", And (In (Var "A") (Var "K")) (In (Var "B") (Var "K")),
+              Lam ("z", TClass,
+                Lam ("hzInterK", In (Var "z") (App (Const "Inter", Var "K")),
+                  let
+                    val allYinK =
+                      Forall "y" TClass (Impl (In (Var "y") (Var "K")) (In (Var "z") (Var "y")))
+                  in
+                    Let ("hAll", allYinK, Var "hzInterK",
+                      Pair (App (App (Var "hAll", Var "A"), Fst (Var "hAB")),
+                            App (App (Var "hAll", Var "B"), Snd (Var "hAB"))))
+                  end))))))
+  }
+
+  (* 235. Diagonal Evaluation of Reduced Object-Level Variable Substitution:
+          forall t x u.
+            u in t -> u in SubstVar(t, x, x)
+          Proves constructively in MKTD2-system using Refl(x) that substituting t
+          instead of x in x itself evaluates directly to t. *)
+  val thm_235_reduced_var_subst_diagonal_eval : TheoremRecord = {
+    id = 235,
+    name = "thm_reduced_var_subst_diagonal_eval",
+    statement =
+      Forall "t" TClass (
+        Forall "x" TClass (
+          Forall "u" TClass (
+            Impl (In (Var "u") (Var "t"))
+                 (In (Var "u") (App (App (App (Const "SubstVar", Var "t"), Var "x"), Var "x")))))),
+    proofProgram =
+      Lam ("t", TClass,
+        Lam ("x", TClass,
+          Lam ("u", TClass,
+            let
+              val hitDiag = And (Eq (Var "x") (Var "x")) (In (Var "u") (Var "t"))
+              val missDiag = And (Impl (Eq (Var "x") (Var "x")) (Const "False")) (In (Var "u") (Var "x"))
+            in
+              Lam ("huT", In (Var "u") (Var "t"),
+                Lam ("C", TProp,
+                  Lam ("inL", Impl hitDiag (Var "C"),
+                    Lam ("_", Impl missDiag (Var "C"),
+                      App (Var "inL", Pair (Refl (Var "x"), Var "huT"))))))
+            end)))
+  }
+
+  (* 236. Self-Substitution Preservation under Decidable Variable Equality:
+          forall x v u.
+            ((v = x \/ (v = x -> False)) /\ u in v) ->
+            u in SubstVar(x, x, v)
+          Proves constructively in MKTD2-system that substituting x instead of x in v
+          preserves membership u in v across both hit and miss branches. *)
+  val thm_236_reduced_var_subst_idempotent_self : TheoremRecord = {
+    id = 236,
+    name = "thm_reduced_var_subst_idempotent_self",
+    statement =
+      Forall "x" TClass (
+        Forall "v" TClass (
+          Forall "u" TClass (
+            let
+              val eqVX = Eq (Var "v") (Var "x")
+              val neqVX = Impl eqVX (Const "False")
+              val svXXV = App (App (App (Const "SubstVar", Var "x"), Var "x"), Var "v")
+            in
+              Impl (And (Or eqVX neqVX) (In (Var "u") (Var "v")))
+                   (In (Var "u") svXXV)
+            end))),
+    proofProgram =
+      Lam ("x", TClass,
+        Lam ("v", TClass,
+          Lam ("u", TClass,
+            let
+              val eqVX = Eq (Var "v") (Var "x")
+              val neqVX = Impl eqVX (Const "False")
+              val hitSelf = And eqVX (In (Var "u") (Var "x"))
+              val missSelf = And neqVX (In (Var "u") (Var "v"))
+              val svXXV = App (App (App (Const "SubstVar", Var "x"), Var "x"), Var "v")
+              val uInSV = In (Var "u") svXXV
+              val predV = Lam ("w", TClass, In (Var "u") (Var "w"))
+            in
+              Lam ("h", And (Or eqVX neqVX) (In (Var "u") (Var "v")),
+                App (
+                  App (
+                    App (Fst (Var "h"), uInSV),
+                    Lam ("hEq", eqVX,
+                      let
+                        val uInX =
+                          App (
+                            App (
+                              App (
+                                App (
+                                  App (Const "ax_eq_subst", predV),
+                                  Var "v"),
+                                Var "x"),
+                              Var "hEq"),
+                            Snd (Var "h"))
+                      in
+                        Lam ("C", TProp,
+                          Lam ("inL", Impl hitSelf (Var "C"),
+                            Lam ("_", Impl missSelf (Var "C"),
+                              App (Var "inL", Pair (Var "hEq", uInX)))))
+                      end)),
+                  Lam ("hNeq", neqVX,
+                    Lam ("C", TProp,
+                      Lam ("_", Impl hitSelf (Var "C"),
+                        Lam ("inR", Impl missSelf (Var "C"),
+                          App (Var "inR", Pair (Var "hNeq", Snd (Var "h")))))))))
+            end)))
+  }
+
+  (* 237. Intensionality via Singleton Witness (3.11 AxmIntensionality Bridge):
+          forall x y.
+            (x in {x} /\ (forall z. z in {x} -> z in {y}) /\ (forall z. z in {y} -> z = y)) ->
+            x = y
+          Proves constructively in MKTD2-system that if x belongs to its singleton {x},
+          {x} is a subclass of {y}, and every element of {y} equals y, then x = y. *)
+  val thm_237_intensionality_via_singleton_witness : TheoremRecord = {
+    id = 237,
+    name = "thm_intensionality_via_singleton_witness",
+    statement =
+      Forall "x" TClass (
+        Forall "y" TClass (
+          let
+            val singX = App (Const "singleton", Var "x")
+            val singY = App (Const "singleton", Var "y")
+            val xInSingX = In (Var "x") singX
+            val subSingXY = Forall "z" TClass (Impl (In (Var "z") singX) (In (Var "z") singY))
+            val elimSingY = Forall "z" TClass (Impl (In (Var "z") singY) (Eq (Var "z") (Var "y")))
+          in
+            Impl (And xInSingX (And subSingXY elimSingY))
+                 (Eq (Var "x") (Var "y"))
+          end)),
+    proofProgram =
+      Lam ("x", TClass,
+        Lam ("y", TClass,
+          let
+            val singX = App (Const "singleton", Var "x")
+            val singY = App (Const "singleton", Var "y")
+            val xInSingX = In (Var "x") singX
+            val subSingXY = Forall "z" TClass (Impl (In (Var "z") singX) (In (Var "z") singY))
+            val elimSingY = Forall "z" TClass (Impl (In (Var "z") singY) (Eq (Var "z") (Var "y")))
+          in
+            Lam ("h", And xInSingX (And subSingXY elimSingY),
+              App (
+                App (Snd (Snd (Var "h")), Var "x"),
+                App (
+                  App (Fst (Snd (Var "h")), Var "x"),
+                  Fst (Var "h"))))
+          end))
+  }
+
+  (* 238. Irreflexivity from Epsilon-Induction / Well-Foundedness Step:
+          forall x.
+            ((forall y. y in x -> (y in y -> False)) /\ x in x) -> False
+          Proves constructively in MKTD2-system that the inductive hypothesis of
+          epsilon-induction at x immediately refutes self-membership x in x. *)
+  val thm_238_irreflexivity_from_well_founded_step : TheoremRecord = {
+    id = 238,
+    name = "thm_irreflexivity_from_well_founded_step",
+    statement =
+      Forall "x" TClass (
+        let
+          val ihAtX = Forall "y" TClass (Impl (In (Var "y") (Var "x")) (Impl (In (Var "y") (Var "y")) (Const "False")))
+          val xInX = In (Var "x") (Var "x")
+        in
+          Impl (And ihAtX xInX) (Const "False")
+        end),
+    proofProgram =
+      Lam ("x", TClass,
+        let
+          val ihAtX = Forall "y" TClass (Impl (In (Var "y") (Var "x")) (Impl (In (Var "y") (Var "y")) (Const "False")))
+          val xInX = In (Var "x") (Var "x")
+        in
+          Lam ("h", And ihAtX xInX,
+            App (
+              App (
+                App (Fst (Var "h"), Var "x"),
+                Snd (Var "h")),
+              Snd (Var "h")))
+        end)
+  }
+
+  (* 239. Burali-Forti Proper Class Step for On:
+          ((Set(On) -> On in On) /\ (On in On -> False)) -> (Set(On) -> False)
+          Proves constructively in MKTD2-system that since any set ordinal belongs to On
+          and On is an ordinal while membership is irreflexive, On cannot be a set. *)
+  val thm_239_burali_forti_ordinal_proper_class_step : TheoremRecord = {
+    id = 239,
+    name = "thm_burali_forti_ordinal_proper_class_step",
+    statement =
+      let
+        val setOn = IsSet (Const "On")
+        val onInOn = In (Const "On") (Const "On")
+      in
+        Impl (And (Impl setOn onInOn) (Impl onInOn (Const "False")))
+             (Impl setOn (Const "False"))
+      end,
+    proofProgram =
+      let
+        val setOn = IsSet (Const "On")
+        val onInOn = In (Const "On") (Const "On")
+      in
+        Lam ("h", And (Impl setOn onInOn) (Impl onInOn (Const "False")),
+          Lam ("hSetOn", setOn,
+            App (Snd (Var "h"), App (Fst (Var "h"), Var "hSetOn"))))
+      end
+  }
+
+  (* Complete Table of All 239 Theorem Records *)
   val allTheorems : TheoremRecord list = [
     thm_01_A01,
     thm_02_A02,
@@ -9655,7 +10319,21 @@ struct
     thm_222_universe_indexed_union_identity_union_step,
     thm_223_universe_inter_on_limit_irreflexivity_step,
     thm_224_von_neumann_stage_sub_universe_step,
-    thm_225_universe_sub_von_neumann_stage_rank_step
+    thm_225_universe_sub_von_neumann_stage_rank_step,
+    thm_226_domain_restriction_elem_iff,
+    thm_227_transfinite_approx_coherence_step,
+    thm_228_transfinite_recursion_equation_step,
+    thm_229_transfinite_recursion_uniqueness_step,
+    thm_230_von_neumann_hierarchy_by_transfinite_recursion_step,
+    thm_231_sigma_family_model_dependent_pair_bridge,
+    thm_232_pi_family_model_dependent_product_bridge,
+    thm_233_reduced_var_subst_hit_and_miss,
+    thm_234_unary_inter_subset_bin_inter,
+    thm_235_reduced_var_subst_diagonal_eval,
+    thm_236_reduced_var_subst_idempotent_self,
+    thm_237_intensionality_via_singleton_witness,
+    thm_238_irreflexivity_from_well_founded_step,
+    thm_239_burali_forti_ordinal_proper_class_step
   ]
 
   (* Verification Result Datatype *)
@@ -9731,6 +10409,40 @@ struct
 
   fun startsWithDef (c: string) : bool =
     String.size c >= 4 andalso String.substring (c, 0, 4) = "def_"
+
+  fun startsWithAx (c: string) : bool =
+    String.size c >= 3 andalso String.substring (c, 0, 3) = "ax_"
+
+  fun axiomsUsedInTerm (tm: Term) (acc: string list) : string list =
+    let
+      fun addUnique s xs =
+        if List.exists (fn x => x = s) xs then xs else xs @ [s]
+    in
+      case tm of
+        Const c =>
+          if startsWithAx c orelse startsWithPlan c orelse startsWithDef c
+          then addUnique c acc
+          else acc
+      | Succ u => axiomsUsedInTerm u acc
+      | Pi (_, d, b) => axiomsUsedInTerm b (axiomsUsedInTerm d acc)
+      | Sigma (_, d, b) => axiomsUsedInTerm b (axiomsUsedInTerm d acc)
+      | Id (ty, l, r) => axiomsUsedInTerm r (axiomsUsedInTerm l (axiomsUsedInTerm ty acc))
+      | Refine (_, d, p) => axiomsUsedInTerm p (axiomsUsedInTerm d acc)
+      | Lam (_, d, b) => axiomsUsedInTerm b (axiomsUsedInTerm d acc)
+      | App (f, a) => axiomsUsedInTerm a (axiomsUsedInTerm f acc)
+      | Pair (a, b) => axiomsUsedInTerm b (axiomsUsedInTerm a acc)
+      | Fst p => axiomsUsedInTerm p acc
+      | Snd p => axiomsUsedInTerm p acc
+      | Refl u => axiomsUsedInTerm u acc
+      | NatRec (p, z, s, n) =>
+          axiomsUsedInTerm n (axiomsUsedInTerm s (axiomsUsedInTerm z (axiomsUsedInTerm p acc)))
+      | Let (_, ty, v, b) =>
+          axiomsUsedInTerm b (axiomsUsedInTerm v (axiomsUsedInTerm ty acc))
+      | _ => acc
+    end
+
+  fun axiomsUsed (th: TheoremRecord) : string list =
+    axiomsUsedInTerm (#proofProgram th) []
 
   fun proofKind (th: TheoremRecord) : ProofKind =
     if nameIn definitionalTheoremNames (#name th) then Definitional
@@ -9819,6 +10531,15 @@ struct
     in
       (List.length passes, List.length results)
     end
+
+  (* Mandatory load-time verification of all MKTD2-system theorems *)
+  val _ =
+    case List.filter (fn (VerificationFailed _) => true | _ => false) (verifyAll ()) of
+      [] => ()
+    | failures =>
+        raise Fail ("VerifiedTheorems load-time check failed: " ^
+                    String.concatWith "; "
+                      (List.map (fn VerificationFailed r => #name r ^ ": " ^ #error r | _ => "") failures))
 
 end;
 
@@ -25561,6 +26282,26 @@ struct
                                  EApp (ESnd (EFst (EVar "h")), EVar "hxU")))))
               end)))))
 
+  (* Unary Intersection Subclass of Binary Intersection of Any Two Members (thm_145):
+     forall (K:Class) (A:Class) (B:Class) (z:Class),
+       ((A in K /\ B in K) /\ (forall (y:Class), y in K -> z in y)) ->
+       (z in A /\ z in B) *)
+  val proofUnaryInterSubclassBinInter : Expr =
+    ETLam ("K", ClassSort,
+      ETLam ("A", ClassSort,
+        ETLam ("B", ClassSort,
+          ETLam ("z", ClassSort,
+            let
+              val aInK = TIn (FVar "A", FVar "K")
+              val bInK = TIn (FVar "B", FVar "K")
+              val allY = TPi ("y", ClassSort, TArrow (TIn (FVar "y", FVar "K"), TIn (FVar "z", FVar "y")))
+            in
+              ELam ("h", TProd (TProd (aInK, bInK), allY),
+                EPair (
+                  EApp (ETApp (ESnd (EVar "h"), FVar "A"), EFst (EFst (EVar "h"))),
+                  EApp (ETApp (ESnd (EVar "h"), FVar "B"), ESnd (EFst (EVar "h")))))
+            end))))
+
   (* All 140 Constructive NBG/MK Theorems Bridged Automatically from MKTD2-system to MKTD1-system *)
   fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
     [
@@ -25708,7 +26449,8 @@ struct
       translateExprV2ToV1Anatomy "universe_indexed_union_identity_union_step" NBG_Predicative [] proofUniverseIndexedUnionIdentityUnionStep,
       translateExprV2ToV1Anatomy "universe_inter_on_limit_irreflexivity_step" NBG_Predicative [] proofUniverseInterOnLimitIrreflexivityStep,
       translateExprV2ToV1Anatomy "von_neumann_stage_sub_universe_step" NBG_Predicative [] proofVonNeumannStageSubUniverseStep,
-      translateExprV2ToV1Anatomy "universe_sub_von_neumann_stage_rank_step" NBG_Predicative [] proofUniverseSubVonNeumannStageRankStep
+      translateExprV2ToV1Anatomy "universe_sub_von_neumann_stage_rank_step" NBG_Predicative [] proofUniverseSubVonNeumannStageRankStep,
+      translateExprV2ToV1Anatomy "unary_inter_subclass_bin_inter" MK_Impredicative [] proofUnaryInterSubclassBinInter
     ]
 
   (* ========================================================================= *)
@@ -26182,6 +26924,67 @@ struct
             V1CConst "SetRankGraph",
             V1CInter (V1CKappa (r, V1FOrd (V1CVar r)))
           )
+      | ("DefDomainRestriction", [f, a, z]) =>
+          V1FForall (f, V1TyClass,
+            V1FForall (a, V1TyClass,
+              V1FEq (
+                V1CBinInter (V1CVar f, V1CVar a),
+                V1CKappa (z, V1FAnd (V1FIn (V1CVar z, V1CVar f), V1FIn (V1CPr1 (V1CVar z), V1CVar a)))
+              )
+            )
+          )
+      | ("DefTransfiniteApproximation", [g_op, g_fn, b, x]) =>
+          V1FForall (g_op, V1TyClass,
+            V1FForall (g_fn, V1TyClass,
+              V1FAnd (
+                V1FSet (V1CVar g_fn),
+                V1FForall (b, V1TyClass,
+                  V1FForall (x, V1TyClass,
+                    V1FImp (
+                      V1FAnd (V1FIn (V1CVar b, V1COn), V1FEq (V1CVar x, V1CBinInter (V1CVar g_fn, V1CVar b))),
+                      V1FIn (V1CDunaevPair (V1CVar b, V1CVar x), V1CVar g_op)
+                    )
+                  )
+                )
+              )
+            )
+          )
+      | ("DefTransfiniteRecursionGraph", [g_op, g_fn]) =>
+          V1FForall (g_op, V1TyClass,
+            V1FEq (
+              V1CUnion (V1CVar g_op),
+              V1CUnion (V1CKappa (g_fn, V1FIn (V1CVar g_fn, V1CVar g_op)))
+            )
+          )
+      | ("DefVonNeumannStepGenerator", [f_fn, y, b]) =>
+          V1FForall (f_fn, V1TyClass,
+            V1FEq (
+              V1CUnion (V1CVar f_fn),
+              V1CUnion (
+                V1CKappa (y,
+                  V1FExists (b, V1TyClass,
+                    V1FAnd (V1FIn (V1CVar b, V1CVar f_fn), V1FEq (V1CVar y, V1CPower (V1CVar b)))
+                  )
+                )
+              )
+            )
+          )
+      | ("DefReducedVarSubst", [t, x, v, u]) =>
+          V1FForall (t, V1TyClass,
+            V1FForall (x, V1TyClass,
+              V1FForall (v, V1TyClass,
+                V1FEq (
+                  V1CBinUnion (V1CVar t, V1CVar v),
+                  V1CKappa (u,
+                    V1FOr (
+                      V1FAnd (V1FEq (V1CVar v, V1CVar x), V1FIn (V1CVar u, V1CVar t)),
+                      V1FAnd (V1FNeg (V1FEq (V1CVar v, V1CVar x)), V1FIn (V1CVar u, V1CVar v))
+                    )
+                  )
+                )
+              )
+            )
+          )
       | _ =>
           raise KernelDefBridgeError ("Unknown or arity-mismatched PKernelDef_prf: " ^ name)
 
@@ -26453,8 +27256,83 @@ struct
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefVonNeumannStageLaws", ["G", "a", "b"])) NONE,
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefVonNeumannStageGraph", ["G"])) NONE,
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefSetRankLaws", ["R", "x", "y"])) NONE,
-      translatePKernelDefToAnatomy (PKernelDef_prf ("DefSetRankGraph", ["R"])) NONE
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefSetRankGraph", ["R"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefDomainRestriction", ["F", "A", "z"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefTransfiniteApproximation", ["G", "g", "B", "X"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefTransfiniteRecursionGraph", ["G", "g"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefVonNeumannStepGenerator", ["f", "Y", "B"])) NONE,
+      translatePKernelDefToAnatomy (PKernelDef_prf ("DefReducedVarSubst", ["t", "x", "v", "u"])) NONE
     ]
+
+  (* Constructive NBGCompiler.Expr proofs for Domain Restriction, Dependent Sigma Family Comprehension,
+     and Reduced 3-Argument Variable Substitution *)
+  val proofDomainRestrictionCompr : Expr =
+    let
+      val body = TProd (TIn (FVar "w", FVar "F"), TIn (CPr1 (FVar "w"), FVar "A"))
+      val rClass = CKappa ("w", body)
+      val zBody = TProd (TIn (FVar "z", FVar "F"), TIn (CPr1 (FVar "z"), FVar "A"))
+    in
+      ETLam ("F", ClassSort,
+        ETLam ("A", ClassSort,
+          ETLam ("z", ClassSort,
+            ELam ("hInR", TIn (FVar "z", rClass),
+              ESnd (EApp (EFst (EAxCompr ("w", body, FVar "z")), EVar "hInR"))))))
+    end
+
+  val proofSigmaFamilyModelCompr : Expr =
+    let
+      val body =
+        TSigma ("u", ClassSort,
+          TSigma ("v", ClassSort,
+            TProd (
+              TEq (FVar "z", CDunaevPair (FVar "u", FVar "v")),
+              TProd (TIn (FVar "u", FVar "DomB"), TIn (FVar "v", FVar "Bx"))
+            )))
+      val sigClass = CKappa ("z", body)
+    in
+      ETLam ("DomB", ClassSort,
+        ETLam ("Bx", ClassSort,
+          ETLam ("x", ClassSort,
+            ETLam ("y", ClassSort,
+              ELam ("hMem", TIn (CDunaevPair (FVar "x", FVar "y"), sigClass),
+                ESnd (EApp (EFst (EAxCompr ("z", body, CDunaevPair (FVar "x", FVar "y"))), EVar "hMem")))))))
+    end
+
+  val proofReducedVarSubstHitAndMiss : Expr =
+    let
+      val br1 = TProd (TEq (FVar "v", FVar "x"), TIn (FVar "w", FVar "t"))
+      val br2 = TProd (TNeg (TEq (FVar "v", FVar "x")), TIn (FVar "w", FVar "v"))
+      val body = TSum (br1, br2)
+      val svClass = CKappa ("w", body)
+      val uBr1 = TProd (TEq (FVar "v", FVar "x"), TIn (FVar "u", FVar "t"))
+      val uBr2 = TProd (TNeg (TEq (FVar "v", FVar "x")), TIn (FVar "u", FVar "v"))
+      val uBody = TSum (uBr1, uBr2)
+      val hitProof =
+        ELam ("hHit", uBr1,
+          let
+            val hEq = EFst (EVar "hHit")
+            val hInT = ESnd (EVar "hHit")
+            val hSetU = EApp (EAxHeredity (FVar "u", FVar "t"), hInT)
+            val hOr = EInl (EVar "hHit", uBr2)
+          in
+            EApp (ESnd (EAxCompr ("w", body, FVar "u")), EPair (hSetU, hOr))
+          end)
+      val missProof =
+        ELam ("hMiss", uBr2,
+          let
+            val hInV = ESnd (EVar "hMiss")
+            val hSetU = EApp (EAxHeredity (FVar "u", FVar "v"), hInV)
+            val hOr = EInr (EVar "hMiss", uBr1)
+          in
+            EApp (ESnd (EAxCompr ("w", body, FVar "u")), EPair (hSetU, hOr))
+          end)
+    in
+      ETLam ("t", ClassSort,
+        ETLam ("x", ClassSort,
+          ETLam ("v", ClassSort,
+            ETLam ("u", ClassSort,
+              EPair (hitProof, missProof)))))
+    end
 
   fun verifyOrdinalBridge () : (int * int * bool) =
     let
@@ -26581,8 +27459,17 @@ struct
         val dupRejected =
           (let val _ = unfoldPKernelDefV1 (PKernelDef_prf ("DefTransitiveClass", ["A", "A"]))
            in false end) handle KernelDefBridgeError _ => true
+        val restrOk =
+          (let val _ = typeCheckWithSortAndTheory NBG_Predicative [] [] proofDomainRestrictionCompr
+           in true end) handle TypeError _ => false
+        val sigmaOk =
+          (let val _ = typeCheckWithSortAndTheory MK_Impredicative [] [] proofSigmaFamilyModelCompr
+           in true end) handle TypeError _ => false
+        val substVarOk =
+          (let val _ = typeCheckWithSortAndTheory NBG_Predicative [] [] proofReducedVarSubstHitAndMiss
+           in true end) handle TypeError _ => false
       in
-        univOk andalso ordOk andalso dupRejected
+        univOk andalso ordOk andalso dupRejected andalso restrOk andalso sigmaOk andalso substVarOk
       end
 
     fun runAllHypotheses () : (string * bool) list =
