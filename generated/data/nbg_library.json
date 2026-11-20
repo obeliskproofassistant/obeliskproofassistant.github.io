@@ -3,9 +3,9 @@
   "generator": "set_theory_prover/program/nbg_html_generator.ML",
   "source": "set_theory_prover/program/verified_theorems.ML",
   "regeneration_command": "cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML",
-  "total_count": 233,
-  "verified_count": 233,
-  "derived_count": 210,
+  "total_count": 234,
+  "verified_count": 234,
+  "derived_count": 211,
   "definitional_count": 16,
   "axiomatic_count": 7,
   "theorems": [
@@ -2105,6 +2105,15 @@
       "statement_unicode": "Π(t:Class), Π(x:Class), Π(v:Class), Π(u:Class), ((((v = x) × (u ∈ t)) → (u ∈ (SubstVar(t, x) v))) × ((((v = x) → 𝟘) × (u ∈ v)) → (u ∈ (SubstVar(t, x) v))))",
       "proof_unicode": "(λ(t:Class). (λ(x:Class). (λ(v:Class). (λ(u:Class). ⟨(λ(hHit:((v = x) × (u ∈ t))). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ t)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL hHit))))), (λ(hMiss:(((v = x) → 𝟘) × (u ∈ v))). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ t)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR hMiss)))))⟩))))",
       "statement_ast": "(Pi (t : Class) -> (Pi (x : Class) -> (Pi (v : Class) -> (Pi (u : Class) -> (Sigma (_ : (Pi (_ : (Sigma (_ : (Id Class v x)) * (Id Prop ((In u) t) true))) -> (Id Prop ((In u) (((SubstVar t) x) v)) true))) * (Pi (_ : (Sigma (_ : (Pi (_ : (Id Class v x)) -> False)) * (Id Prop ((In u) v) true))) -> (Id Prop ((In u) (((SubstVar t) x) v)) true)))))))"
+    },
+    {
+      "id": 234,
+      "num": "NBG-234",
+      "name": "thm_unary_inter_subset_bin_inter",
+      "kind": "Derived",
+      "statement_unicode": "Π(K:Class), Π(A:Class), Π(B:Class), (((A ∈ K) × (B ∈ K)) → (⋂(K) ⊆ (A ∩ B)))",
+      "proof_unicode": "(λ(K:Class). (λ(A:Class). (λ(B:Class). (λ(hAB:((A ∈ K) × (B ∈ K))). (λ(z:Class). (λ(hzInterK:(z ∈ ⋂(K))). let hAll:Π(y:Class), ((y ∈ K) → (z ∈ y)) = hzInterK in ⟨((hAll A) fst(hAB)), ((hAll B) snd(hAB))⟩))))))",
+      "statement_ast": "(Pi (K : Class) -> (Pi (A : Class) -> (Pi (B : Class) -> (Pi (_ : (Sigma (_ : (Id Prop ((In A) K) true)) * (Id Prop ((In B) K) true))) -> (Id Prop ((Subset (Inter K)) ((BinInter A) B)) true)))))"
     }
   ]
 }

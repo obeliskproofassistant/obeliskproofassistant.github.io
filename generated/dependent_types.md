@@ -116,13 +116,13 @@ Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals
 - **Proof Constructor:** `TpClassFunc (F)`
 - **Standalone Certificate:** [proofs/DefClassFunction.html](proofs/DefClassFunction.html)
 
-### 3.33 `DefInjectiveFunction` — “Is injective” predicate (Definition)
+### 3.33 `DefInjectiveClassFunction` — “Is an injective class-function” predicate (Definition)
 
-- **Identifier:** `DefInjectiveFunction` (entry `3.33`, kind: `Definition`, status: `Definitional (Kernel AST)`)
-- **Formula (Unicode):** `(∀(F:Class)((F injective)←→(((F family)∧(F set-valued))∧∀(x:Class)∀(y:Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))—→(x=y)))))`
-- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)←→((([F@Class.Expression] family)∧([F@Class.Expression] set-valued))∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(((([x@Class.Expression]∈Dom([F@Class.Expression]))∧([y@Class.Expression]∈Dom([F@Class.Expression])))∧([F@Class.Expression]([x@Class.Expression])=[F@Class.Expression]([y@Class.Expression])))—→([x@Class.Expression]=[y@Class.Expression])))))`
+- **Identifier:** `DefInjectiveClassFunction` (entry `3.33`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(F:Class)((F injective)←→((F class-function)∧∀(x:Class)∀(y:Class)((((x∈Dom(F))∧(y∈Dom(F)))∧(F(x)=F(y)))—→(x=y)))))`
+- **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])(([F@Class.Expression] injective)←→(([F@Class.Expression] class-function)∧∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(((([x@Class.Expression]∈Dom([F@Class.Expression]))∧([y@Class.Expression]∈Dom([F@Class.Expression])))∧([F@Class.Expression]([x@Class.Expression])=[F@Class.Expression]([y@Class.Expression])))—→([x@Class.Expression]=[y@Class.Expression])))))`
 - **Proof Constructor:** `TpInjective (F)`
-- **Standalone Certificate:** [proofs/DefInjectiveFunction.html](proofs/DefInjectiveFunction.html)
+- **Standalone Certificate:** [proofs/DefInjectiveClassFunction.html](proofs/DefInjectiveClassFunction.html)
 
 ### 3.34 `DefSetFunction` — “Is a function” predicate (Definition)
 

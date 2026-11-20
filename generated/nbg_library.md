@@ -11,7 +11,7 @@
 
 Agent-friendly Markdown edition generated directly from `set_theory_prover/program/verified_theorems.ML` via `nbg_html_generator.ML` for **MKTD2-system / MKTD2-prover (MKTD2-framework, MKTD2-theory)**.
 
-- **Live Kernel Audit:** 233/233 Mechanically Type-Checked Records (210 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+- **Live Kernel Audit:** 234/234 Mechanically Type-Checked Records (211 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 - **Machine-Readable JSON Database:** [nbg_library.json](nbg_library.json)
 - **MKTD1-system Complete Entity Database (Markdown):** [manual.md](manual.md)
 
@@ -1645,4 +1645,11 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (Unicode):** `Π(t:Class), Π(x:Class), Π(v:Class), Π(u:Class), ((((v = x) × (u ∈ t)) → (u ∈ (SubstVar(t, x) v))) × ((((v = x) → 𝟘) × (u ∈ v)) → (u ∈ (SubstVar(t, x) v))))`
 - **Statement (ANSII):** `Pi(t:Class), Pi(x:Class), Pi(v:Class), Pi(u:Class), ((((v = x) * (u in t)) -> (u in (SubstVar(t, x) v))) * ((((v = x) -> Void) * (u in v)) -> (u in (SubstVar(t, x) v))))`
 - **Constructive Proof Term:** `(λ(t:Class). (λ(x:Class). (λ(v:Class). (λ(u:Class). ⟨(λ(hHit:((v = x) × (u ∈ t))). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ t)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL hHit))))), (λ(hMiss:(((v = x) → 𝟘) × (u ∈ v))). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ t)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR hMiss)))))⟩))))`
+
+### NBG-234 `thm_unary_inter_subset_bin_inter` (Derived)
+
+- **Identifier:** `thm_unary_inter_subset_bin_inter` (`NBG-234`, kind: `Derived`)
+- **Statement (Unicode):** `Π(K:Class), Π(A:Class), Π(B:Class), (((A ∈ K) × (B ∈ K)) → (⋂(K) ⊆ (A ∩ B)))`
+- **Statement (ANSII):** `Pi(K:Class), Pi(A:Class), Pi(B:Class), (((A in K) * (B in K)) -> (Inter(K) c= (A n* B)))`
+- **Constructive Proof Term:** `(λ(K:Class). (λ(A:Class). (λ(B:Class). (λ(hAB:((A ∈ K) × (B ∈ K))). (λ(z:Class). (λ(hzInterK:(z ∈ ⋂(K))). let hAll:Π(y:Class), ((y ∈ K) → (z ∈ y)) = hzInterK in ⟨((hAll A) fst(hAB)), ((hAll B) snd(hAB))⟩))))))`
 

@@ -1,7 +1,7 @@
 # AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
 # Source: set_theory_prover/program/verified_theorems.ML
 # Generator: set_theory_prover/program/nbg_html_generator.ML
-# Summary: 233/233 Mechanically Type-Checked Records (210 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+# Summary: 234/234 Mechanically Type-Checked Records (211 Derived Constructive Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 
 [NBG-001 / thm_A01] (Derived)
   Name:       thm_A01
@@ -1167,4 +1167,9 @@
   Name:       thm_reduced_var_subst_hit_and_miss
   Statement:  Π(t:Class), Π(x:Class), Π(v:Class), Π(u:Class), ((((v = x) × (u ∈ t)) → (u ∈ (SubstVar(t, x) v))) × ((((v = x) → 𝟘) × (u ∈ v)) → (u ∈ (SubstVar(t, x) v))))
   Proof Term: (λ(t:Class). (λ(x:Class). (λ(v:Class). (λ(u:Class). ⟨(λ(hHit:((v = x) × (u ∈ t))). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ t)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL hHit))))), (λ(hMiss:(((v = x) → 𝟘) × (u ∈ v))). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ t)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR hMiss)))))⟩))))
+
+[NBG-234 / thm_unary_inter_subset_bin_inter] (Derived)
+  Name:       thm_unary_inter_subset_bin_inter
+  Statement:  Π(K:Class), Π(A:Class), Π(B:Class), (((A ∈ K) × (B ∈ K)) → (⋂(K) ⊆ (A ∩ B)))
+  Proof Term: (λ(K:Class). (λ(A:Class). (λ(B:Class). (λ(hAB:((A ∈ K) × (B ∈ K))). (λ(z:Class). (λ(hzInterK:(z ∈ ⋂(K))). let hAll:Π(y:Class), ((y ∈ K) → (z ∈ y)) = hzInterK in ⟨((hAll A) fst(hAB)), ((hAll B) snd(hAB))⟩))))))
 
