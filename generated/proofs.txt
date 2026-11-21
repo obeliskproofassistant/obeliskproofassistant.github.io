@@ -107,8 +107,8 @@
 [3.38 / DefSigmaModel] “Dependent Sum (Sigma-Type)” model over a family (Theorem)
   Name:            DefSigmaModel
   Formula [0]:     (∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))
-  SML Kernel AST:  PKernelDef_prf (def_sigma_model_cert, [B, x, y, s, a, b])
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmRightInSound | Definitions Used: DefSigmaModel, DefDunaevOrderedPair, DefClassLists, DefUnorderedPair, DefSingletonSet, DefBinaryUnion | Kernel Prf Nodes: 35
+  SML Kernel AST:  thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 161572
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:     Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
   Verification:    Verified
@@ -224,19 +224,19 @@
 [3.77 / ThmDunaevFirstProjection] First projection of Dunaev's tagged ordered pair (Theorem)
   Name:            ThmDunaevFirstProjection
   Formula [0]:     (∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
-  SML Kernel AST:  thm_3_77_dunaev_pr1_sub (PKernelDef_prf / PAndR_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmRightInSound | Definitions Used: DefDunaevOrderedPair, DefClassLists, DefUnorderedPair, DefSingletonSet, DefBinaryUnion | Kernel Prf Nodes: 15
+  SML Kernel AST:  thm_3_77_dunaev_pr1_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 41145
   Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))
-  Kernel Note:     Recovers A from Dunaev's tagged ordered pair (A, B) via tag 1 = {∅} ({ a | {{{{a}}}, {∅}} ∈ (A, B) } = A, matching pr1 in 3.51 DefClassLists and 3.91 DefDomainRestriction) without requiring A or B to be sets.
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_77_dunaev_pr1_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers A from Dunaev's tagged ordered pair (A, B) via tag 1 = {∅} ({ a | {{{{a}}}, {∅}} ∈ (A, B) } = A, matching pr1 in 3.51 DefClassLists and 3.91 DefDomainRestriction) without requiring A or B to be sets, and together with 3.78 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
   Verification:    Verified
 
 [3.78 / ThmDunaevSecondProjection] Second projection of Dunaev's tagged ordered pair (Theorem)
   Name:            ThmDunaevSecondProjection
   Formula [0]:     (∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
-  SML Kernel AST:  thm_3_78_dunaev_pr2_sub (PKernelDef_prf / PAndR_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmRightInSound | Definitions Used: DefDunaevOrderedPair, DefClassLists, DefUnorderedPair, DefSingletonSet, DefBinaryUnion | Kernel Prf Nodes: 15
+  SML Kernel AST:  thm_3_78_dunaev_pr2_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 38665
   Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))
-  Kernel Note:     Recovers B from Dunaev's tagged ordered pair (A, B) via tag 2 = {∅, {∅}} ({ b | {{{{b}}}, {∅, {∅}}} ∈ (A, B) } = B, matching pr2 in 3.51 DefClassLists) without requiring A or B to be sets.
+  Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_78_dunaev_pr2_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers B from Dunaev's tagged ordered pair (A, B) via tag 2 = {∅, {∅}} ({ b | {{{{b}}}, {∅, {∅}}} ∈ (A, B) } = B, matching pr2 in 3.51 DefClassLists) without requiring A or B to be sets, and together with 3.77 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
   Verification:    Verified
 
 [3.85 / ThmUniverseInterOnIsOrdinal] Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal (Theorem)
