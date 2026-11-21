@@ -26,7 +26,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(𝛗:Fm)((𝘍,[]⊢𝛗)—→eval(𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢[𝛗@Fm.Expression])—→eval([𝛗@Fm.Expression])))`
 - **Proof Constructor:** `PCredo_prf (p)`
-- **Kernel Note:** Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Why this avoids Tarski and Löb inconsistency: While the r.e. base theory 𝘛 cannot assert its own soundness without violating Gödel's second incompleteness theorem and Löb's theorem (hence soundness of 𝘛 is not postulated in 𝘛), the full theory 𝘍 is non-r.e. and Henkin-complete (Th(M)). The evaluation operator ⟦φ⟧ lives in the +1 metalogic on the base formula sublanguage Fm₀ without self-referential truth predicate internalisation, avoiding Tarski undefinability.
+- **Kernel Note:** Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Two-Level Stratification (Why This Avoids Tarski and Löb Inconsistency): In MKTD1-system (Fact [FormulaVsSideConditionMetalevel]), object-level set/class formulas live at metalevel 0 (sort Fm = Fm₀, the object language of 𝘛 and 𝘍), whereas the reflection schemas 3.72-3.74 and the semantic evaluation functor ⟦φ⟧ (EEval) live in the +1 metalogic (metalevel 1). Because 3.72-3.74 are +1 metalevel axioms about 𝘍 rather than object-level formulas inside Fm₀, and ⟦φ⟧ is a +1 metalevel valuation functor rather than an internalized first-order truth predicate in Fm₀, the object-level diagonal lemma cannot be applied to (𝘍, [] ⊢ ·) to form a Tarski liar sentence.
 - **Standalone Certificate:** [proofs/AxmSoundnessOfFullTheory.html](proofs/AxmSoundnessOfFullTheory.html)
 
 ### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Axiom)
@@ -35,7 +35,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `POmnisSem_prf (p)`
-- **Kernel Note:** Semantic completeness (omniscience, 3.73, POmnisSem_prf) of the non-r.e. Henkin completion 𝘍: for every sentence φ, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). Strictly decoupled from syntactic negation-completeness (3.74 AxmNegationCompletenessOfFullTheory). Together with Soundness of 𝘍 (3.72), this establishes (𝘍, [] ⊢ φ) ⇔ ⟦φ⟧, identifying 𝘍 as the complete true theory Th(M).
+- **Kernel Note:** Semantic completeness (omniscience, 3.73, POmnisSem_prf) of the non-r.e. Henkin completion 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). Formulated as a separate axiom from syntactic negation-completeness (3.74 AxmNegationCompletenessOfFullTheory, which is stated purely in terms of ⊢ and ¬ without mentioning ⟦φ⟧): neither implies the other in isolation, while under Soundness of 𝘍 (3.72) and classical model bivalence (⟦φ⟧ ∨ ⟦¬φ⟧) they are conditionally equivalent.
 - **Standalone Certificate:** [proofs/AxmSemanticCompletenessOfFullTheory.html](proofs/AxmSemanticCompletenessOfFullTheory.html)
 
 ### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Axiom)
@@ -44,7 +44,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `POmnisNeg_prf (p)`
-- **Kernel Note:** Syntactic negation-completeness (3.74, POmnisNeg_prf) of the non-r.e. Henkin completion 𝘍: for every sentence φ, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). Strictly decoupled from semantic completeness / omniscience (3.73 AxmSemanticCompletenessOfFullTheory). In classical logic, this is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ). In the bivalent semantics of the background model M (⟦φ⟧ ∨ ⟦¬φ⟧), negation-completeness follows from semantic completeness (3.73), and conversely implies semantic completeness (3.73) given Soundness of 𝘍 (3.72).
+- **Kernel Note:** Syntactic negation-completeness (3.74, POmnisNeg_prf) of the non-r.e. Henkin completion 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). Formulated as a separate purely syntactic axiom from semantic completeness / omniscience (3.73 AxmSemanticCompletenessOfFullTheory): in classical logic, 3.74 is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ), and becomes equivalent to semantic completeness (3.73) when combined with Soundness of 𝘍 (3.72) and classical bivalence of M (⟦φ⟧ ∨ ⟦¬φ⟧).
 - **Standalone Certificate:** [proofs/AxmNegationCompletenessOfFullTheory.html](proofs/AxmNegationCompletenessOfFullTheory.html)
 
 ### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
@@ -62,25 +62,25 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.01 `DefMetaInstantiation` — Instantiation (Axiom)
 
-- **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
 - **Formula (Unicode):** `(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))`
 - **Proof Constructor:** `PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))`
-- **Kernel Note:** Kernel-verified metalevel universal instantiation schema (thm_4_01_finiteness / thm_4_01_meta_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
+- **Kernel Note:** Postulated +1 metalevel universal instantiation schema (requiring Fm.FFI(t, v, φ) as enforced in IncompletenessMechanization.law_4_01_meta_instantiation), accompanied by a kernel-checked object-level instance (thm_4_01_meta_instantiation / sequent_4_01_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
 - **Standalone Certificate:** [proofs/DefMetaInstantiation.html](proofs/DefMetaInstantiation.html)
 
 ### 4.02 `DefMetaGeneralisation` — Generalisation (Axiom)
 
-- **Identifier:** `DefMetaGeneralisation` (entry `4.02`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
-- **Formula (Unicode):** `(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:A)⟦𝛗⟧›))))`
-- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[[A@Type]@Type])⟦[𝛗@Fm.Expression]⟧›))))`
+- **Identifier:** `DefMetaGeneralisation` (entry `4.02`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
+- **Formula (Unicode):** `(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:⟦A⟧)⟦𝛗⟧›))))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧›))))`
 - **Proof Constructor:** `PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))`
-- **Kernel Note:** (A theory 𝘞 is assumed here to contain only formulas without free variables, so the variable x has no free occurences in any formula of a set of formulas [|Dec(Theory.Expression)(W)|]. Here Enc(v) (μ_Variable(v) : Variable.Expression → Class.Expression) denotes the explicit typed term interpretation / valuation homomorphism mapping a typed term of sort A into a term of sort Class while respecting the fixed model and variable valuation.)
+- **Kernel Note:** Postulated +1 metalevel context-indexed generalisation schema with explicit context freshness guard ¬Ctx.IFV(v, Γ), accompanied by a kernel-checked object-level instance (thm_4_02_meta_generalisation / sequent_4_02_generalisation : Thm). (A theory 𝘞 is assumed here to contain only closed axioms without free variables, so v has no free occurrences in 𝘞 whenever ¬Ctx.IFV(v, Γ) holds.)
 - **Standalone Certificate:** [proofs/DefMetaGeneralisation.html](proofs/DefMetaGeneralisation.html)
 
 ### 4.03 `DefMetaConecessitation` — CoNecessitation (Inference Rule)
 
-- **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
+- **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `PMetaConec_prf (Γ, φ, PCredo_prf (p))`
@@ -93,7 +93,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Formula (Unicode):** `(∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))—→([x@Class.Expression]=[y@Class.Expression])))))`
 - **Proof Constructor:** `PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))`
-- **Kernel Note:** Kernel-verified at-most-one binder definition (thm_4_04_at_most_one_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
+- **Kernel Note:** Definitional metalevel schema for the at-most-one binder (!(z:Class)φ), subject to the variable freshness and capture-avoidance side conditions x ≠ y, ¬Fm.IFV(x, φ), ¬Fm.IFV(y, φ), Fm.FFI(x, z, φ), and Fm.FFI(y, z, φ) (enforced in IncompletenessMechanization.law_4_04_at_most_one_binder_def and accompanied by the class-level witness DefAtMostOneMember / sequent_4_04_at_most_one : Thm).
 - **Standalone Certificate:** [proofs/DefAtMostOneBinder.html](proofs/DefAtMostOneBinder.html)
 
 ### 4.05 `DefExistsUniqueBinder` — Quantifier “exists and unique” (Definition)
@@ -107,11 +107,11 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.06 `AxmMetaClassComprehension` — Class comprehension axiom schema (Axiom)
 
-- **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)∀(x:Name)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),‹x›,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Name@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),‹[x@Name.Expression]›,[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))`
 - **Proof Constructor:** `PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))`
-- **Kernel Note:** Kernel-verified metalevel class comprehension schema (thm_4_06_meta_class_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check) guarded by Fm.FFI.
+- **Kernel Note:** Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).
 - **Standalone Certificate:** [proofs/AxmMetaClassComprehension.html](proofs/AxmMetaClassComprehension.html)
 
 ## 5. Incompleteness-Related Statements (5.01-5.02) (5.01-5.02)
@@ -124,8 +124,8 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
 - **Proof Constructor:** `PLoeb_prf (ψ, PMP_prf (PDiagFixedPoint_prf (ψ, φ), PAndR_prf (PHBL1_prf (ψ), PAndR_prf (PHBL2_prf (ψ, φ), PHBL3_prf (ψ)))))`
-- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation | Kernel Prf Nodes: 1`
-- **Kernel Note:** Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving the Hilbert-Bernays-Löb derivability conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993, Metamathematics of First-Order Arithmetic, Ch. I §3 & Ch. III; Bezboruah & Shepherdson 1976, JSL 41(2):503-512; Boolos 1993, The Logic of Provability, Ch. 2).
+- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, HBL_D1_D2_D3, DiagonalLemma_10StepTrace | Kernel Prf Nodes: 5`
+- **Kernel Note:** Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation using the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
 ### 5.02 `ThmSecondIncompleteness` — Gödel's second incompleteness theorem (Theorem)
@@ -134,7 +134,7 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Proof Constructor:** `PSecondIncompl_prf (Τ, PMP_prf (PLoebInstBot_prf (Τ, ⊥), PImplR_prf (PConsistencyDef_prf (Τ, ⊥))))`
-- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, AxmPropNegElim, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, ThmLoeb | Kernel Prf Nodes: 1`
-- **Kernel Note:** Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} (not Robinson's Q, which lacks Σ₁-induction needed for HBL condition D3; cf. Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976) for the recursively enumerable object theory 𝘛. Note that Gödel's second incompleteness theorem applies to the r.e. theory 𝘛, whereas 𝘍 is non-r.e.
+- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, AxmPropNegElim, AxmPropNegIntro, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, HBL_D1_D2_D3, ThmLoeb_5StepTrace | Kernel Prf Nodes: 11`
+- **Kernel Note:** Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 
