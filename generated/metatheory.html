@@ -505,7 +505,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion <span class="ansi-light-magenta">𝘍</span>: if (<span class="ansi-light-magenta">𝘍</span>, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Two-Level Stratification (Why This Avoids Tarski and Löb Inconsistency): In MKTD1-system (Fact [FormulaVsSideConditionMetalevel]), object-level set/class formulas live at metalevel 0 (sort Fm = Fm₀, the object language of <span class="ansi-light-magenta">𝘛</span> and <span class="ansi-light-magenta">𝘍</span>), whereas the reflection schemas 3.72-3.74 and the semantic evaluation functor ⟦φ⟧ (EEval) live in the +1 metalogic (metalevel 1). Because 3.72-3.74 are +1 metalevel axioms about <span class="ansi-light-magenta">𝘍</span> rather than object-level formulas inside Fm₀, and ⟦φ⟧ is a +1 metalevel valuation functor rather than an internalized first-order truth predicate in Fm₀, the object-level diagonal lemma cannot be applied to (𝘍, [] ⊢ ·) to form a Tarski liar sentence.</td>
+              <td class="field-value proof-cell">Soundness of the non-recursively-enumerable (non-r.e.) Henkin completion <span class="ansi-light-magenta">𝘍</span>: if (<span class="ansi-light-magenta">𝘍</span>, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Two-Level Stratification (How the Kernel Excludes TpHolds(IpFau, ...) from Object-Level Fm₀): In MKTD1-system (Fact [FormulaVsSideConditionMetalevel]), object-level set/class formulas live at metalevel 0 (sort Fm₀, enforced in the kernel by KernelDefinitions.is_object_level_fm0 in newchecker/06_definitions.ML and checked on every PComprAx_prf class comprehension node in newchecker/07_theorems.ML), which explicitly rejects TpHolds, EEval, TpFFI, TpIFV, and TpCtxIFV inside object-level class comprehension {x | φ} and object-level predicate/class definitions. Because 3.72-3.74 and 4.03 live at metalevel +1 and TpHolds(IpFau, ...) is barred from Fm₀ comprehension by is_object_level_fm0, the object-level diagonal lemma cannot be applied to (𝘍, [] ⊢ ·) to form a Tarski liar sentence.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1259,7 +1259,7 @@
             </tr>
             <tr>
               <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><a href="manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a>, <a href="manual.html#RulModusPonens" class="sym-link" title="RulModusPonens (1.14)"><code>RulModusPonens</code> (1.14)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="manual.html#DefMetaInstantiation" class="sym-link" title="DefMetaInstantiation (4.01)"><code>DefMetaInstantiation</code> (4.01)</a>, <a href="manual.html#DefMetaGeneralisation" class="sym-link" title="DefMetaGeneralisation (4.02)"><code>DefMetaGeneralisation</code> (4.02)</a>, <code>DiagonalLemma</code>, <code>HBL_D1_D2_D3</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>11</code></td>
+              <td class="field-value proof-cell"><a href="manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a>, <a href="manual.html#RulModusPonens" class="sym-link" title="RulModusPonens (1.14)"><code>RulModusPonens</code> (1.14)</a>, <code>DiagonalLemma</code>, <code>HBL_D1_D2_D3</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="manual.html#DefMetaInstantiation" class="sym-link" title="DefMetaInstantiation (4.01)"><code>DefMetaInstantiation</code> (4.01)</a>, <a href="manual.html#DefMetaGeneralisation" class="sym-link" title="DefMetaGeneralisation (4.02)"><code>DefMetaGeneralisation</code> (4.02)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>11</code></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
@@ -1271,7 +1271,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Verified</td>
+              <td class="field-value proof-cell">Verified (Relative to DiagonalLemma &amp; HBL D1-D3)</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -1335,7 +1335,7 @@
             </tr>
             <tr>
               <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><a href="manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a>, <a href="manual.html#AxmPropNegElim" class="sym-link" title="AxmPropNegElim (1.09)"><code>AxmPropNegElim</code> (1.09)</a>, <a href="manual.html#AxmPropNegIntro" class="sym-link" title="AxmPropNegIntro (1.10)"><code>AxmPropNegIntro</code> (1.10)</a>, <a href="manual.html#RulModusPonens" class="sym-link" title="RulModusPonens (1.14)"><code>RulModusPonens</code> (1.14)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="manual.html#DefMetaInstantiation" class="sym-link" title="DefMetaInstantiation (4.01)"><code>DefMetaInstantiation</code> (4.01)</a>, <a href="manual.html#DefMetaGeneralisation" class="sym-link" title="DefMetaGeneralisation (4.02)"><code>DefMetaGeneralisation</code> (4.02)</a>, <a href="manual.html#ThmLoeb" class="sym-link" title="ThmLoeb (5.01)"><code>ThmLoeb</code> (5.01)</a>, <code>HBL_D1_D2</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>11</code></td>
+              <td class="field-value proof-cell"><a href="manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a>, <a href="manual.html#AxmPropNegElim" class="sym-link" title="AxmPropNegElim (1.09)"><code>AxmPropNegElim</code> (1.09)</a>, <a href="manual.html#AxmPropNegIntro" class="sym-link" title="AxmPropNegIntro (1.10)"><code>AxmPropNegIntro</code> (1.10)</a>, <a href="manual.html#RulModusPonens" class="sym-link" title="RulModusPonens (1.14)"><code>RulModusPonens</code> (1.14)</a>, <a href="manual.html#ThmLoeb" class="sym-link" title="ThmLoeb (5.01)"><code>ThmLoeb</code> (5.01)</a>, <code>HBL_D1_D2</code> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="manual.html#DefMetaInstantiation" class="sym-link" title="DefMetaInstantiation (4.01)"><code>DefMetaInstantiation</code> (4.01)</a>, <a href="manual.html#DefMetaGeneralisation" class="sym-link" title="DefMetaGeneralisation (4.02)"><code>DefMetaGeneralisation</code> (4.02)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>11</code></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
@@ -1347,7 +1347,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Verified</td>
+              <td class="field-value proof-cell">Verified (Relative to ThmLoeb &amp; HBL D1-D2)</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -1365,7 +1365,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">a56c95c</code> &bull; Built on: <time datetime="2026-11-21T13:27:52Z">2026-11-21 13:27:52 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">ffb0c50</code> &bull; Built on: <time datetime="2026-11-21T14:59:20Z">2026-11-21 14:59:20 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>

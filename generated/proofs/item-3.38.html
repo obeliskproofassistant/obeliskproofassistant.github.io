@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DefSigmaModel (3.38, Definition): “Dependent Sum (Sigma-Type)” model over a family</title>
+  <title>DefSigmaModel (3.38, Theorem): “Dependent Sum (Sigma-Type)” model over a family</title>
   <script>
     window.MathJax = {
       tex: {
@@ -419,7 +419,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>DefSigmaModel (3.38, Definition): “Dependent Sum (Sigma-Type)” model over a family</h1>
+      <h1>DefSigmaModel (3.38, Theorem): “Dependent Sum (Sigma-Type)” model over a family</h1>
       <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.98) &mdash; <a href="../manual.html#DefSigmaModel" style="color: #38bdf8;">View in Complete Entity Database (<code>#DefSigmaModel</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -457,7 +457,7 @@
             <tbody>
             <tr>
               <th class="field-name">Num</th>
-              <td class="field-value entry-num-cell"><span id="item-3.38"></span><span id="label-dependent-sum-sigma-type-model-over-a-family"></span><span id="label-dependent-sum-sigma-type-model-over-a-family-3-38"></span><a href="../manual.html#DefSigmaModel" class="num-anchor" title="DefSigmaModel">3.38</a></td>
+              <td class="field-value entry-num-cell"><span id="item-3.38"></span><span id="label-dependent-sum-sigma-type-model-over-a-family"></span><span id="label-dependent-sum-sigma-type-model-over-a-family-3-38"></span><span id="ThmSigmaModel"></span><a href="../manual.html#DefSigmaModel" class="num-anchor" title="DefSigmaModel">3.38</a></td>
             </tr>
             <tr>
               <th class="field-name">Title</th>
@@ -465,7 +465,7 @@
             </tr>
             <tr>
               <th class="field-name">Classification</th>
-              <td class="field-value"><span class="badge badge-def">Definition</span></td>
+              <td class="field-value"><span class="badge badge-theorem">Theorem</span></td>
             </tr>
             <tr class="row-unicode">
               <th class="field-name">Formula (Unicode)</th>
@@ -504,12 +504,32 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Axioms Used</th>
+              <td class="field-value proof-cell"><a href="../manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <a href="../manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="../manual.html#AxmRightInSound" class="sym-link" title="AxmRightInSound (3.09)"><code>AxmRightInSound</code> (3.09)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Definitions Used:</strong> <a href="../manual.html#DefSigmaModel" class="sym-link" title="DefSigmaModel (3.38)"><code>DefSigmaModel</code> (3.38)</a>, <a href="../manual.html#DefDunaevOrderedPair" class="sym-link" title="DefDunaevOrderedPair (3.76)"><code>DefDunaevOrderedPair</code> (3.76)</a>, <a href="../manual.html#DefClassLists" class="sym-link" title="DefClassLists (3.51)"><code>DefClassLists</code> (3.51)</a>, <a href="../manual.html#DefUnorderedPair" class="sym-link" title="DefUnorderedPair (3.49)"><code>DefUnorderedPair</code> (3.49)</a>, <a href="../manual.html#DefSingletonSet" class="sym-link" title="DefSingletonSet (3.48)"><code>DefSingletonSet</code> (3.48)</a>, <a href="../manual.html#DefBinaryUnion" class="sym-link" title="DefBinaryUnion (3.53)"><code>DefBinaryUnion</code> (3.53)</a> &nbsp;|&nbsp; <strong style="color:#94a3b8;">Kernel Prf Nodes:</strong> <code>35</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>PKernelDef_prf (def_sigma_model_cert, [B, x, y, s, a, b])</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 35 *)
+PAndR_prf (
+  PKernelDef_prf (&quot;DefSigmaModel&quot;),
+  PAndR_prf (
+    PComprAx_prf,
+    PAndR_prf (
+      PAndR_prf (
+        PKernelDef_prf (&quot;DefDunaevOrderedPair&quot;),
+        PAndR_prf (..., ...)
+      ),
+      PAndR_prf (
+        PKernelDef_prf (&quot;DefDunaevOrderedPair&quot;),
+        PAndR_prf (..., ...)
+      )
+    )
+  )
+)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Definitional β-membership characterization (def_sigma_model_cert, PKernelDef_prf) of the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B using Dunaev ordered pairs (3.76 DefDunaevOrderedPair).</td>
+              <td class="field-value proof-cell">Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -517,7 +537,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Definitional (Kernel AST)</td>
+              <td class="field-value proof-cell">Verified</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -535,7 +555,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">a56c95c</code> &bull; Built on: <time datetime="2026-11-21T13:27:52Z">2026-11-21 13:27:52 UTC</time> &bull; <a href="../changelog.html">Changelog</a> &bull; <a href="../symbols.html">Notation Registry</a> &bull; <a href="../glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">ffb0c50</code> &bull; Built on: <time datetime="2026-11-21T14:59:20Z">2026-11-21 14:59:20 UTC</time> &bull; <a href="../changelog.html">Changelog</a> &bull; <a href="../symbols.html">Notation Registry</a> &bull; <a href="../glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>
