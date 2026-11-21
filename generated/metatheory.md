@@ -18,7 +18,7 @@ Directly generated from `newchecker.ML` via `types/order_metatheory.txt`.
 
 ## 3. Set/Class-Theoretic Foundations (3.01-3.98) (3.01-3.98)
 
-Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
+Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 
 ### 3.72 `AxmSoundnessOfFullTheory` — Soundness of the theory 𝘍 (Axiom)
 

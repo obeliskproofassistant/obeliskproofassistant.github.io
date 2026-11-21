@@ -444,11 +444,11 @@
             <tbody>
             <tr>
               <th class="field-name">Num</th>
-              <td class="field-value entry-num-cell"><span id="item-2.01"></span><span id="label-discourse-domain-is-non-empty"></span><span id="label-discourse-domain-is-non-empty-2-01"></span><a href="../manual.html#AxmDiscourseNonEmpty" class="num-anchor" title="AxmDiscourseNonEmpty">2.01</a></td>
+              <td class="field-value entry-num-cell"><span id="item-2.01"></span><span id="label-discourse-domain-is-non-empty-admissible"></span><span id="label-discourse-domain-is-non-empty-admissible-2-01"></span><a href="../manual.html#AxmDiscourseNonEmpty" class="num-anchor" title="AxmDiscourseNonEmpty">2.01</a></td>
             </tr>
             <tr>
               <th class="field-name">Title</th>
-              <td class="field-value entry-title-cell">Discourse domain is non-empty <a href="../manual.html#AxmDiscourseNonEmpty" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#AxmDiscourseNonEmpty</code></a> <a href="../manual.html#label-discourse-domain-is-non-empty" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-discourse-domain-is-non-empty</code></a></td>
+              <td class="field-value entry-title-cell">Discourse domain is non-empty (admissible) <a href="../manual.html#AxmDiscourseNonEmpty" class="sym-link" style="font-size:0.78rem; margin-left:0.5rem;"><code>#AxmDiscourseNonEmpty</code></a> <a href="../manual.html#label-discourse-domain-is-non-empty-admissible" class="sym-link" style="font-size:0.72rem; margin-left:0.35rem; opacity:0.8;"><code>#label-discourse-domain-is-non-empty-admissible</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Classification</th>
@@ -491,12 +491,16 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Admissible axiom: retained as an axiom for structural clarity, though derivable in the kernel from 1.13 AxmPropVerum (⊤) and 2.03 RulExistsInstantiation using a free class variable K : Class (or constant ∅ : Class) as witness.</td>
+            </tr>
+            <tr>
               <th class="field-name">Source Line</th>
               <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L168" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 168"><code>entries.ML:L168</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Postulated (Kernel Axiom)</td>
+              <td class="field-value proof-cell">Admissible / Postulated (Kernel Axiom)</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -596,7 +600,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Axiom schema of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.</td>
+              <td class="field-value proof-cell">Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -704,7 +708,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Axiom schema of Existential Introduction (phi[t/x] -&gt; exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.</td>
+              <td class="field-value proof-cell">Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -&gt; exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -812,7 +816,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Inference rule of Universal Abstraction: from B -&gt; A infer B -&gt; forall x. A, with side condition NFV(x, B) (x not free in B).</td>
+              <td class="field-value proof-cell">Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -920,7 +924,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Inference rule of Existential Elimination: from A -&gt; B infer (exists x. A) -&gt; B, with side condition NFV(x, B) (x not free in B).</td>
+              <td class="field-value proof-cell">Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1010,7 +1014,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.</td>
+              <td class="field-value proof-cell">Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1018,7 +1022,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel)</td>
+              <td class="field-value proof-cell">Admissible Rule (Kernel, Γ = [])</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>

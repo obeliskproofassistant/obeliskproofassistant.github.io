@@ -624,7 +624,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Axiom schema of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.</td>
+              <td class="field-value proof-cell">Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -&gt; phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -732,7 +732,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Axiom schema of Existential Introduction (phi[t/x] -&gt; exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.</td>
+              <td class="field-value proof-cell">Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -&gt; exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -840,7 +840,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Inference rule of Universal Abstraction: from B -&gt; A infer B -&gt; forall x. A, with side condition NFV(x, B) (x not free in B).</td>
+              <td class="field-value proof-cell">Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -948,7 +948,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Inference rule of Existential Elimination: from A -&gt; B infer (exists x. A) -&gt; B, with side condition NFV(x, B) (x not free in B).</td>
+              <td class="field-value proof-cell">Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1038,7 +1038,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.</td>
+              <td class="field-value proof-cell">Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1046,7 +1046,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Primitive / Derived Rule (Kernel)</td>
+              <td class="field-value proof-cell">Admissible Rule (Kernel, Γ = [])</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -1063,7 +1063,7 @@
   <section class="manual-section" id="sec-3">
     <div class="section-header">
       <h2>3. Set/Class-Theoretic Foundations (3.01&ndash;3.98)</h2>
-      <p class="section-desc">Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.</p>
+      <p class="section-desc">Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -1142,6 +1142,10 @@
               <td class="field-value">
                 <div class="formula-ansii judgements"><span class="metalevel-badge" title="Metalevel 1 (+1 prefix meta-theory: typing judgements)">1</span><a href="symbols/square-brackets.html" class="sym-link" title="Left context / judgment list bracket [">[</a><a href="symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="symbols/variables.html" class="sym-link" title="Free variable-name variable x">x</a></span><a href="symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-green"><a href="symbols/name-sort.html" class="sym-link" title="Syntactic variable-name sort (Name)">Name</a></span><a href="symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-light-red"><a href="symbols/formula-metavariables.html" class="sym-link" title="Free formula variable 𝛗">phi</a></span><a href="symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a><span class="ansi-light-green"><a href="symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a></span><a href="symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="symbols/square-brackets.html" class="sym-link" title="Right context / judgment list bracket ]">]</a></div>
               </td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Note</th>
+              <td class="field-value proof-cell">Impredicative Morse-Kelley (MKTD1-theory) class comprehension schema for variable x: ((x ∈ {x | 𝛗}) ⟷ ((x set) ∧ 𝛗)), where 𝛗 : Fm may contain arbitrary class quantifiers. Note that the binder x inside {x | 𝛗} binds occurrences of x in 𝛗 while x on the left of ∈ and in (x set) is free; this diagonal variable-instance form is completely sound and yields the general term instance (k ∈ {x | 𝛗}) ⟷ ((k set) ∧ (let x = k in 𝛗)) via 4.06 AxmMetaClassComprehension under Fm.FFI((k:Class.Expression), ‹x›, 𝛗).</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>

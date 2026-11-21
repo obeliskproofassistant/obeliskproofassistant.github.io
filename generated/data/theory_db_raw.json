@@ -389,9 +389,9 @@
       "id": "AxmDiscourseNonEmpty",
       "legacy_id": "item-2.01",
       "num": "2.01",
-      "title": "Discourse domain is non-empty",
+      "title": "Discourse domain is non-empty (admissible)",
       "kind": "Axiom",
-      "status": "Postulated (Kernel Axiom)",
+      "status": "Admissible / Postulated (Kernel Axiom)",
       "formula_unicode": "(∃(K:Class)⊤)",
       "prf_constructor": "PA0_prf (x)",
       "axioms_used": [],
@@ -406,8 +406,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
-      "verification": "Postulated (Kernel Axiom)"
+      "comment": "Admissible axiom: retained as an axiom for structural clarity, though derivable in the kernel from 1.13 AxmPropVerum (⊤) and 2.03 RulExistsInstantiation using a free class variable K : Class (or constant ∅ : Class) as witness.",
+      "verification": "Admissible / Postulated (Kernel Axiom)"
     },
     {
       "index": 16,
@@ -432,7 +432,7 @@
       "side_condition_unicode": "Fm.FFI((t:X.Expression),x,𝛗)",
       "side_condition_unicode_html": "<a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/ffi-pred.html\" class=\"sym-link\" title=\"Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))\">FFI</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free term expression variable t\">t</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/expression-sort.html\" class=\"sym-link\" title=\"Parameterized syntactic AST expression sort constructor (A.Expression)\">Expression</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛗\">𝛗</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/dot-delim.html}{.} \\href{symbols/ffi-pred.html}{\\mathrm{FFI}} \\href{symbols/parentheses.html}{(} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{t} \\href{symbols/typing-colon.html}{:} \\href{symbols/variables.html}{X} \\href{symbols/dot-delim.html}{.} \\href{symbols/expression-sort.html}{\\mathsf{Expression}} \\href{symbols/parentheses.html}{)} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\varphi}} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Axiom schema of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.",
+      "comment": "Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -458,7 +458,7 @@
       "side_condition_unicode": "Fm.FFI((t:X.Expression),x,𝛗)",
       "side_condition_unicode_html": "<a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/ffi-pred.html\" class=\"sym-link\" title=\"Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))\">FFI</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free term expression variable t\">t</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/expression-sort.html\" class=\"sym-link\" title=\"Parameterized syntactic AST expression sort constructor (A.Expression)\">Expression</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛗\">𝛗</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/dot-delim.html}{.} \\href{symbols/ffi-pred.html}{\\mathrm{FFI}} \\href{symbols/parentheses.html}{(} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{t} \\href{symbols/typing-colon.html}{:} \\href{symbols/variables.html}{X} \\href{symbols/dot-delim.html}{.} \\href{symbols/expression-sort.html}{\\mathsf{Expression}} \\href{symbols/parentheses.html}{)} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\varphi}} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Axiom schema of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.",
+      "comment": "Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -484,7 +484,7 @@
       "side_condition_unicode": "NFV(X,x,(𝛃:Fm))",
       "side_condition_unicode_html": "<a href=\"symbols/nfv-pred.html\" class=\"sym-link\" title=\"Not Free Variable eigenvariable predicate symbol (NFV)\">NFV</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛃\">𝛃</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/nfv-pred.html}{\\mathrm{NFV}} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{X} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/parentheses.html}{(} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\beta}} \\href{symbols/typing-colon.html}{:} \\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/parentheses.html}{)} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Inference rule of Universal Abstraction: from B -> A infer B -> forall x. A, with side condition NFV(x, B) (x not free in B).",
+      "comment": "Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -510,7 +510,7 @@
       "side_condition_unicode": "NFV(X,x,(𝛃:Fm))",
       "side_condition_unicode_html": "<a href=\"symbols/nfv-pred.html\" class=\"sym-link\" title=\"Not Free Variable eigenvariable predicate symbol (NFV)\">NFV</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛃\">𝛃</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/nfv-pred.html}{\\mathrm{NFV}} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{X} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/parentheses.html}{(} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\beta}} \\href{symbols/typing-colon.html}{:} \\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/parentheses.html}{)} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Inference rule of Existential Elimination: from A -> B infer (exists x. A) -> B, with side condition NFV(x, B) (x not free in B).",
+      "comment": "Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -521,7 +521,7 @@
       "num": "2.06",
       "title": "Generalisation (admissible rule)",
       "kind": "Inference Rule",
-      "status": "Primitive / Derived Rule (Kernel)",
+      "status": "Admissible Rule (Kernel, Γ = [])",
       "formula_unicode": "(⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))",
       "prf_constructor": "PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))",
       "axioms_used": [],
@@ -536,8 +536,8 @@
       "side_condition_unicode": "⊤",
       "side_condition_unicode_html": "<a href=\"symbols/top-const.html\" class=\"sym-link\" title=\"Verum / logical truth constant (Constructor: HP TpTop)\">⊤</a>",
       "side_condition_latex_linked": "\\href{symbols/top-const.html}{\\top} ",
-      "comment": "Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.",
-      "verification": "Primitive / Derived Rule (Kernel)"
+      "comment": "Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).",
+      "verification": "Admissible Rule (Kernel, Γ = [])"
     }
       ]
     },
@@ -545,7 +545,7 @@
       "id": "sec-3",
       "title": "3. Set/Class-Theoretic Foundations (3.01-3.98)",
       "range": "3.01-3.98",
-      "description": "Morse-Kelley / Von Neumann-Bernays-Gödel class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.",
+      "description": "Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.",
       "entries": [
     {
       "index": 21,
@@ -570,7 +570,7 @@
       "side_condition_unicode": "⊤",
       "side_condition_unicode_html": "<a href=\"symbols/top-const.html\" class=\"sym-link\" title=\"Verum / logical truth constant (Constructor: HP TpTop)\">⊤</a>",
       "side_condition_latex_linked": "\\href{symbols/top-const.html}{\\top} ",
-      "comment": "",
+      "comment": "Impredicative Morse-Kelley (MKTD1-theory) class comprehension schema for variable x: ((x ∈ {x | 𝛗}) ⟷ ((x set) ∧ 𝛗)), where 𝛗 : Fm may contain arbitrary class quantifiers. Note that the binder x inside {x | 𝛗} binds occurrences of x in 𝛗 while x on the left of ∈ and in (x set) is free; this diagonal variable-instance form is completely sound and yields the general term instance (k ∈ {x | 𝛗}) ⟷ ((k set) ∧ (let x = k in 𝛗)) via 4.06 AxmMetaClassComprehension under Fm.FFI((k:Class.Expression), ‹x›, 𝛗).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -596,7 +596,7 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Standard conservative definition defining predicate set(B)  exists x:Class. B in x. By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional yields a conservative extension.",
+      "comment": "Standard conservative definition defining predicate (X set) ⟷ ∃(Y:Class)(X ∈ Y) (certified via KernelDefinitions :> KERNEL_DEFINITIONS). By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional with no extra free variables on the right-hand side yields a conservative extension.",
       "verification": "Definitional (Kernel AST)"
     },
     {
@@ -735,9 +735,9 @@
       "id": "AxmLeftInSound",
       "legacy_id": "item-3.08",
       "num": "3.08",
-      "title": "“Membership respects equality in right argument (container class)”",
+      "title": "“Membership respects equality in right argument (container class)” (admissible)",
       "kind": "Axiom",
-      "status": "Postulated (Kernel Axiom)",
+      "status": "Admissible / Postulated (Kernel Axiom)",
       "formula_unicode": "(∀(X:Class)∀(Y:Class)((X=Y)—→∀(z:Class)((z∈X)←→(z∈Y))))",
       "prf_constructor": "PLeftInSoundAx_prf (X, Y, Z)",
       "axioms_used": [],
@@ -752,8 +752,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
-      "verification": "Postulated (Kernel Axiom)"
+      "comment": "Admissible axiom: retained as a primitive kernel axiom (PLeftInSoundAx_prf, converse of 3.10 AxmExtensionality), though derivable from the kernel's class equality definition DefClassEq (EqDef: X = Y ⟷ (X ⊆ Y ∧ Y ⊆ X)) and 3.06 DefSubclass. (Note: the historical identifier AxmLeftInSound refers to X = Y appearing on the left of the implication arrow —→, whereas in the membership literals z ∈ X and z ∈ Y the equal classes X and Y stand in the right/container argument position.)",
+      "verification": "Admissible / Postulated (Kernel Axiom)"
     },
     {
       "index": 29,
@@ -778,7 +778,7 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
+      "comment": "Element-position Leibniz congruence axiom for membership (PRightInSoundAx_prf): if X = Y, then X and Y belong to the same container classes W (X ∈ W ⟷ Y ∈ W).",
       "verification": "Postulated (Kernel Axiom)"
     },
     {
@@ -3745,9 +3745,9 @@
       "id": "AxmDiscourseNonEmpty",
       "legacy_id": "item-2.01",
       "num": "2.01",
-      "title": "Discourse domain is non-empty",
+      "title": "Discourse domain is non-empty (admissible)",
       "kind": "Axiom",
-      "status": "Postulated (Kernel Axiom)",
+      "status": "Admissible / Postulated (Kernel Axiom)",
       "formula_unicode": "(∃(K:Class)⊤)",
       "prf_constructor": "PA0_prf (x)",
       "axioms_used": [],
@@ -3762,8 +3762,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
-      "verification": "Postulated (Kernel Axiom)"
+      "comment": "Admissible axiom: retained as an axiom for structural clarity, though derivable in the kernel from 1.13 AxmPropVerum (⊤) and 2.03 RulExistsInstantiation using a free class variable K : Class (or constant ∅ : Class) as witness.",
+      "verification": "Admissible / Postulated (Kernel Axiom)"
     },
     {
       "index": 16,
@@ -3788,7 +3788,7 @@
       "side_condition_unicode": "Fm.FFI((t:X.Expression),x,𝛗)",
       "side_condition_unicode_html": "<a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/ffi-pred.html\" class=\"sym-link\" title=\"Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))\">FFI</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free term expression variable t\">t</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/expression-sort.html\" class=\"sym-link\" title=\"Parameterized syntactic AST expression sort constructor (A.Expression)\">Expression</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛗\">𝛗</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/dot-delim.html}{.} \\href{symbols/ffi-pred.html}{\\mathrm{FFI}} \\href{symbols/parentheses.html}{(} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{t} \\href{symbols/typing-colon.html}{:} \\href{symbols/variables.html}{X} \\href{symbols/dot-delim.html}{.} \\href{symbols/expression-sort.html}{\\mathsf{Expression}} \\href{symbols/parentheses.html}{)} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\varphi}} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Axiom schema of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition FFI(t, x, phi). Stated as an implication schema without premises.",
+      "comment": "Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -3814,7 +3814,7 @@
       "side_condition_unicode": "Fm.FFI((t:X.Expression),x,𝛗)",
       "side_condition_unicode_html": "<a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/ffi-pred.html\" class=\"sym-link\" title=\"Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...))\">FFI</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free term expression variable t\">t</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/dot-delim.html\" class=\"sym-link\" title=\"Lambda binder body and sort projection separator (.)\">.</a><a href=\"symbols/expression-sort.html\" class=\"sym-link\" title=\"Parameterized syntactic AST expression sort constructor (A.Expression)\">Expression</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛗\">𝛗</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/dot-delim.html}{.} \\href{symbols/ffi-pred.html}{\\mathrm{FFI}} \\href{symbols/parentheses.html}{(} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{t} \\href{symbols/typing-colon.html}{:} \\href{symbols/variables.html}{X} \\href{symbols/dot-delim.html}{.} \\href{symbols/expression-sort.html}{\\mathsf{Expression}} \\href{symbols/parentheses.html}{)} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\varphi}} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Axiom schema of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition FFI(t, x, phi). Dual to Universal Instantiation.",
+      "comment": "Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -3840,7 +3840,7 @@
       "side_condition_unicode": "NFV(X,x,(𝛃:Fm))",
       "side_condition_unicode_html": "<a href=\"symbols/nfv-pred.html\" class=\"sym-link\" title=\"Not Free Variable eigenvariable predicate symbol (NFV)\">NFV</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛃\">𝛃</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/nfv-pred.html}{\\mathrm{NFV}} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{X} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/parentheses.html}{(} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\beta}} \\href{symbols/typing-colon.html}{:} \\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/parentheses.html}{)} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Inference rule of Universal Abstraction: from B -> A infer B -> forall x. A, with side condition NFV(x, B) (x not free in B).",
+      "comment": "Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -3866,7 +3866,7 @@
       "side_condition_unicode": "NFV(X,x,(𝛃:Fm))",
       "side_condition_unicode_html": "<a href=\"symbols/nfv-pred.html\" class=\"sym-link\" title=\"Not Free Variable eigenvariable predicate symbol (NFV)\">NFV</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free type variable X\">X</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><span class=\"ansi-light-red\"><a href=\"symbols/variables.html\" class=\"sym-link\" title=\"Free variable-name variable x\">x</a></span><a href=\"symbols/comma-delim.html\" class=\"sym-link\" title=\"Tuple, sequent context, and binder body separator comma (,)\">,</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-light-red\"><a href=\"symbols/formula-metavariables.html\" class=\"sym-link\" title=\"Free formula variable 𝛃\">𝛃</a></span><a href=\"symbols/typing-colon.html\" class=\"sym-link\" title=\"Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)\">:</a><a href=\"symbols/fm-sort.html\" class=\"sym-link\" title=\"Object Formula syntactic sort (Fm = Bool.Expression)\">Fm</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
       "side_condition_latex_linked": "\\href{symbols/nfv-pred.html}{\\mathrm{NFV}} \\href{symbols/parentheses.html}{(} \\href{symbols/variables.html}{X} \\href{symbols/comma-delim.html}{,} \\href{symbols/variables.html}{x} \\href{symbols/comma-delim.html}{,} \\href{symbols/parentheses.html}{(} \\href{symbols/formula-metavariables.html}{\\boldsymbol{\\beta}} \\href{symbols/typing-colon.html}{:} \\href{symbols/fm-sort.html}{\\mathsf{Fm}} \\href{symbols/parentheses.html}{)} \\href{symbols/parentheses.html}{)} ",
-      "comment": "Inference rule of Existential Elimination: from A -> B infer (exists x. A) -> B, with side condition NFV(x, B) (x not free in B).",
+      "comment": "Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -3877,7 +3877,7 @@
       "num": "2.06",
       "title": "Generalisation (admissible rule)",
       "kind": "Inference Rule",
-      "status": "Primitive / Derived Rule (Kernel)",
+      "status": "Admissible Rule (Kernel, Γ = [])",
       "formula_unicode": "(⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))",
       "prf_constructor": "PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))",
       "axioms_used": [],
@@ -3892,8 +3892,8 @@
       "side_condition_unicode": "⊤",
       "side_condition_unicode_html": "<a href=\"symbols/top-const.html\" class=\"sym-link\" title=\"Verum / logical truth constant (Constructor: HP TpTop)\">⊤</a>",
       "side_condition_latex_linked": "\\href{symbols/top-const.html}{\\top} ",
-      "comment": "Admissible rule of Generalisation: from |- phi infer |- forall x. phi. Sound only for closed derivations without undischarged hypotheses mentioning x.",
-      "verification": "Primitive / Derived Rule (Kernel)"
+      "comment": "Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).",
+      "verification": "Admissible Rule (Kernel, Γ = [])"
     },
     {
       "index": 21,
@@ -3918,7 +3918,7 @@
       "side_condition_unicode": "⊤",
       "side_condition_unicode_html": "<a href=\"symbols/top-const.html\" class=\"sym-link\" title=\"Verum / logical truth constant (Constructor: HP TpTop)\">⊤</a>",
       "side_condition_latex_linked": "\\href{symbols/top-const.html}{\\top} ",
-      "comment": "",
+      "comment": "Impredicative Morse-Kelley (MKTD1-theory) class comprehension schema for variable x: ((x ∈ {x | 𝛗}) ⟷ ((x set) ∧ 𝛗)), where 𝛗 : Fm may contain arbitrary class quantifiers. Note that the binder x inside {x | 𝛗} binds occurrences of x in 𝛗 while x on the left of ∈ and in (x set) is free; this diagonal variable-instance form is completely sound and yields the general term instance (k ∈ {x | 𝛗}) ⟷ ((k set) ∧ (let x = k in 𝛗)) via 4.06 AxmMetaClassComprehension under Fm.FFI((k:Class.Expression), ‹x›, 𝛗).",
       "verification": "Primitive / Derived Rule (Kernel)"
     },
     {
@@ -3944,7 +3944,7 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Standard conservative definition defining predicate set(B)  exists x:Class. B in x. By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional yields a conservative extension.",
+      "comment": "Standard conservative definition defining predicate (X set) ⟷ ∃(Y:Class)(X ∈ Y) (certified via KernelDefinitions :> KERNEL_DEFINITIONS). By the Conservativity Theorem for first-order logic, introducing a new predicate symbol via an explicit biconditional with no extra free variables on the right-hand side yields a conservative extension.",
       "verification": "Definitional (Kernel AST)"
     },
     {
@@ -4083,9 +4083,9 @@
       "id": "AxmLeftInSound",
       "legacy_id": "item-3.08",
       "num": "3.08",
-      "title": "“Membership respects equality in right argument (container class)”",
+      "title": "“Membership respects equality in right argument (container class)” (admissible)",
       "kind": "Axiom",
-      "status": "Postulated (Kernel Axiom)",
+      "status": "Admissible / Postulated (Kernel Axiom)",
       "formula_unicode": "(∀(X:Class)∀(Y:Class)((X=Y)—→∀(z:Class)((z∈X)←→(z∈Y))))",
       "prf_constructor": "PLeftInSoundAx_prf (X, Y, Z)",
       "axioms_used": [],
@@ -4100,8 +4100,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
-      "verification": "Postulated (Kernel Axiom)"
+      "comment": "Admissible axiom: retained as a primitive kernel axiom (PLeftInSoundAx_prf, converse of 3.10 AxmExtensionality), though derivable from the kernel's class equality definition DefClassEq (EqDef: X = Y ⟷ (X ⊆ Y ∧ Y ⊆ X)) and 3.06 DefSubclass. (Note: the historical identifier AxmLeftInSound refers to X = Y appearing on the left of the implication arrow —→, whereas in the membership literals z ∈ X and z ∈ Y the equal classes X and Y stand in the right/container argument position.)",
+      "verification": "Admissible / Postulated (Kernel Axiom)"
     },
     {
       "index": 29,
@@ -4126,7 +4126,7 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "",
+      "comment": "Element-position Leibniz congruence axiom for membership (PRightInSoundAx_prf): if X = Y, then X and Y belong to the same container classes W (X ∈ W ⟷ Y ∈ W).",
       "verification": "Postulated (Kernel Axiom)"
     },
     {
