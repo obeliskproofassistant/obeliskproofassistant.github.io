@@ -441,7 +441,7 @@
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
       <h2>Nonzero Limit Ordinal Predicate Symbol (LimitOrd)</h2>
-      <p class="section-desc">Asserts that class <code>A</code> is a nonzero limit ordinal: <code>(A ordinal) ∧ (∅ ∈ A) ∧ ∀(B:Class)((B ∈ A) → ((B ∪ {B}) ∈ A))</code> (Entry DefLimitOrdinal (3.79)).</p>
+      <p class="section-desc">Asserts that class <code>A</code> is a nonzero limit ordinal: <code>Ord(A) ∧ (∅ ∈ A) ∧ ∀(B:Class)((B ∈ A) —→ ((B ∪ {B}) ∈ A))</code> (Entry DefLimitOrdinal (3.79)).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -472,7 +472,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Category</td>
-            <td class="external-entity"><span class="badge badge-def">Predicate Symbol (Unary)</span></td>
+            <td class="external-entity"><span class="badge badge-def">Predicate Symbol (Unary Class Predicate)</span></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">SML AST Constructor</td>
@@ -480,15 +480,15 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Constructor Arguments</td>
-            <td class="external-entity">1. Class term A : Class</td>
+            <td class="external-entity">1. Class term A : Class.Expression</td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Bool</code></td>
+            <td class="external-entity"><code>Class.Expression → Fm   |   Class → Bool</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
-            <td class="external-entity"><strong>No — Defined Unary Predicate Symbol (Nonzero Limit Ordinal)</strong></td>
+            <td class="external-entity"><strong>No — Defined Unary Prefix Predicate Symbol (Nonzero Limit Ordinal, Syntactic Signature: Class.Expression → Fm)</strong></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Defining Kernel Entries (ML Labels)</td>
@@ -496,19 +496,19 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: RulClassComprehension (3.01);"><p><strong>Formal Definition (DefLimitOrdinal (3.79)):</strong> Certified via <code>def_limit_ord_cert</code> in <code>universe_definitions.ML</code>.</p></td>
+            <td class="external-entity" style="line-height: 1.65;"><p><strong>Formal Definition (DefLimitOrdinal (3.79)):</strong> Certified via <code>def_limit_ord_cert</code> in <code>universe_definitions.ML</code>.</p></td>
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Canonical Law (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><code>LimitOrd(A) ⟷ ((A ordinal) ∧ ((∅ ∈ A) ∧ ∀(B:Class)((B ∈ A) → ((B ∪ {B}) ∈ A))))</code></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><code>LimitOrd(A) ⟷ (Ord(A) ∧ ((∅ ∈ A) ∧ ∀(B:Class)((B ∈ A) —→ ((B ∪ {B}) ∈ A))))</code></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/limit-ord-pred.html}{\mathrm{LimitOrd}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/iff-conn.html}{\longleftrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} ~\href{../symbols/variables.html}{\mathrm{ordinal}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/emptyset-const.html}{\emptyset} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/func-arrow.html}{\rightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} ~\href{../symbols/binunion-op.html}{\cup} ~\href{../symbols/singleton-op.html}{\{} \href{../symbols/variables.html}{B} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/limit-ord-pred.html}{\mathrm{LimitOrd}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/iff-conn.html}{\longleftrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/ord-pred.html}{\mathrm{Ord}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/emptyset-const.html}{\emptyset} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/and-conn.html}{\land} ~\href{../symbols/forall-binder.html}{\forall} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} \href{../symbols/typing-colon.html}{:} \href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/impl-conn.html}{\longrightarrow} ~\href{../symbols/parentheses.html}{(} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{B} ~\href{../symbols/binunion-op.html}{\cup} ~\href{../symbols/singleton-op.html}{\{} \href{../symbols/variables.html}{B} \href{../symbols/singleton-op.html}{\}} \href{../symbols/parentheses.html}{)} ~\href{../symbols/in-pred.html}{\in} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \href{../symbols/parentheses.html}{)} \)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Canonical Law (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><code>LimitOrd(A) &lt;--&gt; ((A ordinal) /\ ((EmptySet in A) /\ forall(B:Class)((B in A) -&gt; ((B u+ {B}) in A))))</code></div></td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><code>LimitOrd(A) &lt;--&gt; (Ord(A) /\ ((EmptySet in A) /\ forall(B:Class)((B in A) --&gt; ((B u+ {B}) in A))))</code></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -692,7 +692,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">5e23508</code> &bull; Built on: <time datetime="2026-11-21T18:27:52Z">2026-11-21 18:27:52 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">beb4c86</code> &bull; Built on: <time datetime="2026-11-21T19:04:10Z">2026-11-21 19:04:10 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>
