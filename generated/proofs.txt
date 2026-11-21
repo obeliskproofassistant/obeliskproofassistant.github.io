@@ -4,9 +4,9 @@
 
 [1.14 / RulModusPonens] Modus Ponens (Inference Rule)
   Name:            RulModusPonens
-  Formula [0]:     (⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ⊢ ⟦𝛃⟧)
+  Formula [0]:     (⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ─── ⟦𝛃⟧)
   SML Kernel AST:  PMP_prf (p, q)
-  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)
+  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ─── ⟦[𝛃@Fm.Expression]⟧)
   Judgements [1]:  [(𝛂:Fm), (𝛃:Fm)]
   Verification:    Primitive / Derived Rule (Kernel)
 
@@ -14,7 +14,7 @@
   Name:            RulForallInstantiation
   Formula [0]:     ((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)—→⟦𝛗[t/x]⟧)
   SML Kernel AST:  PForaL_prf (φ, T, x, p)
-  Scheme of Types: ((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)
+  Scheme of Types: ((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧)
   Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
   Kernel Note:     Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).
@@ -24,7 +24,7 @@
   Name:            RulExistsInstantiation
   Formula [0]:     (⟦𝛗[t/x]⟧—→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)
   SML Kernel AST:  PExisR_prf (φ, T, x, p)
-  Scheme of Types: (⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)
+  Scheme of Types: (⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)
   Judgements [1]:  [(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]
   Side Cond [1]:   Fm.FFI((t:X.Expression),x,𝛗)
   Kernel Note:     Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.
@@ -32,9 +32,9 @@
 
 [2.04 / RulForallAbstraction] Forall Abstraction (Inference Rule)
   Name:            RulForallAbstraction
-  Formula [0]:     ((⟦𝛃⟧—→⟦𝛂⟧) ⊢ (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
+  Formula [0]:     ((⟦𝛃⟧—→⟦𝛂⟧) ─── (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
   SML Kernel AST:  PForaR_prf (φ, x, x', T, p)
-  Scheme of Types: ((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Scheme of Types: ((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ─── (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
   Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Cond [1]:   NFV(X,x,(𝛃:Fm))
   Kernel Note:     Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).
@@ -42,9 +42,9 @@
 
 [2.05 / RulExistsAbstraction] Exists Abstraction (Inference Rule)
   Name:            RulExistsAbstraction
-  Formula [0]:     ((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))
+  Formula [0]:     ((⟦𝛂⟧—→⟦𝛃⟧) ─── ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))
   SML Kernel AST:  PExisL_prf (φ, x, x', T, p)
-  Scheme of Types: ((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))
+  Scheme of Types: ((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ─── ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))
   Judgements [1]:  [(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]
   Side Cond [1]:   NFV(X,x,(𝛃:Fm))
   Kernel Note:     Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).
@@ -52,9 +52,9 @@
 
 [2.06 / RulGeneralisation] Generalisation (admissible rule) (Inference Rule)
   Name:            RulGeneralisation
-  Formula [0]:     (⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
+  Formula [0]:     (⟦𝛂⟧ ─── (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))
   SML Kernel AST:  PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))
-  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
+  Scheme of Types: (⟦[𝛂@Fm.Expression]⟧ ─── (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))
   Judgements [1]:  [(x:Name), (X:Type), (𝛂:Fm)]
   Kernel Note:     Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
   Verification:    Admissible Rule (Kernel, Γ = [])

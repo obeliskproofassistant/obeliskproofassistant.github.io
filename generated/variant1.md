@@ -142,8 +142,8 @@ Classical propositional calculus axiom schemas (A01-A13) and Modus Ponens.
 ### 1.14 `RulModusPonens` — Modus Ponens (Inference Rule)
 
 - **Identifier:** `RulModusPonens` (entry `1.14`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
-- **Formula (Unicode):** `(⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ⊢ ⟦𝛃⟧)`
-- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ⟦[𝛃@Fm.Expression]⟧)`
+- **Formula (Unicode):** `(⟦𝛂⟧, (⟦𝛂⟧—→⟦𝛃⟧) ─── ⟦𝛃⟧)`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧, (⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ─── ⟦[𝛃@Fm.Expression]⟧)`
 - **Proof Constructor:** `PMP_prf (p, q)`
 - **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
 - **Standalone Certificate:** [proofs/RulModusPonens.html](proofs/RulModusPonens.html)
@@ -165,7 +165,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 
 - **Identifier:** `RulForallInstantiation` (entry `2.02`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
 - **Formula (Unicode):** `((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)—→⟦𝛗[t/x]⟧)`
-- **Scheme of Types (Unicode):** `((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧)`
+- **Scheme of Types (Unicode):** `((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧)`
 - **Proof Constructor:** `PForaL_prf (φ, T, x, p)`
 - **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
 - **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
@@ -176,7 +176,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 
 - **Identifier:** `RulExistsInstantiation` (entry `2.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
 - **Formula (Unicode):** `(⟦𝛗[t/x]⟧—→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)`
-- **Scheme of Types (Unicode):** `(⟦[𝛗@Fm.Expression][[t@LCEWIP]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)`
+- **Scheme of Types (Unicode):** `(⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)`
 - **Proof Constructor:** `PExisR_prf (φ, T, x, p)`
 - **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
 - **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
@@ -186,8 +186,8 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 ### 2.04 `RulForallAbstraction` — Forall Abstraction (Inference Rule)
 
 - **Identifier:** `RulForallAbstraction` (entry `2.04`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
-- **Formula (Unicode):** `((⟦𝛃⟧—→⟦𝛂⟧) ⊢ (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
-- **Scheme of Types (Unicode):** `((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ⊢ (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
+- **Formula (Unicode):** `((⟦𝛃⟧—→⟦𝛂⟧) ─── (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ─── (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
 - **Proof Constructor:** `PForaR_prf (φ, x, x', T, p)`
 - **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
 - **Side Condition:** `NFV(X,x,(𝛃:Fm))`
@@ -197,8 +197,8 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 ### 2.05 `RulExistsAbstraction` — Exists Abstraction (Inference Rule)
 
 - **Identifier:** `RulExistsAbstraction` (entry `2.05`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
-- **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))`
-- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ⊢ ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))`
+- **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛃⟧) ─── ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ─── ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))`
 - **Proof Constructor:** `PExisL_prf (φ, x, x', T, p)`
 - **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
 - **Side Condition:** `NFV(X,x,(𝛃:Fm))`
@@ -208,8 +208,8 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 ### 2.06 `RulGeneralisation` — Generalisation (admissible rule) (Inference Rule)
 
 - **Identifier:** `RulGeneralisation` (entry `2.06`, kind: `Inference Rule`, status: `Admissible Rule (Kernel, Γ = [])`)
-- **Formula (Unicode):** `(⟦𝛂⟧ ⊢ (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
-- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧ ⊢ (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
+- **Formula (Unicode):** `(⟦𝛂⟧ ─── (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
+- **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧ ─── (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
 - **Proof Constructor:** `PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))`
 - **Judgements:** `[(x:Name), (X:Type), (𝛂:Fm)]`
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).

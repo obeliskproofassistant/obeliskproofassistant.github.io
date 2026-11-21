@@ -358,6 +358,26 @@
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
+    .infer-frac {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: middle;
+      padding: 0.15rem 0.35rem;
+    }
+    .infer-num {
+      padding: 0 0.35rem 0.2rem 0.35rem;
+      text-align: center;
+    }
+    .infer-bar {
+      width: 100%;
+      border-top: 1.75px solid #cbd5e1;
+      margin: 0.05rem 0;
+    }
+    .infer-den {
+      padding: 0.2rem 0.35rem 0 0.35rem;
+      text-align: center;
+    }
     body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
@@ -5081,32 +5101,32 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="lcewip-sort.html" class="sym-link">LCEWIP</a></div>
+                <div class="formula-unicode"><a href="lcewip-sort.html" class="sym-link">Term</a></div>
               </td>
             </tr>
             <tr class="row-latex">
               <th class="field-name">Symbol (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{lcewip-sort.html}{\mathsf{LCEWIP}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{LCEWIP}</code></div>
+                <div class="formula-latex">\(\href{lcewip-sort.html}{\mathsf{Term}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{Term}</code></div>
               </td>
             </tr>
             <tr class="row-ansii">
               <th class="field-name">Symbol (ANSII)</th>
               <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="lcewip-sort.html" class="sym-link"><code>LCEWIP</code></a></div>
+                <div class="formula-ansii"><a href="lcewip-sort.html" class="sym-link"><code>Term</code></a></div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="lcewip-sort.html" class="sym-link"><strong>Large Conglomerate Expression Sort Placeholder (LCEWIP)</strong> (<code>symbols/lcewip-sort.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="lcewip-sort.html" class="sym-link"><strong>Polymorphic Term Sort (Term / Term.Expression, formerly LCEWIP)</strong> (<code>symbols/lcewip-sort.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Internal Kernel Sort Marker</code></td>
+              <td class="field-value"><span class="badge badge-def">Metatheoretic AST Sorts</span> &nbsp; <code>Polymorphic Term Sort (Constructors: UTerm / TTerm_Expression / OpWoInPr)</code></td>
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Internal kernel sort marker <code>LCEWIP</code> for large conglomerate/type expressions in <code>newchecker.ML</code>.</td>
+              <td class="field-value">Polymorphic metatheoretic term sort <code>Term</code> (and its stored syntactic expression sort <code>Term.Expression</code>, formerly placeholder <code>LCEWIP</code>) for general large term expressions in <code>newchecker.ML</code> (such as <code>[t@Term.Expression]</code> in quantifier instantiation schemas).</td>
             </tr>
             </tbody>
           </table>
