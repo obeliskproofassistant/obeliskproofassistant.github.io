@@ -151,7 +151,7 @@
   Formula [0]:     (∀(K:Class)(|K|=(On∩⋂{a|(a∈On)∧(K≼a)})))
   SML Kernel AST:  CpCard (X)
   Scheme of Types: (∀([K@Variable]:[Class@Type])(|[K@Class.Expression]|=(On∩⋂{[a@Class.Expression]|([a@Class.Expression]∈On)∧([K@Class.Expression]≼[a@Class.Expression])})))
-  Kernel Note:     Defines the von Neumann initial-ordinal cardinality |K| = On ∩ { a : Class | ¬(a ≺ K) } (the class of all ordinals that do not inject into a larger cardinal than K, yielding the initial ordinal of K for well-orderable sets and On for proper classes under Global Choice / Limitation of Size). Paired in the kernel with CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: ∀A∀B((|A| ≺ |B|) ⟷ (A ≺ B))).
+  Kernel Note:     Defines the von Neumann initial-ordinal cardinality |K| = On ∩ ⋂{ a : Class | (a ∈ On) ∧ (K ≼ a) }: the intersection ⋂ of the class of all ordinal sets a ∈ On into which K injects (K ≼ a), intersected with On. Because the intersection of a non-empty class of ordinals is its least element, |K| equals the least ordinal a ∈ On with K ≼ a (the initial ordinal of K) when K is a well-orderable set, and equals On ∩ ⋂∅ = On ∩ V = On when no ordinal set a ∈ On satisfies K ≼ a (i.e., when K is a proper class). Paired in the kernel with CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: ∀A∀B((|A| ≺ |B|) ⟷ (A ≺ B))).
   Verification:    Definitional (Kernel AST)
 
 [3.42 / DefCardLess] “Is strictly smaller than” binary relation (Definition)
@@ -251,15 +251,15 @@
   Formula [0]:     (∀(V:Class)(VStageLaws(V)←→((V(∅)=∅)∧((∀(A:Class)(Ord(A)—→(V((A∪{A}))=𝒫(V(A)))))∧((∀(A:Class)(LimitOrd(A)—→(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=V(B)))})))∧∀(A:Class)(Ord(A)—→((A=∅)∨((∃(B:Class)((B∈A)∧(A=(B∪{B}))))∨LimitOrd(A)))))))))
   SML Kernel AST:  PKernelDef_prf (def_v_stage_laws_cert, [V, A, B, Y])
   Scheme of Types: (∀([V@Variable]:[Class@Type])(VStageLaws([V@Class.Expression])←→(([V@Class.Expression](∅)=∅)∧((∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→([V@Class.Expression](([A@Class.Expression]∪{[A@Class.Expression]}))=𝒫([V@Class.Expression]([A@Class.Expression])))))∧((∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])—→([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=[V@Class.Expression]([B@Class.Expression])))})))∧∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→(([A@Class.Expression]=∅)∨((∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([A@Class.Expression]=([B@Class.Expression]∪{[B@Class.Expression]}))))∨LimitOrd([A@Class.Expression])))))))))
-  Kernel Note:     Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit).
+  Kernel Note:     Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit). (Notational convention: here and in 3.82, 3.83, 3.88, 3.89, 3.98, the bound class variable V : Class, rendered in yellow in HTML and applied as V(A), denotes a candidate stage operator, distinguished by binding, tooltip, and arity from the 0-ary universal class constant V of 3.05 and 3.86.)
   Verification:    Definitional (Kernel AST)
 
 [3.82 / DefVonNeumannStageGraph] Canonical von Neumann cumulative hierarchy graph (Definition)
   Name:            DefVonNeumannStageGraph
-  Formula [0]:     (VStageGraph=⋂{V|VStageLaws(V)})
+  Formula [0]:     (VStageGraph=⋂{V|(V class-function)∧VStageLaws(V)})
   SML Kernel AST:  PKernelDef_prf (def_v_stage_graph_cert, [V])
-  Scheme of Types: (VStageGraph=⋂{[V@Class.Expression]|VStageLaws([V@Class.Expression])})
-  Kernel Note:     Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class graphs satisfying VStageLaws(V). In 3.88-3.90, the stage recursion laws VStageLaws(V) are carried as an explicit antecedent hypothesis on the stage operator V (and discharged via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
+  Scheme of Types: (VStageGraph=⋂{[V@Class.Expression]|([V@Class.Expression] class-function)∧VStageLaws([V@Class.Expression])})
+  Kernel Note:     Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class-functions V satisfying VStageLaws(V). Restricting V to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues that for each A in Dom(V) with set value V(A), there is a unique pair (A, y) in V, which by 3.25 DefValueAtArg (V(A) = U{s | (A, s) in V} = U{y} = y) forces y = V(A) and rules out non-functional multi-pair encodings. In 3.88-3.90, VStageLaws(V) is carried as an explicit antecedent hypothesis (and constructed bottom-up via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
   Verification:    Definitional (Kernel AST)
 
 [3.83 / DefSetRankLaws] Mirimanoff-von Neumann set rank recursion laws (Definition)
@@ -272,10 +272,10 @@
 
 [3.84 / DefSetRankGraph] Canonical Mirimanoff-von Neumann set rank graph (Definition)
   Name:            DefSetRankGraph
-  Formula [0]:     (SetRankGraph=⋂{R|SetRankLaws(R,VStageGraph)})
+  Formula [0]:     (SetRankGraph=⋂{R|(R class-function)∧SetRankLaws(R,VStageGraph)})
   SML Kernel AST:  PKernelDef_prf (def_rank_graph_cert, [R])
-  Scheme of Types: (SetRankGraph=⋂{[R@Class.Expression]|SetRankLaws([R@Class.Expression],VStageGraph)})
-  Kernel Note:     Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class graphs R satisfying SetRankLaws(R, VStageGraph). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
+  Scheme of Types: (SetRankGraph=⋂{[R@Class.Expression]|([R@Class.Expression] class-function)∧SetRankLaws([R@Class.Expression],VStageGraph)})
+  Kernel Note:     Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class-functions R satisfying SetRankLaws(R, VStageGraph). Restricting R to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues and 3.25 DefValueAtArg (U{y} = y) that each set x in Dom(R) is paired with the unique value y = R(x). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
   Verification:    Definitional (Kernel AST)
 
 [3.85 / ThmUniverseInterOnIsOrdinal] Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal (Theorem)

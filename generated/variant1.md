@@ -332,13 +332,13 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Proof Constructor:** `PPowSetAx_prf (X)`
 - **Standalone Certificate:** [proofs/AxmExponent.html](proofs/AxmExponent.html)
 
-### 3.14 `AxmRegularity` — “Regularity”(only universal class is equal to its powerclass) (Axiom)
+### 3.14 `AxmRegularity` — “Regularity”(any class containing its powerclass contains all sets) (Axiom)
 
 - **Identifier:** `AxmRegularity` (entry `3.14`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
 - **Formula (Unicode):** `(∀(X:Class)((𝒫(X)⊆X)—→(V⊆X)))`
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])((𝒫([X@Class.Expression])⊆[X@Class.Expression])—→(V⊆[X@Class.Expression])))`
 - **Proof Constructor:** `PEpsIndAx_prf (X)`
-- **Kernel Note:** Kernel Form (Cumulative 𝒫-Induction): ∀(X:Class)((𝒫(X) ⊆ X) —→ (V ⊆ X)). Classically equivalent (via X = V \ A) to the textbook ∈-minimal-element Regularity / Foundation formulation ∀(A:Class)((A ≠ ∅) —→ ∃(x:Class)((x ∈ A) ∧ ((x ∩ A) = ∅))).
+- **Kernel Note:** Kernel Form (Cumulative 𝒫-Induction): ∀(X:Class)((𝒫(X) ⊆ X) —→ (V ⊆ X)) (with the immediate corollary that V is the only subclass of V equal to its powerclass). Classically equivalent (via X = V \ A) to the textbook ∈-minimal-element Regularity / Foundation formulation ∀(A:Class)((A ≠ ∅) —→ ∃(x:Class)((x ∈ A) ∧ ((x ∩ A) = ∅))).
 - **Standalone Certificate:** [proofs/AxmRegularity.html](proofs/AxmRegularity.html)
 
 ### 3.15 `DefTransitiveClass` — Transitivity predicate (Definition)
@@ -561,7 +561,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(K:Class)(|K|=(On∩⋂{a|(a∈On)∧(K≼a)})))`
 - **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(|[K@Class.Expression]|=(On∩⋂{[a@Class.Expression]|([a@Class.Expression]∈On)∧([K@Class.Expression]≼[a@Class.Expression])})))`
 - **Proof Constructor:** `CpCard (X)`
-- **Kernel Note:** Defines the von Neumann initial-ordinal cardinality |K| = On ∩ { a : Class | ¬(a ≺ K) } (the class of all ordinals that do not inject into a larger cardinal than K, yielding the initial ordinal of K for well-orderable sets and On for proper classes under Global Choice / Limitation of Size). Paired in the kernel with CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: ∀A∀B((|A| ≺ |B|) ⟷ (A ≺ B))).
+- **Kernel Note:** Defines the von Neumann initial-ordinal cardinality |K| = On ∩ ⋂{ a : Class | (a ∈ On) ∧ (K ≼ a) }: the intersection ⋂ of the class of all ordinal sets a ∈ On into which K injects (K ≼ a), intersected with On. Because the intersection of a non-empty class of ordinals is its least element, |K| equals the least ordinal a ∈ On with K ≼ a (the initial ordinal of K) when K is a well-orderable set, and equals On ∩ ⋂∅ = On ∩ V = On when no ordinal set a ∈ On satisfies K ≼ a (i.e., when K is a proper class). Paired in the kernel with CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: ∀A∀B((|A| ≺ |B|) ⟷ (A ≺ B))).
 - **Standalone Certificate:** [proofs/DefCardinality.html](proofs/DefCardinality.html)
 
 ### 3.42 `DefCardLess` — “Is strictly smaller than” binary relation (Definition)
@@ -682,7 +682,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(X:Class)(Ind(X)←→((∅∈X)∧∀(a:Class)((a∈X)—→((a∪{a})∈X)))))`
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(Ind([X@Class.Expression])←→((∅∈[X@Class.Expression])∧∀([a@Variable]:[Class@Type])(([a@Class.Expression]∈[X@Class.Expression])—→(([a@Class.Expression]∪{[a@Class.Expression]})∈[X@Class.Expression])))))`
 - **Proof Constructor:** `TpInd (X)`
-- **Kernel Note:** Successor-inductive (Peano 0-successor-inductive) in the narrowest sense: closed under 0 = ∅ and ordinal successor a |-> a ∪ {a}, as distinguished from transfinite ∈-induction (3.70) or 𝒫-induction.
+- **Kernel Note:** Successor-inductive (Peano 0-successor-inductive) in the narrowest sense: closed under 0 = ∅ and ordinal successor a |-> a ∪ {a}, as distinguished from transfinite ∈-induction (3.71 ThmTransitiveClassInduction) or cumulative 𝒫-induction (3.14 AxmRegularity).
 - **Standalone Certificate:** [proofs/DefInductiveClass.html](proofs/DefInductiveClass.html)
 
 ### 3.56 `DefOmega` — The intersection class of all successor-inductive (Peano-inductive) classes is called omega (⊆-minimal successor-inductive class and smallest successor-inductive ordinal) (Definition)
@@ -779,6 +779,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Scheme of Types (Unicode):** `Card(ω)`
 - **Proof Constructor:** `thm_3_65_omega_card_sub_on (PAndR_prf / POmegaSetAx_prf / PKernelDef_prf)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefCardinality, DefIsCardinal | Kernel Prf Nodes: 5488`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_65_omega_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.
 - **Standalone Certificate:** [proofs/ThmOmegaCardinal.html](proofs/ThmOmegaCardinal.html)
 
 ### 3.66 `ThmOrdinalsCardinal` — On is a cardinal class (Theorem)
@@ -787,7 +788,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `Card(On)`
 - **Scheme of Types (Unicode):** `Card(On)`
 - **Proof Constructor:** `thm_3_66_on_card_sub_on (PAndR_prf / PComprAx_prf / PKernelDef_prf)`
-- **Axioms Used:** `AxmLeftInSound, RulClassComprehension | Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefCardinality, DefIsCardinal | Kernel Prf Nodes: 564`
+- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmPropNegElim, AxmRegularity, AxmSizeLimitation | Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefIsProperClass, DefCardLess, DefTightClass, DefCardinality, DefIsCardinal | Kernel Prf Nodes: 1960`
+- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_66_on_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines Ord(On) (3.18), Burali-Forti properness Proper(On) (thm_burali_forti_on_proper: On ∉ V), and Tight(V) (v_universe_lemma_5_tight from 3.43 AxmSizeLimitation and CardLessOrderAx) with 3.41 DefCardinality and 3.64 DefIsCardinal. Since On is a proper class and every a ∈ On is a set, Tight(V) / Limitation of Size rules out On ≼ a for all a ∈ On, so {a | a ∈ On ∧ On ≼ a} = ∅, ⋂∅ = V, and |On| = On ∩ V = On.
 - **Standalone Certificate:** [proofs/ThmOrdinalsCardinal.html](proofs/ThmOrdinalsCardinal.html)
 
 ### 3.67 `ThmUniversalClassNotCardinal` — Class of all sets is not a cardinal class (Theorem)
@@ -925,16 +927,16 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(V:Class)(VStageLaws(V)←→((V(∅)=∅)∧((∀(A:Class)(Ord(A)—→(V((A∪{A}))=𝒫(V(A)))))∧((∀(A:Class)(LimitOrd(A)—→(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=V(B)))})))∧∀(A:Class)(Ord(A)—→((A=∅)∨((∃(B:Class)((B∈A)∧(A=(B∪{B}))))∨LimitOrd(A)))))))))`
 - **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])(VStageLaws([V@Class.Expression])←→(([V@Class.Expression](∅)=∅)∧((∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→([V@Class.Expression](([A@Class.Expression]∪{[A@Class.Expression]}))=𝒫([V@Class.Expression]([A@Class.Expression])))))∧((∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])—→([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=[V@Class.Expression]([B@Class.Expression])))})))∧∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→(([A@Class.Expression]=∅)∨((∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([A@Class.Expression]=([B@Class.Expression]∪{[B@Class.Expression]}))))∨LimitOrd([A@Class.Expression])))))))))`
 - **Proof Constructor:** `PKernelDef_prf (def_v_stage_laws_cert, [V, A, B, Y])`
-- **Kernel Note:** Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit).
+- **Kernel Note:** Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit). (Notational convention: here and in 3.82, 3.83, 3.88, 3.89, 3.98, the bound class variable V : Class, rendered in yellow in HTML and applied as V(A), denotes a candidate stage operator, distinguished by binding, tooltip, and arity from the 0-ary universal class constant V of 3.05 and 3.86.)
 - **Standalone Certificate:** [proofs/DefVonNeumannStageLaws.html](proofs/DefVonNeumannStageLaws.html)
 
 ### 3.82 `DefVonNeumannStageGraph` — Canonical von Neumann cumulative hierarchy graph (Definition)
 
 - **Identifier:** `DefVonNeumannStageGraph` (entry `3.82`, kind: `Definition`, status: `Definitional (Kernel AST)`)
-- **Formula (Unicode):** `(VStageGraph=⋂{V|VStageLaws(V)})`
-- **Scheme of Types (Unicode):** `(VStageGraph=⋂{[V@Class.Expression]|VStageLaws([V@Class.Expression])})`
+- **Formula (Unicode):** `(VStageGraph=⋂{V|(V class-function)∧VStageLaws(V)})`
+- **Scheme of Types (Unicode):** `(VStageGraph=⋂{[V@Class.Expression]|([V@Class.Expression] class-function)∧VStageLaws([V@Class.Expression])})`
 - **Proof Constructor:** `PKernelDef_prf (def_v_stage_graph_cert, [V])`
-- **Kernel Note:** Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class graphs satisfying VStageLaws(V). In 3.88-3.90, the stage recursion laws VStageLaws(V) are carried as an explicit antecedent hypothesis on the stage operator V (and discharged via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
+- **Kernel Note:** Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class-functions V satisfying VStageLaws(V). Restricting V to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues that for each A in Dom(V) with set value V(A), there is a unique pair (A, y) in V, which by 3.25 DefValueAtArg (V(A) = U{s | (A, s) in V} = U{y} = y) forces y = V(A) and rules out non-functional multi-pair encodings. In 3.88-3.90, VStageLaws(V) is carried as an explicit antecedent hypothesis (and constructed bottom-up via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
 - **Standalone Certificate:** [proofs/DefVonNeumannStageGraph.html](proofs/DefVonNeumannStageGraph.html)
 
 ### 3.83 `DefSetRankLaws` — Mirimanoff-von Neumann set rank recursion laws (Definition)
@@ -949,10 +951,10 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 ### 3.84 `DefSetRankGraph` — Canonical Mirimanoff-von Neumann set rank graph (Definition)
 
 - **Identifier:** `DefSetRankGraph` (entry `3.84`, kind: `Definition`, status: `Definitional (Kernel AST)`)
-- **Formula (Unicode):** `(SetRankGraph=⋂{R|SetRankLaws(R,VStageGraph)})`
-- **Scheme of Types (Unicode):** `(SetRankGraph=⋂{[R@Class.Expression]|SetRankLaws([R@Class.Expression],VStageGraph)})`
+- **Formula (Unicode):** `(SetRankGraph=⋂{R|(R class-function)∧SetRankLaws(R,VStageGraph)})`
+- **Scheme of Types (Unicode):** `(SetRankGraph=⋂{[R@Class.Expression]|([R@Class.Expression] class-function)∧SetRankLaws([R@Class.Expression],VStageGraph)})`
 - **Proof Constructor:** `PKernelDef_prf (def_rank_graph_cert, [R])`
-- **Kernel Note:** Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class graphs R satisfying SetRankLaws(R, VStageGraph). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
+- **Kernel Note:** Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class-functions R satisfying SetRankLaws(R, VStageGraph). Restricting R to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues and 3.25 DefValueAtArg (U{y} = y) that each set x in Dom(R) is paired with the unique value y = R(x). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
 - **Standalone Certificate:** [proofs/DefSetRankGraph.html](proofs/DefSetRankGraph.html)
 
 ### 3.85 `ThmUniverseInterOnIsOrdinal` — Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal (Theorem)
@@ -1178,8 +1180,8 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
 - **Proof Constructor:** `PLoeb_prf (ψ, PMP_prf (PDiagFixedPoint_prf (ψ, φ), PAndR_prf (PHBL1_prf (ψ), PAndR_prf (PHBL2_prf (ψ, φ), PHBL3_prf (ψ)))))`
-- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, HBL_D1_D2_D3, DiagonalLemma_10StepTrace | Kernel Prf Nodes: 5`
-- **Kernel Note:** Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation using the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, Σ₁-completeness, which requires Σ₁-induction and fails in Robinson's arithmetic Q; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
+- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, DiagonalLemma, HBL_D1_D2_D3 | Kernel Prf Nodes: 11`
+- **Kernel Note:** Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
 ### 5.02 `ThmSecondIncompleteness` — Gödel's second incompleteness theorem (Theorem)
@@ -1188,7 +1190,7 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Proof Constructor:** `PSecondIncompl_prf (Τ, PMP_prf (PLoebInstBot_prf (Τ, ⊥), PImplR_prf (PConsistencyDef_prf (Τ, ⊥))))`
-- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, AxmPropNegElim, AxmPropNegIntro, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, HBL_D1_D2_D3, ThmLoeb_5StepTrace | Kernel Prf Nodes: 11`
-- **Kernel Note:** Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
+- **Axioms Used:** `AxmPropWeakening, AxmPropFrege, AxmPropNegElim, AxmPropNegIntro, RulModusPonens | Definitions Used: DefMetaInstantiation, DefMetaGeneralisation, ThmLoeb, HBL_D1_D2 | Kernel Prf Nodes: 11`
+- **Kernel Note:** Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 
