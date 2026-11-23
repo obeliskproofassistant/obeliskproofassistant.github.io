@@ -363,7 +363,7 @@
     .infer-frac {
       display: inline-flex;
       flex-direction: column;
-      align-items: center;
+      align-items: stretch;
       vertical-align: middle;
       padding: 0.15rem 0.35rem;
     }
@@ -372,9 +372,12 @@
       text-align: center;
     }
     .infer-bar {
-      width: 100%;
-      border-top: 1.75px solid #cbd5e1;
-      margin: 0.05rem 0;
+      display: block;
+      align-self: stretch;
+      height: 0;
+      min-width: 2em;
+      border-top: 2px solid currentColor;
+      margin: 0.1rem 0;
     }
     .infer-den {
       padding: 0.2rem 0.35rem 0 0.35rem;
@@ -546,7 +549,7 @@
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Formation Rule (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num">&nbsp;</span><span class="infer-bar" style="font-size: 0; line-height: 0; color: transparent;"> &#x2500;&#x2500;&#x2500; </span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/theory-wau.html" class="sym-link" title="Free theory variable 𝘞">𝘞</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/theory-sort.html" class="sym-link" title="Object & Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system)">Theory</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num">&nbsp;</span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/theory-wau.html" class="sym-link" title="Free theory variable 𝘞">𝘞</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/theory-sort.html" class="sym-link" title="Object & Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system)">Theory</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Formation Rule (LaTeX)</td>
@@ -554,7 +557,7 @@
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Formation Rule (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num">&nbsp;</span><span class="infer-bar" style="font-size: 0; line-height: 0; color: transparent;"> --- </span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/theory-wau.html" class="sym-link" title="Free theory variable 𝘞">W</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/theory-sort.html" class="sym-link" title="Object & Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system)">Theory</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num">&nbsp;</span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/theory-wau.html" class="sym-link" title="Free theory variable 𝘞">W</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/theory-sort.html" class="sym-link" title="Object & Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system)">Theory</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
@@ -809,7 +812,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">8b3a272</code> &bull; Built on: <time datetime="2026-11-23T20:32:11Z">2026-11-23 20:32:11 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">c127b9d</code> &bull; Built on: <time datetime="2026-11-23T20:51:09Z">2026-11-23 20:51:09 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>
