@@ -39,20 +39,20 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Formula (Unicode):** `((∀(⦃x⦄:⟦X⟧)⟦𝛗⟧)—→⟦𝛗[t/x]⟧)`
 - **Scheme of Types (Unicode):** `((∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧)`
 - **Proof Constructor:** `PForaL_prf (φ, T, x, p)`
-- **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
+- **Judgements:** `[(t:X.Expression), (X:Type), (x:Variable), (𝛗:Fm)]`
 - **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
-- **Kernel Note:** Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation (forall x. phi -> phi[t/x]) with substitution side condition Fm.FFI((t:X.Expression), x, phi).
+- **Kernel Note:** Inference rule schema (0-premise Hilbert-style axiom schema) of Universal Instantiation ((∀(x:X)𝛗) —→ 𝛗[t/x], i.e., ((forall (x:X) phi) -> phi[t/x])) with substitution side condition Fm.FFI((t:X.Expression), x, 𝛗).
 - **Standalone Certificate:** [proofs/RulForallInstantiation.html](proofs/RulForallInstantiation.html)
 
-### 2.03 `RulExistsInstantiation` — Exists Instantiation (Inference Rule)
+### 2.03 `RulExistsInstantiation` — Exists Introduction (Inference Rule)
 
 - **Identifier:** `RulExistsInstantiation` (entry `2.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Kernel)`)
 - **Formula (Unicode):** `(⟦𝛗[t/x]⟧—→∃(⦃x⦄:⟦X⟧)⟦𝛗⟧)`
 - **Scheme of Types (Unicode):** `(⟦[𝛗@Fm.Expression][[t@Term.Expression]/[x@Variable.Expression]]⟧—→∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)`
 - **Proof Constructor:** `PExisR_prf (φ, T, x, p)`
-- **Judgements:** `[(t:X.Expression), (X:Type), (x:Name), (𝛗:Fm)]`
+- **Judgements:** `[(t:X.Expression), (X:Type), (x:Variable), (𝛗:Fm)]`
 - **Side Condition:** `Fm.FFI((t:X.Expression),x,𝛗)`
-- **Kernel Note:** Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (phi[t/x] -> exists x. phi) with substitution side condition Fm.FFI((t:X.Expression), x, phi). Dual to Universal Instantiation.
+- **Kernel Note:** Inference rule schema (0-premise Hilbert-style axiom schema) of Existential Introduction (𝛗[t/x] —→ (∃(x:X)𝛗), i.e., (phi[t/x] -> (exists (x:X) phi))) with substitution side condition Fm.FFI((t:X.Expression), x, 𝛗). Dual to Universal Instantiation.
 - **Standalone Certificate:** [proofs/RulExistsInstantiation.html](proofs/RulExistsInstantiation.html)
 
 ### 2.04 `RulForallAbstraction` — Forall Abstraction (Inference Rule)
@@ -61,7 +61,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Formula (Unicode):** `((⟦𝛃⟧—→⟦𝛂⟧) ─── (⟦𝛃⟧—→∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
 - **Scheme of Types (Unicode):** `((⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧) ─── (⟦[𝛃@Fm.Expression]⟧—→∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
 - **Proof Constructor:** `PForaR_prf (φ, x, x', T, p)`
-- **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
+- **Judgements:** `[(X:Type), (x:Variable), (𝛂:Fm), (𝛃:Fm)]`
 - **Side Condition:** `NFV(X,x,(𝛃:Fm))`
 - **Kernel Note:** Inference rule schema of Universal Abstraction (Bernays' first quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛃 —→ 𝛂 infer ⊢ 𝛃 —→ ∀(x:X)𝛂, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PForaR_prf additionally enforces ¬Ctx.IFV(x, Γ).
 - **Standalone Certificate:** [proofs/RulForallAbstraction.html](proofs/RulForallAbstraction.html)
@@ -72,7 +72,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Formula (Unicode):** `((⟦𝛂⟧—→⟦𝛃⟧) ─── ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))`
 - **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧) ─── ((∃([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧)—→⟦[𝛃@Fm.Expression]⟧))`
 - **Proof Constructor:** `PExisL_prf (φ, x, x', T, p)`
-- **Judgements:** `[(X:Type), (x:Name), (𝛂:Fm), (𝛃:Fm)]`
+- **Judgements:** `[(X:Type), (x:Variable), (𝛂:Fm), (𝛃:Fm)]`
 - **Side Condition:** `NFV(X,x,(𝛃:Fm))`
 - **Kernel Note:** Inference rule schema of Existential Elimination (Bernays' second quantifier rule, specialized to theorem derivations with empty undischarged context Γ = []): from ⊢ 𝛂 —→ 𝛃 infer ⊢ (∃(x:X)𝛂) —→ 𝛃, with formula freshness side condition NFV(X, x, 𝛃) (x not free in 𝛃). Under non-empty contexts Γ, the kernel rule PExisL_prf additionally enforces ¬Ctx.IFV(x, Γ).
 - **Standalone Certificate:** [proofs/RulExistsAbstraction.html](proofs/RulExistsAbstraction.html)
@@ -83,7 +83,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Formula (Unicode):** `(⟦𝛂⟧ ─── (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
 - **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧ ─── (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
 - **Proof Constructor:** `PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))`
-- **Judgements:** `[(x:Name), (X:Type), (𝛂:Fm)]`
+- **Judgements:** `[(x:Variable), (X:Type), (𝛂:Fm)]`
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
 
@@ -97,8 +97,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `((⦃x⦄∈{⦃x⦄|⟦𝛗⟧})←→((⦃x⦄ set)∧⟦𝛗⟧))`
 - **Scheme of Types (Unicode):** `(([⦃[x@Variable.Expression]⦄@Class.Expression]∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→(([⦃[x@Variable.Expression]⦄@Class.Expression] set)∧⟦[𝛗@Fm.Expression]⟧))`
 - **Proof Constructor:** `PComprAx_prf (φ)`
-- **Judgements:** `[(x:Name), (𝛗:Fm)]`
-- **Kernel Note:** Impredicative Morse-Kelley (MKTD1-theory) class comprehension schema for variable x: ((x ∈ {x | 𝛗}) ⟷ ((x set) ∧ 𝛗)), where 𝛗 : Fm may contain arbitrary class quantifiers. Note that the binder x inside {x | 𝛗} binds occurrences of x in 𝛗 while x on the left of ∈ and in (x set) is free; this diagonal variable-instance form is completely sound and yields the general term instance (k ∈ {x | 𝛗}) ⟷ ((k set) ∧ (let x = k in 𝛗)) via 4.06 AxmMetaClassComprehension under Fm.FFI((k:Class.Expression), ‹x›, 𝛗).
+- **Judgements:** `[(x:Variable), (𝛗:Fm)]`
+- **Kernel Note:** Impredicative Morse-Kelley (MKTD1-theory) class comprehension schema for variable x: ((x ∈ {x | 𝛗}) ⟷ ((x set) ∧ 𝛗)), where 𝛗 : Fm may contain arbitrary class quantifiers. Note that the binder x inside {x | 𝛗} binds occurrences of x in 𝛗 while x on the left of ∈ and in (x set) is free; this diagonal variable-instance form is completely sound and yields the general term instance (k ∈ {x | 𝛗}) ⟷ ((k set) ∧ (let x = k in 𝛗)) via 4.06 AxmMetaClassComprehension under Fm.FFI((k:Class.Expression), x, 𝛗).
 - **Standalone Certificate:** [proofs/RulClassComprehension.html](proofs/RulClassComprehension.html)
 
 ### 3.07 `ThmEmptySetIsSubclass` — Example: “The empty class is a subclass of any class” statement (Theorem)
