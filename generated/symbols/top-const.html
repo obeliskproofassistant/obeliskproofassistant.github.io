@@ -493,24 +493,27 @@
             <td class="external-entity"><strong>No — 0-ary Logical Formula Constant (Verum, Syntactic Signature: Fm)</strong></td>
           </tr>
           <tr class="external-row">
-            <td class="external-num">Defining Kernel Entries (ML Labels)</td>
-            <td class="external-entity"><a href="../manual.html#AxmPropVerum" class="sym-link"><strong>Axiom AxmPropVerum (1.13): A13</strong> (<code>#AxmPropVerum</code> / <code>#label-a13</code>)</a></td>
+            <td class="external-num">Defining &amp; Formation Laws (Personal Pages)</td>
+            <td class="external-entity"><ol style="margin: 0; padding-left: 1.35rem; line-height: 1.75;">
+<li><span class="badge badge-rule">Formation Rule</span> <a href="../proofs/FormNullaryFormulaConst.html" class="sym-link"><strong>FormNullaryFormulaConst (F.06): 0-ary Propositional Formula Constant Formation Rule</strong></a></li>
+<li><span class="badge badge-axiom">Axiom</span> <a href="../proofs/AxmPropVerum.html" class="sym-link"><strong>AxmPropVerum (1.13): A13</strong></a> (<a href="../manual.html#AxmPropVerum" class="sym-link"><code>#AxmPropVerum</code></a>)</li>
+</ol></td>
+          </tr>
+          <tr class="external-row row-unicode">
+            <td class="external-num">Formation Rule (Unicode)</td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></span><span class="infer-bar"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+          </tr>
+          <tr class="external-row row-latex">
+            <td class="external-num">Formation Rule (LaTeX)</td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/top-const.html}{\top} }{\href{../symbols/parentheses.html}{(} \href{../symbols/top-const.html}{\top} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/fm-sort.html}{\mathsf{Fm}} \href{../symbols/parentheses.html}{)} }\)</div></td>
+          </tr>
+          <tr class="external-row row-ansii">
+            <td class="external-num">Formation Rule (ANSII)</td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></span><span class="infer-bar"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/fm-sort.html" class="sym-link" title="Object Formula syntactic sort (Fm = Bool.Expression)">Fm</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
             <td class="external-entity" style="line-height: 1.65;"><p><strong>SML AST Constructor:</strong> <code>HP TpTop</code> in <code>Truth_p</code> (<code>typetheory.ML:649</code>). 0-ary formula constructor of sort <code>Fm</code>. Strictly distinguished from MKTD2-system's Unit type <code>𝟙</code> (<code>Unit</code> / <code>\mathbf{1}</code>) and from the Boolean value <code>true : Bool</code> (<code>\mathsf{true}</code>).</p></td>
-          </tr>
-          <tr class="external-row row-unicode">
-            <td class="external-num">Canonical Law (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">⊤</a></div></td>
-          </tr>
-          <tr class="external-row row-latex">
-            <td class="external-num">Canonical Law (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\href{../symbols/top-const.html}{\top} \)</div></td>
-          </tr>
-          <tr class="external-row row-ansii">
-            <td class="external-num">Canonical Law (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
@@ -527,8 +530,8 @@
   </section>
   <section class="manual-section" id="symbol-defining-axioms">
     <div class="section-header">
-      <h2>Defining Axioms, Rules &amp; Formal Definitions (Rendered Directly from Kernel Entries)</h2>
-      <p class="section-desc">Generated without code duplication by invoking <code>render_entry_row_base "../manual.html"</code> on the corresponding kernel <code>Entry</code> records.</p>
+      <h2>Minimal Defining &amp; Axiomatizing Laws (Rendered Directly from Kernel Entries)</h2>
+      <p class="section-desc">Minimal necessary formal definitions, axioms, or inference rules for this symbol, linking directly to each law's standalone personal page under <code>generated/proofs/</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -618,7 +621,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">236a71c</code> &bull; Built on: <time datetime="2026-11-23T11:50:33Z">2026-11-23 11:50:33 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">2ca47f1</code> &bull; Built on: <time datetime="2026-11-23T14:05:10Z">2026-11-23 14:05:10 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>

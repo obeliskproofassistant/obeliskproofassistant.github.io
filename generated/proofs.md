@@ -16,7 +16,7 @@ Agent-friendly Markdown edition of all 40 kernel theorems and inference rules in
 - **MKTD2-system JSON Database:** [nbg_library.json](nbg_library.json)
 - **Plain-Text Specification:** [output.txt](output.txt)
 
-## 1. Propositional Logic (1.01-1.14) (1.01-1.14)
+## 1. Propositional Logic (1.01-1.15) (1.01-1.15)
 
 Classical propositional calculus axiom schemas (A01-A13) and Modus Ponens.
 
@@ -87,7 +87,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.98) (3.01-3.98)
+## 3. Set/Class-Theoretic Foundations (3.01-3.99) (3.01-3.99)
 
 Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 

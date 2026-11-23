@@ -16,7 +16,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **MKTD2-system JSON Database:** [nbg_library.json](nbg_library.json)
 - **Plain-Text Specification:** [output.txt](output.txt)
 
-## 1. Propositional Logic (1.01-1.14) (1.01-1.14)
+## 1. Propositional Logic (1.01-1.15) (1.01-1.15)
 
 Classical propositional calculus axiom schemas (A01-A13) and Modus Ponens.
 
@@ -149,6 +149,16 @@ Classical propositional calculus axiom schemas (A01-A13) and Modus Ponens.
 - **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
 - **Standalone Certificate:** [proofs/RulModusPonens.html](proofs/RulModusPonens.html)
 
+### 1.15 `DefIff` — Logical bi-implication (equivalence) connective (Definition)
+
+- **Identifier:** `DefIff` (entry `1.15`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `((⟦𝛂⟧←→⟦𝛃⟧)←→((⟦𝛂⟧—→⟦𝛃⟧)∧(⟦𝛃⟧—→⟦𝛂⟧)))`
+- **Scheme of Types (Unicode):** `((⟦[𝛂@Fm.Expression]⟧←→⟦[𝛃@Fm.Expression]⟧)←→((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧)∧(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧)))`
+- **Proof Constructor:** `PIffDef_prf (Γ, 𝛂, 𝛃)`
+- **Judgements:** `[(𝛂:Fm), (𝛃:Fm)]`
+- **Kernel Note:** Conservative propositional definition (DefIff, PIffDef_prf in 05_rules.ML): defines logical bi-implication (⟦𝛂⟧ ⟷ ⟦𝛃⟧) as the conjunction of mutual implications ((⟦𝛂⟧ —→ ⟦𝛃⟧) ∧ (⟦𝛃⟧ —→ ⟦𝛂⟧)).
+- **Standalone Certificate:** [proofs/DefIff.html](proofs/DefIff.html)
+
 ## 2. Predicate Logic (2.01-2.06) (2.01-2.06)
 
 Quantifier instantiation, variable-binding abstraction rules, and non-empty discourse domain over Classes in MKTD1-theory.
@@ -216,7 +226,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.98) (3.01-3.98)
+## 3. Set/Class-Theoretic Foundations (3.01-3.99) (3.01-3.99)
 
 Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 
@@ -332,7 +342,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Formula (Unicode):** `(∀(X:Class)((X set)—→(𝒫(X) set)))`
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)—→(𝒫([X@Class.Expression]) set)))`
 - **Proof Constructor:** `PPowSetAx_prf (X)`
-- **Kernel Note:** Power-set sethood axiom (PPowSetAx_prf: ∀(A:Class)((A set) —→ (𝒫(A) set))). Paired in the kernel with the conservative powerclass definition DefPowerClass (PowClassDef / def_power_class_cert in 06_definitions.ML: ∀(K:Class)(𝒫(K) = { x : Class | x ⊆ K })).
+- **Kernel Note:** Power-set sethood axiom (PPowSetAx_prf: ∀(A:Class)((A set) —→ (𝒫(A) set))). Paired in the kernel with the conservative powerclass definition 3.99 DefPowerClass (PowClassDef / def_power_class_cert in 06_definitions.ML: ∀(K:Class)(𝒫(K) = { x : Class | x ⊆ K })).
 - **Standalone Certificate:** [proofs/AxmExponent.html](proofs/AxmExponent.html)
 
 ### 3.14 `AxmRegularity` — “Regularity”(any class containing its powerclass contains all sets) (Axiom)
@@ -1098,6 +1108,15 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso | Definitions Used: DefVonNeumannStepGenerator, DefIff, DefUnaryUnion, DefSubclass, DefEmptySet, DefClassEq, DefPowerClass | Kernel Prf Nodes: 10507`
 - **Kernel Note:** Machine-checked MKTD1-system theorem (thm_von_neumann_hierarchy_by_recursion, thm_von_neumann_step_g_empty, thm_von_neumann_step_g_on_stage, and thm_power_cong : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that VonNeumannStepG(f) = ∅ whenever Dom(f) is empty, and (2) conditionally, by unfolding DefVonNeumannStepGenerator and applying powerclass congruence (thm_power_cong: P = Q -> Pow(P) = Pow(Q)), that whenever Dom(f) = A, f agrees with V on A, and V(A) = VonNeumannStepG(f), both VonNeumannStepG(f) and V(A) equal U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
 - **Standalone Certificate:** [proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html](proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html)
+
+### 3.99 `DefPowerClass` — Powerclass operator (Definition)
+
+- **Identifier:** `DefPowerClass` (entry `3.99`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Formula (Unicode):** `(∀(K:Class)(𝒫(K)={x|x⊆K}))`
+- **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])(𝒫([K@Class.Expression])={[x@Class.Expression]|[x@Class.Expression]⊆[K@Class.Expression]}))`
+- **Proof Constructor:** `PKernelDef_prf (def_power_class_cert, [K, x])`
+- **Kernel Note:** Conservative class-operator definition (DefPowerClass, def_power_class_cert in 06_definitions.ML, PKernelDef_prf): defines the powerclass 𝒫(K) = { x : Class | x ⊆ K } of any class K as the comprehension class of all set subclasses of K. Paired with the power-set sethood axiom 3.13 AxmExponent (∀(X:Class)((X set) —→ (𝒫(X) set))).
+- **Standalone Certificate:** [proofs/DefPowerClass.html](proofs/DefPowerClass.html)
 
 ## 4. Metalogical Laws (4.01-4.08) (4.01-4.08)
 

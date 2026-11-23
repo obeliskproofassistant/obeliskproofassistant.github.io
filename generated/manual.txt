@@ -117,6 +117,15 @@
   Judgements [1]:  [(𝛂:Fm), (𝛃:Fm)]
   Verification:    Primitive / Derived Rule (Kernel)
 
+[1.15 / DefIff] Logical bi-implication (equivalence) connective (Definition)
+  Name:            DefIff
+  Formula [0]:     ((⟦𝛂⟧←→⟦𝛃⟧)←→((⟦𝛂⟧—→⟦𝛃⟧)∧(⟦𝛃⟧—→⟦𝛂⟧)))
+  SML Kernel AST:  PIffDef_prf (Γ, 𝛂, 𝛃)
+  Scheme of Types: ((⟦[𝛂@Fm.Expression]⟧←→⟦[𝛃@Fm.Expression]⟧)←→((⟦[𝛂@Fm.Expression]⟧—→⟦[𝛃@Fm.Expression]⟧)∧(⟦[𝛃@Fm.Expression]⟧—→⟦[𝛂@Fm.Expression]⟧)))
+  Judgements [1]:  [(𝛂:Fm), (𝛃:Fm)]
+  Kernel Note:     Conservative propositional definition (DefIff, PIffDef_prf in 05_rules.ML): defines logical bi-implication (⟦𝛂⟧ ⟷ ⟦𝛃⟧) as the conjunction of mutual implications ((⟦𝛂⟧ —→ ⟦𝛃⟧) ∧ (⟦𝛃⟧ —→ ⟦𝛂⟧)).
+  Verification:    Definitional (Kernel AST)
+
 [2.01 / AxmDiscourseNonEmpty] Discourse domain is non-empty (admissible) (Axiom)
   Name:            AxmDiscourseNonEmpty
   Formula [0]:     (∃(K:Class)⊤)
@@ -273,7 +282,7 @@
   Formula [0]:     (∀(X:Class)((X set)—→(𝒫(X) set)))
   SML Kernel AST:  PPowSetAx_prf (X)
   Scheme of Types: (∀([X@Variable]:[Class@Type])(([X@Class.Expression] set)—→(𝒫([X@Class.Expression]) set)))
-  Kernel Note:     Power-set sethood axiom (PPowSetAx_prf: ∀(A:Class)((A set) —→ (𝒫(A) set))). Paired in the kernel with the conservative powerclass definition DefPowerClass (PowClassDef / def_power_class_cert in 06_definitions.ML: ∀(K:Class)(𝒫(K) = { x : Class | x ⊆ K })).
+  Kernel Note:     Power-set sethood axiom (PPowSetAx_prf: ∀(A:Class)((A set) —→ (𝒫(A) set))). Paired in the kernel with the conservative powerclass definition 3.99 DefPowerClass (PowClassDef / def_power_class_cert in 06_definitions.ML: ∀(K:Class)(𝒫(K) = { x : Class | x ⊆ K })).
   Verification:    Postulated (Kernel Axiom)
 
 [3.14 / AxmRegularity] “Regularity”(any class containing its powerclass contains all sets) (Axiom)
@@ -954,6 +963,14 @@
   Scheme of Types: (∀([f@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(((∀([B@Variable]:[Class@Type])¬([B@Class.Expression]∈Dom([f@Class.Expression])))—→(VonNeumannStepG([f@Class.Expression])=∅))∧((([V@Class.Expression]([A@Class.Expression])=VonNeumannStepG([f@Class.Expression]))∧((Dom([f@Class.Expression])=[A@Class.Expression])∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→([f@Class.Expression]([B@Class.Expression])=[V@Class.Expression]([B@Class.Expression])))))—→((VonNeumannStepG([f@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})∧([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_von_neumann_hierarchy_by_recursion, thm_von_neumann_step_g_empty, thm_von_neumann_step_g_on_stage, and thm_power_cong : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that VonNeumannStepG(f) = ∅ whenever Dom(f) is empty, and (2) conditionally, by unfolding DefVonNeumannStepGenerator and applying powerclass congruence (thm_power_cong: P = Q -> Pow(P) = Pow(Q)), that whenever Dom(f) = A, f agrees with V on A, and V(A) = VonNeumannStepG(f), both VonNeumannStepG(f) and V(A) equal U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
   Verification:    Verified
+
+[3.99 / DefPowerClass] Powerclass operator (Definition)
+  Name:            DefPowerClass
+  Formula [0]:     (∀(K:Class)(𝒫(K)={x|x⊆K}))
+  SML Kernel AST:  PKernelDef_prf (def_power_class_cert, [K, x])
+  Scheme of Types: (∀([K@Variable]:[Class@Type])(𝒫([K@Class.Expression])={[x@Class.Expression]|[x@Class.Expression]⊆[K@Class.Expression]}))
+  Kernel Note:     Conservative class-operator definition (DefPowerClass, def_power_class_cert in 06_definitions.ML, PKernelDef_prf): defines the powerclass 𝒫(K) = { x : Class | x ⊆ K } of any class K as the comprehension class of all set subclasses of K. Paired with the power-set sethood axiom 3.13 AxmExponent (∀(X:Class)((X set) —→ (𝒫(X) set))).
+  Verification:    Definitional (Kernel AST)
 
 [4.01 / DefMetaInstantiation] Instantiation (Axiom)
   Name:            DefMetaInstantiation
