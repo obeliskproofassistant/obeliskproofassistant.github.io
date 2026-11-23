@@ -384,7 +384,46 @@
     body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
     body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
     body.hide-schemata .row-scheme { display: none !important; }
-    .metalevel-badge { display: none !important; }
+    .metalevel-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1;
+      padding: 0.18rem 0.42rem;
+      margin-right: 0.45rem;
+      border-radius: 4px;
+      vertical-align: middle;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+    }
+    .metalevel-badge.lvl-1 {
+      background: rgba(168, 85, 247, 0.16);
+      color: #c084fc;
+      border-color: rgba(168, 85, 247, 0.4);
+    }
+    .metalevel-badge.lvl-2 {
+      background: rgba(245, 158, 11, 0.16);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .meta-ctor-sig {
+      color: #e9d5ff;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      border-radius: 6px;
+      padding: 0.35rem 0.65rem;
+    }
+    .func-abbr-note {
+      color: #fde68a;
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 3px solid #fbbf24;
+      padding: 0.45rem 0.75rem;
+      margin-top: 0.4rem;
+      font-size: 0.86rem;
+      border-radius: 0 4px 4px 0;
+    }
     footer {
       margin-top: 3rem;
       padding: 1.5rem 2rem;
@@ -422,7 +461,7 @@
         <a class="nav-link" href="../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Symbols, Types &amp; Variables Architecture</h1>
-      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (228 entries) + <a href="symbols/index.html" style="color: #38bdf8;">148 Personal Symbol Reference Pages</a>.</p>
+      <p class="subtitle">Features 3 Dedicated Multi-Column Tables (<a href="#symbols-table" style="color: #38bdf8;">1. Symbols</a> &middot; <a href="#types-table" style="color: #38bdf8;">2. Types</a> &middot; <a href="#variables-table" style="color: #38bdf8;">3. Variables</a>) + Complete Token Registry (232 entries) + <a href="symbols/index.html" style="color: #38bdf8;">148 Personal Symbol Reference Pages</a>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -875,7 +914,7 @@
   </section>
   <section class="manual-section" id="symbols-index">
     <div class="section-header">
-      <h2>4. Complete Algorithmic Token Registry (228 Entries)</h2>
+      <h2>4. Complete Algorithmic Token Registry (232 Entries)</h2>
       <p class="section-desc">Every symbol and type listed below is automatically recognized inside both Unicode and LaTeX formulas and hyperlinked either to its canonical kernel entry by plain-English name (<code>manual.html#EntryName</code>) or to its dedicated <strong>Personal Symbol Reference Page</strong> (<code>symbols/*.html</code>).</p>
     </div>
     <div class="table-container">
@@ -1044,6 +1083,162 @@
         </td>
       </tr>
       <tr id="sym-5" class="external-row">
+        <td class="external-num"><a href="symbols/typing-colon.html" class="num-anchor">SYM</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr class="row-unicode">
+              <th class="field-name">Symbol (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="symbols/typing-colon.html" class="sym-link">∷</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Symbol (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex">\(\href{symbols/typing-colon.html}{{::}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">{::}</code></div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Symbol (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><a href="symbols/typing-colon.html" class="sym-link"><code>::</code></a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Target / Personal Page</th>
+              <td class="field-value entry-title-cell"><a href="symbols/typing-colon.html" class="sym-link">Meta-level AST constructor typing double-colon :: (Isabelle/Pure style, distinct from object-level typing : and class membership in)</a> &mdash; <code>symbols/typing-colon.html</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definition (Formal or Natural-Language)</th>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Meta-level AST constructor typing double-colon :: (Isabelle/Pure style, distinct from object-level typing : and class membership in) &mdash; see linked <a href="symbols/typing-colon.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-6" class="external-row">
+        <td class="external-num"><a href="symbols/func-arrow.html" class="num-anchor">SYM</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr class="row-unicode">
+              <th class="field-name">Symbol (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="symbols/func-arrow.html" class="sym-link">⟾</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Symbol (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex">\(\href{symbols/func-arrow.html}{{\color{#c084fc}{\Longrightarrow}}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">{\color{#c084fc}{\Longrightarrow}}</code></div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Symbol (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>==&gt;</code></a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Target / Personal Page</th>
+              <td class="field-value entry-title-cell"><a href="symbols/func-arrow.html" class="sym-link">Meta-level functional AST constructor / higher-order binder arrow ==&gt; (Isabelle/HOL4 style: genuine functional type in the metatheory, distinct from formula implication --&gt;, MKTD2 type arrow -&gt;, and set-function graph notation)</a> &mdash; <code>symbols/func-arrow.html</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definition (Formal or Natural-Language)</th>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Meta-level functional AST constructor / higher-order binder arrow ==&gt; (Isabelle/HOL4 style: genuine functional type in the metatheory, distinct from formula implication --&gt;, MKTD2 type arrow -&gt;, and set-function graph notation) &mdash; see linked <a href="symbols/func-arrow.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-7" class="external-row">
+        <td class="external-num"><a href="symbols/expression-sort.html" class="num-anchor">SYM</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr class="row-unicode">
+              <th class="field-name">Symbol (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="symbols/expression-sort.html" class="sym-link">↦</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Symbol (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex">\(\href{symbols/expression-sort.html}{\mapsto}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mapsto</code></div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Symbol (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><a href="symbols/expression-sort.html" class="sym-link"><code>|-&gt;</code></a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Target / Personal Page</th>
+              <td class="field-value entry-title-cell"><a href="symbols/expression-sort.html" class="sym-link">AST constructor display / surface notation projection |-&gt; (dStr)</a> &mdash; <code>symbols/expression-sort.html</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definition (Formal or Natural-Language)</th>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> AST constructor display / surface notation projection |-&gt; (dStr) &mdash; see linked <a href="symbols/expression-sort.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-8" class="external-row">
+        <td class="external-num"><a href="symbols/func-arrow.html" class="num-anchor">SYM</a></td>
+        <td class="external-entity">
+          <table class="internal-entity-table">
+            <tbody>
+            <tr class="row-unicode">
+              <th class="field-name">Symbol (Unicode)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-unicode"><a href="symbols/func-arrow.html" class="sym-link">∘</a></div>
+              </td>
+            </tr>
+            <tr class="row-latex">
+              <th class="field-name">Symbol (LaTeX)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-latex">\(\href{symbols/func-arrow.html}{\circ}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\circ</code></div>
+              </td>
+            </tr>
+            <tr class="row-ansii">
+              <th class="field-name">Symbol (ANSII)</th>
+              <td class="field-value formula-cell">
+                <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>o</code></a></div>
+              </td>
+            </tr>
+            <tr>
+              <th class="field-name">Category</th>
+              <td class="field-value"><span class="badge badge-def">Operator / Connective / Constant</span></td>
+            </tr>
+            <tr>
+              <th class="field-name">Canonical Target / Personal Page</th>
+              <td class="field-value entry-title-cell"><a href="symbols/func-arrow.html" class="sym-link">Meta-level constructor composition (o)</a> &mdash; <code>symbols/func-arrow.html</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definition (Formal or Natural-Language)</th>
+              <td class="field-value"><strong>[Primitive / Structural Kernel Symbol] Natural-Language Definition:</strong> Meta-level constructor composition (o) &mdash; see linked <a href="symbols/func-arrow.html" class="sym-link">Personal Symbol Reference Page</a> for full typing rules and formal semantics.</td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      <tr id="sym-9" class="external-row">
         <td class="external-num"><a href="symbols/exists-uniq-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1082,7 +1277,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-6" class="external-row">
+      <tr id="sym-10" class="external-row">
         <td class="external-num"><a href="symbols/theory-tau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1121,7 +1316,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-7" class="external-row">
+      <tr id="sym-11" class="external-row">
         <td class="external-num"><a href="symbols/theory-fau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1160,7 +1355,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-8" class="external-row">
+      <tr id="sym-12" class="external-row">
         <td class="external-num"><a href="symbols/theory-eau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1199,7 +1394,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-9" class="external-row">
+      <tr id="sym-13" class="external-row">
         <td class="external-num"><a href="symbols/theory-qau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1238,7 +1433,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-10" class="external-row">
+      <tr id="sym-14" class="external-row">
         <td class="external-num"><a href="symbols/theory-wau.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1277,7 +1472,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-11" class="external-row">
+      <tr id="sym-15" class="external-row">
         <td class="external-num"><a href="symbols/universal-class-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1316,7 +1511,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-12" class="external-row">
+      <tr id="sym-16" class="external-row">
         <td class="external-num"><a href="symbols/power-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1355,7 +1550,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-13" class="external-row">
+      <tr id="sym-17" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1394,7 +1589,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-14" class="external-row">
+      <tr id="sym-18" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1433,7 +1628,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-15" class="external-row">
+      <tr id="sym-19" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1472,7 +1667,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-16" class="external-row">
+      <tr id="sym-20" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1511,7 +1706,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-17" class="external-row">
+      <tr id="sym-21" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1550,7 +1745,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-18" class="external-row">
+      <tr id="sym-22" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1589,7 +1784,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-19" class="external-row">
+      <tr id="sym-23" class="external-row">
         <td class="external-num"><a href="symbols/antiquotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1628,7 +1823,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-20" class="external-row">
+      <tr id="sym-24" class="external-row">
         <td class="external-num"><a href="symbols/antiquotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1667,7 +1862,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-21" class="external-row">
+      <tr id="sym-25" class="external-row">
         <td class="external-num"><a href="symbols/binder-brackets.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1706,7 +1901,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-22" class="external-row">
+      <tr id="sym-26" class="external-row">
         <td class="external-num"><a href="symbols/binder-brackets.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1745,7 +1940,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-23" class="external-row">
+      <tr id="sym-27" class="external-row">
         <td class="external-num"><a href="symbols/metalevel-brackets.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1784,7 +1979,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-24" class="external-row">
+      <tr id="sym-28" class="external-row">
         <td class="external-num"><a href="symbols/metalevel-brackets.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1823,7 +2018,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-25" class="external-row">
+      <tr id="sym-29" class="external-row">
         <td class="external-num"><a href="symbols/quotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1862,7 +2057,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-26" class="external-row">
+      <tr id="sym-30" class="external-row">
         <td class="external-num"><a href="symbols/quotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1901,7 +2096,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-27" class="external-row">
+      <tr id="sym-31" class="external-row">
         <td class="external-num"><a href="symbols/quotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1940,7 +2135,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-28" class="external-row">
+      <tr id="sym-32" class="external-row">
         <td class="external-num"><a href="symbols/quotation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -1979,7 +2174,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-29" class="external-row">
+      <tr id="sym-33" class="external-row">
         <td class="external-num"><a href="symbols/emb.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2018,7 +2213,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-30" class="external-row">
+      <tr id="sym-34" class="external-row">
         <td class="external-num"><a href="symbols/unit-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2057,7 +2252,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-31" class="external-row">
+      <tr id="sym-35" class="external-row">
         <td class="external-num"><a href="symbols/void-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2096,7 +2291,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-32" class="external-row">
+      <tr id="sym-36" class="external-row">
         <td class="external-num"><a href="symbols/iff-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2135,7 +2330,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-33" class="external-row">
+      <tr id="sym-37" class="external-row">
         <td class="external-num"><a href="symbols/iff-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2174,7 +2369,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-34" class="external-row">
+      <tr id="sym-38" class="external-row">
         <td class="external-num"><a href="symbols/iff-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2213,7 +2408,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-35" class="external-row">
+      <tr id="sym-39" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2252,7 +2447,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-36" class="external-row">
+      <tr id="sym-40" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2291,7 +2486,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-37" class="external-row">
+      <tr id="sym-41" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2330,7 +2525,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-38" class="external-row">
+      <tr id="sym-42" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2369,7 +2564,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-39" class="external-row">
+      <tr id="sym-43" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2408,7 +2603,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-40" class="external-row">
+      <tr id="sym-44" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2447,7 +2642,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-41" class="external-row">
+      <tr id="sym-45" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2486,7 +2681,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-42" class="external-row">
+      <tr id="sym-46" class="external-row">
         <td class="external-num"><a href="symbols/impl-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2525,7 +2720,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-43" class="external-row">
+      <tr id="sym-47" class="external-row">
         <td class="external-num"><a href="symbols/type-iff.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2564,7 +2759,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-44" class="external-row">
+      <tr id="sym-48" class="external-row">
         <td class="external-num"><a href="symbols/func-arrow.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2603,7 +2798,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-45" class="external-row">
+      <tr id="sym-49" class="external-row">
         <td class="external-num"><a href="symbols/func-arrow.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2642,7 +2837,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-46" class="external-row">
+      <tr id="sym-50" class="external-row">
         <td class="external-num"><a href="symbols/prod-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2681,7 +2876,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-47" class="external-row">
+      <tr id="sym-51" class="external-row">
         <td class="external-num"><a href="symbols/and-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2720,7 +2915,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-48" class="external-row">
+      <tr id="sym-52" class="external-row">
         <td class="external-num"><a href="symbols/or-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2759,7 +2954,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-49" class="external-row">
+      <tr id="sym-53" class="external-row">
         <td class="external-num"><a href="symbols/bot-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2798,7 +2993,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-50" class="external-row">
+      <tr id="sym-54" class="external-row">
         <td class="external-num"><a href="symbols/top-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2837,7 +3032,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-51" class="external-row">
+      <tr id="sym-55" class="external-row">
         <td class="external-num"><a href="symbols/forall-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2876,7 +3071,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-52" class="external-row">
+      <tr id="sym-56" class="external-row">
         <td class="external-num"><a href="symbols/exists-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2915,7 +3110,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-53" class="external-row">
+      <tr id="sym-57" class="external-row">
         <td class="external-num"><a href="symbols/in-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2954,7 +3149,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-54" class="external-row">
+      <tr id="sym-58" class="external-row">
         <td class="external-num"><a href="symbols/notin-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -2993,7 +3188,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-55" class="external-row">
+      <tr id="sym-59" class="external-row">
         <td class="external-num"><a href="symbols/sub-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3032,7 +3227,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-56" class="external-row">
+      <tr id="sym-60" class="external-row">
         <td class="external-num"><a href="symbols/emptyset-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3071,7 +3266,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-57" class="external-row">
+      <tr id="sym-61" class="external-row">
         <td class="external-num"><a href="symbols/bigunion-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3110,7 +3305,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-58" class="external-row">
+      <tr id="sym-62" class="external-row">
         <td class="external-num"><a href="symbols/biginter-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3149,7 +3344,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-59" class="external-row">
+      <tr id="sym-63" class="external-row">
         <td class="external-num"><a href="symbols/binunion-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3188,7 +3383,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-60" class="external-row">
+      <tr id="sym-64" class="external-row">
         <td class="external-num"><a href="symbols/bininter-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3227,7 +3422,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-61" class="external-row">
+      <tr id="sym-65" class="external-row">
         <td class="external-num"><a href="symbols/turnstile-derivability.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3266,7 +3461,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-62" class="external-row">
+      <tr id="sym-66" class="external-row">
         <td class="external-num"><a href="symbols/turnstile-derivability.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3305,7 +3500,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-63" class="external-row">
+      <tr id="sym-67" class="external-row">
         <td class="external-num"><a href="symbols/card-leq-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3344,7 +3539,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-64" class="external-row">
+      <tr id="sym-68" class="external-row">
         <td class="external-num"><a href="symbols/card-lt-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3383,7 +3578,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-65" class="external-row">
+      <tr id="sym-69" class="external-row">
         <td class="external-num"><a href="symbols/definitional-eq.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3422,7 +3617,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-66" class="external-row">
+      <tr id="sym-70" class="external-row">
         <td class="external-num"><a href="symbols/formula-metavariables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3461,7 +3656,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-67" class="external-row">
+      <tr id="sym-71" class="external-row">
         <td class="external-num"><a href="symbols/sigma-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3500,7 +3695,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-68" class="external-row">
+      <tr id="sym-72" class="external-row">
         <td class="external-num"><a href="symbols/pi-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3539,7 +3734,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-69" class="external-row">
+      <tr id="sym-73" class="external-row">
         <td class="external-num"><a href="symbols/lambda-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3578,7 +3773,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-70" class="external-row">
+      <tr id="sym-74" class="external-row">
         <td class="external-num"><a href="symbols/iota-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3617,7 +3812,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-71" class="external-row">
+      <tr id="sym-75" class="external-row">
         <td class="external-num"><a href="symbols/tau-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3656,7 +3851,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-72" class="external-row">
+      <tr id="sym-76" class="external-row">
         <td class="external-num"><a href="symbols/eps-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3695,7 +3890,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-73" class="external-row">
+      <tr id="sym-77" class="external-row">
         <td class="external-num"><a href="symbols/class-comprehension.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3734,7 +3929,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-74" class="external-row">
+      <tr id="sym-78" class="external-row">
         <td class="external-num"><a href="symbols/omega-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3773,7 +3968,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-75" class="external-row">
+      <tr id="sym-79" class="external-row">
         <td class="external-num"><a href="symbols/neg-conn.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3812,7 +4007,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-76" class="external-row">
+      <tr id="sym-80" class="external-row">
         <td class="external-num"><a href="symbols/empty-list-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3851,7 +4046,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-77" class="external-row">
+      <tr id="sym-81" class="external-row">
         <td class="external-num"><a href="symbols/class-comprehension.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3890,7 +4085,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-78" class="external-row">
+      <tr id="sym-82" class="external-row">
         <td class="external-num"><a href="symbols/class-comprehension.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3929,7 +4124,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-79" class="external-row">
+      <tr id="sym-83" class="external-row">
         <td class="external-num"><a href="symbols/class-comprehension.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -3968,7 +4163,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-80" class="external-row">
+      <tr id="sym-84" class="external-row">
         <td class="external-num"><a href="symbols/parentheses.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4007,7 +4202,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-81" class="external-row">
+      <tr id="sym-85" class="external-row">
         <td class="external-num"><a href="symbols/parentheses.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4046,7 +4241,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-82" class="external-row">
+      <tr id="sym-86" class="external-row">
         <td class="external-num"><a href="symbols/typing-colon.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4085,7 +4280,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-83" class="external-row">
+      <tr id="sym-87" class="external-row">
         <td class="external-num"><a href="symbols/typing-colon.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4124,7 +4319,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-84" class="external-row">
+      <tr id="sym-88" class="external-row">
         <td class="external-num"><a href="symbols/comma-delim.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4163,7 +4358,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-85" class="external-row">
+      <tr id="sym-89" class="external-row">
         <td class="external-num"><a href="symbols/dot-delim.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4202,7 +4397,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-86" class="external-row">
+      <tr id="sym-90" class="external-row">
         <td class="external-num"><a href="symbols/uniq-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4241,7 +4436,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-87" class="external-row">
+      <tr id="sym-91" class="external-row">
         <td class="external-num"><a href="symbols/subst-slash.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4280,7 +4475,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-88" class="external-row">
+      <tr id="sym-92" class="external-row">
         <td class="external-num"><a href="symbols/numeral-0.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4319,7 +4514,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-89" class="external-row">
+      <tr id="sym-93" class="external-row">
         <td class="external-num"><a href="symbols/numeral-1.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4358,7 +4553,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-90" class="external-row">
+      <tr id="sym-94" class="external-row">
         <td class="external-num"><a href="symbols/numeral-2.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4397,7 +4592,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-91" class="external-row">
+      <tr id="sym-95" class="external-row">
         <td class="external-num"><a href="symbols/numeral-3.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4436,7 +4631,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-92" class="external-row">
+      <tr id="sym-96" class="external-row">
         <td class="external-num"><a href="symbols/neq-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4475,7 +4670,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-93" class="external-row">
+      <tr id="sym-97" class="external-row">
         <td class="external-num"><a href="symbols/eq-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4514,7 +4709,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-94" class="external-row">
+      <tr id="sym-98" class="external-row">
         <td class="external-num"><a href="symbols/valof-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4553,7 +4748,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-95" class="external-row">
+      <tr id="sym-99" class="external-row">
         <td class="external-num"><a href="symbols/mu-interpretation.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4592,7 +4787,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-96" class="external-row">
+      <tr id="sym-100" class="external-row">
         <td class="external-num"><a href="symbols/model-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4631,7 +4826,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-97" class="external-row">
+      <tr id="sym-101" class="external-row">
         <td class="external-num"><a href="symbols/class-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4670,7 +4865,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-98" class="external-row">
+      <tr id="sym-102" class="external-row">
         <td class="external-num"><a href="symbols/set-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4709,7 +4904,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-99" class="external-row">
+      <tr id="sym-103" class="external-row">
         <td class="external-num"><a href="symbols/set-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4748,7 +4943,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-100" class="external-row">
+      <tr id="sym-104" class="external-row">
         <td class="external-num"><a href="symbols/proper-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4787,7 +4982,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-101" class="external-row">
+      <tr id="sym-105" class="external-row">
         <td class="external-num"><a href="symbols/universal-class-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4826,7 +5021,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-102" class="external-row">
+      <tr id="sym-106" class="external-row">
         <td class="external-num"><a href="symbols/trans-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4865,7 +5060,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-103" class="external-row">
+      <tr id="sym-107" class="external-row">
         <td class="external-num"><a href="symbols/ord-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4904,7 +5099,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-104" class="external-row">
+      <tr id="sym-108" class="external-row">
         <td class="external-num"><a href="symbols/on-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4943,7 +5138,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-105" class="external-row">
+      <tr id="sym-109" class="external-row">
         <td class="external-num"><a href="symbols/dom-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -4982,7 +5177,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-106" class="external-row">
+      <tr id="sym-110" class="external-row">
         <td class="external-num"><a href="symbols/class-if-then-else.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5021,7 +5216,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-107" class="external-row">
+      <tr id="sym-111" class="external-row">
         <td class="external-num"><a href="symbols/class-if-then-else.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5060,7 +5255,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-108" class="external-row">
+      <tr id="sym-112" class="external-row">
         <td class="external-num"><a href="symbols/class-if-then-else.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5099,7 +5294,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-109" class="external-row">
+      <tr id="sym-113" class="external-row">
         <td class="external-num"><a href="symbols/class-if-then-else.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5138,7 +5333,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-110" class="external-row">
+      <tr id="sym-114" class="external-row">
         <td class="external-num"><a href="symbols/simple-if.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5177,7 +5372,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-111" class="external-row">
+      <tr id="sym-115" class="external-row">
         <td class="external-num"><a href="symbols/conditionals-if-dep.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5216,7 +5411,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-112" class="external-row">
+      <tr id="sym-116" class="external-row">
         <td class="external-num"><a href="symbols/conditionals-if-dep.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5255,7 +5450,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-113" class="external-row">
+      <tr id="sym-117" class="external-row">
         <td class="external-num"><a href="symbols/singleton-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5294,7 +5489,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-114" class="external-row">
+      <tr id="sym-118" class="external-row">
         <td class="external-num"><a href="symbols/set-valued-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5333,7 +5528,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-115" class="external-row">
+      <tr id="sym-119" class="external-row">
         <td class="external-num"><a href="symbols/concentrated-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5372,7 +5567,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-116" class="external-row">
+      <tr id="sym-120" class="external-row">
         <td class="external-num"><a href="symbols/flat-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5411,7 +5606,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-117" class="external-row">
+      <tr id="sym-121" class="external-row">
         <td class="external-num"><a href="symbols/family-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5450,7 +5645,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-118" class="external-row">
+      <tr id="sym-122" class="external-row">
         <td class="external-num"><a href="symbols/family-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5489,7 +5684,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-119" class="external-row">
+      <tr id="sym-123" class="external-row">
         <td class="external-num"><a href="symbols/class-func-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5528,7 +5723,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-120" class="external-row">
+      <tr id="sym-124" class="external-row">
         <td class="external-num"><a href="symbols/injective-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5567,7 +5762,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-121" class="external-row">
+      <tr id="sym-125" class="external-row">
         <td class="external-num"><a href="symbols/func-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5606,7 +5801,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-122" class="external-row">
+      <tr id="sym-126" class="external-row">
         <td class="external-num"><a href="symbols/func-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5645,7 +5840,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-123" class="external-row">
+      <tr id="sym-127" class="external-row">
         <td class="external-num"><a href="symbols/semi-singleton-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5684,7 +5879,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-124" class="external-row">
+      <tr id="sym-128" class="external-row">
         <td class="external-num"><a href="symbols/sss-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5723,7 +5918,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-125" class="external-row">
+      <tr id="sym-129" class="external-row">
         <td class="external-num"><a href="symbols/hereditary-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5762,7 +5957,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-126" class="external-row">
+      <tr id="sym-130" class="external-row">
         <td class="external-num"><a href="symbols/powerful-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5801,7 +5996,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-127" class="external-row">
+      <tr id="sym-131" class="external-row">
         <td class="external-num"><a href="symbols/pairful-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5840,7 +6035,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-128" class="external-row">
+      <tr id="sym-132" class="external-row">
         <td class="external-num"><a href="symbols/tight-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5879,7 +6074,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-129" class="external-row">
+      <tr id="sym-133" class="external-row">
         <td class="external-num"><a href="symbols/mark-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5918,7 +6113,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-130" class="external-row">
+      <tr id="sym-134" class="external-row">
         <td class="external-num"><a href="symbols/ordered-pair.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5957,7 +6152,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-131" class="external-row">
+      <tr id="sym-135" class="external-row">
         <td class="external-num"><a href="symbols/pr1-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -5996,7 +6191,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-132" class="external-row">
+      <tr id="sym-136" class="external-row">
         <td class="external-num"><a href="symbols/pr2-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6035,7 +6230,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-133" class="external-row">
+      <tr id="sym-137" class="external-row">
         <td class="external-num"><a href="symbols/nat-model-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6074,7 +6269,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-134" class="external-row">
+      <tr id="sym-138" class="external-row">
         <td class="external-num"><a href="symbols/ind-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6113,7 +6308,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-135" class="external-row">
+      <tr id="sym-139" class="external-row">
         <td class="external-num"><a href="symbols/card-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6152,7 +6347,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-136" class="external-row">
+      <tr id="sym-140" class="external-row">
         <td class="external-num"><a href="symbols/universe-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6191,7 +6386,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-137" class="external-row">
+      <tr id="sym-141" class="external-row">
         <td class="external-num"><a href="symbols/limit-ord-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6230,7 +6425,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-138" class="external-row">
+      <tr id="sym-142" class="external-row">
         <td class="external-num"><a href="symbols/indexed-union-closed-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6269,7 +6464,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-139" class="external-row">
+      <tr id="sym-143" class="external-row">
         <td class="external-num"><a href="symbols/v-stage-laws-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6308,7 +6503,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-140" class="external-row">
+      <tr id="sym-144" class="external-row">
         <td class="external-num"><a href="symbols/v-stage-graph-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6347,7 +6542,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-141" class="external-row">
+      <tr id="sym-145" class="external-row">
         <td class="external-num"><a href="symbols/set-rank-laws-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6386,7 +6581,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-142" class="external-row">
+      <tr id="sym-146" class="external-row">
         <td class="external-num"><a href="symbols/set-rank-graph-const.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6425,7 +6620,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-143" class="external-row">
+      <tr id="sym-147" class="external-row">
         <td class="external-num"><a href="symbols/restrict-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6464,7 +6659,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-144" class="external-row">
+      <tr id="sym-148" class="external-row">
         <td class="external-num"><a href="symbols/transfinite-approx-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6503,7 +6698,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-145" class="external-row">
+      <tr id="sym-149" class="external-row">
         <td class="external-num"><a href="symbols/transfinite-rec-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6542,7 +6737,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-146" class="external-row">
+      <tr id="sym-150" class="external-row">
         <td class="external-num"><a href="symbols/von-neumann-step-g-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6581,7 +6776,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-147" class="external-row">
+      <tr id="sym-151" class="external-row">
         <td class="external-num"><a href="symbols/subst-var-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6620,7 +6815,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-148" class="external-row">
+      <tr id="sym-152" class="external-row">
         <td class="external-num"><a href="symbols/pi-binder.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6659,7 +6854,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-149" class="external-row">
+      <tr id="sym-153" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6698,7 +6893,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-150" class="external-row">
+      <tr id="sym-154" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6737,7 +6932,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-151" class="external-row">
+      <tr id="sym-155" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6776,7 +6971,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-152" class="external-row">
+      <tr id="sym-156" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6815,7 +7010,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-153" class="external-row">
+      <tr id="sym-157" class="external-row">
         <td class="external-num"><a href="symbols/eval.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6854,7 +7049,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-154" class="external-row">
+      <tr id="sym-158" class="external-row">
         <td class="external-num"><a href="symbols/substitution-let.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6893,7 +7088,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-155" class="external-row">
+      <tr id="sym-159" class="external-row">
         <td class="external-num"><a href="symbols/substitution-let.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6932,7 +7127,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-156" class="external-row">
+      <tr id="sym-160" class="external-row">
         <td class="external-num"><a href="symbols/type-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -6971,7 +7166,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-157" class="external-row">
+      <tr id="sym-161" class="external-row">
         <td class="external-num"><a href="symbols/ctx-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7010,7 +7205,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-158" class="external-row">
+      <tr id="sym-162" class="external-row">
         <td class="external-num"><a href="symbols/fm-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7049,7 +7244,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-159" class="external-row">
+      <tr id="sym-163" class="external-row">
         <td class="external-num"><a href="symbols/variable-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7088,7 +7283,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-160" class="external-row">
+      <tr id="sym-164" class="external-row">
         <td class="external-num"><a href="symbols/expression-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7127,7 +7322,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-161" class="external-row">
+      <tr id="sym-165" class="external-row">
         <td class="external-num"><a href="symbols/stmt-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7166,7 +7361,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-162" class="external-row">
+      <tr id="sym-166" class="external-row">
         <td class="external-num"><a href="symbols/theory-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7205,7 +7400,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-163" class="external-row">
+      <tr id="sym-167" class="external-row">
         <td class="external-num"><a href="symbols/prf-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7244,7 +7439,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-164" class="external-row">
+      <tr id="sym-168" class="external-row">
         <td class="external-num"><a href="symbols/lcewip-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7283,7 +7478,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-165" class="external-row">
+      <tr id="sym-169" class="external-row">
         <td class="external-num"><a href="symbols/lcewip-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7322,7 +7517,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-166" class="external-row">
+      <tr id="sym-170" class="external-row">
         <td class="external-num"><a href="symbols/lcewip-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7361,7 +7556,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-167" class="external-row">
+      <tr id="sym-171" class="external-row">
         <td class="external-num"><a href="symbols/enc.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7400,7 +7595,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-168" class="external-row">
+      <tr id="sym-172" class="external-row">
         <td class="external-num"><a href="symbols/dec.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7439,7 +7634,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-169" class="external-row">
+      <tr id="sym-173" class="external-row">
         <td class="external-num"><a href="symbols/emb.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7478,7 +7673,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-170" class="external-row">
+      <tr id="sym-174" class="external-row">
         <td class="external-num"><a href="symbols/fv-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7517,7 +7712,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-171" class="external-row">
+      <tr id="sym-175" class="external-row">
         <td class="external-num"><a href="symbols/fv-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7556,7 +7751,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-172" class="external-row">
+      <tr id="sym-176" class="external-row">
         <td class="external-num"><a href="symbols/fv-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7595,7 +7790,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-173" class="external-row">
+      <tr id="sym-177" class="external-row">
         <td class="external-num"><a href="symbols/fv-op.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7634,7 +7829,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-174" class="external-row">
+      <tr id="sym-178" class="external-row">
         <td class="external-num"><a href="symbols/ifv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7673,7 +7868,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-175" class="external-row">
+      <tr id="sym-179" class="external-row">
         <td class="external-num"><a href="symbols/ifv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7712,7 +7907,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-176" class="external-row">
+      <tr id="sym-180" class="external-row">
         <td class="external-num"><a href="symbols/ifv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7751,7 +7946,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-177" class="external-row">
+      <tr id="sym-181" class="external-row">
         <td class="external-num"><a href="symbols/ifv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7790,7 +7985,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-178" class="external-row">
+      <tr id="sym-182" class="external-row">
         <td class="external-num"><a href="symbols/ffi-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7829,7 +8024,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-179" class="external-row">
+      <tr id="sym-183" class="external-row">
         <td class="external-num"><a href="symbols/ffi-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7868,7 +8063,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-180" class="external-row">
+      <tr id="sym-184" class="external-row">
         <td class="external-num"><a href="symbols/ffi-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7907,7 +8102,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-181" class="external-row">
+      <tr id="sym-185" class="external-row">
         <td class="external-num"><a href="symbols/expression-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7946,7 +8141,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-182" class="external-row">
+      <tr id="sym-186" class="external-row">
         <td class="external-num"><a href="symbols/nfv-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -7985,7 +8180,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-183" class="external-row">
+      <tr id="sym-187" class="external-row">
         <td class="external-num"><a href="symbols/fresh-pred.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8024,7 +8219,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-184" class="external-row">
+      <tr id="sym-188" class="external-row">
         <td class="external-num"><a href="symbols/name-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8063,7 +8258,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-185" class="external-row">
+      <tr id="sym-189" class="external-row">
         <td class="external-num"><a href="symbols/bool-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8102,7 +8297,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-186" class="external-row">
+      <tr id="sym-190" class="external-row">
         <td class="external-num"><a href="symbols/bool-true.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8141,7 +8336,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-187" class="external-row">
+      <tr id="sym-191" class="external-row">
         <td class="external-num"><a href="symbols/bool-false.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8180,7 +8375,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-188" class="external-row">
+      <tr id="sym-192" class="external-row">
         <td class="external-num"><a href="symbols/unit-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8219,7 +8414,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-189" class="external-row">
+      <tr id="sym-193" class="external-row">
         <td class="external-num"><a href="symbols/void-type.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8258,7 +8453,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-190" class="external-row">
+      <tr id="sym-194" class="external-row">
         <td class="external-num"><a href="symbols/prop-sort.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8297,7 +8492,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-191" class="external-row">
+      <tr id="sym-195" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8336,7 +8531,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-192" class="external-row">
+      <tr id="sym-196" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8375,7 +8570,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-193" class="external-row">
+      <tr id="sym-197" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8414,7 +8609,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-194" class="external-row">
+      <tr id="sym-198" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8453,7 +8648,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-195" class="external-row">
+      <tr id="sym-199" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8492,7 +8687,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-196" class="external-row">
+      <tr id="sym-200" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8531,7 +8726,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-197" class="external-row">
+      <tr id="sym-201" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8570,7 +8765,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-198" class="external-row">
+      <tr id="sym-202" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8609,7 +8804,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-199" class="external-row">
+      <tr id="sym-203" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8648,7 +8843,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-200" class="external-row">
+      <tr id="sym-204" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8687,7 +8882,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-201" class="external-row">
+      <tr id="sym-205" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8726,7 +8921,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-202" class="external-row">
+      <tr id="sym-206" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8765,7 +8960,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-203" class="external-row">
+      <tr id="sym-207" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8804,7 +8999,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-204" class="external-row">
+      <tr id="sym-208" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8843,7 +9038,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-205" class="external-row">
+      <tr id="sym-209" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8882,7 +9077,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-206" class="external-row">
+      <tr id="sym-210" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8921,7 +9116,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-207" class="external-row">
+      <tr id="sym-211" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8960,7 +9155,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-208" class="external-row">
+      <tr id="sym-212" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -8999,7 +9194,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-209" class="external-row">
+      <tr id="sym-213" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9038,7 +9233,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-210" class="external-row">
+      <tr id="sym-214" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9077,7 +9272,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-211" class="external-row">
+      <tr id="sym-215" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9116,7 +9311,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-212" class="external-row">
+      <tr id="sym-216" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9155,7 +9350,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-213" class="external-row">
+      <tr id="sym-217" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9194,7 +9389,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-214" class="external-row">
+      <tr id="sym-218" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9233,7 +9428,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-215" class="external-row">
+      <tr id="sym-219" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9272,7 +9467,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-216" class="external-row">
+      <tr id="sym-220" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9311,7 +9506,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-217" class="external-row">
+      <tr id="sym-221" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9350,7 +9545,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-218" class="external-row">
+      <tr id="sym-222" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9389,7 +9584,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-219" class="external-row">
+      <tr id="sym-223" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9428,7 +9623,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-220" class="external-row">
+      <tr id="sym-224" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9467,7 +9662,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-221" class="external-row">
+      <tr id="sym-225" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9506,7 +9701,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-222" class="external-row">
+      <tr id="sym-226" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9545,7 +9740,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-223" class="external-row">
+      <tr id="sym-227" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9584,7 +9779,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-224" class="external-row">
+      <tr id="sym-228" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9623,7 +9818,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-225" class="external-row">
+      <tr id="sym-229" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9662,7 +9857,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-226" class="external-row">
+      <tr id="sym-230" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9701,7 +9896,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-227" class="external-row">
+      <tr id="sym-231" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9740,7 +9935,7 @@
           </table>
         </td>
       </tr>
-      <tr id="sym-228" class="external-row">
+      <tr id="sym-232" class="external-row">
         <td class="external-num"><a href="symbols/variables.html" class="num-anchor">SYM</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
@@ -9787,7 +9982,7 @@
   <footer>
     <div class="footer-inner">
       <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">2ca47f1</code> &bull; Built on: <time datetime="2026-11-23T14:05:10Z">2026-11-23 14:05:10 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
+      <p style="margin: 0;">Build Hash: <code style="color: #38bdf8;">de4e470</code> &bull; Built on: <time datetime="2026-11-23T17:20:42Z">2026-11-23 17:20:42 UTC</time> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
     </div>
   </footer>
   <script>

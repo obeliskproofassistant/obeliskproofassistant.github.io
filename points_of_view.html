@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" class="dark-mode">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematical Points of View &amp; Declaration of Principles — Obelisk Proof Assistant</title>
+  <meta name="description" content="Untangling the 7 Mathematical Points of View in Obelisk Proof Assistant (MKTD1-system and MKTD2-system): how class theory, conglomerates-as-types, internal dependent type models, propositions-as-types, SML functorial ASTs, wire-and-box binding graphs, and Gödel-Dunaev self-reflection model one another.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://obeliskproofassistant.github.io/points_of_view.html">
+  <link rel="icon" type="image/x-icon" href="myfavicon.ico">
+  <link rel="icon" type="image/png" sizes="96x96" href="myfavicon-96x96.png">
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.82);
+      --card-border: rgba(148, 163, 184, 0.18);
+      --primary: #38bdf8;
+      --purple: #c084fc;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --code-bg: #030712;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      line-height: 1.68;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 22, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .nav-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background: rgba(30, 41, 59, 0.7);
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+    .nav-btn:hover {
+      background: rgba(56, 189, 248, 0.16);
+      border-color: var(--primary);
+    }
+    main {
+      max-width: 100%;
+      width: 100%;
+      padding: 28px 24px 64px;
+    }
+    .hero-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 27, 75, 0.65));
+      border: 1px solid rgba(192, 132, 252, 0.35);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .hero-box h1 {
+      margin: 0 0 10px;
+      font-size: 1.75rem;
+      color: #f8fafc;
+    }
+    .quote-banner {
+      border-left: 4px solid var(--purple);
+      padding: 10px 16px;
+      background: rgba(192, 132, 252, 0.08);
+      color: #e2e8f0;
+      font-style: italic;
+      margin: 14px 0 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 22px 24px;
+      margin-bottom: 24px;
+    }
+    .section-card h2 {
+      margin-top: 0;
+      color: var(--primary);
+      font-size: 1.35rem;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 8px;
+    }
+    .pov-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+    .pov-card {
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 18px;
+    }
+    .pov-card h3 {
+      margin: 0 0 8px;
+      font-size: 1.08rem;
+      color: var(--emerald);
+    }
+    .pov-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      background: rgba(192, 132, 252, 0.16);
+      color: var(--purple);
+      border: 1px solid rgba(192, 132, 252, 0.4);
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      border: 1px solid var(--card-border);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: rgba(30, 41, 59, 0.85);
+      color: var(--primary);
+      font-weight: 700;
+    }
+    code {
+      background: var(--code-bg);
+      color: #e2e8f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.86em;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="brand">Obelisk Proof Assistant &mdash; Principles &amp; Points of View</a>
+    <nav class="nav-links">
+      <a href="index.html" class="nav-btn">Classic Portal</a>
+      <a href="obelisk_ai.html" class="nav-btn">Architecture &amp; Provers</a>
+      <a href="generated/manual.html" class="nav-btn">MKTD1-system Manual</a>
+      <a href="generated/nbg_library.html" class="nav-btn">MKTD2-system Library</a>
+      <a href="generated/symbols/index.html" class="nav-btn">Personal Symbol Pages</a>
+      <a href="foundations.pdf" class="nav-btn">Foundations PDF</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="hero-box">
+      <h1>Declaration of Principles &amp; The Seven Mathematical Points of View</h1>
+      <p style="margin: 0; color: var(--muted);">
+        How <strong>MKTD1-system</strong> and <strong>MKTD2-system</strong> untangle distinct views on types, classes, syntax, and metatheory&mdash;and model all of them within a single foundational system without contradiction.
+      </p>
+      <div class="quote-banner">
+        &ldquo;In mathematics, good principles are those which simplify things, but do not oversimplify (so they do not make the system contradictory). Loosely speaking, everything has a certain type, depending on how we look at it&mdash;different type systems, levels, or languages&mdash;and what is remarkable about mathematics is that all of those systems can and should be modelled within the very system we are developing.&rdquo;
+      </div>
+    </div>
+
+    <section class="section-card" id="seven-views">
+      <h2>1. The Seven Mathematical Points of View on &ldquo;What Is What&rdquo;</h2>
+      <p>
+        When we write a typing or classification judgement in formal mathematics, its meaning depends on our active <strong>point of view</strong>. Rather than conflating these views, the Obelisk kernel untangles them into seven explicit perspectives and proves how they model one another:
+      </p>
+      <div class="pov-grid">
+        <div class="pov-card">
+          <span class="pov-badge">View 1 &bull; Metalevel 0 Ontology</span>
+          <h3>Pure Class Ontology (<code>MKTD1-theory</code>)</h3>
+          <p>
+            Every object in the domain of discourse is a <code>Class</code>. Sets are not a separate syntactic sort; a set is a class that is an element of some class ($\mathrm{Set}(X) \iff \exists Y.\, X \in Y \iff X \in V$, <a href="generated/proofs/DefIsSet.html"><code>#DefIsSet</code></a>). Proper classes ($V, \mathrm{On}$) are non-elements (<a href="generated/proofs/DefIsProperClass.html"><code>#DefIsProperClass</code></a>). Using <strong>Dunaev Tagged Ordered Pairs</strong> $(A, B) = \mathrm{mark}(A, 0) \cup \mathrm{mark}(B, 1)$ (<a href="generated/proofs/DefDunaevOrderedPair.html"><code>#DefDunaevOrderedPair</code></a>), pairing, projections, and families work uniformly across all classes (<a href="generated/proofs/ThmDunaevOpairInjective.html"><code>#ThmDunaevOpairInjective</code></a>).
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 2 &bull; Conglomerates as Types</span>
+          <h3>Predicates on Classes (<code>Huge_Col</code>)</h3>
+          <p>
+            A &ldquo;type&rdquo; of classes $T$ is a <strong>Conglomerate</strong>&mdash;a unary predicate on classes $T : \mathrm{Class} \to \mathrm{Bool}$ (<code>LPredicate</code> in <code>typetheory.ML</code>). The default sort <code>Class</code> (<code>TClass</code>) is the universal predicate $\lambda X.\,\top$. A typed quantifier $\forall(x : A)\varphi(x)$ is canonically guarded by the conglomerate predicate $A(x)$.
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 3 &bull; Internal Type Models</span>
+          <h3>Set-Theoretic Models of Dependent Types</h3>
+          <p>
+            Dependent type theory is modeled <em>inside</em> <code>MKTD1-theory</code> via indexed class-families (<a href="generated/proofs/DefIsFamily.html"><code>#DefIsFamily</code></a>): Dependent Sum $\Sigma(B)$ (<a href="generated/proofs/DefSigmaModel.html"><code>#DefSigmaModel</code></a>), Dependent Product $\Pi(B)$ (<a href="generated/proofs/DefPiPredicateModel.html"><code>#DefPiPredicateModel</code></a>), Natural Numbers $\omega$ (<a href="generated/proofs/DefFiniteOrdinalsOmega.html"><code>#DefFiniteOrdinalsOmega</code></a>), cumulative stages $V_\alpha$ via <a href="generated/proofs/DefTransfiniteRecursionOperator.html"><code>#DefTransfiniteRecursionOperator</code></a>, and Grothendieck-Tarski Universes satisfying $U = V_{U \cap \mathrm{On}}$ (<a href="generated/proofs/ThmUniverseEqVonNeumannStageInterOn.html"><code>#ThmUniverseEqVonNeumannStageInterOn</code></a>).
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 4 &bull; Curry-Howard Constructivism</span>
+          <h3>Propositions-as-Types (<code>MKTD2-theory</code>)</h3>
+          <p>
+            In <code>MKTD2-system</code> (<a href="generated/nbg_library.html">225 constructive theorems</a>), formulas <em>are</em> types (<code>Fm : Type</code>) and proofs <em>are</em> $\lambda$-terms (<code>p : A</code>). Universal quantification and implication are unified as $\Pi(x : A), B(x)$; existential quantification and conjunction are unified as $\Sigma(x : A), B(x)$; false formulas are uninhabited types ($\simeq \mathbb{0}$). Connected to View 1 &amp; View 3 via <code>program/variant_bridge.ML</code>.
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 5 &bull; Metalevel 1 &amp; 2 Functor Tower</span>
+          <h3>SML Off-by-One AST Hierarchy (<code>typetheory.ML</code>)</h3>
+          <p>
+            Semantic <code>Class</code> is <code>Nonstored.t</code> in SML (Fact 1: a class never sits in RAM and cannot be free or bound). SML stores syntactic levels built by the <code>MAKE</code> functor: Pattern (<code>Class_p</code> / <code>Truth_p</code>) $\hookrightarrow$ Half-Expression (<code>.Expre</code>) $\hookrightarrow$ Level-1 Expression (<code>.Expression</code>) $\hookrightarrow$ Level-2 Reflected Term (<code>.Expression.Expression</code>).
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 6 &bull; Combinatorial Syntax</span>
+          <h3>Wire-and-Box Graphs (Vereschagin &amp; Shen)</h3>
+          <p>
+            Following Vereschagin &amp; Shen, bound variable names are temporary coordinates for <em>wires</em> linking a binder hub (<code>VarPos_Binder</code>) to bound occurrences (<code>BoundVarOccurrence</code>). Erasing bound names yields a canonical <code>WireBoxSchema</code> (<code>ai_playground/symbol_ontology.ML</code>) where $\alpha$-equivalence is syntactic identity.
+          </p>
+        </div>
+
+        <div class="pov-card">
+          <span class="pov-badge">View 7 &bull; Self-Reflection</span>
+          <h3>Internalized Metatheory ($\mathcal{T}$ vs. $\mathcal{F}$)</h3>
+          <p>
+            Syntax and derivability are reflected back into View 1 via Gödel coding (<a href="generated/proofs/AxmGoedelCodingRoundtrip.html"><code>#AxmGoedelCodingRoundtrip</code></a>, $\mathrm{Dec}(\mathrm{Enc}(u)) = u$), internal substitution $\mathrm{SubstVar}(t, x, v)$ (<a href="generated/proofs/DefReducedVarSubst.html"><code>#DefReducedVarSubst</code></a>), and formal theories $\mathcal{T}, \mathcal{F}, \mathcal{E}$ proving <a href="generated/proofs/ThmLoeb.html"><code>#ThmLoeb</code></a> and <a href="generated/proofs/ThmSecondIncompleteness.html"><code>#ThmSecondIncompleteness</code></a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-card" id="simplify-without-oversimplifying">
+      <h2>2. Principle 1: Simplify Without Oversimplifying (The Non-Contradiction Boundary)</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Sound Unification (Where We Simplify)</th>
+            <th>Essential Decoupling (Where Oversimplifying Causes Contradiction)</th>
+            <th>Paradox Prevented &amp; Kernel Mechanism</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>0-ary operators unify constants ($\emptyset, V, \mathrm{On}, \omega$) with $n$-ary functional symbols ($\mathcal{P}, \cup, \cap$).</td>
+            <td><strong>Semantic Class</strong> (<code>Nonstored.t</code>) $\neq$ <strong>Symbol</strong> (<code>CpEmptySet</code>) $\neq$ <strong>Expression</strong> (<code>CEmptySet_Class_Expression</code>).</td>
+            <td>Prevents conflating semantic objects with syntactic variables/substitutions (Fact 1 &amp; Fact 6).</td>
+          </tr>
+          <tr>
+            <td>Default variable sort is <code>Class</code> everywhere, including $\{x : \mathrm{Class} \mid \varphi(x)\}$.</td>
+            <td>Membership in $\{x : \mathrm{Class} \mid \varphi(x)\}$ requires $z \in V \land \varphi(z)$ (<a href="generated/proofs/RulClassComprehension.html"><code>#RulClassComprehension</code></a>).</td>
+            <td>Prevents <strong>Russell&rsquo;s Paradox</strong> ($R = \{x \mid x \notin x\}$ is a proper class, so $R \notin R$).</td>
+          </tr>
+          <tr>
+            <td>Universal ordered pair $(A, B) = \mathrm{mark}(A, 0) \cup \mathrm{mark}(B, 1)$ on all classes.</td>
+            <td><strong>Dunaev Pair</strong> <code>(A, B)</code> (<a href="generated/proofs/DefDunaevOrderedPair.html"><code>#DefDunaevOrderedPair</code></a>) $\neq$ <strong>Kuratowski Set Pair</strong> <code>opairK(a, b)</code> (<a href="generated/proofs/DefKuratowskiOrderedPair.html"><code>#DefKuratowskiOrderedPair</code></a>).</td>
+            <td>Prevents proper-class pair collapse ($\{A\} = \emptyset$ when $A \notin V$).</td>
+          </tr>
+          <tr>
+            <td>First-order sequent calculus operates uniformly on $\Gamma \vdash \varphi$.</td>
+            <td><strong>Metalevel 0</strong> object formulas ($\mathrm{Fm}_0$) $\neq$ <strong>Metalevel +1</strong> reflection (<code>TpHolds</code>, <code>FFI</code>, <code>IFV</code>).</td>
+            <td><code>is_object_level_fm0</code> guard on <code>PComprAx_prf</code> prevents <strong>Tarski&rsquo;s Undefinability Paradox</strong>.</td>
+          </tr>
+          <tr>
+            <td>Internalized derivability $(\mathcal{W}, \Gamma \vdash \varphi)$ inside the language.</td>
+            <td>R.E. object theory $\mathcal{T}$ (<code>IpTau</code>) $\neq$ Non-R.E. Henkin completion $\mathcal{F}$ (<code>IpFau</code>) $\neq$ Metatheory $\mathcal{E}$ (<code>IpEau</code>).</td>
+            <td>Respects <strong>Gödel&rsquo;s Incompleteness</strong> &amp; <strong>Löb&rsquo;s Theorem</strong> (<a href="generated/proofs/ThmLoeb.html"><code>#ThmLoeb</code></a>, <a href="generated/proofs/ThmSecondIncompleteness.html"><code>#ThmSecondIncompleteness</code></a>).</td>
+          </tr>
+          <tr>
+            <td>Completeness axioms for the full Henkin theory $\mathcal{F}$ on $\mathrm{Fm}_0$.</td>
+            <td><strong>Semantic Completeness</strong> (<a href="generated/proofs/AxmSemanticCompletenessOfFullTheory.html"><code>3.73</code></a>) $\neq$ <strong>Negation-Completeness</strong> (<a href="generated/proofs/AxmNegationCompletenessOfFullTheory.html"><code>3.74</code></a>).</td>
+            <td>Distinguishes truth-to-derivability bridge from syntactic disjunction of derivability.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section-card" id="constructor-naming-formula">
+      <h2>3. Principle 2: Deterministic Four-Stage SML AST Constructor Naming Formula</h2>
+      <p>
+        Every symbol in <code>program/types/typetheory.ML</code>, <code>program/newchecker/01_core_ast.ML</code>, and <code>program/newchecker/02_globvars.ML</code> follows a strict, type-reflective naming progression across the four syntactic stages, displayed in the <a href="generated/proofs/FormNullaryClassConst.html">Formation Rules (<code>F.01</code>&ndash;<code>F.16</code>)</a>:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Stage</th>
+            <th>SML Sort / Type</th>
+            <th>Naming Formula</th>
+            <th>Class Example ($\emptyset$, $\mathcal{P}$, $\kappa$)</th>
+            <th>Formula Example ($\top$, $\longrightarrow$, $\forall$)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Stage 1a</strong> (Polytype Pattern)</td>
+            <td><code>Class_p</code> / <code>Truth_p</code></td>
+            <td><code>Cp&lt;Stem&gt;</code> / <code>Tp&lt;Stem&gt;</code></td>
+            <td><code>CpEmptySet</code>, <code>CpPower</code>, <code>CpKappa</code></td>
+            <td><code>TpTop</code>, <code>TpImpl</code>, <code>TpFora</code></td>
+          </tr>
+          <tr>
+            <td><strong>Stage 1b</strong> (Head Half-Expression)</td>
+            <td><code>Class.Expre</code> / <code>Truth.Expre</code></td>
+            <td><code>CH&lt;Stem&gt; = HC &circ; Cp&lt;Stem&gt;</code><br/><code>HP&lt;Stem&gt; = HP &circ; Tp&lt;Stem&gt;</code></td>
+            <td><code>CHEmptySet</code>, <code>CHPower</code>, <code>CHKappa</code></td>
+            <td><code>HPTop</code>, <code>HPImpl</code>, <code>HPFora</code></td>
+          </tr>
+          <tr>
+            <td><strong>Stage 1c</strong> (Level-1 Expression)</td>
+            <td><code>Class.Expression</code> / <code>Truth.Expression</code> (<code>= Fm</code>)</td>
+            <td><code>C&lt;Stem&gt;_&lt;ArgTypes&gt;_Class_Expression</code><br/><code>F&lt;Stem&gt;_&lt;ArgTypes&gt;_Truth_Expression</code></td>
+            <td><code>CEmptySet_Class_Expression</code>,<br/><code>CPower_Class_Class_Expression</code>,<br/><code>CKappa_FmLBound_Class_Expression</code></td>
+            <td><code>FTop_Truth_Expression</code>,<br/><code>FImpl_Truth_Truth_Truth_Expression</code>,<br/><code>FFora_FmTyBound_Truth_Expression</code></td>
+          </tr>
+          <tr>
+            <td><strong>Stage 2</strong> (Reflected Level-2 Term)</td>
+            <td><code>Large.Term.Expression</code> / <code>Fm.Expression</code></td>
+            <td><code>&lt;Stem&gt;Term</code> / <code>HQuote</code> / <code>HLT</code></td>
+            <td><code>VClass_Expr</code>, <code>HLT</code></td>
+            <td><code>ImplTerm</code>, <code>ForaTerm</code>, <code>VFm</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section-card" id="four-arrow-disambiguation">
+      <h2>4. Principle 3: Strict Four-Arrow Disambiguation</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Notation</th>
+            <th>ASCII</th>
+            <th>LaTeX</th>
+            <th>Exact Mathematical &amp; Kernel Meaning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>&mdash;&rarr;</code></td>
+            <td><code>--&gt;</code></td>
+            <td><code>\longrightarrow</code></td>
+            <td><strong>Object-Level Material Implication</strong> (<code>TpImpl</code> / <code>FImpl_Truth_Truth_Truth_Expression</code>) between two formulas in <code>Fm</code>.</td>
+          </tr>
+          <tr>
+            <td><code>&rarr;</code></td>
+            <td><code>-&gt;</code></td>
+            <td><code>\rightarrow</code></td>
+            <td><strong>Constructive Function-Space Type Constructor</strong> (<code>TArrow</code> / <code>Pi</code>) in <code>MKTD2-system</code>.</td>
+          </tr>
+          <tr>
+            <td><code style="color: #c084fc;">&Longrightarrow;</code></td>
+            <td><code>==&gt;</code></td>
+            <td><code>{\color{#c084fc}{\Longrightarrow}}</code></td>
+            <td><strong>Meta-Level SML Functional Constructor Arrow</strong> in formation rules (e.g. <code>CPower_Class_Class_Expression :: (Class.Expression &Longrightarrow; Class.Expression)</code>), accompanied by <code>::</code> (<code>&Colon;</code>, meta-typing) and <code>&mapsto;</code> (<code>|-&gt;</code>, display projection <code>dStr</code>).</td>
+          </tr>
+          <tr>
+            <td><code>f : A &rarr; B</code></td>
+            <td><code>(f function) /\ (Dom(f) = A) /\ (f[A] c= B)</code></td>
+            <td><code>f : A \to B</code> (prose shorthand)</td>
+            <td><strong>Relational Set-Function Shorthand</strong>: In <code>MKTD1-theory</code>, a set-function $f$ is a class of Dunaev ordered pairs (<a href="generated/proofs/DefIsFunction.html"><code>#DefIsFunction</code></a>), not an SML meta-function.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
