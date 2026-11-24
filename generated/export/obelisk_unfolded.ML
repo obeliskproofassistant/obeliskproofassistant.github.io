@@ -2,7 +2,7 @@
  * AUTO-GENERATED FILE -- DO NOT EDIT BY HAND (User Directives #6 & #17).
  * Source: set_theory_prover/program/export_certificates_and_bundles.ML (unfolding 41 kernel/prover modules in set_theory_prover/program/)
  * Generator: Poly/ML batch exporter (set_theory_prover/program/export_certificates_and_bundles.ML)
- * Regenerate: cd /hostramdisk/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
+ * Regenerate: cd /botworkspace/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
  *
  * Obelisk Proof Assistant -- Unfolded Monolithic Standard ML (SML'97) Source
  * Compatible with both Poly/ML (v5.7.1+) and CakeML (v2000+).
@@ -1043,29 +1043,42 @@ struct
     | Var x => lookup ctx x
     | Const c => lookup ctx c
 
+    (* [WHY] Formation rules (audit #8079): every domain/codomain/carrier must be
+       a TYPE, i.e. its own type must normalize to a sort (Universe i or TProp).
+       The previous fallback `| _ => Universe 0` accepted numerals and other
+       terms as types, and Refine always landed in Universe 0, so that
+       Refine (x : Universe 0 | p) : Universe 0 (the Type:Type pattern).
+       Sorting discipline (CIC-style):
+         - Pi into a proposition is a proposition (impredicative Prop; sound in
+           the proof-irrelevant model Prop = {false, true}).
+         - Sigma is a proposition only if BOTH components are propositions; a
+           strong Sigma over a large carrier must never live in Prop (Coquand).
+         - Otherwise Pi/Sigma live predicatively in Universe (max i j), TProp
+           counting as level 0 (TProp : Universe 0).
+         - Refine (x : A | p) lives in the sort of A. *)
     | Pi (x, a, b) =>
         let
-          val sortA = infer ctx a
-          val sortB = infer ((x, a) :: ctx) b
+          val sortA = sortOf ctx a
+          val sortB = sortOf ((x, a) :: ctx) b
         in
-          case (sortA, sortB) of
-            (Universe i, Universe j) => Universe (Int.max (i, j))
-          | _ => Universe 0
+          case sortB of
+            TProp => TProp
+          | _ => Universe (Int.max (sortLevel sortA, sortLevel sortB))
         end
 
     | Sigma (x, a, b) =>
         let
-          val sortA = infer ctx a
-          val sortB = infer ((x, a) :: ctx) b
+          val sortA = sortOf ctx a
+          val sortB = sortOf ((x, a) :: ctx) b
         in
           case (sortA, sortB) of
-            (Universe i, Universe j) => Universe (Int.max (i, j))
-          | _ => Universe 0
+            (TProp, TProp) => TProp
+          | _ => Universe (Int.max (sortLevel sortA, sortLevel sortB))
         end
 
     | Id (a, u, v) =>
         let
-          val _ = infer ctx a
+          val _ = sortOf ctx a
           val _ = check ctx u a
           val _ = check ctx v a
         in
@@ -1074,15 +1087,15 @@ struct
 
     | Refine (x, a, p) =>
         let
-          val _ = infer ctx a
+          val sortA = sortOf ctx a
           val _ = check ((x, a) :: ctx) p TProp
         in
-          Universe 0
+          sortA
         end
 
     | Lam (x, a, body) =>
         let
-          val _ = infer ctx a
+          val _ = sortOf ctx a
           val b = infer ((x, a) :: ctx) body
         in
           Pi (x, a, b)
@@ -1160,11 +1173,26 @@ struct
 
     | Let (x, ty, e1, e2) =>
         let
-          val _ = infer ctx ty
+          val _ = sortOf ctx ty
           val _ = check ctx e1 ty
         in
           infer ((x, ty) :: ctx) e2
         end
+
+  (* The sort of a type: its own type, normalized, which must be Universe i or
+     TProp.  Raises TypeError when `a` is not a type (e.g. the numeral 0). *)
+  and sortOf (ctx: Context) (a: Term) : Term =
+    case eval [] (infer ctx a) of
+      Universe i => Universe i
+    | TProp => TProp
+    | s => raise TypeError ("Not a type: " ^ termToString a ^
+                            " has type " ^ termToString s ^
+                            ", which is not a sort (Universe i or Prop)")
+
+  and sortLevel (s: Term) : int =
+    case s of
+      Universe i => i
+    | _ => 0
 
   (* Bidirectional checking: check term against expected type *)
   and check (ctx: Context) (t: Term) (expectedTy: Term) : unit =
@@ -1221,7 +1249,7 @@ struct
 
       | (Let (x, ty, e1, e2), _) =>
           let
-            val _ = infer ctx ty
+            val _ = sortOf ctx ty
             val _ = check ctx e1 ty
           in
             check ((x, ty) :: ctx) e2 expectedNorm
@@ -1243,7 +1271,7 @@ struct
     case d of
       ValDecl (name, ty, expr) =>
         let
-          val _ = infer ctx ty
+          val _ = sortOf ctx ty
           val _ = check ctx expr ty
         in
           (name, ty) :: ctx
@@ -1253,8 +1281,8 @@ struct
         let
           (* Construct dependent Pi type from parameters *)
           val fullTy = List.foldr (fn ((p, pty), acc) => Pi (p, pty, acc)) retTy params
+          val _ = sortOf ctx fullTy
           val bodyCtx = List.rev params @ ctx
-          val _ = infer bodyCtx retTy
           val _ = check bodyCtx body retTy
         in
           (name, fullTy) :: ctx
@@ -1262,12 +1290,26 @@ struct
 
     | TypeDecl (name, params, body) =>
         let
-          val fullTy = List.foldr (fn ((p, pty), acc) => Pi (p, pty, acc)) (Universe 0) params
+          (* [WHY] #8079: the declared kind ends in the ACTUAL sort of `body`,
+             not a hard-coded Universe 0 (which let a large type be declared
+             small). *)
           val bodyCtx = List.rev params @ ctx
-          val _ = infer bodyCtx body
+          val bodySort = sortOf bodyCtx body
+          val fullTy = List.foldr (fn ((p, pty), acc) => Pi (p, pty, acc)) bodySort params
+          val _ = sortOf ctx fullTy
         in
           (name, fullTy) :: ctx
         end
+
+  (* Well-formedness of a whole context: every declared type must be a type.
+     Entries may refer to each other, so each is checked against the full
+     context.  Returns the names whose declared type is ill-formed. *)
+  fun illFormedContextEntries (ctx: Context) : (string * string) list =
+    List.foldr
+      (fn ((name, ty), acc) =>
+         ((ignore (sortOf ctx ty); acc)
+          handle TypeError msg => (name, msg) :: acc))
+      [] ctx
 
 end;
 
@@ -2054,7 +2096,7 @@ end;
   FOUNDATIONAL TRUTH SOURCE (MKTD1-system & MKTD2-system Alignment):
     - Primary Mathematical Definitions (MKTD1-theory): program/types/foundations.ML (Georgy Dunaev, Jul 28 2026)
     - Sequent Calculus & Inference Rules (MKTD1-system): program/newchecker.ML (Georgy Dunaev, Mar 13 2026)
-    - Constructive Dependent Type Kernel (MKTD2-system): program/dependent_eval.ML, program/dependent_typechecker.ML
+    - Dependent Type Kernel (MKTD2-system): program/dependent_eval.ML, program/dependent_typechecker.ML
 
   INVARIANT:
     "Every theorem should have at least a mock (or a plan) of proof which your
@@ -3572,7 +3614,7 @@ struct
   (* 81. Semi-Singleton Subset Characterization (Foundations ch. 110):
          forall s A x y. ((s c= A) /\ (forall u v. ((u in s) /\ (v in s)) -> (u = v)))
            -> (((x in s) /\ (y in s)) -> ((x in A) /\ (x = y)))
-         Constructive lambda-term proof establishing both elementhood in A and uniqueness. *)
+         Lambda-term proof establishing both elementhood in A and uniqueness. *)
   val thm_81_semi_singleton_sub_char : TheoremRecord = {
     id = 81,
     name = "thm_semi_singleton_sub_char",
@@ -3614,7 +3656,7 @@ struct
   (* 82. Family Value Evaluation via Semi-Singleton Subsets (Foundations ch. 110):
          forall F x z. (Set(z) /\ (forall u. (u in ValOf(F, x)) <-> (exists s. (s c= z) /\ ((u in s) /\ (OPair(x, s) in F)))))
            -> (forall u. (u in ValOf(F, x)) -> (u in z))
-         Constructive lambda-term proof showing that any element of F(x) = U{s | (x,s) in F} belongs to the target fiber z. *)
+         Lambda-term proof showing that any element of F(x) = U{s | (x,s) in F} belongs to the target fiber z. *)
   val thm_82_family_value_eval : TheoremRecord = {
     id = 82,
     name = "thm_family_value_eval",
@@ -5078,7 +5120,7 @@ struct
             end)))
   }
 
-  (* 127. Constructive Round-Trip Identity Witness for the Yoneda Bijection in MKTD2-theory:
+  (* 127. Round-Trip Identity Witness for the Yoneda Bijection in MKTD2-theory:
           forall Phi Psi u.
             (ValOf(Phi, ValOf(Psi, u)) = u /\ ValOf(Psi, ValOf(Phi, u)) = u) ->
             (u = ValOf(Phi, ValOf(Psi, u)) /\ u = ValOf(Psi, ValOf(Phi, u))) *)
@@ -10008,8 +10050,8 @@ struct
       Forall "x" TClass (
         Forall "y" TClass (
           let
-            val singX = App (Const "singleton", Var "x")
-            val singY = App (Const "singleton", Var "y")
+            val singX = App (Const "Singleton", Var "x")
+            val singY = App (Const "Singleton", Var "y")
             val xInSingX = In (Var "x") singX
             val subSingXY = Forall "z" TClass (Impl (In (Var "z") singX) (In (Var "z") singY))
             val elimSingY = Forall "z" TClass (Impl (In (Var "z") singY) (Eq (Var "z") (Var "y")))
@@ -10021,8 +10063,8 @@ struct
       Lam ("x", TClass,
         Lam ("y", TClass,
           let
-            val singX = App (Const "singleton", Var "x")
-            val singY = App (Const "singleton", Var "y")
+            val singX = App (Const "Singleton", Var "x")
+            val singY = App (Const "Singleton", Var "y")
             val xInSingX = In (Var "x") singX
             val subSingXY = Forall "z" TClass (Impl (In (Var "z") singX) (In (Var "z") singY))
             val elimSingY = Forall "z" TClass (Impl (In (Var "z") singY) (Eq (Var "z") (Var "y")))
@@ -10502,6 +10544,10 @@ struct
   (* Check single theorem program against its statement type *)
   fun verifyTheorem (th: TheoremRecord) : VerificationResult =
     let
+      (* [WHY] #8079: the statement must itself be a well-formed type (its sort is
+         Universe i or Prop) before the proof is checked against it; previously an
+         ill-formed statement (e.g. one using an undeclared constant) could pass. *)
+      val _ = sortOf globalTheoremContext (#statement th)
       val _ = check globalTheoremContext (#proofProgram th) (#statement th)
     in
       Verified {
@@ -10531,6 +10577,91 @@ struct
     in
       (List.length passes, List.length results)
     end
+
+  (* ------------------------------------------------------------------------ *)
+  (* Eliminable postulates (#8079 axiom footprint).                           *)
+  (* [WHY] A postulate `c : T` in globalTheoremContext is eliminable when a    *)
+  (* closed proof term of T exists that does not use c nor any other          *)
+  (* eliminable postulate.  Every use of c can then be replaced by that term, *)
+  (* so c adds no logical strength.  Each justification is re-checked at load *)
+  (* time against the context with ALL eliminable postulates removed.         *)
+  (* ------------------------------------------------------------------------ *)
+  val eliminablePostulates : (string * Term) list =
+    let
+      fun eqP a b = Eq a b
+      val subst = Const "ax_eq_subst"
+      fun leibniz (motive : Term) (x : Term) (y : Term) (h : Term) (px : Term) : Term =
+        App (App (App (App (App (subst, motive), x), y), h), px)
+      fun pr1 t = App (Const "DunaevPr1", t)
+      fun pr2 t = App (Const "DunaevPr2", t)
+    in
+      [
+        (* x = y  implies  y = x : transport Refl x along the motive w |-> w = x *)
+        ("ax_eq_sym",
+         Lam ("x", TClass, Lam ("y", TClass, Lam ("h", eqP (Var "x") (Var "y"),
+           leibniz (Lam ("w", TClass, eqP (Var "w") (Var "x")))
+                   (Var "x") (Var "y") (Var "h") (Refl (Var "x")))))),
+        (* x = y, y = z  implies  x = z : transport h1 along w |-> x = w *)
+        ("ax_eq_trans",
+         Lam ("x", TClass, Lam ("y", TClass, Lam ("z", TClass,
+           Lam ("h1", eqP (Var "x") (Var "y"), Lam ("h2", eqP (Var "y") (Var "z"),
+             leibniz (Lam ("w", TClass, eqP (Var "x") (Var "w")))
+                     (Var "y") (Var "z") (Var "h2") (Var "h1"))))))),
+        (* p1 = p2  implies  pr1 p1 = pr1 p2 *)
+        ("ax_eq_cong_pr1",
+         Lam ("p1", TClass, Lam ("p2", TClass, Lam ("h", eqP (Var "p1") (Var "p2"),
+           leibniz (Lam ("w", TClass, eqP (pr1 (Var "p1")) (pr1 (Var "w"))))
+                   (Var "p1") (Var "p2") (Var "h") (Refl (pr1 (Var "p1"))))))),
+        (* p1 = p2  implies  pr2 p1 = pr2 p2 *)
+        ("ax_eq_cong_pr2",
+         Lam ("p1", TClass, Lam ("p2", TClass, Lam ("h", eqP (Var "p1") (Var "p2"),
+           leibniz (Lam ("w", TClass, eqP (pr2 (Var "p1")) (pr2 (Var "w"))))
+                   (Var "p1") (Var "p2") (Var "h") (Refl (pr2 (Var "p1"))))))),
+        (* literally the same statement as plan_extensionality *)
+        ("ax_extensionality", Const "plan_extensionality")
+      ]
+    end
+
+  val contextWithoutEliminable : Context =
+    List.filter (fn (n, _) => not (List.exists (fn (m, _) => m = n) eliminablePostulates))
+                globalTheoremContext
+
+  val _ =
+    List.app
+      (fn (name, prf) =>
+         let
+           val ty = case List.find (fn (n, _) => n = name) globalTheoremContext of
+                      SOME (_, t) => t
+                    | NONE => raise Fail ("eliminablePostulates: unknown postulate " ^ name)
+         in
+           check contextWithoutEliminable prf ty
+           handle TypeError msg =>
+             raise Fail ("eliminablePostulates: justification of " ^ name ^ " failed: " ^ msg)
+         end)
+      eliminablePostulates
+
+  (* Irreducible postulates a theorem rests on: its axiom footprint minus the
+     eliminable ones (whose justifications use only irreducible postulates). *)
+  fun irreducibleAxiomsUsed (th : TheoremRecord) : string list =
+    let
+      val direct = axiomsUsed th
+      val viaElim =
+        List.concat (List.map (fn (n, prf) =>
+          if List.exists (fn d => d = n) direct
+          then axiomsUsedInTerm prf [] else []) eliminablePostulates)
+      fun isElim c = List.exists (fn (n, _) => n = c) eliminablePostulates
+      fun addU (c, acc) = if List.exists (fn x => x = c) acc then acc else acc @ [c]
+    in
+      List.filter (not o isElim) (List.foldl addU [] (direct @ viaElim))
+    end
+
+  (* Mandatory load-time well-formedness of the axiom/constant context (#8079) *)
+  val _ =
+    case illFormedContextEntries globalTheoremContext of
+      [] => ()
+    | bad =>
+        raise Fail ("VerifiedTheorems: ill-formed context entries: " ^
+                    String.concatWith "; " (List.map (fn (n, m) => n ^ ": " ^ m) bad))
 
   (* Mandatory load-time verification of all MKTD2-system theorems *)
   val _ =
@@ -12457,7 +12588,8 @@ struct
   fun hyps (Thm (h, _)) = h
 end;
 
-(* Sealed Milner LCF Theorem-Without-Proof Kernel (newchecker.ML:9142) *)
+(* EXPERIMENT, not a trusted kernel (GitLab #8081): sealed Milner LCF
+   Theorem-Without-Proof prototype.  The trusted MKTD1 kernel is program/newchecker/. *)
 structure ThmWithoutPrf :> sig
   type form = LCFKernel.form
   type thm
@@ -24029,7 +24161,7 @@ struct
                 EApp (ESnd (EVar "hYon"), EFst (EVar "hYon")))
             end))))
 
-  (* Constructive Round-Trip Identity Witness for the Yoneda Bijection (thm_127):
+  (* Round-Trip Identity Witness for the Yoneda Bijection (thm_127):
      forall (Phi:Class) (Psi:Class) (u:Class),
        (ValOf(Phi, ValOf(Psi, u)) = u /\ ValOf(Psi, ValOf(Phi, u)) = u) ->
        (u = ValOf(Phi, ValOf(Psi, u)) /\ u = ValOf(Psi, ValOf(Phi, u))) *)
@@ -26302,7 +26434,7 @@ struct
                   EApp (ETApp (ESnd (EVar "h"), FVar "B"), ESnd (EFst (EVar "h")))))
             end))))
 
-  (* All 140 Constructive NBG/MK Theorems Bridged Automatically from MKTD2-system to MKTD1-system *)
+  (* All 140 NBG/MK Theorems Bridged Automatically from MKTD2-system to MKTD1-system *)
   fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
     [
       translateExprV2ToV1Anatomy "russell_not_set_constructive" NBG_Predicative [] proofRussellClassNotSet,
@@ -26992,7 +27124,7 @@ struct
   fun unfoldPKernelDefV2 (cert: V1KernelDefCert) : Type =
     translateFmV1ToV2Type (unfoldPKernelDefV1 cert)
 
-  (* Constructive MKTD2-system proof expressions for Grothendieck Universe definitions *)
+  (* MKTD2-system proof expressions for Grothendieck Universe definitions *)
   fun mkDefinitionalIffProof (paramVar: string) (lhsTy: Type) (rhsTy: Type) : Expr =
     ETLam (paramVar, ClassSort,
       EIffIntro (
@@ -27086,7 +27218,7 @@ struct
       mkDefinitionalIffProof "U" lhs rhs
     end
 
-  (* Constructive MKTD2-system proofs of the components of ThmUniversalClassIsUniverse (3.69: V universe) *)
+  (* MKTD2-system proofs of the components of ThmUniversalClassIsUniverse (3.69: V universe) *)
   val proofUnivIsTransitive : Expr =
     let
       val rawSub =
@@ -27264,7 +27396,7 @@ struct
       translatePKernelDefToAnatomy (PKernelDef_prf ("DefReducedVarSubst", ["t", "x", "v", "u"])) NONE
     ]
 
-  (* Constructive NBGCompiler.Expr proofs for Domain Restriction, Dependent Sigma Family Comprehension,
+  (* NBGCompiler.Expr proofs for Domain Restriction, Dependent Sigma Family Comprehension,
      and Reduced 3-Argument Variable Substitution *)
   val proofDomainRestrictionCompr : Expr =
     let
@@ -27416,7 +27548,7 @@ struct
       end
 
     (* Hypothesis H4 (Bidirectional Isomorphism of Variant 1 & Variant 2):
-       Every constructive proof term in Variant 2 translates to a 7-part Option B
+       Every proof term in Variant 2 translates to a 7-part Option B
        anatomy in Variant 1 whose formula + parameter signature translates back to
        an alpha-beta-convertible Type in Variant 2 verified by the kernel. *)
     fun testH4_BidirectionalBridgeIsomorphism () : bool =
@@ -29234,7 +29366,7 @@ struct
                             else raw_ty
                           val key = var_name ^ "@" ^ clean_ty
                         in
-                          if raw_ty = "Type" orelse raw_ty = "LCEWIP" orelse List.exists (fn s => s = key) seen then
+                          if raw_ty = "Type" orelse raw_ty = "Term.Expression" orelse raw_ty = "LCEWIP" orelse List.exists (fn s => s = key) seen then
                             scan (close_idx + 1) seen acc
                           else
                             scan (close_idx + 1) (key :: seen) ((var_name, clean_ty) :: acc)

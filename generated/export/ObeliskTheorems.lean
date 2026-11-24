@@ -1,14 +1,14 @@
 -- AUTO-GENERATED FILE — DO NOT EDIT BY HAND (User Directives #6 & #17).
 -- Source: set_theory_prover/program/export_certificates_and_bundles.ML & set_theory_prover/program/verified_theorems.ML
 -- Generator: Poly/ML batch exporter (set_theory_prover/program/export_certificates_and_bundles.ML)
--- Regenerate: cd /hostramdisk/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
+-- Regenerate: cd /botworkspace/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
 --
 -- Obelisk Proof Assistant — Lean 4 Exported Theorem Library
 -- Cross-checked against 239 verified kernel theorems in MKTD1-system & MKTD2-system.
 
 namespace Obelisk.Export
 
--- 1. Propositional & Quantifier Constructive Core (MKTD1-theory / MKTD2-theory)
+-- 1. Propositional & Quantifier Core (MKTD1-theory / MKTD2-theory)
 theorem thm_01_id (A : Prop) : A → A :=
   fun h => h
 

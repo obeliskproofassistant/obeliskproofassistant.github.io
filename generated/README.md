@@ -2,7 +2,7 @@
   AUTO-GENERATED FILE — DO NOT EDIT BY HAND (User Directives #6 & #17).
   Source: set_theory_prover/program/export_certificates_and_bundles.ML
   Generator: Poly/ML batch exporter (set_theory_prover/program/export_certificates_and_bundles.ML)
-  Regenerate: cd /hostramdisk/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
+  Regenerate: cd /botworkspace/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
 -->
 
 # Generated Formal Reference, Proof Certificates & Export Bundles (`generated/`)
@@ -23,7 +23,7 @@ Across all generated specifications, proof certificates, and symbol pages, Obeli
 
 ## Regeneration Commands
 
-Run from `/hostramdisk/set_theory_prover/program`:
+Run from `/botworkspace/set_theory_prover/program`:
 
 ```bash
 # 1. Generate manual.html, variant1.html, variant2.html, symbols.html, index.html, and symbols/*.html
@@ -41,7 +41,7 @@ poly -q --use export_certificates_and_bundles.ML </dev/null
 - `index.html`: Master directory of all SML-generated HTML pages, proof certificates, and export bundles.
 - `manual.html`: Complete unified reference for `MKTD1-system` and `MKTD2-system` with clickable Unicode, LaTeX, and ANSII formula rows.
 - `variant1.html`: Dedicated `MKTD1-system` (`MKTD1-theory` / `MKTD1-framework`) sequent calculus and typed AST reference.
-- `variant2.html`: Dedicated `MKTD2-system` (`MKTD2-theory` / `MKTD2-framework`) propositions-as-types and constructive lambda-term reference.
+- `variant2.html`: Dedicated `MKTD2-system` (`MKTD2-theory` / `MKTD2-framework`) propositions-as-types and lambda-term reference.
 - `symbols.html` & `symbols/*.html`: Complete clickable symbol registry and 81 dedicated personal symbol reference pages.
 - `nbg_propositions_as_types.html` & `proofpages/*.html`: Interactive step-by-step proof explorer for `MKTD1-system` and `MKTD2-system` theorems.
 - `certificates/nbg_propositions_as_types.lp`: Lambdapi / Dedukti proof certificate for the 20 core `MKTD2-system` set-theoretic theorems.

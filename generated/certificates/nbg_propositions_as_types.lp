@@ -1,7 +1,7 @@
 // AUTO-GENERATED FILE — DO NOT EDIT BY HAND (User Directives #6 & #17).
 // Source: set_theory_prover/program/export_certificates_and_bundles.ML & set_theory_prover/program/nbg_dedukti_exporter.ML
 // Generator: Poly/ML batch exporter (set_theory_prover/program/export_certificates_and_bundles.ML)
-// Regenerate: cd /hostramdisk/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
+// Regenerate: cd /botworkspace/set_theory_prover/program && poly -q --use export_certificates_and_bundles.ML </dev/null
 
 // =============================================================================
 // OBELISK NBG PROPOSITIONS-AS-TYPES: DEDUKTI / LAMBDAPI PROOF CERTIFICATE
