@@ -1421,8 +1421,8 @@
 
 [NBG-237 / thm_intensionality_via_singleton_witness] (Derived)
   Name:        thm_intensionality_via_singleton_witness
-  Statement:   Π(x:Class), Π(y:Class), (((x ∈ singleton(x)) × ((Π(z:Class), ((z ∈ singleton(x)) → (z ∈ singleton(y)))) × (Π(z:Class), ((z ∈ singleton(y)) → (z = y))))) → (x = y))
-  Proof Term:  (λ(x:Class). (λ(y:Class). (λ(h:((x ∈ singleton(x)) × ((Π(z:Class), ((z ∈ singleton(x)) → (z ∈ singleton(y)))) × (Π(z:Class), ((z ∈ singleton(y)) → (z = y)))))). ((snd(snd(h)) x) ((fst(snd(h)) x) fst(h))))))
+  Statement:   Π(x:Class), Π(y:Class), (((x ∈ {x}) × ((Π(z:Class), ((z ∈ {x}) → (z ∈ {y}))) × (Π(z:Class), ((z ∈ {y}) → (z = y))))) → (x = y))
+  Proof Term:  (λ(x:Class). (λ(y:Class). (λ(h:((x ∈ {x}) × ((Π(z:Class), ((z ∈ {x}) → (z ∈ {y}))) × (Π(z:Class), ((z ∈ {y}) → (z = y)))))). ((snd(snd(h)) x) ((fst(snd(h)) x) fst(h))))))
   Axioms Used: (none -- pure constructive lambda-term)
 
 [NBG-238 / thm_irreflexivity_from_well_founded_step] (Derived)

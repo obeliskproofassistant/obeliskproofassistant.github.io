@@ -4,7 +4,7 @@
                    set_theory_prover/program/dependent_typechecker.ML,
                    set_theory_prover/program/verified_theorems.ML
      Generator:    set_theory_prover/program/nbg_html_generator.ML
-     Regenerate:   cd /hostramdisk/set_theory_prover/program && poly -q --use nbg_html_generator.ML
+     Regenerate:   cd /botworkspace/set_theory_prover/program && poly -q --use nbg_html_generator.ML
 -->
 
 # Obelisk MKTD2-system Formulas-as-Types Library (MKTD2-theory)
@@ -1906,9 +1906,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-237 `thm_intensionality_via_singleton_witness` (Derived)
 
 - **Identifier:** `thm_intensionality_via_singleton_witness` (`NBG-237`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), (((x ∈ singleton(x)) × ((Π(z:Class), ((z ∈ singleton(x)) → (z ∈ singleton(y)))) × (Π(z:Class), ((z ∈ singleton(y)) → (z = y))))) → (x = y))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), (((x in singleton(x)) * ((Pi(z:Class), ((z in singleton(x)) -> (z in singleton(y)))) * (Pi(z:Class), ((z in singleton(y)) -> (z = y))))) -> (x = y))`
-- **Constructive Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(h:((x ∈ singleton(x)) × ((Π(z:Class), ((z ∈ singleton(x)) → (z ∈ singleton(y)))) × (Π(z:Class), ((z ∈ singleton(y)) → (z = y)))))). ((snd(snd(h)) x) ((fst(snd(h)) x) fst(h))))))`
+- **Statement (Unicode):** `Π(x:Class), Π(y:Class), (((x ∈ {x}) × ((Π(z:Class), ((z ∈ {x}) → (z ∈ {y}))) × (Π(z:Class), ((z ∈ {y}) → (z = y))))) → (x = y))`
+- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), (((x in {x}) * ((Pi(z:Class), ((z in {x}) -> (z in {y}))) * (Pi(z:Class), ((z in {y}) -> (z = y))))) -> (x = y))`
+- **Constructive Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(h:((x ∈ {x}) × ((Π(z:Class), ((z ∈ {x}) → (z ∈ {y}))) × (Π(z:Class), ((z ∈ {y}) → (z = y)))))). ((snd(snd(h)) x) ((fst(snd(h)) x) fst(h))))))`
 - **Axioms Used:** `(none -- pure constructive lambda-term)`
 
 ### NBG-238 `thm_irreflexivity_from_well_founded_step` (Derived)

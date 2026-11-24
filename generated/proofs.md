@@ -4,7 +4,7 @@
                    set_theory_prover/program/types/foundations.ML,
                    set_theory_prover/program/types/entries.ML
      Generator:    set_theory_prover/program/html_generator.ML
-     Regenerate:   cd /hostramdisk/set_theory_prover/program && poly -q --use export_theory_db.ML
+     Regenerate:   cd /botworkspace/set_theory_prover/program && poly -q --use export_theory_db.ML
 -->
 
 # Obelisk Proof Assistant — Verified Theorems & Inference Rules Gallery (MKTD1-system)
