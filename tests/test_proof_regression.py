@@ -95,8 +95,13 @@ class TestProofRegression(unittest.TestCase):
         self.assertTrue(os.path.isfile(nbg_json_path))
         with open(nbg_json_path, "r", encoding="utf-8") as f:
             nbg_lib = json.load(f)
-        self.assertEqual(nbg_lib["total_count"], 225)
-        self.assertEqual(nbg_lib["derived_count"], 202)
+        # [WHY] #8085: counts are derived from the data instead of a frozen 225/202 that went
+        # stale every time a theorem was added.
+        self.assertEqual(nbg_lib["total_count"], len(nbg_lib["theorems"]))
+        self.assertEqual(
+            nbg_lib["derived_count"] + nbg_lib["definitional_count"] + nbg_lib.get("axiomatic_count", 0),
+            nbg_lib["total_count"],
+        )
         self.assertEqual(nbg_lib["definitional_count"], 16)
         self.assertEqual(nbg_lib["axiomatic_count"], 7)
         for md_rel in ("manual.md", "variant1.md", "proofs.md", "nbg_library.md", "variant2.md"):
@@ -182,16 +187,19 @@ class TestProofRegression(unittest.TestCase):
             )
 
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
-        # RulClassComprehension must separate Judgements [(x:Name), (𝛗:Fm)] from Side Condition ⊤
+        # RulClassComprehension must separate Judgements [(x:Variable), (𝛗:Fm)] from Side Condition ⊤
+        # (HARDEST_INVARIANTS_REMINDER.md: variables are typed (x:Variable))
         eccr = by_name["RulClassComprehension"]
-        self.assertEqual(eccr["judgements_unicode"], "[(x:Name), (𝛗:Fm)]")
+        self.assertEqual(eccr["judgements_unicode"], "[(x:Variable), (𝛗:Fm)]")
         self.assertEqual(eccr["side_condition_unicode"], "⊤")
         self.assertIn('<th class="field-name">Judgements (Unicode)</th>', self.gen_manual_html)
 
         # RulExistsAbstraction conclusion must be ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧), never ∃(x:Class)(φ→ψ)
         eea = by_name["RulExistsAbstraction"]
         self.assertEqual(eea["title"], "Exists Abstraction")
-        self.assertEqual(eea["formula_unicode"], "((⟦𝛂⟧—→⟦𝛃⟧) ⊢ ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))")
+        # Plain-text rules separate premise and conclusion with the inference bar " ─── "
+        # (html_generator.ML sInferBarSep), not the sequent turnstile.
+        self.assertEqual(eea["formula_unicode"], "((⟦𝛂⟧—→⟦𝛃⟧) ─── ((∃(⦃x⦄:⟦X⟧)⟦𝛂⟧)—→⟦𝛃⟧))")
         self.assertNotIn("∃(x : Class) (φ → ψ)", self.gen_manual_html)
 
         # AxmPropNegElim is Negation Elimination; AxmPropNegIntro is Negation Introduction (Reductio Ad Absurdum)
@@ -383,7 +391,8 @@ class TestProofRegression(unittest.TestCase):
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
         self.assertIn("¬Fm.IFV(v,𝛙)", by_name["DefClassConditional"]["formula_unicode"])
         self.assertIn("¬Ctx.IFV(v,Γ)", by_name["DefMetaGeneralisation"]["formula_unicode"])
-        self.assertIn("Fm.FFI((k:Class.Expression),‹x›,𝛗)", by_name["AxmMetaClassComprehension"]["formula_unicode"])
+        # Side conditions render the variable unquoted: FFI((t:X.Expression),x,(𝛗:Fm)) (HARDEST_INVARIANTS_REMINDER.md 4)
+        self.assertIn("Fm.FFI((k:Class.Expression),x,𝛗)", by_name["AxmMetaClassComprehension"]["formula_unicode"])
         self.assertEqual(by_name["RulForallInstantiation"]["side_condition_unicode"], "Fm.FFI((t:X.Expression),x,𝛗)")
 
     def test_example_b_sml_kernel_ast_and_scheme_of_types(self):
@@ -422,7 +431,9 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(e369["num"], "3.69")
         self.assertEqual(e369["kind"], "Theorem")
         self.assertEqual(e369["formula_unicode"], "(V universe)")
-        self.assertEqual(e369["prf_constructor"], "PVUniverseAx_prf")
+        # 3.69 is a theorem proved from MK axioms, not the backup axiom (#8080)
+        self.assertTrue(e369["prf_constructor"].startswith("v_universe_thm"), e369["prf_constructor"])
+        self.assertNotIn("PVUniverseAx_prf", e369["prf_constructor"])
         self.assertIn("v_universe_thm_proof", e369["comment"])
         self.assertIn("PVUniverseAx_prf", e369["comment"])
 

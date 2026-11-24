@@ -681,7 +681,7 @@ class ObeliskREPL {
       `Type 'help' to list kernel commands (theorems, axioms, definitions, rules, lookup <id>, ast <id>, check <id>, compile, load <preset>).\n` +
       `To typecheck an inline MKTD2-system declaration, start with 'formula <Name> = ...;' or 'theorem <Name> : <Type> = <ProofTerm>;'.\n` +
       `To verify new SML kernel proofs offline, run:\n` +
-      `  poly -q --use /hostramdisk/set_theory_prover/program/newchecker.ML </dev/null`
+      `  poly -q --use /botworkspace/set_theory_prover/program/newchecker.ML </dev/null`
     );
   }
 

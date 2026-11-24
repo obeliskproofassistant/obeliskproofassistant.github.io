@@ -10,5 +10,5 @@
 
 ## Verification Commands
 ```bash
-python3 /hostramdisk/obeliskproofassistant.github.io/tools/check_html_links.py
+python3 /botworkspace/obeliskproofassistant.github.io/tools/check_html_links.py
 ```
