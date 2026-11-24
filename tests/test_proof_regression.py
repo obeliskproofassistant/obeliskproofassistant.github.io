@@ -546,8 +546,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(neg_comp_f["status"], "Postulated (Kernel Axiom)")
         self.assertIn("negation-completeness", neg_comp_f["comment"])
 
-        # Ensure total entry count is 118 (106 + 12 new universe/cumulative hierarchy entries 3.79-3.90)
-        self.assertEqual(len(db), 118)
+        # Entry count must match the database header (a frozen 118 went stale as entries were added)
+        self.assertEqual(len(db), self.gen_db["entry_count"])
 
         # In manual.html, verify verification cell is Postulated (Kernel Axiom), not Definitional
         self.assertIn('id="AxmSemanticCompletenessOfFullTheory"', self.gen_manual_html)

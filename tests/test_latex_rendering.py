@@ -157,7 +157,10 @@ class TestLatexRendering(unittest.TestCase):
             mtxt = f.read()
         self.assertIn(r"\mathcal{E}", mtxt)
         self.assertIn(r"\mathcal{F}", mtxt)
-        self.assertIn("μ_", mtxt)
+        # The typed interpretation notation mu_A is defined on the symbol pages; kernel entry notes
+        # in manual.html were rewritten (set_theory_prover f9397a9) and no longer repeat it.
+        with open(os.path.join(SITE_DIR, "generated", "symbols.html"), "r", encoding="utf-8") as f:
+            self.assertIn("μ_", f.read())
         self.assertIn("Bezboruah", mtxt)
         self.assertIn("CoNecessitation", mtxt)
 
