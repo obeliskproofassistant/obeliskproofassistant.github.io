@@ -759,28 +759,28 @@ Lightweight Markdown mirror of `generated/symbols.html` (231 registered tokens a
 - **Reference Page**: `symbols/dom-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefBigDomain (3.21)): Domain of a class relation: Dom(F) = {x | ∃(y:Class)((x,y) ∈ F)}.
 
-### 109. `IF` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf / CpIf))
+### 109. `IF` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
 - **ANSII**: `IF`
 - **LaTeX**: `\mathbf{IF}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧ = {⦃v⦄ | (⟦𝛙⟧ ∧ (⦃v⦄∈A)) ∨ ((¬⟦𝛙⟧) ∧ (⦃v⦄∈B))} where ¬(Enc(⦃v⦄) ∈ FV(𝛙:Fm)).
 
-### 110. `THEN` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf / CpIf))
+### 110. `THEN` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
 - **ANSII**: `THEN`
 - **LaTeX**: `\mathbf{THEN}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Then-branch delimiter of class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧.
 
-### 111. `ELSE` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf / CpIf))
+### 111. `ELSE` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
 - **ANSII**: `ELSE`
 - **LaTeX**: `\mathbf{ELSE}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Else-branch delimiter of class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧.
 
-### 112. `FI` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf / CpIf))
+### 112. `FI` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
 - **ANSII**: `FI`
 - **LaTeX**: `\mathbf{FI}`
 - **Category**: Type / Predicate / Function / Variable

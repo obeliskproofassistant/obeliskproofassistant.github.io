@@ -756,9 +756,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-083 `thm_sigma_model_proj` (Derived)
 
 - **Identifier:** `thm_sigma_model_proj` (`NBG-083`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:Class), Π(x:Class), Π(y:Class), ((((OPair(x, y) ∈ Sigma(B)) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × (OPair(x, y) ∈ Sigma(B))) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x))))`
-- **Statement (ANSII):** `Pi(B:Class), Pi(x:Class), Pi(y:Class), ((((OPair(x, y) in Sigma(B)) -> ((x in Dom(B)) * (y in ValOf(B, x)))) * (OPair(x, y) in Sigma(B))) -> ((x in Dom(B)) * (y in ValOf(B, x))))`
-- **Proof Term:** `(λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((OPair(x, y) ∈ Sigma(B)) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × (OPair(x, y) ∈ Sigma(B)))). (fst(h) snd(h))))))`
+- **Statement (Unicode):** `Π(B:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ SigmaModel(B)) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × ((x, y) ∈ SigmaModel(B))) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x))))`
+- **Statement (ANSII):** `Pi(B:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in SigmaModel(B)) -> ((x in Dom(B)) * (y in ValOf(B, x)))) * ((x, y) in SigmaModel(B))) -> ((x in Dom(B)) * (y in ValOf(B, x))))`
+- **Proof Term:** `(λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ SigmaModel(B)) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × ((x, y) ∈ SigmaModel(B)))). (fst(h) snd(h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -2088,9 +2088,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-231 `thm_sigma_family_model_dependent_pair_bridge` (Derived)
 
 - **Identifier:** `thm_sigma_family_model_dependent_pair_bridge` (`NBG-231`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:Class), (((Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))) → Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × ((Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) → Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))))`
-- **Statement (ANSII):** `Pi(B:Class), (((Sigma(x:Class), Sigma(y:Class), (OPair(x, y) in Sigma(B))) -> Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) * ((Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) -> Sigma(x:Class), Sigma(y:Class), (OPair(x, y) in Sigma(B))))`
-- **Proof Term:** `(λ(B:Class). ⟨(λ(w:Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩), (λ(w:Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩)⟩)`
+- **Statement (Unicode):** `Π(B:Class), (((Σ(x:Class), Σ(y:Class), ((x, y) ∈ SigmaModel(B))) → Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × ((Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) → Σ(x:Class), Σ(y:Class), ((x, y) ∈ SigmaModel(B))))`
+- **Statement (ANSII):** `Pi(B:Class), (((Sigma(x:Class), Sigma(y:Class), ((x, y) in SigmaModel(B))) -> Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) * ((Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) -> Sigma(x:Class), Sigma(y:Class), ((x, y) in SigmaModel(B))))`
+- **Proof Term:** `(λ(B:Class). ⟨(λ(w:Σ(x:Class), Σ(y:Class), ((x, y) ∈ SigmaModel(B))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩), (λ(w:Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
