@@ -3,8 +3,7 @@
  * Connects the `.nbg` Source Editor, Catalog Sidebar, Inspector, and Command Bar to:
  * 1. SML-generated `generated/theory_db.json` (106 MKTD1-system Sequent Calculus / Typed AST entries)
  * 2. SML-generated `generated/nbg_library.json` (100 MKTD2-system Formulas-as-Types entries)
- * 3. Live Poly/ML 5.7.1 `NBGSurfaceCompiler` (`/api/obelisk/compile`) when reachable
- * 4. Client-side `ObeliskNBGCompiler` PREVIEW type-checker (JavaScript, MKTD2-style). It is NOT the
+ * 3. Client-side `ObeliskNBGCompiler` PREVIEW type-checker (JavaScript, MKTD2-style). It is NOT the
  *    trusted kernel: the trusted checkers are the SML kernels in set_theory_prover (GitLab #8081).
  */
 
@@ -246,26 +245,9 @@ class ObeliskREPL {
       return;
     }
 
-    // 1. Always run client-side recursive-descent parser & bidirectional type-checker immediately
-    const clientReport = this.clientCompiler.compileSource(src);
-
-    // 2. Also query live Poly/ML 5.7.1 `/api/obelisk/compile` if reachable
-    let finalReport = clientReport;
-    try {
-      const resp = await fetch('/api/obelisk/compile', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: src })
-      });
-      if (resp.ok || resp.status === 400 || resp.status === 408) {
-        const serverData = await resp.json();
-        if (serverData && (serverData.status === 'COMPILED' || serverData.status === 'REJECTED')) {
-          finalReport = serverData;
-        }
-      }
-    } catch (_e) {
-      // Offline / static GitHub Pages fallback uses clientReport
-    }
+    // Run client-side recursive-descent parser & bidirectional preview type-checker directly
+    // (No server implements `/api/obelisk/compile`; removed dead fetch per GitLab #8091 item 7)
+    const finalReport = this.clientCompiler.compileSource(src);
 
     this.lastResult = finalReport;
     this.renderReport(finalReport, presetTitle);
