@@ -14,7 +14,7 @@
   Formula [0]:     (∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬Fm.IFV(v,𝛙))—→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))
   SML Kernel AST:  CpIf (φ, A, B)
   Scheme of Types: (∀([Γ@Variable]:[Ctx@Type])∀([v@Variable]:[Variable@Type])∀([𝛙@Variable]:[Fm@Type])∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((¬Fm.IFV([v@Variable.Expression],[𝛙@Fm.Expression]))—→(𝘞,[Γ@Ctx.Expression]⊢‹⟦IF ⟦[𝛙@Fm.Expression]⟧ THEN [A@Class.Expression] ELSE [B@Class.Expression] FI⟧={[⦃[v@Variable.Expression]⦄@Class.Expression]|(⟦[𝛙@Fm.Expression]⟧∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[A@Class.Expression]))∨((¬⟦[𝛙@Fm.Expression]⟧)∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[B@Class.Expression]))}›)))
-  Verification:    Definitional (Kernel AST)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.23 / DefSimpleConditional] simple_if (polymorphic non-dependent conditional over Type) (Definition)
   Name:            DefSimpleConditional
@@ -22,7 +22,7 @@
   SML Kernel AST:  EIf (φ, a, b)
   Scheme of Types: ∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))
   Kernel Note:     Ambient metalogical / type-theoretic non-dependent conditional schema over Type (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's typed function space; in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional IF 𝛗 THEN A ELSE B FI and the kernel AST evaluation certificate def_simple_conditional_cert).
-  Verification:    Definitional (Kernel AST)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.24 / DefDependentConditional] if_dep (dependent conditional over (Bool → Type)) (Definition)
   Name:            DefDependentConditional
@@ -30,7 +30,7 @@
   SML Kernel AST:  EIfDep (φ, a, b)
   Scheme of Types: ∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))
   Kernel Note:     Ambient metalogical / type-theoretic dependent conditional schema over (Bool → Type) (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's dependent product Π(b:Bool); in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional and the kernel AST evaluation certificate def_dependent_conditional_cert).
-  Verification:    Definitional (Kernel AST)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.25 / DefValueAtArg] Evaluation of a [function|class-function|family] (Definition)
   Name:            DefValueAtArg
@@ -132,7 +132,7 @@
   Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 161572
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:     Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
-  Verification:    Verified
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.39 / DefPiPredicateModel] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
   Name:            DefPiPredicateModel
@@ -141,7 +141,7 @@
   Axioms Used:     (none -- pure sequent / definitional) | Kernel Prf Nodes: 25
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).
-  Verification:    Verified
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.40 / DefCardLessEq] “Is not strictly larger than” binary relation (Definition)
   Name:            DefCardLessEq

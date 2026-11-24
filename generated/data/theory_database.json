@@ -1127,7 +1127,7 @@
       "num": "3.22",
       "title": "IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬Fm.IFV(v,𝛙))—→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))",
       "prf_constructor": "CpIf (φ, A, B)",
       "axioms_used": [],
@@ -1143,7 +1143,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 44,
@@ -1153,7 +1153,7 @@
       "num": "3.23",
       "title": "simple_if (polymorphic non-dependent conditional over Type)",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))",
       "prf_constructor": "EIf (φ, a, b)",
       "axioms_used": [],
@@ -1169,7 +1169,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Ambient metalogical / type-theoretic non-dependent conditional schema over Type (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's typed function space; in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional IF 𝛗 THEN A ELSE B FI and the kernel AST evaluation certificate def_simple_conditional_cert).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 45,
@@ -1179,7 +1179,7 @@
       "num": "3.24",
       "title": "if_dep (dependent conditional over (Bool → Type))",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))",
       "prf_constructor": "EIfDep (φ, a, b)",
       "axioms_used": [],
@@ -1195,7 +1195,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Ambient metalogical / type-theoretic dependent conditional schema over (Bool → Type) (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's dependent product Π(b:Bool); in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional and the kernel AST evaluation certificate def_dependent_conditional_cert).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 46,
@@ -1543,7 +1543,7 @@
       "num": "3.38",
       "title": "“Dependent Sum (Sigma-Type)” model over a family",
       "kind": "Theorem",
-      "status": "Verified",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))",
       "prf_constructor": "thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)",
       "axioms_used": ["RulClassComprehension", "AxmLeftInSound", "AxmPropExFalso", "AxmOmegaIsSet", "AxmHeredity", "PairSetAx", "AxmPropVerum", "AxmRightInSound", "AxmPropNegElim", "AxmRegularity"],
@@ -1559,7 +1559,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).",
-      "verification": "Verified"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 60,
@@ -1569,7 +1569,7 @@
       "num": "3.39",
       "title": "“Dependent Product (Pi-Type)” predicate and section model",
       "kind": "Theorem",
-      "status": "Verified",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))",
       "prf_constructor": "thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)",
       "axioms_used": [],
@@ -1585,7 +1585,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).",
-      "verification": "Verified"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 61,
@@ -3163,7 +3163,7 @@
       "num": "4.01",
       "title": "Instantiation",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))",
       "prf_constructor": "PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))",
       "axioms_used": [],
@@ -3179,7 +3179,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel universal instantiation schema (requiring Fm.FFI(t, v, φ) as enforced in IncompletenessMechanization.law_4_01_meta_instantiation), accompanied by a kernel-checked object-level instance (thm_4_01_meta_instantiation / sequent_4_01_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 122,
@@ -3189,7 +3189,7 @@
       "num": "4.02",
       "title": "Generalisation",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:⟦A⟧)⟦𝛗⟧›))))",
       "prf_constructor": "PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))",
       "axioms_used": [],
@@ -3205,7 +3205,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel context-indexed generalisation schema with explicit context freshness guard ¬Ctx.IFV(v, Γ), accompanied by a kernel-checked object-level instance (thm_4_02_meta_generalisation / sequent_4_02_generalisation : Thm). (A theory 𝘞 is assumed here to contain only closed axioms without free variables, so v has no free occurrences in 𝘞 whenever ¬Ctx.IFV(v, Γ) holds.)",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 123,
@@ -3215,7 +3215,7 @@
       "num": "4.03",
       "title": "CoNecessitation",
       "kind": "Inference Rule",
-      "status": "Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))",
       "prf_constructor": "PMetaConec_prf (Γ, φ, PCredo_prf (p))",
       "axioms_used": [],
@@ -3231,7 +3231,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).",
-      "verification": "Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 124,
@@ -3241,7 +3241,7 @@
       "num": "4.04",
       "title": "Quantifier “unique”",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))",
       "prf_constructor": "PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))",
       "axioms_used": [],
@@ -3257,7 +3257,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Definitional metalevel schema for the at-most-one binder (!(z:Class)φ), subject to the variable freshness and capture-avoidance side conditions x ≠ y, ¬Fm.IFV(x, φ), ¬Fm.IFV(y, φ), Fm.FFI(x, z, φ), and Fm.FFI(y, z, φ) (enforced in IncompletenessMechanization.law_4_04_at_most_one_binder_def and accompanied by the class-level witness DefAtMostOneMember / sequent_4_04_at_most_one : Thm).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 125,
@@ -3267,7 +3267,7 @@
       "num": "4.05",
       "title": "Quantifier “exists and unique”",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)←→((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))",
       "prf_constructor": "PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))",
       "axioms_used": [],
@@ -3283,7 +3283,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Kernel-verified exists-unique binder definition (thm_4_05_exists_unique_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 126,
@@ -3293,7 +3293,7 @@
       "num": "4.06",
       "title": "Class comprehension axiom schema",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)∀(x:Variable)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),x,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))",
       "prf_constructor": "PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))",
       "axioms_used": [],
@@ -3309,7 +3309,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 127,
@@ -3379,7 +3379,7 @@
       "num": "5.01",
       "title": "Löb's theorem",
       "kind": "Theorem",
-      "status": "Verified (Relative to DiagonalLemma & HBL D1-D3)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))",
       "prf_constructor": "IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace",
       "axioms_used": ["AxmPropFrege", "AxmPropWeakening", "AxmPropVerum"],
@@ -3394,8 +3394,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).",
-      "verification": "Verified (Relative to DiagonalLemma & HBL D1-D3)"
+      "comment": "Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).",
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 130,
@@ -3405,7 +3405,7 @@
       "num": "5.02",
       "title": "Gödel's second incompleteness theorem",
       "kind": "Theorem",
-      "status": "Verified (Relative to ThmLoeb & HBL D1-D2)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)",
       "prf_constructor": "IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace",
       "axioms_used": ["AxmPropNegElim", "AxmPropNegIntro", "AxmPropWeakening", "AxmPropFrege"],
@@ -3420,8 +3420,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).",
-      "verification": "Verified (Relative to ThmLoeb & HBL D1-D2)"
+      "comment": "Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).",
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     }
       ]
     }
@@ -4527,7 +4527,7 @@
       "num": "3.22",
       "title": "IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile)",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬Fm.IFV(v,𝛙))—→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))",
       "prf_constructor": "CpIf (φ, A, B)",
       "axioms_used": [],
@@ -4543,7 +4543,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 44,
@@ -4553,7 +4553,7 @@
       "num": "3.23",
       "title": "simple_if (polymorphic non-dependent conditional over Type)",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))",
       "prf_constructor": "EIf (φ, a, b)",
       "axioms_used": [],
@@ -4569,7 +4569,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Ambient metalogical / type-theoretic non-dependent conditional schema over Type (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's typed function space; in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional IF 𝛗 THEN A ELSE B FI and the kernel AST evaluation certificate def_simple_conditional_cert).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 45,
@@ -4579,7 +4579,7 @@
       "num": "3.24",
       "title": "if_dep (dependent conditional over (Bool → Type))",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))",
       "prf_constructor": "EIfDep (φ, a, b)",
       "axioms_used": [],
@@ -4595,7 +4595,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Ambient metalogical / type-theoretic dependent conditional schema over (Bool → Type) (bridging MKTD1's metalevel sort hierarchy with MKTD2-theory's dependent product Π(b:Bool); in the object-level class language of MKTD1-theory, see 3.22 DefClassConditional and the kernel AST evaluation certificate def_dependent_conditional_cert).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 46,
@@ -4943,7 +4943,7 @@
       "num": "3.38",
       "title": "“Dependent Sum (Sigma-Type)” model over a family",
       "kind": "Theorem",
-      "status": "Verified",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))",
       "prf_constructor": "thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)",
       "axioms_used": ["RulClassComprehension", "AxmLeftInSound", "AxmPropExFalso", "AxmOmegaIsSet", "AxmHeredity", "PairSetAx", "AxmPropVerum", "AxmRightInSound", "AxmPropNegElim", "AxmRegularity"],
@@ -4959,7 +4959,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).",
-      "verification": "Verified"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 60,
@@ -4969,7 +4969,7 @@
       "num": "3.39",
       "title": "“Dependent Product (Pi-Type)” predicate and section model",
       "kind": "Theorem",
-      "status": "Verified",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))",
       "prf_constructor": "thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)",
       "axioms_used": [],
@@ -4985,7 +4985,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).",
-      "verification": "Verified"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 61,
@@ -6555,7 +6555,7 @@
       "num": "4.01",
       "title": "Instantiation",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))",
       "prf_constructor": "PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))",
       "axioms_used": [],
@@ -6571,7 +6571,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel universal instantiation schema (requiring Fm.FFI(t, v, φ) as enforced in IncompletenessMechanization.law_4_01_meta_instantiation), accompanied by a kernel-checked object-level instance (thm_4_01_meta_instantiation / sequent_4_01_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 122,
@@ -6581,7 +6581,7 @@
       "num": "4.02",
       "title": "Generalisation",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:⟦A⟧)⟦𝛗⟧›))))",
       "prf_constructor": "PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))",
       "axioms_used": [],
@@ -6597,7 +6597,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel context-indexed generalisation schema with explicit context freshness guard ¬Ctx.IFV(v, Γ), accompanied by a kernel-checked object-level instance (thm_4_02_meta_generalisation / sequent_4_02_generalisation : Thm). (A theory 𝘞 is assumed here to contain only closed axioms without free variables, so v has no free occurrences in 𝘞 whenever ¬Ctx.IFV(v, Γ) holds.)",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 123,
@@ -6607,7 +6607,7 @@
       "num": "4.03",
       "title": "CoNecessitation",
       "kind": "Inference Rule",
-      "status": "Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))",
       "prf_constructor": "PMetaConec_prf (Γ, φ, PCredo_prf (p))",
       "axioms_used": [],
@@ -6623,7 +6623,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).",
-      "verification": "Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 124,
@@ -6633,7 +6633,7 @@
       "num": "4.04",
       "title": "Quantifier “unique”",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))",
       "prf_constructor": "PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))",
       "axioms_used": [],
@@ -6649,7 +6649,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Definitional metalevel schema for the at-most-one binder (!(z:Class)φ), subject to the variable freshness and capture-avoidance side conditions x ≠ y, ¬Fm.IFV(x, φ), ¬Fm.IFV(y, φ), Fm.FFI(x, z, φ), and Fm.FFI(y, z, φ) (enforced in IncompletenessMechanization.law_4_04_at_most_one_binder_def and accompanied by the class-level witness DefAtMostOneMember / sequent_4_04_at_most_one : Thm).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 125,
@@ -6659,7 +6659,7 @@
       "num": "4.05",
       "title": "Quantifier “exists and unique”",
       "kind": "Definition",
-      "status": "Definitional (Kernel AST)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)←→((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))",
       "prf_constructor": "PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))",
       "axioms_used": [],
@@ -6675,7 +6675,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Kernel-verified exists-unique binder definition (thm_4_05_exists_unique_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Definitional (Kernel AST)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 126,
@@ -6685,7 +6685,7 @@
       "num": "4.06",
       "title": "Class comprehension axiom schema",
       "kind": "Axiom",
-      "status": "Postulated (Metalevel Schema, Instance Verified)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)∀(x:Variable)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),x,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))",
       "prf_constructor": "PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))",
       "axioms_used": [],
@@ -6701,7 +6701,7 @@
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
       "comment": "Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).",
-      "verification": "Postulated (Metalevel Schema, Instance Verified)"
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 127,
@@ -6763,7 +6763,7 @@
       "num": "5.01",
       "title": "Löb's theorem",
       "kind": "Theorem",
-      "status": "Verified (Relative to DiagonalLemma & HBL D1-D3)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))",
       "prf_constructor": "IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace",
       "axioms_used": ["AxmPropFrege", "AxmPropWeakening", "AxmPropVerum"],
@@ -6778,8 +6778,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).",
-      "verification": "Verified (Relative to DiagonalLemma & HBL D1-D3)"
+      "comment": "Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).",
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     },
     {
       "index": 130,
@@ -6789,7 +6789,7 @@
       "num": "5.02",
       "title": "Gödel's second incompleteness theorem",
       "kind": "Theorem",
-      "status": "Verified (Relative to ThmLoeb & HBL D1-D2)",
+      "status": "Postulated (Unchecked Kernel Schema, Not Derived)",
       "formula_unicode": "(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)",
       "prf_constructor": "IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace",
       "axioms_used": ["AxmPropNegElim", "AxmPropNegIntro", "AxmPropWeakening", "AxmPropFrege"],
@@ -6804,8 +6804,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).",
-      "verification": "Verified (Relative to ThmLoeb & HBL D1-D2)"
+      "comment": "Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).",
+      "verification": "Postulated (Unchecked Kernel Schema, Not Derived)"
     }
   ]
 }

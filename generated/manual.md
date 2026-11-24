@@ -414,7 +414,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.22 `DefClassConditional` — IF-THEN-ELSE-FI (Class conditional with NFV side condition and context turnstile) (Definition)
 
-- **Identifier:** `DefClassConditional` (entry `3.22`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Identifier:** `DefClassConditional` (entry `3.22`, kind: `Definition`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(v:Variable)∀(𝛙:Fm)∀(A:Class)∀(B:Class)((¬Fm.IFV(v,𝛙))—→(𝘞,Γ⊢‹⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧={⦃v⦄|(⟦𝛙⟧∧(⦃v⦄∈A))∨((¬⟦𝛙⟧)∧(⦃v⦄∈B))}›)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([v@Variable]:[Variable@Type])∀([𝛙@Variable]:[Fm@Type])∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])((¬Fm.IFV([v@Variable.Expression],[𝛙@Fm.Expression]))—→(𝘞,[Γ@Ctx.Expression]⊢‹⟦IF ⟦[𝛙@Fm.Expression]⟧ THEN [A@Class.Expression] ELSE [B@Class.Expression] FI⟧={[⦃[v@Variable.Expression]⦄@Class.Expression]|(⟦[𝛙@Fm.Expression]⟧∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[A@Class.Expression]))∨((¬⟦[𝛙@Fm.Expression]⟧)∧([⦃[v@Variable.Expression]⦄@Class.Expression]∈[B@Class.Expression]))}›)))`
 - **Proof Constructor:** `CpIf (φ, A, B)`
@@ -422,7 +422,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.23 `DefSimpleConditional` — simple_if (polymorphic non-dependent conditional over Type) (Definition)
 
-- **Identifier:** `DefSimpleConditional` (entry `3.23`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Identifier:** `DefSimpleConditional` (entry `3.23`, kind: `Definition`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))`
 - **Scheme of Types (Unicode):** `∀(Tₑ:Type), ((simple_if(⟦Tₑ⟧):Bool→(⟦Tₑ⟧→(⟦Tₑ⟧→⟦Tₑ⟧)))∧∀(t₁:⟦Tₑ⟧)∀(t₂:⟦Tₑ⟧)((simple_if(⟦Tₑ⟧,true,t₁,t₂)=t₁)∧(simple_if(⟦Tₑ⟧,false,t₁,t₂)=t₂)))`
 - **Proof Constructor:** `EIf (φ, a, b)`
@@ -431,7 +431,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.24 `DefDependentConditional` — if_dep (dependent conditional over (Bool → Type)) (Definition)
 
-- **Identifier:** `DefDependentConditional` (entry `3.24`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Identifier:** `DefDependentConditional` (entry `3.24`, kind: `Definition`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))`
 - **Scheme of Types (Unicode):** `∀(Tₑ:Bool→Type), ((if_dep:Π(b:Bool),(⟦Tₑ(true)⟧→(⟦Tₑ(false)⟧→⟦Tₑ(b)⟧)))∧∀(b:Bool)∀(t₁:⟦Tₑ(true)⟧)∀(t₂:⟦Tₑ(false)⟧)((if_dep(b,t₁,t₂):⟦Tₑ(b)⟧)∧((if_dep(true,t₁,t₂)=t₁)∧(if_dep(false,t₁,t₂)=t₂))))`
 - **Proof Constructor:** `EIfDep (φ, a, b)`
@@ -546,7 +546,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Theorem)
 
-- **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Verified`)
+- **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
 - **Proof Constructor:** `thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)`
@@ -556,7 +556,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.39 `DefPiPredicateModel` — “Dependent Product (Pi-Type)” predicate and section model (Theorem)
 
-- **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Verified`)
+- **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))`
 - **Proof Constructor:** `thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)`
@@ -1124,7 +1124,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.01 `DefMetaInstantiation` — Instantiation (Axiom)
 
-- **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
+- **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⟦v⟧ = ⟦t⟧ in ⟦𝛗⟧)›))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))`
 - **Proof Constructor:** `PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))`
@@ -1133,7 +1133,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.02 `DefMetaGeneralisation` — Generalisation (Axiom)
 
-- **Identifier:** `DefMetaGeneralisation` (entry `4.02`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
+- **Identifier:** `DefMetaGeneralisation` (entry `4.02`, kind: `Axiom`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(A:Type)∀(Γ:Ctx)∀(𝛗:Fm)∀(v:Variable)((¬Ctx.IFV(v,Γ))—→((𝘞,Γ⊢𝛗)—→(𝘞,Γ⊢‹∀(⦃v⦄:⟦A⟧)⟦𝛗⟧›))))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧›))))`
 - **Proof Constructor:** `PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))`
@@ -1142,7 +1142,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.03 `DefMetaConecessitation` — CoNecessitation (Inference Rule)
 
-- **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)`)
+- **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `PMetaConec_prf (Γ, φ, PCredo_prf (p))`
@@ -1151,7 +1151,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.04 `DefAtMostOneBinder` — Quantifier “unique” (Definition)
 
-- **Identifier:** `DefAtMostOneBinder` (entry `4.04`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Identifier:** `DefAtMostOneBinder` (entry `4.04`, kind: `Definition`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)((!(z:Class)⟦𝛗⟧)←→(∀(x:Class)∀(y:Class)((⟦𝛗[(x:Class.Expression)/‹z›]⟧∧(let z = y in ⟦𝛗⟧))—→(x=y)))))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))—→([x@Class.Expression]=[y@Class.Expression])))))`
 - **Proof Constructor:** `PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))`
@@ -1160,7 +1160,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.05 `DefExistsUniqueBinder` — Quantifier “exists and unique” (Definition)
 
-- **Identifier:** `DefExistsUniqueBinder` (entry `4.05`, kind: `Definition`, status: `Definitional (Kernel AST)`)
+- **Identifier:** `DefExistsUniqueBinder` (entry `4.05`, kind: `Definition`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘛,[]⊢‹(∃!(x:Class)⟦𝛗⟧)←→((∃(x:Class)⟦𝛗⟧)∧!(x:Class)⟦𝛗⟧)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘛,[]⊢‹(∃!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→((∃([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)∧!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)›))`
 - **Proof Constructor:** `PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))`
@@ -1169,7 +1169,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 
 ### 4.06 `AxmMetaClassComprehension` — Class comprehension axiom schema (Axiom)
 
-- **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Metalevel Schema, Instance Verified)`)
+- **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)∀(x:Variable)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),x,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Variable@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),[x@Variable.Expression],[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))`
 - **Proof Constructor:** `PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))`
@@ -1201,21 +1201,21 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 
 ### 5.01 `ThmLoeb` — Löb's theorem (Theorem)
 
-- **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Verified (Relative to DiagonalLemma & HBL D1-D3)`)
+- **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
 - **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace`
 - **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum | Definitions Used: ThmLoeb | Kernel Prf Nodes: 11`
-- **Kernel Note:** Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
+- **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
 ### 5.02 `ThmSecondIncompleteness` — Gödel's second incompleteness theorem (Theorem)
 
-- **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Verified (Relative to ThmLoeb & HBL D1-D2)`)
+- **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace`
 - **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege | Definitions Used: ThmSecondIncompleteness, ThmLoeb | Kernel Prf Nodes: 11`
-- **Kernel Note:** Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
+- **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 

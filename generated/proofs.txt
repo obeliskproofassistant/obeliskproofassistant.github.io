@@ -111,7 +111,7 @@
   Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 161572
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:     Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
-  Verification:    Verified
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.39 / DefPiPredicateModel] “Dependent Product (Pi-Type)” predicate and section model (Theorem)
   Name:            DefPiPredicateModel
@@ -120,7 +120,7 @@
   Axioms Used:     (none -- pure sequent / definitional) | Kernel Prf Nodes: 25
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).
-  Verification:    Verified
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [3.58 / ThmUniversalClassInductive] Class of all sets is successor-inductive (Peano-inductive) (Theorem)
   Name:            ThmUniversalClassInductive
@@ -335,7 +335,7 @@
   SML Kernel AST:  PMetaConec_prf (Γ, φ, PCredo_prf (p))
   Scheme of Types: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
   Kernel Note:     If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
-  Verification:    Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.08 / ThmReducedVarSubstLaws] Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
   Name:            ThmReducedVarSubstLaws
@@ -352,8 +352,8 @@
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace
   Axioms Used:     AxmPropFrege, AxmPropWeakening, AxmPropVerum | Definitions Used: ThmLoeb | Kernel Prf Nodes: 11
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))
-  Kernel Note:     Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
-  Verification:    Verified (Relative to DiagonalLemma & HBL D1-D3)
+  Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem (Theorem)
   Name:            ThmSecondIncompleteness
@@ -361,6 +361,6 @@
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace
   Axioms Used:     AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege | Definitions Used: ThmSecondIncompleteness, ThmLoeb | Kernel Prf Nodes: 11
   Scheme of Types: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
-  Kernel Note:     Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
-  Verification:    Verified (Relative to ThmLoeb & HBL D1-D2)
+  Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 

@@ -40,7 +40,7 @@
   SML Kernel AST:  PMetaInst_prf (Γ, x, T, t, φ, PForaL_prf (φ, t, x, p))
   Scheme of Types: (∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⟦[v@Name.Expression]⟧ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))
   Kernel Note:     Postulated +1 metalevel universal instantiation schema (requiring Fm.FFI(t, v, φ) as enforced in IncompletenessMechanization.law_4_01_meta_instantiation), accompanied by a kernel-checked object-level instance (thm_4_01_meta_instantiation / sequent_4_01_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
-  Verification:    Postulated (Metalevel Schema, Instance Verified)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.02 / DefMetaGeneralisation] Generalisation (Axiom)
   Name:            DefMetaGeneralisation
@@ -48,7 +48,7 @@
   SML Kernel AST:  PMetaGen_prf (Γ, x, x', T, PForaR_prf (Γ, x, x', T, p))
   Scheme of Types: (∀([A@Variable]:[Type@Type])∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])∀([v@Variable]:[Variable@Type])((¬Ctx.IFV([v@Variable.Expression],[Γ@Ctx.Expression]))—→((𝘞,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘞,[Γ@Ctx.Expression]⊢‹∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧›))))
   Kernel Note:     Postulated +1 metalevel context-indexed generalisation schema with explicit context freshness guard ¬Ctx.IFV(v, Γ), accompanied by a kernel-checked object-level instance (thm_4_02_meta_generalisation / sequent_4_02_generalisation : Thm). (A theory 𝘞 is assumed here to contain only closed axioms without free variables, so v has no free occurrences in 𝘞 whenever ¬Ctx.IFV(v, Γ) holds.)
-  Verification:    Postulated (Metalevel Schema, Instance Verified)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.03 / DefMetaConecessitation] CoNecessitation (Inference Rule)
   Name:            DefMetaConecessitation
@@ -56,7 +56,7 @@
   SML Kernel AST:  PMetaConec_prf (Γ, φ, PCredo_prf (p))
   Scheme of Types: (∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))
   Kernel Note:     If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
-  Verification:    Primitive / Derived Rule (Metalevel for 𝘍, Instance Verified)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.04 / DefAtMostOneBinder] Quantifier “unique” (Definition)
   Name:            DefAtMostOneBinder
@@ -64,7 +64,7 @@
   SML Kernel AST:  PAtMostOneDef_prf (x, y, φ, PForaR_prf (Γ, x, x, Class, PForaR_prf (Γ, y, y, Class, PImplR_prf (PEqDef_prf (x, y)))))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])((!([z@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→(∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])((⟦[𝛗@Fm.Expression][([x@Class.Expression.Expression]:Class.Expression)/‹z›]⟧∧(let z = [y@Class.Expression] in ⟦[𝛗@Fm.Expression]⟧))—→([x@Class.Expression]=[y@Class.Expression])))))
   Kernel Note:     Definitional metalevel schema for the at-most-one binder (!(z:Class)φ), subject to the variable freshness and capture-avoidance side conditions x ≠ y, ¬Fm.IFV(x, φ), ¬Fm.IFV(y, φ), Fm.FFI(x, z, φ), and Fm.FFI(y, z, φ) (enforced in IncompletenessMechanization.law_4_04_at_most_one_binder_def and accompanied by the class-level witness DefAtMostOneMember / sequent_4_04_at_most_one : Thm).
-  Verification:    Definitional (Kernel AST)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.05 / DefExistsUniqueBinder] Quantifier “exists and unique” (Definition)
   Name:            DefExistsUniqueBinder
@@ -72,7 +72,7 @@
   SML Kernel AST:  PExisUniqDef_prf (x, φ, PAndR_prf (PExisR_prf (φ, x, x, p), PAtMostOneDef_prf (x, y, φ, q)))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘛,[]⊢‹(∃!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)←→((∃([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)∧!([x@Variable]:[Class@Type])⟦[𝛗@Fm.Expression]⟧)›))
   Kernel Note:     Kernel-verified exists-unique binder definition (thm_4_05_exists_unique_binder : Thm, checked by Thm.checkPipeline and Thm.slow_check).
-  Verification:    Definitional (Kernel AST)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [4.06 / AxmMetaClassComprehension] Class comprehension axiom schema (Axiom)
   Name:            AxmMetaClassComprehension
@@ -80,7 +80,7 @@
   SML Kernel AST:  PMetaComprAx_prf (Γ, x, y, φ, PComprAx_prf (φ))
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Variable@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),[x@Variable.Expression],[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))
   Kernel Note:     Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).
-  Verification:    Postulated (Metalevel Schema, Instance Verified)
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [5.01 / ThmLoeb] Löb's theorem (Theorem)
   Name:            ThmLoeb
@@ -88,8 +88,8 @@
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace
   Axioms Used:     AxmPropFrege, AxmPropWeakening, AxmPropVerum | Definitions Used: ThmLoeb | Kernel Prf Nodes: 11
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))
-  Kernel Note:     Verified in IncompletenessMechanization.derive_loeb_trace (incompleteness.ML:1103-1215, 10-step derivation of Löb's theorem from the Diagonal Lemma fixed point ψ ⟷ ((𝘛, [] ⊢ ψ) —→ φ), Hilbert-Bernays-Löb derivability conditions D1-D3, and propositional axioms A01, A02, MP, bridged to a 10-node kernel certificate in IncompletenessMKTD1Kernel). Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
-  Verification:    Verified (Relative to DiagonalLemma & HBL D1-D3)
+  Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
 [5.02 / ThmSecondIncompleteness] Gödel's second incompleteness theorem (Theorem)
   Name:            ThmSecondIncompleteness
@@ -97,6 +97,6 @@
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace
   Axioms Used:     AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege | Definitions Used: ThmSecondIncompleteness, ThmLoeb | Kernel Prf Nodes: 11
   Scheme of Types: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
-  Kernel Note:     Verified in IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML:1229-1261, 5-step derivation of Gödel's second incompleteness theorem instantiating 5.01 Löb's theorem at φ := ⊥, internalizing the forward negation elimination law ¬α —→ (α —→ ⊥) via A09 inside 𝘛 with HBL D1-D2, and applying contrapositive via A10 in 𝘌, bridged to an 11-node kernel certificate in IncompletenessMKTD1Kernel). Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
-  Verification:    Verified (Relative to ThmLoeb & HBL D1-D2)
+  Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
+  Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
