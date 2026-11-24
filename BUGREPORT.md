@@ -22,7 +22,7 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 - **Symptom:** Semantic brackets around conditional definitions and denotations rendered as red slashes with raw command strings (`\llbracket \text{if} \dots \rrbracket`).
 - **Root Cause:** MathJax 3 does not include the legacy LaTeX `stmaryrd` package by default. Furthermore, template strings contained occasional typos (`\rrbracket`).
 - **Fix Applied:**
-  1. Updated [`tools/systematic_catalog_generator.py`](file:///botworkspace/tools/systematic_catalog_generator.py) to configure MathJax with explicit Unicode math macros:
+  1. Updated `tools/systematic_catalog_generator.py` to configure MathJax with explicit Unicode math macros:
      ```javascript
      tex: {
        inlineMath: [['$', '$'], ['\\(', '\\)']],
@@ -54,15 +54,15 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 - **Symptom:** `(if _ then _ else _)` was modeled as a class antiquotation `EInject (HC (CpIf ...))` rather than a first-class syntactic constructor of terms parameterized by expressions (`'a_expression`).
 - **Root Cause:** In the legacy ML grammar, `CpIf` was bound within `Class_p` (class anti-quotation) instead of being a generic constructor of `'a_expression`.
 - **Fix Applied:**
-  1. Added first-class constructor `| EIf of (Truth_Expre   sion * 'a_expre   sion * 'a_expre   sion)` to `'a_expre   sion` in [`program/types/typetheory.ML`](file:///botworkspace/set_theory_prover/program/types/typetheory.ML#L1360).
-  2. Implemented pretty-printer arm in [`program/newchecker.ML`](file:///botworkspace/set_theory_prover/program/newchecker.ML#L1805):
+  1. Added first-class constructor `| EIf of (Truth_Expre   sion * 'a_expre   sion * 'a_expre   sion)` to `'a_expre   sion` in `program/types/typetheory.ML`.
+  2. Implemented pretty-printer arm in `program/newchecker.ML`:
      ```sml
      | sion_toString (EIf (p, t1, t2)) =
          "⟦IF " ^ (Truth_Expression_toString p) ^ " THEN " ^ (sion_toString t1) ^ " ELSE " ^ (sion_toString t2) ^ " FI⟧"
      ```
   3. Extended freeness checks (`sion_isFree`, `Class_Expression_isFree`) and capture-avoiding substitution traversals (`sion_simSubst`, `Class_Expression_simSubst`, `Truth_Expression_simSubst`).
-  4. Updated `class_if_then_else_def_entry_fm` in [`program/types/foundations.ML`](file:///botworkspace/set_theory_prover/program/types/foundations.ML#L3836) to directly produce `EIf`.
-  5. Verified against test suite in [`tests/test_curated_tickets.py`](file:///botworkspace/set_theory_prover/tests/test_curated_tickets.py).
+  4. Updated `class_if_then_else_def_entry_fm` in `program/types/foundations.ML` to directly produce `EIf`.
+  5. Verified against test suite in `tests/test_curated_tickets.py`.
 - **Status:** **RESOLVED & VERIFIED**.
 
 ---
@@ -70,7 +70,7 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 ### BUG-003: `value_def_entry_fm` in `foundations.ML` Used Deprecated `CpIf`
 - **Severity:** Medium (Consistency & PolyML Kernel Soundness)
 - **Subprojects:** `set_theory_prover`
-- **Location:** [`program/types/foundations.ML:3951`](file:///botworkspace/set_theory_prover/program/types/foundations.ML#L3948-L3955).
+- **Location:** `program/types/foundations.ML:3951`.
 - **Symptom:** While `class_if_then_else_def_entry_fm` was refactored to `EIf`, `value_def_entry_fm` was still generating `EInject (HC (CpIf (con, valu, constV)))`.
 - **Root Cause:** Overlooked during initial refactoring pass.
 - **Fix Applied:** Refactored line 3951 to:
@@ -86,7 +86,7 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 ### BUG-004: Dashboard Sentinel Button Non-Compliance with Design Spec
 - **Severity:** Medium (UI/UX Branding & Workflow Consistency)
 - **Subprojects:** `mybot`
-- **Location:** [`mybot/local-gitlab/server.py:6018`](file:///botworkspace/mybot/local-gitlab/server.py#L6018) and `/dashboard`.
+- **Location:** `mybot/local-gitlab/server.py:6018` and `/dashboard`.
 - **Symptom:** The Sentinel release button on the GitLab dashboard was rendered as a generic HTML text button ("RELEASE ALL SENTIENTS") instead of adhering to the visual graphic specification in `/botworkspace/design/SENTINEL_SPEC.md`.
 - **Root Cause:** Initial placeholder implementation failed to link the dedicated graphical asset `/preview/design/assets/sentinels/release_the_sentinels_button.jpg`.
 - **Fix Applied:**
@@ -105,7 +105,7 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 ### BUG-005: 404 Route Error for `/api/planner/release-sentinels`
 - **Severity:** Medium (API Integrity)
 - **Subprojects:** `mybot`
-- **Location:** [`mybot/local-gitlab/server.py:2764`](file:///botworkspace/mybot/local-gitlab/server.py#L2764).
+- **Location:** `mybot/local-gitlab/server.py:2764`.
 - **Symptom:** Invoking `/api/planner/release-sentinels` returned HTTP 404 because the legacy endpoint was misspelled as `/api/planner/release-sentients`.
 - **Root Cause:** Naming discrepancy between the UI trigger script and the backend HTTP handler.
 - **Fix Applied:** Registered `/api/planner/release-sentinels` as an official first-class endpoint alias in `server.py` handling both GET and POST requests.
@@ -118,22 +118,22 @@ During systematic auditing of the Standard ML proof checker codebase, theory cat
 Per user instructions, deeper mathematical, architectural, and web inconsistencies have been structured into interactive multiple-choice questions on the GitLab Dashboard (`http://127.0.0.1:8929/questions`):
 
 ### Problem 1: Ordinal Induction ($\in$-Ind) Formulation (Question #19)
-- **Location:** [`manual.html#3.32`](file:///botworkspace/obeliskproofassistant.github.io/manual.html#3.32) and [`program/newchecker.ML:9248`](file:///botworkspace/set_theory_prover/program/newchecker.ML#L9248).
+- **Location:** `manual.html#3.32` and `program/newchecker.ML:9248`.
 - **Issue:** Ordinal induction is currently presented as an Axiom Schema (`PEpsIndAx_prf`). However, in Morse-Kelley class theory, the class of ordinals $On$ is a class object, not a syntactic type. Formulas with variables are standard formulas, whereas theorem schemata strictly imply witness proof programs. Since $\in$ is well-founded on sets by Foundation/Regularity, $\in$-induction can and should be formally derived as a theorem schema.
 - **Escalated Question:** [Question #19 on Dashboard](http://127.0.0.1:8929/questions) (Recommended Option A: Formal derivation of Theorem Schema).
 
 ### Problem 2: Proper Classes & Pairing Soundness (Question #20)
-- **Location:** [`program/newchecker.ML:5040`](file:///botworkspace/set_theory_prover/program/newchecker.ML#L5040).
+- **Location:** `program/newchecker.ML:5040`.
 - **Issue:** In Morse-Kelley class theory, proper classes cannot be elements of sets. Standard Kuratowski pairs $(a, b) = \{\{a\}, \{a, b\}\}$ fail when $a$ or $b$ are proper classes. Dunaev Tagged Ordered Pairs $(A, B)_D = (\{0\} \times A) \cup (\{1\} \times B)$ resolve this limitation. `CpOPair` in `newchecker.ML` does not currently delineate set-level Kuratowski pairs from class-level Dunaev pairs.
 - **Escalated Question:** [Question #20 on Dashboard](http://127.0.0.1:8929/questions) (Recommended Option A: Delineate into `SetOPair` and `ClassOPair`).
 
 ### Problem 3: Incompleteness Section 6 Proof Derivation Gaps (Question #21)
-- **Location:** [`program/newchecker.ML:12400`](file:///botworkspace/set_theory_prover/program/newchecker.ML#L12400).
+- **Location:** `program/newchecker.ML:12400`.
 - **Issue:** Section 6 (Löb's theorem 6.02, Gödel's second incompleteness theorem 6.03) contains the explicit comment: `"(WIP: too much known errors in this section)"` and lacks full witness proof derivations.
 - **Escalated Question:** [Question #21 on Dashboard](http://127.0.0.1:8929/questions) (Recommended Option A: Isolate into `program/incompleteness.ML`).
 
 ### Problem 4: Web REPL Client-Side Lag vs Live PolyML Kernel (Question #22)
-- **Location:** [`obeliskproofassistant.github.io/repl.html`](file:///botworkspace/obeliskproofassistant.github.io/repl.html) and [`js/obelisk_engine.js`](file:///botworkspace/obeliskproofassistant.github.io/js/obelisk_engine.js).
+- **Location:** `obeliskproofassistant.github.io/repl.html` and `js/obelisk_engine.js`.
 - **Issue:** The client-side JavaScript emulator lacks recent AST additions (such as `EIf`) and cannot evaluate multi-approach tactics available in PolyML. The local GitLab backend already hosts `/api/obelisk/compile`.
 - **Escalated Question:** [Question #22 on Dashboard](http://127.0.0.1:8929/questions) (Recommended Option A: Hybrid architecture with live PolyML backend and offline fallback).
 

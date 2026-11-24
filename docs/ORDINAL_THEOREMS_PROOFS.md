@@ -261,7 +261,7 @@ Following `program/types/foundations.ML`, `generated/theory_db.json`, and `progr
 
 ## 3. Poly/ML Typed Verification Mapping
 
-Every theorem and auxiliary lemma above corresponds to a typed record verified in [`program/ordinal_theorems.ML`](../program/ordinal_theorems.ML) and tested in [`tests/test_ordinal_theorems.py`](../tests/test_ordinal_theorems.py):
+Every theorem and auxiliary lemma above corresponds to a typed record verified in [`program/ordinal_theorems.ML`](https://github.com/georgydunaev/set_theory_prover/blob/main/program/ordinal_theorems.ML) and tested in [`tests/test_ordinal_theorems.py`](https://github.com/georgydunaev/set_theory_prover/blob/main/tests/test_ordinal_theorems.py):
 
 | ID / Lemma | SML Record Name | Domain & Hypotheses | Upstream Proof Dependencies (Acyclic DAG) |
 | :--- | :--- | :--- | :--- |

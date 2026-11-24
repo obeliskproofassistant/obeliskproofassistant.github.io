@@ -125,7 +125,7 @@
 <li><strong>Fix Applied:</strong></li>
 </ul>
 <ol>
-<li>Updated <a href="file:///botworkspace/tools/systematic_catalog_generator.py"><code>tools/systematic_catalog_generator.py</code></a> to configure MathJax with explicit Unicode math macros:</li>
+<li>Updated <code>tools/systematic_catalog_generator.py</code> to configure MathJax with explicit Unicode math macros:</li>
 </ol>
 <pre><code class="language-javascript">     tex: {
        inlineMath: [[&#x27;$&#x27;, &#x27;$&#x27;], [&#x27;\\(&#x27;, &#x27;\\)&#x27;]],
@@ -161,15 +161,15 @@
 <li><strong>Fix Applied:</strong></li>
 </ul>
 <ol>
-<li>Added first-class constructor <code>| EIf of (Truth_Expre   sion <em> &#x27;a_expre   sion </em> &#x27;a_expre   sion)</code> to <code>&#x27;a_expre   sion</code> in <a href="file:///botworkspace/set_theory_prover/program/types/typetheory.ML#L1360"><code>program/types/typetheory.ML</code></a>.</li>
-<li>Implemented pretty-printer arm in <a href="file:///botworkspace/set_theory_prover/program/newchecker.ML#L1805"><code>program/newchecker.ML</code></a>:</li>
+<li>Added first-class constructor <code>| EIf of (Truth_Expre   sion <em> &#x27;a_expre   sion </em> &#x27;a_expre   sion)</code> to <code>&#x27;a_expre   sion</code> in <code>program/types/typetheory.ML</code>.</li>
+<li>Implemented pretty-printer arm in <code>program/newchecker.ML</code>:</li>
 </ol>
 <pre><code class="language-sml">     | sion_toString (EIf (p, t1, t2)) =
          &quot;⟦IF &quot; ^ (Truth_Expression_toString p) ^ &quot; THEN &quot; ^ (sion_toString t1) ^ &quot; ELSE &quot; ^ (sion_toString t2) ^ &quot; FI⟧&quot;</code></pre>
 <ol>
 <li>Extended freeness checks (<code>sion_isFree</code>, <code>Class_Expression_isFree</code>) and capture-avoiding substitution traversals (<code>sion_simSubst</code>, <code>Class_Expression_simSubst</code>, <code>Truth_Expression_simSubst</code>).</li>
-<li>Updated <code>class_if_then_else_def_entry_fm</code> in <a href="file:///botworkspace/set_theory_prover/program/types/foundations.ML#L3836"><code>program/types/foundations.ML</code></a> to directly produce <code>EIf</code>.</li>
-<li>Verified against test suite in <a href="file:///botworkspace/set_theory_prover/tests/test_curated_tickets.py"><code>tests/test_curated_tickets.py</code></a>.</li>
+<li>Updated <code>class_if_then_else_def_entry_fm</code> in <code>program/types/foundations.ML</code> to directly produce <code>EIf</code>.</li>
+<li>Verified against test suite in <code>tests/test_curated_tickets.py</code>.</li>
 </ol>
 <ul>
 <li><strong>Status:</strong> <strong>RESOLVED &amp; VERIFIED</strong>.</li>
@@ -179,7 +179,7 @@
 <ul>
 <li><strong>Severity:</strong> Medium (Consistency &amp; PolyML Kernel Soundness)</li>
 <li><strong>Subprojects:</strong> <code>set_theory_prover</code></li>
-<li><strong>Location:</strong> <a href="file:///botworkspace/set_theory_prover/program/types/foundations.ML#L3948-L3955"><code>program/types/foundations.ML:3951</code></a>.</li>
+<li><strong>Location:</strong> <code>program/types/foundations.ML:3951</code>.</li>
 <li><strong>Symptom:</strong> While <code>class_if_then_else_def_entry_fm</code> was refactored to <code>EIf</code>, <code>value_def_entry_fm</code> was still generating <code>EInject (HC (CpIf (con, valu, constV)))</code>.</li>
 <li><strong>Root Cause:</strong> Overlooked during initial refactoring pass.</li>
 <li><strong>Fix Applied:</strong> Refactored line 3951 to:</li>
@@ -195,7 +195,7 @@
 <ul>
 <li><strong>Severity:</strong> Medium (UI/UX Branding &amp; Workflow Consistency)</li>
 <li><strong>Subprojects:</strong> <code>mybot</code></li>
-<li><strong>Location:</strong> <a href="file:///botworkspace/mybot/local-gitlab/server.py#L6018"><code>mybot/local-gitlab/server.py:6018</code></a> and <code>/dashboard</code>.</li>
+<li><strong>Location:</strong> <code>mybot/local-gitlab/server.py:6018</code> and <code>/dashboard</code>.</li>
 <li><strong>Symptom:</strong> The Sentinel release button on the GitLab dashboard was rendered as a generic HTML text button (&quot;RELEASE ALL SENTIENTS&quot;) instead of adhering to the visual graphic specification in <code>/botworkspace/design/SENTINEL_SPEC.md</code>.</li>
 <li><strong>Root Cause:</strong> Initial placeholder implementation failed to link the dedicated graphical asset <code>/preview/design/assets/sentinels/release_the_sentinels_button.jpg</code>.</li>
 <li><strong>Fix Applied:</strong></li>
@@ -218,7 +218,7 @@
 <ul>
 <li><strong>Severity:</strong> Medium (API Integrity)</li>
 <li><strong>Subprojects:</strong> <code>mybot</code></li>
-<li><strong>Location:</strong> <a href="file:///botworkspace/mybot/local-gitlab/server.py#L2764"><code>mybot/local-gitlab/server.py:2764</code></a>.</li>
+<li><strong>Location:</strong> <code>mybot/local-gitlab/server.py:2764</code>.</li>
 <li><strong>Symptom:</strong> Invoking <code>/api/planner/release-sentinels</code> returned HTTP 404 because the legacy endpoint was misspelled as <code>/api/planner/release-sentients</code>.</li>
 <li><strong>Root Cause:</strong> Naming discrepancy between the UI trigger script and the backend HTTP handler.</li>
 <li><strong>Fix Applied:</strong> Registered <code>/api/planner/release-sentinels</code> as an official first-class endpoint alias in <code>server.py</code> handling both GET and POST requests.</li>
@@ -229,25 +229,25 @@
 <p>Per user instructions, deeper mathematical, architectural, and web inconsistencies have been structured into interactive multiple-choice questions on the GitLab Dashboard (<code>http://127.0.0.1:8929/questions</code>):</p>
 <h3 id="problem-1-ordinal-induction-in-ind-formulation-question-19">Problem 1: Ordinal Induction ($\in$-Ind) Formulation (Question #19)</h3>
 <ul>
-<li><strong>Location:</strong> <a href="file:///botworkspace/obeliskproofassistant.github.io/manual.html#3.32"><code>manual.html#3.32</code></a> and <a href="file:///botworkspace/set_theory_prover/program/newchecker.ML#L9248"><code>program/newchecker.ML:9248</code></a>.</li>
+<li><strong>Location:</strong> <code>manual.html#3.32</code> and <code>program/newchecker.ML:9248</code>.</li>
 <li><strong>Issue:</strong> Ordinal induction is currently presented as an Axiom Schema (<code>PEpsIndAx_prf</code>). However, in Morse-Kelley class theory, the class of ordinals $On$ is a class object, not a syntactic type. Formulas with variables are standard formulas, whereas theorem schemata strictly imply witness proof programs. Since $\in$ is well-founded on sets by Foundation/Regularity, $\in$-induction can and should be formally derived as a theorem schema.</li>
 <li><strong>Escalated Question:</strong> <a href="http://127.0.0.1:8929/questions">Question #19 on Dashboard</a> (Recommended Option A: Formal derivation of Theorem Schema).</li>
 </ul>
 <h3 id="problem-2-proper-classes-pairing-soundness-question-20">Problem 2: Proper Classes &amp; Pairing Soundness (Question #20)</h3>
 <ul>
-<li><strong>Location:</strong> <a href="file:///botworkspace/set_theory_prover/program/newchecker.ML#L5040"><code>program/newchecker.ML:5040</code></a>.</li>
+<li><strong>Location:</strong> <code>program/newchecker.ML:5040</code>.</li>
 <li><strong>Issue:</strong> In Morse-Kelley class theory, proper classes cannot be elements of sets. Standard Kuratowski pairs $(a, b) = \{\{a\}, \{a, b\}\}$ fail when $a$ or $b$ are proper classes. Dunaev Tagged Ordered Pairs $(A, B)_D = (\{0\} \times A) \cup (\{1\} \times B)$ resolve this limitation. <code>CpOPair</code> in <code>newchecker.ML</code> does not currently delineate set-level Kuratowski pairs from class-level Dunaev pairs.</li>
 <li><strong>Escalated Question:</strong> <a href="http://127.0.0.1:8929/questions">Question #20 on Dashboard</a> (Recommended Option A: Delineate into <code>SetOPair</code> and <code>ClassOPair</code>).</li>
 </ul>
 <h3 id="problem-3-incompleteness-section-6-proof-derivation-gaps-question-21">Problem 3: Incompleteness Section 6 Proof Derivation Gaps (Question #21)</h3>
 <ul>
-<li><strong>Location:</strong> <a href="file:///botworkspace/set_theory_prover/program/newchecker.ML#L12400"><code>program/newchecker.ML:12400</code></a>.</li>
+<li><strong>Location:</strong> <code>program/newchecker.ML:12400</code>.</li>
 <li><strong>Issue:</strong> Section 6 (Löb&#x27;s theorem 6.02, Gödel&#x27;s second incompleteness theorem 6.03) contains the explicit comment: <code>&quot;(WIP: too much known errors in this section)&quot;</code> and lacks full witness proof derivations.</li>
 <li><strong>Escalated Question:</strong> <a href="http://127.0.0.1:8929/questions">Question #21 on Dashboard</a> (Recommended Option A: Isolate into <code>program/incompleteness.ML</code>).</li>
 </ul>
 <h3 id="problem-4-web-repl-client-side-lag-vs-live-polyml-kernel-question-22">Problem 4: Web REPL Client-Side Lag vs Live PolyML Kernel (Question #22)</h3>
 <ul>
-<li><strong>Location:</strong> <a href="file:///botworkspace/obeliskproofassistant.github.io/repl.html"><code>obeliskproofassistant.github.io/repl.html</code></a> and <a href="file:///botworkspace/obeliskproofassistant.github.io/js/obelisk_engine.js"><code>js/obelisk_engine.js</code></a>.</li>
+<li><strong>Location:</strong> <code>obeliskproofassistant.github.io/repl.html</code> and <code>js/obelisk_engine.js</code>.</li>
 <li><strong>Issue:</strong> The client-side JavaScript emulator lacks recent AST additions (such as <code>EIf</code>) and cannot evaluate multi-approach tactics available in PolyML. The local GitLab backend already hosts <code>/api/obelisk/compile</code>.</li>
 <li><strong>Escalated Question:</strong> <a href="http://127.0.0.1:8929/questions">Question #22 on Dashboard</a> (Recommended Option A: Hybrid architecture with live PolyML backend and offline fallback).</li>
 </ul>

@@ -131,8 +131,8 @@ In Von Neumann-Bernays-Gödel (NBG) set theory with classes:
   This establishes that the collection of all ordinals forms an **Ordinal Class** ($\text{OrdClass}(\text{On})$).
 
 - **Links:**
-  - Mathematical Specification: [ORDINAL_THEOREMS_PROOFS.md](file:///botworkspace/set_theory_prover/formal/ORDINAL_THEOREMS_PROOFS.md#L220-L233)
-  - Formal Program: [`thm_O11_on_ord_class`](file:///botworkspace/set_theory_prover/program/ordinal_theorems.ML#L204-L214)
+  - Mathematical Specification: ORDINAL_THEOREMS_PROOFS.md
+  - Formal Program: `thm_O11_on_ord_class`
 
 &lt;!-- slide --&gt;
 ### Slide 2: Part I — Transitivity of $\text{On}$ ($\text{Trans}(\text{On})$)
@@ -241,7 +241,7 @@ If $\text{On}$ is an ordinal class, why does Cesare Burali-Forti&#x27;s (1897) p
 &lt;!-- slide --&gt;
 ### Slide 5: Part IV — Formal Verification in Obelisk Dependent Type Kernel
 
-In Obelisk&#x27;s kernel ([`program/dependent_typechecker.ML`](file:///botworkspace/set_theory_prover/program/dependent_typechecker.ML)), theorems are types and proofs are terms:
+In Obelisk&#x27;s kernel (`program/dependent_typechecker.ML`), theorems are types and proofs are terms:
 </code></pre>
 <p>(<em> Definition in program/ordinal_theorems.ML </em>)</p>
 <p>val thm_O11_on_ord_class : TheoremRecord = {</p>
@@ -280,7 +280,7 @@ To comply with the **de Bruijn criterion**, the proof certificate is exported an
 <p>ax_on_trans</p>
 <p>ax_on_elements_ord;</p>
 <pre><code>
-**External Verifier Execution ([`tools/verify_dedukti_certificates.py`](file:///botworkspace/set_theory_prover/tools/verify_dedukti_certificates.py)):**</code></pre>
+**External Verifier Execution (`tools/verify_dedukti_certificates.py`):**</code></pre>
 <p>$ python3 tools/verify_dedukti_certificates.py</p>
 <p>==================================================================</p>
 <p>OBELISK INDEPENDENT DEDUKTI / LAMBDAPI CERTIFICATE VERIFIER</p>

@@ -27,8 +27,8 @@ In Von Neumann-Bernays-Gödel (NBG) set theory with classes:
   This establishes that the collection of all ordinals forms an **Ordinal Class** ($\text{OrdClass}(\text{On})$).
 
 - **Links:**
-  - Mathematical Specification: [ORDINAL_THEOREMS_PROOFS.md](file:///botworkspace/set_theory_prover/formal/ORDINAL_THEOREMS_PROOFS.md#L220-L233)
-  - Formal Program: [`thm_O11_on_ord_class`](file:///botworkspace/set_theory_prover/program/ordinal_theorems.ML#L204-L214)
+  - Mathematical Specification: ORDINAL_THEOREMS_PROOFS.md
+  - Formal Program: `thm_O11_on_ord_class`
 
 <!-- slide -->
 ### Slide 2: Part I — Transitivity of $\text{On}$ ($\text{Trans}(\text{On})$)
@@ -143,7 +143,7 @@ If $\text{On}$ is an ordinal class, why does Cesare Burali-Forti's (1897) parado
 <!-- slide -->
 ### Slide 5: Part IV — Formal Verification in Obelisk Dependent Type Kernel
 
-In Obelisk's kernel ([`program/dependent_typechecker.ML`](file:///botworkspace/set_theory_prover/program/dependent_typechecker.ML)), theorems are types and proofs are terms:
+In Obelisk's kernel (`program/dependent_typechecker.ML`), theorems are types and proofs are terms:
 
 ```sml
 (* Definition in program/ordinal_theorems.ML *)
@@ -188,7 +188,7 @@ def thm_O11_on_ord_class : Proof (And (Trans On) (Forall "a" TClass (Impl (In (V
           ax_on_elements_ord;
 ```
 
-**External Verifier Execution ([`tools/verify_dedukti_certificates.py`](file:///botworkspace/set_theory_prover/tools/verify_dedukti_certificates.py)):**
+**External Verifier Execution (`tools/verify_dedukti_certificates.py`):**
 ```text
 $ python3 tools/verify_dedukti_certificates.py
 ==================================================================
