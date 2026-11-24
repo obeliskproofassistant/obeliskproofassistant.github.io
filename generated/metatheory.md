@@ -124,7 +124,9 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
 - **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace`
-- **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum | Definitions Used: ThmLoeb | Kernel Prf Nodes: 11`
+- **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum`
+- **Definitions Used:** `ThmLoeb`
+- **Kernel Prf Nodes:** `11`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
@@ -134,7 +136,9 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace`
-- **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege | Definitions Used: ThmSecondIncompleteness, ThmLoeb | Kernel Prf Nodes: 11`
+- **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege`
+- **Definitions Used:** `ThmSecondIncompleteness, ThmLoeb`
+- **Kernel Prf Nodes:** `11`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 

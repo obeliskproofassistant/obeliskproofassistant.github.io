@@ -72,7 +72,9 @@
   Name:            ThmEmptySetIsSubclass
   Formula [0]:     (∀(X:Class)(∅⊆X))
   SML Kernel AST:  PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso | Definitions Used: DefEmptySet, DefIff, DefSubclass | Kernel Prf Nodes: 95
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso
+  Definitions Used: DefEmptySet, DefIff, DefSubclass
+  Kernel Prf Nodes: 95
   Scheme of Types: (∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))
   Kernel Note:     Derived theorem in MKTD1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in MKTD2.
   Verification:    Verified
@@ -81,7 +83,9 @@
   Name:            AxmIntensionality
   Formula [0]:     (∀(X:Class)∀(Y:Class)(((X set)∧(Y set))—→((∀(W:Class)((X∈W)←→(Y∈W)))—→(X=Y))))
   SML Kernel AST:  thm_3_11_intensionality (PForaR_prf / PImplR_prf / PComprAx_prf / PLeftInSoundAx_prf)
-  Axioms Used:     RulClassComprehension | Definitions Used: DefSubclass, DefIff, DefClassEq | Kernel Prf Nodes: 277
+  Axioms Used:     RulClassComprehension
+  Definitions Used: DefSubclass, DefIff, DefClassEq
+  Kernel Prf Nodes: 277
   Scheme of Types: (∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))—→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression]))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_11_intensionality : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical anchor identifier AxmIntensionality retained for link stability): if X and Y are sets and belong to the same classes W, instantiating W with the singleton comprehension class { u : Class | u = X } yields Y = X and hence X = Y.
   Verification:    Verified
@@ -90,7 +94,9 @@
   Name:            ThmOrdinalsIsOrdinal
   Formula [0]:     Ord(On)
   SML Kernel AST:  thm_on_is_ordinal (POrdDef_prf / PTransDef_prf / PSubDef_prf / PComprAx_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension | Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass | Kernel Prf Nodes: 555
+  Axioms Used:     AxmLeftInSound, RulClassComprehension
+  Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass
+  Kernel Prf Nodes: 555
   Scheme of Types: Ord(On)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_on_is_ordinal and thm_on_is_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check); combined with thm_not_in_self, this directly yields the Burali-Forti properness theorem (thm_burali_forti_on_proper : Proper(On)).
   Verification:    Verified
@@ -99,7 +105,9 @@
   Name:            ThmFamilyEvaluation
   Formula [0]:     (∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))
   SML Kernel AST:  thm_3_37_family_eval_when_defined (PKernelDef_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound | Definitions Used: DefValueAtArg, DefBigDomain, DefFamily, DefUnaryUnion | Kernel Prf Nodes: 11
+  Axioms Used:     RulClassComprehension, AxmLeftInSound
+  Definitions Used: DefValueAtArg, DefBigDomain, DefFamily, DefUnaryUnion
+  Kernel Prf Nodes: 11
   Scheme of Types: (∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_37_family_eval_when_defined : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.
   Verification:    Verified
@@ -108,7 +116,9 @@
   Name:            DefSigmaModel
   Formula [0]:     (∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))
   SML Kernel AST:  thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 161572
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity
+  Definitions Used: DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass
+  Kernel Prf Nodes: 161572
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))
   Kernel Note:     Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
   Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
@@ -117,7 +127,9 @@
   Name:            DefPiPredicateModel
   Formula [0]:     (∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))
   SML Kernel AST:  thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)
-  Axioms Used:     (none -- pure sequent / definitional) | Kernel Prf Nodes: 25
+  Axioms Used:     (none -- pure sequent / definitional)
+  Definitions Used: (none)
+  Kernel Prf Nodes: 25
   Scheme of Types: (∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).
   Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
@@ -126,7 +138,9 @@
   Name:            ThmUniversalClassInductive
   Formula [0]:     Ind(V)
   SML Kernel AST:  thm_3_58_v_inductive (PAndR_prf / PForaR_prf / PPairSetAx_prf / PComprAx_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmPropVerum, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefUniversalClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefSingletonSet, DefClassEq, DefBinaryUnion, DefIsSet, DefUnaryUnion | Kernel Prf Nodes: 3985
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmPropVerum, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx, AxmRightInSound
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefUniversalClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefSingletonSet, DefClassEq, DefBinaryUnion, DefIsSet, DefUnaryUnion
+  Kernel Prf Nodes: 3985
   Scheme of Types: Ind(V)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_58_v_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).
   Verification:    Verified
@@ -135,7 +149,9 @@
   Name:            ThmOmegaInductive
   Formula [0]:     Ind(ω)
   SML Kernel AST:  thm_3_59_omega_inductive (PKernelDef_prf / PAndR_prf / PForaR_prf)
-  Axioms Used:     (none -- pure sequent / definitional) | Definitions Used: DefInductiveClass, DefIff, DefOmega | Kernel Prf Nodes: 160
+  Axioms Used:     (none -- pure sequent / definitional)
+  Definitions Used: DefInductiveClass, DefIff, DefOmega
+  Kernel Prf Nodes: 160
   Scheme of Types: Ind(ω)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_59_omega_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order. (Because 3.56 DefOmega quantifies directly over all inductive classes Q without a separate (x set) guard on the RHS, Ind(ω) follows from DefOmega and DefInductiveClass alone; sethood of ∅ and ω in downstream theorems is grounded in 3.57 AxmOmegaIsSet and 3.12 AxmHeredity.)
   Verification:    Verified
@@ -144,7 +160,9 @@
   Name:            ThmOrdinalsInductive
   Formula [0]:     Ind(On)
   SML Kernel AST:  thm_3_60_on_inductive (PKernelDef_prf / PPowSetAx_prf / PHeredityAx_prf / PComprAx_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmExponent | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefTransitiveClass, DefOrdinalClass, DefClassOfOrdinals, DefBinaryUnion, DefIsSet, DefPowerClass, DefSingletonSet, DefClassEq, DefInductiveClass | Kernel Prf Nodes: 2705
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmExponent
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefTransitiveClass, DefOrdinalClass, DefClassOfOrdinals, DefBinaryUnion, DefIsSet, DefPowerClass, DefSingletonSet, DefClassEq, DefInductiveClass
+  Kernel Prf Nodes: 2705
   Scheme of Types: Ind(On)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_60_on_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved without a separate union-set axiom by showing that for any transitive set a in On, (a u {a}) c= Pow(a), so AxmExponent (PowSetAx) and AxmHeredity (HeredityAx) yield Set(a u {a}), which combines with thm_ord_succ_is_ordinal to give (a u {a}) in On.
   Verification:    Verified
@@ -153,7 +171,9 @@
   Name:            ThmOmegaTransitive
   Formula [0]:     Tr(ω)
   SML Kernel AST:  thm_3_61_omega_transitive (PTransDef_prf / PSubDef_prf / PComprAx_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq | Kernel Prf Nodes: 2696
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq
+  Kernel Prf Nodes: 2696
   Scheme of Types: Tr(ω)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_61_omega_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.
   Verification:    Verified
@@ -162,7 +182,9 @@
   Name:            ThmOmegaOrdinal
   Formula [0]:     Ord(ω)
   SML Kernel AST:  thm_3_62_omega_ordinal (POrdDef_prf / PAndR_prf / PForaR_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq | Kernel Prf Nodes: 5419
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq
+  Kernel Prf Nodes: 5419
   Scheme of Types: Ord(ω)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_62_omega_ordinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.
   Verification:    Verified
@@ -171,7 +193,9 @@
   Name:            ThmOmegaInOrdinals
   Formula [0]:     (ω∈On)
   SML Kernel AST:  thm_3_63_omega_in_on (PMP_prf / POmegaSetAx_prf / PComprAx_prf)
-  Axioms Used:     AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals | Kernel Prf Nodes: 5479
+  Axioms Used:     AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals
+  Kernel Prf Nodes: 5479
   Scheme of Types: (ω∈On)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_63_omega_in_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.
   Verification:    Verified
@@ -180,7 +204,9 @@
   Name:            ThmOmegaCardinal
   Formula [0]:     Card(ω)
   SML Kernel AST:  thm_3_65_omega_card_sub_on (PAndR_prf / POmegaSetAx_prf / PKernelDef_prf)
-  Axioms Used:     AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound | Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefCardinality, DefIsCardinal | Kernel Prf Nodes: 5488
+  Axioms Used:     AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound
+  Definitions Used: DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefCardinality, DefIsCardinal
+  Kernel Prf Nodes: 5488
   Scheme of Types: Card(ω)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_65_omega_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.
   Verification:    Verified
@@ -189,7 +215,9 @@
   Name:            ThmOrdinalsCardinal
   Formula [0]:     Card(On)
   SML Kernel AST:  thm_3_66_on_card_sub_on (PIsCardinalDef_prf / PExisR_prf / PCardinalityDef_prf / PSizeLimAx_prf / PCardLessOrderAx_prf / PUnaryInterDef_prf / PEqDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmSizeLimitation, CardLessOrderAx, AxmPropNegElim, AxmPropExFalso | Definitions Used: DefCardinality, DefBinaryIntersection, DefIff, DefIsSet, DefSubclass, DefUniversalClass, DefCardLess, DefUnaryIntersection, DefClassEq, DefIsCardinal | Kernel Prf Nodes: 1141
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmSizeLimitation, CardLessOrderAx, AxmPropNegElim, AxmPropExFalso
+  Definitions Used: DefCardinality, DefBinaryIntersection, DefIff, DefIsSet, DefSubclass, DefUniversalClass, DefCardLess, DefUnaryIntersection, DefClassEq, DefIsCardinal
+  Kernel Prf Nodes: 1141
   Scheme of Types: Card(On)
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_66_on_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): proves (On cardinal) by taking K := V as the witness in 3.64 DefIsCardinal (∃K(|K| = On)). For every a ∈ S_V = {a | (a ∈ On) ∧ (V ≼ a)}, a ∈ On implies a set (3.02 DefIsSet) and hence a ∈ V (3.05 DefUniversalClass), which by 3.43 AxmSizeLimitation (PSizeLimAx_prf), CardLessOrderAx (PCardLessOrderAx_prf), and 3.42 DefCardLess yields a ≺ V ⟷ ¬(V ≼ a), contradicting V ≼ a. Hence S_V is empty, every x ∈ On belongs to ⋂S_V (3.20 DefUnaryIntersection), |V| = On ∩ ⋂S_V = On (3.41 DefCardinality, 3.10 DefClassEq), and therefore Card(On) holds.
   Verification:    Verified
@@ -198,7 +226,9 @@
   Name:            ThmUniversalClassNotCardinal
   Formula [0]:     (¬Card(V))
   SML Kernel AST:  thm_3_67_v_not_cardinal (PNegR_prf / PPairSetAx_prf / PLeftInSoundAx_prf / PKernelDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, PairSetAx, AxmPropVerum, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound, AxmPropNegElim | Definitions Used: DefIsCardinal, DefIff, DefUniversalClass, DefUnorderedPair, DefPairfulClass, DefEmptySet, DefSubclass, DefSingletonSet, DefClassEq, DefCardinality, DefBinaryIntersection, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass | Kernel Prf Nodes: 6099
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, PairSetAx, AxmPropVerum, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound, AxmPropNegElim
+  Definitions Used: DefIsCardinal, DefIff, DefUniversalClass, DefUnorderedPair, DefPairfulClass, DefEmptySet, DefSubclass, DefSingletonSet, DefClassEq, DefCardinality, DefBinaryIntersection, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass
+  Kernel Prf Nodes: 6099
   Scheme of Types: (¬Card(V))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_67_v_not_cardinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from first principles by constructing {{emptyset}} in V, showing {{emptyset}} is not transitive and hence not in On, whereas |K| c= On for every class K.
   Verification:    Verified
@@ -207,7 +237,9 @@
   Name:            ThmUniversalClassIsUniverse
   Formula [0]:     (V universe)
   SML Kernel AST:  v_universe_thm (PAndR_prf / POmegaSetAx_prf / PHeredityAx_prf / PPowSetAx_prf / PSizeLimAx_prf / PPairSetAx_prf)
-  Axioms Used:     AxmOmegaIsSet, AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmHeredity, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx | Definitions Used: DefIff, DefUniversalClass, DefIsSet, DefSubclass, DefTransitiveClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefGrothendieckUniverse | Kernel Prf Nodes: 910
+  Axioms Used:     AxmOmegaIsSet, AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmHeredity, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx
+  Definitions Used: DefIff, DefUniversalClass, DefIsSet, DefSubclass, DefTransitiveClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefGrothendieckUniverse
+  Kernel Prf Nodes: 910
   Scheme of Types: (V universe)
   Kernel Note:     Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf: X ∈ V ⟷ |X| ≺ |V|), and 3.41/3.42 #DefCardinality/#DefCardLess via the kernel cardinal-order reflection rule CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: |A| ≺ |B| ⟷ A ≺ B, reflecting Global Choice V ≈ On); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood rule PairSetAx (PPairSetAx_prf). (An unused legacy backup constructor PVUniverseAx_prf also exists in 06_definitions.ML but is not invoked in v_universe_thm_proof.)
   Verification:    Verified
@@ -216,7 +248,9 @@
   Name:            ThmTransitiveClassInduction
   Formula [0]:     (∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))
   SML Kernel AST:  thm_3_71_transitive_class_induction (PForaR_prf / PEpsIndAx_prf / PComprAx_prf / PSubDef_prf)
-  Axioms Used:     AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRegularity | Definitions Used: DefIsSet, DefIff, DefUniversalClass, DefPowerClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection | Kernel Prf Nodes: 1224
+  Axioms Used:     AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRegularity
+  Definitions Used: DefIsSet, DefIff, DefUniversalClass, DefPowerClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection
+  Kernel Prf Nodes: 1224
   Scheme of Types: (∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_71_transitive_class_induction : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -> (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
   Verification:    Verified
@@ -225,7 +259,9 @@
   Name:            ThmDunaevFirstProjection
   Formula [0]:     (∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))
   SML Kernel AST:  thm_3_77_dunaev_pr1_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 41145
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity
+  Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass
+  Kernel Prf Nodes: 41145
   Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_77_dunaev_pr1_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers A from Dunaev's tagged ordered pair (A, B) via tag 1 = {∅} ({ a | {{{{a}}}, {∅}} ∈ (A, B) } = A, matching pr1 in 3.51 DefClassLists and 3.91 DefDomainRestriction) without requiring A or B to be sets, and together with 3.78 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
   Verification:    Verified
@@ -234,7 +270,9 @@
   Name:            ThmDunaevSecondProjection
   Formula [0]:     (∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))
   SML Kernel AST:  thm_3_78_dunaev_pr2_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity | Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass | Kernel Prf Nodes: 38665
+  Axioms Used:     RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity
+  Definitions Used: DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass
+  Kernel Prf Nodes: 38665
   Scheme of Types: (∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_3_78_dunaev_pr2_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers B from Dunaev's tagged ordered pair (A, B) via tag 2 = {∅, {∅}} ({ b | {{{{b}}}, {∅, {∅}}} ∈ (A, B) } = B, matching pr2 in 3.51 DefClassLists) without requiring A or B to be sets, and together with 3.77 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
   Verification:    Verified
@@ -243,7 +281,9 @@
   Name:            ThmUniverseInterOnIsOrdinal
   Formula [0]:     (∀(U:Class)((U universe)—→Ord((U∩On))))
   SML Kernel AST:  thm_step0_universe_inter_on_is_ordinal (PForaR_prf / POrdDef_prf / PBinInterDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension | Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection | Kernel Prf Nodes: 1693
+  Axioms Used:     AxmLeftInSound, RulClassComprehension
+  Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection
+  Kernel Prf Nodes: 1693
   Scheme of Types: (∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)—→Ord(([U@Class.Expression]∩On))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_step0_universe_inter_on_is_ordinal : Thm, accompanied in universe_definitions.ML by thm_step0_universe_emptyset_in_u : ∀(U:Class)((U universe) —→ ((∅ ∈ U) ∧ ((∅ ∈ (U ∩ On)) ∧ ¬((U ∩ On) = ∅))))): if U is a universe, then U is transitive and On is an ordinal, so their binary intersection kappa = U n On is a transitive class of ordinals and hence an ordinal.
   Verification:    Verified
@@ -252,7 +292,9 @@
   Name:            ThmUniverseUnionClosedFromIndexedUnion
   Formula [0]:     (∀(U:Class)∀(f:Class)(((Tr(U)∧IndexedUnionClosed(U))∧((f class-function)∧((V⊆Dom(f))∧∀(a:Class)(f(a)=a))))—→∀(x:Class)((x∈U)—→(⋃x∈U))))
   SML Kernel AST:  thm_step1a_union_closed_from_indexed_union (PForaR_prf / PKernelDef_prf / PImageDef_prf)
-  Axioms Used:     AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRightInSound | Definitions Used: DefIsSet, DefIff, DefUniversalClass, DefSubclass, DefRelationalImage, DefClassEq, DefTransitiveClass, DefIndexedUnionClosed, DefUnaryUnion | Kernel Prf Nodes: 3757
+  Axioms Used:     AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRightInSound
+  Definitions Used: DefIsSet, DefIff, DefUniversalClass, DefSubclass, DefRelationalImage, DefClassEq, DefTransitiveClass, DefIndexedUnionClosed, DefUnaryUnion
+  Kernel Prf Nodes: 3757
   Scheme of Types: (∀([U@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])(((Tr([U@Class.Expression])∧IndexedUnionClosed([U@Class.Expression]))∧(([f@Class.Expression] class-function)∧((V⊆Dom([f@Class.Expression]))∧∀([a@Variable]:[Class@Type])([f@Class.Expression]([a@Class.Expression])=[a@Class.Expression]))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression]))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_step1a_union_closed_from_indexed_union : Thm, verified by Thm.checkPipeline and Thm.slow_check): instantiating IndexedUnionClosed(U) with I = x in U and an identity class-function witness f on V yields f[x] = x c U and hence U(x) in U.
   Verification:    Verified
@@ -261,7 +303,9 @@
   Name:            ThmUniverseInterOnIsLimitOrdinal
   Formula [0]:     (∀(U:Class)(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))—→LimitOrd((U∩On))))
   SML Kernel AST:  thm_step1c_kappa_is_limit_ord (PForaR_prf / PKernelDef_prf / PEpsIndAx_prf / PPairfulDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx | Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal | Kernel Prf Nodes: 12286
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx
+  Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal
+  Kernel Prf Nodes: 12286
   Scheme of Types: (∀([U@Variable]:[Class@Type])((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))—→LimitOrd(([U@Class.Expression]∩On))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_step1c_kappa_is_limit_ord : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any universe U closed under unary union, kappa = U n On is an ordinal, contains 0 (via thm_step0_universe_emptyset_in_u from ω ∈ U and Hereditary(U)), and is closed under ordinal successor B |-> B u {B} = U({B, {B}}) by pairing and union closure; therefore LimitOrd(U n On) holds.
   Verification:    Verified
@@ -270,7 +314,9 @@
   Name:            ThmVonNeumannStageSubUniverse
   Formula [0]:     (∀(V:Class)∀(U:Class)((VStageLaws(V)∧(Tr(U)∧(LimitOrd((U∩On))∧∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))))—→(V((U∩On))⊆U)))
   SML Kernel AST:  thm_step2_v_kappa_sub_u (PForaR_prf / PEpsIndAx_prf / PPowerfulDef_prf / PSubDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmRightInSound | Definitions Used: DefVonNeumannStageLaws, DefIff, DefUnaryUnion, DefClassEq, DefSubclass, DefTransitiveClass | Kernel Prf Nodes: 655
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmRightInSound
+  Definitions Used: DefVonNeumannStageLaws, DefIff, DefUnaryUnion, DefClassEq, DefSubclass, DefTransitiveClass
+  Kernel Prf Nodes: 655
   Scheme of Types: (∀([V@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(Tr([U@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))))—→([V@Class.Expression](([U@Class.Expression]∩On))⊆[U@Class.Expression])))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_step2_v_kappa_sub_u : Thm, accompanied in universe_definitions.ML by the base and successor step lemmas thm_step2_v_0_in_u, thm_step2_v_succ_in_u, and thm_step2_v_limit_fam_sub_u): under VStageLaws(V), Trans(U), LimitOrd(U n On), and the stage-closure premise ∀B ∈ (U n On), V(B) ∈ U, unfolding the limit clause V(U n On) = U_{B ∈ U n On} V(B) and applying transitivity of U yields V(U n On) c= U.
   Verification:    Verified
@@ -279,7 +325,9 @@
   Name:            ThmUniverseSubVonNeumannStage
   Formula [0]:     (∀(V:Class)∀(R:Class)∀(U:Class)((VStageLaws(V)∧(SetRankLaws(R,V)∧(LimitOrd((U∩On))∧((∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))∧∀(x:Class)((x∈U)—→(R(x)∈U))))))—→(U⊆V((U∩On)))))
   SML Kernel AST:  thm_step3_u_sub_v_kappa (PForaR_prf / PEpsIndAx_prf / PKernelDef_prf / PSubDef_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound | Definitions Used: DefIsSet, DefIff, DefSetRankLaws, DefClassOfOrdinals, DefBinaryIntersection, DefLimitOrdinal, DefSubclass, DefClassEq, DefUnaryUnion, DefVonNeumannStageLaws | Kernel Prf Nodes: 1626
+  Axioms Used:     RulClassComprehension, AxmLeftInSound
+  Definitions Used: DefIsSet, DefIff, DefSetRankLaws, DefClassOfOrdinals, DefBinaryIntersection, DefLimitOrdinal, DefSubclass, DefClassEq, DefUnaryUnion, DefVonNeumannStageLaws
+  Kernel Prf Nodes: 1626
   Scheme of Types: (∀([V@Variable]:[Class@Type])∀([R@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(SetRankLaws([R@Class.Expression],[V@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→([R@Class.Expression]([x@Class.Expression])∈[U@Class.Expression]))))))—→([U@Class.Expression]⊆[V@Class.Expression](([U@Class.Expression]∩On)))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_step3_u_sub_v_kappa : Thm, accompanied in universe_definitions.ML by the inductive rank-successor step lemma thm_step3_rank_succ_in_u): under VStageLaws(V), SetRankLaws(R, V), LimitOrd(U n On), stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, every a ∈ U has R(a) ∈ (U n On), R(a) u {R(a)} ∈ (U n On) by limit closure, and a ∈ V(R(a) u {R(a)}) c= V(U n On), concluding U c= V(U n On).
   Verification:    Verified
@@ -288,7 +336,9 @@
   Name:            ThmUniverseEqVonNeumannStageInterOn
   Formula [0]:     (∀(U:Class)((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))∧((∀(B:Class)((B∈(U∩On))—→(VStageGraph(B)∈U)))∧∀(x:Class)((x∈U)—→(SetRankGraph(x)∈U))))))—→(LimitOrd((U∩On))∧(U=VStageGraph((U∩On))))))
   SML Kernel AST:  thm_universe_eq_canonical_v_inter_on (PForaR_prf / PEqDef_prf / PAndR_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx | Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal, DefSetRankLaws, DefVonNeumannStageLaws | Kernel Prf Nodes: 39444
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx
+  Definitions Used: DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal, DefSetRankLaws, DefVonNeumannStageLaws
+  Kernel Prf Nodes: 39444
   Scheme of Types: (∀([U@Variable]:[Class@Type])((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→(VStageGraph([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(SetRankGraph([x@Class.Expression])∈[U@Class.Expression]))))))—→(LimitOrd(([U@Class.Expression]∩On))∧([U@Class.Expression]=VStageGraph(([U@Class.Expression]∩On))))))
   Kernel Note:     Machine-checked MKTD1-system synthesis theorem (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm, verified by Thm.checkPipeline and Thm.slow_check across the 45 constituent lemmas in universe_definitions.ML Section 11): given VStageLaws(VStageGraph), SetRankLaws(SetRankGraph, VStageGraph), Universe(U) with unary union closure, stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, combines Step 1c (LimitOrd(U n On)), Step 2 (V_(U n On) c= U), and Step 3 (U c= V_(U n On)) via class equality antisymmetry (EqDef) to conclude LimitOrd(U n On) /\ (U = VStageGraph(U n On)).
   Verification:    Verified
@@ -297,7 +347,9 @@
   Name:            ThmTransfiniteApproxCoherence
   Formula [0]:     (∀(G:Class)∀(g:Class)∀(h:Class)∀(A:Class)((TransfiniteApprox(G,g)∧(TransfiniteApprox(G,h)∧((∀(z:Class)((g(pr1(z))=h(pr1(z)))—→((z∈g)←→(z∈h))))∧(A∈(Dom(g)∩Dom(h))))))—→((Restrict(g,A)=Restrict(h,A))∧((g(A)=G(Restrict(g,A)))∧(g(A)=h(A))))))
   SML Kernel AST:  thm_transfinite_approx_coherence (PForaR_prf / PKernelDef_prf / PBinInterDef_prf / PEqDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity | Definitions Used: DefTransfiniteApproximation, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefBinaryIntersection, DefIsSet, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq | Kernel Prf Nodes: 18311
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity
+  Definitions Used: DefTransfiniteApproximation, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefBinaryIntersection, DefIsSet, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq
+  Kernel Prf Nodes: 18311
   Scheme of Types: (∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([h@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])∧(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧((∀([z@Variable]:[Class@Type])(([g@Class.Expression](pr1([z@Class.Expression]))=[h@Class.Expression](pr1([z@Class.Expression])))—→(([z@Class.Expression]∈[g@Class.Expression])←→([z@Class.Expression]∈[h@Class.Expression]))))∧([A@Class.Expression]∈(Dom([g@Class.Expression])∩Dom([h@Class.Expression]))))))—→((Restrict([g@Class.Expression],[A@Class.Expression])=Restrict([h@Class.Expression],[A@Class.Expression]))∧(([g@Class.Expression]([A@Class.Expression])=[G@Class.Expression](Restrict([g@Class.Expression],[A@Class.Expression])))∧([g@Class.Expression]([A@Class.Expression])=[h@Class.Expression]([A@Class.Expression]))))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_transfinite_approx_coherence and thm_transfinite_approx_coherence_step : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (EpsIndAx) on K_1 = { B : Class | (B in (Dom(g) n Dom(h))) -> (valOf(g, B) = valOf(h, B)) } using transitivity of the ordinal intersection Dom(g) n Dom(h) (thm_bininter_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (g(pr1(z)) = h(pr1(z))) -> ((z in g)  (z in h))), concluding Restrict(g, A) = Restrict(h, A) and valOf(g, A) = valOf(G, Restrict(g, A)) = valOf(h, A) for all A in Dom(g) n Dom(h).
   Verification:    Verified
@@ -306,7 +358,9 @@
   Name:            ThmTransfiniteRecursionEquation
   Formula [0]:     (∀(G:Class)∀(g:Class)∀(F:Class)∀(A:Class)((TransfiniteApprox(G,g)—→((g set)∧(g⊆TransfiniteRec(G))))∧(((∀(B:Class)((B∈On)—→∃(h:Class)(TransfiniteApprox(G,h)∧((B∈Dom(h))∧((F(B)=h(B))∧(Restrict(F,B)=Restrict(h,B)))))))∧(A∈On))—→(F(A)=G(Restrict(F,A))))))
   SML Kernel AST:  thm_transfinite_recursion_equation (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf / PExisL_prf)
-  Axioms Used:     RulClassComprehension, AxmLeftInSound | Definitions Used: DefTransfiniteApproximation, DefIff, DefSetFunction, DefIsSet, DefUnaryUnion, DefTransfiniteRecursionGraph, DefSubclass, DefClassEq | Kernel Prf Nodes: 789
+  Axioms Used:     RulClassComprehension, AxmLeftInSound
+  Definitions Used: DefTransfiniteApproximation, DefIff, DefSetFunction, DefIsSet, DefUnaryUnion, DefTransfiniteRecursionGraph, DefSubclass, DefClassEq
+  Kernel Prf Nodes: 789
   Scheme of Types: (∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])—→(([g@Class.Expression] set)∧([g@Class.Expression]⊆TransfiniteRec([G@Class.Expression]))))∧(((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈On)—→∃([h@Variable]:[Class@Type])(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧(([B@Class.Expression]∈Dom([h@Class.Expression]))∧(([F@Class.Expression]([B@Class.Expression])=[h@Class.Expression]([B@Class.Expression]))∧(Restrict([F@Class.Expression],[B@Class.Expression])=Restrict([h@Class.Expression],[B@Class.Expression])))))))∧([A@Class.Expression]∈On))—→([F@Class.Expression]([A@Class.Expression])=[G@Class.Expression](Restrict([F@Class.Expression],[A@Class.Expression]))))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_transfinite_recursion_equation, thm_approx_is_set, thm_in_approx_class_iff, thm_approx_sub_transfinite_rec, and thm_restrict_agree_from_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that every G-approximation g is a set and a subclass of TransfiniteRec(G) = U { g | TransfiniteApprox(G, g) }, and (2) conditionally that whenever each ordinal B in On has a witnessing approximation h in A(G) with B in Dom(h), F(B) = h(B), and Restrict(F, B) = Restrict(h, B), the global recursion equation valOf(F, A) = valOf(G, Restrict(F, A)) holds for all A in On.
   Verification:    Verified
@@ -315,7 +369,9 @@
   Name:            ThmTransfiniteRecursionUniqueness
   Formula [0]:     (∀(G:Class)∀(F:Class)∀(H:Class)∀(A:Class)((((∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(F,B)))—→(F(B)=G(X))))∧∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(H,B)))—→(H(B)=G(X))))∧((∀(z:Class)((F(pr1(z))=H(pr1(z)))—→((z∈F)←→(z∈H))))∧(A∈On)))—→((Restrict(F,A)=Restrict(H,A))∧(F(A)=H(A)))))
   SML Kernel AST:  thm_transfinite_recursion_uniqueness (PForaR_prf / PEqDef_prf / PLeftInSoundAx_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity | Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq | Kernel Prf Nodes: 12773
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity
+  Definitions Used: DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq
+  Kernel Prf Nodes: 12773
   Scheme of Types: (∀([G@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([H@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((((∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([F@Class.Expression],[B@Class.Expression])))—→([F@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([H@Class.Expression],[B@Class.Expression])))—→([H@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧((∀([z@Variable]:[Class@Type])(([F@Class.Expression](pr1([z@Class.Expression]))=[H@Class.Expression](pr1([z@Class.Expression])))—→(([z@Class.Expression]∈[F@Class.Expression])←→([z@Class.Expression]∈[H@Class.Expression]))))∧([A@Class.Expression]∈On)))—→((Restrict([F@Class.Expression],[A@Class.Expression])=Restrict([H@Class.Expression],[A@Class.Expression]))∧([F@Class.Expression]([A@Class.Expression])=[H@Class.Expression]([A@Class.Expression])))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_transfinite_recursion_uniqueness and thm_transfinite_recursion_uniqueness_step : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by genuine transfinite epsilon-induction (EpsIndAx) on K_4 = { B : Class | (B in On) -> (valOf(F, B) = valOf(H, B)) } using transitivity of On (thm_on_is_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (F(pr1(z)) = H(pr1(z))) -> ((z in F)  (z in H))), concluding Restrict(F, A) = Restrict(H, A) and valOf(F, A) = valOf(H, A) for all A in On.
   Verification:    Verified
@@ -324,7 +380,9 @@
   Name:            ThmVonNeumannHierarchyByTransfiniteRecursion
   Formula [0]:     (∀(f:Class)∀(V:Class)∀(A:Class)(((∀(B:Class)¬(B∈Dom(f)))—→(VonNeumannStepG(f)=∅))∧(((V(A)=VonNeumannStepG(f))∧((Dom(f)=A)∧∀(B:Class)((B∈A)—→(f(B)=V(B)))))—→((VonNeumannStepG(f)=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))})∧(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))})))))
   SML Kernel AST:  thm_von_neumann_hierarchy_by_recursion (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso | Definitions Used: DefVonNeumannStepGenerator, DefIff, DefUnaryUnion, DefSubclass, DefEmptySet, DefClassEq, DefPowerClass | Kernel Prf Nodes: 10507
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso
+  Definitions Used: DefVonNeumannStepGenerator, DefIff, DefUnaryUnion, DefSubclass, DefEmptySet, DefClassEq, DefPowerClass
+  Kernel Prf Nodes: 10507
   Scheme of Types: (∀([f@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(((∀([B@Variable]:[Class@Type])¬([B@Class.Expression]∈Dom([f@Class.Expression])))—→(VonNeumannStepG([f@Class.Expression])=∅))∧((([V@Class.Expression]([A@Class.Expression])=VonNeumannStepG([f@Class.Expression]))∧((Dom([f@Class.Expression])=[A@Class.Expression])∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→([f@Class.Expression]([B@Class.Expression])=[V@Class.Expression]([B@Class.Expression])))))—→((VonNeumannStepG([f@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})∧([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})))))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_von_neumann_hierarchy_by_recursion, thm_von_neumann_step_g_empty, thm_von_neumann_step_g_on_stage, and thm_power_cong : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that VonNeumannStepG(f) = ∅ whenever Dom(f) is empty, and (2) conditionally, by unfolding DefVonNeumannStepGenerator and applying powerclass congruence (thm_power_cong: P = Q -> Pow(P) = Pow(Q)), that whenever Dom(f) = A, f agrees with V on A, and V(A) = VonNeumannStepG(f), both VonNeumannStepG(f) and V(A) equal U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
   Verification:    Verified
@@ -341,7 +399,9 @@
   Name:            ThmReducedVarSubstLaws
   Formula [0]:     ((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))
   SML Kernel AST:  thm_reduced_var_subst_laws (PForaR_prf / PKernelDef_prf / PComprAx_prf / PEqDef_prf)
-  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso, AxmPropExcludedMiddle | Definitions Used: DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq | Kernel Prf Nodes: 2069
+  Axioms Used:     AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso, AxmPropExcludedMiddle
+  Definitions Used: DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq
+  Kernel Prf Nodes: 2069
   Scheme of Types: ((∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([x@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))∧∀([a@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(SubstVar([a@Class.Expression],[x@Class.Expression],[x@Class.Expression])=[a@Class.Expression])))
   Kernel Note:     Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
   Verification:    Verified
@@ -350,7 +410,9 @@
   Name:            ThmLoeb
   Formula [0]:     (∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace
-  Axioms Used:     AxmPropFrege, AxmPropWeakening, AxmPropVerum | Definitions Used: ThmLoeb | Kernel Prf Nodes: 11
+  Axioms Used:     AxmPropFrege, AxmPropWeakening, AxmPropVerum
+  Definitions Used: ThmLoeb
+  Kernel Prf Nodes: 11
   Scheme of Types: (∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))
   Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
   Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
@@ -359,7 +421,9 @@
   Name:            ThmSecondIncompleteness
   Formula [0]:     (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
   SML Kernel AST:  IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace
-  Axioms Used:     AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege | Definitions Used: ThmSecondIncompleteness, ThmLoeb | Kernel Prf Nodes: 11
+  Axioms Used:     AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege
+  Definitions Used: ThmSecondIncompleteness, ThmLoeb
+  Kernel Prf Nodes: 11
   Scheme of Types: (𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)
   Kernel Note:     Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
   Verification:    Postulated (Unchecked Kernel Schema, Not Derived)

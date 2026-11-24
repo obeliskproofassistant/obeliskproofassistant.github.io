@@ -22,6 +22,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), (A -> (B -> A))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(a:A). (λ(b:B). a))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-002 `thm_A02` (Derived)
 
@@ -30,6 +31,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), Pi(C:Prop), ((A -> (B -> C)) -> ((A -> B) -> (A -> C)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(C:Prop). (λ(f:(A → (B → C))). (λ(g:(A → B)). (λ(x:A). ((f x) (g x))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-003 `thm_A03` (Derived)
 
@@ -38,6 +40,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A * B) -> A)`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(p:(A × B)). fst(p)))) ≡ (λ(A:Prop). (λ(B:Prop). fst))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-004 `thm_A04` (Derived)
 
@@ -46,6 +49,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A * B) -> B)`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(p:(A × B)). snd(p))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-005 `thm_A05` (Derived)
 
@@ -54,6 +58,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), (A -> (B -> (A * B)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(a:A). (λ(b:B). ⟨a, b⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-006 `thm_A06` (Derived)
 
@@ -62,6 +67,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), (A -> Pi(C:Prop), ((A -> C) -> ((B -> C) -> C)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(a:A). (λ(C:Prop). (λ(fa:(A → C)). (λ(fb:(B → C)). (fa a)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-007 `thm_A07` (Derived)
 
@@ -70,6 +76,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), (B -> Pi(C:Prop), ((A -> C) -> ((B -> C) -> C)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(b:B). (λ(C:Prop). (λ(fa:(A → C)). (λ(fb:(B → C)). (fb b)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-008 `thm_A08` (Derived)
 
@@ -78,6 +85,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), Pi(C:Prop), ((A -> C) -> ((B -> C) -> ((Pi(D:Prop), ((A -> D) -> ((B -> D) -> D))) -> C)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(C:Prop). (λ(fa:(A → C)). (λ(fb:(B → C)). (λ(disj:Π(D:Prop), ((A → D) → ((B → D) → D))). (((disj C) fa) fb)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-009 `thm_A09` (Derived)
 
@@ -86,6 +94,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A -> B) -> ((A -> (B -> Void)) -> (A -> Void)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(f:(A → B)). (λ(g:(A → (B → 𝟘))). (λ(a:A). ((g a) (f a)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-010 `thm_A10` (Derived)
 
@@ -94,6 +103,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), (((A -> Void) -> Void) -> A)`
 - **Proof Term:** `(λ(A:Prop). (λ(dneg:((A → 𝟘) → 𝟘)). ax_dneg_elim(A, dneg)))`
 - **Axioms Used:** `ax_dneg_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-011 `thm_A11` (Derived)
 
@@ -102,6 +112,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), (Void -> A)`
 - **Proof Term:** `(λ(A:Prop). (λ(falsum:𝟘). ax_false_elim(A, falsum)))`
 - **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-012 `thm_A12` (Derived)
 
@@ -110,6 +121,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), (((A -> B) -> A) -> A)`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(h:((A → B) → A)). (ax_peirce(A, B) h))))`
 - **Axioms Used:** `ax_peirce`
+- **Definitions Used:** `(none)`
 
 ### NBG-013 `thm_identity` (Derived)
 
@@ -118,6 +130,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), (A -> A)`
 - **Proof Term:** `(λ(A:Prop). (λ(x:A). x))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-014 `thm_modus_ponens` (Derived)
 
@@ -126,6 +139,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A -> B) -> (A -> B))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(f:(A → B)). (λ(a:A). (f a)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-015 `thm_transitivity` (Derived)
 
@@ -134,6 +148,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), Pi(C:Prop), ((A -> B) -> ((B -> C) -> (A -> C)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(C:Prop). (λ(f:(A → B)). (λ(g:(B → C)). (λ(a:A). (g (f a))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-016 `thm_and_comm` (Derived)
 
@@ -142,6 +157,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A * B) -> (B * A))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(p:(A × B)). ⟨snd(p), fst(p)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-017 `thm_contraposition` (Derived)
 
@@ -150,6 +166,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:Prop), ((A -> B) -> ((B -> Void) -> (A -> Void)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:Prop). (λ(f:(A → B)). (λ(nb:(B → 𝟘)). (λ(a:A). (nb (f a)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-018 `thm_D01` (Derived)
 
@@ -158,6 +175,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Prop), Pi(B:(Class -> Prop)), ((Pi(x:Class), (A -> (B x))) -> (A -> Pi(x:Class), (B x)))`
 - **Proof Term:** `(λ(A:Prop). (λ(B:(Class → Prop)). (λ(h:Π(x:Class), (A → (B x))). (λ(a:A). (λ(x:Class). ((h x) a))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-019 `thm_forall_inst` (Derived)
 
@@ -166,6 +184,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:(Class -> Prop)), Pi(c:Class), ((Pi(x:Class), (B x)) -> (B c))`
 - **Proof Term:** `(λ(B:(Class → Prop)). (λ(c:Class). (λ(h:Π(x:Class), (B x)). (h c))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-020 `thm_exists_intro` (Derived)
 
@@ -174,6 +193,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:(Class -> Prop)), Pi(c:Class), ((B c) -> Sigma(x:Class), (B x))`
 - **Proof Term:** `(λ(B:(Class → Prop)). (λ(c:Class). (λ(witness:(B c)). ⟨c, witness⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-021 `def_isSet` (Definitional)
 
@@ -182,6 +202,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), ((set(X) -> Sigma(Y:Class), (X in Y)) * ((Sigma(Y:Class), (X in Y)) -> set(X)))`
 - **Proof Term:** `(λ(X:Class). ⟨(λ(h:set(X)). let res:Σ(Y:Class), (X ∈ Y) = h in res), (λ(h:Σ(Y:Class), (X ∈ Y)). let res:set(X) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-022 `def_isProper` (Definitional)
 
@@ -190,6 +211,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(K:Class), ((proper(K) -> (set(K) -> Void)) * ((set(K) -> Void) -> proper(K)))`
 - **Proof Term:** `(λ(K:Class). ⟨(λ(h:proper(K)). let res:(set(K) → 𝟘) = h in res), (λ(h:(set(K) → 𝟘)). let res:proper(K) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-023 `def_empty_set` (Definitional)
 
@@ -198,6 +220,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), (((X = EmptySet) -> Pi(z:Class), ((z in X) -> Void)) * ((Pi(z:Class), ((z in X) -> Void)) -> (X = EmptySet)))`
 - **Proof Term:** `(λ(X:Class). ⟨(λ(hEq:(X = ∅)). (λ(z:Class). (λ(hzX:(z ∈ X)). ax_empty_no_elements(z, (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) ∅) hEq) hzX))))), (λ(hNoElts:Π(z:Class), ((z ∈ X) → 𝟘)). (ax_extensionality(X, ∅) (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). ax_false_elim((z ∈ ∅), ((hNoElts z) hzX))), (λ(hzE:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, hzE)))⟩)))⟩)`
 - **Axioms Used:** `ax_empty_no_elements, ax_eq_subst, ax_extensionality, ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-024 `def_universal_class` (Definitional)
 
@@ -206,6 +229,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), (((X = V) -> Pi(z:Class), (((z in X) -> set(z)) * (set(z) -> (z in X)))) * ((Pi(z:Class), (((z in X) -> set(z)) * (set(z) -> (z in X)))) -> (X = V)))`
 - **Proof Term:** `(λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩)`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-025 `def_subclass` (Definitional)
 
@@ -214,6 +238,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(Y:Class), (((X c= Y) -> Pi(z:Class), ((z in X) -> (z in Y))) * ((Pi(z:Class), ((z in X) -> (z in Y))) -> (X c= Y)))`
 - **Proof Term:** `(λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-026 `thm_emptyset_is_subclass` (Derived)
 
@@ -222,6 +247,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(z:Class), ((z in EmptySet) -> (z in X))`
 - **Proof Term:** `(λ(X:Class). (λ(z:Class). (λ(h:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, h)))))`
 - **Axioms Used:** `ax_false_elim, ax_empty_no_elements`
+- **Definitions Used:** `(none)`
 
 ### NBG-027 `ax_extensionality` (Axiomatic)
 
@@ -230,6 +256,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(Y:Class), ((Pi(z:Class), (((z in X) -> (z in Y)) * ((z in Y) -> (z in X)))) -> (X = Y))`
 - **Proof Term:** `plan_extensionality`
 - **Axioms Used:** `plan_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-028 `ax_heredity` (Axiomatic)
 
@@ -238,6 +265,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (((A c= B) * set(B)) -> set(A))`
 - **Proof Term:** `plan_heredity`
 - **Axioms Used:** `plan_heredity`
+- **Definitions Used:** `(none)`
 
 ### NBG-029 `ax_exponent` (Axiomatic)
 
@@ -246,6 +274,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), (set(x) -> set(Power(x)))`
 - **Proof Term:** `plan_exponent`
 - **Axioms Used:** `plan_exponent`
+- **Definitions Used:** `(none)`
 
 ### NBG-030 `ax_regularity` (Axiomatic)
 
@@ -254,6 +283,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), ((Power(X) c= X) -> (V c= X))`
 - **Proof Term:** `plan_regularity`
 - **Axioms Used:** `plan_regularity`
+- **Definitions Used:** `(none)`
 
 ### NBG-031 `def_ord` (Definitional)
 
@@ -262,6 +292,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), ((Ord(A) -> (Tr(A) * (Pi(B:Class), ((B in A) -> Tr(B))))) * ((Tr(A) * (Pi(B:Class), ((B in A) -> Tr(B)))) -> Ord(A)))`
 - **Proof Term:** `(λ(A:Class). ⟨(λ(h:Ord(A)). let res:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B)))) = h in res), (λ(h:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B))))). let res:Ord(A) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-032 `ax_global_choice` (Axiomatic)
 
@@ -270,6 +301,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), ((Sigma(x:Class), (x in A)) -> (choice(A) in A))`
 - **Proof Term:** `plan_global_choice`
 - **Axioms Used:** `plan_global_choice`
+- **Definitions Used:** `(none)`
 
 ### NBG-033 `thm_subset_refl` (Derived)
 
@@ -278,6 +310,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(z:Class), ((z in X) -> (z in X))`
 - **Proof Term:** `(λ(X:Class). (λ(z:Class). (λ(hz:(z ∈ X)). hz)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-034 `thm_subset_trans` (Derived)
 
@@ -286,6 +319,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(Y:Class), Pi(Z:Class), ((Pi(z:Class), ((z in X) -> (z in Y))) -> ((Pi(z:Class), ((z in Y) -> (z in Z))) -> Pi(z:Class), ((z in X) -> (z in Z))))`
 - **Proof Term:** `(λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h1:Π(z:Class), ((z ∈ X) → (z ∈ Y))). (λ(h2:Π(z:Class), ((z ∈ Y) → (z ∈ Z))). (λ(z:Class). (λ(hz:(z ∈ X)). ((h2 z) ((h1 z) hz)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-035 `def_dunaev_opair` (Definitional)
 
@@ -294,6 +328,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), ((a, b) = (a, b))`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). refl((a, b))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-036 `def_relational_func` (Definitional)
 
@@ -302,6 +337,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), ((function(F) -> Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in F) * ((x, z) in F)) -> (y = z))) * ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in F) * ((x, z) in F)) -> (y = z))) -> function(F)))`
 - **Proof Term:** `(λ(F:Class). ⟨(λ(h:function(F)). let res:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ F) × ((x, z) ∈ F)) → (y = z)) = h in res), (λ(h:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ F) × ((x, z) ∈ F)) → (y = z))). let res:function(F) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-037 `thm_zero_is_nat` (Derived)
 
@@ -310,6 +346,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(0 = 0)`
 - **Proof Term:** `refl(0)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-038 `thm_succ_preserves_nat` (Derived)
 
@@ -318,6 +355,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(n:Nat), (succ(n) = succ(n))`
 - **Proof Term:** `(λ(n:Nat). refl(succ(n)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-039 `thm_zero_not_succ` (Derived)
 
@@ -326,6 +364,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(n:Nat), Pi(h:(succ(n) = 0)), Void`
 - **Proof Term:** `(λ(n:Nat). (λ(h:(succ(n) = 0)). ax_peano_zero_not_succ(n, h)))`
 - **Axioms Used:** `ax_peano_zero_not_succ`
+- **Definitions Used:** `(none)`
 
 ### NBG-040 `thm_succ_injective` (Derived)
 
@@ -334,6 +373,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(n:Nat), Pi(m:Nat), Pi(h:(succ(n) = succ(m))), (n = m)`
 - **Proof Term:** `(λ(n:Nat). (λ(m:Nat). (λ(h:(succ(n) = succ(m))). (ax_peano_succ_inj(n, m) h))))`
 - **Axioms Used:** `ax_peano_succ_inj`
+- **Definitions Used:** `(none)`
 
 ### NBG-041 `thm_add_zero_left` (Derived)
 
@@ -342,6 +382,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(n:Nat), (nat_rec((fun (_:Nat). Nat), n, (fun (_:Nat). (fun (ih:Nat). succ(ih))), 0) = n)`
 - **Proof Term:** `(λ(n:Nat). refl(n))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-042 `thm_mathematical_induction` (Derived)
 
@@ -350,6 +391,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(P:(Nat -> Prop)), Pi(base:(P 0)), Pi(step:Pi(n:Nat), Pi(ih:(P n)), (P succ(n))), Pi(n:Nat), (P n)`
 - **Proof Term:** `(λ(P:(Nat → Prop)). (λ(base:(P 0)). (λ(step:Π(n:Nat), Π(ih:(P n)), (P succ(n))). (λ(n:Nat). nat_rec(P, base, step, n)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-043 `thm_v_ind` (Derived)
 
@@ -358,6 +400,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Ind(V)`
 - **Proof Term:** `ax_ind_intro(V, ⟨(snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) ∅)) ax_empty_set), (λ(y:Class). (λ(hyInV:(y ∈ V)). (snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) SuccOrd(y))) ax_ord_succ_set(y, (fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) y)) hyInV)))))⟩)`
 - **Axioms Used:** `ax_ind_intro, ax_eq_subst, ax_eq_sym, ax_extensionality, ax_empty_set, ax_ord_succ_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-044 `thm_omega_def` (Definitional)
 
@@ -366,6 +409,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), (((x in omega) -> Pi(Q:Class), (Ind(Q) -> (x in Q))) * ((Pi(Q:Class), (Ind(Q) -> (x in Q))) -> (x in omega)))`
 - **Proof Term:** `(λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-045 `thm_omega_set` (Axiomatic)
 
@@ -374,6 +418,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `set(omega)`
 - **Proof Term:** `plan_omega_set`
 - **Axioms Used:** `plan_omega_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-046 `thm_omega_ind` (Derived)
 
@@ -382,6 +427,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Ind(omega)`
 - **Proof Term:** `ax_ind_intro(ω, ⟨(snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) ∅)) (λ(Q:Class). (λ(hIndQ:Ind(Q)). fst(ax_ind_elim(Q, hIndQ))))), (λ(y:Class). (λ(hyInOmega:(y ∈ ω)). (snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) SuccOrd(y))) (λ(Q:Class). (λ(hIndQ:Ind(Q)). ((snd(ax_ind_elim(Q, hIndQ)) y) (((fst(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) y)) hyInOmega) Q) hIndQ)))))))⟩)`
 - **Axioms Used:** `ax_ind_intro, ax_ind_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-047 `thm_tr_omega` (Derived)
 
@@ -390,6 +436,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Tr(omega)`
 - **Proof Term:** `ax_omega_trans_from_ind(ax_ind_intro(ω, ⟨(snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) ∅)) (λ(Q:Class). (λ(hIndQ:Ind(Q)). fst(ax_ind_elim(Q, hIndQ))))), (λ(y:Class). (λ(hyInOmega:(y ∈ ω)). (snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) SuccOrd(y))) (λ(Q:Class). (λ(hIndQ:Ind(Q)). ((snd(ax_ind_elim(Q, hIndQ)) y) (((fst(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) y)) hyInOmega) Q) hIndQ)))))))⟩), ax_omega_elements_trans)`
 - **Axioms Used:** `ax_omega_trans_from_ind, ax_ind_intro, ax_ind_elim, ax_omega_elements_trans`
+- **Definitions Used:** `(none)`
 
 ### NBG-048 `thm_ord_omega` (Derived)
 
@@ -398,6 +445,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Ord(omega)`
 - **Proof Term:** `(snd(((λ(A:Class). ⟨(λ(h:Ord(A)). let res:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B)))) = h in res), (λ(h:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B))))). let res:Ord(A) = h in res)⟩) ω)) ⟨ax_omega_trans_from_ind(ax_ind_intro(ω, ⟨(snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) ∅)) (λ(Q:Class). (λ(hIndQ:Ind(Q)). fst(ax_ind_elim(Q, hIndQ))))), (λ(y:Class). (λ(hyInOmega:(y ∈ ω)). (snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) SuccOrd(y))) (λ(Q:Class). (λ(hIndQ:Ind(Q)). ((snd(ax_ind_elim(Q, hIndQ)) y) (((fst(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) y)) hyInOmega) Q) hIndQ)))))))⟩), ax_omega_elements_trans), ax_omega_elements_trans⟩)`
 - **Axioms Used:** `ax_omega_trans_from_ind, ax_ind_intro, ax_ind_elim, ax_omega_elements_trans`
+- **Definitions Used:** `(none)`
 
 ### NBG-049 `thm_omega_in_on` (Derived)
 
@@ -406,6 +454,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(omega in On)`
 - **Proof Term:** `ax_on_intro(ω, ⟨plan_omega_set, (snd(((λ(A:Class). ⟨(λ(h:Ord(A)). let res:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B)))) = h in res), (λ(h:(Tr(A) × (Π(B:Class), ((B ∈ A) → Tr(B))))). let res:Ord(A) = h in res)⟩) ω)) ⟨ax_omega_trans_from_ind(ax_ind_intro(ω, ⟨(snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) ∅)) (λ(Q:Class). (λ(hIndQ:Ind(Q)). fst(ax_ind_elim(Q, hIndQ))))), (λ(y:Class). (λ(hyInOmega:(y ∈ ω)). (snd(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) SuccOrd(y))) (λ(Q:Class). (λ(hIndQ:Ind(Q)). ((snd(ax_ind_elim(Q, hIndQ)) y) (((fst(((λ(x:Class). ⟨(λ(h:(x ∈ ω)). let res:Π(Q:Class), (Ind(Q) → (x ∈ Q)) = h in res), (λ(h:Π(Q:Class), (Ind(Q) → (x ∈ Q))). let res:(x ∈ ω) = h in res)⟩) y)) hyInOmega) Q) hIndQ)))))))⟩), ax_omega_elements_trans), ax_omega_elements_trans⟩)⟩)`
 - **Axioms Used:** `ax_on_intro, plan_omega_set, ax_omega_trans_from_ind, ax_ind_intro, ax_ind_elim, ax_omega_elements_trans`
+- **Definitions Used:** `(none)`
 
 ### NBG-050 `thm_on_ind` (Derived)
 
@@ -414,6 +463,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `((EmptySet in On) * (Pi(a:Class), ((a in On) -> (SuccOrd(a) in On))))`
 - **Proof Term:** `⟨ax_on_intro(∅, ⟨ax_empty_set, ax_empty_ord⟩), (λ(a:Class). (λ(hIn:(a ∈ On)). ax_on_intro(SuccOrd(a), ⟨ax_ord_succ_set(a, fst(ax_on_elim(a, hIn))), ax_ord_succ_ord(a, ax_on_elim(a, hIn))⟩)))⟩`
 - **Axioms Used:** `ax_on_intro, ax_empty_set, ax_empty_ord, ax_ord_succ_set, ax_on_elim, ax_ord_succ_ord`
+- **Definitions Used:** `(none)`
 
 ### NBG-051 `def_isCard` (Definitional)
 
@@ -422,6 +472,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(C:Class), ((Card(C) -> Sigma(K:Class), (CardOf(K) = C)) * ((Sigma(K:Class), (CardOf(K) = C)) -> Card(C)))`
 - **Proof Term:** `(λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-052 `thm_omega_card` (Derived)
 
@@ -430,6 +481,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Card(omega)`
 - **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) ω)) ⟨ω, ax_cardof_omega⟩)`
 - **Axioms Used:** `ax_cardof_omega`
+- **Definitions Used:** `(none)`
 
 ### NBG-053 `thm_on_card` (Derived)
 
@@ -438,6 +490,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Card(On)`
 - **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) On)) ⟨On, ax_cardof_on⟩)`
 - **Axioms Used:** `ax_cardof_on`
+- **Definitions Used:** `(none)`
 
 ### NBG-054 `thm_v_not_card` (Derived)
 
@@ -446,6 +499,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(Card(V) -> Void)`
 - **Proof Term:** `(λ(hCardV:Card(V)). ax_cardof_never_v(fst((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV)), snd((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV))))`
 - **Axioms Used:** `ax_cardof_never_v`
+- **Definitions Used:** `(none)`
 
 ### NBG-055 `ax_tarski_universes` (Axiomatic)
 
@@ -454,6 +508,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), (set(X) -> Sigma(U:Class), (universe(U) * ((X in U) * set(U))))`
 - **Proof Term:** `plan_tarski_axm`
 - **Axioms Used:** `plan_tarski_axm`
+- **Definitions Used:** `(none)`
 
 ### NBG-056 `def_binary_union` (Definitional)
 
@@ -462,6 +517,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(z:Class), (((z in (A u+ B)) -> Pi(C:Prop), (((z in A) -> C) -> (((z in B) -> C) -> C))) * ((Pi(C:Prop), (((z in A) -> C) -> (((z in B) -> C) -> C))) -> (z in (A u+ B))))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-057 `def_binary_inter` (Definitional)
 
@@ -470,6 +526,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(z:Class), (((z in (A n* B)) -> ((z in A) * (z in B))) * (((z in A) * (z in B)) -> (z in (A n* B))))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-058 `def_unary_union` (Definitional)
 
@@ -478,6 +535,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(z:Class), (((z in Union(A)) -> Sigma(y:Class), ((y in A) * (z in y))) * ((Sigma(y:Class), ((y in A) * (z in y))) -> (z in Union(A))))`
 - **Proof Term:** `(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋃(A))). let res:Σ(y:Class), ((y ∈ A) × (z ∈ y)) = h in res), (λ(h:Σ(y:Class), ((y ∈ A) × (z ∈ y))). let res:(z ∈ ⋃(A)) = h in res)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-059 `def_unary_inter` (Definitional)
 
@@ -486,6 +544,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(z:Class), (((z in Inter(A)) -> Pi(y:Class), ((y in A) -> (z in y))) * ((Pi(y:Class), ((y in A) -> (z in y))) -> (z in Inter(A))))`
 - **Proof Term:** `(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋂(A))). let res:Π(y:Class), ((y ∈ A) → (z ∈ y)) = h in res), (λ(h:Π(y:Class), ((y ∈ A) → (z ∈ y))). let res:(z ∈ ⋂(A)) = h in res)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-060 `def_singleton` (Definitional)
 
@@ -494,6 +553,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(z:Class), (((z in {a}) -> (set(a) * (z = a))) * ((set(a) * (z = a)) -> (z in {a})))`
 - **Proof Term:** `(λ(a:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a})). let res:(set(a) × (z = a)) = h in res), (λ(h:(set(a) × (z = a))). let res:(z ∈ {a}) = h in res)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-061 `def_upair` (Definitional)
 
@@ -502,6 +562,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), Pi(z:Class), (((z in {a, b}) -> Pi(C:Prop), (((z = a) -> C) -> (((z = b) -> C) -> C))) * ((Pi(C:Prop), (((z = a) -> C) -> (((z = b) -> C) -> C))) -> (z in {a, b})))`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a, b})). let res:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C))). let res:(z ∈ {a, b}) = h in res)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-062 `thm_russell_class_not_set` (Derived)
 
@@ -510,6 +571,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `((Sigma(R:Class), (set(R) * (Pi(x:Class), (((x in R) -> (set(x) * ((x in x) -> Void))) * ((set(x) * ((x in x) -> Void)) -> (x in R)))))) -> Void)`
 - **Proof Term:** `(λ(hExists:Σ(R:Class), (set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))). ((λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn)) (snd((snd(snd(hExists)) fst(hExists))) ⟨fst(snd(hExists)), (λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn))⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-063 `thm_dunaev_tagged_pair_proj` (Derived)
 
@@ -518,6 +580,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((pr1((A, B)) = A) * (pr2((A, B)) = B))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩))`
 - **Axioms Used:** `ax_dunaev_pr1, ax_dunaev_pr2`
+- **Definitions Used:** `(none)`
 
 ### NBG-064 `thm_dunaev_pair_injectivity` (Derived)
 
@@ -526,6 +589,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(C:Class), Pi(D:Class), (((A, B) = (C, D)) -> ((A = C) * (B = D)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(hEq:((A, B) = (C, D))). ⟨(((ax_eq_trans(A, pr1((C, D))) C) (((ax_eq_trans(A, pr1((A, B))) pr1((C, D))) (ax_eq_sym(pr1((A, B)), A) fst((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) A) B)))) (ax_eq_cong_pr1((A, B), (C, D)) hEq))) fst((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) C) D))), (((ax_eq_trans(B, pr2((C, D))) D) (((ax_eq_trans(B, pr2((A, B))) pr2((C, D))) (ax_eq_sym(pr2((A, B)), B) snd((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) A) B)))) (ax_eq_cong_pr2((A, B), (C, D)) hEq))) snd((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) C) D)))⟩)))))`
 - **Axioms Used:** `ax_eq_trans, ax_eq_sym, ax_dunaev_pr1, ax_dunaev_pr2, ax_eq_cong_pr1, ax_eq_cong_pr2`
+- **Definitions Used:** `(none)`
 
 ### NBG-065 `thm_empty_set_elim` (Derived)
 
@@ -534,6 +598,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), ((Pi(z:Class), ((z in X) -> Void)) -> (X = EmptySet))`
 - **Proof Term:** `(λ(X:Class). (λ(h:Π(z:Class), ((z ∈ X) → 𝟘)). (plan_extensionality(X, ∅) (λ(z:Class). ⟨(λ(hz:(z ∈ X)). ax_false_elim((z ∈ ∅), ((h z) hz))), (λ(hz:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, hz)))⟩))))`
 - **Axioms Used:** `plan_extensionality, ax_false_elim, ax_empty_no_elements`
+- **Definitions Used:** `(none)`
 
 ### NBG-066 `thm_every_set_in_v` (Derived)
 
@@ -542,6 +607,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), (set(x) -> (x in V))`
 - **Proof Term:** `(λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x)))`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-067 `thm_in_v_is_set` (Derived)
 
@@ -550,6 +616,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), ((x in V) -> set(x))`
 - **Proof Term:** `(λ(x:Class). fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x)))`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-068 `thm_emptyset_in_v` (Derived)
 
@@ -558,6 +625,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(EmptySet in V)`
 - **Proof Term:** `(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) ∅) ax_empty_set)`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality, ax_empty_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-069 `thm_omega_in_v` (Derived)
 
@@ -566,6 +634,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(omega in V)`
 - **Proof Term:** `(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) ω) plan_omega_set)`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality, plan_omega_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-070 `thm_power_omega_is_set` (Derived)
 
@@ -574,6 +643,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `set(Power(omega))`
 - **Proof Term:** `plan_exponent(ω, plan_omega_set)`
 - **Axioms Used:** `plan_exponent, plan_omega_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-071 `thm_singleton_self_in` (Derived)
 
@@ -582,6 +652,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), (set(a) -> (a in {a}))`
 - **Proof Term:** `(λ(a:Class). (λ(hSetA:set(a)). (snd((((λ(a:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a})). let res:(set(a) × (z = a)) = h in res), (λ(h:(set(a) × (z = a))). let res:(z ∈ {a}) = h in res)⟩)) a) a)) ⟨hSetA, refl(a)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-072 `thm_upair_left_in` (Derived)
 
@@ -590,6 +661,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), (a in {a, b})`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (snd(((((λ(a:Class). (λ(b:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a, b})). let res:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C))). let res:(z ∈ {a, b}) = h in res)⟩))) a) b) a)) (λ(C:Prop). (λ(fa:((a = a) → C)). (λ(fb:((a = b) → C)). (fa refl(a))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-073 `thm_upair_right_in` (Derived)
 
@@ -598,6 +670,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), (b in {a, b})`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (snd(((((λ(a:Class). (λ(b:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a, b})). let res:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C))). let res:(z ∈ {a, b}) = h in res)⟩))) a) b) b)) (λ(C:Prop). (λ(fa:((b = a) → C)). (λ(fb:((b = b) → C)). (fb refl(b))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-074 `thm_inter_subset_left` (Derived)
 
@@ -606,6 +679,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((A n* B) c= A)`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). fst((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-075 `thm_inter_subset_right` (Derived)
 
@@ -614,6 +688,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((A n* B) c= B)`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) B)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). snd((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-076 `thm_union_subset_left` (Derived)
 
@@ -622,6 +697,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (A c= (A u+ B))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-077 `thm_union_subset_right` (Derived)
 
@@ -630,6 +706,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (B c= (A u+ B))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) B) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ B)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fb hz))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-078 `thm_inter_idem_subset` (Derived)
 
@@ -638,6 +715,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), ((A n* A) c= A)`
 - **Proof Term:** `(λ(A:Class). (((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). fst((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) A))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-079 `thm_union_idem_subset` (Derived)
 
@@ -646,6 +724,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), (A c= (A u+ A))`
 - **Proof Term:** `(λ(A:Class). (((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz)))))))))) A) A))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-080 `thm_inter_set_left` (Derived)
 
@@ -654,6 +733,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (set(A) -> set((A n* B)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hSetA:set(A)). (plan_heredity((A ∩ B), A) ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). fst((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) B), hSetA⟩))))`
 - **Axioms Used:** `plan_heredity`
+- **Definitions Used:** `(none)`
 
 ### NBG-081 `thm_semi_singleton_sub_char` (Derived)
 
@@ -662,6 +742,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(s:Class), Pi(A:Class), Pi(x:Class), Pi(y:Class), (((s c= A) * (Pi(u:Class), Pi(v:Class), (((u in s) * (v in s)) -> (u = v)))) -> (((x in s) * (y in s)) -> ((x in A) * (x = y))))`
 - **Proof Term:** `(λ(s:Class). (λ(A:Class). (λ(x:Class). (λ(y:Class). (λ(hSSS:((s ⊆ A) × (Π(u:Class), Π(v:Class), (((u ∈ s) × (v ∈ s)) → (u = v))))). (λ(hXY:((x ∈ s) × (y ∈ s))). ⟨(((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) s) A)) fst(hSSS)) x) fst(hXY)), (((snd(hSSS) x) y) hXY)⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-082 `thm_family_value_eval` (Derived)
 
@@ -670,6 +751,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(x:Class), Pi(z:Class), Pi(s:Class), Pi(u:Class), (((s c= z) * ((u in ValOf(F, x)) -> (u in s))) -> ((u in ValOf(F, x)) -> (u in z)))`
 - **Proof Term:** `(λ(F:Class). (λ(x:Class). (λ(z:Class). (λ(s:Class). (λ(u:Class). (λ(hFam:((s ⊆ z) × ((u ∈ ValOf(F, x)) → (u ∈ s)))). (λ(hUinVal:(u ∈ ValOf(F, x))). (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) s) z)) fst(hFam)) u) (snd(hFam) hUinVal)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-083 `thm_sigma_model_proj` (Derived)
 
@@ -678,6 +760,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(x:Class), Pi(y:Class), ((((OPair(x, y) in Sigma(B)) -> ((x in Dom(B)) * (y in ValOf(B, x)))) * (OPair(x, y) in Sigma(B))) -> ((x in Dom(B)) * (y in ValOf(B, x))))`
 - **Proof Term:** `(λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((OPair(x, y) ∈ Sigma(B)) → ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))) × (OPair(x, y) ∈ Sigma(B)))). (fst(h) snd(h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-084 `thm_pi_model_elim` (Derived)
 
@@ -686,6 +769,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(f:Class), Pi(x:Class), (((Pi(u:Class), ((u in Dom(B)) -> (ValOf(f, u) in ValOf(B, u)))) * (x in Dom(B))) -> (ValOf(f, x) in ValOf(B, x)))`
 - **Proof Term:** `(λ(B:Class). (λ(f:Class). (λ(x:Class). (λ(hPi:((Π(u:Class), ((u ∈ Dom(B)) → (ValOf(f, u) ∈ ValOf(B, u)))) × (x ∈ Dom(B)))). ((fst(hPi) x) snd(hPi))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-085 `thm_if_dep_true_branch` (Derived)
 
@@ -694,6 +778,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Phi:Prop), Pi(T1:(Phi -> Prop)), Pi(T2:((Phi -> Void) -> Prop)), (((Pi(h:Phi), (T1 h)) * (Pi(nh:(Phi -> Void)), (T2 nh))) -> Pi(h:Phi), (T1 h))`
 - **Proof Term:** `(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:((Phi → 𝟘) → Prop)). (λ(branches:((Π(h:Phi), (T1 h)) × (Π(nh:(Phi → 𝟘)), (T2 nh)))). (λ(h:Phi). (fst(branches) h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-086 `thm_if_dep_false_branch` (Derived)
 
@@ -702,6 +787,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Phi:Prop), Pi(T1:(Phi -> Prop)), Pi(T2:((Phi -> Void) -> Prop)), (((Pi(h:Phi), (T1 h)) * (Pi(nh:(Phi -> Void)), (T2 nh))) -> Pi(nh:(Phi -> Void)), (T2 nh))`
 - **Proof Term:** `(λ(Phi:Prop). (λ(T1:(Phi → Prop)). (λ(T2:((Phi → 𝟘) → Prop)). (λ(branches:((Π(h:Phi), (T1 h)) × (Π(nh:(Phi → 𝟘)), (T2 nh)))). (λ(nh:(Phi → 𝟘)). (snd(branches) nh))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-087 `thm_model_stratification_trans` (Derived)
 
@@ -710,6 +796,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(W:Class), Pi(E:Class), Pi(T:Class), Pi(F:Class), (((mu_A(W) c= mu_A(E)) * ((mu_A(E) c= mu_A(T)) * (mu_A(T) c= mu_A(F)))) -> (mu_A(W) c= mu_A(F)))`
 - **Proof Term:** `(λ(W:Class). (λ(E:Class). (λ(T:Class). (λ(F:Class). (λ(hStrat:((mu_A(W) ⊆ mu_A(E)) × ((mu_A(E) ⊆ mu_A(T)) × (mu_A(T) ⊆ mu_A(F))))). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) mu_A(W)) mu_A(F))) (λ(z:Class). (λ(hz:(z ∈ mu_A(W))). (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) mu_A(T)) mu_A(F))) snd(snd(hStrat))) z) (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) mu_A(E)) mu_A(T))) fst(snd(hStrat))) z) (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) mu_A(W)) mu_A(E))) fst(hStrat)) z) hz)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-088 `thm_dunaev_pair_fst_beta` (Derived)
 
@@ -718,6 +805,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), (pr1((x, y)) = x)`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). ax_dunaev_pr1(x, y)))`
 - **Axioms Used:** `ax_dunaev_pr1`
+- **Definitions Used:** `(none)`
 
 ### NBG-089 `thm_dunaev_pair_snd_beta` (Derived)
 
@@ -726,6 +814,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), (pr2((x, y)) = y)`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). ax_dunaev_pr2(x, y)))`
 - **Axioms Used:** `ax_dunaev_pr2`
+- **Definitions Used:** `(none)`
 
 ### NBG-090 `thm_singleton_elem_eq` (Derived)
 
@@ -734,6 +823,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(z:Class), ((z in {a}) -> (z = a))`
 - **Proof Term:** `(λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst((((λ(a:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a})). let res:(set(a) × (z = a)) = h in res), (λ(h:(set(a) × (z = a))). let res:(z ∈ {a}) = h in res)⟩)) a) z)) hz)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-091 `thm_singleton_subset_upair_left` (Derived)
 
@@ -742,6 +832,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), ({a} c= {a, b})`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) {a}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {a})). (snd(((((λ(a:Class). (λ(b:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a, b})). let res:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C))). let res:(z ∈ {a, b}) = h in res)⟩))) a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fa ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst((((λ(a:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a})). let res:(set(a) × (z = a)) = h in res), (λ(h:(set(a) × (z = a))). let res:(z ∈ {a}) = h in res)⟩)) a) z)) hz))))) a) z) hz)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-092 `thm_singleton_subset_upair_right` (Derived)
 
@@ -750,6 +841,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), ({b} c= {a, b})`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) {b}) {a, b})) (λ(z:Class). (λ(hz:(z ∈ {b})). (snd(((((λ(a:Class). (λ(b:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a, b})). let res:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z = a) → C) → (((z = b) → C) → C))). let res:(z ∈ {a, b}) = h in res)⟩))) a) b) z)) (λ(C:Prop). (λ(fa:((z = a) → C)). (λ(fb:((z = b) → C)). (fb ((((λ(a:Class). (λ(z:Class). (λ(hz:(z ∈ {a})). snd((fst((((λ(a:Class). (λ(z:Class). ⟨(λ(h:(z ∈ {a})). let res:(set(a) × (z = a)) = h in res), (λ(h:(set(a) × (z = a))). let res:(z ∈ {a}) = h in res)⟩)) a) z)) hz))))) b) z) hz)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-093 `thm_inter_subset_union` (Derived)
 
@@ -758,6 +850,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((A n* B) c= (A u+ B))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) (A ∪ B))) ((((((λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h1:Π(z:Class), ((z ∈ X) → (z ∈ Y))). (λ(h2:Π(z:Class), ((z ∈ Y) → (z ∈ Z))). (λ(z:Class). (λ(hz:(z ∈ X)). ((h2 z) ((h1 z) hz))))))))) (A ∩ B)) A) (A ∪ B)) (fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). fst((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) B))) (fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz)))))))))) A) B))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-094 `thm_inter_set_right` (Derived)
 
@@ -766,6 +859,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (set(B) -> set((A n* B)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hSetB:set(B)). (plan_heredity((A ∩ B), B) ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) B)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). snd((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) B), hSetB⟩))))`
 - **Axioms Used:** `plan_heredity`
+- **Definitions Used:** `(none)`
 
 ### NBG-095 `thm_emptyset_subset_all` (Derived)
 
@@ -774,6 +868,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), (EmptySet c= X)`
 - **Proof Term:** `(λ(X:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) ∅) X)) ((λ(X:Class). (λ(z:Class). (λ(h:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, h))))) X)))`
 - **Axioms Used:** `ax_false_elim, ax_empty_no_elements`
+- **Definitions Used:** `(none)`
 
 ### NBG-096 `thm_subset_antisym` (Derived)
 
@@ -782,6 +877,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(Y:Class), (((X c= Y) * (Y c= X)) -> (X = Y))`
 - **Proof Term:** `(λ(X:Class). (λ(Y:Class). (λ(hSubPair:((X ⊆ Y) × (Y ⊆ X))). (plan_extensionality(X, Y) (λ(z:Class). ⟨((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) X) Y)) fst(hSubPair)) z), ((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) Y) X)) snd(hSubPair)) z)⟩)))))`
 - **Axioms Used:** `plan_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-097 `thm_every_set_subset_v` (Derived)
 
@@ -790,6 +886,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), ((Pi(z:Class), ((z in A) -> set(z))) -> (A c= V))`
 - **Proof Term:** `(λ(A:Class). (λ(hElemSet:Π(z:Class), ((z ∈ A) → set(z))). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) V)) (λ(z:Class). (λ(hz:(z ∈ A)). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) z) ((hElemSet z) hz)))))))`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-098 `thm_singleton_in_v_if_set` (Derived)
 
@@ -798,6 +895,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), (set({a}) -> ({a} in V))`
 - **Proof Term:** `(λ(a:Class). (λ(hSetSing:set({a})). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) {a}) hSetSing)))`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality`
+- **Definitions Used:** `(none)`
 
 ### NBG-099 `thm_power_omega_in_v` (Derived)
 
@@ -806,6 +904,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(Power(omega) in V)`
 - **Proof Term:** `(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) 𝒫(ω)) plan_exponent(ω, plan_omega_set))`
 - **Axioms Used:** `ax_eq_subst, ax_eq_sym, ax_extensionality, plan_exponent, plan_omega_set`
+- **Definitions Used:** `(none)`
 
 ### NBG-100 `thm_inter_subset_both` (Derived)
 
@@ -814,6 +913,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (((A n* B) c= A) * ((A n* B) c= B))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) A)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). fst((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) B), (((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) (A ∩ B)) B)) (λ(z:Class). (λ(hz:(z ∈ (A ∩ B))). snd((fst(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) A) B) z)) hz))))))) A) B)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-101 `thm_semi_singleton_eq` (Derived)
 
@@ -822,6 +922,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(s:Class), Pi(x:Class), Pi(y:Class), ((Pi(u:Class), Pi(v:Class), ((u in s) -> ((v in s) -> (u = v)))) -> ((x in s) -> ((y in s) -> (x = y))))`
 - **Proof Term:** `(λ(s:Class). (λ(x:Class). (λ(y:Class). (λ(hSemi:Π(u:Class), Π(v:Class), ((u ∈ s) → ((v ∈ s) → (u = v)))). (λ(hx:(x ∈ s)). (λ(hy:(y ∈ s)). ((((hSemi x) y) hx) hy)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-102 `thm_semi_singleton_subclass_proj` (Derived)
 
@@ -830,6 +931,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(s:Class), Pi(A:Class), (((s c= A) * (Pi(u:Class), Pi(v:Class), ((u in s) -> ((v in s) -> (u = v))))) -> ((s c= A) * (Pi(u:Class), Pi(v:Class), ((u in s) -> ((v in s) -> (u = v))))))`
 - **Proof Term:** `(λ(s:Class). (λ(A:Class). (λ(hSss:((s ⊆ A) × (Π(u:Class), Π(v:Class), ((u ∈ s) → ((v ∈ s) → (u = v)))))). ⟨fst(hSss), snd(hSss)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-103 `thm_class_lists_dunaev_step` (Derived)
 
@@ -838,6 +940,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(L:Class), Pi(x:Class), Pi(xs:Class), ((Pi(a:Class), Pi(l:Class), ((a in A) -> ((l in L) -> ((a, l) in L)))) -> (((x in A) * (xs in L)) -> ((x, xs) in L)))`
 - **Proof Term:** `(λ(A:Class). (λ(L:Class). (λ(x:Class). (λ(xs:Class). (λ(hStep:Π(a:Class), Π(l:Class), ((a ∈ A) → ((l ∈ L) → ((a, l) ∈ L)))). (λ(hPair:((x ∈ A) × (xs ∈ L))). ((((hStep x) xs) fst(hPair)) snd(hPair))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-104 `thm_family_value_vs_image` (Derived)
 
@@ -846,6 +949,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(I:Class), Pi(G:Class), Pi(x:Class), ((ValOf(G, x) = Union(Image(G, {x}))) -> ((pr2((I, G)) = G) * (ValOf(G, x) = Union(Image(G, {x})))))`
 - **Proof Term:** `(λ(I:Class). (λ(G:Class). (λ(x:Class). (λ(hValImg:(ValOf(G, x) = ⋃(Image(G, {x})))). ⟨ax_dunaev_pr2(I, G), hValImg⟩))))`
 - **Axioms Used:** `ax_dunaev_pr2`
+- **Definitions Used:** `(none)`
 
 ### NBG-105 `thm_tight_universe_indexed_union` (Derived)
 
@@ -854,6 +958,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(I:Class), Pi(G:Class), ((Pi(A:Class), Pi(B:Class), ((A in U) -> ((B c= U) -> ((Image(B, A) c= U) -> (Union(Image(B, A)) in U))))) -> ((I in U) -> ((G c= U) -> ((Image(G, I) c= U) -> (Union(Image(G, I)) in U)))))`
 - **Proof Term:** `(λ(U:Class). (λ(I:Class). (λ(G:Class). (λ(hTight:Π(A:Class), Π(B:Class), ((A ∈ U) → ((B ⊆ U) → ((Image(B, A) ⊆ U) → (⋃(Image(B, A)) ∈ U))))). (λ(hI:(I ∈ U)). (λ(hGSub:(G ⊆ U)). (λ(hImgSub:(Image(G, I) ⊆ U)). (((((hTight I) G) hI) hGSub) hImgSub))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-106 `thm_dunaev_rel_inverse_involutive` (Derived)
 
@@ -862,6 +967,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), ((Pi(u:Class), Pi(v:Class), ((((u, v) in RelConverse(R)) -> ((v, u) in R)) * (((v, u) in R) -> ((u, v) in RelConverse(R))))) -> ((Pi(u:Class), Pi(v:Class), ((((u, v) in RelConverse(RelConverse(R))) -> ((v, u) in RelConverse(R))) * (((v, u) in RelConverse(R)) -> ((u, v) in RelConverse(RelConverse(R)))))) -> ((((x, y) in R) -> ((x, y) in RelConverse(RelConverse(R)))) * (((x, y) in RelConverse(RelConverse(R))) -> ((x, y) in R)))))`
 - **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(hInv1:Π(u:Class), Π(v:Class), ((((u, v) ∈ RelConverse(R)) → ((v, u) ∈ R)) × (((v, u) ∈ R) → ((u, v) ∈ RelConverse(R))))). (λ(hInv2:Π(u:Class), Π(v:Class), ((((u, v) ∈ RelConverse(RelConverse(R))) → ((v, u) ∈ RelConverse(R))) × (((v, u) ∈ RelConverse(R)) → ((u, v) ∈ RelConverse(RelConverse(R)))))). ⟨(λ(hInR:((x, y) ∈ R)). (snd(((hInv2 x) y)) (snd(((hInv1 y) x)) hInR))), (λ(hInInv2:((x, y) ∈ RelConverse(RelConverse(R)))). (fst(((hInv1 y) x)) (fst(((hInv2 x) y)) hInInv2)))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-107 `thm_inter_assoc` (Derived)
 
@@ -870,6 +976,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(z:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), ((((z in A) * (z in B)) * (z in C)) -> ((z in A) * ((z in B) * (z in C))))`
 - **Proof Term:** `(λ(z:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((z ∈ A) × (z ∈ B)) × (z ∈ C))). ⟨fst(fst(h)), ⟨snd(fst(h)), snd(h)⟩⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-108 `thm_union_distrib_inter` (Derived)
 
@@ -878,6 +985,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(z:Class), Pi(X:Class), Pi(Y:Class), Pi(Z:Class), ((Pi(C:Prop), (((z in X) -> C) -> ((((z in Y) * (z in Z)) -> C) -> C))) -> ((Pi(C:Prop), (((z in X) -> C) -> (((z in Y) -> C) -> C))) * (Pi(C:Prop), (((z in X) -> C) -> (((z in Z) -> C) -> C)))))`
 - **Proof Term:** `(λ(z:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(hOr:Π(C:Prop), (((z ∈ X) → C) → ((((z ∈ Y) × (z ∈ Z)) → C) → C))). ⟨(λ(C:Prop). (λ(fX:((z ∈ X) → C)). (λ(fY:((z ∈ Y) → C)). (((hOr C) fX) (λ(hYZ:((z ∈ Y) × (z ∈ Z))). (fY fst(hYZ))))))), (λ(C:Prop). (λ(fX:((z ∈ X) → C)). (λ(fZ:((z ∈ Z) → C)). (((hOr C) fX) (λ(hYZ:((z ∈ Y) × (z ∈ Z))). (fZ snd(hYZ)))))))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-109 `thm_dunaev_pair_fst_snd_eq` (Derived)
 
@@ -886,6 +994,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), (((a, b) = (c, d)) -> ((a = c) * (b = d)))`
 - **Proof Term:** `(λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (((((λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(hEq:((A, B) = (C, D))). ⟨(((ax_eq_trans(A, pr1((C, D))) C) (((ax_eq_trans(A, pr1((A, B))) pr1((C, D))) (ax_eq_sym(pr1((A, B)), A) fst((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) A) B)))) (ax_eq_cong_pr1((A, B), (C, D)) hEq))) fst((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) C) D))), (((ax_eq_trans(B, pr2((C, D))) D) (((ax_eq_trans(B, pr2((A, B))) pr2((C, D))) (ax_eq_sym(pr2((A, B)), B) snd((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) A) B)))) (ax_eq_cong_pr2((A, B), (C, D)) hEq))) snd((((λ(A:Class). (λ(B:Class). ⟨ax_dunaev_pr1(A, B), ax_dunaev_pr2(A, B)⟩)) C) D)))⟩))))) a) b) c) d)))))`
 - **Axioms Used:** `ax_eq_trans, ax_eq_sym, ax_dunaev_pr1, ax_dunaev_pr2, ax_eq_cong_pr1, ax_eq_cong_pr2`
+- **Definitions Used:** `(none)`
 
 ### NBG-110 `thm_cantor_no_surjection_power` (Derived)
 
@@ -894,6 +1003,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(F:Class), Pi(D:Class), ((Pi(x:Class), (((x in D) -> ((x in A) * ((x in ValOf(F, x)) -> Void))) * (((x in A) * ((x in ValOf(F, x)) -> Void)) -> (x in D)))) -> ((Sigma(a:Class), ((a in A) * (Pi(z:Class), (((z in D) -> (z in ValOf(F, a))) * ((z in ValOf(F, a)) -> (z in D)))))) -> Void))`
 - **Proof Term:** `(λ(A:Class). (λ(F:Class). (λ(D:Class). (λ(hDiag:Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))). (λ(hSurj:Σ(a:Class), ((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((hDiag fst(hSurj))) ⟨fst(snd(hSurj)), (λ(hInFa:(fst(hSurj) ∈ ValOf(F, fst(hSurj)))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((snd(snd(hSurj)) fst(hSurj))) hInFa)))⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-111 `thm_ord_succ_trans` (Derived)
 
@@ -902,6 +1012,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(a:Class), Pi(x:Class), (((Pi(u:Class), ((u in a) -> (u c= a))) * ((x c= a) -> (x c= SuccOrd(a)))) -> ((x in a) -> (x c= SuccOrd(a))))`
 - **Proof Term:** `(λ(a:Class). (λ(x:Class). (λ(hTransSucc:((Π(u:Class), ((u ∈ a) → (u ⊆ a))) × ((x ⊆ a) → (x ⊆ SuccOrd(a))))). (λ(hxInA:(x ∈ a)). (snd(hTransSucc) ((fst(hTransSucc) x) hxInA))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-112 `thm_knaster_tarski_post_fixed` (Derived)
 
@@ -910,6 +1021,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(A:Class), Pi(X:Class), ((Pi(B:Class), Pi(C:Class), ((B c= C) -> (ValOf(F, B) c= ValOf(F, C)))) -> (((A c= X) * (ValOf(F, X) c= X)) -> (ValOf(F, A) c= X)))`
 - **Proof Term:** `(λ(F:Class). (λ(A:Class). (λ(X:Class). (λ(hMono:Π(B:Class), Π(C:Class), ((B ⊆ C) → (ValOf(F, B) ⊆ ValOf(F, C)))). (λ(hPost:((A ⊆ X) × (ValOf(F, X) ⊆ X))). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) ValOf(F, A)) X)) (λ(z:Class). (λ(hz:(z ∈ ValOf(F, A))). (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) ValOf(F, X)) X)) snd(hPost)) z) (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) ValOf(F, A)) ValOf(F, X))) (((hMono A) X) fst(hPost))) z) hz))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-113 `thm_dunaev_rel_comp_assoc_proj` (Derived)
 
@@ -918,6 +1030,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(S:Class), Pi(T:Class), Pi(x:Class), Pi(w:Class), ((Sigma(v:Class), ((Sigma(u:Class), (((x, u) in R) * ((u, v) in S))) * ((v, w) in T))) -> Sigma(u:Class), (((x, u) in R) * (Sigma(v:Class), (((u, v) in S) * ((v, w) in T)))))`
 - **Proof Term:** `(λ(R:Class). (λ(S:Class). (λ(T:Class). (λ(x:Class). (λ(w:Class). (λ(hComp:Σ(v:Class), ((Σ(u:Class), (((x, u) ∈ R) × ((u, v) ∈ S))) × ((v, w) ∈ T))). ⟨fst(fst(snd(hComp))), ⟨fst(snd(fst(snd(hComp)))), ⟨fst(hComp), ⟨snd(snd(fst(snd(hComp)))), snd(snd(hComp))⟩⟩⟩⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-114 `thm_universe_power_pair_closure` (Derived)
 
@@ -926,6 +1039,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(A:Class), Pi(B:Class), (((Pi(X:Class), ((X in U) -> (Power(X) in U))) * (Pi(X:Class), Pi(Y:Class), (((X in U) * (Y in U)) -> ((X, Y) in U)))) -> (((A in U) * (B in U)) -> ((Power(A), Power(B)) in U)))`
 - **Proof Term:** `(λ(U:Class). (λ(A:Class). (λ(B:Class). (λ(hUniv:((Π(X:Class), ((X ∈ U) → (𝒫(X) ∈ U))) × (Π(X:Class), Π(Y:Class), (((X ∈ U) × (Y ∈ U)) → ((X, Y) ∈ U))))). (λ(hAB:((A ∈ U) × (B ∈ U))). (((snd(hUniv) 𝒫(A)) 𝒫(B)) ⟨((fst(hUniv) A) fst(hAB)), ((fst(hUniv) B) snd(hAB))⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-115 `thm_forcing_check_name_refl` (Derived)
 
@@ -934,6 +1048,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(P:Class), Pi(x:Class), Pi(p:Class), (((x, p) = (x, p)) * (((p in P) * (x in V)) -> (((x, p) = (x, p)) * (x in V))))`
 - **Proof Term:** `(λ(P:Class). (λ(x:Class). (λ(p:Class). ⟨refl((x, p)), (λ(hCond:((p ∈ P) × (x ∈ V))). ⟨refl((x, p)), snd(hCond)⟩)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-116 `thm_veblen_normal_fixed_point` (Derived)
 
@@ -942,6 +1057,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(a:Class), ((Ord(a) * (ValOf(F, a) = a)) -> (Ord(a) * (a = ValOf(F, a))))`
 - **Proof Term:** `(λ(F:Class). (λ(a:Class). (λ(hFix:(Ord(a) × (ValOf(F, a) = a))). ⟨fst(hFix), (ax_eq_sym(ValOf(F, a), a) snd(hFix))⟩)))`
 - **Axioms Used:** `ax_eq_sym`
+- **Definitions Used:** `(none)`
 
 ### NBG-117 `thm_club_intersection_closed` (Derived)
 
@@ -950,6 +1066,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(C1:Class), Pi(C2:Class), Pi(B:Class), ((((B c= C1) * (B c= C2)) * ((Pi(D:Class), ((D c= C1) -> (Union(D) in C1))) * (Pi(D:Class), ((D c= C2) -> (Union(D) in C2))))) -> (Union(B) in (C1 n* C2)))`
 - **Proof Term:** `(λ(C1:Class). (λ(C2:Class). (λ(B:Class). (λ(hClub:(((B ⊆ C1) × (B ⊆ C2)) × ((Π(D:Class), ((D ⊆ C1) → (⋃(D) ∈ C1))) × (Π(D:Class), ((D ⊆ C2) → (⋃(D) ∈ C2)))))). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) C1) C2) ⋃(B))) ⟨((fst(snd(hClub)) B) fst(fst(hClub))), ((snd(snd(hClub)) B) snd(fst(hClub)))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-118 `thm_fodor_regressive_witness` (Derived)
 
@@ -958,6 +1075,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(S:Class), Pi(F:Class), ((Sigma(a:Class), Sigma(b:Class), ((a in S) * ((b in a) * (ValOf(F, a) = b)))) -> Sigma(b:Class), Sigma(a:Class), ((a in S) * ((b in a) * (ValOf(F, a) = b))))`
 - **Proof Term:** `(λ(S:Class). (λ(F:Class). (λ(hReg:Σ(a:Class), Σ(b:Class), ((a ∈ S) × ((b ∈ a) × (ValOf(F, a) = b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-119 `thm_bval_extensionality_witness` (Derived)
 
@@ -966,6 +1084,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(u:Class), Pi(v:Class), Pi(p:Class), Pi(b:Class), ((((u, p) in b) * (u = v)) -> (((u, p) in b) * (v = u)))`
 - **Proof Term:** `(λ(u:Class). (λ(v:Class). (λ(p:Class). (λ(b:Class). (λ(hBval:(((u, p) ∈ b) × (u = v))). ⟨fst(hBval), (ax_eq_sym(u, v) snd(hBval))⟩)))))`
 - **Axioms Used:** `ax_eq_sym`
+- **Definitions Used:** `(none)`
 
 ### NBG-120 `thm_gale_stewart_strategy_exclusivity` (Derived)
 
@@ -974,6 +1093,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(G:Class), Pi(s1:Class), Pi(s2:Class), ((((s1 in G) * (s2 in G)) -> Void) -> ((s1 in G) -> ((s2 in G) -> Void)))`
 - **Proof Term:** `(λ(G:Class). (λ(s1:Class). (λ(s2:Class). (λ(hExcl:(((s1 ∈ G) × (s2 ∈ G)) → 𝟘)). (λ(h1:(s1 ∈ G)). (λ(h2:(s2 ∈ G)). (hExcl ⟨h1, h2⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-121 `thm_gale_stewart_closed_det_proj` (Derived)
 
@@ -982,6 +1102,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(G:Class), Pi(C:Class), Pi(W1:Class), (((G in C) * ((G in C) -> Sigma(s:Class), ((G, s) in W1))) -> Sigma(s:Class), ((G, s) in W1))`
 - **Proof Term:** `(λ(G:Class). (λ(C:Class). (λ(W1:Class). (λ(hClosedDet:((G ∈ C) × ((G ∈ C) → Σ(s:Class), ((G, s) ∈ W1)))). (snd(hClosedDet) fst(hClosedDet))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-122 `thm_borel_determinacy_modus_ponens` (Derived)
 
@@ -990,6 +1111,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(Det:Class), Pi(g:Class), (((Pi(x:Class), ((x in B) -> (x in Det))) * (g in B)) -> (g in Det))`
 - **Proof Term:** `(λ(B:Class). (λ(Det:Class). (λ(g:Class). (λ(hBorel:((Π(x:Class), ((x ∈ B) → (x ∈ Det))) × (g ∈ B))). ((fst(hBorel) g) snd(hBorel))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-123 `thm_semigroup_dyson_phillips_step` (Derived)
 
@@ -998,6 +1120,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(S:Class), Pi(T0:Class), Pi(P:Class), ((((T0 in S) * (P in S)) * (Pi(A:Class), Pi(B:Class), (((A in S) * (B in S)) -> ((A, B) in S)))) -> ((T0, P) in S))`
 - **Proof Term:** `(λ(S:Class). (λ(T0:Class). (λ(P:Class). (λ(hDP:(((T0 ∈ S) × (P ∈ S)) × (Π(A:Class), Π(B:Class), (((A ∈ S) × (B ∈ S)) → ((A, B) ∈ S))))). (((snd(hDP) T0) P) fst(hDP))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-124 `thm_dunaev_list_append_nil_right` (Derived)
 
@@ -1006,6 +1129,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(L:Class), ((L c= (L u+ EmptySet)) * (EmptySet c= L))`
 - **Proof Term:** `(λ(L:Class). ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz)))))))))) L) ∅), ((λ(X:Class). (λ(z:Class). (λ(h:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, h))))) L)⟩)`
 - **Axioms Used:** `ax_false_elim, ax_empty_no_elements`
+- **Definitions Used:** `(none)`
 
 ### NBG-125 `thm_family_canonical_record_proj` (Derived)
 
@@ -1014,6 +1138,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(B:Class), Pi(x:Class), Pi(y:Class), (((F c= B) * ((x in B) * ((x, y) in F))) -> ((x in B) * ((x, y) in B)))`
 - **Proof Term:** `(λ(F:Class). (λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(hFam:((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F)))). ⟨fst(snd(hFam)), (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) F) B)) fst(hFam)) (x, y)) snd(snd(hFam)))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-126 `thm_yoneda_identity_eval` (Derived)
 
@@ -1022,6 +1147,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(eta:Class), Pi(A:Class), (((IdMor(A) in A) * ((IdMor(A) in A) -> (ValOf(eta, IdMor(A)) in ValOf(F, A)))) -> (ValOf(eta, IdMor(A)) in ValOf(F, A)))`
 - **Proof Term:** `(λ(F:Class). (λ(eta:Class). (λ(A:Class). (λ(hYon:((IdMor(A) ∈ A) × ((IdMor(A) ∈ A) → (ValOf(eta, IdMor(A)) ∈ ValOf(F, A))))). (snd(hYon) fst(hYon))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-127 `thm_yoneda_roundtrip_id` (Derived)
 
@@ -1030,6 +1156,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Phi:Class), Pi(Psi:Class), Pi(u:Class), (((ValOf(Phi, ValOf(Psi, u)) = u) * (ValOf(Psi, ValOf(Phi, u)) = u)) -> ((u = ValOf(Phi, ValOf(Psi, u))) * (u = ValOf(Psi, ValOf(Phi, u)))))`
 - **Proof Term:** `(λ(Phi:Class). (λ(Psi:Class). (λ(u:Class). (λ(hRT:((ValOf(Phi, ValOf(Psi, u)) = u) × (ValOf(Psi, ValOf(Phi, u)) = u))). ⟨(ax_eq_sym(ValOf(Phi, ValOf(Psi, u)), u) fst(hRT)), (ax_eq_sym(ValOf(Psi, ValOf(Phi, u)), u) snd(hRT))⟩))))`
 - **Axioms Used:** `ax_eq_sym`
+- **Definitions Used:** `(none)`
 
 ### NBG-128 `thm_kan_extension_adjunction_unit` (Derived)
 
@@ -1038,6 +1165,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(K:Class), Pi(F:Class), Pi(G:Class), Pi(Lan:Class), (((F c= (K, Lan)) * ((F c= (K, G)) -> (Lan c= G))) -> ((F c= (K, G)) -> ((F c= (K, Lan)) * (Lan c= G))))`
 - **Proof Term:** `(λ(K:Class). (λ(F:Class). (λ(G:Class). (λ(Lan:Class). (λ(hKan:((F ⊆ (K, Lan)) × ((F ⊆ (K, G)) → (Lan ⊆ G)))). (λ(hSubG:(F ⊆ (K, G))). ⟨fst(hKan), (snd(hKan) hSubG)⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-129 `thm_schrodinger_feynman_kac_positivity` (Derived)
 
@@ -1046,6 +1174,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Pos:Class), Pi(Pt:Class), Pi(Vpot:Class), Pi(u:Class), (((Pi(f:Class), ((f in Pos) -> (ValOf(Pt, f) in Pos))) * ((Pi(f:Class), ((f in Pos) -> (ValOf(Vpot, f) in Pos))) * (u in Pos))) -> (ValOf(Pt, ValOf(Vpot, u)) in Pos))`
 - **Proof Term:** `(λ(Pos:Class). (λ(Pt:Class). (λ(Vpot:Class). (λ(u:Class). (λ(hFK:((Π(f:Class), ((f ∈ Pos) → (ValOf(Pt, f) ∈ Pos))) × ((Π(f:Class), ((f ∈ Pos) → (ValOf(Vpot, f) ∈ Pos))) × (u ∈ Pos)))). ((fst(hFK) ValOf(Vpot, u)) ((fst(snd(hFK)) u) snd(snd(hFK)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-130 `thm_lipschitz_regularity_composition` (Derived)
 
@@ -1054,6 +1183,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Lip:Class), Pi(F:Class), Pi(G:Class), ((((F in Lip) * (G in Lip)) * (Pi(A:Class), Pi(B:Class), (((A in Lip) * (B in Lip)) -> ((A, B) in Lip)))) -> ((F, G) in Lip))`
 - **Proof Term:** `(λ(Lip:Class). (λ(F:Class). (λ(G:Class). (λ(hLip:(((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip))))). (((snd(hLip) F) G) fst(hLip))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-131 `thm_dunaev_pair_union_left_distributivity` (Derived)
 
@@ -1062,6 +1192,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(X:Class), Pi(Y:Class), Pi(Z:Class), (((Pi(C:Prop), (((x in X) -> C) -> (((x in Y) -> C) -> C))) * (y in Z)) -> Pi(C:Prop), ((((x in X) * (y in Z)) -> C) -> ((((x in Y) * (y in Z)) -> C) -> C)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((Π(C:Prop), (((x ∈ X) → C) → (((x ∈ Y) → C) → C))) × (y ∈ Z))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Z)) → C)). (λ(fR:(((x ∈ Y) × (y ∈ Z)) → C)). (((fst(h) C) (λ(hxX:(x ∈ X)). (fL ⟨hxX, snd(h)⟩))) (λ(hxY:(x ∈ Y)). (fR ⟨hxY, snd(h)⟩))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-132 `thm_dunaev_pair_union_right_distributivity` (Derived)
 
@@ -1070,6 +1201,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(X:Class), Pi(Y:Class), Pi(Z:Class), (((x in X) * (Pi(C:Prop), (((y in Y) -> C) -> (((y in Z) -> C) -> C)))) -> Pi(C:Prop), ((((x in X) * (y in Y)) -> C) -> ((((x in X) * (y in Z)) -> C) -> C)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((x ∈ X) × (Π(C:Prop), (((y ∈ Y) → C) → (((y ∈ Z) → C) → C))))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Y)) → C)). (λ(fR:(((x ∈ X) × (y ∈ Z)) → C)). (((snd(h) C) (λ(hyY:(y ∈ Y)). (fL ⟨fst(h), hyY⟩))) (λ(hyZ:(y ∈ Z)). (fR ⟨fst(h), hyZ⟩))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-133 `thm_dunaev_pair_intersection_factoring` (Derived)
 
@@ -1078,6 +1210,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), Pi(D:Class), ((((x in A) * (y in C)) * ((x in B) * (y in D))) -> (((x in A) * (x in B)) * ((y in C) * (y in D))))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(h:(((x ∈ A) × (y ∈ C)) × ((x ∈ B) × (y ∈ D)))). ⟨⟨fst(fst(h)), fst(snd(h))⟩, ⟨snd(fst(h)), snd(snd(h))⟩⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-134 `thm_class_difference_union_absorption` (Derived)
 
@@ -1086,6 +1219,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), ((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in A) * (x in B)) -> C) -> C))) -> (x in A))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(hOr:Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ A) × (x ∈ B)) → C) → C))). (((hOr (x ∈ A)) (λ(hDiff:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hDiff))) (λ(hInter:((x ∈ A) × (x ∈ B))). fst(hInter)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-135 `thm_forall_biconditional_to_conjunction_of_forall` (Derived)
 
@@ -1094,6 +1228,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((Pi(X:Class), (((X in A) -> (X in B)) * ((X in B) -> (X in A)))) -> ((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in B) -> (X in A)))))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hIff:Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))). ⟨(λ(X:Class). fst((hIff X))), (λ(X:Class). snd((hIff X)))⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-136 `thm_conjunction_of_forall_to_forall_biconditional` (Derived)
 
@@ -1102,6 +1237,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in B) -> (X in A)))) -> Pi(X:Class), (((X in A) -> (X in B)) * ((X in B) -> (X in A))))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hConj:((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A))))). (λ(X:Class). ⟨(fst(hConj) X), (snd(hConj) X)⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-137 `thm_relational_composition_witness_monotonicity_left` (Derived)
 
@@ -1110,6 +1246,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(R:Class), Pi(R2:Class), Pi(S:Class), ((((x in R) * (y in S)) * ((x in R) -> (x in R2))) -> ((x in R2) * (y in S)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(R2:Class). (λ(S:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((x ∈ R) → (x ∈ R2)))). ⟨(snd(h) fst(fst(h))), snd(fst(h))⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-138 `thm_relational_composition_witness_monotonicity_right` (Derived)
 
@@ -1118,6 +1255,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(R:Class), Pi(S:Class), Pi(S2:Class), ((((x in R) * (y in S)) * ((y in S) -> (y in S2))) -> ((x in R) * (y in S2)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(S:Class). (λ(S2:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((y ∈ S) → (y ∈ S2)))). ⟨fst(fst(h)), (snd(h) snd(fst(h)))⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-139 `thm_class_symmetric_difference_left_elimination` (Derived)
 
@@ -1126,6 +1264,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), (((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in B) * ((x in A) -> Void)) -> C) -> C))) * ((x in A) -> Void)) -> ((x in B) * ((x in A) -> Void)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ A) → 𝟘))). ⟨(((fst(h) (x ∈ B)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). ax_false_elim((x ∈ B), (snd(h) fst(hL))))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). fst(hR))), snd(h)⟩))))`
 - **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-140 `thm_class_symmetric_difference_right_elimination` (Derived)
 
@@ -1134,6 +1273,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), (((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in B) * ((x in A) -> Void)) -> C) -> C))) * ((x in B) -> Void)) -> ((x in A) * ((x in B) -> Void)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ B) → 𝟘))). ⟨(((fst(h) (x ∈ A)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hL))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). ax_false_elim((x ∈ A), (snd(h) fst(hR))))), snd(h)⟩))))`
 - **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-141 `thm_function_fiber_intersection_disjointness` (Derived)
 
@@ -1142,6 +1282,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y1:Class), Pi(y2:Class), Pi(F1:Class), Pi(F2:Class), ((((x in F1) * ((x in F1) -> (y1 = y2))) * ((x in F2) * ((y1 = y2) -> Void))) -> Void)`
 - **Proof Term:** `(λ(x:Class). (λ(y1:Class). (λ(y2:Class). (λ(F1:Class). (λ(F2:Class). (λ(h:(((x ∈ F1) × ((x ∈ F1) → (y1 = y2))) × ((x ∈ F2) × ((y1 = y2) → 𝟘)))). (snd(snd(h)) (snd(fst(h)) fst(fst(h))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-142 `thm_image_subclass_transitivity_witness` (Derived)
 
@@ -1150,6 +1291,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(A:Class), Pi(A2:Class), Pi(B:Class), Pi(B2:Class), ((((x in A) * (y in B)) * (((x in A) -> (x in A2)) * ((y in B) -> (y in B2)))) -> ((x in A2) * (y in B2)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(A:Class). (λ(A2:Class). (λ(B:Class). (λ(B2:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × (((x ∈ A) → (x ∈ A2)) × ((y ∈ B) → (y ∈ B2))))). ⟨(fst(snd(h)) fst(fst(h))), (snd(snd(h)) snd(fst(h)))⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-143 `thm_preimage_union_decomposition_witness` (Derived)
 
@@ -1158,6 +1300,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(Dom:Class), Pi(B1:Class), Pi(B2:Class), (((x in Dom) * (Pi(C:Prop), (((y in B1) -> C) -> (((y in B2) -> C) -> C)))) -> Pi(C:Prop), ((((x in Dom) * (y in B1)) -> C) -> ((((x in Dom) * (y in B2)) -> C) -> C)))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(Dom:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:((x ∈ Dom) × (Π(C:Prop), (((y ∈ B1) → C) → (((y ∈ B2) → C) → C))))). (λ(C:Prop). (λ(fL:(((x ∈ Dom) × (y ∈ B1)) → C)). (λ(fR:(((x ∈ Dom) × (y ∈ B2)) → C)). (((snd(h) C) (λ(hyB1:(y ∈ B1)). (fL ⟨fst(h), hyB1⟩))) (λ(hyB2:(y ∈ B2)). (fR ⟨fst(h), hyB2⟩))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-144 `thm_equivalence_relation_symmetry_transitivity_step` (Derived)
 
@@ -1166,6 +1309,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in R) -> ((y, x) in R)) * ((((y, x) in R) * ((x, z) in R)) -> ((y, z) in R))) -> ((((x, y) in R) * ((x, z) in R)) -> ((y, z) in R)))`
 - **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(hSymTrans:((((x, y) ∈ R) → ((y, x) ∈ R)) × ((((y, x) ∈ R) × ((x, z) ∈ R)) → ((y, z) ∈ R)))). (λ(hPair:(((x, y) ∈ R) × ((x, z) ∈ R))). (snd(hSymTrans) ⟨(fst(hSymTrans) fst(hPair)), snd(hPair)⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-145 `thm_forall_implication_conjunction_merging` (Derived)
 
@@ -1174,6 +1318,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(C:Class), (((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in A) -> (X in C)))) -> Pi(X:Class), ((X in A) -> ((X in B) * (X in C))))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(hBoth:((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ A) → (X ∈ C))))). (λ(X:Class). (λ(hxA:(X ∈ A)). ⟨((fst(hBoth) X) hxA), ((snd(hBoth) X) hxA)⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-146 `thm_forall_conjunction_implication_distribution` (Derived)
 
@@ -1182,6 +1327,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(C:Class), Pi(D:Class), (((Pi(X:Class), (((X in A) * (X in B)) -> (X in C))) * (Pi(X:Class), ((X in D) -> ((X in A) * (X in B))))) -> Pi(X:Class), ((X in D) -> (X in C)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(h:((Π(X:Class), (((X ∈ A) × (X ∈ B)) → (X ∈ C))) × (Π(X:Class), ((X ∈ D) → ((X ∈ A) × (X ∈ B)))))). (λ(X:Class). (λ(hxD:(X ∈ D)). ((fst(h) X) ((snd(h) X) hxD)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-147 `thm_dunaev_pair_converse_involutive_equivalence` (Derived)
 
@@ -1190,6 +1336,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in R) -> ((y, x) in RelConverse(R))) * (((y, x) in RelConverse(R)) -> ((x, y) in RelConverse(RelConverse(R))))) -> (((x, y) in R) -> ((x, y) in RelConverse(RelConverse(R)))))`
 - **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((y, x) ∈ RelConverse(R))) × (((y, x) ∈ RelConverse(R)) → ((x, y) ∈ RelConverse(RelConverse(R)))))). (λ(hxy:((x, y) ∈ R)). (snd(h) (fst(h) hxy)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-148 `thm_subclass_antitone_complement_contraposition` (Derived)
 
@@ -1198,6 +1345,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), ((((x in A) -> (x in B)) * (((x in B) -> Void) * (x in A))) -> Void)`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:(((x ∈ A) → (x ∈ B)) × (((x ∈ B) → 𝟘) × (x ∈ A)))). (fst(snd(h)) (fst(h) snd(snd(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-149 `thm_binary_relation_field_membership_introduction` (Derived)
 
@@ -1206,6 +1354,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in R) -> ((x in Dom(R)) * (y in Ran(R)))) * ((x, y) in R)) -> ((Pi(C:Prop), (((x in Dom(R)) -> C) -> (((x in Ran(R)) -> C) -> C))) * (Pi(C:Prop), (((y in Dom(R)) -> C) -> (((y in Ran(R)) -> C) -> C)))))`
 - **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((x ∈ Dom(R)) × (y ∈ Ran(R)))) × ((x, y) ∈ R))). ⟨(λ(C:Prop). (λ(fL:((x ∈ Dom(R)) → C)). (λ(fR:((x ∈ Ran(R)) → C)). (fL fst((fst(h) snd(h))))))), (λ(C:Prop). (λ(gL:((y ∈ Dom(R)) → C)). (λ(gR:((y ∈ Ran(R)) → C)). (gR snd((fst(h) snd(h)))))))⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-150 `thm_universal_subclass_antisymmetry_witness` (Derived)
 
@@ -1214,6 +1363,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(A:Class), (((Pi(x:Class), Pi(y:Class), (((x in A) * ((x, y) in R)) -> (y in A))) * (Pi(x:Class), ((x, x) in R))) -> Pi(x:Class), ((x in A) -> ((x in A) * ((x, x) in R))))`
 - **Proof Term:** `(λ(R:Class). (λ(A:Class). (λ(hSatRefl:((Π(x:Class), Π(y:Class), (((x ∈ A) × ((x, y) ∈ R)) → (y ∈ A))) × (Π(x:Class), ((x, x) ∈ R)))). (λ(x:Class). (λ(hxA:(x ∈ A)). ⟨(((fst(hSatRefl) x) x) ⟨hxA, (snd(hSatRefl) x)⟩), (snd(hSatRefl) x)⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-151 `thm_dunaev_pair_diagonal_subclass_product` (Derived)
 
@@ -1222,6 +1372,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(x:Class), ((((x in A) -> ((x, x) in DiagClass(A))) * (((x, x) in DiagClass(A)) -> ((x in A) * (x in A)))) -> ((x in A) -> ((x in A) * ((x, x) in DiagClass(A)))))`
 - **Proof Term:** `(λ(A:Class). (λ(x:Class). (λ(hDiag:(((x ∈ A) → ((x, x) ∈ DiagClass(A))) × (((x, x) ∈ DiagClass(A)) → ((x ∈ A) × (x ∈ A))))). (λ(hxA:(x ∈ A)). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-152 `thm_preorder_upper_bound_transitivity` (Derived)
 
@@ -1230,6 +1381,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in R) * ((y, z) in R)) -> ((x, z) in R))) -> (((((a, b) in R) * ((c, b) in R)) * ((b, d) in R)) -> (((a, d) in R) * ((c, d) in R))))`
 - **Proof Term:** `(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hUB:((((a, b) ∈ R) × ((c, b) ∈ R)) × ((b, d) ∈ R))). ⟨((((hTrans a) b) d) ⟨fst(fst(hUB)), snd(hUB)⟩), ((((hTrans c) b) d) ⟨snd(fst(hUB)), snd(hUB)⟩)⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-153 `thm_preorder_lower_bound_transitivity` (Derived)
 
@@ -1238,6 +1390,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in R) * ((y, z) in R)) -> ((x, z) in R))) -> ((((d, b) in R) * (((b, a) in R) * ((b, c) in R))) -> (((d, a) in R) * ((d, c) in R))))`
 - **Proof Term:** `(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hLB:(((d, b) ∈ R) × (((b, a) ∈ R) × ((b, c) ∈ R)))). ⟨((((hTrans d) b) a) ⟨fst(hLB), fst(snd(hLB))⟩), ((((hTrans d) b) c) ⟨fst(hLB), snd(snd(hLB))⟩)⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-154 `thm_functional_graph_uniqueness_contraposition` (Derived)
 
@@ -1246,6 +1399,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(x:Class), Pi(y1:Class), Pi(y2:Class), ((((((x, y1) in F) * ((x, y2) in F)) -> (y1 = y2)) * ((y1 = y2) -> Void)) -> (((x, y1) in F) -> (((x, y2) in F) -> Void)))`
 - **Proof Term:** `(λ(F:Class). (λ(x:Class). (λ(y1:Class). (λ(y2:Class). (λ(h:(((((x, y1) ∈ F) × ((x, y2) ∈ F)) → (y1 = y2)) × ((y1 = y2) → 𝟘))). (λ(h1:((x, y1) ∈ F)). (λ(h2:((x, y2) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-155 `thm_injective_graph_uniqueness_contraposition` (Derived)
 
@@ -1254,6 +1408,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(x1:Class), Pi(x2:Class), Pi(y:Class), ((((((x1, y) in F) * ((x2, y) in F)) -> (x1 = x2)) * ((x1 = x2) -> Void)) -> (((x1, y) in F) -> (((x2, y) in F) -> Void)))`
 - **Proof Term:** `(λ(F:Class). (λ(x1:Class). (λ(x2:Class). (λ(y:Class). (λ(h:(((((x1, y) ∈ F) × ((x2, y) ∈ F)) → (x1 = x2)) × ((x1 = x2) → 𝟘))). (λ(h1:((x1, y) ∈ F)). (λ(h2:((x2, y) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-156 `thm_galois_connection_adjunction_modus_ponens` (Derived)
 
@@ -1262,6 +1417,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LeqA:Class), Pi(LeqB:Class), Pi(F:Class), Pi(G:Class), Pi(x:Class), Pi(y:Class), ((((((x, y) in LeqA) -> ((ValOf(F, x), y) in LeqB)) * (((ValOf(F, x), y) in LeqB) -> ((x, ValOf(G, y)) in LeqA))) * ((x, y) in LeqA)) -> ((x, ValOf(G, y)) in LeqA))`
 - **Proof Term:** `(λ(LeqA:Class). (λ(LeqB:Class). (λ(F:Class). (λ(G:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((((x, y) ∈ LeqA) → ((ValOf(F, x), y) ∈ LeqB)) × (((ValOf(F, x), y) ∈ LeqB) → ((x, ValOf(G, y)) ∈ LeqA))) × ((x, y) ∈ LeqA))). (snd(fst(h)) (fst(fst(h)) snd(h))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-157 `thm_closure_operator_extensivity_idempotence_step` (Derived)
 
@@ -1270,6 +1426,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), ((((x in A) -> (x in ClosureOp(A))) * ((x in ClosureOp(ClosureOp(A))) -> (x in ClosureOp(A)))) -> ((Pi(C:Prop), (((x in A) -> C) -> (((x in ClosureOp(ClosureOp(A))) -> C) -> C))) -> (x in ClosureOp(A))))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ A) → (x ∈ ClosureOp(A))) × ((x ∈ ClosureOp(ClosureOp(A))) → (x ∈ ClosureOp(A))))). (λ(hOr:Π(C:Prop), (((x ∈ A) → C) → (((x ∈ ClosureOp(ClosureOp(A))) → C) → C))). (((hOr (x ∈ ClosureOp(A))) fst(h)) snd(h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-158 `thm_interior_operator_contraction_idempotence_step` (Derived)
 
@@ -1278,6 +1435,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), ((((x in InteriorOp(A)) -> (x in A)) * ((x in InteriorOp(A)) -> (x in InteriorOp(InteriorOp(A))))) -> ((x in InteriorOp(A)) -> ((x in A) * (x in InteriorOp(InteriorOp(A))))))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ InteriorOp(A)) → (x ∈ A)) × ((x ∈ InteriorOp(A)) → (x ∈ InteriorOp(InteriorOp(A)))))). (λ(hx:(x ∈ InteriorOp(A))). ⟨(fst(h) hx), (snd(h) hx)⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-159 `thm_dunaev_pair_filter_upward_closure_intersection` (Derived)
 
@@ -1286,6 +1444,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(Sub:Class), Pi(x:Class), Pi(y:Class), Pi(w:Class), (((((x in F) * (y in F)) -> ((x n* y) in F)) * ((((x n* y) in F) * (((x n* y), w) in Sub)) -> (w in F))) -> ((((x in F) * (y in F)) * (((x n* y), w) in Sub)) -> (w in F)))`
 - **Proof Term:** `(λ(F:Class). (λ(Sub:Class). (λ(x:Class). (λ(y:Class). (λ(w:Class). (λ(h:((((x ∈ F) × (y ∈ F)) → ((x ∩ y) ∈ F)) × ((((x ∩ y) ∈ F) × (((x ∩ y), w) ∈ Sub)) → (w ∈ F)))). (λ(hIn:(((x ∈ F) × (y ∈ F)) × (((x ∩ y), w) ∈ Sub))). (snd(h) ⟨(fst(h) fst(hIn)), snd(hIn)⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-160 `thm_ideal_downward_closure_union` (Derived)
 
@@ -1294,6 +1453,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(I:Class), Pi(Sub:Class), Pi(x:Class), Pi(y:Class), Pi(v:Class), (((((x in I) * (y in I)) -> ((x u+ y) in I)) * ((((v, (x u+ y)) in Sub) * ((x u+ y) in I)) -> (v in I))) -> ((((x in I) * (y in I)) * ((v, (x u+ y)) in Sub)) -> (v in I)))`
 - **Proof Term:** `(λ(I:Class). (λ(Sub:Class). (λ(x:Class). (λ(y:Class). (λ(v:Class). (λ(h:((((x ∈ I) × (y ∈ I)) → ((x ∪ y) ∈ I)) × ((((v, (x ∪ y)) ∈ Sub) × ((x ∪ y) ∈ I)) → (v ∈ I)))). (λ(hIn:(((x ∈ I) × (y ∈ I)) × ((v, (x ∪ y)) ∈ Sub))). (snd(h) ⟨snd(hIn), (fst(h) fst(hIn))⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-161 `thm_complete_lattice_supremum_least_upper_bound` (Derived)
 
@@ -1302,6 +1462,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(UB:Class), Pi(Leq:Class), Pi(A:Class), Pi(x:Class), (((x in UB) * (Pi(Z:Class), ((Z in UB) -> ((LatticeSup(Leq, A), Z) in Leq)))) -> ((LatticeSup(Leq, A), x) in Leq))`
 - **Proof Term:** `(λ(UB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((LatticeSup(Leq, A), Z) ∈ Leq))))). ((snd(h) x) fst(h)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-162 `thm_complete_lattice_infimum_greatest_lower_bound` (Derived)
 
@@ -1310,6 +1471,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LB:Class), Pi(Leq:Class), Pi(A:Class), Pi(x:Class), (((x in LB) * (Pi(Z:Class), ((Z in LB) -> ((Z, LatticeInf(Leq, A)) in Leq)))) -> ((x, LatticeInf(Leq, A)) in Leq))`
 - **Proof Term:** `(λ(LB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, LatticeInf(Leq, A)) ∈ Leq))))). ((snd(h) x) fst(h)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-163 `thm_monotone_operator_post_fixed_point_closure` (Derived)
 
@@ -1318,6 +1480,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Leq:Class), Pi(F:Class), Pi(x:Class), (((((x, ValOf(F, x)) in Leq) -> ((ValOf(F, x), ValOf(F, ValOf(F, x))) in Leq)) * ((((x, ValOf(F, x)) in Leq) * ((ValOf(F, x), ValOf(F, ValOf(F, x))) in Leq)) -> ((x, ValOf(F, ValOf(F, x))) in Leq))) -> (((x, ValOf(F, x)) in Leq) -> ((x, ValOf(F, ValOf(F, x))) in Leq)))`
 - **Proof Term:** `(λ(Leq:Class). (λ(F:Class). (λ(x:Class). (λ(h:((((x, ValOf(F, x)) ∈ Leq) → ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) × ((((x, ValOf(F, x)) ∈ Leq) × ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) → ((x, ValOf(F, ValOf(F, x))) ∈ Leq)))). (λ(hxfx:((x, ValOf(F, x)) ∈ Leq)). (snd(h) ⟨hxfx, (fst(h) hxfx)⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-164 `thm_well_founded_inductive_heredity_step` (Derived)
 
@@ -1326,6 +1489,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(R:Class), Pi(P:Class), Pi(x:Class), (((Pi(Y:Class), (((Y, x) in R) -> (Y in P))) * ((Pi(Y:Class), (((Y, x) in R) -> (Y in P))) -> (x in P))) -> (x in P))`
 - **Proof Term:** `(λ(R:Class). (λ(P:Class). (λ(x:Class). (λ(h:((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) × ((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) → (x ∈ P)))). (snd(h) fst(h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-165 `thm_dunaev_pair_equivalence_quotient_canonical_map` (Derived)
 
@@ -1334,6 +1498,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Eq:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in Eq) -> ((x in EquivClass(Eq, y)) * (y in EquivClass(Eq, x)))) * ((x, y) in Eq)) -> ((y in EquivClass(Eq, x)) * (x in EquivClass(Eq, y))))`
 - **Proof Term:** `(λ(Eq:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ Eq) → ((x ∈ EquivClass(Eq, y)) × (y ∈ EquivClass(Eq, x)))) × ((x, y) ∈ Eq))). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-166 `thm_heyting_implication_modus_ponens_internal` (Derived)
 
@@ -1342,6 +1507,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), ((((x in A) * ((x in A) -> (x in B))) * ((x in B) -> (x in C))) -> ((x in A) * (x in C)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × ((x ∈ A) → (x ∈ B))) × ((x ∈ B) → (x ∈ C)))). ⟨fst(fst(h)), (snd(h) (snd(fst(h)) fst(fst(h))))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-167 `thm_heyting_implication_exportation_witness` (Derived)
 
@@ -1350,6 +1516,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), ((((x in A) * (x in B)) -> (x in C)) -> ((x in A) -> ((x in B) -> (x in C))))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × (x ∈ B)) → (x ∈ C))). (λ(hxA:(x ∈ A)). (λ(hxB:(x ∈ B)). (h ⟨hxA, hxB⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-168 `thm_heyting_implication_importation_witness` (Derived)
 
@@ -1358,6 +1525,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), (((x in A) -> ((x in B) -> (x in C))) -> (((x in A) * (x in B)) -> (x in C)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:((x ∈ A) → ((x ∈ B) → (x ∈ C)))). (λ(hAB:((x ∈ A) × (x ∈ B))). ((h fst(hAB)) snd(hAB))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-169 `thm_dunaev_pair_lexicographic_order_first_branch` (Derived)
 
@@ -1366,6 +1534,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x1:Class), Pi(x2:Class), Pi(y1:Class), Pi(y2:Class), (((x1, x2) in LtA) -> Pi(C:Prop), ((((x1, x2) in LtA) -> C) -> ((((x1 = x2) * ((y1, y2) in LtB)) -> C) -> C)))`
 - **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hLtX:((x1, x2) ∈ LtA)). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fL hLtX)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-170 `thm_dunaev_pair_lexicographic_order_second_branch` (Derived)
 
@@ -1374,6 +1543,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x1:Class), Pi(x2:Class), Pi(y1:Class), Pi(y2:Class), (((x1 = x2) * ((y1, y2) in LtB)) -> Pi(C:Prop), ((((x1, x2) in LtA) -> C) -> ((((x1 = x2) * ((y1, y2) in LtB)) -> C) -> C)))`
 - **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hR:((x1 = x2) × ((y1, y2) ∈ LtB))). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fR hR)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-171 `thm_dunaev_pair_lexicographic_irreflexivity_step` (Derived)
 
@@ -1382,6 +1552,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x:Class), Pi(y:Class), ((((Pi(C:Prop), ((((x, x) in LtA) -> C) -> ((((x = x) * ((y, y) in LtB)) -> C) -> C))) * (((x, x) in LtA) -> Void)) * (((y, y) in LtB) -> Void)) -> Void)`
 - **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((Π(C:Prop), ((((x, x) ∈ LtA) → C) → ((((x = x) × ((y, y) ∈ LtB)) → C) → C))) × (((x, x) ∈ LtA) → 𝟘)) × (((y, y) ∈ LtB) → 𝟘))). (((fst(fst(h)) 𝟘) snd(fst(h))) (λ(hR:((x = x) × ((y, y) ∈ LtB))). (snd(h) snd(hR)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-172 `thm_directed_class_upper_bound_pair_witness` (Derived)
 
@@ -1390,6 +1561,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(D:Class), Pi(Leq:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x in D) * (y in D)) -> (((x, z) in Leq) * ((y, z) in Leq))) * ((x in D) * (y in D))) -> (((x, z) in Leq) * ((y, z) in Leq)))`
 - **Proof Term:** `(λ(D:Class). (λ(Leq:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x ∈ D) × (y ∈ D)) → (((x, z) ∈ Leq) × ((y, z) ∈ Leq))) × ((x ∈ D) × (y ∈ D)))). (fst(h) snd(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-173 `thm_filtered_class_lower_bound_pair_witness` (Derived)
 
@@ -1398,6 +1570,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(Leq:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x in F) * (y in F)) -> (((z, x) in Leq) * ((z, y) in Leq))) * ((x in F) * (y in F))) -> (((z, x) in Leq) * ((z, y) in Leq)))`
 - **Proof Term:** `(λ(F:Class). (λ(Leq:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x ∈ F) × (y ∈ F)) → (((z, x) ∈ Leq) × ((z, y) ∈ Leq))) × ((x ∈ F) × (y ∈ F)))). (fst(h) snd(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-174 `thm_coinitial_subclass_transitivity_witness` (Derived)
 
@@ -1406,6 +1579,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Leq:Class), Pi(C1:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in Leq) * ((y, z) in Leq)) * ((((x, y) in Leq) * ((y, z) in Leq)) -> ((x in C1) * ((x, z) in Leq)))) -> ((x in C1) * ((x, z) in Leq)))`
 - **Proof Term:** `(λ(Leq:Class). (λ(C1:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((x ∈ C1) × ((x, z) ∈ Leq))))). (snd(h) fst(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-175 `thm_cofinal_subclass_transitivity_witness` (Derived)
 
@@ -1414,6 +1588,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Leq:Class), Pi(C2:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in Leq) * ((y, z) in Leq)) * ((((x, y) in Leq) * ((y, z) in Leq)) -> ((z in C2) * ((x, z) in Leq)))) -> ((z in C2) * ((x, z) in Leq)))`
 - **Proof Term:** `(λ(Leq:Class). (λ(C2:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((z ∈ C2) × ((x, z) ∈ Leq))))). (snd(h) fst(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-176 `thm_boolean_algebra_complement_uniqueness_forward` (Derived)
 
@@ -1422,6 +1597,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B1:Class), Pi(B2:Class), ((((x in B1) -> Pi(C:Prop), (((x in A) -> C) -> (((x in B2) -> C) -> C))) * (((x in B1) * (x in A)) -> Void)) -> ((x in B1) -> (x in B2)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B1) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B2) → C) → C))) × (((x ∈ B1) × (x ∈ A)) → 𝟘))). (λ(hxB1:(x ∈ B1)). ((((fst(h) hxB1) (x ∈ B2)) (λ(hxA:(x ∈ A)). ax_false_elim((x ∈ B2), (snd(h) ⟨hxB1, hxA⟩)))) (λ(hxB2:(x ∈ B2)). hxB2))))))))`
 - **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-177 `thm_boolean_algebra_complement_uniqueness_backward` (Derived)
 
@@ -1430,6 +1606,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B1:Class), Pi(B2:Class), ((((x in B2) -> Pi(C:Prop), (((x in A) -> C) -> (((x in B1) -> C) -> C))) * (((x in B2) * (x in A)) -> Void)) -> ((x in B2) -> (x in B1)))`
 - **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B2) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B1) → C) → C))) × (((x ∈ B2) × (x ∈ A)) → 𝟘))). (λ(hxB2:(x ∈ B2)). ((((fst(h) hxB2) (x ∈ B1)) (λ(hxA:(x ∈ A)). ax_false_elim((x ∈ B1), (snd(h) ⟨hxB2, hxA⟩)))) (λ(hxB1:(x ∈ B1)). hxB1))))))))`
 - **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
 
 ### NBG-178 `thm_dunaev_pair_pullback_fiber_product_projection_left` (Derived)
 
@@ -1438,6 +1615,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), Pi(y:Class), ((((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC)) -> ((x in A) * ((ValOf(f, x), ValOf(g, y)) in EqC)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC))). ⟨fst(fst(h)), snd(h)⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-179 `thm_dunaev_pair_pullback_fiber_product_projection_right` (Derived)
 
@@ -1446,6 +1624,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), Pi(y:Class), ((((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC)) -> ((y in B) * ((ValOf(f, x), ValOf(g, y)) in EqC)))`
 - **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC))). ⟨snd(fst(h)), snd(h)⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-180 `thm_dunaev_pair_pullback_universal_mediating_pair` (Derived)
 
@@ -1454,6 +1633,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(P:Class), Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(u:Class), Pi(x:Class), Pi(y:Class), (((((u in P) -> (x in A)) * ((u in P) -> (y in B))) * ((u in P) -> ((ValOf(f, x), ValOf(g, y)) in EqC))) -> ((u in P) -> (((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC))))`
 - **Proof Term:** `(λ(P:Class). (λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(u:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((ValOf(f, x), ValOf(g, y)) ∈ EqC)))). (λ(huP:(u ∈ P)). ⟨⟨(fst(fst(h)) huP), (snd(fst(h)) huP)⟩, (snd(h) huP)⟩)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-181 `thm_equalizer_inclusion_fork_commutativity` (Derived)
 
@@ -1462,6 +1642,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(EqFG:Class), Pi(A:Class), Pi(DiagB:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), (((x in EqFG) -> ((x in A) * ((ValOf(f, x), ValOf(g, x)) in DiagB))) -> ((x in EqFG) -> ((ValOf(f, x), ValOf(g, x)) in DiagB)))`
 - **Proof Term:** `(λ(EqFG:Class). (λ(A:Class). (λ(DiagB:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(h:((x ∈ EqFG) → ((x ∈ A) × ((ValOf(f, x), ValOf(g, x)) ∈ DiagB)))). (λ(hxEq:(x ∈ EqFG)). snd((h hxEq))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-182 `thm_equalizer_universal_factorization_uniqueness` (Derived)
 
@@ -1470,6 +1651,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(X:Class), Pi(DiagA:Class), Pi(h_fn:Class), Pi(k_fn:Class), Pi(u:Class), (((((u in X) -> ((ValOf(h_fn, u), ValOf(h_fn, u)) in DiagA)) * (((ValOf(h_fn, u), ValOf(k_fn, u)) in DiagA) -> (ValOf(h_fn, u) = ValOf(k_fn, u)))) * ((u in X) -> ((ValOf(h_fn, u), ValOf(k_fn, u)) in DiagA))) -> ((u in X) -> (ValOf(h_fn, u) = ValOf(k_fn, u))))`
 - **Proof Term:** `(λ(X:Class). (λ(DiagA:Class). (λ(h_fn:Class). (λ(k_fn:Class). (λ(u:Class). (λ(h:((((u ∈ X) → ((ValOf(h_fn, u), ValOf(h_fn, u)) ∈ DiagA)) × (((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA) → (ValOf(h_fn, u) = ValOf(k_fn, u)))) × ((u ∈ X) → ((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA)))). (λ(huX:(u ∈ X)). (snd(fst(h)) (snd(h) huX)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-183 `thm_pushout_amalgamated_sum_left_injection` (Derived)
 
@@ -1478,6 +1660,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(CoprodAB:Class), Pi(PushoutABC:Class), Pi(x:Class), ((((x in A) -> ((CoprodTag0, x) in CoprodAB)) * (((CoprodTag0, x) in CoprodAB) -> ((CoprodTag0, x) in PushoutABC))) -> ((x in A) -> ((CoprodTag0, x) in PushoutABC)))`
 - **Proof Term:** `(λ(A:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((CoprodTag0, x) ∈ CoprodAB)) × (((CoprodTag0, x) ∈ CoprodAB) → ((CoprodTag0, x) ∈ PushoutABC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-184 `thm_pushout_amalgamated_sum_right_injection` (Derived)
 
@@ -1486,6 +1669,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(CoprodAB:Class), Pi(PushoutABC:Class), Pi(y:Class), ((((y in B) -> ((CoprodTag1, y) in CoprodAB)) * (((CoprodTag1, y) in CoprodAB) -> ((CoprodTag1, y) in PushoutABC))) -> ((y in B) -> ((CoprodTag1, y) in PushoutABC)))`
 - **Proof Term:** `(λ(B:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(y:Class). (λ(h:(((y ∈ B) → ((CoprodTag1, y) ∈ CoprodAB)) × (((CoprodTag1, y) ∈ CoprodAB) → ((CoprodTag1, y) ∈ PushoutABC)))). (λ(hyB:(y ∈ B)). (snd(h) (fst(h) hyB))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-185 `thm_pushout_cocone_glueing_compatibility` (Derived)
 
@@ -1494,6 +1678,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(C:Class), Pi(PushoutABC:Class), Pi(f:Class), Pi(g:Class), Pi(z:Class), ((((z in C) -> ((CoprodTag0, ValOf(f, z)) in PushoutABC)) * ((z in C) -> ((CoprodTag1, ValOf(g, z)) in PushoutABC))) -> ((z in C) -> (((CoprodTag0, ValOf(f, z)) in PushoutABC) * ((CoprodTag1, ValOf(g, z)) in PushoutABC))))`
 - **Proof Term:** `(λ(C:Class). (λ(PushoutABC:Class). (λ(f:Class). (λ(g:Class). (λ(z:Class). (λ(h:(((z ∈ C) → ((CoprodTag0, ValOf(f, z)) ∈ PushoutABC)) × ((z ∈ C) → ((CoprodTag1, ValOf(g, z)) ∈ PushoutABC)))). (λ(hzC:(z ∈ C)). ⟨(fst(h) hzC), (snd(h) hzC)⟩)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-186 `thm_coequalizer_quotient_fork_commutativity` (Derived)
 
@@ -1502,6 +1687,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(KerQ:Class), Pi(DiagC:Class), Pi(f:Class), Pi(g:Class), Pi(q_fn:Class), Pi(x:Class), ((((x in A) -> ((ValOf(f, x), ValOf(g, x)) in KerQ)) * (((ValOf(f, x), ValOf(g, x)) in KerQ) -> ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) in DiagC))) -> ((x in A) -> ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) in DiagC)))`
 - **Proof Term:** `(λ(A:Class). (λ(KerQ:Class). (λ(DiagC:Class). (λ(f:Class). (λ(g:Class). (λ(q_fn:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((ValOf(f, x), ValOf(g, x)) ∈ KerQ)) × (((ValOf(f, x), ValOf(g, x)) ∈ KerQ) → ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) ∈ DiagC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-187 `thm_coequalizer_universal_mediating_uniqueness` (Derived)
 
@@ -1510,6 +1696,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(DiagZ:Class), Pi(u_fn:Class), Pi(v_fn:Class), Pi(y:Class), (((((y in B) -> ((ValOf(u_fn, y), ValOf(v_fn, y)) in DiagZ)) * (((ValOf(u_fn, y), ValOf(v_fn, y)) in DiagZ) -> (ValOf(u_fn, y) = ValOf(v_fn, y)))) * (y in B)) -> (ValOf(u_fn, y) = ValOf(v_fn, y)))`
 - **Proof Term:** `(λ(B:Class). (λ(DiagZ:Class). (λ(u_fn:Class). (λ(v_fn:Class). (λ(y:Class). (λ(h:((((y ∈ B) → ((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ)) × (((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ) → (ValOf(u_fn, y) = ValOf(v_fn, y)))) × (y ∈ B))). (snd(fst(h)) (fst(fst(h)) snd(h)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-188 `thm_exponential_evaluation_beta_reduction_step` (Derived)
 
@@ -1518,6 +1705,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(DomEv:Class), Pi(GraphLam:Class), Pi(EqC:Class), Pi(body_fn:Class), Pi(f:Class), Pi(x:Class), (((((f, x) in DomEv) * ((f, x) in GraphLam)) * ((((f, x) in DomEv) * ((f, x) in GraphLam)) -> ((ExpEval(f, x), ValOf(body_fn, x)) in EqC))) -> ((ExpEval(f, x), ValOf(body_fn, x)) in EqC))`
 - **Proof Term:** `(λ(DomEv:Class). (λ(GraphLam:Class). (λ(EqC:Class). (λ(body_fn:Class). (λ(f:Class). (λ(x:Class). (λ(h:((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) × ((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) → ((ExpEval(f, x), ValOf(body_fn, x)) ∈ EqC)))). (snd(h) fst(h)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-189 `thm_exponential_transpose_eta_uniqueness_step` (Derived)
 
@@ -1526,6 +1714,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(HomAB:Class), Pi(EqHom:Class), Pi(EqExp:Class), Pi(f:Class), Pi(g:Class), ((((f in HomAB) * ((UncurryOp(f), g) in EqHom)) * (((UncurryOp(f), g) in EqHom) -> ((f, CurryOp(g)) in EqExp))) -> ((f in HomAB) -> ((f, CurryOp(g)) in EqExp)))`
 - **Proof Term:** `(λ(HomAB:Class). (λ(EqHom:Class). (λ(EqExp:Class). (λ(f:Class). (λ(g:Class). (λ(h:(((f ∈ HomAB) × ((UncurryOp(f), g) ∈ EqHom)) × (((UncurryOp(f), g) ∈ EqHom) → ((f, CurryOp(g)) ∈ EqExp)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) snd(fst(h))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-190 `thm_subobject_classifier_characteristic_pullback_iff` (Derived)
 
@@ -1534,6 +1723,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(SubA:Class), Pi(EqOmega:Class), Pi(chi_fn:Class), Pi(x:Class), ((((x in SubA) -> ((ValOf(chi_fn, x), TrueVal) in EqOmega)) * (((ValOf(chi_fn, x), TrueVal) in EqOmega) -> (x in SubA))) -> (((x in SubA) -> ((ValOf(chi_fn, x), TrueVal) in EqOmega)) * (((ValOf(chi_fn, x), TrueVal) in EqOmega) -> (x in SubA))))`
 - **Proof Term:** `(λ(SubA:Class). (λ(EqOmega:Class). (λ(chi_fn:Class). (λ(x:Class). (λ(h:(((x ∈ SubA) → ((ValOf(chi_fn, x), TrueVal) ∈ EqOmega)) × (((ValOf(chi_fn, x), TrueVal) ∈ EqOmega) → (x ∈ SubA)))). ⟨fst(h), snd(h)⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-191 `thm_lawvere_tierney_topology_idempotence_step` (Derived)
 
@@ -1542,6 +1732,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Omega:Class), Pi(LeqOmega:Class), Pi(EqOmega:Class), Pi(j_fn:Class), Pi(p:Class), (((((p in Omega) -> ((ValOf(j_fn, p), p) in LeqOmega)) * ((p in Omega) -> ((p, ValOf(j_fn, ValOf(j_fn, p))) in LeqOmega))) * ((((ValOf(j_fn, p), p) in LeqOmega) * ((p, ValOf(j_fn, ValOf(j_fn, p))) in LeqOmega)) -> ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) in EqOmega))) -> ((p in Omega) -> ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) in EqOmega)))`
 - **Proof Term:** `(λ(Omega:Class). (λ(LeqOmega:Class). (λ(EqOmega:Class). (λ(j_fn:Class). (λ(p:Class). (λ(h:((((p ∈ Omega) → ((ValOf(j_fn, p), p) ∈ LeqOmega)) × ((p ∈ Omega) → ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega))) × ((((ValOf(j_fn, p), p) ∈ LeqOmega) × ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega)) → ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) ∈ EqOmega)))). (λ(hpOm:(p ∈ Omega)). (snd(h) ⟨(fst(fst(h)) hpOm), (snd(fst(h)) hpOm)⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-192 `thm_lawvere_tierney_topology_meet_preservation_step` (Derived)
 
@@ -1550,6 +1741,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Omega:Class), Pi(EqOmega:Class), Pi(j_fn:Class), Pi(p:Class), Pi(q:Class), (((((p in Omega) * (q in Omega)) -> ((ValOf(j_fn, (p n* q)), (ValOf(j_fn, p) n* ValOf(j_fn, q))) in EqOmega)) * ((p in Omega) * (q in Omega))) -> ((ValOf(j_fn, (p n* q)), (ValOf(j_fn, p) n* ValOf(j_fn, q))) in EqOmega))`
 - **Proof Term:** `(λ(Omega:Class). (λ(EqOmega:Class). (λ(j_fn:Class). (λ(p:Class). (λ(q:Class). (λ(h:((((p ∈ Omega) × (q ∈ Omega)) → ((ValOf(j_fn, (p ∩ q)), (ValOf(j_fn, p) ∩ ValOf(j_fn, q))) ∈ EqOmega)) × ((p ∈ Omega) × (q ∈ Omega)))). (fst(h) snd(h))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-193 `thm_monad_left_unit_law_coherence` (Derived)
 
@@ -1558,6 +1750,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(EtaMap:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((x, MonadEta(x)) in EtaMap)) * (((x, MonadEta(x)) in EtaMap) -> ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) in EqTA))) -> ((x in A) -> ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) in EqTA)))`
 - **Proof Term:** `(λ(A:Class). (λ(EtaMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, MonadEta(x)) ∈ EtaMap)) × (((x, MonadEta(x)) ∈ EtaMap) → ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-194 `thm_monad_right_unit_law_coherence` (Derived)
 
@@ -1566,6 +1759,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(EtaTMap:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((MonadT(x), MonadEta(MonadT(x))) in EtaTMap)) * (((MonadT(x), MonadEta(MonadT(x))) in EtaTMap) -> ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) in EqTA))) -> ((x in A) -> ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) in EqTA)))`
 - **Proof Term:** `(λ(A:Class). (λ(EtaTMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap)) × (((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap) → ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-195 `thm_monad_associativity_square_coherence` (Derived)
 
@@ -1574,6 +1768,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(AssocPair:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((MonadMu(MonadT(x)), MonadT(MonadMu(x))) in AssocPair)) * (((MonadMu(MonadT(x)), MonadT(MonadMu(x))) in AssocPair) -> ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) in EqTA))) -> ((x in A) -> ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) in EqTA)))`
 - **Proof Term:** `(λ(A:Class). (λ(AssocPair:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair)) × (((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair) → ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-196 `thm_eilenberg_moore_algebra_unit_coherence` (Derived)
 
@@ -1582,6 +1777,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(EtaA:Class), Pi(EqA:Class), Pi(alpha_fn:Class), Pi(x:Class), ((((x in A) -> ((x, MonadEta(x)) in EtaA)) * (((x, MonadEta(x)) in EtaA) -> ((ValOf(alpha_fn, MonadEta(x)), x) in EqA))) -> ((x in A) -> ((ValOf(alpha_fn, MonadEta(x)), x) in EqA)))`
 - **Proof Term:** `(λ(A:Class). (λ(EtaA:Class). (λ(EqA:Class). (λ(alpha_fn:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, MonadEta(x)) ∈ EtaA)) × (((x, MonadEta(x)) ∈ EtaA) → ((ValOf(alpha_fn, MonadEta(x)), x) ∈ EqA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-197 `thm_eilenberg_moore_algebra_multiplication_coherence` (Derived)
 
@@ -1590,6 +1786,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(TTA:Class), Pi(EqA:Class), Pi(alpha_fn:Class), Pi(z:Class), ((((z in TTA) -> ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) in EqA)) * (z in TTA)) -> ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) in EqA))`
 - **Proof Term:** `(λ(TTA:Class). (λ(EqA:Class). (λ(alpha_fn:Class). (λ(z:Class). (λ(h:(((z ∈ TTA) → ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) ∈ EqA)) × (z ∈ TTA))). (fst(h) snd(h)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-198 `thm_kleisli_category_identity_left_composition` (Derived)
 
@@ -1598,6 +1795,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(KleisliAB:Class), Pi(EqTB:Class), Pi(f:Class), Pi(x:Class), ((((x in A) -> ((x, ValOf(f, x)) in KleisliAB)) * (((x, ValOf(f, x)) in KleisliAB) -> ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) in EqTB))) -> ((x in A) -> ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) in EqTB)))`
 - **Proof Term:** `(λ(A:Class). (λ(KleisliAB:Class). (λ(EqTB:Class). (λ(f:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, ValOf(f, x)) ∈ KleisliAB)) × (((x, ValOf(f, x)) ∈ KleisliAB) → ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) ∈ EqTB)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-199 `thm_yoneda_natural_transformation_evaluation_bijection` (Derived)
 
@@ -1606,6 +1804,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(NatHomF:Class), Pi(EqFA:Class), Pi(EqNat:Class), Pi(phi:Class), Pi(u:Class), ((((phi in NatHomF) -> ((ValOf(phi, IdMor(A)), u) in EqFA)) * (((ValOf(phi, IdMor(A)), u) in EqFA) -> ((YonedaMap(u), phi) in EqNat))) -> ((phi in NatHomF) -> ((YonedaMap(u), phi) in EqNat)))`
 - **Proof Term:** `(λ(A:Class). (λ(NatHomF:Class). (λ(EqFA:Class). (λ(EqNat:Class). (λ(phi:Class). (λ(u:Class). (λ(h:(((phi ∈ NatHomF) → ((ValOf(phi, IdMor(A)), u) ∈ EqFA)) × (((ValOf(phi, IdMor(A)), u) ∈ EqFA) → ((YonedaMap(u), phi) ∈ EqNat)))). (λ(hPhi:(phi ∈ NatHomF)). (snd(h) (fst(h) hPhi))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-200 `thm_yoneda_embedding_full_faithfulness_isomorphism` (Derived)
 
@@ -1614,6 +1813,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(A:Class), Pi(HomAB:Class), Pi(EqNatHom:Class), Pi(EqHomAB:Class), Pi(f:Class), Pi(Phi:Class), ((((f in HomAB) -> ((YonedaMap(f), Phi) in EqNatHom)) * (((YonedaMap(f), Phi) in EqNatHom) -> ((ValOf(Phi, IdMor(A)), f) in EqHomAB))) -> ((f in HomAB) -> ((ValOf(Phi, IdMor(A)), f) in EqHomAB)))`
 - **Proof Term:** `(λ(A:Class). (λ(HomAB:Class). (λ(EqNatHom:Class). (λ(EqHomAB:Class). (λ(f:Class). (λ(Phi:Class). (λ(h:(((f ∈ HomAB) → ((YonedaMap(f), Phi) ∈ EqNatHom)) × (((YonedaMap(f), Phi) ∈ EqNatHom) → ((ValOf(Phi, IdMor(A)), f) ∈ EqHomAB)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-201 `thm_grothendieck_sieve_pullback_stability_step` (Derived)
 
@@ -1622,6 +1822,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(SieveS:Class), Pi(CompMor:Class), Pi(f:Class), Pi(g:Class), (((((f in SieveS) * ((g, f) in CompMor)) -> (CompMorOp(g, f) in SieveS)) * ((f in SieveS) * ((g, f) in CompMor))) -> (CompMorOp(g, f) in SieveS))`
 - **Proof Term:** `(λ(SieveS:Class). (λ(CompMor:Class). (λ(f:Class). (λ(g:Class). (λ(h:((((f ∈ SieveS) × ((g, f) ∈ CompMor)) → (CompMorOp(g, f) ∈ SieveS)) × ((f ∈ SieveS) × ((g, f) ∈ CompMor)))). (fst(h) snd(h)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-202 `thm_grothendieck_topology_transitivity_step` (Derived)
 
@@ -1630,6 +1831,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(CovU:Class), Pi(PullbackCov:Class), Pi(R:Class), Pi(S:Class), (((((R in CovU) * ((S, R) in PullbackCov)) -> (S in CovU)) * ((R in CovU) * ((S, R) in PullbackCov))) -> (S in CovU))`
 - **Proof Term:** `(λ(CovU:Class). (λ(PullbackCov:Class). (λ(R:Class). (λ(S:Class). (λ(h:((((R ∈ CovU) × ((S, R) ∈ PullbackCov)) → (S ∈ CovU)) × ((R ∈ CovU) × ((S, R) ∈ PullbackCov)))). (fst(h) snd(h)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-203 `thm_sheaf_matching_family_unique_gluing_step` (Derived)
 
@@ -1638,6 +1840,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(MatchFam:Class), Pi(RestrictEq:Class), Pi(EqSecU:Class), Pi(glue_fn:Class), Pi(s:Class), Pi(t:Class), ((((s in MatchFam) -> ((ValOf(glue_fn, s), s) in RestrictEq)) * (((ValOf(glue_fn, s), s) in RestrictEq) -> ((ValOf(glue_fn, s), t) in EqSecU))) -> ((s in MatchFam) -> ((ValOf(glue_fn, s), t) in EqSecU)))`
 - **Proof Term:** `(λ(MatchFam:Class). (λ(RestrictEq:Class). (λ(EqSecU:Class). (λ(glue_fn:Class). (λ(s:Class). (λ(t:Class). (λ(h:(((s ∈ MatchFam) → ((ValOf(glue_fn, s), s) ∈ RestrictEq)) × (((ValOf(glue_fn, s), s) ∈ RestrictEq) → ((ValOf(glue_fn, s), t) ∈ EqSecU)))). (λ(hsMatch:(s ∈ MatchFam)). (snd(h) (fst(h) hsMatch))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-204 `thm_abelian_short_exact_kernel_image_coincidence` (Derived)
 
@@ -1646,6 +1849,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(KerG:Class), Pi(ImF:Class), Pi(x:Class), ((((x in KerG) -> (x in ImF)) * ((x in ImF) -> (x in KerG))) -> (((x in KerG) -> (x in ImF)) * ((x in ImF) -> (x in KerG))))`
 - **Proof Term:** `(λ(KerG:Class). (λ(ImF:Class). (λ(x:Class). (λ(h:(((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG)))). ⟨fst(h), snd(h)⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-205 `thm_spectral_differential_squared_zero_kernel_inclusion` (Derived)
 
@@ -1654,6 +1858,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(PageEr:Class), Pi(DiffPair:Class), Pi(KerDr:Class), Pi(dr_fn:Class), Pi(x:Class), ((((x in PageEr) -> ((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) in DiffPair)) * (((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) in DiffPair) -> (ValOf(dr_fn, x) in KerDr))) -> ((x in PageEr) -> (ValOf(dr_fn, x) in KerDr)))`
 - **Proof Term:** `(λ(PageEr:Class). (λ(DiffPair:Class). (λ(KerDr:Class). (λ(dr_fn:Class). (λ(x:Class). (λ(h:(((x ∈ PageEr) → ((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair)) × (((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair) → (ValOf(dr_fn, x) ∈ KerDr)))). (λ(hxPage:(x ∈ PageEr)). (snd(h) (fst(h) hxPage)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-206 `thm_monoidal_pentagon_associator_coherence_step` (Derived)
 
@@ -1662,6 +1867,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Obj4:Class), Pi(EqMor:Class), Pi(mid_fn:Class), Pi(w:Class), ((((w in Obj4) -> ((AssocMorL(w), ValOf(mid_fn, w)) in EqMor)) * (((AssocMorL(w), ValOf(mid_fn, w)) in EqMor) -> ((AssocMorL(w), AssocMorR(w)) in EqMor))) -> ((w in Obj4) -> ((AssocMorL(w), AssocMorR(w)) in EqMor)))`
 - **Proof Term:** `(λ(Obj4:Class). (λ(EqMor:Class). (λ(mid_fn:Class). (λ(w:Class). (λ(h:(((w ∈ Obj4) → ((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor)) × (((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor) → ((AssocMorL(w), AssocMorR(w)) ∈ EqMor)))). (λ(hwObj:(w ∈ Obj4)). (snd(h) (fst(h) hwObj))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-207 `thm_monoidal_triangle_unitor_coherence_step` (Derived)
 
@@ -1670,6 +1876,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Obj2:Class), Pi(EqMor:Class), Pi(rho_fn:Class), Pi(lam_fn:Class), Pi(u:Class), ((((u in Obj2) -> ((AssocMorL(u), ValOf(rho_fn, u)) in EqMor)) * (((AssocMorL(u), ValOf(rho_fn, u)) in EqMor) -> ((ValOf(lam_fn, u), ValOf(rho_fn, u)) in EqMor))) -> ((u in Obj2) -> ((ValOf(lam_fn, u), ValOf(rho_fn, u)) in EqMor)))`
 - **Proof Term:** `(λ(Obj2:Class). (λ(EqMor:Class). (λ(rho_fn:Class). (λ(lam_fn:Class). (λ(u:Class). (λ(h:(((u ∈ Obj2) → ((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor)) × (((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor) → ((ValOf(lam_fn, u), ValOf(rho_fn, u)) ∈ EqMor)))). (λ(huObj:(u ∈ Obj2)). (snd(h) (fst(h) huObj)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-208 `thm_symmetric_braiding_involutive_coherence` (Derived)
 
@@ -1678,6 +1885,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(Obj2:Class), Pi(CompBraid:Class), Pi(EqMor:Class), Pi(A:Class), Pi(B:Class), (((((A, B) in Obj2) -> ((BraidMor(A, B), BraidMor(B, A)) in CompBraid)) * (((BraidMor(A, B), BraidMor(B, A)) in CompBraid) -> ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) in EqMor))) -> (((A, B) in Obj2) -> ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) in EqMor)))`
 - **Proof Term:** `(λ(Obj2:Class). (λ(CompBraid:Class). (λ(EqMor:Class). (λ(A:Class). (λ(B:Class). (λ(h:((((A, B) ∈ Obj2) → ((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid)) × (((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid) → ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) ∈ EqMor)))). (λ(huObj:((A, B) ∈ Obj2)). (snd(h) (fst(h) huObj)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-209 `thm_tensor_internal_hom_currying_adjunction_step` (Derived)
 
@@ -1686,6 +1894,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(HomTensorBC:Class), Pi(EqHomAInt:Class), Pi(EqHomTensor:Class), Pi(f:Class), Pi(g:Class), ((((f in HomTensorBC) -> ((CurryOp(f), g) in EqHomAInt)) * (((CurryOp(f), g) in EqHomAInt) -> ((UncurryOp(g), f) in EqHomTensor))) -> ((f in HomTensorBC) -> ((UncurryOp(g), f) in EqHomTensor)))`
 - **Proof Term:** `(λ(HomTensorBC:Class). (λ(EqHomAInt:Class). (λ(EqHomTensor:Class). (λ(f:Class). (λ(g:Class). (λ(h:(((f ∈ HomTensorBC) → ((CurryOp(f), g) ∈ EqHomAInt)) × (((CurryOp(f), g) ∈ EqHomAInt) → ((UncurryOp(g), f) ∈ EqHomTensor)))). (λ(hfHom:(f ∈ HomTensorBC)). (snd(h) (fst(h) hfHom)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-210 `thm_day_convolution_coend_wedge_factorization` (Derived)
 
@@ -1694,6 +1903,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(CoendWedge:Class), Pi(WedgeMed:Class), Pi(EqNat:Class), Pi(w:Class), Pi(uniqMap:Class), ((((w in CoendWedge) -> ((w, DayFactor(w)) in WedgeMed)) * (((w, DayFactor(w)) in WedgeMed) -> ((DayFactor(w), uniqMap) in EqNat))) -> ((w in CoendWedge) -> ((DayFactor(w), uniqMap) in EqNat)))`
 - **Proof Term:** `(λ(CoendWedge:Class). (λ(WedgeMed:Class). (λ(EqNat:Class). (λ(w:Class). (λ(uniqMap:Class). (λ(h:(((w ∈ CoendWedge) → ((w, DayFactor(w)) ∈ WedgeMed)) × (((w, DayFactor(w)) ∈ WedgeMed) → ((DayFactor(w), uniqMap) ∈ EqNat)))). (λ(hwWedge:(w ∈ CoendWedge)). (snd(h) (fst(h) hwWedge)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-211 `thm_extranatural_wedge_dinaturality_square` (Derived)
 
@@ -1702,6 +1912,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(HomAB:Class), Pi(DinatPair:Class), Pi(EqTarget:Class), Pi(P_a:Class), Pi(P_b:Class), Pi(w_c:Class), Pi(w_b:Class), Pi(f:Class), ((((f in HomAB) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in DinatPair)) * (((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in DinatPair) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in EqTarget))) -> ((f in HomAB) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in EqTarget)))`
 - **Proof Term:** `(λ(HomAB:Class). (λ(DinatPair:Class). (λ(EqTarget:Class). (λ(P_a:Class). (λ(P_b:Class). (λ(w_c:Class). (λ(w_b:Class). (λ(f:Class). (λ(h:(((f ∈ HomAB) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair)) × (((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ EqTarget)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-212 `thm_categorical_end_universal_wedge_factorization` (Derived)
 
@@ -1710,6 +1921,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(WedgeP:Class), Pi(EndMed:Class), Pi(EqApex:Class), Pi(w:Class), Pi(uniqEnd:Class), ((((w in WedgeP) -> ((w, EndFactor(w)) in EndMed)) * (((w, EndFactor(w)) in EndMed) -> ((EndFactor(w), uniqEnd) in EqApex))) -> ((w in WedgeP) -> ((EndFactor(w), uniqEnd) in EqApex)))`
 - **Proof Term:** `(λ(WedgeP:Class). (λ(EndMed:Class). (λ(EqApex:Class). (λ(w:Class). (λ(uniqEnd:Class). (λ(h:(((w ∈ WedgeP) → ((w, EndFactor(w)) ∈ EndMed)) × (((w, EndFactor(w)) ∈ EndMed) → ((EndFactor(w), uniqEnd) ∈ EqApex)))). (λ(hwWedge:(w ∈ WedgeP)). (snd(h) (fst(h) hwWedge)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-213 `thm_categorical_coend_universal_cowedge_factorization` (Derived)
 
@@ -1718,6 +1930,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(CowedgeP:Class), Pi(CoendMed:Class), Pi(EqNadir:Class), Pi(cw:Class), Pi(uniqCoend:Class), ((((cw in CowedgeP) -> ((cw, CoendFactor(cw)) in CoendMed)) * (((cw, CoendFactor(cw)) in CoendMed) -> ((CoendFactor(cw), uniqCoend) in EqNadir))) -> ((cw in CowedgeP) -> ((CoendFactor(cw), uniqCoend) in EqNadir)))`
 - **Proof Term:** `(λ(CowedgeP:Class). (λ(CoendMed:Class). (λ(EqNadir:Class). (λ(cw:Class). (λ(uniqCoend:Class). (λ(h:(((cw ∈ CowedgeP) → ((cw, CoendFactor(cw)) ∈ CoendMed)) × (((cw, CoendFactor(cw)) ∈ CoendMed) → ((CoendFactor(cw), uniqCoend) ∈ EqNadir)))). (λ(hcwCow:(cw ∈ CowedgeP)). (snd(h) (fst(h) hcwCow)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-214 `thm_fubini_iterated_end_interchange_isomorphism` (Derived)
 
@@ -1726,6 +1939,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(EndAB:Class), Pi(IsoBA:Class), Pi(EqEndAB:Class), Pi(x:Class), Pi(y:Class), ((((x in EndAB) -> ((FubiniAB(x), y) in IsoBA)) * (((FubiniAB(x), y) in IsoBA) -> ((FubiniBA(y), x) in EqEndAB))) -> ((x in EndAB) -> ((FubiniBA(y), x) in EqEndAB)))`
 - **Proof Term:** `(λ(EndAB:Class). (λ(IsoBA:Class). (λ(EqEndAB:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ EndAB) → ((FubiniAB(x), y) ∈ IsoBA)) × (((FubiniAB(x), y) ∈ IsoBA) → ((FubiniBA(y), x) ∈ EqEndAB)))). (λ(hxEnd:(x ∈ EndAB)). (snd(h) (fst(h) hxEnd)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-215 `thm_weighted_limit_enriched_end_representation` (Derived)
 
@@ -1734,6 +1948,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(WLimWD:Class), Pi(IsoEndHom:Class), Pi(EqWLim:Class), Pi(u:Class), Pi(v:Class), ((((u in WLimWD) -> ((WeightedRep(u), v) in IsoEndHom)) * (((WeightedRep(u), v) in IsoEndHom) -> ((WeightedInv(v), u) in EqWLim))) -> ((u in WLimWD) -> ((WeightedInv(v), u) in EqWLim)))`
 - **Proof Term:** `(λ(WLimWD:Class). (λ(IsoEndHom:Class). (λ(EqWLim:Class). (λ(u:Class). (λ(v:Class). (λ(h:(((u ∈ WLimWD) → ((WeightedRep(u), v) ∈ IsoEndHom)) × (((WeightedRep(u), v) ∈ IsoEndHom) → ((WeightedInv(v), u) ∈ EqWLim)))). (λ(huWLim:(u ∈ WLimWD)). (snd(h) (fst(h) huWLim)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-216 `thm_bicategory_two_cell_middle_four_interchange` (Derived)
 
@@ -1742,6 +1957,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(TwoCellQuad:Class), Pi(Eq2Cell:Class), Pi(mid_fn:Class), Pi(u:Class), ((((u in TwoCellQuad) -> ((TwoCellHV(u), ValOf(mid_fn, u)) in Eq2Cell)) * (((TwoCellHV(u), ValOf(mid_fn, u)) in Eq2Cell) -> ((TwoCellHV(u), TwoCellVH(u)) in Eq2Cell))) -> ((u in TwoCellQuad) -> ((TwoCellHV(u), TwoCellVH(u)) in Eq2Cell)))`
 - **Proof Term:** `(λ(TwoCellQuad:Class). (λ(Eq2Cell:Class). (λ(mid_fn:Class). (λ(u:Class). (λ(h:(((u ∈ TwoCellQuad) → ((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell)) × (((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell) → ((TwoCellHV(u), TwoCellVH(u)) ∈ Eq2Cell)))). (λ(huQuad:(u ∈ TwoCellQuad)). (snd(h) (fst(h) huQuad))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-217 `thm_eckmann_hilton_two_cell_commutativity` (Derived)
 
@@ -1750,6 +1966,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(End2Id:Class), Pi(Eq2Cell:Class), Pi(a:Class), Pi(b:Class), (((((a in End2Id) * (b in End2Id)) -> ((TwoCellVComp(a, b), TwoCellHComp(a, b)) in Eq2Cell)) * (((TwoCellVComp(a, b), TwoCellHComp(a, b)) in Eq2Cell) -> ((TwoCellVComp(a, b), TwoCellVComp(b, a)) in Eq2Cell))) -> (((a in End2Id) * (b in End2Id)) -> ((TwoCellVComp(a, b), TwoCellVComp(b, a)) in Eq2Cell)))`
 - **Proof Term:** `(λ(End2Id:Class). (λ(Eq2Cell:Class). (λ(a:Class). (λ(b:Class). (λ(h:((((a ∈ End2Id) × (b ∈ End2Id)) → ((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell)) × (((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell) → ((TwoCellVComp(a, b), TwoCellVComp(b, a)) ∈ Eq2Cell)))). (λ(hab:((a ∈ End2Id) × (b ∈ End2Id))). (snd(h) (fst(h) hab))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-218 `thm_internal_adjunction_zig_zag_left_triangle` (Derived)
 
@@ -1758,6 +1975,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(LeftAdj1Cell:Class), Pi(ZigZagL:Class), Pi(Eq2Cell:Class), Pi(L:Class), Pi(f:Class), ((((f in LeftAdj1Cell) -> ((f, IdMor(L)) in ZigZagL)) * (((f, IdMor(L)) in ZigZagL) -> ((ZigZagCompL(f), IdMor(f)) in Eq2Cell))) -> ((f in LeftAdj1Cell) -> ((ZigZagCompL(f), IdMor(f)) in Eq2Cell)))`
 - **Proof Term:** `(λ(LeftAdj1Cell:Class). (λ(ZigZagL:Class). (λ(Eq2Cell:Class). (λ(L:Class). (λ(f:Class). (λ(h:(((f ∈ LeftAdj1Cell) → ((f, IdMor(L)) ∈ ZigZagL)) × (((f, IdMor(L)) ∈ ZigZagL) → ((ZigZagCompL(f), IdMor(f)) ∈ Eq2Cell)))). (λ(hfLeft:(f ∈ LeftAdj1Cell)). (snd(h) (fst(h) hfLeft)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-219 `thm_internal_adjunction_zig_zag_right_triangle` (Derived)
 
@@ -1766,6 +1984,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(RightAdj1Cell:Class), Pi(ZigZagR:Class), Pi(Eq2Cell:Class), Pi(R:Class), Pi(g:Class), ((((g in RightAdj1Cell) -> ((g, IdMor(R)) in ZigZagR)) * (((g, IdMor(R)) in ZigZagR) -> ((ZigZagCompR(g), IdMor(g)) in Eq2Cell))) -> ((g in RightAdj1Cell) -> ((ZigZagCompR(g), IdMor(g)) in Eq2Cell)))`
 - **Proof Term:** `(λ(RightAdj1Cell:Class). (λ(ZigZagR:Class). (λ(Eq2Cell:Class). (λ(R:Class). (λ(g:Class). (λ(h:(((g ∈ RightAdj1Cell) → ((g, IdMor(R)) ∈ ZigZagR)) × (((g, IdMor(R)) ∈ ZigZagR) → ((ZigZagCompR(g), IdMor(g)) ∈ Eq2Cell)))). (λ(hgRight:(g ∈ RightAdj1Cell)). (snd(h) (fst(h) hgRight)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-220 `thm_benabou_bicategory_strictification_coherence` (Derived)
 
@@ -1774,6 +1993,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(PasteDiag:Class), Pi(Eq2Cell:Class), Pi(d:Class), ((((d in PasteDiag) -> ((PasteEval1(d), PasteCanon(d)) in Eq2Cell)) * (((PasteEval1(d), PasteCanon(d)) in Eq2Cell) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell))) -> ((d in PasteDiag) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell)))`
 - **Proof Term:** `(λ(PasteDiag:Class). (λ(Eq2Cell:Class). (λ(d:Class). (λ(h:(((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))). (λ(hdPaste:(d ∈ PasteDiag)). (snd(h) (fst(h) hdPaste)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-221 `thm_limit_ordinal_successor_closure_proj` (Derived)
 
@@ -1782,6 +2002,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(kap:Class), Pi(b:Class), (((Ord(kap) * ((EmptySet in kap) * (Pi(a:Class), ((a in kap) -> (SuccOrd(a) in kap))))) * (b in kap)) -> (Ord(kap) * ((EmptySet in kap) * (SuccOrd(b) in kap))))`
 - **Proof Term:** `(λ(kap:Class). (λ(b:Class). (λ(h:((Ord(kap) × ((∅ ∈ kap) × (Π(a:Class), ((a ∈ kap) → (SuccOrd(a) ∈ kap))))) × (b ∈ kap))). ⟨fst(fst(h)), ⟨fst(snd(fst(h))), ((snd(snd(fst(h))) b) snd(h))⟩⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-222 `thm_universe_indexed_union_identity_union_step` (Derived)
 
@@ -1790,6 +2011,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(x:Class), ((((x in U) -> ((x, IdMor(x)) in U)) * (((x, IdMor(x)) in U) -> (Union(x) in U))) -> ((x in U) -> (Union(x) in U)))`
 - **Proof Term:** `(λ(U:Class). (λ(x:Class). (λ(h:(((x ∈ U) → ((x, IdMor(x)) ∈ U)) × (((x, IdMor(x)) ∈ U) → (⋃(x) ∈ U)))). (λ(hxU:(x ∈ U)). (snd(h) (fst(h) hxU))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-223 `thm_universe_inter_on_limit_irreflexivity_step` (Derived)
 
@@ -1798,6 +2020,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(kap:Class), Pi(a:Class), (((((a in kap) -> (SuccOrd(a) in U)) * ((SuccOrd(a) in U) -> (kap in kap))) * (((kap in kap) -> Void) * (a in kap))) -> Void)`
 - **Proof Term:** `(λ(U:Class). (λ(kap:Class). (λ(a:Class). (λ(h:((((a ∈ kap) → (SuccOrd(a) ∈ U)) × ((SuccOrd(a) ∈ U) → (kap ∈ kap))) × (((kap ∈ kap) → 𝟘) × (a ∈ kap)))). (fst(snd(h)) (snd(fst(h)) (fst(fst(h)) snd(snd(h)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-224 `thm_von_neumann_stage_sub_universe_step` (Derived)
 
@@ -1806,6 +2029,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(Vstage:Class), Pi(kap:Class), Pi(a:Class), Pi(x:Class), (((((a in kap) -> (ValOf(Vstage, a) in U)) * ((ValOf(Vstage, a) in U) -> ((x in ValOf(Vstage, a)) -> (x in U)))) * ((a in kap) * (x in ValOf(Vstage, a)))) -> (x in U))`
 - **Proof Term:** `(λ(U:Class). (λ(Vstage:Class). (λ(kap:Class). (λ(a:Class). (λ(x:Class). (λ(h:((((a ∈ kap) → (ValOf(Vstage, a) ∈ U)) × ((ValOf(Vstage, a) ∈ U) → ((x ∈ ValOf(Vstage, a)) → (x ∈ U)))) × ((a ∈ kap) × (x ∈ ValOf(Vstage, a))))). ((snd(fst(h)) (fst(fst(h)) fst(snd(h)))) snd(snd(h)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-225 `thm_universe_sub_von_neumann_stage_rank_step` (Derived)
 
@@ -1814,6 +2038,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(U:Class), Pi(Vstage:Class), Pi(RankOp:Class), Pi(kap:Class), Pi(x:Class), (((((x in U) -> (SuccOrd(ValOf(RankOp, x)) in kap)) * ((x in U) -> (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) * (((SuccOrd(ValOf(RankOp, x)) in kap) * (x in ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) -> (x in ValOf(Vstage, kap)))) -> ((x in U) -> (x in ValOf(Vstage, kap))))`
 - **Proof Term:** `(λ(U:Class). (λ(Vstage:Class). (λ(RankOp:Class). (λ(kap:Class). (λ(x:Class). (λ(h:((((x ∈ U) → (SuccOrd(ValOf(RankOp, x)) ∈ kap)) × ((x ∈ U) → (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x)))))) × (((SuccOrd(ValOf(RankOp, x)) ∈ kap) × (x ∈ ValOf(Vstage, SuccOrd(ValOf(RankOp, x))))) → (x ∈ ValOf(Vstage, kap))))). (λ(hxU:(x ∈ U)). (snd(h) ⟨(fst(fst(h)) hxU), (snd(fst(h)) hxU)⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-226 `thm_domain_restriction_elem_iff` (Derived)
 
@@ -1822,6 +2047,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(F:Class), Pi(A:Class), Pi(z:Class), (((z in Restrict(F, A)) -> ((z in F) * (pr1(z) in A))) * (((z in F) * (pr1(z) in A)) -> (z in Restrict(F, A))))`
 - **Proof Term:** `(λ(F:Class). (λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ Restrict(F, A))). let res:((z ∈ F) × (pr1(z) ∈ A)) = h in res), (λ(h:((z ∈ F) × (pr1(z) ∈ A))). let res:(z ∈ Restrict(F, A)) = h in res)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-227 `thm_transfinite_approx_coherence_step` (Derived)
 
@@ -1830,6 +2056,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(G:Class), Pi(g:Class), Pi(h:Class), Pi(B:Class), (((((B in Dom(g)) -> (ValOf(g, B) = ValOf(G, Restrict(g, B)))) * (((B in Dom(h)) * (Restrict(g, B) = Restrict(h, B))) -> (ValOf(h, B) = ValOf(G, Restrict(g, B))))) * (((B in Dom(g)) * (B in Dom(h))) * (Restrict(g, B) = Restrict(h, B)))) -> ((ValOf(g, B) = ValOf(G, Restrict(g, B))) * (ValOf(g, B) = ValOf(h, B))))`
 - **Proof Term:** `(λ(G:Class). (λ(g:Class). (λ(h:Class). (λ(B:Class). (λ(hyp:((((B ∈ Dom(g)) → (ValOf(g, B) = ValOf(G, Restrict(g, B)))) × (((B ∈ Dom(h)) × (Restrict(g, B) = Restrict(h, B))) → (ValOf(h, B) = ValOf(G, Restrict(g, B))))) × (((B ∈ Dom(g)) × (B ∈ Dom(h))) × (Restrict(g, B) = Restrict(h, B))))). ⟨(fst(fst(hyp)) fst(fst(snd(hyp)))), (((ax_eq_trans(ValOf(g, B), ValOf(G, Restrict(g, B))) ValOf(h, B)) (fst(fst(hyp)) fst(fst(snd(hyp))))) (ax_eq_sym(ValOf(h, B), ValOf(G, Restrict(g, B))) (snd(fst(hyp)) ⟨snd(fst(snd(hyp))), snd(snd(hyp))⟩)))⟩)))))`
 - **Axioms Used:** `ax_eq_trans, ax_eq_sym`
+- **Definitions Used:** `(none)`
 
 ### NBG-228 `thm_transfinite_recursion_equation_step` (Derived)
 
@@ -1838,6 +2065,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(G:Class), Pi(F:Class), Pi(g:Class), Pi(A:Class), ((((A in Dom(g)) * (Restrict(F, A) = Restrict(g, A))) -> (ValOf(g, A) = ValOf(G, Restrict(F, A)))) -> (((ValOf(F, A) = ValOf(g, A)) * ((A in Dom(g)) * (Restrict(F, A) = Restrict(g, A)))) -> (ValOf(F, A) = ValOf(G, Restrict(F, A)))))`
 - **Proof Term:** `(λ(G:Class). (λ(F:Class). (λ(g:Class). (λ(A:Class). (λ(hLaw:(((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))) → (ValOf(g, A) = ValOf(G, Restrict(F, A))))). (λ(w:((ValOf(F, A) = ValOf(g, A)) × ((A ∈ Dom(g)) × (Restrict(F, A) = Restrict(g, A))))). (((ax_eq_trans(ValOf(F, A), ValOf(g, A)) ValOf(G, Restrict(F, A))) fst(w)) (hLaw snd(w)))))))))`
 - **Axioms Used:** `ax_eq_trans`
+- **Definitions Used:** `(none)`
 
 ### NBG-229 `thm_transfinite_recursion_uniqueness_step` (Derived)
 
@@ -1846,6 +2074,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(G:Class), Pi(F:Class), Pi(H:Class), Pi(A:Class), (((((A in On) -> (ValOf(F, A) = ValOf(G, Restrict(F, A)))) * (((A in On) * (Restrict(F, A) = Restrict(H, A))) -> (ValOf(H, A) = ValOf(G, Restrict(F, A))))) * ((A in On) * (Restrict(F, A) = Restrict(H, A)))) -> ((ValOf(F, A) = ValOf(G, Restrict(F, A))) * (ValOf(F, A) = ValOf(H, A))))`
 - **Proof Term:** `(λ(G:Class). (λ(F:Class). (λ(H:Class). (λ(A:Class). (λ(hyp:((((A ∈ On) → (ValOf(F, A) = ValOf(G, Restrict(F, A)))) × (((A ∈ On) × (Restrict(F, A) = Restrict(H, A))) → (ValOf(H, A) = ValOf(G, Restrict(F, A))))) × ((A ∈ On) × (Restrict(F, A) = Restrict(H, A))))). ⟨(fst(fst(hyp)) fst(snd(hyp))), (((ax_eq_trans(ValOf(F, A), ValOf(G, Restrict(F, A))) ValOf(H, A)) (fst(fst(hyp)) fst(snd(hyp)))) (ax_eq_sym(ValOf(H, A), ValOf(G, Restrict(F, A))) (snd(fst(hyp)) snd(hyp))))⟩)))))`
 - **Axioms Used:** `ax_eq_trans, ax_eq_sym`
+- **Definitions Used:** `(none)`
 
 ### NBG-230 `thm_von_neumann_hierarchy_by_transfinite_recursion_step` (Derived)
 
@@ -1854,6 +2083,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(V:Class), Pi(A:Class), Pi(Ufam:Class), (((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) * (VonNeumannStepG(Restrict(V, A)) = Ufam)) -> (ValOf(V, A) = Ufam))`
 - **Proof Term:** `(λ(V:Class). (λ(A:Class). (λ(Ufam:Class). (λ(h:((ValOf(V, A) = VonNeumannStepG(Restrict(V, A))) × (VonNeumannStepG(Restrict(V, A)) = Ufam))). (((ax_eq_trans(ValOf(V, A), VonNeumannStepG(Restrict(V, A))) Ufam) fst(h)) snd(h))))))`
 - **Axioms Used:** `ax_eq_trans`
+- **Definitions Used:** `(none)`
 
 ### NBG-231 `thm_sigma_family_model_dependent_pair_bridge` (Derived)
 
@@ -1862,6 +2092,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), (((Sigma(x:Class), Sigma(y:Class), (OPair(x, y) in Sigma(B))) -> Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) * ((Sigma(x:Class), Sigma(y:Class), ((x in Dom(B)) * (y in ValOf(B, x)))) -> Sigma(x:Class), Sigma(y:Class), (OPair(x, y) in Sigma(B))))`
 - **Proof Term:** `(λ(B:Class). ⟨(λ(w:Σ(x:Class), Σ(y:Class), (OPair(x, y) ∈ Sigma(B))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩), (λ(w:Σ(x:Class), Σ(y:Class), ((x ∈ Dom(B)) × (y ∈ ValOf(B, x)))). ⟨fst(w), ⟨fst(snd(w)), snd(snd(w))⟩⟩)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-232 `thm_pi_family_model_dependent_product_bridge` (Derived)
 
@@ -1870,6 +2101,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(B:Class), Pi(f:Class), Pi(x:Class), (((f in PiModel(B)) * (x in Dom(B))) -> Sigma(y:Class), ((y = ValOf(f, x)) * (y in ValOf(B, x))))`
 - **Proof Term:** `(λ(B:Class). (λ(f:Class). (λ(x:Class). (λ(h:((f ∈ PiModel(B)) × (x ∈ Dom(B)))). let sec:Π(u:Class), ((u ∈ Dom(B)) → (ValOf(f, u) ∈ ValOf(B, u))) = fst(h) in ⟨ValOf(f, x), ⟨refl(ValOf(f, x)), ((sec x) snd(h))⟩⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-233 `thm_reduced_var_subst_hit_and_miss` (Derived)
 
@@ -1878,6 +2110,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(t:Class), Pi(x:Class), Pi(v:Class), Pi(u:Class), ((((v = x) * (u in t)) -> (u in (SubstVar(t, x) v))) * ((((v = x) -> Void) * (u in v)) -> (u in (SubstVar(t, x) v))))`
 - **Proof Term:** `(λ(t:Class). (λ(x:Class). (λ(v:Class). (λ(u:Class). ⟨(λ(hHit:((v = x) × (u ∈ t))). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ t)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL hHit))))), (λ(hMiss:(((v = x) → 𝟘) × (u ∈ v))). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ t)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR hMiss)))))⟩))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-234 `thm_unary_inter_subset_bin_inter` (Derived)
 
@@ -1886,6 +2119,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(K:Class), Pi(A:Class), Pi(B:Class), (((A in K) * (B in K)) -> (Inter(K) c= (A n* B)))`
 - **Proof Term:** `(λ(K:Class). (λ(A:Class). (λ(B:Class). (λ(hAB:((A ∈ K) × (B ∈ K))). (λ(z:Class). (λ(hzInterK:(z ∈ ⋂(K))). let hAll:Π(y:Class), ((y ∈ K) → (z ∈ y)) = hzInterK in ⟨((hAll A) fst(hAB)), ((hAll B) snd(hAB))⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-235 `thm_reduced_var_subst_diagonal_eval` (Derived)
 
@@ -1894,6 +2128,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(t:Class), Pi(x:Class), Pi(u:Class), ((u in t) -> (u in (SubstVar(t, x) x)))`
 - **Proof Term:** `(λ(t:Class). (λ(x:Class). (λ(u:Class). (λ(huT:(u ∈ t)). (λ(C:Prop). (λ(inL:(((x = x) × (u ∈ t)) → C)). (λ(_:((((x = x) → 𝟘) × (u ∈ x)) → C)). (inL ⟨refl(x), huT⟩))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-236 `thm_reduced_var_subst_idempotent_self` (Derived)
 
@@ -1902,6 +2137,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(v:Class), Pi(u:Class), (((Pi(C:Prop), (((v = x) -> C) -> ((((v = x) -> Void) -> C) -> C))) * (u in v)) -> (u in (SubstVar(x, x) v)))`
 - **Proof Term:** `(λ(x:Class). (λ(v:Class). (λ(u:Class). (λ(h:((Π(C:Prop), (((v = x) → C) → ((((v = x) → 𝟘) → C) → C))) × (u ∈ v))). (((fst(h) (u ∈ (SubstVar(x, x) v))) (λ(hEq:(v = x)). (λ(C:Prop). (λ(inL:(((v = x) × (u ∈ x)) → C)). (λ(_:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inL ⟨hEq, (((ax_eq_subst((λ(w:Class). (u ∈ w)), v) x) hEq) snd(h))⟩)))))) (λ(hNeq:((v = x) → 𝟘)). (λ(C:Prop). (λ(_:(((v = x) × (u ∈ x)) → C)). (λ(inR:((((v = x) → 𝟘) × (u ∈ v)) → C)). (inR ⟨hNeq, snd(h)⟩))))))))))`
 - **Axioms Used:** `ax_eq_subst`
+- **Definitions Used:** `(none)`
 
 ### NBG-237 `thm_intensionality_via_singleton_witness` (Derived)
 
@@ -1910,6 +2146,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), (((x in {x}) * ((Pi(z:Class), ((z in {x}) -> (z in {y}))) * (Pi(z:Class), ((z in {y}) -> (z = y))))) -> (x = y))`
 - **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(h:((x ∈ {x}) × ((Π(z:Class), ((z ∈ {x}) → (z ∈ {y}))) × (Π(z:Class), ((z ∈ {y}) → (z = y)))))). ((snd(snd(h)) x) ((fst(snd(h)) x) fst(h))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-238 `thm_irreflexivity_from_well_founded_step` (Derived)
 
@@ -1918,6 +2155,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `Pi(x:Class), (((Pi(y:Class), ((y in x) -> ((y in y) -> Void))) * (x in x)) -> Void)`
 - **Proof Term:** `(λ(x:Class). (λ(h:((Π(y:Class), ((y ∈ x) → ((y ∈ y) → 𝟘))) × (x ∈ x))). (((fst(h) x) snd(h)) snd(h))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
 ### NBG-239 `thm_burali_forti_ordinal_proper_class_step` (Derived)
 
@@ -1926,4 +2164,5 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (ANSII):** `(((set(On) -> (On in On)) * ((On in On) -> Void)) -> (set(On) -> Void))`
 - **Proof Term:** `(λ(h:((set(On) → (On ∈ On)) × ((On ∈ On) → 𝟘))). (λ(hSetOn:set(On)). (snd(h) (fst(h) hSetOn))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
 
