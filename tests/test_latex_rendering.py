@@ -57,7 +57,7 @@ class TestLatexRendering(unittest.TestCase):
 
             # 1. No double-escaped LaTeX commands like \\alpha or \\to in HTML body
             # [WHY] #8085: <pre>/<code> blocks show source code (e.g. the JS string
-            # "\\unicode{x27E6}" in BUGREPORT.html) and are not rendered by MathJax.
+            # "\\unicode{x27E6}" in a code sample) and are not rendered by MathJax.
             body_no_code_1 = re.sub(r"<(code|pre)\b[^>]*>.*?</\1>", "", body, flags=re.S | re.I)
             dbl = DOUBLE_BACKSLASH_CMD_RE.findall(body_no_code_1)
             self.assertEqual(
@@ -104,7 +104,7 @@ class TestLatexRendering(unittest.TestCase):
             # 4. No stray TeX commands outside math blocks (excluding code/pre blocks)
             body_no_code = re.sub(r"<(code|pre)\b[^>]*>.*?</\1>", "", body, flags=re.S | re.I)
             outside_math = MATH_BLOCK_RE.sub("", body_no_code)
-            # [WHY] #8085: pages whose MathJax config enables $...$ inline math (e.g. BUGREPORT.html
+            # [WHY] #8085: pages whose MathJax config enables $...$ inline math (e.g. pages rendered
             # rendered from Markdown) render $\in$ correctly; strip those spans as math too.
             if "['$', '$']" in txt:
                 outside_math = re.sub(r"\$[^$\n]+\$", "", outside_math)
@@ -119,7 +119,7 @@ class TestLatexRendering(unittest.TestCase):
             # 5. No inline MathJax delimiters \(...\) inside <code> tags (skipped by skipHtmlTags)
             code_blocks = re.findall(r"<code\b[^>]*>.*?</code>", body, flags=re.S | re.I)
             # Source-code listings (class="language-...") legitimately contain "\(" (e.g. a
-            # MathJax config sample in BUGREPORT.html); only inline <code> math is a bug.
+            # MathJax config sample); only inline <code> math is a bug.
             code_with_mathjax = [
                 c for c in code_blocks
                 if (r"\(" in c or r"\[" in c) and 'class="language-' not in c

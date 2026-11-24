@@ -1170,7 +1170,7 @@ theory NBG_Predicative;
 (* Valid TYPE definition of a mathematically FALSE statement: *)
 formula False_RussellIsSet = Set({ x | x in x -> Bot });
 
-(* Constructive proof term inhabiting the negation (Set(R) -> Bot): *)
+(* Proof term inhabiting the negation (Set(R) -> Bot): *)
 theorem thm_russell_not_set : Set({ x | x in x -> Bot }) -> Bot =
   fn (hSetR : Set({ x | x in x -> Bot })) =>
     ((fn (hNotIn : { x | x in x -> Bot } in { x | x in x -> Bot } -> Bot) =>

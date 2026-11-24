@@ -53,7 +53,7 @@ All notable changes to the formal kernel, entity database, proof compilers, and 
 - **Dunaev Class-Lists (Section 3, 3.39):**
   - `DefClassLists` (3.39): Inductive sequence representation for classes using iterated tagged pairs.
 - **Variant 2 (MKTD2 Formulas-as-Types):**
-  - 100 mechanically type-checked constructive lambda-term records: 77 Derived Theorems + 16 Conservative Definitions + 7 Irreducible MK/NBG Axioms in `generated/nbg_library.html` and `generated/variant2.html`.
+  - 100 mechanically type-checked lambda-term records: 77 Derived Theorems + 16 Conservative Definitions + 7 Irreducible MK/NBG Axioms in `generated/nbg_library.html` and `generated/variant2.html`.
 
 ### Renumbered
 - Renumbered entries 3.76–3.78 to append Dunaev tagged ordered pairs cleanly after Tarski-Grothendieck Universes (3.66) and Metatheoretic Reflection (3.72–3.75).

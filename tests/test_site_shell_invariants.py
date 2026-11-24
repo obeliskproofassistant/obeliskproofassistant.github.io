@@ -39,8 +39,12 @@ DIRECTIONAL_ARROW_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
+# [WHY] "first-order logic" is standard terminology and allowed. What is banned is using
+# "first-order" / "1st-order" as the NAME of an Obelisk system or variant; the systems are
+# called MKTD1 and MKTD2 (set_theory_prover/FACTBOOK.md section 1).
 INFORMAL_FIRST_ORDER_PATTERN = re.compile(
-    r"(?:first[_ -]?order|1st[_ -]?order)",
+    r"(?:first_order|1st[_ -]?order"
+    r"|first[- ]order (?:proof assistant|prover|kernel|variant|system|nbg set theory))",
     re.IGNORECASE,
 )
 

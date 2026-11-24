@@ -484,8 +484,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("DefDunaevOrderedPair", c_html)
 
         # T6: Glossary artifact and page
-        glossary_md = os.path.join(SITE_DIR, "docs", "glossary.md")
-        self.assertTrue(os.path.isfile(glossary_md), "Missing docs/glossary.md")
+        # The glossary source is set_theory_prover/docs/glossary.md; the site publishes only the
+        # generated page (the hand-copied docs/glossary.md was removed as a duplicate).
         glossary_html = os.path.join(SITE_DIR, "generated", "glossary.html")
         self.assertTrue(os.path.isfile(glossary_html), "Missing generated/glossary.html")
         with open(glossary_html, "r", encoding="utf-8") as f:

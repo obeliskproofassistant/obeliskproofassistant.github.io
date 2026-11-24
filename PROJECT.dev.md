@@ -1,14 +1,24 @@
-# Project Development Context (`obeliskproofassistant.github.io`)
+# PROJECT.dev.md: obeliskproofassistant.github.io
 
-> **Tier 0 Global Ruleset**: Read `/botworkspace/AGENTS.md` and `/botworkspace/FACTBOOK.md` first. Do not duplicate global rules here.
+Workspace rules: `/botworkspace/AGENTS.md`. Display rules for generated pages:
+`/botworkspace/set_theory_prover/docs/PRESENTATION_RULES.md`. This is a sensitive project: change
+it only when the user names it or approves.
 
-## Repository Scope & Boundaries
-- **Site Shell (`index.html`, `about.html`, `obelisk_ai.html`, `repl.html`, `embedding.html`)**: Hand-maintained portal pages. Check `about.html.dev.md` for local invariants (such as preserving `‼️` near the cross-site link to `georgydunaev.github.io`).
-- **Auto-Generated Directory (`generated/`)**: Produced exclusively by Standard ML generators in `set_theory_prover/program/` (`html_generator.ML`, `nbg_html_generator.ML`, `symbol_pages.ML`). AI agents should read `generated/*.txt` (`output.txt`, `manual.txt`, `nbg_library.txt`, `proofs.txt`, `symbols.txt`) rather than multi-MB `.html` files when inspecting mathematical formulas or theorems.
-- **Frozen Reference Directory (`frozen/`)**: Archived legacy files kept unlinked from navigation and untouched by direct edits.
-- **Rendered Documentation (`docs/*.html`, `CHANGELOG.html`, `BUGREPORT.html`)**: Generated from `docs/*.md` via `python3 /botworkspace/tools/render_site_markdown.py`.
+## Commands
 
-## Verification Commands
-```bash
-python3 /botworkspace/obeliskproofassistant.github.io/tools/check_html_links.py
-```
+| Task | Command |
+|---|---|
+| Regenerate `generated/` | in `set_theory_prover`: `cd program && poly -q --maxheap 3300 --use export_theory_db.ML </dev/null` (about 7 min, detached) |
+| Render `docs/*.md` and `CHANGELOG.md` to HTML | `python3 /botworkspace/tools/render_site_markdown.py` |
+| Check local links | `python3 tools/check_html_links.py` |
+| Run the site tests | `for t in tests/test_*.py; do python3 -B -m unittest "$t"; done` (pytest is not installed) |
+| Rebuild `foundations.pdf` | build `/botworkspace/foundations/001_foundations.tex` (see `foundations/PROJECT.dev.md`) and copy the PDF here |
+
+## Rules for this repository
+
+- Never edit `generated/` or `frozen/` by hand.
+- When reading formulas, prefer the text mirrors `generated/*.txt` over the multi-megabyte HTML
+  pages.
+- Hand-written pages must not state counts or "verified" status; link to generated pages instead.
+- Commit generated output separately from hand-written changes, naming the `set_theory_prover`
+  commit it was generated from.

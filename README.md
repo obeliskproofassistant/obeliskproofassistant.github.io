@@ -1,26 +1,23 @@
-# Obelisk Proof Assistant Web Portal (`obeliskproofassistant.github.io`)
+# obeliskproofassistant.github.io
 
-## Mandatory Step 0 for AI Agents (Read Before Any Task)
+The public website of the Obelisk proof assistant: <https://obeliskproofassistant.github.io>.
+The mathematics and the kernels live in the sibling repository `set_theory_prover`.
 
-Before modifying any file or generator for `obeliskproofassistant.github.io` or `set_theory_prover`, **always visit `/botworkspace/` and specifically `/botworkspace/catalog/` first**:
+## What is here
 
-1. `/botworkspace/catalog/index.html` — AI Long-Term Memory Root Index
-2. `/botworkspace/catalog/rules/index.html` — Hierarchical Rules Cache (Level 0–3 invariants)
-3. `/botworkspace/catalog/user_directives.html` — Prioritized Cognitive Directives
-4. `/botworkspace/catalog/repos/set_theory_prover/index.html` — Obelisk Proof Assistant Core Memory Map
-5. `/botworkspace/catalog/repos/web/obelisk_web.html` — Obelisk Web Portal Memory Map
+| Path | Contents | Who writes it |
+|---|---|---|
+| `index.html`, `about.html`, `obelisk_ai.html`, `points_of_view.html`, `repl.html`, `embedding.html`, `classic.html`, `yoneda_ai.html`, `mymap.html` | hand-maintained site pages | people and agents (see `<page>.dev.md` where present) |
+| `generated/` | the entity database, entry pages, symbol pages, JSON and text mirrors | **only** the SML generators in `set_theory_prover/program/` |
+| `foundations.pdf` | the book, built from `/botworkspace/foundations/001_foundations.tex` | LaTeX build |
+| `docs/` | a few explanatory documents rendered from Markdown (`docs/*.md` to `docs/*.html`) | `python3 /botworkspace/tools/render_site_markdown.py` |
+| `js/`, `css/`, `assets/` | REPL, highlighter, styles | hand-maintained |
+| `frozen/` | old hand-made pages, kept unchanged and unlinked | nobody |
+| `tests/`, `tools/` | site tests and the link checker | hand-maintained |
 
-Visiting `/botworkspace/catalog/` first prevents context decay and ensures all mathematical and architectural rules are honored.
+The in-browser REPL (`repl.html`, `js/obelisk_engine.js`) is a **preview** checker written in
+JavaScript. It is not the Obelisk kernel. What the kernels verified is recorded in
+`generated/theory_db.json` and `generated/nbg_library.json`.
 
-## Core Invariants for `obeliskproofassistant.github.io`
-
-1. **Pure ML Generation of `generated/` (No Hand-Editing or CSS Tricks)**:
-   - Every file in `generated/` (`manual.html`, `variant1.html`, `variant2.html`, `nbg_library.html`, `symbols.html`, `proofs.html`, `dependent_types.html`, `metatheory.html`, `sections/*.html`, `proofs/item-*.html`, `symbols/*.html`, `theory_db.json`, `nbg_library.json`, `output.txt`) is emitted exclusively by Standard ML scripts in `/botworkspace/set_theory_prover/program/` (`html_generator.ML` and `nbg_html_generator.ML`).
-   - Legacy files in `frozen/` remain strictly frozen, isolated, and unlinked from site navigation.
-   - Never use CSS or JS hacks to hide or alter `:` vs `∈`. All formula structure and notation (`:` for typing, `∈` for object-level membership, Unicode subscripts like `ifᵈₑₚ` vs LaTeX `\mathsf{if}_{\mathsf{dep}}`) must be computed in ML.
-2. **100% Clickable Formula Symbols & Personal Symbol Pages**:
-   - Every variable, constant, operator, Greek metavariable (`𝛂`, `𝛃`, `𝛄`, `𝛗`, `𝛙`, `𝛘`), quotation/antiquotation bracket (`⟨`, `⟩`, `⟦`, `⟧`, `⦃`, `⦄`, `⦇`, `⦈`), encoding/decoding/embedding operator (`Enc`, `Dec`, `Emb`, `μ_A`, `ᶜᵒᵈᵉ`, `eval`), binder, and parenthesis must be clickable and link to its exact canonical definition and personal symbol explanation page.
-3. **Strict `MKTD1` & `MKTD2` Taxonomy**:
-   - Out of the 12+6 theory/assistant variants (`NBG1`, `NBGT1`, `NBGTD1`, `MK1`, `MKT1`, `MKTD1`; `NBG2`, `NBGT2`, `NBGTD2`, `MK2`, `MKT2`, `MKTD2`; plus shared `*` variants `NBG*`..`MKTD*`), active development concentrates on **`MKTD1`** (`MKTD1-framework` / `MKTD1-system` / `MKTD1-prover` / `MKTD1-theory`) and **`MKTD2`** (`MKTD2-framework` / `MKTD2-system` / `MKTD2-prover` / `MKTD2-theory`).
-4. **Host RAMDisk Synchronization**:
-   - Commit changes in `/botworkspace/obeliskproofassistant.github.io` via `/botworkspace/scripts/hostramdisk_workspace.sh` to synchronize with Local GitLab (`http://127.0.0.1:8929`) and `/botworkspace/obeliskproofassistant.github.io`.
+Definitions: `set_theory_prover/FACTBOOK.md`. Display rules:
+`set_theory_prover/docs/PRESENTATION_RULES.md`. Removed files: `docs/REMOVED_DOCUMENTS.md`.

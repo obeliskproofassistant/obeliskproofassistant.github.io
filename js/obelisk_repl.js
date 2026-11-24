@@ -398,7 +398,7 @@ class ObeliskREPL {
         `<div class="clickable-formula-box">${fHtml}</div>` +
         `</div>` +
         `<div style="margin-bottom:6px;padding:6px;background:#090d16;border:1px solid #1e293b;border-radius:4px;">` +
-        `<div style="color:#94a3b8;font-size:0.7rem;text-transform:uppercase;margin-bottom:3px;">Constructive Lambda Proof Term (NBGCompiler.Expr)</div>` +
+        `<div style="color:#94a3b8;font-size:0.7rem;text-transform:uppercase;margin-bottom:3px;">Lambda Proof Term (NBGCompiler.Expr)</div>` +
         `<div class="clickable-formula-box" style="max-height:140px;overflow-y:auto;">${pHtml}</div>` +
         `</div>` +
         `<div style="color:#94a3b8;font-size:0.74rem;">${this.escapeHtml(entry.explanation || '')}</div>`;
@@ -528,7 +528,7 @@ class ObeliskREPL {
         '  check <id>                   - Look up a theorem in the published kernel registry (not re-checked in the browser)',
         '  primitives                   - List all closed kernel proof-term constructors',
         '  formula <Name> = <Formula>;  - Parse & check a well-formed MKTD2-theory formula definition (Type)',
-        '  theorem <Name> : <F> = <E>;  - Typecheck a constructive proof term directly',
+        '  theorem <Name> : <F> = <E>;  - Typecheck a proof term directly',
         '  clear                        - Clear terminal output'
       ].join('\n');
     }
@@ -634,7 +634,7 @@ class ObeliskREPL {
         '     - Core SML types: Class_Expre, Fm_Expre, Stmt, Ctx, Theory_Expre, Prf',
         '     - Every bound variable in class comprehension { (x : Class) | phi(x) } has sort Class.',
         '     - Ordered pairs use Dunaev Tagged Ordered Pairs [A, B]_D (never Kuratowski pairs for proper classes).',
-        '  2. MKTD2-framework / MKTD2-system / MKTD2-theory (Formulas-as-Types / Constructive Lambda):',
+        '  2. MKTD2-framework / MKTD2-system / MKTD2-theory (Formulas-as-Types / Lambda):',
         '     - Kernel modules: program/nbg_compiler.ML, program/nbg_surface_compiler.ML, program/verified_theorems.ML',
         '     - Formulas are types (implication as ->, universal quantifier as Pi-type Lam, existential as Sigma-type pack/unpack).',
         '     - Proofs are explicit beta-normalizable lambda terms checked bidirectionally.'
