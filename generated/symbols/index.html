@@ -464,7 +464,7 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>Obelisk Proof Assistant &mdash; Personal Symbol Reference Pages (<code>generated/symbols/</code>)</h1>
-      <p class="subtitle">Dedicated reference pages explaining quotation/antiquotation (<code>‹...›</code>, <code>⟨...⟩</code>), encoding/decoding (<code>Enc</code>, <code>Dec</code>), embedding (<code>Emb</code>), valuation (<code>μ_A</code>), conglomerate types (<code>Class</code>, <code>Type</code>), binders, and dependent conditionals (<code>if_dep</code>) in <strong>MKTD1-system</strong> and <strong>MKTD2-system</strong>.</p>
+      <p class="subtitle">Dedicated reference pages explaining quotation/antiquotation (<code>‹...›</code>, <code>⟦...⟧</code>), encoding/decoding (<code>Enc</code>, <code>Dec</code>), embedding (<code>Emb</code>), valuation (<code>μ_A</code>), conglomerate types (<code>Class</code>, <code>Type</code>), binders, and dependent conditionals (<code>if_dep</code>) in <strong>MKTD1-system</strong> and <strong>MKTD2-system</strong>.</p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -547,28 +547,28 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="antiquotation.html" class="sym-link">⟨ ... ⟩</a></div>
+                <div class="formula-unicode"><a href="antiquotation.html" class="sym-link">⟦ ... ⟧</a></div>
               </td>
             </tr>
             <tr class="row-latex">
               <th class="field-name">Symbol (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{antiquotation.html}{\langle \dots \rangle}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\langle \dots \rangle</code></div>
+                <div class="formula-latex">\(\href{antiquotation.html}{\llbracket \dots \rrbracket}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\llbracket \dots \rrbracket</code></div>
               </td>
             </tr>
             <tr class="row-ansii">
               <th class="field-name">Symbol (ANSII)</th>
               <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="antiquotation.html" class="sym-link"><code>&lt; ... &gt;</code></a></div>
+                <div class="formula-ansii"><a href="antiquotation.html" class="sym-link"><code>[| ... |]</code></a></div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="antiquotation.html" class="sym-link"><strong>Explicit Syntactic Antiquotation / Splicing Brackets &amp; Tuple Delimiters</strong> (<code>symbols/antiquotation.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="antiquotation.html" class="sym-link"><strong>Explicit Antiquotation Brackets (EAnti / EEval)</strong> (<code>symbols/antiquotation.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>A.Expression → A.Expression (inside ‹...›; or Class → A.Expression via Dec_A) | Pair Constructor</code></td>
+              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>A.Expression → A</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -576,7 +576,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Splices a meta-level syntactic expression <code>u : A.Expression</code> (such as <code>Dec_A(c)</code> for a valid code <code>c ∈ Code_A</code>) into a quoted syntactic template <code>‹ ... ›</code>; kept distinct from semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>.</td>
+              <td class="field-value">Antiquotation <code>⟦u⟧</code> takes a syntactic expression <code>u : A.Expression</code> one level down to <code>A</code>: inside a quotation <code>‹ ... ›</code> it splices <code>u</code> into the quoted syntax; outside, it evaluates <code>u</code> (constructors <code>EAnti</code> / <code>EEval</code>). It is the inverse direction of quotation.</td>
             </tr>
             </tbody>
           </table>

@@ -113,12 +113,12 @@ OBELISK PROOF ASSISTANT -- ALGORITHMIC SYMBOL, TYPE & VARIABLE REGISTRY (231 TOK
 [22] ⟦  (ANSII: [| | LaTeX: [\![ )
   Category: Operator / Connective / Constant
   Target:   symbols/antiquotation.html -- Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)
-  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Left valuation (semantic evaluation) bracket ⟦u⟧ evaluating a syntactic expression u:A.Expression into the semantic sort A under the current assignment (not splicing; splicing into quotations is the antiquotation ⟨ ⟩).
+  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Left antiquotation bracket ⟦u⟧ (constructors EAnti / EEval, NOTATION.txt): takes u : A.Expression one metalevel down to A; inside a quotation it splices u, outside it evaluates u under the current assignment. Dual of quotation ‹ › / ⟨ ⟩.
 
 [23] ⟧  (ANSII: |] | LaTeX:  ]\!])
   Category: Operator / Connective / Constant
   Target:   symbols/antiquotation.html -- Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)
-  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Right valuation (semantic evaluation) bracket closing ⟦u⟧.
+  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Right antiquotation bracket closing ⟦u⟧.
 
 [24] ⦃  (ANSII: {| | LaTeX: \{\!\lvert )
   Category: Operator / Connective / Constant
@@ -153,12 +153,12 @@ OBELISK PROOF ASSISTANT -- ALGORITHMIC SYMBOL, TYPE & VARIABLE REGISTRY (231 TOK
 [30] ⟨  (ANSII: < | LaTeX: \langle )
   Category: Operator / Connective / Constant
   Target:   symbols/quotation.html -- Left dependent pair / quotation angle bracket
-  Meaning:  [Primitive / Defined Bracket] Natural-Language Definition: Left mathematical angle bracket: metatheoretic antiquotation (splicing) ⟨u⟩ of a syntactic expression into a quoted template ‹ ... ›. It is NOT a quotation bracket (quotation is ‹ ›) and NOT the valuation bracket ⟦ ⟧. (Open question: legacy use for dependent pairs ⟨a,b⟩ : Σ(x:A),B(x) is pending a notation decision.)
+  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Left angle bracket: syntactic quotation ⟨φ⟩ (LaTeX \langle\varphi\rangle; Unicode form ‹φ›, NOTATION.txt), constructor HQuote : A → A.Expression. With a comma, ⟨a, b⟩ is an ordered or dependent pair. Angle brackets are never antiquotation brackets; antiquotation is ⟦u⟧.
 
 [31] ⟩  (ANSII: > | LaTeX: \rangle )
   Category: Operator / Connective / Constant
   Target:   symbols/quotation.html -- Right dependent pair / quotation angle bracket
-  Meaning:  [Primitive / Defined Bracket] Natural-Language Definition: Right mathematical angle bracket closing an antiquotation ⟨u⟩ (see the left bracket). Not a quotation bracket and not a valuation bracket.
+  Meaning:  [Primitive Reflection Operator] Natural-Language Definition: Right angle bracket closing a quotation ⟨φ⟩ or a pair ⟨a, b⟩ (see the left bracket).
 
 [32] ↪  (ANSII: Emb | LaTeX: \hookrightarrow)
   Category: Operator / Connective / Constant

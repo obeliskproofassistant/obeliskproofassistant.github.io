@@ -1781,7 +1781,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Left valuation (semantic evaluation) bracket <code>⟦u⟧</code> evaluating a syntactic expression <code>u:A.Expression</code> into the semantic sort <code>A</code> under the current assignment (not splicing; splicing into quotations is the antiquotation <code>⟨ ⟩</code>).</td>
+              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Left antiquotation bracket <code>⟦u⟧</code> (constructors <code>EAnti</code> / <code>EEval</code>, NOTATION.txt): takes <code>u : A.Expression</code> one metalevel down to <code>A</code>; inside a quotation it splices <code>u</code>, outside it evaluates <code>u</code> under the current assignment. Dual of quotation <code>‹ ›</code> / <code>⟨ ⟩</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -1820,7 +1820,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Right valuation (semantic evaluation) bracket closing <code>⟦u⟧</code>.</td>
+              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Right antiquotation bracket closing <code>⟦u⟧</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -2093,7 +2093,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Defined Bracket] Natural-Language Definition:</strong> Left mathematical angle bracket: metatheoretic <em>antiquotation</em> (splicing) <code>⟨u⟩</code> of a syntactic expression into a quoted template <code>‹ ... ›</code>. It is NOT a quotation bracket (quotation is <code>‹ ›</code>) and NOT the valuation bracket <code>⟦ ⟧</code>. (Open question: legacy use for dependent pairs <code>⟨a,b⟩ : Σ(x:A),B(x)</code> is pending a notation decision.)</td>
+              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Left angle bracket: syntactic <em>quotation</em> <code>⟨φ⟩</code> (LaTeX <code>\langle\varphi\rangle</code>; Unicode form <code>‹φ›</code>, NOTATION.txt), constructor <code>HQuote : A → A.Expression</code>. With a comma, <code>⟨a, b⟩</code> is an ordered or dependent pair. Angle brackets are never antiquotation brackets; antiquotation is <code>⟦u⟧</code>.</td>
             </tr>
             </tbody>
           </table>
@@ -2132,7 +2132,7 @@
             </tr>
             <tr>
               <th class="field-name">Definition (Formal or Natural-Language)</th>
-              <td class="field-value"><strong>[Primitive / Defined Bracket] Natural-Language Definition:</strong> Right mathematical angle bracket closing an antiquotation <code>⟨u⟩</code> (see the left bracket). Not a quotation bracket and not a valuation bracket.</td>
+              <td class="field-value"><strong>[Primitive Reflection Operator] Natural-Language Definition:</strong> Right angle bracket closing a quotation <code>⟨φ⟩</code> or a pair <code>⟨a, b⟩</code> (see the left bracket).</td>
             </tr>
             </tbody>
           </table>

@@ -155,14 +155,14 @@ Lightweight Markdown mirror of `generated/symbols.html` (231 registered tokens a
 - **LaTeX**: `[\![ `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/antiquotation.html`
-- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left valuation (semantic evaluation) bracket ⟦u⟧ evaluating a syntactic expression u:A.Expression into the semantic sort A under the current assignment (not splicing; splicing into quotations is the antiquotation ⟨ ⟩).
+- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left antiquotation bracket ⟦u⟧ (constructors EAnti / EEval, NOTATION.txt): takes u : A.Expression one metalevel down to A; inside a quotation it splices u, outside it evaluates u under the current assignment. Dual of quotation ‹ › / ⟨ ⟩.
 
 ### 23. `⟧` (Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval))
 - **ANSII**: `|]`
 - **LaTeX**: ` ]\!]`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/antiquotation.html`
-- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right valuation (semantic evaluation) bracket closing ⟦u⟧.
+- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right antiquotation bracket closing ⟦u⟧.
 
 ### 24. `⦃` (Left syntactic binder-variable bracket {| x |} (Constructor: IVariable_t))
 - **ANSII**: `{|`
@@ -211,14 +211,14 @@ Lightweight Markdown mirror of `generated/symbols.html` (231 registered tokens a
 - **LaTeX**: `\langle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
-- **Definition**: [Primitive / Defined Bracket] Natural-Language Definition: Left mathematical angle bracket: metatheoretic antiquotation (splicing) ⟨u⟩ of a syntactic expression into a quoted template ‹ ... ›. It is NOT a quotation bracket (quotation is ‹ ›) and NOT the valuation bracket ⟦ ⟧. (Open question: legacy use for dependent pairs ⟨a,b⟩ : Σ(x:A),B(x) is pending a notation decision.)
+- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left angle bracket: syntactic quotation ⟨φ⟩ (LaTeX \langle\varphi\rangle; Unicode form ‹φ›, NOTATION.txt), constructor HQuote : A → A.Expression. With a comma, ⟨a, b⟩ is an ordered or dependent pair. Angle brackets are never antiquotation brackets; antiquotation is ⟦u⟧.
 
 ### 31. `⟩` (Right dependent pair / quotation angle bracket)
 - **ANSII**: `>`
 - **LaTeX**: `\rangle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
-- **Definition**: [Primitive / Defined Bracket] Natural-Language Definition: Right mathematical angle bracket closing an antiquotation ⟨u⟩ (see the left bracket). Not a quotation bracket and not a valuation bracket.
+- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right angle bracket closing a quotation ⟨φ⟩ or a pair ⟨a, b⟩ (see the left bracket).
 
 ### 32. `↪` (Syntactic / semantic theory embedding arrow (Emb))
 - **ANSII**: `Emb`

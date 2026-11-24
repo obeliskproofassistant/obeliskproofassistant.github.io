@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: ⟨ ... ⟩ &mdash; Explicit Syntactic Antiquotation / Splicing Brackets &amp; Tuple Delimiters</title>
+  <title>Symbol Reference: ⟦ ... ⟧ &mdash; Explicit Antiquotation Brackets (EAnti / EEval)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -463,7 +463,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: ⟨ ... ⟩ &mdash; Explicit Syntactic Antiquotation / Splicing Brackets &amp; Tuple Delimiters</h1>
+      <h1>Symbol Reference: ⟦ ... ⟧ &mdash; Explicit Antiquotation Brackets (EAnti / EEval)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -484,8 +484,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Explicit Syntactic Antiquotation / Splicing Brackets &amp; Tuple Delimiters</h2>
-      <p class="section-desc">Splices a meta-level syntactic expression <code>u : A.Expression</code> (such as <code>Dec_A(c)</code> for a valid code <code>c ∈ Code_A</code>) into a quoted syntactic template <code>‹ ... ›</code>; kept distinct from semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>.</p>
+      <h2>Explicit Antiquotation Brackets (EAnti / EEval)</h2>
+      <p class="section-desc">Antiquotation <code>⟦u⟧</code> takes a syntactic expression <code>u : A.Expression</code> one level down to <code>A</code>: inside a quotation <code>‹ ... ›</code> it splices <code>u</code> into the quoted syntax; outside, it evaluates <code>u</code> (constructors <code>EAnti</code> / <code>EEval</code>). It is the inverse direction of quotation.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -499,19 +499,19 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">⟨ ... ⟩</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">⟦ ... ⟧</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Symbol (LaTeX)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\langle \dots \rangle\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\langle \dots \rangle</code></div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\llbracket \dots \rrbracket\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\llbracket \dots \rrbracket</code></div>
             </td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Symbol (ANSII)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>&lt; ... &gt;</code></div>
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>[| ... |]</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -524,15 +524,15 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">SML AST Constructor</td>
-            <td class="external-entity"><code>EAntiquote / Syntactic Splice ⟨u⟩  [in datatype EXP, typetheory.ML]</code></td>
+            <td class="external-entity"><code>EAnti / EEval: Antiquotation ⟦u⟧  [in datatype expression, typetheory.ML]</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Constructor Arguments</td>
-            <td class="external-entity">1. Metalevel syntactic expression u : A.Expression spliced into a quotation ‹...⟩</td>
+            <td class="external-entity">1. Metalevel syntactic expression u : A.Expression spliced into a quotation ‹...› or evaluated</td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>A.Expression → A.Expression (inside ‹...›; or Class → A.Expression via Dec_A) | Pair Constructor</code></td>
+            <td class="external-entity"><code>A.Expression → A</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -547,19 +547,19 @@
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Formation Rule (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/quotation.html" class="sym-link" title="Left dependent pair / quotation angle bracket">⟨</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a><a href="../symbols/quotation.html" class="sym-link" title="Right dependent pair / quotation angle bracket">⟩</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟦</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">⟧</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Formation Rule (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{u} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/variables.html}{A} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }{\href{../symbols/parentheses.html}{(} \href{../symbols/quotation.html}{\langle } \href{../symbols/variables.html}{u} \href{../symbols/quotation.html}{\rangle } ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} }\)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{u} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/variables.html}{A} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }{\href{../symbols/parentheses.html}{(} \href{../symbols/antiquotation.html}{[\![ } \href{../symbols/variables.html}{u} \href{../symbols/antiquotation.html}{ ]\!]} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} }\)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Formation Rule (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/quotation.html" class="sym-link" title="Left dependent pair / quotation angle bracket">&lt;</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a><a href="../symbols/quotation.html" class="sym-link" title="Right dependent pair / quotation angle bracket">&gt;</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/antiquotation.html" class="sym-link" title="Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)">[| </a><a href="../symbols/variables.html" class="sym-link" title="Free class variable u">u</a><a href="../symbols/antiquotation.html" class="sym-link" title="Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval)"> |]</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p>In <strong>MKTD1-system (MKTD1-theory)</strong> and <strong>MKTD2-system (MKTD2-theory)</strong>, the angle brackets <code>⟨ ... ⟩</code> serve two documented syntactic roles and must not be conflated with semantic valuation <code>⟦e⟧_ρ = Val_ρ(e)</code>:</p><ol><li><strong>Explicit Syntactic Antiquotation (Splicing) inside <code>‹ ... ›</code></strong>: When writing a quoted formula <code>‹ ∀x:Class. ⟨Dec_Fm(c)⟩ ›</code>, the sub-expression inside <code>⟨ ... ⟩</code> is evaluated at the meta-level to an AST in <code>A.Expression</code> and spliced into the surrounding syntax tree. For any valid code <code>c ∈ Code_A</code>, <code>‹ ⟨Dec_A(c)⟩ › = Enc_A(Dec_A(c)) = c</code>. (By contrast, semantic valuation in a model under assignment <code>ρ</code> is written with double white square brackets <code>⟦e⟧_ρ = Val_ρ(e)</code>; see <a href="binder-brackets.html"><code>symbols/binder-brackets.html</code></a>.)</li><li><strong>Ordered Tuple / Pair Construction</strong>: Outside quotation contexts, <code>⟨a, b⟩</code> or <code>(x, y)</code> denotes ordered pairing (Entry DefDunaevOrderedPair (3.76) / dependent pair in Entry DefSigmaModel (3.38)).</li></ol></td>
+            <td class="external-entity" style="line-height: 1.65;"><p>In <strong>MKTD1-system</strong> quotation and antiquotation are dual constructors of the expression layer (<code>typetheory.ML</code>): quotation <code>HQuote : A → A.Expression</code> goes one metalevel up, antiquotation <code>EAnti, EEval : A.Expression → A</code> goes one metalevel down.</p><ol><li><strong>Brackets</strong> (NOTATION.txt): quotation is written with angle brackets, <code>‹𝛗›</code> in Unicode and <code>\langle\varphi\rangle</code> in LaTeX; antiquotation is written with white square brackets <code>⟦u⟧</code> (ASCII <code>[|u|]</code>). Angle brackets are never antiquotation brackets.</li><li><strong>Splicing inside a quotation</strong>: <code>‹ ∀x:Class. ⟦Dec_Fm(c)⟧ ›</code> places the syntax tree <code>Dec_Fm(c)</code> under the quoted binder.</li><li><strong>Evaluation</strong>: outside quotations, <code>⟦e⟧_ρ = Val_ρ(e)</code> is the semantic value of <code>e</code> under the assignment <code>ρ</code> (see <a href="binder-brackets.html"><code>binder-brackets.html</code></a>).</li><li><strong>Pairs</strong>: <code>⟨a, b⟩</code> with a comma is an ordered pair (Entry DefDunaevOrderedPair (3.76)), not a quotation.</li></ol></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>

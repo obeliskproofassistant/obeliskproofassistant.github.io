@@ -16,9 +16,14 @@ In metaprogramming and formal reflection, four conceptually distinct operations 
    Takes an *already formed finite syntactic expression* $e : A.\mathrm{Expression}$ (or formula $\varphi : \mathrm{Fm}$) and maps it to its canonical hereditary set code $\operatorname{Enc}(e) \in \operatorname{Code}_A \subseteq V$ (`generated/symbols/quotation.html`, `generated/symbols/enc.html`). Quotation acts on **syntax**, not on arbitrary unnameable semantic classes.
 2. **Syntactic Decoding (`Dec_A : Class → A.Expression` on valid codes $\operatorname{Code}_A \subseteq V$):**
    Recovers the syntactic AST from a valid class code $c \in \operatorname{Code}_A$, satisfying the typed syntactic round-trip identity $\operatorname{Dec}_A(\operatorname{Enc}(e)) = e$ for every $e : A.\mathrm{Expression}$ (`generated/symbols/dec.html`).
-3. **Syntactic Antiquotation / Splicing (`⟨u⟩` inside `‹...›`) vs. Semantic Valuation (`⟦e⟧_ρ = Val_ρ(e)`):**
-   - **Syntactic Splicing (`⟨u⟩`, U+27E8/U+27E9, `generated/symbols/antiquotation.html`):** Inside a quotation template $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, evaluates the meta-level expression $u : A.\mathrm{Expression}$ (such as $\operatorname{Dec}_A(c)$) and splices the resulting syntax tree into the surrounding AST.
-   - **Semantic Valuation (`⟦e⟧_ρ = Val_ρ(e)`, U+27E6/U+27E7, `generated/symbols/binder-brackets.html`):** Evaluates a syntactic expression $e : A.\mathrm{Expression}$ to its semantic denotation in $A$ under a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.
+3. **Antiquotation (`⟦u⟧`, constructors `EAnti` / `EEval`):** The dual of quotation (NOTATION.txt).
+   Quotation `‹φ›` (LaTeX `\langle\varphi\rangle`) goes one metalevel up; antiquotation `⟦u⟧`
+   (U+27E6/U+27E7, `generated/symbols/antiquotation.html`) takes `u : A.Expression` one metalevel down.
+   Inside a quotation template $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ it splices the syntax
+   tree $u$ (e.g. $\operatorname{Dec}_A(c)$); outside a quotation it evaluates $u$, written
+   $\llbracket e\rrbracket_\rho = \operatorname{Val}_\rho(e)$ under an assignment $\rho$
+   (`generated/symbols/binder-brackets.html`). Angle brackets are never antiquotation brackets;
+   `⟨a, b⟩` with a comma is a pair.
 4. **Type-Indexed Expression Translation ($\mu_A$) vs. Assignment-Indexed Valuation ($\mu^{\mathrm{val}}_\rho$):**
    Reconciles the type-indexed translation $\mu_A : A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$ used in `130_classes_as_types.tex` and `DefMetaGeneralisation` (`4.02`) with the assignment-indexed valuation shorthand $\mu^{\mathrm{val}}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ used on the symbol pages (`generated/symbols/mu-interpretation.html`, `generated/symbols/eval.html`) via the explicit composite
    $$\operatorname{Eval}_{(A, \rho)}(c) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(\operatorname{Dec}_A(c))\bigr).$$
@@ -62,16 +67,18 @@ For each syntactic category $A.\mathrm{Expression}$ (such as $\mathrm{Class}.\ma
     $$\forall c : \mathrm{Class},\qquad c \in \operatorname{Code}_A \implies \operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c.$$
     *(For $c \notin \operatorname{Code}_A$, $\operatorname{Dec}_A(c)$ returns a fixed default syntactic variable/constant $e^{\mathrm{def}}_A$, so $\operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c$ holds if and only if $c \in \operatorname{Code}_A$.)*
 
-### 3.2 Syntactic Antiquotation (`⟨u⟩`) vs. Semantic Valuation (`⟦e⟧_rho`)
-Two distinct bracket notations operate on expressions:
-1. **Syntactic Antiquotation / Splicing (`⟨u⟩`, `generated/symbols/antiquotation.html`):**
-   Inside a quoted expression $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, the subterm $u : A.\mathrm{Expression}$ (for example, $u = \operatorname{Dec}_A(c)$ where $c : \mathrm{Class}$ is a code variable) is spliced directly into the quoted AST:
-   $$\text{‹}\forall x : \mathrm{Class}.\;\langle \operatorname{Dec}_{\mathrm{Fm}}(c) \rangle\text{›} \;:\; \mathrm{Fm}.$$
-   In particular, $\text{‹}\langle e \rangle\text{›} = \operatorname{Enc}_A(e)$ for $e : A.\mathrm{Expression}$, and $\text{‹}\langle \operatorname{Dec}_A(c) \rangle\text{›} = c$ for $c \in \operatorname{Code}_A$.
-2. **Semantic Valuation (`⟦e⟧_ρ = Val_ρ(e)`, `generated/symbols/binder-brackets.html`):**
-   Given a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$, semantic valuation interprets a class expression or formula in the model:
+### 3.2 Antiquotation (`⟦u⟧`): splicing and evaluation
+Quotation and antiquotation are written with different brackets (NOTATION.txt): quotation with angle
+brackets (`‹φ›`, LaTeX `\langle\varphi\rangle`), antiquotation with white square brackets (`⟦u⟧`,
+ASCII `[|u|]`).
+1. **Splicing inside a quotation:** in $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ the subterm
+   $u : A.\mathrm{Expression}$ (for example $u = \operatorname{Dec}_A(c)$ for a code variable $c$) is
+   placed into the quoted AST:
+   $$\text{‹}\forall x : \mathrm{Class}.\;\llbracket \operatorname{Dec}_{\mathrm{Fm}}(c) \rrbracket\text{›} \;:\; \mathrm{Fm}.$$
+2. **Evaluation outside a quotation:** given an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$,
    $$\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \longrightarrow \mathrm{Class}, \qquad \operatorname{Val}_\rho : \mathrm{Truth}.\mathrm{Expression} \longrightarrow \mathrm{Bool},$$
-   written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$. As noted in `program/libs/unicodedefs.ML`, when $\rho$ is the ambient unnamed assignment of the current context, $\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$.
+   written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$; with the ambient assignment,
+   $\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$ (`program/libs/unicodedefs.ML`).
 
 ### 3.3 Reconciling the Two Conventions for $\mu$ and $\operatorname{eval}$
 Across the project documentation and symbol pages, the letter $\mu$ appears with two different subscript types. Both are mathematically sound once their signatures are distinguished:

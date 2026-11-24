@@ -123,12 +123,15 @@
 </ol>
 <p>Recovers the syntactic AST from a valid class code $c \in \operatorname{Code}_A$, satisfying the typed syntactic round-trip identity $\operatorname{Dec}_A(\operatorname{Enc}(e)) = e$ for every $e : A.\mathrm{Expression}$ (<code>generated/symbols/dec.html</code>).</p>
 <ol>
-<li><strong>Syntactic Antiquotation / Splicing (<code>⟨u⟩</code> inside <code>‹...›</code>) vs. Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>):</strong></li>
+<li><strong>Antiquotation (<code>⟦u⟧</code>, constructors <code>EAnti</code> / <code>EEval</code>):</strong> The dual of quotation (NOTATION.txt).</li>
 </ol>
-<ul>
-<li><strong>Syntactic Splicing (<code>⟨u⟩</code>, U+27E8/U+27E9, <code>generated/symbols/antiquotation.html</code>):</strong> Inside a quotation template $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, evaluates the meta-level expression $u : A.\mathrm{Expression}$ (such as $\operatorname{Dec}_A(c)$) and splices the resulting syntax tree into the surrounding AST.</li>
-<li><strong>Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>, U+27E6/U+27E7, <code>generated/symbols/binder-brackets.html</code>):</strong> Evaluates a syntactic expression $e : A.\mathrm{Expression}$ to its semantic denotation in $A$ under a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.</li>
-</ul>
+<p>Quotation <code>‹φ›</code> (LaTeX <code>\langle\varphi\rangle</code>) goes one metalevel up; antiquotation <code>⟦u⟧</code></p>
+<p>(U+27E6/U+27E7, <code>generated/symbols/antiquotation.html</code>) takes <code>u : A.Expression</code> one metalevel down.</p>
+<p>Inside a quotation template $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ it splices the syntax</p>
+<p>tree $u$ (e.g. $\operatorname{Dec}_A(c)$); outside a quotation it evaluates $u$, written</p>
+<p>$\llbracket e\rrbracket_\rho = \operatorname{Val}_\rho(e)$ under an assignment $\rho$</p>
+<p>(<code>generated/symbols/binder-brackets.html</code>). Angle brackets are never antiquotation brackets;</p>
+<p><code>⟨a, b⟩</code> with a comma is a pair.</p>
 <ol>
 <li><strong>Type-Indexed Expression Translation ($\mu_A$) vs. Assignment-Indexed Valuation ($\mu^{\mathrm{val}}_\rho$):</strong></li>
 </ol>
@@ -178,20 +181,22 @@
 </ul>
 <p>$$\forall c : \mathrm{Class},\qquad c \in \operatorname{Code}_A \implies \operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c.$$</p>
 <p><em>(For $c \notin \operatorname{Code}_A$, $\operatorname{Dec}_A(c)$ returns a fixed default syntactic variable/constant $e^{\mathrm{def}}_A$, so $\operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c$ holds if and only if $c \in \operatorname{Code}_A$.)</em></p>
-<h3 id="3-2-syntactic-antiquotation-u-vs-semantic-valuation-e-rho">3.2 Syntactic Antiquotation (<code>⟨u⟩</code>) vs. Semantic Valuation (<code>⟦e⟧_rho</code>)</h3>
-<p>Two distinct bracket notations operate on expressions:</p>
+<h3 id="3-2-antiquotation-u-splicing-and-evaluation">3.2 Antiquotation (<code>⟦u⟧</code>): splicing and evaluation</h3>
+<p>Quotation and antiquotation are written with different brackets (NOTATION.txt): quotation with angle</p>
+<p>brackets (<code>‹φ›</code>, LaTeX <code>\langle\varphi\rangle</code>), antiquotation with white square brackets (<code>⟦u⟧</code>,</p>
+<p>ASCII <code>[|u|]</code>).</p>
 <ol>
-<li><strong>Syntactic Antiquotation / Splicing (<code>⟨u⟩</code>, <code>generated/symbols/antiquotation.html</code>):</strong></li>
+<li><strong>Splicing inside a quotation:</strong> in $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ the subterm</li>
 </ol>
-<p>Inside a quoted expression $\text{‹}\dots\,\langle u \rangle\,\dots\text{›}$, the subterm $u : A.\mathrm{Expression}$ (for example, $u = \operatorname{Dec}_A(c)$ where $c : \mathrm{Class}$ is a code variable) is spliced directly into the quoted AST:</p>
-<p>$$\text{‹}\forall x : \mathrm{Class}.\;\langle \operatorname{Dec}_{\mathrm{Fm}}(c) \rangle\text{›} \;:\; \mathrm{Fm}.$$</p>
-<p>In particular, $\text{‹}\langle e \rangle\text{›} = \operatorname{Enc}_A(e)$ for $e : A.\mathrm{Expression}$, and $\text{‹}\langle \operatorname{Dec}_A(c) \rangle\text{›} = c$ for $c \in \operatorname{Code}_A$.</p>
+<p>$u : A.\mathrm{Expression}$ (for example $u = \operatorname{Dec}_A(c)$ for a code variable $c$) is</p>
+<p>placed into the quoted AST:</p>
+<p>$$\text{‹}\forall x : \mathrm{Class}.\;\llbracket \operatorname{Dec}_{\mathrm{Fm}}(c) \rrbracket\text{›} \;:\; \mathrm{Fm}.$$</p>
 <ol>
-<li><strong>Semantic Valuation (<code>⟦e⟧_ρ = Val_ρ(e)</code>, <code>generated/symbols/binder-brackets.html</code>):</strong></li>
+<li><strong>Evaluation outside a quotation:</strong> given an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$,</li>
 </ol>
-<p>Given a variable assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$, semantic valuation interprets a class expression or formula in the model:</p>
 <p>$$\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \longrightarrow \mathrm{Class}, \qquad \operatorname{Val}_\rho : \mathrm{Truth}.\mathrm{Expression} \longrightarrow \mathrm{Bool},$$</p>
-<p>written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$. As noted in <code>program/libs/unicodedefs.ML</code>, when $\rho$ is the ambient unnamed assignment of the current context, $\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$.</p>
+<p>written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$; with the ambient assignment,</p>
+<p>$\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$ (<code>program/libs/unicodedefs.ML</code>).</p>
 <h3 id="3-3-reconciling-the-two-conventions-for-mu-and-operatorname-eval">3.3 Reconciling the Two Conventions for $\mu$ and $\operatorname{eval}$</h3>
 <p>Across the project documentation and symbol pages, the letter $\mu$ appears with two different subscript types. Both are mathematically sound once their signatures are distinguished:</p>
 <div class="table-wrap"><table><thead><tr>
