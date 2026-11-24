@@ -467,9 +467,14 @@ class TestProofRegression(unittest.TestCase):
 
     def test_tickets_t6_t7_w6_verification(self):
         """Verify complete implementation of tickets T6, T7, and W6."""
-        # W6: Build hash and date in page footers
-        self.assertIn("Build Hash:", self.gen_manual_html)
-        self.assertIn("Built on:", self.gen_manual_html)
+        # W6: build hash and date live in generated/BUILD.json (one file, #8086);
+        # page footers link to it instead of embedding the stamp.
+        self.assertIn('href="BUILD.json" data-build-json', self.gen_manual_html)
+        self.assertNotIn("Build Hash:", self.gen_manual_html)
+        with open(os.path.join(SITE_DIR, "generated", "BUILD.json"), encoding="utf-8") as fh:
+            build = json.load(fh)
+        self.assertTrue(build.get("commit"))
+        self.assertTrue(build.get("datetime_iso"))
         self.assertIn("entries.ML:L", self.gen_manual_html)
         self.assertIn("https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L", self.gen_manual_html)
 
