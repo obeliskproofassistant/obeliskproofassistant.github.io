@@ -4,7 +4,8 @@
  * 1. SML-generated `generated/theory_db.json` (106 MKTD1-system Sequent Calculus / Typed AST entries)
  * 2. SML-generated `generated/nbg_library.json` (100 MKTD2-system Formulas-as-Types entries)
  * 3. Live Poly/ML 5.7.1 `NBGSurfaceCompiler` (`/api/obelisk/compile`) when reachable
- * 4. Client-side `ObeliskNBGCompiler` bidirectional kernel type-checker (`MKTD2-system`)
+ * 4. Client-side `ObeliskNBGCompiler` PREVIEW type-checker (JavaScript, MKTD2-style). It is NOT the
+ *    trusted kernel: the trusted checkers are the SML kernels in set_theory_prover (GitLab #8081).
  */
 
 class ObeliskREPL {
@@ -235,7 +236,7 @@ class ObeliskREPL {
     if (!src || !src.trim()) {
       this.renderReport({
         status: 'REJECTED',
-        engine: 'Obelisk Kernel Type-Checker (MKTD2-system)',
+        engine: 'In-browser preview checker (JavaScript; not the Obelisk SML kernel)',
         elapsed_ms: 0,
         theory: 'NBG_Predicative',
         defined_formulas: [],
@@ -304,7 +305,13 @@ class ObeliskREPL {
       } else {
         lines.push(`  (0 theorem declarations — only formula type definitions were checked)`);
       }
-      lines.push(`\n[OK] COMPILATION SUCCEEDED: All proof terms deterministically type-checked.`);
+      if (/preview/i.test(r.engine || '')) {
+        lines.push(`\n[OK] ACCEPTED by the in-browser preview checker (JavaScript re-implementation).`);
+        lines.push(`     This is NOT a kernel verification. Authoritative checking is done by the SML kernels`);
+        lines.push(`     in set_theory_prover (MKTD1: program/newchecker/, MKTD2: program/dependent_typechecker.ML).`);
+      } else {
+        lines.push(`\n[OK] COMPILATION SUCCEEDED: all proof terms type-checked by ${r.engine}.`);
+      }
     } else {
       lines.push(`\n[2] KERNEL TYPE-CHECKER REJECTION (DETERMINISTIC REFUSAL):`);
       lines.push(`  [ERROR] ${r.error}`);
@@ -518,7 +525,7 @@ class ObeliskREPL {
         '  ast <id|code>                - Display SML kernel AST constructor, Scheme of Types, and Side Conditions',
         '  ansii <id|code>              - Display compact terminal Unicode/ASCII summary of a kernel entry',
         '  bridge <id|code>             - Compare MKTD1-system (Sequent/Typed AST) & MKTD2-system (Formulas-as-Types)',
-        '  check <id>                   - Verify a theorem identifier against the certified LCF kernel registry',
+        '  check <id>                   - Look up a theorem in the published kernel registry (not re-checked in the browser)',
         '  primitives                   - List all closed kernel proof-term constructors',
         '  formula <Name> = <Formula>;  - Parse & check a well-formed MKTD2-theory formula definition (Type)',
         '  theorem <Name> : <F> = <E>;  - Typecheck a constructive proof term directly',
@@ -568,7 +575,7 @@ class ObeliskREPL {
       for (const e of m2.slice(0, 15)) {
         lines.push(`    [${e.id}] ${e.title.padEnd(28)} : ${e.statement_unicode}`);
       }
-      lines.push('  [Certified Named Registry (use "check <name>")]:');
+      lines.push('  [Built-in REPL examples (use "check <name>")]:');
       lines.push('    ' + Array.from(this.theorems.keys()).join(', '));
       return lines.join('\n');
     }
@@ -644,15 +651,15 @@ class ObeliskREPL {
       const thm = cmd.substring(6).trim();
       if (this.theorems.has(thm)) {
         const desc = this.theorems.get(thm);
-        return `[VERIFIED] Proof tree for '${thm}' checked against LCF kernel:\n  Formula: ${desc}\n  Status: Valid derivation, 0 warnings, zero implicit computation.`;
+        return `[EXAMPLE] '${thm}' is a built-in REPL example statement:\n  Formula: ${desc}\n  Status: listed only; nothing is re-checked in your browser.`;
       }
       const found = this.findEntry(thm);
       if (found) {
         this.inspectCatalogEntry(found.entry, found.system);
-        return `[VERIFIED] Kernel entry '${thm}' verified in ${found.system}:\n  Statement: ${found.entry.statement_unicode}\n  Constructor: ${found.entry.prf_constructor || found.entry.id}\n  Status: Valid kernel derivation.`;
+        return `[RECORDED] Kernel entry '${thm}' (${found.system}) as published in generated/theory_db.json:\n  Statement: ${found.entry.statement_unicode}\n  Constructor: ${found.entry.prf_constructor || found.entry.id}\n  Status: checked by the SML kernel when the site was generated; not re-checked in your browser.`;
       }
       return (
-        `[ERROR] Unknown theorem '${thm}'. Available certified theorems:\n  ` +
+        `[ERROR] Unknown theorem '${thm}'. Built-in REPL examples:\n  ` +
         Array.from(this.theorems.keys()).join(", ") +
         `\n\nTo verify a new theorem in the SML kernel:\n` +
         `  * MKTD1-system: poly -q --use program/newchecker.ML </dev/null\n` +

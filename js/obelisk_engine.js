@@ -1105,7 +1105,7 @@ class ObeliskNBGCompiler {
       }
       return {
         status: 'COMPILED',
-        engine: 'Obelisk Bidirectional Kernel Type-Checker (MKTD2-system)',
+        engine: 'In-browser preview checker (JavaScript; not the Obelisk SML kernel)',
         elapsed_ms: Math.round((performance.now() - t0) * 10) / 10,
         theory: curTheory,
         defined_formulas: definedFormulas,
@@ -1115,7 +1115,7 @@ class ObeliskNBGCompiler {
     } catch (err) {
       return {
         status: 'REJECTED',
-        engine: 'Obelisk Bidirectional Kernel Type-Checker (MKTD2-system)',
+        engine: 'In-browser preview checker (JavaScript; not the Obelisk SML kernel)',
         elapsed_ms: Math.round((performance.now() - t0) * 10) / 10,
         theory: 'NBG_Predicative',
         defined_formulas: [],
