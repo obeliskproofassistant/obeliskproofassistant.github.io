@@ -288,7 +288,7 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))`
 - **Proof Constructor:** `PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso | Definitions Used: DefEmptySet, DefIff, DefSubclass | Kernel Prf Nodes: 95`
-- **Kernel Note:** Derived theorem in Variant 1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in Variant 2.
+- **Kernel Note:** Derived theorem in MKTD1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in MKTD2.
 - **Standalone Certificate:** [proofs/ThmEmptySetIsSubclass.html](proofs/ThmEmptySetIsSubclass.html)
 
 ### 3.08 `AxmLeftInSound` — “Membership respects equality in right argument (container class)” (admissible) (Axiom)

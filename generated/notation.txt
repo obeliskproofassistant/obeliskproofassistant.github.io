@@ -6,9 +6,9 @@
 ================================================================================
 OBELISK SET THEORY PROVER — CANONICAL UNAMBIGUOUS NOTATION SPECIFICATION
 ================================================================================
-Repository: set_theory_prover (Variant 1 = MKTD1 & Variant 2 = MKTD2)
-Purpose:    Unambiguous distinction between logical formulas in Variant 1 (MKTD1),
-            constructive types/functions in Variant 2 (MKTD2), and computation-level
+Repository: set_theory_prover (MKTD1 and MKTD2)
+Purpose:    Unambiguous distinction between logical formulas in MKTD1,
+            types/functions in MKTD2, and computation-level
             boolean truth values (Bool), across all three printing strategies:
               (x.1) LaTeX
               (x.2) Unicode
@@ -18,9 +18,9 @@ Purpose:    Unambiguous distinction between logical formulas in Variant 1 (MKTD1
 2 different notations:
 
 ================================================================================
-1) Prover, Variant 1 (MKTD1): ("for formulas" — MKTD1-prover)
+1) Prover, MKTD1: ("for formulas" — MKTD1-prover)
    Sort of Formulas: Fm (= Truth.Expression in newchecker.ML / typetheory.ML)
-   Theory Name:      MKTD1 (Morse-Kelley + Tarski + Dunaev, Variant 1)
+   Theory Name:      MKTD1 (Morse-Kelley + Tarski + Dunaev)
 ================================================================================
 
 1.1 Latex
@@ -105,9 +105,9 @@ let x = t in phi                  (Explicit capture-avoiding substitution in for
 
 
 ================================================================================
-2) Variant 2 (MKTD2): ("for types" — Higher-Order Dependent-Type / Rocq Proof Assistant)
+2) MKTD2: ("for types" — Dependent-Type Proof Assistant)
    Sort of Types:  Type / Prop (dependent_syntax.ML, nbg_compiler.ML)
-   Theory Name:    MKTD2 (Morse-Kelley + Tarski + Dunaev, Variant 2)
+   Theory Name:    MKTD2 (Morse-Kelley + Tarski + Dunaev)
 ================================================================================
 
 1.1 Latex
@@ -186,9 +186,9 @@ Question: "Also do we need a separate notation for boolean values or not?"
 Answer:   YES — a separate notation for boolean values (b : Bool) is strictly
           necessary to eliminate ambiguity between three distinct layers:
             (i)   Syntactic formulas of the object theory (T / F, ⊤ / ⊥, \top / \bot : Fm)
-                  in Variant 1, which are syntactic AST objects proved by sequents;
+                  in MKTD1, which are syntactic AST objects proved by sequents;
             (ii)  Constructive types (Unit / Void, 𝟙 / 𝟘, \mathbf{1} / \mathbf{0} : Type)
-                  in Variant 2, which are inhabited by proof/program terms; and
+                  in MKTD2, which are inhabited by proof/program terms; and
             (iii) Boolean data values (true / false : Bool), which are the two
                   canonical term inhabitants of the two-element computation type
                   Bool (UBool in typetheory.ML), passed as arguments to polymorphic
@@ -230,7 +230,7 @@ if_dep(T_e, b, t1, t2)            (Dependent conditional over T_e : Bool -> Type
 ================================================================================
 4) MASTER DISAMBIGUATION MATRIX (ALL 3 STRATEGIES x ALL 3 LAYERS)
 ================================================================================
-Concept              | Printing | Variant 1 (MKTD1): Fm    | Variant 2 (MKTD2): Type | Boolean Values (Bool)
+Concept              | Printing | MKTD1: Fm    | MKTD2: Type | Boolean Values (Bool)
 ---------------------+----------+--------------------------+-------------------------+----------------------
 Truth / Unit / True  | LaTeX    | \top                     | \mathbf{1} (\top)       | \mathsf{true}
                      | Unicode  | ⊤ (U+22A4)               | 𝟙 (U+1D7D9)             | true (𝘁𝗿𝘂𝗲)
