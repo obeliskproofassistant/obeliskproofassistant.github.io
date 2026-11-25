@@ -82,7 +82,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Identifier:** `RulGeneralisation` (entry `2.06`, kind: `Inference Rule`, status: `Admissible Rule (Kernel, Γ = [])`)
 - **Formula (Unicode):** `(⟦𝛂⟧ ─── (∀(⦃x⦄:⟦X⟧)⟦𝛂⟧))`
 - **Scheme of Types (Unicode):** `(⟦[𝛂@Fm.Expression]⟧ ─── (∀([⦃[x@Variable.Expression]⦄@Variable]:[⟦[X@Type.Expression.Expression]⟧@Type])⟦[𝛂@Fm.Expression]⟧))`
-- **Proof Constructor:** `PGenR_prf (φ, x, x', Class, PForaR_prf (φ, x, x', Class, p))`
+- **Proof Constructor:** `PForaR_prf`
 - **Judgements:** `[(x:Variable), (X:Type), (𝛂:Fm)]`
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
@@ -106,7 +106,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmEmptySetIsSubclass` (entry `3.07`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(X:Class)(∅⊆X))`
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])(∅⊆[X@Class.Expression]))`
-- **Proof Constructor:** `PForaR_prf (Γ, X, X, Class, PMP_prf (PForaR_prf (Γ, z, z, Class, PImplR_prf (PMP_prf (PA11_prf (Γ, z ∈ ∅), PIdent_prf (z ∈ ∅)))), PSubDef_prf (∅, X, z)))`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 95 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass`
 - **Kernel Prf Nodes:** `95`
@@ -118,7 +119,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `AxmIntensionality` (entry `3.11`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(X:Class)∀(Y:Class)(((X set)∧(Y set))—→((∀(W:Class)((X∈W)←→(Y∈W)))—→(X=Y))))`
 - **Scheme of Types (Unicode):** `(∀([X@Variable]:[Class@Type])∀([Y@Variable]:[Class@Type])((([X@Class.Expression] set)∧([Y@Class.Expression] set))—→((∀([W@Variable]:[Class@Type])(([X@Class.Expression]∈[W@Class.Expression])←→([Y@Class.Expression]∈[W@Class.Expression])))—→([X@Class.Expression]=[Y@Class.Expression]))))`
-- **Proof Constructor:** `thm_3_11_intensionality (PForaR_prf / PImplR_prf / PComprAx_prf / PLeftInSoundAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 277 *)
+PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension`
 - **Definitions Used:** `DefSubclass, DefIff, DefClassEq`
 - **Kernel Prf Nodes:** `277`
@@ -130,7 +132,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOrdinalsIsOrdinal` (entry `3.18`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ord(On)`
 - **Scheme of Types (Unicode):** `Ord(On)`
-- **Proof Constructor:** `thm_on_is_ordinal (POrdDef_prf / PTransDef_prf / PSubDef_prf / PComprAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 555 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension`
 - **Definitions Used:** `DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass`
 - **Kernel Prf Nodes:** `555`
@@ -142,7 +145,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))`
 - **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))`
-- **Proof Constructor:** `thm_3_37_family_eval_when_defined (PKernelDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
 - **Definitions Used:** `DefValueAtArg, DefBigDomain, DefFamily, DefUnaryUnion`
 - **Kernel Prf Nodes:** `11`
@@ -154,7 +158,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
-- **Proof Constructor:** `thm_3_38_sigma_model (PKernelDef_prf / PComprAx_prf / thm_dunaev_opair_injective)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 161572 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
 - **Definitions Used:** `DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
 - **Kernel Prf Nodes:** `161572`
@@ -166,7 +171,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))`
-- **Proof Constructor:** `thm_3_39_pi_predicate_model (PForaR_prf / PImplR_prf / PForaL_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 25 *)
+PForaR_prf (...)`
 - **Axioms Used:** `(none -- pure sequent / definitional)`
 - **Definitions Used:** `(none)`
 - **Kernel Prf Nodes:** `25`
@@ -178,7 +184,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ind(V)`
 - **Scheme of Types (Unicode):** `Ind(V)`
-- **Proof Constructor:** `thm_3_58_v_inductive (PAndR_prf / PForaR_prf / PPairSetAx_prf / PComprAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 3985 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmPropVerum, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefUniversalClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefSingletonSet, DefClassEq, DefBinaryUnion, DefIsSet, DefUnaryUnion`
 - **Kernel Prf Nodes:** `3985`
@@ -190,7 +197,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaInductive` (entry `3.59`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ind(ω)`
 - **Scheme of Types (Unicode):** `Ind(ω)`
-- **Proof Constructor:** `thm_3_59_omega_inductive (PKernelDef_prf / PAndR_prf / PForaR_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 160 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `(none -- pure sequent / definitional)`
 - **Definitions Used:** `DefInductiveClass, DefIff, DefOmega`
 - **Kernel Prf Nodes:** `160`
@@ -202,7 +210,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOrdinalsInductive` (entry `3.60`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ind(On)`
 - **Scheme of Types (Unicode):** `Ind(On)`
-- **Proof Constructor:** `thm_3_60_on_inductive (PKernelDef_prf / PPowSetAx_prf / PHeredityAx_prf / PComprAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 2705 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmExponent`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefTransitiveClass, DefOrdinalClass, DefClassOfOrdinals, DefBinaryUnion, DefIsSet, DefPowerClass, DefSingletonSet, DefClassEq, DefInductiveClass`
 - **Kernel Prf Nodes:** `2705`
@@ -214,7 +223,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaTransitive` (entry `3.61`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Tr(ω)`
 - **Scheme of Types (Unicode):** `Tr(ω)`
-- **Proof Constructor:** `thm_3_61_omega_transitive (PTransDef_prf / PSubDef_prf / PComprAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 2696 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq`
 - **Kernel Prf Nodes:** `2696`
@@ -226,7 +236,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaOrdinal` (entry `3.62`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ord(ω)`
 - **Scheme of Types (Unicode):** `Ord(ω)`
-- **Proof Constructor:** `thm_3_62_omega_ordinal (POrdDef_prf / PAndR_prf / PForaR_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 5419 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq`
 - **Kernel Prf Nodes:** `5419`
@@ -238,7 +249,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaInOrdinals` (entry `3.63`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(ω∈On)`
 - **Scheme of Types (Unicode):** `(ω∈On)`
-- **Proof Constructor:** `thm_3_63_omega_in_on (PMP_prf / POmegaSetAx_prf / PComprAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 5479 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals`
 - **Kernel Prf Nodes:** `5479`
@@ -250,7 +262,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Card(ω)`
 - **Scheme of Types (Unicode):** `Card(ω)`
-- **Proof Constructor:** `thm_3_65_omega_card_sub_on (PAndR_prf / POmegaSetAx_prf / PKernelDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 5488 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefCardinality, DefIsCardinal`
 - **Kernel Prf Nodes:** `5488`
@@ -262,7 +275,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmOrdinalsCardinal` (entry `3.66`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Card(On)`
 - **Scheme of Types (Unicode):** `Card(On)`
-- **Proof Constructor:** `thm_3_66_on_card_sub_on (PIsCardinalDef_prf / PExisR_prf / PCardinalityDef_prf / PSizeLimAx_prf / PCardLessOrderAx_prf / PUnaryInterDef_prf / PEqDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1141 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmSizeLimitation, CardLessOrderAx, AxmPropNegElim, AxmPropExFalso`
 - **Definitions Used:** `DefCardinality, DefBinaryIntersection, DefIff, DefIsSet, DefSubclass, DefUniversalClass, DefCardLess, DefUnaryIntersection, DefClassEq, DefIsCardinal`
 - **Kernel Prf Nodes:** `1141`
@@ -274,7 +288,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniversalClassNotCardinal` (entry `3.67`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(¬Card(V))`
 - **Scheme of Types (Unicode):** `(¬Card(V))`
-- **Proof Constructor:** `thm_3_67_v_not_cardinal (PNegR_prf / PPairSetAx_prf / PLeftInSoundAx_prf / PKernelDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 6099 *)
+PNegR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, PairSetAx, AxmPropVerum, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound, AxmPropNegElim`
 - **Definitions Used:** `DefIsCardinal, DefIff, DefUniversalClass, DefUnorderedPair, DefPairfulClass, DefEmptySet, DefSubclass, DefSingletonSet, DefClassEq, DefCardinality, DefBinaryIntersection, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass`
 - **Kernel Prf Nodes:** `6099`
@@ -286,7 +301,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniversalClassIsUniverse` (entry `3.69`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(V universe)`
 - **Scheme of Types (Unicode):** `(V universe)`
-- **Proof Constructor:** `v_universe_thm (PAndR_prf / POmegaSetAx_prf / PHeredityAx_prf / PPowSetAx_prf / PSizeLimAx_prf / PPairSetAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 910 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmHeredity, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx`
 - **Definitions Used:** `DefIff, DefUniversalClass, DefIsSet, DefSubclass, DefTransitiveClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefGrothendieckUniverse`
 - **Kernel Prf Nodes:** `910`
@@ -298,7 +314,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmTransitiveClassInduction` (entry `3.71`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(K:Class)∀(A:Class)((Tr(K)∧((K∩𝒫(A))⊆A))—→(K⊆A)))`
 - **Scheme of Types (Unicode):** `(∀([K@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((Tr([K@Class.Expression])∧(([K@Class.Expression]∩𝒫([A@Class.Expression]))⊆[A@Class.Expression]))—→([K@Class.Expression]⊆[A@Class.Expression])))`
-- **Proof Constructor:** `thm_3_71_transitive_class_induction (PForaR_prf / PEpsIndAx_prf / PComprAx_prf / PSubDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1224 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRegularity`
 - **Definitions Used:** `DefIsSet, DefIff, DefUniversalClass, DefPowerClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection`
 - **Kernel Prf Nodes:** `1224`
@@ -310,7 +327,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmDunaevFirstProjection` (entry `3.77`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(A:Class)∀(B:Class)({a|{{{{a}}},{∅}}∈(A,B)}=A))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[a@Class.Expression]|{{{{[a@Class.Expression]}}},{∅}}∈([A@Class.Expression],[B@Class.Expression])}=[A@Class.Expression]))`
-- **Proof Constructor:** `thm_3_77_dunaev_pr1_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 41145 *)
+PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
 - **Definitions Used:** `DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
 - **Kernel Prf Nodes:** `41145`
@@ -322,7 +340,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmDunaevSecondProjection` (entry `3.78`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(A:Class)∀(B:Class)({b|{{{{b}}},{∅,{∅}}}∈(A,B)}=B))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])∀([B@Variable]:[Class@Type])({[b@Class.Expression]|{{{{[b@Class.Expression]}}},{∅,{∅}}}∈([A@Class.Expression],[B@Class.Expression])}=[B@Class.Expression]))`
-- **Proof Constructor:** `thm_3_78_dunaev_pr2_sub (PForaR_prf / PEqDef_prf / PSubDef_prf / PComprAx_prf / POrL_prf / PExisL_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 38665 *)
+PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
 - **Definitions Used:** `DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
 - **Kernel Prf Nodes:** `38665`
@@ -334,7 +353,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniverseInterOnIsOrdinal` (entry `3.85`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(U:Class)((U universe)—→Ord((U∩On))))`
 - **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(([U@Class.Expression] universe)—→Ord(([U@Class.Expression]∩On))))`
-- **Proof Constructor:** `thm_step0_universe_inter_on_is_ordinal (PForaR_prf / POrdDef_prf / PBinInterDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1693 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection`
 - **Kernel Prf Nodes:** `1693`
@@ -346,7 +366,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniverseUnionClosedFromIndexedUnion` (entry `3.86`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(U:Class)∀(f:Class)(((Tr(U)∧IndexedUnionClosed(U))∧((f class-function)∧((V⊆Dom(f))∧∀(a:Class)(f(a)=a))))—→∀(x:Class)((x∈U)—→(⋃x∈U))))`
 - **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])(((Tr([U@Class.Expression])∧IndexedUnionClosed([U@Class.Expression]))∧(([f@Class.Expression] class-function)∧((V⊆Dom([f@Class.Expression]))∧∀([a@Variable]:[Class@Type])([f@Class.Expression]([a@Class.Expression])=[a@Class.Expression]))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression]))))`
-- **Proof Constructor:** `thm_step1a_union_closed_from_indexed_union (PForaR_prf / PKernelDef_prf / PImageDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 3757 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRightInSound`
 - **Definitions Used:** `DefIsSet, DefIff, DefUniversalClass, DefSubclass, DefRelationalImage, DefClassEq, DefTransitiveClass, DefIndexedUnionClosed, DefUnaryUnion`
 - **Kernel Prf Nodes:** `3757`
@@ -358,7 +379,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniverseInterOnIsLimitOrdinal` (entry `3.87`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(U:Class)(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))—→LimitOrd((U∩On))))`
 - **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))—→LimitOrd(([U@Class.Expression]∩On))))`
-- **Proof Constructor:** `thm_step1c_kappa_is_limit_ord (PForaR_prf / PKernelDef_prf / PEpsIndAx_prf / PPairfulDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 12286 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal`
 - **Kernel Prf Nodes:** `12286`
@@ -370,7 +392,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmVonNeumannStageSubUniverse` (entry `3.88`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(V:Class)∀(U:Class)((VStageLaws(V)∧(Tr(U)∧(LimitOrd((U∩On))∧∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))))—→(V((U∩On))⊆U)))`
 - **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(Tr([U@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))))—→([V@Class.Expression](([U@Class.Expression]∩On))⊆[U@Class.Expression])))`
-- **Proof Constructor:** `thm_step2_v_kappa_sub_u (PForaR_prf / PEpsIndAx_prf / PPowerfulDef_prf / PSubDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 655 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmRightInSound`
 - **Definitions Used:** `DefVonNeumannStageLaws, DefIff, DefUnaryUnion, DefClassEq, DefSubclass, DefTransitiveClass`
 - **Kernel Prf Nodes:** `655`
@@ -382,7 +405,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniverseSubVonNeumannStage` (entry `3.89`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(V:Class)∀(R:Class)∀(U:Class)((VStageLaws(V)∧(SetRankLaws(R,V)∧(LimitOrd((U∩On))∧((∀(B:Class)((B∈(U∩On))—→(V(B)∈U)))∧∀(x:Class)((x∈U)—→(R(x)∈U))))))—→(U⊆V((U∩On)))))`
 - **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])∀([R@Variable]:[Class@Type])∀([U@Variable]:[Class@Type])((VStageLaws([V@Class.Expression])∧(SetRankLaws([R@Class.Expression],[V@Class.Expression])∧(LimitOrd(([U@Class.Expression]∩On))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→([V@Class.Expression]([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→([R@Class.Expression]([x@Class.Expression])∈[U@Class.Expression]))))))—→([U@Class.Expression]⊆[V@Class.Expression](([U@Class.Expression]∩On)))))`
-- **Proof Constructor:** `thm_step3_u_sub_v_kappa (PForaR_prf / PEpsIndAx_prf / PKernelDef_prf / PSubDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1626 *)
+PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
 - **Definitions Used:** `DefIsSet, DefIff, DefSetRankLaws, DefClassOfOrdinals, DefBinaryIntersection, DefLimitOrdinal, DefSubclass, DefClassEq, DefUnaryUnion, DefVonNeumannStageLaws`
 - **Kernel Prf Nodes:** `1626`
@@ -394,7 +418,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmUniverseEqVonNeumannStageInterOn` (entry `3.90`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(U:Class)((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧(((U universe)∧∀(x:Class)((x∈U)—→(⋃x∈U)))∧((∀(B:Class)((B∈(U∩On))—→(VStageGraph(B)∈U)))∧∀(x:Class)((x∈U)—→(SetRankGraph(x)∈U))))))—→(LimitOrd((U∩On))∧(U=VStageGraph((U∩On))))))`
 - **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])((VStageLaws(VStageGraph)∧(SetRankLaws(SetRankGraph,VStageGraph)∧((([U@Class.Expression] universe)∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(⋃[x@Class.Expression]∈[U@Class.Expression])))∧((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈([U@Class.Expression]∩On))—→(VStageGraph([B@Class.Expression])∈[U@Class.Expression])))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈[U@Class.Expression])—→(SetRankGraph([x@Class.Expression])∈[U@Class.Expression]))))))—→(LimitOrd(([U@Class.Expression]∩On))∧([U@Class.Expression]=VStageGraph(([U@Class.Expression]∩On))))))`
-- **Proof Constructor:** `thm_universe_eq_canonical_v_inter_on (PForaR_prf / PEqDef_prf / PAndR_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 39444 *)
+PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal, DefSetRankLaws, DefVonNeumannStageLaws`
 - **Kernel Prf Nodes:** `39444`
@@ -406,7 +431,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmTransfiniteApproxCoherence` (entry `3.95`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(G:Class)∀(g:Class)∀(h:Class)∀(A:Class)((TransfiniteApprox(G,g)∧(TransfiniteApprox(G,h)∧((∀(z:Class)((g(pr1(z))=h(pr1(z)))—→((z∈g)←→(z∈h))))∧(A∈(Dom(g)∩Dom(h))))))—→((Restrict(g,A)=Restrict(h,A))∧((g(A)=G(Restrict(g,A)))∧(g(A)=h(A))))))`
 - **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([h@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])∧(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧((∀([z@Variable]:[Class@Type])(([g@Class.Expression](pr1([z@Class.Expression]))=[h@Class.Expression](pr1([z@Class.Expression])))—→(([z@Class.Expression]∈[g@Class.Expression])←→([z@Class.Expression]∈[h@Class.Expression]))))∧([A@Class.Expression]∈(Dom([g@Class.Expression])∩Dom([h@Class.Expression]))))))—→((Restrict([g@Class.Expression],[A@Class.Expression])=Restrict([h@Class.Expression],[A@Class.Expression]))∧(([g@Class.Expression]([A@Class.Expression])=[G@Class.Expression](Restrict([g@Class.Expression],[A@Class.Expression])))∧([g@Class.Expression]([A@Class.Expression])=[h@Class.Expression]([A@Class.Expression]))))))`
-- **Proof Constructor:** `thm_transfinite_approx_coherence (PForaR_prf / PKernelDef_prf / PBinInterDef_prf / PEqDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 18311 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity`
 - **Definitions Used:** `DefTransfiniteApproximation, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefBinaryIntersection, DefIsSet, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq`
 - **Kernel Prf Nodes:** `18311`
@@ -418,7 +444,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmTransfiniteRecursionEquation` (entry `3.96`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(G:Class)∀(g:Class)∀(F:Class)∀(A:Class)((TransfiniteApprox(G,g)—→((g set)∧(g⊆TransfiniteRec(G))))∧(((∀(B:Class)((B∈On)—→∃(h:Class)(TransfiniteApprox(G,h)∧((B∈Dom(h))∧((F(B)=h(B))∧(Restrict(F,B)=Restrict(h,B)))))))∧(A∈On))—→(F(A)=G(Restrict(F,A))))))`
 - **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((TransfiniteApprox([G@Class.Expression],[g@Class.Expression])—→(([g@Class.Expression] set)∧([g@Class.Expression]⊆TransfiniteRec([G@Class.Expression]))))∧(((∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈On)—→∃([h@Variable]:[Class@Type])(TransfiniteApprox([G@Class.Expression],[h@Class.Expression])∧(([B@Class.Expression]∈Dom([h@Class.Expression]))∧(([F@Class.Expression]([B@Class.Expression])=[h@Class.Expression]([B@Class.Expression]))∧(Restrict([F@Class.Expression],[B@Class.Expression])=Restrict([h@Class.Expression],[B@Class.Expression])))))))∧([A@Class.Expression]∈On))—→([F@Class.Expression]([A@Class.Expression])=[G@Class.Expression](Restrict([F@Class.Expression],[A@Class.Expression]))))))`
-- **Proof Constructor:** `thm_transfinite_recursion_equation (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf / PExisL_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 789 *)
+PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
 - **Definitions Used:** `DefTransfiniteApproximation, DefIff, DefSetFunction, DefIsSet, DefUnaryUnion, DefTransfiniteRecursionGraph, DefSubclass, DefClassEq`
 - **Kernel Prf Nodes:** `789`
@@ -430,7 +457,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmTransfiniteRecursionUniqueness` (entry `3.97`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(G:Class)∀(F:Class)∀(H:Class)∀(A:Class)((((∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(F,B)))—→(F(B)=G(X))))∧∀(B:Class)∀(X:Class)(((B∈On)∧(X=Restrict(H,B)))—→(H(B)=G(X))))∧((∀(z:Class)((F(pr1(z))=H(pr1(z)))—→((z∈F)←→(z∈H))))∧(A∈On)))—→((Restrict(F,A)=Restrict(H,A))∧(F(A)=H(A)))))`
 - **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([F@Variable]:[Class@Type])∀([H@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])((((∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([F@Class.Expression],[B@Class.Expression])))—→([F@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈On)∧([X@Class.Expression]=Restrict([H@Class.Expression],[B@Class.Expression])))—→([H@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression]))))∧((∀([z@Variable]:[Class@Type])(([F@Class.Expression](pr1([z@Class.Expression]))=[H@Class.Expression](pr1([z@Class.Expression])))—→(([z@Class.Expression]∈[F@Class.Expression])←→([z@Class.Expression]∈[H@Class.Expression]))))∧([A@Class.Expression]∈On)))—→((Restrict([F@Class.Expression],[A@Class.Expression])=Restrict([H@Class.Expression],[A@Class.Expression]))∧([F@Class.Expression]([A@Class.Expression])=[H@Class.Expression]([A@Class.Expression])))))`
-- **Proof Constructor:** `thm_transfinite_recursion_uniqueness (PForaR_prf / PEqDef_prf / PLeftInSoundAx_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 12773 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity`
 - **Definitions Used:** `DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq`
 - **Kernel Prf Nodes:** `12773`
@@ -442,7 +470,8 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Identifier:** `ThmVonNeumannHierarchyByTransfiniteRecursion` (entry `3.98`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(f:Class)∀(V:Class)∀(A:Class)(((∀(B:Class)¬(B∈Dom(f)))—→(VonNeumannStepG(f)=∅))∧(((V(A)=VonNeumannStepG(f))∧((Dom(f)=A)∧∀(B:Class)((B∈A)—→(f(B)=V(B)))))—→((VonNeumannStepG(f)=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))})∧(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=𝒫(V(B))))})))))`
 - **Scheme of Types (Unicode):** `(∀([f@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(((∀([B@Variable]:[Class@Type])¬([B@Class.Expression]∈Dom([f@Class.Expression])))—→(VonNeumannStepG([f@Class.Expression])=∅))∧((([V@Class.Expression]([A@Class.Expression])=VonNeumannStepG([f@Class.Expression]))∧((Dom([f@Class.Expression])=[A@Class.Expression])∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→([f@Class.Expression]([B@Class.Expression])=[V@Class.Expression]([B@Class.Expression])))))—→((VonNeumannStepG([f@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})∧([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=𝒫([V@Class.Expression]([B@Class.Expression]))))})))))`
-- **Proof Constructor:** `thm_von_neumann_hierarchy_by_recursion (PForaR_prf / PKernelDef_prf / PComprAx_prf / PUnaryUnionDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 10507 *)
+PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso`
 - **Definitions Used:** `DefVonNeumannStepGenerator, DefIff, DefUnaryUnion, DefSubclass, DefEmptySet, DefClassEq, DefPowerClass`
 - **Kernel Prf Nodes:** `10507`
@@ -458,8 +487,8 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Identifier:** `DefMetaConecessitation` (entry `4.03`, kind: `Inference Rule`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘍,[]⊢‹𝘍,Γ⊢𝛗›)—→(𝘍,Γ⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘍,[]⊢‹𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression]›)—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
-- **Proof Constructor:** `PMetaConec_prf (Γ, φ, PCredo_prf (p))`
-- **Kernel Note:** If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. sound Henkin extension equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
+- **Proof Constructor:** `PKernelDef_prf ("DefMetaConecessitation")`
+- **Kernel Note:** If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. theory of the intended model equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
 - **Standalone Certificate:** [proofs/DefMetaConecessitation.html](proofs/DefMetaConecessitation.html)
 
 ### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
@@ -467,7 +496,8 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Identifier:** `ThmReducedVarSubstLaws` (entry `4.08`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))`
 - **Scheme of Types (Unicode):** `((∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([x@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))∧∀([a@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(SubstVar([a@Class.Expression],[x@Class.Expression],[x@Class.Expression])=[a@Class.Expression])))`
-- **Proof Constructor:** `thm_reduced_var_subst_laws (PForaR_prf / PKernelDef_prf / PComprAx_prf / PEqDef_prf)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 2069 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso, AxmPropExcludedMiddle`
 - **Definitions Used:** `DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq`
 - **Kernel Prf Nodes:** `2069`
@@ -483,7 +513,8 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
-- **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_01_loeb (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_loeb_trace`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum`
 - **Definitions Used:** `ThmLoeb`
 - **Kernel Prf Nodes:** `11`
@@ -495,7 +526,8 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
-- **Proof Constructor:** `IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness (PKernelDef_prf / PAndR_prf) + IncompletenessMechanization.derive_second_incompleteness_trace`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
+PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege`
 - **Definitions Used:** `ThmSecondIncompleteness, ThmLoeb`
 - **Kernel Prf Nodes:** `11`

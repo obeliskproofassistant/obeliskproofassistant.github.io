@@ -73,12 +73,12 @@ Lightweight Markdown mirror of `generated/symbols.html` (231 registered tokens a
 - **Reference Page**: `symbols/theory-tau.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Recursively Enumerable Base Class Theory T (Constructor: HI IpTau) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
-### 11. `𝘍` (Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau))
+### 11. `𝘍` (Non-r.e. Theory F of the Intended Model (Constructor: HI IpFau))
 - **ANSII**: `Fau`
 - **LaTeX**: `\mathcal{F}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/theory-fau.html`
-- **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Non-r.e. Henkin-Complete Extension F (Constructor: HI IpFau) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
+- **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Non-r.e. Theory F of the Intended Model (Constructor: HI IpFau) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 12. `𝘌` (Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK})
 - **ANSII**: `Eau`
