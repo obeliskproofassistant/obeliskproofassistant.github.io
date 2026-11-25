@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ideal Models — Obelisk Proof Assistant</title>
-  <meta name="description" content="Ideal mathematical models of the MKTD1 and MKTD2 formal systems of Obelisk, with their Lean 4 formalisation and the list of departures of the SML implementation.">
+  <meta name="description" content="Ideal mathematical models of the MKTD1 and MKTD2 formal systems of Obelisk, with the list of departures of the SML implementation.">
   <link rel="canonical" href="https://obeliskproofassistant.github.io/articles/">
   <link rel="icon" type="image/x-icon" href="../myfavicon.ico">
   <style>
@@ -28,33 +28,26 @@
 <main>
   <nav><a href="../index.html">Obelisk home</a></nav>
   <h1>Ideal models of MKTD1 and MKTD2</h1>
-  <p class="lead">Two short articles, each stating the mathematical object that one of Obelisk's formal
-  systems is meant to implement, and listing where the SML implementation departs from it. Both
-  ideal models are formalised in Lean&nbsp;4.</p>
+  <p class="lead">Two short articles, each stating the completely idealised mathematical object that
+  one of Obelisk's formal systems is meant to implement, and listing where the SML implementation
+  departs from it.</p>
 
   <section class="card">
     <h2><a href="mktd1_model.pdf">MKTD1: the language and calculus</a> (PDF)</h2>
     <p>A classical sequent calculus for Morse–Kelley class theory with universes. It covers the
     sort-indexed expressions with quotation ⟨e⟩ and antiquotation ⟦u⟧, and reflection through
     Holds, Omnis and Credo.</p>
-    <p>Lean: the expression family is written once for every metalevel. The calculus with
-    Omnis and Credo is proved sound for Holds read as validity, assuming that 𝓕 has a model.
-    The paper also explains why restricting comprehension to object-level formulas makes the
-    semantics of Holds well founded, and it proves Russell's theorem.</p>
+    <p>Foundational assumption: the axioms of 𝘛 are true in the intended model. It is believed,
+    not proved, and it is why Credo is sound.</p>
   </section>
 
   <section class="card">
     <h2><a href="mktd2_model.pdf">MKTD2: the language and calculus</a> (PDF)</h2>
     <p>A dependent type theory with an impredicative Prop and universes Type<sub>i</sub>,
     made classical by postulates.</p>
-    <p>Lean: a de Bruijn calculus with transport along equality. A bidirectional checker is
-    proved sound: whatever it accepts is derivable, for every fuel bound. Regression tests
-    cover the two soundness bugs fixed in the SML kernel, and symmetry of equality is derived
-    instead of postulated.</p>
   </section>
 
-  <p>Sources: the LaTeX files are in <code>set_theory_prover/docs/models/</code> and the Lean
-  files in <code>set_theory_prover/formal/lean/</code>
+  <p>Sources: <code>set_theory_prover/docs/models/</code>
   (<a href="https://github.com/georgydunaev/set_theory_prover">repository</a>).</p>
 </main>
 </body>
