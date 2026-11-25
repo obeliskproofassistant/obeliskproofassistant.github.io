@@ -548,52 +548,12 @@
               </td>
             </tr>
             <tr>
-              <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#AxmOmegaIsSet" class="sym-link" title="AxmOmegaIsSet (3.57)"><code>AxmOmegaIsSet</code> (3.57)</a>, <a href="../manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="../manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <a href="../manual.html#AxmPropExFalso" class="sym-link" title="AxmPropExFalso (1.11)"><code>AxmPropExFalso</code> (1.11)</a>, <a href="../manual.html#AxmHeredity" class="sym-link" title="AxmHeredity (3.12)"><code>AxmHeredity</code> (3.12)</a>, <a href="../manual.html#AxmRightInSound" class="sym-link" title="AxmRightInSound (3.09)"><code>AxmRightInSound</code> (3.09)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Definitions Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#DefEmptySet" class="sym-link" title="DefEmptySet (3.04)"><code>DefEmptySet</code> (3.04)</a>, <a href="../manual.html#DefIff" class="sym-link" title="DefIff (1.15)"><code>DefIff</code> (1.15)</a>, <a href="../manual.html#DefSubclass" class="sym-link" title="DefSubclass (3.06)"><code>DefSubclass</code> (3.06)</a>, <a href="../manual.html#DefInductiveClass" class="sym-link" title="DefInductiveClass (3.55)"><code>DefInductiveClass</code> (3.55)</a>, <a href="../manual.html#DefOmega" class="sym-link" title="DefOmega (3.56)"><code>DefOmega</code> (3.56)</a>, <a href="../manual.html#DefTransitiveClass" class="sym-link" title="DefTransitiveClass (3.15)"><code>DefTransitiveClass</code> (3.15)</a>, <a href="../manual.html#DefOrdinalClass" class="sym-link" title="DefOrdinalClass (3.16)"><code>DefOrdinalClass</code> (3.16)</a>, <a href="../manual.html#DefIsSet" class="sym-link" title="DefIsSet (3.02)"><code>DefIsSet</code> (3.02)</a>, <a href="../manual.html#DefBinaryUnion" class="sym-link" title="DefBinaryUnion (3.53)"><code>DefBinaryUnion</code> (3.53)</a>, <a href="../manual.html#DefSingletonSet" class="sym-link" title="DefSingletonSet (3.48)"><code>DefSingletonSet</code> (3.48)</a>, <a href="../manual.html#DefClassEq" class="sym-link" title="DefClassEq: forall A B, (A = B) &lt;-&gt; ((A c= B) /\ (B c= A)), paired with 3.10 AxmExtensionality"><code>DefClassEq</code> (3.10)</a>, <a href="../manual.html#DefClassOfOrdinals" class="sym-link" title="DefClassOfOrdinals (3.17)"><code>DefClassOfOrdinals</code> (3.17)</a>, <a href="../manual.html#DefCardinality" class="sym-link" title="DefCardinality (3.41)"><code>DefCardinality</code> (3.41)</a>, <a href="../manual.html#DefIsCardinal" class="sym-link" title="DefIsCardinal (3.64)"><code>DefIsCardinal</code> (3.64)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Kernel Prf Nodes</th>
-              <td class="field-value proof-cell"><code>5488</code></td>
-            </tr>
-            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 5488 *)
-PAndR_prf (
-  PMP_prf (
-    PAndR_prf (
-      POmegaSetAx_prf,
-      PMP_prf (
-        PAndR_prf (..., ...),
-        PMP_prf (..., ...)
-      )
-    ),
-    PMP_prf (
-      PForaR_prf (
-        PImplR_prf (...)
-      ),
-      PWeak_prf (
-        PImplR_prf (...)
-      )
-    )
-  ),
-  PAndR_prf (
-    PMP_prf (
-      PKernelDef_prf (&quot;DefCardinality&quot;),
-      PWeak_prf (
-        PImplR_prf (...)
-      )
-    ),
-    PKernelDef_prf (&quot;DefIsCardinal&quot;)
-  )
-)</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(the linked kernel proof has a different statement; see GitLab #8101)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Machine-checked MKTD1-system theorem (thm_3_65_omega_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.</td>
+              <td class="field-value proof-cell">Kernel proof term (thm_3_65_omega_card_sub_on : Thm): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -601,7 +561,7 @@ PAndR_prf (
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Verified</td>
+              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>

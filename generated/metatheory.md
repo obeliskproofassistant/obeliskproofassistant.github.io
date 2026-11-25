@@ -29,27 +29,27 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 - **Kernel Note:** Soundness of the non-r.e. theory of the intended model 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Two-Level Stratification (How the Kernel Excludes TpHolds(IpFau, ...) from Object-Level Fm₀): In MKTD1-system (FACTBOOK section 6 (metalevels)), object-level set/class formulas live at metalevel 0 (sort Fm₀, enforced in the kernel by KernelDefinitions.is_object_level_fm0 in newchecker/06_definitions.ML and checked on every PComprAx_prf class comprehension node in newchecker/07_theorems.ML), which explicitly rejects TpHolds, EEval, TpFFI, TpIFV, and TpCtxIFV inside object-level class comprehension {x | φ} and object-level predicate/class definitions. Because 3.72-3.74 and 4.03 live at metalevel +1 and TpHolds(IpFau, ...) is barred from Fm₀ comprehension by is_object_level_fm0, the object-level diagonal lemma cannot be applied to (𝘍, [] ⊢ ·) to form a Tarski liar sentence or a Löb fixed point ψ ⟷ ((𝘍, [] ⊢ ψ) —→ φ).
 - **Standalone Certificate:** [proofs/AxmSoundnessOfFullTheory.html](proofs/AxmSoundnessOfFullTheory.html)
 
-### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Axiom)
+### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Statement)
 
-- **Identifier:** `AxmSemanticCompletenessOfFullTheory` (entry `3.73`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmSemanticCompletenessOfFullTheory` (entry `3.73`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
 - **Kernel Note:** Semantic completeness (omniscience, 3.73) of the non-r.e. theory of the intended model 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). It holds by the definition of 𝘍 as the theory of the intended model (FACTBOOK section 2) and is a metatheorem, not a kernel rule. Stated separately from syntactic negation-completeness (3.74 AxmNegationCompletenessOfFullTheory, which is stated purely in terms of ⊢ and ¬ without mentioning ⟦φ⟧): neither implies the other in isolation, while under Soundness of 𝘍 (3.72) and classical model bivalence (⟦φ⟧ ∨ ⟦¬φ⟧) they are conditionally equivalent.
 - **Standalone Certificate:** [proofs/AxmSemanticCompletenessOfFullTheory.html](proofs/AxmSemanticCompletenessOfFullTheory.html)
 
-### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Axiom)
+### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Statement)
 
-- **Identifier:** `AxmNegationCompletenessOfFullTheory` (entry `3.74`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmNegationCompletenessOfFullTheory` (entry `3.74`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
 - **Kernel Note:** Syntactic negation-completeness (3.74) of the non-r.e. theory of the intended model 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). Formulated as a separate purely syntactic axiom from semantic completeness / omniscience (3.73 AxmSemanticCompletenessOfFullTheory): in classical logic, 3.74 is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ), and becomes equivalent to semantic completeness (3.73) when combined with Soundness of 𝘍 (3.72) and classical bivalence of M (⟦φ⟧ ∨ ⟦¬φ⟧).
 - **Standalone Certificate:** [proofs/AxmNegationCompletenessOfFullTheory.html](proofs/AxmNegationCompletenessOfFullTheory.html)
 
-### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Statement)
 
-- **Identifier:** `AxmBaseSubtheoryOfFull` (entry `3.75`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmBaseSubtheoryOfFull` (entry `3.75`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘛,Γ⊢𝛗)—→(𝘍,Γ⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘛,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
@@ -123,11 +123,7 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum`
-- **Definitions Used:** `ThmLoeb`
-- **Kernel Prf Nodes:** `11`
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
@@ -136,11 +132,7 @@ PAndR_prf (..., ...)`
 - **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege`
-- **Definitions Used:** `ThmSecondIncompleteness, ThmLoeb`
-- **Kernel Prf Nodes:** `11`
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 

@@ -291,7 +291,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass`
 - **Kernel Prf Nodes:** `95`
-- **Kernel Note:** Derived theorem in MKTD1 from DefSubclass, DefEmptySet, and AxmPropExFalso; machine-checked as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all in MKTD2.
+- **Kernel Note:** Derived theorem in MKTD1 from DefSubclass, DefEmptySet, and AxmPropExFalso; checked in MKTD2 as thm_26_emptyset_is_subclass and thm_95_emptyset_subset_all.
 - **Standalone Certificate:** [proofs/ThmEmptySetIsSubclass.html](proofs/ThmEmptySetIsSubclass.html)
 
 ### 3.08 `AxmLeftInSound` — “Membership respects equality in right argument (container class)” (admissible) (Axiom)
@@ -331,7 +331,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension`
 - **Definitions Used:** `DefSubclass, DefIff, DefClassEq`
 - **Kernel Prf Nodes:** `277`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_11_intensionality : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical anchor identifier AxmIntensionality retained for link stability): if X and Y are sets and belong to the same classes W, instantiating W with the singleton comprehension class { u : Class | u = X } yields Y = X and hence X = Y.
+- **Kernel Note:** Kernel proof term (thm_3_11_intensionality : Thm; historical anchor identifier AxmIntensionality retained for link stability): if X and Y are sets and belong to the same classes W, instantiating W with the singleton comprehension class { u : Class | u = X } yields Y = X and hence X = Y.
 - **Standalone Certificate:** [proofs/AxmIntensionality.html](proofs/AxmIntensionality.html)
 
 ### 3.12 `AxmHeredity` — “Heredity”(a subclass of a set is also a set) (Axiom)
@@ -394,7 +394,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension`
 - **Definitions Used:** `DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass`
 - **Kernel Prf Nodes:** `555`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_on_is_ordinal and thm_on_is_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check); combined with thm_not_in_self, this directly yields the Burali-Forti properness theorem (thm_burali_forti_on_proper : Proper(On)).
+- **Kernel Note:** Kernel proof term (thm_on_is_ordinal and thm_on_is_transitive : Thm); combined with thm_not_in_self, this directly yields the Burali-Forti properness theorem (thm_burali_forti_on_proper : Proper(On)).
 - **Standalone Certificate:** [proofs/ThmOrdinalsIsOrdinal.html](proofs/ThmOrdinalsIsOrdinal.html)
 
 ### 3.19 `DefUnaryUnion` — Union of the elements of a class (Definition)
@@ -545,15 +545,11 @@ PMP_prf (..., ...)`
 
 ### 3.37 `ThmFamilyEvaluation` — Evaluation of “Family Value” via semi-singleton subsets (Theorem)
 
-- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Verified`)
+- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
 - **Formula (Unicode):** `(∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))`
 - **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
-- **Definitions Used:** `DefValueAtArg, DefBigDomain, DefFamily, DefUnaryUnion`
-- **Kernel Prf Nodes:** `11`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_37_family_eval_when_defined : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
+- **Kernel Note:** Kernel proof term (thm_3_37_family_eval_when_defined : Thm): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.
 - **Standalone Certificate:** [proofs/ThmFamilyEvaluation.html](proofs/ThmFamilyEvaluation.html)
 
 ### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Theorem)
@@ -561,12 +557,8 @@ PAndR_prf (..., ...)`
 - **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 161572 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
-- **Definitions Used:** `DefSigmaModel, DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
-- **Kernel Prf Nodes:** `161572`
-- **Kernel Note:** Machine-checked MKTD1-system membership characterization theorem (thm_3_38_sigma_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
+- **Kernel Note:** Membership characterization (thm_3_38_sigma_model : Thm; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
 - **Standalone Certificate:** [proofs/DefSigmaModel.html](proofs/DefSigmaModel.html)
 
 ### 3.39 `DefPiPredicateModel` — “Dependent Product (Pi-Type)” predicate and section model (Theorem)
@@ -579,7 +571,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `(none -- pure sequent / definitional)`
 - **Definitions Used:** `(none)`
 - **Kernel Prf Nodes:** `25`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_39_pi_predicate_model : Thm, verified by Thm.checkPipeline and Thm.slow_check; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).
+- **Kernel Note:** Kernel proof term (thm_3_39_pi_predicate_model : Thm; historical identifier DefPiPredicateModel retained for link stability): in MKTD1-theory, the dependent product predicate (f : Π(B)) is a macro abbreviation for ((f family) ∧ ((Dom(f) = Dom(B)) ∧ ∀(u:Class)((u ∈ Dom(B)) —→ (f(u) ∈ B(u))))), so the Π-elimination law ((B family ∧ f : Π(B)) —→ ∀(x:Class)((x ∈ Dom(B)) —→ (f(x) ∈ B(x)))) unfolds after macro expansion to the displayed universal projection theorem (bridged to primitive dependent product types in MKTD2-system via thm_232_pi_family_model_dependent_product_bridge).
 - **Standalone Certificate:** [proofs/DefPiPredicateModel.html](proofs/DefPiPredicateModel.html)
 
 ### 3.40 `DefCardLessEq` — “Is not strictly larger than” binary relation (Definition)
@@ -739,15 +731,11 @@ PForaR_prf (...)`
 
 ### 3.58 `ThmUniversalClassInductive` — Class of all sets is successor-inductive (Peano-inductive) (Theorem)
 
-- **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Verified`)
+- **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
 - **Formula (Unicode):** `Ind(V)`
 - **Scheme of Types (Unicode):** `Ind(V)`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 3985 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmPropVerum, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx, AxmRightInSound`
-- **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefUniversalClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefSingletonSet, DefClassEq, DefBinaryUnion, DefIsSet, DefUnaryUnion`
-- **Kernel Prf Nodes:** `3985`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_58_v_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
+- **Kernel Note:** Kernel proof term (thm_3_58_v_inductive : Thm): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).
 - **Standalone Certificate:** [proofs/ThmUniversalClassInductive.html](proofs/ThmUniversalClassInductive.html)
 
 ### 3.59 `ThmOmegaInductive` — Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
@@ -760,7 +748,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `(none -- pure sequent / definitional)`
 - **Definitions Used:** `DefInductiveClass, DefIff, DefOmega`
 - **Kernel Prf Nodes:** `160`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_59_omega_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order. (Because 3.56 DefOmega quantifies directly over all inductive classes Q without a separate (x set) guard on the RHS, Ind(ω) follows from DefOmega and DefInductiveClass alone; sethood of ∅ and ω in downstream theorems is grounded in 3.57 AxmOmegaIsSet and 3.12 AxmHeredity.)
+- **Kernel Note:** Kernel proof term (thm_3_59_omega_inductive : Thm): establishes that ω itself satisfies Ind(ω), making ω the ⊆-least (minimal) element among all successor-inductive classes in the ⊆ order. (Because 3.56 DefOmega quantifies directly over all inductive classes Q without a separate (x set) guard on the RHS, Ind(ω) follows from DefOmega and DefInductiveClass alone; sethood of ∅ and ω in downstream theorems is grounded in 3.57 AxmOmegaIsSet and 3.12 AxmHeredity.)
 - **Standalone Certificate:** [proofs/ThmOmegaInductive.html](proofs/ThmOmegaInductive.html)
 
 ### 3.60 `ThmOrdinalsInductive` — Class of all ordinal numbers is successor-inductive (Peano-inductive) (Theorem)
@@ -773,7 +761,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmExponent`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefTransitiveClass, DefOrdinalClass, DefClassOfOrdinals, DefBinaryUnion, DefIsSet, DefPowerClass, DefSingletonSet, DefClassEq, DefInductiveClass`
 - **Kernel Prf Nodes:** `2705`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_60_on_inductive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved without a separate union-set axiom by showing that for any transitive set a in On, (a u {a}) c= Pow(a), so AxmExponent (PowSetAx) and AxmHeredity (HeredityAx) yield Set(a u {a}), which combines with thm_ord_succ_is_ordinal to give (a u {a}) in On.
+- **Kernel Note:** Kernel proof term (thm_3_60_on_inductive : Thm): proved without a separate union-set axiom by showing that for any transitive set a in On, (a u {a}) c= Pow(a), so AxmExponent (PowSetAx) and AxmHeredity (HeredityAx) yield Set(a u {a}), which combines with thm_ord_succ_is_ordinal to give (a u {a}) in On.
 - **Standalone Certificate:** [proofs/ThmOrdinalsInductive.html](proofs/ThmOrdinalsInductive.html)
 
 ### 3.61 `ThmOmegaTransitive` — ω is transitive (Theorem)
@@ -786,7 +774,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq`
 - **Kernel Prf Nodes:** `2696`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_61_omega_transitive : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.
+- **Kernel Note:** Kernel proof term (thm_3_61_omega_transitive : Thm): proved by Peano induction on the inductive class { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } via DefOmega.
 - **Standalone Certificate:** [proofs/ThmOmegaTransitive.html](proofs/ThmOmegaTransitive.html)
 
 ### 3.62 `ThmOmegaOrdinal` — ω is ordinal (Theorem)
@@ -799,7 +787,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq`
 - **Kernel Prf Nodes:** `5419`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_62_omega_ordinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.
+- **Kernel Note:** Kernel proof term (thm_3_62_omega_ordinal : Thm): proved by Peano induction on { a : Class | (a in ω) /\ ((a c= ω) /\ (a ordinal)) } showing both Tr(ω) and that every element of ω is a transitive ordinal.
 - **Standalone Certificate:** [proofs/ThmOmegaOrdinal.html](proofs/ThmOmegaOrdinal.html)
 
 ### 3.63 `ThmOmegaInOrdinals` — ω is in the class of all ordinal numbers (sets) (Theorem)
@@ -812,7 +800,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound`
 - **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals`
 - **Kernel Prf Nodes:** `5479`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_63_omega_in_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.
+- **Kernel Note:** Kernel proof term (thm_3_63_omega_in_on : Thm): combines AxmOmegaIsSet (POmegaSetAx_prf) with Ord(ω) (thm_3_62_omega_ordinal) via DefClassOfOrdinals.
 - **Standalone Certificate:** [proofs/ThmOmegaInOrdinals.html](proofs/ThmOmegaInOrdinals.html)
 
 ### 3.64 `DefIsCardinal` — “Is cardinal” predicate (Definition)
@@ -826,15 +814,11 @@ PMP_prf (..., ...)`
 
 ### 3.65 `ThmOmegaCardinal` — ω is cardinal (Theorem)
 
-- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Verified`)
+- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
 - **Formula (Unicode):** `Card(ω)`
 - **Scheme of Types (Unicode):** `Card(ω)`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 5488 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound`
-- **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefCardinality, DefIsCardinal`
-- **Kernel Prf Nodes:** `5488`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_65_omega_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
+- **Kernel Note:** Kernel proof term (thm_3_65_omega_card_sub_on : Thm): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.
 - **Standalone Certificate:** [proofs/ThmOmegaCardinal.html](proofs/ThmOmegaCardinal.html)
 
 ### 3.66 `ThmOrdinalsCardinal` — On is a cardinal class (Theorem)
@@ -847,7 +831,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmSizeLimitation, CardLessOrderAx, AxmPropNegElim, AxmPropExFalso`
 - **Definitions Used:** `DefCardinality, DefBinaryIntersection, DefIff, DefIsSet, DefSubclass, DefUniversalClass, DefCardLess, DefUnaryIntersection, DefClassEq, DefIsCardinal`
 - **Kernel Prf Nodes:** `1141`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_66_on_card_sub_on : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): proves (On cardinal) by taking K := V as the witness in 3.64 DefIsCardinal (∃K(|K| = On)). For every a ∈ S_V = {a | (a ∈ On) ∧ (V ≼ a)}, a ∈ On implies a set (3.02 DefIsSet) and hence a ∈ V (3.05 DefUniversalClass), which by 3.43 AxmSizeLimitation (PSizeLimAx_prf), CardLessOrderAx (PCardLessOrderAx_prf), and 3.42 DefCardLess yields a ≺ V ⟷ ¬(V ≼ a), contradicting V ≼ a. Hence S_V is empty, every x ∈ On belongs to ⋂S_V (3.20 DefUnaryIntersection), |V| = On ∩ ⋂S_V = On (3.41 DefCardinality, 3.10 DefClassEq), and therefore Card(On) holds.
+- **Kernel Note:** Kernel proof term (thm_3_66_on_card_sub_on : Thm with exact statement equality): proves (On cardinal) by taking K := V as the witness in 3.64 DefIsCardinal (∃K(|K| = On)). For every a ∈ S_V = {a | (a ∈ On) ∧ (V ≼ a)}, a ∈ On implies a set (3.02 DefIsSet) and hence a ∈ V (3.05 DefUniversalClass), which by 3.43 AxmSizeLimitation (PSizeLimAx_prf), CardLessOrderAx (PCardLessOrderAx_prf), and 3.42 DefCardLess yields a ≺ V ⟷ ¬(V ≼ a), contradicting V ≼ a. Hence S_V is empty, every x ∈ On belongs to ⋂S_V (3.20 DefUnaryIntersection), |V| = On ∩ ⋂S_V = On (3.41 DefCardinality, 3.10 DefClassEq), and therefore Card(On) holds.
 - **Standalone Certificate:** [proofs/ThmOrdinalsCardinal.html](proofs/ThmOrdinalsCardinal.html)
 
 ### 3.67 `ThmUniversalClassNotCardinal` — Class of all sets is not a cardinal class (Theorem)
@@ -860,7 +844,7 @@ PNegR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, PairSetAx, AxmPropVerum, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmRightInSound, AxmPropNegElim`
 - **Definitions Used:** `DefIsCardinal, DefIff, DefUniversalClass, DefUnorderedPair, DefPairfulClass, DefEmptySet, DefSubclass, DefSingletonSet, DefClassEq, DefCardinality, DefBinaryIntersection, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass`
 - **Kernel Prf Nodes:** `6099`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_67_v_not_cardinal : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from first principles by constructing {{emptyset}} in V, showing {{emptyset}} is not transitive and hence not in On, whereas |K| c= On for every class K.
+- **Kernel Note:** Kernel proof term (thm_3_67_v_not_cardinal : Thm): proved from first principles by constructing {{emptyset}} in V, showing {{emptyset}} is not transitive and hence not in On, whereas |K| c= On for every class K.
 - **Standalone Certificate:** [proofs/ThmUniversalClassNotCardinal.html](proofs/ThmUniversalClassNotCardinal.html)
 
 ### 3.68 `DefGrothendieckUniverse` — “Is a universe” predicate (Definition)
@@ -881,7 +865,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmOmegaIsSet, AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmHeredity, AxmExponent, CardLessOrderAx, AxmSizeLimitation, PairSetAx`
 - **Definitions Used:** `DefIff, DefUniversalClass, DefIsSet, DefSubclass, DefTransitiveClass, DefHereditaryClass, DefPowerfulClass, DefCardLess, DefTightClass, DefUnorderedPair, DefPairfulClass, DefGrothendieckUniverse`
 - **Kernel Prf Nodes:** `910`
-- **Kernel Note:** Formal kernel proof (v_universe_thm_proof : unit -> Thm, verified by Thm.checkPipeline and Thm.slow_check) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf: X ∈ V ⟷ |X| ≺ |V|), and 3.41/3.42 #DefCardinality/#DefCardLess via the kernel cardinal-order reflection rule CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: |A| ≺ |B| ⟷ A ≺ B, reflecting Global Choice V ≈ On); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood rule PairSetAx (PPairSetAx_prf). (An unused legacy backup constructor PVUniverseAx_prf also exists in 06_definitions.ML but is not invoked in v_universe_thm_proof.)
+- **Kernel Note:** Formal kernel proof (v_universe_thm_proof : unit -> Thm) deriving (𝘍, [] ⊢ (V universe)) from 3.68 #DefGrothendieckUniverse (PKernelDef_prf) and the 6 component lemmas: (1) (ω ∈ V) via 3.57 #AxmOmegaIsSet (POmegaSetAx_prf), 3.05 #DefUniversalClass (PKernelDef_prf), 3.08 #AxmLeftInSound (PLeftInSoundAx_prf), and 3.01 #RulClassComprehension (PComprAx_prf); (2) (V transitive) via 3.15 #DefTransitiveClass (PKernelDef_prf), 3.06 #DefSubclass (PKernelDef_prf), and 3.02 #DefIsSet (PKernelDef_prf); (3) (V Hereditary) via 3.44 #DefHereditaryClass (PKernelDef_prf) and 3.12 #AxmHeredity (PHeredityAx_prf); (4) (V Powerful) via 3.45 #DefPowerfulClass (PKernelDef_prf) and 3.13 #AxmExponent (PPowSetAx_prf); (5) (V Tight) via 3.47 #DefTightClass (PKernelDef_prf), 3.43 #AxmSizeLimitation (PSizeLimAx_prf: X ∈ V ⟷ |X| ≺ |V|), and 3.41/3.42 #DefCardinality/#DefCardLess via the kernel cardinal-order reflection rule CardLessOrderAx (PCardLessOrderAx_prf in 06_definitions.ML: |A| ≺ |B| ⟷ A ≺ B, reflecting Global Choice V ≈ On); (6) (V Pairful) via 3.46 #DefPairfulClass (PKernelDef_prf) and 3.49 #DefUnorderedPair sethood rule PairSetAx (PPairSetAx_prf). (An unused legacy backup constructor PVUniverseAx_prf also exists in 06_definitions.ML but is not invoked in v_universe_thm_proof.)
 - **Standalone Certificate:** [proofs/ThmUniversalClassIsUniverse.html](proofs/ThmUniversalClassIsUniverse.html)
 
 ### 3.70 `AxmTarskiUniverses` — “Tarski's axiom” (Axiom)
@@ -906,7 +890,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRegularity`
 - **Definitions Used:** `DefIsSet, DefIff, DefUniversalClass, DefPowerClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection`
 - **Kernel Prf Nodes:** `1224`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_71_transitive_class_induction : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -> (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
+- **Kernel Note:** Kernel proof term (thm_3_71_transitive_class_induction : Thm): proved from AxmRegularity (PEpsIndAx_prf) applied to W = { x : Class | (x in K) -> (x in A) }. Transfinite membership (∈) induction on a well-founded transitive class, contrasted with successor-induction (Peano 0-successor-induction Ind(X) in 3.55).
 - **Standalone Certificate:** [proofs/ThmTransitiveClassInduction.html](proofs/ThmTransitiveClassInduction.html)
 
 ### 3.72 `AxmSoundnessOfFullTheory` — Soundness of the theory 𝘍 (Axiom)
@@ -918,27 +902,27 @@ PForaR_prf (...)`
 - **Kernel Note:** Soundness of the non-r.e. theory of the intended model 𝘍: if (𝘍, [] ⊢ φ), then ⟦φ⟧ holds in the fixed background model M. Two-Level Stratification (How the Kernel Excludes TpHolds(IpFau, ...) from Object-Level Fm₀): In MKTD1-system (FACTBOOK section 6 (metalevels)), object-level set/class formulas live at metalevel 0 (sort Fm₀, enforced in the kernel by KernelDefinitions.is_object_level_fm0 in newchecker/06_definitions.ML and checked on every PComprAx_prf class comprehension node in newchecker/07_theorems.ML), which explicitly rejects TpHolds, EEval, TpFFI, TpIFV, and TpCtxIFV inside object-level class comprehension {x | φ} and object-level predicate/class definitions. Because 3.72-3.74 and 4.03 live at metalevel +1 and TpHolds(IpFau, ...) is barred from Fm₀ comprehension by is_object_level_fm0, the object-level diagonal lemma cannot be applied to (𝘍, [] ⊢ ·) to form a Tarski liar sentence or a Löb fixed point ψ ⟷ ((𝘍, [] ⊢ ψ) —→ φ).
 - **Standalone Certificate:** [proofs/AxmSoundnessOfFullTheory.html](proofs/AxmSoundnessOfFullTheory.html)
 
-### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Axiom)
+### 3.73 `AxmSemanticCompletenessOfFullTheory` — Semantic Completeness of the theory 𝘍 (Statement)
 
-- **Identifier:** `AxmSemanticCompletenessOfFullTheory` (entry `3.73`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmSemanticCompletenessOfFullTheory` (entry `3.73`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(eval(𝛗)—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(eval([𝛗@Fm.Expression])—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
 - **Kernel Note:** Semantic completeness (omniscience, 3.73) of the non-r.e. theory of the intended model 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if φ evaluates to true in the background model M (⟦φ⟧), then φ is formally derivable in 𝘍 (𝘍, [] ⊢ φ). It holds by the definition of 𝘍 as the theory of the intended model (FACTBOOK section 2) and is a metatheorem, not a kernel rule. Stated separately from syntactic negation-completeness (3.74 AxmNegationCompletenessOfFullTheory, which is stated purely in terms of ⊢ and ¬ without mentioning ⟦φ⟧): neither implies the other in isolation, while under Soundness of 𝘍 (3.72) and classical model bivalence (⟦φ⟧ ∨ ⟦¬φ⟧) they are conditionally equivalent.
 - **Standalone Certificate:** [proofs/AxmSemanticCompletenessOfFullTheory.html](proofs/AxmSemanticCompletenessOfFullTheory.html)
 
-### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Axiom)
+### 3.74 `AxmNegationCompletenessOfFullTheory` — Negation-Completeness of the theory 𝘍 (Statement)
 
-- **Identifier:** `AxmNegationCompletenessOfFullTheory` (entry `3.74`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmNegationCompletenessOfFullTheory` (entry `3.74`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)((¬(𝘍,[]⊢‹¬𝛗›))—→(𝘍,[]⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])((¬(𝘍,[]⊢‹¬[𝛗@Fm]›))—→(𝘍,[]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
 - **Kernel Note:** Syntactic negation-completeness (3.74) of the non-r.e. theory of the intended model 𝘍 at metalevel 1: for every object-level sentence φ : Fm, if ¬φ is not derivable in 𝘍 (¬(𝘍, [] ⊢ ¬φ)), then φ is derivable in 𝘍 (𝘍, [] ⊢ φ). Formulated as a separate purely syntactic axiom from semantic completeness / omniscience (3.73 AxmSemanticCompletenessOfFullTheory): in classical logic, 3.74 is equivalent to (𝘍, [] ⊢ φ) ∨ (𝘍, [] ⊢ ¬φ), and becomes equivalent to semantic completeness (3.73) when combined with Soundness of 𝘍 (3.72) and classical bivalence of M (⟦φ⟧ ∨ ⟦¬φ⟧).
 - **Standalone Certificate:** [proofs/AxmNegationCompletenessOfFullTheory.html](proofs/AxmNegationCompletenessOfFullTheory.html)
 
-### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Axiom)
+### 3.75 `AxmBaseSubtheoryOfFull` — If a formula is derivable in 𝘛, then it is derivable in 𝘍 (Statement)
 
-- **Identifier:** `AxmBaseSubtheoryOfFull` (entry `3.75`, kind: `Axiom`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
+- **Identifier:** `AxmBaseSubtheoryOfFull` (entry `3.75`, kind: `Statement`, status: `Metatheorem (Holds by the Definition of F, Not a Kernel Rule)`)
 - **Formula (Unicode):** `(∀(Γ:Ctx)∀(𝛗:Fm)((𝘛,Γ⊢𝛗)—→(𝘍,Γ⊢𝛗)))`
 - **Scheme of Types (Unicode):** `(∀([Γ@Variable]:[Ctx@Type])∀([𝛗@Variable]:[Fm@Type])((𝘛,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])—→(𝘍,[Γ@Ctx.Expression]⊢[𝛗@Fm.Expression])))`
 - **Proof Constructor:** `(metatheorem: holds by the definition of F; not a kernel rule)`
@@ -964,7 +948,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
 - **Definitions Used:** `DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
 - **Kernel Prf Nodes:** `41145`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_77_dunaev_pr1_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers A from Dunaev's tagged ordered pair (A, B) via tag 1 = {∅} ({ a | {{{{a}}}, {∅}} ∈ (A, B) } = A, matching pr1 in 3.51 DefClassLists and 3.91 DefDomainRestriction) without requiring A or B to be sets, and together with 3.78 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
+- **Kernel Note:** Kernel proof term (thm_3_77_dunaev_pr1_sub : Thm with exact statement equality): recovers A from Dunaev's tagged ordered pair (A, B) via tag 1 = {∅} ({ a | {{{{a}}}, {∅}} ∈ (A, B) } = A, matching pr1 in 3.51 DefClassLists and 3.91 DefDomainRestriction) without requiring A or B to be sets, and together with 3.78 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
 - **Standalone Certificate:** [proofs/ThmDunaevFirstProjection.html](proofs/ThmDunaevFirstProjection.html)
 
 ### 3.78 `ThmDunaevSecondProjection` — Second projection of Dunaev's tagged ordered pair (Theorem)
@@ -977,7 +961,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, PairSetAx, AxmPropVerum, AxmRightInSound, AxmPropNegElim, AxmRegularity`
 - **Definitions Used:** `DefIff, DefDunaevOrderedPair, DefBinaryUnion, DefEmptySet, DefSubclass, DefClassEq, DefUnorderedPair, DefSingletonSet, DefUniversalClass, DefPairfulClass, DefIsSet, DefPowerClass`
 - **Kernel Prf Nodes:** `38665`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_3_78_dunaev_pr2_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check with exact statement equality): recovers B from Dunaev's tagged ordered pair (A, B) via tag 2 = {∅, {∅}} ({ b | {{{{b}}}, {∅, {∅}}} ∈ (A, B) } = B, matching pr2 in 3.51 DefClassLists) without requiring A or B to be sets, and together with 3.77 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
+- **Kernel Note:** Kernel proof term (thm_3_78_dunaev_pr2_sub : Thm with exact statement equality): recovers B from Dunaev's tagged ordered pair (A, B) via tag 2 = {∅, {∅}} ({ b | {{{{b}}}, {∅, {∅}}} ∈ (A, B) } = B, matching pr2 in 3.51 DefClassLists) without requiring A or B to be sets, and together with 3.77 yields Dunaev pair injectivity (thm_dunaev_opair_injective : (A, B) = (C, D) —→ (A = C ∧ B = D)).
 - **Standalone Certificate:** [proofs/ThmDunaevSecondProjection.html](proofs/ThmDunaevSecondProjection.html)
 
 ### 3.79 `DefLimitOrdinal` — Nonzero limit ordinal predicate (Definition)
@@ -986,7 +970,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(∀(A:Class)(LimitOrd(A)←→(Ord(A)∧((¬(A=∅))∧∀(B:Class)((B∈A)—→((B∪{B})∈A))))))`
 - **Scheme of Types (Unicode):** `(∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])←→(Ord([A@Class.Expression])∧((¬([A@Class.Expression]=∅))∧∀([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])—→(([B@Class.Expression]∪{[B@Class.Expression]})∈[A@Class.Expression]))))))`
 - **Proof Constructor:** `PKernelDef_prf (def_limit_ord_cert, [A, B])`
-- **Kernel Note:** Conservative definition (DefLimitOrd, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): a class A is a nonzero limit ordinal (LimitOrd(A)) iff A is an ordinal, A is non-empty, and for every B in A, the von Neumann successor B u {B} also belongs to A.
+- **Kernel Note:** Conservative definition (DefLimitOrd, PKernelDef_prf): a class A is a nonzero limit ordinal (LimitOrd(A)) iff A is an ordinal, A is non-empty, and for every B in A, the von Neumann successor B u {B} also belongs to A.
 - **Standalone Certificate:** [proofs/DefLimitOrdinal.html](proofs/DefLimitOrdinal.html)
 
 ### 3.80 `DefIndexedUnionClosed` — Indexed-union closure predicate (Definition)
@@ -995,7 +979,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(∀(U:Class)(IndexedUnionClosed(U)←→(∀(I:Class)∀(f:Class)(((I∈U)∧((f class-function)∧((I⊆Dom(f))∧(f[I]⊆U))))—→(⋃f[I]∈U)))))`
 - **Scheme of Types (Unicode):** `(∀([U@Variable]:[Class@Type])(IndexedUnionClosed([U@Class.Expression])←→(∀([I@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([I@Class.Expression]∈[U@Class.Expression])∧(([f@Class.Expression] class-function)∧(([I@Class.Expression]⊆Dom([f@Class.Expression]))∧([f@Class.Expression][[I@Class.Expression]]⊆[U@Class.Expression]))))—→(⋃[f@Class.Expression][[I@Class.Expression]]∈[U@Class.Expression])))))`
 - **Proof Constructor:** `PKernelDef_prf (def_indexed_union_closed_cert, [U, I, f])`
-- **Kernel Note:** Conservative definition (DefIndexedUnionClosed, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): a class U is closed under indexed unions (IndexedUnionClosed(U)) iff for every index set I in U and every class-function f with I c Dom(f) and relational image f[I] c U, the union U(f[I]) belongs to U.
+- **Kernel Note:** Conservative definition (DefIndexedUnionClosed, PKernelDef_prf): a class U is closed under indexed unions (IndexedUnionClosed(U)) iff for every index set I in U and every class-function f with I c Dom(f) and relational image f[I] c U, the union U(f[I]) belongs to U.
 - **Standalone Certificate:** [proofs/DefIndexedUnionClosed.html](proofs/DefIndexedUnionClosed.html)
 
 ### 3.81 `DefVonNeumannStageLaws` — Von Neumann cumulative hierarchy recursion laws (Definition)
@@ -1004,7 +988,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(∀(V:Class)(VStageLaws(V)←→((V(∅)=∅)∧((∀(A:Class)(Ord(A)—→(V((A∪{A}))=𝒫(V(A)))))∧((∀(A:Class)(LimitOrd(A)—→(V(A)=⋃{Y|∃(B:Class)((B∈A)∧(Y=V(B)))})))∧∀(A:Class)(Ord(A)—→((A=∅)∨((∃(B:Class)((B∈A)∧(A=(B∪{B}))))∨LimitOrd(A)))))))))`
 - **Scheme of Types (Unicode):** `(∀([V@Variable]:[Class@Type])(VStageLaws([V@Class.Expression])←→(([V@Class.Expression](∅)=∅)∧((∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→([V@Class.Expression](([A@Class.Expression]∪{[A@Class.Expression]}))=𝒫([V@Class.Expression]([A@Class.Expression])))))∧((∀([A@Variable]:[Class@Type])(LimitOrd([A@Class.Expression])—→([V@Class.Expression]([A@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([Y@Class.Expression]=[V@Class.Expression]([B@Class.Expression])))})))∧∀([A@Variable]:[Class@Type])(Ord([A@Class.Expression])—→(([A@Class.Expression]=∅)∨((∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈[A@Class.Expression])∧([A@Class.Expression]=([B@Class.Expression]∪{[B@Class.Expression]}))))∨LimitOrd([A@Class.Expression])))))))))`
 - **Proof Constructor:** `PKernelDef_prf (def_v_stage_laws_cert, [V, A, B, Y])`
-- **Kernel Note:** Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit). (Notational convention: here and in 3.82, 3.83, 3.88, 3.89, 3.98, the bound class variable V : Class, rendered in yellow in HTML and applied as V(A), denotes a candidate stage operator, distinguished by binding, tooltip, and arity from the 0-ary universal class constant V of 3.05 and 3.86.)
+- **Kernel Note:** Conservative definition (DefVonNeumannStageLaws, PKernelDef_prf): VStageLaws(V) characterizes the transfinite recursion equations for the von Neumann cumulative hierarchy stages valOf(V, A) across base stage 0, successor ordinals A u {A}, and limit ordinals, together with the three-way ordinal classification (zero, successor, or limit). (Notational convention: here and in 3.82, 3.83, 3.88, 3.89, 3.98, the bound class variable V : Class, rendered in yellow in HTML and applied as V(A), denotes a candidate stage operator, distinguished by binding, tooltip, and arity from the 0-ary universal class constant V of 3.05 and 3.86.)
 - **Standalone Certificate:** [proofs/DefVonNeumannStageLaws.html](proofs/DefVonNeumannStageLaws.html)
 
 ### 3.82 `DefVonNeumannStageGraph` — Canonical von Neumann cumulative hierarchy graph (Definition)
@@ -1013,7 +997,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(VStageGraph=⋂{V|(V class-function)∧VStageLaws(V)})`
 - **Scheme of Types (Unicode):** `(VStageGraph=⋂{[V@Class.Expression]|([V@Class.Expression] class-function)∧VStageLaws([V@Class.Expression])})`
 - **Proof Constructor:** `PKernelDef_prf (def_v_stage_graph_cert, [V])`
-- **Kernel Note:** Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VStageGraph is the intersection of all class-functions V satisfying VStageLaws(V). Restricting V to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues that for each A in Dom(V) with set value V(A), there is a unique pair (A, y) in V, which by 3.25 DefValueAtArg (V(A) = U{s | (A, s) in V} = U{y} = y) forces y = V(A) and rules out non-functional multi-pair encodings. In 3.88-3.90, VStageLaws(V) is carried as an explicit antecedent hypothesis (and constructed bottom-up via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
+- **Kernel Note:** Conservative definition (DefVonNeumannStageGraph, PKernelDef_prf): VStageGraph is the intersection of all class-functions V satisfying VStageLaws(V). Restricting V to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues that for each A in Dom(V) with set value V(A), there is a unique pair (A, y) in V, which by 3.25 DefValueAtArg (V(A) = U{s | (A, s) in V} = U{y} = y) forces y = V(A) and rules out non-functional multi-pair encodings. In 3.88-3.90, VStageLaws(V) is carried as an explicit antecedent hypothesis (and constructed bottom-up via 3.91-3.98 TransfiniteRec(VonNeumannStepG)).
 - **Standalone Certificate:** [proofs/DefVonNeumannStageGraph.html](proofs/DefVonNeumannStageGraph.html)
 
 ### 3.83 `DefSetRankLaws` — Mirimanoff-von Neumann set rank recursion laws (Definition)
@@ -1022,7 +1006,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(∀(R:Class)∀(V:Class)(SetRankLaws(R,V)←→((∀(x:Class)((x set)—→Ord(R(x))))∧((∀(x:Class)((x set)—→(R(x)=⋃{z|∃(y:Class)((y∈x)∧(z=(R(y)∪{R(y)})))})))∧∀(x:Class)((x set)—→(x∈V((R(x)∪{R(x)}))))))))`
 - **Scheme of Types (Unicode):** `(∀([R@Variable]:[Class@Type])∀([V@Variable]:[Class@Type])(SetRankLaws([R@Class.Expression],[V@Class.Expression])←→((∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→Ord([R@Class.Expression]([x@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→([R@Class.Expression]([x@Class.Expression])=⋃{[z@Class.Expression]|∃([y@Variable]:[Class@Type])(([y@Class.Expression]∈[x@Class.Expression])∧([z@Class.Expression]=([R@Class.Expression]([y@Class.Expression])∪{[R@Class.Expression]([y@Class.Expression])})))})))∧∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→([x@Class.Expression]∈[V@Class.Expression](([R@Class.Expression]([x@Class.Expression])∪{[R@Class.Expression]([x@Class.Expression])}))))))))`
 - **Proof Constructor:** `PKernelDef_prf (def_rank_laws_cert, [R, V, x, y, z])`
-- **Kernel Note:** Conservative definition (DefSetRankLaws, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankLaws(R, V) characterizes the set rank operator valOf(R, x) and its cumulative-stage bounding law x in valOf(V, valOf(R, x) u {valOf(R, x)}) for every set x.
+- **Kernel Note:** Conservative definition (DefSetRankLaws, PKernelDef_prf): SetRankLaws(R, V) characterizes the set rank operator valOf(R, x) and its cumulative-stage bounding law x in valOf(V, valOf(R, x) u {valOf(R, x)}) for every set x.
 - **Standalone Certificate:** [proofs/DefSetRankLaws.html](proofs/DefSetRankLaws.html)
 
 ### 3.84 `DefSetRankGraph` — Canonical Mirimanoff-von Neumann set rank graph (Definition)
@@ -1031,7 +1015,7 @@ PForaR_prf (...)`
 - **Formula (Unicode):** `(SetRankGraph=⋂{R|(R class-function)∧SetRankLaws(R,VStageGraph)})`
 - **Scheme of Types (Unicode):** `(SetRankGraph=⋂{[R@Class.Expression]|([R@Class.Expression] class-function)∧SetRankLaws([R@Class.Expression],VStageGraph)})`
 - **Proof Constructor:** `PKernelDef_prf (def_rank_graph_cert, [R])`
-- **Kernel Note:** Conservative definition (DefSetRankGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): SetRankGraph is the intersection of all class-functions R satisfying SetRankLaws(R, VStageGraph). Restricting R to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues and 3.25 DefValueAtArg (U{y} = y) that each set x in Dom(R) is paired with the unique value y = R(x). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
+- **Kernel Note:** Conservative definition (DefSetRankGraph, PKernelDef_prf): SetRankGraph is the intersection of all class-functions R satisfying SetRankLaws(R, VStageGraph). Restricting R to class-functions (3.32 DefClassFunction) ensures via 3.29 DefHasConcentratedValues and 3.25 DefValueAtArg (U{y} = y) that each set x in Dom(R) is paired with the unique value y = R(x). In 3.89-3.90, SetRankLaws(R, V) is carried as an explicit antecedent hypothesis on the rank operator R.
 - **Standalone Certificate:** [proofs/DefSetRankGraph.html](proofs/DefSetRankGraph.html)
 
 ### 3.85 `ThmUniverseInterOnIsOrdinal` — Step 0 of U = V_(U n On): the ordinal trace U n On of a universe is an ordinal (Theorem)
@@ -1044,7 +1028,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection`
 - **Kernel Prf Nodes:** `1693`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step0_universe_inter_on_is_ordinal : Thm, accompanied in universe_definitions.ML by thm_step0_universe_emptyset_in_u : ∀(U:Class)((U universe) —→ ((∅ ∈ U) ∧ ((∅ ∈ (U ∩ On)) ∧ ¬((U ∩ On) = ∅))))): if U is a universe, then U is transitive and On is an ordinal, so their binary intersection kappa = U n On is a transitive class of ordinals and hence an ordinal.
+- **Kernel Note:** Kernel proof term (thm_step0_universe_inter_on_is_ordinal : Thm, accompanied in universe_definitions.ML by thm_step0_universe_emptyset_in_u : ∀(U:Class)((U universe) —→ ((∅ ∈ U) ∧ ((∅ ∈ (U ∩ On)) ∧ ¬((U ∩ On) = ∅))))): if U is a universe, then U is transitive and On is an ordinal, so their binary intersection kappa = U n On is a transitive class of ordinals and hence an ordinal.
 - **Standalone Certificate:** [proofs/ThmUniverseInterOnIsOrdinal.html](proofs/ThmUniverseInterOnIsOrdinal.html)
 
 ### 3.86 `ThmUniverseUnionClosedFromIndexedUnion` — Step 1a of U = V_(U n On): a transitive class closed under indexed unions is closed under unary union (Theorem)
@@ -1057,7 +1041,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmPropVerum, RulClassComprehension, AxmLeftInSound, AxmRightInSound`
 - **Definitions Used:** `DefIsSet, DefIff, DefUniversalClass, DefSubclass, DefRelationalImage, DefClassEq, DefTransitiveClass, DefIndexedUnionClosed, DefUnaryUnion`
 - **Kernel Prf Nodes:** `3757`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step1a_union_closed_from_indexed_union : Thm, verified by Thm.checkPipeline and Thm.slow_check): instantiating IndexedUnionClosed(U) with I = x in U and an identity class-function witness f on V yields f[x] = x c U and hence U(x) in U.
+- **Kernel Note:** Kernel proof term (thm_step1a_union_closed_from_indexed_union : Thm): instantiating IndexedUnionClosed(U) with I = x in U and an identity class-function witness f on V yields f[x] = x c U and hence U(x) in U.
 - **Standalone Certificate:** [proofs/ThmUniverseUnionClosedFromIndexedUnion.html](proofs/ThmUniverseUnionClosedFromIndexedUnion.html)
 
 ### 3.87 `ThmUniverseInterOnIsLimitOrdinal` — Step 1c of U = V_(U n On): the ordinal trace U n On of an union-closed universe is a nonzero limit ordinal (Theorem)
@@ -1070,7 +1054,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal`
 - **Kernel Prf Nodes:** `12286`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step1c_kappa_is_limit_ord : Thm, verified by Thm.checkPipeline and Thm.slow_check): for any universe U closed under unary union, kappa = U n On is an ordinal, contains 0 (via thm_step0_universe_emptyset_in_u from ω ∈ U and Hereditary(U)), and is closed under ordinal successor B |-> B u {B} = U({B, {B}}) by pairing and union closure; therefore LimitOrd(U n On) holds.
+- **Kernel Note:** Kernel proof term (thm_step1c_kappa_is_limit_ord : Thm): for any universe U closed under unary union, kappa = U n On is an ordinal, contains 0 (via thm_step0_universe_emptyset_in_u from ω ∈ U and Hereditary(U)), and is closed under ordinal successor B |-> B u {B} = U({B, {B}}) by pairing and union closure; therefore LimitOrd(U n On) holds.
 - **Standalone Certificate:** [proofs/ThmUniverseInterOnIsLimitOrdinal.html](proofs/ThmUniverseInterOnIsLimitOrdinal.html)
 
 ### 3.88 `ThmVonNeumannStageSubUniverse` — Step 2 of U = V_(U n On): limit-stage inclusion V_(U n On) c= U from stage closure below U n On (Theorem)
@@ -1083,7 +1067,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmRightInSound`
 - **Definitions Used:** `DefVonNeumannStageLaws, DefIff, DefUnaryUnion, DefClassEq, DefSubclass, DefTransitiveClass`
 - **Kernel Prf Nodes:** `655`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step2_v_kappa_sub_u : Thm, accompanied in universe_definitions.ML by the base and successor step lemmas thm_step2_v_0_in_u, thm_step2_v_succ_in_u, and thm_step2_v_limit_fam_sub_u): under VStageLaws(V), Trans(U), LimitOrd(U n On), and the stage-closure premise ∀B ∈ (U n On), V(B) ∈ U, unfolding the limit clause V(U n On) = U_{B ∈ U n On} V(B) and applying transitivity of U yields V(U n On) c= U.
+- **Kernel Note:** Kernel proof term (thm_step2_v_kappa_sub_u : Thm, accompanied in universe_definitions.ML by the base and successor step lemmas thm_step2_v_0_in_u, thm_step2_v_succ_in_u, and thm_step2_v_limit_fam_sub_u): under VStageLaws(V), Trans(U), LimitOrd(U n On), and the stage-closure premise ∀B ∈ (U n On), V(B) ∈ U, unfolding the limit clause V(U n On) = U_{B ∈ U n On} V(B) and applying transitivity of U yields V(U n On) c= U.
 - **Standalone Certificate:** [proofs/ThmVonNeumannStageSubUniverse.html](proofs/ThmVonNeumannStageSubUniverse.html)
 
 ### 3.89 `ThmUniverseSubVonNeumannStage` — Step 3 of U = V_(U n On): rank-bounded inclusion U c= V_(U n On) from stage and rank closure (Theorem)
@@ -1096,7 +1080,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
 - **Definitions Used:** `DefIsSet, DefIff, DefSetRankLaws, DefClassOfOrdinals, DefBinaryIntersection, DefLimitOrdinal, DefSubclass, DefClassEq, DefUnaryUnion, DefVonNeumannStageLaws`
 - **Kernel Prf Nodes:** `1626`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_step3_u_sub_v_kappa : Thm, accompanied in universe_definitions.ML by the inductive rank-successor step lemma thm_step3_rank_succ_in_u): under VStageLaws(V), SetRankLaws(R, V), LimitOrd(U n On), stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, every a ∈ U has R(a) ∈ (U n On), R(a) u {R(a)} ∈ (U n On) by limit closure, and a ∈ V(R(a) u {R(a)}) c= V(U n On), concluding U c= V(U n On).
+- **Kernel Note:** Kernel proof term (thm_step3_u_sub_v_kappa : Thm, accompanied in universe_definitions.ML by the inductive rank-successor step lemma thm_step3_rank_succ_in_u): under VStageLaws(V), SetRankLaws(R, V), LimitOrd(U n On), stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, every a ∈ U has R(a) ∈ (U n On), R(a) u {R(a)} ∈ (U n On) by limit closure, and a ∈ V(R(a) u {R(a)}) c= V(U n On), concluding U c= V(U n On).
 - **Standalone Certificate:** [proofs/ThmUniverseSubVonNeumannStage.html](proofs/ThmUniverseSubVonNeumannStage.html)
 
 ### 3.90 `ThmUniverseEqVonNeumannStageInterOn` — Conclusion of U = V_(U n On): combining Step 1c, Step 2, and Step 3 under stage, rank, and union closure (Theorem)
@@ -1109,7 +1093,7 @@ PMP_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmRightInSound, PairSetAx`
 - **Definitions Used:** `DefGrothendieckUniverse, DefIff, DefIsSet, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefBinaryIntersection, DefEmptySet, DefHereditaryClass, DefPairfulClass, DefUnorderedPair, DefSingletonSet, DefClassEq, DefBinaryUnion, DefUnaryUnion, DefLimitOrdinal, DefSetRankLaws, DefVonNeumannStageLaws`
 - **Kernel Prf Nodes:** `39444`
-- **Kernel Note:** Machine-checked MKTD1-system synthesis theorem (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm, verified by Thm.checkPipeline and Thm.slow_check across the 45 constituent lemmas in universe_definitions.ML Section 11): given VStageLaws(VStageGraph), SetRankLaws(SetRankGraph, VStageGraph), Universe(U) with unary union closure, stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, combines Step 1c (LimitOrd(U n On)), Step 2 (V_(U n On) c= U), and Step 3 (U c= V_(U n On)) via class equality antisymmetry (EqDef) to conclude LimitOrd(U n On) /\ (U = VStageGraph(U n On)).
+- **Kernel Note:** Synthesis theorem (thm_universe_eq_canonical_v_inter_on and thm_universe_eq_v_inter_on : Thm across the 45 constituent lemmas in universe_definitions.ML Section 11): given VStageLaws(VStageGraph), SetRankLaws(SetRankGraph, VStageGraph), Universe(U) with unary union closure, stage closure ∀B ∈ (U n On), V(B) ∈ U, and rank closure ∀x ∈ U, R(x) ∈ U, combines Step 1c (LimitOrd(U n On)), Step 2 (V_(U n On) c= U), and Step 3 (U c= V_(U n On)) via class equality antisymmetry (EqDef) to conclude LimitOrd(U n On) /\ (U = VStageGraph(U n On)).
 - **Standalone Certificate:** [proofs/ThmUniverseEqVonNeumannStageInterOn.html](proofs/ThmUniverseEqVonNeumannStageInterOn.html)
 
 ### 3.91 `DefDomainRestriction` — Restriction of a class relation or function to a domain class (Definition)
@@ -1118,7 +1102,7 @@ PMP_prf (..., ...)`
 - **Formula (Unicode):** `(∀(F:Class)∀(A:Class)(Restrict(F,A)={z|(z∈F)∧(pr1(z)∈A)}))`
 - **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([A@Variable]:[Class@Type])(Restrict([F@Class.Expression],[A@Class.Expression])={[z@Class.Expression]|([z@Class.Expression]∈[F@Class.Expression])∧(pr1([z@Class.Expression])∈[A@Class.Expression])}))`
 - **Proof Constructor:** `PKernelDef_prf (def_domain_restriction_cert, [F, A, z])`
-- **Kernel Note:** Conservative definition (DefDomainRestriction, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): Restrict(F, A) = { z : Class | (z in F) /\ (pr1(z) in A) } restricts a class relation or function F to arguments whose first Dunaev projection belongs to A.
+- **Kernel Note:** Conservative definition (DefDomainRestriction, PKernelDef_prf): Restrict(F, A) = { z : Class | (z in F) /\ (pr1(z) in A) } restricts a class relation or function F to arguments whose first Dunaev projection belongs to A.
 - **Standalone Certificate:** [proofs/DefDomainRestriction.html](proofs/DefDomainRestriction.html)
 
 ### 3.92 `DefTransfiniteApproximation` — Transfinite recursion approximation predicate on ordinal domains (Definition)
@@ -1127,7 +1111,7 @@ PMP_prf (..., ...)`
 - **Formula (Unicode):** `(∀(G:Class)∀(g:Class)(TransfiniteApprox(G,g)←→((g function)∧((Dom(g)∈On)∧∀(B:Class)∀(X:Class)(((B∈Dom(g))∧(X=Restrict(g,B)))—→(g(B)=G(X)))))))`
 - **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])∀([g@Variable]:[Class@Type])(TransfiniteApprox([G@Class.Expression],[g@Class.Expression])←→(([g@Class.Expression] function)∧((Dom([g@Class.Expression])∈On)∧∀([B@Variable]:[Class@Type])∀([X@Variable]:[Class@Type])((([B@Class.Expression]∈Dom([g@Class.Expression]))∧([X@Class.Expression]=Restrict([g@Class.Expression],[B@Class.Expression])))—→([g@Class.Expression]([B@Class.Expression])=[G@Class.Expression]([X@Class.Expression])))))))`
 - **Proof Constructor:** `PKernelDef_prf (def_transfinite_approx_cert, [G, g, B, X])`
-- **Kernel Note:** Conservative definition (DefTransfiniteApproximation, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): TransfiniteApprox(G, g) holds iff g is a set-sized function whose domain Dom(g) belongs to On and for all B in Dom(g) and X = Restrict(g, B), valOf(g, B) = valOf(G, X).
+- **Kernel Note:** Conservative definition (DefTransfiniteApproximation, PKernelDef_prf): TransfiniteApprox(G, g) holds iff g is a set-sized function whose domain Dom(g) belongs to On and for all B in Dom(g) and X = Restrict(g, B), valOf(g, B) = valOf(G, X).
 - **Standalone Certificate:** [proofs/DefTransfiniteApproximation.html](proofs/DefTransfiniteApproximation.html)
 
 ### 3.93 `DefTransfiniteRecursionGraph` — Canonical transfinite recursion class-function graph on On (Definition)
@@ -1136,7 +1120,7 @@ PMP_prf (..., ...)`
 - **Formula (Unicode):** `(∀(G:Class)(TransfiniteRec(G)=⋃{g|TransfiniteApprox(G,g)}))`
 - **Scheme of Types (Unicode):** `(∀([G@Variable]:[Class@Type])(TransfiniteRec([G@Class.Expression])=⋃{[g@Class.Expression]|TransfiniteApprox([G@Class.Expression],[g@Class.Expression])}))`
 - **Proof Constructor:** `PKernelDef_prf (def_transfinite_rec_graph_cert, [G, g])`
-- **Kernel Note:** Conservative definition (DefTransfiniteRecursionGraph, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): TransfiniteRec(G) = U { g : Class | TransfiniteApprox(G, g) } is the union of the class A(G) of all set-sized transfinite approximations for generator G.
+- **Kernel Note:** Conservative definition (DefTransfiniteRecursionGraph, PKernelDef_prf): TransfiniteRec(G) = U { g : Class | TransfiniteApprox(G, g) } is the union of the class A(G) of all set-sized transfinite approximations for generator G.
 - **Standalone Certificate:** [proofs/DefTransfiniteRecursionGraph.html](proofs/DefTransfiniteRecursionGraph.html)
 
 ### 3.94 `DefVonNeumannStepGenerator` — Von Neumann cumulative hierarchy transfinite step generator (Definition)
@@ -1145,7 +1129,7 @@ PMP_prf (..., ...)`
 - **Formula (Unicode):** `(∀(f:Class)(VonNeumannStepG(f)=⋃{Y|∃(B:Class)((B∈Dom(f))∧(Y=𝒫(f(B))))}))`
 - **Scheme of Types (Unicode):** `(∀([f@Variable]:[Class@Type])(VonNeumannStepG([f@Class.Expression])=⋃{[Y@Class.Expression]|∃([B@Variable]:[Class@Type])(([B@Class.Expression]∈Dom([f@Class.Expression]))∧([Y@Class.Expression]=𝒫([f@Class.Expression]([B@Class.Expression]))))}))`
 - **Proof Constructor:** `PKernelDef_prf (def_von_neumann_step_g_cert, [f, Y, B])`
-- **Kernel Note:** Conservative definition (DefVonNeumannStepGenerator, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): VonNeumannStepG(f) = U { Y : Class | exists (B:Class), (B in Dom(f)) /\ (Y = Pow(valOf(f, B))) } maps any set-sized ordinal approximation f to the union of the powersets of its values.
+- **Kernel Note:** Conservative definition (DefVonNeumannStepGenerator, PKernelDef_prf): VonNeumannStepG(f) = U { Y : Class | exists (B:Class), (B in Dom(f)) /\ (Y = Pow(valOf(f, B))) } maps any set-sized ordinal approximation f to the union of the powersets of its values.
 - **Standalone Certificate:** [proofs/DefVonNeumannStepGenerator.html](proofs/DefVonNeumannStepGenerator.html)
 
 ### 3.95 `ThmTransfiniteApproxCoherence` — Step 1 of Transfinite Recursion on On: coherence of approximations on common ordinal domains (Theorem)
@@ -1158,7 +1142,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity`
 - **Definitions Used:** `DefTransfiniteApproximation, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefBinaryIntersection, DefIsSet, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq`
 - **Kernel Prf Nodes:** `18311`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_approx_coherence and thm_transfinite_approx_coherence_step : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by transfinite epsilon-induction (EpsIndAx) on K_1 = { B : Class | (B in (Dom(g) n Dom(h))) -> (valOf(g, B) = valOf(h, B)) } using transitivity of the ordinal intersection Dom(g) n Dom(h) (thm_bininter_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (g(pr1(z)) = h(pr1(z))) -> ((z in g)  (z in h))), concluding Restrict(g, A) = Restrict(h, A) and valOf(g, A) = valOf(G, Restrict(g, A)) = valOf(h, A) for all A in Dom(g) n Dom(h).
+- **Kernel Note:** Kernel proof term (thm_transfinite_approx_coherence and thm_transfinite_approx_coherence_step : Thm): proved by transfinite epsilon-induction (EpsIndAx) on K_1 = { B : Class | (B in (Dom(g) n Dom(h))) -> (valOf(g, B) = valOf(h, B)) } using transitivity of the ordinal intersection Dom(g) n Dom(h) (thm_bininter_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (g(pr1(z)) = h(pr1(z))) -> ((z in g)  (z in h))), concluding Restrict(g, A) = Restrict(h, A) and valOf(g, A) = valOf(G, Restrict(g, A)) = valOf(h, A) for all A in Dom(g) n Dom(h).
 - **Standalone Certificate:** [proofs/ThmTransfiniteApproxCoherence.html](proofs/ThmTransfiniteApproxCoherence.html)
 
 ### 3.96 `ThmTransfiniteRecursionEquation` — Steps 2 and 3 of Transfinite Recursion on On: approximation sethood, union inclusion, and global recursion equation F(A) = G(Restrict(F, A)) from witnessing approximations (Theorem)
@@ -1171,7 +1155,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `RulClassComprehension, AxmLeftInSound`
 - **Definitions Used:** `DefTransfiniteApproximation, DefIff, DefSetFunction, DefIsSet, DefUnaryUnion, DefTransfiniteRecursionGraph, DefSubclass, DefClassEq`
 - **Kernel Prf Nodes:** `789`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_recursion_equation, thm_approx_is_set, thm_in_approx_class_iff, thm_approx_sub_transfinite_rec, and thm_restrict_agree_from_sub : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that every G-approximation g is a set and a subclass of TransfiniteRec(G) = U { g | TransfiniteApprox(G, g) }, and (2) conditionally that whenever each ordinal B in On has a witnessing approximation h in A(G) with B in Dom(h), F(B) = h(B), and Restrict(F, B) = Restrict(h, B), the global recursion equation valOf(F, A) = valOf(G, Restrict(F, A)) holds for all A in On.
+- **Kernel Note:** Kernel proof term (thm_transfinite_recursion_equation, thm_approx_is_set, thm_in_approx_class_iff, thm_approx_sub_transfinite_rec, and thm_restrict_agree_from_sub : Thm): proves (1) unconditionally that every G-approximation g is a set and a subclass of TransfiniteRec(G) = U { g | TransfiniteApprox(G, g) }, and (2) conditionally that whenever each ordinal B in On has a witnessing approximation h in A(G) with B in Dom(h), F(B) = h(B), and Restrict(F, B) = Restrict(h, B), the global recursion equation valOf(F, A) = valOf(G, Restrict(F, A)) holds for all A in On.
 - **Standalone Certificate:** [proofs/ThmTransfiniteRecursionEquation.html](proofs/ThmTransfiniteRecursionEquation.html)
 
 ### 3.97 `ThmTransfiniteRecursionUniqueness` — Step 4 of Transfinite Recursion on On: uniqueness of the transfinite recursion class-function (Theorem)
@@ -1184,7 +1168,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropVerum, AxmRegularity`
 - **Definitions Used:** `DefIsSet, DefIff, DefClassOfOrdinals, DefOrdinalClass, DefTransitiveClass, DefSubclass, DefUniversalClass, DefPowerClass, DefDomainRestriction, DefClassEq`
 - **Kernel Prf Nodes:** `12773`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_transfinite_recursion_uniqueness and thm_transfinite_recursion_uniqueness_step : Thm, verified by Thm.checkPipeline and Thm.slow_check): proved by genuine transfinite epsilon-induction (EpsIndAx) on K_4 = { B : Class | (B in On) -> (valOf(F, B) = valOf(H, B)) } using transitivity of On (thm_on_is_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (F(pr1(z)) = H(pr1(z))) -> ((z in F)  (z in H))), concluding Restrict(F, A) = Restrict(H, A) and valOf(F, A) = valOf(H, A) for all A in On.
+- **Kernel Note:** Kernel proof term (thm_transfinite_recursion_uniqueness and thm_transfinite_recursion_uniqueness_step : Thm): proved by genuine transfinite epsilon-induction (EpsIndAx) on K_4 = { B : Class | (B in On) -> (valOf(F, B) = valOf(H, B)) } using transitivity of On (thm_on_is_transitive) and extensional restriction equality (thm_restrict_eq_from_below under graph value-extensionality forall z, (F(pr1(z)) = H(pr1(z))) -> ((z in F)  (z in H))), concluding Restrict(F, A) = Restrict(H, A) and valOf(F, A) = valOf(H, A) for all A in On.
 - **Standalone Certificate:** [proofs/ThmTransfiniteRecursionUniqueness.html](proofs/ThmTransfiniteRecursionUniqueness.html)
 
 ### 3.98 `ThmVonNeumannHierarchyByTransfiniteRecursion` — Application of Transfinite Recursion on On: base-stage law and unfolding of VonNeumannStepG(f) = U_(B in A) P(V_B) (Theorem)
@@ -1197,7 +1181,7 @@ PForaR_prf (...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso`
 - **Definitions Used:** `DefVonNeumannStepGenerator, DefIff, DefUnaryUnion, DefSubclass, DefEmptySet, DefClassEq, DefPowerClass`
 - **Kernel Prf Nodes:** `10507`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_von_neumann_hierarchy_by_recursion, thm_von_neumann_step_g_empty, thm_von_neumann_step_g_on_stage, and thm_power_cong : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves (1) unconditionally that VonNeumannStepG(f) = ∅ whenever Dom(f) is empty, and (2) conditionally, by unfolding DefVonNeumannStepGenerator and applying powerclass congruence (thm_power_cong: P = Q -> Pow(P) = Pow(Q)), that whenever Dom(f) = A, f agrees with V on A, and V(A) = VonNeumannStepG(f), both VonNeumannStepG(f) and V(A) equal U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
+- **Kernel Note:** Kernel proof term (thm_von_neumann_hierarchy_by_recursion, thm_von_neumann_step_g_empty, thm_von_neumann_step_g_on_stage, and thm_power_cong : Thm): proves (1) unconditionally that VonNeumannStepG(f) = ∅ whenever Dom(f) is empty, and (2) conditionally, by unfolding DefVonNeumannStepGenerator and applying powerclass congruence (thm_power_cong: P = Q -> Pow(P) = Pow(Q)), that whenever Dom(f) = A, f agrees with V on A, and V(A) = VonNeumannStepG(f), both VonNeumannStepG(f) and V(A) equal U { Y : Class | exists (B:Class), (B in A) /\ (Y = Pow(valOf(V, B))) }.
 - **Standalone Certificate:** [proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html](proofs/ThmVonNeumannHierarchyByTransfiniteRecursion.html)
 
 ### 3.99 `DefPowerClass` — Powerclass operator (Definition)
@@ -1298,11 +1282,7 @@ Formalized Löb's theorem and Gödel's second incompleteness theorem.
 - **Identifier:** `ThmLoeb` (entry `5.01`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(∀(𝛗:Fm)(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢𝛗)—→⟦𝛗⟧›)—→(𝘛,[]⊢𝛗)›))`
 - **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])(𝘌,[]⊢‹(𝘛,[]⊢‹(𝘛,[]⊢[𝛗@Fm.Expression])—→⟦[𝛗@Fm.Expression]⟧›)—→(𝘛,[]⊢[𝛗@Fm.Expression])›))`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmPropFrege, AxmPropWeakening, AxmPropVerum`
-- **Definitions Used:** `ThmLoeb`
-- **Kernel Prf Nodes:** `11`
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmLoeb (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_loeb_trace (incompleteness.ML), which is not connected to the kernel. Here 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} is an unspecified elementary metatheory capable of proving HBL conditions D1-D3 for the r.e. base theory 𝘛 (specifically D3, formalized / internal Σ₁-completeness ψ —→ Pr_𝘛(⌜ψ⌝), which requires Σ₁-induction IΣ₁ and cannot be proved inside Robinson's arithmetic Q even though Q is externally Σ₁-complete for true Σ₁ sentences; see Hájek & Pudlák 1993; Bezboruah & Shepherdson 1976; Boolos 1993).
 - **Standalone Certificate:** [proofs/ThmLoeb.html](proofs/ThmLoeb.html)
 
@@ -1311,11 +1291,7 @@ PAndR_prf (..., ...)`
 - **Identifier:** `ThmSecondIncompleteness` (entry `5.02`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
 - **Formula (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
 - **Scheme of Types (Unicode):** `(𝘌,[]⊢‹(¬(𝘛,[]⊢‹⊥›))—→¬(𝘛,[]⊢‹¬(𝘛,[]⊢‹⊥›)›)›)`
-- **Proof Constructor:** `(* Total kernel Prf nodes: 11 *)
-PAndR_prf (..., ...)`
-- **Axioms Used:** `AxmPropNegElim, AxmPropNegIntro, AxmPropWeakening, AxmPropFrege`
-- **Definitions Used:** `ThmSecondIncompleteness, ThmLoeb`
-- **Kernel Prf Nodes:** `11`
+- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
 - **Kernel Note:** Postulated, not derived: the MKTD1 kernel registers this statement as the unchecked GeneralDef ThmSecondIncompleteness (general_definition_allowlist, newchecker/06_definitions.ML). An informal step-by-step trace exists only in the standalone model IncompletenessMechanization.derive_second_incompleteness_trace (incompleteness.ML), which is not connected to the kernel. Formalized in the unspecified elementary metatheory 𝘌 ∈ {IΣ₁, PA, 𝘛, NBG, MK} for the r.e. object theory 𝘛 (whereas 𝘍 is non-r.e.).
 - **Standalone Certificate:** [proofs/ThmSecondIncompleteness.html](proofs/ThmSecondIncompleteness.html)
 

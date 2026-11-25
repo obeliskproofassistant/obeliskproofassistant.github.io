@@ -548,43 +548,8 @@
               </td>
             </tr>
             <tr>
-              <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#AxmPropNegElim" class="sym-link" title="AxmPropNegElim (1.09)"><code>AxmPropNegElim</code> (1.09)</a>, <a href="../manual.html#AxmPropNegIntro" class="sym-link" title="AxmPropNegIntro (1.10)"><code>AxmPropNegIntro</code> (1.10)</a>, <a href="../manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="../manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Definitions Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#ThmSecondIncompleteness" class="sym-link" title="ThmSecondIncompleteness (5.02)"><code>ThmSecondIncompleteness</code> (5.02)</a>, <a href="../manual.html#ThmLoeb" class="sym-link" title="ThmLoeb (5.01)"><code>ThmLoeb</code> (5.01)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Kernel Prf Nodes</th>
-              <td class="field-value proof-cell"><code>11</code></td>
-            </tr>
-            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* MKTD1 kernel witness (IncompletenessMKTD1Kernel.sequent_5_02_second_incompleteness): *)
-(* Total kernel Prf nodes: 11 *)
-PAndR_prf (
-  PKernelDef_prf (&quot;ThmSecondIncompleteness&quot;),
-  PAndR_prf (
-    PKernelDef_prf (&quot;ThmLoeb&quot;),
-    PAndR_prf (
-      PA9_prf,
-      PAndR_prf (
-        PA10_prf,
-        PAndR_prf (..., ...)
-      )
-    )
-  )
-)
-
-(* Metatheoretic HBL trace (incompleteness.ML): *)
-IncompletenessMechanization.derive_second_incompleteness_trace (I_Sigma_1):
-  step1_loeb_at_bot: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (&lt;(Tau, [] |- Bot)&gt; implies Bot))&gt; implies &lt;(Tau, [] |- Bot)&gt;))
-  step2_obj_neg_to_impl_bot: (Tau, [] |- ((not &lt;(Tau, [] |- Bot)&gt;) implies (&lt;(Tau, [] |- Bot)&gt; implies Bot)))
-  step3_meta_pr_con_to_pr_impl_bot: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (not &lt;(Tau, [] |- Bot)&gt;))&gt; implies &lt;(Tau, [] |- (&lt;(Tau, [] |- Bot)&gt; implies Bot))&gt;))
-  step4_meta_pr_con_to_pr_bot: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (not &lt;(Tau, [] |- Bot)&gt;))&gt; implies &lt;(Tau, [] |- Bot)&gt;))
-  step5_second_incompleteness: (I_Sigma_1, [] |- ((not &lt;(Tau, [] |- Bot)&gt;) implies (not &lt;(Tau, [] |- (not &lt;(Tau, [] |- Bot)&gt;))&gt;)))
-</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(the linked kernel proof has a different statement; see GitLab #8101)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>

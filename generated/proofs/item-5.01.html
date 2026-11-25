@@ -548,49 +548,8 @@
               </td>
             </tr>
             <tr>
-              <th class="field-name">Axioms Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#AxmPropFrege" class="sym-link" title="AxmPropFrege (1.02)"><code>AxmPropFrege</code> (1.02)</a>, <a href="../manual.html#AxmPropWeakening" class="sym-link" title="AxmPropWeakening (1.01)"><code>AxmPropWeakening</code> (1.01)</a>, <a href="../manual.html#AxmPropVerum" class="sym-link" title="AxmPropVerum (1.13)"><code>AxmPropVerum</code> (1.13)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Definitions Used</th>
-              <td class="field-value proof-cell"><a href="../manual.html#ThmLoeb" class="sym-link" title="ThmLoeb (5.01)"><code>ThmLoeb</code> (5.01)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Kernel Prf Nodes</th>
-              <td class="field-value proof-cell"><code>11</code></td>
-            </tr>
-            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* MKTD1 kernel witness (IncompletenessMKTD1Kernel.sequent_5_01_loeb): *)
-(* Total kernel Prf nodes: 11 *)
-PAndR_prf (
-  PKernelDef_prf (&quot;ThmLoeb&quot;),
-  PAndR_prf (
-    PA2_prf,
-    PAndR_prf (
-      PA1_prf,
-      PAndR_prf (
-        PA13_prf,
-        PAndR_prf (..., ...)
-      )
-    )
-  )
-)
-
-(* Metatheoretic HBL trace (incompleteness.ML): *)
-IncompletenessMechanization.derive_loeb_trace (I_Sigma_1, phi):
-  diagonal_sentence psi := Diag_Tau(&lt;phi&gt;)
-  step1_obj_diag_forward: (Tau, [] |- (Diag_Tau(&lt;phi&gt;) implies (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies phi)))
-  step2_meta_pr_diag_forward: (I_Sigma_1, [] |- &lt;(Tau, [] |- (Diag_Tau(&lt;phi&gt;) implies (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies phi)))&gt;)
-  step3_meta_dist_outer: (I_Sigma_1, [] |- (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies &lt;(Tau, [] |- (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies phi))&gt;))
-  step4_meta_dist_inner: (I_Sigma_1, [] |- (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies (&lt;(Tau, [] |- &lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt;)&gt; implies &lt;(Tau, [] |- phi)&gt;)))
-  step5_meta_d3_instance: (I_Sigma_1, [] |- (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies &lt;(Tau, [] |- &lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt;)&gt;))
-  step6_meta_pr_psi_to_pr_phi: (I_Sigma_1, [] |- (&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies &lt;(Tau, [] |- phi)&gt;))
-  step7_obj_internal_step: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (&lt;(Tau, [] |- phi)&gt; implies phi))&gt; implies &lt;(Tau, [] |- ((&lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt; implies phi) implies Diag_Tau(&lt;phi&gt;)))&gt;))
-  step8_meta_loeb_hyp_to_psi: (I_Sigma_1, [] |- ((&lt;(Tau, [] |- phi)&gt; implies phi) implies Diag_Tau(&lt;phi&gt;)))
-  step9_meta_loeb_hyp_to_pr_psi: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (&lt;(Tau, [] |- phi)&gt; implies phi))&gt; implies &lt;(Tau, [] |- Diag_Tau(&lt;phi&gt;))&gt;))
-  step10_loeb_theorem: (I_Sigma_1, [] |- (&lt;(Tau, [] |- (&lt;(Tau, [] |- phi)&gt; implies phi))&gt; implies &lt;(Tau, [] |- phi)&gt;))
-</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(the linked kernel proof has a different statement; see GitLab #8101)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
