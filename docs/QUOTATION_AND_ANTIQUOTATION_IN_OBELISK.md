@@ -16,14 +16,13 @@ In metaprogramming and formal reflection, four conceptually distinct operations 
    Takes an *already formed finite syntactic expression* $e : A.\mathrm{Expression}$ (or formula $\varphi : \mathrm{Fm}$) and maps it to its canonical hereditary set code $\operatorname{Enc}(e) \in \operatorname{Code}_A \subseteq V$ (`generated/symbols/quotation.html`, `generated/symbols/enc.html`). Quotation acts on **syntax**, not on arbitrary unnameable semantic classes.
 2. **Syntactic Decoding (`Dec_A : Class → A.Expression` on valid codes $\operatorname{Code}_A \subseteq V$):**
    Recovers the syntactic AST from a valid class code $c \in \operatorname{Code}_A$, satisfying the typed syntactic round-trip identity $\operatorname{Dec}_A(\operatorname{Enc}(e)) = e$ for every $e : A.\mathrm{Expression}$ (`generated/symbols/dec.html`).
-3. **Antiquotation (`⟦u⟧`, constructors `EAnti` / `EEval`):** The dual of quotation (NOTATION.txt).
+3. **Antiquotation (`⟦u⟧`, constructor `EAnti`) and evaluation (`eval(u)`, constructor `EEval`):** The dual of quotation (NOTATION.txt).
    Quotation `‹φ›` (LaTeX `\langle\varphi\rangle`) goes one metalevel up; antiquotation `⟦u⟧`
    (U+27E6/U+27E7, `generated/symbols/antiquotation.html`) takes `u : A.Expression` one metalevel down.
    Inside a quotation template ‹… ⟦u⟧ …› it splices the syntax tree $u$ (e.g.
-   $\operatorname{Dec}_A(c)$); outside a quotation it evaluates $u$ (LaTeX $[\![ e ]\!]$). The
-   semantics writes the same operation as the denotation ⟦e⟧_ρ under an assignment ρ. White square
-   brackets have no other meaning, and angle brackets denote only quotation; the ordered pair is
-   `(a, b)` (FACTBOOK §7).
+   $\operatorname{Dec}_A(c)$) (LaTeX $[\![ u ]\!]$). Evaluation is a different constructor with its own
+   notation, `eval(u)` (`EEval`). White square brackets have no other meaning, and angle brackets
+   denote only quotation; the ordered pair is `(a, b)` (FACTBOOK §7).
 4. **Type-Indexed Expression Translation ($\mu_A$) vs. Assignment-Indexed Valuation ($\mu^{\mathrm{val}}_\rho$):**
    Reconciles the type-indexed translation $\mu_A : A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$ used in `130_classes_as_types.tex` and `DefMetaGeneralisation` (`4.02`) with the assignment-indexed valuation shorthand $\mu^{\mathrm{val}}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ used on the symbol pages (`generated/symbols/mu-interpretation.html`, `generated/symbols/eval.html`) via the explicit composite
    $$\operatorname{Eval}_{(A, \rho)}(c) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(\operatorname{Dec}_A(c))\bigr).$$
@@ -45,7 +44,7 @@ To maintain a rigorous separation between finite syntax in ML memory and arbitra
 
 Under this architecture:
 - **In the implementation (`program/types/typetheory.ML`):** Kernel functions manipulate finite syntactic expressions $\varphi : \mathrm{Truth}.\mathrm{Expression}$ (`Fm`) and $t : \mathrm{Class}.\mathrm{Expression}$.
-- **In the semantics (`010_logic.tex`, `130_classes_as_types.tex`):** Semantic valuation $\operatorname{Val}_\rho(\varphi) = \llbracket \varphi \rrbracket_\rho \in \mathrm{Bool}$ and $\operatorname{Val}_\rho(t) = \llbracket t \rrbracket_\rho : \mathrm{Class}$ interprets those finite expressions under an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.
+- **In the semantics (`010_logic.tex`, `130_classes_as_types.tex`):** Semantic valuation $\operatorname{Val}_\rho(\varphi) = [\![ \varphi ]\!]_\rho \in \mathrm{Bool}$ and $\operatorname{Val}_\rho(t) = [\![ t ]\!]_\rho : \mathrm{Class}$ interprets those finite expressions under an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$.
 
 ---
 
@@ -67,18 +66,18 @@ For each syntactic category $A.\mathrm{Expression}$ (such as $\mathrm{Class}.\ma
     $$\forall c : \mathrm{Class},\qquad c \in \operatorname{Code}_A \implies \operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c.$$
     *(For $c \notin \operatorname{Code}_A$, $\operatorname{Dec}_A(c)$ returns a fixed default syntactic variable/constant $e^{\mathrm{def}}_A$, so $\operatorname{Enc}_A(\operatorname{Dec}_A(c)) = c$ holds if and only if $c \in \operatorname{Code}_A$.)*
 
-### 3.2 Antiquotation (`⟦u⟧`): splicing and evaluation
+### 3.2 Antiquotation (`⟦u⟧`) and evaluation (`eval(u)`)
 Quotation and antiquotation are written with different brackets (NOTATION.txt): quotation with angle
 brackets (`‹φ›`, LaTeX `\langle\varphi\rangle`), antiquotation with white square brackets (`⟦u⟧`,
 ASCII `[|u|]`).
-1. **Splicing inside a quotation:** in $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ the subterm
+1. **Splicing inside a quotation:** in $\text{‹}\dots[\![ u]\!]\dots\text{›}$ the subterm
    $u : A.\mathrm{Expression}$ (for example $u = \operatorname{Dec}_A(c)$ for a code variable $c$) is
    placed into the quoted AST:
-   $$\text{‹}\forall x : \mathrm{Class}.\;\llbracket \operatorname{Dec}_{\mathrm{Fm}}(c) \rrbracket\text{›} \;:\; \mathrm{Fm}.$$
-2. **Evaluation outside a quotation:** given an assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$,
-   $$\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \longrightarrow \mathrm{Class}, \qquad \operatorname{Val}_\rho : \mathrm{Truth}.\mathrm{Expression} \longrightarrow \mathrm{Bool},$$
-   written $\llbracket e \rrbracket_\rho := \operatorname{Val}_\rho(e)$; with the ambient assignment,
-   $\llbracket e \rrbracket$ abbreviates $\operatorname{Val}_\rho(e)$ (`program/libs/unicodedefs.ML`).
+   $$\text{‹}\forall x : \mathrm{Class}.\;[\![ \operatorname{Dec}_{\mathrm{Fm}}(c) ]\!]\text{›} \;:\; \mathrm{Fm}.$$
+2. **Evaluation:** `eval(e)` (constructor `EEval`) evaluates `e` under the current assignment
+   $\rho : \mathrm{Variable} \to \mathrm{Class}$; semantically it is $\operatorname{Val}_\rho(e)$, with
+   $\operatorname{Val}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ and
+   $\operatorname{Val}_\rho : \mathrm{Truth}.\mathrm{Expression} \to \mathrm{Bool}$.
 
 ### 3.3 Reconciling the Two Conventions for $\mu$ and $\operatorname{eval}$
 Across the project documentation and symbol pages, the letter $\mu$ appears with two different subscript types. Both are mathematically sound once their signatures are distinguished:
@@ -152,7 +151,7 @@ val proof_O11 =
 val () = check ordinalContext proof_O11 stmt_O11;
 ```
 - **Syntactic level (`Level 1`):** `stmt_O11` is a finite AST formula; its class code is $\operatorname{Enc}_{\mathrm{Fm}}(\mathtt{stmt\_O11}) \in \operatorname{Code}_{\mathrm{Fm}} \subseteq V$.
-- **Semantic level (`Level 0`):** Under any variable assignment $\rho$, its semantic valuation $\llbracket \mathtt{stmt\_O11} \rrbracket_\rho = \operatorname{Val}_\rho(\mathtt{stmt\_O11}) \in \mathrm{Bool}$ asserts that $\mathrm{On}$ is transitive and all its members are ordinals.
+- **Semantic level (`Level 0`):** Under any variable assignment $\rho$, its semantic valuation $[\![ \mathtt{stmt\_O11} ]\!]_\rho = \operatorname{Val}_\rho(\mathtt{stmt\_O11}) \in \mathrm{Bool}$ asserts that $\mathrm{On}$ is transitive and all its members are ordinals.
 - **Verification:** `check ordinalContext proof_O11 stmt_O11` verifies the derivation statically without emitting bytecode.
 
 ---
@@ -165,6 +164,6 @@ val () = check ordinalContext proof_O11 stmt_O11;
 | **Syntactic Decoding** | $\operatorname{Dec}_A(c)$ | $\mathrm{Class} \to A.\mathrm{Expression}$ | Left-inverse on $\forall e,\;\operatorname{Dec}_A(\operatorname{Enc}_A(e)) = e$; right-inverse on valid codes $c \in \operatorname{Code}_A$ |
 | **Syntactic Antiquotation (Splicing)** | $\langle u \rangle$ (inside $\text{‹}\dots\text{›}$) | $A.\mathrm{Expression} \to A.\mathrm{Expression}$ | Splices expression $u$ (e.g. $\operatorname{Dec}_A(c)$) into a surrounding quoted AST template |
 | **Type-Indexed Expression Translation** | $\mu_A(e)$ | $A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$ | Translates typed $A$-expressions into class expressions (`130_classes_as_types.tex`, `4.02`) |
-| **Semantic Valuation** | $\llbracket e \rrbracket_\rho = \operatorname{Val}_\rho(e)$ | $\mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ (or $\mathrm{Fm} \to \mathrm{Bool}$) | Evaluates syntax in the model under assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$; not injective ($0+0 \neq 0$) |
+| **Semantic Valuation** | $[\![ e ]\!]_\rho = \operatorname{Val}_\rho(e)$ | $\mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ (or $\mathrm{Fm} \to \mathrm{Bool}$) | Evaluates syntax in the model under assignment $\rho : \mathrm{Variable} \to \mathrm{Class}$; not injective ($0+0 \neq 0$) |
 | **Assignment-Indexed Valuation** | $\mu^{\mathrm{val}}_\rho(e)$ (written $\mu_A(e)$ with $A=\rho$) | $A.\mathrm{Expression} \to \mathrm{Class}$ | Shorthand for $\operatorname{Val}_\rho(\mu_A(e))$ (`generated/symbols/mu-interpretation.html`) |
 | **Composite Code Evaluation** | $\operatorname{Eval}_{(A,\rho)}(c)$ (written $\operatorname{eval}_A(c)$) | $\mathrm{Class} \to \mathrm{Class}$ | $\operatorname{Val}_\rho(\mu_A(\operatorname{Dec}_A(c)))$; satisfies $\operatorname{Eval}_{(A,\rho)}(\operatorname{Enc}_A(e)) = \mu^{\mathrm{val}}_\rho(e)$ (`generated/symbols/eval.html`) |
