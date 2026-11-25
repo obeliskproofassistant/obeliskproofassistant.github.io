@@ -491,7 +491,7 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Kernel Note:** If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. theory of the intended model equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
 - **Standalone Certificate:** [proofs/DefMetaConecessitation.html](proofs/DefMetaConecessitation.html)
 
-### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
+### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, self and diagonal laws of SubstVar(t, x, v) (Theorem)
 
 - **Identifier:** `ThmReducedVarSubstLaws` (entry `4.08`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))`
@@ -501,7 +501,7 @@ PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso, AxmPropExcludedMiddle`
 - **Definitions Used:** `DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq`
 - **Kernel Prf Nodes:** `2069`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
+- **Kernel Note:** Kernel theorem thm_reduced_var_subst_laws, for arbitrary classes: the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), SubstVar(x, x, v) = v and SubstVar(a, x, x) = a.
 - **Standalone Certificate:** [proofs/ThmReducedVarSubstLaws.html](proofs/ThmReducedVarSubstLaws.html)
 
 ## 5. Incompleteness-Related Statements (5.01-5.02) (5.01-5.02)

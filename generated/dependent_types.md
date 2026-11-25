@@ -279,10 +279,14 @@ PMP_prf (..., ...)`
 
 ### 3.70 `AxmTarskiUniverses` — “Tarski's axiom” (Axiom)
 
-- **Identifier:** `AxmTarskiUniverses` (entry `3.70`, kind: `Axiom`, status: `Part of MKTD, Not Yet a Kernel Axiom`)
+- **Identifier:** `AxmTarskiUniverses` (entry `3.70`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
 - **Formula (Unicode):** `(∀(x:Class)((x set)—→∃(u:Class)(((u universe)∧(x∈u))∧(u set))))`
 - **Scheme of Types (Unicode):** `(∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→∃([u@Variable]:[Class@Type])((([u@Class.Expression] universe)∧([x@Class.Expression]∈[u@Class.Expression]))∧([u@Class.Expression] set))))`
-- **Proof Constructor:** `(not a kernel axiom)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1 *)
+PTarskiAx_prf`
+- **Axioms Used:** `AxmTarskiUniverses`
+- **Definitions Used:** `(none)`
+- **Kernel Prf Nodes:** `1`
 - **Standalone Certificate:** [proofs/AxmTarskiUniverses.html](proofs/AxmTarskiUniverses.html)
 
 ### 3.71 `ThmTransitiveClassInduction` — General form of the transfinite ∈-induction principle on a transitive class (Theorem)

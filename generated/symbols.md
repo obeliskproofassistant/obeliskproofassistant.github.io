@@ -1046,12 +1046,12 @@ Lightweight Markdown mirror of `generated/symbols.html` (231 registered tokens a
 - **Reference Page**: `symbols/von-neumann-step-g-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefVonNeumannStepGenerator (3.94)): Von Neumann cumulative hierarchy transfinite step generator: VonNeumannStepG(f) = ⋃{Y : Class | ∃(B:Class)((B ∈ Dom(f)) ∧ (Y = 𝒫(f(B))))}.
 
-### 150. `SubstVar` (Reduced 3-argument object-level variable substitution operator SubstVar(t, x, v) (Constructor: HC (CpSymbol ("SubstVar", ...))))
+### 150. `SubstVar` (Reduced variable-substitution operator on classes SubstVar(t, x, v) = IF v = x THEN t ELSE v FI (Constructor: HC (CpSymbol ("SubstVar", ...))))
 - **ANSII**: `SubstVar`
 - **LaTeX**: `\mathrm{SubstVar}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/subst-var-op.html`
-- **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Reduced 3-argument object-level variable substitution operator SubstVar(t, x, v) (Constructor: HC (CpSymbol (&quot;SubstVar&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
+- **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Reduced variable-substitution operator on classes SubstVar(t, x, v) = IF v = x THEN t ELSE v FI (Constructor: HC (CpSymbol (&quot;SubstVar&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 151. `PiModel` (Set-theoretic dependent product section model PiModel(B))
 - **ANSII**: `PiModel`

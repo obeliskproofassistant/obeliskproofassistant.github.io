@@ -886,10 +886,14 @@ PMP_prf (..., ...)`
 
 ### 3.70 `AxmTarskiUniverses` — “Tarski's axiom” (Axiom)
 
-- **Identifier:** `AxmTarskiUniverses` (entry `3.70`, kind: `Axiom`, status: `Part of MKTD, Not Yet a Kernel Axiom`)
+- **Identifier:** `AxmTarskiUniverses` (entry `3.70`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
 - **Formula (Unicode):** `(∀(x:Class)((x set)—→∃(u:Class)(((u universe)∧(x∈u))∧(u set))))`
 - **Scheme of Types (Unicode):** `(∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→∃([u@Variable]:[Class@Type])((([u@Class.Expression] universe)∧([x@Class.Expression]∈[u@Class.Expression]))∧([u@Class.Expression] set))))`
-- **Proof Constructor:** `(not a kernel axiom)`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1 *)
+PTarskiAx_prf`
+- **Axioms Used:** `AxmTarskiUniverses`
+- **Definitions Used:** `(none)`
+- **Kernel Prf Nodes:** `1`
 - **Standalone Certificate:** [proofs/AxmTarskiUniverses.html](proofs/AxmTarskiUniverses.html)
 
 ### 3.71 `ThmTransitiveClassInduction` — General form of the transfinite ∈-induction principle on a transitive class (Theorem)
@@ -1263,16 +1267,16 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 - **Kernel Note:** Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).
 - **Standalone Certificate:** [proofs/AxmMetaClassComprehension.html](proofs/AxmMetaClassComprehension.html)
 
-### 4.07 `DefReducedVarSubst` — Reduced object-level variable substitution operator SubstVar(t, x, v) (Definition)
+### 4.07 `DefReducedVarSubst` — Reduced variable-substitution operator on classes SubstVar(t, x, v) (Definition)
 
 - **Identifier:** `DefReducedVarSubst` (entry `4.07`, kind: `Definition`, status: `Definitional (Kernel AST)`)
 - **Formula (Unicode):** `(∀(t:Class)∀(x:Class)∀(v:Class)(SubstVar(t,x,v)={u|((v=x)∧(u∈t))∨((¬(v=x))∧(u∈v))}))`
 - **Scheme of Types (Unicode):** `(∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])={[u@Class.Expression]|(([v@Class.Expression]=[x@Class.Expression])∧([u@Class.Expression]∈[t@Class.Expression]))∨((¬([v@Class.Expression]=[x@Class.Expression]))∧([u@Class.Expression]∈[v@Class.Expression]))}))`
 - **Proof Constructor:** `PKernelDef_prf (def_reduced_var_subst_cert, [t, x, v, u])`
-- **Kernel Note:** Conservative definition (DefReducedVarSubst, PKernelDef_prf, verified by Thm.checkPipeline and Thm.slow_check): explicit 3-argument object-level substitution operator SubstVar(t, x, v) = { u : Class | (((v = x) /\ (u in t)) \/ ((~(v = x)) /\ (u in v))) } taking (1) what is being substituted (t), (2) instead of what (x), and (3) where (v), internalizing atomic variable substitution as a first-class object inside MKTD1-theory.
+- **Kernel Note:** Conservative definition (DefReducedVarSubst, PKernelDef_prf): SubstVar(t, x, v) = { u : Class | (((v = x) /\ (u in t)) \/ ((~(v = x)) /\ (u in v))) }, the class conditional IF v = x THEN t ELSE v FI on arbitrary classes, with the arguments in the substitution order (what t, instead of what x, where v). It is intended as the atomic case of substitution applied to codes of variables; that link through Enc is not formalised, so SubstVar is a class operation, not syntactic substitution (FACTBOOK section 4).
 - **Standalone Certificate:** [proofs/DefReducedVarSubst.html](proofs/DefReducedVarSubst.html)
 
-### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
+### 4.08 `ThmReducedVarSubstLaws` — Hit, miss, self and diagonal laws of SubstVar(t, x, v) (Theorem)
 
 - **Identifier:** `ThmReducedVarSubstLaws` (entry `4.08`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))`
@@ -1282,7 +1286,7 @@ PAndR_prf (..., ...)`
 - **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropNegElim, AxmPropExFalso, AxmPropExcludedMiddle`
 - **Definitions Used:** `DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq`
 - **Kernel Prf Nodes:** `2069`
-- **Kernel Note:** Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
+- **Kernel Note:** Kernel theorem thm_reduced_var_subst_laws, for arbitrary classes: the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), SubstVar(x, x, v) = v and SubstVar(a, x, x) = a.
 - **Standalone Certificate:** [proofs/ThmReducedVarSubstLaws.html](proofs/ThmReducedVarSubstLaws.html)
 
 ## 5. Incompleteness-Related Statements (5.01-5.02) (5.01-5.02)

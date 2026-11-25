@@ -424,7 +424,7 @@ PForaR_prf (...)
   Kernel Note:     If a formula  is derived in 𝘍 from the empty context, then the formula 𝛗 is derived in 𝘍 from the context Γ. Why this holds for 𝘍: for an arbitrary theory 𝘞, concluding (𝘞, Γ⊢𝛗) from (𝘞, [] ⊢ ) requires 1-consistency / Σ₁-soundness of 𝘞 (and for the r.e. base theory 𝘛, asserting internal co-necessitation would by Löb's theorem 5.01 trivialize 𝘛). Because 𝘍 is a non-r.e. theory of the intended model equipped with Soundness 3.72 ((𝘍, [] ⊢ ψ) → ⟦ψ⟧), instantiating 3.72 at ψ :=  directly yields (𝘍, Γ⊢𝛗).
   Verification:    Postulated (Unchecked Kernel Schema, Not Derived)
 
-[4.08 / ThmReducedVarSubstLaws] Hit, miss, idempotence, and diagonal evaluation laws of reduced object-level variable substitution SubstVar(t, x, v) (Theorem)
+[4.08 / ThmReducedVarSubstLaws] Hit, miss, self and diagonal laws of SubstVar(t, x, v) (Theorem)
   Name:            ThmReducedVarSubstLaws
   Formula [0]:     ((∀(t:Class)∀(x:Class)∀(v:Class)(((v=x)—→(SubstVar(t,x,v)=t))∧((¬(v=x))—→(SubstVar(t,x,v)=v))))∧((∀(x:Class)∀(v:Class)(SubstVar(x,x,v)=v))∧∀(a:Class)∀(x:Class)(SubstVar(a,x,x)=a)))
   SML Kernel AST:  (* Total kernel Prf nodes: 2069 *)
@@ -433,7 +433,7 @@ PAndR_prf (..., ...)
   Definitions Used: DefReducedVarSubst, DefIff, DefSubclass, DefIsSet, DefClassEq
   Kernel Prf Nodes: 2069
   Scheme of Types: ((∀([t@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])((([v@Class.Expression]=[x@Class.Expression])—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[t@Class.Expression]))∧((¬([v@Class.Expression]=[x@Class.Expression]))—→(SubstVar([t@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))))∧((∀([x@Variable]:[Class@Type])∀([v@Variable]:[Class@Type])(SubstVar([x@Class.Expression],[x@Class.Expression],[v@Class.Expression])=[v@Class.Expression]))∧∀([a@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])(SubstVar([a@Class.Expression],[x@Class.Expression],[x@Class.Expression])=[a@Class.Expression])))
-  Kernel Note:     Machine-checked MKTD1-system theorem (thm_reduced_var_subst_laws, thm_reduced_var_subst_hit, thm_reduced_var_subst_miss, thm_reduced_var_subst_idempotent_self, and thm_reduced_var_subst_chain_same_var : Thm, verified by Thm.checkPipeline and Thm.slow_check): proves inside MKTD1-theory the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), the self-substitution identity SubstVar(x, x, v) = v, and the diagonal evaluation identity SubstVar(a, x, x) = a.
+  Kernel Note:     Kernel theorem thm_reduced_var_subst_laws, for arbitrary classes: the hit law (v = x) -> (SubstVar(t, x, v) = t), the miss law (~(v = x)) -> (SubstVar(t, x, v) = v), SubstVar(x, x, v) = v and SubstVar(a, x, x) = a.
   Verification:    Verified
 
 [5.01 / ThmLoeb] Löb's theorem (Theorem)
