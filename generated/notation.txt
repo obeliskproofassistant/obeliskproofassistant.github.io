@@ -42,7 +42,6 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 (x\ \mathrm{set})                 (Sethood predicate formula: \exists Y, (x \in Y), TpSet)
 \{ x \mid \varphi(x) \} / \kappa  (Class comprehension binder over Class: \kappa(x:\mathrm{Class}), \varphi(x), CpKappa)
 \iota (x : \mathrm{Class}), \varphi(x)       (Definite description binder, CpIota)
-\tau (x : \mathrm{Class}), \varphi(x)        (Unlimited choice descriptor binder, \tau \equiv \tau^{\mathrm{Un}})
 \varepsilon (x : \mathrm{Class}), \varphi(x) (Hilbert/Zermelo choice binder, CpEps)
 \mathcal{W}, \Gamma \vdash \varphi           (Formal sequent derivability statement, ApStmt / TpHolds)
 \langle \varphi \rangle           (Syntactic formula quotation, HQuote : Fm -> Fm.Expression)
@@ -69,7 +68,6 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 (x set)                           (Sethood predicate formula, TpSet)
 {x | φ(x)} / κ(x:Class), φ(x)     (U+03BA: Class comprehension binder over Class, CpKappa)
 ι(x:Class), φ(x)                  (U+03B9: Definite description binder, CpIota)
-τ(x:Class), φ(x)                  (U+03C4: Unlimited choice descriptor binder)
 ε(x:Class), φ(x)                  (U+03B5: Hilbert/Zermelo choice binder, CpEps)
 𝒲, Γ ⊢ φ                          (U+22A2: Formal sequent derivability statement, ApStmt / TpHolds)
 ‹φ›                               (U+2039/U+203A: Syntactic formula quotation, HQuote)
@@ -96,7 +94,6 @@ exists! (x:A), phi                (Unique existence quantifier binder on formula
 (x set)                           (Sethood predicate formula, TpSet)
 { x | phi(x) } / kappa (x:Class), phi(x) (Class comprehension binder over Class, CpKappa)
 iota (x:Class), phi(x)            (Definite description binder, CpIota)
-tau (x:Class), phi(x)             (Unlimited choice descriptor binder)
 eps (x:Class), phi(x)             (Hilbert/Zermelo choice binder, CpEps)
 W, Gamma |- phi                   (Formal sequent derivability statement, ApStmt / TpHolds)
 <| phi |>                         (Syntactic formula quotation, HQuote)
@@ -109,6 +106,14 @@ let x = t in phi                  (Explicit capture-avoiding substitution in for
    Sort of Types:  Type / Prop (dependent_syntax.ML, nbg_compiler.ML)
    Theory Name:    MKTD2 (Morse-Kelley + Tarski + Dunaev)
 ================================================================================
+
+Two languages share this section, and must not be confused (FACTBOOK §1, GitLab #8096):
+  (a) the MKTD2 kernel language, DependentSyntax.Term (dependent_syntax.ML), whose constructors
+      are exactly: Universe i, Prop, Set, Class, Nat, variables, constants, numerals, succ,
+      Π, Σ, Id, refinement {x : A | P}, λ, application, pairs (a, b), fst, snd, refl, natrec, let;
+  (b) the .nbg surface language checked by the second checker NBGCompiler (nbg_compiler.ML),
+      which adds 𝟙, 𝟘, →, ↔, ×, +, ¬ on propositions and the proof terms (), abort, inl, inr, case.
+Every notation below that is not in list (a) belongs to (b) only.
 
 1.1 Latex
 
@@ -126,7 +131,7 @@ A \rightarrow \mathbf{0}          (Empty function space / type refutation: \math
 \mathsf{refl}(x)                  (Reflexivity proof term inhabiting \mathsf{Id}(A, x, x), Refl / ERefl)
 ()          (or \star)            (Canonical inhabitant term of Unit type \mathbf{1})
 \mathsf{abort}(e, A)              (Empty type eliminator from e : \mathbf{0} into type A, EAbort)
-\langle a, b \rangle              (Ordered pair term inhabiting A \times B or \Sigma(x:A), B(x), Pair / EPair)
+(a, b)                            (Pair term inhabiting A \times B or \Sigma(x:A), B(x), Pair / EPair)
 \mathsf{fst}(p), \mathsf{snd}(p)  (First and second projections of product type, Fst / Snd)
 \mathsf{inl}(a), \mathsf{inr}(b)  (Left and right injections into sum type A + B, EInl / EInr)
 \mathsf{case}(s, x.u, y.v)        (Coproduct case analysis eliminator, ECase)
@@ -149,7 +154,7 @@ Id(A, x, y)                       (Intensional Martin-Lof identity type over sor
 refl(x)                           (Reflexivity proof term inhabiting Id(A, x, x), Refl / ERefl)
 ()          (or ★ U+2605)         (Canonical inhabitant term of Unit type 𝟙)
 abort(e, A)                       (Empty type eliminator from e : 𝟘 into type A, EAbort)
-⟨a, b⟩      (U+27E8/U+27E9)       (Pair term inhabiting A × B or Σ(x:A), B(x), Pair / EPair)
+(a, b)                            (Pair term inhabiting A × B or Σ(x:A), B(x), Pair / EPair)
 fst(p), snd(p)                    (First and second projections of product type, Fst / Snd)
 inl(a), inr(b)                    (Left and right injections into sum type A + B, EInl / EInr)
 case(s, x.u, y.v)                 (Coproduct case analysis eliminator, ECase)
@@ -277,18 +282,20 @@ Existential Quant.   | LaTeX    | \exists (x : A), \varphi | \Sigma (x : A), B(x
 --------------------------------------------------------------------------------
 Glyph      | Syntactic Role A             | Syntactic Role B             | Disambiguation Rule
 -----------+------------------------------+------------------------------+---------------------------------------
-⟦ ... ⟧    | Antiquotation term bracket   | External semantic evaluation | Antiquotation ⟦e⟧ (ASCII [|e|]) is an
-(U+27E6 /  | (Constructor: EAnti / EEval) | ⟦φ⟧_M in model M with        | object-level AST expression constructor;
- U+27E7)   | in explicit substitution.    | valuation assignment μ.      | semantic evaluation ⟦φ⟧_M takes model
-           |                              |                              | subscript or evaluation environment.
+⟦ ... ⟧    | Antiquotation / evaluation   | (no second role)             | One meaning only. Inside a quotation
+(U+27E6 /  | (Constructor: EAnti / EEval) |                              | ⟦u⟧ splices u; outside it evaluates u.
+ U+27E7)   |                              |                              | The articles' denotation ⟦φ⟧_ρ is the
+           |                              |                              | semantics of the same operation. Never
+           |                              |                              | a scope or substitution delimiter.
 -----------+------------------------------+------------------------------+---------------------------------------
 [ ... ]    | Relational Image f[A]        | Dunaev Class-List [X₁, ...,  | f[A] has a preceding relation term f;
-(U+005B /  | ≡ {y | ∃x ∈ A, ⟨x,y⟩ ∈ f}    | X_n] / Sequent Judgements    | class-lists enclose comma-separated
+(U+005B /  | ≡ {y | ∃x ∈ A, (x,y) ∈ f}    | X_n] / Sequent Judgements    | class-lists enclose comma-separated
  U+005D)   | (DefRelationalImage, 3.26)   | [J₁, ..., J_k] ⊢ φ           | classes; judgement lists contain sequents.
 -----------+------------------------------+------------------------------+---------------------------------------
-⟨ ... ⟩    | Ordered pair ⟨a, b⟩          | Syntactic quotation ⟨φ⟩ / ‹φ›| ⟨a, b⟩ encloses 2 comma-separated
-(U+27E8 /  | (Pair / EPair, PairType)     | (Constructor: HQuote,        | terms; ⟨φ⟩ / ‹φ› encloses a single
- U+27E9)   |                              |  Fm -> Fm.Expression)        | formula expression.
+⟨ ... ⟩    | Syntactic quotation ⟨φ⟩      | (no second role)             | One meaning only: ⟨φ⟩ is the LaTeX form
+(U+27E8 /  | (Constructor: HQuote,        |                              | of the Unicode quotation ‹φ›. The
+ U+27E9)   |  Fm -> Fm.Expression)        |                              | ordered (Dunaev) pair is (a, b) (3.76),
+           |                              |                              | the Kuratowski pair opairK(a, b) (3.52).
 -----------+------------------------------+------------------------------+---------------------------------------
 Set(X) vs  | Set(X): ASCII surface token  | isSet(X) / X set: object     | Set(X) is the .nbg parser keyword;
 isSet(X)   | in .nbg grammar.             | sethood predicate ∃Y(X ∈ Y)  | isSet(X) is the mathematical predicate
@@ -316,7 +323,7 @@ In judgements Δ; Γ ⊢ e : T:
 1. Dunaev Pair (Dunaev Tagged Ordered Pair):
    • Notation:   (A, B)_D  ≡  mark(A, 1) ∪ mark(B, 2)  =  ({1} × A) ∪ ({2} × B)
    • Definition: In Morse-Kelley class theory, proper classes cannot be elements
-     of sets or classes. Standard Kuratowski pairing ⟨a, b⟩_K = {{a}, {{a, b}}} fails
+     of sets or classes. Standard Kuratowski pairing opairK(a, b) = {{a}, {a, b}} fails
      when either a or b is a proper class (such as V or On), because {{V}} requires
      V ∈ {V}, which is false in MK. Dunaev tagged ordered pairing solves this by
      disjoint union tagging.
