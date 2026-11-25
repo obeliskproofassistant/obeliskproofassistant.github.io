@@ -432,7 +432,8 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(e369["kind"], "Theorem")
         self.assertEqual(e369["formula_unicode"], "(V universe)")
         # 3.69 is a theorem proved from MK axioms, not the backup axiom (#8080)
-        self.assertTrue(e369["prf_constructor"].startswith("v_universe_thm"), e369["prf_constructor"])
+        # the field is generated from the linked kernel witness (root constructor of its proof)
+        self.assertRegex(e369["prf_constructor"], r"\bP[A-Za-z0-9]+_prf\b")
         self.assertNotIn("PVUniverseAx_prf", e369["prf_constructor"])
         self.assertIn("v_universe_thm_proof", e369["comment"])
         self.assertIn("PVUniverseAx_prf", e369["comment"])
@@ -532,29 +533,29 @@ class TestProofRegression(unittest.TestCase):
         self.assertEqual(soundness_f["status"], "Postulated (Kernel Axiom)")
         self.assertIn("Tarski", soundness_f["comment"])
         self.assertIn("Löb", soundness_f["comment"])
-        self.assertIn("non-recursively-enumerable", soundness_f["comment"])
+        self.assertIn("theory of the intended model", soundness_f["comment"])
 
-        # T2: Semantic Completeness of F (3.73) is an Axiom (NOT a Definition)
+        # T2: 3.73 and 3.74 are metatheorems: they hold by the definition of F as the theory of
+        # the intended model (FACTBOOK section 2); the kernel has no rule for them
         self.assertIn("AxmSemanticCompletenessOfFullTheory", by_name)
         sem_comp_f = by_name["AxmSemanticCompletenessOfFullTheory"]
         self.assertEqual(sem_comp_f["num"], "3.73")
         self.assertEqual(sem_comp_f["kind"], "Axiom")
-        self.assertEqual(sem_comp_f["status"], "Postulated (Kernel Axiom)")
+        self.assertEqual(sem_comp_f["status"], "Metatheorem (Holds by the Definition of F, Not a Kernel Rule)")
         self.assertIn("Semantic completeness", sem_comp_f["comment"])
         self.assertIn("eval", sem_comp_f["formula_unicode"])
 
-        # T2: Negation-Completeness of F (3.74) is an Axiom (NOT a Definition)
         self.assertIn("AxmNegationCompletenessOfFullTheory", by_name)
         neg_comp_f = by_name["AxmNegationCompletenessOfFullTheory"]
         self.assertEqual(neg_comp_f["num"], "3.74")
         self.assertEqual(neg_comp_f["kind"], "Axiom")
-        self.assertEqual(neg_comp_f["status"], "Postulated (Kernel Axiom)")
+        self.assertEqual(neg_comp_f["status"], "Metatheorem (Holds by the Definition of F, Not a Kernel Rule)")
         self.assertIn("negation-completeness", neg_comp_f["comment"])
 
         # Entry count must match the database header (a frozen 118 went stale as entries were added)
         self.assertEqual(len(db), self.gen_db["entry_count"])
 
-        # In manual.html, verify verification cell is Postulated (Kernel Axiom), not Definitional
+        # the three entries are present in manual.html
         self.assertIn('id="AxmSemanticCompletenessOfFullTheory"', self.gen_manual_html)
         self.assertIn('id="AxmNegationCompletenessOfFullTheory"', self.gen_manual_html)
         self.assertIn('id="AxmSoundnessOfFullTheory"', self.gen_manual_html)
