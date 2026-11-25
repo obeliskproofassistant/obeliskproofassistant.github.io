@@ -150,14 +150,14 @@ Lightweight Markdown mirror of `generated/symbols.html` (230 registered tokens a
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable chi (𝛘 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
-### 22. `⟦` (Left semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval))
+### 22. `⟦` (Left antiquotation bracket (Constructor: EAnti))
 - **ANSII**: `[|`
 - **LaTeX**: `[\![ `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/antiquotation.html`
-- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left antiquotation bracket ⟦u⟧ (constructors EAnti / EEval, NOTATION.txt): takes u : A.Expression one metalevel down to A; inside a quotation it splices u, outside it evaluates u under the current assignment. Dual of quotation ‹ › / ⟨ ⟩.
+- **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left antiquotation bracket ⟦u⟧ (constructor EAnti, NOTATION.txt): takes u : A.Expression one metalevel down to A by splicing it into the surrounding quotation. Evaluation is the separate constructor EEval, written eval(u). Dual of quotation ‹ › / ⟨ ⟩.
 
-### 23. `⟧` (Right semantic evaluation / antiquotation bracket (Constructor: EAnti / EEval))
+### 23. `⟧` (Right antiquotation bracket (Constructor: EAnti))
 - **ANSII**: `|]`
 - **LaTeX**: ` ]\!]`
 - **Category**: Operator / Connective / Constant

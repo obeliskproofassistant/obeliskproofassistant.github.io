@@ -564,7 +564,7 @@
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="antiquotation.html" class="sym-link"><strong>Explicit Antiquotation Brackets (EAnti / EEval)</strong> (<code>symbols/antiquotation.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="antiquotation.html" class="sym-link"><strong>Explicit Antiquotation Brackets (EAnti)</strong> (<code>symbols/antiquotation.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
@@ -576,7 +576,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Antiquotation <code>⟦u⟧</code> takes a syntactic expression <code>u : A.Expression</code> one level down to <code>A</code>: inside a quotation <code>‹ ... ›</code> it splices <code>u</code> into the quoted syntax; outside, it evaluates <code>u</code> (constructors <code>EAnti</code> / <code>EEval</code>). It is the inverse direction of quotation.</td>
+              <td class="field-value">Antiquotation <code>⟦u⟧</code> takes a syntactic expression <code>u : A.Expression</code> one level down to <code>A</code>: it splices <code>u</code> into the surrounding quoted syntax <code>‹ ... ›</code> (constructor <code>EAnti</code>). It is the inverse direction of quotation. Evaluation of an expression is a different constructor with its own notation, <code>eval(u)</code> (<code>EEval</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -805,28 +805,28 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="eval.html" class="sym-link">eval  /  Eval_(A,ρ)</a></div>
+                <div class="formula-unicode"><a href="eval.html" class="sym-link">eval</a></div>
               </td>
             </tr>
             <tr class="row-latex">
               <th class="field-name">Symbol (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{eval.html}{\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}</code></div>
+                <div class="formula-latex">\(\href{eval.html}{\mathsf{eval}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{eval}</code></div>
               </td>
             </tr>
             <tr class="row-ansii">
               <th class="field-name">Symbol (ANSII)</th>
               <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="eval.html" class="sym-link"><code>eval / Eval_(A,rho)</code></a></div>
+                <div class="formula-ansii"><a href="eval.html" class="sym-link"><code>eval</code></a></div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="eval.html" class="sym-link"><strong>Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</strong> (<code>symbols/eval.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="eval.html" class="sym-link"><strong>Evaluation eval(u) (constructor EEval)</strong> (<code>symbols/eval.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Metatheory Notation (book; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Class → Class  (or Class → Bool for Fm codes)</code></td>
+              <td class="field-value"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span> &nbsp; <code>A.Expression.Expression → A.Expression   (e.g. Fm.Expression → Fm)</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -834,7 +834,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Composes syntactic decoding <code>Dec_A : Class → A.Expression</code>, type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code>, and semantic valuation <code>Val_ρ : Class.Expression → Class</code>.</td>
+              <td class="field-value"><code>eval(u)</code> evaluates the expression <code>u</code> one metalevel down, under the current assignment (constructor <code>EEval</code>, <code>typetheory.ML</code>). It is distinct from antiquotation <code>⟦u⟧</code> (<code>EAnti</code>), which splices <code>u</code> into a surrounding quotation.</td>
             </tr>
             </tbody>
           </table>

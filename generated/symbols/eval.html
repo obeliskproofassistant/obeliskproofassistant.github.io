@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: eval  /  Eval_(A,ρ) &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</title>
+  <title>Symbol Reference: eval &mdash; Evaluation eval(u) (constructor EEval)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -463,7 +463,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: eval  /  Eval_(A,ρ) &mdash; Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h1>
+      <h1>Symbol Reference: eval &mdash; Evaluation eval(u) (constructor EEval)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -484,8 +484,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Composite Code Evaluation Operator (Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))))</h2>
-      <p class="section-desc">Composes syntactic decoding <code>Dec_A : Class → A.Expression</code>, type-indexed expression translation <code>μ_A : A.Expression → Class.Expression</code>, and semantic valuation <code>Val_ρ : Class.Expression → Class</code>.</p>
+      <h2>Evaluation eval(u) (constructor EEval)</h2>
+      <p class="section-desc"><code>eval(u)</code> evaluates the expression <code>u</code> one metalevel down, under the current assignment (constructor <code>EEval</code>, <code>typetheory.ML</code>). It is distinct from antiquotation <code>⟦u⟧</code> (<code>EAnti</code>), which splices <code>u</code> into a surrounding quotation.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -499,24 +499,24 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">eval  /  Eval_(A,ρ)</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">eval</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Symbol (LaTeX)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{eval} \; / \; \mathsf{Eval}_{(A,\rho)}</code></div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{eval}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{eval}</code></div>
             </td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Symbol (ANSII)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>eval / Eval_(A,rho)</code></div>
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>eval</code></div>
             </td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Category</td>
-            <td class="external-entity"><span class="badge badge-def">Metatheory Notation (book; not a symbol of the MKTD1 or MKTD2 language)</span></td>
+            <td class="external-entity"><span class="badge badge-def">Quotation &amp; Antiquotation (Reflection Layer)</span></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metalevel</td>
@@ -524,19 +524,19 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">SML AST Constructor</td>
-            <td class="external-entity"><code>EEval of (UCol * 'a)  [in datatype EXP, typetheory.ML]</code></td>
+            <td class="external-entity"><code>EEval of 'a_expre sion expre sion  [expression layer, typetheory.ML]</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Constructor Arguments</td>
-            <td class="external-entity">1. Target sort A : UCol; 2. Syntactic expression u : A.Expression</td>
+            <td class="external-entity">1. Expression u : A.Expression.Expression</td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Class  (or Class → Bool for Fm codes)</code></td>
+            <td class="external-entity"><code>A.Expression.Expression → A.Expression   (e.g. Fm.Expression → Fm)</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
-            <td class="external-entity"><strong>No — Primitive Semantic Evaluation Operator</strong></td>
+            <td class="external-entity"><strong>No — Evaluation</strong></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Defining &amp; Formation Laws (Personal Pages)</td>
@@ -560,15 +560,14 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>How to Understand <code>eval</code> / <code>Eval_(A,ρ)</code>:</strong></p><p>With the type-indexed translation <code>μ_A</code> and assignment-indexed valuation <code>Val_ρ</code> kept explicitly distinct, the semantic evaluation of a class code <code>c ∈ Code_A ⊆ V</code> is the three-stage composite:</p><p><code>Eval_(A,ρ)(c) = Val_ρ(μ_A(Dec_A(c))) = μ^val_ρ(Dec_A(c))</code></p><ul><li><strong>Well-Typed Round-Trip on Coded Expressions</strong>: For any syntactic expression <code>e : A.Expression</code>, <code>Eval_(A,ρ)(Enc_A(e)) = Val_ρ(μ_A(e)) = μ^val_ρ(e)</code> because <code>Dec_A(Enc_A(e)) = e</code>.</li><li><strong>Stratification via Tarski Universes</strong>: By Tarski's Undefinability of Truth, a single unstratified truth/evaluation predicate for all formulas over the entire universe cannot be internal to the same level; in <strong>MKTD1-system (MKTD1-theory)</strong> and <strong>MKTD2-system (MKTD2-theory)</strong>, Tarski's Axiom of Universes (Entry AxmTarskiUniverses (3.70)) provides set-sized universes supporting internal model valuations.</li></ul></td>
+            <td class="external-entity" style="line-height: 1.65;"><p>Entry AxmSemanticCompletenessOfFullTheory (3.73) is stated with it: <code>∀(𝛗:Fm)(eval(𝛗) —→ (𝘍, [] ⊢ 𝛗))</code>. Like <code>Holds</code>, <code>FFI</code> and <code>IFV</code>, <code>eval</code> is a metalevel symbol: formulas containing it are not object-level (<code>Fm₀</code>), so they cannot be used in comprehension or definitions (FACTBOOK section 3). The kernel has no typing rule for <code>EEval</code> yet.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="mu-interpretation.html" class="sym-link">Expression Translation μ_A &amp; Valuation μ_ρ</a></li>
-<li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
-<li><a href="dec.html" class="sym-link">Syntactic Decoding Operator Dec</a></li>
-<li><a href="../manual.html#AxmTarskiUniverses" class="sym-link">Axiom AxmTarskiUniverses (3.70): “Tarski's axiom”</a></li>
+<li><a href="antiquotation.html" class="sym-link">Antiquotation ⟦u⟧ (EAnti)</a></li>
+<li><a href="quotation.html" class="sym-link">Quotation ‹ ... ›</a></li>
+<li><a href="../manual.html#AxmSemanticCompletenessOfFullTheory" class="sym-link">Statement AxmSemanticCompletenessOfFullTheory (3.73): Semantic Completeness of the theory 𝘍</a></li>
 </ul></td>
           </tr>
         </tbody>

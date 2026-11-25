@@ -45,7 +45,8 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 \varepsilon (x : \mathrm{Class}), \varphi(x) (Hilbert/Zermelo choice binder, CpEps)
 \mathcal{W}, \Gamma \vdash \varphi           (Formal sequent derivability statement, ApStmt / TpHolds)
 \langle \varphi \rangle           (Syntactic formula quotation, HQuote : Fm -> Fm.Expression)
-[\![ e ]\!]                       (Semantic evaluation / antiquotation, EAnti / EEval)
+[\![ e ]\!]                       (Antiquotation, EAnti)
+\mathsf{eval}(e)                  (Evaluation under the current assignment, EEval)
 \mathbf{let}\ x = t\ \mathbf{in}\ \varphi    (Explicit capture-avoiding substitution in formula, ESubst)
 
 
@@ -71,7 +72,8 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 ε(x:Class), φ(x)                  (U+03B5: Hilbert/Zermelo choice binder, CpEps)
 𝒲, Γ ⊢ φ                          (U+22A2: Formal sequent derivability statement, ApStmt / TpHolds)
 ‹φ›                               (U+2039/U+203A: Syntactic formula quotation, HQuote)
-⟦e⟧                               (U+27E6/U+27E7: Semantic evaluation / antiquotation, EAnti)
+⟦e⟧                               (U+27E6/U+27E7: Antiquotation, EAnti)
+eval(e)                           (Evaluation under the current assignment, EEval)
 let x = t in φ                    (Explicit capture-avoiding substitution in formula)
 
 
@@ -97,7 +99,8 @@ iota (x:Class), phi(x)            (Definite description binder, CpIota)
 eps (x:Class), phi(x)             (Hilbert/Zermelo choice binder, CpEps)
 W, Gamma |- phi                   (Formal sequent derivability statement, ApStmt / TpHolds)
 <| phi |>                         (Syntactic formula quotation, HQuote)
-[| e |]                           (Semantic evaluation / antiquotation, EAnti)
+[| e |]                           (Antiquotation, EAnti)
+eval(e)                           (Evaluation under the current assignment, EEval)
 let x = t in phi                  (Explicit capture-avoiding substitution in formula)
 
 
@@ -282,11 +285,11 @@ Existential Quant.   | LaTeX    | \exists (x : A), \varphi | \Sigma (x : A), B(x
 --------------------------------------------------------------------------------
 Glyph      | Syntactic Role A             | Syntactic Role B             | Disambiguation Rule
 -----------+------------------------------+------------------------------+---------------------------------------
-⟦ ... ⟧    | Antiquotation / evaluation   | (no second role)             | One meaning only. Inside a quotation
-(U+27E6 /  | (Constructor: EAnti / EEval) |                              | ⟦u⟧ splices u; outside it evaluates u.
- U+27E7)   |                              |                              | The articles' denotation ⟦φ⟧_ρ is the
-           |                              |                              | semantics of the same operation. Never
-           |                              |                              | a scope or substitution delimiter.
+⟦ ... ⟧    | Antiquotation                | (no second role)             | One meaning only: ⟦u⟧ splices u into
+(U+27E6 /  | (Constructor: EAnti)         |                              | the surrounding quotation. Evaluation
+ U+27E7)   |                              |                              | is eval(u) (EEval); the articles write
+           |                              |                              | interpretation in the model M as X^M.
+           |                              |                              | Never a scope or substitution delimiter.
 -----------+------------------------------+------------------------------+---------------------------------------
 [ ... ]    | Relational Image f[A]        | Dunaev Class-List [X₁, ...,  | f[A] has a preceding relation term f;
 (U+005B /  | ≡ {y | ∃x ∈ A, (x,y) ∈ f}    | X_n] / Sequent Judgements    | class-lists enclose comma-separated
