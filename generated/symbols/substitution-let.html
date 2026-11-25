@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: let x ↤ t in 𝛂  /  [x/t] &mdash; Explicit Capture-Avoiding Substitution Operator</title>
+  <title>Symbol Reference: 𝛂[t/x] &mdash; Metatheoretic Capture-Avoiding Substitution 𝛂[t/x]</title>
   <script>
     window.MathJax = {
       tex: {
@@ -463,7 +463,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: let x ↤ t in 𝛂  /  [x/t] &mdash; Explicit Capture-Avoiding Substitution Operator</h1>
+      <h1>Symbol Reference: 𝛂[t/x] &mdash; Metatheoretic Capture-Avoiding Substitution 𝛂[t/x]</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -484,8 +484,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Explicit Capture-Avoiding Substitution Operator</h2>
-      <p class="section-desc">Denotes the capture-avoiding substitution of term <code>t</code> for free occurrences of variable <code>x</code> inside formula or expression <code>𝛂</code>.</p>
+      <h2>Metatheoretic Capture-Avoiding Substitution 𝛂[t/x]</h2>
+      <p class="section-desc"><code>𝛂[t/x]</code> is the result of substituting <code>t</code> for the free occurrences of the variable <code>x</code> in <code>𝛂</code>, renaming bound variables to avoid capture. It is an operation of the metatheory used to state rules (Entries RulForallInstantiation (2.02), RulExistsAbstraction (2.05)), with the argument order of FACTBOOK section 6: what (<code>t</code>), instead of what (<code>x</code>), where (<code>𝛂</code>).</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -499,19 +499,19 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">let x ↤ t in 𝛂  /  [x/t]</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">𝛂[t/x]</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Symbol (LaTeX)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{let}\; x \leftarrow t \;\mathsf{in}\; \alpha \; / \; [x/t]\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{let}\; x \leftarrow t \;\mathsf{in}\; \alpha \; / \; [x/t]</code></div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\alpha[t/x]\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\alpha[t/x]</code></div>
             </td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Symbol (ANSII)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>let x &lt;- t in alpha / [x/t]</code></div>
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>alpha[t/x]</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -532,7 +532,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Variable → Class → Fm → Fm</code></td>
+            <td class="external-entity"><code>𝛂 : A.Expression, t : X.Expression, x : Variable  →  A.Expression</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -559,16 +559,14 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p>In Obelisk (Entries RulForallInstantiation (2.02), RulExistsAbstraction (2.05), AxmTarskiUniverses (3.70), and Section 4 Entries DefMetaConecessitation (4.03)&ndash;AxmMetaClassComprehension (4.06)), substitution is represented explicitly in the AST as <code>let x ↤ t in 𝛂</code> (or <code>𝛂[x/t]</code>):</p><ul><li>Rather than silently mutating AST nodes in meta-code, the kernel tracks substitution explicitly and discharges it via the verified metalogical substitution laws (Entries DefMetaConecessitation (4.03)&ndash;AxmMetaClassComprehension (4.06)) subject to the <code>FFI</code> hygiene guard.</li></ul></td>
+            <td class="external-entity" style="line-height: 1.65;"><p>It is not a constructor of the language. The object-level explicit substitution is <code>let x = t in e</code> (<a href="let-binder.html">let-binder.html</a>). Whether <code>t</code> may be substituted is the side condition <code>Fm.FFI(t, x, 𝛂)</code>.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="ffi-pred.html" class="sym-link">Syntactic Hygiene Predicates FFI, FV, NFV</a></li>
-<li><a href="../manual.html#DefMetaInstantiation" class="sym-link">Axiom DefMetaInstantiation (4.01): Instantiation</a></li>
-<li><a href="../manual.html#DefAtMostOneBinder" class="sym-link">Definition DefAtMostOneBinder (4.04): Quantifier “unique”</a></li>
-<li><a href="../manual.html#DefExistsUniqueBinder" class="sym-link">Definition DefExistsUniqueBinder (4.05): Quantifier “exists and unique”</a></li>
-<li><a href="../manual.html#AxmMetaClassComprehension" class="sym-link">Axiom AxmMetaClassComprehension (4.06): Class comprehension axiom schema</a></li>
+<li><a href="let-binder.html" class="sym-link">Explicit Substitution let x = t in e</a></li>
+<li><a href="ffi-pred.html" class="sym-link">Free-For-Instantiation Fm.FFI</a></li>
+<li><a href="../manual.html#RulForallInstantiation" class="sym-link">Inference Rule RulForallInstantiation (2.02): Forall Instantiation</a></li>
 </ul></td>
           </tr>
         </tbody>

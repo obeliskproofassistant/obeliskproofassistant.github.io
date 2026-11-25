@@ -484,7 +484,7 @@
   <main>
   <section class="manual-section" id="personal-symbols-index">
     <div class="section-header">
-      <h2>Personal Symbol Reference Directory (141 Dedicated Pages)</h2>
+      <h2>Personal Symbol Reference Directory (140 Dedicated Pages)</h2>
       <p class="section-desc">Every metatheoretic, reflection, type, binder, and structural symbol in <strong>MKTD1-system</strong> and <strong>MKTD2-system</strong> links directly to its corresponding personal page below rather than to an unrelated theorem.</p>
     </div>
     <div class="table-container">
@@ -826,7 +826,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Embedding &amp; Interpretation</span> &nbsp; <code>Class → Class  (or Class → Bool for Fm codes)</code></td>
+              <td class="field-value"><span class="badge badge-def">Metatheory Notation (book; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Class → Class  (or Class → Bool for Fm codes)</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -1192,28 +1192,28 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="substitution-let.html" class="sym-link">let x ↤ t in 𝛂  /  [x/t]</a></div>
+                <div class="formula-unicode"><a href="substitution-let.html" class="sym-link">𝛂[t/x]</a></div>
               </td>
             </tr>
             <tr class="row-latex">
               <th class="field-name">Symbol (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{substitution-let.html}{\mathsf{let}\; x \leftarrow t \;\mathsf{in}\; \alpha \; / \; [x/t]}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{let}\; x \leftarrow t \;\mathsf{in}\; \alpha \; / \; [x/t]</code></div>
+                <div class="formula-latex">\(\href{substitution-let.html}{\alpha[t/x]}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\alpha[t/x]</code></div>
               </td>
             </tr>
             <tr class="row-ansii">
               <th class="field-name">Symbol (ANSII)</th>
               <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="substitution-let.html" class="sym-link"><code>let x &lt;- t in alpha / [x/t]</code></a></div>
+                <div class="formula-ansii"><a href="substitution-let.html" class="sym-link"><code>alpha[t/x]</code></a></div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="substitution-let.html" class="sym-link"><strong>Explicit Capture-Avoiding Substitution Operator</strong> (<code>symbols/substitution-let.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="substitution-let.html" class="sym-link"><strong>Metatheoretic Capture-Avoiding Substitution 𝛂[t/x]</strong> (<code>symbols/substitution-let.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Syntactic Hygiene &amp; Substitution</span> &nbsp; <code>Variable → Class → Fm → Fm</code></td>
+              <td class="field-value"><span class="badge badge-def">Syntactic Hygiene &amp; Substitution</span> &nbsp; <code>𝛂 : A.Expression, t : X.Expression, x : Variable  →  A.Expression</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -1221,7 +1221,7 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Denotes the capture-avoiding substitution of term <code>t</code> for free occurrences of variable <code>x</code> inside formula or expression <code>𝛂</code>.</td>
+              <td class="field-value"><code>𝛂[t/x]</code> is the result of substituting <code>t</code> for the free occurrences of the variable <code>x</code> in <code>𝛂</code>, renaming bound variables to avoid capture. It is an operation of the metatheory used to state rules (Entries RulForallInstantiation (2.02), RulExistsAbstraction (2.05)), with the argument order of FACTBOOK section 6: what (<code>t</code>), instead of what (<code>x</code>), where (<code>𝛂</code>).</td>
             </tr>
             </tbody>
           </table>
@@ -1686,7 +1686,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Type Constructor (MKTD2-system Function Space)</span> &nbsp; <code>Type × Type → Type</code></td>
+              <td class="field-value"><span class="badge badge-def">Type Constructor (MKTD2 kernel notation for Π _ : A. B; .nbg constructor TArrow)</span> &nbsp; <code>Type × Type → Type</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -1772,7 +1772,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Type Constructor (MKTD2-system Type Equivalence)</span> &nbsp; <code>Type × Type → Type</code></td>
+              <td class="field-value"><span class="badge badge-def">Type Constructor (.nbg surface language only (second checker NBGCompiler; not in the MKTD2 kernel))</span> &nbsp; <code>Type × Type → Type</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -1815,7 +1815,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Type Constructor (MKTD2-system Product Type)</span> &nbsp; <code>Type × Type → Type</code></td>
+              <td class="field-value"><span class="badge badge-def">Type Constructor (.nbg surface language only (second checker NBGCompiler; not in the MKTD2 kernel))</span> &nbsp; <code>Type × Type → Type</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -2073,7 +2073,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Constructive Type Constant (MKTD2-system Sort Type)</span> &nbsp; <code>Type</code></td>
+              <td class="field-value"><span class="badge badge-def">Type Constant (.nbg surface language only (second checker NBGCompiler; not in the MKTD2 kernel))</span> &nbsp; <code>Type</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -2116,7 +2116,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Constructive Type Constant (MKTD2-system Sort Type)</span> &nbsp; <code>Type</code></td>
+              <td class="field-value"><span class="badge badge-def">Type Constant (.nbg surface language only (second checker NBGCompiler; not in the MKTD2 kernel))</span> &nbsp; <code>Type</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -2159,7 +2159,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Boolean Data Value (Inhabitant of Bool)</span> &nbsp; <code>Bool</code></td>
+              <td class="field-value"><span class="badge badge-def">Semantic Truth Value (metatheory; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Bool</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -2202,7 +2202,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Boolean Data Value (Inhabitant of Bool)</span> &nbsp; <code>Bool</code></td>
+              <td class="field-value"><span class="badge badge-def">Semantic Truth Value (metatheory; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Bool</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -4761,28 +4761,28 @@
             <tr class="row-unicode">
               <th class="field-name">Symbol (Unicode)</th>
               <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="let-binder.html" class="sym-link">let v = t in ⟦𝛗⟧</a></div>
+                <div class="formula-unicode"><a href="let-binder.html" class="sym-link">let x = t in e</a></div>
               </td>
             </tr>
             <tr class="row-latex">
               <th class="field-name">Symbol (LaTeX)</th>
               <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{let-binder.html}{\mathbf{let}\;v = t\;\mathbf{in}\;\varphi}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathbf{let}\;v = t\;\mathbf{in}\;\varphi</code></div>
+                <div class="formula-latex">\(\href{let-binder.html}{\mathsf{let}\;x = t\;\mathsf{in}\;e}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathsf{let}\;x = t\;\mathsf{in}\;e</code></div>
               </td>
             </tr>
             <tr class="row-ansii">
               <th class="field-name">Symbol (ANSII)</th>
               <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="let-binder.html" class="sym-link"><code>let v = t in [| phi |]</code></a></div>
+                <div class="formula-ansii"><a href="let-binder.html" class="sym-link"><code>let x = t in e</code></a></div>
               </td>
             </tr>
             <tr>
               <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="let-binder.html" class="sym-link"><strong>Explicit Substitution / Let-Binding Operator</strong> (<code>symbols/let-binder.html</code>)</a></td>
+              <td class="field-value entry-title-cell"><a href="let-binder.html" class="sym-link"><strong>Explicit Substitution let x = t in e (MKTD1 ESubst, MKTD2 Let)</strong> (<code>symbols/let-binder.html</code>)</a></td>
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Binder (Explicit Substitution Operator)</span> &nbsp; <code>(v : Variable) × (t : A) × B → B</code></td>
+              <td class="field-value"><span class="badge badge-def">Binder (Explicit Substitution)</span> &nbsp; <code>(x : Variable) × (t : A.Expression) × (e : B.Expression) → B.Expression</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -4790,57 +4790,14 @@
             </tr>
             <tr>
               <th class="field-name">Summary</th>
-              <td class="field-value">Explicit substitution binder <code>let v = t in ⟦𝛗⟧</code> binding variable <code>v</code> to value <code>t</code> inside <code>𝛗</code> (Entry DefMetaInstantiation (4.01)).</td>
+              <td class="field-value"><code>let x = t in e</code> binds the variable <code>x</code> to <code>t</code> in the body <code>e</code>; it denotes <code>e[t/x]</code>.</td>
             </tr>
             </tbody>
           </table>
         </td>
       </tr>
       <tr id="psym-101" class="external-row">
-        <td class="external-num"><a href="in-let-kw.html" class="num-anchor">101</a></td>
-        <td class="external-entity">
-          <table class="internal-entity-table">
-            <tbody>
-            <tr class="row-unicode">
-              <th class="field-name">Symbol (Unicode)</th>
-              <td class="field-value formula-cell">
-                <div class="formula-unicode"><a href="in-let-kw.html" class="sym-link">in  (let v = t in e)</a></div>
-              </td>
-            </tr>
-            <tr class="row-latex">
-              <th class="field-name">Symbol (LaTeX)</th>
-              <td class="field-value formula-cell">
-                <div class="formula-latex">\(\href{in-let-kw.html}{\mathbf{in}}\) &nbsp; <code style="font-size:0.82rem; color:#94a3b8;">\mathbf{in}</code></div>
-              </td>
-            </tr>
-            <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
-              <td class="field-value formula-cell">
-                <div class="formula-ansii"><a href="in-let-kw.html" class="sym-link"><code>in (let v = t in e)</code></a></div>
-              </td>
-            </tr>
-            <tr>
-              <th class="field-name">Personal Reference Page</th>
-              <td class="field-value entry-title-cell"><a href="in-let-kw.html" class="sym-link"><strong>Body Delimiter of Explicit Substitution Binder</strong> (<code>symbols/in-let-kw.html</code>)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Binder Delimiter (Part of Explicit Substitution ELet)</span> &nbsp; <code>(v : Variable) × (t : A) × B → B</code></td>
-            </tr>
-            <tr>
-              <th class="field-name">Defining &amp; Formation Laws</th>
-              <td class="field-value"><a href="../proofs/FormLetSubstitution.html" class="sym-link"><code>FormLetSubstitution</code> (F.05)</a> &middot; <a href="../proofs/DefMetaInstantiation.html" class="sym-link"><code>DefMetaInstantiation</code> (4.01)</a></td>
-            </tr>
-            <tr>
-              <th class="field-name">Summary</th>
-              <td class="field-value">Keyword <code>in</code> separating the variable binding <code>v = t</code> from the body expression in <code>let v = t in e</code> (Entry DefMetaInstantiation (4.01)). Note: set membership is always written with the Unicode symbol <code>∈</code> (<a href="in-pred.html" class="sym-link"><code>symbols/in-pred.html</code></a>).</td>
-            </tr>
-            </tbody>
-          </table>
-        </td>
-      </tr>
-      <tr id="psym-102" class="external-row">
-        <td class="external-num"><a href="fst-op.html" class="num-anchor">102</a></td>
+        <td class="external-num"><a href="fst-op.html" class="num-anchor">101</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -4882,8 +4839,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-103" class="external-row">
-        <td class="external-num"><a href="snd-op.html" class="num-anchor">103</a></td>
+      <tr id="psym-102" class="external-row">
+        <td class="external-num"><a href="snd-op.html" class="num-anchor">102</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -4925,8 +4882,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-104" class="external-row">
-        <td class="external-num"><a href="turnstile-derivability.html" class="num-anchor">104</a></td>
+      <tr id="psym-103" class="external-row">
+        <td class="external-num"><a href="turnstile-derivability.html" class="num-anchor">103</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -4968,8 +4925,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-105" class="external-row">
-        <td class="external-num"><a href="fv-op.html" class="num-anchor">105</a></td>
+      <tr id="psym-104" class="external-row">
+        <td class="external-num"><a href="fv-op.html" class="num-anchor">104</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5011,8 +4968,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-106" class="external-row">
-        <td class="external-num"><a href="ifv-pred.html" class="num-anchor">106</a></td>
+      <tr id="psym-105" class="external-row">
+        <td class="external-num"><a href="ifv-pred.html" class="num-anchor">105</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5054,8 +5011,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-107" class="external-row">
-        <td class="external-num"><a href="ffi-pred.html" class="num-anchor">107</a></td>
+      <tr id="psym-106" class="external-row">
+        <td class="external-num"><a href="ffi-pred.html" class="num-anchor">106</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5097,8 +5054,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-108" class="external-row">
-        <td class="external-num"><a href="nfv-pred.html" class="num-anchor">108</a></td>
+      <tr id="psym-107" class="external-row">
+        <td class="external-num"><a href="nfv-pred.html" class="num-anchor">107</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5140,8 +5097,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-109" class="external-row">
-        <td class="external-num"><a href="fresh-pred.html" class="num-anchor">109</a></td>
+      <tr id="psym-108" class="external-row">
+        <td class="external-num"><a href="fresh-pred.html" class="num-anchor">108</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5183,8 +5140,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-110" class="external-row">
-        <td class="external-num"><a href="variable-sort.html" class="num-anchor">110</a></td>
+      <tr id="psym-109" class="external-row">
+        <td class="external-num"><a href="variable-sort.html" class="num-anchor">109</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5226,8 +5183,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-111" class="external-row">
-        <td class="external-num"><a href="expression-sort.html" class="num-anchor">111</a></td>
+      <tr id="psym-110" class="external-row">
+        <td class="external-num"><a href="expression-sort.html" class="num-anchor">110</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5269,8 +5226,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-112" class="external-row">
-        <td class="external-num"><a href="name-sort.html" class="num-anchor">112</a></td>
+      <tr id="psym-111" class="external-row">
+        <td class="external-num"><a href="name-sort.html" class="num-anchor">111</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5312,8 +5269,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-113" class="external-row">
-        <td class="external-num"><a href="bool-sort.html" class="num-anchor">113</a></td>
+      <tr id="psym-112" class="external-row">
+        <td class="external-num"><a href="bool-sort.html" class="num-anchor">112</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5355,8 +5312,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-114" class="external-row">
-        <td class="external-num"><a href="prop-sort.html" class="num-anchor">114</a></td>
+      <tr id="psym-113" class="external-row">
+        <td class="external-num"><a href="prop-sort.html" class="num-anchor">113</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5398,8 +5355,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-115" class="external-row">
-        <td class="external-num"><a href="lcewip-sort.html" class="num-anchor">115</a></td>
+      <tr id="psym-114" class="external-row">
+        <td class="external-num"><a href="lcewip-sort.html" class="num-anchor">114</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5441,8 +5398,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-116" class="external-row">
-        <td class="external-num"><a href="empty-list-const.html" class="num-anchor">116</a></td>
+      <tr id="psym-115" class="external-row">
+        <td class="external-num"><a href="empty-list-const.html" class="num-anchor">115</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5484,8 +5441,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-117" class="external-row">
-        <td class="external-num"><a href="comma-delim.html" class="num-anchor">117</a></td>
+      <tr id="psym-116" class="external-row">
+        <td class="external-num"><a href="comma-delim.html" class="num-anchor">116</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5527,8 +5484,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-118" class="external-row">
-        <td class="external-num"><a href="dot-delim.html" class="num-anchor">118</a></td>
+      <tr id="psym-117" class="external-row">
+        <td class="external-num"><a href="dot-delim.html" class="num-anchor">117</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5570,8 +5527,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-119" class="external-row">
-        <td class="external-num"><a href="subst-slash.html" class="num-anchor">119</a></td>
+      <tr id="psym-118" class="external-row">
+        <td class="external-num"><a href="subst-slash.html" class="num-anchor">118</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5613,8 +5570,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-120" class="external-row">
-        <td class="external-num"><a href="model-const.html" class="num-anchor">120</a></td>
+      <tr id="psym-119" class="external-row">
+        <td class="external-num"><a href="model-const.html" class="num-anchor">119</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5642,7 +5599,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Functional Symbol (0-ary Class/Model Constant)</span> &nbsp; <code>Class</code></td>
+              <td class="field-value"><span class="badge badge-def">Metatheory Notation (book; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Class</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -5656,8 +5613,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-121" class="external-row">
-        <td class="external-num"><a href="numeral-0.html" class="num-anchor">121</a></td>
+      <tr id="psym-120" class="external-row">
+        <td class="external-num"><a href="numeral-0.html" class="num-anchor">120</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5699,8 +5656,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-122" class="external-row">
-        <td class="external-num"><a href="numeral-1.html" class="num-anchor">122</a></td>
+      <tr id="psym-121" class="external-row">
+        <td class="external-num"><a href="numeral-1.html" class="num-anchor">121</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5742,8 +5699,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-123" class="external-row">
-        <td class="external-num"><a href="numeral-2.html" class="num-anchor">123</a></td>
+      <tr id="psym-122" class="external-row">
+        <td class="external-num"><a href="numeral-2.html" class="num-anchor">122</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5785,8 +5742,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-124" class="external-row">
-        <td class="external-num"><a href="numeral-3.html" class="num-anchor">124</a></td>
+      <tr id="psym-123" class="external-row">
+        <td class="external-num"><a href="numeral-3.html" class="num-anchor">123</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5828,8 +5785,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-125" class="external-row">
-        <td class="external-num"><a href="theory-tau.html" class="num-anchor">125</a></td>
+      <tr id="psym-124" class="external-row">
+        <td class="external-num"><a href="theory-tau.html" class="num-anchor">124</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5871,8 +5828,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-126" class="external-row">
-        <td class="external-num"><a href="theory-fau.html" class="num-anchor">126</a></td>
+      <tr id="psym-125" class="external-row">
+        <td class="external-num"><a href="theory-fau.html" class="num-anchor">125</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5914,8 +5871,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-127" class="external-row">
-        <td class="external-num"><a href="theory-eau.html" class="num-anchor">127</a></td>
+      <tr id="psym-126" class="external-row">
+        <td class="external-num"><a href="theory-eau.html" class="num-anchor">126</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -5957,8 +5914,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-128" class="external-row">
-        <td class="external-num"><a href="theory-wau.html" class="num-anchor">128</a></td>
+      <tr id="psym-127" class="external-row">
+        <td class="external-num"><a href="theory-wau.html" class="num-anchor">127</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6000,8 +5957,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-129" class="external-row">
-        <td class="external-num"><a href="ordered-pair.html" class="num-anchor">129</a></td>
+      <tr id="psym-128" class="external-row">
+        <td class="external-num"><a href="ordered-pair.html" class="num-anchor">128</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6043,8 +6000,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-130" class="external-row">
-        <td class="external-num"><a href="definitional-eq.html" class="num-anchor">130</a></td>
+      <tr id="psym-129" class="external-row">
+        <td class="external-num"><a href="definitional-eq.html" class="num-anchor">129</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6072,7 +6029,7 @@
             </tr>
             <tr>
               <th class="field-name">Category &amp; Signature</th>
-              <td class="field-value"><span class="badge badge-def">Metatheoretic Relation Symbol</span> &nbsp; <code>Syntactic / Definitional Equivalence</code></td>
+              <td class="field-value"><span class="badge badge-def">Metatheory Notation (book; not a symbol of the MKTD1 or MKTD2 language)</span> &nbsp; <code>Syntactic / Definitional Equivalence</code></td>
             </tr>
             <tr>
               <th class="field-name">Defining &amp; Formation Laws</th>
@@ -6086,8 +6043,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-131" class="external-row">
-        <td class="external-num"><a href="limit-ord-pred.html" class="num-anchor">131</a></td>
+      <tr id="psym-130" class="external-row">
+        <td class="external-num"><a href="limit-ord-pred.html" class="num-anchor">130</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6129,8 +6086,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-132" class="external-row">
-        <td class="external-num"><a href="indexed-union-closed-pred.html" class="num-anchor">132</a></td>
+      <tr id="psym-131" class="external-row">
+        <td class="external-num"><a href="indexed-union-closed-pred.html" class="num-anchor">131</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6172,8 +6129,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-133" class="external-row">
-        <td class="external-num"><a href="v-stage-laws-pred.html" class="num-anchor">133</a></td>
+      <tr id="psym-132" class="external-row">
+        <td class="external-num"><a href="v-stage-laws-pred.html" class="num-anchor">132</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6215,8 +6172,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-134" class="external-row">
-        <td class="external-num"><a href="v-stage-graph-const.html" class="num-anchor">134</a></td>
+      <tr id="psym-133" class="external-row">
+        <td class="external-num"><a href="v-stage-graph-const.html" class="num-anchor">133</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6258,8 +6215,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-135" class="external-row">
-        <td class="external-num"><a href="set-rank-laws-pred.html" class="num-anchor">135</a></td>
+      <tr id="psym-134" class="external-row">
+        <td class="external-num"><a href="set-rank-laws-pred.html" class="num-anchor">134</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6301,8 +6258,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-136" class="external-row">
-        <td class="external-num"><a href="set-rank-graph-const.html" class="num-anchor">136</a></td>
+      <tr id="psym-135" class="external-row">
+        <td class="external-num"><a href="set-rank-graph-const.html" class="num-anchor">135</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6344,8 +6301,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-137" class="external-row">
-        <td class="external-num"><a href="restrict-op.html" class="num-anchor">137</a></td>
+      <tr id="psym-136" class="external-row">
+        <td class="external-num"><a href="restrict-op.html" class="num-anchor">136</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6387,8 +6344,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-138" class="external-row">
-        <td class="external-num"><a href="transfinite-approx-pred.html" class="num-anchor">138</a></td>
+      <tr id="psym-137" class="external-row">
+        <td class="external-num"><a href="transfinite-approx-pred.html" class="num-anchor">137</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6430,8 +6387,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-139" class="external-row">
-        <td class="external-num"><a href="transfinite-rec-op.html" class="num-anchor">139</a></td>
+      <tr id="psym-138" class="external-row">
+        <td class="external-num"><a href="transfinite-rec-op.html" class="num-anchor">138</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6473,8 +6430,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-140" class="external-row">
-        <td class="external-num"><a href="von-neumann-step-g-op.html" class="num-anchor">140</a></td>
+      <tr id="psym-139" class="external-row">
+        <td class="external-num"><a href="von-neumann-step-g-op.html" class="num-anchor">139</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>
@@ -6516,8 +6473,8 @@
           </table>
         </td>
       </tr>
-      <tr id="psym-141" class="external-row">
-        <td class="external-num"><a href="subst-var-op.html" class="num-anchor">141</a></td>
+      <tr id="psym-140" class="external-row">
+        <td class="external-num"><a href="subst-var-op.html" class="num-anchor">140</a></td>
         <td class="external-entity">
           <table class="internal-entity-table">
             <tbody>

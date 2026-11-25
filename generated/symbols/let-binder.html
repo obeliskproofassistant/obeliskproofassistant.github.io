@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: let v = t in ⟦𝛗⟧ &mdash; Explicit Substitution / Let-Binding Operator</title>
+  <title>Symbol Reference: let x = t in e &mdash; Explicit Substitution let x = t in e (MKTD1 ESubst, MKTD2 Let)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -463,7 +463,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: let v = t in ⟦𝛗⟧ &mdash; Explicit Substitution / Let-Binding Operator</h1>
+      <h1>Symbol Reference: let x = t in e &mdash; Explicit Substitution let x = t in e (MKTD1 ESubst, MKTD2 Let)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -484,8 +484,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Explicit Substitution / Let-Binding Operator</h2>
-      <p class="section-desc">Explicit substitution binder <code>let v = t in ⟦𝛗⟧</code> binding variable <code>v</code> to value <code>t</code> inside <code>𝛗</code> (Entry DefMetaInstantiation (4.01)).</p>
+      <h2>Explicit Substitution let x = t in e (MKTD1 ESubst, MKTD2 Let)</h2>
+      <p class="section-desc"><code>let x = t in e</code> binds the variable <code>x</code> to <code>t</code> in the body <code>e</code>; it denotes <code>e[t/x]</code>.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -499,24 +499,24 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">let v = t in ⟦𝛗⟧</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">let x = t in e</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Symbol (LaTeX)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathbf{let}\;v = t\;\mathbf{in}\;\varphi\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathbf{let}\;v = t\;\mathbf{in}\;\varphi</code></div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{let}\;x = t\;\mathsf{in}\;e\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{let}\;x = t\;\mathsf{in}\;e</code></div>
             </td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Symbol (ANSII)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>let v = t in [| phi |]</code></div>
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>let x = t in e</code></div>
             </td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Category</td>
-            <td class="external-entity"><span class="badge badge-def">Binder (Explicit Substitution Operator)</span></td>
+            <td class="external-entity"><span class="badge badge-def">Binder (Explicit Substitution)</span></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metalevel</td>
@@ -532,7 +532,7 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>(v : Variable) × (t : A) × B → B</code></td>
+            <td class="external-entity"><code>(x : Variable) × (t : A.Expression) × (e : B.Expression) → B.Expression</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
@@ -559,13 +559,13 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>SML AST Constructor:</strong> <code>ELet of (UCol * UCol * 'a * 'b LBound_id)</code> in <code>typetheory.ML:804</code>. <strong>Classification:</strong> Binder. Both <code>let</code> and <code>in</code> resolve to this explicit substitution binder.</p></td>
+            <td class="external-entity" style="line-height: 1.65;"><p>In MKTD2 the constructor <code>Let</code> (<code>dependent_syntax.ML</code>) reduces by &zeta;: <code>let x = t in e</code> &rarr; <code>e[t/x]</code>. In MKTD1 the constructor <code>ESubst</code> exists in every sort but has no printer, no typing and no inference rule (departure D5 of <code>mktd1_model.tex</code>). The keywords <code>let</code> and <code>in</code> are parts of this one symbol.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="../manual.html#DefMetaInstantiation" class="sym-link">Axiom DefMetaInstantiation (4.01): Instantiation</a></li>
-<li><a href="ffi-pred.html" class="sym-link">Free-For-Instantiation Guard FFI</a></li>
+<li><a href="substitution-let.html" class="sym-link">Metatheoretic Substitution [t/x]</a></li>
+<li><a href="binders.html" class="sym-link">Binders</a></li>
 </ul></td>
           </tr>
         </tbody>
