@@ -11,7 +11,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Symbol Reference: Emb  /  ↪ &mdash; Canonical Embedding Operator (Deep-to-Shallow / Subsort / Universe Embedding)</title>
+  <title>Symbol Reference: Emb &mdash; Type-to-Predicate Embedding (Emb, constructors LTpEmb / TyTpEmb)</title>
   <script>
     window.MathJax = {
       tex: {
@@ -463,7 +463,7 @@
         <a class="nav-link" href="../theory_db.json">JSON DB</a>
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
-      <h1>Symbol Reference: Emb  /  ↪ &mdash; Canonical Embedding Operator (Deep-to-Shallow / Subsort / Universe Embedding)</h1>
+      <h1>Symbol Reference: Emb &mdash; Type-to-Predicate Embedding (Emb, constructors LTpEmb / TyTpEmb)</h1>
       <p class="subtitle">Personal Symbol Reference Page in <strong>MKTD1-system</strong> &amp; <strong>MKTD2-system</strong> (Morse-Kelley + Tarski + Dunaev) &mdash; <a href="index.html" style="color: #38bdf8;">All Personal Symbol Pages</a> | <a href="../symbols.html" style="color: #38bdf8;">Full Symbol Registry</a></p>
       <div class="controls-bar">
         <div class="control-group">
@@ -484,8 +484,8 @@
   <main>
   <section class="manual-section" id="symbol-personal-page">
     <div class="section-header">
-      <h2>Canonical Embedding Operator (Deep-to-Shallow / Subsort / Universe Embedding)</h2>
-      <p class="section-desc">Canonically embeds a named or parameterized class into the syntactic expression layer or embeds a sub-conglomerate into a larger domain.</p>
+      <h2>Type-to-Predicate Embedding (Emb, constructors LTpEmb / TyTpEmb)</h2>
+      <p class="section-desc"><code>Emb(A)</code> is the predicate of a type expression <code>A</code>: it holds of <code>x</code> exactly when <code>x : A</code>. A predicate (<code>LPredicate_p</code>) is either <code>Def(x. 𝛗)</code>, given by a formula, or <code>Emb(A)</code>, given by a type.</p>
     </div>
     <div class="table-container">
       <table class="section-external-table">
@@ -499,19 +499,19 @@
           <tr class="external-row row-unicode">
             <td class="external-num">Symbol (Unicode)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">Emb  /  ↪</div>
+              <div class="formula-unicode" style="font-size: 1.25rem; font-weight: 700;">Emb</div>
             </td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Symbol (LaTeX)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{Emb} \; / \; \hookrightarrow\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{Emb} \; / \; \hookrightarrow</code></div>
+              <div class="formula-latex" style="font-size: 1.25rem;">\(\mathsf{Emb}\) &nbsp; <code style="font-size: 0.9rem; color: #94a3b8;">\mathsf{Emb}</code></div>
             </td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Symbol (ANSII)</td>
             <td class="external-entity formula-cell">
-              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>Emb / Emb</code></div>
+              <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>Emb</code></div>
             </td>
           </tr>
           <tr class="external-row">
@@ -524,19 +524,19 @@
           </tr>
           <tr class="external-row">
             <td class="external-num">SML AST Constructor</td>
-            <td class="external-entity"><code>Emb : Class → Class.Expression  [Structure-Preserving Subsort / Deep-to-Shallow Embedding]</code></td>
+            <td class="external-entity"><code>Stage 1a: TpEmb :: Truth_p  |  Stage 1b: HPEmb :: Truth.Expre  |  Stage 1c: FEmb :: Fm (= Truth.Expression)  [LTpEmb of 'Huge_Col_EXPRESSION  [datatype LPredicate_p, typetheory.ML]]</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Constructor Arguments</td>
-            <td class="external-entity">1. Semantic parameter or lower-sort term X : Class</td>
+            <td class="external-entity">1. Type expression A : Type.Expression</td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Metatype / Signature</td>
-            <td class="external-entity"><code>Class → Expression  |  Sub-Universe ↪ Ambient Class</code></td>
+            <td class="external-entity"><code>Type.Expression → Predicate</code></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Binder Status</td>
-            <td class="external-entity"><strong>No — Metatheoretic Embedding Functional Symbol</strong></td>
+            <td class="external-entity"><strong>No — Type-to-predicate embedding</strong></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Defining &amp; Formation Laws (Personal Pages)</td>
@@ -547,27 +547,26 @@
           </tr>
           <tr class="external-row row-unicode">
             <td class="external-num">Formation Rule (Unicode)</td>
-            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable X">X</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/emb.html" class="sym-link" title="Structure-Preserving Syntactic & Semantic Embedding functional symbol (Emb)">Emb</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable X">X</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-unicode"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/emb.html" class="sym-link" title="Structure-Preserving Syntactic & Semantic Embedding functional symbol (Emb)">Emb</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Predicate">Predicate</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row row-latex">
             <td class="external-num">Formation Rule (LaTeX)</td>
-            <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{X} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/parentheses.html}{)} }{\href{../symbols/parentheses.html}{(} \href{../symbols/emb.html}{\mathsf{Emb}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{X} \href{../symbols/parentheses.html}{)} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }\)</div></td>
+            <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/type-sort.html}{\mathsf{Type}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }{\href{../symbols/parentheses.html}{(} \href{../symbols/emb.html}{\mathsf{Emb}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/parentheses.html}{)} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/variables.html}{\mathrm{Predicate}} \href{../symbols/parentheses.html}{)} }\)</div></td>
           </tr>
           <tr class="external-row row-ansii">
             <td class="external-num">Formation Rule (ANSII)</td>
-            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable X">X</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/emb.html" class="sym-link" title="Structure-Preserving Syntactic & Semantic Embedding functional symbol (Emb)">Emb</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable X">X</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
+            <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/emb.html" class="sym-link" title="Structure-Preserving Syntactic & Semantic Embedding functional symbol (Emb)">Emb</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Predicate">Predicate</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">How to Understand It</td>
-            <td class="external-entity" style="line-height: 1.65;"><p><strong>How to Understand Embedding (<code>Emb</code> / <code>↪</code>) in MKTD1-system (MKTD1-theory) &amp; MKTD2-system (MKTD2-theory):</strong></p><p>Whereas <code>Enc : A.Expression → Class</code> maps a syntactic expression to its set code, <strong>Embedding</strong> <code>Emb</code> (written symbolically with the hook arrow <code>↪</code>) injects a lower-level syntactic sort or named parameter into a target expression sort:</p><ul><li><strong>Semantic Evaluation Law</strong>: Evaluating an embedded constant/parameter expression under any assignment <code>ρ</code> returns the corresponding semantic object: <code>Val_ρ(Emb(X)) = X</code>.</li><li><strong>Substitution into Quoted Formulas</strong>: Allows parameterizing quoted formulas by represented expressions via <code>‹ 𝛂(⟨Emb(X)⟩) ›</code>.</li><li><strong>MKTD1-system and MKTD2-system Bridge</strong>: Also denotes the structure-preserving embedding of MKTD1-system (MKTD1-theory) derivations into MKTD2-system (MKTD2-theory) Formulas-as-Types proof terms.</li></ul></td>
+            <td class="external-entity" style="line-height: 1.65;"><p>In <code>typetheory.ML</code> the datatype <code>LPredicate_p</code> has the two constructors <code>LTpDef</code> and <code>LTpEmb</code> (and <code>TyPredicate_p</code> the analogous <code>TyTpDef</code> and <code>TyTpEmb</code>). <code>Emb</code> therefore turns a type, which is a conglomerate (FACTBOOK section 4), into the corresponding predicate on classes. It does not map classes to expressions and is not an inclusion of universes.</p></td>
           </tr>
           <tr class="external-row">
             <td class="external-num">Related Symbols &amp; Kernel Entries</td>
             <td class="external-entity"><ul style="margin: 0; padding-left: 1.25rem;">
-<li><a href="enc.html" class="sym-link">Syntactic Encoding Operator Enc</a></li>
-<li><a href="dec.html" class="sym-link">Syntactic Decoding Operator Dec</a></li>
-<li><a href="mu-interpretation.html" class="sym-link">Expression Translation μ_A &amp; Valuation μ_ρ</a></li>
-<li><a href="quotation.html" class="sym-link">Explicit Quotation ‹ ... ›</a></li>
+<li><a href="class-type.html" class="sym-link">Default Type Class</a></li>
+<li><a href="type-sort.html" class="sym-link">Kind of Types Type</a></li>
+<li><a href="typing-colon.html" class="sym-link">Typing Colon :</a></li>
 </ul></td>
           </tr>
         </tbody>
