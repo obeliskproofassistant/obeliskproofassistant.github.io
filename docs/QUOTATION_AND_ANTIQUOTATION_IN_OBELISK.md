@@ -19,11 +19,11 @@ In metaprogramming and formal reflection, four conceptually distinct operations 
 3. **Antiquotation (`⟦u⟧`, constructors `EAnti` / `EEval`):** The dual of quotation (NOTATION.txt).
    Quotation `‹φ›` (LaTeX `\langle\varphi\rangle`) goes one metalevel up; antiquotation `⟦u⟧`
    (U+27E6/U+27E7, `generated/symbols/antiquotation.html`) takes `u : A.Expression` one metalevel down.
-   Inside a quotation template $\text{‹}\dots\llbracket u\rrbracket\dots\text{›}$ it splices the syntax
-   tree $u$ (e.g. $\operatorname{Dec}_A(c)$); outside a quotation it evaluates $u$, written
-   $\llbracket e\rrbracket_\rho = \operatorname{Val}_\rho(e)$ under an assignment $\rho$
-   (`generated/symbols/binder-brackets.html`). Angle brackets are never antiquotation brackets;
-   `⟨a, b⟩` with a comma is a pair.
+   Inside a quotation template ‹… ⟦u⟧ …› it splices the syntax tree $u$ (e.g.
+   $\operatorname{Dec}_A(c)$); outside a quotation it evaluates $u$ (LaTeX $[\![ e ]\!]$). The
+   semantics writes the same operation as the denotation ⟦e⟧_ρ under an assignment ρ. White square
+   brackets have no other meaning, and angle brackets denote only quotation; the ordered pair is
+   `(a, b)` (FACTBOOK §7).
 4. **Type-Indexed Expression Translation ($\mu_A$) vs. Assignment-Indexed Valuation ($\mu^{\mathrm{val}}_\rho$):**
    Reconciles the type-indexed translation $\mu_A : A.\mathrm{Expression} \to \mathrm{Class}.\mathrm{Expression}$ used in `130_classes_as_types.tex` and `DefMetaGeneralisation` (`4.02`) with the assignment-indexed valuation shorthand $\mu^{\mathrm{val}}_\rho : \mathrm{Class}.\mathrm{Expression} \to \mathrm{Class}$ used on the symbol pages (`generated/symbols/mu-interpretation.html`, `generated/symbols/eval.html`) via the explicit composite
    $$\operatorname{Eval}_{(A, \rho)}(c) \;=\; \operatorname{Val}_\rho\!\bigl(\mu_A(\operatorname{Dec}_A(c))\bigr).$$

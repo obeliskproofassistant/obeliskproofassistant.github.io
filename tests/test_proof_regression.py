@@ -301,6 +301,13 @@ class TestProofRegression(unittest.TestCase):
         self.assertNotIn("if\u1d48\u2091\u209a", gen_html)
         self.assertNotIn("if_{dep}", gen_html)
 
+    def test_retired_symbol_pages_absent(self):
+        """One glyph, one meaning: page 03 (a second meaning of the antiquotation brackets) and the
+        tau binder (no kernel constructor; duplicate of epsilon) are retired."""
+        sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
+        for page in ("binder-brackets.html", "tau-binder.html"):
+            self.assertFalse(os.path.exists(os.path.join(sym_dir, page)), page)
+
     def test_personal_symbol_pages_and_links(self):
         """Directive 15: Personal symbol reference pages exist in generated/symbols/ and symbols link to them."""
         sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
@@ -308,7 +315,6 @@ class TestProofRegression(unittest.TestCase):
             "index.html",
             "quotation.html",
             "antiquotation.html",
-            "binder-brackets.html",
             "metalevel-brackets.html",
             "enc.html",
             "dec.html",
@@ -384,7 +390,6 @@ class TestProofRegression(unittest.TestCase):
             "name-sort.html",
             "bool-sort.html",
             "prop-sort.html",
-            "tau-binder.html",
             "definitional-eq.html",
         ):
             self.assertTrue(os.path.isfile(os.path.join(sym_dir, page)), f"Missing symbol page: {page}")
