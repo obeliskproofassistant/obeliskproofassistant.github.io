@@ -540,7 +540,7 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("AxmSemanticCompletenessOfFullTheory", by_name)
         sem_comp_f = by_name["AxmSemanticCompletenessOfFullTheory"]
         self.assertEqual(sem_comp_f["num"], "3.73")
-        self.assertEqual(sem_comp_f["kind"], "Axiom")
+        self.assertEqual(sem_comp_f["kind"], "Statement")
         self.assertEqual(sem_comp_f["status"], "Metatheorem (Holds by the Definition of F, Not a Kernel Rule)")
         self.assertIn("Semantic completeness", sem_comp_f["comment"])
         self.assertIn("eval", sem_comp_f["formula_unicode"])
@@ -548,7 +548,7 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("AxmNegationCompletenessOfFullTheory", by_name)
         neg_comp_f = by_name["AxmNegationCompletenessOfFullTheory"]
         self.assertEqual(neg_comp_f["num"], "3.74")
-        self.assertEqual(neg_comp_f["kind"], "Axiom")
+        self.assertEqual(neg_comp_f["kind"], "Statement")
         self.assertEqual(neg_comp_f["status"], "Metatheorem (Holds by the Definition of F, Not a Kernel Rule)")
         self.assertIn("negation-completeness", neg_comp_f["comment"])
 

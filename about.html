@@ -852,7 +852,7 @@ width="100" height="100"
             <strong>Decidability of Definitional Equality:</strong> Term normalization is deterministic and terminating for all registered kernel definitions.
           </li>
           <li>
-            <strong>Conservativity of Definitions:</strong> All new definitions are verified to contain no free RHS variables, no circularity, and matching parameters, guaranteeing conservative extensions.
+            <strong>Conservativity of Definitions:</strong> Ordinary definitions are checked by the kernel's definition store (no free right-hand-side variables, no circularity, matching parameters), which makes them conservative. The few names on the kernel allowlist of general definitions are unchecked postulates and are labelled so in the catalogue (FACTBOOK §3).
           </li>
           <li>
             <strong>Trusted Computing Base (TCB):</strong> Strictly confined to the Standard ML checker (<code>newchecker.ML</code> / <code>nbg_compiler.ML</code>), primitive rules (Modus Ponens, Generalisation), and primitive set-theoretic axioms.
