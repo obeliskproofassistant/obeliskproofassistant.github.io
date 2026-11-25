@@ -305,7 +305,7 @@ class TestProofRegression(unittest.TestCase):
         """One glyph, one meaning: page 03 (a second meaning of the antiquotation brackets) and the
         tau binder (no kernel constructor; duplicate of epsilon) are retired."""
         sym_dir = os.path.join(SITE_DIR, "generated", "symbols")
-        for page in ("binder-brackets.html", "tau-binder.html"):
+        for page in ("binder-brackets.html", "tau-binder.html", "prop-bool.html", "variable-expression.html", "hygiene-ffi-fv.html", "code.html"):
             self.assertFalse(os.path.exists(os.path.join(sym_dir, page)), page)
 
     def test_personal_symbol_pages_and_links(self):
@@ -318,21 +318,17 @@ class TestProofRegression(unittest.TestCase):
             "metalevel-brackets.html",
             "enc.html",
             "dec.html",
-            "code.html",
             "emb.html",
             "mu-interpretation.html",
             "eval.html",
             "class-type.html",
             "typing-colon.html",
             "type-sort.html",
-            "prop-bool.html",
             "fm-sort.html",
             "stmt-sort.html",
             "ctx-sort.html",
             "theory-sort.html",
             "prf-sort.html",
-            "variable-expression.html",
-            "hygiene-ffi-fv.html",
             "substitution-let.html",
             "binders.html",
             "conditionals-if-dep.html",
