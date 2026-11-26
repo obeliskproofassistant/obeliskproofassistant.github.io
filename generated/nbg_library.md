@@ -11,7 +11,7 @@
 
 Agent-friendly Markdown edition generated directly from `set_theory_prover/program/verified_theorems.ML` via `nbg_html_generator.ML` for **MKTD2-system / MKTD2-prover (MKTD2-framework, MKTD2-theory)**.
 
-- **Live Kernel Audit:** 239/239 Mechanically Type-Checked Records (216 Derived Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
+- **Live Kernel Audit:** 192/192 Mechanically Type-Checked Records (169 Derived Theorems, 16 Conservative Definitions, 7 Irreducible MK/NBG Axioms).
 - **Machine-Readable JSON Database:** [nbg_library.json](nbg_library.json)
 - **MKTD1-system Complete Entity Database (Markdown):** [manual.md](manual.md)
 
@@ -1041,957 +1041,84 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
-### NBG-115 `thm_forcing_check_name_refl` (Derived)
+### NBG-115 `thm_dunaev_pair_refl_conj` (Derived)
 
-- **Identifier:** `thm_forcing_check_name_refl` (`NBG-115`, kind: `Derived`)
+- **Identifier:** `thm_dunaev_pair_refl_conj` (`NBG-115`, kind: `Derived`)
 - **Statement (Unicode):** `Π(P:Class), Π(x:Class), Π(p:Class), (((x, p) = (x, p)) × (((p ∈ P) × (x ∈ V)) → (((x, p) = (x, p)) × (x ∈ V))))`
 - **Statement (ANSII):** `Pi(P:Class), Pi(x:Class), Pi(p:Class), (((x, p) = (x, p)) * (((p in P) * (x in V)) -> (((x, p) = (x, p)) * (x in V))))`
 - **Proof Term:** `(λ(P:Class). (λ(x:Class). (λ(p:Class). ⟨refl((x, p)), (λ(hCond:((p ∈ P) × (x ∈ V))). ⟨refl((x, p)), snd(hCond)⟩)⟩)))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
-### NBG-116 `thm_veblen_normal_fixed_point` (Derived)
+### NBG-116 `thm_eq_sym_with_ord` (Derived)
 
-- **Identifier:** `thm_veblen_normal_fixed_point` (`NBG-116`, kind: `Derived`)
+- **Identifier:** `thm_eq_sym_with_ord` (`NBG-116`, kind: `Derived`)
 - **Statement (Unicode):** `Π(F:Class), Π(a:Class), ((Ord(a) × (ValOf(F, a) = a)) → (Ord(a) × (a = ValOf(F, a))))`
 - **Statement (ANSII):** `Pi(F:Class), Pi(a:Class), ((Ord(a) * (ValOf(F, a) = a)) -> (Ord(a) * (a = ValOf(F, a))))`
 - **Proof Term:** `(λ(F:Class). (λ(a:Class). (λ(hFix:(Ord(a) × (ValOf(F, a) = a))). ⟨fst(hFix), (ax_eq_sym(ValOf(F, a), a) snd(hFix))⟩)))`
 - **Axioms Used:** `ax_eq_sym`
 - **Definitions Used:** `(none)`
 
-### NBG-117 `thm_club_intersection_closed` (Derived)
+### NBG-117 `thm_union_in_inter_of_union_closed` (Derived)
 
-- **Identifier:** `thm_club_intersection_closed` (`NBG-117`, kind: `Derived`)
+- **Identifier:** `thm_union_in_inter_of_union_closed` (`NBG-117`, kind: `Derived`)
 - **Statement (Unicode):** `Π(C1:Class), Π(C2:Class), Π(B:Class), ((((B ⊆ C1) × (B ⊆ C2)) × ((Π(D:Class), ((D ⊆ C1) → (⋃(D) ∈ C1))) × (Π(D:Class), ((D ⊆ C2) → (⋃(D) ∈ C2))))) → (⋃(B) ∈ (C1 ∩ C2)))`
 - **Statement (ANSII):** `Pi(C1:Class), Pi(C2:Class), Pi(B:Class), ((((B c= C1) * (B c= C2)) * ((Pi(D:Class), ((D c= C1) -> (Union(D) in C1))) * (Pi(D:Class), ((D c= C2) -> (Union(D) in C2))))) -> (Union(B) in (C1 n* C2)))`
 - **Proof Term:** `(λ(C1:Class). (λ(C2:Class). (λ(B:Class). (λ(hClub:(((B ⊆ C1) × (B ⊆ C2)) × ((Π(D:Class), ((D ⊆ C1) → (⋃(D) ∈ C1))) × (Π(D:Class), ((D ⊆ C2) → (⋃(D) ∈ C2)))))). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∩ B))). let res:((z ∈ A) × (z ∈ B)) = h in res), (λ(h:((z ∈ A) × (z ∈ B))). let res:(z ∈ (A ∩ B)) = h in res)⟩))) C1) C2) ⋃(B))) ⟨((fst(snd(hClub)) B) fst(fst(hClub))), ((snd(snd(hClub)) B) snd(fst(hClub)))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
-### NBG-118 `thm_fodor_regressive_witness` (Derived)
+### NBG-119 `thm_eq_sym_with_pair_member` (Derived)
 
-- **Identifier:** `thm_fodor_regressive_witness` (`NBG-118`, kind: `Derived`)
-- **Statement (Unicode):** `Π(S:Class), Π(F:Class), ((Σ(a:Class), Σ(b:Class), ((a ∈ S) × ((b ∈ a) × (ValOf(F, a) = b)))) → Σ(b:Class), Σ(a:Class), ((a ∈ S) × ((b ∈ a) × (ValOf(F, a) = b))))`
-- **Statement (ANSII):** `Pi(S:Class), Pi(F:Class), ((Sigma(a:Class), Sigma(b:Class), ((a in S) * ((b in a) * (ValOf(F, a) = b)))) -> Sigma(b:Class), Sigma(a:Class), ((a in S) * ((b in a) * (ValOf(F, a) = b))))`
-- **Proof Term:** `(λ(S:Class). (λ(F:Class). (λ(hReg:Σ(a:Class), Σ(b:Class), ((a ∈ S) × ((b ∈ a) × (ValOf(F, a) = b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩)))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-119 `thm_bval_extensionality_witness` (Derived)
-
-- **Identifier:** `thm_bval_extensionality_witness` (`NBG-119`, kind: `Derived`)
+- **Identifier:** `thm_eq_sym_with_pair_member` (`NBG-119`, kind: `Derived`)
 - **Statement (Unicode):** `Π(u:Class), Π(v:Class), Π(p:Class), Π(b:Class), ((((u, p) ∈ b) × (u = v)) → (((u, p) ∈ b) × (v = u)))`
 - **Statement (ANSII):** `Pi(u:Class), Pi(v:Class), Pi(p:Class), Pi(b:Class), ((((u, p) in b) * (u = v)) -> (((u, p) in b) * (v = u)))`
 - **Proof Term:** `(λ(u:Class). (λ(v:Class). (λ(p:Class). (λ(b:Class). (λ(hBval:(((u, p) ∈ b) × (u = v))). ⟨fst(hBval), (ax_eq_sym(u, v) snd(hBval))⟩)))))`
 - **Axioms Used:** `ax_eq_sym`
 - **Definitions Used:** `(none)`
 
-### NBG-120 `thm_gale_stewart_strategy_exclusivity` (Derived)
+### NBG-124 `thm_subclass_union_empty` (Derived)
 
-- **Identifier:** `thm_gale_stewart_strategy_exclusivity` (`NBG-120`, kind: `Derived`)
-- **Statement (Unicode):** `Π(G:Class), Π(s1:Class), Π(s2:Class), ((((s1 ∈ G) × (s2 ∈ G)) → 𝟘) → ((s1 ∈ G) → ((s2 ∈ G) → 𝟘)))`
-- **Statement (ANSII):** `Pi(G:Class), Pi(s1:Class), Pi(s2:Class), ((((s1 in G) * (s2 in G)) -> Void) -> ((s1 in G) -> ((s2 in G) -> Void)))`
-- **Proof Term:** `(λ(G:Class). (λ(s1:Class). (λ(s2:Class). (λ(hExcl:(((s1 ∈ G) × (s2 ∈ G)) → 𝟘)). (λ(h1:(s1 ∈ G)). (λ(h2:(s2 ∈ G)). (hExcl ⟨h1, h2⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-121 `thm_gale_stewart_closed_det_proj` (Derived)
-
-- **Identifier:** `thm_gale_stewart_closed_det_proj` (`NBG-121`, kind: `Derived`)
-- **Statement (Unicode):** `Π(G:Class), Π(C:Class), Π(W1:Class), (((G ∈ C) × ((G ∈ C) → Σ(s:Class), ((G, s) ∈ W1))) → Σ(s:Class), ((G, s) ∈ W1))`
-- **Statement (ANSII):** `Pi(G:Class), Pi(C:Class), Pi(W1:Class), (((G in C) * ((G in C) -> Sigma(s:Class), ((G, s) in W1))) -> Sigma(s:Class), ((G, s) in W1))`
-- **Proof Term:** `(λ(G:Class). (λ(C:Class). (λ(W1:Class). (λ(hClosedDet:((G ∈ C) × ((G ∈ C) → Σ(s:Class), ((G, s) ∈ W1)))). (snd(hClosedDet) fst(hClosedDet))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-122 `thm_borel_determinacy_modus_ponens` (Derived)
-
-- **Identifier:** `thm_borel_determinacy_modus_ponens` (`NBG-122`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:Class), Π(Det:Class), Π(g:Class), (((Π(x:Class), ((x ∈ B) → (x ∈ Det))) × (g ∈ B)) → (g ∈ Det))`
-- **Statement (ANSII):** `Pi(B:Class), Pi(Det:Class), Pi(g:Class), (((Pi(x:Class), ((x in B) -> (x in Det))) * (g in B)) -> (g in Det))`
-- **Proof Term:** `(λ(B:Class). (λ(Det:Class). (λ(g:Class). (λ(hBorel:((Π(x:Class), ((x ∈ B) → (x ∈ Det))) × (g ∈ B))). ((fst(hBorel) g) snd(hBorel))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-123 `thm_semigroup_dyson_phillips_step` (Derived)
-
-- **Identifier:** `thm_semigroup_dyson_phillips_step` (`NBG-123`, kind: `Derived`)
-- **Statement (Unicode):** `Π(S:Class), Π(T0:Class), Π(P:Class), ((((T0 ∈ S) × (P ∈ S)) × (Π(A:Class), Π(B:Class), (((A ∈ S) × (B ∈ S)) → ((A, B) ∈ S)))) → ((T0, P) ∈ S))`
-- **Statement (ANSII):** `Pi(S:Class), Pi(T0:Class), Pi(P:Class), ((((T0 in S) * (P in S)) * (Pi(A:Class), Pi(B:Class), (((A in S) * (B in S)) -> ((A, B) in S)))) -> ((T0, P) in S))`
-- **Proof Term:** `(λ(S:Class). (λ(T0:Class). (λ(P:Class). (λ(hDP:(((T0 ∈ S) × (P ∈ S)) × (Π(A:Class), Π(B:Class), (((A ∈ S) × (B ∈ S)) → ((A, B) ∈ S))))). (((snd(hDP) T0) P) fst(hDP))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-124 `thm_dunaev_list_append_nil_right` (Derived)
-
-- **Identifier:** `thm_dunaev_list_append_nil_right` (`NBG-124`, kind: `Derived`)
+- **Identifier:** `thm_subclass_union_empty` (`NBG-124`, kind: `Derived`)
 - **Statement (Unicode):** `Π(L:Class), ((L ⊆ (L ∪ ∅)) × (∅ ⊆ L))`
 - **Statement (ANSII):** `Pi(L:Class), ((L c= (L u+ EmptySet)) * (EmptySet c= L))`
 - **Proof Term:** `(λ(L:Class). ⟨(((λ(A:Class). (λ(B:Class). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) (A ∪ B))) (λ(z:Class). (λ(hz:(z ∈ A)). (snd(((((λ(A:Class). (λ(B:Class). (λ(z:Class). ⟨(λ(h:(z ∈ (A ∪ B))). let res:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C)) = h in res), (λ(h:Π(C:Prop), (((z ∈ A) → C) → (((z ∈ B) → C) → C))). let res:(z ∈ (A ∪ B)) = h in res)⟩))) A) B) z)) (λ(C:Prop). (λ(fa:((z ∈ A) → C)). (λ(fb:((z ∈ B) → C)). (fa hz)))))))))) L) ∅), ((λ(X:Class). (λ(z:Class). (λ(h:(z ∈ ∅)). ax_false_elim((z ∈ X), ax_empty_no_elements(z, h))))) L)⟩)`
 - **Axioms Used:** `ax_false_elim, ax_empty_no_elements`
 - **Definitions Used:** `(none)`
 
-### NBG-125 `thm_family_canonical_record_proj` (Derived)
+### NBG-125 `thm_subclass_transfer_pair_member` (Derived)
 
-- **Identifier:** `thm_family_canonical_record_proj` (`NBG-125`, kind: `Derived`)
+- **Identifier:** `thm_subclass_transfer_pair_member` (`NBG-125`, kind: `Derived`)
 - **Statement (Unicode):** `Π(F:Class), Π(B:Class), Π(x:Class), Π(y:Class), (((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F))) → ((x ∈ B) × ((x, y) ∈ B)))`
 - **Statement (ANSII):** `Pi(F:Class), Pi(B:Class), Pi(x:Class), Pi(y:Class), (((F c= B) * ((x in B) * ((x, y) in F))) -> ((x in B) * ((x, y) in B)))`
 - **Proof Term:** `(λ(F:Class). (λ(B:Class). (λ(x:Class). (λ(y:Class). (λ(hFam:((F ⊆ B) × ((x ∈ B) × ((x, y) ∈ F)))). ⟨fst(snd(hFam)), (((fst((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) F) B)) fst(hFam)) (x, y)) snd(snd(hFam)))⟩)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
-### NBG-126 `thm_yoneda_identity_eval` (Derived)
+### NBG-127 `thm_eq_sym_mutual_inverse_values` (Derived)
 
-- **Identifier:** `thm_yoneda_identity_eval` (`NBG-126`, kind: `Derived`)
-- **Statement (Unicode):** `Π(F:Class), Π(eta:Class), Π(A:Class), (((IdMor(A) ∈ A) × ((IdMor(A) ∈ A) → (ValOf(eta, IdMor(A)) ∈ ValOf(F, A)))) → (ValOf(eta, IdMor(A)) ∈ ValOf(F, A)))`
-- **Statement (ANSII):** `Pi(F:Class), Pi(eta:Class), Pi(A:Class), (((IdMor(A) in A) * ((IdMor(A) in A) -> (ValOf(eta, IdMor(A)) in ValOf(F, A)))) -> (ValOf(eta, IdMor(A)) in ValOf(F, A)))`
-- **Proof Term:** `(λ(F:Class). (λ(eta:Class). (λ(A:Class). (λ(hYon:((IdMor(A) ∈ A) × ((IdMor(A) ∈ A) → (ValOf(eta, IdMor(A)) ∈ ValOf(F, A))))). (snd(hYon) fst(hYon))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-127 `thm_yoneda_roundtrip_id` (Derived)
-
-- **Identifier:** `thm_yoneda_roundtrip_id` (`NBG-127`, kind: `Derived`)
+- **Identifier:** `thm_eq_sym_mutual_inverse_values` (`NBG-127`, kind: `Derived`)
 - **Statement (Unicode):** `Π(Phi:Class), Π(Psi:Class), Π(u:Class), (((ValOf(Phi, ValOf(Psi, u)) = u) × (ValOf(Psi, ValOf(Phi, u)) = u)) → ((u = ValOf(Phi, ValOf(Psi, u))) × (u = ValOf(Psi, ValOf(Phi, u)))))`
 - **Statement (ANSII):** `Pi(Phi:Class), Pi(Psi:Class), Pi(u:Class), (((ValOf(Phi, ValOf(Psi, u)) = u) * (ValOf(Psi, ValOf(Phi, u)) = u)) -> ((u = ValOf(Phi, ValOf(Psi, u))) * (u = ValOf(Psi, ValOf(Phi, u)))))`
 - **Proof Term:** `(λ(Phi:Class). (λ(Psi:Class). (λ(u:Class). (λ(hRT:((ValOf(Phi, ValOf(Psi, u)) = u) × (ValOf(Psi, ValOf(Phi, u)) = u))). ⟨(ax_eq_sym(ValOf(Phi, ValOf(Psi, u)), u) fst(hRT)), (ax_eq_sym(ValOf(Psi, ValOf(Phi, u)), u) snd(hRT))⟩))))`
 - **Axioms Used:** `ax_eq_sym`
 - **Definitions Used:** `(none)`
 
-### NBG-128 `thm_kan_extension_adjunction_unit` (Derived)
+### NBG-129 `thm_closed_under_composite_value` (Derived)
 
-- **Identifier:** `thm_kan_extension_adjunction_unit` (`NBG-128`, kind: `Derived`)
-- **Statement (Unicode):** `Π(K:Class), Π(F:Class), Π(G:Class), Π(Lan:Class), (((F ⊆ (K, Lan)) × ((F ⊆ (K, G)) → (Lan ⊆ G))) → ((F ⊆ (K, G)) → ((F ⊆ (K, Lan)) × (Lan ⊆ G))))`
-- **Statement (ANSII):** `Pi(K:Class), Pi(F:Class), Pi(G:Class), Pi(Lan:Class), (((F c= (K, Lan)) * ((F c= (K, G)) -> (Lan c= G))) -> ((F c= (K, G)) -> ((F c= (K, Lan)) * (Lan c= G))))`
-- **Proof Term:** `(λ(K:Class). (λ(F:Class). (λ(G:Class). (λ(Lan:Class). (λ(hKan:((F ⊆ (K, Lan)) × ((F ⊆ (K, G)) → (Lan ⊆ G)))). (λ(hSubG:(F ⊆ (K, G))). ⟨fst(hKan), (snd(hKan) hSubG)⟩))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-129 `thm_schrodinger_feynman_kac_positivity` (Derived)
-
-- **Identifier:** `thm_schrodinger_feynman_kac_positivity` (`NBG-129`, kind: `Derived`)
+- **Identifier:** `thm_closed_under_composite_value` (`NBG-129`, kind: `Derived`)
 - **Statement (Unicode):** `Π(Pos:Class), Π(Pt:Class), Π(Vpot:Class), Π(u:Class), (((Π(f:Class), ((f ∈ Pos) → (ValOf(Pt, f) ∈ Pos))) × ((Π(f:Class), ((f ∈ Pos) → (ValOf(Vpot, f) ∈ Pos))) × (u ∈ Pos))) → (ValOf(Pt, ValOf(Vpot, u)) ∈ Pos))`
 - **Statement (ANSII):** `Pi(Pos:Class), Pi(Pt:Class), Pi(Vpot:Class), Pi(u:Class), (((Pi(f:Class), ((f in Pos) -> (ValOf(Pt, f) in Pos))) * ((Pi(f:Class), ((f in Pos) -> (ValOf(Vpot, f) in Pos))) * (u in Pos))) -> (ValOf(Pt, ValOf(Vpot, u)) in Pos))`
 - **Proof Term:** `(λ(Pos:Class). (λ(Pt:Class). (λ(Vpot:Class). (λ(u:Class). (λ(hFK:((Π(f:Class), ((f ∈ Pos) → (ValOf(Pt, f) ∈ Pos))) × ((Π(f:Class), ((f ∈ Pos) → (ValOf(Vpot, f) ∈ Pos))) × (u ∈ Pos)))). ((fst(hFK) ValOf(Vpot, u)) ((fst(snd(hFK)) u) snd(snd(hFK)))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
-### NBG-130 `thm_lipschitz_regularity_composition` (Derived)
+### NBG-150 `thm_reflexive_pair_on_members` (Derived)
 
-- **Identifier:** `thm_lipschitz_regularity_composition` (`NBG-130`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Lip:Class), Π(F:Class), Π(G:Class), ((((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip)))) → ((F, G) ∈ Lip))`
-- **Statement (ANSII):** `Pi(Lip:Class), Pi(F:Class), Pi(G:Class), ((((F in Lip) * (G in Lip)) * (Pi(A:Class), Pi(B:Class), (((A in Lip) * (B in Lip)) -> ((A, B) in Lip)))) -> ((F, G) in Lip))`
-- **Proof Term:** `(λ(Lip:Class). (λ(F:Class). (λ(G:Class). (λ(hLip:(((F ∈ Lip) × (G ∈ Lip)) × (Π(A:Class), Π(B:Class), (((A ∈ Lip) × (B ∈ Lip)) → ((A, B) ∈ Lip))))). (((snd(hLip) F) G) fst(hLip))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-131 `thm_dunaev_pair_union_left_distributivity` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_union_left_distributivity` (`NBG-131`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(X:Class), Π(Y:Class), Π(Z:Class), (((Π(C:Prop), (((x ∈ X) → C) → (((x ∈ Y) → C) → C))) × (y ∈ Z)) → Π(C:Prop), ((((x ∈ X) × (y ∈ Z)) → C) → ((((x ∈ Y) × (y ∈ Z)) → C) → C)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(X:Class), Pi(Y:Class), Pi(Z:Class), (((Pi(C:Prop), (((x in X) -> C) -> (((x in Y) -> C) -> C))) * (y in Z)) -> Pi(C:Prop), ((((x in X) * (y in Z)) -> C) -> ((((x in Y) * (y in Z)) -> C) -> C)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((Π(C:Prop), (((x ∈ X) → C) → (((x ∈ Y) → C) → C))) × (y ∈ Z))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Z)) → C)). (λ(fR:(((x ∈ Y) × (y ∈ Z)) → C)). (((fst(h) C) (λ(hxX:(x ∈ X)). (fL ⟨hxX, snd(h)⟩))) (λ(hxY:(x ∈ Y)). (fR ⟨hxY, snd(h)⟩))))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-132 `thm_dunaev_pair_union_right_distributivity` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_union_right_distributivity` (`NBG-132`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(X:Class), Π(Y:Class), Π(Z:Class), (((x ∈ X) × (Π(C:Prop), (((y ∈ Y) → C) → (((y ∈ Z) → C) → C)))) → Π(C:Prop), ((((x ∈ X) × (y ∈ Y)) → C) → ((((x ∈ X) × (y ∈ Z)) → C) → C)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(X:Class), Pi(Y:Class), Pi(Z:Class), (((x in X) * (Pi(C:Prop), (((y in Y) -> C) -> (((y in Z) -> C) -> C)))) -> Pi(C:Prop), ((((x in X) * (y in Y)) -> C) -> ((((x in X) * (y in Z)) -> C) -> C)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(X:Class). (λ(Y:Class). (λ(Z:Class). (λ(h:((x ∈ X) × (Π(C:Prop), (((y ∈ Y) → C) → (((y ∈ Z) → C) → C))))). (λ(C:Prop). (λ(fL:(((x ∈ X) × (y ∈ Y)) → C)). (λ(fR:(((x ∈ X) × (y ∈ Z)) → C)). (((snd(h) C) (λ(hyY:(y ∈ Y)). (fL ⟨fst(h), hyY⟩))) (λ(hyZ:(y ∈ Z)). (fR ⟨fst(h), hyZ⟩))))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-133 `thm_dunaev_pair_intersection_factoring` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_intersection_factoring` (`NBG-133`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(A:Class), Π(B:Class), Π(C:Class), Π(D:Class), ((((x ∈ A) × (y ∈ C)) × ((x ∈ B) × (y ∈ D))) → (((x ∈ A) × (x ∈ B)) × ((y ∈ C) × (y ∈ D))))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), Pi(D:Class), ((((x in A) * (y in C)) * ((x in B) * (y in D))) -> (((x in A) * (x in B)) * ((y in C) * (y in D))))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(h:(((x ∈ A) × (y ∈ C)) × ((x ∈ B) × (y ∈ D)))). ⟨⟨fst(fst(h)), fst(snd(h))⟩, ⟨snd(fst(h)), snd(snd(h))⟩⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-134 `thm_class_difference_union_absorption` (Derived)
-
-- **Identifier:** `thm_class_difference_union_absorption` (`NBG-134`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), ((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ A) × (x ∈ B)) → C) → C))) → (x ∈ A))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), ((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in A) * (x in B)) -> C) -> C))) -> (x in A))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(hOr:Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ A) × (x ∈ B)) → C) → C))). (((hOr (x ∈ A)) (λ(hDiff:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hDiff))) (λ(hInter:((x ∈ A) × (x ∈ B))). fst(hInter)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-135 `thm_forall_biconditional_to_conjunction_of_forall` (Derived)
-
-- **Identifier:** `thm_forall_biconditional_to_conjunction_of_forall` (`NBG-135`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), ((Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))) → ((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A)))))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), ((Pi(X:Class), (((X in A) -> (X in B)) * ((X in B) -> (X in A)))) -> ((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in B) -> (X in A)))))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hIff:Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A)))). ⟨(λ(X:Class). fst((hIff X))), (λ(X:Class). snd((hIff X)))⟩)))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-136 `thm_conjunction_of_forall_to_forall_biconditional` (Derived)
-
-- **Identifier:** `thm_conjunction_of_forall_to_forall_biconditional` (`NBG-136`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), (((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A)))) → Π(X:Class), (((X ∈ A) → (X ∈ B)) × ((X ∈ B) → (X ∈ A))))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), (((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in B) -> (X in A)))) -> Pi(X:Class), (((X in A) -> (X in B)) * ((X in B) -> (X in A))))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(hConj:((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ B) → (X ∈ A))))). (λ(X:Class). ⟨(fst(hConj) X), (snd(hConj) X)⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-137 `thm_relational_composition_witness_monotonicity_left` (Derived)
-
-- **Identifier:** `thm_relational_composition_witness_monotonicity_left` (`NBG-137`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(R:Class), Π(R2:Class), Π(S:Class), ((((x ∈ R) × (y ∈ S)) × ((x ∈ R) → (x ∈ R2))) → ((x ∈ R2) × (y ∈ S)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(R:Class), Pi(R2:Class), Pi(S:Class), ((((x in R) * (y in S)) * ((x in R) -> (x in R2))) -> ((x in R2) * (y in S)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(R2:Class). (λ(S:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((x ∈ R) → (x ∈ R2)))). ⟨(snd(h) fst(fst(h))), snd(fst(h))⟩))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-138 `thm_relational_composition_witness_monotonicity_right` (Derived)
-
-- **Identifier:** `thm_relational_composition_witness_monotonicity_right` (`NBG-138`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(R:Class), Π(S:Class), Π(S2:Class), ((((x ∈ R) × (y ∈ S)) × ((y ∈ S) → (y ∈ S2))) → ((x ∈ R) × (y ∈ S2)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(R:Class), Pi(S:Class), Pi(S2:Class), ((((x in R) * (y in S)) * ((y in S) -> (y in S2))) -> ((x in R) * (y in S2)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(R:Class). (λ(S:Class). (λ(S2:Class). (λ(h:(((x ∈ R) × (y ∈ S)) × ((y ∈ S) → (y ∈ S2)))). ⟨fst(fst(h)), (snd(h) snd(fst(h)))⟩))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-139 `thm_class_symmetric_difference_left_elimination` (Derived)
-
-- **Identifier:** `thm_class_symmetric_difference_left_elimination` (`NBG-139`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), (((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ A) → 𝟘)) → ((x ∈ B) × ((x ∈ A) → 𝟘)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), (((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in B) * ((x in A) -> Void)) -> C) -> C))) * ((x in A) -> Void)) -> ((x in B) * ((x in A) -> Void)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ A) → 𝟘))). ⟨(((fst(h) (x ∈ B)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). ax_false_elim((x ∈ B), (snd(h) fst(hL))))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). fst(hR))), snd(h)⟩))))`
-- **Axioms Used:** `ax_false_elim`
-- **Definitions Used:** `(none)`
-
-### NBG-140 `thm_class_symmetric_difference_right_elimination` (Derived)
-
-- **Identifier:** `thm_class_symmetric_difference_right_elimination` (`NBG-140`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), (((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ B) → 𝟘)) → ((x ∈ A) × ((x ∈ B) → 𝟘)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), (((Pi(C:Prop), ((((x in A) * ((x in B) -> Void)) -> C) -> ((((x in B) * ((x in A) -> Void)) -> C) -> C))) * ((x in B) -> Void)) -> ((x in A) * ((x in B) -> Void)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((x ∈ A) × ((x ∈ B) → 𝟘)) → C) → ((((x ∈ B) × ((x ∈ A) → 𝟘)) → C) → C))) × ((x ∈ B) → 𝟘))). ⟨(((fst(h) (x ∈ A)) (λ(hL:((x ∈ A) × ((x ∈ B) → 𝟘))). fst(hL))) (λ(hR:((x ∈ B) × ((x ∈ A) → 𝟘))). ax_false_elim((x ∈ A), (snd(h) fst(hR))))), snd(h)⟩))))`
-- **Axioms Used:** `ax_false_elim`
-- **Definitions Used:** `(none)`
-
-### NBG-141 `thm_function_fiber_intersection_disjointness` (Derived)
-
-- **Identifier:** `thm_function_fiber_intersection_disjointness` (`NBG-141`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y1:Class), Π(y2:Class), Π(F1:Class), Π(F2:Class), ((((x ∈ F1) × ((x ∈ F1) → (y1 = y2))) × ((x ∈ F2) × ((y1 = y2) → 𝟘))) → 𝟘)`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y1:Class), Pi(y2:Class), Pi(F1:Class), Pi(F2:Class), ((((x in F1) * ((x in F1) -> (y1 = y2))) * ((x in F2) * ((y1 = y2) -> Void))) -> Void)`
-- **Proof Term:** `(λ(x:Class). (λ(y1:Class). (λ(y2:Class). (λ(F1:Class). (λ(F2:Class). (λ(h:(((x ∈ F1) × ((x ∈ F1) → (y1 = y2))) × ((x ∈ F2) × ((y1 = y2) → 𝟘)))). (snd(snd(h)) (snd(fst(h)) fst(fst(h))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-142 `thm_image_subclass_transitivity_witness` (Derived)
-
-- **Identifier:** `thm_image_subclass_transitivity_witness` (`NBG-142`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(A:Class), Π(A2:Class), Π(B:Class), Π(B2:Class), ((((x ∈ A) × (y ∈ B)) × (((x ∈ A) → (x ∈ A2)) × ((y ∈ B) → (y ∈ B2)))) → ((x ∈ A2) × (y ∈ B2)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(A:Class), Pi(A2:Class), Pi(B:Class), Pi(B2:Class), ((((x in A) * (y in B)) * (((x in A) -> (x in A2)) * ((y in B) -> (y in B2)))) -> ((x in A2) * (y in B2)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(A:Class). (λ(A2:Class). (λ(B:Class). (λ(B2:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × (((x ∈ A) → (x ∈ A2)) × ((y ∈ B) → (y ∈ B2))))). ⟨(fst(snd(h)) fst(fst(h))), (snd(snd(h)) snd(fst(h)))⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-143 `thm_preimage_union_decomposition_witness` (Derived)
-
-- **Identifier:** `thm_preimage_union_decomposition_witness` (`NBG-143`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(y:Class), Π(Dom:Class), Π(B1:Class), Π(B2:Class), (((x ∈ Dom) × (Π(C:Prop), (((y ∈ B1) → C) → (((y ∈ B2) → C) → C)))) → Π(C:Prop), ((((x ∈ Dom) × (y ∈ B1)) → C) → ((((x ∈ Dom) × (y ∈ B2)) → C) → C)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(y:Class), Pi(Dom:Class), Pi(B1:Class), Pi(B2:Class), (((x in Dom) * (Pi(C:Prop), (((y in B1) -> C) -> (((y in B2) -> C) -> C)))) -> Pi(C:Prop), ((((x in Dom) * (y in B1)) -> C) -> ((((x in Dom) * (y in B2)) -> C) -> C)))`
-- **Proof Term:** `(λ(x:Class). (λ(y:Class). (λ(Dom:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:((x ∈ Dom) × (Π(C:Prop), (((y ∈ B1) → C) → (((y ∈ B2) → C) → C))))). (λ(C:Prop). (λ(fL:(((x ∈ Dom) × (y ∈ B1)) → C)). (λ(fR:(((x ∈ Dom) × (y ∈ B2)) → C)). (((snd(h) C) (λ(hyB1:(y ∈ B1)). (fL ⟨fst(h), hyB1⟩))) (λ(hyB2:(y ∈ B2)). (fR ⟨fst(h), hyB2⟩))))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-144 `thm_equivalence_relation_symmetry_transitivity_step` (Derived)
-
-- **Identifier:** `thm_equivalence_relation_symmetry_transitivity_step` (`NBG-144`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x, y) ∈ R) → ((y, x) ∈ R)) × ((((y, x) ∈ R) × ((x, z) ∈ R)) → ((y, z) ∈ R))) → ((((x, y) ∈ R) × ((x, z) ∈ R)) → ((y, z) ∈ R)))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in R) -> ((y, x) in R)) * ((((y, x) in R) * ((x, z) in R)) -> ((y, z) in R))) -> ((((x, y) in R) * ((x, z) in R)) -> ((y, z) in R)))`
-- **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(hSymTrans:((((x, y) ∈ R) → ((y, x) ∈ R)) × ((((y, x) ∈ R) × ((x, z) ∈ R)) → ((y, z) ∈ R)))). (λ(hPair:(((x, y) ∈ R) × ((x, z) ∈ R))). (snd(hSymTrans) ⟨(fst(hSymTrans) fst(hPair)), snd(hPair)⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-145 `thm_forall_implication_conjunction_merging` (Derived)
-
-- **Identifier:** `thm_forall_implication_conjunction_merging` (`NBG-145`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), Π(C:Class), (((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ A) → (X ∈ C)))) → Π(X:Class), ((X ∈ A) → ((X ∈ B) × (X ∈ C))))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(C:Class), (((Pi(X:Class), ((X in A) -> (X in B))) * (Pi(X:Class), ((X in A) -> (X in C)))) -> Pi(X:Class), ((X in A) -> ((X in B) * (X in C))))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(hBoth:((Π(X:Class), ((X ∈ A) → (X ∈ B))) × (Π(X:Class), ((X ∈ A) → (X ∈ C))))). (λ(X:Class). (λ(hxA:(X ∈ A)). ⟨((fst(hBoth) X) hxA), ((snd(hBoth) X) hxA)⟩))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-146 `thm_forall_conjunction_implication_distribution` (Derived)
-
-- **Identifier:** `thm_forall_conjunction_implication_distribution` (`NBG-146`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), Π(C:Class), Π(D:Class), (((Π(X:Class), (((X ∈ A) × (X ∈ B)) → (X ∈ C))) × (Π(X:Class), ((X ∈ D) → ((X ∈ A) × (X ∈ B))))) → Π(X:Class), ((X ∈ D) → (X ∈ C)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(C:Class), Pi(D:Class), (((Pi(X:Class), (((X in A) * (X in B)) -> (X in C))) * (Pi(X:Class), ((X in D) -> ((X in A) * (X in B))))) -> Pi(X:Class), ((X in D) -> (X in C)))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(D:Class). (λ(h:((Π(X:Class), (((X ∈ A) × (X ∈ B)) → (X ∈ C))) × (Π(X:Class), ((X ∈ D) → ((X ∈ A) × (X ∈ B)))))). (λ(X:Class). (λ(hxD:(X ∈ D)). ((fst(h) X) ((snd(h) X) hxD)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-147 `thm_dunaev_pair_converse_involutive_equivalence` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_converse_involutive_equivalence` (`NBG-147`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((y, x) ∈ RelConverse(R))) × (((y, x) ∈ RelConverse(R)) → ((x, y) ∈ RelConverse(RelConverse(R))))) → (((x, y) ∈ R) → ((x, y) ∈ RelConverse(RelConverse(R)))))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in R) -> ((y, x) in RelConverse(R))) * (((y, x) in RelConverse(R)) -> ((x, y) in RelConverse(RelConverse(R))))) -> (((x, y) in R) -> ((x, y) in RelConverse(RelConverse(R)))))`
-- **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((y, x) ∈ RelConverse(R))) × (((y, x) ∈ RelConverse(R)) → ((x, y) ∈ RelConverse(RelConverse(R)))))). (λ(hxy:((x, y) ∈ R)). (snd(h) (fst(h) hxy)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-148 `thm_subclass_antitone_complement_contraposition` (Derived)
-
-- **Identifier:** `thm_subclass_antitone_complement_contraposition` (`NBG-148`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), ((((x ∈ A) → (x ∈ B)) × (((x ∈ B) → 𝟘) × (x ∈ A))) → 𝟘)`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), ((((x in A) -> (x in B)) * (((x in B) -> Void) * (x in A))) -> Void)`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(h:(((x ∈ A) → (x ∈ B)) × (((x ∈ B) → 𝟘) × (x ∈ A)))). (fst(snd(h)) (fst(h) snd(snd(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-149 `thm_binary_relation_field_membership_introduction` (Derived)
-
-- **Identifier:** `thm_binary_relation_field_membership_introduction` (`NBG-149`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ R) → ((x ∈ Dom(R)) × (y ∈ Ran(R)))) × ((x, y) ∈ R)) → ((Π(C:Prop), (((x ∈ Dom(R)) → C) → (((x ∈ Ran(R)) → C) → C))) × (Π(C:Prop), (((y ∈ Dom(R)) → C) → (((y ∈ Ran(R)) → C) → C)))))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in R) -> ((x in Dom(R)) * (y in Ran(R)))) * ((x, y) in R)) -> ((Pi(C:Prop), (((x in Dom(R)) -> C) -> (((x in Ran(R)) -> C) -> C))) * (Pi(C:Prop), (((y in Dom(R)) -> C) -> (((y in Ran(R)) -> C) -> C)))))`
-- **Proof Term:** `(λ(R:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ R) → ((x ∈ Dom(R)) × (y ∈ Ran(R)))) × ((x, y) ∈ R))). ⟨(λ(C:Prop). (λ(fL:((x ∈ Dom(R)) → C)). (λ(fR:((x ∈ Ran(R)) → C)). (fL fst((fst(h) snd(h))))))), (λ(C:Prop). (λ(gL:((y ∈ Dom(R)) → C)). (λ(gR:((y ∈ Ran(R)) → C)). (gR snd((fst(h) snd(h)))))))⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-150 `thm_universal_subclass_antisymmetry_witness` (Derived)
-
-- **Identifier:** `thm_universal_subclass_antisymmetry_witness` (`NBG-150`, kind: `Derived`)
+- **Identifier:** `thm_reflexive_pair_on_members` (`NBG-150`, kind: `Derived`)
 - **Statement (Unicode):** `Π(R:Class), Π(A:Class), (((Π(x:Class), Π(y:Class), (((x ∈ A) × ((x, y) ∈ R)) → (y ∈ A))) × (Π(x:Class), ((x, x) ∈ R))) → Π(x:Class), ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ R))))`
 - **Statement (ANSII):** `Pi(R:Class), Pi(A:Class), (((Pi(x:Class), Pi(y:Class), (((x in A) * ((x, y) in R)) -> (y in A))) * (Pi(x:Class), ((x, x) in R))) -> Pi(x:Class), ((x in A) -> ((x in A) * ((x, x) in R))))`
 - **Proof Term:** `(λ(R:Class). (λ(A:Class). (λ(hSatRefl:((Π(x:Class), Π(y:Class), (((x ∈ A) × ((x, y) ∈ R)) → (y ∈ A))) × (Π(x:Class), ((x, x) ∈ R)))). (λ(x:Class). (λ(hxA:(x ∈ A)). ⟨(((fst(hSatRefl) x) x) ⟨hxA, (snd(hSatRefl) x)⟩), (snd(hSatRefl) x)⟩)))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-151 `thm_dunaev_pair_diagonal_subclass_product` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_diagonal_subclass_product` (`NBG-151`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(x:Class), ((((x ∈ A) → ((x, x) ∈ DiagClass(A))) × (((x, x) ∈ DiagClass(A)) → ((x ∈ A) × (x ∈ A)))) → ((x ∈ A) → ((x ∈ A) × ((x, x) ∈ DiagClass(A)))))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(x:Class), ((((x in A) -> ((x, x) in DiagClass(A))) * (((x, x) in DiagClass(A)) -> ((x in A) * (x in A)))) -> ((x in A) -> ((x in A) * ((x, x) in DiagClass(A)))))`
-- **Proof Term:** `(λ(A:Class). (λ(x:Class). (λ(hDiag:(((x ∈ A) → ((x, x) ∈ DiagClass(A))) × (((x, x) ∈ DiagClass(A)) → ((x ∈ A) × (x ∈ A))))). (λ(hxA:(x ∈ A)). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-152 `thm_preorder_upper_bound_transitivity` (Derived)
-
-- **Identifier:** `thm_preorder_upper_bound_transitivity` (`NBG-152`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))) → (((((a, b) ∈ R) × ((c, b) ∈ R)) × ((b, d) ∈ R)) → (((a, d) ∈ R) × ((c, d) ∈ R))))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in R) * ((y, z) in R)) -> ((x, z) in R))) -> (((((a, b) in R) * ((c, b) in R)) * ((b, d) in R)) -> (((a, d) in R) * ((c, d) in R))))`
-- **Proof Term:** `(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hUB:((((a, b) ∈ R) × ((c, b) ∈ R)) × ((b, d) ∈ R))). ⟨((((hTrans a) b) d) ⟨fst(fst(hUB)), snd(hUB)⟩), ((((hTrans c) b) d) ⟨snd(fst(hUB)), snd(hUB)⟩)⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-153 `thm_preorder_lower_bound_transitivity` (Derived)
-
-- **Identifier:** `thm_preorder_lower_bound_transitivity` (`NBG-153`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))) → ((((d, b) ∈ R) × (((b, a) ∈ R) × ((b, c) ∈ R))) → (((d, a) ∈ R) × ((d, c) ∈ R))))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((x, y) in R) * ((y, z) in R)) -> ((x, z) in R))) -> ((((d, b) in R) * (((b, a) in R) * ((b, c) in R))) -> (((d, a) in R) * ((d, c) in R))))`
-- **Proof Term:** `(λ(R:Class). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((x, y) ∈ R) × ((y, z) ∈ R)) → ((x, z) ∈ R))). (λ(hLB:(((d, b) ∈ R) × (((b, a) ∈ R) × ((b, c) ∈ R)))). ⟨((((hTrans d) b) a) ⟨fst(hLB), fst(snd(hLB))⟩), ((((hTrans d) b) c) ⟨fst(hLB), snd(snd(hLB))⟩)⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-154 `thm_functional_graph_uniqueness_contraposition` (Derived)
-
-- **Identifier:** `thm_functional_graph_uniqueness_contraposition` (`NBG-154`, kind: `Derived`)
-- **Statement (Unicode):** `Π(F:Class), Π(x:Class), Π(y1:Class), Π(y2:Class), ((((((x, y1) ∈ F) × ((x, y2) ∈ F)) → (y1 = y2)) × ((y1 = y2) → 𝟘)) → (((x, y1) ∈ F) → (((x, y2) ∈ F) → 𝟘)))`
-- **Statement (ANSII):** `Pi(F:Class), Pi(x:Class), Pi(y1:Class), Pi(y2:Class), ((((((x, y1) in F) * ((x, y2) in F)) -> (y1 = y2)) * ((y1 = y2) -> Void)) -> (((x, y1) in F) -> (((x, y2) in F) -> Void)))`
-- **Proof Term:** `(λ(F:Class). (λ(x:Class). (λ(y1:Class). (λ(y2:Class). (λ(h:(((((x, y1) ∈ F) × ((x, y2) ∈ F)) → (y1 = y2)) × ((y1 = y2) → 𝟘))). (λ(h1:((x, y1) ∈ F)). (λ(h2:((x, y2) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-155 `thm_injective_graph_uniqueness_contraposition` (Derived)
-
-- **Identifier:** `thm_injective_graph_uniqueness_contraposition` (`NBG-155`, kind: `Derived`)
-- **Statement (Unicode):** `Π(F:Class), Π(x1:Class), Π(x2:Class), Π(y:Class), ((((((x1, y) ∈ F) × ((x2, y) ∈ F)) → (x1 = x2)) × ((x1 = x2) → 𝟘)) → (((x1, y) ∈ F) → (((x2, y) ∈ F) → 𝟘)))`
-- **Statement (ANSII):** `Pi(F:Class), Pi(x1:Class), Pi(x2:Class), Pi(y:Class), ((((((x1, y) in F) * ((x2, y) in F)) -> (x1 = x2)) * ((x1 = x2) -> Void)) -> (((x1, y) in F) -> (((x2, y) in F) -> Void)))`
-- **Proof Term:** `(λ(F:Class). (λ(x1:Class). (λ(x2:Class). (λ(y:Class). (λ(h:(((((x1, y) ∈ F) × ((x2, y) ∈ F)) → (x1 = x2)) × ((x1 = x2) → 𝟘))). (λ(h1:((x1, y) ∈ F)). (λ(h2:((x2, y) ∈ F)). (snd(h) (fst(h) ⟨h1, h2⟩)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-156 `thm_galois_connection_adjunction_modus_ponens` (Derived)
-
-- **Identifier:** `thm_galois_connection_adjunction_modus_ponens` (`NBG-156`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LeqA:Class), Π(LeqB:Class), Π(F:Class), Π(G:Class), Π(x:Class), Π(y:Class), ((((((x, y) ∈ LeqA) → ((ValOf(F, x), y) ∈ LeqB)) × (((ValOf(F, x), y) ∈ LeqB) → ((x, ValOf(G, y)) ∈ LeqA))) × ((x, y) ∈ LeqA)) → ((x, ValOf(G, y)) ∈ LeqA))`
-- **Statement (ANSII):** `Pi(LeqA:Class), Pi(LeqB:Class), Pi(F:Class), Pi(G:Class), Pi(x:Class), Pi(y:Class), ((((((x, y) in LeqA) -> ((ValOf(F, x), y) in LeqB)) * (((ValOf(F, x), y) in LeqB) -> ((x, ValOf(G, y)) in LeqA))) * ((x, y) in LeqA)) -> ((x, ValOf(G, y)) in LeqA))`
-- **Proof Term:** `(λ(LeqA:Class). (λ(LeqB:Class). (λ(F:Class). (λ(G:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((((x, y) ∈ LeqA) → ((ValOf(F, x), y) ∈ LeqB)) × (((ValOf(F, x), y) ∈ LeqB) → ((x, ValOf(G, y)) ∈ LeqA))) × ((x, y) ∈ LeqA))). (snd(fst(h)) (fst(fst(h)) snd(h))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-157 `thm_closure_operator_extensivity_idempotence_step` (Derived)
-
-- **Identifier:** `thm_closure_operator_extensivity_idempotence_step` (`NBG-157`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), ((((x ∈ A) → (x ∈ ClosureOp(A))) × ((x ∈ ClosureOp(ClosureOp(A))) → (x ∈ ClosureOp(A)))) → ((Π(C:Prop), (((x ∈ A) → C) → (((x ∈ ClosureOp(ClosureOp(A))) → C) → C))) → (x ∈ ClosureOp(A))))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), ((((x in A) -> (x in ClosureOp(A))) * ((x in ClosureOp(ClosureOp(A))) -> (x in ClosureOp(A)))) -> ((Pi(C:Prop), (((x in A) -> C) -> (((x in ClosureOp(ClosureOp(A))) -> C) -> C))) -> (x in ClosureOp(A))))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ A) → (x ∈ ClosureOp(A))) × ((x ∈ ClosureOp(ClosureOp(A))) → (x ∈ ClosureOp(A))))). (λ(hOr:Π(C:Prop), (((x ∈ A) → C) → (((x ∈ ClosureOp(ClosureOp(A))) → C) → C))). (((hOr (x ∈ ClosureOp(A))) fst(h)) snd(h))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-158 `thm_interior_operator_contraction_idempotence_step` (Derived)
-
-- **Identifier:** `thm_interior_operator_contraction_idempotence_step` (`NBG-158`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), ((((x ∈ InteriorOp(A)) → (x ∈ A)) × ((x ∈ InteriorOp(A)) → (x ∈ InteriorOp(InteriorOp(A))))) → ((x ∈ InteriorOp(A)) → ((x ∈ A) × (x ∈ InteriorOp(InteriorOp(A))))))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), ((((x in InteriorOp(A)) -> (x in A)) * ((x in InteriorOp(A)) -> (x in InteriorOp(InteriorOp(A))))) -> ((x in InteriorOp(A)) -> ((x in A) * (x in InteriorOp(InteriorOp(A))))))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(h:(((x ∈ InteriorOp(A)) → (x ∈ A)) × ((x ∈ InteriorOp(A)) → (x ∈ InteriorOp(InteriorOp(A)))))). (λ(hx:(x ∈ InteriorOp(A))). ⟨(fst(h) hx), (snd(h) hx)⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-159 `thm_dunaev_pair_filter_upward_closure_intersection` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_filter_upward_closure_intersection` (`NBG-159`, kind: `Derived`)
-- **Statement (Unicode):** `Π(F:Class), Π(Sub:Class), Π(x:Class), Π(y:Class), Π(w:Class), (((((x ∈ F) × (y ∈ F)) → ((x ∩ y) ∈ F)) × ((((x ∩ y) ∈ F) × (((x ∩ y), w) ∈ Sub)) → (w ∈ F))) → ((((x ∈ F) × (y ∈ F)) × (((x ∩ y), w) ∈ Sub)) → (w ∈ F)))`
-- **Statement (ANSII):** `Pi(F:Class), Pi(Sub:Class), Pi(x:Class), Pi(y:Class), Pi(w:Class), (((((x in F) * (y in F)) -> ((x n* y) in F)) * ((((x n* y) in F) * (((x n* y), w) in Sub)) -> (w in F))) -> ((((x in F) * (y in F)) * (((x n* y), w) in Sub)) -> (w in F)))`
-- **Proof Term:** `(λ(F:Class). (λ(Sub:Class). (λ(x:Class). (λ(y:Class). (λ(w:Class). (λ(h:((((x ∈ F) × (y ∈ F)) → ((x ∩ y) ∈ F)) × ((((x ∩ y) ∈ F) × (((x ∩ y), w) ∈ Sub)) → (w ∈ F)))). (λ(hIn:(((x ∈ F) × (y ∈ F)) × (((x ∩ y), w) ∈ Sub))). (snd(h) ⟨(fst(h) fst(hIn)), snd(hIn)⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-160 `thm_ideal_downward_closure_union` (Derived)
-
-- **Identifier:** `thm_ideal_downward_closure_union` (`NBG-160`, kind: `Derived`)
-- **Statement (Unicode):** `Π(I:Class), Π(Sub:Class), Π(x:Class), Π(y:Class), Π(v:Class), (((((x ∈ I) × (y ∈ I)) → ((x ∪ y) ∈ I)) × ((((v, (x ∪ y)) ∈ Sub) × ((x ∪ y) ∈ I)) → (v ∈ I))) → ((((x ∈ I) × (y ∈ I)) × ((v, (x ∪ y)) ∈ Sub)) → (v ∈ I)))`
-- **Statement (ANSII):** `Pi(I:Class), Pi(Sub:Class), Pi(x:Class), Pi(y:Class), Pi(v:Class), (((((x in I) * (y in I)) -> ((x u+ y) in I)) * ((((v, (x u+ y)) in Sub) * ((x u+ y) in I)) -> (v in I))) -> ((((x in I) * (y in I)) * ((v, (x u+ y)) in Sub)) -> (v in I)))`
-- **Proof Term:** `(λ(I:Class). (λ(Sub:Class). (λ(x:Class). (λ(y:Class). (λ(v:Class). (λ(h:((((x ∈ I) × (y ∈ I)) → ((x ∪ y) ∈ I)) × ((((v, (x ∪ y)) ∈ Sub) × ((x ∪ y) ∈ I)) → (v ∈ I)))). (λ(hIn:(((x ∈ I) × (y ∈ I)) × ((v, (x ∪ y)) ∈ Sub))). (snd(h) ⟨snd(hIn), (fst(h) fst(hIn))⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-161 `thm_complete_lattice_supremum_least_upper_bound` (Derived)
-
-- **Identifier:** `thm_complete_lattice_supremum_least_upper_bound` (`NBG-161`, kind: `Derived`)
-- **Statement (Unicode):** `Π(UB:Class), Π(Leq:Class), Π(A:Class), Π(x:Class), (((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((LatticeSup(Leq, A), Z) ∈ Leq)))) → ((LatticeSup(Leq, A), x) ∈ Leq))`
-- **Statement (ANSII):** `Pi(UB:Class), Pi(Leq:Class), Pi(A:Class), Pi(x:Class), (((x in UB) * (Pi(Z:Class), ((Z in UB) -> ((LatticeSup(Leq, A), Z) in Leq)))) -> ((LatticeSup(Leq, A), x) in Leq))`
-- **Proof Term:** `(λ(UB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ UB) × (Π(Z:Class), ((Z ∈ UB) → ((LatticeSup(Leq, A), Z) ∈ Leq))))). ((snd(h) x) fst(h)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-162 `thm_complete_lattice_infimum_greatest_lower_bound` (Derived)
-
-- **Identifier:** `thm_complete_lattice_infimum_greatest_lower_bound` (`NBG-162`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LB:Class), Π(Leq:Class), Π(A:Class), Π(x:Class), (((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, LatticeInf(Leq, A)) ∈ Leq)))) → ((x, LatticeInf(Leq, A)) ∈ Leq))`
-- **Statement (ANSII):** `Pi(LB:Class), Pi(Leq:Class), Pi(A:Class), Pi(x:Class), (((x in LB) * (Pi(Z:Class), ((Z in LB) -> ((Z, LatticeInf(Leq, A)) in Leq)))) -> ((x, LatticeInf(Leq, A)) in Leq))`
-- **Proof Term:** `(λ(LB:Class). (λ(Leq:Class). (λ(A:Class). (λ(x:Class). (λ(h:((x ∈ LB) × (Π(Z:Class), ((Z ∈ LB) → ((Z, LatticeInf(Leq, A)) ∈ Leq))))). ((snd(h) x) fst(h)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-163 `thm_monotone_operator_post_fixed_point_closure` (Derived)
-
-- **Identifier:** `thm_monotone_operator_post_fixed_point_closure` (`NBG-163`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Leq:Class), Π(F:Class), Π(x:Class), (((((x, ValOf(F, x)) ∈ Leq) → ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) × ((((x, ValOf(F, x)) ∈ Leq) × ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) → ((x, ValOf(F, ValOf(F, x))) ∈ Leq))) → (((x, ValOf(F, x)) ∈ Leq) → ((x, ValOf(F, ValOf(F, x))) ∈ Leq)))`
-- **Statement (ANSII):** `Pi(Leq:Class), Pi(F:Class), Pi(x:Class), (((((x, ValOf(F, x)) in Leq) -> ((ValOf(F, x), ValOf(F, ValOf(F, x))) in Leq)) * ((((x, ValOf(F, x)) in Leq) * ((ValOf(F, x), ValOf(F, ValOf(F, x))) in Leq)) -> ((x, ValOf(F, ValOf(F, x))) in Leq))) -> (((x, ValOf(F, x)) in Leq) -> ((x, ValOf(F, ValOf(F, x))) in Leq)))`
-- **Proof Term:** `(λ(Leq:Class). (λ(F:Class). (λ(x:Class). (λ(h:((((x, ValOf(F, x)) ∈ Leq) → ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) × ((((x, ValOf(F, x)) ∈ Leq) × ((ValOf(F, x), ValOf(F, ValOf(F, x))) ∈ Leq)) → ((x, ValOf(F, ValOf(F, x))) ∈ Leq)))). (λ(hxfx:((x, ValOf(F, x)) ∈ Leq)). (snd(h) ⟨hxfx, (fst(h) hxfx)⟩))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-164 `thm_well_founded_inductive_heredity_step` (Derived)
-
-- **Identifier:** `thm_well_founded_inductive_heredity_step` (`NBG-164`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(P:Class), Π(x:Class), (((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) × ((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) → (x ∈ P))) → (x ∈ P))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(P:Class), Pi(x:Class), (((Pi(Y:Class), (((Y, x) in R) -> (Y in P))) * ((Pi(Y:Class), (((Y, x) in R) -> (Y in P))) -> (x in P))) -> (x in P))`
-- **Proof Term:** `(λ(R:Class). (λ(P:Class). (λ(x:Class). (λ(h:((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) × ((Π(Y:Class), (((Y, x) ∈ R) → (Y ∈ P))) → (x ∈ P)))). (snd(h) fst(h))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-165 `thm_dunaev_pair_equivalence_quotient_canonical_map` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_equivalence_quotient_canonical_map` (`NBG-165`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Eq:Class), Π(x:Class), Π(y:Class), (((((x, y) ∈ Eq) → ((x ∈ EquivClass(Eq, y)) × (y ∈ EquivClass(Eq, x)))) × ((x, y) ∈ Eq)) → ((y ∈ EquivClass(Eq, x)) × (x ∈ EquivClass(Eq, y))))`
-- **Statement (ANSII):** `Pi(Eq:Class), Pi(x:Class), Pi(y:Class), (((((x, y) in Eq) -> ((x in EquivClass(Eq, y)) * (y in EquivClass(Eq, x)))) * ((x, y) in Eq)) -> ((y in EquivClass(Eq, x)) * (x in EquivClass(Eq, y))))`
-- **Proof Term:** `(λ(Eq:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((x, y) ∈ Eq) → ((x ∈ EquivClass(Eq, y)) × (y ∈ EquivClass(Eq, x)))) × ((x, y) ∈ Eq))). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-166 `thm_heyting_implication_modus_ponens_internal` (Derived)
-
-- **Identifier:** `thm_heyting_implication_modus_ponens_internal` (`NBG-166`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), ((((x ∈ A) × ((x ∈ A) → (x ∈ B))) × ((x ∈ B) → (x ∈ C))) → ((x ∈ A) × (x ∈ C)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), ((((x in A) * ((x in A) -> (x in B))) * ((x in B) -> (x in C))) -> ((x in A) * (x in C)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × ((x ∈ A) → (x ∈ B))) × ((x ∈ B) → (x ∈ C)))). ⟨fst(fst(h)), (snd(h) (snd(fst(h)) fst(fst(h))))⟩)))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-167 `thm_heyting_implication_exportation_witness` (Derived)
-
-- **Identifier:** `thm_heyting_implication_exportation_witness` (`NBG-167`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), ((((x ∈ A) × (x ∈ B)) → (x ∈ C)) → ((x ∈ A) → ((x ∈ B) → (x ∈ C))))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), ((((x in A) * (x in B)) -> (x in C)) -> ((x in A) -> ((x in B) -> (x in C))))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:(((x ∈ A) × (x ∈ B)) → (x ∈ C))). (λ(hxA:(x ∈ A)). (λ(hxB:(x ∈ B)). (h ⟨hxA, hxB⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-168 `thm_heyting_implication_importation_witness` (Derived)
-
-- **Identifier:** `thm_heyting_implication_importation_witness` (`NBG-168`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B:Class), Π(C:Class), (((x ∈ A) → ((x ∈ B) → (x ∈ C))) → (((x ∈ A) × (x ∈ B)) → (x ∈ C)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B:Class), Pi(C:Class), (((x in A) -> ((x in B) -> (x in C))) -> (((x in A) * (x in B)) -> (x in C)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B:Class). (λ(C:Class). (λ(h:((x ∈ A) → ((x ∈ B) → (x ∈ C)))). (λ(hAB:((x ∈ A) × (x ∈ B))). ((h fst(hAB)) snd(hAB))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-169 `thm_dunaev_pair_lexicographic_order_first_branch` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_lexicographic_order_first_branch` (`NBG-169`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LtA:Class), Π(LtB:Class), Π(x1:Class), Π(x2:Class), Π(y1:Class), Π(y2:Class), (((x1, x2) ∈ LtA) → Π(C:Prop), ((((x1, x2) ∈ LtA) → C) → ((((x1 = x2) × ((y1, y2) ∈ LtB)) → C) → C)))`
-- **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x1:Class), Pi(x2:Class), Pi(y1:Class), Pi(y2:Class), (((x1, x2) in LtA) -> Pi(C:Prop), ((((x1, x2) in LtA) -> C) -> ((((x1 = x2) * ((y1, y2) in LtB)) -> C) -> C)))`
-- **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hLtX:((x1, x2) ∈ LtA)). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fL hLtX)))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-170 `thm_dunaev_pair_lexicographic_order_second_branch` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_lexicographic_order_second_branch` (`NBG-170`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LtA:Class), Π(LtB:Class), Π(x1:Class), Π(x2:Class), Π(y1:Class), Π(y2:Class), (((x1 = x2) × ((y1, y2) ∈ LtB)) → Π(C:Prop), ((((x1, x2) ∈ LtA) → C) → ((((x1 = x2) × ((y1, y2) ∈ LtB)) → C) → C)))`
-- **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x1:Class), Pi(x2:Class), Pi(y1:Class), Pi(y2:Class), (((x1 = x2) * ((y1, y2) in LtB)) -> Pi(C:Prop), ((((x1, x2) in LtA) -> C) -> ((((x1 = x2) * ((y1, y2) in LtB)) -> C) -> C)))`
-- **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x1:Class). (λ(x2:Class). (λ(y1:Class). (λ(y2:Class). (λ(hR:((x1 = x2) × ((y1, y2) ∈ LtB))). (λ(C:Prop). (λ(fL:(((x1, x2) ∈ LtA) → C)). (λ(fR:(((x1 = x2) × ((y1, y2) ∈ LtB)) → C)). (fR hR)))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-171 `thm_dunaev_pair_lexicographic_irreflexivity_step` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_lexicographic_irreflexivity_step` (`NBG-171`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LtA:Class), Π(LtB:Class), Π(x:Class), Π(y:Class), ((((Π(C:Prop), ((((x, x) ∈ LtA) → C) → ((((x = x) × ((y, y) ∈ LtB)) → C) → C))) × (((x, x) ∈ LtA) → 𝟘)) × (((y, y) ∈ LtB) → 𝟘)) → 𝟘)`
-- **Statement (ANSII):** `Pi(LtA:Class), Pi(LtB:Class), Pi(x:Class), Pi(y:Class), ((((Pi(C:Prop), ((((x, x) in LtA) -> C) -> ((((x = x) * ((y, y) in LtB)) -> C) -> C))) * (((x, x) in LtA) -> Void)) * (((y, y) in LtB) -> Void)) -> Void)`
-- **Proof Term:** `(λ(LtA:Class). (λ(LtB:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((Π(C:Prop), ((((x, x) ∈ LtA) → C) → ((((x = x) × ((y, y) ∈ LtB)) → C) → C))) × (((x, x) ∈ LtA) → 𝟘)) × (((y, y) ∈ LtB) → 𝟘))). (((fst(fst(h)) 𝟘) snd(fst(h))) (λ(hR:((x = x) × ((y, y) ∈ LtB))). (snd(h) snd(hR)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-172 `thm_directed_class_upper_bound_pair_witness` (Derived)
-
-- **Identifier:** `thm_directed_class_upper_bound_pair_witness` (`NBG-172`, kind: `Derived`)
-- **Statement (Unicode):** `Π(D:Class), Π(Leq:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x ∈ D) × (y ∈ D)) → (((x, z) ∈ Leq) × ((y, z) ∈ Leq))) × ((x ∈ D) × (y ∈ D))) → (((x, z) ∈ Leq) × ((y, z) ∈ Leq)))`
-- **Statement (ANSII):** `Pi(D:Class), Pi(Leq:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x in D) * (y in D)) -> (((x, z) in Leq) * ((y, z) in Leq))) * ((x in D) * (y in D))) -> (((x, z) in Leq) * ((y, z) in Leq)))`
-- **Proof Term:** `(λ(D:Class). (λ(Leq:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x ∈ D) × (y ∈ D)) → (((x, z) ∈ Leq) × ((y, z) ∈ Leq))) × ((x ∈ D) × (y ∈ D)))). (fst(h) snd(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-173 `thm_filtered_class_lower_bound_pair_witness` (Derived)
-
-- **Identifier:** `thm_filtered_class_lower_bound_pair_witness` (`NBG-173`, kind: `Derived`)
-- **Statement (Unicode):** `Π(F:Class), Π(Leq:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x ∈ F) × (y ∈ F)) → (((z, x) ∈ Leq) × ((z, y) ∈ Leq))) × ((x ∈ F) × (y ∈ F))) → (((z, x) ∈ Leq) × ((z, y) ∈ Leq)))`
-- **Statement (ANSII):** `Pi(F:Class), Pi(Leq:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x in F) * (y in F)) -> (((z, x) in Leq) * ((z, y) in Leq))) * ((x in F) * (y in F))) -> (((z, x) in Leq) * ((z, y) in Leq)))`
-- **Proof Term:** `(λ(F:Class). (λ(Leq:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x ∈ F) × (y ∈ F)) → (((z, x) ∈ Leq) × ((z, y) ∈ Leq))) × ((x ∈ F) × (y ∈ F)))). (fst(h) snd(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-174 `thm_coinitial_subclass_transitivity_witness` (Derived)
-
-- **Identifier:** `thm_coinitial_subclass_transitivity_witness` (`NBG-174`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Leq:Class), Π(C1:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((x ∈ C1) × ((x, z) ∈ Leq)))) → ((x ∈ C1) × ((x, z) ∈ Leq)))`
-- **Statement (ANSII):** `Pi(Leq:Class), Pi(C1:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in Leq) * ((y, z) in Leq)) * ((((x, y) in Leq) * ((y, z) in Leq)) -> ((x in C1) * ((x, z) in Leq)))) -> ((x in C1) * ((x, z) in Leq)))`
-- **Proof Term:** `(λ(Leq:Class). (λ(C1:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((x ∈ C1) × ((x, z) ∈ Leq))))). (snd(h) fst(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-175 `thm_cofinal_subclass_transitivity_witness` (Derived)
-
-- **Identifier:** `thm_cofinal_subclass_transitivity_witness` (`NBG-175`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Leq:Class), Π(C2:Class), Π(x:Class), Π(y:Class), Π(z:Class), (((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((z ∈ C2) × ((x, z) ∈ Leq)))) → ((z ∈ C2) × ((x, z) ∈ Leq)))`
-- **Statement (ANSII):** `Pi(Leq:Class), Pi(C2:Class), Pi(x:Class), Pi(y:Class), Pi(z:Class), (((((x, y) in Leq) * ((y, z) in Leq)) * ((((x, y) in Leq) * ((y, z) in Leq)) -> ((z in C2) * ((x, z) in Leq)))) -> ((z in C2) * ((x, z) in Leq)))`
-- **Proof Term:** `(λ(Leq:Class). (λ(C2:Class). (λ(x:Class). (λ(y:Class). (λ(z:Class). (λ(h:((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) × ((((x, y) ∈ Leq) × ((y, z) ∈ Leq)) → ((z ∈ C2) × ((x, z) ∈ Leq))))). (snd(h) fst(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-176 `thm_boolean_algebra_complement_uniqueness_forward` (Derived)
-
-- **Identifier:** `thm_boolean_algebra_complement_uniqueness_forward` (`NBG-176`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B1:Class), Π(B2:Class), ((((x ∈ B1) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B2) → C) → C))) × (((x ∈ B1) × (x ∈ A)) → 𝟘)) → ((x ∈ B1) → (x ∈ B2)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B1:Class), Pi(B2:Class), ((((x in B1) -> Pi(C:Prop), (((x in A) -> C) -> (((x in B2) -> C) -> C))) * (((x in B1) * (x in A)) -> Void)) -> ((x in B1) -> (x in B2)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B1) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B2) → C) → C))) × (((x ∈ B1) × (x ∈ A)) → 𝟘))). (λ(hxB1:(x ∈ B1)). ((((fst(h) hxB1) (x ∈ B2)) (λ(hxA:(x ∈ A)). ax_false_elim((x ∈ B2), (snd(h) ⟨hxB1, hxA⟩)))) (λ(hxB2:(x ∈ B2)). hxB2))))))))`
-- **Axioms Used:** `ax_false_elim`
-- **Definitions Used:** `(none)`
-
-### NBG-177 `thm_boolean_algebra_complement_uniqueness_backward` (Derived)
-
-- **Identifier:** `thm_boolean_algebra_complement_uniqueness_backward` (`NBG-177`, kind: `Derived`)
-- **Statement (Unicode):** `Π(x:Class), Π(A:Class), Π(B1:Class), Π(B2:Class), ((((x ∈ B2) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B1) → C) → C))) × (((x ∈ B2) × (x ∈ A)) → 𝟘)) → ((x ∈ B2) → (x ∈ B1)))`
-- **Statement (ANSII):** `Pi(x:Class), Pi(A:Class), Pi(B1:Class), Pi(B2:Class), ((((x in B2) -> Pi(C:Prop), (((x in A) -> C) -> (((x in B1) -> C) -> C))) * (((x in B2) * (x in A)) -> Void)) -> ((x in B2) -> (x in B1)))`
-- **Proof Term:** `(λ(x:Class). (λ(A:Class). (λ(B1:Class). (λ(B2:Class). (λ(h:(((x ∈ B2) → Π(C:Prop), (((x ∈ A) → C) → (((x ∈ B1) → C) → C))) × (((x ∈ B2) × (x ∈ A)) → 𝟘))). (λ(hxB2:(x ∈ B2)). ((((fst(h) hxB2) (x ∈ B1)) (λ(hxA:(x ∈ A)). ax_false_elim((x ∈ B1), (snd(h) ⟨hxB2, hxA⟩)))) (λ(hxB1:(x ∈ B1)). hxB1))))))))`
-- **Axioms Used:** `ax_false_elim`
-- **Definitions Used:** `(none)`
-
-### NBG-178 `thm_dunaev_pair_pullback_fiber_product_projection_left` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_pullback_fiber_product_projection_left` (`NBG-178`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), Π(EqC:Class), Π(f:Class), Π(g:Class), Π(x:Class), Π(y:Class), ((((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC)) → ((x ∈ A) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), Pi(y:Class), ((((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC)) -> ((x in A) * ((ValOf(f, x), ValOf(g, y)) in EqC)))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC))). ⟨fst(fst(h)), snd(h)⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-179 `thm_dunaev_pair_pullback_fiber_product_projection_right` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_pullback_fiber_product_projection_right` (`NBG-179`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(B:Class), Π(EqC:Class), Π(f:Class), Π(g:Class), Π(x:Class), Π(y:Class), ((((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC)) → ((y ∈ B) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), Pi(y:Class), ((((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC)) -> ((y in B) * ((ValOf(f, x), ValOf(g, y)) in EqC)))`
-- **Proof Term:** `(λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC))). ⟨snd(fst(h)), snd(h)⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-180 `thm_dunaev_pair_pullback_universal_mediating_pair` (Derived)
-
-- **Identifier:** `thm_dunaev_pair_pullback_universal_mediating_pair` (`NBG-180`, kind: `Derived`)
-- **Statement (Unicode):** `Π(P:Class), Π(A:Class), Π(B:Class), Π(EqC:Class), Π(f:Class), Π(g:Class), Π(u:Class), Π(x:Class), Π(y:Class), (((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((ValOf(f, x), ValOf(g, y)) ∈ EqC))) → ((u ∈ P) → (((x ∈ A) × (y ∈ B)) × ((ValOf(f, x), ValOf(g, y)) ∈ EqC))))`
-- **Statement (ANSII):** `Pi(P:Class), Pi(A:Class), Pi(B:Class), Pi(EqC:Class), Pi(f:Class), Pi(g:Class), Pi(u:Class), Pi(x:Class), Pi(y:Class), (((((u in P) -> (x in A)) * ((u in P) -> (y in B))) * ((u in P) -> ((ValOf(f, x), ValOf(g, y)) in EqC))) -> ((u in P) -> (((x in A) * (y in B)) * ((ValOf(f, x), ValOf(g, y)) in EqC))))`
-- **Proof Term:** `(λ(P:Class). (λ(A:Class). (λ(B:Class). (λ(EqC:Class). (λ(f:Class). (λ(g:Class). (λ(u:Class). (λ(x:Class). (λ(y:Class). (λ(h:((((u ∈ P) → (x ∈ A)) × ((u ∈ P) → (y ∈ B))) × ((u ∈ P) → ((ValOf(f, x), ValOf(g, y)) ∈ EqC)))). (λ(huP:(u ∈ P)). ⟨⟨(fst(fst(h)) huP), (snd(fst(h)) huP)⟩, (snd(h) huP)⟩)))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-181 `thm_equalizer_inclusion_fork_commutativity` (Derived)
-
-- **Identifier:** `thm_equalizer_inclusion_fork_commutativity` (`NBG-181`, kind: `Derived`)
-- **Statement (Unicode):** `Π(EqFG:Class), Π(A:Class), Π(DiagB:Class), Π(f:Class), Π(g:Class), Π(x:Class), (((x ∈ EqFG) → ((x ∈ A) × ((ValOf(f, x), ValOf(g, x)) ∈ DiagB))) → ((x ∈ EqFG) → ((ValOf(f, x), ValOf(g, x)) ∈ DiagB)))`
-- **Statement (ANSII):** `Pi(EqFG:Class), Pi(A:Class), Pi(DiagB:Class), Pi(f:Class), Pi(g:Class), Pi(x:Class), (((x in EqFG) -> ((x in A) * ((ValOf(f, x), ValOf(g, x)) in DiagB))) -> ((x in EqFG) -> ((ValOf(f, x), ValOf(g, x)) in DiagB)))`
-- **Proof Term:** `(λ(EqFG:Class). (λ(A:Class). (λ(DiagB:Class). (λ(f:Class). (λ(g:Class). (λ(x:Class). (λ(h:((x ∈ EqFG) → ((x ∈ A) × ((ValOf(f, x), ValOf(g, x)) ∈ DiagB)))). (λ(hxEq:(x ∈ EqFG)). snd((h hxEq))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-182 `thm_equalizer_universal_factorization_uniqueness` (Derived)
-
-- **Identifier:** `thm_equalizer_universal_factorization_uniqueness` (`NBG-182`, kind: `Derived`)
-- **Statement (Unicode):** `Π(X:Class), Π(DiagA:Class), Π(h_fn:Class), Π(k_fn:Class), Π(u:Class), (((((u ∈ X) → ((ValOf(h_fn, u), ValOf(h_fn, u)) ∈ DiagA)) × (((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA) → (ValOf(h_fn, u) = ValOf(k_fn, u)))) × ((u ∈ X) → ((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA))) → ((u ∈ X) → (ValOf(h_fn, u) = ValOf(k_fn, u))))`
-- **Statement (ANSII):** `Pi(X:Class), Pi(DiagA:Class), Pi(h_fn:Class), Pi(k_fn:Class), Pi(u:Class), (((((u in X) -> ((ValOf(h_fn, u), ValOf(h_fn, u)) in DiagA)) * (((ValOf(h_fn, u), ValOf(k_fn, u)) in DiagA) -> (ValOf(h_fn, u) = ValOf(k_fn, u)))) * ((u in X) -> ((ValOf(h_fn, u), ValOf(k_fn, u)) in DiagA))) -> ((u in X) -> (ValOf(h_fn, u) = ValOf(k_fn, u))))`
-- **Proof Term:** `(λ(X:Class). (λ(DiagA:Class). (λ(h_fn:Class). (λ(k_fn:Class). (λ(u:Class). (λ(h:((((u ∈ X) → ((ValOf(h_fn, u), ValOf(h_fn, u)) ∈ DiagA)) × (((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA) → (ValOf(h_fn, u) = ValOf(k_fn, u)))) × ((u ∈ X) → ((ValOf(h_fn, u), ValOf(k_fn, u)) ∈ DiagA)))). (λ(huX:(u ∈ X)). (snd(fst(h)) (snd(h) huX)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-183 `thm_pushout_amalgamated_sum_left_injection` (Derived)
-
-- **Identifier:** `thm_pushout_amalgamated_sum_left_injection` (`NBG-183`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(CoprodAB:Class), Π(PushoutABC:Class), Π(x:Class), ((((x ∈ A) → ((CoprodTag0, x) ∈ CoprodAB)) × (((CoprodTag0, x) ∈ CoprodAB) → ((CoprodTag0, x) ∈ PushoutABC))) → ((x ∈ A) → ((CoprodTag0, x) ∈ PushoutABC)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(CoprodAB:Class), Pi(PushoutABC:Class), Pi(x:Class), ((((x in A) -> ((CoprodTag0, x) in CoprodAB)) * (((CoprodTag0, x) in CoprodAB) -> ((CoprodTag0, x) in PushoutABC))) -> ((x in A) -> ((CoprodTag0, x) in PushoutABC)))`
-- **Proof Term:** `(λ(A:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((CoprodTag0, x) ∈ CoprodAB)) × (((CoprodTag0, x) ∈ CoprodAB) → ((CoprodTag0, x) ∈ PushoutABC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-184 `thm_pushout_amalgamated_sum_right_injection` (Derived)
-
-- **Identifier:** `thm_pushout_amalgamated_sum_right_injection` (`NBG-184`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:Class), Π(CoprodAB:Class), Π(PushoutABC:Class), Π(y:Class), ((((y ∈ B) → ((CoprodTag1, y) ∈ CoprodAB)) × (((CoprodTag1, y) ∈ CoprodAB) → ((CoprodTag1, y) ∈ PushoutABC))) → ((y ∈ B) → ((CoprodTag1, y) ∈ PushoutABC)))`
-- **Statement (ANSII):** `Pi(B:Class), Pi(CoprodAB:Class), Pi(PushoutABC:Class), Pi(y:Class), ((((y in B) -> ((CoprodTag1, y) in CoprodAB)) * (((CoprodTag1, y) in CoprodAB) -> ((CoprodTag1, y) in PushoutABC))) -> ((y in B) -> ((CoprodTag1, y) in PushoutABC)))`
-- **Proof Term:** `(λ(B:Class). (λ(CoprodAB:Class). (λ(PushoutABC:Class). (λ(y:Class). (λ(h:(((y ∈ B) → ((CoprodTag1, y) ∈ CoprodAB)) × (((CoprodTag1, y) ∈ CoprodAB) → ((CoprodTag1, y) ∈ PushoutABC)))). (λ(hyB:(y ∈ B)). (snd(h) (fst(h) hyB))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-185 `thm_pushout_cocone_glueing_compatibility` (Derived)
-
-- **Identifier:** `thm_pushout_cocone_glueing_compatibility` (`NBG-185`, kind: `Derived`)
-- **Statement (Unicode):** `Π(C:Class), Π(PushoutABC:Class), Π(f:Class), Π(g:Class), Π(z:Class), ((((z ∈ C) → ((CoprodTag0, ValOf(f, z)) ∈ PushoutABC)) × ((z ∈ C) → ((CoprodTag1, ValOf(g, z)) ∈ PushoutABC))) → ((z ∈ C) → (((CoprodTag0, ValOf(f, z)) ∈ PushoutABC) × ((CoprodTag1, ValOf(g, z)) ∈ PushoutABC))))`
-- **Statement (ANSII):** `Pi(C:Class), Pi(PushoutABC:Class), Pi(f:Class), Pi(g:Class), Pi(z:Class), ((((z in C) -> ((CoprodTag0, ValOf(f, z)) in PushoutABC)) * ((z in C) -> ((CoprodTag1, ValOf(g, z)) in PushoutABC))) -> ((z in C) -> (((CoprodTag0, ValOf(f, z)) in PushoutABC) * ((CoprodTag1, ValOf(g, z)) in PushoutABC))))`
-- **Proof Term:** `(λ(C:Class). (λ(PushoutABC:Class). (λ(f:Class). (λ(g:Class). (λ(z:Class). (λ(h:(((z ∈ C) → ((CoprodTag0, ValOf(f, z)) ∈ PushoutABC)) × ((z ∈ C) → ((CoprodTag1, ValOf(g, z)) ∈ PushoutABC)))). (λ(hzC:(z ∈ C)). ⟨(fst(h) hzC), (snd(h) hzC)⟩)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-186 `thm_coequalizer_quotient_fork_commutativity` (Derived)
-
-- **Identifier:** `thm_coequalizer_quotient_fork_commutativity` (`NBG-186`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(KerQ:Class), Π(DiagC:Class), Π(f:Class), Π(g:Class), Π(q_fn:Class), Π(x:Class), ((((x ∈ A) → ((ValOf(f, x), ValOf(g, x)) ∈ KerQ)) × (((ValOf(f, x), ValOf(g, x)) ∈ KerQ) → ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) ∈ DiagC))) → ((x ∈ A) → ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) ∈ DiagC)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(KerQ:Class), Pi(DiagC:Class), Pi(f:Class), Pi(g:Class), Pi(q_fn:Class), Pi(x:Class), ((((x in A) -> ((ValOf(f, x), ValOf(g, x)) in KerQ)) * (((ValOf(f, x), ValOf(g, x)) in KerQ) -> ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) in DiagC))) -> ((x in A) -> ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) in DiagC)))`
-- **Proof Term:** `(λ(A:Class). (λ(KerQ:Class). (λ(DiagC:Class). (λ(f:Class). (λ(g:Class). (λ(q_fn:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((ValOf(f, x), ValOf(g, x)) ∈ KerQ)) × (((ValOf(f, x), ValOf(g, x)) ∈ KerQ) → ((ValOf(q_fn, ValOf(f, x)), ValOf(q_fn, ValOf(g, x))) ∈ DiagC)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-187 `thm_coequalizer_universal_mediating_uniqueness` (Derived)
-
-- **Identifier:** `thm_coequalizer_universal_mediating_uniqueness` (`NBG-187`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:Class), Π(DiagZ:Class), Π(u_fn:Class), Π(v_fn:Class), Π(y:Class), (((((y ∈ B) → ((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ)) × (((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ) → (ValOf(u_fn, y) = ValOf(v_fn, y)))) × (y ∈ B)) → (ValOf(u_fn, y) = ValOf(v_fn, y)))`
-- **Statement (ANSII):** `Pi(B:Class), Pi(DiagZ:Class), Pi(u_fn:Class), Pi(v_fn:Class), Pi(y:Class), (((((y in B) -> ((ValOf(u_fn, y), ValOf(v_fn, y)) in DiagZ)) * (((ValOf(u_fn, y), ValOf(v_fn, y)) in DiagZ) -> (ValOf(u_fn, y) = ValOf(v_fn, y)))) * (y in B)) -> (ValOf(u_fn, y) = ValOf(v_fn, y)))`
-- **Proof Term:** `(λ(B:Class). (λ(DiagZ:Class). (λ(u_fn:Class). (λ(v_fn:Class). (λ(y:Class). (λ(h:((((y ∈ B) → ((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ)) × (((ValOf(u_fn, y), ValOf(v_fn, y)) ∈ DiagZ) → (ValOf(u_fn, y) = ValOf(v_fn, y)))) × (y ∈ B))). (snd(fst(h)) (fst(fst(h)) snd(h)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-188 `thm_exponential_evaluation_beta_reduction_step` (Derived)
-
-- **Identifier:** `thm_exponential_evaluation_beta_reduction_step` (`NBG-188`, kind: `Derived`)
-- **Statement (Unicode):** `Π(DomEv:Class), Π(GraphLam:Class), Π(EqC:Class), Π(body_fn:Class), Π(f:Class), Π(x:Class), (((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) × ((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) → ((ExpEval(f, x), ValOf(body_fn, x)) ∈ EqC))) → ((ExpEval(f, x), ValOf(body_fn, x)) ∈ EqC))`
-- **Statement (ANSII):** `Pi(DomEv:Class), Pi(GraphLam:Class), Pi(EqC:Class), Pi(body_fn:Class), Pi(f:Class), Pi(x:Class), (((((f, x) in DomEv) * ((f, x) in GraphLam)) * ((((f, x) in DomEv) * ((f, x) in GraphLam)) -> ((ExpEval(f, x), ValOf(body_fn, x)) in EqC))) -> ((ExpEval(f, x), ValOf(body_fn, x)) in EqC))`
-- **Proof Term:** `(λ(DomEv:Class). (λ(GraphLam:Class). (λ(EqC:Class). (λ(body_fn:Class). (λ(f:Class). (λ(x:Class). (λ(h:((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) × ((((f, x) ∈ DomEv) × ((f, x) ∈ GraphLam)) → ((ExpEval(f, x), ValOf(body_fn, x)) ∈ EqC)))). (snd(h) fst(h)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-189 `thm_exponential_transpose_eta_uniqueness_step` (Derived)
-
-- **Identifier:** `thm_exponential_transpose_eta_uniqueness_step` (`NBG-189`, kind: `Derived`)
-- **Statement (Unicode):** `Π(HomAB:Class), Π(EqHom:Class), Π(EqExp:Class), Π(f:Class), Π(g:Class), ((((f ∈ HomAB) × ((UncurryOp(f), g) ∈ EqHom)) × (((UncurryOp(f), g) ∈ EqHom) → ((f, CurryOp(g)) ∈ EqExp))) → ((f ∈ HomAB) → ((f, CurryOp(g)) ∈ EqExp)))`
-- **Statement (ANSII):** `Pi(HomAB:Class), Pi(EqHom:Class), Pi(EqExp:Class), Pi(f:Class), Pi(g:Class), ((((f in HomAB) * ((UncurryOp(f), g) in EqHom)) * (((UncurryOp(f), g) in EqHom) -> ((f, CurryOp(g)) in EqExp))) -> ((f in HomAB) -> ((f, CurryOp(g)) in EqExp)))`
-- **Proof Term:** `(λ(HomAB:Class). (λ(EqHom:Class). (λ(EqExp:Class). (λ(f:Class). (λ(g:Class). (λ(h:(((f ∈ HomAB) × ((UncurryOp(f), g) ∈ EqHom)) × (((UncurryOp(f), g) ∈ EqHom) → ((f, CurryOp(g)) ∈ EqExp)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) snd(fst(h))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-190 `thm_subobject_classifier_characteristic_pullback_iff` (Derived)
-
-- **Identifier:** `thm_subobject_classifier_characteristic_pullback_iff` (`NBG-190`, kind: `Derived`)
-- **Statement (Unicode):** `Π(SubA:Class), Π(EqOmega:Class), Π(chi_fn:Class), Π(x:Class), ((((x ∈ SubA) → ((ValOf(chi_fn, x), TrueVal) ∈ EqOmega)) × (((ValOf(chi_fn, x), TrueVal) ∈ EqOmega) → (x ∈ SubA))) → (((x ∈ SubA) → ((ValOf(chi_fn, x), TrueVal) ∈ EqOmega)) × (((ValOf(chi_fn, x), TrueVal) ∈ EqOmega) → (x ∈ SubA))))`
-- **Statement (ANSII):** `Pi(SubA:Class), Pi(EqOmega:Class), Pi(chi_fn:Class), Pi(x:Class), ((((x in SubA) -> ((ValOf(chi_fn, x), TrueVal) in EqOmega)) * (((ValOf(chi_fn, x), TrueVal) in EqOmega) -> (x in SubA))) -> (((x in SubA) -> ((ValOf(chi_fn, x), TrueVal) in EqOmega)) * (((ValOf(chi_fn, x), TrueVal) in EqOmega) -> (x in SubA))))`
-- **Proof Term:** `(λ(SubA:Class). (λ(EqOmega:Class). (λ(chi_fn:Class). (λ(x:Class). (λ(h:(((x ∈ SubA) → ((ValOf(chi_fn, x), TrueVal) ∈ EqOmega)) × (((ValOf(chi_fn, x), TrueVal) ∈ EqOmega) → (x ∈ SubA)))). ⟨fst(h), snd(h)⟩)))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-191 `thm_lawvere_tierney_topology_idempotence_step` (Derived)
-
-- **Identifier:** `thm_lawvere_tierney_topology_idempotence_step` (`NBG-191`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Omega:Class), Π(LeqOmega:Class), Π(EqOmega:Class), Π(j_fn:Class), Π(p:Class), (((((p ∈ Omega) → ((ValOf(j_fn, p), p) ∈ LeqOmega)) × ((p ∈ Omega) → ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega))) × ((((ValOf(j_fn, p), p) ∈ LeqOmega) × ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega)) → ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) ∈ EqOmega))) → ((p ∈ Omega) → ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) ∈ EqOmega)))`
-- **Statement (ANSII):** `Pi(Omega:Class), Pi(LeqOmega:Class), Pi(EqOmega:Class), Pi(j_fn:Class), Pi(p:Class), (((((p in Omega) -> ((ValOf(j_fn, p), p) in LeqOmega)) * ((p in Omega) -> ((p, ValOf(j_fn, ValOf(j_fn, p))) in LeqOmega))) * ((((ValOf(j_fn, p), p) in LeqOmega) * ((p, ValOf(j_fn, ValOf(j_fn, p))) in LeqOmega)) -> ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) in EqOmega))) -> ((p in Omega) -> ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) in EqOmega)))`
-- **Proof Term:** `(λ(Omega:Class). (λ(LeqOmega:Class). (λ(EqOmega:Class). (λ(j_fn:Class). (λ(p:Class). (λ(h:((((p ∈ Omega) → ((ValOf(j_fn, p), p) ∈ LeqOmega)) × ((p ∈ Omega) → ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega))) × ((((ValOf(j_fn, p), p) ∈ LeqOmega) × ((p, ValOf(j_fn, ValOf(j_fn, p))) ∈ LeqOmega)) → ((ValOf(j_fn, ValOf(j_fn, p)), ValOf(j_fn, p)) ∈ EqOmega)))). (λ(hpOm:(p ∈ Omega)). (snd(h) ⟨(fst(fst(h)) hpOm), (snd(fst(h)) hpOm)⟩))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-192 `thm_lawvere_tierney_topology_meet_preservation_step` (Derived)
-
-- **Identifier:** `thm_lawvere_tierney_topology_meet_preservation_step` (`NBG-192`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Omega:Class), Π(EqOmega:Class), Π(j_fn:Class), Π(p:Class), Π(q:Class), (((((p ∈ Omega) × (q ∈ Omega)) → ((ValOf(j_fn, (p ∩ q)), (ValOf(j_fn, p) ∩ ValOf(j_fn, q))) ∈ EqOmega)) × ((p ∈ Omega) × (q ∈ Omega))) → ((ValOf(j_fn, (p ∩ q)), (ValOf(j_fn, p) ∩ ValOf(j_fn, q))) ∈ EqOmega))`
-- **Statement (ANSII):** `Pi(Omega:Class), Pi(EqOmega:Class), Pi(j_fn:Class), Pi(p:Class), Pi(q:Class), (((((p in Omega) * (q in Omega)) -> ((ValOf(j_fn, (p n* q)), (ValOf(j_fn, p) n* ValOf(j_fn, q))) in EqOmega)) * ((p in Omega) * (q in Omega))) -> ((ValOf(j_fn, (p n* q)), (ValOf(j_fn, p) n* ValOf(j_fn, q))) in EqOmega))`
-- **Proof Term:** `(λ(Omega:Class). (λ(EqOmega:Class). (λ(j_fn:Class). (λ(p:Class). (λ(q:Class). (λ(h:((((p ∈ Omega) × (q ∈ Omega)) → ((ValOf(j_fn, (p ∩ q)), (ValOf(j_fn, p) ∩ ValOf(j_fn, q))) ∈ EqOmega)) × ((p ∈ Omega) × (q ∈ Omega)))). (fst(h) snd(h))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-193 `thm_monad_left_unit_law_coherence` (Derived)
-
-- **Identifier:** `thm_monad_left_unit_law_coherence` (`NBG-193`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(EtaMap:Class), Π(EqTA:Class), Π(x:Class), ((((x ∈ A) → ((x, MonadEta(x)) ∈ EtaMap)) × (((x, MonadEta(x)) ∈ EtaMap) → ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) ∈ EqTA))) → ((x ∈ A) → ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) ∈ EqTA)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(EtaMap:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((x, MonadEta(x)) in EtaMap)) * (((x, MonadEta(x)) in EtaMap) -> ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) in EqTA))) -> ((x in A) -> ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) in EqTA)))`
-- **Proof Term:** `(λ(A:Class). (λ(EtaMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, MonadEta(x)) ∈ EtaMap)) × (((x, MonadEta(x)) ∈ EtaMap) → ((MonadMu(MonadT(MonadEta(x))), MonadT(x)) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-194 `thm_monad_right_unit_law_coherence` (Derived)
-
-- **Identifier:** `thm_monad_right_unit_law_coherence` (`NBG-194`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(EtaTMap:Class), Π(EqTA:Class), Π(x:Class), ((((x ∈ A) → ((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap)) × (((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap) → ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) ∈ EqTA))) → ((x ∈ A) → ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) ∈ EqTA)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(EtaTMap:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((MonadT(x), MonadEta(MonadT(x))) in EtaTMap)) * (((MonadT(x), MonadEta(MonadT(x))) in EtaTMap) -> ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) in EqTA))) -> ((x in A) -> ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) in EqTA)))`
-- **Proof Term:** `(λ(A:Class). (λ(EtaTMap:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap)) × (((MonadT(x), MonadEta(MonadT(x))) ∈ EtaTMap) → ((MonadMu(MonadEta(MonadT(x))), MonadT(x)) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-195 `thm_monad_associativity_square_coherence` (Derived)
-
-- **Identifier:** `thm_monad_associativity_square_coherence` (`NBG-195`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(AssocPair:Class), Π(EqTA:Class), Π(x:Class), ((((x ∈ A) → ((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair)) × (((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair) → ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) ∈ EqTA))) → ((x ∈ A) → ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) ∈ EqTA)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(AssocPair:Class), Pi(EqTA:Class), Pi(x:Class), ((((x in A) -> ((MonadMu(MonadT(x)), MonadT(MonadMu(x))) in AssocPair)) * (((MonadMu(MonadT(x)), MonadT(MonadMu(x))) in AssocPair) -> ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) in EqTA))) -> ((x in A) -> ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) in EqTA)))`
-- **Proof Term:** `(λ(A:Class). (λ(AssocPair:Class). (λ(EqTA:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair)) × (((MonadMu(MonadT(x)), MonadT(MonadMu(x))) ∈ AssocPair) → ((MonadMu(MonadMu(MonadT(x))), MonadMu(MonadT(MonadMu(x)))) ∈ EqTA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-196 `thm_eilenberg_moore_algebra_unit_coherence` (Derived)
-
-- **Identifier:** `thm_eilenberg_moore_algebra_unit_coherence` (`NBG-196`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(EtaA:Class), Π(EqA:Class), Π(alpha_fn:Class), Π(x:Class), ((((x ∈ A) → ((x, MonadEta(x)) ∈ EtaA)) × (((x, MonadEta(x)) ∈ EtaA) → ((ValOf(alpha_fn, MonadEta(x)), x) ∈ EqA))) → ((x ∈ A) → ((ValOf(alpha_fn, MonadEta(x)), x) ∈ EqA)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(EtaA:Class), Pi(EqA:Class), Pi(alpha_fn:Class), Pi(x:Class), ((((x in A) -> ((x, MonadEta(x)) in EtaA)) * (((x, MonadEta(x)) in EtaA) -> ((ValOf(alpha_fn, MonadEta(x)), x) in EqA))) -> ((x in A) -> ((ValOf(alpha_fn, MonadEta(x)), x) in EqA)))`
-- **Proof Term:** `(λ(A:Class). (λ(EtaA:Class). (λ(EqA:Class). (λ(alpha_fn:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, MonadEta(x)) ∈ EtaA)) × (((x, MonadEta(x)) ∈ EtaA) → ((ValOf(alpha_fn, MonadEta(x)), x) ∈ EqA)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-197 `thm_eilenberg_moore_algebra_multiplication_coherence` (Derived)
-
-- **Identifier:** `thm_eilenberg_moore_algebra_multiplication_coherence` (`NBG-197`, kind: `Derived`)
-- **Statement (Unicode):** `Π(TTA:Class), Π(EqA:Class), Π(alpha_fn:Class), Π(z:Class), ((((z ∈ TTA) → ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) ∈ EqA)) × (z ∈ TTA)) → ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) ∈ EqA))`
-- **Statement (ANSII):** `Pi(TTA:Class), Pi(EqA:Class), Pi(alpha_fn:Class), Pi(z:Class), ((((z in TTA) -> ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) in EqA)) * (z in TTA)) -> ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) in EqA))`
-- **Proof Term:** `(λ(TTA:Class). (λ(EqA:Class). (λ(alpha_fn:Class). (λ(z:Class). (λ(h:(((z ∈ TTA) → ((ValOf(alpha_fn, MonadMu(z)), ValOf(alpha_fn, MonadT(ValOf(alpha_fn, z)))) ∈ EqA)) × (z ∈ TTA))). (fst(h) snd(h)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-198 `thm_kleisli_category_identity_left_composition` (Derived)
-
-- **Identifier:** `thm_kleisli_category_identity_left_composition` (`NBG-198`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(KleisliAB:Class), Π(EqTB:Class), Π(f:Class), Π(x:Class), ((((x ∈ A) → ((x, ValOf(f, x)) ∈ KleisliAB)) × (((x, ValOf(f, x)) ∈ KleisliAB) → ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) ∈ EqTB))) → ((x ∈ A) → ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) ∈ EqTB)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(KleisliAB:Class), Pi(EqTB:Class), Pi(f:Class), Pi(x:Class), ((((x in A) -> ((x, ValOf(f, x)) in KleisliAB)) * (((x, ValOf(f, x)) in KleisliAB) -> ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) in EqTB))) -> ((x in A) -> ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) in EqTB)))`
-- **Proof Term:** `(λ(A:Class). (λ(KleisliAB:Class). (λ(EqTB:Class). (λ(f:Class). (λ(x:Class). (λ(h:(((x ∈ A) → ((x, ValOf(f, x)) ∈ KleisliAB)) × (((x, ValOf(f, x)) ∈ KleisliAB) → ((MonadMu(MonadT(ValOf(f, MonadEta(x)))), ValOf(f, x)) ∈ EqTB)))). (λ(hxA:(x ∈ A)). (snd(h) (fst(h) hxA)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-199 `thm_yoneda_natural_transformation_evaluation_bijection` (Derived)
-
-- **Identifier:** `thm_yoneda_natural_transformation_evaluation_bijection` (`NBG-199`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(NatHomF:Class), Π(EqFA:Class), Π(EqNat:Class), Π(phi:Class), Π(u:Class), ((((phi ∈ NatHomF) → ((ValOf(phi, IdMor(A)), u) ∈ EqFA)) × (((ValOf(phi, IdMor(A)), u) ∈ EqFA) → ((YonedaMap(u), phi) ∈ EqNat))) → ((phi ∈ NatHomF) → ((YonedaMap(u), phi) ∈ EqNat)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(NatHomF:Class), Pi(EqFA:Class), Pi(EqNat:Class), Pi(phi:Class), Pi(u:Class), ((((phi in NatHomF) -> ((ValOf(phi, IdMor(A)), u) in EqFA)) * (((ValOf(phi, IdMor(A)), u) in EqFA) -> ((YonedaMap(u), phi) in EqNat))) -> ((phi in NatHomF) -> ((YonedaMap(u), phi) in EqNat)))`
-- **Proof Term:** `(λ(A:Class). (λ(NatHomF:Class). (λ(EqFA:Class). (λ(EqNat:Class). (λ(phi:Class). (λ(u:Class). (λ(h:(((phi ∈ NatHomF) → ((ValOf(phi, IdMor(A)), u) ∈ EqFA)) × (((ValOf(phi, IdMor(A)), u) ∈ EqFA) → ((YonedaMap(u), phi) ∈ EqNat)))). (λ(hPhi:(phi ∈ NatHomF)). (snd(h) (fst(h) hPhi))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-200 `thm_yoneda_embedding_full_faithfulness_isomorphism` (Derived)
-
-- **Identifier:** `thm_yoneda_embedding_full_faithfulness_isomorphism` (`NBG-200`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(HomAB:Class), Π(EqNatHom:Class), Π(EqHomAB:Class), Π(f:Class), Π(Phi:Class), ((((f ∈ HomAB) → ((YonedaMap(f), Phi) ∈ EqNatHom)) × (((YonedaMap(f), Phi) ∈ EqNatHom) → ((ValOf(Phi, IdMor(A)), f) ∈ EqHomAB))) → ((f ∈ HomAB) → ((ValOf(Phi, IdMor(A)), f) ∈ EqHomAB)))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(HomAB:Class), Pi(EqNatHom:Class), Pi(EqHomAB:Class), Pi(f:Class), Pi(Phi:Class), ((((f in HomAB) -> ((YonedaMap(f), Phi) in EqNatHom)) * (((YonedaMap(f), Phi) in EqNatHom) -> ((ValOf(Phi, IdMor(A)), f) in EqHomAB))) -> ((f in HomAB) -> ((ValOf(Phi, IdMor(A)), f) in EqHomAB)))`
-- **Proof Term:** `(λ(A:Class). (λ(HomAB:Class). (λ(EqNatHom:Class). (λ(EqHomAB:Class). (λ(f:Class). (λ(Phi:Class). (λ(h:(((f ∈ HomAB) → ((YonedaMap(f), Phi) ∈ EqNatHom)) × (((YonedaMap(f), Phi) ∈ EqNatHom) → ((ValOf(Phi, IdMor(A)), f) ∈ EqHomAB)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-201 `thm_grothendieck_sieve_pullback_stability_step` (Derived)
-
-- **Identifier:** `thm_grothendieck_sieve_pullback_stability_step` (`NBG-201`, kind: `Derived`)
-- **Statement (Unicode):** `Π(SieveS:Class), Π(CompMor:Class), Π(f:Class), Π(g:Class), (((((f ∈ SieveS) × ((g, f) ∈ CompMor)) → (CompMorOp(g, f) ∈ SieveS)) × ((f ∈ SieveS) × ((g, f) ∈ CompMor))) → (CompMorOp(g, f) ∈ SieveS))`
-- **Statement (ANSII):** `Pi(SieveS:Class), Pi(CompMor:Class), Pi(f:Class), Pi(g:Class), (((((f in SieveS) * ((g, f) in CompMor)) -> (CompMorOp(g, f) in SieveS)) * ((f in SieveS) * ((g, f) in CompMor))) -> (CompMorOp(g, f) in SieveS))`
-- **Proof Term:** `(λ(SieveS:Class). (λ(CompMor:Class). (λ(f:Class). (λ(g:Class). (λ(h:((((f ∈ SieveS) × ((g, f) ∈ CompMor)) → (CompMorOp(g, f) ∈ SieveS)) × ((f ∈ SieveS) × ((g, f) ∈ CompMor)))). (fst(h) snd(h)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-202 `thm_grothendieck_topology_transitivity_step` (Derived)
-
-- **Identifier:** `thm_grothendieck_topology_transitivity_step` (`NBG-202`, kind: `Derived`)
-- **Statement (Unicode):** `Π(CovU:Class), Π(PullbackCov:Class), Π(R:Class), Π(S:Class), (((((R ∈ CovU) × ((S, R) ∈ PullbackCov)) → (S ∈ CovU)) × ((R ∈ CovU) × ((S, R) ∈ PullbackCov))) → (S ∈ CovU))`
-- **Statement (ANSII):** `Pi(CovU:Class), Pi(PullbackCov:Class), Pi(R:Class), Pi(S:Class), (((((R in CovU) * ((S, R) in PullbackCov)) -> (S in CovU)) * ((R in CovU) * ((S, R) in PullbackCov))) -> (S in CovU))`
-- **Proof Term:** `(λ(CovU:Class). (λ(PullbackCov:Class). (λ(R:Class). (λ(S:Class). (λ(h:((((R ∈ CovU) × ((S, R) ∈ PullbackCov)) → (S ∈ CovU)) × ((R ∈ CovU) × ((S, R) ∈ PullbackCov)))). (fst(h) snd(h)))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-203 `thm_sheaf_matching_family_unique_gluing_step` (Derived)
-
-- **Identifier:** `thm_sheaf_matching_family_unique_gluing_step` (`NBG-203`, kind: `Derived`)
-- **Statement (Unicode):** `Π(MatchFam:Class), Π(RestrictEq:Class), Π(EqSecU:Class), Π(glue_fn:Class), Π(s:Class), Π(t:Class), ((((s ∈ MatchFam) → ((ValOf(glue_fn, s), s) ∈ RestrictEq)) × (((ValOf(glue_fn, s), s) ∈ RestrictEq) → ((ValOf(glue_fn, s), t) ∈ EqSecU))) → ((s ∈ MatchFam) → ((ValOf(glue_fn, s), t) ∈ EqSecU)))`
-- **Statement (ANSII):** `Pi(MatchFam:Class), Pi(RestrictEq:Class), Pi(EqSecU:Class), Pi(glue_fn:Class), Pi(s:Class), Pi(t:Class), ((((s in MatchFam) -> ((ValOf(glue_fn, s), s) in RestrictEq)) * (((ValOf(glue_fn, s), s) in RestrictEq) -> ((ValOf(glue_fn, s), t) in EqSecU))) -> ((s in MatchFam) -> ((ValOf(glue_fn, s), t) in EqSecU)))`
-- **Proof Term:** `(λ(MatchFam:Class). (λ(RestrictEq:Class). (λ(EqSecU:Class). (λ(glue_fn:Class). (λ(s:Class). (λ(t:Class). (λ(h:(((s ∈ MatchFam) → ((ValOf(glue_fn, s), s) ∈ RestrictEq)) × (((ValOf(glue_fn, s), s) ∈ RestrictEq) → ((ValOf(glue_fn, s), t) ∈ EqSecU)))). (λ(hsMatch:(s ∈ MatchFam)). (snd(h) (fst(h) hsMatch))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-204 `thm_abelian_short_exact_kernel_image_coincidence` (Derived)
-
-- **Identifier:** `thm_abelian_short_exact_kernel_image_coincidence` (`NBG-204`, kind: `Derived`)
-- **Statement (Unicode):** `Π(KerG:Class), Π(ImF:Class), Π(x:Class), ((((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG))) → (((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG))))`
-- **Statement (ANSII):** `Pi(KerG:Class), Pi(ImF:Class), Pi(x:Class), ((((x in KerG) -> (x in ImF)) * ((x in ImF) -> (x in KerG))) -> (((x in KerG) -> (x in ImF)) * ((x in ImF) -> (x in KerG))))`
-- **Proof Term:** `(λ(KerG:Class). (λ(ImF:Class). (λ(x:Class). (λ(h:(((x ∈ KerG) → (x ∈ ImF)) × ((x ∈ ImF) → (x ∈ KerG)))). ⟨fst(h), snd(h)⟩))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-205 `thm_spectral_differential_squared_zero_kernel_inclusion` (Derived)
-
-- **Identifier:** `thm_spectral_differential_squared_zero_kernel_inclusion` (`NBG-205`, kind: `Derived`)
-- **Statement (Unicode):** `Π(PageEr:Class), Π(DiffPair:Class), Π(KerDr:Class), Π(dr_fn:Class), Π(x:Class), ((((x ∈ PageEr) → ((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair)) × (((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair) → (ValOf(dr_fn, x) ∈ KerDr))) → ((x ∈ PageEr) → (ValOf(dr_fn, x) ∈ KerDr)))`
-- **Statement (ANSII):** `Pi(PageEr:Class), Pi(DiffPair:Class), Pi(KerDr:Class), Pi(dr_fn:Class), Pi(x:Class), ((((x in PageEr) -> ((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) in DiffPair)) * (((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) in DiffPair) -> (ValOf(dr_fn, x) in KerDr))) -> ((x in PageEr) -> (ValOf(dr_fn, x) in KerDr)))`
-- **Proof Term:** `(λ(PageEr:Class). (λ(DiffPair:Class). (λ(KerDr:Class). (λ(dr_fn:Class). (λ(x:Class). (λ(h:(((x ∈ PageEr) → ((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair)) × (((ValOf(dr_fn, x), ValOf(dr_fn, ValOf(dr_fn, x))) ∈ DiffPair) → (ValOf(dr_fn, x) ∈ KerDr)))). (λ(hxPage:(x ∈ PageEr)). (snd(h) (fst(h) hxPage)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-206 `thm_monoidal_pentagon_associator_coherence_step` (Derived)
-
-- **Identifier:** `thm_monoidal_pentagon_associator_coherence_step` (`NBG-206`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Obj4:Class), Π(EqMor:Class), Π(mid_fn:Class), Π(w:Class), ((((w ∈ Obj4) → ((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor)) × (((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor) → ((AssocMorL(w), AssocMorR(w)) ∈ EqMor))) → ((w ∈ Obj4) → ((AssocMorL(w), AssocMorR(w)) ∈ EqMor)))`
-- **Statement (ANSII):** `Pi(Obj4:Class), Pi(EqMor:Class), Pi(mid_fn:Class), Pi(w:Class), ((((w in Obj4) -> ((AssocMorL(w), ValOf(mid_fn, w)) in EqMor)) * (((AssocMorL(w), ValOf(mid_fn, w)) in EqMor) -> ((AssocMorL(w), AssocMorR(w)) in EqMor))) -> ((w in Obj4) -> ((AssocMorL(w), AssocMorR(w)) in EqMor)))`
-- **Proof Term:** `(λ(Obj4:Class). (λ(EqMor:Class). (λ(mid_fn:Class). (λ(w:Class). (λ(h:(((w ∈ Obj4) → ((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor)) × (((AssocMorL(w), ValOf(mid_fn, w)) ∈ EqMor) → ((AssocMorL(w), AssocMorR(w)) ∈ EqMor)))). (λ(hwObj:(w ∈ Obj4)). (snd(h) (fst(h) hwObj))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-207 `thm_monoidal_triangle_unitor_coherence_step` (Derived)
-
-- **Identifier:** `thm_monoidal_triangle_unitor_coherence_step` (`NBG-207`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Obj2:Class), Π(EqMor:Class), Π(rho_fn:Class), Π(lam_fn:Class), Π(u:Class), ((((u ∈ Obj2) → ((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor)) × (((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor) → ((ValOf(lam_fn, u), ValOf(rho_fn, u)) ∈ EqMor))) → ((u ∈ Obj2) → ((ValOf(lam_fn, u), ValOf(rho_fn, u)) ∈ EqMor)))`
-- **Statement (ANSII):** `Pi(Obj2:Class), Pi(EqMor:Class), Pi(rho_fn:Class), Pi(lam_fn:Class), Pi(u:Class), ((((u in Obj2) -> ((AssocMorL(u), ValOf(rho_fn, u)) in EqMor)) * (((AssocMorL(u), ValOf(rho_fn, u)) in EqMor) -> ((ValOf(lam_fn, u), ValOf(rho_fn, u)) in EqMor))) -> ((u in Obj2) -> ((ValOf(lam_fn, u), ValOf(rho_fn, u)) in EqMor)))`
-- **Proof Term:** `(λ(Obj2:Class). (λ(EqMor:Class). (λ(rho_fn:Class). (λ(lam_fn:Class). (λ(u:Class). (λ(h:(((u ∈ Obj2) → ((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor)) × (((AssocMorL(u), ValOf(rho_fn, u)) ∈ EqMor) → ((ValOf(lam_fn, u), ValOf(rho_fn, u)) ∈ EqMor)))). (λ(huObj:(u ∈ Obj2)). (snd(h) (fst(h) huObj)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-208 `thm_symmetric_braiding_involutive_coherence` (Derived)
-
-- **Identifier:** `thm_symmetric_braiding_involutive_coherence` (`NBG-208`, kind: `Derived`)
-- **Statement (Unicode):** `Π(Obj2:Class), Π(CompBraid:Class), Π(EqMor:Class), Π(A:Class), Π(B:Class), (((((A, B) ∈ Obj2) → ((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid)) × (((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid) → ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) ∈ EqMor))) → (((A, B) ∈ Obj2) → ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) ∈ EqMor)))`
-- **Statement (ANSII):** `Pi(Obj2:Class), Pi(CompBraid:Class), Pi(EqMor:Class), Pi(A:Class), Pi(B:Class), (((((A, B) in Obj2) -> ((BraidMor(A, B), BraidMor(B, A)) in CompBraid)) * (((BraidMor(A, B), BraidMor(B, A)) in CompBraid) -> ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) in EqMor))) -> (((A, B) in Obj2) -> ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) in EqMor)))`
-- **Proof Term:** `(λ(Obj2:Class). (λ(CompBraid:Class). (λ(EqMor:Class). (λ(A:Class). (λ(B:Class). (λ(h:((((A, B) ∈ Obj2) → ((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid)) × (((BraidMor(A, B), BraidMor(B, A)) ∈ CompBraid) → ((CompMorOp(BraidMor(B, A), BraidMor(A, B)), IdMor((A, B))) ∈ EqMor)))). (λ(huObj:((A, B) ∈ Obj2)). (snd(h) (fst(h) huObj)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-209 `thm_tensor_internal_hom_currying_adjunction_step` (Derived)
-
-- **Identifier:** `thm_tensor_internal_hom_currying_adjunction_step` (`NBG-209`, kind: `Derived`)
-- **Statement (Unicode):** `Π(HomTensorBC:Class), Π(EqHomAInt:Class), Π(EqHomTensor:Class), Π(f:Class), Π(g:Class), ((((f ∈ HomTensorBC) → ((CurryOp(f), g) ∈ EqHomAInt)) × (((CurryOp(f), g) ∈ EqHomAInt) → ((UncurryOp(g), f) ∈ EqHomTensor))) → ((f ∈ HomTensorBC) → ((UncurryOp(g), f) ∈ EqHomTensor)))`
-- **Statement (ANSII):** `Pi(HomTensorBC:Class), Pi(EqHomAInt:Class), Pi(EqHomTensor:Class), Pi(f:Class), Pi(g:Class), ((((f in HomTensorBC) -> ((CurryOp(f), g) in EqHomAInt)) * (((CurryOp(f), g) in EqHomAInt) -> ((UncurryOp(g), f) in EqHomTensor))) -> ((f in HomTensorBC) -> ((UncurryOp(g), f) in EqHomTensor)))`
-- **Proof Term:** `(λ(HomTensorBC:Class). (λ(EqHomAInt:Class). (λ(EqHomTensor:Class). (λ(f:Class). (λ(g:Class). (λ(h:(((f ∈ HomTensorBC) → ((CurryOp(f), g) ∈ EqHomAInt)) × (((CurryOp(f), g) ∈ EqHomAInt) → ((UncurryOp(g), f) ∈ EqHomTensor)))). (λ(hfHom:(f ∈ HomTensorBC)). (snd(h) (fst(h) hfHom)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-210 `thm_day_convolution_coend_wedge_factorization` (Derived)
-
-- **Identifier:** `thm_day_convolution_coend_wedge_factorization` (`NBG-210`, kind: `Derived`)
-- **Statement (Unicode):** `Π(CoendWedge:Class), Π(WedgeMed:Class), Π(EqNat:Class), Π(w:Class), Π(uniqMap:Class), ((((w ∈ CoendWedge) → ((w, DayFactor(w)) ∈ WedgeMed)) × (((w, DayFactor(w)) ∈ WedgeMed) → ((DayFactor(w), uniqMap) ∈ EqNat))) → ((w ∈ CoendWedge) → ((DayFactor(w), uniqMap) ∈ EqNat)))`
-- **Statement (ANSII):** `Pi(CoendWedge:Class), Pi(WedgeMed:Class), Pi(EqNat:Class), Pi(w:Class), Pi(uniqMap:Class), ((((w in CoendWedge) -> ((w, DayFactor(w)) in WedgeMed)) * (((w, DayFactor(w)) in WedgeMed) -> ((DayFactor(w), uniqMap) in EqNat))) -> ((w in CoendWedge) -> ((DayFactor(w), uniqMap) in EqNat)))`
-- **Proof Term:** `(λ(CoendWedge:Class). (λ(WedgeMed:Class). (λ(EqNat:Class). (λ(w:Class). (λ(uniqMap:Class). (λ(h:(((w ∈ CoendWedge) → ((w, DayFactor(w)) ∈ WedgeMed)) × (((w, DayFactor(w)) ∈ WedgeMed) → ((DayFactor(w), uniqMap) ∈ EqNat)))). (λ(hwWedge:(w ∈ CoendWedge)). (snd(h) (fst(h) hwWedge)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-211 `thm_extranatural_wedge_dinaturality_square` (Derived)
-
-- **Identifier:** `thm_extranatural_wedge_dinaturality_square` (`NBG-211`, kind: `Derived`)
-- **Statement (Unicode):** `Π(HomAB:Class), Π(DinatPair:Class), Π(EqTarget:Class), Π(P_a:Class), Π(P_b:Class), Π(w_c:Class), Π(w_b:Class), Π(f:Class), ((((f ∈ HomAB) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair)) × (((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ EqTarget))) → ((f ∈ HomAB) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ EqTarget)))`
-- **Statement (ANSII):** `Pi(HomAB:Class), Pi(DinatPair:Class), Pi(EqTarget:Class), Pi(P_a:Class), Pi(P_b:Class), Pi(w_c:Class), Pi(w_b:Class), Pi(f:Class), ((((f in HomAB) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in DinatPair)) * (((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in DinatPair) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in EqTarget))) -> ((f in HomAB) -> ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) in EqTarget)))`
-- **Proof Term:** `(λ(HomAB:Class). (λ(DinatPair:Class). (λ(EqTarget:Class). (λ(P_a:Class). (λ(P_b:Class). (λ(w_c:Class). (λ(w_b:Class). (λ(f:Class). (λ(h:(((f ∈ HomAB) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair)) × (((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ DinatPair) → ((CompMorOp(ValOf(P_a, f), w_c), CompMorOp(ValOf(P_b, f), w_b)) ∈ EqTarget)))). (λ(hfHom:(f ∈ HomAB)). (snd(h) (fst(h) hfHom))))))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-212 `thm_categorical_end_universal_wedge_factorization` (Derived)
-
-- **Identifier:** `thm_categorical_end_universal_wedge_factorization` (`NBG-212`, kind: `Derived`)
-- **Statement (Unicode):** `Π(WedgeP:Class), Π(EndMed:Class), Π(EqApex:Class), Π(w:Class), Π(uniqEnd:Class), ((((w ∈ WedgeP) → ((w, EndFactor(w)) ∈ EndMed)) × (((w, EndFactor(w)) ∈ EndMed) → ((EndFactor(w), uniqEnd) ∈ EqApex))) → ((w ∈ WedgeP) → ((EndFactor(w), uniqEnd) ∈ EqApex)))`
-- **Statement (ANSII):** `Pi(WedgeP:Class), Pi(EndMed:Class), Pi(EqApex:Class), Pi(w:Class), Pi(uniqEnd:Class), ((((w in WedgeP) -> ((w, EndFactor(w)) in EndMed)) * (((w, EndFactor(w)) in EndMed) -> ((EndFactor(w), uniqEnd) in EqApex))) -> ((w in WedgeP) -> ((EndFactor(w), uniqEnd) in EqApex)))`
-- **Proof Term:** `(λ(WedgeP:Class). (λ(EndMed:Class). (λ(EqApex:Class). (λ(w:Class). (λ(uniqEnd:Class). (λ(h:(((w ∈ WedgeP) → ((w, EndFactor(w)) ∈ EndMed)) × (((w, EndFactor(w)) ∈ EndMed) → ((EndFactor(w), uniqEnd) ∈ EqApex)))). (λ(hwWedge:(w ∈ WedgeP)). (snd(h) (fst(h) hwWedge)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-213 `thm_categorical_coend_universal_cowedge_factorization` (Derived)
-
-- **Identifier:** `thm_categorical_coend_universal_cowedge_factorization` (`NBG-213`, kind: `Derived`)
-- **Statement (Unicode):** `Π(CowedgeP:Class), Π(CoendMed:Class), Π(EqNadir:Class), Π(cw:Class), Π(uniqCoend:Class), ((((cw ∈ CowedgeP) → ((cw, CoendFactor(cw)) ∈ CoendMed)) × (((cw, CoendFactor(cw)) ∈ CoendMed) → ((CoendFactor(cw), uniqCoend) ∈ EqNadir))) → ((cw ∈ CowedgeP) → ((CoendFactor(cw), uniqCoend) ∈ EqNadir)))`
-- **Statement (ANSII):** `Pi(CowedgeP:Class), Pi(CoendMed:Class), Pi(EqNadir:Class), Pi(cw:Class), Pi(uniqCoend:Class), ((((cw in CowedgeP) -> ((cw, CoendFactor(cw)) in CoendMed)) * (((cw, CoendFactor(cw)) in CoendMed) -> ((CoendFactor(cw), uniqCoend) in EqNadir))) -> ((cw in CowedgeP) -> ((CoendFactor(cw), uniqCoend) in EqNadir)))`
-- **Proof Term:** `(λ(CowedgeP:Class). (λ(CoendMed:Class). (λ(EqNadir:Class). (λ(cw:Class). (λ(uniqCoend:Class). (λ(h:(((cw ∈ CowedgeP) → ((cw, CoendFactor(cw)) ∈ CoendMed)) × (((cw, CoendFactor(cw)) ∈ CoendMed) → ((CoendFactor(cw), uniqCoend) ∈ EqNadir)))). (λ(hcwCow:(cw ∈ CowedgeP)). (snd(h) (fst(h) hcwCow)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-214 `thm_fubini_iterated_end_interchange_isomorphism` (Derived)
-
-- **Identifier:** `thm_fubini_iterated_end_interchange_isomorphism` (`NBG-214`, kind: `Derived`)
-- **Statement (Unicode):** `Π(EndAB:Class), Π(IsoBA:Class), Π(EqEndAB:Class), Π(x:Class), Π(y:Class), ((((x ∈ EndAB) → ((FubiniAB(x), y) ∈ IsoBA)) × (((FubiniAB(x), y) ∈ IsoBA) → ((FubiniBA(y), x) ∈ EqEndAB))) → ((x ∈ EndAB) → ((FubiniBA(y), x) ∈ EqEndAB)))`
-- **Statement (ANSII):** `Pi(EndAB:Class), Pi(IsoBA:Class), Pi(EqEndAB:Class), Pi(x:Class), Pi(y:Class), ((((x in EndAB) -> ((FubiniAB(x), y) in IsoBA)) * (((FubiniAB(x), y) in IsoBA) -> ((FubiniBA(y), x) in EqEndAB))) -> ((x in EndAB) -> ((FubiniBA(y), x) in EqEndAB)))`
-- **Proof Term:** `(λ(EndAB:Class). (λ(IsoBA:Class). (λ(EqEndAB:Class). (λ(x:Class). (λ(y:Class). (λ(h:(((x ∈ EndAB) → ((FubiniAB(x), y) ∈ IsoBA)) × (((FubiniAB(x), y) ∈ IsoBA) → ((FubiniBA(y), x) ∈ EqEndAB)))). (λ(hxEnd:(x ∈ EndAB)). (snd(h) (fst(h) hxEnd)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-215 `thm_weighted_limit_enriched_end_representation` (Derived)
-
-- **Identifier:** `thm_weighted_limit_enriched_end_representation` (`NBG-215`, kind: `Derived`)
-- **Statement (Unicode):** `Π(WLimWD:Class), Π(IsoEndHom:Class), Π(EqWLim:Class), Π(u:Class), Π(v:Class), ((((u ∈ WLimWD) → ((WeightedRep(u), v) ∈ IsoEndHom)) × (((WeightedRep(u), v) ∈ IsoEndHom) → ((WeightedInv(v), u) ∈ EqWLim))) → ((u ∈ WLimWD) → ((WeightedInv(v), u) ∈ EqWLim)))`
-- **Statement (ANSII):** `Pi(WLimWD:Class), Pi(IsoEndHom:Class), Pi(EqWLim:Class), Pi(u:Class), Pi(v:Class), ((((u in WLimWD) -> ((WeightedRep(u), v) in IsoEndHom)) * (((WeightedRep(u), v) in IsoEndHom) -> ((WeightedInv(v), u) in EqWLim))) -> ((u in WLimWD) -> ((WeightedInv(v), u) in EqWLim)))`
-- **Proof Term:** `(λ(WLimWD:Class). (λ(IsoEndHom:Class). (λ(EqWLim:Class). (λ(u:Class). (λ(v:Class). (λ(h:(((u ∈ WLimWD) → ((WeightedRep(u), v) ∈ IsoEndHom)) × (((WeightedRep(u), v) ∈ IsoEndHom) → ((WeightedInv(v), u) ∈ EqWLim)))). (λ(huWLim:(u ∈ WLimWD)). (snd(h) (fst(h) huWLim)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-216 `thm_bicategory_two_cell_middle_four_interchange` (Derived)
-
-- **Identifier:** `thm_bicategory_two_cell_middle_four_interchange` (`NBG-216`, kind: `Derived`)
-- **Statement (Unicode):** `Π(TwoCellQuad:Class), Π(Eq2Cell:Class), Π(mid_fn:Class), Π(u:Class), ((((u ∈ TwoCellQuad) → ((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell)) × (((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell) → ((TwoCellHV(u), TwoCellVH(u)) ∈ Eq2Cell))) → ((u ∈ TwoCellQuad) → ((TwoCellHV(u), TwoCellVH(u)) ∈ Eq2Cell)))`
-- **Statement (ANSII):** `Pi(TwoCellQuad:Class), Pi(Eq2Cell:Class), Pi(mid_fn:Class), Pi(u:Class), ((((u in TwoCellQuad) -> ((TwoCellHV(u), ValOf(mid_fn, u)) in Eq2Cell)) * (((TwoCellHV(u), ValOf(mid_fn, u)) in Eq2Cell) -> ((TwoCellHV(u), TwoCellVH(u)) in Eq2Cell))) -> ((u in TwoCellQuad) -> ((TwoCellHV(u), TwoCellVH(u)) in Eq2Cell)))`
-- **Proof Term:** `(λ(TwoCellQuad:Class). (λ(Eq2Cell:Class). (λ(mid_fn:Class). (λ(u:Class). (λ(h:(((u ∈ TwoCellQuad) → ((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell)) × (((TwoCellHV(u), ValOf(mid_fn, u)) ∈ Eq2Cell) → ((TwoCellHV(u), TwoCellVH(u)) ∈ Eq2Cell)))). (λ(huQuad:(u ∈ TwoCellQuad)). (snd(h) (fst(h) huQuad))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-217 `thm_eckmann_hilton_two_cell_commutativity` (Derived)
-
-- **Identifier:** `thm_eckmann_hilton_two_cell_commutativity` (`NBG-217`, kind: `Derived`)
-- **Statement (Unicode):** `Π(End2Id:Class), Π(Eq2Cell:Class), Π(a:Class), Π(b:Class), (((((a ∈ End2Id) × (b ∈ End2Id)) → ((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell)) × (((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell) → ((TwoCellVComp(a, b), TwoCellVComp(b, a)) ∈ Eq2Cell))) → (((a ∈ End2Id) × (b ∈ End2Id)) → ((TwoCellVComp(a, b), TwoCellVComp(b, a)) ∈ Eq2Cell)))`
-- **Statement (ANSII):** `Pi(End2Id:Class), Pi(Eq2Cell:Class), Pi(a:Class), Pi(b:Class), (((((a in End2Id) * (b in End2Id)) -> ((TwoCellVComp(a, b), TwoCellHComp(a, b)) in Eq2Cell)) * (((TwoCellVComp(a, b), TwoCellHComp(a, b)) in Eq2Cell) -> ((TwoCellVComp(a, b), TwoCellVComp(b, a)) in Eq2Cell))) -> (((a in End2Id) * (b in End2Id)) -> ((TwoCellVComp(a, b), TwoCellVComp(b, a)) in Eq2Cell)))`
-- **Proof Term:** `(λ(End2Id:Class). (λ(Eq2Cell:Class). (λ(a:Class). (λ(b:Class). (λ(h:((((a ∈ End2Id) × (b ∈ End2Id)) → ((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell)) × (((TwoCellVComp(a, b), TwoCellHComp(a, b)) ∈ Eq2Cell) → ((TwoCellVComp(a, b), TwoCellVComp(b, a)) ∈ Eq2Cell)))). (λ(hab:((a ∈ End2Id) × (b ∈ End2Id))). (snd(h) (fst(h) hab))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-218 `thm_internal_adjunction_zig_zag_left_triangle` (Derived)
-
-- **Identifier:** `thm_internal_adjunction_zig_zag_left_triangle` (`NBG-218`, kind: `Derived`)
-- **Statement (Unicode):** `Π(LeftAdj1Cell:Class), Π(ZigZagL:Class), Π(Eq2Cell:Class), Π(L:Class), Π(f:Class), ((((f ∈ LeftAdj1Cell) → ((f, IdMor(L)) ∈ ZigZagL)) × (((f, IdMor(L)) ∈ ZigZagL) → ((ZigZagCompL(f), IdMor(f)) ∈ Eq2Cell))) → ((f ∈ LeftAdj1Cell) → ((ZigZagCompL(f), IdMor(f)) ∈ Eq2Cell)))`
-- **Statement (ANSII):** `Pi(LeftAdj1Cell:Class), Pi(ZigZagL:Class), Pi(Eq2Cell:Class), Pi(L:Class), Pi(f:Class), ((((f in LeftAdj1Cell) -> ((f, IdMor(L)) in ZigZagL)) * (((f, IdMor(L)) in ZigZagL) -> ((ZigZagCompL(f), IdMor(f)) in Eq2Cell))) -> ((f in LeftAdj1Cell) -> ((ZigZagCompL(f), IdMor(f)) in Eq2Cell)))`
-- **Proof Term:** `(λ(LeftAdj1Cell:Class). (λ(ZigZagL:Class). (λ(Eq2Cell:Class). (λ(L:Class). (λ(f:Class). (λ(h:(((f ∈ LeftAdj1Cell) → ((f, IdMor(L)) ∈ ZigZagL)) × (((f, IdMor(L)) ∈ ZigZagL) → ((ZigZagCompL(f), IdMor(f)) ∈ Eq2Cell)))). (λ(hfLeft:(f ∈ LeftAdj1Cell)). (snd(h) (fst(h) hfLeft)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-219 `thm_internal_adjunction_zig_zag_right_triangle` (Derived)
-
-- **Identifier:** `thm_internal_adjunction_zig_zag_right_triangle` (`NBG-219`, kind: `Derived`)
-- **Statement (Unicode):** `Π(RightAdj1Cell:Class), Π(ZigZagR:Class), Π(Eq2Cell:Class), Π(R:Class), Π(g:Class), ((((g ∈ RightAdj1Cell) → ((g, IdMor(R)) ∈ ZigZagR)) × (((g, IdMor(R)) ∈ ZigZagR) → ((ZigZagCompR(g), IdMor(g)) ∈ Eq2Cell))) → ((g ∈ RightAdj1Cell) → ((ZigZagCompR(g), IdMor(g)) ∈ Eq2Cell)))`
-- **Statement (ANSII):** `Pi(RightAdj1Cell:Class), Pi(ZigZagR:Class), Pi(Eq2Cell:Class), Pi(R:Class), Pi(g:Class), ((((g in RightAdj1Cell) -> ((g, IdMor(R)) in ZigZagR)) * (((g, IdMor(R)) in ZigZagR) -> ((ZigZagCompR(g), IdMor(g)) in Eq2Cell))) -> ((g in RightAdj1Cell) -> ((ZigZagCompR(g), IdMor(g)) in Eq2Cell)))`
-- **Proof Term:** `(λ(RightAdj1Cell:Class). (λ(ZigZagR:Class). (λ(Eq2Cell:Class). (λ(R:Class). (λ(g:Class). (λ(h:(((g ∈ RightAdj1Cell) → ((g, IdMor(R)) ∈ ZigZagR)) × (((g, IdMor(R)) ∈ ZigZagR) → ((ZigZagCompR(g), IdMor(g)) ∈ Eq2Cell)))). (λ(hgRight:(g ∈ RightAdj1Cell)). (snd(h) (fst(h) hgRight)))))))))`
-- **Axioms Used:** `(none -- pure lambda-term)`
-- **Definitions Used:** `(none)`
-
-### NBG-220 `thm_benabou_bicategory_strictification_coherence` (Derived)
-
-- **Identifier:** `thm_benabou_bicategory_strictification_coherence` (`NBG-220`, kind: `Derived`)
-- **Statement (Unicode):** `Π(PasteDiag:Class), Π(Eq2Cell:Class), Π(d:Class), ((((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell))) → ((d ∈ PasteDiag) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))`
-- **Statement (ANSII):** `Pi(PasteDiag:Class), Pi(Eq2Cell:Class), Pi(d:Class), ((((d in PasteDiag) -> ((PasteEval1(d), PasteCanon(d)) in Eq2Cell)) * (((PasteEval1(d), PasteCanon(d)) in Eq2Cell) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell))) -> ((d in PasteDiag) -> ((PasteEval1(d), PasteEval2(d)) in Eq2Cell)))`
-- **Proof Term:** `(λ(PasteDiag:Class). (λ(Eq2Cell:Class). (λ(d:Class). (λ(h:(((d ∈ PasteDiag) → ((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell)) × (((PasteEval1(d), PasteCanon(d)) ∈ Eq2Cell) → ((PasteEval1(d), PasteEval2(d)) ∈ Eq2Cell)))). (λ(hdPaste:(d ∈ PasteDiag)). (snd(h) (fst(h) hdPaste)))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -2163,6 +1290,456 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Statement (Unicode):** `(((set(On) → (On ∈ On)) × ((On ∈ On) → 𝟘)) → (set(On) → 𝟘))`
 - **Statement (ANSII):** `(((set(On) -> (On in On)) * ((On in On) -> Void)) -> (set(On) -> Void))`
 - **Proof Term:** `(λ(h:((set(On) → (On ∈ On)) × ((On ∈ On) → 𝟘))). (λ(hSetOn:set(On)). (snd(h) (fst(h) hSetOn))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-240 `thm_exists_exists_swap` (Derived)
+
+- **Identifier:** `thm_exists_exists_swap` (`NBG-240`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), ((Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))) → Σ(b:Class), Σ(a:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> (Class -> Prop))), Pi(p3:(Class -> (Class -> Prop))), ((Sigma(a:Class), Sigma(b:Class), ((p1 a) * (((p2 b) a) * ((p3 a) b)))) -> Sigma(b:Class), Sigma(a:Class), ((p1 a) * (((p2 b) a) * ((p3 a) b))))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(hReg:Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-241 `thm_not_and_to_impl_not` (Derived)
+
+- **Identifier:** `thm_not_and_to_impl_not` (`NBG-241`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), (((p1 × p2) → 𝟘) → (p1 → (p2 → 𝟘)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), (((p1 * p2) -> Void) -> (p1 -> (p2 -> Void)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(hExcl:((p1 × p2) → 𝟘)). (λ(h1:p1). (λ(h2:p2). (hExcl ⟨h1, h2⟩))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-242 `thm_and_modus_ponens_exists` (Derived)
+
+- **Identifier:** `thm_and_modus_ponens_exists` (`NBG-242`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:(Class → Prop)), ((p1 × (p1 → Σ(s:Class), (p2 s))) → Σ(s:Class), (p2 s))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:(Class -> Prop)), ((p1 * (p1 -> Sigma(s:Class), (p2 s))) -> Sigma(s:Class), (p2 s))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:(Class → Prop)). (λ(hClosedDet:(p1 × (p1 → Σ(s:Class), (p2 s)))). (snd(hClosedDet) fst(hClosedDet)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-243 `thm_forall_impl_apply` (Derived)
+
+- **Identifier:** `thm_forall_impl_apply` (`NBG-243`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(g:Class), (((Π(x:Class), ((p1 x) → (p2 x))) × (p1 g)) → (p2 g))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(g:Class), (((Pi(x:Class), ((p1 x) -> (p2 x))) * (p1 g)) -> (p2 g))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(g:Class). (λ(hBorel:((Π(x:Class), ((p1 x) → (p2 x))) × (p1 g))). ((fst(hBorel) g) snd(hBorel))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-244 `thm_binary_rule_apply` (Derived)
+
+- **Identifier:** `thm_binary_rule_apply` (`NBG-244`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(T0:Class), Π(P:Class), ((((p1 T0) × (p1 P)) × (Π(A:Class), Π(B:Class), (((p1 A) × (p1 B)) → ((p2 A) B)))) → ((p2 T0) P))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> (Class -> Prop))), Pi(T0:Class), Pi(P:Class), ((((p1 T0) * (p1 P)) * (Pi(A:Class), Pi(B:Class), (((p1 A) * (p1 B)) -> ((p2 A) B)))) -> ((p2 T0) P))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(T0:Class). (λ(P:Class). (λ(hDP:(((p1 T0) × (p1 P)) × (Π(A:Class), Π(B:Class), (((p1 A) × (p1 B)) → ((p2 A) B))))). (((snd(hDP) T0) P) fst(hDP)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-245 `thm_and_modus_ponens` (Derived)
+
+- **Identifier:** `thm_and_modus_ponens` (`NBG-245`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), ((p1 × (p1 → p2)) → p2)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), ((p1 * (p1 -> p2)) -> p2)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(hYon:(p1 × (p1 → p2))). (snd(hYon) fst(hYon)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-246 `thm_and_impl_carry` (Derived)
+
+- **Identifier:** `thm_and_impl_carry` (`NBG-246`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((p1 × (p2 → p3)) → (p2 → (p1 × p3)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((p1 * (p2 -> p3)) -> (p2 -> (p1 * p3)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(hKan:(p1 × (p2 → p3))). (λ(hSubG:p2). ⟨fst(hKan), (snd(hKan) hSubG)⟩)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-247 `thm_or_and_distrib_right` (Derived)
+
+- **Identifier:** `thm_or_and_distrib_right` (`NBG-247`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((Π(C:Prop), ((p1 → C) → ((p2 → C) → C))) × p3) → Π(C:Prop), (((p1 × p3) → C) → (((p2 × p3) → C) → C)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((Pi(C:Prop), ((p1 -> C) -> ((p2 -> C) -> C))) * p3) -> Pi(C:Prop), (((p1 * p3) -> C) -> (((p2 * p3) -> C) -> C)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((Π(C:Prop), ((p1 → C) → ((p2 → C) → C))) × p3)). (λ(C:Prop). (λ(fL:((p1 × p3) → C)). (λ(fR:((p2 × p3) → C)). (((fst(h) C) (λ(hxX:p1). (fL ⟨hxX, snd(h)⟩))) (λ(hxY:p2). (fR ⟨hxY, snd(h)⟩))))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-248 `thm_and_or_distrib_left` (Derived)
+
+- **Identifier:** `thm_and_or_distrib_left` (`NBG-248`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((p1 × (Π(C:Prop), ((p2 → C) → ((p3 → C) → C)))) → Π(C:Prop), (((p1 × p2) → C) → (((p1 × p3) → C) → C)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((p1 * (Pi(C:Prop), ((p2 -> C) -> ((p3 -> C) -> C)))) -> Pi(C:Prop), (((p1 * p2) -> C) -> (((p1 * p3) -> C) -> C)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(p1 × (Π(C:Prop), ((p2 → C) → ((p3 → C) → C))))). (λ(C:Prop). (λ(fL:((p1 × p2) → C)). (λ(fR:((p1 × p3) → C)). (((snd(h) C) (λ(hyY:p2). (fL ⟨fst(h), hyY⟩))) (λ(hyZ:p3). (fR ⟨fst(h), hyZ⟩))))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-249 `thm_and_interchange` (Derived)
+
+- **Identifier:** `thm_and_interchange` (`NBG-249`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), (((p1 × p2) × (p3 × p4)) → ((p1 × p3) × (p2 × p4)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), (((p1 * p2) * (p3 * p4)) -> ((p1 * p3) * (p2 * p4)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(h:((p1 × p2) × (p3 × p4))). ⟨⟨fst(fst(h)), fst(snd(h))⟩, ⟨snd(fst(h)), snd(snd(h))⟩⟩)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-250 `thm_or_both_cases_left` (Derived)
+
+- **Identifier:** `thm_or_both_cases_left` (`NBG-250`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → (Class → Prop))), Π(p2:(Class → Prop)), Π(x:Class), Π(A:Class), ((Π(C:Prop), (((((p1 x) A) × ((p2 x) → 𝟘)) → C) → (((((p1 x) A) × (p2 x)) → C) → C))) → ((p1 x) A))`
+- **Statement (ANSII):** `Pi(p1:(Class -> (Class -> Prop))), Pi(p2:(Class -> Prop)), Pi(x:Class), Pi(A:Class), ((Pi(C:Prop), (((((p1 x) A) * ((p2 x) -> Void)) -> C) -> (((((p1 x) A) * (p2 x)) -> C) -> C))) -> ((p1 x) A))`
+- **Proof Term:** `(λ(p1:(Class → (Class → Prop))). (λ(p2:(Class → Prop)). (λ(x:Class). (λ(A:Class). (λ(hOr:Π(C:Prop), (((((p1 x) A) × ((p2 x) → 𝟘)) → C) → (((((p1 x) A) × (p2 x)) → C) → C))). (((hOr ((p1 x) A)) (λ(hDiff:(((p1 x) A) × ((p2 x) → 𝟘))). fst(hDiff))) (λ(hInter:(((p1 x) A) × (p2 x))). fst(hInter))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-251 `thm_forall_iff_split` (Derived)
+
+- **Identifier:** `thm_forall_iff_split` (`NBG-251`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), ((Π(X:Class), (((p1 X) → (p2 X)) × ((p2 X) → (p1 X)))) → ((Π(X:Class), ((p1 X) → (p2 X))) × (Π(X:Class), ((p2 X) → (p1 X)))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), ((Pi(X:Class), (((p1 X) -> (p2 X)) * ((p2 X) -> (p1 X)))) -> ((Pi(X:Class), ((p1 X) -> (p2 X))) * (Pi(X:Class), ((p2 X) -> (p1 X)))))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(hIff:Π(X:Class), (((p1 X) → (p2 X)) × ((p2 X) → (p1 X)))). ⟨(λ(X:Class). fst((hIff X))), (λ(X:Class). snd((hIff X)))⟩)))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-252 `thm_forall_iff_join` (Derived)
+
+- **Identifier:** `thm_forall_iff_join` (`NBG-252`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), (((Π(X:Class), ((p1 X) → (p2 X))) × (Π(X:Class), ((p2 X) → (p1 X)))) → Π(X:Class), (((p1 X) → (p2 X)) × ((p2 X) → (p1 X))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), (((Pi(X:Class), ((p1 X) -> (p2 X))) * (Pi(X:Class), ((p2 X) -> (p1 X)))) -> Pi(X:Class), (((p1 X) -> (p2 X)) * ((p2 X) -> (p1 X))))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(hConj:((Π(X:Class), ((p1 X) → (p2 X))) × (Π(X:Class), ((p2 X) → (p1 X))))). (λ(X:Class). ⟨(fst(hConj) X), (snd(hConj) X)⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-253 `thm_and_map_left` (Derived)
+
+- **Identifier:** `thm_and_map_left` (`NBG-253`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) × (p1 → p3)) → (p3 × p2))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) * (p1 -> p3)) -> (p3 * p2))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) × (p1 → p3))). ⟨(snd(h) fst(fst(h))), snd(fst(h))⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-254 `thm_and_map_right` (Derived)
+
+- **Identifier:** `thm_and_map_right` (`NBG-254`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) × (p2 → p3)) → (p1 × p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) * (p2 -> p3)) -> (p1 * p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) × (p2 → p3))). ⟨fst(fst(h)), (snd(h) snd(fst(h)))⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-255 `thm_xor_elim_left` (Derived)
+
+- **Identifier:** `thm_xor_elim_left` (`NBG-255`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(x:Class), Π(B:Class), (((Π(C:Prop), ((((p1 x) × (((p2 x) B) → 𝟘)) → C) → (((((p2 x) B) × ((p1 x) → 𝟘)) → C) → C))) × ((p1 x) → 𝟘)) → (((p2 x) B) × ((p1 x) → 𝟘)))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> (Class -> Prop))), Pi(x:Class), Pi(B:Class), (((Pi(C:Prop), ((((p1 x) * (((p2 x) B) -> Void)) -> C) -> (((((p2 x) B) * ((p1 x) -> Void)) -> C) -> C))) * ((p1 x) -> Void)) -> (((p2 x) B) * ((p1 x) -> Void)))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(x:Class). (λ(B:Class). (λ(h:((Π(C:Prop), ((((p1 x) × (((p2 x) B) → 𝟘)) → C) → (((((p2 x) B) × ((p1 x) → 𝟘)) → C) → C))) × ((p1 x) → 𝟘))). ⟨(((fst(h) ((p2 x) B)) (λ(hL:((p1 x) × (((p2 x) B) → 𝟘))). ax_false_elim(((p2 x) B), (snd(h) fst(hL))))) (λ(hR:(((p2 x) B) × ((p1 x) → 𝟘))). fst(hR))), snd(h)⟩)))))`
+- **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
+
+### NBG-256 `thm_xor_elim_right` (Derived)
+
+- **Identifier:** `thm_xor_elim_right` (`NBG-256`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → (Class → Prop))), Π(p2:(Class → Prop)), Π(x:Class), Π(A:Class), (((Π(C:Prop), (((((p1 x) A) × ((p2 x) → 𝟘)) → C) → ((((p2 x) × (((p1 x) A) → 𝟘)) → C) → C))) × ((p2 x) → 𝟘)) → (((p1 x) A) × ((p2 x) → 𝟘)))`
+- **Statement (ANSII):** `Pi(p1:(Class -> (Class -> Prop))), Pi(p2:(Class -> Prop)), Pi(x:Class), Pi(A:Class), (((Pi(C:Prop), (((((p1 x) A) * ((p2 x) -> Void)) -> C) -> ((((p2 x) * (((p1 x) A) -> Void)) -> C) -> C))) * ((p2 x) -> Void)) -> (((p1 x) A) * ((p2 x) -> Void)))`
+- **Proof Term:** `(λ(p1:(Class → (Class → Prop))). (λ(p2:(Class → Prop)). (λ(x:Class). (λ(A:Class). (λ(h:((Π(C:Prop), (((((p1 x) A) × ((p2 x) → 𝟘)) → C) → ((((p2 x) × (((p1 x) A) → 𝟘)) → C) → C))) × ((p2 x) → 𝟘))). ⟨(((fst(h) ((p1 x) A)) (λ(hL:(((p1 x) A) × ((p2 x) → 𝟘))). fst(hL))) (λ(hR:((p2 x) × (((p1 x) A) → 𝟘))). ax_false_elim(((p1 x) A), (snd(h) fst(hR))))), snd(h)⟩)))))`
+- **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
+
+### NBG-257 `thm_modus_ponens_absurd` (Derived)
+
+- **Identifier:** `thm_modus_ponens_absurd` (`NBG-257`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × (p1 → p2)) × (p3 × (p2 → 𝟘))) → 𝟘)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * (p1 -> p2)) * (p3 * (p2 -> Void))) -> Void)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × (p1 → p2)) × (p3 × (p2 → 𝟘)))). (snd(snd(h)) (snd(fst(h)) fst(fst(h))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-258 `thm_and_map_both` (Derived)
+
+- **Identifier:** `thm_and_map_both` (`NBG-258`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), (((p1 × p2) × ((p1 → p3) × (p2 → p4))) → (p3 × p4))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), (((p1 * p2) * ((p1 -> p3) * (p2 -> p4))) -> (p3 * p4))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(h:((p1 × p2) × ((p1 → p3) × (p2 → p4)))). ⟨(fst(snd(h)) fst(fst(h))), (snd(snd(h)) snd(fst(h)))⟩)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-259 `thm_impl_then_and_rule` (Derived)
+
+- **Identifier:** `thm_impl_then_and_rule` (`NBG-259`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), (((p1 → p2) × ((p2 × p3) → p4)) → ((p1 × p3) → p4))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), (((p1 -> p2) * ((p2 * p3) -> p4)) -> ((p1 * p3) -> p4))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(hSymTrans:((p1 → p2) × ((p2 × p3) → p4))). (λ(hPair:(p1 × p3)). (snd(hSymTrans) ⟨(fst(hSymTrans) fst(hPair)), snd(hPair)⟩)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-260 `thm_forall_impl_and_intro` (Derived)
+
+- **Identifier:** `thm_forall_impl_and_intro` (`NBG-260`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(p3:(Class → Prop)), (((Π(X:Class), ((p1 X) → (p2 X))) × (Π(X:Class), ((p1 X) → (p3 X)))) → Π(X:Class), ((p1 X) → ((p2 X) × (p3 X))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(p3:(Class -> Prop)), (((Pi(X:Class), ((p1 X) -> (p2 X))) * (Pi(X:Class), ((p1 X) -> (p3 X)))) -> Pi(X:Class), ((p1 X) -> ((p2 X) * (p3 X))))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(p3:(Class → Prop)). (λ(hBoth:((Π(X:Class), ((p1 X) → (p2 X))) × (Π(X:Class), ((p1 X) → (p3 X))))). (λ(X:Class). (λ(hxA:(p1 X)). ⟨((fst(hBoth) X) hxA), ((snd(hBoth) X) hxA)⟩))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-261 `thm_forall_impl_trans_through_and` (Derived)
+
+- **Identifier:** `thm_forall_impl_trans_through_and` (`NBG-261`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(p3:(Class → Prop)), Π(p4:(Class → Prop)), (((Π(X:Class), (((p1 X) × (p2 X)) → (p3 X))) × (Π(X:Class), ((p4 X) → ((p1 X) × (p2 X))))) → Π(X:Class), ((p4 X) → (p3 X)))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(p3:(Class -> Prop)), Pi(p4:(Class -> Prop)), (((Pi(X:Class), (((p1 X) * (p2 X)) -> (p3 X))) * (Pi(X:Class), ((p4 X) -> ((p1 X) * (p2 X))))) -> Pi(X:Class), ((p4 X) -> (p3 X)))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(p3:(Class → Prop)). (λ(p4:(Class → Prop)). (λ(h:((Π(X:Class), (((p1 X) × (p2 X)) → (p3 X))) × (Π(X:Class), ((p4 X) → ((p1 X) × (p2 X)))))). (λ(X:Class). (λ(hxD:(p4 X)). ((fst(h) X) ((snd(h) X) hxD)))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-262 `thm_impl_trans_and` (Derived)
+
+- **Identifier:** `thm_impl_trans_and` (`NBG-262`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 → p2) × (p2 → p3)) → (p1 → p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 -> p2) * (p2 -> p3)) -> (p1 -> p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 → p2) × (p2 → p3))). (λ(hxy:p1). (snd(h) (fst(h) hxy)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-263 `thm_modus_tollens_absurd` (Derived)
+
+- **Identifier:** `thm_modus_tollens_absurd` (`NBG-263`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), (((p1 → p2) × ((p2 → 𝟘) × p1)) → 𝟘)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), (((p1 -> p2) * ((p2 -> Void) * p1)) -> Void)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(h:((p1 → p2) × ((p2 → 𝟘) × p1))). (fst(snd(h)) (fst(h) snd(snd(h)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-264 `thm_impl_and_to_two_ors` (Derived)
+
+- **Identifier:** `thm_impl_and_to_two_ors` (`NBG-264`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), Π(p5:Prop), (((p1 → (p2 × p3)) × p1) → ((Π(C:Prop), ((p2 → C) → ((p4 → C) → C))) × (Π(C:Prop), ((p5 → C) → ((p3 → C) → C)))))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), Pi(p5:Prop), (((p1 -> (p2 * p3)) * p1) -> ((Pi(C:Prop), ((p2 -> C) -> ((p4 -> C) -> C))) * (Pi(C:Prop), ((p5 -> C) -> ((p3 -> C) -> C)))))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(p5:Prop). (λ(h:((p1 → (p2 × p3)) × p1)). ⟨(λ(C:Prop). (λ(fL:(p2 → C)). (λ(fR:(p4 → C)). (fL fst((fst(h) snd(h))))))), (λ(C:Prop). (λ(gL:(p5 → C)). (λ(gR:(p3 → C)). (gR snd((fst(h) snd(h)))))))⟩))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-265 `thm_impl_back_and_forth` (Derived)
+
+- **Identifier:** `thm_impl_back_and_forth` (`NBG-265`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), (((p1 → p2) × (p2 → (p1 × p1))) → (p1 → (p1 × p2)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), (((p1 -> p2) * (p2 -> (p1 * p1))) -> (p1 -> (p1 * p2)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(hDiag:((p1 → p2) × (p2 → (p1 × p1)))). (λ(hxA:p1). ⟨fst((snd(hDiag) (fst(hDiag) hxA))), (fst(hDiag) hxA)⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-266 `thm_transitive_common_upper_bound` (Derived)
+
+- **Identifier:** `thm_transitive_common_upper_bound` (`NBG-266`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → (Class → Prop))), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((p1 x) y) × ((p1 y) z)) → ((p1 x) z))) → (((((p1 a) b) × ((p1 c) b)) × ((p1 b) d)) → (((p1 a) d) × ((p1 c) d))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> (Class -> Prop))), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((p1 x) y) * ((p1 y) z)) -> ((p1 x) z))) -> (((((p1 a) b) * ((p1 c) b)) * ((p1 b) d)) -> (((p1 a) d) * ((p1 c) d))))`
+- **Proof Term:** `(λ(p1:(Class → (Class → Prop))). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((p1 x) y) × ((p1 y) z)) → ((p1 x) z))). (λ(hUB:((((p1 a) b) × ((p1 c) b)) × ((p1 b) d))). ⟨((((hTrans a) b) d) ⟨fst(fst(hUB)), snd(hUB)⟩), ((((hTrans c) b) d) ⟨snd(fst(hUB)), snd(hUB)⟩)⟩)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-267 `thm_transitive_common_lower_bound` (Derived)
+
+- **Identifier:** `thm_transitive_common_lower_bound` (`NBG-267`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → (Class → Prop))), Π(a:Class), Π(b:Class), Π(c:Class), Π(d:Class), ((Π(x:Class), Π(y:Class), Π(z:Class), ((((p1 x) y) × ((p1 y) z)) → ((p1 x) z))) → ((((p1 d) b) × (((p1 b) a) × ((p1 b) c))) → (((p1 d) a) × ((p1 d) c))))`
+- **Statement (ANSII):** `Pi(p1:(Class -> (Class -> Prop))), Pi(a:Class), Pi(b:Class), Pi(c:Class), Pi(d:Class), ((Pi(x:Class), Pi(y:Class), Pi(z:Class), ((((p1 x) y) * ((p1 y) z)) -> ((p1 x) z))) -> ((((p1 d) b) * (((p1 b) a) * ((p1 b) c))) -> (((p1 d) a) * ((p1 d) c))))`
+- **Proof Term:** `(λ(p1:(Class → (Class → Prop))). (λ(a:Class). (λ(b:Class). (λ(c:Class). (λ(d:Class). (λ(hTrans:Π(x:Class), Π(y:Class), Π(z:Class), ((((p1 x) y) × ((p1 y) z)) → ((p1 x) z))). (λ(hLB:(((p1 d) b) × (((p1 b) a) × ((p1 b) c)))). ⟨((((hTrans d) b) a) ⟨fst(hLB), fst(snd(hLB))⟩), ((((hTrans d) b) c) ⟨fst(hLB), snd(snd(hLB))⟩)⟩)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-268 `thm_not_conclusion_to_not_and` (Derived)
+
+- **Identifier:** `thm_not_conclusion_to_not_and` (`NBG-268`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((((p1 × p2) → p3) × (p3 → 𝟘)) → (p1 → (p2 → 𝟘)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((((p1 * p2) -> p3) * (p3 -> Void)) -> (p1 -> (p2 -> Void)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(((p1 × p2) → p3) × (p3 → 𝟘))). (λ(h1:p1). (λ(h2:p2). (snd(h) (fst(h) ⟨h1, h2⟩))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-269 `thm_impl_chain_apply` (Derived)
+
+- **Identifier:** `thm_impl_chain_apply` (`NBG-269`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((((p1 → p2) × (p2 → p3)) × p1) → p3)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((((p1 -> p2) * (p2 -> p3)) * p1) -> p3)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(((p1 → p2) × (p2 → p3)) × p1)). (snd(fst(h)) (fst(fst(h)) snd(h)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-270 `thm_or_elim_common_goal` (Derived)
+
+- **Identifier:** `thm_or_elim_common_goal` (`NBG-270`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → (Class → Prop))), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), Π(x:Class), Π(A:Class), (((((p1 x) A) → ((p2 x) A)) × (((p3 x) A) → ((p2 x) A))) → ((Π(C:Prop), ((((p1 x) A) → C) → ((((p3 x) A) → C) → C))) → ((p2 x) A)))`
+- **Statement (ANSII):** `Pi(p1:(Class -> (Class -> Prop))), Pi(p2:(Class -> (Class -> Prop))), Pi(p3:(Class -> (Class -> Prop))), Pi(x:Class), Pi(A:Class), (((((p1 x) A) -> ((p2 x) A)) * (((p3 x) A) -> ((p2 x) A))) -> ((Pi(C:Prop), ((((p1 x) A) -> C) -> ((((p3 x) A) -> C) -> C))) -> ((p2 x) A)))`
+- **Proof Term:** `(λ(p1:(Class → (Class → Prop))). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(x:Class). (λ(A:Class). (λ(h:((((p1 x) A) → ((p2 x) A)) × (((p3 x) A) → ((p2 x) A)))). (λ(hOr:Π(C:Prop), ((((p1 x) A) → C) → ((((p3 x) A) → C) → C))). (((hOr ((p2 x) A)) fst(h)) snd(h)))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-271 `thm_impl_and_intro` (Derived)
+
+- **Identifier:** `thm_impl_and_intro` (`NBG-271`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 → p2) × (p1 → p3)) → (p1 → (p2 × p3)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 -> p2) * (p1 -> p3)) -> (p1 -> (p2 * p3)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 → p2) × (p1 → p3))). (λ(hx:p1). ⟨(fst(h) hx), (snd(h) hx)⟩)))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-272 `thm_and_rule_then_rule` (Derived)
+
+- **Identifier:** `thm_and_rule_then_rule` (`NBG-272`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), Π(p5:Prop), ((((p1 × p2) → p3) × ((p4 × p3) → p5)) → (((p1 × p2) × p4) → p5))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), Pi(p5:Prop), ((((p1 * p2) -> p3) * ((p4 * p3) -> p5)) -> (((p1 * p2) * p4) -> p5))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(p5:Prop). (λ(h:(((p1 × p2) → p3) × ((p4 × p3) → p5))). (λ(hIn:((p1 × p2) × p4)). (snd(h) ⟨snd(hIn), (fst(h) fst(hIn))⟩))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-273 `thm_member_forall_apply` (Derived)
+
+- **Identifier:** `thm_member_forall_apply` (`NBG-273`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(x:Class), (((p1 x) × (Π(Z:Class), ((p1 Z) → (p2 Z)))) → (p2 x))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(x:Class), (((p1 x) * (Pi(Z:Class), ((p1 Z) -> (p2 Z)))) -> (p2 x))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(x:Class). (λ(h:((p1 x) × (Π(Z:Class), ((p1 Z) → (p2 Z))))). ((snd(h) x) fst(h))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-274 `thm_impl_trans_keep_premise` (Derived)
+
+- **Identifier:** `thm_impl_trans_keep_premise` (`NBG-274`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 → p2) × ((p1 × p2) → p3)) → (p1 → p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 -> p2) * ((p1 * p2) -> p3)) -> (p1 -> p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 → p2) × ((p1 × p2) → p3))). (λ(hxfx:p1). (snd(h) ⟨hxfx, (fst(h) hxfx)⟩))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-275 `thm_apply_hypothesis` (Derived)
+
+- **Identifier:** `thm_apply_hypothesis` (`NBG-275`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(p3:Prop), (((Π(Y:Class), ((p1 Y) → (p2 Y))) × ((Π(Y:Class), ((p1 Y) → (p2 Y))) → p3)) → p3)`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(p3:Prop), (((Pi(Y:Class), ((p1 Y) -> (p2 Y))) * ((Pi(Y:Class), ((p1 Y) -> (p2 Y))) -> p3)) -> p3)`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(p3:Prop). (λ(h:((Π(Y:Class), ((p1 Y) → (p2 Y))) × ((Π(Y:Class), ((p1 Y) → (p2 Y))) → p3))). (snd(h) fst(h))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-276 `thm_impl_and_apply_swap` (Derived)
+
+- **Identifier:** `thm_impl_and_apply_swap` (`NBG-276`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 → (p2 × p3)) × p1) → (p3 × p2))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 -> (p2 * p3)) * p1) -> (p3 * p2))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 → (p2 × p3)) × p1)). ⟨snd((fst(h) snd(h))), fst((fst(h) snd(h)))⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-277 `thm_modus_ponens_then_impl` (Derived)
+
+- **Identifier:** `thm_modus_ponens_then_impl` (`NBG-277`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × (p1 → p2)) × (p2 → p3)) → (p1 × p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * (p1 -> p2)) * (p2 -> p3)) -> (p1 * p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × (p1 → p2)) × (p2 → p3))). ⟨fst(fst(h)), (snd(h) (snd(fst(h)) fst(fst(h))))⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-278 `thm_curry` (Derived)
+
+- **Identifier:** `thm_curry` (`NBG-278`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) → p3) → (p1 → (p2 → p3)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) -> p3) -> (p1 -> (p2 -> p3)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) → p3)). (λ(hxA:p1). (λ(hxB:p2). (h ⟨hxA, hxB⟩)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-279 `thm_uncurry` (Derived)
+
+- **Identifier:** `thm_uncurry` (`NBG-279`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((p1 → (p2 → p3)) → ((p1 × p2) → p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((p1 -> (p2 -> p3)) -> ((p1 * p2) -> p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(p1 → (p2 → p3))). (λ(hAB:(p1 × p2)). ((h fst(hAB)) snd(hAB)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-280 `thm_or_both_refuted` (Derived)
+
+- **Identifier:** `thm_or_both_refuted` (`NBG-280`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((((Π(C:Prop), ((p1 → C) → (((p2 × p3) → C) → C))) × (p1 → 𝟘)) × (p3 → 𝟘)) → 𝟘)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((((Pi(C:Prop), ((p1 -> C) -> (((p2 * p3) -> C) -> C))) * (p1 -> Void)) * (p3 -> Void)) -> Void)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(((Π(C:Prop), ((p1 → C) → (((p2 × p3) → C) → C))) × (p1 → 𝟘)) × (p3 → 𝟘))). (((fst(fst(h)) 𝟘) snd(fst(h))) (λ(hR:(p2 × p3)). (snd(h) snd(hR))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-281 `thm_disjunctive_syllogism_under_impl` (Derived)
+
+- **Identifier:** `thm_disjunctive_syllogism_under_impl` (`NBG-281`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → Prop)), Π(p3:(Class → (Class → Prop))), Π(x:Class), Π(B2:Class), ((((p1 x) → Π(C:Prop), (((p2 x) → C) → ((((p3 x) B2) → C) → C))) × (((p1 x) × (p2 x)) → 𝟘)) → ((p1 x) → ((p3 x) B2)))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> Prop)), Pi(p3:(Class -> (Class -> Prop))), Pi(x:Class), Pi(B2:Class), ((((p1 x) -> Pi(C:Prop), (((p2 x) -> C) -> ((((p3 x) B2) -> C) -> C))) * (((p1 x) * (p2 x)) -> Void)) -> ((p1 x) -> ((p3 x) B2)))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → Prop)). (λ(p3:(Class → (Class → Prop))). (λ(x:Class). (λ(B2:Class). (λ(h:(((p1 x) → Π(C:Prop), (((p2 x) → C) → ((((p3 x) B2) → C) → C))) × (((p1 x) × (p2 x)) → 𝟘))). (λ(hxB1:(p1 x)). ((((fst(h) hxB1) ((p3 x) B2)) (λ(hxA:(p2 x)). ax_false_elim(((p3 x) B2), (snd(h) ⟨hxB1, hxA⟩)))) (λ(hxB2:((p3 x) B2)). hxB2)))))))))`
+- **Axioms Used:** `ax_false_elim`
+- **Definitions Used:** `(none)`
+
+### NBG-282 `thm_and3_drop_middle` (Derived)
+
+- **Identifier:** `thm_and3_drop_middle` (`NBG-282`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) × p3) → (p1 × p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) * p3) -> (p1 * p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) × p3)). ⟨fst(fst(h)), snd(h)⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-283 `thm_and3_drop_first` (Derived)
+
+- **Identifier:** `thm_and3_drop_first` (`NBG-283`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) × p3) → (p2 × p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) * p3) -> (p2 * p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) × p3)). ⟨snd(fst(h)), snd(h)⟩))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-284 `thm_impl_and3_intro` (Derived)
+
+- **Identifier:** `thm_impl_and3_intro` (`NBG-284`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), ((((p1 → p2) × (p1 → p3)) × (p1 → p4)) → (p1 → ((p2 × p3) × p4)))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), ((((p1 -> p2) * (p1 -> p3)) * (p1 -> p4)) -> (p1 -> ((p2 * p3) * p4)))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(h:(((p1 → p2) × (p1 → p3)) × (p1 → p4))). (λ(huP:p1). ⟨⟨(fst(fst(h)) huP), (snd(fst(h)) huP)⟩, (snd(h) huP)⟩))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-285 `thm_impl_and_proj_right` (Derived)
+
+- **Identifier:** `thm_impl_and_proj_right` (`NBG-285`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), ((p1 → (p2 × p3)) → (p1 → p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), ((p1 -> (p2 * p3)) -> (p1 -> p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:(p1 → (p2 × p3))). (λ(hxEq:p1). snd((h hxEq)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-286 `thm_impl_trans_three` (Derived)
+
+- **Identifier:** `thm_impl_trans_three` (`NBG-286`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), ((((p1 → p2) × (p3 → p4)) × (p1 → p3)) → (p1 → p4))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), ((((p1 -> p2) * (p3 -> p4)) * (p1 -> p3)) -> (p1 -> p4))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(h:(((p1 → p2) × (p3 → p4)) × (p1 → p3))). (λ(huX:p1). (snd(fst(h)) (snd(h) huX))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-287 `thm_and_right_impl` (Derived)
+
+- **Identifier:** `thm_and_right_impl` (`NBG-287`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), (((p1 × p2) × (p2 → p3)) → (p1 → p3))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), (((p1 * p2) * (p2 -> p3)) -> (p1 -> p3))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(h:((p1 × p2) × (p2 → p3))). (λ(hfHom:p1). (snd(h) snd(fst(h))))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-288 `thm_impl_and_intro_then_rule` (Derived)
+
+- **Identifier:** `thm_impl_and_intro_then_rule` (`NBG-288`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), Π(p3:Prop), Π(p4:Prop), ((((p1 → p2) × (p1 → p3)) × ((p2 × p3) → p4)) → (p1 → p4))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), Pi(p3:Prop), Pi(p4:Prop), ((((p1 -> p2) * (p1 -> p3)) * ((p2 * p3) -> p4)) -> (p1 -> p4))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(p3:Prop). (λ(p4:Prop). (λ(h:(((p1 → p2) × (p1 → p3)) × ((p2 × p3) → p4))). (λ(hpOm:p1). (snd(h) ⟨(fst(fst(h)) hpOm), (snd(fst(h)) hpOm)⟩)))))))`
+- **Axioms Used:** `(none -- pure lambda-term)`
+- **Definitions Used:** `(none)`
+
+### NBG-289 `thm_modus_ponens_and` (Derived)
+
+- **Identifier:** `thm_modus_ponens_and` (`NBG-289`, kind: `Derived`)
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:Prop), (((p1 → p2) × p1) → p2)`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:Prop), (((p1 -> p2) * p1) -> p2)`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:Prop). (λ(h:((p1 → p2) × p1)). (fst(h) snd(h)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
