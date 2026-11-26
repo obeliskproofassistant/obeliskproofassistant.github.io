@@ -225,10 +225,10 @@
       "name": "thm_exists_intro",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(B:(Class → Prop)), Π(c:Class), ((B c) → Σ(x:Class), (B x))",
-      "proof_unicode": "(λ(B:(Class → Prop)). (λ(c:Class). (λ(witness:(B c)). ⟨c, witness⟩)))",
+      "statement_unicode": "Π(B:(Class → Prop)), Π(c:Class), ((B c) → Π(C:Prop), ((Π(x:Class), ((B x) → C)) → C))",
+      "proof_unicode": "(λ(B:(Class → Prop)). (λ(c:Class). (λ(witness:(B c)). (λ(C:Prop). (λ(k:Π(x:Class), ((B x) → C)). ((k c) witness))))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (B : (Pi (_ : Class) -> Prop)) -> (Pi (c : Class) -> (Pi (_ : (B c)) -> (Sigma (x : Class) * (B x)))))"
+      "statement_ast": "(Pi (B : (Pi (_ : Class) -> Prop)) -> (Pi (c : Class) -> (Pi (_ : (B c)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (x : Class) -> (Pi (_ : (B x)) -> C))) -> C)))))"
     },
     {
       "id": 21,
@@ -236,10 +236,10 @@
       "name": "def_isSet",
       "kind": "Definitional",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(X:Class), ((set(X) → Σ(Y:Class), (X ∈ Y)) × ((Σ(Y:Class), (X ∈ Y)) → set(X)))",
-      "proof_unicode": "(λ(X:Class). ⟨(λ(h:set(X)). let res:Σ(Y:Class), (X ∈ Y) = h in res), (λ(h:Σ(Y:Class), (X ∈ Y)). let res:set(X) = h in res)⟩)",
+      "statement_unicode": "Π(X:Class), ((set(X) → Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)) × ((Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)) → set(X)))",
+      "proof_unicode": "(λ(X:Class). ⟨(λ(h:set(X)). let res:Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C) = h in res), (λ(h:Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)). let res:set(X) = h in res)⟩)",
       "axioms_used": [],
-      "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Set X)) -> (Sigma (Y : Class) * ((In X) Y)))) * (Pi (_ : (Sigma (Y : Class) * ((In X) Y))) -> (Set X))))"
+      "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Set X)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (Y : Class) -> (Pi (_ : ((In X) Y)) -> C))) -> C)))) * (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (Y : Class) -> (Pi (_ : ((In X) Y)) -> C))) -> C))) -> (Set X))))"
     },
     {
       "id": 22,
@@ -357,10 +357,10 @@
       "name": "ax_global_choice",
       "kind": "Axiomatic",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(A:Class), ((Σ(x:Class), (x ∈ A)) → (choice(A) ∈ A))",
+      "statement_unicode": "Π(A:Class), ((Π(C:Prop), ((Π(x:Class), ((x ∈ A) → C)) → C)) → (choice(A) ∈ A))",
       "proof_unicode": "plan_global_choice",
       "axioms_used": ["plan_global_choice"],
-      "statement_ast": "(Pi (A : Class) -> (Pi (_ : (Sigma (x : Class) * ((In x) A))) -> ((In (choice A)) A)))"
+      "statement_ast": "(Pi (A : Class) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (x : Class) -> (Pi (_ : ((In x) A)) -> C))) -> C))) -> ((In (choice A)) A)))"
     },
     {
       "id": 33,
@@ -566,10 +566,10 @@
       "name": "def_isCard",
       "kind": "Definitional",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(C:Class), ((Card(C) → Σ(K:Class), (CardOf(K) = C)) × ((Σ(K:Class), (CardOf(K) = C)) → Card(C)))",
-      "proof_unicode": "(λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩)",
+      "statement_unicode": "Π(C:Class), ((Card(C) → Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)) × ((Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)) → Card(C)))",
+      "proof_unicode": "(λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩)",
       "axioms_used": [],
-      "statement_ast": "(Pi (C : Class) -> (Sigma (_ : (Pi (_ : (Card C)) -> (Sigma (K : Class) * (Id Class (CardOf K) C)))) * (Pi (_ : (Sigma (K : Class) * (Id Class (CardOf K) C))) -> (Card C))))"
+      "statement_ast": "(Pi (C : Class) -> (Sigma (_ : (Pi (_ : (Card C)) -> (Pi (C1 : Prop) -> (Pi (_ : (Pi (K : Class) -> (Pi (_ : (Id Class (CardOf K) C)) -> C1))) -> C1)))) * (Pi (_ : (Pi (C1 : Prop) -> (Pi (_ : (Pi (K : Class) -> (Pi (_ : (Id Class (CardOf K) C)) -> C1))) -> C1))) -> (Card C))))"
     },
     {
       "id": 52,
@@ -578,7 +578,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Card(ω)",
-      "proof_unicode": "(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) ω)) ⟨ω, ax_cardof_omega⟩)",
+      "proof_unicode": "(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) ω)) (λ(C:Prop). (λ(k:Π(K:Class), ((CardOf(K) = ω) → C)). ((k ω) ax_cardof_omega))))",
       "axioms_used": ["ax_cardof_omega"],
       "statement_ast": "(Card omega)"
     },
@@ -589,7 +589,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Card(On)",
-      "proof_unicode": "(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) On)) ⟨On, ax_cardof_on⟩)",
+      "proof_unicode": "(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) On)) (λ(C:Prop). (λ(k:Π(K:Class), ((CardOf(K) = On) → C)). ((k On) ax_cardof_on))))",
       "axioms_used": ["ax_cardof_on"],
       "statement_ast": "(Card On)"
     },
@@ -600,7 +600,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "(Card(V) → 𝟘)",
-      "proof_unicode": "(λ(hCardV:Card(V)). ax_cardof_never_v(fst((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV)), snd((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV))))",
+      "proof_unicode": "(λ(hCardV:Card(V)). (((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) V)) hCardV) 𝟘) (λ(K:Class). (λ(hEqV:(CardOf(K) = V)). ax_cardof_never_v(K, hEqV)))))",
       "axioms_used": ["ax_cardof_never_v"],
       "statement_ast": "(Pi (_ : (Card V)) -> False)"
     },
@@ -610,10 +610,10 @@
       "name": "ax_tarski_universes",
       "kind": "Axiomatic",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(X:Class), (set(X) → Σ(U:Class), (universe(U) × ((X ∈ U) × set(U))))",
+      "statement_unicode": "Π(X:Class), (set(X) → Π(C:Prop), ((Π(U:Class), ((universe(U) × ((X ∈ U) × set(U))) → C)) → C))",
       "proof_unicode": "plan_tarski_axm",
       "axioms_used": ["plan_tarski_axm"],
-      "statement_ast": "(Pi (X : Class) -> (Pi (_ : (Set X)) -> (Sigma (U : Class) * (Sigma (_ : (Universe U)) * (Sigma (_ : ((In X) U)) * (Set U))))))"
+      "statement_ast": "(Pi (X : Class) -> (Pi (_ : (Set X)) -> (Pi (C : Prop) -> (Pi (_ : (Pi (U : Class) -> (Pi (_ : (Sigma (_ : (Universe U)) * (Sigma (_ : ((In X) U)) * (Set U)))) -> C))) -> C))))"
     },
     {
       "id": 56,
@@ -643,10 +643,10 @@
       "name": "def_unary_union",
       "kind": "Definitional",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(A:Class), Π(z:Class), (((z ∈ ⋃(A)) → Σ(y:Class), ((y ∈ A) × (z ∈ y))) × ((Σ(y:Class), ((y ∈ A) × (z ∈ y))) → (z ∈ ⋃(A))))",
-      "proof_unicode": "(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋃(A))). let res:Σ(y:Class), ((y ∈ A) × (z ∈ y)) = h in res), (λ(h:Σ(y:Class), ((y ∈ A) × (z ∈ y))). let res:(z ∈ ⋃(A)) = h in res)⟩))",
+      "statement_unicode": "Π(A:Class), Π(z:Class), (((z ∈ ⋃(A)) → Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)) × ((Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)) → (z ∈ ⋃(A))))",
+      "proof_unicode": "(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋃(A))). let res:Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C) = h in res), (λ(h:Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)). let res:(z ∈ ⋃(A)) = h in res)⟩))",
       "axioms_used": [],
-      "statement_ast": "(Pi (A : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) (Union A))) -> (Sigma (y : Class) * (Sigma (_ : ((In y) A)) * ((In z) y))))) * (Pi (_ : (Sigma (y : Class) * (Sigma (_ : ((In y) A)) * ((In z) y)))) -> ((In z) (Union A))))))"
+      "statement_ast": "(Pi (A : Class) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) (Union A))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (y : Class) -> (Pi (_ : (Sigma (_ : ((In y) A)) * ((In z) y))) -> C))) -> C)))) * (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (y : Class) -> (Pi (_ : (Sigma (_ : ((In y) A)) * ((In z) y))) -> C))) -> C))) -> ((In z) (Union A))))))"
     },
     {
       "id": 59,
@@ -687,10 +687,10 @@
       "name": "thm_russell_class_not_set",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "((Σ(R:Class), (set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))) → 𝟘)",
-      "proof_unicode": "(λ(hExists:Σ(R:Class), (set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))). ((λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn)) (snd((snd(snd(hExists)) fst(hExists))) ⟨fst(snd(hExists)), (λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn))⟩)))",
+      "statement_unicode": "((Π(C:Prop), ((Π(R:Class), ((set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R))))) → C)) → C)) → 𝟘)",
+      "proof_unicode": "(λ(hExists:Π(C:Prop), ((Π(R:Class), ((set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R))))) → C)) → C)). ((hExists 𝟘) (λ(R:Class). (λ(hPairR:(set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))). ((λ(hIn:(R ∈ R)). (snd((fst((snd(hPairR) R)) hIn)) hIn)) (snd((snd(hPairR) R)) ⟨fst(hPairR), (λ(hIn:(R ∈ R)). (snd((fst((snd(hPairR) R)) hIn)) hIn))⟩))))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (_ : (Sigma (R : Class) * (Sigma (_ : (Set R)) * (Pi (x : Class) -> (Sigma (_ : (Pi (_ : ((In x) R)) -> (Sigma (_ : (Set x)) * (Pi (_ : ((In x) x)) -> False)))) * (Pi (_ : (Sigma (_ : (Set x)) * (Pi (_ : ((In x) x)) -> False))) -> ((In x) R))))))) -> False)"
+      "statement_ast": "(Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (R : Class) -> (Pi (_ : (Sigma (_ : (Set R)) * (Pi (x : Class) -> (Sigma (_ : (Pi (_ : ((In x) R)) -> (Sigma (_ : (Set x)) * (Pi (_ : ((In x) x)) -> False)))) * (Pi (_ : (Sigma (_ : (Set x)) * (Pi (_ : ((In x) x)) -> False))) -> ((In x) R)))))) -> C))) -> C))) -> False)"
     },
     {
       "id": 63,
@@ -1215,10 +1215,10 @@
       "name": "thm_cantor_no_surjection_power",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(A:Class), Π(F:Class), Π(D:Class), ((Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))) → ((Σ(a:Class), ((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))) → 𝟘))",
-      "proof_unicode": "(λ(A:Class). (λ(F:Class). (λ(D:Class). (λ(hDiag:Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))). (λ(hSurj:Σ(a:Class), ((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((hDiag fst(hSurj))) ⟨fst(snd(hSurj)), (λ(hInFa:(fst(hSurj) ∈ ValOf(F, fst(hSurj)))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((snd(snd(hSurj)) fst(hSurj))) hInFa)))⟩)))))))",
+      "statement_unicode": "Π(A:Class), Π(F:Class), Π(D:Class), ((Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))) → ((Π(C:Prop), ((Π(a:Class), (((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D))))) → C)) → C)) → 𝟘))",
+      "proof_unicode": "(λ(A:Class). (λ(F:Class). (λ(D:Class). (λ(hDiag:Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))). (λ(hSurj:Π(C:Prop), ((Π(a:Class), (((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D))))) → C)) → C)). ((hSurj 𝟘) (λ(a:Class). (λ(hA:((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))). ((λ(hInD:(a ∈ D)). (snd((fst((hDiag a)) hInD)) (fst((snd(hA) a)) hInD))) (snd((hDiag a)) ⟨fst(hA), (λ(hInFa:(a ∈ ValOf(F, a))). ((λ(hInD:(a ∈ D)). (snd((fst((hDiag a)) hInD)) (fst((snd(hA) a)) hInD))) (snd((snd(hA) a)) hInFa)))⟩))))))))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (A : Class) -> (Pi (F : Class) -> (Pi (D : Class) -> (Pi (_ : (Pi (x : Class) -> (Sigma (_ : (Pi (_ : ((In x) D)) -> (Sigma (_ : ((In x) A)) * (Pi (_ : ((In x) ((ValOf F) x))) -> False)))) * (Pi (_ : (Sigma (_ : ((In x) A)) * (Pi (_ : ((In x) ((ValOf F) x))) -> False))) -> ((In x) D))))) -> (Pi (_ : (Sigma (a : Class) * (Sigma (_ : ((In a) A)) * (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) D)) -> ((In z) ((ValOf F) a)))) * (Pi (_ : ((In z) ((ValOf F) a))) -> ((In z) D))))))) -> False)))))"
+      "statement_ast": "(Pi (A : Class) -> (Pi (F : Class) -> (Pi (D : Class) -> (Pi (_ : (Pi (x : Class) -> (Sigma (_ : (Pi (_ : ((In x) D)) -> (Sigma (_ : ((In x) A)) * (Pi (_ : ((In x) ((ValOf F) x))) -> False)))) * (Pi (_ : (Sigma (_ : ((In x) A)) * (Pi (_ : ((In x) ((ValOf F) x))) -> False))) -> ((In x) D))))) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (a : Class) -> (Pi (_ : (Sigma (_ : ((In a) A)) * (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) D)) -> ((In z) ((ValOf F) a)))) * (Pi (_ : ((In z) ((ValOf F) a))) -> ((In z) D)))))) -> C))) -> C))) -> False)))))"
     },
     {
       "id": 111,
@@ -1248,10 +1248,10 @@
       "name": "thm_dunaev_rel_comp_assoc_proj",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(R:Class), Π(S:Class), Π(T:Class), Π(x:Class), Π(w:Class), ((Σ(v:Class), ((Σ(u:Class), (((x, u) ∈ R) × ((u, v) ∈ S))) × ((v, w) ∈ T))) → Σ(u:Class), (((x, u) ∈ R) × (Σ(v:Class), (((u, v) ∈ S) × ((v, w) ∈ T)))))",
-      "proof_unicode": "(λ(R:Class). (λ(S:Class). (λ(T:Class). (λ(x:Class). (λ(w:Class). (λ(hComp:Σ(v:Class), ((Σ(u:Class), (((x, u) ∈ R) × ((u, v) ∈ S))) × ((v, w) ∈ T))). ⟨fst(fst(snd(hComp))), ⟨fst(snd(fst(snd(hComp)))), ⟨fst(hComp), ⟨snd(snd(fst(snd(hComp)))), snd(snd(hComp))⟩⟩⟩⟩))))))",
+      "statement_unicode": "Π(R:Class), Π(S:Class), Π(T:Class), Π(x:Class), Π(w:Class), ((Π(C:Prop), ((Π(v:Class), (((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T)) → C)) → C)) → Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C))",
+      "proof_unicode": "(λ(R:Class). (λ(S:Class). (λ(T:Class). (λ(x:Class). (λ(w:Class). (λ(hComp:Π(C:Prop), ((Π(v:Class), (((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T)) → C)) → C)). ((hComp Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C)) (λ(v:Class). (λ(hv:((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T))). ((fst(hv) Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C)) (λ(u:Class). (λ(hu:(((x, u) ∈ R) × ((u, v) ∈ S))). (λ(C:Prop). (λ(k:Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)). ((k u) ⟨fst(hu), (λ(C:Prop). (λ(k:Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)). ((k v) ⟨snd(hu), snd(hv)⟩)))⟩)))))))))))))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (R : Class) -> (Pi (S : Class) -> (Pi (T : Class) -> (Pi (x : Class) -> (Pi (w : Class) -> (Pi (_ : (Sigma (v : Class) * (Sigma (_ : (Sigma (u : Class) * (Sigma (_ : ((In ((DunaevPair x) u)) R)) * ((In ((DunaevPair u) v)) S)))) * ((In ((DunaevPair v) w)) T)))) -> (Sigma (u : Class) * (Sigma (_ : ((In ((DunaevPair x) u)) R)) * (Sigma (v : Class) * (Sigma (_ : ((In ((DunaevPair u) v)) S)) * ((In ((DunaevPair v) w)) T)))))))))))"
+      "statement_ast": "(Pi (R : Class) -> (Pi (S : Class) -> (Pi (T : Class) -> (Pi (x : Class) -> (Pi (w : Class) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (v : Class) -> (Pi (_ : (Sigma (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (u : Class) -> (Pi (_ : (Sigma (_ : ((In ((DunaevPair x) u)) R)) * ((In ((DunaevPair u) v)) S))) -> C))) -> C))) * ((In ((DunaevPair v) w)) T))) -> C))) -> C))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (u : Class) -> (Pi (_ : (Sigma (_ : ((In ((DunaevPair x) u)) R)) * (Pi (C : Prop) -> (Pi (_ : (Pi (v : Class) -> (Pi (_ : (Sigma (_ : ((In ((DunaevPair u) v)) S)) * ((In ((DunaevPair v) w)) T))) -> C))) -> C)))) -> C))) -> C))))))))"
     },
     {
       "id": 114,
@@ -1578,10 +1578,10 @@
       "name": "thm_exists_exists_swap",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), ((Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))) → Σ(b:Class), Σ(a:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b))))",
-      "proof_unicode": "(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(hReg:Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩))))",
+      "statement_unicode": "Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), ((Π(C:Prop), ((Π(a:Class), ((Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) → Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C))",
+      "proof_unicode": "(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(h:Π(C:Prop), ((Π(a:Class), ((Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)). ((h Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) (λ(a:Class). (λ(ha:Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)). ((ha Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) (λ(b:Class). (λ(hb:((p1 a) × (((p2 b) a) × ((p3 a) b)))). (λ(C:Prop). (λ(k:Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)). ((k b) (λ(C:Prop). (λ(k:Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)). ((k a) hb))))))))))))))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (p1 : (Pi (_ : Class) -> Prop)) -> (Pi (p2 : (Pi (_ : Class) -> (Pi (_ : Class) -> Prop))) -> (Pi (p3 : (Pi (_ : Class) -> (Pi (_ : Class) -> Prop))) -> (Pi (_ : (Sigma (a : Class) * (Sigma (b : Class) * (Sigma (_ : (p1 a)) * (Sigma (_ : ((p2 b) a)) * ((p3 a) b)))))) -> (Sigma (b : Class) * (Sigma (a : Class) * (Sigma (_ : (p1 a)) * (Sigma (_ : ((p2 b) a)) * ((p3 a) b)))))))))"
+      "statement_ast": "(Pi (p1 : (Pi (_ : Class) -> Prop)) -> (Pi (p2 : (Pi (_ : Class) -> (Pi (_ : Class) -> Prop))) -> (Pi (p3 : (Pi (_ : Class) -> (Pi (_ : Class) -> Prop))) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (a : Class) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (b : Class) -> (Pi (_ : (Sigma (_ : (p1 a)) * (Sigma (_ : ((p2 b) a)) * ((p3 a) b)))) -> C))) -> C))) -> C))) -> C))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (b : Class) -> (Pi (_ : (Pi (C : Prop) -> (Pi (_ : (Pi (a : Class) -> (Pi (_ : (Sigma (_ : (p1 a)) * (Sigma (_ : ((p2 b) a)) * ((p3 a) b)))) -> C))) -> C))) -> C))) -> C))))))"
     },
     {
       "id": 241,
@@ -1600,10 +1600,10 @@
       "name": "thm_and_modus_ponens_exists",
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
-      "statement_unicode": "Π(p1:Prop), Π(p2:(Class → Prop)), ((p1 × (p1 → Σ(s:Class), (p2 s))) → Σ(s:Class), (p2 s))",
-      "proof_unicode": "(λ(p1:Prop). (λ(p2:(Class → Prop)). (λ(hClosedDet:(p1 × (p1 → Σ(s:Class), (p2 s)))). (snd(hClosedDet) fst(hClosedDet)))))",
+      "statement_unicode": "Π(p1:Prop), Π(p2:(Class → Prop)), ((p1 × (p1 → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C))) → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C))",
+      "proof_unicode": "(λ(p1:Prop). (λ(p2:(Class → Prop)). (λ(h:(p1 × (p1 → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C)))). (snd(h) fst(h)))))",
       "axioms_used": [],
-      "statement_ast": "(Pi (p1 : Prop) -> (Pi (p2 : (Pi (_ : Class) -> Prop)) -> (Pi (_ : (Sigma (_ : p1) * (Pi (_ : p1) -> (Sigma (s : Class) * (p2 s))))) -> (Sigma (s : Class) * (p2 s)))))"
+      "statement_ast": "(Pi (p1 : Prop) -> (Pi (p2 : (Pi (_ : Class) -> Prop)) -> (Pi (_ : (Sigma (_ : p1) * (Pi (_ : p1) -> (Pi (C : Prop) -> (Pi (_ : (Pi (s : Class) -> (Pi (_ : (p2 s)) -> C))) -> C))))) -> (Pi (C : Prop) -> (Pi (_ : (Pi (s : Class) -> (Pi (_ : (p2 s)) -> C))) -> C)))))"
     },
     {
       "id": 243,

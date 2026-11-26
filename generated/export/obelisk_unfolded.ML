@@ -874,11 +874,22 @@ struct
     alphaEqEnv [] t1 t2
 
   (* Structural conservative definition unfolding for MKTD2-system conversion *)
+  (* [WHY] #8096 step 3: the existential of a formula is the impredicative
+       exists x:A, B  :=  Pi (C : Prop), (Pi (x : A), B -> C) -> C,
+     the same encoding as disjunction. It lives in TProp. A strong Sigma over a large carrier
+     (Class) cannot live in TProp (large elimination from an impredicative sort is
+     inconsistent), so formulas that used Sigma (x : Class) were not propositions. Sigma stays
+     for data and for the conjunction of two propositions. *)
+  fun existsP (x: string, a: Term, b: Term) : Term =
+    let val c = fresh "C" (x :: freeVars a @ freeVars b) in
+      Pi (c, TProp, Pi ("_", Pi (x, a, Pi ("_", b, Var c)), Var c))
+    end
+
   fun unfoldDefs (t: Term) : Term =
     case t of
       App (Const "Set", x) =>
         let val yVar = fresh "Y" (freeVars x) in
-          Sigma (yVar, TClass, App (App (Const "In", unfoldDefs x), Var yVar))
+          existsP (yVar, TClass, App (App (Const "In", unfoldDefs x), Var yVar))
         end
     | App (Const "Proper", k) =>
         unfoldDefs (Pi ("_", App (Const "Set", k), Const "False"))
@@ -908,7 +919,7 @@ struct
         end
     | App (Const "Card", c) =>
         let val kVar = fresh "K" (freeVars c) in
-          unfoldDefs (Sigma (kVar, TClass, Id (TClass, App (Const "CardOf", Var kVar), c)))
+          unfoldDefs (existsP (kVar, TClass, Id (TClass, App (Const "CardOf", Var kVar), c)))
         end
     | App (App (Const "In", z), App (App (Const "BinUnion", a), b)) =>
         let val cVar = fresh "C" (freeVars z @ freeVars a @ freeVars b) in
@@ -918,7 +929,7 @@ struct
         unfoldDefs (Sigma ("_", App (App (Const "In", z), a), App (App (Const "In", z), b)))
     | App (App (Const "In", z), App (Const "Union", a)) =>
         let val yVar = fresh "y" (freeVars z @ freeVars a) in
-          unfoldDefs (Sigma (yVar, TClass, Sigma ("_", App (App (Const "In", Var yVar), a), App (App (Const "In", z), Var yVar))))
+          unfoldDefs (existsP (yVar, TClass, Sigma ("_", App (App (Const "In", Var yVar), a), App (App (Const "In", z), Var yVar))))
         end
     | App (App (Const "In", z), App (Const "Inter", a)) =>
         let val yVar = fresh "y" (freeVars z @ freeVars a) in
@@ -1494,13 +1505,9 @@ struct
   fun Impl a b = Pi ("_", a, b)
   fun And a b = Sigma ("_", a, b)
   fun Forall x sort body = Pi (x, sort, body)
-  fun Exists x sort body = Sigma (x, sort, body)
-  (* [WHY] Exists is the strong sum; over a large carrier (TClass : Universe 1) it is not a
-     Prop, so e.g. "Set X <-> exists Y, X in Y" was not a proposition.  ExistsP is the weak,
-     Prop-valued existential (impredicative encoding, capture-free motive). *)
-  fun ExistsP x sort body =
-    let val c = DependentEval.fresh "C" (x :: DependentEval.freeVars body @ DependentEval.freeVars sort)
-    in Pi (c, TProp, Pi ("_", Pi (x, sort, Pi ("_", body, Var c)), Var c)) end
+  (* [WHY] One existential (#8096 step 3): the Prop-valued impredicative encoding of
+     DependentEval.existsP, as in verified_theorems.ML. *)
+  fun Exists x sort body = DependentEval.existsP (x, sort, body)
 
   fun App2 f x y = App (App (f, x), y)
   fun In x y = App2 (Const "In") x y
@@ -1582,8 +1589,8 @@ struct
   (* isSet Definition: forall X. Set(X) <-> exists Y. X in Y *)
   val type_isSet_def : Term =
     Forall "X" TClass (
-      And (Impl (IsSet (Var "X")) (ExistsP "Y" TClass (In (Var "X") (Var "Y"))))
-          (Impl (ExistsP "Y" TClass (In (Var "X") (Var "Y"))) (IsSet (Var "X")))
+      And (Impl (IsSet (Var "X")) (Exists "Y" TClass (In (Var "X") (Var "Y"))))
+          (Impl (Exists "Y" TClass (In (Var "X") (Var "Y"))) (IsSet (Var "X")))
     )
 
   (* isProper Definition: forall K. Proper(K) <-> ~ Set(K) *)
@@ -2191,7 +2198,23 @@ struct
     let val c = DependentEval.fresh "C" (DependentEval.freeVars a @ DependentEval.freeVars b)
     in Pi (c, TProp, Impl (Impl a (Var c)) (Impl (Impl b (Var c)) (Var c))) end
   fun Forall x sort body = Pi (x, sort, body)
-  fun Exists x sort body = Sigma (x, sort, body)
+  (* [WHY] #8096 step 3: impredicative existential (DependentEval.existsP), a proposition like
+     Or. ExIntro / ExElim are its introduction and elimination. *)
+  fun Exists x sort body = DependentEval.existsP (x, sort, body)
+  (* ExIntro (x, sort, body) w prf : Exists x sort body, given prf : body[w/x] *)
+  fun ExIntro (x, sort, body) (w: Term) (prf: Term) : Term =
+    let
+      val used = x :: DependentEval.freeVars sort @ DependentEval.freeVars body @
+                 DependentEval.freeVars w @ DependentEval.freeVars prf
+      val c = DependentEval.fresh "C" (x :: DependentEval.freeVars sort @ DependentEval.freeVars body)
+      val k = DependentEval.fresh "k" (c :: used)
+    in
+      Lam (c, TProp, Lam (k, Pi (x, sort, Pi ("_", body, Var c)), App (App (Var k, w), prf)))
+    end
+  (* ExElim h goal (x, sort, body) hx inner : goal, where h : Exists x sort body and
+     inner : goal under x : sort, hx : body *)
+  fun ExElim (h: Term) (goal: Term) (x, sort, body) (hx: string) (inner: Term) : Term =
+    App (App (h, goal), Lam (x, sort, Lam (hx, body, inner)))
 
   fun In x y = App (App (Const "In", x), y)
   fun Eq x y = Id (TClass, x, y)
@@ -2668,12 +2691,12 @@ struct
       Pi ("B", Pi ("_", TClass, TProp),
         Pi ("c", TClass,
           Impl (App (Var "B", Var "c"))
-               (Sigma ("x", TClass, App (Var "B", Var "x"))))),
+               (Exists "x" TClass (App (Var "B", Var "x"))))),
     proofProgram =
       Lam ("B", Pi ("_", TClass, TProp),
         Lam ("c", TClass,
           Lam ("witness", App (Var "B", Var "c"),
-            Pair (Var "c", Var "witness"))))
+            ExIntro ("x", TClass, App (Var "B", Var "x")) (Var "c") (Var "witness"))))
   }
 
   (*****************************************************************************)
@@ -3174,7 +3197,7 @@ struct
     statement = App (Const "Card", Omega),
     proofProgram =
       App (Snd (App (#proofProgram thm_51_isCard_def, Omega)),
-        Pair (Omega, Const "ax_cardof_omega"))
+        ExIntro ("K", TClass, Eq (App (Const "CardOf", Var "K")) Omega) Omega (Const "ax_cardof_omega"))
   }
 
   (* 53. On is Cardinal Class: Card(On) -- Derived by Argon from def_isCard + ax_cardof_on *)
@@ -3184,7 +3207,7 @@ struct
     statement = App (Const "Card", Const "On"),
     proofProgram =
       App (Snd (App (#proofProgram thm_51_isCard_def, Const "On")),
-        Pair (Const "On", Const "ax_cardof_on"))
+        ExIntro ("K", TClass, Eq (App (Const "CardOf", Var "K")) (Const "On")) (Const "On") (Const "ax_cardof_on"))
   }
 
   (* 54. Universal Class Not Cardinal: ~Card(V) -- Derived by Argon from def_isCard + ax_cardof_never_v *)
@@ -3196,10 +3219,9 @@ struct
       Lam ("hCardV", App (Const "Card", UnivV),
         let
           val hEx = App (Fst (App (#proofProgram thm_51_isCard_def, UnivV)), Var "hCardV")
-          val kWitness = Fst hEx
-          val hEqV = Snd hEx
         in
-          App (App (Const "ax_cardof_never_v", kWitness), hEqV)
+          ExElim hEx (Const "False") ("K", TClass, Eq (App (Const "CardOf", Var "K")) UnivV) "hEqV"
+            (App (App (Const "ax_cardof_never_v", Var "K"), Var "hEqV"))
         end)
   }
 
@@ -3296,9 +3318,12 @@ struct
         val hypType = Exists "R" TClass (And (IsSet (Var "R")) (Forall "x" TClass (Iff (In (Var "x") (Var "R")) (And (IsSet (Var "x")) (Impl (In (Var "x") (Var "x")) (Const "False"))))))
       in
         Lam ("hExists", hypType,
-          let
-            val rVar = Fst (Var "hExists")
-            val hPair = Snd (Var "hExists")
+          ExElim (Var "hExists") (Const "False")
+            ("R", TClass, And (IsSet (Var "R")) (Forall "x" TClass (Iff (In (Var "x") (Var "R")) (And (IsSet (Var "x")) (Impl (In (Var "x") (Var "x")) (Const "False"))))))
+            "hPairR"
+          (let
+            val rVar = Var "R"
+            val hPair = Var "hPairR"
             val hSet = Fst hPair
             val hDefAll = Snd hPair
             val hDefInst = App (hDefAll, rVar)
@@ -3313,7 +3338,7 @@ struct
             val rInRProof = App (bwd, Pair (hSet, notRInR))
           in
             App (notRInR, rInRProof)
-          end)
+          end))
       end
   }
 
@@ -4538,10 +4563,17 @@ struct
             in
               Lam ("hDiag", diagSpec,
                 Lam ("hSurj", surjHyp,
-                  let
-                    val aVar = Fst (Var "hSurj")
-                    val hInA = Fst (Snd (Var "hSurj"))
-                    val hEqAll = Snd (Snd (Var "hSurj"))
+                  ExElim (Var "hSurj") (Const "False")
+                    ("a", TClass,
+                     And (In (Var "a") (Var "A"))
+                         (Forall "z" TClass (
+                            Iff (In (Var "z") (Var "D"))
+                                (In (Var "z") (App (App (Const "ValOf", Var "F"), Var "a"))))))
+                    "hA"
+                  (let
+                    val aVar = Var "a"
+                    val hInA = Fst (Var "hA")
+                    val hEqAll = Snd (Var "hA")
                     val fa = App (App (Const "ValOf", Var "F"), aVar)
                     val hDiagA = App (Var "hDiag", aVar)
                     val hEqA = App (hEqAll, aVar)
@@ -4556,7 +4588,7 @@ struct
                       App (Snd hDiagA, Pair (hInA, notInFa))
                   in
                     App (notInD, inDProof)
-                  end))
+                  end)))
             end)))
   }
 
@@ -4691,14 +4723,17 @@ struct
                 in
                   Lam ("hComp", lhs,
                     let
-                      val vWit = Fst (Var "hComp")
-                      val hLeft = Fst (Snd (Var "hComp"))
-                      val hInT = Snd (Snd (Var "hComp"))
-                      val uWit = Fst hLeft
-                      val hInR = Fst (Snd hLeft)
-                      val hInS = Snd (Snd hLeft)
+                      val inR = In (dp (Var "x") (Var "u")) (Var "R")
+                      val inS = In (dp (Var "u") (Var "v")) (Var "S")
+                      val inT = In (dp (Var "v") (Var "w")) (Var "T")
+                      val innerRhs = ("v", TClass, And inS inT)
+                      val rhs = Exists "u" TClass (And inR (Exists "v" TClass (And inS inT)))
                     in
-                      Pair (uWit, Pair (hInR, Pair (vWit, Pair (hInS, hInT))))
+                      ExElim (Var "hComp") rhs ("v", TClass, And (Exists "u" TClass (And inR inS)) inT) "hv"
+                        (ExElim (Fst (Var "hv")) rhs ("u", TClass, And inR inS) "hu"
+                          (ExIntro ("u", TClass, And inR (Exists "v" TClass (And inS inT))) (Var "u")
+                            (Pair (Fst (Var "hu"),
+                                   ExIntro innerRhs (Var "v") (Pair (Snd (Var "hu"), Snd (Var "hv")))))))
                     end)
                 end)))))
   }
@@ -5087,9 +5122,31 @@ struct
     id = 240,
     name = "thm_exists_exists_swap",
     statement =
-      Pi ("p1", Impl (TClass) (TProp), Pi ("p2", Impl (TClass) (Impl (TClass) (TProp)), Pi ("p3", Impl (TClass) (Impl (TClass) (TProp)), Impl (Sigma ("a", TClass, Sigma ("b", TClass, And (App (Var "p1", Var "a")) (And (App (App (Var "p2", Var "b"), Var "a")) (App (App (Var "p3", Var "a"), Var "b")))))) (Sigma ("b", TClass, Sigma ("a", TClass, And (App (Var "p1", Var "a")) (And (App (App (Var "p2", Var "b"), Var "a")) (App (App (Var "p3", Var "a"), Var "b"))))))))),
+      let
+        val pred1 = Pi ("_", TClass, TProp)
+        val pred2 = Pi ("_", TClass, Pi ("_", TClass, TProp))
+        val body = And (App (Var "p1", Var "a"))
+                       (And (App (App (Var "p2", Var "b"), Var "a")) (App (App (Var "p3", Var "a"), Var "b")))
+      in
+        Pi ("p1", pred1, Pi ("p2", pred2, Pi ("p3", pred2,
+          Impl (Exists "a" TClass (Exists "b" TClass body))
+               (Exists "b" TClass (Exists "a" TClass body)))))
+      end,
     proofProgram =
-      Lam ("p1", Impl (TClass) (TProp), Lam ("p2", Impl (TClass) (Impl (TClass) (TProp)), Lam ("p3", Impl (TClass) (Impl (TClass) (TProp)), Lam ("hReg", Sigma ("a", TClass, Sigma ("b", TClass, And (App (Var "p1", Var "a")) (And (App (App (Var "p2", Var "b"), Var "a")) (App (App (Var "p3", Var "a"), Var "b"))))), Pair (Fst (Snd (Var "hReg")), Pair (Fst (Var "hReg"), Snd (Snd (Var "hReg"))))))))
+      let
+        val pred1 = Pi ("_", TClass, TProp)
+        val pred2 = Pi ("_", TClass, Pi ("_", TClass, TProp))
+        val body = And (App (Var "p1", Var "a"))
+                       (And (App (App (Var "p2", Var "b"), Var "a")) (App (App (Var "p3", Var "a"), Var "b")))
+        val goal = Exists "b" TClass (Exists "a" TClass body)
+      in
+        Lam ("p1", pred1, Lam ("p2", pred2, Lam ("p3", pred2,
+          Lam ("h", Exists "a" TClass (Exists "b" TClass body),
+            ExElim (Var "h") goal ("a", TClass, Exists "b" TClass body) "ha"
+              (ExElim (Var "ha") goal ("b", TClass, body) "hb"
+                (ExIntro ("b", TClass, Exists "a" TClass body) (Var "b")
+                  (ExIntro ("a", TClass, body) (Var "a") (Var "hb"))))))))
+      end
   }
 
   (* 241. ~(P /\ Q) -> (P -> ~Q)
@@ -5109,9 +5166,13 @@ struct
     id = 242,
     name = "thm_and_modus_ponens_exists",
     statement =
-      Pi ("p1", TProp, Pi ("p2", Impl (TClass) (TProp), Impl (And (Var "p1") (Impl (Var "p1") (Sigma ("s", TClass, App (Var "p2", Var "s"))))) (Sigma ("s", TClass, App (Var "p2", Var "s"))))),
+      Pi ("p1", TProp, Pi ("p2", Pi ("_", TClass, TProp),
+        Impl (And (Var "p1") (Impl (Var "p1") (Exists "s" TClass (App (Var "p2", Var "s")))))
+             (Exists "s" TClass (App (Var "p2", Var "s"))))),
     proofProgram =
-      Lam ("p1", TProp, Lam ("p2", Impl (TClass) (TProp), Lam ("hClosedDet", And (Var "p1") (Impl (Var "p1") (Sigma ("s", TClass, App (Var "p2", Var "s")))), App (Snd (Var "hClosedDet"), Fst (Var "hClosedDet")))))
+      Lam ("p1", TProp, Lam ("p2", Pi ("_", TClass, TProp),
+        Lam ("h", And (Var "p1") (Impl (Var "p1") (Exists "s" TClass (App (Var "p2", Var "s")))),
+          App (Snd (Var "h"), Fst (Var "h")))))
   }
 
   (* 243. ((forall x, P x -> Q x) /\ P g) -> Q g

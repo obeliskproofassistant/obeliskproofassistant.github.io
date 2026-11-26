@@ -189,18 +189,18 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-020 `thm_exists_intro` (Derived)
 
 - **Identifier:** `thm_exists_intro` (`NBG-020`, kind: `Derived`)
-- **Statement (Unicode):** `Π(B:(Class → Prop)), Π(c:Class), ((B c) → Σ(x:Class), (B x))`
-- **Statement (ANSII):** `Pi(B:(Class -> Prop)), Pi(c:Class), ((B c) -> Sigma(x:Class), (B x))`
-- **Proof Term:** `(λ(B:(Class → Prop)). (λ(c:Class). (λ(witness:(B c)). ⟨c, witness⟩)))`
+- **Statement (Unicode):** `Π(B:(Class → Prop)), Π(c:Class), ((B c) → Π(C:Prop), ((Π(x:Class), ((B x) → C)) → C))`
+- **Statement (ANSII):** `Pi(B:(Class -> Prop)), Pi(c:Class), ((B c) -> Pi(C:Prop), ((Pi(x:Class), ((B x) -> C)) -> C))`
+- **Proof Term:** `(λ(B:(Class → Prop)). (λ(c:Class). (λ(witness:(B c)). (λ(C:Prop). (λ(k:Π(x:Class), ((B x) → C)). ((k c) witness))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
 ### NBG-021 `def_isSet` (Definitional)
 
 - **Identifier:** `def_isSet` (`NBG-021`, kind: `Definitional`)
-- **Statement (Unicode):** `Π(X:Class), ((set(X) → Σ(Y:Class), (X ∈ Y)) × ((Σ(Y:Class), (X ∈ Y)) → set(X)))`
-- **Statement (ANSII):** `Pi(X:Class), ((set(X) -> Sigma(Y:Class), (X in Y)) * ((Sigma(Y:Class), (X in Y)) -> set(X)))`
-- **Proof Term:** `(λ(X:Class). ⟨(λ(h:set(X)). let res:Σ(Y:Class), (X ∈ Y) = h in res), (λ(h:Σ(Y:Class), (X ∈ Y)). let res:set(X) = h in res)⟩)`
+- **Statement (Unicode):** `Π(X:Class), ((set(X) → Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)) × ((Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)) → set(X)))`
+- **Statement (ANSII):** `Pi(X:Class), ((set(X) -> Pi(C:Prop), ((Pi(Y:Class), ((X in Y) -> C)) -> C)) * ((Pi(C:Prop), ((Pi(Y:Class), ((X in Y) -> C)) -> C)) -> set(X)))`
+- **Proof Term:** `(λ(X:Class). ⟨(λ(h:set(X)). let res:Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C) = h in res), (λ(h:Π(C:Prop), ((Π(Y:Class), ((X ∈ Y) → C)) → C)). let res:set(X) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -297,8 +297,8 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-032 `ax_global_choice` (Axiomatic)
 
 - **Identifier:** `ax_global_choice` (`NBG-032`, kind: `Axiomatic`)
-- **Statement (Unicode):** `Π(A:Class), ((Σ(x:Class), (x ∈ A)) → (choice(A) ∈ A))`
-- **Statement (ANSII):** `Pi(A:Class), ((Sigma(x:Class), (x in A)) -> (choice(A) in A))`
+- **Statement (Unicode):** `Π(A:Class), ((Π(C:Prop), ((Π(x:Class), ((x ∈ A) → C)) → C)) → (choice(A) ∈ A))`
+- **Statement (ANSII):** `Pi(A:Class), ((Pi(C:Prop), ((Pi(x:Class), ((x in A) -> C)) -> C)) -> (choice(A) in A))`
 - **Proof Term:** `plan_global_choice`
 - **Axioms Used:** `plan_global_choice`
 - **Definitions Used:** `(none)`
@@ -468,9 +468,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-051 `def_isCard` (Definitional)
 
 - **Identifier:** `def_isCard` (`NBG-051`, kind: `Definitional`)
-- **Statement (Unicode):** `Π(C:Class), ((Card(C) → Σ(K:Class), (CardOf(K) = C)) × ((Σ(K:Class), (CardOf(K) = C)) → Card(C)))`
-- **Statement (ANSII):** `Pi(C:Class), ((Card(C) -> Sigma(K:Class), (CardOf(K) = C)) * ((Sigma(K:Class), (CardOf(K) = C)) -> Card(C)))`
-- **Proof Term:** `(λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩)`
+- **Statement (Unicode):** `Π(C:Class), ((Card(C) → Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)) × ((Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)) → Card(C)))`
+- **Statement (ANSII):** `Pi(C:Class), ((Card(C) -> Pi(C1:Prop), ((Pi(K:Class), ((CardOf(K) = C) -> C1)) -> C1)) * ((Pi(C1:Prop), ((Pi(K:Class), ((CardOf(K) = C) -> C1)) -> C1)) -> Card(C)))`
+- **Proof Term:** `(λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩)`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -479,7 +479,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Identifier:** `thm_omega_card` (`NBG-052`, kind: `Derived`)
 - **Statement (Unicode):** `Card(ω)`
 - **Statement (ANSII):** `Card(omega)`
-- **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) ω)) ⟨ω, ax_cardof_omega⟩)`
+- **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) ω)) (λ(C:Prop). (λ(k:Π(K:Class), ((CardOf(K) = ω) → C)). ((k ω) ax_cardof_omega))))`
 - **Axioms Used:** `ax_cardof_omega`
 - **Definitions Used:** `(none)`
 
@@ -488,7 +488,7 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Identifier:** `thm_on_card` (`NBG-053`, kind: `Derived`)
 - **Statement (Unicode):** `Card(On)`
 - **Statement (ANSII):** `Card(On)`
-- **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) On)) ⟨On, ax_cardof_on⟩)`
+- **Proof Term:** `(snd(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) On)) (λ(C:Prop). (λ(k:Π(K:Class), ((CardOf(K) = On) → C)). ((k On) ax_cardof_on))))`
 - **Axioms Used:** `ax_cardof_on`
 - **Definitions Used:** `(none)`
 
@@ -497,15 +497,15 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 - **Identifier:** `thm_v_not_card` (`NBG-054`, kind: `Derived`)
 - **Statement (Unicode):** `(Card(V) → 𝟘)`
 - **Statement (ANSII):** `(Card(V) -> Void)`
-- **Proof Term:** `(λ(hCardV:Card(V)). ax_cardof_never_v(fst((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV)), snd((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Σ(K:Class), (CardOf(K) = C) = h in res), (λ(h:Σ(K:Class), (CardOf(K) = C)). let res:Card(C) = h in res)⟩) V)) hCardV))))`
+- **Proof Term:** `(λ(hCardV:Card(V)). (((fst(((λ(C:Class). ⟨(λ(h:Card(C)). let res:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1) = h in res), (λ(h:Π(C1:Prop), ((Π(K:Class), ((CardOf(K) = C) → C1)) → C1)). let res:Card(C) = h in res)⟩) V)) hCardV) 𝟘) (λ(K:Class). (λ(hEqV:(CardOf(K) = V)). ax_cardof_never_v(K, hEqV)))))`
 - **Axioms Used:** `ax_cardof_never_v`
 - **Definitions Used:** `(none)`
 
 ### NBG-055 `ax_tarski_universes` (Axiomatic)
 
 - **Identifier:** `ax_tarski_universes` (`NBG-055`, kind: `Axiomatic`)
-- **Statement (Unicode):** `Π(X:Class), (set(X) → Σ(U:Class), (universe(U) × ((X ∈ U) × set(U))))`
-- **Statement (ANSII):** `Pi(X:Class), (set(X) -> Sigma(U:Class), (universe(U) * ((X in U) * set(U))))`
+- **Statement (Unicode):** `Π(X:Class), (set(X) → Π(C:Prop), ((Π(U:Class), ((universe(U) × ((X ∈ U) × set(U))) → C)) → C))`
+- **Statement (ANSII):** `Pi(X:Class), (set(X) -> Pi(C:Prop), ((Pi(U:Class), ((universe(U) * ((X in U) * set(U))) -> C)) -> C))`
 - **Proof Term:** `plan_tarski_axm`
 - **Axioms Used:** `plan_tarski_axm`
 - **Definitions Used:** `(none)`
@@ -531,9 +531,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-058 `def_unary_union` (Definitional)
 
 - **Identifier:** `def_unary_union` (`NBG-058`, kind: `Definitional`)
-- **Statement (Unicode):** `Π(A:Class), Π(z:Class), (((z ∈ ⋃(A)) → Σ(y:Class), ((y ∈ A) × (z ∈ y))) × ((Σ(y:Class), ((y ∈ A) × (z ∈ y))) → (z ∈ ⋃(A))))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(z:Class), (((z in Union(A)) -> Sigma(y:Class), ((y in A) * (z in y))) * ((Sigma(y:Class), ((y in A) * (z in y))) -> (z in Union(A))))`
-- **Proof Term:** `(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋃(A))). let res:Σ(y:Class), ((y ∈ A) × (z ∈ y)) = h in res), (λ(h:Σ(y:Class), ((y ∈ A) × (z ∈ y))). let res:(z ∈ ⋃(A)) = h in res)⟩))`
+- **Statement (Unicode):** `Π(A:Class), Π(z:Class), (((z ∈ ⋃(A)) → Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)) × ((Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)) → (z ∈ ⋃(A))))`
+- **Statement (ANSII):** `Pi(A:Class), Pi(z:Class), (((z in Union(A)) -> Pi(C:Prop), ((Pi(y:Class), (((y in A) * (z in y)) -> C)) -> C)) * ((Pi(C:Prop), ((Pi(y:Class), (((y in A) * (z in y)) -> C)) -> C)) -> (z in Union(A))))`
+- **Proof Term:** `(λ(A:Class). (λ(z:Class). ⟨(λ(h:(z ∈ ⋃(A))). let res:Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C) = h in res), (λ(h:Π(C:Prop), ((Π(y:Class), (((y ∈ A) × (z ∈ y)) → C)) → C)). let res:(z ∈ ⋃(A)) = h in res)⟩))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -567,9 +567,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-062 `thm_russell_class_not_set` (Derived)
 
 - **Identifier:** `thm_russell_class_not_set` (`NBG-062`, kind: `Derived`)
-- **Statement (Unicode):** `((Σ(R:Class), (set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))) → 𝟘)`
-- **Statement (ANSII):** `((Sigma(R:Class), (set(R) * (Pi(x:Class), (((x in R) -> (set(x) * ((x in x) -> Void))) * ((set(x) * ((x in x) -> Void)) -> (x in R)))))) -> Void)`
-- **Proof Term:** `(λ(hExists:Σ(R:Class), (set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))). ((λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn)) (snd((snd(snd(hExists)) fst(hExists))) ⟨fst(snd(hExists)), (λ(hIn:(fst(hExists) ∈ fst(hExists))). (snd((fst((snd(snd(hExists)) fst(hExists))) hIn)) hIn))⟩)))`
+- **Statement (Unicode):** `((Π(C:Prop), ((Π(R:Class), ((set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R))))) → C)) → C)) → 𝟘)`
+- **Statement (ANSII):** `((Pi(C:Prop), ((Pi(R:Class), ((set(R) * (Pi(x:Class), (((x in R) -> (set(x) * ((x in x) -> Void))) * ((set(x) * ((x in x) -> Void)) -> (x in R))))) -> C)) -> C)) -> Void)`
+- **Proof Term:** `(λ(hExists:Π(C:Prop), ((Π(R:Class), ((set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R))))) → C)) → C)). ((hExists 𝟘) (λ(R:Class). (λ(hPairR:(set(R) × (Π(x:Class), (((x ∈ R) → (set(x) × ((x ∈ x) → 𝟘))) × ((set(x) × ((x ∈ x) → 𝟘)) → (x ∈ R)))))). ((λ(hIn:(R ∈ R)). (snd((fst((snd(hPairR) R)) hIn)) hIn)) (snd((snd(hPairR) R)) ⟨fst(hPairR), (λ(hIn:(R ∈ R)). (snd((fst((snd(hPairR) R)) hIn)) hIn))⟩))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -999,9 +999,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-110 `thm_cantor_no_surjection_power` (Derived)
 
 - **Identifier:** `thm_cantor_no_surjection_power` (`NBG-110`, kind: `Derived`)
-- **Statement (Unicode):** `Π(A:Class), Π(F:Class), Π(D:Class), ((Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))) → ((Σ(a:Class), ((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))) → 𝟘))`
-- **Statement (ANSII):** `Pi(A:Class), Pi(F:Class), Pi(D:Class), ((Pi(x:Class), (((x in D) -> ((x in A) * ((x in ValOf(F, x)) -> Void))) * (((x in A) * ((x in ValOf(F, x)) -> Void)) -> (x in D)))) -> ((Sigma(a:Class), ((a in A) * (Pi(z:Class), (((z in D) -> (z in ValOf(F, a))) * ((z in ValOf(F, a)) -> (z in D)))))) -> Void))`
-- **Proof Term:** `(λ(A:Class). (λ(F:Class). (λ(D:Class). (λ(hDiag:Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))). (λ(hSurj:Σ(a:Class), ((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((hDiag fst(hSurj))) ⟨fst(snd(hSurj)), (λ(hInFa:(fst(hSurj) ∈ ValOf(F, fst(hSurj)))). ((λ(hInD:(fst(hSurj) ∈ D)). (snd((fst((hDiag fst(hSurj))) hInD)) (fst((snd(snd(hSurj)) fst(hSurj))) hInD))) (snd((snd(snd(hSurj)) fst(hSurj))) hInFa)))⟩)))))))`
+- **Statement (Unicode):** `Π(A:Class), Π(F:Class), Π(D:Class), ((Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))) → ((Π(C:Prop), ((Π(a:Class), (((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D))))) → C)) → C)) → 𝟘))`
+- **Statement (ANSII):** `Pi(A:Class), Pi(F:Class), Pi(D:Class), ((Pi(x:Class), (((x in D) -> ((x in A) * ((x in ValOf(F, x)) -> Void))) * (((x in A) * ((x in ValOf(F, x)) -> Void)) -> (x in D)))) -> ((Pi(C:Prop), ((Pi(a:Class), (((a in A) * (Pi(z:Class), (((z in D) -> (z in ValOf(F, a))) * ((z in ValOf(F, a)) -> (z in D))))) -> C)) -> C)) -> Void))`
+- **Proof Term:** `(λ(A:Class). (λ(F:Class). (λ(D:Class). (λ(hDiag:Π(x:Class), (((x ∈ D) → ((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘))) × (((x ∈ A) × ((x ∈ ValOf(F, x)) → 𝟘)) → (x ∈ D)))). (λ(hSurj:Π(C:Prop), ((Π(a:Class), (((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D))))) → C)) → C)). ((hSurj 𝟘) (λ(a:Class). (λ(hA:((a ∈ A) × (Π(z:Class), (((z ∈ D) → (z ∈ ValOf(F, a))) × ((z ∈ ValOf(F, a)) → (z ∈ D)))))). ((λ(hInD:(a ∈ D)). (snd((fst((hDiag a)) hInD)) (fst((snd(hA) a)) hInD))) (snd((hDiag a)) ⟨fst(hA), (λ(hInFa:(a ∈ ValOf(F, a))). ((λ(hInD:(a ∈ D)). (snd((fst((hDiag a)) hInD)) (fst((snd(hA) a)) hInD))) (snd((snd(hA) a)) hInFa)))⟩))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -1026,9 +1026,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-113 `thm_dunaev_rel_comp_assoc_proj` (Derived)
 
 - **Identifier:** `thm_dunaev_rel_comp_assoc_proj` (`NBG-113`, kind: `Derived`)
-- **Statement (Unicode):** `Π(R:Class), Π(S:Class), Π(T:Class), Π(x:Class), Π(w:Class), ((Σ(v:Class), ((Σ(u:Class), (((x, u) ∈ R) × ((u, v) ∈ S))) × ((v, w) ∈ T))) → Σ(u:Class), (((x, u) ∈ R) × (Σ(v:Class), (((u, v) ∈ S) × ((v, w) ∈ T)))))`
-- **Statement (ANSII):** `Pi(R:Class), Pi(S:Class), Pi(T:Class), Pi(x:Class), Pi(w:Class), ((Sigma(v:Class), ((Sigma(u:Class), (((x, u) in R) * ((u, v) in S))) * ((v, w) in T))) -> Sigma(u:Class), (((x, u) in R) * (Sigma(v:Class), (((u, v) in S) * ((v, w) in T)))))`
-- **Proof Term:** `(λ(R:Class). (λ(S:Class). (λ(T:Class). (λ(x:Class). (λ(w:Class). (λ(hComp:Σ(v:Class), ((Σ(u:Class), (((x, u) ∈ R) × ((u, v) ∈ S))) × ((v, w) ∈ T))). ⟨fst(fst(snd(hComp))), ⟨fst(snd(fst(snd(hComp)))), ⟨fst(hComp), ⟨snd(snd(fst(snd(hComp)))), snd(snd(hComp))⟩⟩⟩⟩))))))`
+- **Statement (Unicode):** `Π(R:Class), Π(S:Class), Π(T:Class), Π(x:Class), Π(w:Class), ((Π(C:Prop), ((Π(v:Class), (((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T)) → C)) → C)) → Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C))`
+- **Statement (ANSII):** `Pi(R:Class), Pi(S:Class), Pi(T:Class), Pi(x:Class), Pi(w:Class), ((Pi(C:Prop), ((Pi(v:Class), (((Pi(C:Prop), ((Pi(u:Class), ((((x, u) in R) * ((u, v) in S)) -> C)) -> C)) * ((v, w) in T)) -> C)) -> C)) -> Pi(C:Prop), ((Pi(u:Class), ((((x, u) in R) * (Pi(C:Prop), ((Pi(v:Class), ((((u, v) in S) * ((v, w) in T)) -> C)) -> C))) -> C)) -> C))`
+- **Proof Term:** `(λ(R:Class). (λ(S:Class). (λ(T:Class). (λ(x:Class). (λ(w:Class). (λ(hComp:Π(C:Prop), ((Π(v:Class), (((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T)) → C)) → C)). ((hComp Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C)) (λ(v:Class). (λ(hv:((Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × ((u, v) ∈ S)) → C)) → C)) × ((v, w) ∈ T))). ((fst(hv) Π(C:Prop), ((Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)) → C)) (λ(u:Class). (λ(hu:(((x, u) ∈ R) × ((u, v) ∈ S))). (λ(C:Prop). (λ(k:Π(u:Class), ((((x, u) ∈ R) × (Π(C:Prop), ((Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)) → C))) → C)). ((k u) ⟨fst(hu), (λ(C:Prop). (λ(k:Π(v:Class), ((((u, v) ∈ S) × ((v, w) ∈ T)) → C)). ((k v) ⟨snd(hu), snd(hv)⟩)))⟩)))))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -1296,9 +1296,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-240 `thm_exists_exists_swap` (Derived)
 
 - **Identifier:** `thm_exists_exists_swap` (`NBG-240`, kind: `Derived`)
-- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), ((Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))) → Σ(b:Class), Σ(a:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b))))`
-- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> (Class -> Prop))), Pi(p3:(Class -> (Class -> Prop))), ((Sigma(a:Class), Sigma(b:Class), ((p1 a) * (((p2 b) a) * ((p3 a) b)))) -> Sigma(b:Class), Sigma(a:Class), ((p1 a) * (((p2 b) a) * ((p3 a) b))))`
-- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(hReg:Σ(a:Class), Σ(b:Class), ((p1 a) × (((p2 b) a) × ((p3 a) b)))). ⟨fst(snd(hReg)), ⟨fst(hReg), snd(snd(hReg))⟩⟩))))`
+- **Statement (Unicode):** `Π(p1:(Class → Prop)), Π(p2:(Class → (Class → Prop))), Π(p3:(Class → (Class → Prop))), ((Π(C:Prop), ((Π(a:Class), ((Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) → Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C))`
+- **Statement (ANSII):** `Pi(p1:(Class -> Prop)), Pi(p2:(Class -> (Class -> Prop))), Pi(p3:(Class -> (Class -> Prop))), ((Pi(C:Prop), ((Pi(a:Class), ((Pi(C:Prop), ((Pi(b:Class), (((p1 a) * (((p2 b) a) * ((p3 a) b))) -> C)) -> C)) -> C)) -> C)) -> Pi(C:Prop), ((Pi(b:Class), ((Pi(C:Prop), ((Pi(a:Class), (((p1 a) * (((p2 b) a) * ((p3 a) b))) -> C)) -> C)) -> C)) -> C))`
+- **Proof Term:** `(λ(p1:(Class → Prop)). (λ(p2:(Class → (Class → Prop))). (λ(p3:(Class → (Class → Prop))). (λ(h:Π(C:Prop), ((Π(a:Class), ((Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)). ((h Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) (λ(a:Class). (λ(ha:Π(C:Prop), ((Π(b:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)). ((ha Π(C:Prop), ((Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)) → C)) (λ(b:Class). (λ(hb:((p1 a) × (((p2 b) a) × ((p3 a) b)))). (λ(C:Prop). (λ(k:Π(b:Class), ((Π(C:Prop), ((Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)) → C)) → C)). ((k b) (λ(C:Prop). (λ(k:Π(a:Class), (((p1 a) × (((p2 b) a) × ((p3 a) b))) → C)). ((k a) hb))))))))))))))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
@@ -1314,9 +1314,9 @@ Agent-friendly Markdown edition generated directly from `set_theory_prover/progr
 ### NBG-242 `thm_and_modus_ponens_exists` (Derived)
 
 - **Identifier:** `thm_and_modus_ponens_exists` (`NBG-242`, kind: `Derived`)
-- **Statement (Unicode):** `Π(p1:Prop), Π(p2:(Class → Prop)), ((p1 × (p1 → Σ(s:Class), (p2 s))) → Σ(s:Class), (p2 s))`
-- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:(Class -> Prop)), ((p1 * (p1 -> Sigma(s:Class), (p2 s))) -> Sigma(s:Class), (p2 s))`
-- **Proof Term:** `(λ(p1:Prop). (λ(p2:(Class → Prop)). (λ(hClosedDet:(p1 × (p1 → Σ(s:Class), (p2 s)))). (snd(hClosedDet) fst(hClosedDet)))))`
+- **Statement (Unicode):** `Π(p1:Prop), Π(p2:(Class → Prop)), ((p1 × (p1 → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C))) → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C))`
+- **Statement (ANSII):** `Pi(p1:Prop), Pi(p2:(Class -> Prop)), ((p1 * (p1 -> Pi(C:Prop), ((Pi(s:Class), ((p2 s) -> C)) -> C))) -> Pi(C:Prop), ((Pi(s:Class), ((p2 s) -> C)) -> C))`
+- **Proof Term:** `(λ(p1:Prop). (λ(p2:(Class → Prop)). (λ(h:(p1 × (p1 → Π(C:Prop), ((Π(s:Class), ((p2 s) → C)) → C)))). (snd(h) fst(h)))))`
 - **Axioms Used:** `(none -- pure lambda-term)`
 - **Definitions Used:** `(none)`
 
