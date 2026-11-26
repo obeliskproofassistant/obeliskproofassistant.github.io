@@ -16,7 +16,7 @@ Directly generated from `newchecker.ML` via `types/order_dependent_types.txt`.
 - **MKTD2-system JSON Database:** [nbg_library.json](nbg_library.json)
 - **Plain-Text Specification:** [output.txt](output.txt)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.99) (3.01-3.99)
+## 3. Set/Class-Theoretic Foundations (3.01-3.100) (3.01-3.100)
 
 Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 
@@ -152,11 +152,15 @@ Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals
 
 ### 3.37 `ThmFamilyEvaluation` — Evaluation of “Family Value” via semi-singleton subsets (Theorem)
 
-- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
+- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))`
 - **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))`
-- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
-- **Kernel Note:** Kernel proof term (thm_3_37_family_eval_when_defined : Thm): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.
+- **Proof Constructor:** `(* Total kernel Prf nodes: 354 *)
+PForaR_prf (...)`
+- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmIfTrue`
+- **Definitions Used:** `DefValueAtArg, DefBigDomain, DefIff, DefSubclass, DefClassEq`
+- **Kernel Prf Nodes:** `354`
+- **Kernel Note:** Kernel proof thm_3_37_family_eval_when_defined: x ∈ Dom(F) gives ∃s((x, s) ∈ F) by 3.21 DefBigDomain, so the conditional of 3.25 DefValueAtArg takes its THEN branch (IfTrueAx): F(x) = ⋃{ s : Class | (x, s) ∈ F }. The family hypothesis is not used.
 - **Standalone Certificate:** [proofs/ThmFamilyEvaluation.html](proofs/ThmFamilyEvaluation.html)
 
 ### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Theorem)

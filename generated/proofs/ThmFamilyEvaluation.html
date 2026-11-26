@@ -464,7 +464,7 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>ThmFamilyEvaluation (3.37, Theorem): Evaluation of “Family Value” via semi-singleton subsets</h1>
-      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.99) &mdash; <a href="../manual.html#ThmFamilyEvaluation" style="color: #38bdf8;">View in Complete Entity Database (<code>#ThmFamilyEvaluation</code>)</a></p>
+      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.100) &mdash; <a href="../manual.html#ThmFamilyEvaluation" style="color: #38bdf8;">View in Complete Entity Database (<code>#ThmFamilyEvaluation</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -548,12 +548,34 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Axioms Used</th>
+              <td class="field-value proof-cell"><a href="../manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="../manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <code>AxmIfTrue</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definitions Used</th>
+              <td class="field-value proof-cell"><a href="../manual.html#DefValueAtArg" class="sym-link" title="DefValueAtArg (3.25)"><code>DefValueAtArg</code> (3.25)</a>, <a href="../manual.html#DefBigDomain" class="sym-link" title="DefBigDomain (3.21)"><code>DefBigDomain</code> (3.21)</a>, <a href="../manual.html#DefIff" class="sym-link" title="DefIff (1.15)"><code>DefIff</code> (1.15)</a>, <a href="../manual.html#DefSubclass" class="sym-link" title="DefSubclass (3.06)"><code>DefSubclass</code> (3.06)</a>, <a href="../manual.html#DefClassEq" class="sym-link" title="DefClassEq: forall A B, (A = B) &lt;-&gt; ((A c= B) /\ (B c= A)), paired with 3.10 AxmExtensionality"><code>DefClassEq</code> (3.10)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Prf Nodes</th>
+              <td class="field-value proof-cell"><code>354</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(the linked kernel proof has a different statement; see GitLab #8101)</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 354 *)
+PForaR_prf (
+  PForaR_prf (
+    PImplR_prf (
+      PMP_prf (
+        PAndR_prf (..., ...),
+        PWeak_prf (...)
+      )
+    )
+  )
+)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Kernel proof term (thm_3_37_family_eval_when_defined : Thm): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.</td>
+              <td class="field-value proof-cell">Kernel proof thm_3_37_family_eval_when_defined: x ∈ Dom(F) gives ∃s((x, s) ∈ F) by 3.21 DefBigDomain, so the conditional of 3.25 DefValueAtArg takes its THEN branch (IfTrueAx): F(x) = ⋃{ s : Class | (x, s) ∈ F }. The family hypothesis is not used.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -561,7 +583,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
+              <td class="field-value proof-cell">Verified</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>

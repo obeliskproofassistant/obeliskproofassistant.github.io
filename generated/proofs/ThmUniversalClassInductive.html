@@ -464,7 +464,7 @@
         <a class="nav-link" href="../../repl.html">Interactive REPL</a>
       </nav>
       <h1>ThmUniversalClassInductive (3.58, Theorem): Class of all sets is successor-inductive (Peano-inductive)</h1>
-      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.99) &mdash; <a href="../manual.html#ThmUniversalClassInductive" style="color: #38bdf8;">View in Complete Entity Database (<code>#ThmUniversalClassInductive</code>)</a></p>
+      <p class="subtitle">Standalone kernel entity record from 3. Set/Class-Theoretic Foundations (3.01&ndash;3.100) &mdash; <a href="../manual.html#ThmUniversalClassInductive" style="color: #38bdf8;">View in Complete Entity Database (<code>#ThmUniversalClassInductive</code>)</a></p>
       <div class="controls-bar">
         <div class="control-group">
           <span class="control-label">Formula Display:</span>
@@ -548,12 +548,59 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Axioms Used</th>
+              <td class="field-value proof-cell"><a href="../manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="../manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <a href="../manual.html#AxmPropExFalso" class="sym-link" title="AxmPropExFalso (1.11)"><code>AxmPropExFalso</code> (1.11)</a>, <a href="../manual.html#AxmOmegaIsSet" class="sym-link" title="AxmOmegaIsSet (3.57)"><code>AxmOmegaIsSet</code> (3.57)</a>, <a href="../manual.html#AxmHeredity" class="sym-link" title="AxmHeredity (3.12)"><code>AxmHeredity</code> (3.12)</a>, <a href="../manual.html#AxmPropVerum" class="sym-link" title="AxmPropVerum (1.13)"><code>AxmPropVerum</code> (1.13)</a>, <a href="../manual.html#PairSetAx" class="sym-link" title="PairSetAx: forall A B, ((A set) /\ (B set)) -&gt; ({A, B} set), paired with 3.49 DefUnorderedPair"><code>PairSetAx</code> (3.49)</a>, <a href="../manual.html#AxmUnion" class="sym-link" title="AxmUnion (3.100)"><code>AxmUnion</code> (3.100)</a>, <a href="../manual.html#AxmRightInSound" class="sym-link" title="AxmRightInSound (3.09)"><code>AxmRightInSound</code> (3.09)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definitions Used</th>
+              <td class="field-value proof-cell"><a href="../manual.html#DefEmptySet" class="sym-link" title="DefEmptySet (3.04)"><code>DefEmptySet</code> (3.04)</a>, <a href="../manual.html#DefIff" class="sym-link" title="DefIff (1.15)"><code>DefIff</code> (1.15)</a>, <a href="../manual.html#DefSubclass" class="sym-link" title="DefSubclass (3.06)"><code>DefSubclass</code> (3.06)</a>, <a href="../manual.html#DefUniversalClass" class="sym-link" title="DefUniversalClass (3.05)"><code>DefUniversalClass</code> (3.05)</a>, <a href="../manual.html#DefUnorderedPair" class="sym-link" title="DefUnorderedPair (3.49)"><code>DefUnorderedPair</code> (3.49)</a>, <a href="../manual.html#DefPairfulClass" class="sym-link" title="DefPairfulClass (3.46)"><code>DefPairfulClass</code> (3.46)</a>, <a href="../manual.html#DefSingletonSet" class="sym-link" title="DefSingletonSet (3.48)"><code>DefSingletonSet</code> (3.48)</a>, <a href="../manual.html#DefClassEq" class="sym-link" title="DefClassEq: forall A B, (A = B) &lt;-&gt; ((A c= B) /\ (B c= A)), paired with 3.10 AxmExtensionality"><code>DefClassEq</code> (3.10)</a>, <a href="../manual.html#DefIsSet" class="sym-link" title="DefIsSet (3.02)"><code>DefIsSet</code> (3.02)</a>, <a href="../manual.html#DefBinaryUnion" class="sym-link" title="DefBinaryUnion (3.53)"><code>DefBinaryUnion</code> (3.53)</a>, <a href="../manual.html#DefUnaryUnion" class="sym-link" title="DefUnaryUnion (3.19)"><code>DefUnaryUnion</code> (3.19)</a>, <a href="../manual.html#DefInductiveClass" class="sym-link" title="DefInductiveClass (3.55)"><code>DefInductiveClass</code> (3.55)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Prf Nodes</th>
+              <td class="field-value proof-cell"><code>3511</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(the linked kernel proof has a different statement; see GitLab #8101)</code></pre></td>
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 3511 *)
+PMP_prf (
+  PAndR_prf (
+    PMP_prf (
+      PMP_prf (
+        PAndR_prf (..., ...),
+        PMP_prf (..., ...)
+      ),
+      PMP_prf (
+        PForaR_prf (...),
+        PWeak_prf (...)
+      )
+    ),
+    PForaR_prf (
+      PImplR_prf (
+        PMP_prf (..., ...)
+      )
+    )
+  ),
+  PMP_prf (
+    PMP_prf (
+      PMP_prf (
+        PKernelDef_prf (&quot;DefInductiveClass&quot;),
+        PWeak_prf (...)
+      ),
+      PWeak_prf (
+        PMP_prf (..., ...)
+      )
+    ),
+    PInCtx_prf (
+      PImplR_prf (
+        PAnd2L_prf (...)
+      )
+    )
+  )
+)</code></pre></td>
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Kernel proof term (thm_3_58_v_inductive : Thm): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).</td>
+              <td class="field-value proof-cell">Kernel proof thm_3_58_v_inductive: ∅ ∈ V (3.57 AxmOmegaIsSet, 3.12 AxmHeredity); for a ∈ V, V is pairful (PairSetAx) and closed under ⋃ (3.100 AxmUnion), so a ∪ {a} = ⋃{a, {a}} ∈ V; folded with 3.55 DefInductiveClass.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -561,7 +608,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
+              <td class="field-value proof-cell">Verified</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>

@@ -226,7 +226,7 @@ Quantifier instantiation, variable-binding abstraction rules, and non-empty disc
 - **Kernel Note:** Admissible theorem-level inference rule schema of Generalisation (specialized to empty undischarged hypothesis context Γ = [], where ¬Ctx.IFV(x, []) holds vacuously): from theorem ⊢ 𝛂 infer ⊢ ∀(x:X)𝛂 (derivable from 1.13 AxmPropVerum and 2.04 RulForallAbstraction with 𝛃 := ⊤). For derivations under arbitrary contexts Γ, see 4.02 DefMetaGeneralisation, which explicitly requires the context freshness side condition ¬Ctx.IFV(v, Γ).
 - **Standalone Certificate:** [proofs/RulGeneralisation.html](proofs/RulGeneralisation.html)
 
-## 3. Set/Class-Theoretic Foundations (3.01-3.99) (3.01-3.99)
+## 3. Set/Class-Theoretic Foundations (3.01-3.100) (3.01-3.100)
 
 Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.
 
@@ -545,11 +545,15 @@ PMP_prf (..., ...)`
 
 ### 3.37 `ThmFamilyEvaluation` — Evaluation of “Family Value” via semi-singleton subsets (Theorem)
 
-- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
+- **Identifier:** `ThmFamilyEvaluation` (entry `3.37`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(F:Class)∀(x:Class)(((F family)∧(x∈Dom(F)))—→(F(x)=⋃{s|(x,s)∈F})))`
 - **Scheme of Types (Unicode):** `(∀([F@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])((([F@Class.Expression] family)∧([x@Class.Expression]∈Dom([F@Class.Expression])))—→([F@Class.Expression]([x@Class.Expression])=⋃{[s@Class.Expression]|([x@Class.Expression],[s@Class.Expression])∈[F@Class.Expression]})))`
-- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
-- **Kernel Note:** Kernel proof term (thm_3_37_family_eval_when_defined : Thm): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.
+- **Proof Constructor:** `(* Total kernel Prf nodes: 354 *)
+PForaR_prf (...)`
+- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmIfTrue`
+- **Definitions Used:** `DefValueAtArg, DefBigDomain, DefIff, DefSubclass, DefClassEq`
+- **Kernel Prf Nodes:** `354`
+- **Kernel Note:** Kernel proof thm_3_37_family_eval_when_defined: x ∈ Dom(F) gives ∃s((x, s) ∈ F) by 3.21 DefBigDomain, so the conditional of 3.25 DefValueAtArg takes its THEN branch (IfTrueAx): F(x) = ⋃{ s : Class | (x, s) ∈ F }. The family hypothesis is not used.
 - **Standalone Certificate:** [proofs/ThmFamilyEvaluation.html](proofs/ThmFamilyEvaluation.html)
 
 ### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Theorem)
@@ -731,11 +735,15 @@ PForaR_prf (...)`
 
 ### 3.58 `ThmUniversalClassInductive` — Class of all sets is successor-inductive (Peano-inductive) (Theorem)
 
-- **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
+- **Identifier:** `ThmUniversalClassInductive` (entry `3.58`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Ind(V)`
 - **Scheme of Types (Unicode):** `Ind(V)`
-- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
-- **Kernel Note:** Kernel proof term (thm_3_58_v_inductive : Thm): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).
+- **Proof Constructor:** `(* Total kernel Prf nodes: 3511 *)
+PMP_prf (..., ...)`
+- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmOmegaIsSet, AxmHeredity, AxmPropVerum, PairSetAx, AxmUnion, AxmRightInSound`
+- **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefUniversalClass, DefUnorderedPair, DefPairfulClass, DefSingletonSet, DefClassEq, DefIsSet, DefBinaryUnion, DefUnaryUnion, DefInductiveClass`
+- **Kernel Prf Nodes:** `3511`
+- **Kernel Note:** Kernel proof thm_3_58_v_inductive: ∅ ∈ V (3.57 AxmOmegaIsSet, 3.12 AxmHeredity); for a ∈ V, V is pairful (PairSetAx) and closed under ⋃ (3.100 AxmUnion), so a ∪ {a} = ⋃{a, {a}} ∈ V; folded with 3.55 DefInductiveClass.
 - **Standalone Certificate:** [proofs/ThmUniversalClassInductive.html](proofs/ThmUniversalClassInductive.html)
 
 ### 3.59 `ThmOmegaInductive` — Intersection of all successor-inductive (Peano-inductive) classes is a successor-inductive class itself (ω is the ⊆-least successor-inductive class) (Theorem)
@@ -814,11 +822,11 @@ PMP_prf (..., ...)`
 
 ### 3.65 `ThmOmegaCardinal` — ω is cardinal (Theorem)
 
-- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Stated (Linked Kernel Proof Has a Different Statement)`)
+- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Stated (No Kernel Proof Linked)`)
 - **Formula (Unicode):** `Card(ω)`
 - **Scheme of Types (Unicode):** `Card(ω)`
-- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
-- **Kernel Note:** Kernel proof term (thm_3_65_omega_card_sub_on : Thm): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.
+- **Proof Constructor:** `(no kernel proof term linked)`
+- **Kernel Note:** Not proved yet. Plan: Card(ω) by 3.64 DefIsCardinal with K := ω, so |ω| = ω is needed (3.41 DefCardinality). ω ⊆ |ω| requires the finite pigeonhole principle (no injection of ω into a natural number, by induction on ω); |ω| ⊆ ω requires ω ≼ ω, i.e. the identity on ω as an injective class function. Neither lemma is in the library yet.
 - **Standalone Certificate:** [proofs/ThmOmegaCardinal.html](proofs/ThmOmegaCardinal.html)
 
 ### 3.66 `ThmOrdinalsCardinal` — On is a cardinal class (Theorem)
@@ -1193,6 +1201,19 @@ PForaR_prf (...)`
 - **Kernel Note:** Conservative class-operator definition (DefPowerClass, def_power_class_cert in 06_definitions.ML, PKernelDef_prf): defines the powerclass 𝒫(K) = { x : Class | x ⊆ K } of any class K as the comprehension class of all set subclasses of K. Paired with the power-set sethood axiom 3.13 AxmExponent (∀(X:Class)((X set) —→ (𝒫(X) set))).
 - **Standalone Certificate:** [proofs/DefPowerClass.html](proofs/DefPowerClass.html)
 
+### 3.100 `AxmUnion` — Union axiom: the union of a set is a set (Axiom)
+
+- **Identifier:** `AxmUnion` (entry `3.100`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
+- **Formula (Unicode):** `(∀(x:Class)((x set)—→(⋃x set)))`
+- **Scheme of Types (Unicode):** `(∀([x@Variable]:[Class@Type])(([x@Class.Expression] set)—→(⋃[x@Class.Expression] set)))`
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1 *)
+PUnionSetAx_prf`
+- **Axioms Used:** `AxmUnion`
+- **Definitions Used:** `(none)`
+- **Kernel Prf Nodes:** `1`
+- **Kernel Note:** Primitive kernel rule UnionSetAx for now, although it is derivable: Azriel Levy (On Von Neumann's Axiom System for Set Theory, Amer. Math. Monthly 75, 1968) derives it from limitation of size, powerset, heredity and pairing; see the theorem 'union of a set is a set' (thm:unionisset) in foundations/080_azriel_levi_union_thm.tex. When that derivation is formalised in the kernel, this entry becomes a theorem.
+- **Standalone Certificate:** [proofs/AxmUnion.html](proofs/AxmUnion.html)
+
 ## 4. Metalogical Laws (4.01-4.08) (4.01-4.08)
 
 Explicit substitution, context encoding, co-necessitation, uniqueness quantifiers, and reflected comprehension.
@@ -1200,8 +1221,8 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 ### 4.01 `DefMetaInstantiation` — Instantiation (Axiom)
 
 - **Identifier:** `DefMetaInstantiation` (entry `4.01`, kind: `Axiom`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
-- **Formula (Unicode):** `(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let v = ⟦t⟧ in ⟦𝛗⟧)›))`
-- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let [v@Name.Expression] = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))`
+- **Formula (Unicode):** `(∀(A:Type)∀(G:Ctx.Expression)∀(𝛗:Fm)∀(t:eval(A).Expression)∀(v:Variable)(𝘞,⟦G⟧⊢‹(∀(⦃v⦄:⟦A⟧)⟦𝛗⟧)—→(let ⦃v⦄ = ⟦t⟧ in ⟦𝛗⟧)›))`
+- **Scheme of Types (Unicode):** `(∀([A@Variable]:[Type@Type])∀([G@Variable]:[Ctx.Expression@Type])∀([𝛗@Variable]:[Fm@Type])∀([t@Variable]:[eval([A@Type.Expression.Expression]).Expression@Type])∀([v@Variable]:[Variable@Type])(𝘞,⟦[G@Ctx.Expression.Expression]⟧⊢‹(∀([⦃[v@Variable.Expression]⦄@Variable]:[⟦[A@Type.Expression.Expression]⟧@Type])⟦[𝛗@Fm.Expression]⟧)—→(let ⦃[v@Variable.Expression]⦄ = ⟦[t@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧)›))`
 - **Proof Constructor:** `PKernelDef_prf ("DefMetaInstantiation")`
 - **Kernel Note:** Postulated +1 metalevel universal instantiation schema (requiring Fm.FFI(t, v, φ) as enforced in IncompletenessMechanization.law_4_01_meta_instantiation), accompanied by a kernel-checked object-level instance (thm_4_01_meta_instantiation / sequent_4_01_instantiation : Thm, checked by Thm.checkPipeline and Thm.slow_check).
 - **Standalone Certificate:** [proofs/DefMetaInstantiation.html](proofs/DefMetaInstantiation.html)
@@ -1245,8 +1266,8 @@ Explicit substitution, context encoding, co-necessitation, uniqueness quantifier
 ### 4.06 `AxmMetaClassComprehension` — Class comprehension axiom schema (Axiom)
 
 - **Identifier:** `AxmMetaClassComprehension` (entry `4.06`, kind: `Axiom`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
-- **Formula (Unicode):** `(∀(𝛗:Fm)∀(x:Variable)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),x,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let x = ⟦k⟧ in ⟦𝛗⟧))›)))`
-- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Variable@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),[x@Variable.Expression],[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let [x@Name.Expression] = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))`
+- **Formula (Unicode):** `(∀(𝛗:Fm)∀(x:Variable)∀(k:Class.Expression)(Fm.FFI((k:Class.Expression),x,𝛗)—→(𝘛,[]⊢‹(⟦k⟧∈{⦃x⦄|⟦𝛗⟧})←→((⟦k⟧ set)∧(let ⦃x⦄ = ⟦k⟧ in ⟦𝛗⟧))›)))`
+- **Scheme of Types (Unicode):** `(∀([𝛗@Variable]:[Fm@Type])∀([x@Variable]:[Variable@Type])∀([k@Variable]:[Class.Expression@Type])(Fm.FFI(([k@Class.Expression.Expression]:Class.Expression),[x@Variable.Expression],[𝛗@Fm.Expression])—→(𝘛,[]⊢‹(⟦[k@Class.Expression.Expression]⟧∈{[⦃[x@Variable.Expression]⦄@Class.Expression]|⟦[𝛗@Fm.Expression]⟧})←→((⟦[k@Class.Expression.Expression]⟧ set)∧(let ⦃[x@Variable.Expression]⦄ = ⟦[k@Class.Expression.Expression]⟧ in ⟦[𝛗@Fm.Expression]⟧))›)))`
 - **Proof Constructor:** `PKernelDef_prf ("AxmMetaClassComprehension")`
 - **Kernel Note:** Postulated +1 metalevel class comprehension schema guarded by Fm.FFI(k, x, φ), accompanied by a kernel-checked object-level instance (thm_4_06_meta_class_comprehension / sequent_4_06_comprehension : Thm, checked by Thm.checkPipeline and Thm.slow_check).
 - **Standalone Certificate:** [proofs/AxmMetaClassComprehension.html](proofs/AxmMetaClassComprehension.html)

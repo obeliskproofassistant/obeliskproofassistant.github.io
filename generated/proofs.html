@@ -1126,7 +1126,7 @@
   </section>
   <section class="manual-section" id="sec-3">
     <div class="section-header">
-      <h2>3. Set/Class-Theoretic Foundations (3.01&ndash;3.99)</h2>
+      <h2>3. Set/Class-Theoretic Foundations (3.01&ndash;3.100)</h2>
       <p class="section-desc">Impredicative Morse-Kelley (MKTD1-theory) class comprehension, sethood, ordinals, Dunaev pairs, cardinals, universes, and reflection.</p>
     </div>
     <div class="table-container">
@@ -1532,8 +1532,20 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Axioms Used</th>
+              <td class="field-value proof-cell"><a href="manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <code>AxmIfTrue</code></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definitions Used</th>
+              <td class="field-value proof-cell"><a href="manual.html#DefValueAtArg" class="sym-link" title="DefValueAtArg (3.25)"><code>DefValueAtArg</code> (3.25)</a>, <a href="manual.html#DefBigDomain" class="sym-link" title="DefBigDomain (3.21)"><code>DefBigDomain</code> (3.21)</a>, <a href="manual.html#DefIff" class="sym-link" title="DefIff (1.15)"><code>DefIff</code> (1.15)</a>, <a href="manual.html#DefSubclass" class="sym-link" title="DefSubclass (3.06)"><code>DefSubclass</code> (3.06)</a>, <a href="manual.html#DefClassEq" class="sym-link" title="DefClassEq: forall A B, (A = B) &lt;-&gt; ((A c= B) /\ (B c= A)), paired with 3.10 AxmExtensionality"><code>DefClassEq</code> (3.10)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Prf Nodes</th>
+              <td class="field-value proof-cell"><code>354</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Kernel proof term (thm_3_37_family_eval_when_defined : Thm): for any family F and x ∈ Dom(F), unfolding 3.21 DefBigDomain (∃s((x, s) ∈ F)) and 3.25 DefValueAtArg evaluates the conditional branch to F(x) = ⋃{ s : Class | (x, s) ∈ F }.</td>
+              <td class="field-value proof-cell">Kernel proof thm_3_37_family_eval_when_defined: x ∈ Dom(F) gives ∃s((x, s) ∈ F) by 3.21 DefBigDomain, so the conditional of 3.25 DefValueAtArg takes its THEN branch (IfTrueAx): F(x) = ⋃{ s : Class | (x, s) ∈ F }. The family hypothesis is not used.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1541,7 +1553,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
+              <td class="field-value proof-cell">Verified</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -1760,8 +1772,20 @@
               </td>
             </tr>
             <tr>
+              <th class="field-name">Axioms Used</th>
+              <td class="field-value proof-cell"><a href="manual.html#AxmLeftInSound" class="sym-link" title="AxmLeftInSound (3.08)"><code>AxmLeftInSound</code> (3.08)</a>, <a href="manual.html#RulClassComprehension" class="sym-link" title="RulClassComprehension (3.01)"><code>RulClassComprehension</code> (3.01)</a>, <a href="manual.html#AxmPropExFalso" class="sym-link" title="AxmPropExFalso (1.11)"><code>AxmPropExFalso</code> (1.11)</a>, <a href="manual.html#AxmOmegaIsSet" class="sym-link" title="AxmOmegaIsSet (3.57)"><code>AxmOmegaIsSet</code> (3.57)</a>, <a href="manual.html#AxmHeredity" class="sym-link" title="AxmHeredity (3.12)"><code>AxmHeredity</code> (3.12)</a>, <a href="manual.html#AxmPropVerum" class="sym-link" title="AxmPropVerum (1.13)"><code>AxmPropVerum</code> (1.13)</a>, <a href="manual.html#PairSetAx" class="sym-link" title="PairSetAx: forall A B, ((A set) /\ (B set)) -&gt; ({A, B} set), paired with 3.49 DefUnorderedPair"><code>PairSetAx</code> (3.49)</a>, <a href="manual.html#AxmUnion" class="sym-link" title="AxmUnion (3.100)"><code>AxmUnion</code> (3.100)</a>, <a href="manual.html#AxmRightInSound" class="sym-link" title="AxmRightInSound (3.09)"><code>AxmRightInSound</code> (3.09)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Definitions Used</th>
+              <td class="field-value proof-cell"><a href="manual.html#DefEmptySet" class="sym-link" title="DefEmptySet (3.04)"><code>DefEmptySet</code> (3.04)</a>, <a href="manual.html#DefIff" class="sym-link" title="DefIff (1.15)"><code>DefIff</code> (1.15)</a>, <a href="manual.html#DefSubclass" class="sym-link" title="DefSubclass (3.06)"><code>DefSubclass</code> (3.06)</a>, <a href="manual.html#DefUniversalClass" class="sym-link" title="DefUniversalClass (3.05)"><code>DefUniversalClass</code> (3.05)</a>, <a href="manual.html#DefUnorderedPair" class="sym-link" title="DefUnorderedPair (3.49)"><code>DefUnorderedPair</code> (3.49)</a>, <a href="manual.html#DefPairfulClass" class="sym-link" title="DefPairfulClass (3.46)"><code>DefPairfulClass</code> (3.46)</a>, <a href="manual.html#DefSingletonSet" class="sym-link" title="DefSingletonSet (3.48)"><code>DefSingletonSet</code> (3.48)</a>, <a href="manual.html#DefClassEq" class="sym-link" title="DefClassEq: forall A B, (A = B) &lt;-&gt; ((A c= B) /\ (B c= A)), paired with 3.10 AxmExtensionality"><code>DefClassEq</code> (3.10)</a>, <a href="manual.html#DefIsSet" class="sym-link" title="DefIsSet (3.02)"><code>DefIsSet</code> (3.02)</a>, <a href="manual.html#DefBinaryUnion" class="sym-link" title="DefBinaryUnion (3.53)"><code>DefBinaryUnion</code> (3.53)</a>, <a href="manual.html#DefUnaryUnion" class="sym-link" title="DefUnaryUnion (3.19)"><code>DefUnaryUnion</code> (3.19)</a>, <a href="manual.html#DefInductiveClass" class="sym-link" title="DefInductiveClass (3.55)"><code>DefInductiveClass</code> (3.55)</a></td>
+            </tr>
+            <tr>
+              <th class="field-name">Kernel Prf Nodes</th>
+              <td class="field-value proof-cell"><code>3511</code></td>
+            </tr>
+            <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Kernel proof term (thm_3_58_v_inductive : Thm): combines (1) base membership ∅ ∈ V (from 3.57 AxmOmegaIsSet, 3.07 ∅ ⊆ ω, and 3.12 AxmHeredity), (2) V Hereditary (3.12 AxmHeredity), V Powerful (3.13 AxmExponent), V Tight (3.43 AxmSizeLimitation and CardLessOrderAx), and V Pairful (3.49 DefUnorderedPair / PairSetAx), and (3) the successor-union identity ∀a ∈ V, ({a, {a}} ∈ V ∧ (a ∪ {a}) = ⋃{a, {a}}) (thm_step1b_succ_eq_union_pair), from which closure under a ∪ {a} follows by Limitation of Size / Tight(V) (and for ordinal/transitive sets a directly via a ∪ {a} ⊆ 𝒫(a) as in 3.60).</td>
+              <td class="field-value proof-cell">Kernel proof thm_3_58_v_inductive: ∅ ∈ V (3.57 AxmOmegaIsSet, 3.12 AxmHeredity); for a ∈ V, V is pairful (PairSetAx) and closed under ⋃ (3.100 AxmUnion), so a ∪ {a} = ⋃{a, {a}} ∈ V; folded with 3.55 DefInductiveClass.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -1769,7 +1793,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
+              <td class="field-value proof-cell">Verified</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -2253,7 +2277,7 @@
             </tr>
             <tr>
               <th class="field-name">Kernel Note</th>
-              <td class="field-value proof-cell">Kernel proof term (thm_3_65_omega_card_sub_on : Thm): combines ω ∈ On (3.63 ThmOmegaInOrdinals) with 3.41 DefCardinality (|ω| = On ∩ ⋂{a | a ∈ On ∧ ω ≼ a} = ω by the finite-pigeonhole / initial-ordinal property of ω) and 3.64 DefIsCardinal.</td>
+              <td class="field-value proof-cell">Not proved yet. Plan: Card(ω) by 3.64 DefIsCardinal with K := ω, so |ω| = ω is needed (3.41 DefCardinality). ω ⊆ |ω| requires the finite pigeonhole principle (no injection of ω into a natural number, by induction on ω); |ω| ⊆ ω requires ω ≼ ω, i.e. the identity on ω as an injective class function. Neither lemma is in the library yet.</td>
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
@@ -2261,7 +2285,7 @@
             </tr>
             <tr>
               <th class="field-name">Verification</th>
-              <td class="field-value proof-cell">Stated (Linked Kernel Proof Has a Different Statement)</td>
+              <td class="field-value proof-cell">Stated (No Kernel Proof Linked)</td>
             </tr>
             <tr>
               <th class="field-name">Standalone Page</th>
@@ -2509,7 +2533,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1462" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1462"><code>entries.ML:L1462</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1473" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1473"><code>entries.ML:L1473</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -2593,7 +2617,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1384" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1384"><code>entries.ML:L1384</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1395" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1395"><code>entries.ML:L1395</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -3690,7 +3714,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1608" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1608"><code>entries.ML:L1608</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1619" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1619"><code>entries.ML:L1619</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -3774,7 +3798,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1633" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1633"><code>entries.ML:L1633</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1644" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1644"><code>entries.ML:L1644</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -3863,7 +3887,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1643" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1643"><code>entries.ML:L1643</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1654" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1654"><code>entries.ML:L1654</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
@@ -3935,7 +3959,7 @@
             </tr>
             <tr>
               <th class="field-name">Source Line</th>
-              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1657" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1657"><code>entries.ML:L1657</code></a></td>
+              <td class="field-value proof-cell"><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/program/types/entries.ML#L1668" class="sym-link" target="_blank" title="View definition in set_theory_prover/program/types/entries.ML at line 1668"><code>entries.ML:L1668</code></a></td>
             </tr>
             <tr>
               <th class="field-name">Verification</th>
