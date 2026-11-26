@@ -270,7 +270,7 @@
       "kind": "Definitional",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Π(X:Class), (((X = V) → Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))) × ((Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))) → (X = V)))",
-      "proof_unicode": "(λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩)",
+      "proof_unicode": "(λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩)",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality"],
       "statement_ast": "(Pi (X : Class) -> (Sigma (_ : (Pi (_ : (Id Class X V)) -> (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) X)) -> (Set z))) * (Pi (_ : (Set z)) -> ((In z) X)))))) * (Pi (_ : (Pi (z : Class) -> (Sigma (_ : (Pi (_ : ((In z) X)) -> (Set z))) * (Pi (_ : (Set z)) -> ((In z) X))))) -> (Id Class X V))))"
     },
@@ -479,7 +479,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Ind(V)",
-      "proof_unicode": "ax_ind_intro(V, ⟨(snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) ∅)) ax_empty_set), (λ(y:Class). (λ(hyInV:(y ∈ V)). (snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) SuccOrd(y))) ax_ord_succ_set(y, (fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) y)) hyInV)))))⟩)",
+      "proof_unicode": "ax_ind_intro(V, ⟨(snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) ∅)) ax_empty_set), (λ(y:Class). (λ(hyInV:(y ∈ V)). (snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) SuccOrd(y))) ax_ord_succ_set(y, (fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) y)) hyInV)))))⟩)",
       "axioms_used": ["ax_ind_intro", "ax_eq_subst", "ax_eq_sym", "ax_extensionality", "ax_empty_set", "ax_ord_succ_set"],
       "statement_ast": "(Ind V)"
     },
@@ -732,7 +732,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Π(x:Class), (set(x) → (x ∈ V))",
-      "proof_unicode": "(λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x)))",
+      "proof_unicode": "(λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x)))",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality"],
       "statement_ast": "(Pi (x : Class) -> (Pi (_ : (Set x)) -> ((In x) V)))"
     },
@@ -743,7 +743,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Π(x:Class), ((x ∈ V) → set(x))",
-      "proof_unicode": "(λ(x:Class). fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x)))",
+      "proof_unicode": "(λ(x:Class). fst(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x)))",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality"],
       "statement_ast": "(Pi (x : Class) -> (Pi (_ : ((In x) V)) -> (Set x)))"
     },
@@ -754,7 +754,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "(∅ ∈ V)",
-      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) ∅) ax_empty_set)",
+      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x))) ∅) ax_empty_set)",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality", "ax_empty_set"],
       "statement_ast": "((In EmptySet) V)"
     },
@@ -765,7 +765,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "(ω ∈ V)",
-      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) ω) plan_omega_set)",
+      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x))) ω) plan_omega_set)",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality", "plan_omega_set"],
       "statement_ast": "((In omega) V)"
     },
@@ -1073,7 +1073,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Π(A:Class), ((Π(z:Class), ((z ∈ A) → set(z))) → (A ⊆ V))",
-      "proof_unicode": "(λ(A:Class). (λ(hElemSet:Π(z:Class), ((z ∈ A) → set(z))). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) V)) (λ(z:Class). (λ(hz:(z ∈ A)). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) z) ((hElemSet z) hz)))))))",
+      "proof_unicode": "(λ(A:Class). (λ(hElemSet:Π(z:Class), ((z ∈ A) → set(z))). (snd((((λ(X:Class). (λ(Y:Class). ⟨(λ(h:(X ⊆ Y)). let res:Π(z:Class), ((z ∈ X) → (z ∈ Y)) = h in res), (λ(h:Π(z:Class), ((z ∈ X) → (z ∈ Y))). let res:(X ⊆ Y) = h in res)⟩)) A) V)) (λ(z:Class). (λ(hz:(z ∈ A)). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x))) z) ((hElemSet z) hz)))))))",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality"],
       "statement_ast": "(Pi (A : Class) -> (Pi (_ : (Pi (z : Class) -> (Pi (_ : ((In z) A)) -> (Set z)))) -> ((Subset A) V)))"
     },
@@ -1084,7 +1084,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "Π(a:Class), (set({a}) → ({a} ∈ V))",
-      "proof_unicode": "(λ(a:Class). (λ(hSetSing:set({a})). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) {a}) hSetSing)))",
+      "proof_unicode": "(λ(a:Class). (λ(hSetSing:set({a})). (((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x))) {a}) hSetSing)))",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality"],
       "statement_ast": "(Pi (a : Class) -> (Pi (_ : (Set (Singleton a))) -> ((In (Singleton a)) V)))"
     },
@@ -1095,7 +1095,7 @@
       "kind": "Derived",
       "checker": "DependentTypeChecker.check",
       "statement_unicode": "(𝒫(ω) ∈ V)",
-      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) hzSet))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) hChar))⟩) V)) refl(V)) x))) 𝒫(ω)) plan_exponent(ω, plan_omega_set))",
+      "proof_unicode": "(((λ(x:Class). snd(((fst(((λ(X:Class). ⟨(λ(hEq:(X = V)). (λ(z:Class). ⟨(λ(hzX:(z ∈ X)). fst(let _u:(set(z) × 𝟙) = (((ax_eq_subst((λ(C:Class). (z ∈ C)), X) V) hEq) hzX) in _u)), (λ(hzSet:set(z)). (((ax_eq_subst((λ(C:Class). (z ∈ C)), V) X) (ax_eq_sym(X, V) hEq)) ⟨hzSet, (λ(P:Prop). (λ(h:P). h))⟩))⟩)), (λ(hChar:Π(z:Class), (((z ∈ X) → set(z)) × (set(z) → (z ∈ X)))). (ax_extensionality(X, V) (λ(z:Class). ⟨(λ(_a:(z ∈ X)). ⟨(fst((hChar z)) _a), (λ(P:Prop). (λ(h:P). h))⟩), (λ(_b:(z ∈ V)). (snd((hChar z)) fst(let _u:(set(z) × 𝟙) = _b in _u)))⟩)))⟩) V)) refl(V)) x))) 𝒫(ω)) plan_exponent(ω, plan_omega_set))",
       "axioms_used": ["ax_eq_subst", "ax_eq_sym", "ax_extensionality", "plan_exponent", "plan_omega_set"],
       "statement_ast": "((In (Power omega)) V)"
     },

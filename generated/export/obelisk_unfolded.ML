@@ -885,6 +885,9 @@ struct
       DefPred of string * int * Term
     | DefMember of string * int * Term
     | DefPairMember of string * int * Term
+    | DefMemberTyped of string * Term list * Term   (* membership definition whose parameters
+                                                       are not all classes (types listed) *)
+    | DefClass of string * Term                     (* a class constant defined as a class term *)
 
   local
     fun v i = Var ("%" ^ Int.toString i)
@@ -908,8 +911,11 @@ struct
                  impl (andP (inT (dp (Var "x") (Var "y")) (v 1), inT (dp (Var "x") (Var "z")) (v 1)),
                        Id (TClass, Var "y", Var "z")))))),
       DefPred ("Card", 1, existsP ("K", TClass, Id (TClass, App (Const "CardOf", Var "K"), v 1))),
-      DefMember ("EmptySet", 0, Const "False"),
-      DefMember ("V", 0, App (Const "Set", m)),
+      DefPred ("True", 0, Pi ("P", TProp, Pi ("_", Var "P", Var "P"))),
+      (* [WHY] The empty class and the universal class are the comprehensions {x | False} and
+         {x | True} (as in NBGCompiler), so membership in them is the Kappa definition. *)
+      DefClass ("EmptySet", App (Const "Kappa", Lam ("x", TClass, Const "False"))),
+      DefClass ("V", App (Const "Kappa", Lam ("x", TClass, Const "True"))),
       DefMember ("omega", 0, Pi ("Q", TClass, impl (App (Const "Ind", Var "Q"), inT m (Var "Q")))),
       DefMember ("BinUnion", 2, orP (inT m (v 1), inT m (v 2))),
       DefMember ("BinInter", 2, andP (inT m (v 1), inT m (v 2))),
@@ -923,6 +929,8 @@ struct
       DefMember ("PiModel", 1, Pi ("u", TClass,
                    impl (inT (Var "u") (App (Const "Dom", v 1)),
                          inT (App (App (Const "ValOf", m), Var "u")) (App (App (Const "ValOf", v 1), Var "u"))))),
+      (* class comprehension {x | phi} = Kappa (fn x => phi): members are the sets satisfying phi *)
+      DefMemberTyped ("Kappa", [Pi ("_", TClass, TProp)], andP (App (Const "Set", m), App (v 1, m))),
       DefMember ("SubstVar", 3, orP (andP (Id (TClass, v 3, v 2), inT m (v 1)),
                                      andP (impl (Id (TClass, v 3, v 2), Const "False"), inT m (v 3))))
     ]
@@ -931,6 +939,8 @@ struct
   fun definitionName (DefPred (c, _, _)) = c
     | definitionName (DefMember (c, _, _)) = "In_" ^ c
     | definitionName (DefPairMember (c, _, _)) = "InPair_" ^ c
+    | definitionName (DefMemberTyped (c, _, _)) = "In_" ^ c
+    | definitionName (DefClass (c, _)) = c
 
   (* head constant and arguments of an application spine *)
   fun spine (App (f, a)) = (case spine f of SOME (c, args) => SOME (c, args @ [a]) | NONE => NONE)
@@ -965,6 +975,12 @@ struct
                SOME (c', args) => if c' = c andalso List.length args = n
                                   then SOME (instantiate body (("%0", z) :: paramBinds args)) else NONE
              | NONE => NONE)
+        | (DefClass (c, body), Const c') => if c = c' then SOME body else NONE
+        | (DefMemberTyped (c, tys, body), App (App (Const "In", z), opT)) =>
+            (case spine opT of
+               SOME (c', args) => if c' = c andalso List.length args = List.length tys
+                                  then SOME (instantiate body (("%0", z) :: paramBinds args)) else NONE
+             | NONE => NONE)
         | (DefPairMember (c, n, body), App (App (Const "In", App (App (Const "DunaevPair", x), y)), opT)) =>
             (case spine opT of
                SOME (c', args) => if c' = c andalso List.length args = n
@@ -988,7 +1004,13 @@ struct
     | Id (a, u, v) => Id (unfoldDefs a, unfoldDefs u, unfoldDefs v)
     | Refine (x, a, p) => Refine (x, unfoldDefs a, unfoldDefs p)
     | Lam (x, a, b) => Lam (x, unfoldDefs a, unfoldDefs b)
-    | App (e1, e2) => App (unfoldDefs e1, unfoldDefs e2)
+    | App (e1, e2) =>
+        (* an argument may unfold into a definitional redex (z in V, V := Kappa ...) *)
+        let val t' = App (unfoldDefs e1, unfoldDefs e2) in
+          case lookupDefinition t' of
+            SOME u => unfoldDefs u
+          | NONE => t'
+        end
     | Pair (e1, e2) => Pair (unfoldDefs e1, unfoldDefs e2)
     | Fst e => Fst (unfoldDefs e)
     | Snd e => Snd (unfoldDefs e)
@@ -1006,6 +1028,15 @@ struct
       val n2 = normalize env t2
     in
       n1 = n2 orelse alphaEq n1 n2 orelse
+      (* [WHY] #8096: one delta-step at the head of one side, then beta. Full unfolding of
+         both sides can stop at different depths for a self-referential definition
+         (x in {x | ~ x in x}), where a single step already meets the other side. *)
+      (case lookupDefinition n1 of
+         SOME u => alphaEq (normalize env u) n2
+       | NONE => false) orelse
+      (case lookupDefinition n2 of
+         SOME u => alphaEq n1 (normalize env u)
+       | NONE => false) orelse
       let
         val u1 = unfoldDefs (normalize env (unfoldDefs n1))
         val u2 = unfoldDefs (normalize env (unfoldDefs n2))
@@ -2221,6 +2252,8 @@ struct
   (* [WHY] #8096 step 3: impredicative existential (DependentEval.existsP), a proposition like
      Or. ExIntro / ExElim are its introduction and elimination. *)
   fun Exists x sort body = DependentEval.existsP (x, sort, body)
+  (* the proof of True (True := Pi P:Prop. P -> P, definitionTable) *)
+  val TrueIntro = Lam ("P", TProp, Lam ("h", Var "P", Var "h"))
   (* ExIntro (x, sort, body) w prf : Exists x sort body, given prf : body[w/x] *)
   fun ExIntro (x, sort, body) (w: Term) (prf: Term) : Term =
     let
@@ -2324,6 +2357,7 @@ struct
     ("Union", Pi ("_", TClass, TClass)),
     ("Inter", Pi ("_", TClass, TClass)),
     ("Singleton", Pi ("_", TClass, TClass)),
+    ("Kappa", Pi ("_", Pi ("_", TClass, TProp), TClass)),  (* class comprehension; membership: definitionTable *)
     ("Model", Pi ("_", TClass, TClass)),
     ("mu_A", Pi ("_", TClass, TClass)),
     ("ValOf", Pi ("_", TClass, Pi ("_", TClass, TClass))),
@@ -2800,6 +2834,8 @@ struct
             Lam ("z", TClass,
               Pair (
                 Lam ("hzX", In (Var "z") (Var "X"),
+                  (* [WHY] z in V is Set z /\ True since V := {x | True} (definitionTable) *)
+                  Fst (Let ("_u", And (IsSet (Var "z")) (Const "True"),
                   App (
                     App (
                       App (
@@ -2808,7 +2844,7 @@ struct
                           Var "X"),
                         UnivV),
                       Var "hEq"),
-                    Var "hzX")),
+                    Var "hzX"), Var "_u"))),
                 Lam ("hzSet", IsSet (Var "z"),
                   let
                     val hSym = App (App (App (Const "ax_eq_sym", Var "X"), UnivV), Var "hEq")
@@ -2821,11 +2857,17 @@ struct
                             UnivV),
                           Var "X"),
                         hSym),
-                      Var "hzSet")
+                      Pair (Var "hzSet", TrueIntro))
                   end)))),
           Lam ("hChar", Forall "z" TClass (And (Impl (In (Var "z") (Var "X")) (IsSet (Var "z")))
                                                (Impl (IsSet (Var "z")) (In (Var "z") (Var "X")))),
-            App (App (App (Const "ax_extensionality", Var "X"), UnivV), Var "hChar"))))
+            App (App (App (Const "ax_extensionality", Var "X"), UnivV),
+              Lam ("z", TClass,
+                Pair (Lam ("_a", In (Var "z") (Var "X"),
+                        Pair (App (Fst (App (Var "hChar", Var "z")), Var "_a"), TrueIntro)),
+                      Lam ("_b", In (Var "z") UnivV,
+                        App (Snd (App (Var "hChar", Var "z")),
+                             Fst (Let ("_u", And (IsSet (Var "z")) (Const "True"), Var "_b", Var "_u"))))))))))
   }
 
   (* 25. subclass Definition: forall X Y. X subset Y <-> forall z. z in X -> z in Y *)
@@ -7033,17 +7075,25 @@ struct
   val _ =
     List.app (fn d =>
       let
-        val (n, body, extra) =
+        fun classes ps = List.map (fn p => (p, TClass)) ps
+        fun params n = List.tabulate (n, fn i => "%" ^ Int.toString (i + 1))
+        val (body, pctx) =
           case d of
-            DependentEval.DefPred (_, n, b) => (n, b, [])
-          | DependentEval.DefMember (_, n, b) => (n, b, ["%0"])
-          | DependentEval.DefPairMember (_, n, b) => (n, b, ["%x", "%y"])
-        val ps = extra @ List.tabulate (n, fn i => "%" ^ Int.toString (i + 1))
-        val ctx = List.map (fn p => (p, TClass)) ps @ globalTheoremContext
+            DependentEval.DefPred (_, n, b) => (b, classes (params n))
+          | DependentEval.DefMember (_, n, b) => (b, classes ("%0" :: params n))
+          | DependentEval.DefPairMember (_, n, b) => (b, classes (["%x", "%y"] @ params n))
+          | DependentEval.DefMemberTyped (_, tys, b) =>
+              (b, ("%0", TClass) :: ListPair.zip (params (List.length tys), tys))
+          | DependentEval.DefClass (_, b) => (b, [])
+        val ctx = pctx @ globalTheoremContext
       in
-        case (sortOf ctx body handle TypeError m => raise Fail ("definition " ^ DependentEval.definitionName d ^ ": " ^ m)) of
-          TProp => ()
-        | _ => raise Fail ("definition " ^ DependentEval.definitionName d ^ " is not a proposition")
+        (case d of
+           DependentEval.DefClass (_, b) =>
+             (check ctx b TClass handle TypeError m => raise Fail ("definition " ^ DependentEval.definitionName d ^ ": " ^ m))
+         | _ =>
+             case (sortOf ctx body handle TypeError m => raise Fail ("definition " ^ DependentEval.definitionName d ^ ": " ^ m)) of
+               TProp => ()
+             | _ => raise Fail ("definition " ^ DependentEval.definitionName d ^ " is not a proposition"))
       end) DependentEval.definitionTable
 
   (* Mandatory load-time verification of all MKTD2-system theorems *)
@@ -20691,58 +20741,60 @@ struct
             end))))
 
   (* NBG/MK theorems bridged from MKTD2-system to MKTD1-system (records 115-220 removed 2026-11-26, #8096) *)
-  fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
-    [
-      translateExprV2ToV1Anatomy "russell_not_set_constructive" NBG_Predicative [] proofRussellClassNotSet,
-      translateExprV2ToV1Anatomy "russell_proper" NBG_Predicative [] proofRussellProper,
-      translateExprV2ToV1Anatomy "empty_class_no_elements" NBG_Predicative [] proofEmptyClassNoElements,
-      translateExprV2ToV1Anatomy "empty_subset_every_class" NBG_Predicative [] proofEmptySetSubclass,
-      translateExprV2ToV1Anatomy "universal_class_char" NBG_Predicative [] proofUniversalClassChar,
-      translateExprV2ToV1Anatomy "cantor_diagonal" NBG_Predicative [] proofCantorDiagonal,
-      translateExprV2ToV1Anatomy "dunaev_pair_proj" NBG_Predicative [] proofDunaevPairProjections,
-      translateExprV2ToV1Anatomy "dunaev_pair_injective" NBG_Predicative [] proofDunaevPairInjectivity,
-      translateExprV2ToV1Anatomy "bin_inter_comm" NBG_Predicative [] proofBinInterComm,
-      translateExprV2ToV1Anatomy "bin_union_comm" NBG_Predicative [] proofBinUnionComm,
-      translateExprV2ToV1Anatomy "eq_sym" NBG_Predicative [] proofEqSym,
-      translateExprV2ToV1Anatomy "eq_trans" NBG_Predicative [] proofEqTrans,
-      translateExprV2ToV1Anatomy "quantifier_swap" NBG_Predicative [] proofQuantifierSwap,
-      translateExprV2ToV1Anatomy "self_in_singleton" NBG_Predicative [] proofSelfInSingleton,
-      translateExprV2ToV1Anatomy "self_in_succ" NBG_Predicative [] proofSelfInSucc,
-      translateExprV2ToV1Anatomy "sub_succ_heredity" NBG_Predicative [] proofSubSucc,
-      translateExprV2ToV1Anatomy "subclass_antisym" NBG_Predicative [] proofSubclassAntisym,
-      translateExprV2ToV1Anatomy "empty_set_unique" NBG_Predicative [] proofEmptySetUnique,
-      translateExprV2ToV1Anatomy "bin_inter_sub_left" NBG_Predicative [] proofBinInterSubLeft,
-      translateExprV2ToV1Anatomy "bin_inter_sub_right" NBG_Predicative [] proofBinInterSubRight,
-      translateExprV2ToV1Anatomy "bin_union_sub_left" NBG_Predicative [] proofBinUnionSubLeft,
-      translateExprV2ToV1Anatomy "mk_impredicative_big_inter" MK_Impredicative [] proofMKImpredicativeBigInter,
-      translateExprV2ToV1Anatomy "def_semi_singleton_elim" MK_Impredicative [] proofDefSemiSingletonElim,
-      translateExprV2ToV1Anatomy "def_semi_singleton_subclass_proj" MK_Impredicative [] proofDefSemiSingletonSubclassProj,
-      translateExprV2ToV1Anatomy "def_class_lists_dunaev_step" MK_Impredicative [] proofDefClassListsDunaevStep,
-      translateExprV2ToV1Anatomy "tight_universe_indexed_union" MK_Impredicative [] proofTightUniverseIndexedUnion,
-      translateExprV2ToV1Anatomy "inter_assoc" NBG_Predicative [] proofInterAssoc,
-      translateExprV2ToV1Anatomy "union_distrib_inter" NBG_Predicative [] proofUnionDistribInter,
-      translateExprV2ToV1Anatomy "dunaev_pair_fst_snd_eq" NBG_Predicative [] proofDunaevPairFstSndEq,
-      translateExprV2ToV1Anatomy "cantor_no_surjection_power" NBG_Predicative [] proofCantorNoSurjectionPower,
-      translateExprV2ToV1Anatomy "ord_succ_trans" MK_Impredicative [] proofOrdSuccTrans,
-      translateExprV2ToV1Anatomy "knaster_tarski_post_fixed" MK_Impredicative [] proofKnasterTarskiPostFixed,
-      translateExprV2ToV1Anatomy "dunaev_rel_comp_assoc_proj" NBG_Predicative [] proofDunaevRelCompAssocProj,
-      translateExprV2ToV1Anatomy "universe_power_pair_closure" MK_Impredicative [] proofUniversePowerPairClosure,
-      translateExprV2ToV1Anatomy "dunaev_pair_refl_conj" MK_Impredicative [] proofForcingCheckNameRefl,
-      translateExprV2ToV1Anatomy "eq_sym_with_ord" NBG_Predicative [] proofVeblenNormalFixedPoint,
-      translateExprV2ToV1Anatomy "union_in_inter_of_union_closed" MK_Impredicative [] proofClubIntersectionClosed,
-      translateExprV2ToV1Anatomy "eq_sym_with_pair_member" NBG_Predicative [] proofBvalExtensionalityWitness,
-      translateExprV2ToV1Anatomy "subclass_union_empty" NBG_Predicative [] proofDunaevListAppendNilRight,
-      translateExprV2ToV1Anatomy "subclass_transfer_pair_member" NBG_Predicative [] proofFamilyCanonicalRecordProj,
-      translateExprV2ToV1Anatomy "eq_sym_mutual_inverse_values" NBG_Predicative [] proofYonedaRoundtripId,
-      translateExprV2ToV1Anatomy "closed_under_composite_value" NBG_Predicative [] proofSchrodingerFeynmanKacPositivity,
-      translateExprV2ToV1Anatomy "reflexive_pair_on_members" MK_Impredicative [] proofUniversalSubclassAntisymmetryWitness,
-      translateExprV2ToV1Anatomy "limit_ordinal_successor_closure_proj" MK_Impredicative [] proofLimitOrdinalSuccessorClosureProj,
-      translateExprV2ToV1Anatomy "universe_indexed_union_identity_union_step" NBG_Predicative [] proofUniverseIndexedUnionIdentityUnionStep,
-      translateExprV2ToV1Anatomy "universe_inter_on_limit_irreflexivity_step" NBG_Predicative [] proofUniverseInterOnLimitIrreflexivityStep,
-      translateExprV2ToV1Anatomy "von_neumann_stage_sub_universe_step" NBG_Predicative [] proofVonNeumannStageSubUniverseStep,
-      translateExprV2ToV1Anatomy "universe_sub_von_neumann_stage_rank_step" NBG_Predicative [] proofUniverseSubVonNeumannStageRankStep,
-      translateExprV2ToV1Anatomy "unary_inter_subclass_bin_inter" MK_Impredicative [] proofUnaryInterSubclassBinInter
+  val bridgedProofPrograms : (string * TheoryLevel * Expr) list = [
+      ("russell_not_set_constructive", NBG_Predicative, proofRussellClassNotSet),
+      ("russell_proper", NBG_Predicative, proofRussellProper),
+      ("empty_class_no_elements", NBG_Predicative, proofEmptyClassNoElements),
+      ("empty_subset_every_class", NBG_Predicative, proofEmptySetSubclass),
+      ("universal_class_char", NBG_Predicative, proofUniversalClassChar),
+      ("cantor_diagonal", NBG_Predicative, proofCantorDiagonal),
+      ("dunaev_pair_proj", NBG_Predicative, proofDunaevPairProjections),
+      ("dunaev_pair_injective", NBG_Predicative, proofDunaevPairInjectivity),
+      ("bin_inter_comm", NBG_Predicative, proofBinInterComm),
+      ("bin_union_comm", NBG_Predicative, proofBinUnionComm),
+      ("eq_sym", NBG_Predicative, proofEqSym),
+      ("eq_trans", NBG_Predicative, proofEqTrans),
+      ("quantifier_swap", NBG_Predicative, proofQuantifierSwap),
+      ("self_in_singleton", NBG_Predicative, proofSelfInSingleton),
+      ("self_in_succ", NBG_Predicative, proofSelfInSucc),
+      ("sub_succ_heredity", NBG_Predicative, proofSubSucc),
+      ("subclass_antisym", NBG_Predicative, proofSubclassAntisym),
+      ("empty_set_unique", NBG_Predicative, proofEmptySetUnique),
+      ("bin_inter_sub_left", NBG_Predicative, proofBinInterSubLeft),
+      ("bin_inter_sub_right", NBG_Predicative, proofBinInterSubRight),
+      ("bin_union_sub_left", NBG_Predicative, proofBinUnionSubLeft),
+      ("mk_impredicative_big_inter", MK_Impredicative, proofMKImpredicativeBigInter),
+      ("def_semi_singleton_elim", MK_Impredicative, proofDefSemiSingletonElim),
+      ("def_semi_singleton_subclass_proj", MK_Impredicative, proofDefSemiSingletonSubclassProj),
+      ("def_class_lists_dunaev_step", MK_Impredicative, proofDefClassListsDunaevStep),
+      ("tight_universe_indexed_union", MK_Impredicative, proofTightUniverseIndexedUnion),
+      ("inter_assoc", NBG_Predicative, proofInterAssoc),
+      ("union_distrib_inter", NBG_Predicative, proofUnionDistribInter),
+      ("dunaev_pair_fst_snd_eq", NBG_Predicative, proofDunaevPairFstSndEq),
+      ("cantor_no_surjection_power", NBG_Predicative, proofCantorNoSurjectionPower),
+      ("ord_succ_trans", MK_Impredicative, proofOrdSuccTrans),
+      ("knaster_tarski_post_fixed", MK_Impredicative, proofKnasterTarskiPostFixed),
+      ("dunaev_rel_comp_assoc_proj", NBG_Predicative, proofDunaevRelCompAssocProj),
+      ("universe_power_pair_closure", MK_Impredicative, proofUniversePowerPairClosure),
+      ("dunaev_pair_refl_conj", MK_Impredicative, proofForcingCheckNameRefl),
+      ("eq_sym_with_ord", NBG_Predicative, proofVeblenNormalFixedPoint),
+      ("union_in_inter_of_union_closed", MK_Impredicative, proofClubIntersectionClosed),
+      ("eq_sym_with_pair_member", NBG_Predicative, proofBvalExtensionalityWitness),
+      ("subclass_union_empty", NBG_Predicative, proofDunaevListAppendNilRight),
+      ("subclass_transfer_pair_member", NBG_Predicative, proofFamilyCanonicalRecordProj),
+      ("eq_sym_mutual_inverse_values", NBG_Predicative, proofYonedaRoundtripId),
+      ("closed_under_composite_value", NBG_Predicative, proofSchrodingerFeynmanKacPositivity),
+      ("reflexive_pair_on_members", MK_Impredicative, proofUniversalSubclassAntisymmetryWitness),
+      ("limit_ordinal_successor_closure_proj", MK_Impredicative, proofLimitOrdinalSuccessorClosureProj),
+      ("universe_indexed_union_identity_union_step", NBG_Predicative, proofUniverseIndexedUnionIdentityUnionStep),
+      ("universe_inter_on_limit_irreflexivity_step", NBG_Predicative, proofUniverseInterOnLimitIrreflexivityStep),
+      ("von_neumann_stage_sub_universe_step", NBG_Predicative, proofVonNeumannStageSubUniverseStep),
+      ("universe_sub_von_neumann_stage_rank_step", NBG_Predicative, proofUniverseSubVonNeumannStageRankStep),
+      ("unary_inter_subclass_bin_inter", MK_Impredicative, proofUnaryInterSubclassBinInter)
     ]
+
+  fun buildAllBridgedTheorems () : V1TheoremAnatomy list =
+    List.map (fn (n, lvl, prf) => translateExprV2ToV1Anatomy n lvl [] prf) bridgedProofPrograms
 
   (* ========================================================================= *)
   (* 7b. OPAQUE KERNEL DEFINITIONS (PKernelDef_prf) & GROTHENDIECK UNIVERSES   *)
