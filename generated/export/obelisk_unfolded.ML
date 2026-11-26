@@ -730,22 +730,9 @@ struct
                       step (Snd e2')
                   | App (Const "Pair", a) =>
                       step (App (App (Const "DunaevPair", a), e2'))
-                  (* [WHY] Membership conversions are part of the MKTD2 trusted base: each one
-                     is a postulate that the axiom footprint does not see.  Only two remain,
-                     both definitional in MKTD1 (DefEmptySet, DefUniversalClass).  Removed on
-                     2026-11-24 as unreachable by well-typed terms and unsound in form:
-                     t in Refine(x:A|p) ~> Set t /\ p[t] (dropped A; Refine is a type, not a
-                     TClass), and binary Inter/Union rules (the context declares Inter/Union
-                     unary; BinInter/BinUnion are the binary operators). *)
-                  | App (Const "In", t) =>
-                      (case e2' of
-                        Const "EmptySet" => Const "False"
-                      | Const "V" => step (App (Const "Set", t))
-                      | _ => App (e1', e2'))
-                  (* [WHY] Removed 2026-11-24: In t V rewrote to the undeclared constant isSet
-                     (the predicate is Set), and four truth-table rules for And/Or applied to
-                     constants that the context never declares (conjunction and disjunction
-                     are the Sigma / impredicative encodings), so they were unreachable. *)
+                  (* [WHY] Membership in EmptySet and V is no longer built in here: it is the
+                     registered definitions In_EmptySet and In_V (definitionTable, #8096 step 2),
+                     unfolded by conv like every other definition. *)
                   | _ => App (e1', e2')
                 end
 
@@ -885,84 +872,117 @@ struct
       Pi (c, TProp, Pi ("_", Pi (x, a, Pi ("_", b, Var c)), Var c))
     end
 
+  (* ---------------------------------------------------------------------------
+     Registered definitions (#8096 step 2). Conversion unfolds a constant only through
+     this table; nothing else is built into conv. Parameters are written %1, %2, ...
+     and the member of a membership definition %0 (names that cannot occur in user
+     terms); instantiation is capture-avoiding substitution.
+       DefPred (c, n, body)       c %1 ... %n            ==  body
+       DefMember (c, n, body)     %0 in (c %1 ... %n)    ==  body
+       DefPairMember (c, n, body) (DunaevPair %x %y) in (c %1 ... %n) == body
+     --------------------------------------------------------------------------- *)
+  datatype Definition =
+      DefPred of string * int * Term
+    | DefMember of string * int * Term
+    | DefPairMember of string * int * Term
+
+  local
+    fun v i = Var ("%" ^ Int.toString i)
+    val m = Var "%0"
+    fun inT a b = App (App (Const "In", a), b)
+    fun orP (a, b) =
+      let val c = fresh "C" (freeVars a @ freeVars b) in
+        Pi (c, TProp, Pi ("_", Pi ("_", a, Var c), Pi ("_", Pi ("_", b, Var c), Var c)))
+      end
+    fun andP (a, b) = Sigma ("_", a, b)
+    fun impl (a, b) = Pi ("_", a, b)
+    fun dp a b = App (App (Const "DunaevPair", a), b)
+  in
+    val definitionTable : Definition list = [
+      DefPred ("Set", 1, existsP ("Y", TClass, inT (v 1) (Var "Y"))),
+      DefPred ("Proper", 1, impl (App (Const "Set", v 1), Const "False")),
+      DefPred ("Subset", 2, Pi ("z", TClass, impl (inT (Var "z") (v 1), inT (Var "z") (v 2)))),
+      DefPred ("Ord", 1, andP (App (Const "Trans", v 1),
+                               Pi ("B", TClass, impl (inT (Var "B") (v 1), App (Const "Trans", Var "B"))))),
+      DefPred ("Func", 1, Pi ("x", TClass, Pi ("y", TClass, Pi ("z", TClass,
+                 impl (andP (inT (dp (Var "x") (Var "y")) (v 1), inT (dp (Var "x") (Var "z")) (v 1)),
+                       Id (TClass, Var "y", Var "z")))))),
+      DefPred ("Card", 1, existsP ("K", TClass, Id (TClass, App (Const "CardOf", Var "K"), v 1))),
+      DefMember ("EmptySet", 0, Const "False"),
+      DefMember ("V", 0, App (Const "Set", m)),
+      DefMember ("omega", 0, Pi ("Q", TClass, impl (App (Const "Ind", Var "Q"), inT m (Var "Q")))),
+      DefMember ("BinUnion", 2, orP (inT m (v 1), inT m (v 2))),
+      DefMember ("BinInter", 2, andP (inT m (v 1), inT m (v 2))),
+      DefMember ("Union", 1, existsP ("y", TClass, andP (inT (Var "y") (v 1), inT m (Var "y")))),
+      DefMember ("Inter", 1, Pi ("y", TClass, impl (inT (Var "y") (v 1), inT m (Var "y")))),
+      DefMember ("Singleton", 1, andP (App (Const "Set", v 1), Id (TClass, m, v 1))),
+      DefMember ("UPair", 2, orP (Id (TClass, m, v 1), Id (TClass, m, v 2))),
+      DefMember ("Restrict", 2, andP (inT m (v 1), inT (App (Const "pr1", m)) (v 2))),
+      DefPairMember ("SigmaModel", 1, andP (inT (Var "%x") (App (Const "Dom", v 1)),
+                                            inT (Var "%y") (App (App (Const "ValOf", v 1), Var "%x")))),
+      DefMember ("PiModel", 1, Pi ("u", TClass,
+                   impl (inT (Var "u") (App (Const "Dom", v 1)),
+                         inT (App (App (Const "ValOf", m), Var "u")) (App (App (Const "ValOf", v 1), Var "u"))))),
+      DefMember ("SubstVar", 3, orP (andP (Id (TClass, v 3, v 2), inT m (v 1)),
+                                     andP (impl (Id (TClass, v 3, v 2), Const "False"), inT m (v 3))))
+    ]
+  end
+
+  fun definitionName (DefPred (c, _, _)) = c
+    | definitionName (DefMember (c, _, _)) = "In_" ^ c
+    | definitionName (DefPairMember (c, _, _)) = "InPair_" ^ c
+
+  (* head constant and arguments of an application spine *)
+  fun spine (App (f, a)) = (case spine f of SOME (c, args) => SOME (c, args @ [a]) | NONE => NONE)
+    | spine (Const c) = SOME (c, [])
+    | spine _ = NONE
+
+  fun instantiate (body: Term) (binds: (string * Term) list) : Term =
+    List.foldl (fn ((x, r), acc) => subst x r acc) body binds
+
+  fun paramBinds (args: Term list) : (string * Term) list =
+    #2 (List.foldl (fn (a, (i, acc)) => (i + 1, acc @ [("%" ^ Int.toString i, a)])) (1, []) args)
+
+  (* Names of the definitions unfolded since the last reset; read by the axiom footprint
+     report (tools/mktd2_axiom_footprint.ML). Bookkeeping only, it never changes a result. *)
+  val definitionsUsed : string list ref = ref []
+  fun noteDefinition (d: Definition) : unit =
+    let val n = definitionName d in
+      if List.exists (fn x => x = n) (!definitionsUsed) then ()
+      else definitionsUsed := !definitionsUsed @ [n]
+    end
+
+  fun lookupDefinition (t: Term) : Term option =
+    let
+      fun tryDef d =
+        case (d, t) of
+          (DefPred (c, n, body), _) =>
+            (case spine t of
+               SOME (c', args) => if c' = c andalso List.length args = n then SOME (instantiate body (paramBinds args)) else NONE
+             | NONE => NONE)
+        | (DefMember (c, n, body), App (App (Const "In", z), opT)) =>
+            (case spine opT of
+               SOME (c', args) => if c' = c andalso List.length args = n
+                                  then SOME (instantiate body (("%0", z) :: paramBinds args)) else NONE
+             | NONE => NONE)
+        | (DefPairMember (c, n, body), App (App (Const "In", App (App (Const "DunaevPair", x), y)), opT)) =>
+            (case spine opT of
+               SOME (c', args) => if c' = c andalso List.length args = n
+                                  then SOME (instantiate body (("%x", x) :: ("%y", y) :: paramBinds args)) else NONE
+             | NONE => NONE)
+        | _ => NONE
+      fun first [] = NONE
+        | first (d :: r) = (case tryDef d of SOME u => (noteDefinition d; SOME u) | NONE => first r)
+    in
+      first definitionTable
+    end
+
   fun unfoldDefs (t: Term) : Term =
+    case lookupDefinition t of
+      SOME u => unfoldDefs u
+    | NONE =>
     case t of
-      App (Const "Set", x) =>
-        let val yVar = fresh "Y" (freeVars x) in
-          existsP (yVar, TClass, App (App (Const "In", unfoldDefs x), Var yVar))
-        end
-    | App (Const "Proper", k) =>
-        unfoldDefs (Pi ("_", App (Const "Set", k), Const "False"))
-    | App (App (Const "Subset", x), y) =>
-        let val zVar = fresh "z" (freeVars x @ freeVars y) in
-          unfoldDefs (Pi (zVar, TClass, Pi ("_", App (App (Const "In", Var zVar), x), App (App (Const "In", Var zVar), y))))
-        end
-    | App (Const "Ord", a) =>
-        let val bVar = fresh "B" (freeVars a) in
-          unfoldDefs (Sigma ("_", App (Const "Trans", a), Pi (bVar, TClass, Pi ("_", App (App (Const "In", Var bVar), a), App (Const "Trans", Var bVar)))))
-        end
-    | App (Const "Func", f) =>
-        let
-          val used = freeVars f
-          val xVar = fresh "x" used
-          val yVar = fresh "y" (xVar :: used)
-          val zVar = fresh "z" (yVar :: xVar :: used)
-        in
-          unfoldDefs (Pi (xVar, TClass, Pi (yVar, TClass, Pi (zVar, TClass,
-            Pi ("_", Sigma ("_", App (App (Const "In", App (App (Const "DunaevPair", Var xVar), Var yVar)), f),
-                                 App (App (Const "In", App (App (Const "DunaevPair", Var xVar), Var zVar)), f)),
-                Id (TClass, Var yVar, Var zVar))))))
-        end
-    | App (App (Const "In", x), Const "omega") =>
-        let val qVar = fresh "Q" (freeVars x) in
-          unfoldDefs (Pi (qVar, TClass, Pi ("_", App (Const "Ind", Var qVar), App (App (Const "In", x), Var qVar))))
-        end
-    | App (Const "Card", c) =>
-        let val kVar = fresh "K" (freeVars c) in
-          unfoldDefs (existsP (kVar, TClass, Id (TClass, App (Const "CardOf", Var kVar), c)))
-        end
-    | App (App (Const "In", z), App (App (Const "BinUnion", a), b)) =>
-        let val cVar = fresh "C" (freeVars z @ freeVars a @ freeVars b) in
-          unfoldDefs (Pi (cVar, TProp, Pi ("_", Pi ("_", App (App (Const "In", z), a), Var cVar), Pi ("_", Pi ("_", App (App (Const "In", z), b), Var cVar), Var cVar))))
-        end
-    | App (App (Const "In", z), App (App (Const "BinInter", a), b)) =>
-        unfoldDefs (Sigma ("_", App (App (Const "In", z), a), App (App (Const "In", z), b)))
-    | App (App (Const "In", z), App (Const "Union", a)) =>
-        let val yVar = fresh "y" (freeVars z @ freeVars a) in
-          unfoldDefs (existsP (yVar, TClass, Sigma ("_", App (App (Const "In", Var yVar), a), App (App (Const "In", z), Var yVar))))
-        end
-    | App (App (Const "In", z), App (Const "Inter", a)) =>
-        let val yVar = fresh "y" (freeVars z @ freeVars a) in
-          unfoldDefs (Pi (yVar, TClass, Pi ("_", App (App (Const "In", Var yVar), a), App (App (Const "In", z), Var yVar))))
-        end
-    | App (App (Const "In", z), App (Const "Singleton", a)) =>
-        unfoldDefs (Sigma ("_", App (Const "Set", a), Id (TClass, z, a)))
-    | App (App (Const "In", z), App (App (Const "UPair", a), b)) =>
-        let val cVar = fresh "C" (freeVars z @ freeVars a @ freeVars b) in
-          unfoldDefs (Pi (cVar, TProp, Pi ("_", Pi ("_", Id (TClass, z, a), Var cVar), Pi ("_", Pi ("_", Id (TClass, z, b), Var cVar), Var cVar))))
-        end
-    | App (App (Const "In", z), App (App (Const "Restrict", f), a)) =>
-        unfoldDefs (Sigma ("_", App (App (Const "In", z), f),
-                                App (App (Const "In", App (Const "pr1", z)), a)))
-    | App (App (Const "In", App (App (Const "DunaevPair", x), y)), App (Const "SigmaModel", b)) =>
-        unfoldDefs (Sigma ("_", App (App (Const "In", x), App (Const "Dom", b)),
-                                App (App (Const "In", y), App (App (Const "ValOf", b), x))))
-    | App (App (Const "In", f), App (Const "PiModel", b)) =>
-        let val uVar = fresh "u" (freeVars f @ freeVars b) in
-          unfoldDefs (Pi (uVar, TClass,
-            Pi ("_", App (App (Const "In", Var uVar), App (Const "Dom", b)),
-                App (App (Const "In", App (App (Const "ValOf", f), Var uVar)),
-                                App (App (Const "ValOf", b), Var uVar)))))
-        end
-    | App (App (Const "In", u), App (App (App (Const "SubstVar", t), x), v)) =>
-        let
-          val cVar = fresh "C" (freeVars u @ freeVars t @ freeVars x @ freeVars v)
-          val br1 = Sigma ("_", Id (TClass, v, x), App (App (Const "In", u), t))
-          val br2 = Sigma ("_", Pi ("_", Id (TClass, v, x), Const "False"), App (App (Const "In", u), v))
-        in
-          unfoldDefs (Pi (cVar, TProp, Pi ("_", Pi ("_", br1, Var cVar), Pi ("_", Pi ("_", br2, Var cVar), Var cVar))))
-        end
-    | Succ n => Succ (unfoldDefs n)
+      Succ n => Succ (unfoldDefs n)
     | Pi (x, a, b) => Pi (x, unfoldDefs a, unfoldDefs b)
     | Sigma (x, a, b) => Sigma (x, unfoldDefs a, unfoldDefs b)
     | Id (a, u, v) => Id (unfoldDefs a, unfoldDefs u, unfoldDefs v)
@@ -7007,6 +7027,24 @@ struct
     | bad =>
         raise Fail ("VerifiedTheorems: ill-formed context entries: " ^
                     String.concatWith "; " (List.map (fn (n, m) => n ^ ": " ^ m) bad))
+
+  (* Mandatory load-time check of the registered definitions (#8096 step 2): with every
+     parameter (and the member) a class, each body must be a proposition. *)
+  val _ =
+    List.app (fn d =>
+      let
+        val (n, body, extra) =
+          case d of
+            DependentEval.DefPred (_, n, b) => (n, b, [])
+          | DependentEval.DefMember (_, n, b) => (n, b, ["%0"])
+          | DependentEval.DefPairMember (_, n, b) => (n, b, ["%x", "%y"])
+        val ps = extra @ List.tabulate (n, fn i => "%" ^ Int.toString (i + 1))
+        val ctx = List.map (fn p => (p, TClass)) ps @ globalTheoremContext
+      in
+        case (sortOf ctx body handle TypeError m => raise Fail ("definition " ^ DependentEval.definitionName d ^ ": " ^ m)) of
+          TProp => ()
+        | _ => raise Fail ("definition " ^ DependentEval.definitionName d ^ " is not a proposition")
+      end) DependentEval.definitionTable
 
   (* Mandatory load-time verification of all MKTD2-system theorems *)
   val _ =
