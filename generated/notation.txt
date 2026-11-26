@@ -47,7 +47,10 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 \langle \varphi \rangle           (Syntactic formula quotation, HQuote : Fm -> Fm.Expression)
 [\![ e ]\!]                       (Antiquotation, EAnti)
 \mathsf{eval}(e)                  (Evaluation under the current assignment, EEval)
-\mathbf{let}\ x = t\ \mathbf{in}\ \varphi    (Explicit capture-avoiding substitution in formula, ESubst)
+\varphi\llparenthesis t/x \rrparenthesis    (Explicit substitution: a node, rule SigmaAx, ESubst)
+\varphi[t/x]                      (Implicit substitution: computed at once, no node, simSubst)
+\mathsf{let}\ x = t\ \mathsf{in}\ \varphi    (Explicit let-binder: a node, rule ZetaAx, ELet)
+\varphi\ \mathsf{where}\ x = t    (Implicit let: abbreviates \exists(x:\mathrm{Class})\,(x = t \wedge \varphi), no node)
 
 
 1.2 Unicode
@@ -74,7 +77,10 @@ Purpose:    Unambiguous distinction between logical formulas in MKTD1,
 ‹φ›                               (U+2039/U+203A: Syntactic formula quotation, HQuote)
 ⟦e⟧                               (U+27E6/U+27E7: Antiquotation, EAnti)
 eval(e)                           (Evaluation under the current assignment, EEval)
-let x = t in φ                    (Explicit capture-avoiding substitution in formula)
+φ⦇t/x⦈                            (U+2987/U+2988: Explicit substitution, a node, SigmaAx, ESubst)
+φ[t/x]                            (Implicit substitution, computed at once, no node)
+let x = t in φ                    (Explicit let-binder, a node, ZetaAx, ELet)
+φ where x = t                     (Implicit let: ∃(x:Class)((x = t) ∧ φ), no node)
 
 
 1.3 Plain-text ASCII-only textual concrete syntax
@@ -101,7 +107,10 @@ W, Gamma |- phi                   (Formal sequent derivability statement, ApStmt
 <| phi |>                         (Syntactic formula quotation, HQuote)
 [| e |]                           (Antiquotation, EAnti)
 eval(e)                           (Evaluation under the current assignment, EEval)
-let x = t in phi                  (Explicit capture-avoiding substitution in formula)
+phi(|t/x|)                        (Explicit substitution, a node, SigmaAx, ESubst)
+phi[t/x]                          (Implicit substitution, computed at once, no node)
+let x = t in phi                  (Explicit let-binder, a node, ZetaAx, ELet)
+phi where x = t                   (Implicit let: exists (x:Class) ((x = t) /\ phi), no node)
 
 
 ================================================================================
@@ -339,9 +348,10 @@ In judgements Δ; Γ ⊢ e : T:
                  and 3.78 (ThmDunaevSecondProjection).
 
 2. Dunaev Class-List:
-   • Notation:   [] (empty list), [X₁, ..., X_n] (finite sequence of classes).
+   • Notation:   nil (empty list, = ∅), [X₁, ..., X_n] (finite sequence of classes).
+                 [] alone always denotes the empty hypothesis context, never a class.
    • Definition: Inductively generated sequence of classes defined via iterated
-     Dunaev tagged pairing: [X] = (X, [])_D, [X₁, X₂] = (X₁, (X₂, [])_D)_D.
+     Dunaev tagged pairing: [X] = (X, nil)_D, [X₁, X₂] = (X₁, (X₂, nil)_D)_D.
    • Purpose:    Enables class-level multi-argument function domains, explicit
      substitution environments, and sequent hypothesis contexts without ascending
      to conglomerates.
