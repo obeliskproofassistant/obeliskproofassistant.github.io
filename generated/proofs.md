@@ -155,16 +155,20 @@ PForaR_prf (...)`
 
 ### 3.38 `DefSigmaModel` — “Dependent Sum (Sigma-Type)” model over a family (Theorem)
 
-- **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
+- **Identifier:** `DefSigmaModel` (entry `3.38`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(B:Class)∀(x:Class)∀(y:Class)((B family)—→(((x∈Dom(B))∧(y∈B(x)))←→((x,y)∈{s|∃(a:Class)∃(b:Class)((s=(a,b))∧((a∈Dom(B))∧(b∈B(a))))}))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([x@Variable]:[Class@Type])∀([y@Variable]:[Class@Type])(([B@Class.Expression] family)—→((([x@Class.Expression]∈Dom([B@Class.Expression]))∧([y@Class.Expression]∈[B@Class.Expression]([x@Class.Expression])))←→(([x@Class.Expression],[y@Class.Expression])∈{[s@Class.Expression]|∃([a@Variable]:[Class@Type])∃([b@Variable]:[Class@Type])(([s@Class.Expression]=([a@Class.Expression],[b@Class.Expression]))∧(([a@Class.Expression]∈Dom([B@Class.Expression]))∧([b@Class.Expression]∈[B@Class.Expression]([a@Class.Expression]))))}))))`
-- **Proof Constructor:** `(the linked kernel proof has a different statement; see GitLab #8101)`
-- **Kernel Note:** Membership characterization (thm_3_38_sigma_model : Thm; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): characterizes membership of a Dunaev ordered pair (x, y) in the dependent sum comprehension class Σ(B) = { s : Class | ∃(a:Class)∃(b:Class)((s = (a, b)) ∧ ((a ∈ Dom(B)) ∧ (b ∈ B(a)))) } over a family B via 3.01 RulClassComprehension and Dunaev pair projection injectivity (3.76-3.78).
+- **Proof Constructor:** `(* Total kernel Prf nodes: 1249099 *)
+PForaR_prf (...)`
+- **Axioms Used:** `AxmLeftInSound, RulClassComprehension, PairSetAx, AxmRightInSound, AxmPropExFalso, AxmPropDisjElim, AxmUnion, AxmExponent, AxmHeredity, AxmOmegaIsSet, AxmPropVerum, AxmPropNegElim, AxmRegularity, AxmPropExcludedMiddle, AxmIfTrue, AxmIfFalse`
+- **Definitions Used:** `DefIsSet, DefIff, DefBinaryUnion, DefSubclass, DefClassEq, DefUnorderedPair, DefUnaryUnion, DefSingletonSet, DefPowerClass, DefInductiveClass, DefOmega, DefEmptySet, DefDunaevOrderedPair, DefUniversalClass, DefPairfulClass, DefValueAtArg`
+- **Kernel Prf Nodes:** `1249099`
+- **Kernel Note:** Kernel proof term (thm_3_38_sigma_model : Thm, types/family_models.ML; historical identifier DefSigmaModel retained for link stability alongside #ThmSigmaModel): (->) x and y are sets, so (x, y) is a set (thm_dunaev_pair_set) and lies in the comprehension class with a := x, b := y; (
 - **Standalone Certificate:** [proofs/DefSigmaModel.html](proofs/DefSigmaModel.html)
 
 ### 3.39 `DefPiPredicateModel` — “Dependent Product (Pi-Type)” predicate and section model (Theorem)
 
-- **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Postulated (Unchecked Kernel Schema, Not Derived)`)
+- **Identifier:** `DefPiPredicateModel` (entry `3.39`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `(∀(B:Class)∀(f:Class)(((B family)∧((f family)∧((Dom(f)=Dom(B))∧∀(u:Class)((u∈Dom(B))—→(f(u)∈B(u))))))—→∀(x:Class)((x∈Dom(B))—→(f(x)∈B(x)))))`
 - **Scheme of Types (Unicode):** `(∀([B@Variable]:[Class@Type])∀([f@Variable]:[Class@Type])((([B@Class.Expression] family)∧(([f@Class.Expression] family)∧((Dom([f@Class.Expression])=Dom([B@Class.Expression]))∧∀([u@Variable]:[Class@Type])(([u@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([u@Class.Expression])∈[B@Class.Expression]([u@Class.Expression]))))))—→∀([x@Variable]:[Class@Type])(([x@Class.Expression]∈Dom([B@Class.Expression]))—→([f@Class.Expression]([x@Class.Expression])∈[B@Class.Expression]([x@Class.Expression])))))`
 - **Proof Constructor:** `(* Total kernel Prf nodes: 25 *)
