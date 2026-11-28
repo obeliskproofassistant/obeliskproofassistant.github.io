@@ -329,7 +329,8 @@ class TestProofRegression(unittest.TestCase):
             "ctx-sort.html",
             "theory-sort.html",
             "prf-sort.html",
-            "substitution-let.html",
+            # substitution-let.html was split into the four let/substitution pages (2026-11-26)
+            "explicit-substitution.html",
             "binders.html",
             "conditionals-if-dep.html",
             "formula-metavariables.html",
@@ -491,15 +492,14 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn("DefDunaevOrderedPair", c_html)
 
         # T6: Glossary artifact and page
-        # The glossary source is set_theory_prover/docs/glossary.md; the site publishes only the
-        # generated page (the hand-copied docs/glossary.md was removed as a duplicate).
+        # The glossary source is set_theory_prover/docs/glossary.txt, built by
+        # program/glossary_page.ML into generated/glossary.html.
         glossary_html = os.path.join(SITE_DIR, "generated", "glossary.html")
         self.assertTrue(os.path.isfile(glossary_html), "Missing generated/glossary.html")
         with open(glossary_html, "r", encoding="utf-8") as f:
             g_html = f.read()
-        self.assertIn("Dunaev Tagged Ordered Pair", g_html)
-        self.assertIn("Dunaev Class-List", g_html)
-        self.assertIn("Context Environments", g_html)
+        for anchor in ('id="dunaev-pair"', 'id="class-list"', 'id="context"', 'id="mktd1"', 'id="status"'):
+            self.assertIn(anchor, g_html)
 
         # T6 & T7: obelisk_ai.html definitions, typing rules, and 2nd worked example without bot (moved from index.html per user request)
         ai_path = os.path.join(SITE_DIR, "obelisk_ai.html")

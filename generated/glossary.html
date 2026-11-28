@@ -1,579 +1,183 @@
-<!-- AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND.
-     Source files: set_theory_prover/program/newchecker.ML,
-                   set_theory_prover/program/types/typetheory.ML,
-                   set_theory_prover/program/types/foundations.ML,
-                   set_theory_prover/program/types/entries.ML
-     Generator:    set_theory_prover/program/html_generator.ML
-     Regenerate:   cd /botworkspace/set_theory_prover/program && poly -q --use html_generator.ML
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Obelisk Proof Assistant &mdash; Glossary &amp; Notation Disambiguation</title>
-  <script>
-    window.MathJax = {
-      tex: {
-        inlineMath: [['\\(', '\\)']],
-        displayMath: [['\\[', '\\]']],
-        packages: {'[+]': ['ams', 'color', 'noerrors', 'noundefined']}
-      },
-      startup: { typeset: true }
-    };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  <style>
-    :root {
-      --bg-primary: #0b0f19;
-      --bg-secondary: #111827;
-      --bg-card: #1e293b;
-      --bg-row-hover: #263349;
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --accent-blue: #38bdf8;
-      --accent-purple: #a855f7;
-      --border-color: #334155;
-    }
-    * { box-sizing: border-box; }
-    body {
-      background-color: var(--bg-primary);
-      color: var(--text-primary);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(180deg, #1e293b 0%, #0b0f19 100%);
-      border-bottom: 1px solid var(--border-color);
-      padding: 1.75rem 2rem;
-    }
-    .header-inner {
-      max-width: 100%;
-      margin: 0 auto;
-    }
-    .nav-bar {
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
-    }
-    .nav-link {
-      color: var(--accent-blue);
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 600;
-      padding: 0.35rem 0.75rem;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      border-radius: 6px;
-      background: rgba(56, 189, 248, 0.08);
-    }
-    .nav-link:hover {
-      background: rgba(56, 189, 248, 0.2);
-    }
-    h1 {
-      margin: 0 0 0.5rem 0;
-      font-size: 1.85rem;
-      color: #f8fafc;
-    }
-    .subtitle {
-      color: var(--text-secondary);
-      margin: 0 0 1.25rem 0;
-      font-size: 0.98rem;
-    }
-    .controls-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      align-items: center;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      padding: 0.9rem 1.25rem;
-      border-radius: 0.75rem;
-    }
-    .control-group {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-    .control-label {
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-secondary);
-      margin-right: 0.25rem;
-    }
-    .toggle-btn {
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-color);
-      padding: 0.45rem 0.9rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: all 0.15s ease;
-    }
-    .toggle-btn:hover {
-      color: var(--text-primary);
-      border-color: var(--accent-blue);
-    }
-    .toggle-btn.active {
-      background: rgba(56, 189, 248, 0.15);
-      color: var(--accent-blue);
-      border-color: var(--accent-blue);
-    }
-    .toc-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-top: 1rem;
-    }
-    .toc-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.85rem;
-      padding: 0.35rem 0.75rem;
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 0.4rem;
-    }
-    .toc-link:hover {
-      color: var(--accent-blue);
-      border-color: var(--accent-blue);
-    }
-    main {
-      max-width: 100%;
-      margin: 1.5rem auto;
-      padding: 0 2rem;
-    }
-    .manual-section {
-      margin-bottom: 3rem;
-      scroll-margin-top: 64px;
-    }
-    .section-header h2 {
-      font-size: 1.45rem;
-      margin: 0 0 0.25rem 0;
-      color: var(--accent-blue);
-    }
-    .section-desc {
-      color: var(--text-secondary);
-      margin: 0 0 1rem 0;
-      font-size: 0.92rem;
-    }
-    .table-container {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border-color);
-      border-radius: 0.75rem;
-      overflow-x: hidden;
-      max-width: 100%;
-      width: 100%;
-    }
-    /* External Section Table: 2 Columns (Num | Internal Vertical Table) */
-    .section-external-table {
-      width: 100%;
-      max-width: 100%;
-      table-layout: fixed;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .section-external-table > thead > tr > th {
-      background: var(--bg-card);
-      color: var(--text-secondary);
-      font-weight: 700;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.85rem 1rem;
-      border-bottom: 2px solid var(--border-color);
-    }
-    .col-num { width: 170px; text-align: center; }
-    .col-entity { width: 100%; }
-    .external-row {
-      border-bottom: 6px solid #475569;
-      transition: background 0.15s ease;
-      scroll-margin-top: 64px;
-    }
-    .external-row:target {
-      background: rgba(56, 189, 248, 0.14);
-      outline: 2px solid var(--accent-blue);
-    }
-    .entry-num-cell {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 1rem;
-      font-weight: 700;
-    }
-    .external-num {
-      width: 170px;
-      vertical-align: top;
-      text-align: center;
-      padding: 0.85rem 0.75rem;
-      background: rgba(15, 23, 42, 0.6);
-      border-right: 1px solid var(--border-color);
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.88rem;
-      font-weight: 700;
-      word-break: normal;
-      overflow-wrap: break-word;
-    }
-    .num-anchor {
-      color: var(--accent-blue);
-      text-decoration: none;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      background: rgba(56, 189, 248, 0.1);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-    .num-anchor:hover {
-      background: rgba(56, 189, 248, 0.25);
-    }
-    .external-entity {
-      padding: 0;
-      vertical-align: top;
-    }
-    /* Internal Entity Table: Vertically Organized (Field Name | Field Value) */
-    .internal-entity-table {
-      width: 100%;
-      max-width: 100%;
-      table-layout: fixed;
-      border-collapse: collapse;
-    }
-    .internal-entity-table tr {
-      border-bottom: 1px solid rgba(51, 65, 85, 0.6);
-    }
-    .internal-entity-table tr:last-child {
-      border-bottom: none;
-    }
-    .internal-entity-table th.field-name {
-      width: 150px;
-      min-width: 150px;
-      max-width: 150px;
-      word-break: normal;
-      padding: 0.6rem 1rem;
-      background: rgba(30, 41, 59, 0.45);
-      color: var(--text-secondary);
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      border-right: 1px solid rgba(51, 65, 85, 0.6);
-      vertical-align: middle;
-    }
-    .internal-entity-table td.field-value {
-      width: calc(100% - 150px);
-      max-width: calc(100% - 150px);
-      word-break: break-word;
-      overflow-wrap: anywhere;
-      white-space: normal;
-      padding: 0.65rem 1rem;
-      vertical-align: middle;
-    }
-    .entry-title-cell {
-      font-weight: 600;
-      color: #f8fafc;
-      font-size: 0.98rem;
-    }
-    .formula-cell {
-      font-family: 'JetBrains Mono', 'Fira Code', 'DejaVu Sans Mono', monospace;
-      font-size: 0.96rem;
-      overflow-wrap: anywhere !important;
-      word-break: break-word !important;
-      white-space: normal !important;
-      max-width: 100% !important;
-    }
-    .proof-cell {
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.85rem;
-    }
-    .badge {
-      display: inline-block;
-      padding: 0.2rem 0.6rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-    .badge-axiom { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
-    .badge-rule { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-def { background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-theorem { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); }
-    .badge-stmt { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
-    /* Algorithmic Clickable Symbol Links inside Unicode & LaTeX Formulas */
-    a.sym-link {
-      all: unset;
-      cursor: pointer;
-      color: inherit !important;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-decoration-color: rgba(56, 189, 248, 0.55);
-      text-underline-offset: 3px;
-      border-radius: 3px;
-      transition: background 0.12s ease, text-decoration-color 0.12s ease;
-    }
-    a.sym-link:hover {
-      background: rgba(56, 189, 248, 0.22);
-      text-decoration-style: solid;
-      text-decoration-color: #38bdf8;
-    }
-    .formula-latex a, mjx-container a {
-      all: unset;
-      cursor: pointer;
-      color: #60a5fa !important;
-      text-decoration: underline;
-      text-decoration-style: dotted;
-      text-decoration-color: rgba(56, 189, 248, 0.55);
-      text-underline-offset: 3px;
-      border-radius: 3px;
-      transition: background 0.12s ease, text-decoration-color 0.12s ease, color 0.12s ease;
-    }
-    .formula-latex a:hover, mjx-container a:hover {
-      background: rgba(56, 189, 248, 0.22);
-      text-decoration-style: solid;
-      text-decoration-color: #38bdf8;
-      color: #93c5fd !important;
-    }
-    /* ANSI Syntax Highlighting Classes */
-    .ansi-bold-red { color: #f87171; font-weight: 700; }
-    .ansi-bold-green { color: #4ade80; font-weight: 700; }
-    .ansi-bold-yellow { color: #fbbf24; font-weight: 700; }
-    .ansi-bold-blue { color: #60a5fa; font-weight: 700; }
-    .ansi-bold-magenta { color: #e879f9; font-weight: 700; }
-    .ansi-bold-cyan { color: #22d3ee; font-weight: 700; }
-    .ansi-yellow { color: #fde047; }
-    .ansi-cyan { color: #67e8f9; }
-    .ansi-gray { color: #94a3b8; }
-    .ansi-light-red { color: #fca5a5; }
-    .ansi-light-green { color: #86efac; }
-    .ansi-light-yellow { color: #fef08a; }
-    .ansi-light-blue { color: #93c5fd; }
-    .ansi-light-magenta { color: #f0abfc; }
-    .ansi-light-cyan { color: #a5f3fc; }
-    .ansi-white { color: #f8fafc; }
-    .ansi-bold-white { color: #ffffff; font-weight: 700; }
-    .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
-    .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
-    .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
-    .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
-    .formula-latex mjx-container, .formula-latex mjx-container > mjx-math { white-space: normal !important; overflow-wrap: anywhere !important; display: inline !important; }
-    .infer-frac {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: stretch;
-      vertical-align: middle;
-      padding: 0.15rem 0.35rem;
-    }
-    .infer-num {
-      padding: 0 0.35rem 0.2rem 0.35rem;
-      text-align: center;
-    }
-    .infer-bar {
-      display: block;
-      align-self: stretch;
-      height: 0;
-      min-width: 2em;
-      border-top: 2px solid currentColor;
-      margin: 0.1rem 0;
-    }
-    .infer-den {
-      padding: 0.2rem 0.35rem 0 0.35rem;
-      text-align: center;
-    }
-    body.hide-latex .row-latex, body.hide-latex .formula-latex { display: none !important; }
-    body.hide-unicode .row-unicode, body.hide-unicode .formula-unicode { display: none !important; }
-    body.hide-ansii .row-ansii, body.hide-ansii .formula-ansii { display: none !important; }
-    body.hide-schemata .row-scheme { display: none !important; }
-    .metalevel-badge {
-      display: inline-block;
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 0.7rem;
-      font-weight: 700;
-      line-height: 1;
-      padding: 0.18rem 0.42rem;
-      margin-right: 0.45rem;
-      border-radius: 4px;
-      vertical-align: middle;
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-    }
-    .metalevel-badge.lvl-1 {
-      background: rgba(168, 85, 247, 0.16);
-      color: #c084fc;
-      border-color: rgba(168, 85, 247, 0.4);
-    }
-    .metalevel-badge.lvl-2 {
-      background: rgba(245, 158, 11, 0.16);
-      color: #fbbf24;
-      border-color: rgba(245, 158, 11, 0.4);
-    }
-    .meta-ctor-sig {
-      color: #e9d5ff;
-      background: rgba(168, 85, 247, 0.1);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      border-radius: 6px;
-      padding: 0.35rem 0.65rem;
-    }
-    .func-abbr-note {
-      color: #fde68a;
-      background: rgba(245, 158, 11, 0.1);
-      border-left: 3px solid #fbbf24;
-      padding: 0.45rem 0.75rem;
-      margin-top: 0.4rem;
-      font-size: 0.86rem;
-      border-radius: 0 4px 4px 0;
-    }
-    footer {
-      margin-top: 3rem;
-      padding: 1.5rem 2rem;
-      border-top: 1px solid var(--border-color);
-      background: var(--bg-secondary);
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      text-align: center;
-    }
-    footer a {
-      color: var(--accent-blue);
-      text-decoration: underline;
-      text-decoration-style: dotted;
-    }
-    footer a:hover {
-      color: #93c5fd;
-      text-decoration-style: solid;
-    }
-  </style>
-  <script src="../js/proof_tree_collapse.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obelisk glossary</title>
+<style>body{background:#fff;color:#1a1a1a;margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.6}main{max-width:40rem;margin:0 auto;padding:2rem 1rem 4rem}h1{font-size:1.6rem;font-weight:normal;margin:0 0 .3rem}h2{font-size:1.15rem;margin:2.2rem 0 .4rem}p{margin:.5rem 0}a{color:#0645ad}.lead{color:#555;font-size:.95rem}.index{font-size:.95rem;line-height:1.9}section{border-top:1px solid #e5e5e5}footer{color:#777;font-size:.85rem;margin-top:3rem}</style>
 </head>
-<body class="mode-unicode hide-ansii">
-  <header>
-    <div class="header-inner">
-      <nav class="nav-bar">
-        <a class="nav-link obelisk-portal-link" href="../index.html">Obelisk Portal</a>
-        <a class="nav-link" href="manual.html">Complete Entity Database (1.01&ndash;5.02)</a>
-        <a class="nav-link" href="variant1.html">MKTD1</a>
-        <a class="nav-link" href="variant2.html">MKTD2</a>
-        <a class="nav-link" href="proofs.html">Verified Theorems &amp; Rules</a>
-        <a class="nav-link" href="symbols.html">Symbol &amp; Type Index</a>
-        <a class="nav-link" href="dependent_types.html">Dependent Types</a>
-        <a class="nav-link" href="metatheory.html">Metatheory</a>
-        <a class="nav-link" href="theory_db.json">JSON DB</a>
-        <a class="nav-link" href="../repl.html">Interactive REPL</a>
-      </nav>
-      <h1>Obelisk Proof Assistant &mdash; Glossary &amp; Notation Disambiguation</h1>
-      <p class="subtitle">Definitive mathematical glossary of Dunaev tagged ordered pairs, Dunaev class-lists, kernel context environments (&Delta; vs &Gamma;), and delimiter disambiguation matrix.</p>
-      <div class="controls-bar">
-        <div class="control-group">
-          <span class="control-label">Formula Display:</span>
-          <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
-          <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
-          <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
-        </div>
-        <div class="control-group">
-          <span class="control-label">Proof Trees:</span>
-          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.expandAll()">Expand All</button>
-          <button class="toggle-btn" onclick="if(window.ProofTreeCollapse)ProofTreeCollapse.collapseAll()">Collapse All</button>
-        </div>
-      </div>
-    </div>
-  </header>
-  <main>
-  <section class="manual-section" id="glossary">
-    <div class="section-header">
-      <h2>Class-Theoretic Glossary &amp; Disambiguation Matrix</h2>
-      <p class="section-desc">Authoritative reference specifications for foundational concepts in Morse-Kelley class theory with tagged pairs (MKTD1 / MKTD2).</p>
-    </div>
-    <div class="table-container">
-      <table class="section-external-table">
-        <thead>
-          <tr>
-            <th class="col-num">Concept</th>
-            <th class="col-entity">Glossary Record (Internal Table)</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr id="dunaev-pair" class="external-row">
-            <td class="external-num"><a href="#dunaev-pair" class="num-anchor">01</a></td>
-            <td class="external-entity">
-              <table class="internal-entity-table">
-                <tbody>
-                  <tr><th class="field-name">Term</th><td class="field-value"><strong>Dunaev Tagged Ordered Pair (&lang;A, B&rang;<sub>D</sub>)</strong></td></tr>
-                  <tr><th class="field-name">Formal Definition</th><td class="field-value"><code>(A, B)_D &equiv; mark(A, 1) &cup; mark(B, 2) = ({1} &times; A) &cup; ({2} &times; B)</code></td></tr>
-                  <tr><th class="field-name">Source Reference</th><td class="field-value">Georgy Dunaev, <code>set_theory_prover/program/types/foundations.ML</code> (entries 3.76 <code>DefDunaevOrderedPair</code>, 3.77 <code>ThmDunaevFirstProjection</code>, 3.78 <code>ThmDunaevSecondProjection</code>).</td></tr>
-                  <tr><th class="field-name">Soundness for Classes</th><td class="field-value">In Morse-Kelley class theory, proper classes cannot be elements of other classes. Kuratowski pairs <code>{{a}, {a, b}}</code> require <code>a, b &isin; V</code> and fail for proper classes. Dunaev tagged pairs are universally sound for all classes (including V and On), satisfying &pi;<sub>1</sub>((A,B)_D) = A, &pi;<sub>2</sub>((A,B)_D) = B, and injectivity.</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <tr id="dunaev-class-list" class="external-row">
-            <td class="external-num"><a href="#dunaev-class-list" class="num-anchor">02</a></td>
-            <td class="external-entity">
-              <table class="internal-entity-table">
-                <tbody>
-                  <tr><th class="field-name">Term</th><td class="field-value"><strong>Dunaev Class-List ([X<sub>1</sub>, ..., X<sub>n</sub>])</strong></td></tr>
-                  <tr><th class="field-name">Formal Definition</th><td class="field-value">Inductive finite sequence using Dunaev tagged pairs: <code>[] &equiv; &empty;</code>, <code>[X] &equiv; (X, [])_D</code>, <code>[X<sub>1</sub>, X<sub>2</sub>] &equiv; (X_1, (X_2, [])_D)_D</code>.</td></tr>
-                  <tr><th class="field-name">Source Reference</th><td class="field-value">Georgy Dunaev, <code>set_theory_prover/program/types/foundations.ML</code> (entry 3.39: <code>DefClassLists</code>).</td></tr>
-                  <tr><th class="field-name">Syntactic Role</th><td class="field-value">Multi-argument class tuples, sequent hypothesis contexts &Gamma;, and explicit substitution environments without requiring higher-universe conglomerates.</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <tr id="context-environments" class="external-row">
-            <td class="external-num"><a href="#context-environments" class="num-anchor">03</a></td>
-            <td class="external-entity">
-              <table class="internal-entity-table">
-                <tbody>
-                  <tr><th class="field-name">Term</th><td class="field-value"><strong>Kernel Context Environments (&Delta; vs &Gamma;)</strong></td></tr>
-                  <tr><th class="field-name">Variable Signature &Delta;</th><td class="field-value">Declares object-language variables and their sorts: <code>&Delta; = { z : Class, A : Class, F : Class }</code>. Scoped by universal binders (<code>ELam</code>).</td></tr>
-                  <tr><th class="field-name">Hypothesis Context &Gamma;</th><td class="field-value">Stores local propositional assumptions: <code>&Gamma; = { hIn : (z &isin; {x | &perp;}) }</code>. Scoped by implication binders (<code>EFn</code>).</td></tr>
-                  <tr><th class="field-name">Judgement Form</th><td class="field-value">In <code>&Delta;; &Gamma; &vdash; e : T</code>, &Delta; scopes free variables while &Gamma; scopes active proof hypotheses.</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-          <tr id="overloaded-delimiters" class="external-row">
-            <td class="external-num"><a href="#overloaded-delimiters" class="num-anchor">04</a></td>
-            <td class="external-entity">
-              <table class="internal-entity-table">
-                <tbody>
-                  <tr><th class="field-name">Term</th><td class="field-value"><strong>Overloaded Delimiters Disambiguation Matrix</strong></td></tr>
-                  <tr><th class="field-name">&LeftDoubleBracket; ... &RightDoubleBracket; (U+27E6/U+27E7)</th><td class="field-value">Antiquotation <code>&LeftDoubleBracket;e&RightDoubleBracket;</code> (constructor <code>EAnti</code>) only. Evaluation is the separate constructor <code>EEval</code>, written <code>eval(e)</code>.</td></tr>
-                  <tr><th class="field-name">[ ... ] (Square Brackets)</th><td class="field-value">Relational image <code>f[A]</code> vs Dunaev class-list <code>[X<sub>1</sub>, ..., X<sub>n</sub>]</code> vs premise judgement list <code>[J<sub>1</sub>, ..., J<sub>k</sub>] &vdash; &phi;</code>.</td></tr>
-                  <tr><th class="field-name">Set(X) vs isSet(X)</th><td class="field-value"><code>Set(X)</code> is ASCII surface token in <code>.nbg</code> syntax; rendered as predicate <code>isSet(X)</code> (&exist;Y(X &isin; Y)) to distinguish from the class sort <code>Set</code>.</td></tr>
-                </tbody>
-              </table>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-  </main>
-  <footer>
-    <div class="footer-inner">
-      <p style="margin: 0 0 0.4rem 0;">Generated by <code>set_theory_prover/program/html_generator.ML</code> from <code>newchecker.ML</code> and <code>types/entries.ML</code>.</p>
-      <p style="margin: 0;">Build: <a href="BUILD.json" data-build-json>BUILD.json</a><script>(function(){var a=document.querySelector('a[data-build-json]');if(!a||!window.fetch)return;fetch(a.getAttribute('href')).then(function(r){return r.json();}).then(function(b){if(b&&b.commit){a.textContent=b.commit+' \u2022 '+b.datetime_display;}}).catch(function(){});})();</script> &bull; <a href="changelog.html">Changelog</a> &bull; <a href="symbols.html">Notation Registry</a> &bull; <a href="glossary.html">Glossary</a></p>
-    </div>
-  </footer>
-  <script>
-    function toggleFormatHide(fmt) {
-      var cls = 'hide-' + fmt;
-      var isHidden = document.body.classList.toggle(cls);
-      var btn = document.getElementById('btn-hide-' + fmt);
-      if (btn) btn.classList.toggle('active', isHidden);
-      if (fmt === 'latex' && !isHidden && window.MathJax && window.MathJax.typesetPromise) {
-        window.MathJax.typesetPromise();
-      }
-    }
-    function toggleSchemataHide() {
-      var isHidden = document.body.classList.toggle('hide-schemata');
-      var btn = document.getElementById('btn-hide-schemata');
-      if (btn) btn.classList.toggle('active', isHidden);
-    }
-  </script>
+<body>
+<main>
+<h1>Obelisk glossary</h1>
+<p class="lead">What the words used on this site mean. <a href="../index.html">Back to the site</a>.</p>
+<p class="index"><a href="#mktd">MKTD</a> &middot; <a href="#mk">Morse–Kelley class theory (MK)</a> &middot; <a href="#nbg">NBG (von Neumann–Bernays–Gödel class theory)</a> &middot; <a href="#class">Class</a> &middot; <a href="#set">Set</a> &middot; <a href="#proper-class">Proper class</a> &middot; <a href="#universe">Universe</a> &middot; <a href="#tarski-axiom">Tarski's axiom</a> &middot; <a href="#dunaev-pair">Dunaev pair</a> &middot; <a href="#class-list">Class list</a> &middot; <a href="#context">Context</a> &middot; <a href="#kuratowski-pair">Kuratowski pair</a> &middot; <a href="#formal-system">Formal system</a> &middot; <a href="#framework">Framework</a> &middot; <a href="#axiom">Axiom</a> &middot; <a href="#mktd1">MKTD1</a> &middot; <a href="#mktd2">MKTD2</a> &middot; <a href="#kernel">Kernel</a> &middot; <a href="#lcf">LCF approach</a> &middot; <a href="#derivation">Derivation</a> &middot; <a href="#propositions-as-types">Propositions as types</a> &middot; <a href="#theory-symbols">𝘛, 𝘍, 𝘌, 𝘞</a> &middot; <a href="#intended-model">Intended model</a> &middot; <a href="#foundational-assumption">Foundational assumption</a> &middot; <a href="#metalevel">Metalevel</a> &middot; <a href="#quotation">Quotation and antiquotation</a> &middot; <a href="#holds">Holds</a> &middot; <a href="#object-level">Object-level formula</a> &middot; <a href="#stratification">Stratification</a> &middot; <a href="#postulate">Unchecked postulate</a> &middot; <a href="#entry">Entry</a> &middot; <a href="#status">Status of an entry</a> &middot; <a href="#entry-page">Reading an entry page</a></p>
+<section id="mktd">
+<h2>MKTD</h2>
+<p>The mathematical subject of Obelisk: <a href="#mk">Morse–Kelley class theory</a> together with <a href="#tarski-axiom">Tarski's axiom of universes</a>, with <a href="#dunaev-pair">Dunaev pairs</a> as ordered pairs. The letters stand for Morse–Kelley, Tarski, Dunaev.</p>
+<p>Obelisk develops MKTD in two separate <a href="#formal-system">formal systems</a>, <a href="#mktd1">MKTD1</a> and <a href="#mktd2">MKTD2</a>.</p>
+</section>
+<section id="mk">
+<h2>Morse–Kelley class theory (MK)</h2>
+<p>A theory whose objects are <a href="#class">classes</a>. Its characteristic axiom is class comprehension: for every formula φ(x) the class {x | φ(x)} exists; its elements are exactly the <a href="#set">sets</a> x with φ(x). In MK the formula φ may quantify over all classes, not only over sets. Compare <a href="#nbg">NBG (von Neumann–Bernays–Gödel class theory)</a>.</p>
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Morse%E2%80%93Kelley_set_theory">Wikipedia: Morse–Kelley set theory</a>.</p>
+</section>
+<section id="nbg">
+<h2>NBG (von Neumann–Bernays–Gödel class theory)</h2>
+<p>A class theory like <a href="#mk">MK</a>, except that class comprehension {x | φ(x)} is allowed only when every quantifier in φ ranges over sets. Every theorem of NBG is a theorem of MK.</p>
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Von_Neumann%E2%80%93Bernays%E2%80%93G%C3%B6del_set_theory">Wikipedia: NBG set theory</a>.</p>
+</section>
+<section id="class">
+<h2>Class</h2>
+<p>The only kind of object in <a href="#mktd">MKTD</a>. Every object is a class, and some classes are <a href="#set">sets</a>. The basic relation is membership, a ∈ A, read &quot;a is an element of A&quot;.</p>
+</section>
+<section id="set">
+<h2>Set</h2>
+<p>A <a href="#class">Class</a> that is an element of some class: X is a set if and only if X ∈ Y for some class Y (<a href="proofs/DefIsSet.html">definition</a>).</p>
+</section>
+<section id="proper-class">
+<h2>Proper class</h2>
+<p>A <a href="#class">Class</a> that is not a <a href="#set">Set</a> (<a href="proofs/DefIsProperClass.html">definition</a>). Examples: V, the class of all sets, and On, the class of all ordinals. A proper class is not an element of any class.</p>
+</section>
+<section id="universe">
+<h2>Universe</h2>
+<p>A class U with these properties (<a href="proofs/DefGrothendieckUniverse.html">definition</a>): ω ∈ U; every element of U is a subclass of U (transitive); every subclass of an element of U is an element of U (hereditary); the power set of an element of U is an element of U (powerful); for a subclass B of U, B is an element of U exactly when B is strictly smaller than U (tight); and with two elements a, b of U also {a, b} is an element of U (pairful).</p>
+<p>The textbook notion is the Grothendieck universe: <a href="https://en.wikipedia.org/wiki/Grothendieck_universe">Wikipedia: Grothendieck universe</a>.</p>
+</section>
+<section id="tarski-axiom">
+<h2>Tarski's axiom</h2>
+<p>The axiom that every <a href="#set">Set</a> is an element of some <a href="#universe">Universe</a> that is itself a set (<a href="proofs/AxmTarskiUniverses.html">axiom</a>).</p>
+</section>
+<section id="dunaev-pair">
+<h2>Dunaev pair</h2>
+<p>The ordered pair of <a href="#mktd">MKTD</a>, written (A, B) (<a href="proofs/DefDunaevOrderedPair.html">definition</a>). Write 1 = {∅} and 2 = {∅, {∅}}. Every element a of A is replaced by the set {{{{a}}}, 1}, and every element b of B by {{{{b}}}, 2}; (A, B) is the class of all these sets together with the two markers {∅, 1} and {∅, 2}.</p>
+<p>Only the elements of A and B are used, never A and B themselves, so A and B may be <a href="#proper-class">proper classes</a>. Proved in Obelisk: (A, B) = (C, D) implies A = C and B = D.</p>
+<p>Compare <a href="#kuratowski-pair">Kuratowski pair</a>.</p>
+</section>
+<section id="class-list">
+<h2>Class list</h2>
+<p>A finite list of classes built from tagged copies, so that its members may be <a href="#proper-class">proper classes</a> (<a href="proofs/DefClassLists.html">definition</a> uses only the lists below). With mark(A, n) = {{∅, n}} ∪ { {{{{a}}}, n} | a ∈ A }: [] = ∅, [A] = mark(A, 1), and [A, B] = mark(A, 1) ∪ mark(B, 2). The two-element list [A, B] is the <a href="#dunaev-pair">Dunaev pair</a> (A, B).</p>
+</section>
+<section id="context">
+<h2>Context</h2>
+<p>The list of hypotheses of a statement. In <a href="#mktd1">MKTD1</a> a context Γ is a finite list of formulas [φ₁, …, φₙ], and (T, Γ ⊢ φ) says that φ follows from them. In <a href="#mktd2">MKTD2</a> a context lists variables and hypotheses together with their types.</p>
+</section>
+<section id="kuratowski-pair">
+<h2>Kuratowski pair</h2>
+<p>The usual ordered pair of sets, {{a, a}, {a, b}} (<a href="proofs/DefKuratowskiPair.html">definition</a>). It requires a and b to be <a href="#set">sets</a>, because a <a href="#proper-class">proper class</a> cannot be an element of {a, a}. <a href="#mktd">MKTD</a> uses <a href="#dunaev-pair">Dunaev pairs</a> instead.</p>
+</section>
+<section id="formal-system">
+<h2>Formal system</h2>
+<p>A precise description of which expressions are statements and which statements are derivable. In Obelisk a formal system consists of a <a href="#framework">Framework</a> and a list of <a href="#axiom">axioms</a>.</p>
+</section>
+<section id="framework">
+<h2>Framework</h2>
+<p>The logical part of a <a href="#formal-system">formal system</a>: the language, the form of its judgments and the rules of logic, without the axioms of class theory. Obelisk has two:</p>
+<p>MKTD1-framework: a classical sequent calculus. Its judgments have the form (T, Γ ⊢ φ), read &quot;in the <a href="#theory-symbols">theory</a> T, the formula φ follows from the hypotheses Γ&quot;. The language can quote its own formulas (<a href="#quotation">Quotation and antiquotation</a>).</p>
+<p>MKTD2-framework: a dependent type theory. Its judgments have the form p : A, read &quot;p is a proof of the proposition A&quot; (<a href="#propositions-as-types">Propositions as types</a>).</p>
+</section>
+<section id="axiom">
+<h2>Axiom</h2>
+<p>A statement that is accepted without proof. In Obelisk every axiom is built into a <a href="#kernel">Kernel</a>; its entry has a status that begins with &quot;Postulated&quot; (<a href="#status">Status of an entry</a>).</p>
+</section>
+<section id="mktd1">
+<h2>MKTD1</h2>
+<p>The first of Obelisk's two formal systems for <a href="#mktd">MKTD</a>. The name is used in three precise forms:</p>
+<p>MKTD1-framework: the rules of logic of MKTD1 (see <a href="#framework">Framework</a>).</p>
+<p>MKTD1-theory: all statements that can be derived in the MKTD1-framework from the MKTD axioms.</p>
+<p>MKTD1-system: the program that checks such derivations: the <a href="#kernel">Kernel</a> in program/newchecker/ and the theorem library in program/types/, written in Standard ML. Synonym: MKTD1-prover.</p>
+</section>
+<section id="mktd2">
+<h2>MKTD2</h2>
+<p>The second of Obelisk's two formal systems for <a href="#mktd">MKTD</a>. The name is used in three precise forms:</p>
+<p>MKTD2-framework: the rules of logic of MKTD2, a classical dependent type theory (see <a href="#framework">Framework</a>).</p>
+<p>MKTD2-theory: all propositions that have a proof term in the MKTD2-framework from the MKTD axioms.</p>
+<p>MKTD2-system: the program that checks such proof terms: the <a href="#kernel">Kernel</a> in program/dependent_typechecker.ML and program/dependent_eval.ML, with the library program/verified_theorems.ML. Synonym: MKTD2-prover.</p>
+<p>MKTD1 and MKTD2 are never merged. A translation program compares their statements; it does not transfer proofs.</p>
+</section>
+<section id="kernel">
+<h2>Kernel</h2>
+<p>The small part of a proof checker that decides whether a proof is correct. All other parts (libraries, search procedures, page generators) can only propose proofs, and the kernel checks them. Obelisk has one kernel for <a href="#mktd1">MKTD1</a> and one for <a href="#mktd2">MKTD2</a>.</p>
+</section>
+<section id="lcf">
+<h2>LCF approach</h2>
+<p>A design for proof checkers, named after the LCF system of Robin Milner (1972). Theorems are values of an abstract type, and the only functions that create such values are the inference rules. A program can therefore obtain a theorem only by applying rules. The MKTD1 <a href="#kernel">Kernel</a> follows it: the abstract type is called Thm.</p>
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Logic_for_Computable_Functions">Wikipedia: Logic for Computable Functions</a>.</p>
+</section>
+<section id="derivation">
+<h2>Derivation</h2>
+<p>A tree of inference-rule applications whose root is the statement proved. The MKTD1 <a href="#kernel">Kernel</a> keeps the tree of every theorem and can check it again from the start.</p>
+</section>
+<section id="propositions-as-types">
+<h2>Propositions as types</h2>
+<p>The reading used by <a href="#mktd2">MKTD2</a>: a proposition is a type, and a proof of it is a term of that type. For example, a proof of &quot;A implies B&quot; is a function that turns proofs of A into proofs of B.</p>
+<p>Reference: <a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Wikipedia: Curry–Howard correspondence</a>.</p>
+</section>
+<section id="theory-symbols">
+<h2>𝘛, 𝘍, 𝘌, 𝘞</h2>
+<p>Names of theories that appear inside MKTD1 statements (T, Γ ⊢ φ):</p>
+<p>𝘛 is the base theory: a consistent theory whose axioms a program can list. 𝘍 is the theory of the <a href="#intended-model">intended model</a>: all sentences true in it. 𝘌 is an unspecified elementary metatheory, used for statements about provability. 𝘞 is a parameter that stands for any theory.</p>
+</section>
+<section id="intended-model">
+<h2>Intended model</h2>
+<p>The universe of classes that the axioms of <a href="#mktd">MKTD</a> are meant to describe. Obelisk assumes, without proof, that the axioms of 𝘛 are true in it (<a href="#foundational-assumption">Foundational assumption</a>).</p>
+</section>
+<section id="foundational-assumption">
+<h2>Foundational assumption</h2>
+<p>The belief, stated and not proved, that the axioms of 𝘛 are true in the <a href="#intended-model">intended model</a>. It implies that 𝘛 and 𝘍 are consistent.</p>
+</section>
+<section id="metalevel">
+<h2>Metalevel</h2>
+<p>The small number shown in a box before a formula. 0 marks an ordinary statement about classes. Each <a href="#quotation">Quotation and antiquotation</a> raises the number by one: a formula of metalevel 1 speaks about formulas of metalevel 0, for example that a formula is provable.</p>
+</section>
+<section id="quotation">
+<h2>Quotation and antiquotation</h2>
+<p>Quotation ‹φ› turns the formula φ into an object that other formulas can speak about. Antiquotation ⟦u⟧ is the inverse step: inside a quotation, it inserts the formula that u stands for. Together they let MKTD1 state facts about its own formulas, such as <a href="#holds">Holds</a>.</p>
+</section>
+<section id="holds">
+<h2>Holds</h2>
+<p>Holds(T, Γ ⊢ φ) is the formula saying that the statement (T, Γ ⊢ φ) is derivable. It is a formula about a statement, not about classes.</p>
+</section>
+<section id="object-level">
+<h2>Object-level formula</h2>
+<p>A formula that speaks only about classes. It contains no <a href="#holds">Holds</a>, no <a href="#quotation">antiquotation</a> and no other symbol about syntax. Written Fm₀.</p>
+</section>
+<section id="stratification">
+<h2>Stratification</h2>
+<p>The kernel rule that class comprehension {x | φ} and definitions accept only <a href="#object-level">object-level formulas</a> φ. Without it one could write a sentence that says of itself &quot;I am not provable&quot; and, together with the reflection rules, derive a contradiction.</p>
+</section>
+<section id="postulate">
+<h2>Unchecked postulate</h2>
+<p>A statement that the MKTD1 <a href="#kernel">Kernel</a> accepts through a general definition mechanism that performs no check. It acts as an <a href="#axiom">Axiom</a>. Only a fixed list of names may use the mechanism, and their entries carry the status &quot;Postulated (Unchecked Kernel Schema, Not Derived)&quot; (<a href="#status">Status of an entry</a>).</p>
+</section>
+<section id="entry">
+<h2>Entry</h2>
+<p>One numbered item of the Obelisk catalogue: a definition, an axiom, a rule or a theorem. The number has the form section.position, for example 3.65. Every entry has its own page (<a href="#entry-page">how to read it</a>).</p>
+</section>
+<section id="status">
+<h2>Status of an entry</h2>
+<p>What the <a href="#kernel">Kernel</a> knows about an <a href="#entry">Entry</a>:</p>
+<p>Verified: the kernel checked a proof of exactly the stated formula.</p>
+<p>Postulated (Kernel Axiom): the statement is an <a href="#axiom">Axiom</a> of the kernel.</p>
+<p>Postulated (Unchecked Kernel Schema, Not Derived): an <a href="#postulate">unchecked postulate</a>.</p>
+<p>Definitional (Kernel AST): a definition registered in the kernel's definition store, which checks that the definition is well formed.</p>
+<p>Primitive / Derived Rule (Kernel): an inference rule of the kernel.</p>
+<p>Metatheorem (Holds by the Definition of F, Not a Kernel Rule): true because of how 𝘍 is defined (<a href="#theory-symbols">𝘛, 𝘍, 𝘌, 𝘞</a>); not used by the kernel.</p>
+<p>Stated (No Kernel Proof Linked): the statement is written down, and no kernel proof exists yet.</p>
+</section>
+<section id="entry-page">
+<h2>Reading an entry page</h2>
+<p>The rows of an <a href="#entry">Entry</a> page, from top to bottom:</p>
+<p>Num: the entry number. Title: a short name. Classification: definition, axiom, rule or theorem.</p>
+<p>Formula (Unicode), (LaTeX), (ANSII): the same formula in three notations. The boxed number before it is the <a href="#metalevel">Metalevel</a>. ANSII is plain ASCII text.</p>
+<p>Scheme of Types: the same formula with the types of its variables shown. Often it looks the same as the formula.</p>
+<p>Axioms Used, Definitions Used: the axioms and definitions on which the kernel proof depends, counted over the whole proof.</p>
+<p>Kernel Prf Nodes: the number of steps in the kernel's <a href="#derivation">Derivation</a>, counted without sharing repeated parts.</p>
+<p>Proof Term: the first levels of the derivation tree; deeper levels are shown as &quot;...&quot;.</p>
+<p>Kernel Note: a short explanation of the proof and where it is in the code.</p>
+<p>Source Line: where the entry is defined in the source code.</p>
+<p>Verification: the <a href="#status">Status of an entry</a>.</p>
+</section>
+<footer>Generated from set_theory_prover/docs/glossary.txt by program/glossary_page.ML.</footer>
+</main>
 </body>
 </html>

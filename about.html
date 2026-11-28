@@ -387,7 +387,7 @@ Georgy Dunaev | Programmer &amp; Mathematician
                 
         </th>
         <td class="obk-td">
-                <strong>LambdaPi / Dedukti Proof Certificate</strong>: independently verifiable LF proof terms exported from the NBG Propositions-as-Types compiler.
+                <strong>LambdaPi / Dedukti export</strong>: an experimental export of NBG proofs to the Lambdapi file format. It has not been checked with Lambdapi or Dedukti, so it is not a certificate.
         </td>
     </tr>
     <tr>
@@ -789,91 +789,37 @@ width="100" height="100"
     <details class="section" id="theory-at-a-glance" open>
       <summary class="obk-section-summary"><span class="fold-icon" role="button" aria-label="Toggle section" title="Toggle section" tabindex="0"></span><h2 class="obk-heading obk-h2 obk-section-h2 obk-header-h2">Theory at a Glance: MKTD (Morse&ndash;Kelley + Tarski + Dunaev)</h2></summary>
       <div class="section-content">
-        <p>
-          The Obelisk Proof Assistant formalizes <strong>Morse&ndash;Kelley class theory with Tarski&ndash;Grothendieck universes and Dunaev foundations (MKTD)</strong>.
-        </p>
-        
-        <table class="tableList" style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 0.92rem; background: #fafafa;">
-          <thead>
-            <tr style="background: #e2e8f0; text-align: left;">
-              <th class="obk-th" style="padding: 8px 12px; color: #1e3a8a; border: 1px solid #cbd5e1;">Dimension</th>
-              <th class="obk-th" style="padding: 8px 12px; color: #1e3a8a; border: 1px solid #cbd5e1;">Specification in Obelisk (MKTD)</th>
-              <th class="obk-th" style="padding: 8px 12px; color: #475569; border: 1px solid #cbd5e1;">Comparison / Notes</th>
-            </tr>
-          </thead>
+        <!-- [WHY] Every notion links to the glossary (generated/glossary.html, source
+             set_theory_prover/docs/glossary.txt). Only statements that are definitions or that the
+             kernels check belong here; removed claims are listed in
+             set_theory_prover/docs/QUARANTINED_CLAIMS.md until they are proved or cited. -->
+        <table class="tableList" style="width: 100%; border-collapse: collapse; margin-top: 12px; margin-bottom: 16px; font-size: 0.95rem; background: #fff;">
           <tbody>
             <tr>
-              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1;">Formal Theory</td>
-              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;"><strong>MKTD</strong> (Morse&ndash;Kelley + Tarski + Dunaev)</td>
-              <td class="obk-td" style="padding: 8px 12px; color: #475569; border: 1px solid #cbd5e1;">Class theory with proper classes and Grothendieck universes.</td>
+              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1; white-space: nowrap;">Subject</td>
+              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;"><a href="generated/glossary.html#mktd">MKTD</a>: <a href="generated/glossary.html#mk">Morse&ndash;Kelley class theory</a> with <a href="generated/glossary.html#tarski-axiom">Tarski&rsquo;s axiom of universes</a>, using <a href="generated/glossary.html#dunaev-pair">Dunaev pairs</a> as ordered pairs.</td>
             </tr>
             <tr>
-              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1;">Comprehension Bounds</td>
-              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">
-                <code>{x | &phi;(x)}</code>: Rule 3.01 admits formulas &phi; quantifying over <em>all classes</em> (including proper classes).
-              </td>
-              <td class="obk-td" style="padding: 8px 12px; color: #475569; border: 1px solid #cbd5e1;">
-                Strictly stronger than NBG, which restricts &phi; to quantify only over sets (&Delta;<sub>0</sub>-comprehension).
-              </td>
+              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1; white-space: nowrap;">Objects</td>
+              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">Every object is a <a href="generated/glossary.html#class">class</a>. A <a href="generated/glossary.html#set">set</a> is a class that is an element of some class; the other classes are <a href="generated/glossary.html#proper-class">proper classes</a>.</td>
             </tr>
             <tr>
-              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1;">Consistency Strength</td>
-              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">
-                <strong>Core MKTD</strong> strictly exceeds ZFC and NBG (proves Con(ZFC) and Con(NBG); consistency provable in ZFC + &exist; strongly inaccessible &kappa;); extended with Tarski universes (<code>AxmTarskiUniverses</code>, 3.74), it provides a proper class of strongly inaccessible cardinals.
-              </td>
-              <td class="obk-td" style="padding: 8px 12px; color: #475569; border: 1px solid #cbd5e1;">
-                Proves Con(ZFC) and Con(NBG). Stronger than second-order arithmetic and predicative class theories.
-              </td>
+              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1; white-space: nowrap;">Comprehension</td>
+              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">For every formula &phi;(x) there is the class {x | &phi;(x)} of all sets x with &phi;(x), also when &phi; quantifies over classes (as in <a href="generated/glossary.html#mk">MK</a>, unlike <a href="generated/glossary.html#nbg">NBG</a>). Entry <a href="generated/proofs/RulClassComprehension.html">3.01</a>.</td>
             </tr>
             <tr>
-              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1;">MKTD1 &amp; MKTD2 Systems</td>
-              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">
-                <strong>MKTD1-system</strong> / <strong>MKTD1-theory</strong> (<code>MKTD1-framework</code> sequent calculus over class expressions) and <strong>MKTD2-system</strong> / <strong>MKTD2-theory</strong> (<code>MKTD2-framework</code> Curry&ndash;Howard propositions-as-types).
-              </td>
-              <td class="obk-td" style="padding: 8px 12px; color: #475569; border: 1px solid #cbd5e1;">
-                <code>MKTD1-prover</code> checks derivation trees over formula-expression data with explicit side conditions; <code>MKTD2-prover</code> checks &lambda;-terms inhabiting proposition-types via bidirectional typing.
-              </td>
+              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1; white-space: nowrap;">Two formal systems</td>
+              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;"><a href="generated/glossary.html#mktd1">MKTD1</a>: a classical sequent calculus, statements of the form (T, &Gamma; &vdash; &phi;). <a href="generated/glossary.html#mktd2">MKTD2</a>: a classical dependent type theory, statements of the form p : A (<a href="generated/glossary.html#propositions-as-types">propositions as types</a>). Each name comes in three precise forms: <a href="generated/glossary.html#mktd1">-framework, -theory and -system</a>.</td>
+            </tr>
+            <tr>
+              <td class="obk-td" style="padding: 8px 12px; font-weight: bold; border: 1px solid #cbd5e1; white-space: nowrap;">Checking</td>
+              <td class="obk-td" style="padding: 8px 12px; border: 1px solid #cbd5e1;">Every proof is checked by a small <a href="generated/glossary.html#kernel">kernel</a> program, one for MKTD1 and one for MKTD2. &ldquo;Verified&rdquo; means that the kernel checked a proof of exactly the displayed formula. Other <a href="generated/glossary.html#status">statuses</a> say when a statement is an axiom, an <a href="generated/glossary.html#postulate">unchecked postulate</a>, or not yet proved.</td>
             </tr>
           </tbody>
         </table>
-
-        <h3 style="color: #1e3a8a; margin-top: 20px;">Kernel Metatheory &amp; Soundness Guarantees</h3>
-        <p style="font-size: 0.92rem; line-height: 1.6;">
-          Soundness of the Obelisk verification pipeline rests on the following formal metatheoretic properties:
+        <p style="font-size: 0.92rem; color: #475569;">
+          Unfamiliar word? See the <a href="generated/glossary.html">glossary</a>.
         </p>
-        <ul class="obk-ul" style="font-size: 0.92rem; line-height: 1.6;">
-          <li>
-            <strong>Relative Soundness:</strong> Assuming consistency of the MKTD axioms, there is no closed proof term <code>e</code> such that <code>&empty; &vdash; e : &bot;</code>. Every constructor in the kernel is checked; untrusted placeholders (<code>PCheat_prf</code>) are strictly rejected.
-          </li>
-          <li>
-            <strong>Subject Reduction:</strong> If <code>&Gamma; &vdash; e : T</code> and <code>e &rarr;<sub>&beta;&delta;</sub> e'</code>, then <code>&Gamma; &vdash; e' : T</code>. Typing is invariant under term evaluation and definition unrolling.
-          </li>
-          <li>
-            <strong>Decidability of Definitional Equality:</strong> Term normalization is deterministic and terminating for all registered kernel definitions.
-          </li>
-          <li>
-            <strong>Conservativity of Definitions:</strong> Ordinary definitions are checked by the kernel's definition store (no free right-hand-side variables, no circularity, matching parameters), which makes them conservative. The few names on the kernel allowlist of general definitions are unchecked postulates and are labelled so in the catalogue (FACTBOOK §3).
-          </li>
-          <li>
-            <strong>Trusted Computing Base (TCB):</strong> Strictly confined to the Standard ML checker (<code>newchecker.ML</code> / <code>nbg_compiler.ML</code>), primitive rules (Modus Ponens, Generalisation), and primitive set-theoretic axioms.
-          </li>
-        </ul>
-
-        <h3 style="color: #1e3a8a; margin-top: 20px;">Propositions-as-Types Alongside Classical Axioms</h3>
-        <p style="font-size: 0.92rem; line-height: 1.6;">
-          In <code>MKTD2-system</code> (<code>MKTD2-theory</code> / <code>MKTD2-framework</code>), propositions are treated as types (implications as function spaces <code>P &rarr; Q</code>, universal quantifiers as dependent products <code>&Pi;(x:X), P(x)</code>):
-        </p>
-        <ul class="obk-ul" style="font-size: 0.92rem; line-height: 1.6;">
-          <li>
-            <strong>Postulated Axioms as Constant Proof Constructors:</strong> Classical axioms such as Excluded Middle and Global Choice appear in proof terms as uninterpreted constants in the signature &Delta;.
-          </li>
-          <li>
-            <strong>Inhabitation:</strong> Establishing a theorem <code>P</code> means exhibiting a well-typed term <code>&Delta;; &Gamma; &vdash; e : P</code> constructed from &lambda;-calculus rules and axiom constants.
-          </li>
-          <li>
-            <strong>Proof Irrelevance:</strong> Once a proof term is successfully verified by the kernel, any two proofs of the same proposition <code>P</code> are epistemically equivalent certificates.
-          </li>
-        </ul>
       </div>
     </details>
 
