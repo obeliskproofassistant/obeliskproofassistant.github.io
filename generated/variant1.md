@@ -822,11 +822,15 @@ PMP_prf (..., ...)`
 
 ### 3.65 `ThmOmegaCardinal` — ω is cardinal (Theorem)
 
-- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Stated (No Kernel Proof Linked)`)
+- **Identifier:** `ThmOmegaCardinal` (entry `3.65`, kind: `Theorem`, status: `Verified`)
 - **Formula (Unicode):** `Card(ω)`
 - **Scheme of Types (Unicode):** `Card(ω)`
-- **Proof Constructor:** `(no kernel proof term linked)`
-- **Kernel Note:** Not proved yet. Plan: Card(ω) by 3.64 DefIsCardinal with K := ω, so |ω| = ω is needed (3.41 DefCardinality). ω ⊆ |ω| requires the finite pigeonhole principle (no injection of ω into a natural number, by induction on ω); |ω| ⊆ ω requires ω ≼ ω, i.e. the identity on ω as an injective class function. Neither lemma is in the library yet.
+- **Proof Constructor:** `(* Total kernel Prf nodes: 60352498 *)
+PMP_prf (..., ...)`
+- **Axioms Used:** `AxmOmegaIsSet, AxmLeftInSound, RulClassComprehension, AxmPropExFalso, AxmHeredity, AxmRightInSound, PairSetAx, AxmPropVerum, AxmPropNegElim, AxmRegularity, AxmPropDisjElim, AxmExponent, DefAtMostOneBinder, DefExistsUniqueBinder, AxmIfTrue, AxmPropExcludedMiddle`
+- **Definitions Used:** `DefEmptySet, DefIff, DefSubclass, DefInductiveClass, DefOmega, DefTransitiveClass, DefOrdinalClass, DefIsSet, DefBinaryUnion, DefSingletonSet, DefClassEq, DefClassOfOrdinals, DefBigDomain, DefDunaevOrderedPair, DefUnorderedPair, DefUniversalClass, DefPairfulClass, DefPowerClass, DefHasConcentratedValues, DefValueAtArg, DefUnaryUnion, DefIsProperClass, DefFlatValues, DefFamily, DefIsSetValued, DefClassFunction, DefRelationalImage, DefInjectiveClassFunction, DefCardLessEq, DefCardinality, DefBinaryIntersection, DefUnaryIntersection, DefIsCardinal`
+- **Kernel Prf Nodes:** `60352498`
+- **Kernel Note:** Kernel proof term thm_3_65_omega_cardinal (types/omega_cardinal.ML, exact statement Card(ω)): by 3.64 DefIsCardinal with K := ω it suffices that |ω| = ω (3.41 DefCardinality). |ω| ⊆ ω because ω ≼ ω, witnessed by the identity {p | ∃k((k ∈ ω) ∧ (p = (k, k)))}, an injective class function (Dunaev pairs of sets are sets, as subclasses of 𝒫⁴(k)). ω ⊆ |ω| combines two inductions: every ordinal a satisfies n ∈ a or a ⊆ n for n ∈ ω (EpsIndAx), and the finite pigeonhole principle ¬(ω ≼ n) for n ∈ ω (induction on n over classes X with no ∈-maximal element, so no new functions are built).
 - **Standalone Certificate:** [proofs/ThmOmegaCardinal.html](proofs/ThmOmegaCardinal.html)
 
 ### 3.66 `ThmOrdinalsCardinal` — On is a cardinal class (Theorem)

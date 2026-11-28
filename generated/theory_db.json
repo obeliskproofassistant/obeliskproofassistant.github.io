@@ -2245,11 +2245,11 @@
       "num": "3.65",
       "title": "ω is cardinal",
       "kind": "Theorem",
-      "status": "Stated (No Kernel Proof Linked)",
+      "status": "Verified",
       "formula_unicode": "Card(ω)",
-      "prf_constructor": "(no kernel proof term linked)",
-      "axioms_used": [],
-      "defs_used": [],
+      "prf_constructor": "(* Total kernel Prf nodes: 60352498 *)\nPMP_prf (..., ...)",
+      "axioms_used": ["AxmOmegaIsSet", "AxmLeftInSound", "RulClassComprehension", "AxmPropExFalso", "AxmHeredity", "AxmRightInSound", "PairSetAx", "AxmPropVerum", "AxmPropNegElim", "AxmRegularity", "AxmPropDisjElim", "AxmExponent", "DefAtMostOneBinder", "DefExistsUniqueBinder", "AxmIfTrue", "AxmPropExcludedMiddle"],
+      "defs_used": ["DefEmptySet", "DefIff", "DefSubclass", "DefInductiveClass", "DefOmega", "DefTransitiveClass", "DefOrdinalClass", "DefIsSet", "DefBinaryUnion", "DefSingletonSet", "DefClassEq", "DefClassOfOrdinals", "DefBigDomain", "DefDunaevOrderedPair", "DefUnorderedPair", "DefUniversalClass", "DefPairfulClass", "DefPowerClass", "DefHasConcentratedValues", "DefValueAtArg", "DefUnaryUnion", "DefIsProperClass", "DefFlatValues", "DefFamily", "DefIsSetValued", "DefClassFunction", "DefRelationalImage", "DefInjectiveClassFunction", "DefCardLessEq", "DefCardinality", "DefBinaryIntersection", "DefUnaryIntersection", "DefIsCardinal"],
       "scheme_of_types_unicode": "Card(ω)",
       "kernel_ast_unicode": "Card(ω)",
       "formula_unicode_html": "<span class=\"ansi-bold-blue\"><a href=\"symbols/card-pred.html\" class=\"sym-link\" title=\"Is a cardinal unary predicate symbol (Constructor: HP (TpCard ...))\">Card</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-bold-yellow\"><a href=\"symbols/omega-const.html\" class=\"sym-link\" title=\"Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)\">ω</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
@@ -2260,8 +2260,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Not proved yet. Plan: Card(ω) by 3.64 DefIsCardinal with K := ω, so |ω| = ω is needed (3.41 DefCardinality). ω ⊆ |ω| requires the finite pigeonhole principle (no injection of ω into a natural number, by induction on ω); |ω| ⊆ ω requires ω ≼ ω, i.e. the identity on ω as an injective class function. Neither lemma is in the library yet.",
-      "verification": "Stated (No Kernel Proof Linked)"
+      "comment": "Kernel proof term thm_3_65_omega_cardinal (types/omega_cardinal.ML, exact statement Card(ω)): by 3.64 DefIsCardinal with K := ω it suffices that |ω| = ω (3.41 DefCardinality). |ω| ⊆ ω because ω ≼ ω, witnessed by the identity {p | ∃k((k ∈ ω) ∧ (p = (k, k)))}, an injective class function (Dunaev pairs of sets are sets, as subclasses of 𝒫⁴(k)). ω ⊆ |ω| combines two inductions: every ordinal a satisfies n ∈ a or a ⊆ n for n ∈ ω (EpsIndAx), and the finite pigeonhole principle ¬(ω ≼ n) for n ∈ ω (induction on n over classes X with no ∈-maximal element, so no new functions are built).",
+      "verification": "Verified"
     },
     {
       "index": 87,
@@ -5671,11 +5671,11 @@
       "num": "3.65",
       "title": "ω is cardinal",
       "kind": "Theorem",
-      "status": "Stated (No Kernel Proof Linked)",
+      "status": "Verified",
       "formula_unicode": "Card(ω)",
-      "prf_constructor": "(no kernel proof term linked)",
-      "axioms_used": [],
-      "defs_used": [],
+      "prf_constructor": "(* Total kernel Prf nodes: 60352498 *)\nPMP_prf (..., ...)",
+      "axioms_used": ["AxmOmegaIsSet", "AxmLeftInSound", "RulClassComprehension", "AxmPropExFalso", "AxmHeredity", "AxmRightInSound", "PairSetAx", "AxmPropVerum", "AxmPropNegElim", "AxmRegularity", "AxmPropDisjElim", "AxmExponent", "DefAtMostOneBinder", "DefExistsUniqueBinder", "AxmIfTrue", "AxmPropExcludedMiddle"],
+      "defs_used": ["DefEmptySet", "DefIff", "DefSubclass", "DefInductiveClass", "DefOmega", "DefTransitiveClass", "DefOrdinalClass", "DefIsSet", "DefBinaryUnion", "DefSingletonSet", "DefClassEq", "DefClassOfOrdinals", "DefBigDomain", "DefDunaevOrderedPair", "DefUnorderedPair", "DefUniversalClass", "DefPairfulClass", "DefPowerClass", "DefHasConcentratedValues", "DefValueAtArg", "DefUnaryUnion", "DefIsProperClass", "DefFlatValues", "DefFamily", "DefIsSetValued", "DefClassFunction", "DefRelationalImage", "DefInjectiveClassFunction", "DefCardLessEq", "DefCardinality", "DefBinaryIntersection", "DefUnaryIntersection", "DefIsCardinal"],
       "scheme_of_types_unicode": "Card(ω)",
       "kernel_ast_unicode": "Card(ω)",
       "formula_unicode_html": "<span class=\"ansi-bold-blue\"><a href=\"symbols/card-pred.html\" class=\"sym-link\" title=\"Is a cardinal unary predicate symbol (Constructor: HP (TpCard ...))\">Card</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Left grouping / binder domain / ordered pair / application parenthesis\">(</a><span class=\"ansi-bold-yellow\"><a href=\"symbols/omega-const.html\" class=\"sym-link\" title=\"Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega)\">ω</a></span><a href=\"symbols/parentheses.html\" class=\"sym-link\" title=\"Right grouping / binder domain / ordered pair / application parenthesis\">)</a>",
@@ -5686,8 +5686,8 @@
       "side_condition_unicode": "",
       "side_condition_unicode_html": "",
       "side_condition_latex_linked": "",
-      "comment": "Not proved yet. Plan: Card(ω) by 3.64 DefIsCardinal with K := ω, so |ω| = ω is needed (3.41 DefCardinality). ω ⊆ |ω| requires the finite pigeonhole principle (no injection of ω into a natural number, by induction on ω); |ω| ⊆ ω requires ω ≼ ω, i.e. the identity on ω as an injective class function. Neither lemma is in the library yet.",
-      "verification": "Stated (No Kernel Proof Linked)"
+      "comment": "Kernel proof term thm_3_65_omega_cardinal (types/omega_cardinal.ML, exact statement Card(ω)): by 3.64 DefIsCardinal with K := ω it suffices that |ω| = ω (3.41 DefCardinality). |ω| ⊆ ω because ω ≼ ω, witnessed by the identity {p | ∃k((k ∈ ω) ∧ (p = (k, k)))}, an injective class function (Dunaev pairs of sets are sets, as subclasses of 𝒫⁴(k)). ω ⊆ |ω| combines two inductions: every ordinal a satisfies n ∈ a or a ⊆ n for n ∈ ω (EpsIndAx), and the finite pigeonhole principle ¬(ω ≼ n) for n ∈ ω (induction on n over classes X with no ∈-maximal element, so no new functions are built).",
+      "verification": "Verified"
     },
     {
       "index": 87,
