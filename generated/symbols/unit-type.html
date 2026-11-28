@@ -355,7 +355,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ASCII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
@@ -470,7 +470,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ASCII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -509,7 +509,7 @@
             </td>
           </tr>
           <tr class="external-row row-ansii">
-            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-num">Symbol (ASCII)</td>
             <td class="external-entity formula-cell">
               <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>Unit</code></div>
             </td>
@@ -554,7 +554,7 @@
             <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\quad}{\href{../symbols/parentheses.html}{(} \href{../symbols/unit-type.html}{\mathsf{Unit}} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/type-sort.html}{\mathsf{Type}} \href{../symbols/parentheses.html}{)} }\)</div></td>
           </tr>
           <tr class="external-row row-ansii">
-            <td class="external-num">Formation Rule (ANSII)</td>
+            <td class="external-num">Formation Rule (ASCII)</td>
             <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num">&nbsp;</span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/unit-type.html" class="sym-link" title="Unit / Singleton Top type in MKTD2-system (Unit : Type, Constructor: UUnit / TTop)">Unit</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/type-sort.html" class="sym-link" title="Conglomerate / Type sort (predicates on the conglomerate of all classes)">Type</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
@@ -602,6 +602,10 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-axiom">Axiom</span></td>
             </tr>
+            <tr>
+              <th class="field-name">In plain words</th>
+              <td class="field-value">&quot;True&quot; holds.</td>
+            </tr>
             <tr class="row-unicode">
               <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
@@ -615,7 +619,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Formula (ANSII)</th>
+              <th class="field-name">Formula (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></span></div>
               </td>
@@ -633,7 +637,7 @@
               </td>
             </tr>
             <tr class="row-scheme row-ansii">
-              <th class="field-name">Scheme of Types (ANSII)</th>
+              <th class="field-name">Scheme of Types (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><span class="ansi-bold-blue"><a href="../symbols/top-const.html" class="sym-link" title="Verum / logical truth constant (Constructor: HP TpTop)">T</a></span></div>
               </td>

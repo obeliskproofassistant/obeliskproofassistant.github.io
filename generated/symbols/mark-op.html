@@ -355,7 +355,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ASCII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
@@ -470,7 +470,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ASCII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -509,7 +509,7 @@
             </td>
           </tr>
           <tr class="external-row row-ansii">
-            <td class="external-num">Symbol (ANSII)</td>
+            <td class="external-num">Symbol (ASCII)</td>
             <td class="external-entity formula-cell">
               <div class="formula-ansii" style="font-size: 1.15rem; font-weight: 700;"><code>mark</code></div>
             </td>
@@ -554,7 +554,7 @@
             <td class="external-entity formula-cell"><div class="formula-latex">\(\dfrac{\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{n} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }{\href{../symbols/parentheses.html}{(} \href{../symbols/mark-op.html}{\mathrm{mark}} \href{../symbols/parentheses.html}{(} \href{../symbols/variables.html}{A} \href{../symbols/comma-delim.html}{,} ~\href{../symbols/variables.html}{n} \href{../symbols/parentheses.html}{)} ~\href{../symbols/typing-colon.html}{:} ~\href{../symbols/class-type.html}{\mathsf{Class}} \href{../symbols/dot-delim.html}{.} \href{../symbols/expression-sort.html}{\mathsf{Expression}} \href{../symbols/parentheses.html}{)} }\)</div></td>
           </tr>
           <tr class="external-row row-ansii">
-            <td class="external-num">Formation Rule (ANSII)</td>
+            <td class="external-num">Formation Rule (ASCII)</td>
             <td class="external-entity formula-cell"><div class="formula-ansii"><span class="infer-frac" title="Gentzen horizontal inference rule: premises above the line, conclusion below the line"><span class="infer-num"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable n">n</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span><span class="infer-bar" role="separator" aria-label="inference line"></span><span class="infer-den"><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/mark-op.html" class="sym-link" title="Dunaev class-list mark functional symbol (mark)">mark</a><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable A">A</a><a href="../symbols/comma-delim.html" class="sym-link" title="Tuple, sequent context, and binder body separator comma (,)">,</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable n">n</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a> <a href="../symbols/typing-colon.html" class="sym-link" title="Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type)">:</a> <a href="../symbols/class-type.html" class="sym-link" title="Default Type Class (universal conglomerate / constant-true predicate on classes)">Class</a><a href="../symbols/dot-delim.html" class="sym-link" title="Lambda binder body and sort projection separator (.)">.</a><a href="../symbols/expression-sort.html" class="sym-link" title="Parameterized syntactic AST expression sort constructor (A.Expression)">Expression</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></span></span></div></td>
           </tr>
           <tr class="external-row">
@@ -603,6 +603,10 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-def">Definition</span></td>
             </tr>
+            <tr>
+              <th class="field-name">In plain words</th>
+              <td class="field-value">Lists of classes are built from tagged copies of their entries, so that the entries may be proper classes.</td>
+            </tr>
             <tr class="row-unicode">
               <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
@@ -616,7 +620,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Formula (ANSII)</th>
+              <th class="field-name">Formula (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable Evaluated">Evaluated</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Kernel">Kernel</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Rule">Rule</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Definition">Definition</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
@@ -634,7 +638,7 @@
               </td>
             </tr>
             <tr class="row-scheme row-ansii">
-              <th class="field-name">Scheme of Types (ANSII)</th>
+              <th class="field-name">Scheme of Types (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><a href="../symbols/variables.html" class="sym-link" title="Free class variable Evaluated">Evaluated</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Kernel">Kernel</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Rule">Rule</a> <a href="../symbols/variables.html" class="sym-link" title="Free class variable Definition">Definition</a><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>

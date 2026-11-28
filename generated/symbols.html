@@ -355,7 +355,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ASCII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
@@ -470,7 +470,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ASCII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -489,7 +489,7 @@
     </div>
     <div class="note-box" style="margin-bottom: 1.5rem; line-height: 1.65;">
       <ul style="margin: 0.25rem 0; padding-left: 1.35rem;">
-        <li><strong>What a Symbol Is in Formal Logic (vs. Whitespace Lexemes)</strong>: In mathematical logic, a <em>symbol</em> of a formal language is an atomic syntactic constructor of the abstract syntax tree (AST) with a fixed arity and syntactic formation signature &mdash; <strong>not</strong> merely a whitespace-delimited English word. Consequently, multi-word postfix predicates such as <code>concentrated set values</code> (AST constructor <code>TpConcentrated</code>, Entry DefHasConcentratedValues (3.29)) and <code>flat proper values</code> (AST constructor <code>TpFlat</code>, Entry DefFlatValues (3.30)), which define <code>(F family) ⟷ ((F concentrated set values) ∧ (F flat proper values))</code> in Entry DefFamily (3.31), are each <strong>one single indivisible unary predicate symbol</strong>, tokenized and hyperlinked as a single unit across Unicode, LaTeX, and ANSII.</li>
+        <li><strong>What a Symbol Is in Formal Logic (vs. Whitespace Lexemes)</strong>: In mathematical logic, a <em>symbol</em> of a formal language is an atomic syntactic constructor of the abstract syntax tree (AST) with a fixed arity and syntactic formation signature &mdash; <strong>not</strong> merely a whitespace-delimited English word. Consequently, multi-word postfix predicates such as <code>concentrated set values</code> (AST constructor <code>TpConcentrated</code>, Entry DefHasConcentratedValues (3.29)) and <code>flat proper values</code> (AST constructor <code>TpFlat</code>, Entry DefFlatValues (3.30)), which define <code>(F family) ⟷ ((F concentrated set values) ∧ (F flat proper values))</code> in Entry DefFamily (3.31), are each <strong>one single indivisible unary predicate symbol</strong>, tokenized and hyperlinked as a single unit across Unicode, LaTeX, and ASCII.</li>
         <li><strong>Syntactic Formation Types vs. Semantic Interpretation Types</strong>: Every symbol carries two complementary type signatures: (1) its <strong>Syntactic Formation Type (Arity / AST Sort Signature)</strong> specifying how it constructs a syntactic term or formula (e.g., <code>Class.Expression → Class.Expression</code> for a unary functional symbol, <code>Class.Expression → Fm</code> for a unary predicate symbol, <code>Fm × Fm → Fm</code> for a binary logical connective, and <code>Variable × Fm → Class.Expression</code> for the class comprehension binder <code>{x | 𝛗}</code>), and (2) its <strong>Semantic Interpretation Type</strong> under Tarski valuation <code>⟦·⟧</code> (e.g., <code>Class → Class</code> or <code>Class → Bool</code>).</li>
         <li><strong>The Four Non-Variable Symbol Classes</strong>: (a) <strong>Functional Symbols</strong> (0-ary constants <code>∅, 𝒱, On, ω : Class.Expression</code>; unary/binary/mixfix term constructors <code>𝒫(X), ⋃X, ⋂X, Dom(F), A∪B, A∩B, F(x), f[A], {a}, {a,b}, (A,B), |C|, Restrict(F,A), TransfiniteRec(G)</code>); (b) <strong>Predicate Symbols</strong> (primitive <code>∈, =</code> and defined prefix/infix/postfix relation constructors <code>⊆, ⪯, ≺, set, proper, singleton, set-valued, concentrated set values, flat proper values, family, class-function, injective, function, Tr, Ord, Card, Ind, Hereditary, Powerful, Pairful, Tight, universe</code> producing formulas in <code>Fm</code>); (c) <strong>Logical Connectives</strong> (<code>¬, ∧, ∨, —→, ⟷, ⊤, ⊥</code> on <code>Fm</code>); and (d) <strong>Variable-Binding Operators (Binders)</strong> (quantifiers <code>∀, ∃, ∃!, !</code>, class comprehension <code>{x | 𝛗}</code>, descriptors <code>ι, ε</code>, abstraction <code>λ, Π, Σ</code>, and explicit substitution <code>let v = t in 𝛗</code>).</li>
       </ul>
@@ -947,7 +947,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/enc.html" class="sym-link"><code>^code</code></a></div>
               </td>
@@ -986,7 +986,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/mu-interpretation.html" class="sym-link"><code>mu_Variable</code></a></div>
               </td>
@@ -1025,7 +1025,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/mu-interpretation.html" class="sym-link"><code>mu_Nat</code></a></div>
               </td>
@@ -1064,7 +1064,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/mu-interpretation.html" class="sym-link"><code>mu_A</code></a></div>
               </td>
@@ -1103,7 +1103,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/typing-colon.html" class="sym-link"><code>::</code></a></div>
               </td>
@@ -1142,7 +1142,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>==&gt;</code></a></div>
               </td>
@@ -1181,7 +1181,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/expression-sort.html" class="sym-link"><code>|-&gt;</code></a></div>
               </td>
@@ -1220,7 +1220,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>o</code></a></div>
               </td>
@@ -1259,7 +1259,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/exists-uniq-binder.html" class="sym-link"><code>exists!</code></a></div>
               </td>
@@ -1298,7 +1298,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/theory-tau.html" class="sym-link"><code>Tau</code></a></div>
               </td>
@@ -1337,7 +1337,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/theory-fau.html" class="sym-link"><code>Fau</code></a></div>
               </td>
@@ -1376,7 +1376,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/theory-eau.html" class="sym-link"><code>Eau</code></a></div>
               </td>
@@ -1415,7 +1415,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/theory-wau.html" class="sym-link"><code>W</code></a></div>
               </td>
@@ -1454,7 +1454,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/universal-class-const.html" class="sym-link"><code>V</code></a></div>
               </td>
@@ -1493,7 +1493,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/power-op.html" class="sym-link"><code>Power</code></a></div>
               </td>
@@ -1532,7 +1532,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>alpha</code></a></div>
               </td>
@@ -1571,7 +1571,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>beta</code></a></div>
               </td>
@@ -1610,7 +1610,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>gamma</code></a></div>
               </td>
@@ -1649,7 +1649,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>phi</code></a></div>
               </td>
@@ -1688,7 +1688,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>psi</code></a></div>
               </td>
@@ -1727,7 +1727,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>chi</code></a></div>
               </td>
@@ -1766,7 +1766,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/antiquotation.html" class="sym-link"><code>[|</code></a></div>
               </td>
@@ -1805,7 +1805,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/antiquotation.html" class="sym-link"><code>|]</code></a></div>
               </td>
@@ -1844,7 +1844,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/metalevel-brackets.html" class="sym-link"><code>{|</code></a></div>
               </td>
@@ -1883,7 +1883,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/metalevel-brackets.html" class="sym-link"><code>|}</code></a></div>
               </td>
@@ -1922,7 +1922,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/explicit-substitution.html" class="sym-link"><code>(||</code></a></div>
               </td>
@@ -1961,7 +1961,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/explicit-substitution.html" class="sym-link"><code>||)</code></a></div>
               </td>
@@ -2000,7 +2000,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/quotation.html" class="sym-link"><code>&lt;|</code></a></div>
               </td>
@@ -2039,7 +2039,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/quotation.html" class="sym-link"><code>|&gt;</code></a></div>
               </td>
@@ -2078,7 +2078,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/quotation.html" class="sym-link"><code>&lt;</code></a></div>
               </td>
@@ -2117,7 +2117,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/quotation.html" class="sym-link"><code>&gt;</code></a></div>
               </td>
@@ -2156,7 +2156,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/emb.html" class="sym-link"><code>Emb</code></a></div>
               </td>
@@ -2195,7 +2195,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/unit-type.html" class="sym-link"><code>Unit</code></a></div>
               </td>
@@ -2234,7 +2234,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/void-type.html" class="sym-link"><code>Void</code></a></div>
               </td>
@@ -2273,7 +2273,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/iff-conn.html" class="sym-link"><code>&lt;--&gt;</code></a></div>
               </td>
@@ -2312,7 +2312,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/iff-conn.html" class="sym-link"><code>&lt;--&gt;</code></a></div>
               </td>
@@ -2351,7 +2351,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/iff-conn.html" class="sym-link"><code>&lt;--&gt;</code></a></div>
               </td>
@@ -2390,7 +2390,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>--&gt;</code></a></div>
               </td>
@@ -2429,7 +2429,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>--&gt;</code></a></div>
               </td>
@@ -2468,7 +2468,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>--&gt;</code></a></div>
               </td>
@@ -2507,7 +2507,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>--&gt;</code></a></div>
               </td>
@@ -2546,7 +2546,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>&lt;--</code></a></div>
               </td>
@@ -2585,7 +2585,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>&lt;--</code></a></div>
               </td>
@@ -2624,7 +2624,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>&lt;--</code></a></div>
               </td>
@@ -2663,7 +2663,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/impl-conn.html" class="sym-link"><code>&lt;--</code></a></div>
               </td>
@@ -2702,7 +2702,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/type-iff.html" class="sym-link"><code>&lt;-&gt;</code></a></div>
               </td>
@@ -2741,7 +2741,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>-&gt;</code></a></div>
               </td>
@@ -2780,7 +2780,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-arrow.html" class="sym-link"><code>&lt;-</code></a></div>
               </td>
@@ -2819,7 +2819,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/prod-type.html" class="sym-link"><code>*</code></a></div>
               </td>
@@ -2858,7 +2858,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/and-conn.html" class="sym-link"><code>/\</code></a></div>
               </td>
@@ -2897,7 +2897,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/or-conn.html" class="sym-link"><code>\/</code></a></div>
               </td>
@@ -2936,7 +2936,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bot-const.html" class="sym-link"><code>F</code></a></div>
               </td>
@@ -2975,7 +2975,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/top-const.html" class="sym-link"><code>T</code></a></div>
               </td>
@@ -3014,7 +3014,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/forall-binder.html" class="sym-link"><code>forall</code></a></div>
               </td>
@@ -3053,7 +3053,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/exists-binder.html" class="sym-link"><code>exists</code></a></div>
               </td>
@@ -3092,7 +3092,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/in-pred.html" class="sym-link"><code>in</code></a></div>
               </td>
@@ -3131,7 +3131,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/notin-pred.html" class="sym-link"><code>notin</code></a></div>
               </td>
@@ -3170,7 +3170,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/sub-pred.html" class="sym-link"><code>c=</code></a></div>
               </td>
@@ -3209,7 +3209,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/emptyset-const.html" class="sym-link"><code>EmptySet</code></a></div>
               </td>
@@ -3248,7 +3248,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bigunion-op.html" class="sym-link"><code>Union</code></a></div>
               </td>
@@ -3287,7 +3287,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/biginter-op.html" class="sym-link"><code>Inter</code></a></div>
               </td>
@@ -3326,7 +3326,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/binunion-op.html" class="sym-link"><code>u+</code></a></div>
               </td>
@@ -3365,7 +3365,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bininter-op.html" class="sym-link"><code>n+</code></a></div>
               </td>
@@ -3404,7 +3404,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/turnstile-derivability.html" class="sym-link"><code>|-</code></a></div>
               </td>
@@ -3443,7 +3443,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/turnstile-derivability.html" class="sym-link"><code>---</code></a></div>
               </td>
@@ -3482,7 +3482,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/card-leq-pred.html" class="sym-link"><code>=&lt;=</code></a></div>
               </td>
@@ -3521,7 +3521,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/card-lt-pred.html" class="sym-link"><code>&lt;</code></a></div>
               </td>
@@ -3560,7 +3560,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/definitional-eq.html" class="sym-link"><code>===</code></a></div>
               </td>
@@ -3599,7 +3599,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/formula-metavariables.html" class="sym-link"><code>Gamma</code></a></div>
               </td>
@@ -3638,7 +3638,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/sigma-binder.html" class="sym-link"><code>Sigma</code></a></div>
               </td>
@@ -3677,7 +3677,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/pi-binder.html" class="sym-link"><code>Pi</code></a></div>
               </td>
@@ -3716,7 +3716,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/lambda-binder.html" class="sym-link"><code>fn</code></a></div>
               </td>
@@ -3755,7 +3755,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/iota-binder.html" class="sym-link"><code>iota</code></a></div>
               </td>
@@ -3794,7 +3794,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/eps-binder.html" class="sym-link"><code>eps</code></a></div>
               </td>
@@ -3833,7 +3833,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-comprehension.html" class="sym-link"><code>kappa</code></a></div>
               </td>
@@ -3872,7 +3872,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/omega-const.html" class="sym-link"><code>omega</code></a></div>
               </td>
@@ -3911,7 +3911,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/neg-conn.html" class="sym-link"><code>~</code></a></div>
               </td>
@@ -3950,7 +3950,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/empty-list-const.html" class="sym-link"><code>[]</code></a></div>
               </td>
@@ -3989,7 +3989,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-comprehension.html" class="sym-link"><code>{</code></a></div>
               </td>
@@ -4028,7 +4028,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-comprehension.html" class="sym-link"><code>}</code></a></div>
               </td>
@@ -4067,7 +4067,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-comprehension.html" class="sym-link"><code>|</code></a></div>
               </td>
@@ -4106,7 +4106,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/parentheses.html" class="sym-link"><code>(</code></a></div>
               </td>
@@ -4145,7 +4145,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/parentheses.html" class="sym-link"><code>)</code></a></div>
               </td>
@@ -4184,7 +4184,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/typing-colon.html" class="sym-link"><code>:</code></a></div>
               </td>
@@ -4223,7 +4223,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/typing-colon.html" class="sym-link"><code>@</code></a></div>
               </td>
@@ -4262,7 +4262,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/comma-delim.html" class="sym-link"><code>,</code></a></div>
               </td>
@@ -4301,7 +4301,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/dot-delim.html" class="sym-link"><code>.</code></a></div>
               </td>
@@ -4340,7 +4340,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/uniq-binder.html" class="sym-link"><code>!</code></a></div>
               </td>
@@ -4379,7 +4379,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/subst-slash.html" class="sym-link"><code>/</code></a></div>
               </td>
@@ -4418,7 +4418,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/numeral-0.html" class="sym-link"><code>0</code></a></div>
               </td>
@@ -4457,7 +4457,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/numeral-1.html" class="sym-link"><code>1</code></a></div>
               </td>
@@ -4496,7 +4496,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/numeral-2.html" class="sym-link"><code>2</code></a></div>
               </td>
@@ -4535,7 +4535,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/numeral-3.html" class="sym-link"><code>3</code></a></div>
               </td>
@@ -4574,7 +4574,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/neq-pred.html" class="sym-link"><code>!=</code></a></div>
               </td>
@@ -4613,7 +4613,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/eq-pred.html" class="sym-link"><code>=</code></a></div>
               </td>
@@ -4652,7 +4652,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/valof-op.html" class="sym-link"><code>valOf</code></a></div>
               </td>
@@ -4691,7 +4691,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/mu-interpretation.html" class="sym-link"><code>mu_A</code></a></div>
               </td>
@@ -4730,7 +4730,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/model-const.html" class="sym-link"><code>Model</code></a></div>
               </td>
@@ -4769,7 +4769,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-type.html" class="sym-link"><code>Class</code></a></div>
               </td>
@@ -4808,7 +4808,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/set-pred.html" class="sym-link"><code>Set</code></a></div>
               </td>
@@ -4847,7 +4847,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/set-pred.html" class="sym-link"><code>set</code></a></div>
               </td>
@@ -4886,7 +4886,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/proper-pred.html" class="sym-link"><code>proper</code></a></div>
               </td>
@@ -4925,7 +4925,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/universal-class-const.html" class="sym-link"><code>V</code></a></div>
               </td>
@@ -4964,7 +4964,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/trans-pred.html" class="sym-link"><code>Tr</code></a></div>
               </td>
@@ -5003,7 +5003,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ord-pred.html" class="sym-link"><code>Ord</code></a></div>
               </td>
@@ -5042,7 +5042,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/on-const.html" class="sym-link"><code>On</code></a></div>
               </td>
@@ -5081,7 +5081,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/dom-op.html" class="sym-link"><code>Dom</code></a></div>
               </td>
@@ -5120,7 +5120,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-if-then-else.html" class="sym-link"><code>IF</code></a></div>
               </td>
@@ -5159,7 +5159,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-if-then-else.html" class="sym-link"><code>THEN</code></a></div>
               </td>
@@ -5198,7 +5198,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-if-then-else.html" class="sym-link"><code>ELSE</code></a></div>
               </td>
@@ -5237,7 +5237,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-if-then-else.html" class="sym-link"><code>FI</code></a></div>
               </td>
@@ -5276,7 +5276,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/simple-if.html" class="sym-link"><code>simple_if</code></a></div>
               </td>
@@ -5315,7 +5315,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/conditionals-if-dep.html" class="sym-link"><code>if_dep</code></a></div>
               </td>
@@ -5354,7 +5354,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/conditionals-if-dep.html" class="sym-link"><code>if_dep</code></a></div>
               </td>
@@ -5393,7 +5393,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/singleton-pred.html" class="sym-link"><code>singleton</code></a></div>
               </td>
@@ -5432,7 +5432,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/set-valued-pred.html" class="sym-link"><code>set-valued</code></a></div>
               </td>
@@ -5471,7 +5471,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/concentrated-pred.html" class="sym-link"><code>concentrated set values</code></a></div>
               </td>
@@ -5510,7 +5510,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/flat-pred.html" class="sym-link"><code>flat proper values</code></a></div>
               </td>
@@ -5549,7 +5549,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/family-pred.html" class="sym-link"><code>family</code></a></div>
               </td>
@@ -5588,7 +5588,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/family-pred.html" class="sym-link"><code>Family</code></a></div>
               </td>
@@ -5627,7 +5627,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/class-func-pred.html" class="sym-link"><code>class-function</code></a></div>
               </td>
@@ -5666,7 +5666,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/injective-pred.html" class="sym-link"><code>injective</code></a></div>
               </td>
@@ -5705,7 +5705,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-pred.html" class="sym-link"><code>function</code></a></div>
               </td>
@@ -5744,7 +5744,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/func-pred.html" class="sym-link"><code>Func</code></a></div>
               </td>
@@ -5783,7 +5783,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/semi-singleton-pred.html" class="sym-link"><code>semi-singleton</code></a></div>
               </td>
@@ -5822,7 +5822,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/sss-pred.html" class="sym-link"><code>sss</code></a></div>
               </td>
@@ -5861,7 +5861,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/hereditary-pred.html" class="sym-link"><code>Hereditary</code></a></div>
               </td>
@@ -5900,7 +5900,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/powerful-pred.html" class="sym-link"><code>Powerful</code></a></div>
               </td>
@@ -5939,7 +5939,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/pairful-pred.html" class="sym-link"><code>Pairful</code></a></div>
               </td>
@@ -5978,7 +5978,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/tight-pred.html" class="sym-link"><code>Tight</code></a></div>
               </td>
@@ -6017,7 +6017,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/mark-op.html" class="sym-link"><code>mark</code></a></div>
               </td>
@@ -6056,7 +6056,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ordered-pair.html" class="sym-link"><code>opairK</code></a></div>
               </td>
@@ -6095,7 +6095,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/pr1-op.html" class="sym-link"><code>pr1</code></a></div>
               </td>
@@ -6134,7 +6134,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/pr2-op.html" class="sym-link"><code>pr2</code></a></div>
               </td>
@@ -6173,7 +6173,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/nat-model-pred.html" class="sym-link"><code>NatModel</code></a></div>
               </td>
@@ -6212,7 +6212,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ind-pred.html" class="sym-link"><code>Ind</code></a></div>
               </td>
@@ -6251,7 +6251,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/card-pred.html" class="sym-link"><code>Card</code></a></div>
               </td>
@@ -6290,7 +6290,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/universe-pred.html" class="sym-link"><code>universe</code></a></div>
               </td>
@@ -6329,7 +6329,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/limit-ord-pred.html" class="sym-link"><code>LimitOrd</code></a></div>
               </td>
@@ -6368,7 +6368,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/indexed-union-closed-pred.html" class="sym-link"><code>IndexedUnionClosed</code></a></div>
               </td>
@@ -6407,7 +6407,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/v-stage-laws-pred.html" class="sym-link"><code>VStageLaws</code></a></div>
               </td>
@@ -6446,7 +6446,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/v-stage-graph-const.html" class="sym-link"><code>VStageGraph</code></a></div>
               </td>
@@ -6485,7 +6485,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/set-rank-laws-pred.html" class="sym-link"><code>SetRankLaws</code></a></div>
               </td>
@@ -6524,7 +6524,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/set-rank-graph-const.html" class="sym-link"><code>SetRankGraph</code></a></div>
               </td>
@@ -6563,7 +6563,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/restrict-op.html" class="sym-link"><code>Restrict</code></a></div>
               </td>
@@ -6602,7 +6602,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/transfinite-approx-pred.html" class="sym-link"><code>TransfiniteApprox</code></a></div>
               </td>
@@ -6641,7 +6641,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/transfinite-rec-op.html" class="sym-link"><code>TransfiniteRec</code></a></div>
               </td>
@@ -6680,7 +6680,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/von-neumann-step-g-op.html" class="sym-link"><code>VonNeumannStepG</code></a></div>
               </td>
@@ -6719,7 +6719,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/subst-var-op.html" class="sym-link"><code>SubstVar</code></a></div>
               </td>
@@ -6758,7 +6758,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/pi-binder.html" class="sym-link"><code>PiModel</code></a></div>
               </td>
@@ -6797,7 +6797,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>H</code></a></div>
               </td>
@@ -6836,7 +6836,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>h</code></a></div>
               </td>
@@ -6875,7 +6875,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>I</code></a></div>
               </td>
@@ -6914,7 +6914,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>R</code></a></div>
               </td>
@@ -6953,7 +6953,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/eval.html" class="sym-link"><code>eval</code></a></div>
               </td>
@@ -6992,7 +6992,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/let-binder.html" class="sym-link"><code>let</code></a></div>
               </td>
@@ -7031,7 +7031,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/let-binder.html" class="sym-link"><code>in</code></a></div>
               </td>
@@ -7070,7 +7070,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/type-sort.html" class="sym-link"><code>Type</code></a></div>
               </td>
@@ -7109,7 +7109,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ctx-sort.html" class="sym-link"><code>Ctx</code></a></div>
               </td>
@@ -7148,7 +7148,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fm-sort.html" class="sym-link"><code>Fm</code></a></div>
               </td>
@@ -7187,7 +7187,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variable-sort.html" class="sym-link"><code>Variable</code></a></div>
               </td>
@@ -7226,7 +7226,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/expression-sort.html" class="sym-link"><code>Expression</code></a></div>
               </td>
@@ -7265,7 +7265,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/stmt-sort.html" class="sym-link"><code>Stmt</code></a></div>
               </td>
@@ -7304,7 +7304,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/theory-sort.html" class="sym-link"><code>Theory</code></a></div>
               </td>
@@ -7343,7 +7343,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/prf-sort.html" class="sym-link"><code>Prf</code></a></div>
               </td>
@@ -7382,7 +7382,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/lcewip-sort.html" class="sym-link"><code>Term</code></a></div>
               </td>
@@ -7421,7 +7421,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/lcewip-sort.html" class="sym-link"><code>LOE</code></a></div>
               </td>
@@ -7460,7 +7460,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/lcewip-sort.html" class="sym-link"><code>LCEWIP</code></a></div>
               </td>
@@ -7499,7 +7499,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/enc.html" class="sym-link"><code>Enc</code></a></div>
               </td>
@@ -7538,7 +7538,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/dec.html" class="sym-link"><code>Dec</code></a></div>
               </td>
@@ -7577,7 +7577,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/emb.html" class="sym-link"><code>Emb</code></a></div>
               </td>
@@ -7616,7 +7616,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fv-op.html" class="sym-link"><code>Fm.FV</code></a></div>
               </td>
@@ -7655,7 +7655,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fv-op.html" class="sym-link"><code>Ctx.FV</code></a></div>
               </td>
@@ -7694,7 +7694,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fv-op.html" class="sym-link"><code>ClassTerm.FV</code></a></div>
               </td>
@@ -7733,7 +7733,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fv-op.html" class="sym-link"><code>FV</code></a></div>
               </td>
@@ -7772,7 +7772,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ifv-pred.html" class="sym-link"><code>Fm.IFV</code></a></div>
               </td>
@@ -7811,7 +7811,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ifv-pred.html" class="sym-link"><code>Ctx.IFV</code></a></div>
               </td>
@@ -7850,7 +7850,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ifv-pred.html" class="sym-link"><code>ClassTerm.IFV</code></a></div>
               </td>
@@ -7889,7 +7889,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ifv-pred.html" class="sym-link"><code>IFV</code></a></div>
               </td>
@@ -7928,7 +7928,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ffi-pred.html" class="sym-link"><code>Fm.FFI</code></a></div>
               </td>
@@ -7967,7 +7967,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ffi-pred.html" class="sym-link"><code>ClassTerm.FFI</code></a></div>
               </td>
@@ -8006,7 +8006,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/ffi-pred.html" class="sym-link"><code>FFI</code></a></div>
               </td>
@@ -8045,7 +8045,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/expression-sort.html" class="sym-link"><code>ClassTerm</code></a></div>
               </td>
@@ -8084,7 +8084,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/nfv-pred.html" class="sym-link"><code>NFV</code></a></div>
               </td>
@@ -8123,7 +8123,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/fresh-pred.html" class="sym-link"><code>Fresh</code></a></div>
               </td>
@@ -8162,7 +8162,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/name-sort.html" class="sym-link"><code>Name</code></a></div>
               </td>
@@ -8201,7 +8201,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bool-sort.html" class="sym-link"><code>Bool</code></a></div>
               </td>
@@ -8240,7 +8240,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bool-true.html" class="sym-link"><code>true</code></a></div>
               </td>
@@ -8279,7 +8279,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/bool-false.html" class="sym-link"><code>false</code></a></div>
               </td>
@@ -8318,7 +8318,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/unit-type.html" class="sym-link"><code>Unit</code></a></div>
               </td>
@@ -8357,7 +8357,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/void-type.html" class="sym-link"><code>Void</code></a></div>
               </td>
@@ -8396,7 +8396,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/prop-sort.html" class="sym-link"><code>Prop</code></a></div>
               </td>
@@ -8435,7 +8435,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>A</code></a></div>
               </td>
@@ -8474,7 +8474,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>B</code></a></div>
               </td>
@@ -8513,7 +8513,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>C</code></a></div>
               </td>
@@ -8552,7 +8552,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>D</code></a></div>
               </td>
@@ -8591,7 +8591,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>F</code></a></div>
               </td>
@@ -8630,7 +8630,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>G</code></a></div>
               </td>
@@ -8669,7 +8669,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>K</code></a></div>
               </td>
@@ -8708,7 +8708,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>L</code></a></div>
               </td>
@@ -8747,7 +8747,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>Q</code></a></div>
               </td>
@@ -8786,7 +8786,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>T_e</code></a></div>
               </td>
@@ -8825,7 +8825,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>T_e</code></a></div>
               </td>
@@ -8864,7 +8864,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>U</code></a></div>
               </td>
@@ -8903,7 +8903,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>W</code></a></div>
               </td>
@@ -8942,7 +8942,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>X</code></a></div>
               </td>
@@ -8981,7 +8981,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>Y</code></a></div>
               </td>
@@ -9020,7 +9020,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>Z</code></a></div>
               </td>
@@ -9059,7 +9059,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>a</code></a></div>
               </td>
@@ -9098,7 +9098,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>b</code></a></div>
               </td>
@@ -9137,7 +9137,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>c</code></a></div>
               </td>
@@ -9176,7 +9176,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>f</code></a></div>
               </td>
@@ -9215,7 +9215,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>g</code></a></div>
               </td>
@@ -9254,7 +9254,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>k</code></a></div>
               </td>
@@ -9293,7 +9293,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>m</code></a></div>
               </td>
@@ -9332,7 +9332,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>n</code></a></div>
               </td>
@@ -9371,7 +9371,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>p</code></a></div>
               </td>
@@ -9410,7 +9410,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>q</code></a></div>
               </td>
@@ -9449,7 +9449,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>s</code></a></div>
               </td>
@@ -9488,7 +9488,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>t</code></a></div>
               </td>
@@ -9527,7 +9527,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>t_1</code></a></div>
               </td>
@@ -9566,7 +9566,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>t_2</code></a></div>
               </td>
@@ -9605,7 +9605,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>t1</code></a></div>
               </td>
@@ -9644,7 +9644,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>t2</code></a></div>
               </td>
@@ -9683,7 +9683,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>u</code></a></div>
               </td>
@@ -9722,7 +9722,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>v</code></a></div>
               </td>
@@ -9761,7 +9761,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>w</code></a></div>
               </td>
@@ -9800,7 +9800,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>x</code></a></div>
               </td>
@@ -9839,7 +9839,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>y</code></a></div>
               </td>
@@ -9878,7 +9878,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Symbol (ANSII)</th>
+              <th class="field-name">Symbol (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><a href="symbols/variables.html" class="sym-link"><code>z</code></a></div>
               </td>

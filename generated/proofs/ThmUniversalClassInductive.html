@@ -355,7 +355,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ASCII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
@@ -470,7 +470,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ASCII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -511,6 +511,10 @@
               <th class="field-name">Classification</th>
               <td class="field-value"><span class="badge badge-theorem">Theorem</span></td>
             </tr>
+            <tr>
+              <th class="field-name">In plain words</th>
+              <td class="field-value">V is inductive.</td>
+            </tr>
             <tr class="row-unicode">
               <th class="field-name">Formula (Unicode)</th>
               <td class="field-value formula-cell">
@@ -524,7 +528,7 @@
               </td>
             </tr>
             <tr class="row-ansii">
-              <th class="field-name">Formula (ANSII)</th>
+              <th class="field-name">Formula (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: object formula)">0</span><span class="ansi-bold-blue"><a href="../symbols/ind-pred.html" class="sym-link" title="Is successor-inductive (Peano-inductive) unary predicate symbol (Constructor: HP (TpInd ...))">Ind</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/universal-class-const.html" class="sym-link" title="Universal class V constant (Constructor: HC CpSets)">V</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>
@@ -542,7 +546,7 @@
               </td>
             </tr>
             <tr class="row-scheme row-ansii">
-              <th class="field-name">Scheme of Types (ANSII)</th>
+              <th class="field-name">Scheme of Types (ASCII)</th>
               <td class="field-value formula-cell">
                 <div class="formula-ansii"><span class="metalevel-badge" title="Metalevel 0 (+0 prefixes meta-theory: Obelisk scheme of types)">0</span><span class="ansi-bold-blue"><a href="../symbols/ind-pred.html" class="sym-link" title="Is successor-inductive (Peano-inductive) unary predicate symbol (Constructor: HP (TpInd ...))">Ind</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Left grouping / binder domain / ordered pair / application parenthesis">(</a><span class="ansi-bold-yellow"><a href="../symbols/universal-class-const.html" class="sym-link" title="Universal class V constant (Constructor: HC CpSets)">V</a></span><a href="../symbols/parentheses.html" class="sym-link" title="Right grouping / binder domain / ordered pair / application parenthesis">)</a></div>
               </td>

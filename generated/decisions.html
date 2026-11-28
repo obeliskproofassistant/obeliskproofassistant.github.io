@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Obelisk design decisions</title>
+<style>body{background:#fff;color:#1a1a1a;margin:0;font-family:Georgia,'Times New Roman',serif;font-size:18px;line-height:1.6}main{max-width:40rem;margin:0 auto;padding:2rem 1rem 4rem}h1{font-size:1.6rem;font-weight:normal;margin:0 0 .3rem}h2{font-size:1.15rem;margin:2.2rem 0 .4rem}p{margin:.5rem 0}a{color:#0645ad}.lead{color:#555;font-size:.95rem}.index{font-size:.95rem;line-height:1.9}section{border-top:1px solid #e5e5e5}footer{color:#777;font-size:.85rem;margin-top:3rem}</style>
+</head>
+<body>
+<main>
+<h1>Obelisk design decisions</h1>
+<p class="lead">Questions about how Obelisk is set up, each with the answer that is used. Words are explained in the <a href="glossary.html">glossary</a>. <a href="../index.html">Back to the site</a>.</p>
+<p class="index"><a href="#names">What do MKTD1-framework, MKTD1-theory and MKTD1-system mean?</a> &middot; <a href="#base-theory">What is the base theory 𝘛?</a> &middot; <a href="#regularity">Why is entry 3.14 about &quot;regularity&quot;?</a> &middot; <a href="#universe">Is a universe in Obelisk the textbook Grothendieck universe?</a> &middot; <a href="#entry-names">Why is DefSigmaModel a theorem?</a> &middot; <a href="#assumed">Why are 5.01 (Löb) and 5.02 (Gödel II) numbered like theorems?</a> &middot; <a href="#dunaev-pair">Is there more than one Dunaev pair?</a> &middot; <a href="#ascii">What is the &quot;ASCII&quot; notation?</a> &middot; <a href="#plain-words">What is the row &quot;In plain words&quot; on entry pages?</a> &middot; <a href="#start">Where should a new reader start?</a> &middot; <a href="#sources">What is the source of truth?</a></p>
+<section id="names">
+<h2>What do MKTD1-framework, MKTD1-theory and MKTD1-system mean?</h2>
+<p>They are three different things, and only these names are used for them (operator instruction).</p>
+<p>MKTD1-framework: the language and the rules of logic, without the axioms of class theory. The reflection rules Omnis and Credo are inference rules, so they belong to the framework.</p>
+<p>MKTD1-theory: everything derivable in the framework from the MKTD axioms.</p>
+<p>MKTD1-system: the program that checks the derivations. The same holds for MKTD2. See <a href="glossary.html#mktd1">MKTD1</a> and <a href="glossary.html#framework">framework</a> in the glossary.</p>
+</section>
+<section id="base-theory">
+<h2>What is the base theory 𝘛?</h2>
+<p>𝘛 is the theory whose axioms are the MKTD axioms: the entries with status &quot;Postulated (Kernel Axiom)&quot;. In the present MKTD1 kernel, however, every axiom is stated directly in 𝘍, the theory of the <a href="glossary.html#intended-model">intended model</a>. 𝘛 occurs only in statements about theories: <a href="proofs/AxmBaseSubtheoryOfFull.html">entry 3.75</a> (every theorem of 𝘛 is a theorem of 𝘍), the schemata 4.05 and 4.06, and the assumed statements 5.01 and 5.02.</p>
+<p>Stating the axioms in 𝘛 as well would be a change to the kernel; it is not done.</p>
+</section>
+<section id="regularity">
+<h2>Why is entry 3.14 about &quot;regularity&quot;?</h2>
+<p>Its statement is ∈-induction: if 𝒫(X) ⊆ X, then V ⊆ X (<a href="proofs/AxmRegularity.html">entry 3.14</a>). This form is fixed and is not changed (operator instruction). The textbook axiom of regularity says that every nonempty set has an ∈-minimal element; in classical class theory it follows from ∈-induction, but Obelisk does not prove this yet. The entry title now says &quot;∈-induction&quot;.</p>
+</section>
+<section id="universe">
+<h2>Is a universe in Obelisk the textbook Grothendieck universe?</h2>
+<p>Not in the same form. Obelisk's definition (<a href="proofs/DefGrothendieckUniverse.html">entry 3.68</a>) asks for ω ∈ U and that U is transitive, hereditary, powerful, tight and pairful. The textbook definition asks for transitivity and closure under pairs, power sets and unions of families indexed by elements. Obelisk does not prove that the two are equivalent.</p>
+<p>The theorems about universes that need closure under unions state it as an extra hypothesis (for example <a href="proofs/ThmUniverseInterOnIsLimitOrdinal.html">entry 3.87</a>), so they do not depend on such a proof.</p>
+</section>
+<section id="entry-names">
+<h2>Why is DefSigmaModel a theorem?</h2>
+<p>An entry keeps the name it was given first, because the site, the book and other pages link to it. The name's prefix (Def, Axm, Rul, Thm) shows what the entry was when it was created; its status shows what the kernel knows now. <a href="proofs/DefSigmaModel.html">Entry 3.38</a> began as a definition and is now a proved theorem.</p>
+<p>New entries get the prefix of their kind.</p>
+</section>
+<section id="assumed">
+<h2>Why are 5.01 (Löb) and 5.02 (Gödel II) numbered like theorems?</h2>
+<p>They keep their numbers so that links stay valid. Their status, &quot;Postulated (Unchecked Kernel Schema, Not Derived)&quot;, says that they are assumed, not proved (<a href="proofs/ThmLoeb.html">5.01</a>, <a href="proofs/ThmSecondIncompleteness.html">5.02</a>). An informal outline of a proof is shown and is labelled as not checked by the kernel.</p>
+</section>
+<section id="dunaev-pair">
+<h2>Is there more than one Dunaev pair?</h2>
+<p>No. The Dunaev pair is the one defined in <a href="proofs/DefDunaevOrderedPair.html">entry 3.76</a> (see the <a href="glossary.html#dunaev-pair">glossary</a>). A different tagging, {0, {x}}, together with the claim that it was formalised in Isabelle/ZF, had been written by an AI on the author's personal site; it was not true and has been removed.</p>
+</section>
+<section id="ascii">
+<h2>What is the &quot;ASCII&quot; notation?</h2>
+<p>The third notation of every formula, using only ASCII characters (for example &quot;Card(omega)&quot;). It used to be labelled &quot;ANSII&quot;, which was a misspelling.</p>
+</section>
+<section id="plain-words">
+<h2>What is the row &quot;In plain words&quot; on entry pages?</h2>
+<p>One sentence that says what the formula means, for readers who do not read the formal notation. It is written by hand in set_theory_prover/docs/plain_words.txt and checked against the list of entries; the formula itself remains the exact statement.</p>
+</section>
+<section id="start">
+<h2>Where should a new reader start?</h2>
+<p>On the front page, with &quot;Theory at a Glance&quot; and the <a href="glossary.html#mktd">glossary</a>, then the catalogue of entries. The other hand-written pages of the site are reviewed one by one; each is either linked from the front page or archived.</p>
+</section>
+<section id="sources">
+<h2>What is the source of truth?</h2>
+<p>For mathematics (what is defined, assumed and proved): the entry registry of the MKTD1-system and the MKTD2 library, checked by the kernels; the site, the JSON report, the LaTeX statements in the book and the statuses are generated from it. For the meaning of words: docs/glossary.txt. For these answers: docs/decisions.txt. For design rules: FACTBOOK.md. The tool tools/check_references.py checks that the book and the sites name entries, numbers and statuses as the report does.</p>
+</section>
+<footer>Generated from set_theory_prover/docs/decisions.txt by program/glossary_page.ML.</footer>
+</main>
+</body>
+</html>

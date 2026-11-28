@@ -4,1610 +4,1610 @@
 Lightweight Markdown mirror of `generated/symbols.html` (230 registered tokens and 142 personal symbol reference pages).
 
 ### 1. `ᶜᵒᵈᵉ` (Goedel-Dunaev syntactic class code superscript (Constructor: HC (CpEnc ...)))
-- **ANSII**: `^code`
+- **ASCII**: `^code`
 - **LaTeX**: `{}^{\mathsf{code}}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/enc.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Goedel-Dunaev syntactic class code superscript (Constructor: HC (CpEnc ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 2. `μ_Variable` (Explicit Typed Term Interpretation / Valuation for Variable sort (mu_Variable))
-- **ANSII**: `mu_Variable`
+- **ASCII**: `mu_Variable`
 - **LaTeX**: `\mu_{\mathsf{Variable}}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/mu-interpretation.html`
 - **Definition**: [Primitive Semantic Valuation] Natural-Language Definition: Explicit valuation for the syntactic Variable sort.
 
 ### 3. `μ_Nat` (Explicit Typed Term Interpretation / Valuation for Nat sort (mu_Nat))
-- **ANSII**: `mu_Nat`
+- **ASCII**: `mu_Nat`
 - **LaTeX**: `\mu_{\mathsf{Nat}}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/mu-interpretation.html`
 - **Definition**: [Primitive Semantic Valuation] Natural-Language Definition: Explicit valuation for the Nat sort.
 
 ### 4. `μ_A` (Explicit Typed Term Interpretation / Valuation (mu_A : A.Expression -> Class.Expression))
-- **ANSII**: `mu_A`
+- **ASCII**: `mu_A`
 - **LaTeX**: `\mu_A`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/mu-interpretation.html`
 - **Definition**: [Primitive Semantic Valuation] Natural-Language Definition: Explicit Tarski-Dunaev valuation / interpretation mapping a syntactic expression of sort A.Expression to its semantic denotation in A.
 
 ### 5. `∷` (Meta-level AST constructor typing double-colon :: (Isabelle/Pure style, distinct from object-level typing : and class membership in))
-- **ANSII**: `::`
+- **ASCII**: `::`
 - **LaTeX**: `{::}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/typing-colon.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Meta-level AST constructor typing double-colon :: (Isabelle/Pure style, distinct from object-level typing : and class membership in) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 6. `⟾` (Meta-level functional AST constructor / higher-order binder arrow ==> (Isabelle/HOL4 style: genuine functional type in the metatheory, distinct from formula implication -->, MKTD2 type arrow ->, and set-function graph notation))
-- **ANSII**: `==>`
+- **ASCII**: `==>`
 - **LaTeX**: `{\color{#c084fc}{\Longrightarrow}}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/func-arrow.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Meta-level functional AST constructor / higher-order binder arrow ==&gt; (Isabelle/HOL4 style: genuine functional type in the metatheory, distinct from formula implication --&gt;, MKTD2 type arrow -&gt;, and set-function graph notation) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 7. `↦` (AST constructor display / surface notation projection |-> (dStr))
-- **ANSII**: `|->`
+- **ASCII**: `|->`
 - **LaTeX**: `\mapsto`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/expression-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: AST constructor display / surface notation projection |-&gt; (dStr) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 8. `∘` (Meta-level constructor composition (o))
-- **ANSII**: `o`
+- **ASCII**: `o`
 - **LaTeX**: `\circ`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/func-arrow.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Meta-level constructor composition (o) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 9. `∃!` (Exists and unique quantifier binder (Constructor: HP (TpExisUniq ...)))
-- **ANSII**: `exists!`
+- **ASCII**: `exists!`
 - **LaTeX**: `\exists!`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/exists-uniq-binder.html`
 - **Definition**: [Defined Binder] Formal Definition (DefExistsUniqueBinder (4.05)): Unique existence binder: (∃!(v:A)⟦𝛗⟧) ⟷ ((∃(v:A)⟦𝛗⟧) ∧ (!(v:A)⟦𝛗⟧)).
 
 ### 10. `𝘛` (Recursively Enumerable Base Class Theory T (Constructor: HI IpTau))
-- **ANSII**: `Tau`
+- **ASCII**: `Tau`
 - **LaTeX**: `\mathcal{T}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/theory-tau.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Recursively Enumerable Base Class Theory T (Constructor: HI IpTau) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 11. `𝘍` (Non-r.e. Theory F of the Intended Model (Constructor: HI IpFau))
-- **ANSII**: `Fau`
+- **ASCII**: `Fau`
 - **LaTeX**: `\mathcal{F}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/theory-fau.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Non-r.e. Theory F of the Intended Model (Constructor: HI IpFau) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 12. `𝘌` (Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK})
-- **ANSII**: `Eau`
+- **ASCII**: `Eau`
 - **LaTeX**: `\mathcal{E}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/theory-eau.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Unspecified Elementary Metatheory E in {I\Sigma_1, PA, T, NBG, MK} &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 13. `𝘞` (Schematic Formal Theory Variable W (W : Theory))
-- **ANSII**: `W`
+- **ASCII**: `W`
 - **LaTeX**: `\mathcal{W}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/theory-wau.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Schematic Formal Theory Variable W (W : Theory) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 14. `𝒱` (Universal class of all sets V (Constructor: HC CpSets))
-- **ANSII**: `V`
+- **ASCII**: `V`
 - **LaTeX**: `\mathcal{V}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/universal-class-const.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Universal class of all sets V (Constructor: HC CpSets) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 15. `𝒫` (Powerclass / Exponent unary functional symbol (Constructor: HC (CpPower ...)))
-- **ANSII**: `Power`
+- **ASCII**: `Power`
 - **LaTeX**: `\mathcal{P}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/power-op.html`
 - **Definition**: [Defined / Axiomatic Operator] Formal Specification (AxmExponent (3.13)): Powerclass / exponent operator: 𝒫(X) = {y | y ⊆ X}; by Axiom AxmExponent (3.13), if x is a set then 𝒫(x) is a set.
 
 ### 16. `𝛂` (Formula variable alpha (𝛂 : Fm))
-- **ANSII**: `alpha`
+- **ASCII**: `alpha`
 - **LaTeX**: `\boldsymbol{\alpha}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable alpha (𝛂 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 17. `𝛃` (Formula variable beta (𝛃 : Fm))
-- **ANSII**: `beta`
+- **ASCII**: `beta`
 - **LaTeX**: `\boldsymbol{\beta}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable beta (𝛃 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 18. `𝛄` (Formula variable gamma (𝛄 : Fm))
-- **ANSII**: `gamma`
+- **ASCII**: `gamma`
 - **LaTeX**: `\boldsymbol{\gamma}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable gamma (𝛄 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 19. `𝛗` (Formula variable phi (𝛗 : Fm))
-- **ANSII**: `phi`
+- **ASCII**: `phi`
 - **LaTeX**: `\boldsymbol{\varphi}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable phi (𝛗 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 20. `𝛙` (Formula variable psi (𝛙 : Fm))
-- **ANSII**: `psi`
+- **ASCII**: `psi`
 - **LaTeX**: `\boldsymbol{\psi}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable psi (𝛙 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 21. `𝛘` (Formula variable chi (𝛘 : Fm))
-- **ANSII**: `chi`
+- **ASCII**: `chi`
 - **LaTeX**: `\boldsymbol{\chi}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Formula variable chi (𝛘 : Fm) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 22. `⟦` (Left antiquotation bracket (Constructor: EAnti))
-- **ANSII**: `[|`
+- **ASCII**: `[|`
 - **LaTeX**: `[\![ `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/antiquotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left antiquotation bracket ⟦u⟧ (constructor EAnti, NOTATION.txt): takes u : A.Expression one metalevel down to A by splicing it into the surrounding quotation. Evaluation is the separate constructor EEval, written eval(u). Dual of quotation ‹ › / ⟨ ⟩.
 
 ### 23. `⟧` (Right antiquotation bracket (Constructor: EAnti))
-- **ANSII**: `|]`
+- **ASCII**: `|]`
 - **LaTeX**: ` ]\!]`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/antiquotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right antiquotation bracket closing ⟦u⟧.
 
 ### 24. `⦃` (Left variable-name bracket {| x |} (Constructor: IVariable_t))
-- **ANSII**: `{|`
+- **ASCII**: `{|`
 - **LaTeX**: `\{\!\lvert `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/metalevel-brackets.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left binder-variable splice bracket ⦃v⦄ injecting a metavariable v:Variable into a binding site or bound occurrence.
 
 ### 25. `⦄` (Right variable-name bracket {| x |} (Constructor: IVariable_t))
-- **ANSII**: `|}`
+- **ASCII**: `|}`
 - **LaTeX**: `\rvert\!\}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/metalevel-brackets.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right binder-variable splice bracket ⦃v⦄.
 
 ### 26. `⦇` (Left bracket of the explicit substitution e(|t/x|) (ESubst))
-- **ANSII**: `(||`
+- **ASCII**: `(||`
 - **LaTeX**: `\llparenthesis `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/explicit-substitution.html`
 - **Definition**: [Primitive Metalevel Delimiter] Natural-Language Definition: Left metalevel substitution / grouping delimiter ⦇...⦈.
 
 ### 27. `⦈` (Right bracket of the explicit substitution e(|t/x|) (ESubst))
-- **ANSII**: `||)`
+- **ASCII**: `||)`
 - **LaTeX**: `\rrparenthesis `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/explicit-substitution.html`
 - **Definition**: [Primitive Metalevel Delimiter] Natural-Language Definition: Right metalevel substitution / grouping delimiter ⦇...⦈.
 
 ### 28. `‹` (Left object-language syntactic quotation bracket &lt;phi&gt; (Constructor: HQuote))
-- **ANSII**: `<|`
+- **ASCII**: `<|`
 - **LaTeX**: `\langle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left syntactic quotation bracket ‹e› reifying an object-language formula or term e:A into its syntactic AST representation of sort A.Expression (e.g., Fm = Bool.Expression).
 
 ### 29. `›` (Right object-language syntactic quotation bracket &lt;phi&gt; (Constructor: HQuote))
-- **ANSII**: `|>`
+- **ASCII**: `|>`
 - **LaTeX**: `\rangle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right syntactic quotation bracket ‹e› closing a quoted syntactic expression of sort A.Expression.
 
 ### 30. `⟨` (Left quotation angle bracket (LaTeX form of the quotation))
-- **ANSII**: `<`
+- **ASCII**: `<`
 - **LaTeX**: `\langle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Left angle bracket: syntactic quotation ⟨φ⟩ (LaTeX \langle\varphi\rangle; Unicode form ‹φ›, NOTATION.txt), constructor HQuote : A → A.Expression. With a comma, ⟨a, b⟩ is an ordered or dependent pair. Angle brackets are never antiquotation brackets; antiquotation is ⟦u⟧.
 
 ### 31. `⟩` (Right quotation angle bracket (LaTeX form of the quotation))
-- **ANSII**: `>`
+- **ASCII**: `>`
 - **LaTeX**: `\rangle `
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/quotation.html`
 - **Definition**: [Primitive Reflection Operator] Natural-Language Definition: Right angle bracket closing a quotation ⟨φ⟩ or a pair ⟨a, b⟩ (see the left bracket).
 
 ### 32. `↪` (Syntactic / semantic theory embedding arrow (Emb))
-- **ANSII**: `Emb`
+- **ASCII**: `Emb`
 - **LaTeX**: `\hookrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/emb.html`
 - **Definition**: [Primitive Metatheoretic Operator] Natural-Language Definition: Syntactic/semantic theory embedding arrow (Emb).
 
 ### 33. `𝟙` (Unit / Top type in MKTD2-system (ASCII: Unit, LaTeX: 1 / top, Constructor: UUnit / TTop))
-- **ANSII**: `Unit`
+- **ASCII**: `Unit`
 - **LaTeX**: `\mathbf{1}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/unit-type.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Unit / Top type in MKTD2-system (ASCII: Unit, LaTeX: 1 / top, Constructor: UUnit / TTop) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 34. `𝟘` (Void / Empty / Bottom type in MKTD2-system (ASCII: Void, LaTeX: 0 / bottom, Constructor: UVoid / TBottom))
-- **ANSII**: `Void`
+- **ASCII**: `Void`
 - **LaTeX**: `\mathbf{0}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/void-type.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Void / Empty / Bottom type in MKTD2-system (ASCII: Void, LaTeX: 0 / bottom, Constructor: UVoid / TBottom) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 35. `←→` (Logical bi-implication / equivalence connective on formulas (MKTD1-system: &lt;--&gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...)))
-- **ANSII**: `<-->`
+- **ASCII**: `<-->`
 - **LaTeX**: `\longleftrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/iff-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Logical bi-implication / equivalence connective on formulas (MKTD1-system: &amp;lt;--&amp;gt; / longleftrightarrow: leftarrow+rightarrow, Constructor: HP (TpIff ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 36. `⟷` (Logical bi-implication / equivalence connective on formulas (MKTD1-system: &lt;--&gt; / longleftrightarrow, Constructor: HP (TpIff ...)))
-- **ANSII**: `<-->`
+- **ASCII**: `<-->`
 - **LaTeX**: `\longleftrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/iff-conn.html`
 - **Definition**: [Defined Connective] Formal Definition: Logical equivalence (“𝛂 if and only if 𝛃”): (𝛂 ⟷ 𝛃) ≡ ((𝛂 → 𝛃) ∧ (𝛃 → 𝛂)).
 
 ### 37. `⇔` (Logical bi-implication / equivalence connective on formulas (MKTD1-system: &lt;--&gt; / longleftrightarrow / Leftrightarrow, Constructor: HP (TpIff ...)))
-- **ANSII**: `<-->`
+- **ASCII**: `<-->`
 - **LaTeX**: `\Leftrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/iff-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Logical bi-implication / equivalence connective on formulas (MKTD1-system: &amp;lt;--&amp;gt; / longleftrightarrow / Leftrightarrow, Constructor: HP (TpIff ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 38. `—→` (Material implication connective on formulas (MKTD1-system: --&gt; / longrightarrow, Constructor: HP (TpImpl ...)))
-- **ANSII**: `-->`
+- **ASCII**: `-->`
 - **LaTeX**: `\longrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Material implication connective on formulas (MKTD1-system: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 39. `-→` (Material implication connective on formulas (MKTD1-system: --&gt; / longrightarrow, Constructor: HP (TpImpl ...)))
-- **ANSII**: `-->`
+- **ASCII**: `-->`
 - **LaTeX**: `\longrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Material implication connective on formulas (MKTD1-system: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 40. `⟶` (Material implication connective on formulas (MKTD1-system: --&gt; / longrightarrow, Constructor: HP (TpImpl ...)))
-- **ANSII**: `-->`
+- **ASCII**: `-->`
 - **LaTeX**: `\longrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Material implication connective on formulas (MKTD1-system: --&amp;gt; / longrightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 41. `⇒` (Material implication connective on formulas (MKTD1-system: --&gt; / longrightarrow / Rightarrow, Constructor: HP (TpImpl ...)))
-- **ANSII**: `-->`
+- **ASCII**: `-->`
 - **LaTeX**: `\Rightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Material implication connective on formulas (MKTD1-system: --&amp;gt; / longrightarrow / Rightarrow, Constructor: HP (TpImpl ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 42. `⇐` (Converse implication connective on formulas (MKTD1-system: &lt;-- / Leftarrow))
-- **ANSII**: `<--`
+- **ASCII**: `<--`
 - **LaTeX**: `\Leftarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Converse implication connective on formulas (MKTD1-system: &amp;lt;-- / Leftarrow) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 43. `⟸` (Converse implication connective on formulas (MKTD1-system: &lt;-- / Longleftarrow))
-- **ANSII**: `<--`
+- **ASCII**: `<--`
 - **LaTeX**: `\Longleftarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Converse implication connective on formulas (MKTD1-system: &amp;lt;-- / Longleftarrow) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 44. `—↤` (Converse implication connective on formulas (MKTD1-system: &lt;-- / longleftarrow))
-- **ANSII**: `<--`
+- **ASCII**: `<--`
 - **LaTeX**: `\longleftarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Converse implication connective on formulas (MKTD1-system: &amp;lt;-- / longleftarrow) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 45. `↤-` (Converse implication connective on formulas (MKTD1-system: &lt;-- / leftarrow-))
-- **ANSII**: `<--`
+- **ASCII**: `<--`
 - **LaTeX**: `\leftarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/impl-conn.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Converse implication connective on formulas (MKTD1-system: &amp;lt;-- / leftarrow-) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 46. `↔` (Type-level equivalence / bi-arrow (MKTD2-system: &lt;-&gt; / leftrightarrow, Constructor: TIff))
-- **ANSII**: `<->`
+- **ASCII**: `<->`
 - **LaTeX**: `\leftrightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/type-iff.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Type-level equivalence / bi-arrow (MKTD2-system: &amp;lt;-&amp;gt; / leftrightarrow, Constructor: TIff) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 47. `→` (Function space / type arrow (MKTD2-system: -&gt; / rightarrow, Constructor: TArrow / Pi))
-- **ANSII**: `->`
+- **ASCII**: `->`
 - **LaTeX**: `\rightarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/func-arrow.html`
 - **Definition**: [Primitive Connective] Natural-Language Definition: Material implication (“if 𝛂 then 𝛃”) and function type arrow, characterized by A01 (Weakening), A02 (Frege distribution), and Rule RulModusPonens (1.14) (Modus Ponens).
 
 ### 48. `↤` (Leftward arrow (MKTD2-system: &lt;- / leftarrow))
-- **ANSII**: `<-`
+- **ASCII**: `<-`
 - **LaTeX**: `\leftarrow`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/func-arrow.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Leftward arrow (MKTD2-system: &amp;lt;- / leftarrow) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 49. `×` (Binary Cartesian product type in MKTD2-system (ASCII: *, LaTeX: times, Constructor: UBinaryProduct / TProd))
-- **ANSII**: `*`
+- **ASCII**: `*`
 - **LaTeX**: `\times`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/prod-type.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Binary Cartesian product type in MKTD2-system (ASCII: *, LaTeX: times, Constructor: UBinaryProduct / TProd) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 50. `∧` (Logical conjunction connective (Constructor: HP (TpAnd ...)))
-- **ANSII**: `/\`
+- **ASCII**: `/\`
 - **LaTeX**: `\land`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/and-conn.html`
 - **Definition**: [Primitive / Axiomatic Connective] Natural-Language Definition: Logical conjunction (“both 𝛂 and 𝛃 hold”), characterized by A03 (left projection), A04 (right projection), and A05 (conjunction introduction).
 
 ### 51. `∨` (Logical disjunction connective (Constructor: HP (TpOr ...)))
-- **ANSII**: `\/`
+- **ASCII**: `\/`
 - **LaTeX**: `\lor`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/or-conn.html`
 - **Definition**: [Primitive / Axiomatic Connective] Natural-Language Definition: Inclusive logical disjunction (“at least one of 𝛂 or 𝛃 holds”), characterized by A06, A07 (injections), and A08 (case analysis).
 
 ### 52. `⊥` (Falsum / logical falsity constant (Constructor: HP TpBot))
-- **ANSII**: `F`
+- **ASCII**: `F`
 - **LaTeX**: `\bot`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/bot-const.html`
 - **Definition**: [Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition: Falsum / logical absurdity (“the unconditionally false proposition / canonical false value in Bool”), characterized by Axiom A11 (AxmPropExFalso (1.11): ⊥ → 𝛂, Ex Falso Quodlibet).
 
 ### 53. `⊤` (Verum / logical truth constant (Constructor: HP TpTop))
-- **ANSII**: `T`
+- **ASCII**: `T`
 - **LaTeX**: `\top`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/top-const.html`
 - **Definition**: [Primitive / Axiomatic] Natural-Language &amp; Axiomatic Definition: Verum / logical truth constant (“the unconditionally true proposition / canonical truth value in Bool”), postulated as a theorem by Axiom A13 (AxmPropVerum (1.13): ⊤).
 
 ### 54. `∀` (Universal quantifier binder (Constructor: HP (TpFora ...)))
-- **ANSII**: `forall`
+- **ASCII**: `forall`
 - **LaTeX**: `\forall`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/forall-binder.html`
 - **Definition**: [Primitive Binder &amp; Defined Bounded Macro] Definition: Universal quantifier (“for all x:A, 𝛗(x) holds”), governed by Rules RulForallInstantiation (2.02) (FI) and RulForallAbstraction (2.04) (FA). Bounded form is a defined macro: ∀(x∈Y),𝛗 ≡ ∀(x:Class),((x∈Y)→𝛗).
 
 ### 55. `∃` (Existential quantifier binder (Constructor: HP (TpExis ...)))
-- **ANSII**: `exists`
+- **ASCII**: `exists`
 - **LaTeX**: `\exists`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/exists-binder.html`
 - **Definition**: [Primitive Binder &amp; Defined Bounded Macro] Definition: Existential quantifier (“there exists at least one x:A such that 𝛗(x) holds”), governed by Rules RulExistsInstantiation (2.03) (EI) and RulExistsAbstraction (2.05) (EA). Bounded form is a defined macro: ∃(x∈Y),𝛗 ≡ ∃(x:Class),((x∈Y)∧𝛗).
 
 ### 56. `∈` (Class membership binary predicate symbol (Constructor: HP (TpIn ...)))
-- **ANSII**: `in`
+- **ASCII**: `in`
 - **LaTeX**: `\in`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/in-pred.html`
 - **Definition**: [Primitive / Undefinable] Natural-Language Definition: Binary class-membership relation (“class x is an element/member of class Y”). Undefinable primitive at the root of the class-theoretic ontology; governed by Class Comprehension (RulClassComprehension (3.01) / AxmMetaClassComprehension (4.06)), Sethood (DefIsSet (3.02)), and Extensionality (AxmExtensionality (3.10)). Never used for typing (use :).
 
 ### 57. `∉` (Negated class membership binary predicate symbol)
-- **ANSII**: `notin`
+- **ASCII**: `notin`
 - **LaTeX**: `\notin`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/notin-pred.html`
 - **Definition**: [Defined Relation] Natural-Language &amp; Formal Definition: Negated class membership relation (“class x is not an element of class Y”), defined as (x ∉ Y) ⟷ ¬(x ∈ Y).
 
 ### 58. `⊆` (Subclass inclusion binary predicate symbol (Constructor: HP (TpSub ...)))
-- **ANSII**: `c=`
+- **ASCII**: `c=`
 - **LaTeX**: `\subseteq`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/sub-pred.html`
 - **Definition**: [Defined Relation] Formal Definition (DefSubclass (3.06)): Subclass inclusion: ∀(X:Class)∀(Y:Class)((X ⊆ Y) ⟷ (∀(z:Class)((z∈X) → (z∈Y)))).
 
 ### 59. `∅` (Empty set / empty class constant (Constructor: HC CpEmptySet))
-- **ANSII**: `EmptySet`
+- **ASCII**: `EmptySet`
 - **LaTeX**: `\emptyset`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/emptyset-const.html`
 - **Definition**: [Defined Constant] Formal Definition (DefEmptySet (3.04)): Empty set/class: ∅ = {x | ⊥} — the unique class containing no elements.
 
 ### 60. `⋃` (Unary union functional symbol (Constructor: HC (CpUnion ...)))
-- **ANSII**: `Union`
+- **ASCII**: `Union`
 - **LaTeX**: `\bigcup`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/bigunion-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefUnaryUnion (3.19)): Unary union: ∀(X:Class)(⋃X = {z | ∃(y:Class)((z∈y) ∧ (y∈X))}).
 
 ### 61. `⋂` (Unary intersection functional symbol (Constructor: HC (CpInter ...)))
-- **ANSII**: `Inter`
+- **ASCII**: `Inter`
 - **LaTeX**: `\bigcap`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/biginter-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefUnaryIntersection (3.20)): Unary intersection: ∀(X:Class)(⋂X = {z | ∀(y:Class)((y∈X) → (z∈y))}).
 
 ### 62. `∪` (Binary union functional symbol (Constructor: HC (CpBinUnion ...)))
-- **ANSII**: `u+`
+- **ASCII**: `u+`
 - **LaTeX**: `\cup`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/binunion-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefBinaryUnion (3.53)): Binary union: ∀(A:Class)∀(B:Class)((A ∪ B) = {x | (x∈A) ∨ (x∈B)}).
 
 ### 63. `∩` (Binary intersection functional symbol (Constructor: HC (CpBinInter ...)))
-- **ANSII**: `n+`
+- **ASCII**: `n+`
 - **LaTeX**: `\cap`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/bininter-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefBinaryIntersection (3.54)): Binary intersection: ∀(A:Class)∀(B:Class)((A ∩ B) = {x | (x∈A) ∧ (x∈B)}).
 
 ### 64. `⊢` (Formal derivability turnstile predicate symbol (Constructor: HP (TpHolds (ApStmt ...))))
-- **ANSII**: `|-`
+- **ASCII**: `|-`
 - **LaTeX**: `\vdash`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/turnstile-derivability.html`
 - **Definition**: [Primitive Metatheoretic Judgment] Natural-Language Definition: Formal derivability turnstile (𝘞, Γ ⊢ 𝛗) asserting that syntactic formula 𝛗:Fm is formally derivable in theory 𝘞:Theory from hypothesis context Γ:Ctx.
 
 ### 65. `───` (Gentzen horizontal inference bar separating rule premises (above) from conclusion (below))
-- **ANSII**: `---`
+- **ASCII**: `---`
 - **LaTeX**: `\dfrac`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/turnstile-derivability.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Gentzen horizontal inference bar separating rule premises (above) from conclusion (below) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 66. `⪯` (Less than or equal in cardinality predicate symbol (Constructor: HP (TpLessEq ...)))
-- **ANSII**: `=<=`
+- **ASCII**: `=<=`
 - **LaTeX**: `\preceq`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/card-leq-pred.html`
 - **Definition**: [Defined Relation] Formal Definition (DefPiPredicateModel (3.39)): Cardinality injection order: (A ⪯ B) ⟷ ∃(f:Class)((f is injective) ∧ (A⊆Dom(f)) ∧ (f[A]⊆B)).
 
 ### 67. `≺` (Strictly less in cardinality predicate symbol (Constructor: HP (TpLess ...)))
-- **ANSII**: `<`
+- **ASCII**: `<`
 - **LaTeX**: `\prec`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/card-lt-pred.html`
 - **Definition**: [Defined Relation] Formal Definition (DefCardLess (3.42)): Strict cardinality order: (A ≺ B) ⟷ ¬(B ⪯ A).
 
 ### 68. `≡` (Definitional / syntactic identity symbol)
-- **ANSII**: `===`
+- **ASCII**: `===`
 - **LaTeX**: `\equiv`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/definitional-eq.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Definitional / syntactic identity symbol &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 69. `Γ` (Context variable Gamma (Γ : Ctx))
-- **ANSII**: `Gamma`
+- **ASCII**: `Gamma`
 - **LaTeX**: `\Gamma`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/formula-metavariables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Context variable Gamma (Γ : Ctx) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/formula-metavariables.html.
 
 ### 70. `Σ` (Dependent sum binder / type constructor (Sigma))
-- **ANSII**: `Sigma`
+- **ASCII**: `Sigma`
 - **LaTeX**: `\Sigma`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/sigma-binder.html`
 - **Definition**: [Defined Binder / Type Constructor] Formal Definition (DefSigmaModel (3.38)): Dependent sum over a family B: (x,y) ∈ Σ(B) ⟷ ((x∈Dom(B)) ∧ (y∈B(x))).
 
 ### 71. `Π` (Dependent product binder / type constructor (Pi))
-- **ANSII**: `Pi`
+- **ASCII**: `Pi`
 - **LaTeX**: `\Pi`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/pi-binder.html`
 - **Definition**: [Defined Binder / Type Constructor] Formal Definition (DefSigmaModel (3.38)): Dependent product over a family B: (f : Π(B)) ⟷ ((f is a family) ∧ (Dom(f)=Dom(B)) ∧ ∀(x∈Dom(B))(f(x)∈B(x))).
 
 ### 72. `λ` (Lambda abstraction binder (Constructor: CpLam))
-- **ANSII**: `fn`
+- **ASCII**: `fn`
 - **LaTeX**: `\lambda`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/lambda-binder.html`
 - **Definition**: [Defined / Primitive Binder] Formal Definition (DefSigmaModel (3.38)): Function / family abstraction (λ(x:A). t(x)); on classes, (λx. t) = {(x,s) | s sss t} satisfying (λx. t)(x) = t (ThmFamilyEvaluation (3.37)).
 
 ### 73. `ι` (Definite description binder (Constructor: HC (CpIota ...)))
-- **ANSII**: `iota`
+- **ASCII**: `iota`
 - **LaTeX**: `\iota`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/iota-binder.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Definite description binder (Constructor: HC (CpIota ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 74. `ε` (Hilbert epsilon choice binder (Constructor: HC (CpEps ...)))
-- **ANSII**: `eps`
+- **ASCII**: `eps`
 - **LaTeX**: `\varepsilon`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/eps-binder.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Hilbert epsilon choice binder (Constructor: HC (CpEps ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 75. `κ` (Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)))
-- **ANSII**: `kappa`
+- **ASCII**: `kappa`
 - **LaTeX**: `\kappa`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/class-comprehension.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 76. `ω` (Smallest successor-inductive ordinal and subseteq-minimal successor-inductive class (Constructor: HC CpOmega))
-- **ANSII**: `omega`
+- **ASCII**: `omega`
 - **LaTeX**: `\omega`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/omega-const.html`
 - **Definition**: [Defined Constant] Formal Definition (DefInductiveClass (3.55)): Smallest successor-inductive ordinal and ⊆-minimal successor-inductive class: ∀(x:Class)((x∈ω) ⟷ (∀(Q:Class)(Ind(Q) → (x∈Q)))).
 
 ### 77. `¬` (Logical negation connective (Constructor: HP (TpNeg ...)))
-- **ANSII**: `~`
+- **ASCII**: `~`
 - **LaTeX**: `\neg`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/neg-conn.html`
 - **Definition**: [Axiomatic / Defined Connective] Formal &amp; Natural-Language Definition: Logical negation (“not 𝛂”), characterized by A09 (¬𝛂)→(𝛂→⊥), A10, and A12 𝛂∨(¬𝛂).
 
 ### 78. `[]` (Empty hypothesis context [])
-- **ANSII**: `[]`
+- **ASCII**: `[]`
 - **LaTeX**: `[\,]`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/empty-list-const.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Empty hypothesis context [] &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 79. `{` (Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)))
-- **ANSII**: `{`
+- **ASCII**: `{`
 - **LaTeX**: `\{`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/class-comprehension.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 80. `}` (Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)))
-- **ANSII**: `}`
+- **ASCII**: `}`
 - **LaTeX**: `\}`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/class-comprehension.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 81. `|` (Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)))
-- **ANSII**: `|`
+- **ASCII**: `|`
 - **LaTeX**: `\mid`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/class-comprehension.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class comprehension binder { x | phi } (Constructor: HC (CpKappa ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 82. `(` (Left grouping / binder domain / ordered pair / application parenthesis)
-- **ANSII**: `(`
+- **ASCII**: `(`
 - **LaTeX**: `(`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/parentheses.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Left grouping / binder domain / ordered pair / application parenthesis &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 83. `)` (Right grouping / binder domain / ordered pair / application parenthesis)
-- **ANSII**: `)`
+- **ASCII**: `)`
 - **LaTeX**: `)`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/parentheses.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Right grouping / binder domain / ordered pair / application parenthesis &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 84. `:` (Typing judgment / conglomerate sort annotation colon (x:Class, A:Prop, T_e:Type))
-- **ANSII**: `:`
+- **ASCII**: `:`
 - **LaTeX**: `:`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/typing-colon.html`
 - **Definition**: [Primitive Kernel Judgment] Natural-Language Definition: Typing / conglomerate sort annotation (“term or variable t has type/conglomerate A”). Each type A : Type is a predicate on the conglomerate of all classes; Class is the constant-true predicate λ(C:Class).⊤.
 
 ### 85. `@` (Stored-type annotation operator (@ in [x@T], analogous to : in x:T))
-- **ANSII**: `@`
+- **ASCII**: `@`
 - **LaTeX**: `@`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/typing-colon.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Stored-type annotation operator (@ in [x@T], analogous to : in x:T) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 86. `,` (Tuple, sequent context, and binder body separator comma (,))
-- **ANSII**: `,`
+- **ASCII**: `,`
 - **LaTeX**: `,`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/comma-delim.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Tuple, sequent context, and binder body separator comma (,) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 87. `.` (Lambda binder body and sort projection separator (.))
-- **ANSII**: `.`
+- **ASCII**: `.`
 - **LaTeX**: `.`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/dot-delim.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Lambda binder body and sort projection separator (.) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 88. `!` (At-most-one / uniqueness quantifier binder (Constructor: HP (TpUniq ...)))
-- **ANSII**: `!`
+- **ASCII**: `!`
 - **LaTeX**: `!`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/uniq-binder.html`
 - **Definition**: [Defined Binder] Formal Definition (DefAtMostOneBinder (4.04)): At-most-one binder: (!(v:A)⟦𝛗⟧) ⟷ ∀(v₁:A)∀(v₂:A)((𝛗[v₁/v] ∧ 𝛗[v₂/v]) → (v₁ = v₂)).
 
 ### 89. `/` (Capture-avoiding substitution slash ([t/x]))
-- **ANSII**: `/`
+- **ASCII**: `/`
 - **LaTeX**: `/`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/subst-slash.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Capture-avoiding substitution slash ([t/x]) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 90. `0` (von Neumann natural number 0 = empty set)
-- **ANSII**: `0`
+- **ASCII**: `0`
 - **LaTeX**: `0`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/numeral-0.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: von Neumann natural number 0 = empty set &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 91. `1` (von Neumann natural number 1 = {0})
-- **ANSII**: `1`
+- **ASCII**: `1`
 - **LaTeX**: `1`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/numeral-1.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: von Neumann natural number 1 = {0} &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 92. `2` (von Neumann natural number 2 = {0,1})
-- **ANSII**: `2`
+- **ASCII**: `2`
 - **LaTeX**: `2`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/numeral-2.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: von Neumann natural number 2 = {0,1} &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 93. `3` (von Neumann natural number 3 = {0,1,2})
-- **ANSII**: `3`
+- **ASCII**: `3`
 - **LaTeX**: `3`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/numeral-3.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: von Neumann natural number 3 = {0,1,2} &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 94. `≠` (Extensional inequality binary predicate symbol)
-- **ANSII**: `!=`
+- **ASCII**: `!=`
 - **LaTeX**: `\neq`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/neq-pred.html`
 - **Definition**: [Defined Relation] Natural-Language &amp; Formal Definition: Negated identity relation (“X and Y denote distinct objects”), defined as (X ≠ Y) ⟷ ¬(X = Y).
 
 ### 95. `=` (Extensional equality binary predicate symbol (Constructor: HP (TpEq ...)))
-- **ANSII**: `=`
+- **ASCII**: `=`
 - **LaTeX**: `=`
 - **Category**: Operator / Connective / Constant
 - **Reference Page**: `symbols/eq-pred.html`
 - **Definition**: [Primitive / Extensional] Natural-Language Definition: Identity relation (“X and Y denote the same object”); on classes, characterized by Left/Right ∈-Soundness (RulClassComprehension (3.01)), Extensionality (∀(z:Class)((z∈X)⟷(z∈Y)))→(X=Y) (AxmExtensionality (3.10)), and Intensionality (AxmIntensionality (3.11)).
 
 ### 96. `valOf` (Evaluation of a function/family (Constructor: HC (CpValOf ...)))
-- **ANSII**: `valOf`
+- **ASCII**: `valOf`
 - **LaTeX**: `\mathsf{valOf}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/valof-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefDependentConditional (3.24)): Value / fiber evaluation of a class relation at argument x: F(x) = ⋃{y | (x,y) ∈ F}.
 
 ### 97. `mu_A` (Explicit Typed Term Interpretation / Valuation (mu_A : A.Expression -> Class.Expression))
-- **ANSII**: `mu_A`
+- **ASCII**: `mu_A`
 - **LaTeX**: `\mu_A`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/mu-interpretation.html`
 - **Definition**: [Primitive Semantic Valuation] Natural-Language Definition: Explicit Tarski-Dunaev valuation / interpretation mapping a syntactic expression of sort A.Expression to its semantic denotation in A.
 
 ### 98. `Model` (Inner set model constant (Model))
-- **ANSII**: `Model`
+- **ASCII**: `Model`
 - **LaTeX**: `\mathsf{Model}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/model-const.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Inner set model constant (Model) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 99. `Class` (Default Type Class (universal conglomerate / constant-true predicate on classes))
-- **ANSII**: `Class`
+- **ASCII**: `Class`
 - **LaTeX**: `\mathsf{Class}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-type.html`
 - **Definition**: [Primitive Default Type / Conglomerate] Natural-Language Definition: The default object type of all classes (both sets and proper classes); in conglomerate semantics, the constant-true predicate λ(C:Class).⊤.
 
 ### 100. `Set` (Is a set unary predicate symbol (Constructor: HP (TpSet ...)))
-- **ANSII**: `Set`
+- **ASCII**: `Set`
 - **LaTeX**: `\mathsf{Set}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/set-pred.html`
 - **Definition**: [Defined Predicate / Restricted Domain] Formal Definition (DefIsSet (3.02)): Denotes sethood (X set) ⟷ ∃(Y:Class)(X ∈ Y); note that variables in binders always use the default type Class, never Set.
 
 ### 101. `set` (Is a set unary predicate symbol (Constructor: HP (TpSet ...)))
-- **ANSII**: `set`
+- **ASCII**: `set`
 - **LaTeX**: `\mathsf{set}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/set-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefIsSet (3.02)): ∀(X:Class)((X set) ⟷ (∃(Y:Class)(X ∈ Y))) — a class is a set iff it is an element of some class.
 
 ### 102. `proper` (Is a proper class unary predicate symbol (Constructor: HP (TpProper ...)))
-- **ANSII**: `proper`
+- **ASCII**: `proper`
 - **LaTeX**: `\mathsf{proper}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/proper-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefIsProperClass (3.03)): ∀(K:Class)((K proper) ⟷ (¬(K set))) — a class is a proper class iff it is not a set.
 
 ### 103. `V` (Universal class V constant (Constructor: HC CpSets))
-- **ANSII**: `V`
+- **ASCII**: `V`
 - **LaTeX**: `\mathbf{V}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/universal-class-const.html`
 - **Definition**: [Defined Constant] Formal Definition (DefUniversalClass (3.05)): Universal class of all sets: 𝒱 = {x | ⊤} — the proper class whose elements are all sets.
 
 ### 104. `Tr` (Transitivity unary predicate symbol (Constructor: HP (TpTrans ...)))
-- **ANSII**: `Tr`
+- **ASCII**: `Tr`
 - **LaTeX**: `\mathrm{Tr}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/trans-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefTransitiveClass (3.15)): Transitive class predicate: ∀(X:Class)(Tr(X) ⟷ (∀(y:Class)((y∈X) → (y ⊆ X)))).
 
 ### 105. `Ord` (Ordinality unary predicate symbol (Constructor: HP (TpOrd ...)))
-- **ANSII**: `Ord`
+- **ASCII**: `Ord`
 - **LaTeX**: `\mathrm{Ord}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ord-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefOrdinalClass (3.16)): Ordinal class predicate: ∀(X:Class)(Ord(X) ⟷ (Tr(X) ∧ (∀(y:Class)((y∈X) → Tr(y))))).
 
 ### 106. `On` (Class of all ordinal sets On constant (Constructor: HC CpOn))
-- **ANSII**: `On`
+- **ASCII**: `On`
 - **LaTeX**: `\mathbf{On}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/on-const.html`
 - **Definition**: [Defined Constant] Formal Definition (DefClassOfOrdinals (3.17)): Class of all ordinal sets: On = {x | Ord(x)}.
 
 ### 107. `Dom` (Domain unary functional symbol (Constructor: HC (CpDom ...)))
-- **ANSII**: `Dom`
+- **ASCII**: `Dom`
 - **LaTeX**: `\mathrm{Dom}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/dom-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefBigDomain (3.21)): Domain of a class relation: Dom(F) = {x | ∃(y:Class)((x,y) ∈ F)}.
 
 ### 108. `IF` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
-- **ANSII**: `IF`
+- **ASCII**: `IF`
 - **LaTeX**: `\mathbf{IF}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧ = {⦃v⦄ | (⟦𝛙⟧ ∧ (⦃v⦄∈A)) ∨ ((¬⟦𝛙⟧) ∧ (⦃v⦄∈B))} where ¬(Enc(⦃v⦄) ∈ FV(𝛙:Fm)).
 
 ### 109. `THEN` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
-- **ANSII**: `THEN`
+- **ASCII**: `THEN`
 - **LaTeX**: `\mathbf{THEN}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Then-branch delimiter of class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧.
 
 ### 110. `ELSE` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
-- **ANSII**: `ELSE`
+- **ASCII**: `ELSE`
 - **LaTeX**: `\mathbf{ELSE}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Else-branch delimiter of class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧.
 
 ### 111. `FI` (Class conditional IF-THEN-ELSE-FI functional symbol (Constructor: EIf))
-- **ANSII**: `FI`
+- **ASCII**: `FI`
 - **LaTeX**: `\mathbf{FI}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-if-then-else.html`
 - **Definition**: [Defined Operator] Formal Definition (DefClassConditional (3.22)): Closing delimiter of class conditional ⟦IF ⟦𝛙⟧ THEN A ELSE B FI⟧.
 
 ### 112. `simple_if` (Polymorphic non-dependent conditional functional symbol (simple_if))
-- **ANSII**: `simple_if`
+- **ASCII**: `simple_if`
 - **LaTeX**: `\mathsf{simple\_if}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/simple-if.html`
 - **Definition**: [Defined Operator] Formal Definition (DefSimpleConditional (3.23)): Polymorphic non-dependent conditional over Tₑ:Type: simple_if(Tₑ,⊤,t₁,t₂)=t₁ ∧ simple_if(Tₑ,⊥,t₁,t₂)=t₂.
 
 ### 113. `if_dep` (Dependent conditional functional symbol (if_dep))
-- **ANSII**: `if_dep`
+- **ASCII**: `if_dep`
 - **LaTeX**: `\mathsf{if}_{\mathsf{dep}}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/conditionals-if-dep.html`
 - **Definition**: [Defined Operator] Formal Definition (DefDependentConditional (3.24)): Dependent conditional over type family Tₑ:Bool→Type: (if_dep(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (if_dep(⊤,t₁,t₂)=t₁) ∧ (if_dep(⊥,t₁,t₂)=t₂).
 
 ### 114. `if_dep` (Dependent conditional functional symbol (if_dep))
-- **ANSII**: `if_dep`
+- **ASCII**: `if_dep`
 - **LaTeX**: `\mathsf{if}_{\mathsf{dep}}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/conditionals-if-dep.html`
 - **Definition**: [Defined Operator] Formal Definition (DefDependentConditional (3.24)): Dependent conditional over type family Tₑ:Bool→Type: (if_dep(b,t₁,t₂):⟦Tₑ(b)⟧) ∧ (if_dep(⊤,t₁,t₂)=t₁) ∧ (if_dep(⊥,t₁,t₂)=t₂).
 
 ### 115. `singleton` (Has exactly one element unary predicate symbol (Constructor: HP (TpSingleton ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `singleton`
+- **ASCII**: `singleton`
 - **LaTeX**: `\mathsf{singleton}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/singleton-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm)] Formal Definition (DefIsSingleton (3.27)): ∀(s:Class)((s singleton) ⟷ ∃(y:Class)((y set) ∧ (s = {y}))).
 
 ### 116. `set-valued` (Is set-valued unary predicate symbol (Constructor: HP (TpSetValued ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `set-valued`
+- **ASCII**: `set-valued`
 - **LaTeX**: `\mathsf{set\text{-}valued}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/set-valued-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm)] Formal Definition (DefIsSetValued (3.28)): ∀(F:Class)((F set-valued) ⟷ ∀(x:Class)((x ∈ Dom(F)) —→ (F(x) set))).
 
 ### 117. `concentrated set values` (Has concentrated set values unary multi-word predicate symbol (Constructor: HP (TpConcentrated ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `concentrated set values`
+- **ASCII**: `concentrated set values`
 - **LaTeX**: `\mathsf{concentrated\ set\ values}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/concentrated-pred.html`
 - **Definition**: [Defined Multi-Word Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm, AST Constructor: TpConcentrated)] Formal Definition (DefHasConcentratedValues (3.29)): Single indivisible multi-word predicate symbol: ∀(F:Class)((F concentrated set values) ⟷ ∀(x:Class)(((x ∈ Dom(F)) ∧ (F(x) set)) —→ ({y | (x,y) ∈ F} singleton))).
 
 ### 118. `flat proper values` (Has flat proper values unary multi-word predicate symbol (Constructor: HP (TpFlat ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `flat proper values`
+- **ASCII**: `flat proper values`
 - **LaTeX**: `\mathsf{flat\ proper\ values}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/flat-pred.html`
 - **Definition**: [Defined Multi-Word Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm, AST Constructor: TpFlat)] Formal Definition (DefFlatValues (3.30)): Single indivisible multi-word predicate symbol: ∀(F:Class)((F flat proper values) ⟷ ∀(x:Class)(((x ∈ Dom(F)) ∧ (F(x) proper)) —→ ∀(y:Class)(((x,y) ∈ F) ⟷ (y ∈ F(x))))).
 
 ### 119. `family` (Is a family unary predicate symbol (Constructor: HP (TpFamily ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `family`
+- **ASCII**: `family`
 - **LaTeX**: `\mathsf{family}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/family-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol / Sort (Syntactic Type: Class.Expression → Fm, AST Constructor: TpFamily)] Formal Definition (DefFamily (3.31)): Set-and-class-valued family defined via the two multi-word predicate symbols: ∀(F:Class)((F family) ⟷ ((F concentrated set values) ∧ (F flat proper values))).
 
 ### 120. `Family` (Family predicate / sort (Constructor: HP (TpFamily ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `Family`
+- **ASCII**: `Family`
 - **LaTeX**: `\mathsf{Family}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/family-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol / Sort (Syntactic Type: Class.Expression → Fm, AST Constructor: TpFamily)] Formal Definition (DefFamily (3.31)): Set-and-class-valued family: ∀(F:Class)((F family) ⟷ ((F concentrated set values) ∧ (F flat proper values))).
 
 ### 121. `class-function` (Is a class-function unary predicate symbol (Constructor: HP (TpClassFunc ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `class-function`
+- **ASCII**: `class-function`
 - **LaTeX**: `\mathsf{class\text{-}function}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/class-func-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm, AST Constructor: TpClassFunc)] Formal Definition (DefClassFunction (3.32)): ∀(F:Class)((F class-function) ⟷ ((F family) ∧ (F set-valued))).
 
 ### 122. `injective` (Is injective unary predicate symbol (Constructor: HP (TpInjective ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `injective`
+- **ASCII**: `injective`
 - **LaTeX**: `\mathsf{injective}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/injective-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm, AST Constructor: TpInjective)] Formal Definition (DefInjectiveClassFunction (3.33)): ∀(F:Class)((F injective) ⟷ ((F class-function) ∧ ∀(x:Class)∀(y:Class)(((x ∈ Dom(F)) ∧ ((y ∈ Dom(F)) ∧ (F(x) = F(y)))) —→ (x = y)))).
 
 ### 123. `function` (Is a set-sized function unary predicate symbol (Constructor: HP (TpFunc ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `function`
+- **ASCII**: `function`
 - **LaTeX**: `\mathsf{function}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/func-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol / Sort (Syntactic Type: Class.Expression → Fm, AST Constructor: TpFunc)] Formal Definition (DefSetFunction (3.34)): Set-sized function: ∀(f:Class)((f function) ⟷ ((f class-function) ∧ (f set))).
 
 ### 124. `Func` (Function predicate / sort (Constructor: HP (TpFunc ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `Func`
+- **ASCII**: `Func`
 - **LaTeX**: `\mathsf{Func}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/func-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol / Sort (Syntactic Type: Class.Expression → Fm, AST Constructor: TpFunc)] Formal Definition (DefSetFunction (3.34)): Set-sized function: ∀(f:Class)((f function) ⟷ ((f class-function) ∧ (f set))).
 
 ### 125. `semi-singleton` (Has at most one element unary predicate symbol (Constructor: TpSymbol("semi-singleton", ...), Syntactic Type: Class.Expression -> Fm))
-- **ANSII**: `semi-singleton`
+- **ASCII**: `semi-singleton`
 - **LaTeX**: `\mathsf{semi\text{-}singleton}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/semi-singleton-pred.html`
 - **Definition**: [Defined Unary Postfix Predicate Symbol (Syntactic Type: Class.Expression → Fm)] Formal Definition (DefSemiSingleton (3.35)): At-most-one-element class: ∀(s:Class)((s semi-singleton) ⟷ ∀(u:Class)∀(v:Class)(((u ∈ s) ∧ (v ∈ s)) —→ (u = v))).
 
 ### 126. `sss` (Semi-singleton subset binary predicate symbol (Constructor: TpSymbol("sss", ...), Syntactic Type: Class.Expression * Class.Expression -> Fm))
-- **ANSII**: `sss`
+- **ASCII**: `sss`
 - **LaTeX**: `\mathsf{sss}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/sss-pred.html`
 - **Definition**: [Defined Relation] Formal Definition (DefSemiSingletonSubclass (3.36)): Semi-singleton subclass relation: (s sss A) ⟷ ((s semi-singleton) ∧ (s ⊆ A)).
 
 ### 127. `Hereditary` (Is hereditary unary predicate symbol (Constructor: HP (TpHereditary ...)))
-- **ANSII**: `Hereditary`
+- **ASCII**: `Hereditary`
 - **LaTeX**: `\mathsf{Hereditary}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/hereditary-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefHereditaryClass (3.44)): Subclass-closed class: Hereditary(U) ⟷ ∀(x∈U)((𝒫(x) ∩ 𝒱) ⊆ U).
 
 ### 128. `Powerful` (Is powerful unary predicate symbol (Constructor: HP (TpPowerful ...)))
-- **ANSII**: `Powerful`
+- **ASCII**: `Powerful`
 - **LaTeX**: `\mathsf{Powerful}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/powerful-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefPowerfulClass (3.45)): Power-set-closed class: Powerful(U) ⟷ ∀(x∈U)(𝒫(x) ∈ U).
 
 ### 129. `Pairful` (Is pairful unary predicate symbol (Constructor: HP (TpPairful ...)))
-- **ANSII**: `Pairful`
+- **ASCII**: `Pairful`
 - **LaTeX**: `\mathsf{Pairful}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/pairful-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefPairfulClass (3.46)): Unordered-pair-closed class: Pairful(U) ⟷ ∀(x∈U)∀(y∈U)({x,y} ∈ U).
 
 ### 130. `Tight` (Is tight unary predicate symbol (Constructor: HP (TpTight ...)))
-- **ANSII**: `Tight`
+- **ASCII**: `Tight`
 - **LaTeX**: `\mathsf{Tight}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/tight-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefTightClass (3.47)): Image/Replacement-closed class: Tight(U) ⟷ ∀(f:Class)((f is a class-function) → ∀(x∈U)((x⊆Dom(f)) → (f[x]∈U))).
 
 ### 131. `mark` (Dunaev class-list mark functional symbol (mark))
-- **ANSII**: `mark`
+- **ASCII**: `mark`
 - **LaTeX**: `\mathrm{mark}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/mark-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefNaturalNumberModels (3.50)): Dunaev class-list index tagging operator: mark(A,n) = ({{0,n}} ∪ {({{{a}},n}:Class) | a∈A}), enabling lists and ordered pairs of arbitrary proper classes.
 
 ### 132. `opairK` (Set-restricted Kuratowski ordered pair functional symbol opairK(a, b) = {{a,a},{a,b}} (3.52 DefKuratowskiPair, distinct from Dunaev's class pair (A, B) in 3.76))
-- **ANSII**: `opairK`
+- **ASCII**: `opairK`
 - **LaTeX**: `\mathrm{opair}_K`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ordered-pair.html`
 - **Definition**: [Defined Binary Functional Symbol (Syntactic Type: Class.Expression × Class.Expression → Class.Expression)] Formal Definition (DefKuratowskiPair (3.52)): Kuratowski set-level ordered pair: ∀(a:Class)∀(b:Class)(opairK(a, b) = {{a, a}, {a, b}}).
 
 ### 133. `pr1` (First projection functional symbol of Dunaev pair (pr1))
-- **ANSII**: `pr1`
+- **ASCII**: `pr1`
 - **LaTeX**: `\mathrm{pr}_1`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/pr1-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefDunaevOrderedPair (3.76)): First projection of a Dunaev class-pair: pr1(L) = {a | ({{{a}},1} ∈ L)}, satisfying pr1((A,B)) = A for all classes A,B:Class.
 
 ### 134. `pr2` (Second projection functional symbol of Dunaev pair (pr2))
-- **ANSII**: `pr2`
+- **ASCII**: `pr2`
 - **LaTeX**: `\mathrm{pr}_2`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/pr2-op.html`
 - **Definition**: [Defined Operator] Formal Definition (ThmDunaevFirstProjection (3.77)): Second projection of a Dunaev class-pair: pr2(L) = {b | ({{{b}},2} ∈ L)}, satisfying pr2((A,B)) = B for all classes A,B:Class.
 
 ### 135. `NatModel` (Set-theoretic model of natural numbers unary predicate symbol (NatModel))
-- **ANSII**: `NatModel`
+- **ASCII**: `NatModel`
 - **LaTeX**: `\mathsf{NatModel}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/nat-model-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Set-theoretic model of natural numbers unary predicate symbol (NatModel) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 136. `Ind` (Is successor-inductive (Peano-inductive) unary predicate symbol (Constructor: HP (TpInd ...)))
-- **ANSII**: `Ind`
+- **ASCII**: `Ind`
 - **LaTeX**: `\mathrm{Ind}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ind-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefInductiveClass (3.55)): Narrowest Peano successor-inductive class predicate: ∀(X:Class)(Ind(X) ⟷ ((∅∈X) ∧ (∀(a:Class)((a∈X) → ((a∪{a})∈X))))).
 
 ### 137. `Card` (Is a cardinal unary predicate symbol (Constructor: HP (TpCard ...)))
-- **ANSII**: `Card`
+- **ASCII**: `Card`
 - **LaTeX**: `\mathrm{Card}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/card-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (ThmOmegaInOrdinals (3.63)): Initial-ordinal cardinal predicate: Card(K) ⟷ ∃(C:Class)(|C| = K) where |C| = ⋂{w | (w∈On) ∧ (C ⪯ w)} (DefCardinality (3.41)).
 
 ### 138. `universe` (Is a Grothendieck/Tarski universe unary predicate symbol (Constructor: HP (TpUniverse ...)))
-- **ANSII**: `universe`
+- **ASCII**: `universe`
 - **LaTeX**: `\mathsf{universe}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/universe-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefGrothendieckUniverse (3.68)): Grothendieck-Tarski universe: (U is a universe) ⟷ (Tr(U) ∧ Hereditary(U) ∧ Powerful(U) ∧ Pairful(U) ∧ Tight(U)).
 
 ### 139. `LimitOrd` (Is a nonzero limit ordinal unary predicate symbol (Constructor: HP (TpSymbol ("LimitOrd", ...))))
-- **ANSII**: `LimitOrd`
+- **ASCII**: `LimitOrd`
 - **LaTeX**: `\mathrm{LimitOrd}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/limit-ord-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Is a nonzero limit ordinal unary predicate symbol (Constructor: HP (TpSymbol (&quot;LimitOrd&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 140. `IndexedUnionClosed` (Indexed-union closure unary predicate symbol (Constructor: HP (TpSymbol ("IndexedUnionClosed", ...))))
-- **ANSII**: `IndexedUnionClosed`
+- **ASCII**: `IndexedUnionClosed`
 - **LaTeX**: `\mathrm{IndexedUnionClosed}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/indexed-union-closed-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Indexed-union closure unary predicate symbol (Constructor: HP (TpSymbol (&quot;IndexedUnionClosed&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 141. `VStageLaws` (Von Neumann cumulative hierarchy recursion laws predicate symbol (Constructor: HP (TpSymbol ("VStageLaws", ...))))
-- **ANSII**: `VStageLaws`
+- **ASCII**: `VStageLaws`
 - **LaTeX**: `\mathrm{VStageLaws}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/v-stage-laws-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Von Neumann cumulative hierarchy recursion laws predicate symbol (Constructor: HP (TpSymbol (&quot;VStageLaws&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 142. `VStageGraph` (Canonical von Neumann cumulative hierarchy graph constant (Constructor: HC (CpSymbol ("VStageGraph", ...))))
-- **ANSII**: `VStageGraph`
+- **ASCII**: `VStageGraph`
 - **LaTeX**: `\mathrm{VStageGraph}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/v-stage-graph-const.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Canonical von Neumann cumulative hierarchy graph constant (Constructor: HC (CpSymbol (&quot;VStageGraph&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 143. `SetRankLaws` (Mirimanoff-von Neumann set rank recursion laws binary predicate symbol (Constructor: HP (TpSymbol ("SetRankLaws", ...))))
-- **ANSII**: `SetRankLaws`
+- **ASCII**: `SetRankLaws`
 - **LaTeX**: `\mathrm{SetRankLaws}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/set-rank-laws-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Mirimanoff-von Neumann set rank recursion laws binary predicate symbol (Constructor: HP (TpSymbol (&quot;SetRankLaws&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 144. `SetRankGraph` (Canonical Mirimanoff-von Neumann set rank graph constant (Constructor: HC (CpSymbol ("SetRankGraph", ...))))
-- **ANSII**: `SetRankGraph`
+- **ASCII**: `SetRankGraph`
 - **LaTeX**: `\mathrm{SetRankGraph}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/set-rank-graph-const.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Canonical Mirimanoff-von Neumann set rank graph constant (Constructor: HC (CpSymbol (&quot;SetRankGraph&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 145. `Restrict` (Domain restriction binary functional symbol Restrict(F, A) (Constructor: HC (CpSymbol ("Restrict", ...))))
-- **ANSII**: `Restrict`
+- **ASCII**: `Restrict`
 - **LaTeX**: `\mathrm{Restrict}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/restrict-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefDomainRestriction (3.91)): Domain restriction of a class relation or function F to class A: Restrict(F, A) = {z : Class | (z ∈ F) ∧ (pr1(z) ∈ A)}.
 
 ### 146. `TransfiniteApprox` (Transfinite recursion approximation binary predicate symbol TransfiniteApprox(G, g) (Constructor: HP (TpSymbol ("TransfiniteApprox", ...))))
-- **ANSII**: `TransfiniteApprox`
+- **ASCII**: `TransfiniteApprox`
 - **LaTeX**: `\mathrm{TransfiniteApprox}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/transfinite-approx-pred.html`
 - **Definition**: [Defined Predicate] Formal Definition (DefTransfiniteApproximation (3.92)): Transfinite recursion approximation predicate on ordinal domains: TransfiniteApprox(G, g) ⟷ ((g function) ∧ (Dom(g) ∈ On) ∧ ∀(B:Class)∀(X:Class)(((B ∈ Dom(g)) ∧ (X = Restrict(g, B))) → (g(B) = G(X)))).
 
 ### 147. `TransfiniteRec` (Canonical transfinite recursion class-function graph operator TransfiniteRec(G) (Constructor: HC (CpSymbol ("TransfiniteRec", ...))))
-- **ANSII**: `TransfiniteRec`
+- **ASCII**: `TransfiniteRec`
 - **LaTeX**: `\mathrm{TransfiniteRec}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/transfinite-rec-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefTransfiniteRecursionGraph (3.93)): Canonical transfinite recursion class-function graph on On: TransfiniteRec(G) = ⋃{g : Class | TransfiniteApprox(G, g)}.
 
 ### 148. `VonNeumannStepG` (Von Neumann cumulative hierarchy transfinite step generator VonNeumannStepG(f) (Constructor: HC (CpSymbol ("VonNeumannStepG", ...))))
-- **ANSII**: `VonNeumannStepG`
+- **ASCII**: `VonNeumannStepG`
 - **LaTeX**: `\mathrm{VonNeumannStepG}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/von-neumann-step-g-op.html`
 - **Definition**: [Defined Operator] Formal Definition (DefVonNeumannStepGenerator (3.94)): Von Neumann cumulative hierarchy transfinite step generator: VonNeumannStepG(f) = ⋃{Y : Class | ∃(B:Class)((B ∈ Dom(f)) ∧ (Y = 𝒫(f(B))))}.
 
 ### 149. `SubstVar` (Reduced variable-substitution operator on classes SubstVar(t, x, v) = IF v = x THEN t ELSE v FI (Constructor: HC (CpSymbol ("SubstVar", ...))))
-- **ANSII**: `SubstVar`
+- **ASCII**: `SubstVar`
 - **LaTeX**: `\mathrm{SubstVar}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/subst-var-op.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Reduced variable-substitution operator on classes SubstVar(t, x, v) = IF v = x THEN t ELSE v FI (Constructor: HC (CpSymbol (&quot;SubstVar&quot;, ...))) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 150. `PiModel` (Set-theoretic dependent product section model PiModel(B))
-- **ANSII**: `PiModel`
+- **ASCII**: `PiModel`
 - **LaTeX**: `\mathrm{PiModel}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/pi-binder.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Set-theoretic dependent product section model PiModel(B) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 151. `H` (Class variable H (class-function / relation))
-- **ANSII**: `H`
+- **ASCII**: `H`
 - **LaTeX**: `H`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable H (class-function / relation) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 152. `h` (Class variable h (function / approximation))
-- **ANSII**: `h`
+- **ASCII**: `h`
 - **LaTeX**: `h`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable h (function / approximation) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 153. `I` (Class variable I (index set))
-- **ANSII**: `I`
+- **ASCII**: `I`
 - **LaTeX**: `I`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable I (index set) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 154. `R` (Class variable R (rank operator graph or relation))
-- **ANSII**: `R`
+- **ASCII**: `R`
 - **LaTeX**: `R`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable R (rank operator graph or relation) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 155. `eval` (Metatheoretic formula valuation / truth evaluation (eval))
-- **ANSII**: `eval`
+- **ASCII**: `eval`
 - **LaTeX**: `\mathsf{eval}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/eval.html`
 - **Definition**: [Primitive Semantic Valuation] Natural-Language Definition: Type-expression and formula evaluation mapping A:Type.Expression to eval(A):Type and 𝛗:Fm to ⟦𝛗⟧:Bool.
 
 ### 156. `let` (Explicit let-binder let x = t in e (Constructor: ELet))
-- **ANSII**: `let`
+- **ASCII**: `let`
 - **LaTeX**: `\mathsf{let}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/let-binder.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Explicit let-binder let x = t in e (Constructor: ELet) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 157. `in` (Scope keyword of the explicit let-binder (Constructor: ELet))
-- **ANSII**: `in`
+- **ASCII**: `in`
 - **LaTeX**: `\mathsf{in}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/let-binder.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Scope keyword of the explicit let-binder (Constructor: ELet) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 158. `Type` (Conglomerate / Type sort (predicates on the conglomerate of all classes))
-- **ANSII**: `Type`
+- **ASCII**: `Type`
 - **LaTeX**: `\mathsf{Type}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/type-sort.html`
 - **Definition**: [Primitive Metasort] Natural-Language Definition: The universe of types / conglomerates (predicates on the conglomerate of all classes).
 
 ### 159. `Ctx` (Typing & Hypothesis Context sort (Ctx))
-- **ANSII**: `Ctx`
+- **ASCII**: `Ctx`
 - **LaTeX**: `\mathsf{Ctx}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ctx-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Typing &amp; Hypothesis Context sort (Ctx) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 160. `Fm` (Object Formula syntactic sort (Fm = Bool.Expression))
-- **ANSII**: `Fm`
+- **ASCII**: `Fm`
 - **LaTeX**: `\mathsf{Fm}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fm-sort.html`
 - **Definition**: [Primitive Syntactic Sort] Formal &amp; Natural-Language Definition: Fm ≡ Bool.Expression — the syntactic sort of object-language formula ASTs, inhabited by Greek formula variables (𝛂,𝛃,𝛄,𝛗,𝛙,𝛘:Fm) and quoted formulas ‹...›.
 
 ### 161. `Variable` (Syntactic variable identifier sort (Variable))
-- **ANSII**: `Variable`
+- **ASCII**: `Variable`
 - **LaTeX**: `\mathsf{Variable}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variable-sort.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Syntactic variable identifier sort (Variable) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variable-sort.html.
 
 ### 162. `Expression` (Parameterized syntactic AST expression sort constructor (A.Expression))
-- **ANSII**: `Expression`
+- **ASCII**: `Expression`
 - **LaTeX**: `\mathsf{Expression}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/expression-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Parameterized syntactic AST expression sort constructor (A.Expression) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 163. `Stmt` (Metatheoretic Sequent / Statement sort (Stmt))
-- **ANSII**: `Stmt`
+- **ASCII**: `Stmt`
 - **LaTeX**: `\mathsf{Stmt}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/stmt-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Metatheoretic Sequent / Statement sort (Stmt) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 164. `Theory` (Object & Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system))
-- **ANSII**: `Theory`
+- **ASCII**: `Theory`
 - **LaTeX**: `\mathsf{Theory}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/theory-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Object &amp; Metatheory sort (Theory; MKTD1-theory in MKTD1-system, MKTD2-theory in MKTD2-system) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 165. `Prf` (Formal Proof Certificate sort (Prf))
-- **ANSII**: `Prf`
+- **ASCII**: `Prf`
 - **LaTeX**: `\mathsf{Prf}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/prf-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Formal Proof Certificate sort (Prf) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 166. `Term` (Polymorphic Term sort (Term / Term.Expression, Constructor: UTerm))
-- **ANSII**: `Term`
+- **ASCII**: `Term`
 - **LaTeX**: `\mathsf{Term}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/lcewip-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Polymorphic Term sort (Term / Term.Expression, Constructor: UTerm) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 167. `LOE` (Large Object Expression sort (LOE, Constructor: ULOE))
-- **ANSII**: `LOE`
+- **ASCII**: `LOE`
 - **LaTeX**: `\mathsf{LOE}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/lcewip-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Large Object Expression sort (LOE, Constructor: ULOE) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 168. `LCEWIP` (Polymorphic Term Expression sort (Term.Expression, formerly LCEWIP))
-- **ANSII**: `LCEWIP`
+- **ASCII**: `LCEWIP`
 - **LaTeX**: `\mathsf{Term.Expression}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/lcewip-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Polymorphic Term Expression sort (Term.Expression, formerly LCEWIP) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 169. `Enc` (Syntax & Context Variable Encoding functional symbol (Constructor: HC (CpEnc ...)))
-- **ANSII**: `Enc`
+- **ASCII**: `Enc`
 - **LaTeX**: `\mathsf{Enc}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/enc.html`
 - **Definition**: [Primitive Metatheoretic Operator] Natural-Language Definition: Injective Gödel-Dunaev encoding mapping syntactic expressions u:A.Expression into MKTD1 classes Enc(u):Class.
 
 ### 170. `Dec` (Syntax & Context Variable Decoding / Reification functional symbol (Dec))
-- **ANSII**: `Dec`
+- **ASCII**: `Dec`
 - **LaTeX**: `\mathsf{Dec}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/dec.html`
 - **Definition**: [Primitive Metatheoretic Operator] Natural-Language Definition: Partial inverse decoding operator mapping class codes back into typed syntactic expressions A.Expression.
 
 ### 171. `Emb` (Structure-Preserving Syntactic & Semantic Embedding functional symbol (Emb))
-- **ANSII**: `Emb`
+- **ASCII**: `Emb`
 - **LaTeX**: `\mathsf{Emb}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/emb.html`
 - **Definition**: [Primitive Metatheoretic Operator] Natural-Language Definition: Structure-preserving syntactic/semantic embedding of a lower-level sort or subtheory into a richer sort or theory.
 
 ### 172. `Fm.FV` (Formula Free Variables functional symbol (Fm.FV : Fm -> Class.Expression, Constructor: HC (CpFV ...)))
-- **ANSII**: `Fm.FV`
+- **ASCII**: `Fm.FV`
 - **LaTeX**: `\mathrm{Fm.FV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fv-op.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Formula Free Variables functional symbol (Fm.FV : Fm -&gt; Class.Expression, Constructor: HC (CpFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 173. `Ctx.FV` (Context Free Variables functional symbol (Ctx.FV : Ctx.Expression -> Class.Expression, Constructor: HC (CpCtxFV ...)))
-- **ANSII**: `Ctx.FV`
+- **ASCII**: `Ctx.FV`
 - **LaTeX**: `\mathrm{Ctx.FV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fv-op.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Context Free Variables functional symbol (Ctx.FV : Ctx.Expression -&gt; Class.Expression, Constructor: HC (CpCtxFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 174. `ClassTerm.FV` (Class-Term Free Variables functional symbol (ClassTerm.FV : Class.Expression -> Class.Expression, Constructor: HC (CpFV ...)))
-- **ANSII**: `ClassTerm.FV`
+- **ASCII**: `ClassTerm.FV`
 - **LaTeX**: `\mathrm{ClassTerm.FV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fv-op.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class-Term Free Variables functional symbol (ClassTerm.FV : Class.Expression -&gt; Class.Expression, Constructor: HC (CpFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 175. `FV` (Free Variables functional symbol (Fm.FV, Ctx.FV, ClassTerm.FV; Constructor: HC (CpFV ...)))
-- **ANSII**: `FV`
+- **ASCII**: `FV`
 - **LaTeX**: `\mathrm{FV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fv-op.html`
 - **Definition**: [Primitive Syntactic Hygiene Operator] Natural-Language Definition: Type-qualified operator (Fm.FV, Ctx.FV, ClassTerm.FV) returning the class of encoded free variables occurring unbound in a syntactic expression (note: the 2-argument predicate Fm.IFV(x,𝛙) is preferred over x ∈ Fm.FV(𝛙)).
 
 ### 176. `Fm.IFV` (Formula Is-Free-Variable binary predicate symbol (Fm.IFV : Variable.Expression * Fm -> Fm, Constructor: HP (TpIFV ...)))
-- **ANSII**: `Fm.IFV`
+- **ASCII**: `Fm.IFV`
 - **LaTeX**: `\mathrm{Fm.IFV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ifv-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Formula Is-Free-Variable binary predicate symbol (Fm.IFV : Variable.Expression * Fm -&gt; Fm, Constructor: HP (TpIFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 177. `Ctx.IFV` (Context Is-Free-Variable binary predicate symbol (Ctx.IFV : Variable.Expression * Ctx.Expression -> Fm, Constructor: HP (TpCtxIFV ...)))
-- **ANSII**: `Ctx.IFV`
+- **ASCII**: `Ctx.IFV`
 - **LaTeX**: `\mathrm{Ctx.IFV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ifv-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Context Is-Free-Variable binary predicate symbol (Ctx.IFV : Variable.Expression * Ctx.Expression -&gt; Fm, Constructor: HP (TpCtxIFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 178. `ClassTerm.IFV` (Class-Term Is-Free-Variable binary predicate symbol (ClassTerm.IFV : Variable.Expression * Class.Expression -> Fm, Constructor: HP (TpIFV ...)))
-- **ANSII**: `ClassTerm.IFV`
+- **ASCII**: `ClassTerm.IFV`
 - **LaTeX**: `\mathrm{ClassTerm.IFV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ifv-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class-Term Is-Free-Variable binary predicate symbol (ClassTerm.IFV : Variable.Expression * Class.Expression -&gt; Fm, Constructor: HP (TpIFV ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 179. `IFV` (Is Free Variable binary predicate symbol (Fm.IFV, Ctx.IFV, ClassTerm.IFV; Constructor: HP (TpIFV ...)))
-- **ANSII**: `IFV`
+- **ASCII**: `IFV`
 - **LaTeX**: `\mathrm{IFV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ifv-pred.html`
 - **Definition**: [Primitive Syntactic Hygiene Predicate] Natural-Language Definition: Type-qualified 2-argument predicate (Fm.IFV(x,𝛙), Ctx.IFV(v,Γ), ClassTerm.IFV(x,k)) asserting that a variable occurs free in a formula, context, or class term.
 
 ### 180. `Fm.FFI` (Formula Free-For-Instantiation ternary predicate symbol (Fm.FFI : X.Expression * Variable.Expression * Fm -> Fm, Constructor: HP (TpFFI ...)))
-- **ANSII**: `Fm.FFI`
+- **ASCII**: `Fm.FFI`
 - **LaTeX**: `\mathrm{Fm.FFI}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ffi-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Formula Free-For-Instantiation ternary predicate symbol (Fm.FFI : X.Expression * Variable.Expression * Fm -&gt; Fm, Constructor: HP (TpFFI ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 181. `ClassTerm.FFI` (Class-Term Free-For-Instantiation ternary predicate symbol (ClassTerm.FFI : X.Expression * Variable.Expression * Class.Expression -> Fm, Constructor: HP (TpFFI ...)))
-- **ANSII**: `ClassTerm.FFI`
+- **ASCII**: `ClassTerm.FFI`
 - **LaTeX**: `\mathrm{ClassTerm.FFI}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ffi-pred.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Class-Term Free-For-Instantiation ternary predicate symbol (ClassTerm.FFI : X.Expression * Variable.Expression * Class.Expression -&gt; Fm, Constructor: HP (TpFFI ...)) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 182. `FFI` (Free For Instantiation capture-avoidance predicate symbol (Fm.FFI, ClassTerm.FFI; Constructor: HP (TpFFI ...)))
-- **ANSII**: `FFI`
+- **ASCII**: `FFI`
 - **LaTeX**: `\mathrm{FFI}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/ffi-pred.html`
 - **Definition**: [Primitive Syntactic Hygiene Predicate] Natural-Language Definition: Type-qualified 3-argument predicate Fm.FFI((t:X.Expression),x,𝛗) (“Free For Instantiation”) holding iff no free variable of term expression t becomes bound when substituted for free occurrences of variable x in formula 𝛗.
 
 ### 183. `ClassTerm` (Syntactic Class Term sort (Class.Expression / ClassTerm))
-- **ANSII**: `ClassTerm`
+- **ASCII**: `ClassTerm`
 - **LaTeX**: `\mathsf{ClassTerm}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/expression-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Syntactic Class Term sort (Class.Expression / ClassTerm) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 184. `NFV` (Not Free Variable eigenvariable predicate symbol (NFV))
-- **ANSII**: `NFV`
+- **ASCII**: `NFV`
 - **LaTeX**: `\mathrm{NFV}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/nfv-pred.html`
 - **Definition**: [Primitive Syntactic Hygiene Predicate] Natural-Language Definition: NFV(X,x,(𝛃:Fm)) asserts that variable x of sort X does not occur free in syntactic formula 𝛃:Fm.
 
 ### 185. `Fresh` (Variable freshness predicate symbol (Fresh))
-- **ANSII**: `Fresh`
+- **ASCII**: `Fresh`
 - **LaTeX**: `\mathrm{Fresh}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/fresh-pred.html`
 - **Definition**: [Primitive Syntactic Hygiene Predicate] Natural-Language Definition: Variable freshness predicate asserting that a variable does not occur in a given syntactic expression or context.
 
 ### 186. `Name` (Syntactic variable-name sort (Name))
-- **ANSII**: `Name`
+- **ASCII**: `Name`
 - **LaTeX**: `\mathsf{Name}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/name-sort.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Syntactic variable-name sort (Name) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 187. `Bool` (Semantic Boolean truth-value type (Bool))
-- **ANSII**: `Bool`
+- **ASCII**: `Bool`
 - **LaTeX**: `\mathsf{Bool}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/bool-sort.html`
 - **Definition**: [Primitive Semantic Type] Natural-Language Definition: The 2-element semantic truth-value conglomerate inhabited by truth values (⊤/true, ⊥/false) and eliminated by simple_if (DefSimpleConditional (3.23)) and if_dep (DefDependentConditional (3.24)).
 
 ### 188. `true` (Boolean truth value (true : Bool, distinct from formula Verum T / top and Unit type))
-- **ANSII**: `true`
+- **ASCII**: `true`
 - **LaTeX**: `\mathsf{true}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/bool-true.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Boolean truth value (true : Bool, distinct from formula Verum T / top and Unit type) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 189. `false` (Boolean falsity value (false : Bool, distinct from formula Falsum F / bottom and Void type))
-- **ANSII**: `false`
+- **ASCII**: `false`
 - **LaTeX**: `\mathsf{false}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/bool-false.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Boolean falsity value (false : Bool, distinct from formula Falsum F / bottom and Void type) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 190. `Unit` (Unit / Singleton Top type in MKTD2-system (Unit : Type, Constructor: UUnit / TTop))
-- **ANSII**: `Unit`
+- **ASCII**: `Unit`
 - **LaTeX**: `\mathsf{Unit}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/unit-type.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Unit / Singleton Top type in MKTD2-system (Unit : Type, Constructor: UUnit / TTop) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 191. `Void` (Void / Empty Bottom type in MKTD2-system (Void : Type, Constructor: UVoid / TBottom))
-- **ANSII**: `Void`
+- **ASCII**: `Void`
 - **LaTeX**: `\mathsf{Void}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/void-type.html`
 - **Definition**: [Primitive / Structural Kernel Symbol] Natural-Language Definition: Void / Empty Bottom type in MKTD2-system (Void : Type, Constructor: UVoid / TBottom) &mdash; see linked Personal Symbol Reference Page for full typing rules and formal semantics.
 
 ### 192. `Prop` (Curry-Howard Universe of Propositions (Prop))
-- **ANSII**: `Prop`
+- **ASCII**: `Prop`
 - **LaTeX**: `\mathsf{Prop}`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/prop-sort.html`
 - **Definition**: [Primitive Curry-Howard Universe] Natural-Language Definition: In MKTD2-system, the universe of propositions-as-types where each formula A:Prop is the type of its proof terms p:A.
 
 ### 193. `A` (Class variable or type variable A)
-- **ANSII**: `A`
+- **ASCII**: `A`
 - **LaTeX**: `A`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable or type variable A &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 194. `B` (Class variable or family variable B)
-- **ANSII**: `B`
+- **ASCII**: `B`
 - **LaTeX**: `B`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable or family variable B &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 195. `C` (Class variable C)
-- **ANSII**: `C`
+- **ASCII**: `C`
 - **LaTeX**: `C`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable C &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 196. `D` (Class variable D)
-- **ANSII**: `D`
+- **ASCII**: `D`
 - **LaTeX**: `D`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable D &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 197. `F` (Class variable F (relation / family / class-function))
-- **ANSII**: `F`
+- **ASCII**: `F`
 - **LaTeX**: `F`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable F (relation / family / class-function) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 198. `G` (Context expression variable G (G : Ctx.Expression))
-- **ANSII**: `G`
+- **ASCII**: `G`
 - **LaTeX**: `G`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Context expression variable G (G : Ctx.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 199. `K` (Class variable K)
-- **ANSII**: `K`
+- **ASCII**: `K`
 - **LaTeX**: `K`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable K &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 200. `L` (Class variable L (Dunaev class-list))
-- **ANSII**: `L`
+- **ASCII**: `L`
 - **LaTeX**: `L`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable L (Dunaev class-list) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 201. `Q` (Class variable Q (successor-inductive class))
-- **ANSII**: `Q`
+- **ASCII**: `Q`
 - **LaTeX**: `Q`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable Q (successor-inductive class) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 202. `Tₑ` (Type-family variable Tₑ)
-- **ANSII**: `T_e`
+- **ASCII**: `T_e`
 - **LaTeX**: `T_e`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Type-family variable Tₑ &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 203. `T_e` (Type-family variable T_e)
-- **ANSII**: `T_e`
+- **ASCII**: `T_e`
 - **LaTeX**: `T_e`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Type-family variable T_e &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 204. `U` (Class variable U (Grothendieck/Tarski universe))
-- **ANSII**: `U`
+- **ASCII**: `U`
 - **LaTeX**: `U`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable U (Grothendieck/Tarski universe) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 205. `W` (Class variable W)
-- **ANSII**: `W`
+- **ASCII**: `W`
 - **LaTeX**: `W`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable W &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 206. `X` (Class variable or type variable X)
-- **ANSII**: `X`
+- **ASCII**: `X`
 - **LaTeX**: `X`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable or type variable X &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 207. `Y` (Class variable Y)
-- **ANSII**: `Y`
+- **ASCII**: `Y`
 - **LaTeX**: `Y`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable Y &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 208. `Z` (Class variable Z)
-- **ANSII**: `Z`
+- **ASCII**: `Z`
 - **LaTeX**: `Z`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable Z &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 209. `a` (Class variable a)
-- **ANSII**: `a`
+- **ASCII**: `a`
 - **LaTeX**: `a`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable a &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 210. `b` (Class variable or boolean variable b)
-- **ANSII**: `b`
+- **ASCII**: `b`
 - **LaTeX**: `b`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable or boolean variable b &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 211. `c` (Class variable c)
-- **ANSII**: `c`
+- **ASCII**: `c`
 - **LaTeX**: `c`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable c &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 212. `f` (Class variable f (function / family))
-- **ANSII**: `f`
+- **ASCII**: `f`
 - **LaTeX**: `f`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable f (function / family) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 213. `g` (Class variable g (function))
-- **ANSII**: `g`
+- **ASCII**: `g`
 - **LaTeX**: `g`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable g (function) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 214. `k` (Class expression variable k (k : Class.Expression))
-- **ANSII**: `k`
+- **ASCII**: `k`
 - **LaTeX**: `k`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class expression variable k (k : Class.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 215. `m` (Class variable m (natural number))
-- **ANSII**: `m`
+- **ASCII**: `m`
 - **LaTeX**: `m`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable m (natural number) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 216. `n` (Class variable n (natural number / tag index))
-- **ANSII**: `n`
+- **ASCII**: `n`
 - **LaTeX**: `n`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable n (natural number / tag index) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 217. `p` (Proposition or pair variable p)
-- **ANSII**: `p`
+- **ASCII**: `p`
 - **LaTeX**: `p`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Proposition or pair variable p &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 218. `q` (Class variable q)
-- **ANSII**: `q`
+- **ASCII**: `q`
 - **LaTeX**: `q`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable q &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 219. `s` (Class variable s)
-- **ANSII**: `s`
+- **ASCII**: `s`
 - **LaTeX**: `s`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable s &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 220. `t` (Term expression variable t (t : X.Expression))
-- **ANSII**: `t`
+- **ASCII**: `t`
 - **LaTeX**: `t`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Term expression variable t (t : X.Expression) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 221. `t₁` (Branch term variable t₁)
-- **ANSII**: `t_1`
+- **ASCII**: `t_1`
 - **LaTeX**: `t_1`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Branch term variable t₁ &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 222. `t₂` (Branch term variable t₂)
-- **ANSII**: `t_2`
+- **ASCII**: `t_2`
 - **LaTeX**: `t_2`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Branch term variable t₂ &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 223. `t1` (Branch term variable t1)
-- **ANSII**: `t1`
+- **ASCII**: `t1`
 - **LaTeX**: `t_1`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Branch term variable t1 &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 224. `t2` (Branch term variable t2)
-- **ANSII**: `t2`
+- **ASCII**: `t2`
 - **LaTeX**: `t_2`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Branch term variable t2 &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 225. `u` (Class variable u)
-- **ANSII**: `u`
+- **ASCII**: `u`
 - **LaTeX**: `u`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable u &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 226. `v` (Variable-name variable v (v : Variable) or class variable v)
-- **ANSII**: `v`
+- **ASCII**: `v`
 - **LaTeX**: `v`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Variable-name variable v (v : Variable) or class variable v &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 227. `w` (Class variable w)
-- **ANSII**: `w`
+- **ASCII**: `w`
 - **LaTeX**: `w`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable w &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 228. `x` (Class variable x (or variable-name variable x : Name))
-- **ANSII**: `x`
+- **ASCII**: `x`
 - **LaTeX**: `x`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable x (or variable-name variable x : Name) &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 229. `y` (Class variable y)
-- **ANSII**: `y`
+- **ASCII**: `y`
 - **LaTeX**: `y`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`
 - **Definition**: [Typed Variable / Metavariable] Natural-Language Definition: Class variable y &mdash; bound or free schematic variable governed by capture-avoiding substitution (FFI) and free-variable hygiene (FV); see symbols/variables.html.
 
 ### 230. `z` (Class variable z)
-- **ANSII**: `z`
+- **ASCII**: `z`
 - **LaTeX**: `z`
 - **Category**: Type / Predicate / Function / Variable
 - **Reference Page**: `symbols/variables.html`

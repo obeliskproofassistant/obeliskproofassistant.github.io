@@ -355,7 +355,7 @@
     .ansi-white { color: #f8fafc; }
     .ansi-bold-white { color: #ffffff; font-weight: 700; }
     .ansi-bg-blue { background-color: rgba(37, 99, 235, 0.35); padding: 0 0.2rem; border-radius: 0.2rem; }
-    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ANSII) by Default; Hide via Toggle Buttons */
+    /* Formula Display: Show All 3 Notations (LaTeX, Unicode, ASCII) by Default; Hide via Toggle Buttons */
     .formula-unicode { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-latex { display: block; font-size: 1.05rem; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
     .formula-ansii { display: block; overflow-wrap: anywhere !important; word-break: break-word !important; white-space: normal !important; max-width: 100% !important; }
@@ -470,7 +470,7 @@
           <span class="control-label">Formula Display:</span>
           <button id="btn-hide-latex" class="toggle-btn" onclick="toggleFormatHide('latex')">Hide LaTeX</button>
           <button id="btn-hide-unicode" class="toggle-btn" onclick="toggleFormatHide('unicode')">Hide Unicode</button>
-          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ANSII</button>
+          <button id="btn-hide-ansii" class="toggle-btn active" onclick="toggleFormatHide('ansii')">Hide ASCII</button>
           <button id="btn-hide-schemata" class="toggle-btn" onclick="toggleSchemataHide()">Hide Schemata of Types</button>
         </div>
         <div class="control-group">
@@ -501,8 +501,8 @@
             <td class="external-entity">
               <table class="internal-entity-table">
                 <tbody>
-                  <tr><th class="field-name">Version &amp; Date</th><td class="field-value"><strong>v1.5.0 &mdash; 2026-11-28</strong> (Build <code>cc1b99d</code>, Built on <code>2026-11-28 13:07:05 UTC</code>)</td></tr>
-                  <tr><th class="field-name">Gentzen Inference Bar &amp; Term Sort</th><td class="field-value">Rendered primitive and derived inference rules (1.14, 2.04&ndash;2.06) with a true horizontal Gentzen inference line across LaTeX (<code>\dfrac</code>), HTML Unicode, and ANSII, and standardized the polymorphic term-expression sort name to <code>Term</code> (<code>Term.Expression</code>).</td></tr>
+                  <tr><th class="field-name">Version &amp; Date</th><td class="field-value"><strong>v1.5.0 &mdash; 2026-11-28</strong> (Build <code>a3ef879</code>, Built on <code>2026-11-28 13:23:27 UTC</code>)</td></tr>
+                  <tr><th class="field-name">Gentzen Inference Bar &amp; Term Sort</th><td class="field-value">Rendered primitive and derived inference rules (1.14, 2.04&ndash;2.06) with a true horizontal Gentzen inference line across LaTeX (<code>\dfrac</code>), HTML Unicode, and ASCII, and standardized the polymorphic term-expression sort name to <code>Term</code> (<code>Term.Expression</code>).</td></tr>
                   <tr><th class="field-name">Catalog Audit (1.01&ndash;5.02) &amp; Dynamic Build Timestamps</th><td class="field-value">Aligned brace nesting in 3.51 <code>DefClassLists</code> with 3.76&ndash;3.78 <code>DefDunaevOrderedPair</code>, corrected 3.64 <code>DefIsCardinal</code> to Definition and 4.02 antiquotation <code>&LeftDoubleBracket;A&RightDoubleBracket;</code>, grounded <code>&empty; set</code> explicitly in 3.57 <code>AxmOmegaIsSet</code> and 3.12 <code>AxmHeredity</code>, and enabled automatic UTC build timestamps and Git commit hash generation.</td></tr>
                 </tbody>
               </table>

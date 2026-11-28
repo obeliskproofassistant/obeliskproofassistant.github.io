@@ -87,7 +87,7 @@ class TestProofRegression(unittest.TestCase):
                 html = f.read()
             self.assertIn("AUTO-GENERATED FILE -- DO NOT EDIT DIRECTLY BY AI OR HAND", html, f"Missing ML provenance header in {rel}")
             self.assertIn("mode-unicode", html, f"Unicode default missing in {rel}")
-            self.assertIn("hide-ansii", html, f"Hide ANSII default missing in {rel}")
+            self.assertIn("hide-ansii", html, f"Hide ASCII default missing in {rel}")
             self.assertNotIn("mode-membership", html, f"Forbidden CSS hack mode-membership in {rel}")
             if rel != "manual_top.html":
                 self.assertIn('class="internal-entity-table"', html, f"Vertical internal table missing in {rel}")
@@ -417,7 +417,7 @@ class TestProofRegression(unittest.TestCase):
         self.assertIn('PA1_prf (Γ, A, B)', a01_content)
         self.assertIn('<th class="field-name">Scheme of Types (Unicode)</th>', a01_block)
         self.assertIn('<th class="field-name">Scheme of Types (LaTeX)</th>', a01_block)
-        self.assertIn('<th class="field-name">Scheme of Types (ANSII)</th>', a01_block)
+        self.assertIn('<th class="field-name">Scheme of Types (ASCII)</th>', a01_block)
         by_name = {e["name"]: e for e in self.gen_db["entries"]}
         self.assertEqual(by_name["AxmPropWeakening"]["prf_constructor"], "PA1_prf (Γ, A, B)")
         self.assertEqual(

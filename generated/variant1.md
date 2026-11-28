@@ -351,7 +351,7 @@ PForaR_prf (...)`
 - **Kernel Note:** Power-set sethood axiom (PPowSetAx_prf: ∀(A:Class)((A set) —→ (𝒫(A) set))). Paired in the kernel with the conservative powerclass definition 3.99 DefPowerClass (PowClassDef / def_power_class_cert in 06_definitions.ML: ∀(K:Class)(𝒫(K) = { x : Class | x ⊆ K })).
 - **Standalone Certificate:** [proofs/AxmExponent.html](proofs/AxmExponent.html)
 
-### 3.14 `AxmRegularity` — “Regularity”(any class containing its powerclass contains all sets) (Axiom)
+### 3.14 `AxmRegularity` — “∈-induction” (Obelisk's form of regularity: any class containing its powerclass contains all sets) (Axiom)
 
 - **Identifier:** `AxmRegularity` (entry `3.14`, kind: `Axiom`, status: `Postulated (Kernel Axiom)`)
 - **Formula (Unicode):** `(∀(X:Class)((𝒫(X)⊆X)—→(V⊆X)))`
