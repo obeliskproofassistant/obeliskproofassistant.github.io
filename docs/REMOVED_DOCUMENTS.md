@@ -16,3 +16,11 @@ Restore any of them with
 | `docs/TERMINOLOGY_AND_SEMANTICS.*`, `docs/glossary.*` | copies of set_theory_prover documents; the glossary is published as `generated/glossary.html` |
 | `docs/ORD_ON_STEP_BY_STEP_PROOF_AND_VERIFICATION.*` | hand-written verification status ("62/62") long out of date; the proof of Ord(On) is on its generated entry page |
 | `docs/ARGON_ARCHITECTURAL_BLUEPRINT_AND_ROADMAP.*` | an AI-written internal roadmap, not documentation for readers |
+
+## 2026-11-28: mirrored Markdown copies
+
+`docs/ORDINAL_THEOREMS_PROOFS.md`, `docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md` and
+`docs/QUOTATION_AND_ANTIQUOTATION_IN_OBELISK.md` were hand-made copies of
+`set_theory_prover/formal/ORDINAL_THEOREMS_PROOFS.md` and `set_theory_prover/docs/*.md` and had
+drifted from them. The `.html` pages are now rendered straight from the sources by
+`/botworkspace/tools/render_site_markdown.py`.
