@@ -214,7 +214,7 @@
           <span class="pov-badge">View 1 &bull; Metalevel 0 Ontology</span>
           <h3>Pure Class Ontology (<code>MKTD1-theory</code>)</h3>
           <p>
-            Every object in the domain of discourse is a <code>Class</code>. Sets are not a separate syntactic sort; a set is a class that is an element of some class ($\mathrm{Set}(X) \iff \exists Y.\, X \in Y \iff X \in V$, <a href="generated/proofs/DefIsSet.html"><code>#DefIsSet</code></a>). Proper classes ($V, \mathrm{On}$) are non-elements (<a href="generated/proofs/DefIsProperClass.html"><code>#DefIsProperClass</code></a>). Using <strong>Dunaev Tagged Ordered Pairs</strong> $(A, B) = \mathrm{mark}(A, 0) \cup \mathrm{mark}(B, 1)$ (<a href="generated/proofs/DefDunaevOrderedPair.html"><code>#DefDunaevOrderedPair</code></a>), pairing, projections, and families work uniformly across all classes (<a href="generated/proofs/ThmDunaevSecondProjection.html"><code>#ThmDunaevSecondProjection</code></a>).
+            Every object in the domain of discourse is a <code>Class</code>. Sets are not a separate syntactic sort; a set is a class that is an element of some class ($\mathrm{Set}(X) \iff \exists Y.\, X \in Y \iff X \in V$, <a href="generated/proofs/DefIsSet.html"><code>#DefIsSet</code></a>). Proper classes ($V, \mathrm{On}$) are non-elements (<a href="generated/proofs/DefIsProperClass.html"><code>#DefIsProperClass</code></a>). Using <strong>Dunaev Tagged Ordered Pairs</strong> $(A, B) = \mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)$ (<a href="generated/proofs/DefDunaevOrderedPair.html"><code>#DefDunaevOrderedPair</code></a>), pairing, projections, and families work uniformly across all classes (<a href="generated/proofs/ThmDunaevSecondProjection.html"><code>#ThmDunaevSecondProjection</code></a>).
           </p>
         </div>
 
@@ -235,10 +235,10 @@
         </div>
 
         <div class="pov-card">
-          <span class="pov-badge">View 4 &bull; Curry-Howard Constructivism</span>
+          <span class="pov-badge">View 4 &bull; Propositions as Types (classical)</span>
           <h3>Propositions-as-Types (<code>MKTD2-theory</code>)</h3>
           <p>
-            In <code>MKTD2-system</code> (<a href="generated/nbg_library.html">library</a>), formulas <em>are</em> types (<code>Fm : Type</code>) and proofs <em>are</em> $\lambda$-terms (<code>p : A</code>). Universal quantification and implication are unified as $\Pi(x : A), B(x)$; existential quantification and conjunction are unified as $\Sigma(x : A), B(x)$; false formulas are uninhabited types ($\simeq \mathbb{0}$). Connected to View 1 &amp; View 3 via <code>program/variant_bridge.ML</code>.
+            In <code>MKTD2-system</code> (<a href="generated/nbg_library.html">library</a>), formulas <em>are</em> types (<code>Fm : Type</code>) and proofs <em>are</em> $\lambda$-terms (<code>p : A</code>). Universal quantification and implication are unified as $\Pi(x : A), B(x)$; conjunction is the product $A \times B$ and the existential $\exists(x:A)\,B(x)$ is the impredicative proposition $\Pi C{:}\mathrm{Prop}.\,(\Pi x{:}A.\,B(x) \to C) \to C$; false formulas are uninhabited types ($\simeq \mathbb{0}$). <code>program/variant_bridge.ML</code> translates statements between MKTD1 and MKTD2; it does not transfer proofs.
           </p>
         </div>
 
@@ -290,7 +290,7 @@
             <td>Prevents <strong>Russell&rsquo;s Paradox</strong> ($R = \{x \mid x \notin x\}$ is a proper class, so $R \notin R$).</td>
           </tr>
           <tr>
-            <td>Universal ordered pair $(A, B) = \mathrm{mark}(A, 0) \cup \mathrm{mark}(B, 1)$ on all classes.</td>
+            <td>Universal ordered pair $(A, B) = \mathrm{mark}(A, 1) \cup \mathrm{mark}(B, 2)$ on all classes.</td>
             <td><strong>Dunaev Pair</strong> <code>(A, B)</code> (<a href="generated/proofs/DefDunaevOrderedPair.html"><code>#DefDunaevOrderedPair</code></a>) $\neq$ <strong>Kuratowski Set Pair</strong> <code>opairK(a, b)</code> (<a href="generated/proofs/DefKuratowskiPair.html"><code>#DefKuratowskiPair</code></a>).</td>
             <td>Prevents proper-class pair collapse ($\{A\} = \emptyset$ when $A \notin V$).</td>
           </tr>
@@ -383,7 +383,7 @@
             <td><code>&rarr;</code></td>
             <td><code>-&gt;</code></td>
             <td><code>\rightarrow</code></td>
-            <td><strong>Constructive Function-Space Type Constructor</strong> (<code>TArrow</code> / <code>Pi</code>) in <code>MKTD2-system</code>.</td>
+            <td><strong>Function-Space Type Constructor</strong> (<code>TArrow</code> / <code>Pi</code>) in <code>MKTD2-system</code>.</td>
           </tr>
           <tr>
             <td><code style="color: #c084fc;">&Longrightarrow;</code></td>

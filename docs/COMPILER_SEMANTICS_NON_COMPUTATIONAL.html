@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
-  Source Markdown: docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md
+  Source Markdown: set_theory_prover/docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md
   Generator: /botworkspace/tools/render_site_markdown.py
   Regenerate: python3 /botworkspace/tools/render_site_markdown.py
 -->
@@ -10,7 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Obelisk Architectural Specification: Non-Computational Semantics &amp; Static Verification Compiler</title>
-  <link rel="alternate" type="text/markdown" href="COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">
+  <link rel="alternate" type="text/markdown" href="https://github.com/georgydunaev/set_theory_prover/blob/main/docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">
   <style>
     :root {
       --bg: #0f172a;
@@ -103,7 +103,7 @@
   <div class="container">
     <div class="topbar">
       <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
-      <div><a href="COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">[Raw .md]</a></div>
+      <div><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/docs/COMPILER_SEMANTICS_NON_COMPUTATIONAL.md">[Source]</a></div>
     </div>
     <h1 id="obelisk-architectural-specification-non-computational-semantics-static-verification-compiler">Obelisk Architectural Specification: Non-Computational Semantics &amp; Static Verification Compiler</h1>
 <h2 id="1-executive-summary-author-design-commitments">1. Executive Summary &amp; Author Design Commitments</h2>
@@ -133,7 +133,7 @@
 <p>Classical logic and Global Choice are foundational commitments of Obelisk, but their mathematical scope should be stated accurately:</p>
 <ul>
 <li><strong>Principles Requiring Choice:</strong> Well-ordering arbitrary sets (Zermelo&#x27;s Well-Ordering Theorem), cardinal trichotomy for arbitrary sets, Zorn&#x27;s Lemma, Tychonoff&#x27;s Theorem, and (in class-map form) placing every proper class in bijection with $V$ or $\mathrm{On}$ (<code>DefTightClass</code> <code>3.47</code> at $U = V$ / Global Choice) require the Axiom of Choice or Global Choice.</li>
-<li><strong>Principles Not Requiring Choice:</strong> Ordinary ordinal induction, transfinite ordinal recursion and ordinal arithmetic ($\alpha + \beta$, $\alpha \cdot \beta$, $\alpha^\beta$ on $\mathrm{On}$), and the <strong>Burali-Forti theorem</strong> ($\mathrm{On}$ is a proper class, <code>ThmOrdinalsProperClass</code> <code>3.22</code> / <code>thm_O12_burali_forti</code>) do <strong>not</strong> logically require the Axiom of Choice; they follow from Class Comprehension / Separation, Replacement, and Regularity (<code>AxmRegularity</code> <code>3.14</code>) alone.</li>
+<li><strong>Principles Not Requiring Choice:</strong> Ordinary ordinal induction, transfinite ordinal recursion and ordinal arithmetic ($\alpha + \beta$, $\alpha \cdot \beta$, $\alpha^\beta$ on $\mathrm{On}$), and the <strong>Burali-Forti theorem</strong> ($\mathrm{On}$ is a proper class, MKTD1: <code>thm_burali_forti_on_proper</code>, MKTD2: <code>thm_O12_burali_forti</code>) do <strong>not</strong> logically require the Axiom of Choice; they follow from Class Comprehension / Separation, Replacement, and Regularity (<code>AxmRegularity</code> <code>3.14</code>) alone.</li>
 </ul>
 <h3 id="2-3-domain-size-conventions-for-set-choice-vs-class-parameter-choice-010-logic-tex-220-simpler-img-thms-tex">2.3 Domain &amp; Size Conventions for Set Choice vs. Class-Parameter Choice (<code>010_logic.tex</code> &amp; <code>220_simpler_img_thms.tex</code>)</h3>
 <p>When formulating a choice operation in NBG/MK class theory, two distinct operators must be distinguished by their domains and size conventions:</p>

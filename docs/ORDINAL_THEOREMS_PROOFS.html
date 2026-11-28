@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
   AUTO-GENERATED FILE — DO NOT EDIT DIRECTLY.
-  Source Markdown: docs/ORDINAL_THEOREMS_PROOFS.md
+  Source Markdown: set_theory_prover/formal/ORDINAL_THEOREMS_PROOFS.md
   Generator: /botworkspace/tools/render_site_markdown.py
   Regenerate: python3 /botworkspace/tools/render_site_markdown.py
 -->
@@ -10,7 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formal Mathematical Proofs of Fundamental Theorems on Ordinals</title>
-  <link rel="alternate" type="text/markdown" href="ORDINAL_THEOREMS_PROOFS.md">
+  <link rel="alternate" type="text/markdown" href="https://github.com/georgydunaev/set_theory_prover/blob/main/formal/ORDINAL_THEOREMS_PROOFS.md">
   <style>
     :root {
       --bg: #0f172a;
@@ -103,7 +103,7 @@
   <div class="container">
     <div class="topbar">
       <div><a href="../">[Home]</a> &middot; <a href="../about.html">[About]</a></div>
-      <div><a href="ORDINAL_THEOREMS_PROOFS.md">[Raw .md]</a></div>
+      <div><a href="https://github.com/georgydunaev/set_theory_prover/blob/main/formal/ORDINAL_THEOREMS_PROOFS.md">[Source]</a></div>
     </div>
     <h1 id="formal-mathematical-proofs-of-fundamental-theorems-on-ordinals">Formal Mathematical Proofs of Fundamental Theorems on Ordinals</h1>
 <p><strong>Repository:</strong> <code>set_theory_prover</code></p>
@@ -141,7 +141,7 @@
 </ul>
 <p>In <code>docs/axioms/ordinals.md</code>, $\operatorname{Ord}_{\mathrm{set}}(\alpha)$ restricts attention to <strong>set ordinals</strong> ($\alpha \in \mathrm{On}$), whereas <code>DefOrdinalClass</code> (<code>3.16</code>) and <code>program/ordinal_theorems.ML</code> apply $\operatorname{Ord}(A)$ to arbitrary classes $A : \mathrm{Class}$ (so both $\operatorname{Ord}(\alpha)$ for $\alpha \in \mathrm{On}$ and $\operatorname{Ord}(\mathrm{On})$ hold). Below, every theorem explicitly states whether its quantifiers range over arbitrary ordinal classes (<code>Ord(A)</code>) or set ordinals (<code>isSet(a) /\ Ord(a)</code>).</p>
 <ol>
-<li><strong>Class of All Set Ordinals $\mathrm{On}$ (<code>DefOrdinals</code>, <code>3.20</code>):</strong></li>
+<li><strong>Class of All Set Ordinals $\mathrm{On}$ (<code>DefClassOfOrdinals</code>, <code>3.17</code>):</strong></li>
 </ol>
 <p>$$\mathrm{On} = \{x \mid \operatorname{isSet}(x) \land \operatorname{Ord}(x)\}$$</p>
 <p>By <code>RulClassComprehension</code> (<code>3.01</code>), $x \in \mathrm{On} \iff \operatorname{isSet}(x) \land \operatorname{Ord}(x)$.</p>
@@ -174,7 +174,7 @@
 <li>$\mathrm{L1}$ (<code>lem_ord_elem_linearity</code>): proved from <code>AxmRegularity</code> (<code>3.14</code>), $\mathrm{O5}$, and $\mathrm{O6}$ — <strong>no dependency on $\mathrm{O9}$ or $\mathrm{O10}$</strong></li>
 <li>$\mathrm{O9}$ (<code>thm_O9_ord_ssub_in</code>): proved from <code>AxmRegularity</code> (<code>3.14</code>), $\mathrm{O5}$, and $\mathrm{L1}$ — <strong>no dependency on $\mathrm{O10}$</strong></li>
 <li>$\mathrm{O10}$ (<code>thm_O10_ord_trichotomy</code>): proved from $\mathrm{O8}$, $\mathrm{O9}$, and $\mathrm{O6}$</li>
-<li>$\mathrm{O11}$ (<code>thm_O11_on_ord_class</code>): proved from $\mathrm{O5}$ and <code>DefOrdinals</code> (<code>3.20</code>)</li>
+<li>$\mathrm{O11}$ (<code>thm_O11_on_ord_class</code>): proved from $\mathrm{O5}$ and <code>DefClassOfOrdinals</code> (<code>3.17</code>)</li>
 <li>$\mathrm{O12}$ (<code>thm_O12_burali_forti</code>): proved from $\mathrm{O11}$ and $\mathrm{O6}$</li>
 </ul>
 <hr>
@@ -200,7 +200,7 @@
 <ol>
 <li>By Theorem O1, $\operatorname{Trans}(\emptyset)$ holds.</li>
 <li>Let $B : \mathrm{Class}$ be arbitrary and assume $B \in \emptyset$. By <code>ax_empty_no_elements</code> and <code>ax_false_elim</code>, $\operatorname{Trans}(B)$ holds vacuously.</li>
-<li>Pairing (1) and (2) gives $\operatorname{Ord}(\emptyset)$. Since $\operatorname{isSet}(\emptyset)$ (<code>AxmEmptySetIsSet</code>), $\emptyset \in \mathrm{On}$ also follows by <code>DefOrdinals</code> (<code>3.20</code>). $\blacksquare$</li>
+<li>Pairing (1) and (2) gives $\operatorname{Ord}(\emptyset)$. Since $\operatorname{isSet}(\emptyset)$ (<code>ax_empty_set</code>, an axiom of the context in <code>program/ordinal_theorems.ML</code>), $\emptyset \in \mathrm{On}$ also follows by <code>DefClassOfOrdinals</code> (<code>3.17</code>). $\blacksquare$</li>
 </ol>
 <hr>
 <h3 id="theorem-o3-successor-of-a-transitive-class-is-transitive-thm-o3-succ-trans">Theorem O3: Successor of a Transitive Class is Transitive (<code>thm_O3_succ_trans</code>)</h3>
@@ -411,13 +411,13 @@
 <hr>
 <h3 id="theorem-o11-class-of-all-set-ordinals-is-transitive-an-ordinal-class-thm-o11-on-ord-class">Theorem O11: Class of All Set Ordinals is Transitive &amp; an Ordinal Class (<code>thm_O11_on_ord_class</code>)</h3>
 <ul>
-<li><strong>Catalog Correspondence:</strong> <code>ThmOrdinalsOrdinalClass</code> (<code>3.21</code> / <code>DefOrdinals</code>, <code>3.20</code>).</li>
+<li><strong>Catalog Correspondence:</strong> <code>ThmOrdinalsIsOrdinal</code> (<code>3.18</code>) / <code>DefClassOfOrdinals</code> (<code>3.17</code>).</li>
 <li><strong>Domain:</strong> Proper class constant $\mathrm{On} : \mathrm{Class}$.</li>
 <li><strong>Statement:</strong> $\vdash \operatorname{Trans}(\mathrm{On}) \land \forall \alpha \in \mathrm{On}.\;\operatorname{Ord}(\alpha)$ (and hence $\operatorname{Ord}(\mathrm{On})$).</li>
 <li><strong>Proof:</strong></li>
 </ul>
 <ol>
-<li>Let $\alpha \in \mathrm{On}$. By <code>DefOrdinals</code> (<code>3.20</code>), $\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha)$.</li>
+<li>Let $\alpha \in \mathrm{On}$. By <code>DefClassOfOrdinals</code> (<code>3.17</code>), $\operatorname{isSet}(\alpha) \land \operatorname{Ord}(\alpha)$.</li>
 <li>Let $\beta \in \alpha$. Since $\beta$ is a member of $\alpha$, $\operatorname{isSet}(\beta)$ holds (<code>DefIsSet</code>), and by Theorem O5 (<code>thm_O5_ord_heredity</code>), $\operatorname{Ord}(\beta)$ holds.</li>
 <li>Thus $\beta \in \mathrm{On}$, showing $\alpha \subseteq \mathrm{On}$ and hence $\operatorname{Trans}(\mathrm{On})$.</li>
 <li>Moreover, every $\alpha \in \mathrm{On}$ satisfies $\operatorname{Ord}(\alpha)$ (and in particular $\operatorname{Trans}(\alpha)$), so $\operatorname{Ord}(\mathrm{On})$ holds by <code>DefOrdinalClass</code> (<code>3.16</code>). $\blacksquare$</li>
@@ -425,7 +425,7 @@
 <hr>
 <h3 id="theorem-o12-burali-forti-theorem-mathrm-on-is-a-proper-class-thm-o12-burali-forti">Theorem O12: Burali-Forti Theorem — $\mathrm{On}$ is a Proper Class (<code>thm_O12_burali_forti</code>)</h3>
 <ul>
-<li><strong>Catalog Correspondence:</strong> <code>ThmOrdinalsProperClass</code> (<code>3.22</code>).</li>
+<li><strong>Catalog Correspondence:</strong> none (the MKTD1 library proves it as <code>thm_burali_forti_on_proper</code> in <code>program/types/universe_definitions.ML</code>; it is not a numbered catalogue entry).</li>
 <li><strong>Dependencies:</strong> Theorem O11 (<code>thm_O11_on_ord_class</code>) and Theorem O6 (<code>thm_O6_ord_irreflexive</code>). <em>(Requires no Axiom of Choice.)</em></li>
 <li><strong>Statement:</strong> $\vdash \neg \operatorname{isSet}(\mathrm{On}) \land \operatorname{isProper}(\mathrm{On})$.</li>
 <li><strong>Proof:</strong></li>
@@ -433,7 +433,7 @@
 <ol>
 <li>Assume for contradiction that $\operatorname{isSet}(\mathrm{On})$.</li>
 <li>By Theorem O11, $\operatorname{Ord}(\mathrm{On})$ holds.</li>
-<li>By <code>DefOrdinals</code> (<code>3.20</code>), $\mathrm{On} \in \mathrm{On} \iff \operatorname{isSet}(\mathrm{On}) \land \operatorname{Ord}(\mathrm{On})$, so $\mathrm{On} \in \mathrm{On}$.</li>
+<li>By <code>DefClassOfOrdinals</code> (<code>3.17</code>), $\mathrm{On} \in \mathrm{On} \iff \operatorname{isSet}(\mathrm{On}) \land \operatorname{Ord}(\mathrm{On})$, so $\mathrm{On} \in \mathrm{On}$.</li>
 <li>By Theorem O6 (<code>thm_O6_ord_irreflexive</code>) specialized to $\alpha := \mathrm{On}$, $\operatorname{isSet}(\mathrm{On}) \land \mathrm{On} \in \mathrm{On} \implies \bot$.</li>
 <li>By <em>reductio ad absurdum</em>, $\neg \operatorname{isSet}(\mathrm{On})$, which by definition is $\operatorname{isProper}(\mathrm{On})$. $\blacksquare$</li>
 </ol>
@@ -527,13 +527,13 @@
 <tr>
 <td><strong>O11</strong></td>
 <td><code>thm_O11_on_ord_class</code></td>
-<td>Proper class $\mathrm{On}$ (<code>DefOrdinals</code>, <code>3.20</code>)</td>
+<td>Proper class $\mathrm{On}$ (<code>DefClassOfOrdinals</code>, <code>3.17</code>)</td>
 <td><code>ax_on_trans</code>, <code>ax_on_elements_ord</code> (from O5)</td>
 </tr>
 <tr>
 <td><strong>O12</strong></td>
 <td><code>thm_O12_burali_forti</code></td>
-<td>Proper class $\mathrm{On}$ (<code>ThmOrdinalsProperClass</code>, <code>3.22</code>)</td>
+<td>Proper class $\mathrm{On}$ (no catalogue entry)</td>
 <td><code>ax_burali_forti_from_O11_O6</code> applied to <code>thm_O11_on_ord_class</code> and <code>thm_O6_ord_irreflexive</code></td>
 </tr>
 </tbody></table></div>

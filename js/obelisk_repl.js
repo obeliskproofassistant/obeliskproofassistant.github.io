@@ -1,7 +1,7 @@
 /**
  * Obelisk WebREPL Workbench Controller
  * Connects the `.nbg` Source Editor, Catalog Sidebar, Inspector, and Command Bar to:
- * 1. SML-generated `generated/theory_db.json` (106 MKTD1-system Sequent Calculus / Typed AST entries)
+ * 1. SML-generated `generated/theory_db.json` (the MKTD1-system catalogue entries)
  * 2. SML-generated `generated/nbg_library.json` (100 MKTD2-system Formulas-as-Types entries)
  * 3. Client-side `ObeliskNBGCompiler` PREVIEW type-checker (JavaScript, MKTD2-style). It is NOT the
  *    trusted kernel: the trusted checkers are the SML kernels in set_theory_prover (GitLab #8081).
