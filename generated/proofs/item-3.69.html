@@ -561,24 +561,45 @@
             </tr>
             <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>PMP_prf (
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 910 *)
+PMP_prf (
   PAndR_prf (
-    POmegaSetAx_prf,
     PAndR_prf (
-      PAndR_prf (
-        PTransDef_prf (V, x),
-        PHereditaryDef_prf (V, x, y)
+      PMP_prf (
+        POmegaSetAx_prf,
+        PMP_prf (..., ...)
       ),
       PAndR_prf (
-        PAndR_prf (
-          PPowerfulDef_prf (V, x),
-          PTightDef_prf (V, x)
-        ),
-        PPairfulDef_prf (V, x, y)
+        PAndR_prf (..., ...),
+        PAndR_prf (..., ...)
+      )
+    ),
+    PMP_prf (
+      PForaR_prf (
+        PForaR_prf (...)
+      ),
+      PMP_prf (
+        PMP_prf (..., ...),
+        PInCtx_prf (...)
       )
     )
   ),
-  PUniverseDef_prf (V)
+  PMP_prf (
+    PMP_prf (
+      PMP_prf (
+        PKernelDef_prf (&quot;DefGrothendieckUniverse&quot;),
+        PWeak_prf (...)
+      ),
+      PWeak_prf (
+        PMP_prf (..., ...)
+      )
+    ),
+    PInCtx_prf (
+      PImplR_prf (
+        PAnd2L_prf (...)
+      )
+    )
+  )
 )</code></pre></td>
             </tr>
             <tr>

@@ -561,19 +561,23 @@
             </tr>
             <tr>
               <th class="field-name">Proof Term</th>
-              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>PForaR_prf (
-  Γ, X, X, Class,
+              <td class="field-value proof-cell"><pre class="proof-term" style="margin:0; font-family:monospace; font-size:0.86rem; background:#0f172a; padding:0.5rem 0.75rem; border-radius:4px; color:#e2e8f0; overflow-x:auto;"><code>(* Total kernel Prf nodes: 95 *)
+PForaR_prf (
   PMP_prf (
     PForaR_prf (
-      Γ, z, z, Class,
       PImplR_prf (
-        PMP_prf (
-          PA11_prf (Γ, z ∈ ∅),
-          PIdent_prf (z ∈ ∅)
-        )
+        PMP_prf (..., ...)
       )
     ),
-    PSubDef_prf (∅, X, z)
+    PMP_prf (
+      PMP_prf (
+        PMP_prf (..., ...),
+        PWeak_prf (...)
+      ),
+      PInCtx_prf (
+        PImplR_prf (...)
+      )
+    )
   )
 )</code></pre></td>
             </tr>

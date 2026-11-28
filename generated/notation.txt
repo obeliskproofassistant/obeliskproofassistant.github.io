@@ -330,30 +330,12 @@ In judgements Δ; Γ ⊢ e : T:
       EFn:  (Δ; Γ, h : P ⊢ e : Q) ==> (Δ; Γ ⊢ fn (h:P) => e : P → Q).
 
 
-5.3 Glossary of Specific Class-Theoretic Structures
+5.3 Pairs and class lists
 --------------------------------------------------------------------------------
-1. Dunaev Pair (Dunaev Tagged Ordered Pair):
-   • Notation:   (A, B)_D  ≡  mark(A, 1) ∪ mark(B, 2)  =  ({1} × A) ∪ ({2} × B)
-   • Definition: In Morse-Kelley class theory, proper classes cannot be elements
-     of sets or classes. Standard Kuratowski pairing opairK(a, b) = {{a}, {a, b}} fails
-     when either a or b is a proper class (such as V or On), because {{V}} requires
-     V ∈ {V}, which is false in MK. Dunaev tagged ordered pairing solves this by
-     disjoint union tagging.
-   • Properties: Satisfies projection axioms π₁((A, B)_D) = A and π₂((A, B)_D) = B,
-     and pair injectivity (A, B)_D = (C, D)_D <==> (A = C ∧ B = D) for arbitrary
-     classes (both sets and proper classes).
-   • Source:     Georgy Dunaev, "Morse-Kelley Class Theory with Tagged Ordered Pairs
-                 and Tarski-Grothendieck Universes", program/types/foundations.ML,
-                 entries 3.76 (DefDunaevOrderedPair), 3.77 (ThmDunaevFirstProjection),
-                 and 3.78 (ThmDunaevSecondProjection).
+   (A, B)     Dunaev pair (entry 3.76); defined for all classes, also proper ones.
+   opairK(a, b)  Kuratowski pair {{a, a}, {a, b}} (entry 3.52); sets only.
+   [], [A], [A, B]   class lists (entry 3.51); [A, B] = (A, B).
+   What these words mean: docs/glossary.txt (the glossary is the single source for
+   meanings; this file only fixes notation).
 
-2. Dunaev Class-List:
-   • Notation:   nil (empty list, = ∅), [X₁, ..., X_n] (finite sequence of classes).
-                 [] alone always denotes the empty hypothesis context, never a class.
-   • Definition: Inductively generated sequence of classes defined via iterated
-     Dunaev tagged pairing: [X] = (X, nil)_D, [X₁, X₂] = (X₁, (X₂, nil)_D)_D.
-   • Purpose:    Enables class-level multi-argument function domains, explicit
-     substitution environments, and sequent hypothesis contexts without ascending
-     to conglomerates.
-   • Source:     program/types/foundations.ML (entry 3.39: DefClassLists).
 ================================================================================

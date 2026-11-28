@@ -675,16 +675,16 @@ PForaR_prf (...)`
 - **Kernel Note:** Formal conservative definition of a set-theoretic model of natural numbers NatModel(M) (Peano-Dedekind inductive structure under von Neumann successor): a class M is a model of natural numbers iff it contains the empty set (0) and is closed under the successor operation n ∪ {n}. (Logically synonymous up to bound variable renaming with the postfix successor-inductive class predicate (X Ind) in 3.55 DefInductiveClass; NatModel(M) is retained as a distinct prefix predicate symbol for model-theoretic statements.)
 - **Standalone Certificate:** [proofs/DefNaturalNumberModels.html](proofs/DefNaturalNumberModels.html)
 
-### 3.51 `DefClassLists` — General definition of lists of classes which applicable not only for sets, but for proper classes too (Definition)
+### 3.51 `DefClassLists` — Lists of classes (also of proper classes) (Definition)
 
 - **Identifier:** `DefClassLists` (entry `3.51`, kind: `Definition`, status: `Definitional (Kernel AST)`)
-- **Formula (Unicode):** `∀(A:Class)∀(B:Class)∀(L:Class)∀(n:Class)((mark(A,n) = ({{0,n}} ∪ {({{{{a}}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{{a}}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{{b}}},2} ∈ L)})))))))`
-- **Scheme of Types (Unicode):** `∀(A:Class)∀(B:Class)∀(L:Class)∀(n:Class)((mark(A,n) = ({{0,n}} ∪ {({{{{a}}},n}:Class) | (a ∈ A)})) ∧ (([] = ∅) ∧ (([A] = mark(A,1)) ∧ (([A,B] = (mark(A,1) ∪ mark(B,2))) ∧ (((A,B) = [A,B]) ∧ ((pr1(L) = {a | ({{{{a}}},1} ∈ L)}) ∧ (pr2(L) = {b | ({{{{b}}},2} ∈ L)})))))))`
+- **Formula (Unicode):** `(Evaluated Kernel Rule Definition)`
+- **Scheme of Types (Unicode):** `(Evaluated Kernel Rule Definition)`
 - **Proof Constructor:** `CpOPair (A, B)`
 - **Kernel Note:** Defines Dunaev's tagged class lists and ordered pair (A, B) = [A, B] = mark(A, 1) ∪ mark(B, 2), where mark(A, n) = {{0, n}} ∪ { {{{{a}}}, n} | a ∈ A } tags each element a ∈ A as the unordered pair { {{{a}}}, n } = {{{{a}}}, n} (4 opening braces: unordered pair of the 3-fold singleton {{{a}}} and index n). Entry 3.76 DefDunaevOrderedPair expands this same definition into primitive set constructors, whereas 3.52 DefKuratowskiPair defines the distinct set-restricted Kuratowski pair symbol opairK(a, b) = {{a, a}, {a, b}}.
 - **Standalone Certificate:** [proofs/DefClassLists.html](proofs/DefClassLists.html)
 
-### 3.52 `DefKuratowskiPair` — Ordered pair(Kuratowsky's) (Definition)
+### 3.52 `DefKuratowskiPair` — Ordered pair (Kuratowski's) (Definition)
 
 - **Identifier:** `DefKuratowskiPair` (entry `3.52`, kind: `Definition`, status: `Definitional (Kernel AST)`)
 - **Formula (Unicode):** `(∀(a:Class)∀(b:Class)(opairK(a,b)={{a,a},{a,b}}))`
