@@ -453,7 +453,10 @@ class TestProofRegression(unittest.TestCase):
             p369_content = f.read()
         self.assertIn('<th class="field-name">Proof Term</th>', p369_content)
         self.assertIn("PMP_prf (", p369_content)
-        self.assertIn("PUniverseDef_prf (V)", p369_content)
+        # The row shows the summary of the real kernel witness (2026-11-28: the hand-typed tree
+        # with "PUniverseDef_prf (V)" was removed; it did not match the kernel proof).
+        self.assertIn("Total kernel Prf nodes:", p369_content)
+        self.assertIn('PKernelDef_prf (&quot;DefGrothendieckUniverse&quot;)', p369_content)
         self.assertNotIn("Step 1 (", p369_content)
 
         expected_ctors = {
